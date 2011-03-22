@@ -398,7 +398,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 	protected void refreshGUI() {
 		add( rightPanel, java.awt.BorderLayout.EAST ); // unit hack
 		//expressionLabel.setForeground( new java.awt.Color( 99, 99, 156 ) ); // hack for red, unfinished look
-		expressionLabel.setForeground( new java.awt.Color( 0, 0, 0 ) ); // Aik Min changed this to black. See bug report #13.
+		expressionLabel.setForeground( new java.awt.Color( 0, 0, 0 ) ); // Aik Min changed this to black. (Item name in the drop down box)
 		Object value = property.get();
 		if( value instanceof edu.cmu.cs.stage3.alice.core.question.AbstractScriptDefinedObject ) {
 			if( this.isAncestorOf( getNativeComponent() ) ) {

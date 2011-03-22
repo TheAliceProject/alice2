@@ -313,7 +313,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	private java.util.HashSet stateListeners = new java.util.HashSet();
 
 	// Logging
-	protected boolean instructorInControl = false;
+	public boolean instructorInControl = false;
 	public static org.python.core.PyFile getPyStdOut() {
 		return pyStdOut;
 	}

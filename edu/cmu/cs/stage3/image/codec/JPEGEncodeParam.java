@@ -196,7 +196,7 @@ public class JPEGEncodeParam implements ImageEncodeParam {
      * @param qTable Quantization table values in "zig-zag" order.
      */
     public void setQTable(int component, int tableSlot, int[]qTable) {
-        qTab[component] = (qTable.clone());
+        qTab[component] = (int[]) (qTable.clone());
         qTabSlot[component] = tableSlot;
         qTabSet[component] = true;
         qualitySet = false;

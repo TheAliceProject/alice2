@@ -11,14 +11,16 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
 
 import java.io.*;
 
+import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
+
 public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener {
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected edu.cmu.cs.stage3.alice.core.World world;
 
-        String dataDirectory = "C:\\loggingData\\";
+    String dataDirectory = "C:\\loggingData\\";
 
-        protected PrintWriter printWriter = null;
-
+    protected PrintWriter printWriter = null;
+    
 
 	public ChangeLogger(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
           this.authoringTool = authoringTool;
@@ -41,13 +43,13 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
         }
         
         public void recordInstructorIntervention (String type, String comment) {
- 			String logString = "TIME=<" + System.currentTimeMillis() + "> "  + "TYPE=<" + type +  ">" + "COMMENT=<" + comment + ">";
+ 			String logString = "TIME=<" + System.currentTimeMillis() + "> "  + "TYPE=<" + type +  "> " + "COMMENT=<" + comment + ">";
  			record(logString);
         }
 
         protected void record(String toRecord) {
-          if (toRecord != null) {
-            if (printWriter != null) printWriter.println(toRecord);
+          if (toRecord != null && authoringTool.instructorInControl) {
+            if (printWriter != null) {printWriter.println(toRecord); printWriter.flush();}
           }
         }
         
@@ -60,26 +62,33 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
 	///////////////////////////////////////////////
 	// AuthoringToolStateListener interface
 	///////////////////////////////////////////////
+    private File file = null;
+        
 	public void stateChanged( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
 
 	}
 
 	public void worldUnLoading( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-          if (printWriter != null) {
-            printWriter.close();
-            printWriter = null;
-          }
+		if (printWriter != null && JAliceFrame.isLogging == true) {
+	        printWriter.close();
+	        printWriter = null;
+	        if (file.length() == 0) { 
+	        	file.delete(); 
+	        	file = null; 
+	        }
+		}
 	}
 
 	public void worldLoaded( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-
-          File file = new File(dataDirectory + System.currentTimeMillis() + ".txt");
-
-          try {
-            printWriter = new PrintWriter(new FileOutputStream(file));
-          } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-          }
+		if (JAliceFrame.isLogging == true && file == null) {
+			file = new File(dataDirectory + System.currentTimeMillis() + ".txt");
+			
+			try {
+				printWriter = new PrintWriter(new FileOutputStream(file));
+			} catch (FileNotFoundException fnfe) {
+				fnfe.printStackTrace();
+			}
+		}
 	}
 
 	public void stateChanging( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
