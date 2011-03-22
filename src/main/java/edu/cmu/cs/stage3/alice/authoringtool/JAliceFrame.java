@@ -36,7 +36,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
  */
 public class JAliceFrame extends javax.swing.JFrame {
 	protected AuthoringTool authoringTool;
-
+	public static Boolean isLogging = false;
 	// modes
 	public static int SCENE_EDITOR_SMALL_MODE = 1;
 	public static int SCENE_EDITOR_LARGE_MODE = 2;
@@ -340,7 +340,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		addObjectButton.setAction( actions.addCharacterAction );
 		teachMeButton.setAction( actions.launchTutorialAction );
 		selectTutorialMenuItem.setAction( actions.launchTutorialFileAction );
-		softwareUpdate.setAction( actions.launchSoftwareUpdate );
+		//softwareUpdate.setAction( actions.launchSoftwareUpdate );
 		showStdOutItem.setAction( actions.showStdOutDialogAction );
 		showStdErrItem.setAction( actions.showStdErrDialogAction );
 		printItem.setAction( actions.showPrintDialogAction );
@@ -663,7 +663,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		exportMovieItem.setText("Export Video");
 		teachMeButton.setText("Teach Me");
 		selectTutorialMenuItem.setText("Select a Tutorial");
-		softwareUpdate.setText("Software Updates");
+		//softwareUpdate.setText("Software Updates");
 		showStdOutItem.setText("Text Output...");
 		showStdErrItem.setText("Standard Error...");
 		printItem.setText("Print...");
@@ -689,14 +689,18 @@ public class JAliceFrame extends javax.swing.JFrame {
 		toolsMenu.add(worldInfoItem);
 		toolsMenu.add(showStdOutItem);
 		toolsMenu.add(showStdErrItem);
-		  
-		if( authoringTool.getConfig().getValue("enableLoggingMode").equalsIgnoreCase("true") == true ) 
+		 
+		
+		if( authoringTool.getConfig().getValue("enableLoggingMode").equalsIgnoreCase("true") == true ) {
 			toolsMenu.add(instructorDemoItem);
+			isLogging = true;
+		}
+		
 		
 		helpMenu.add(exampleWorldsItem);
 		helpMenu.add(selectTutorialMenuItem);
-		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) )
-			helpMenu.add(softwareUpdate);
+/*		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) )
+			helpMenu.add(softwareUpdate);*/
 		helpMenu.add(aboutItem);
 		this.getContentPane().add(toolBarPanel, BorderLayout.NORTH);
 		toolBarPanel.add(buttonPanel,   new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0

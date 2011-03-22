@@ -188,7 +188,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          	  IllegalArgumentException(JaiI18N.getString("PNGEncodeParam1"));
             }
 
-            palette = (rgb.clone());
+            palette = (int[]) (rgb.clone());
             paletteSet = true;
         }
 
@@ -206,7 +206,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
             if (!paletteSet) {
                 throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam3"));
             }
-            return (palette.clone());
+            return (int[]) (palette.clone());
         }
 
         /**
@@ -546,7 +546,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          * <p> The 'tRNS' chunk will encode this information.
          */
         public void setTransparentRGB(int[] transparentRGB) {
-            transparency = (transparentRGB.clone());
+            transparency = (int[]) (transparentRGB.clone());
             transparencySet = true;
         }
 
@@ -563,7 +563,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
             if (!transparencySet) {
                 throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam10"));
             }
-            return (transparency.clone());
+            return (int[]) (transparency.clone());
         }
     }
 
@@ -669,7 +669,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
         if (chromaticity.length != 8) {
             throw new IllegalArgumentException();
         }
-        this.chromaticity = (chromaticity.clone());
+        this.chromaticity = (float[]) (chromaticity.clone());
         chromaticitySet = true;
     }
 
@@ -708,7 +708,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
         if (!chromaticitySet) {
             throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam12"));
         }
-        return (chromaticity.clone());
+        return (float[]) (chromaticity.clone());
     }
 
     /**
@@ -783,7 +783,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      * <p> The 'hIST' chunk will encode this information.
      */
     public void setPaletteHistogram(int[] paletteHistogram) {
-        this.paletteHistogram = (paletteHistogram.clone());
+        this.paletteHistogram = (int[]) (paletteHistogram.clone());
         paletteHistogramSet = true;
     }
 
@@ -829,7 +829,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      * <p> The 'iCCP' chunk will encode this information.
      */
     public void setICCProfileData(byte[] ICCProfileData) {
-        this.ICCProfileData = (ICCProfileData.clone());
+        this.ICCProfileData = (byte[]) (ICCProfileData.clone());
         ICCProfileDataSet = true;
     }
 
@@ -845,7 +845,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
         if (!ICCProfileDataSet) {
             throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam15"));
         }
-        return (ICCProfileData.clone());
+        return (byte[]) (ICCProfileData.clone());
     }
 
     /**
@@ -878,7 +878,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      * <p> The 'pHYS' chunk will encode this information.
      */
     public void setPhysicalDimension(int[] physicalDimension) {
-        this.physicalDimension = (physicalDimension.clone());
+        this.physicalDimension = (int[]) (physicalDimension.clone());
         physicalDimensionSet = true;
     }
 
@@ -911,7 +911,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
         if (!physicalDimensionSet) {
             throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam16"));
         }
-        return (physicalDimension.clone());
+        return (int[]) (physicalDimension.clone());
     }
 
     /**
@@ -942,7 +942,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      * <p> The 'sPLT' chunk will encode this information.
      */
     public void setSuggestedPalette(PNGSuggestedPaletteEntry[] palette) {
-        suggestedPalette = (palette.clone());
+        suggestedPalette = (PNGSuggestedPaletteEntry[]) (palette.clone());
         suggestedPaletteSet = true;
     }
 
@@ -961,7 +961,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
         if (!suggestedPaletteSet) {
             throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam17"));
         }
-        return (suggestedPalette.clone());
+        return (PNGSuggestedPaletteEntry[]) (suggestedPalette.clone());
     }
 
     /**
@@ -995,7 +995,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      * <p> The 'sBIT' chunk will encode this information.
      */
     public void setSignificantBits(int[] significantBits) {
-        this.significantBits = (significantBits.clone());
+        this.significantBits = (int[]) (significantBits.clone());
         significantBitsSet = true;
     }
 
@@ -1013,7 +1013,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
         if (!significantBitsSet) {
             throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam18"));
         }
-        return significantBits.clone();
+        return (int[]) significantBits.clone();
     }
 
     /**

@@ -54,7 +54,7 @@ public class Actions {
 	public javax.swing.AbstractAction showWorldInfoAction;
 	public javax.swing.AbstractAction launchTutorialAction;
 	public javax.swing.AbstractAction launchTutorialFileAction;
-	public javax.swing.AbstractAction launchSoftwareUpdate;
+	//public javax.swing.AbstractAction launchSoftwareUpdate;
 	public javax.swing.AbstractAction showStdOutDialogAction;
 	public javax.swing.AbstractAction showStdErrDialogAction;
 	public javax.swing.AbstractAction showPrintDialogAction;
@@ -243,11 +243,11 @@ public class Actions {
 			}
 		};
 		
-		launchSoftwareUpdate = new javax.swing.AbstractAction() {
+		/*launchSoftwareUpdate = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				authoringTool.updateAlice();
 			}
-		};
+		};*/
 
 		showStdOutDialogAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
@@ -527,7 +527,7 @@ public class Actions {
 		//launchTutorialFileAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( launchTutorialFileAction );
 
-        if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) {
+        /*if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) {
 			//launchSoftwareUpdate.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
 			launchSoftwareUpdate.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchSoftwareUpdate" );
 			//launchSoftwareUpdate.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'U' ) );
@@ -535,7 +535,7 @@ public class Actions {
 			launchSoftwareUpdate.putValue( javax.swing.Action.SHORT_DESCRIPTION, "Update Alice 2.2" );
 			//launchSoftwareUpdate.putValue( javax.swing.Action.SMALL_ICON, );
 			applicationActions.add( launchSoftwareUpdate );	
-        }
+        }*/
         
 		//showStdOutDialogAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
 		showStdOutDialogAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showStdOutDialog" );

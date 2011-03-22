@@ -184,7 +184,7 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 					VariableDnDPanel.this.editName();
 				}
 			} ) );
-
+			//if (!(variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)){
 			final edu.cmu.cs.stage3.alice.authoringtool.util.WatcherPanel watcherPanel = authoringTool.getWatcherPanel();
 			if( watcherPanel.isVariableBeingWatched( variable ) ) {
 				popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "stop watching this variable", new Runnable() {
@@ -198,7 +198,8 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 						watcherPanel.addVariableToWatch( VariableDnDPanel.this.variable );
 					}
 				} ) );
-			}
+
+			}//}
 			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "delete", new Runnable() {
 				public void run() {
 					edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable deleteRunnable = new edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable( variable, authoringTool );

@@ -43,7 +43,7 @@ public class PerspectiveCamera extends edu.cmu.cs.stage3.alice.core.Camera {
 		return perspectiveViewVolumeDecorator;
 	}
 	private void minimumXValueChanged( Number value ) {
-		double[] plane = getSceneGraphPerspectiveCamera().getPlane().clone();
+		double[] plane = (double[]) getSceneGraphPerspectiveCamera().getPlane().clone();
 		plane[0] = Double.NaN;
 		if( value!=null ) {
 			plane[0] = value.doubleValue();
@@ -51,7 +51,7 @@ public class PerspectiveCamera extends edu.cmu.cs.stage3.alice.core.Camera {
 		getSceneGraphPerspectiveCamera().setPlane( plane );
 	}
 	private void minimumYValueChanged( Number value ) {
-		double[] plane = getSceneGraphPerspectiveCamera().getPlane().clone();
+		double[] plane = (double[]) getSceneGraphPerspectiveCamera().getPlane().clone();
 		plane[1] = Double.NaN;
 		if( value!=null ) {
 			plane[1] = value.doubleValue();
@@ -59,7 +59,7 @@ public class PerspectiveCamera extends edu.cmu.cs.stage3.alice.core.Camera {
 		getSceneGraphPerspectiveCamera().setPlane( plane );
 	}
 	private void maximumXValueChanged( Number value ) {
-		double[] plane = getSceneGraphPerspectiveCamera().getPlane().clone();
+		double[] plane = (double[]) getSceneGraphPerspectiveCamera().getPlane().clone();
 		plane[2] = Double.NaN;
 		if( value!=null ) {
 			plane[2] = value.doubleValue();
@@ -67,7 +67,7 @@ public class PerspectiveCamera extends edu.cmu.cs.stage3.alice.core.Camera {
 		getSceneGraphPerspectiveCamera().setPlane( plane );
 	}
 	private void maximumYValueChanged( Number value ) {
-		double[] plane = getSceneGraphPerspectiveCamera().getPlane().clone();
+		double[] plane = (double[]) getSceneGraphPerspectiveCamera().getPlane().clone();
 		plane[3] = Double.NaN;
 		if( value!=null ) {
 			plane[3] = value.doubleValue();
