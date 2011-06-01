@@ -37,17 +37,17 @@ public class DefaultRenderTargetFactory implements RenderTargetFactory {
 				//pass
 			}
 		}
-		try {
-			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
-		} catch( Throwable t ) {
-			//pass
-		}
+
 		try {
 			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer.class );
 		} catch( Throwable t ) {
 			//pass
 		}
-
+		try {
+			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
+		} catch( Throwable t ) {
+			//pass
+		}
 		try {
 			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer.class );
 		} catch( Throwable t ) {

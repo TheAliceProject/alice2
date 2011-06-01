@@ -428,6 +428,7 @@ public abstract class Property {
 			}
 		} else {
 			//pass
+			int iii = 0;
 		}
 	}
 	protected void onSet( Object value ) {

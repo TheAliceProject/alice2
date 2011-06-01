@@ -56,9 +56,9 @@ public class SplashScreen extends java.awt.Frame {
 				int stringWidth = g.getFontMetrics().stringWidth( versionString );
 //				g.drawString( versionString, 6, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.
 				g.drawString( versionString, size.width - 6 - stringWidth, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.			
-				if (hasNewVersion())
-					g.drawString("Loading...                      New Alice 2.2 update available ", 10, size.height - 6 );
-				else
+				//if (hasNewVersion())
+				//	g.drawString("Loading...                      New Alice 2.2 update available ", 10, size.height - 6 );
+				//else
 					g.drawString("Loading...", 10, size.height - 6 );
 			}
 		};
@@ -67,26 +67,26 @@ public class SplashScreen extends java.awt.Frame {
 		this.setSize( size );
 	}
 
-	public boolean hasNewVersion() {
-//		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) {
-//			try {
-//				StringBuffer sb = new StringBuffer( "http://alicedownloads.org/alice.jar" );
-//				java.net.URL url = new java.net.URL( sb.toString() );
-//		        java.net.URLConnection urlc = url.openConnection();
-//		        long i = urlc.getLastModified();
-//		        java.util.Date d = new java.util.Date(i);
-//		        java.util.regex.Pattern p = java.util.regex.Pattern.compile("\\D");
-//		        String oldVersion[] = p.split(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion());     
-//		        if (    (Integer.valueOf(oldVersion[3]).compareTo(Integer.valueOf(d.getMonth()+1)) < 0) && 
-//		        		(Integer.valueOf(oldVersion[5]).compareTo(Integer.valueOf(d.getYear()+1900)) <= 0)    ){
-//		        	return true;
-//		        }
-//			} catch (Exception e){
-//				
-//			}
-//		}
+/*	public boolean hasNewVersion() {
+		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) {
+			try {
+				StringBuffer sb = new StringBuffer( "http://alicedownloads.org/alice.jar" );
+				java.net.URL url = new java.net.URL( sb.toString() );
+		        java.net.URLConnection urlc = url.openConnection();
+		        long i = urlc.getLastModified();
+		        java.util.Date d = new java.util.Date(i);
+		        java.util.regex.Pattern p = java.util.regex.Pattern.compile("\\D");
+		        String oldVersion[] = p.split(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion());     
+		        if (    (Integer.valueOf(oldVersion[3]).compareTo(Integer.valueOf(d.getMonth()+1)) < 0) && 
+		        		(Integer.valueOf(oldVersion[5]).compareTo(Integer.valueOf(d.getYear()+1900)) <= 0)    ){
+		        	return true;
+		        }
+			} catch (Exception e){
+				
+			}
+		}
 		return false;
-	}
+	}*/
 	
 	public void showSplash() {
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();

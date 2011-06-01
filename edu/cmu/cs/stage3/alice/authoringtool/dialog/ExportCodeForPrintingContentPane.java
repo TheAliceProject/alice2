@@ -146,18 +146,18 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		extensions.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter( "html", "*.html" ));
 		m_pathFileChooser.setFileFilter( new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter( extensions, "Web pages" ));
 
-		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
-		String path = authoringToolConfig.getValue( "directories.worldsDirectory" );
-		if( path != null ) {
-			java.io.File dir = new java.io.File( path );
-			if( dir != null && dir.exists() && dir.isDirectory() ) {
-				try {
-					m_pathFileChooser.setCurrentDirectory( dir );
-				} catch( ArrayIndexOutOfBoundsException aioobe ) {
-					// for some reason this can potentially fail in jdk1.4.2_04
-				}
-			}
-		}
+//		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
+//		String path = authoringToolConfig.getValue( "directories.worldsDirectory" );
+//		if( path != null ) {
+//			java.io.File dir = new java.io.File( path );
+//			if( dir != null && dir.exists() && dir.isDirectory() ) {
+//				try {
+//					m_pathFileChooser.setCurrentDirectory( dir );
+//				} catch( ArrayIndexOutOfBoundsException aioobe ) {
+//					// for some reason this can potentially fail in jdk1.4.2_04
+//				} 
+//			}
+//		}
 
 
 		m_pathFileChooser.setDialogType( javax.swing.JFileChooser.OPEN_DIALOG );
@@ -343,7 +343,9 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		m_authorNameTextField.setText( authorName );
 		m_authorNameTextField.setName( authorName );
 
-		java.io.File file = new java.io.File( m_pathFileChooser.getCurrentDirectory(), getWorldName( m_authoringTool.getCurrentWorldLocation() )+".html" );
+		//Aik Min
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
+		java.io.File file = new java.io.File( authoringToolConfig.getValue( "directories.worldsDirectory" ), getWorldName( m_authoringTool.getCurrentWorldLocation() )+".html" );
 		m_pathTextField.setText( file.getAbsolutePath() );
 
 		edu.cmu.cs.stage3.alice.core.World world = m_authoringTool.getWorld();

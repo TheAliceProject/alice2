@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -351,7 +350,11 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	
 	public void setTabID( int tabID ) {
 		if( tabID == OPEN_TAB_ID ) {
-			fileChooser.rescanCurrentDirectory();
+			//fileChooser.rescanCurrentDirectory();
+			java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
+			if (currentDir.exists()) {
+				fileChooser.setCurrentDirectory(currentDir);
+			}
 		}
 		if( tabID != DO_NOT_CHANGE_TAB_ID ) {
 			currentTab = tabID; 
@@ -542,7 +545,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		catch(Exception e) { }
 
 		mainTabPane.remove(fileChooser);
-		java.io.File currentDir = fileChooser.getCurrentDirectory();
+		//java.io.File currentDir = fileChooser.getCurrentDirectory();
 		fileChooser = new JFileChooser() {
 			public void setSelectedFile( java.io.File file ) {
 				super.setSelectedFile( file );
@@ -552,14 +555,14 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		for (int i = 0; i < fileChooser.getComponentCount(); i++) {
 			setButtonBackgroundColors(fileChooser.getComponent(i), fileChooser.getBackground());
 		}
+		//if (currentDir.exists()) {
+		//	fileChooser.setCurrentDirectory(currentDir);
+		//} else {
+		java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
 		if (currentDir.exists()) {
 			fileChooser.setCurrentDirectory(currentDir);
-		} else {
-			currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
-			if (currentDir.exists()) {
-				fileChooser.setCurrentDirectory(currentDir);
-			}
 		}
+		//}
 		fileChooser.setFileFilter(worldFilter);
 		fileChooser.setBackground(Color.white);
 		fileChooser.addActionListener(new java.awt.event.ActionListener() {
@@ -765,7 +768,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		templateWorldsDirectoryContainer.setBackground(Color.white);
 		templateWorldsDirectoryContainer.add(templateWorldsDirLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(2, 2, 2, 0), 0, 0));
 		templateWorldsDirectoryContainer.add(templateScrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		
+
 		add(buttonPanel, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		buttonPanel.add(openButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
 		buttonPanel.add(cancelButton, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
@@ -786,7 +789,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		tutorialScrollPane.getViewport().add(tutorialWorldsContainer, null);
 		add(stopShowingCheckBox, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.HORIZONTAL, new Insets(0, 2, 0, 0), 0, 0));
 		add(headerLabel, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		
+
 		templateScrollPane.getViewport().add(templateWorldsContainer, null);
 		exampleScrollPane.getViewport().add(exampleWorldsContainer, null);
 		recentScrollPane.getViewport().add(recentWorldsContainer, null);
