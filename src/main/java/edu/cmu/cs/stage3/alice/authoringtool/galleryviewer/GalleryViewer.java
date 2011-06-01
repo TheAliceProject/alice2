@@ -1070,8 +1070,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         java.io.File mainLocalGalleryFile = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainDiskGalleryDirectory();
         java.io.File mainCDGalleryFile = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainCDGalleryDirectory();
 
-        cacheDir = edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory().getAbsolutePath() + java.io.File.separator + "webGalleryCache" +java.io.File.separator;  //TODO: set from pref
-        java.io.File testDir = new java.io.File(cacheDir);
+        cacheDir = java.io.File.separator + "webGalleryCache" + java.io.File.separator;  //TODO: set from pref
+        java.io.File testDir = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), cacheDir);
         if (!testDir.exists()){
             testDir.mkdirs();
         }

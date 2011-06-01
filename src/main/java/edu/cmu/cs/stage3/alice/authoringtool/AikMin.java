@@ -4,6 +4,7 @@ import java.awt.Font;
 import javax.swing.UIManager;
 
 public class AikMin {
+	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	//Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )
 	//System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")  

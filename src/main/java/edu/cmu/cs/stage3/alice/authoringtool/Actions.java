@@ -138,19 +138,19 @@ public class Actions {
 
 		cutAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
-				//TODO
+				//TODO - Ignore
 			}
 		};
 
 		copyAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
-				//TODO
+				//TODO - Ignore
 			}
 		};
 
 		pasteAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
-				//TODO
+				//TODO - Ignore
 			}
 		};
 
@@ -198,7 +198,7 @@ public class Actions {
 		
 		trashAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
-				//TODO
+				//TODO - Ignore
 			}
 		};
 

@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.VariableDnDPanel;
+import edu.cmu.cs.stage3.alice.core.Variable;
+
 /**
  * @author Jason Pratt
  */
@@ -148,6 +151,14 @@ public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.D
 				dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_MOVE );
 				java.awt.datatransfer.Transferable transferable = dtde.getTransferable();
 				edu.cmu.cs.stage3.alice.core.Element element = (edu.cmu.cs.stage3.alice.core.Element)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor );
+				//Aik Min - Remove watch variable when variable is deleted.
+				if (element instanceof edu.cmu.cs.stage3.alice.core.Variable){
+					final edu.cmu.cs.stage3.alice.authoringtool.util.WatcherPanel watcherPanel = authoringTool.getWatcherPanel();
+					edu.cmu.cs.stage3.alice.core.Variable variable = (Variable) element;
+					if (watcherPanel.isVariableBeingWatched( variable )) {	
+						watcherPanel.removeVariableBeingWatched( variable );
+					}
+				}
 				//HACK
 				edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable deleteRunnable = new edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable( element, authoringTool );
 				deleteRunnable.run();

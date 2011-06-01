@@ -255,7 +255,7 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 //						worldTree.setSelectionPath( parentPath );
 						worldTree.setShowDropLines( true );
 					} else {
-						//TODO setCursor
+						//TODO - Ignore setCursor, setShowDropLines( false ) is sufficient
 						//if( (!invalidCursorShown) && (invalidCursor != null) ) {
 						//	worldTree.setCursor( invalidCursor );
 						//}

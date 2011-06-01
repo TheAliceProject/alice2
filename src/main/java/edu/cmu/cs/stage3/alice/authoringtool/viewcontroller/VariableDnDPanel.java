@@ -202,6 +202,9 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 			}//}
 			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "delete", new Runnable() {
 				public void run() {
+					if (watcherPanel.isVariableBeingWatched( VariableDnDPanel.this.variable )) {	//Aik Min - Remove watch variable when variable is deleted.
+						watcherPanel.removeVariableBeingWatched( VariableDnDPanel.this.variable );
+					}
 					edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable deleteRunnable = new edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable( variable, authoringTool );
 					deleteRunnable.run();
 				}

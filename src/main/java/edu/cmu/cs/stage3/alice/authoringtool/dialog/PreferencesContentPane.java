@@ -279,11 +279,11 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	public void finalizeSelections(){
 		setInput();
 		if( restartRequired ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(" You will have to restart Alice in order for these settings to take effect.", "Restart Required", JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("You will have to restart Alice in order for these settings to take effect.", "Restart Required", JOptionPane.INFORMATION_MESSAGE );
 			restartRequired = false;
 		} 
 		 else if( reloadRequired ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(" You will have to reload the current world in order for these settings to take effect.", "Reload Required", JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("You will have to reload the current world in order for these settings to take effect.", "Reload Required", JOptionPane.INFORMATION_MESSAGE );
 			reloadRequired = false;
 		} 
 		if (configTabbedPane != null && generalPanel != null){
@@ -942,7 +942,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 //	}
 
 	void worldDirectoryBrowseButton_actionPerformed( ActionEvent ev ) {
-		java.io.File parent = new java.io.File( Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ) ).getParentFile();
+		java.io.File parent = new java.io.File( Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ) );//.getParentFile();
 		browseFileChooser.setCurrentDirectory( parent );
 		int returnVal = browseFileChooser.showOpenDialog( this );
 

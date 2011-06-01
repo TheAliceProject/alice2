@@ -539,13 +539,17 @@ public class JAlice {
 	}
 
 	public static void setAliceUserDirectory( java.io.File file ) {
-		aliceUserDirectory = file;
+		if (file != null) {
+			if( file.exists() ) {
+				aliceUserDirectory = file;
+			} else if( file.mkdir() ) {
+				aliceUserDirectory = file;
+			} 
+		}
 	}
 
 	public static java.io.File getAliceUserDirectory() {
-		if (directory != null)
-			aliceUserDirectory = new java.io.File(directory);
-		else if( aliceUserDirectory == null) {
+		if( aliceUserDirectory == null) {
 			java.io.File dirFromProperties = null;
 			if( System.getProperty( "alice.userDir" ) != null ) {
 				dirFromProperties = new java.io.File( System.getProperty( "alice.userDir" ) ).getAbsoluteFile();
@@ -553,21 +557,17 @@ public class JAlice {
 			java.io.File userHome = new java.io.File( System.getProperty( "user.home" ) ).getAbsoluteFile();
 			java.io.File aliceHome = getAliceHomeDirectory();
 			java.io.File aliceUser = null;
-			if( dirFromProperties != null ) {
+			if( directory != null) {
+				aliceUser = new java.io.File( directory, ".alice2" );
+			} else if (dirFromProperties != null ) {
 				aliceUser = dirFromProperties;
 			} else if( userHome.exists() && userHome.canRead() && userHome.canWrite() ) {
 				aliceUser = new java.io.File( userHome, ".alice2" );
 			} else if( (aliceHome != null) && aliceHome.exists() && aliceHome.canRead() && aliceHome.canWrite() ) {
 				aliceUser = new java.io.File( aliceHome, ".alice2" );
 			}
+			setAliceUserDirectory( aliceUser );
 
-			if( aliceUser != null ) {
-				if( aliceUser.exists() ) {
-					setAliceUserDirectory( aliceUser );
-				} else if( aliceUser.mkdir() ) {
-					setAliceUserDirectory( aliceUser );
-				}
-			}
 		} 
 		return aliceUserDirectory;
 	}

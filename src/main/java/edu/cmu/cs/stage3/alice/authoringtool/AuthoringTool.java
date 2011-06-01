@@ -473,10 +473,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					// for some reason this can potentially fail in jdk1.4.2_04
 				}
 			} else {
-				//TODO: ?
+				//TODO -Ignore : ?
 			}
 		} else {
-			//TODO: what to do when the directory is null?
+			//TODO -Ignore : what to do when the directory is null?
 		}
 	}
 	private void importDirectoryChanged() {
@@ -490,10 +490,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					// for some reason this can potentially fail in jdk1.4.2_04
 				}
 			} else {
-				//TODO: ?
+				//TODO -Ignore : ?
 			}
 		} else {
-			//TODO: what to do when the directory is null?
+			//TODO -Ignore : what to do when the directory is null?
 		}
 	}
 	private void charactersDirectoryChanged() {
@@ -508,10 +508,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					// for some reason this can potentially fail in jdk1.4.2_04
 				}
 			} else {
-				//TODO: ?
+				//TODO -Ignore : ?
 			}
 		} else {
-			//TODO: what to do when the directory is null?
+			//TODO -Ignore : what to do when the directory is null?
 		}
 	}
 
@@ -639,14 +639,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		worldInfoContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.WorldInfoContentPane();
 
 		stdErrOutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this);
-
+		
 		exportCodeForPrintingContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.ExportCodeForPrintingContentPane(this);
-
+		
 		saveForWebContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.SaveForWebContentPane(this);
 
 		newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
 		
 		startUpContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane(this);
+
 	}
 
 	private void undoRedoInit() {
@@ -1602,7 +1603,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public void waitForBackupToFinishIfNecessary( java.io.File file ) {
 	}
 	public void backupWorld( final java.io.File src, final int maxBackups ) {
-	    if( edu.cmu.cs.stage3.io.FileUtilities.isFileCopySupported() ) {
+	    //if( !edu.cmu.cs.stage3.io.FileUtilities.isFileCopySupported() ) {
 			new Thread() {
 				public void run() {
 					java.io.File parentDir = src.getParentFile();
@@ -1674,8 +1675,51 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 					java.io.File dst = new java.io.File( dstDir, sb.toString() );
 					//m_backupProgressObserver = new edu.cmu.cs.stage3.progress.ProgressObserver();
-					try {
-						edu.cmu.cs.stage3.io.FileUtilities.copy( src, dst, true );
+					if( edu.cmu.cs.stage3.io.FileUtilities.isFileCopySupported() ) {				//Aik Min - Make a version for MAC
+						try {
+							edu.cmu.cs.stage3.io.FileUtilities.copy( src, dst, true );
+							java.io.File[] siblings = dstDir.listFiles( new java.io.FilenameFilter() {
+								public boolean accept( java.io.File dir, String name ) {
+									return name.endsWith( ".a2w" );
+								}
+							} );
+							if( siblings.length > maxBackups ) {
+								java.io.File fileToDelete = siblings[ 0 ];
+								long fileToDeleteLastModified = fileToDelete.lastModified();
+								for( int i=1; i<siblings.length; i++ ) {
+									long lastModified = siblings[ i ].lastModified();
+									if( lastModified < fileToDeleteLastModified ) {
+										fileToDelete = siblings[ i ];
+										fileToDeleteLastModified = lastModified;
+									}
+								}
+								fileToDelete.delete();
+							}
+						} finally {
+							//m_backupProgressObserver = null;
+						}
+					} else {
+						//Copy the current file to the BACKUP directory
+						if (!dst.exists()) {
+							dst.getParentFile().mkdirs();
+						}
+						try {
+							java.io.InputStream in = new java.io.FileInputStream(src);
+							java.io.OutputStream out = new java.io.FileOutputStream(dst); 
+			 
+			    	        byte[] buffer = new byte[1024];
+			 
+			    	        int length;
+			    	        //copy the file content in bytes 
+			    	        while ((length = in.read(buffer)) > 0){
+			    	    	   out.write(buffer, 0, length);
+			    	        }
+			 
+			    	        in.close();
+			    	        out.close();
+						} catch (Exception e) 
+						{}
+						//Delete older file if total BACKUP file > maxBackups
 						java.io.File[] siblings = dstDir.listFiles( new java.io.FilenameFilter() {
 							public boolean accept( java.io.File dir, String name ) {
 								return name.endsWith( ".a2w" );
@@ -1693,12 +1737,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							}
 							fileToDelete.delete();
 						}
-					} finally {
-						//m_backupProgressObserver = null;
 					}
 				}
 			}.start();
-	    }
+	    //}
 	}
 	
 

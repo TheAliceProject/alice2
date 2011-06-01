@@ -36,7 +36,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
  */
 public class JAliceFrame extends javax.swing.JFrame {
 	protected AuthoringTool authoringTool;
-	public static Boolean isLogging = false;
+	public static boolean isLogging = false;
 	// modes
 	public static int SCENE_EDITOR_SMALL_MODE = 1;
 	public static int SCENE_EDITOR_LARGE_MODE = 2;
