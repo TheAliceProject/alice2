@@ -113,7 +113,7 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 		} else {
 			worldTreeModel.setRoot( world );
 			setCurrentScope( world );
-			worldTree.setSelectionRow( 0 );
+			//worldTree.setSelectionRow( 0 ); Aik Min - removed due to a null pointer exception. Not sure what this does.
 		}
 
 		revalidate();

@@ -941,7 +941,6 @@ public class AuthoringToolResources {
 						propertyName = getName( key );
 					}
 				}
-			
 			} catch( NoSuchFieldException e ) {
 				AuthoringTool.showErrorDialog( "Error representing PropertyValue: can't find " + propertyName + " on " + valueClass, e );
 			}
@@ -1057,7 +1056,6 @@ public class AuthoringToolResources {
 			value = "position: " + AuthoringToolResources.resources.decimalFormatter.format( position.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.z ) + ";  " +
 					"orientation: (" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );
 		}
-		
 		if( value instanceof edu.cmu.cs.stage3.math.Quaternion ) {
 			edu.cmu.cs.stage3.math.Quaternion quaternion = (edu.cmu.cs.stage3.math.Quaternion)value;
 			value = "(" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );

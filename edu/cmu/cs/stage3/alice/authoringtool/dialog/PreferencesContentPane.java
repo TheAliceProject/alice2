@@ -30,6 +30,7 @@ import javax.swing.border.*;
 import java.awt.event.*;
 import java.util.Collections;
 
+import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 
 /**
@@ -92,6 +93,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		checkBoxToConfigKeyMap.put( showStartUpDialogCheckBox, "showStartUpDialog" );
 		checkBoxToConfigKeyMap.put( enableHighContrastCheckBox, "enableHighContrastMode" );
 		checkBoxToConfigKeyMap.put( enableLoggingCheckBox, "enableLoggingMode" );
+		checkBoxToConfigKeyMap.put( disableTooltipCheckBox, "disableTooltipMode" );
 		checkBoxToConfigKeyMap.put( showWebWarningCheckBox, "showWebWarningDialog" );
 		checkBoxToConfigKeyMap.put( loadSavedTabsCheckBox, "loadSavedTabs" );
 //		checkBoxToConfigKeyMap.put( reloadWorldScriptCheckBox, "reloadWorldScriptOnRun" );
@@ -142,7 +144,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 						restartRequired = true;
 					} else if( ev.getKeyName().endsWith( "enableLoggingMode" ) ) {
 						restartRequired = true;
-					}
+					} 
 				}
 			}
 		);
@@ -583,7 +585,13 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				Configuration.setValue( authoringToolPackage, (String)checkBoxToConfigKeyMap.get( checkBox ), checkBox.isSelected() ? "true" : "false" );
 			}
 		}
-
+// Aik Min - Logging and Tooltip
+		if ( Configuration.getValue( authoringToolPackage, "disableTooltipMode" ).equalsIgnoreCase("true") ) {
+			javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
+		} else {
+			javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
+		}
+		
 		if( ! Configuration.getValue( authoringToolPackage, "recentWorlds.maxWorlds" ).equals( maxRecentWorldsTextField.getText() ) ) {
 			Configuration.setValue( authoringToolPackage, "recentWorlds.maxWorlds", maxRecentWorldsTextField.getText() );
 		}
@@ -1457,6 +1465,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	private JCheckBox clearStdOutOnRunCheckBox = new JCheckBox();
 	private JCheckBox enableHighContrastCheckBox = new JCheckBox();
 	private JCheckBox enableLoggingCheckBox = new JCheckBox();
+	private JCheckBox disableTooltipCheckBox = new JCheckBox();
 	private JTextField numClipboardsTextField = new JTextField();
 	private JComboBox backupCountComboBox = new JComboBox();
 	private void SeldomUsedTabInit(){
@@ -1473,6 +1482,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		clearStdOutOnRunCheckBox.setText(" clear text output on play");
 		enableHighContrastCheckBox.setText(" enable high contrast mode for projectors");
 		enableLoggingCheckBox.setText(" enable logging");
+		disableTooltipCheckBox.setText(" disable tooltip");
 			
 		JLabel numClipboardsLabel = new JLabel();
 		numClipboardsTextField.setColumns(3);
@@ -1532,12 +1542,14 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		seldomUsedPanel.add(enableHighContrastCheckBox, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(enableLoggingCheckBox, new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0
-				,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));			
-		seldomUsedPanel.add(numClipboardsPanel, new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0
+				,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));	
+		seldomUsedPanel.add(disableTooltipCheckBox, new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0
+				,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(numClipboardsPanel, new GridBagConstraints(0, 11, 1, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 0), 0, 0));
-		seldomUsedPanel.add(saveIntervalPanel, new GridBagConstraints(0, 11, 1, 1, 0.0, 0.0
+		seldomUsedPanel.add(saveIntervalPanel, new GridBagConstraints(0, 12, 1, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 12, 1, 1, 0.0, 0.0
+		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 //		seldomUsedPanel.add(enableScriptingCheckBox, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0
 //			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));

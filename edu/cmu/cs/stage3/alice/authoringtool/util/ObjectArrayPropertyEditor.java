@@ -29,6 +29,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
 public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.core.event.PropertyListener, java.awt.dnd.DropTargetListener {
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty objectArrayProperty;
 	protected javax.swing.JButton newItemButton = new javax.swing.JButton( "new item" );
+	protected javax.swing.JButton removeItemButton = new javax.swing.JButton( "remove item" );
 	protected Class type = Object.class;  //hack
 	
 	protected int lineLocation = -1;
@@ -47,6 +48,16 @@ public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					ObjectArrayPropertyEditor.this.objectArrayProperty.add( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getDefaultValueForClass( type ) );
 					ObjectArrayPropertyEditor.this.newItemButton.scrollRectToVisible( ObjectArrayPropertyEditor.this.newItemButton.getBounds() );
+				}
+			}
+		);
+		removeItemButton.setBackground( new java.awt.Color( 240, 240, 255 ) );
+		removeItemButton.addActionListener(
+			new java.awt.event.ActionListener() {
+				public void actionPerformed( java.awt.event.ActionEvent ev ) {
+					if (objectArrayProperty.size() > 0)
+					ObjectArrayPropertyEditor.this.objectArrayProperty.remove(objectArrayProperty.size()-1);
+					ObjectArrayPropertyEditor.this.removeItemButton.scrollRectToVisible( ObjectArrayPropertyEditor.this.removeItemButton.getBounds() );
 				}
 			}
 		);
@@ -93,8 +104,10 @@ public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu
 				}
 			}
 
-			this.add( newItemButton, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
+			this.add( newItemButton, new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
 			newItemButton.setDropTarget( new java.awt.dnd.DropTarget( newItemButton, this ) );
+			this.add( removeItemButton, new java.awt.GridBagConstraints( 1, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
+			removeItemButton.setDropTarget( new java.awt.dnd.DropTarget( removeItemButton, this ) );
 			java.awt.Component glue = javax.swing.Box.createGlue();
 			this.add( glue, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 			glue.setDropTarget( new java.awt.dnd.DropTarget( glue, this ) );

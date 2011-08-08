@@ -16,7 +16,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
 public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener {
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected edu.cmu.cs.stage3.alice.core.World world;
-
+	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
     String dataDirectory = "C:\\loggingData\\";
 
     protected PrintWriter printWriter = null;
@@ -26,8 +26,9 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
           this.authoringTool = authoringTool;
           authoringTool.addAuthoringToolStateListener(this);
           
-          dataDirectory = edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory() + "\\loggingData\\";
+          //dataDirectory = edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory() + "\\loggingData\\";
           //System.out.println(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory());
+          dataDirectory = Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ) + "\\loggingData\\";
 	}
 
         public void pushUndoableRedoable( edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable ur ) {
@@ -81,6 +82,10 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
 
 	public void worldLoaded( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
 		if (JAliceFrame.isLogging == true && file == null) {
+			file = new File(dataDirectory);
+			if (!file.exists()){
+				file.mkdir();
+			}
 			file = new File(dataDirectory + System.currentTimeMillis() + ".txt");
 			
 			try {

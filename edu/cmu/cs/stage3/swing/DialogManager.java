@@ -174,13 +174,6 @@ public class DialogManager {
 		//	}
 		//}
 
-		//Aik Min
-		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
-		java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
-		if (currentDir.exists()) {
-			fileChooser.setCurrentDirectory(currentDir);
-		}
-
 		dialog.pack();
 
 		class FileChooserReturnValueTracker extends ReturnValueTracker {

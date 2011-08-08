@@ -57,9 +57,9 @@ public class SimulationExceptionPanel extends javax.swing.JPanel {
 		m_descriptionLabel.setText( simulationException.getMessage() );
 
 		//java.util.Stack stack = m_simulationException.getStack();
-		//java.util.Enumeration enum = stack.elements();
-		//while( enum.hasMoreElements() ) {
-		//	System.err.println( enum.nextElement() );
+		//java.util.Enumeration enum1 = stack.elements();
+		//while( enum1.hasMoreElements() ) {
+		//	System.err.println( enum1.nextElement() );
 		//}
 
 		edu.cmu.cs.stage3.alice.core.Element element = simulationException.getElement();

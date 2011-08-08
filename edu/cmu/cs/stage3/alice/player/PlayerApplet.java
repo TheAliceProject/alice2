@@ -41,12 +41,12 @@ public class PlayerApplet extends java.applet.Applet {
 	private javax.swing.JButton m_stopButton = new javax.swing.JButton( "stop" );
 	
 	private java.awt.Color decodeColorParam( String name, java.awt.Color valueIfNull ) {
-		//String value = getParameter( name );
-		//if( value != null ) {
-		//	return java.awt.Color.decode( value );
-		//} else {
+		String value = getParameter( name );
+		if( value != null ) {
+			return java.awt.Color.decode( value );
+		} else {
 			return valueIfNull;
-		//}
+		}
 	}
 
 	private class ProgressPanel extends java.awt.Panel {
@@ -57,7 +57,7 @@ public class PlayerApplet extends java.applet.Applet {
 
 		public ProgressPanel() {
 			setLayout( null );
-			setBackground( decodeColorParam( "boxfgcolor", java.awt.Color.black ) );
+			setForeground( decodeColorParam( "boxfgcolor", java.awt.Color.black ) );
 			setBackground( decodeColorParam( "boxbgcolor", java.awt.Color.white ) );
 			java.awt.Color progressColor = decodeColorParam( "progresscolor", java.awt.Color.blue );
 

@@ -696,7 +696,6 @@ public class JAliceFrame extends javax.swing.JFrame {
 			isLogging = true;
 		}
 		
-		
 		helpMenu.add(exampleWorldsItem);
 		helpMenu.add(selectTutorialMenuItem);
 /*		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) )

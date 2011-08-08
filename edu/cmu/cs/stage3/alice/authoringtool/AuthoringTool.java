@@ -616,7 +616,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		importFileChooser.setDialogType(javax.swing.JFileChooser.OPEN_DIALOG);
 		importFileChooser.setPreferredSize(new java.awt.Dimension(x, y));
 
-
 		saveWorldFileChooser.setApproveButtonText("Save World As");
 		saveWorldFileChooser.setDialogTitle("Save World As...");
 		saveWorldFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
@@ -2361,7 +2360,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public edu.cmu.cs.stage3.alice.core.Element importElement(Object path, edu.cmu.cs.stage3.alice.core.Element parent, edu.cmu.cs.stage3.alice.authoringtool.util.PostImportRunnable postImportRunnable, boolean animateOnAdd) {
 		edu.cmu.cs.stage3.alice.core.Element element = null;
 
-		if (path == null) {
+		if (path == null) {	
+			if (importFileChooser.getFileFilter().getDescription().compareToIgnoreCase("Image Files (BMP;JPG;JPEG;PNG;GIF;TIF;TIFF)") == 0) {
+				importFileChooser.setAccessory(new edu.cmu.cs.stage3.alice.authoringtool.dialog.ImagePreview(importFileChooser));	//Aik Min - image preview for import texture map
+				importFileChooser.setCurrentDirectory( new java.io.File(JAlice.getAliceHomeDirectory(), "textureMap") );
+				java.io.File file = new java.io.File(JAlice.getAliceHomeDirectory(), "textureMap/GrassTexture.png") ;
+				if ( file.exists() ) {
+					importFileChooser.setSelectedFile( file ); 
+				}
+			} else {
+				importFileChooser.setAccessory(null);
+				importFileChooser.setSelectedFile( new java.io.File("") ); 
+				edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
+				importFileChooser.setCurrentDirectory( new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory")) );
+			}
 			importFileChooser.rescanCurrentDirectory();
 			int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showDialog(importFileChooser, null);
 
@@ -2374,6 +2386,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			}
 		}
+		importFileChooser.setSelectedFile( null ); 
 		if (path != null) {
 			String ext = null, s;
 			if (path instanceof String) {

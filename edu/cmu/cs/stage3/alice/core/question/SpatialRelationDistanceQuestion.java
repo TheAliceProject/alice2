@@ -38,6 +38,9 @@ public abstract class SpatialRelationDistanceQuestion extends SubjectObjectQuest
 	
 	protected Object getValue( Transformable subjectValue, Transformable objectValue ) {
 		ReferenceFrame asSeenByValue = asSeenBy.getReferenceFrameValue();
-		return new Double( subjectValue.getSpatialRelationDistance( getSpatialRelation(), objectValue, asSeenByValue ) );
+		if (subjectValue == null) 
+			return new Double(1); 
+		else
+			return new Double( subjectValue.getSpatialRelationDistance( getSpatialRelation(), objectValue, asSeenByValue ) );
 	}
 }

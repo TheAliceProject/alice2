@@ -45,7 +45,7 @@ public class StoreElementProgressPane extends edu.cmu.cs.stage3.progress.Progres
 			throw pce;
 		} catch( Throwable t ) {
 			StringBuffer sb = new StringBuffer();
-			sb.append( "An error has occurred while attempting to save your world.\n" );
+			sb.append( "An error has occurred while attempting to save your world.\n\n" );
 			sb.append( "This is a critical situation that needs to be dealt with immediately.\n\n" );
 			if( t instanceof java.io.IOException ) {
 				sb.append( "This may be the result of not having enough space on the target drive.\n" );			

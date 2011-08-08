@@ -36,7 +36,9 @@ public abstract class SubjectObjectQuestion extends SubjectQuestion {
 			objectValue = subjectValue;	//Aik Min
 		}
 		// Proximity
-		if (this instanceof DistanceTo)
+		if ( objectValue == null || subjectValue == null)
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext="";
+		else if (this instanceof DistanceTo)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
 				subjectValue.name.getStringValue()+" distance to " + objectValue.name.getStringValue() + " is ";
 		else if (this instanceof DistanceToTheLeftOf)

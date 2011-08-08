@@ -10,6 +10,7 @@ public class Player extends edu.cmu.cs.stage3.media.AbstractPlayer {
 	public Player( DataSource dataSource ) {
 		super( dataSource );
 		try {
+			FixedJavaSoundRenderer.usurpControlFromJavaSoundRenderer();
 			m_jmfPlayer = javax.media.Manager.createPlayer( dataSource.getJMFDataSource() );
 			m_jmfPlayer.addControllerListener( new javax.media.ControllerListener() {
 				public void controllerUpdate( javax.media.ControllerEvent e ) {

@@ -131,6 +131,7 @@ public class MouseButtonClickBehavior extends TriggerBehavior implements java.aw
 			if( dx*dx + dy*dy < m_clickDistanceThresholdSquared ) {
 				if( isEnabled.booleanValue() ) {
 					if( checkModifierMask( mouseEvent ) ) {
+						updateDetails( mouseEvent );
 						Transformable onWhatValue = onWhat.getTransformableValue();
 						boolean success;
 						if( onWhatValue!=null ) {

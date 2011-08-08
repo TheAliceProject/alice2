@@ -25,6 +25,9 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.lang.reflect.InvocationTargetException;
+
+import javax.swing.SwingUtilities;
 
 /**
  * @author Jason Pratt, Dennis Cosgrove
@@ -221,11 +224,16 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 		
-		java.io.File currentDir = new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
+		final java.io.File currentDir = new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
 		try {
 			if (currentDir.exists()){
 				rootDirectoryPath = currentDir.getAbsolutePath()+java.io.File.separator;
-				htmlFileChooser.setCurrentDirectory(currentDir);
+				Runnable testRun = new Runnable(){
+					public void run() {
+						htmlFileChooser.setCurrentDirectory( currentDir );
+					}
+				};
+				SwingUtilities.invokeAndWait(testRun);				
 			} else{
 				rootDirectoryPath = edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory().getAbsolutePath()+java.io.File.separator;
 				htmlFileChooser.setCurrentDirectory(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory());
@@ -234,6 +242,10 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			//For some reason this can potentially fail. 
 			//If an error occurs, it defaults to My Document as the current directory.
 			//System.err.println("Error in SaveForWebContentPane");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
 		}
 		updateDirectory();
 		
