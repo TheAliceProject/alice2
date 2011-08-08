@@ -144,7 +144,7 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 	synchronized public void push( edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable ur ) {
 //		Thread.dumpStack();
 		// Logging 
-		if (changeLogger != null) {
+		if (changeLogger != null && JAliceFrame.isLogging == true) {
 			changeLogger.pushUndoableRedoable( ur );
 		}
 

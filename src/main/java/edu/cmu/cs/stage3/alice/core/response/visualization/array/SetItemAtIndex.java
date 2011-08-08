@@ -58,7 +58,7 @@ public class SetItemAtIndex extends ArrayVisualizationWithItemAnimation {
 			super.epilogue( t );
             //todo
             int indexValue = index.intValue();
-            Model[] array = (Model[]) m_subject.getItems().clone();
+            Model[] array = m_subject.getItems().clone();
             for( int i=0; i<array.length; i++ ) {
                 if( array[ i ] == m_item ) {
                     array[ i ] = null;

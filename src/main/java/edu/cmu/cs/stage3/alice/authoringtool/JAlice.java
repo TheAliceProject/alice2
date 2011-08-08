@@ -176,6 +176,10 @@ public class JAlice {
 			authoringtoolConfig.setValue( "enableLoggingMode", "false" );
 		}
 		
+		if( authoringtoolConfig.getValue( "disableTooltipMode" ) == null ) {
+			authoringtoolConfig.setValue( "disableTooltipMode", "false" );
+		}
+		
 		if( authoringtoolConfig.getValue( "fontSize" ) == null ) {
 			authoringtoolConfig.setValue( "fontSize", Integer.toString( 12 ) );
 		}

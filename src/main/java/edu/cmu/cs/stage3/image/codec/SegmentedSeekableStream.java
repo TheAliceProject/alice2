@@ -60,8 +60,8 @@ class StreamSegmentMapperImpl implements StreamSegmentMapper {
 
     public StreamSegmentMapperImpl(long[] segmentPositions,
                                    int[] segmentLengths) {
-        this.segmentPositions = (long[]) segmentPositions.clone();
-        this.segmentLengths = (int[]) segmentLengths.clone();
+        this.segmentPositions = segmentPositions.clone();
+        this.segmentLengths = segmentLengths.clone();
     }
 
     public StreamSegment getStreamSegment(long position, int length) {
@@ -112,7 +112,7 @@ class SectorStreamSegmentMapper implements StreamSegmentMapper {
     public SectorStreamSegmentMapper(long[] segmentPositions,
                                      int segmentLength,
                                      int totalLength) {
-        this.segmentPositions = (long[]) segmentPositions.clone();
+        this.segmentPositions = segmentPositions.clone();
         this.segmentLength = segmentLength;
         this.totalLength = totalLength;
         this.lastSegmentLength = totalLength -
