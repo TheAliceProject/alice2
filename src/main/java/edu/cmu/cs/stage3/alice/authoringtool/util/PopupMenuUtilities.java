@@ -2097,7 +2097,8 @@ public class PopupMenuUtilities {
 		if( property != null ) {
 			if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) {
 				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
-				elementClass = propertyAnimation.element.getElementValue().getClass();
+				if (propertyAnimation.element.getElementValue() != null)
+					elementClass = propertyAnimation.element.getElementValue().getClass();
 				if (propertyAnimation.element.getElementValue()instanceof edu.cmu.cs.stage3.alice.core.Variable){
 					edu.cmu.cs.stage3.alice.core.Variable var = (edu.cmu.cs.stage3.alice.core.Variable)propertyAnimation.element.getElementValue();
 					elementClass = var.getValueClass();
@@ -2106,7 +2107,8 @@ public class PopupMenuUtilities {
 				
 			} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "value" ) ) {
 				edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment propertyAssignment = (edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment)property.getOwner();
-				elementClass = propertyAssignment.element.getElementValue().getClass();
+				if (propertyAssignment.element.getElementValue() != null)
+					elementClass = propertyAssignment.element.getElementValue().getClass();
 				if (propertyAssignment.element.getElementValue() instanceof edu.cmu.cs.stage3.alice.core.Variable){
 					edu.cmu.cs.stage3.alice.core.Variable var = (edu.cmu.cs.stage3.alice.core.Variable)propertyAssignment.element.getElementValue();
 					elementClass = var.getValueClass();

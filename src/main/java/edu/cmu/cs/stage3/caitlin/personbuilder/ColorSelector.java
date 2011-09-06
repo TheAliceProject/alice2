@@ -39,6 +39,7 @@ public class ColorSelector extends javax.swing.JPanel implements java.awt.event.
 
 	public ColorSelector(ModelWrapper modelWrapper) {
 		this.modelWrapper = modelWrapper;
+		
 		this.setBackground(new java.awt.Color(155, 159, 206));
 
 		init();
@@ -69,6 +70,7 @@ public class ColorSelector extends javax.swing.JPanel implements java.awt.event.
 		humanColorPanel.setLayout(new java.awt.FlowLayout());
 		colorSlider = new javax.swing.JSlider();
 		skinColor = java.awt.Color.getHSBColor(25.0f / 359.0f, .61f, .665f);
+		modelWrapper.setColor(skinColor); // Aik Min
 		colorSlider.setBackground(skinColor);
 		colorSlider.addChangeListener(this);
 

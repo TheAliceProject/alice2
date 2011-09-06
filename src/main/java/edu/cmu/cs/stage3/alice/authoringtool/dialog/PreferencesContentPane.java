@@ -1551,7 +1551,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-//		seldomUsedPanel.add(enableScriptingCheckBox, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0
+//		seldomUsedPanel.add(enableScriptingCheckBox, new GridBagConstraints(0, 15, 1, 1, 0.0, 0.0
 //			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 //		seldomUsedPanel.add(runtimeScratchPadEnabledCheckBox, new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0
 //			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
@@ -1563,8 +1563,14 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 //			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 //		seldomUsedPanel.add(printingScalePanel, new GridBagConstraints(0, 14, 1, 1, 1.0, 0.0
 //			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(javax.swing.Box.createVerticalGlue(), new GridBagConstraints(0, 15, 1, 1, 1.0, 1.0
+		seldomUsedPanel.add(javax.swing.Box.createVerticalGlue(), new GridBagConstraints(0, 16, 1, 1, 1.0, 1.0
 			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		
+		if ( Configuration.getValue( authoringToolPackage, "disableTooltipMode" ).equalsIgnoreCase("true") ) {
+			javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
+		} else {
+			javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
+		}
 
 	}
 	
