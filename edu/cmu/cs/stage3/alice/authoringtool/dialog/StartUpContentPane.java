@@ -533,13 +533,14 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	private void initializeFileChooser(){
-		javax.swing.LookAndFeel feel = UIManager.getLookAndFeel();
+		//javax.swing.LookAndFeel feel = UIManager.getLookAndFeel();
 		String font = "SansSerif";
 		try {
-			if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) )
-				UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-			else
-				UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel");
+//			if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) )
+//				UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//			else
+//				UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel");
+			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
 			AikMin.setFontSize(12);
 		}
 		catch(Exception e) { }

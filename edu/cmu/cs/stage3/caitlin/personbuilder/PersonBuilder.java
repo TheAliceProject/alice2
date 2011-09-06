@@ -112,7 +112,10 @@ public class PersonBuilder extends javax.swing.JPanel {
 		if( text.length()== 0 ) {
 			text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( "What would you like to name your character?" );
 		}
-		text = text.trim();
+		if (text == null)	//Aik Min - Avoid NullPointer exception
+			text = "";
+		else
+			text = text.trim();
 		if( text.startsWith( "\"" ) || text.startsWith( "'" ) ) {
 			text = text.substring( 1 );
 		}
