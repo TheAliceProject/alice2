@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
 import javax.media.opengl.GL;
-import javax.media.opengl.glu.GLU;
 
 public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.renderer.AbstractProxyRenderTarget {
 	protected RenderTarget( Renderer renderer ) {
@@ -168,44 +167,44 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
     }
 
 	public java.awt.Image getOffscreenImage() {
-//		GL gl = GLU.getCurrentGL();
-//		
-//		int width = m_renderContextForGetOffscreenGraphics.getWidth();
-//		int height = m_renderContextForGetOffscreenGraphics.getHeight();
-//
-//		java.nio.ByteBuffer pixels = com.sun.opengl.util.BufferUtil.newByteBuffer(width * height * 3);
-//		
-//		
-//	    gl.glReadBuffer(GL.GL_BACK);
-//	    gl.glPixelStorei(GL.GL_PACK_ALIGNMENT, 1);
-//	    
-//	    gl.glReadPixels(0,                 	// GLint x
-//                0,                    		// GLint y
-//                width,                     	// GLsize width
-//                height,              		// GLsize height
-//                GL.GL_RGB,              	// GLenum format
-//                GL.GL_UNSIGNED_BYTE,        // GLenum type
-//                pixels);               		// GLvoid *pixels
-//	    
-//		java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage( width, height, java.awt.image.BufferedImage.TYPE_INT_RGB );
-//		
-//		for (int x = 0; x < width; x++) {
-//			for (int y = 0; y < height; y++) {
-//		         
-//				int index = 3 * ((height- y - 1) * width + x);
-//				if (index < 0) {
-//					System.out.println();
-//				}
-//				int argb = (((int) (pixels.get(index+0)) & 0xFF) << 16) 	//r
-//					| (((int) (pixels.get(index+1)) & 0xFF) << 8)  			//g
-//					| (((int) (pixels.get(index+2)) & 0xFF));      			//b
-//		
-//				bufferedImage.setRGB(x, y, argb);
-//			}
-//		}
-//
-//	    return bufferedImage;
-	    return null;
+		
+		RenderContext m_renderContext = new RenderContext(this);
+		
+		int width = m_renderContext.getWidth();
+		int height = m_renderContext.getHeight();
+
+		java.nio.ByteBuffer pixels = com.sun.opengl.util.BufferUtil.newByteBuffer(width * height * 3);
+		
+		m_renderContext.gl.glReadBuffer(GL.GL_BACK);
+		m_renderContext.gl.glPixelStorei(GL.GL_PACK_ALIGNMENT, 1);
+	    
+		m_renderContext.gl.glReadPixels(0, 	// GLint x
+                0,                    		// GLint y
+                width,                     	// GLsize width
+                height,              		// GLsize height
+                GL.GL_RGB,              	// GLenum format
+                GL.GL_UNSIGNED_BYTE,        // GLenum type
+                pixels);               		// GLvoid *pixels
+	    
+		java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage( width, height, java.awt.image.BufferedImage.TYPE_INT_RGB );
+		
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+		         
+				int index = 3 * ((height- y - 1) * width + x);
+				if (index < 0) {
+					System.out.println();
+				}
+				int argb = (((int) (pixels.get(index+0)) & 0xFF) << 16) 	//r
+					| (((int) (pixels.get(index+1)) & 0xFF) << 8)  			//g
+					| (((int) (pixels.get(index+2)) & 0xFF));      			//b
+		
+				bufferedImage.setRGB(x, y, argb);
+			}
+		}
+
+	    return bufferedImage;
+
 	}
 	
 	public java.awt.Graphics getOffscreenGraphics() {
