@@ -1,12 +1,79 @@
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
-
-import javax.media.Controller;
-import javax.media.Format;
-
-/**
- * @author Ben Buchwald, Dennis Cosgrove
+/*
+ * Copyright (c) 1999-2003, Carnegie Mellon University. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Products derived from the software may not be called "Alice",
+ *    nor may "Alice" appear in their name, without prior written
+ *    permission of Carnegie Mellon University.
+ *
+ * 4. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *    "This product includes software developed by Carnegie Mellon University"
  */
-public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
+
+/*
+ * @(#)CapturePlayback.java	1.11	99/12/03
+ *
+ * Copyright (c) 1999 Sun Microsystems, Inc. All Rights Reserved.
+ *
+ * Sun grants you ("Licensee") a non-exclusive, royalty free, license to use,
+ * modify and redistribute this software in source and binary code form,
+ * provided that i) this copyright notice and license appear on all copies of
+ * the software; and ii) Licensee does not utilize the software in a manner
+ * which is disparaging to Sun.
+ *
+ * This software is provided "AS IS," without a warranty of any kind. ALL
+ * EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING ANY
+ * IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+ * NON-INFRINGEMENT, ARE HEREBY EXCLUDED. SUN AND ITS LICENSORS SHALL NOT BE
+ * LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING
+ * OR DISTRIBUTING THE SOFTWARE OR ITS DERIVATIVES. IN NO EVENT WILL SUN OR ITS
+ * LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR DIRECT,
+ * INDIRECT, SPECIAL, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER
+ * CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF THE USE OF
+ * OR INABILITY TO USE SOFTWARE, EVEN IF SUN HAS BEEN ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGES.
+ *
+ * This software is not designed or intended for use in on-line control of
+ * aircraft, air traffic, aircraft navigation or aircraft communications; or in
+ * the design, construction, operation or maintenance of any nuclear
+ * facility. Licensee represents and warrants that it will not use or
+ * redistribute the Software for such purposes.
+ */
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.TargetDataLine;
+import javax.swing.JFrame;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
+
+public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 	private static byte[] s_wavHeader = new byte[ 44 ];
 	static {
 		System.arraycopy( "RIFF????WAVEfmt ".getBytes(), 0, s_wavHeader, 0, 16 );
@@ -33,38 +100,44 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		System.arraycopy( "data????".getBytes(), 0, s_wavHeader, 36, 8 );
 	}
 
+	Capture capture = new Capture();
+	Playback playback = new Playback();
+	AudioInputStream audioInputStream;
+	
+	final int bufSize = 16384;
+	
 	private static final int IDLE = 0;
 	private static final int RECORDING = 1;
-	private static final int PLAYING = 2;
+	private static final int PAUSE = 2;
+	private static final int RESUME = 3;
+	private static final int PLAYING = 4;
 
 	private int m_state = IDLE;
 
 	private edu.cmu.cs.stage3.alice.core.Element m_parentToCheckForNameValidity;
 
 	private edu.cmu.cs.stage3.alice.core.Sound m_sound;
-
+	private edu.cmu.cs.stage3.media.DataSource m_dataSource;
+	
 	private javax.swing.JTextField m_nameTextField;
 	private javax.swing.JLabel m_durationLabel;
 	private javax.swing.JButton m_recordButton;
+	private javax.swing.JButton m_pauseButton;
 	private javax.swing.JButton m_playButton;
 	private javax.swing.JButton m_okButton;
 	private javax.swing.JButton m_cancelButton;
-
-	private javax.media.protocol.DataSource m_jmfDataSource;
-	private javax.media.Processor m_jmfProcessor;
-	private edu.cmu.cs.stage3.alice.authoringtool.util.CaptureRenderer m_jmfRenderer;
-
-	private edu.cmu.cs.stage3.media.DataSource m_dataSource;
-	private edu.cmu.cs.stage3.media.Player m_player;
 
     private javax.swing.Timer m_durationUpdateTimer = new javax.swing.Timer( 100, new java.awt.event.ActionListener(){
         public void actionPerformed( java.awt.event.ActionEvent e ) {
         	SoundRecorder.this.onDurationUpdate();
         }
     } );
+    
 	private long m_durationT0;
+	private java.io.File soundDirectory;
 
-    public SoundRecorder() {
+    public SoundRecorder(java.io.File currentWorldLocation) {
+    	soundDirectory = currentWorldLocation;
 		m_durationLabel = new javax.swing.JLabel();
 		onDurationUpdate();
 
@@ -75,6 +148,14 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 
+		m_pauseButton = new javax.swing.JButton( "Pause" );
+		m_pauseButton.setEnabled(false);
+		m_pauseButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed( java.awt.event.ActionEvent e ) {
+				onPause();
+			}
+		});
+		
 		m_playButton = new javax.swing.JButton( "Play" );
 		m_playButton.setEnabled(false);
 		m_playButton.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +175,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		);
 
 		m_okButton = new javax.swing.JButton( "OK" );
+		m_okButton.setPreferredSize(new Dimension(80, 26));
 		m_okButton.setEnabled( false );
 		m_okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
@@ -102,6 +184,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		});
 
 		m_cancelButton = new javax.swing.JButton( "Cancel" );
+		m_cancelButton.setPreferredSize(new Dimension(80, 26));
 		m_cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				onCancel();
@@ -130,6 +213,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		gbc.gridwidth = 1;
 		gbc.weightx = 1.0;
 		controlPanel.add( m_recordButton, gbc );
+		controlPanel.add( m_pauseButton, gbc );
 		controlPanel.add( m_playButton, gbc );
 
 
@@ -203,248 +287,163 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		m_cancelButton.removeActionListener( l );
 	}
 
-	public edu.cmu.cs.stage3.alice.core.Element getParentToCheckForNameValidity() {
-		return m_parentToCheckForNameValidity;
-	}
-	public void setParentToCheckForNameValidity( edu.cmu.cs.stage3.alice.core.Element parentToCheckForNameValidity ) {
-		m_parentToCheckForNameValidity = parentToCheckForNameValidity;
-		m_nameTextField.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( "unnamedSound", m_parentToCheckForNameValidity ) );
-	}
-
 	public edu.cmu.cs.stage3.alice.core.Sound getSound() {
 		return m_sound;
 	}
 	public void setSound( edu.cmu.cs.stage3.alice.core.Sound sound ) {
 		m_sound = sound;
 	}
-		
+	
+	
+	public edu.cmu.cs.stage3.alice.core.Element getParentToCheckForNameValidity() {
+		return m_parentToCheckForNameValidity;
+	}
+	
+	public void setParentToCheckForNameValidity( edu.cmu.cs.stage3.alice.core.Element parentToCheckForNameValidity ) {
+		m_parentToCheckForNameValidity = parentToCheckForNameValidity;
+		m_nameTextField.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( "unnamedSound", m_parentToCheckForNameValidity ) );
+	}
+	
 	private void checkNameForValidity() {
 		java.awt.Color color = java.awt.Color.black;
+		if( edu.cmu.cs.stage3.alice.core.Element.isPotentialNameValid( m_nameTextField.getText() ) ) {
+			color = java.awt.Color.black;
+		} else {
+			color = java.awt.Color.red;
+		}
+		
 		if( m_parentToCheckForNameValidity != null ) {
 			if( m_parentToCheckForNameValidity.getChildNamedIgnoreCase( m_nameTextField.getText() ) != null ) {
 				color = java.awt.Color.red;
 			}
 		}
+
 		m_nameTextField.setForeground( color );
 		updateOKButtonEnabled();
 	}
 
 	private void updateOKButtonEnabled() {
-		m_okButton.setEnabled( m_dataSource != null && m_nameTextField.getForeground().equals( java.awt.Color.black ) );
+		m_okButton.setEnabled( audioInputStream != null && m_nameTextField.getForeground().equals( java.awt.Color.black ) );
 	}
 
-	private void onDurationUpdate() {
-		double t = 0;
+	private String formatTime( double seconds ) {
+		if( Double.isNaN( seconds ) ) {
+			return "?:??";
+		} else {
+			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" );
+			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" );
+			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" );
+
+			double secondsFloored = (int)Math.floor( seconds );
+			double decimal = seconds - secondsFloored;
+			double secs = secondsFloored % 60.0;
+			double minutes = ((secondsFloored - secs)/60.0) % 60.0;
+			double hours = (secondsFloored - 60.0*minutes - secs)/(60.0*60.0);
+
+			String timeString = secMinFormatter1.format( secs ) + decFormatter.format( decimal );
+			if( hours > 0.0 ) {
+				timeString = secMinFormatter1.format( minutes ) + ":" + timeString;
+				timeString = secMinFormatter2.format( hours ) + ":" + timeString;
+			} else {
+				timeString = secMinFormatter2.format( minutes ) + ":" + timeString;
+			}
+
+			return timeString;
+		}
+	}
+	
+	double pauseTime = 0;
+	long dt = 0;	
+	double t = 0, totalPauseTime = 0;
+	
+	private void onDurationUpdate() {	
 		switch( m_state ) {
 		case RECORDING:
-			long dt = System.currentTimeMillis() - m_durationT0;
-			t = dt*0.001;
-			break;
 		case PLAYING:
-			if( m_player != null ) {
-				t = m_player.getDuration();
-			}
+			dt = System.currentTimeMillis() - m_durationT0;
+			t = dt*0.001 - totalPauseTime;
 			break;
+		case PAUSE:
+			pauseTime = System.currentTimeMillis() - m_durationT0 - dt;
+			break;
+		case RESUME:
+			totalPauseTime += pauseTime * 0.001;
+			 if (capture.thread != null) {
+				 m_state = RECORDING;
+			 } else {
+				 if (playback.thread != null) { 
+					 m_state = PLAYING;
+				 }
+			 }
+		break;		
 		}
-		m_durationLabel.setText( "Duration: " + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.formatTime( t ) );
+		m_durationLabel.setText( "Duration: " + formatTime( t ) );
 	}
 
 	private void onStop() {
+		pauseTime = 0; totalPauseTime = 0;
 		m_state = IDLE;
 		m_playButton.setText( "Play" );
 		m_playButton.setEnabled( true );
 		m_recordButton.setText( "Record" );
 		m_recordButton.setEnabled( true );
-		if( m_jmfProcessor != null ) {
-			m_jmfProcessor.stop();
-			m_jmfProcessor = null;
-		}
-		if( m_jmfRenderer != null ) {
-			m_jmfRenderer.stop();
-			m_jmfRenderer.close();
-			m_jmfRenderer = null;
-		}
-		if( m_jmfDataSource != null ) {
-			try {
-				m_jmfDataSource.stop();
-			} catch( java.io.IOException ioe ) {
-				ioe.printStackTrace();
-			}
-			m_jmfDataSource.disconnect();
-			m_jmfDataSource = null;
-		}
-		if( m_player != null ) {
-			m_player.stop();
-			m_player.setIsAvailable( true );
-		}
+		m_pauseButton.setEnabled(false);
 		m_durationUpdateTimer.stop();
+		checkNameForValidity();
 	}
 	
-//	public void release() {
-//		onStop();
-//		m_player = null;
-//	}
-	
     private void onRecord() {
-		if( m_state == RECORDING ) {
-			m_jmfProcessor.stop();
-			m_jmfRenderer.stop();
-			m_jmfRenderer.close();
-			
-			int dataLength = m_jmfRenderer.getDataLength();
-			byte[] data = new byte[ s_wavHeader.length + dataLength ];
-
-			byte[] dataLengthInBytes = new byte[ 4 ];
-			dataLengthInBytes[0] = (byte)((dataLength & 0x000000FF));
-			dataLengthInBytes[1] = (byte)((dataLength & 0x0000FF00)>>8);
-			dataLengthInBytes[2] = (byte)((dataLength & 0x00FF0000)>>16);
-			dataLengthInBytes[3] = (byte)((dataLength & 0xFF000000)>>24);
-		
-			System.arraycopy( s_wavHeader, 0, data, 0, s_wavHeader.length );	
-			System.arraycopy( dataLengthInBytes, 0, data, 4, dataLengthInBytes.length );	
-			System.arraycopy( dataLengthInBytes, 0, data, 40, dataLengthInBytes.length );
-
-			m_jmfRenderer.getData( data, s_wavHeader.length, dataLength );
-			
-			m_dataSource = edu.cmu.cs.stage3.media.Manager.createDataSource( data, "wav" );
-			m_dataSource.waitForRealizedPlayerCount( 1, 0 );
-			onStop();
-			updateOKButtonEnabled();
-		} else {
+   	 	if (m_recordButton.getText().startsWith("Record")) {	 		
+			capture.start();
+			m_playButton.setEnabled(false);
+			m_pauseButton.setEnabled(true);
+			m_recordButton.setText("Stop");
 			m_state = RECORDING;
-			m_recordButton.setText( "Stop" );
-			m_playButton.setEnabled( false );
-			if( m_jmfDataSource == null ) {			
-				javax.media.format.AudioFormat format = new javax.media.format.AudioFormat( javax.media.format.AudioFormat.LINEAR, Format.NOT_SPECIFIED, 16, 1 );
-				java.util.Vector captureDeviceList = javax.media.CaptureDeviceManager.getDeviceList( format );
-				if( captureDeviceList.size() > 0 ) {
-					javax.media.CaptureDeviceInfo captureDevice = (javax.media.CaptureDeviceInfo)captureDeviceList.firstElement();
-					javax.media.MediaLocator locator = captureDevice.getLocator();
-					try {
-						m_jmfDataSource = javax.media.Manager.createDataSource( locator );
-						m_jmfProcessor = javax.media.Manager.createProcessor( m_jmfDataSource );
-
-						final Object configureLock = new Object();
-						synchronized( configureLock ) {
-							javax.media.ControllerListener configureControllerListener = new javax.media.ControllerListener() {
-								public void controllerUpdate( javax.media.ControllerEvent e ) {
-									if( e instanceof javax.media.TransitionEvent ) {
-										javax.media.TransitionEvent te = (javax.media.TransitionEvent)e;
-										if( te.getCurrentState() == javax.media.Processor.Configured ) {
-											synchronized( configureLock ) {
-												configureLock.notify();
-											}
-										}
-									}
-								}
-							};
-							m_jmfProcessor.addControllerListener( configureControllerListener );
-
-							new Thread() {
-								
-								public void run() {
-									try {
-										sleep( 1000 );
-									} catch( InterruptedException ie ) {
-										ie.printStackTrace();
-									} finally {
-										synchronized( configureLock ) {
-											configureLock.notify();
-										}
-									}
-								}
-							}.start();
-
-							m_jmfProcessor.configure();
-							try {
-								configureLock.wait();
-							} catch( InterruptedException ie ) {
-								ie.printStackTrace();
-							}
-							m_jmfProcessor.removeControllerListener( configureControllerListener );
-						}
-						m_jmfProcessor.setContentDescriptor( null );
-
-						m_jmfRenderer = new edu.cmu.cs.stage3.alice.authoringtool.util.CaptureRenderer();
-						m_jmfProcessor.getTrackControls()[0].setRenderer( m_jmfRenderer );
-
-						m_jmfProcessor.realize();
-						final Object realizeLock = new Object();
-						synchronized( realizeLock ) {
-							javax.media.ControllerListener realizeControllerListener = new javax.media.ControllerListener() {
-								public void controllerUpdate( javax.media.ControllerEvent e ) {
-									if( e instanceof javax.media.TransitionEvent ) {
-										javax.media.TransitionEvent te = (javax.media.TransitionEvent)e;
-										if( te.getCurrentState() == Controller.Realized ) {
-											synchronized( realizeLock ) {
-												realizeLock.notify();
-											}
-										}
-									}
-								}
-							};
-							m_jmfProcessor.addControllerListener( realizeControllerListener );
-
-							new Thread() {
-								
-								public void run() {
-									try {
-										sleep( 1000 );
-									} catch( InterruptedException ie ) {
-										ie.printStackTrace();
-									} finally {
-										synchronized( realizeLock ) {
-											realizeLock.notify();
-										}
-									}
-								}
-							}.start();
-
-							m_jmfProcessor.realize();
-							try {
-								realizeLock.wait();
-							} catch( InterruptedException ie ) {
-								ie.printStackTrace();
-							}
-							m_jmfProcessor.removeControllerListener( realizeControllerListener );
-						}
-						m_jmfProcessor.start();
-						m_durationT0 = System.currentTimeMillis();
-						m_durationUpdateTimer.start();
-					} catch( javax.media.UnsupportedPlugInException upie ) {
-						upie.printStackTrace();
-					} catch( javax.media.NoProcessorException npe ) {
-						npe.printStackTrace();
-					} catch( javax.media.NoDataSourceException ndse ) {
-						ndse.printStackTrace();
-					} catch( java.io.IOException ioe ) {
-						ioe.printStackTrace();
-					}
-				}
-			}
+			m_durationT0 = System.currentTimeMillis();
+			m_durationUpdateTimer.start();		
+         } else {
+             capture.stop();
+         }
+    }
+    
+    private void onPause() {
+		if (m_pauseButton.getText().startsWith("Pause")) {
+		    if (capture.thread != null) {
+		        capture.line.stop();
+		        m_state = PAUSE;
+		    } else {
+		        if (playback.thread != null) {
+		            playback.line.stop();
+		            m_state = PAUSE;
+		        }
+		    }
+		    m_pauseButton.setText("Resume");
+		} else {
+		    if (capture.thread != null) {
+		        capture.line.start();
+		        m_state = RESUME;
+		    } else {
+		        if (playback.thread != null) {
+		            playback.line.start();
+		            m_state = RESUME;
+		        }
+		    }
+		    m_pauseButton.setText("Pause");
 		}
     }
-
+    
     private void onPlay() {
-		if( m_state == PLAYING ) {
-			onStop();
-			m_player.setIsAvailable( true );
-		} else {
-			m_state = PLAYING;
-			m_playButton.setText( "Stop" );
-			m_recordButton.setEnabled( false );
-			m_player = m_dataSource.acquirePlayer();
-			m_player.addPlayerListener( new edu.cmu.cs.stage3.media.event.PlayerListener() {
-				public void endReached( edu.cmu.cs.stage3.media.event.PlayerEvent e ) {
-					if( m_state == PLAYING ) {
-						onPlay();
-					}
-				}
-				public void stateChanged( edu.cmu.cs.stage3.media.event.PlayerEvent e ) {
-				}
-			} );
-			m_player.startFromBeginning();
-		}
+    	if (m_playButton.getText().startsWith("Play")) {
+            playback.start();
+            m_recordButton.setEnabled(false);
+            m_pauseButton.setEnabled(true);
+            m_playButton.setText("Stop");
+            m_state = PLAYING;
+            m_durationT0 = System.currentTimeMillis();
+			m_durationUpdateTimer.start();	
+        } else {
+            playback.stop();
+       }
     }
 
 	private void onCancel() {
@@ -459,4 +458,229 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		sound.dataSource.set( m_dataSource );
 		setSound( sound );
     }
+
+    /**
+     * Write data to the OutputChannel.
+     */
+    public class Playback implements Runnable {
+
+        SourceDataLine line;
+        Thread thread;
+
+        public void start() {
+            thread = new Thread(this);
+            thread.setName("Playback");
+            thread.start();
+        }
+
+        public void stop() {
+            thread = null;
+           
+        }
+        
+        private void shutDown(String message) {
+            if (message != null) {
+            	AuthoringTool.showErrorDialog( message, null );
+            }
+            if (thread != null) {
+                thread = null;
+            } 
+            onStop();
+        }
+
+        public void run() {
+            // make sure we have something to play
+            if (audioInputStream == null) {
+                shutDown("No loaded audio to play back");
+                return;
+            }
+            // reset to the beginning of the stream
+            try {
+                audioInputStream.reset();
+            } catch (Exception e) {
+                shutDown("Unable to reset the stream\n" + e);
+                return;
+            }
+
+            // get an AudioInputStream of the desired format for playback
+            AudioFormat format = new AudioFormat (AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, true);
+            AudioInputStream playbackInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
+                        
+            if (playbackInputStream == null) {
+                shutDown("Unable to convert stream of format " + audioInputStream + " to format " + format);
+                return;
+            }
+
+            // define the required attributes for our line, 
+            // and make sure a compatible line is supported.
+            DataLine.Info info = new DataLine.Info(SourceDataLine.class, 
+                format);
+            if (!AudioSystem.isLineSupported(info)) {
+                shutDown("Line matching " + info + " not supported.");
+                return;
+            }
+
+            // get and open the source data line for playback.
+            try {
+                line = (SourceDataLine) AudioSystem.getLine(info);
+                line.open(format, bufSize);
+            } catch (LineUnavailableException ex) { 
+                shutDown("Unable to open the line: " + ex);
+                return;
+            }
+
+            // play back the captured audio data
+            int frameSizeInBytes = format.getFrameSize();
+            int bufferLengthInFrames = line.getBufferSize() / 8;
+            int bufferLengthInBytes = bufferLengthInFrames * frameSizeInBytes;
+            byte[] data = new byte[bufferLengthInBytes];
+            int numBytesRead = 0;
+
+            // start the source data line
+            line.start();
+
+            while (thread != null) {
+                try {
+                    if ((numBytesRead = playbackInputStream.read(data)) == -1) {
+                        break;
+                    }
+                    int numBytesRemaining = numBytesRead;
+                    while (numBytesRemaining > 0 ) {
+                        numBytesRemaining -= line.write(data, 0, numBytesRemaining);
+                    }
+                } catch (Exception e) {
+                    shutDown("Error during playback: " + e);
+                    break;
+                }
+            }
+            // we reached the end of the stream.  let the data play out, then
+            // stop and close the line.
+            if (thread != null) {
+                line.drain();
+            }
+            line.stop();
+            line.close();
+            line = null;
+            shutDown(null);
+        }
+    } // End class Playback
+    
+    /** 
+     * Reads data from the input channel and writes to the output stream
+     */
+	   class Capture implements Runnable {
+
+	        TargetDataLine line;
+	        Thread thread;
+
+	        public void start() {
+	            thread = new Thread(this);
+	            thread.setName("Capture");
+	            thread.start();
+	        }
+
+	        public void stop() {
+	            thread = null;
+	        }
+	        
+	        private void shutDown(String message) {
+	            if (message != null) {
+	            	AuthoringTool.showErrorDialog( message, null );
+	            }
+	            if (thread != null) {
+	                thread = null;
+	            } 
+	            onStop();
+	        }
+
+	        public void run() {
+
+	            audioInputStream = null;
+	            
+	            // define the required attributes for our line, 
+	            // and make sure a compatible line is supported.
+	            AudioFormat format = new AudioFormat (AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, true);
+	            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+	                        
+	            if (!AudioSystem.isLineSupported(info)) {
+	                shutDown("Line matching " + info + " not supported.");
+	                return;
+	            }
+
+	            // get and open the target data line for capture.
+	            try {
+	                line = (TargetDataLine) AudioSystem.getLine(info);
+	                line.open(format, line.getBufferSize());
+	            } catch (LineUnavailableException ex) { 
+	                shutDown("Unable to open the line: " + ex);
+	                return;
+	            } catch (SecurityException ex) { 
+	                shutDown(ex.toString());	       
+	                return;
+	            } catch (Exception ex) { 
+	                shutDown(ex.toString());
+	                return;
+	            }
+
+	            // play back the captured audio data
+	            ByteArrayOutputStream out = new ByteArrayOutputStream();
+	            int frameSizeInBytes = format.getFrameSize();
+	            int bufferLengthInFrames = line.getBufferSize() / 8;
+	            int bufferLengthInBytes = bufferLengthInFrames * frameSizeInBytes;
+	            byte[] data = new byte[bufferLengthInBytes];
+	            int numBytesRead;
+	            
+	            line.start();
+
+	            while (thread != null) {
+	                if((numBytesRead = line.read(data, 0, bufferLengthInBytes)) == -1) {
+	                    break;
+	                }
+	                out.write(data, 0, numBytesRead);
+	            }
+
+	            // we reached the end of the stream.  stop and close the line.
+	            line.stop();
+	            line.close();
+	            line = null;
+
+	            // stop and close the output stream
+	            try {
+	                out.flush();
+	                out.close();
+	            } catch (IOException ex) {
+	                ex.printStackTrace();
+	            }
+
+	            // load bytes into the audio input stream for playback
+	            byte audioBytes[] = out.toByteArray();
+	            ByteArrayInputStream bais = new ByteArrayInputStream(audioBytes);
+	            audioInputStream = new AudioInputStream(bais, format, audioBytes.length / frameSizeInBytes);
+
+		        try {
+		            audioInputStream.reset();
+		        } catch (Exception e) { 		     
+		            return;
+		        }
+		        
+		        File file = new File(soundDirectory + "/" + m_nameTextField.getText() + ".wav");		//TODO: make it work for MAC
+		        
+		        try {
+		            if (AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, file) == -1) {
+		                throw new IOException("Problems writing to file");
+		            }
+		        } catch (Exception ex) {  }
+		
+            	try {
+					m_dataSource = edu.cmu.cs.stage3.media.Manager.createDataSource( file );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	m_dataSource.waitForRealizedPlayerCount( 1, 0 );
+            	
+	    		shutDown(null);
+	        }
+	    } // End class Capture
+
 }

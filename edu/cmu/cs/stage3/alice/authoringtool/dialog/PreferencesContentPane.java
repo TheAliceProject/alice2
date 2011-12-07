@@ -29,6 +29,7 @@ import java.awt.*;
 import javax.swing.border.*;
 import java.awt.event.*;
 import java.util.Collections;
+import java.util.Locale;
 
 import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
@@ -140,7 +141,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 						restartRequired = true;
 					} else if( ev.getKeyName().endsWith( "rendering.forceSoftwareRendering" ) ) {
 						restartRequired = true;
-					} else if( ev.getKeyName().endsWith( "resourceFile" ) ) {
+					} else if( ev.getKeyName().endsWith( "resourceFile" ) || ev.getKeyName().endsWith( "language" )) {
 						restartRequired = true;
 					} else if( ev.getKeyName().endsWith( "enableLoggingMode" ) ) {
 						restartRequired = true;
@@ -629,6 +630,9 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		if( ! Configuration.getValue( authoringToolPackage, "resourceFile" ).equals( (String)resourceFileComboBox.getSelectedItem() ) ) {
 			Configuration.setValue( authoringToolPackage, "resourceFile", (String)resourceFileComboBox.getSelectedItem() );
 		}
+		if( ! Configuration.getValue( authoringToolPackage, "language" ).equals( (String)languageComboBox.getSelectedItem() ) ) {
+			Configuration.setValue( authoringToolPackage, "language", (String)languageComboBox.getSelectedItem() );
+		}
 //		if( ! Configuration.getValue( authoringToolPackage, "printing.scaleFactor" ).equals( printingScaleComboBox.getSelectedItem().toString() ) ) {
 //			Configuration.setValue( authoringToolPackage, "printing.scaleFactor", printingScaleComboBox.getSelectedItem().toString() );
 //		}
@@ -1101,11 +1105,13 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	private JTextField maxRecentWorldsTextField = new JTextField();
 	private JLabel maxRecentWorldsLabel = new JLabel();
 	private JComboBox resourceFileComboBox = new JComboBox();
+	private JComboBox languageComboBox = new JComboBox();
 	private JComboBox fontSizeComboBox = new JComboBox();
 	private JTextField worldDirectoryTextField = new JTextField();
 	private void GeneralTabInit(){
 		JPanel maxRecentWorldsPanel = new JPanel();
 		JPanel resourcesPanel = new JPanel();
+		JPanel languagePanel = new JPanel();
 		JPanel inputDirectoriesPanel = new JPanel();
 		JPanel fontSizePanel = new JPanel();
 			
@@ -1127,7 +1133,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		resourcesPanel.add(resourceFileComboBox, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
-		resourceFileComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "resourceFile" ) );
+
 		resourcesLabel.setText("display my program:");
 		
 		java.io.File resourceDirectory = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" ).getAbsoluteFile();
@@ -1168,7 +1174,21 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				return toReturn;
 			}
 		});
-	
+		resourceFileComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "resourceFile" ) );
+		
+		// Aik Min - Language
+		JLabel languageLabel = new JLabel();
+		languagePanel.setLayout(new GridBagLayout());
+		languagePanel.add(languageLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+				,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		languagePanel.add(languageComboBox, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+
+		languageLabel.setText("display language:");
+		languageComboBox.addItem("en - English");
+		languageComboBox.addItem("es - Spanish");
+		languageComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "language" ) );
+		
 		JLabel worldDirectoryLabel = new JLabel();
 		JButton worldDirectoryBrowseButton = new JButton();
 		worldDirectoryTextField.setColumns(15);
@@ -1223,11 +1243,13 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 //			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(4, 0, 4, 0), 0, 0));
 		generalPanel.add(resourcesPanel, new GridBagConstraints(0, 3, 1, 1, 1.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(inputDirectoriesPanel, new GridBagConstraints(0, 4, 1, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(fontSizePanel, new GridBagConstraints(0, 5, 1, 1, 1.0, 0.0
+		generalPanel.add(languagePanel, new GridBagConstraints(0, 4, 1, 1, 1.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(component, new GridBagConstraints(0, 6, 1, 1, 1.0,1.0
+		generalPanel.add(inputDirectoriesPanel, new GridBagConstraints(0, 5, 1, 1, 1.0, 0.0
+			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(fontSizePanel, new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0
+			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(component, new GridBagConstraints(0, 7, 1, 1, 1.0,1.0
 			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 //		generalPanel.add(watcherPanelEnabledCheckBox, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0
 //			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));	

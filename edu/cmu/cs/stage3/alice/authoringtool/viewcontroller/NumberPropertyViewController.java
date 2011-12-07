@@ -74,6 +74,7 @@ public class NumberPropertyViewController extends TextFieldEditablePropertyViewC
 
 	
 	protected void updateNativeComponent() {
+		String text = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property.get(), property, property.getOwner().data );
 		numberLabel.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property.get(), property, property.getOwner().data ) );
 	}
 

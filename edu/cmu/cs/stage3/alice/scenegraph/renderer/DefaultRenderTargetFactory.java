@@ -43,7 +43,7 @@ public class DefaultRenderTargetFactory implements RenderTargetFactory {
 			//pass
 		}
 		try {
-			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
+			//vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
 		} catch( Throwable t ) {
 			//pass
 		}

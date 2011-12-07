@@ -584,9 +584,9 @@ public final class Configuration {
 	public static void storeConfig() throws java.io.IOException {
 		if( configLocation.getParentFile().exists() && configLocation.getParentFile().canWrite() ) {
 			//if( configLocation.exists() ) {
-				if( configLocation.canWrite() ) {
+				//if( configLocation.canWrite() ) {
 					storeConfig( configLocation );
-				}
+				//}
 			//} else {
 			//	storeConfig( configLocation );
 			//}
