@@ -253,7 +253,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                 edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory propPIF = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(prop);
                 boolean shouldAllowExpressions = true;
                 Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(prop);
-                //Aik Min - mouse event
+                //Aik Min - When mouse is clicked on object under mouse cursor bug in create new event
                 if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase("onWhat")){
                 	shouldAllowExpressions = false;
                 }

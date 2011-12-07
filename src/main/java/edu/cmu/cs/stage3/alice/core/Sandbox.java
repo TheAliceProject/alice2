@@ -81,7 +81,6 @@ public abstract class Sandbox extends Element {
 		for( int i=0; i<questions.size(); i++ ) {
 			internalAddExpressionIfAssignableTo( (Expression)questions.get( i ), cls, v );
 		}
-		//Aik Min commented this to remove function listing twice in the drop down menu.
-		//super.internalFindAccessibleExpressions( cls, v );
+		super.internalFindAccessibleExpressions( cls, v );
 	}
 }

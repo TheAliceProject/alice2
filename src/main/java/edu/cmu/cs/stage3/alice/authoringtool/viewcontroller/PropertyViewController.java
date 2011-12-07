@@ -580,6 +580,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		if( transferable != null ) {
 			Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(property);
 			try {
+				// Aik Min - Fix null pointer exception. Prevent "ask question" drop in events.
 				/*if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.questionReferenceFlavor ) && PropertyViewController.this.allowExpressions ) {
 					edu.cmu.cs.stage3.alice.core.Question question = (edu.cmu.cs.stage3.alice.core.Question)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.questionReferenceFlavor );
 					if( desiredValueClass.isAssignableFrom( question.getValueClass() ) ) {
@@ -592,7 +593,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						return true;
 					}
 					
-				} else*/ if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.variableReferenceFlavor ) && PropertyViewController.this.allowExpressions ) {
+				} else */if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.variableReferenceFlavor ) && PropertyViewController.this.allowExpressions ) {
 					java.util.List accessibleExpressions = new java.util.ArrayList(java.util.Arrays.asList( property.getOwner().findAccessibleExpressions( Object.class ) ));
 //					System.out.println("owner: "+property.getOwner()+", root: "+property.getOwner().getRoot());
 //					for (int i=0; i<accessibleExpressions.size(); i++ ){
@@ -695,9 +696,9 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 					if( (! (element instanceof edu.cmu.cs.stage3.alice.core.Expression)) && PropertyViewController.this.allowExpressions ) {
 						propertyValueStructure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePropertyValueStructure( element, desiredValueClass, factory, property.getOwner() );
 					}
-
+					// Aik Min - prevent questions and sound to be drag to events.
 					if ( element instanceof edu.cmu.cs.stage3.alice.core.Sound ) 
-						return false;
+						return false;	// Do not allow sound (not play sound tile) 
 					else if ( element instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserForNumber )
 						return false;
 					else if ( element instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserYesNo )

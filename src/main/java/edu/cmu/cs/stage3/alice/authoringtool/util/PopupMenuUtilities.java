@@ -498,7 +498,8 @@ public class PopupMenuUtilities {
 	public static java.util.Vector makeFlatExpressionStructure( Class valueClass, edu.cmu.cs.stage3.util.Criterion criterion, PopupItemFactory factory, edu.cmu.cs.stage3.alice.core.Element context, Object currentValue ) {
 		java.util.Vector structure = new java.util.Vector();
 		if( context != null ) {
-			edu.cmu.cs.stage3.alice.core.Expression[] expressions = context.findAccessibleExpressions( valueClass );
+			edu.cmu.cs.stage3.alice.core.Expression[] expressions;
+			expressions = context.findAccessibleExpressions( valueClass );
 			for( int i = 0; i < expressions.length; i++ ) {
 				if( (criterion == null) || criterion.accept( expressions[i] ) ) {
 					String text = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( expressions[i] );
@@ -741,7 +742,6 @@ public class PopupMenuUtilities {
 	public static java.util.Vector makeOneShotStructure( java.util.Vector responseNames, edu.cmu.cs.stage3.alice.core.Element element, PopupItemFactory factory, edu.cmu.cs.stage3.alice.core.Element context ) {
 		java.util.Vector structure = new java.util.Vector();
 		if( responseNames != null ) {
-			int i = 0;
 			for( java.util.Iterator iter = responseNames.iterator(); iter.hasNext(); ) {
 				Object item = iter.next();
 				if( item instanceof String ) {

@@ -1928,9 +1928,10 @@ public abstract class Element {
 	}
 	public Expression[] findAccessibleExpressions( Class cls ) {
 		java.util.Vector v = new java.util.Vector();
-		internalFindAccessibleExpressions( cls, v );
-		Expression[] array = new Expression[ v.size() ];
-		v.copyInto( array );
+		internalFindAccessibleExpressions( cls, v );		
+		java.util.Vector newVect = new java.util.Vector(new java.util.LinkedHashSet(v));
+		Expression[] array = new Expression[ newVect.size() ];
+		newVect.copyInto( array );
 		return array;
 	}
 

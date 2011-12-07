@@ -8,6 +8,7 @@ public class AikMin {
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	//Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )
 	//System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")  
+	//edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" )
 	public static void setFontSize(int fontSize){
 		Font fontType = UIManager.getFont("Menu.font");
 	    String name = fontType.getName();

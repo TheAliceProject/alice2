@@ -265,12 +265,14 @@ public abstract class Behavior extends Element {
     */
 
     private Variable createRuntimeVariable( Variable other ) {
+    	
         Variable v = new Variable();
-        v.name.set( other.name.getStringValue() );
-        Class cls = other.getValueClass();
-		v.valueClass.set( cls );
-		Object value = other.getValue();
-        v.value.set( value );
+        v = other; // Aik Min added this to make watch variable work.
+//        v.name.set( other.name.getStringValue() );
+//        Class cls = other.getValueClass();
+//		v.valueClass.set( cls );
+//		Object value = other.getValue();
+//        v.value.set( value );
         return v;
     }
     public Variable stackLookup( Variable variable ) {

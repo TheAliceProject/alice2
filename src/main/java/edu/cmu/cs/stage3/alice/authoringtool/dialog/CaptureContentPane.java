@@ -906,7 +906,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		setButtonsCapturing(true);
 		//restartButton.setEnabled(true);
 		
-		recordLabel.setIcon(new javax.swing.ImageIcon("etc/redDot.PNG"));
+		recordLabel.setIcon(new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" ))); // Aik Min
 
 		recordLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 		if (movieCapture == null || capturing == null || !capturing.isAlive()) {
