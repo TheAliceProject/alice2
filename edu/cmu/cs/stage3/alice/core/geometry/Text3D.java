@@ -23,20 +23,22 @@
 
 package edu.cmu.cs.stage3.alice.core.geometry;
 
-import edu.cmu.cs.stage3.alice.core.property.FontProperty;
-import edu.cmu.cs.stage3.alice.core.property.StringProperty;
-import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
-
-import edu.cmu.cs.stage3.alice.core.Geometry;
-import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
-import edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray;
-
+import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
-import java.awt.Shape;
 import java.awt.geom.PathIterator;
-import javax.vecmath.*;
+
+import javax.vecmath.Point2d;
+import javax.vecmath.Point3d;
+import javax.vecmath.TexCoord2f;
+
+import edu.cmu.cs.stage3.alice.core.Geometry;
+import edu.cmu.cs.stage3.alice.core.property.FontProperty;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.property.StringProperty;
+import edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray;
+import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
 
 /**
  * <p>Title: </p>
@@ -83,12 +85,13 @@ public class Text3D extends Geometry {
     protected void updateExtrusion() {
         double extz = extrusion.doubleValue()/2;
         Vertex3d[] verts = ((IndexedTriangleArray)this.getSceneGraphGeometry()).getVertices();
-
+        if (verts != null){
         for (int i=0; i<verts.length; i++) {
             verts[i].position.z=extz*((verts[i].position.z>0)?1:-1);
         }
 
         ((IndexedTriangleArray)this.getSceneGraphGeometry()).setVertices(verts);
+        }
     }
 
     protected void updateGeometry() {

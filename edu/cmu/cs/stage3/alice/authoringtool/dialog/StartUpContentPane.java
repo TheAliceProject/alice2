@@ -70,14 +70,14 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	public static final int EXAMPLE_TAB_ID = 5;
 	public static final int TEXTBOOK_EXAMPLE_TAB_ID = 6;
 
-	private static final String TUTORIAL_STRING = "Tutorial";
-	private static final String EXAMPLES_STRING = "Examples";
-	private static final String RECENT_STRING = "Recent Worlds";
-	private static final String TEXTBOOK_EXAMPLES_STRING = "Textbook";
-	private static final String OPEN_STRING = "Open a world";
-	private static final String TEMPLATES_STRING = "Templates";
+	private static final String TUTORIAL_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Tutorial"+"</body></html>";
+	private static final String EXAMPLES_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Examples"+"</body></html>";
+	private static final String RECENT_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Recent Worlds"+"</body></html>";
+	private static final String TEXTBOOK_EXAMPLES_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Textbook"+"</body></html>";
+	private static final String OPEN_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Open a world"+"</body></html>";
+	private static final String TEMPLATES_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Templates"+"</body></html>";
 
-	private final int WIDTH = 480;
+	private final int WIDTH = 530;
 	private final int HEIGHT = 500;
 	//private final int INSET = 14;
 
@@ -241,15 +241,15 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				matchSizes();
 			}
 		} );
-		tutorialPanelLayout.setHgap(21);
+		tutorialPanelLayout.setHgap(35);
 		tutorialPanelLayout.setVgap(10);
-		examplePanelLayout.setHgap(21);
+		examplePanelLayout.setHgap(35);
 		examplePanelLayout.setVgap(10);
-		recentPanelLayout.setHgap(21);
+		recentPanelLayout.setHgap(35);
 		recentPanelLayout.setVgap(10);
-		templatePanelLayout.setHgap(21);
+		templatePanelLayout.setHgap(35);
 		templatePanelLayout.setVgap(10);
-		textbookPanelLayout.setHgap(21);
+		textbookPanelLayout.setHgap(35);
 		textbookPanelLayout.setVgap(10);
 
 	}
@@ -490,7 +490,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (parentDir != null || toAdd != null) {
 			toBuild.removeAll();
 		}
-		if (parentDir != null) {
+		if (parentDir != null && parentDir.getName().compareToIgnoreCase("Required")!=0) {
 			String parentDirName = "Back";
 			StartUpIcon parentDirIcon = new StartUpIcon(parentDirName, upDirectoryIcon, parentDir.getAbsolutePath(), false, StartUpIcon.DIRECTORY, getTopContainer(toBuild));
 			toBuild.add(parentDirIcon);
@@ -945,6 +945,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 
 		protected String getRelativePath(String current, String root) {
+			if (root==null) root="";
 			return current.substring(root.length());
 		}
 

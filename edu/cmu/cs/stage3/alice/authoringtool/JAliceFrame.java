@@ -117,25 +117,25 @@ public class JAliceFrame extends javax.swing.JFrame {
 		getContentPane().setBackground( new java.awt.Color( 192, 0, 0 ) );
 	}
 	public void HACK_standDownFromRedAlert() {
-		getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() );
+		getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() ); //$NON-NLS-1$
 	}
 	
 	private void guiInit() {
 		setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
 
-		if( authoringToolConfig.getValue( "useSingleFileLoadStore" ).equalsIgnoreCase( "true" ) ) {
+		if( authoringToolConfig.getValue( "useSingleFileLoadStore" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 			fileMenu.remove( JAliceFrame.this.openZippedWorldItem );
 		}
 
-		getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() );
+		getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() ); //$NON-NLS-1$
 		Configuration.addConfigurationListener(
 			new edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationListener() {
 				public void changing( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {}
 				public void changed( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {
-					if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.backgroundColor" ) ) {
-						JAliceFrame.this.getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() );
-					} else if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.useSingleFileLoadStore" ) ) {
-						if( ev.getNewValue().equalsIgnoreCase( "true" ) ) {
+					if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.backgroundColor" ) ) { //$NON-NLS-1$
+						JAliceFrame.this.getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() ); //$NON-NLS-1$
+					} else if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.useSingleFileLoadStore" ) ) { //$NON-NLS-1$
+						if( ev.getNewValue().equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$
 							fileMenu.remove( JAliceFrame.this.openZippedWorldItem );
 						} else {
 							if( ! fileMenu.isMenuComponent( JAliceFrame.this.openZippedWorldItem ) ) {
@@ -167,7 +167,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		behaviorPanel.add( behaviorGroupsEditor, java.awt.BorderLayout.CENTER );
 //		outputPanel.add( outputComponent, java.awt.BorderLayout.CENTER );
 		trashPanel.add( trashComponent, java.awt.BorderLayout.SOUTH );
-		if( authoringToolConfig.getValue( "showWorldStats" ).equalsIgnoreCase( "true" ) ) {
+		if( authoringToolConfig.getValue( "showWorldStats" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 			getContentPane().add( statusBar, java.awt.BorderLayout.SOUTH );
 		}
 
@@ -175,8 +175,8 @@ public class JAliceFrame extends javax.swing.JFrame {
 		int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
-		String boundsString = authoringToolConfig.getValue( "mainWindowBounds" );
-		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," );
+		String boundsString = authoringToolConfig.getValue( "mainWindowBounds" ); //$NON-NLS-1$
+		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," ); //$NON-NLS-1$
 		// if size isn't set in config, fill the screen
 		int x = 0;
 		int y = 0;
@@ -189,10 +189,10 @@ public class JAliceFrame extends javax.swing.JFrame {
 				width = Integer.parseInt( st.nextToken() );
 				height = Integer.parseInt( st.nextToken() );
 			} catch( NumberFormatException e ) {
-				AuthoringTool.showErrorDialog( "Parse error in config value: mainWindowBounds", null );
+				AuthoringTool.showErrorDialog( Messages.getString("JAliceFrame.12"), null ); //$NON-NLS-1$
 			}
 		} else {
-			AuthoringTool.showErrorDialog( "Incorrect number of tokens in config value: mainWindowBounds", null );
+			AuthoringTool.showErrorDialog( Messages.getString("JAliceFrame.13"), null ); //$NON-NLS-1$
 		}
 		this.setBounds( x, y, width, height );
 
@@ -285,12 +285,12 @@ public class JAliceFrame extends javax.swing.JFrame {
 			}
 		};
 
-		String[] recentWorldsStrings = authoringToolConfig.getValueList( "recentWorlds.worlds" );
+		String[] recentWorldsStrings = authoringToolConfig.getValueList( "recentWorlds.worlds" ); //$NON-NLS-1$
 		for( int i = 0; i < recentWorldsStrings.length; i++ ) {
 			recentWorlds.add( recentWorldsStrings[i] );
 		}
 
-		String max = authoringToolConfig.getValue( "recentWorlds.maxWorlds" );
+		String max = authoringToolConfig.getValue( "recentWorlds.maxWorlds" ); //$NON-NLS-1$
 		maxRecentWorlds = Integer.parseInt( max );
 
 		recentWorldsPosition = fileMenu.getMenuComponentCount() - 2;  // assumes (separator, exit) at end of menu
@@ -444,24 +444,24 @@ public class JAliceFrame extends javax.swing.JFrame {
 				item.addActionListener( recentWorldsListener );
 				fileMenu.insert( item, recentWorldsPosition + i );
 				if ( pathname.length() > 60 ){
-					int fontSize = (Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ));
+					int fontSize = (Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )); //$NON-NLS-1$
 					item.setToolTipText(pathname);
 					item.setPreferredSize( new Dimension (500, fontSize + 10));
 				}
 			}
 		} else {
-			javax.swing.JMenuItem item = new javax.swing.JMenuItem( "<No Recent Worlds>" );
+			javax.swing.JMenuItem item = new javax.swing.JMenuItem( Messages.getString("JAliceFrame.17") ); //$NON-NLS-1$
 			item.setEnabled( false );
 			fileMenu.insert( item, recentWorldsPosition );
 		}
 
 		// keep the configuration updated
-		authoringToolConfig.setValueList( "recentWorlds.worlds", (String[])recentWorlds.toArray( new String[0] ) );
+		authoringToolConfig.setValueList( "recentWorlds.worlds", (String[])recentWorlds.toArray( new String[0] ) ); //$NON-NLS-1$
 	}
 
 	public void updateClipboards() {
 		try {
-			int numClipboards = Integer.parseInt( authoringToolConfig.getValue( "numberOfClipboards" ) );
+			int numClipboards = Integer.parseInt( authoringToolConfig.getValue( "numberOfClipboards" ) ); //$NON-NLS-1$
 			int current = clipboardPanel.getComponentCount();
 			if( numClipboards > current ) {
 				for( int i = current; i < numClipboards; i++ ) {
@@ -475,7 +475,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 			clipboardPanel.revalidate();
 			clipboardPanel.repaint();
 		} catch( NumberFormatException e ) {
-			AuthoringTool.showErrorDialog( "illegal number of clipboards: " + authoringToolConfig.getValue( "numberOfClipboards" ), null );
+			AuthoringTool.showErrorDialog( Messages.getString("JAliceFrame.20") + authoringToolConfig.getValue( "numberOfClipboards" ), null ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -581,35 +581,35 @@ public class JAliceFrame extends javax.swing.JFrame {
 		border7 = BorderFactory.createLineBorder(Color.black,1);
 		border8 = BorderFactory.createLineBorder(Color.black,1);
 		fileMenu.setMnemonic('F');
-		fileMenu.setText("File");
-		newWorldItem.setText("New World");
-		openWorldItem.setText("Open World");
-		openZippedWorldItem.setText("Open Single File World");
-		saveWorldItem.setText("Save World");
-		saveWorldAsItem.setText("Save World As...");
-		saveForWebItem.setText("Export As A Web Page...");
-		addCharacterItem.setText("Add Character");
-		importItem.setText("Import...");
-		makeBillboardItem.setText("Make Billboard");
-		exitItem.setText("Exit");
+		fileMenu.setText(Messages.getString("JAliceFrame.22")); //$NON-NLS-1$
+		newWorldItem.setText(Messages.getString("JAliceFrame.23")); //$NON-NLS-1$
+		openWorldItem.setText(Messages.getString("JAliceFrame.24")); //$NON-NLS-1$
+		openZippedWorldItem.setText(Messages.getString("JAliceFrame.25")); //$NON-NLS-1$
+		saveWorldItem.setText(Messages.getString("JAliceFrame.26")); //$NON-NLS-1$
+		saveWorldAsItem.setText(Messages.getString("JAliceFrame.27")); //$NON-NLS-1$
+		saveForWebItem.setText(Messages.getString("JAliceFrame.28")); //$NON-NLS-1$
+		addCharacterItem.setText(Messages.getString("JAliceFrame.29")); //$NON-NLS-1$
+		importItem.setText(Messages.getString("JAliceFrame.30")); //$NON-NLS-1$
+		makeBillboardItem.setText(Messages.getString("JAliceFrame.31")); //$NON-NLS-1$
+		exitItem.setText(Messages.getString("JAliceFrame.32")); //$NON-NLS-1$
 		editMenu.setMnemonic('E');
-		editMenu.setText("Edit");
-		preferencesItem.setText("Preferences...");
+		editMenu.setText(Messages.getString("JAliceFrame.33")); //$NON-NLS-1$
+		preferencesItem.setText(Messages.getString("JAliceFrame.34")); //$NON-NLS-1$
 		helpMenu.setMnemonic('H');
-		helpMenu.setText("Help");
-		exampleWorldsItem.setText("Example Worlds...");
-		aboutItem.setText("About Alice");
+		helpMenu.setText(Messages.getString("JAliceFrame.35")); //$NON-NLS-1$
+		exampleWorldsItem.setText(Messages.getString("JAliceFrame.36")); //$NON-NLS-1$
+		aboutItem.setText(Messages.getString("JAliceFrame.37")); //$NON-NLS-1$
 		this.getContentPane().setLayout(borderLayout1);
 		toolBarPanel.setLayout(gridBagLayout1);
-		playButton.setText("Play");
+		playButton.setText(Messages.getString("JAliceFrame.38")); //$NON-NLS-1$
 		trashPanel.setAlignmentY((float) 0.0);
 		trashPanel.setOpaque(false);
 		trashPanel.setLayout(borderLayout11);
 		clipboardPanel.setLayout(gridBagLayout2);
 		mainPanel.setLayout(borderLayout2);
 		buttonPanel.setLayout(gridBagLayout4);
-		undoButton.setText("Undo");
-		redoButton.setText("Redo");
+		undoButton.setText(Messages.getString("JAliceFrame.39")); //$NON-NLS-1$
+		redoButton.setText(Messages.getString("JAliceFrame.40")); //$NON-NLS-1$
 //		authoringOutputSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 //		authoringOutputSplitPane.setDoubleBuffered(true);
 //		authoringOutputSplitPane.setOpaque(false);
@@ -629,13 +629,13 @@ public class JAliceFrame extends javax.swing.JFrame {
 		leftRightSplitPane.setOpaque(false);
 //		this.getContentPane().setBackground(new Color(255, 230, 180));
 		this.setJMenuBar(menuBar);
-		onScreenHelpItem.setToolTipText("");
-		onScreenHelpItem.setActionCommand("OnScreenHelp");
-		onScreenHelpItem.setText("On-Screen Help");
+		onScreenHelpItem.setToolTipText(""); //$NON-NLS-1$
+		onScreenHelpItem.setActionCommand("OnScreenHelp"); //$NON-NLS-1$
+		onScreenHelpItem.setText(Messages.getString("JAliceFrame.43")); //$NON-NLS-1$
 		toolsMenu.setMnemonic('T');
-		toolsMenu.setText("Tools");
-		worldInfoItem.setActionCommand("worldInfo");
-		worldInfoItem.setText("World Statistics...");
+		toolsMenu.setText(Messages.getString("JAliceFrame.44")); //$NON-NLS-1$
+		worldInfoItem.setActionCommand("worldInfo"); //$NON-NLS-1$
+		worldInfoItem.setText(Messages.getString("JAliceFrame.46")); //$NON-NLS-1$
 		smallSceneBehaviorPanel.setLayout(borderLayout12);
 		scenePanel.setLayout(borderLayout13);
 		worldTreePanel.setBorder(border4);
@@ -658,15 +658,15 @@ public class JAliceFrame extends javax.swing.JFrame {
 		smallSceneBehaviorPanel.setOpaque(false);
 //		outputPanel.setOpaque(false);
 		smallSceneBehaviorSplitPane.setOpaque(false);
-		addObjectButton.setText("Add Object");
-		add3DTextItem.setText("Add 3D Text");
-		exportMovieItem.setText("Export Video");
-		teachMeButton.setText("Teach Me");
-		selectTutorialMenuItem.setText("Select a Tutorial");
+		addObjectButton.setText(Messages.getString("JAliceFrame.47")); //$NON-NLS-1$
+		add3DTextItem.setText(Messages.getString("JAliceFrame.48")); //$NON-NLS-1$
+		exportMovieItem.setText(Messages.getString("JAliceFrame.49")); //$NON-NLS-1$
+		teachMeButton.setText(Messages.getString("JAliceFrame.50")); //$NON-NLS-1$
+		selectTutorialMenuItem.setText(Messages.getString("JAliceFrame.51")); //$NON-NLS-1$
 		//softwareUpdate.setText("Software Updates");
-		showStdOutItem.setText("Text Output...");
-		showStdErrItem.setText("Standard Error...");
-		printItem.setText("Print...");
+		showStdOutItem.setText(Messages.getString("JAliceFrame.52")); //$NON-NLS-1$
+		showStdErrItem.setText(Messages.getString("JAliceFrame.53")); //$NON-NLS-1$
+		printItem.setText(Messages.getString("JAliceFrame.54")); //$NON-NLS-1$
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		menuBar.add(toolsMenu);
@@ -691,7 +691,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		toolsMenu.add(showStdErrItem);
 		 
 		
-		if( authoringTool.getConfig().getValue("enableLoggingMode").equalsIgnoreCase("true") == true ) {
+		if( authoringTool.getConfig().getValue("enableLoggingMode").equalsIgnoreCase("true") == true ) { //$NON-NLS-1$ //$NON-NLS-2$
 			toolsMenu.add(instructorDemoItem);
 			isLogging = true;
 		}

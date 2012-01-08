@@ -47,8 +47,8 @@ package edu.cmu.cs.stage3.image.codec;
 import java.awt.image.ComponentSampleModel;
 import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferShort;
 import java.awt.image.DataBufferInt;
+import java.awt.image.DataBufferShort;
 import java.awt.image.DataBufferUShort;
 import java.awt.image.SampleModel;
 

@@ -24,11 +24,11 @@
 package edu.cmu.cs.stage3.alice.core.behavior;
 
 import edu.cmu.cs.stage3.alice.core.Expression;
+import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.RenderTarget;
-import edu.cmu.cs.stage3.alice.core.Variable;
 import edu.cmu.cs.stage3.alice.core.Transformable;
-import edu.cmu.cs.stage3.alice.core.Model;
+import edu.cmu.cs.stage3.alice.core.Variable;
 import edu.cmu.cs.stage3.alice.core.World;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.alice.core.property.IntegerProperty;

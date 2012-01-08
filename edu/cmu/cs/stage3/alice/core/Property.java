@@ -420,7 +420,6 @@ public abstract class Property {
 	private void onChanged( PropertyEvent propertyEvent ) {
 		//todo
 		getElement().markKeepKeyDirty();
-		String prep = propertyEvent.getSource().getClass().toString();
 		m_owner.propertyChanged( propertyEvent );
 		if( HACK_s_isListeningEnabled ) {
 			PropertyListener[] propertyListeners = getPropertyListeners();

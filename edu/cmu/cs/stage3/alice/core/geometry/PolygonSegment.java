@@ -34,9 +34,15 @@ package edu.cmu.cs.stage3.alice.core.geometry;
 
 import java.awt.Shape;
 import java.awt.geom.PathIterator;
-import javax.vecmath.*;
-import edu.cmu.cs.stage3.math.MathUtilities;
+
+import javax.vecmath.Point2d;
+import javax.vecmath.Point3d;
+import javax.vecmath.TexCoord2f;
+import javax.vecmath.Vector3d;
+import javax.vecmath.Vector3f;
+
 import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
+import edu.cmu.cs.stage3.math.MathUtilities;
 
 public class PolygonSegment {
     private java.util.Vector points;

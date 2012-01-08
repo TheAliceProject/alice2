@@ -24,17 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.media;
 
 import edu.cmu.cs.stage3.alice.core.Element;
-
-/**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2001</p>
- * <p>Company: Stage3</p>
- * @author Ben Buchwald
- * @version 1.0
- */
-
-import edu.cmu.cs.stage3.alice.core.property.*;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public class SoundMarker extends Element {
     public final NumberProperty time = new NumberProperty(this,"time",new Double(0));

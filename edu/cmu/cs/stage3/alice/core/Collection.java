@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
+import edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty;
 
 public abstract class Collection extends Element {
 	public final ObjectArrayProperty values = new ObjectArrayProperty( this, "values", null, Object[].class );

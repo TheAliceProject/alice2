@@ -23,12 +23,11 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.core.Variable;
-import edu.cmu.cs.stage3.alice.core.Response;
 import edu.cmu.cs.stage3.alice.core.Behavior;
-import edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse;
-import edu.cmu.cs.stage3.alice.core.property.UserDefinedResponseProperty;
+import edu.cmu.cs.stage3.alice.core.Response;
+import edu.cmu.cs.stage3.alice.core.Variable;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
+import edu.cmu.cs.stage3.alice.core.property.UserDefinedResponseProperty;
 
 public class CallToUserDefinedResponse extends Response {
 	public final UserDefinedResponseProperty userDefinedResponse = new UserDefinedResponseProperty( this, "userDefinedResponse", null );

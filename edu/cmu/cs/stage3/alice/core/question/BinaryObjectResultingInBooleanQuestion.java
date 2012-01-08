@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
-import edu.cmu.cs.stage3.alice.core.property.OverridableObjectProperty;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
+import edu.cmu.cs.stage3.alice.core.property.OverridableObjectProperty;
 
 public abstract class BinaryObjectResultingInBooleanQuestion extends BooleanQuestion {
 	public final OverridableObjectProperty a = new OverridableObjectProperty( this, "a", null );

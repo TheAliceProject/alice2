@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.player;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
+
 public class PlayerApplet extends java.applet.Applet {
 	private AbstractPlayer m_player = new AbstractPlayer() {
 		
@@ -135,6 +138,7 @@ public class PlayerApplet extends java.applet.Applet {
 	
 	public void init() {
 		super.init();
+		AikMin.locale = getParameter( "language" );	// Aik Min - set the language
 		setLayout( new java.awt.BorderLayout() );
 
 		javax.swing.JPanel panel = new javax.swing.JPanel();

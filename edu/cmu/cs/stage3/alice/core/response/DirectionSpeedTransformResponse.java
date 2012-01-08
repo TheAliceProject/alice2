@@ -27,8 +27,8 @@ import edu.cmu.cs.stage3.alice.core.Direction;
 import edu.cmu.cs.stage3.alice.core.Expression;
 import edu.cmu.cs.stage3.alice.core.event.ExpressionEvent;
 import edu.cmu.cs.stage3.alice.core.event.ExpressionListener;
-import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.DirectionProperty;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public abstract class DirectionSpeedTransformResponse extends TransformResponse {
 	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() );

@@ -50,7 +50,6 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-//import java.awt.image.ImageProducer;
 import java.awt.image.RenderedImage;
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -59,8 +58,6 @@ import java.io.InputStream;
 import sun.awt.image.FileImageSource;
 import sun.awt.image.GifImageDecoder;
 import sun.awt.image.InputStreamImageSource;
-// Name conflict, can't use import
-// import sun.awt.image.ImageDecoder;
 
 class GIFImageSource extends FileImageSource {
 

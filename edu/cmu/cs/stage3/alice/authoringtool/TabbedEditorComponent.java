@@ -59,8 +59,8 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 		setDropTarget( new java.awt.dnd.DropTarget( this, editorDropTargetListener ) );
 		tabbedPane.setDropTarget( new java.awt.dnd.DropTarget( tabbedPane, editorDropTargetListener ) );
 		tabbedPane.addMouseListener( rightClickListener );
-		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
-		tabbedPane.setFont( new java.awt.Font( "SansSerif", java.awt.Font.PLAIN, (int)(16 * (fontSize/12.0)) ) );
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
+		tabbedPane.setFont( new java.awt.Font( "SansSerif", java.awt.Font.PLAIN, (int)(16 * (fontSize/12.0)) ) ); //$NON-NLS-1$
 	}
 
 //	private void miscInit() {
@@ -104,9 +104,9 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 						edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion udq = (edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion)object;
 						if( edu.cmu.cs.stage3.alice.core.List.class.isAssignableFrom( udq.getValueClass() ) ) {
 							edu.cmu.cs.stage3.alice.core.List list = (edu.cmu.cs.stage3.alice.core.List)udq.getValue();
-							iconObject = "types/lists/" + list.valueClass.getClassValue().getName();
+							iconObject = "types/lists/" + list.valueClass.getClassValue().getName(); //$NON-NLS-1$
 						} else {
-							iconObject = "types/" + udq.getValueClass().getName();
+							iconObject = "types/" + udq.getValueClass().getName(); //$NON-NLS-1$
 						}
 					}
 					javax.swing.ImageIcon icon = AuthoringToolResources.getIconForValue( iconObject );
@@ -123,7 +123,7 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 					}
 					authoringTool.saveTabs();
 				} else {
-					AuthoringTool.showErrorDialog( "failed to create editor for " + object + ", " + editorClass, null );
+					AuthoringTool.showErrorDialog( Messages.getString("TabbedEditorComponent.4") + object + ", " + editorClass, null ); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			} else if( switchToNewTab ) {
 				for( int i = 0; i < tabbedPane.getTabCount(); i++ ) {
@@ -259,7 +259,7 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 				authoringTool.saveTabs();
 			}
 		} else {
-			AuthoringTool.showErrorDialog( "no editor to close at " + index, null );
+			AuthoringTool.showErrorDialog( Messages.getString("TabbedEditorComponent.6") + index, null ); //$NON-NLS-1$
 		}
 	}
 
@@ -308,8 +308,8 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 					}
 				};
 				java.util.Vector structure = new java.util.Vector();
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "Close " + TabbedEditorComponent.this.tabbedPane.getTitleAt( index ), closeTabRunnable ) );
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "Close All", closeAllTabsRunnable ) );
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("TabbedEditorComponent.7") + TabbedEditorComponent.this.tabbedPane.getTitleAt( index ), closeTabRunnable ) ); //$NON-NLS-1$
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("TabbedEditorComponent.8"), closeAllTabsRunnable ) ); //$NON-NLS-1$
 				edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.createAndShowPopupMenu( structure, TabbedEditorComponent.this.tabbedPane, ev.getX(), ev.getY() );
 			}
 		}
@@ -416,13 +416,13 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 					dtde.dropComplete( false );
 				}
 			} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-				AuthoringTool.showErrorDialog( "Drop didn't work: bad flavor", e );
+				AuthoringTool.showErrorDialog( Messages.getString("TabbedEditorComponent.9"), e ); //$NON-NLS-1$
 				dtde.dropComplete( false );
 			} catch( java.io.IOException e ) {
-				AuthoringTool.showErrorDialog( "Drop didn't work: IOException", e );
+				AuthoringTool.showErrorDialog( Messages.getString("TabbedEditorComponent.10"), e ); //$NON-NLS-1$
 				dtde.dropComplete( false );
 			} catch( Throwable t ) {
-				AuthoringTool.showErrorDialog( "Drop didn't work.", t );
+				AuthoringTool.showErrorDialog( Messages.getString("TabbedEditorComponent.11"), t ); //$NON-NLS-1$
 				dtde.dropComplete( false );
 			}
 		}

@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
+import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 
 public class Variable extends Expression {
 	public final ValueProperty value = new ValueProperty( this, "value", null );

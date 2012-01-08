@@ -24,8 +24,8 @@
 package edu.cmu.cs.stage3.alice.core;
 
 import edu.cmu.cs.stage3.alice.core.property.DataSourceProperty;
-import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public class Media extends Element {
 	public final DataSourceProperty dataSource = new DataSourceProperty( this, "dataSource", null );

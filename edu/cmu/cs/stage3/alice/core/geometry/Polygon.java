@@ -33,7 +33,12 @@ package edu.cmu.cs.stage3.alice.core.geometry;
  */
 
 import java.awt.geom.PathIterator;
-import javax.vecmath.*;
+
+import javax.vecmath.Point2d;
+import javax.vecmath.Point3d;
+import javax.vecmath.TexCoord2f;
+import javax.vecmath.Vector3d;
+
 import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
 import edu.cmu.cs.stage3.alice.scenegraph.util.Triangle;
 

@@ -25,8 +25,8 @@ package edu.cmu.cs.stage3.alice.core.question.userdefined;
 
 import edu.cmu.cs.stage3.alice.core.Expression;
 import edu.cmu.cs.stage3.alice.core.Variable;
-import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
+import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 
 public class UserDefinedQuestion extends edu.cmu.cs.stage3.alice.core.Question {
 	public final ClassProperty valueClass = new ClassProperty( this, "valueClass", null );

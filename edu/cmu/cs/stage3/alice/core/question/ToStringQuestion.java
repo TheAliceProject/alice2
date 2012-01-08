@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
+import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.property.ObjectProperty;
-import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.response.Print;
 
 /**

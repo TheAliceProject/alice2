@@ -23,12 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.util.HowMuch;
-import edu.cmu.cs.stage3.util.Criterion;
-import edu.cmu.cs.stage3.progress.ProgressObserver;
-import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
-import edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference;
 import edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty;
+import edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference;
+import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
+import edu.cmu.cs.stage3.progress.ProgressObserver;
+import edu.cmu.cs.stage3.util.Criterion;
+import edu.cmu.cs.stage3.util.HowMuch;
 
 class CopyReferenceGenerator extends edu.cmu.cs.stage3.alice.core.reference.DefaultReferenceGenerator {
 	private Class[] m_classesToShare;

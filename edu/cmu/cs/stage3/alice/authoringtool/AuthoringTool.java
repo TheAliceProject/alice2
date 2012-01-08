@@ -1904,6 +1904,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		replacements.put("__worldfile__", worldFile.getName()); //$NON-NLS-1$
 		replacements.put("__width__", Integer.toString(width)); //$NON-NLS-1$
 		replacements.put("__height__", Integer.toString(height)); //$NON-NLS-1$
+		replacements.put("__language__", AikMin.locale); //$NON-NLS-1$
 
 		// write web page
 		java.io.File templateFile = new java.io.File(JAlice.getAliceHomeDirectory(), "etc/appletTemplate.html"); //$NON-NLS-1$
@@ -5232,8 +5233,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		jAliceFrame.playButton.setEnabled(true);
 	}
 
-	public static boolean isresizable = true;
-
 	public javax.swing.JPanel playWhileEncoding(String directory) {
 		jAliceFrame.playButton.setEnabled(false);
 
@@ -5247,12 +5246,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			captureContentPane.setAspectRatio(aspectRatio);
 			captureContentPane.getRenderPanel().add(renderPanel, java.awt.BorderLayout.CENTER);
 			jAliceFrame.sceneEditor.makeDirty();
-			isresizable = false;
+			edu.cmu.cs.stage3.swing.DialogManager.setResize(false);
 			edu.cmu.cs.stage3.swing.DialogManager.showDialog(captureContentPane);
 			stdErrOutContentPane.startReactingToPrint();
 		}
 		jAliceFrame.playButton.setEnabled(true);
-		isresizable = true;
+		edu.cmu.cs.stage3.swing.DialogManager.setResize(true);
 		return captureContentPane;
 	}
 		
