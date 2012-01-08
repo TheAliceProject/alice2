@@ -13,11 +13,10 @@ package edu.cmu.cs.stage3.alice.core.response;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 
-import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
-import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
-import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
-//import edu.cmu.cs.stage3.math.Vector3;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
+import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 
 public class TwoShotAnimation extends AbstractPositionAnimation {
 	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.RIGHT_OF );

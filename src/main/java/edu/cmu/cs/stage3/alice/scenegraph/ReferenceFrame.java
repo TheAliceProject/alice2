@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.scenegraph;
 
 import edu.cmu.cs.stage3.math.MathUtilities;
-
 import edu.cmu.cs.stage3.math.Matrix33;
 import edu.cmu.cs.stage3.math.Matrix44;
 import edu.cmu.cs.stage3.math.Quaternion;

@@ -23,35 +23,40 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 public class DefaultRenderTargetFactory implements RenderTargetFactory {
 
 	public static Class[] getPotentialRendererClasses() {
 		java.util.Vector vector = new java.util.Vector();
-		
-		if ( System.getProperty("os.name").startsWith("Win") ){
-			try {
-				if( edu.cmu.cs.stage3.alice.scenegraph.renderer.util.DirectXVersion.getVersion() >= 7.0 ) {
-					vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.directx7renderer.Renderer.class );
+
+		if (AikMin.target == 0){
+			if ( System.getProperty("os.name").startsWith("Win") ){
+				try {
+					if( edu.cmu.cs.stage3.alice.scenegraph.renderer.util.DirectXVersion.getVersion() >= 7.0 ) {
+						vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.directx7renderer.Renderer.class );
+					}
+				} catch( Throwable t ) {
+					//pass
 				}
+			}
+			try {
+				vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer.class );
+			} catch( Throwable t ) {
+				//pass
+			}
+		} else {
+			try {
+				vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
 			} catch( Throwable t ) {
 				//pass
 			}
 		}
-		try {
-			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer.class );
-		} catch( Throwable t ) {
-			//pass
-		}
-		try {
-			//vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
-		} catch( Throwable t ) {
-			//pass
-		}
-		try {
-			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer.class );
-		} catch( Throwable t ) {
-			//pass
-		}
+//		try {
+//			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer.class );
+//		} catch( Throwable t ) {
+//			//pass
+//		}
 		Class[] array = new Class[ vector.size() ];
 		vector.copyInto( array );
 		return array;

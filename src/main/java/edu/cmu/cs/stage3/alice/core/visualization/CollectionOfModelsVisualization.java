@@ -1,9 +1,9 @@
 package edu.cmu.cs.stage3.alice.core.visualization;
 
 import edu.cmu.cs.stage3.alice.core.Collection;
+import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.TextureMap;
 import edu.cmu.cs.stage3.alice.core.Variable;
-import edu.cmu.cs.stage3.alice.core.Model;
 
 public abstract class CollectionOfModelsVisualization extends edu.cmu.cs.stage3.alice.core.Visualization {
 	private java.util.Vector m_bins = new java.util.Vector();

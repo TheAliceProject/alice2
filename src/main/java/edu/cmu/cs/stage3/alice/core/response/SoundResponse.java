@@ -23,9 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
-import edu.cmu.cs.stage3.alice.core.property.*;
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.media.SoundMarker;
+import edu.cmu.cs.stage3.alice.core.property.ElementProperty;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
+import edu.cmu.cs.stage3.alice.core.property.SoundProperty;
 
 public class SoundResponse extends edu.cmu.cs.stage3.alice.core.Response {
 	public final ReferenceFrameProperty subject = new ReferenceFrameProperty( this, "subject", null );
@@ -137,7 +140,9 @@ public class SoundResponse extends edu.cmu.cs.stage3.alice.core.Response {
 					//m_player.setBeginTime( )
 					//m_player.setStopTime( )
 					fireSoundListeners(t,m_player.getDuration(),dataSourceValue);
-					AuthoringTool.pauseSound(m_player);
+					if (AikMin.target == 0){
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.pauseSound(m_player);
+					}
 					//m_player.startFromBeginning();
 				}
 			}

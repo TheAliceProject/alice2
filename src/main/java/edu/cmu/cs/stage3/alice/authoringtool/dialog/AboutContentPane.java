@@ -23,12 +23,14 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.alice.authoringtool.Messages;
+
 public class AboutContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
-	private javax.swing.JButton m_okButton = new javax.swing.JButton( "OK" );
+	private javax.swing.JButton m_okButton = new javax.swing.JButton( Messages.getString("AboutContentPane.0") ); //$NON-NLS-1$
 	
 	public AboutContentPane()	{
 		javax.swing.JLabel imageLabel = new javax.swing.JLabel();
-		imageLabel.setIcon( new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/aboutAlice.png" ) ) );
+		imageLabel.setIcon( new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/aboutAlice.png" ) ) ); //$NON-NLS-1$
 
 		setBackground(new java.awt.Color(173,202,234));
 		setPreferredSize( new java.awt.Dimension(520, 410) );
@@ -55,7 +57,7 @@ public class AboutContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	
 	
 	public String getTitle() {
-		return "About Alice verison "+edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion();
+		return Messages.getString("AboutContentPane.2")+edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion(); //$NON-NLS-1$
 	}
 
 //	public void preDialogShow() {

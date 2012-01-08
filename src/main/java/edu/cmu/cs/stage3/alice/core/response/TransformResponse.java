@@ -24,9 +24,9 @@
 package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
+import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
-import edu.cmu.cs.stage3.alice.core.Transformable;
 
 //todo: absolute transformation listener
 public abstract class TransformResponse extends edu.cmu.cs.stage3.alice.core.Response {

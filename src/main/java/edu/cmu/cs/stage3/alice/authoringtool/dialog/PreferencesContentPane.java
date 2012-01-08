@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Locale;
 
 import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
+import edu.cmu.cs.stage3.alice.authoringtool.Messages;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 
 /**
@@ -41,7 +42,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	protected java.util.HashMap checkBoxToConfigKeyMap = new java.util.HashMap();
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
-	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
+	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" ); //$NON-NLS-1$
 	protected javax.swing.JFileChooser browseFileChooser = new javax.swing.JFileChooser();
 	protected java.util.HashMap rendererStringMap = new java.util.HashMap();
 	protected boolean restartRequired = false;
@@ -50,8 +51,8 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	protected boolean changedCaptureDirectory = false;
 	protected java.awt.Frame owner;
 	private java.util.Vector m_okActionListeners = new java.util.Vector();
-	private final String FOREVER_INTERVAL_STRING = "Forever";
-	private final String INFINITE_BACKUPS_STRING = "Infinite";
+	private final String FOREVER_INTERVAL_STRING = Messages.getString("PreferencesContentPane.1"); //$NON-NLS-1$
+	private final String INFINITE_BACKUPS_STRING = Messages.getString("PreferencesContentPane.2"); //$NON-NLS-1$
 
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig =
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
@@ -69,67 +70,67 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	}
 	
 	private void actionInit() {
-		okayAction.putValue( javax.swing.Action.NAME, "OK" );
-		okayAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "Accept preference changes" );
+		okayAction.putValue( javax.swing.Action.NAME, Messages.getString("PreferencesContentPane.3") ); //$NON-NLS-1$
+		okayAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("PreferencesContentPane.4") ); //$NON-NLS-1$
 
-		cancelAction.putValue( javax.swing.Action.NAME, "Cancel" );
-		cancelAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "Close dialog without accepting changes" );
+		cancelAction.putValue( javax.swing.Action.NAME, Messages.getString("PreferencesContentPane.5") ); //$NON-NLS-1$
+		cancelAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("PreferencesContentPane.6") ); //$NON-NLS-1$
 
 		okayButton.setAction( okayAction );
 		cancelButton.setAction( cancelAction );
 	}
 
 	private void checkBoxMapInit() {
-		useBorderlessWindowCheckBox.setText("use a borderless render window");
-		watcherPanelEnabledCheckBox.setText("show variable watcher when world runs");
-		runtimeScratchPadEnabledCheckBox.setText("show scratch pad when world runs");
-		infiniteBackupsCheckBox.setText("save infinite number of backup scripts");
-		doProfilingCheckBox.setText("profile world");
-		enableScriptingCheckBox.setToolTipText("");
-		enableScriptingCheckBox.setActionCommand("enable jython scripting");
-		enableScriptingCheckBox.setText("enable jython scripting");
-		saveAsSingleFileCheckBox.setText("always save worlds as single files");
+		useBorderlessWindowCheckBox.setText(Messages.getString("PreferencesContentPane.7")); //$NON-NLS-1$
+		watcherPanelEnabledCheckBox.setText(Messages.getString("PreferencesContentPane.8")); //$NON-NLS-1$
+		runtimeScratchPadEnabledCheckBox.setText(Messages.getString("PreferencesContentPane.9")); //$NON-NLS-1$
+		infiniteBackupsCheckBox.setText(Messages.getString("PreferencesContentPane.10")); //$NON-NLS-1$
+		doProfilingCheckBox.setText(Messages.getString("PreferencesContentPane.11")); //$NON-NLS-1$
+		enableScriptingCheckBox.setToolTipText(""); //$NON-NLS-1$
+		enableScriptingCheckBox.setActionCommand("enable jython scripting"); //$NON-NLS-1$
+		enableScriptingCheckBox.setText(Messages.getString("PreferencesContentPane.14")); //$NON-NLS-1$
+		saveAsSingleFileCheckBox.setText(Messages.getString("PreferencesContentPane.15")); //$NON-NLS-1$
 		
 		
-		checkBoxToConfigKeyMap.put( showStartUpDialogCheckBox, "showStartUpDialog" );
-		checkBoxToConfigKeyMap.put( enableHighContrastCheckBox, "enableHighContrastMode" );
-		checkBoxToConfigKeyMap.put( enableLoggingCheckBox, "enableLoggingMode" );
-		checkBoxToConfigKeyMap.put( disableTooltipCheckBox, "disableTooltipMode" );
-		checkBoxToConfigKeyMap.put( showWebWarningCheckBox, "showWebWarningDialog" );
-		checkBoxToConfigKeyMap.put( loadSavedTabsCheckBox, "loadSavedTabs" );
+		checkBoxToConfigKeyMap.put( showStartUpDialogCheckBox, "showStartUpDialog" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( enableHighContrastCheckBox, "enableHighContrastMode" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( enableLoggingCheckBox, "enableLoggingMode" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( disableTooltipCheckBox, "disableTooltipMode" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( showWebWarningCheckBox, "showWebWarningDialog" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( loadSavedTabsCheckBox, "loadSavedTabs" ); //$NON-NLS-1$
 //		checkBoxToConfigKeyMap.put( reloadWorldScriptCheckBox, "reloadWorldScriptOnRun" );
-		checkBoxToConfigKeyMap.put( saveThumbnailWithWorldCheckBox, "saveThumbnailWithWorld" );
-		checkBoxToConfigKeyMap.put( forceSoftwareRenderingCheckBox, "rendering.forceSoftwareRendering" );
-		checkBoxToConfigKeyMap.put( showFPSCheckBox, "rendering.showFPS" );
-		checkBoxToConfigKeyMap.put( deleteFiles, "rendering.deleteFiles" ); // Aik Min added this.
-		checkBoxToConfigKeyMap.put( useBorderlessWindowCheckBox, "rendering.useBorderlessWindow" );
+		checkBoxToConfigKeyMap.put( saveThumbnailWithWorldCheckBox, "saveThumbnailWithWorld" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( forceSoftwareRenderingCheckBox, "rendering.forceSoftwareRendering" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( showFPSCheckBox, "rendering.showFPS" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( deleteFiles, "rendering.deleteFiles" ); // Aik Min added this. //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( useBorderlessWindowCheckBox, "rendering.useBorderlessWindow" ); //$NON-NLS-1$
 //		checkBoxToConfigKeyMap.put( renderWindowMatchesSceneEditorCheckBox, "rendering.renderWindowMatchesSceneEditor" );
-		checkBoxToConfigKeyMap.put( constrainRenderDialogAspectCheckBox, "rendering.constrainRenderDialogAspectRatio" );
-		checkBoxToConfigKeyMap.put( ensureRenderDialogIsOnScreenCheckBox, "rendering.ensureRenderDialogIsOnScreen" );
-		checkBoxToConfigKeyMap.put( createNormalsCheckBox, "importers.aseImporter.createNormalsIfNoneExist" );
-		checkBoxToConfigKeyMap.put( createUVsCheckBox, "importers.aseImporter.createUVsIfNoneExist" );
-		checkBoxToConfigKeyMap.put( useSpecularCheckBox, "importers.aseImporter.useSpecular" );
-		checkBoxToConfigKeyMap.put( groupMultipleRootObjectsCheckBox, "importers.aseImporter.groupMultipleRootObjects" );
-		checkBoxToConfigKeyMap.put( colorToWhiteWhenTexturedCheckBox, "importers.aseImporter.colorToWhiteWhenTextured" );
-		checkBoxToConfigKeyMap.put( watcherPanelEnabledCheckBox, "watcherPanelEnabled" );
-		checkBoxToConfigKeyMap.put( runtimeScratchPadEnabledCheckBox, "rendering.runtimeScratchPadEnabled" );
-		checkBoxToConfigKeyMap.put( infiniteBackupsCheckBox, "saveInfiniteBackups" );
-		checkBoxToConfigKeyMap.put( doProfilingCheckBox, "doProfiling" );
+		checkBoxToConfigKeyMap.put( constrainRenderDialogAspectCheckBox, "rendering.constrainRenderDialogAspectRatio" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( ensureRenderDialogIsOnScreenCheckBox, "rendering.ensureRenderDialogIsOnScreen" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( createNormalsCheckBox, "importers.aseImporter.createNormalsIfNoneExist" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( createUVsCheckBox, "importers.aseImporter.createUVsIfNoneExist" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( useSpecularCheckBox, "importers.aseImporter.useSpecular" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( groupMultipleRootObjectsCheckBox, "importers.aseImporter.groupMultipleRootObjects" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( colorToWhiteWhenTexturedCheckBox, "importers.aseImporter.colorToWhiteWhenTextured" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( watcherPanelEnabledCheckBox, "watcherPanelEnabled" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( runtimeScratchPadEnabledCheckBox, "rendering.runtimeScratchPadEnabled" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( infiniteBackupsCheckBox, "saveInfiniteBackups" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( doProfilingCheckBox, "doProfiling" ); //$NON-NLS-1$
 //		checkBoxToConfigKeyMap.put( scriptTypeInEnabledCheckBox, "editors.sceneeditor.showScriptComboWidget" );
-		checkBoxToConfigKeyMap.put( showWorldStatsCheckBox, "showWorldStats" );
-		checkBoxToConfigKeyMap.put( enableScriptingCheckBox, "enableScripting" );
-		checkBoxToConfigKeyMap.put( pickUpTilesCheckBox, "gui.pickUpTiles" );
-		checkBoxToConfigKeyMap.put( useAlphaTilesCheckBox, "gui.useAlphaTiles" );
+		checkBoxToConfigKeyMap.put( showWorldStatsCheckBox, "showWorldStats" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( enableScriptingCheckBox, "enableScripting" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( pickUpTilesCheckBox, "gui.pickUpTiles" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( useAlphaTilesCheckBox, "gui.useAlphaTiles" ); //$NON-NLS-1$
 //		checkBoxToConfigKeyMap.put( useJavaSyntaxCheckBox, "useJavaSyntax" );
-		checkBoxToConfigKeyMap.put( saveAsSingleFileCheckBox, "useSingleFileLoadStore" );
-		checkBoxToConfigKeyMap.put( clearStdOutOnRunCheckBox, "clearStdOutOnRun" );
-		checkBoxToConfigKeyMap.put( screenCaptureInformUserCheckBox, "screenCapture.informUser" );
+		checkBoxToConfigKeyMap.put( saveAsSingleFileCheckBox, "useSingleFileLoadStore" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( clearStdOutOnRunCheckBox, "clearStdOutOnRun" ); //$NON-NLS-1$
+		checkBoxToConfigKeyMap.put( screenCaptureInformUserCheckBox, "screenCapture.informUser" ); //$NON-NLS-1$
 //		checkBoxToConfigKeyMap.put( printingFillBackgroundCheckBox, "printing.fillBackground" );
 	}
 
 	private void miscInit() {
-		browseFileChooser.setApproveButtonText( "Set Directory" );
-		browseFileChooser.setDialogTitle( "Choose Directory..." );
+		browseFileChooser.setApproveButtonText( Messages.getString("PreferencesContentPane.45") ); //$NON-NLS-1$
+		browseFileChooser.setDialogTitle( Messages.getString("PreferencesContentPane.46") ); //$NON-NLS-1$
 		browseFileChooser.setDialogType( JFileChooser.OPEN_DIALOG );
 		browseFileChooser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
 
@@ -137,13 +138,13 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			new edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationListener() {
 				public void changing( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {}
 				public void changed( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {
-					if( ev.getKeyName().endsWith( "rendering.orderedRendererList" ) ) {
+					if( ev.getKeyName().endsWith( "rendering.orderedRendererList" ) ) { //$NON-NLS-1$
 						restartRequired = true;
-					} else if( ev.getKeyName().endsWith( "rendering.forceSoftwareRendering" ) ) {
+					} else if( ev.getKeyName().endsWith( "rendering.forceSoftwareRendering" ) ) { //$NON-NLS-1$
 						restartRequired = true;
-					} else if( ev.getKeyName().endsWith( "resourceFile" ) || ev.getKeyName().endsWith( "language" )) {
+					} else if( ev.getKeyName().endsWith( "resourceFile" ) || ev.getKeyName().endsWith( "language" )) { //$NON-NLS-1$ //$NON-NLS-2$
 						restartRequired = true;
-					} else if( ev.getKeyName().endsWith( "enableLoggingMode" ) ) {
+					} else if( ev.getKeyName().endsWith( "enableLoggingMode" ) ) { //$NON-NLS-1$
 						restartRequired = true;
 					} 
 				}
@@ -231,7 +232,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	};
 
 	private void scaleFont(Component currentComponent){
-		currentComponent.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
+		currentComponent.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 		
 		if (currentComponent instanceof Container){
 			for (int i=0; i<((Container)currentComponent).getComponentCount(); i++){
@@ -245,7 +246,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	}
 	
 	public String getTitle() {
-		return "Preferences";
+		return Messages.getString("PreferencesContentPane.53"); //$NON-NLS-1$
 	}
 
 	public void preDialogShow( javax.swing.JDialog dialog ) {
@@ -272,7 +273,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	}
 
 	private void fireOKActionListeners() {
-		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, "OK" );
+		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("PreferencesContentPane.54") ); //$NON-NLS-1$
 		for( int i=0; i<m_okActionListeners.size(); i++ ) {
 			java.awt.event.ActionListener l = (java.awt.event.ActionListener)m_okActionListeners.elementAt( i );
 			l.actionPerformed( e );
@@ -282,11 +283,11 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	public void finalizeSelections(){
 		setInput();
 		if( restartRequired ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("You will have to restart Alice in order for these settings to take effect.", "Restart Required", JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("PreferencesContentPane.55"), Messages.getString("PreferencesContentPane.56"), JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			restartRequired = false;
 		} 
 		 else if( reloadRequired ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("You will have to reload the current world in order for these settings to take effect.", "Reload Required", JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("PreferencesContentPane.57"), Messages.getString("PreferencesContentPane.58"), JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			reloadRequired = false;
 		} 
 		if (configTabbedPane != null && generalPanel != null){
@@ -454,7 +455,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				throw new java.lang.NumberFormatException();
 			}
 		} catch( java.lang.NumberFormatException e ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "the maximum number of recent worlds must be between 0 and 30" , "Invalid Clipboard Number", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.59") , Messages.getString("PreferencesContentPane.60"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 
@@ -464,7 +465,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				throw new java.lang.NumberFormatException();
 			}
 		} catch( java.lang.NumberFormatException e ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "the number of clipboards must be between 0 and 30", "Invalid Clipboard Number", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.61"), Messages.getString("PreferencesContentPane.62"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 
@@ -477,14 +478,14 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				throw new java.lang.NumberFormatException();
 			}
 		} catch( java.lang.NumberFormatException e ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("all of the render window bounds values must be integers greater than 0", "Bad Render Bounds", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("PreferencesContentPane.63"), Messages.getString("PreferencesContentPane.64"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 
 		// bad directories are just given warnings
 		java.io.File worldDirectoryFile = new java.io.File( worldDirectoryTextField.getText() );
 		if( (!worldDirectoryFile.exists()) || (!worldDirectoryFile.isDirectory()) || (!worldDirectoryFile.canRead()) ) {
-			int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(worldDirectoryFile.getAbsolutePath() + " is not valid.  The worlds directory must be a directory that exists and can be read.  Would you like to fix this now?", "Bad Directory", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE );
+			int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(worldDirectoryFile.getAbsolutePath() + Messages.getString("PreferencesContentPane.65"), Messages.getString("PreferencesContentPane.66"), javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			if( result != javax.swing.JOptionPane.NO_OPTION ) {
 				return false;
 			}
@@ -493,7 +494,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		java.io.File importDirectoryFile = new java.io.File( importDirectoryTextField.getText() );
 		if( (!importDirectoryFile.exists()) || (!importDirectoryFile.isDirectory()) || (!importDirectoryFile.canRead()) ) {
-			int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( importDirectoryFile.getAbsolutePath() + " is not valid.  The import directory must be a directory that exists and can be read.  Would you like to fix this now?", "Bad Directory", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE );
+			int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( importDirectoryFile.getAbsolutePath() + Messages.getString("PreferencesContentPane.67"), Messages.getString("PreferencesContentPane.68"), javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			if( result != javax.swing.JOptionPane.NO_OPTION ) {
 				return false;
 			}
@@ -515,16 +516,16 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			java.io.File captureDirectoryFile = new java.io.File( captureDirectoryTextField.getText() );
 			int directoryCheck = edu.cmu.cs.stage3.io.FileUtilities.isWritableDirectory(captureDirectoryFile);
 			if (directoryCheck == edu.cmu.cs.stage3.io.FileUtilities.DIRECTORY_IS_NOT_WRITABLE){
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "The capture directory specified can not be written to. Please choose another directory.", "Bad Directory", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.69"), Messages.getString("PreferencesContentPane.70"), javax.swing.JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				return false;
 			} else if(directoryCheck == edu.cmu.cs.stage3.io.FileUtilities.DIRECTORY_DOES_NOT_EXIST || directoryCheck == edu.cmu.cs.stage3.io.FileUtilities.BAD_DIRECTORY_INPUT){
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "The capture directory must be a directory that exists.", "Bad Directory", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.71"), Messages.getString("PreferencesContentPane.72"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 				return false;
 			}
 		}
 
-		if( baseNameTextField.getText().trim().equals( "" ) ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "The capture base name must not be empty.", "Bad Base Name", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+		if( baseNameTextField.getText().trim().equals( "" ) ) { //$NON-NLS-1$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.74"), Messages.getString("PreferencesContentPane.75"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 
@@ -532,12 +533,12 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		String baseName = baseNameTextField.getText().trim();
 		for( int i = 0; i < badChars.length; i++ ) {
 			if( baseName.indexOf( badChars[i] ) != -1 ) {
-				StringBuffer message = new StringBuffer( "Filenames may not contain the following characters:" );
+				StringBuffer message = new StringBuffer( Messages.getString("PreferencesContentPane.76") ); //$NON-NLS-1$
 				for( int j = 0; j < badChars.length; j++ ) {
-					message.append( " " );
+					message.append( " " ); //$NON-NLS-1$
 					message.append( badChars[j] );
 				}
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( message.toString(), "Bad Filename", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( message.toString(), Messages.getString("PreferencesContentPane.78"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$
 				return false;
 			}
 		}
@@ -547,7 +548,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			try{
 				Integer.parseInt(saveIntervalString);
 			} catch (Throwable t){
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "You must enter a valid number for the time to wait before prompting to save.", "Bad Prompt To Save Interval", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.79"), Messages.getString("PreferencesContentPane.80"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 				return false;
 			}
 		}
@@ -557,7 +558,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			try{
 				Integer.parseInt(backupCountString);
 			} catch (Throwable t){
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "You must enter a valid number for the number of backups you want Alice to save.", "Bad Backup Count Value", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.81"), Messages.getString("PreferencesContentPane.82"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 				return false;
 			}
 		}
@@ -565,7 +566,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		try{
 			Integer.parseInt(fontSizeString);
 		} catch (Throwable t){
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "You must enter a valid number for the font size.", "Bad Backup Font Size", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.83"), Messages.getString("PreferencesContentPane.84"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 
@@ -573,41 +574,41 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	}
 
 	protected void setInput() {
-		boolean oldContrast = Configuration.getValue( authoringToolPackage, "enableHighContrastMode" ).equalsIgnoreCase( "true" );
+		boolean oldContrast = Configuration.getValue( authoringToolPackage, "enableHighContrastMode" ).equalsIgnoreCase( "true" ); //$NON-NLS-1$ //$NON-NLS-2$
 		for( java.util.Iterator iter = checkBoxToConfigKeyMap.keySet().iterator(); iter.hasNext(); ) {
 			javax.swing.JCheckBox checkBox = (javax.swing.JCheckBox)iter.next();
 			String currentValue = Configuration.getValue( authoringToolPackage, (String)checkBoxToConfigKeyMap.get( checkBox ) );
 			if( currentValue == null ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Warning: no value found for preference: " + checkBoxToConfigKeyMap.get( checkBox ), null );
-				currentValue = "false";
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("PreferencesContentPane.87") + checkBoxToConfigKeyMap.get( checkBox ), null ); //$NON-NLS-1$
+				currentValue = "false"; //$NON-NLS-1$
 				Configuration.setValue( authoringToolPackage, (String)checkBoxToConfigKeyMap.get( checkBox ), currentValue );
 			}
-			if( currentValue.equalsIgnoreCase( "true" ) != checkBox.isSelected() ) {
-				Configuration.setValue( authoringToolPackage, (String)checkBoxToConfigKeyMap.get( checkBox ), checkBox.isSelected() ? "true" : "false" );
+			if( currentValue.equalsIgnoreCase( "true" ) != checkBox.isSelected() ) { //$NON-NLS-1$
+				Configuration.setValue( authoringToolPackage, (String)checkBoxToConfigKeyMap.get( checkBox ), checkBox.isSelected() ? "true" : "false" ); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 // Aik Min - Logging and Tooltip
-		if ( Configuration.getValue( authoringToolPackage, "disableTooltipMode" ).equalsIgnoreCase("true") ) {
+		if ( Configuration.getValue( authoringToolPackage, "disableTooltipMode" ).equalsIgnoreCase("true") ) { //$NON-NLS-1$ //$NON-NLS-2$
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
 		} else {
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
 		}
 		
-		if( ! Configuration.getValue( authoringToolPackage, "recentWorlds.maxWorlds" ).equals( maxRecentWorldsTextField.getText() ) ) {
-			Configuration.setValue( authoringToolPackage, "recentWorlds.maxWorlds", maxRecentWorldsTextField.getText() );
+		if( ! Configuration.getValue( authoringToolPackage, "recentWorlds.maxWorlds" ).equals( maxRecentWorldsTextField.getText() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "recentWorlds.maxWorlds", maxRecentWorldsTextField.getText() ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "numberOfClipboards" ).equals( numClipboardsTextField.getText() ) ) {
-			Configuration.setValue( authoringToolPackage, "numberOfClipboards", numClipboardsTextField.getText() );
+		if( ! Configuration.getValue( authoringToolPackage, "numberOfClipboards" ).equals( numClipboardsTextField.getText() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "numberOfClipboards", numClipboardsTextField.getText() ); //$NON-NLS-1$
 		}
-		String boundsString = boundsXTextField.getText() + ", " + boundsYTextField.getText() + ", " + boundsWidthTextField.getText() + ", " + boundsHeightTextField.getText();
-		if( ! Configuration.getValue( authoringToolPackage, "rendering.renderWindowBounds" ).equals( boundsString ) ) {
-			Configuration.setValue( authoringToolPackage, "rendering.renderWindowBounds", boundsString );
+		String boundsString = boundsXTextField.getText() + ", " + boundsYTextField.getText() + ", " + boundsWidthTextField.getText() + ", " + boundsHeightTextField.getText(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if( ! Configuration.getValue( authoringToolPackage, "rendering.renderWindowBounds" ).equals( boundsString ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "rendering.renderWindowBounds", boundsString ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ).equals( worldDirectoryTextField.getText() ) ) {
-			Configuration.setValue( authoringToolPackage, "directories.worldsDirectory", worldDirectoryTextField.getText() );
+		if( ! Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ).equals( worldDirectoryTextField.getText() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "directories.worldsDirectory", worldDirectoryTextField.getText() ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "directories.importDirectory" ).equals( worldDirectoryTextField.getText() ) ) {
-			Configuration.setValue( authoringToolPackage, "directories.importDirectory", worldDirectoryTextField.getText() );
+		if( ! Configuration.getValue( authoringToolPackage, "directories.importDirectory" ).equals( worldDirectoryTextField.getText() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "directories.importDirectory", worldDirectoryTextField.getText() ); //$NON-NLS-1$
 		}
 //		if( ! Configuration.getValue( authoringToolPackage, "directories.galleryDirectory" ).equals( galleryDirectoryTextField.getText() ) ) {
 //			Configuration.setValue( authoringToolPackage, "directories.galleryDirectory", galleryDirectoryTextField.getText() );
@@ -615,23 +616,23 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 //		if( ! Configuration.getValue( authoringToolPackage, "directories.charactersDirectory" ).equals( characterDirectoryTextField.getText() ) ) {
 //			Configuration.setValue( authoringToolPackage, "directories.charactersDirectory", characterDirectoryTextField.getText() );
 //		}
-		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.directory" ).equals( captureDirectoryTextField.getText() ) ) {
-			Configuration.setValue( authoringToolPackage, "screenCapture.directory", captureDirectoryTextField.getText() );
+		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.directory" ).equals( captureDirectoryTextField.getText() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "screenCapture.directory", captureDirectoryTextField.getText() ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.baseName" ).equals( baseNameTextField.getText() ) ) {
-			Configuration.setValue( authoringToolPackage, "screenCapture.baseName", baseNameTextField.getText() );
+		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.baseName" ).equals( baseNameTextField.getText() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "screenCapture.baseName", baseNameTextField.getText() ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.numDigits" ).equals( (String)numDigitsComboBox.getSelectedItem() ) ) {
-			Configuration.setValue( authoringToolPackage, "screenCapture.numDigits", (String)numDigitsComboBox.getSelectedItem() );
+		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.numDigits" ).equals( (String)numDigitsComboBox.getSelectedItem() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "screenCapture.numDigits", (String)numDigitsComboBox.getSelectedItem() ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.codec" ).equals( (String)codecComboBox.getSelectedItem() ) ) {
-			Configuration.setValue( authoringToolPackage, "screenCapture.codec", (String)codecComboBox.getSelectedItem() );
+		if( ! Configuration.getValue( authoringToolPackage, "screenCapture.codec" ).equals( (String)codecComboBox.getSelectedItem() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "screenCapture.codec", (String)codecComboBox.getSelectedItem() ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "resourceFile" ).equals( (String)resourceFileComboBox.getSelectedItem() ) ) {
-			Configuration.setValue( authoringToolPackage, "resourceFile", (String)resourceFileComboBox.getSelectedItem() );
+		if( ! Configuration.getValue( authoringToolPackage, "resourceFile" ).equals( (String)resourceFileComboBox.getSelectedItem() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "resourceFile", (String)resourceFileComboBox.getSelectedItem() ); //$NON-NLS-1$
 		}
-		if( ! Configuration.getValue( authoringToolPackage, "language" ).equals( (String)languageComboBox.getSelectedItem() ) ) {
-			Configuration.setValue( authoringToolPackage, "language", (String)languageComboBox.getSelectedItem() );
+		if( ! Configuration.getValue( authoringToolPackage, "language" ).equals( (String)languageComboBox.getSelectedItem() ) ) { //$NON-NLS-1$
+			Configuration.setValue( authoringToolPackage, "language", (String)languageComboBox.getSelectedItem() ); //$NON-NLS-1$
 		}
 //		if( ! Configuration.getValue( authoringToolPackage, "printing.scaleFactor" ).equals( printingScaleComboBox.getSelectedItem().toString() ) ) {
 //			Configuration.setValue( authoringToolPackage, "printing.scaleFactor", printingScaleComboBox.getSelectedItem().toString() );
@@ -639,22 +640,22 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		
 		String saveIntervalString = (String)saveIntervalComboBox.getSelectedItem();
 		if (saveIntervalString.equalsIgnoreCase(FOREVER_INTERVAL_STRING)){
-			Configuration.setValue( authoringToolPackage, "promptToSaveInterval", Integer.toString(Integer.MAX_VALUE) );
+			Configuration.setValue( authoringToolPackage, "promptToSaveInterval", Integer.toString(Integer.MAX_VALUE) ); //$NON-NLS-1$
 		} else{
-			Configuration.setValue( authoringToolPackage, "promptToSaveInterval", saveIntervalString );
+			Configuration.setValue( authoringToolPackage, "promptToSaveInterval", saveIntervalString ); //$NON-NLS-1$
 		}
 		
 		String backupCountString = (String)backupCountComboBox.getSelectedItem();
 		if (saveIntervalString.equalsIgnoreCase(FOREVER_INTERVAL_STRING)){
-			Configuration.setValue( authoringToolPackage, "maximumWorldBackupCount", Integer.toString(Integer.MAX_VALUE) );
+			Configuration.setValue( authoringToolPackage, "maximumWorldBackupCount", Integer.toString(Integer.MAX_VALUE) ); //$NON-NLS-1$
 		} else{
-			Configuration.setValue( authoringToolPackage, "maximumWorldBackupCount", backupCountString );
+			Configuration.setValue( authoringToolPackage, "maximumWorldBackupCount", backupCountString ); //$NON-NLS-1$
 		}
 		
 		
-		int oldFontSize = ((java.awt.Font)javax.swing.UIManager.get("Label.font")).getSize();
+		int oldFontSize = ((java.awt.Font)javax.swing.UIManager.get("Label.font")).getSize(); //$NON-NLS-1$
 		String fontSizeString = (String)fontSizeComboBox.getSelectedItem();
-		Configuration.setValue( authoringToolPackage, "fontSize", fontSizeString );
+		Configuration.setValue( authoringToolPackage, "fontSize", fontSizeString ); //$NON-NLS-1$
 		int newFontSize = Integer.valueOf(fontSizeString).intValue();
 		if (oldContrast != enableHighContrastCheckBox.isSelected() || oldFontSize != newFontSize){
 			restartRequired = true;
@@ -671,7 +672,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		try {
 			Configuration.storeConfig();
 		} catch( java.io.IOException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error storing preferences.", e );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("PreferencesContentPane.0"), e ); //$NON-NLS-1$
 		}
 	}
 
@@ -680,7 +681,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			javax.swing.JCheckBox checkBox = (javax.swing.JCheckBox)iter.next();
 			boolean value;
 			try {
-				value = Configuration.getValue( authoringToolPackage, (String)checkBoxToConfigKeyMap.get( checkBox ) ).equalsIgnoreCase( "true" );
+				value = Configuration.getValue( authoringToolPackage, (String)checkBoxToConfigKeyMap.get( checkBox ) ).equalsIgnoreCase( "true" ); //$NON-NLS-1$
 			} catch( Exception e ) {
 				value = false;
 			}
@@ -709,20 +710,20 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			boundsHeightTextField.setText( st.nextToken() );
 		}
 
-		String worldDirectory = Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" );
+		String worldDirectory = Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ); //$NON-NLS-1$
 		worldDirectoryTextField.setText( worldDirectory );
-		String importDirectory = Configuration.getValue( authoringToolPackage, "directories.importDirectory" );
+		String importDirectory = Configuration.getValue( authoringToolPackage, "directories.importDirectory" ); //$NON-NLS-1$
 		importDirectoryTextField.setText( importDirectory );
 //		String galleryDirectory = Configuration.getValue( authoringToolPackage, "directories.galleryDirectory" );
 //		galleryDirectoryTextField.setText( galleryDirectory );
 //		String characterDirectory = Configuration.getValue( authoringToolPackage, "directories.charactersDirectory" );
 //		characterDirectoryTextField.setText( characterDirectory );
-		String captureDirectory = Configuration.getValue( authoringToolPackage, "screenCapture.directory" );
+		String captureDirectory = Configuration.getValue( authoringToolPackage, "screenCapture.directory" ); //$NON-NLS-1$
 		captureDirectoryTextField.setText( captureDirectory );
 
-		baseNameTextField.setText( Configuration.getValue( authoringToolPackage, "screenCapture.baseName" ) );
-		numDigitsComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "screenCapture.numDigits" ) );
-		codecComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "screenCapture.codec" ) );
+		baseNameTextField.setText( Configuration.getValue( authoringToolPackage, "screenCapture.baseName" ) ); //$NON-NLS-1$
+		numDigitsComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "screenCapture.numDigits" ) ); //$NON-NLS-1$
+		codecComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "screenCapture.codec" ) ); //$NON-NLS-1$
 
 //		printingScaleComboBox.setSelectedItem( Double.valueOf( Configuration.getValue( authoringToolPackage, "printing.scaleFactor" ) ) );
 
@@ -805,7 +806,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		public void changing( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {}
 		public void changed( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {
-			if( ev.getKeyName().endsWith( "rendering.orderedRendererList" ) ) {
+			if( ev.getKeyName().endsWith( "rendering.orderedRendererList" ) ) { //$NON-NLS-1$
 				int upperRange = 0;
 				if( ev.getOldValueList() != null ) {
 					upperRange = Math.max( upperRange, ev.getOldValueList().length );
@@ -835,12 +836,12 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	
 	private void setSaveIntervalValues(){
 		saveIntervalOptions.removeAllElements();
-		saveIntervalOptions.add("15");
-		saveIntervalOptions.add("30");
-		saveIntervalOptions.add("45");
-		saveIntervalOptions.add("60");
+		saveIntervalOptions.add("15"); //$NON-NLS-1$
+		saveIntervalOptions.add("30"); //$NON-NLS-1$
+		saveIntervalOptions.add("45"); //$NON-NLS-1$
+		saveIntervalOptions.add("60"); //$NON-NLS-1$
 		saveIntervalOptions.add(FOREVER_INTERVAL_STRING);
-		String intervalString = Configuration.getValue( authoringToolPackage, "promptToSaveInterval" );
+		String intervalString = Configuration.getValue( authoringToolPackage, "promptToSaveInterval" ); //$NON-NLS-1$
 		int interval = -1;
 		try{
 			interval = Integer.parseInt(intervalString);
@@ -869,7 +870,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	
 	private void initSaveIntervalComboBox(){
 		saveIntervalComboBox.removeAllItems();
-		String intervalString = Configuration.getValue( authoringToolPackage, "promptToSaveInterval" );
+		String intervalString = Configuration.getValue( authoringToolPackage, "promptToSaveInterval" ); //$NON-NLS-1$
 		for (int i=0; i<saveIntervalOptions.size(); i++){
 			saveIntervalComboBox.addItem(saveIntervalOptions.get(i));
 			if (intervalString.equalsIgnoreCase(saveIntervalOptions.get(i).toString())){
@@ -882,15 +883,15 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	
 	private void setBackupCountValues(){
 		backupCountOptions.removeAllElements();
-		backupCountOptions.add("0");
-		backupCountOptions.add("1");
-		backupCountOptions.add("2");
-		backupCountOptions.add("3");
-		backupCountOptions.add("4");
-		backupCountOptions.add("5");
-		backupCountOptions.add("10");
+		backupCountOptions.add("0"); //$NON-NLS-1$
+		backupCountOptions.add("1"); //$NON-NLS-1$
+		backupCountOptions.add("2"); //$NON-NLS-1$
+		backupCountOptions.add("3"); //$NON-NLS-1$
+		backupCountOptions.add("4"); //$NON-NLS-1$
+		backupCountOptions.add("5"); //$NON-NLS-1$
+		backupCountOptions.add("10"); //$NON-NLS-1$
 		backupCountOptions.add(INFINITE_BACKUPS_STRING);
-		String intervalString = Configuration.getValue( authoringToolPackage, "maximumWorldBackupCount" );
+		String intervalString = Configuration.getValue( authoringToolPackage, "maximumWorldBackupCount" ); //$NON-NLS-1$
 		int interval = -1;
 		try{
 			interval = Integer.parseInt(intervalString);
@@ -900,7 +901,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 	private void initBackupCountComboBox(){
 		backupCountComboBox.removeAllItems();
-		String intervalString = Configuration.getValue( authoringToolPackage, "maximumWorldBackupCount" );
+		String intervalString = Configuration.getValue( authoringToolPackage, "maximumWorldBackupCount" ); //$NON-NLS-1$
 		for (int i=0; i<backupCountOptions.size(); i++){
 			backupCountComboBox.addItem(backupCountOptions.get(i));
 			if (intervalString.equalsIgnoreCase(backupCountOptions.get(i).toString())){
@@ -913,7 +914,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	
 	private void setFontSizeValues(){
 		fontSizeOptions.removeAllElements();
-		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) );
+		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); //$NON-NLS-1$
 		java.util.List size = new java.util.ArrayList();
 		size.add(Integer.valueOf(8));
 		size.add(Integer.valueOf(10));
@@ -932,7 +933,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 	private void initFontSizeComboBox(){
 		fontSizeComboBox.removeAllItems();
-		String intervalString = Configuration.getValue( authoringToolPackage, "fontSize" );
+		String intervalString = Configuration.getValue( authoringToolPackage, "fontSize" ); //$NON-NLS-1$
 		for (int i=0; i<fontSizeOptions.size(); i++){
 			fontSizeComboBox.addItem(fontSizeOptions.get(i));
 			if (intervalString.equalsIgnoreCase(fontSizeOptions.get(i).toString())){
@@ -954,7 +955,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 //	}
 
 	void worldDirectoryBrowseButton_actionPerformed( ActionEvent ev ) {
-		java.io.File parent = new java.io.File( Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ) );//.getParentFile();
+		java.io.File parent = new java.io.File( Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ) );//.getParentFile(); //$NON-NLS-1$
 		browseFileChooser.setCurrentDirectory( parent );
 		int returnVal = browseFileChooser.showOpenDialog( this );
 
@@ -965,7 +966,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	}
 
 	void importDirectoryBrowseButton_actionPerformed( ActionEvent ev ) {
-		java.io.File parent = new java.io.File( Configuration.getValue( authoringToolPackage, "directories.importDirectory" ) ).getParentFile();
+		java.io.File parent = new java.io.File( Configuration.getValue( authoringToolPackage, "directories.importDirectory" ) ).getParentFile(); //$NON-NLS-1$
 		browseFileChooser.setCurrentDirectory( parent );
 		int returnVal = browseFileChooser.showOpenDialog( this );
 
@@ -981,7 +982,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		while (!done){
 			java.io.File parent = new java.io.File( finalFilePath );
 			if (!parent.exists()){
-				parent =  new java.io.File( Configuration.getValue( authoringToolPackage, "screenCapture.directory" ));
+				parent =  new java.io.File( Configuration.getValue( authoringToolPackage, "screenCapture.directory" )); //$NON-NLS-1$
 			}
 			browseFileChooser.setCurrentDirectory( parent );
 			int returnVal = browseFileChooser.showOpenDialog( this );
@@ -991,10 +992,10 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				int directoryCheck = edu.cmu.cs.stage3.io.FileUtilities.isWritableDirectory(captureDirectoryFile);
 				if (directoryCheck == edu.cmu.cs.stage3.io.FileUtilities.DIRECTORY_IS_NOT_WRITABLE){
 					done = false;
-					edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "The capture directory specified can not be written to. Please choose another directory.", "Bad Directory", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+					edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.158"), Messages.getString("PreferencesContentPane.159"), javax.swing.JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				} else if(directoryCheck == edu.cmu.cs.stage3.io.FileUtilities.DIRECTORY_DOES_NOT_EXIST || directoryCheck == edu.cmu.cs.stage3.io.FileUtilities.BAD_DIRECTORY_INPUT){
 					done = false;
-					edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "The capture directory must be a directory that exists.", "Bad Directory", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+					edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("PreferencesContentPane.160"), Messages.getString("PreferencesContentPane.161"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
 					finalFilePath = captureDirectoryFile.getAbsolutePath();
 					done = true;
@@ -1054,8 +1055,8 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	private void jbInit() {
 
 		this.setLayout(new BorderLayout());
-		okayButton.setText("Okay");
-		cancelButton.setText("Cancel");
+		okayButton.setText(Messages.getString("PreferencesContentPane.162")); //$NON-NLS-1$
+		cancelButton.setText(Messages.getString("PreferencesContentPane.163")); //$NON-NLS-1$
 
 		Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
 		JPanel buttonPanel = new JPanel();
@@ -1076,13 +1077,13 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		screenGrabPanel.setBorder(emptyBorder);
 		seldomUsedPanel.setBorder(emptyBorder);
 		
-		configTabbedPane.add(generalPanel, "General");
-		configTabbedPane.add(renderingPanel, "Rendering");
+		configTabbedPane.add(generalPanel, Messages.getString("PreferencesContentPane.12")); //$NON-NLS-1$
+		configTabbedPane.add(renderingPanel, Messages.getString("PreferencesContentPane.13")); //$NON-NLS-1$
 //		configTabbedPane.add(directoriesPanel, "Directories");
-		configTabbedPane.add(screenGrabPanel, "Screen Grab");
+		configTabbedPane.add(screenGrabPanel, Messages.getString("PreferencesContentPane.166")); //$NON-NLS-1$
 //		TODO: config for bvw
 //		configTabbedPane.add(aseImporterPanel, "ASE Importer");
-		configTabbedPane.add(seldomUsedPanel, "Seldom Used");
+		configTabbedPane.add(seldomUsedPanel, Messages.getString("PreferencesContentPane.167")); //$NON-NLS-1$
 		
 		Box buttonBox;
 		buttonBox = Box.createHorizontalBox();
@@ -1118,7 +1119,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		maxRecentWorldsTextField.setColumns(3);
 		maxRecentWorldsTextField.setMinimumSize(new Dimension(50, 22));
 		maxRecentWorldsTextField.setMargin(new Insets(1, 1, 1, 1));
-		maxRecentWorldsLabel.setText("maximum number of worlds kept in the recent worlds menu");
+		maxRecentWorldsLabel.setText(Messages.getString("PreferencesContentPane.168")); //$NON-NLS-1$
 		
 		maxRecentWorldsPanel.setLayout(new GridBagLayout());
 		maxRecentWorldsPanel.add(maxRecentWorldsTextField, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
@@ -1134,9 +1135,9 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
 
-		resourcesLabel.setText("display my program:");
+		resourcesLabel.setText(Messages.getString("PreferencesContentPane.169")); //$NON-NLS-1$
 		
-		java.io.File resourceDirectory = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" ).getAbsoluteFile();
+		java.io.File resourceDirectory = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" ).getAbsoluteFile(); //$NON-NLS-1$
 		java.io.File[] resourceFiles = resourceDirectory.listFiles( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.resourceFileFilter );
 		for( int i = 0; i < resourceFiles.length; i++ ) {
 			resourceFileComboBox.addItem( resourceFiles[i].getName() );
@@ -1144,20 +1145,20 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		
 		resourceFileComboBox.setRenderer(new javax.swing.ListCellRenderer(){
 			public java.awt.Component getListCellRendererComponent(javax.swing.JList list, Object value, int index, boolean isSelected, boolean cellHasFocus){
-				javax.swing.JLabel toReturn = new javax.swing.JLabel("No Name");
+				javax.swing.JLabel toReturn = new javax.swing.JLabel(Messages.getString("PreferencesContentPane.171")); //$NON-NLS-1$
 				toReturn.setOpaque(true);
 //				toReturn.setHorizontalAlignment(javax.swing.JLabel.CENTER);
 //				toReturn.setVerticalAlignment(javax.swing.JLabel.CENTER);
 
 				String name = value.toString();
-				if (name.equals("Alice Style.py")){
-					name = "Alice Style";
-				} else if (name.equals("Java Style.py")){
-					name = "Java Style in Color";
-				} else if (name.equals("Java Text Style.py")){
-					name = "Java Style in Black & White";
+				if (name.equals("Alice Style.py")){ //$NON-NLS-1$
+					name = Messages.getString("PreferencesContentPane.173"); //$NON-NLS-1$
+				} else if (name.equals("Java Style.py")){ //$NON-NLS-1$
+					name = Messages.getString("PreferencesContentPane.175"); //$NON-NLS-1$
+				} else if (name.equals("Java Text Style.py")){ //$NON-NLS-1$
+					name = Messages.getString("PreferencesContentPane.177"); //$NON-NLS-1$
 				} else{
-					int dotIndex = name.lastIndexOf(".");
+					int dotIndex = name.lastIndexOf("."); //$NON-NLS-1$
 					if (dotIndex > -1){
 						name = name.substring(0, dotIndex);
 					}
@@ -1174,7 +1175,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				return toReturn;
 			}
 		});
-		resourceFileComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "resourceFile" ) );
+		resourceFileComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "resourceFile" ) ); //$NON-NLS-1$
 		
 		// Aik Min - Language
 		JLabel languageLabel = new JLabel();
@@ -1184,10 +1185,10 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		languagePanel.add(languageComboBox, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
-		languageLabel.setText("display language:");
-		languageComboBox.addItem("en - English");
-		languageComboBox.addItem("es - Spanish");
-		languageComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "language" ) );
+		languageLabel.setText(Messages.getString("PreferencesContentPane.180")); //$NON-NLS-1$
+		languageComboBox.addItem("English"); //$NON-NLS-1$
+		languageComboBox.addItem("Spanish"); //$NON-NLS-1$
+		languageComboBox.setSelectedItem( Configuration.getValue( authoringToolPackage, "language" ) ); //$NON-NLS-1$
 		
 		JLabel worldDirectoryLabel = new JLabel();
 		JButton worldDirectoryBrowseButton = new JButton();
@@ -1212,8 +1213,8 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 //		inputDirectoriesPanel.add(characterDirectoryBrowseButton,   new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0
 //			,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(4, 4, 4, 4), 0, 0));
 			
-		worldDirectoryLabel.setText("save and load from:");
-		worldDirectoryBrowseButton.setText("Browse...");
+		worldDirectoryLabel.setText(Messages.getString("PreferencesContentPane.184")); //$NON-NLS-1$
+		worldDirectoryBrowseButton.setText(Messages.getString("PreferencesContentPane.185")); //$NON-NLS-1$
 		worldDirectoryBrowseButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				worldDirectoryBrowseButton_actionPerformed(e);
@@ -1232,7 +1233,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		fontSizeComboBox.setPreferredSize(new java.awt.Dimension(55, 25));
 		fontSizeComboBox.setMaximumRowCount(9);
 		
-		fontSizeLabel.setText(" general font size (default value is 12)");
+		fontSizeLabel.setText(Messages.getString("PreferencesContentPane.186")); //$NON-NLS-1$
 		
 		Component component = Box.createGlue();
 		//generalPanel.setBorder(emptyBorder);
@@ -1276,9 +1277,9 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		JButton rendererMoveUpButton = new JButton();
 		JButton rendererMoveDownButton = new JButton();
 		
-		forceSoftwareRenderingCheckBox.setText(" force software rendering (slower and safer)");
-		showFPSCheckBox.setText(" show frames per second");
-		deleteFiles.setText(" delete frames folder after exporting video"); // Aik Min added this.
+		forceSoftwareRenderingCheckBox.setText(Messages.getString("PreferencesContentPane.187")); //$NON-NLS-1$
+		showFPSCheckBox.setText(Messages.getString("PreferencesContentPane.188")); //$NON-NLS-1$
+		deleteFiles.setText(Messages.getString("PreferencesContentPane.189")); // Aik Min added this. //$NON-NLS-1$
 		//renderWindowBoundsPanel.setAlignmentX((float) 0.0);
 		//renderWindowBoundsPanel.setMaximumSize(new Dimension(32767, 125));
 		//renderWindowBoundsPanel.setPreferredSize(new Dimension(300, 125));
@@ -1290,30 +1291,30 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		JLabel boundsXLabel = new JLabel();
 		JLabel boundsYLabel = new JLabel();
 		
-		renderWindowBoundsLabel.setText("render window position and size:");
+		renderWindowBoundsLabel.setText(Messages.getString("PreferencesContentPane.190")); //$NON-NLS-1$
 		
 		boundsXLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		boundsXLabel.setText("horizontal position:");
+		boundsXLabel.setText(Messages.getString("PreferencesContentPane.191")); //$NON-NLS-1$
 		boundsXTextField.setColumns(5);
 		boundsXTextField.setMinimumSize(new Dimension(61,22));
 		boundsXTextField.setMargin(new Insets(1, 1, 1, 1));
 		boundsXTextField.getDocument().addDocumentListener(renderDialogBoundsChecker);
 		
 		boundsYLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		boundsYLabel.setText(" vertical position:");
+		boundsYLabel.setText(Messages.getString("PreferencesContentPane.192")); //$NON-NLS-1$
 		boundsYTextField.setColumns(5);
 		boundsYTextField.setMinimumSize(new Dimension(61,22));
 		boundsYTextField.setMargin(new Insets(1, 1, 1, 1));
 		boundsYTextField.getDocument().addDocumentListener(renderDialogBoundsChecker);
 		
 		boundsWidthLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		boundsWidthLabel.setText(" width:");
+		boundsWidthLabel.setText(Messages.getString("PreferencesContentPane.193")); //$NON-NLS-1$
 		boundsWidthTextField.setColumns(5);
 		boundsWidthTextField.setMinimumSize(new Dimension(61,22));
 		boundsWidthTextField.setMargin(new Insets(1, 1, 1, 1));
 		boundsWidthTextField.getDocument().addDocumentListener(renderDialogWidthChecker);
 
-		boundsHeightLabel.setText("height:");
+		boundsHeightLabel.setText(Messages.getString("PreferencesContentPane.194")); //$NON-NLS-1$
 		boundsHeightTextField.setColumns(5);
 		boundsHeightTextField.setMinimumSize(new Dimension(61,22));
 		boundsHeightTextField.setMargin(new Insets(1, 1, 1, 1));
@@ -1339,23 +1340,23 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		renderWindowBoundsPanel.add(boundsHeightTextField, new GridBagConstraints(1, 4, 1, 1, 1.0, 0.0
 				,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
 		
-		constrainRenderDialogAspectCheckBox.setText(" constrain render window\'s aspect ratio");
+		constrainRenderDialogAspectCheckBox.setText(Messages.getString("PreferencesContentPane.195")); //$NON-NLS-1$
 		constrainRenderDialogAspectCheckBox.addActionListener(new java.awt.event.ActionListener(){
 			public void actionPerformed(java.awt.event.ActionEvent ae){
 				checkAndUpdateRenderBounds();
 			}
 		});
 		
-		ensureRenderDialogIsOnScreenCheckBox.setText(" make sure the render window is always on the screen");
+		ensureRenderDialogIsOnScreenCheckBox.setText(Messages.getString("PreferencesContentPane.196")); //$NON-NLS-1$
 		
-		rendererListLabel.setText("renderer order (top item will be tried first, bottom item will be tried last):");
+		rendererListLabel.setText(Messages.getString("PreferencesContentPane.197")); //$NON-NLS-1$
 		
-		rendererList.setModel( new ConfigListModel( authoringToolPackage, "rendering.orderedRendererList" ) );
+		rendererList.setModel( new ConfigListModel( authoringToolPackage, "rendering.orderedRendererList" ) ); //$NON-NLS-1$
 		rendererList.setSelectedIndex( 0 );
 		rendererList.setBorder(BorderFactory.createLineBorder(Color.black));
 		rendererList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		rendererMoveUpButton.setText("move up");
+		rendererMoveUpButton.setText(Messages.getString("PreferencesContentPane.199")); //$NON-NLS-1$
 		rendererMoveUpButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object selectedItem = rendererList.getSelectedValue();
@@ -1363,7 +1364,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				rendererList.setSelectedValue( selectedItem, false );
 			}
 		});
-		rendererMoveDownButton.setText("move down");
+		rendererMoveDownButton.setText(Messages.getString("PreferencesContentPane.200")); //$NON-NLS-1$
 		rendererMoveDownButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object selectedItem = rendererList.getSelectedValue();
@@ -1409,12 +1410,12 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	private JCheckBox screenCaptureInformUserCheckBox = new JCheckBox();
 	private void ScreenGrabTabInit(){
 		JLabel captureDirectory = new JLabel();
-		captureDirectory.setText("directory to capture to:");
+		captureDirectory.setText(Messages.getString("PreferencesContentPane.201")); //$NON-NLS-1$
 		captureDirectoryTextField.getDocument().addDocumentListener(captureDirectoryChangeListener);
 		captureDirectoryTextField.setColumns(15);
 		
 		JButton browseButton = new JButton();
-		browseButton.setText("Browse...");
+		browseButton.setText(Messages.getString("PreferencesContentPane.202")); //$NON-NLS-1$
 		browseButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				browseButton_actionPerformed(e);
@@ -1422,31 +1423,31 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		});
 		
 		JLabel baseNameLabel = new JLabel();
-		baseNameLabel.setText("base filename:");
+		baseNameLabel.setText(Messages.getString("PreferencesContentPane.203")); //$NON-NLS-1$
 		
 		baseNameTextField.setMinimumSize(new Dimension(100, 28));
 		baseNameTextField.setPreferredSize(new Dimension(100, 28));
 		
 		JLabel numDigitsLabel = new JLabel();
-		numDigitsLabel.setText("number of digits to append:");
+		numDigitsLabel.setText(Messages.getString("PreferencesContentPane.204")); //$NON-NLS-1$
 		//this.setPreferredSize(new java.awt.Dimension( 600, 600 ));
-		numDigitsComboBox.addItem( "1" );
-		numDigitsComboBox.addItem( "2" );
-		numDigitsComboBox.addItem( "3" );
-		numDigitsComboBox.addItem( "4" );
-		numDigitsComboBox.addItem( "5" );
-		numDigitsComboBox.addItem( "6" );
+		numDigitsComboBox.addItem( "1" ); //$NON-NLS-1$
+		numDigitsComboBox.addItem( "2" ); //$NON-NLS-1$
+		numDigitsComboBox.addItem( "3" ); //$NON-NLS-1$
+		numDigitsComboBox.addItem( "4" ); //$NON-NLS-1$
+		numDigitsComboBox.addItem( "5" ); //$NON-NLS-1$
+		numDigitsComboBox.addItem( "6" ); //$NON-NLS-1$
 		
 		JLabel codecLabel = new JLabel();
-		codecLabel.setText("image format:");
+		codecLabel.setText(Messages.getString("PreferencesContentPane.211")); //$NON-NLS-1$
 		codecComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
-		codecComboBox.addItem( "jpeg" );
-		codecComboBox.addItem( "png" );
+		codecComboBox.addItem( "jpeg" ); //$NON-NLS-1$
+		codecComboBox.addItem( "png" ); //$NON-NLS-1$
 		
-		screenCaptureInformUserCheckBox.setText(" show information dialog when capture is made");
+		screenCaptureInformUserCheckBox.setText(Messages.getString("PreferencesContentPane.214")); //$NON-NLS-1$
 
 		JLabel usageLabel = new JLabel();
-		usageLabel.setText("Note: use Ctrl-G to grab a frame while the world is running.");
+		usageLabel.setText(Messages.getString("PreferencesContentPane.215")); //$NON-NLS-1$
 
 		screenGrabPanel.setLayout(new GridBagLayout());
 
@@ -1494,22 +1495,22 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		JPanel saveIntervalPanel = new JPanel();
 		JPanel backupCountPanel = new JPanel();
 
-		showStartUpDialogCheckBox.setText(" show startup dialog when Alice launches");
-		showWebWarningCheckBox.setText(" show warning when browsing the web gallery");
-		loadSavedTabsCheckBox.setText(" open tabs that were previously open on world load");
-		pickUpTilesCheckBox.setText(" pick up tiles while dragging and dropping (reduces performance)");
-		useAlphaTilesCheckBox.setText(" use alpha blending in picked up tiles (really reduces performance)");
-		saveThumbnailWithWorldCheckBox.setText(" save thumbnail with world");
-		showWorldStatsCheckBox.setText(" show world statistics");
-		clearStdOutOnRunCheckBox.setText(" clear text output on play");
-		enableHighContrastCheckBox.setText(" enable high contrast mode for projectors");
-		enableLoggingCheckBox.setText(" enable logging");
-		disableTooltipCheckBox.setText(" disable tooltip");
+		showStartUpDialogCheckBox.setText(Messages.getString("PreferencesContentPane.216")); //$NON-NLS-1$
+		showWebWarningCheckBox.setText(Messages.getString("PreferencesContentPane.217")); //$NON-NLS-1$
+		loadSavedTabsCheckBox.setText(Messages.getString("PreferencesContentPane.218")); //$NON-NLS-1$
+		pickUpTilesCheckBox.setText(Messages.getString("PreferencesContentPane.219")); //$NON-NLS-1$
+		useAlphaTilesCheckBox.setText(Messages.getString("PreferencesContentPane.220")); //$NON-NLS-1$
+		saveThumbnailWithWorldCheckBox.setText(Messages.getString("PreferencesContentPane.221")); //$NON-NLS-1$
+		showWorldStatsCheckBox.setText(Messages.getString("PreferencesContentPane.222")); //$NON-NLS-1$
+		clearStdOutOnRunCheckBox.setText(Messages.getString("PreferencesContentPane.223")); //$NON-NLS-1$
+		enableHighContrastCheckBox.setText(Messages.getString("PreferencesContentPane.224")); //$NON-NLS-1$
+		enableLoggingCheckBox.setText(Messages.getString("PreferencesContentPane.225")); //$NON-NLS-1$
+		disableTooltipCheckBox.setText(Messages.getString("PreferencesContentPane.226")); //$NON-NLS-1$
 			
 		JLabel numClipboardsLabel = new JLabel();
 		numClipboardsTextField.setColumns(3);
 		numClipboardsTextField.setMargin(new Insets(1, 1, 1, 1));
-		numClipboardsLabel.setText("number of clipboards");
+		numClipboardsLabel.setText(Messages.getString("PreferencesContentPane.227")); //$NON-NLS-1$
 		//numClipboardsLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		
 		JPanel numClipboardsPanel = new JPanel();
@@ -1522,7 +1523,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		JLabel saveIntervalLabelEnd = new JLabel();
 		saveIntervalComboBox.setEditable(true);
 		saveIntervalComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
-		saveIntervalLabelEnd.setText(" number of minutes to wait before displaying save reminder");
+		saveIntervalLabelEnd.setText(Messages.getString("PreferencesContentPane.228")); //$NON-NLS-1$
 		
 		saveIntervalPanel.setOpaque(false);
 		saveIntervalPanel.setBorder(null);
@@ -1530,7 +1531,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		saveIntervalPanel.add(saveIntervalLabelEnd);
 		
 		JLabel backupCountLabel = new JLabel();
-		backupCountLabel.setText(" number of backups of each world to save");
+		backupCountLabel.setText(Messages.getString("PreferencesContentPane.229")); //$NON-NLS-1$
 		backupCountComboBox.setEditable(true);
 		backupCountComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
 		backupCountComboBox.setMaximumRowCount(9);
@@ -1588,7 +1589,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		seldomUsedPanel.add(javax.swing.Box.createVerticalGlue(), new GridBagConstraints(0, 16, 1, 1, 1.0, 1.0
 			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		
-		if ( Configuration.getValue( authoringToolPackage, "disableTooltipMode" ).equalsIgnoreCase("true") ) {
+		if ( Configuration.getValue( authoringToolPackage, "disableTooltipMode" ).equalsIgnoreCase("true") ) { //$NON-NLS-1$ //$NON-NLS-2$
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
 		} else {
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
@@ -1605,11 +1606,11 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		Border emptyBorder;
 		emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
 		
-		createNormalsCheckBox.setText("create normals if none exist");
-		createUVsCheckBox.setText("create uv coordinates if none exist");
-		useSpecularCheckBox.setText("use specular information if given in ASE file");
-		groupMultipleRootObjectsCheckBox.setText("group multiple root objects");
-		colorToWhiteWhenTexturedCheckBox.setText("set ambient and diffuse color to white if object is textured");
+		createNormalsCheckBox.setText(Messages.getString("PreferencesContentPane.232")); //$NON-NLS-1$
+		createUVsCheckBox.setText(Messages.getString("PreferencesContentPane.233")); //$NON-NLS-1$
+		useSpecularCheckBox.setText(Messages.getString("PreferencesContentPane.234")); //$NON-NLS-1$
+		groupMultipleRootObjectsCheckBox.setText(Messages.getString("PreferencesContentPane.235")); //$NON-NLS-1$
+		colorToWhiteWhenTexturedCheckBox.setText(Messages.getString("PreferencesContentPane.236")); //$NON-NLS-1$
 		
 		Box aseImporterBox;
 		aseImporterBox = Box.createVerticalBox();

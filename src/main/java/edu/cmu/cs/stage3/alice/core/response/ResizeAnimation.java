@@ -24,11 +24,11 @@
 package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.Dimension;
+import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
+import edu.cmu.cs.stage3.alice.core.property.DimensionProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.ObjectProperty;
-import edu.cmu.cs.stage3.alice.core.property.DimensionProperty;
-import edu.cmu.cs.stage3.alice.core.Transformable;
 
 public class ResizeAnimation extends TransformAnimation {
 	public final DimensionProperty dimension = new DimensionProperty( this, "dimension", Dimension.ALL );

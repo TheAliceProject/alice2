@@ -24,15 +24,15 @@
 package edu.cmu.cs.stage3.alice.core;
 
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
-import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.ColorProperty;
-import edu.cmu.cs.stage3.alice.core.property.Matrix33Property;
-import edu.cmu.cs.stage3.alice.core.property.TextureMapProperty;
-import edu.cmu.cs.stage3.alice.core.property.GeometryProperty;
-import edu.cmu.cs.stage3.alice.core.property.VisualizationProperty;
-import edu.cmu.cs.stage3.alice.core.property.FillingStyleProperty;
-import edu.cmu.cs.stage3.alice.core.property.ShadingStyleProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
+import edu.cmu.cs.stage3.alice.core.property.FillingStyleProperty;
+import edu.cmu.cs.stage3.alice.core.property.GeometryProperty;
+import edu.cmu.cs.stage3.alice.core.property.Matrix33Property;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.property.ShadingStyleProperty;
+import edu.cmu.cs.stage3.alice.core.property.TextureMapProperty;
+import edu.cmu.cs.stage3.alice.core.property.VisualizationProperty;
 
 public class Model extends Transformable {
 	public final ColorProperty color = new ColorProperty( this, "color", edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE );

@@ -33,8 +33,8 @@ package edu.cmu.cs.stage3.alice.core;
  */
 
 import edu.cmu.cs.stage3.alice.core.property.FontProperty;
-import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 
 public class Text3D extends Model {
 	public final StringProperty text = new StringProperty( this, "text", null );

@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
-import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.Transformable;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public class IsCloseTo extends SubjectObjectQuestion {
 	private static Class[] s_supportedCoercionClasses = { IsFarFrom.class };

@@ -23,8 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
-import java.util.Locale;
-
 /**
  * @author Jason Pratt
  */
@@ -32,11 +30,12 @@ public class JAlice {
 	static{
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
 		if( authoringtoolConfig.getValue( "language" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "language", "en - English" ); //$NON-NLS-1$ //$NON-NLS-2$
+			authoringtoolConfig.setValue( "language", "English" ); //$NON-NLS-1$ //$NON-NLS-2$
 		} 
-		String locale = authoringtoolConfig.getValue( "language" );
-		locale = locale.substring(0, locale.indexOf(" ")); //$NON-NLS-1$
-		Locale.setDefault(new Locale( locale )); //$NON-NLS-1$
+		if (authoringtoolConfig.getValue( "language" ).compareToIgnoreCase("spanish")==0){
+			AikMin.locale = "es";
+		} else 
+			AikMin.locale = "en";
 	}
 	// version information
 	private static String version = Messages.getString("JAlice.0"); //$NON-NLS-1$
@@ -252,7 +251,7 @@ public class JAlice {
 		}
 		
 		if( authoringtoolConfig.getValue( "showStartUpDialog_OpenTab" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "showStartUpDialog_OpenTab", Integer.toString(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TUTORIAL_TAB_ID) ); //$NON-NLS-1$
+			authoringtoolConfig.setValue( "showStartUpDialog_OpenTab", Integer.toString(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TEMPLATE_TAB_ID) ); //$NON-NLS-1$
 		}
 		
 		if( authoringtoolConfig.getValue( "loadSavedTabs" ) == null ) { //$NON-NLS-1$

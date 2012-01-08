@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.behavior;
 
+import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.Variable;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
-import edu.cmu.cs.stage3.alice.core.Transformable;
 
 public class MessageReceivedBehavior extends TriggerBehavior implements edu.cmu.cs.stage3.alice.core.event.MessageListener {
 	public final TransformableProperty fromWho = new TransformableProperty( this, "fromWho", null );

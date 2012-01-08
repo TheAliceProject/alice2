@@ -23,10 +23,10 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.alice.core.property.VehicleProperty;
-import edu.cmu.cs.stage3.alice.core.property.Matrix44Property;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
+import edu.cmu.cs.stage3.alice.core.property.Matrix44Property;
+import edu.cmu.cs.stage3.alice.core.property.VehicleProperty;
 
 public class Transformable extends ReferenceFrame {
 	public final ElementArrayProperty parts = new ElementArrayProperty( this, "parts", null, Transformable[].class );

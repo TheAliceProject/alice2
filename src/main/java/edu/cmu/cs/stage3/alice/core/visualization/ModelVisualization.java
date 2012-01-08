@@ -1,8 +1,8 @@
 package edu.cmu.cs.stage3.alice.core.visualization;
 
-import edu.cmu.cs.stage3.alice.core.Variable;
 import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.TextureMap;
+import edu.cmu.cs.stage3.alice.core.Variable;
 
 public class ModelVisualization extends edu.cmu.cs.stage3.alice.core.Visualization {
     

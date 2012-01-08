@@ -8,7 +8,6 @@ package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.Direction;
 import edu.cmu.cs.stage3.alice.core.criterion.ElementNameContainsCriterion;
-import edu.cmu.cs.stage3.alice.core.response.OrientationAnimation;
 import edu.cmu.cs.stage3.math.Quaternion;
 
 /**

@@ -1,9 +1,9 @@
 package edu.cmu.cs.stage3.alice.core.behavior;
 
 import edu.cmu.cs.stage3.alice.core.Collection;
+import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.World;
 import edu.cmu.cs.stage3.alice.core.property.CollectionProperty;
-import edu.cmu.cs.stage3.alice.core.Transformable;
 
 public class IsCollidingBehavior extends AbstractConditionalBehavior {
 	private static Class[] s_supportedCoercionClasses = { CollisionBehavior.class };

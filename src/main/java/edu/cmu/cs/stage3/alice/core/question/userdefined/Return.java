@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core.question.userdefined;
 
-import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
+import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 
 public class Return extends Component {
 	public final ValueProperty value = new ValueProperty( this, "value", null );

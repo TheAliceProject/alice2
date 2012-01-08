@@ -23,8 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.behavior;
 
+import edu.cmu.cs.stage3.alice.core.media.SoundMarker;
+import edu.cmu.cs.stage3.alice.core.media.SoundMarkerListener;
 import edu.cmu.cs.stage3.alice.core.property.ElementProperty;
-import edu.cmu.cs.stage3.alice.core.media.*;
 
 public class SoundMarkerPassedBehavior extends TriggerBehavior implements SoundMarkerListener {
 	public final ElementProperty marker = new ElementProperty( this, "marker", null, SoundMarker.class );

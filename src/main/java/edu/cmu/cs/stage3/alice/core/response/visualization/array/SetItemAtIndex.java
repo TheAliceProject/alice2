@@ -1,9 +1,11 @@
 package edu.cmu.cs.stage3.alice.core.response.visualization.array;
 
-import edu.cmu.cs.stage3.math.*;
 import edu.cmu.cs.stage3.alice.core.Model;
-import edu.cmu.cs.stage3.alice.core.visualization.ArrayOfModelsVisualization;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.visualization.ArrayOfModelsVisualization;
+import edu.cmu.cs.stage3.math.HermiteCubic;
+import edu.cmu.cs.stage3.math.Matrix44;
+import edu.cmu.cs.stage3.math.Quaternion;
 
 public class SetItemAtIndex extends ArrayVisualizationWithItemAnimation {
 	public final NumberProperty index = new NumberProperty( this, "index", new Integer( -1 ) );

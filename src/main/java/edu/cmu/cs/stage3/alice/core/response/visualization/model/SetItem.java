@@ -1,8 +1,10 @@
 package edu.cmu.cs.stage3.alice.core.response.visualization.model;
 
-import edu.cmu.cs.stage3.math.*;
 import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.visualization.ModelVisualization;
+import edu.cmu.cs.stage3.math.HermiteCubic;
+import edu.cmu.cs.stage3.math.Matrix44;
+import edu.cmu.cs.stage3.math.Quaternion;
 
 public class SetItem extends ModelVisualizationWithItemAnimation {
 	public class RuntimeSetItem extends RuntimeModelVisualizationWithItemAnimation {

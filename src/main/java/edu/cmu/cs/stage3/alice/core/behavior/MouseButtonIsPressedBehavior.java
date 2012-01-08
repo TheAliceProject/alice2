@@ -24,15 +24,15 @@
 package edu.cmu.cs.stage3.alice.core.behavior;
 
 import edu.cmu.cs.stage3.alice.core.Expression;
+import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.RenderTarget;
+import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.Variable;
-import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.alice.core.property.IntegerProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 import edu.cmu.cs.stage3.alice.core.question.PickQuestion;
-import edu.cmu.cs.stage3.alice.core.Transformable;
 
 public class MouseButtonIsPressedBehavior extends AbstractConditionalBehavior implements java.awt.event.MouseListener, java.awt.event.MouseMotionListener {
 	private static Class[] s_supportedCoercionClasses = { MouseButtonClickBehavior.class };

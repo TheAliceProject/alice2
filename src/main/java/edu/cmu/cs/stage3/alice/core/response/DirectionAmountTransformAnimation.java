@@ -24,8 +24,8 @@
 package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.Direction;
-import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.DirectionProperty;
+import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public abstract class DirectionAmountTransformAnimation extends TransformAnimation {
 	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() );

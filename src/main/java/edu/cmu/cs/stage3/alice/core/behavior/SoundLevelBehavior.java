@@ -33,9 +33,21 @@ package edu.cmu.cs.stage3.alice.core.behavior;
  */
 
 
-import javax.media.*;
-import javax.media.protocol.*;
+import javax.media.Buffer;
+import javax.media.CaptureDeviceInfo;
+import javax.media.CaptureDeviceManager;
+import javax.media.Controller;
+import javax.media.ControllerListener;
+import javax.media.Format;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.NoDataSourceException;
+import javax.media.NoProcessorException;
+import javax.media.Processor;
+import javax.media.Renderer;
+import javax.media.UnsupportedPlugInException;
 import javax.media.format.AudioFormat;
+import javax.media.protocol.DataSource;
 
 
 public class SoundLevelBehavior extends TriggerBehavior implements ControllerListener,Renderer {

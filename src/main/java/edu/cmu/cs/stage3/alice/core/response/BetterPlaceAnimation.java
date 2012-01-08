@@ -6,8 +6,8 @@
  */
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 
 /**
  * @author caitlin

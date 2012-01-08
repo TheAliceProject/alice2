@@ -25,6 +25,9 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 import java.awt.*;
 import javax.swing.*;
+
+import edu.cmu.cs.stage3.alice.authoringtool.Messages;
+
 import java.awt.event.*;
 
 
@@ -66,7 +69,7 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 
 	
 	public String getTitle() {
-		return "Alice - Alert";
+		return Messages.getString("AliceAlertContentPane.0"); //$NON-NLS-1$
 	}
 
 	
@@ -119,7 +122,7 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 	}
 
 	protected void setLessDetail(){
-		detailButton.setText( "More Detail >>" );
+		detailButton.setText( Messages.getString("AliceAlertContentPane.1") ); //$NON-NLS-1$
 		this.remove(detailScrollPane);
 		this.add(detailPanel, BorderLayout.CENTER);
 		
@@ -135,7 +138,7 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 		buttonPanel.add(detailButton, buttonConstraints);
 	}
 	protected void setMoreDetail(){
-		detailButton.setText( "Less Detail <<" );
+		detailButton.setText( Messages.getString("AliceAlertContentPane.2") ); //$NON-NLS-1$
 		this.remove(detailPanel);
 		this.add(detailScrollPane, BorderLayout.CENTER);
 		
@@ -159,7 +162,7 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 		} else if( mode == MORE_DETAIL_MODE ) {
 			setMoreDetail();
 		} else {
-			throw new IllegalArgumentException( "Illegal mode: " + mode );
+			throw new IllegalArgumentException( Messages.getString("AliceAlertContentPane.3") + mode ); //$NON-NLS-1$
 		}
 	}
 	
@@ -182,11 +185,11 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 	}
 
 	protected void writeAliceHeaderToTextPane() {
-		detailTextPane.setText( "" );
-		detailStream.println( messageLabel.getText() + "\n" );
+		detailTextPane.setText( "" ); //$NON-NLS-1$
+		detailStream.println( messageLabel.getText() + "\n" ); //$NON-NLS-1$
 		detailStream.println();
 
-		detailStream.println( "Alice version: " + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() );
+		detailStream.println( Messages.getString("AliceAlertContentPane.6") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() ); //$NON-NLS-1$
 		//String[] systemProperties = { "os.name", "os.version", "os.arch", "java.vm.name", "java.vm.version", "user.dir" };
 		//for( int i = 0; i < systemProperties.length; i++ ) {
 		//	detailStream.println( systemProperties[i] + ": " + System.getProperty( systemProperties[i] ) );
@@ -213,19 +216,19 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 
 	protected String postStacktrace() {
 		try {
-			java.net.URL url = new java.net.URL( "http://www.alice.org/bugreport/stacktrace.php" );
+			java.net.URL url = new java.net.URL( "http://www.alice.org/bugreport/stacktrace.php" ); //$NON-NLS-1$
 			java.net.URLConnection connection = url.openConnection();
 			connection.setDoInput( true );
 			connection.setDoOutput( true );
 			connection.setUseCaches( false );
-			connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" );
+			connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" ); //$NON-NLS-1$ //$NON-NLS-2$
 
 			String stacktrace = java.net.URLEncoder.encode( detailTextPane.getText() );
-			while( stacktrace.indexOf( "%0D" ) > -1 ) { // delete the carriage returns
-				int i = stacktrace.indexOf( "%0D" );
+			while( stacktrace.indexOf( "%0D" ) > -1 ) { // delete the carriage returns //$NON-NLS-1$
+				int i = stacktrace.indexOf( "%0D" ); //$NON-NLS-1$
 				stacktrace = stacktrace.substring( 0, i ) + stacktrace.substring( i + 3 );
 			}
-			String content = "stacktrace=" + stacktrace;
+			String content = "stacktrace=" + stacktrace; //$NON-NLS-1$
 			java.io.DataOutputStream output = new java.io.DataOutputStream( new java.io.BufferedOutputStream( connection.getOutputStream() ) );
 			output.writeBytes( content );
 			output.flush();
@@ -237,8 +240,8 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 			input.close();
 			return stacktraceIDString;
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error posting stacktrace to bug database.", t );
-			return "0";
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("AliceAlertContentPane.13"), t ); //$NON-NLS-1$
+			return "0"; //$NON-NLS-1$
 		}
 	}
 
@@ -298,11 +301,11 @@ this.setLocation(1, 1);
 		messageLabel.setOpaque(false);
 		messageLabel.setPreferredSize(new java.awt.Dimension(402, 1));
 		messageLabel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		messageLabel.setText("An unknown error has occurred.");
+		messageLabel.setText(Messages.getString("AliceAlertContentPane.15")); //$NON-NLS-1$
 				
-		cancelButton.setText("OK");
+		cancelButton.setText(Messages.getString("AliceAlertContentPane.16")); //$NON-NLS-1$
 		
-		detailButton.setText("More Detail >>");
+		detailButton.setText(Messages.getString("AliceAlertContentPane.17")); //$NON-NLS-1$
 		detailButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				detailButton_actionPerformed(e);
@@ -314,7 +317,7 @@ this.setLocation(1, 1);
 				submitBugButton_actionPerformed(e);
 			}
 		});*/
-		copyButton.setText("Copy Error to Clipboard");
+		copyButton.setText(Messages.getString("AliceAlertContentPane.18")); //$NON-NLS-1$
 		copyButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				copyButton_actionPerformed(e);
@@ -331,7 +334,7 @@ this.setLocation(1, 1);
 		
 		
 		
-		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/errorDialogueIcon.png" );
+		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/errorDialogueIcon.png" ); //$NON-NLS-1$
 		errorIconPanel.setImage( java.awt.Toolkit.getDefaultToolkit().createImage( errorImageResources ) );
 		messagePanel.add( errorIconPanel, java.awt.BorderLayout.WEST );
 		messagePanel.add(messageLabel, BorderLayout.CENTER);

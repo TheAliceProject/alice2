@@ -23,10 +23,10 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
-import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.property.ColorProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.alice.core.property.StringProperty;
+import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 
 public abstract class AbstractBubbleAnimation extends edu.cmu.cs.stage3.alice.core.Response {
 	public final TransformableProperty subject = new TransformableProperty( this, "subject", null );

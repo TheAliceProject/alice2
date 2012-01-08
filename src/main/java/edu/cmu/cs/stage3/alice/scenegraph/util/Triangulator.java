@@ -32,7 +32,7 @@ package edu.cmu.cs.stage3.alice.scenegraph.util;
  * @version 1.0
  */
 
- import javax.vecmath.*;
+ import javax.vecmath.Point2d;
 
 public class Triangulator {
     private java.util.Vector contours;

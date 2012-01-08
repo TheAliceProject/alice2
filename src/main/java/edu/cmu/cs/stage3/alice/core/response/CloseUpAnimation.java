@@ -13,9 +13,9 @@ package edu.cmu.cs.stage3.alice.core.response;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 
-import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
+import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
 
 public class CloseUpAnimation extends AbstractPositionAnimation {
 	public final Vector3Property position = new Vector3Property( this, "position", new javax.vecmath.Vector3d( 0,0,0 ) );

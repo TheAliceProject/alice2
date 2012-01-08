@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
-import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 import edu.cmu.cs.stage3.alice.core.Transformable;
+import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 
 public abstract class SubjectObjectQuestion extends SubjectQuestion {
 	public final TransformableProperty object = new TransformableProperty( this, "object", null );

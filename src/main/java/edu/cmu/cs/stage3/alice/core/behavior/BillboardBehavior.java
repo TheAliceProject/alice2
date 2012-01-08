@@ -24,12 +24,12 @@
 package edu.cmu.cs.stage3.alice.core.behavior;
 
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
+import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.World;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
-import edu.cmu.cs.stage3.alice.core.Transformable;
 
 public class BillboardBehavior extends InternalResponseBehavior implements edu.cmu.cs.stage3.alice.scenegraph.event.AbsoluteTransformationListener {
 	public final TransformableProperty subject = new TransformableProperty( this, "subject", null );

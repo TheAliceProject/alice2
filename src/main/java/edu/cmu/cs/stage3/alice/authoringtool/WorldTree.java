@@ -55,7 +55,7 @@ public class WorldTree extends javax.swing.JTree {
 		dropLinesActive = false;
 		getSelectionModel().setSelectionMode( javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION );
 
-		setToolTipText( "<html><font face=arial size=-1>Object Tree<p><p>The Object Tree shows all<p>of the objects in the world.<p>Some objects have parts.</font></html>" );
+		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("WorldTree.1")+"<p><p>"+Messages.getString("WorldTree.3")+"</font></html>" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		javax.swing.ToolTipManager.sharedInstance().registerComponent( this );
 	}
 
@@ -240,7 +240,7 @@ public class WorldTree extends javax.swing.JTree {
 		try {
 			super.paintComponent( g );
 		} catch( NullPointerException e ) {
-			AuthoringTool.showErrorDialog( "Error painting tree.", e );
+			AuthoringTool.showErrorDialog( Messages.getString("WorldTree.5"), e ); //$NON-NLS-1$
 		}
 		if( dropLinesActive && showDropLines ) {
 			paintLines( g, getBounds(), insets, fromPath, toPath );

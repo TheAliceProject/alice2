@@ -33,7 +33,9 @@ package edu.cmu.cs.stage3.alice.core.geometry;
  */
 
 import java.awt.geom.PathIterator;
-import javax.vecmath.*;
+
+import javax.vecmath.Point2d;
+
 import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
 
 public class PolygonGroup {

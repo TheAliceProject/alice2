@@ -23,10 +23,10 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
+import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.World;
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
-import edu.cmu.cs.stage3.alice.core.Transformable;
 
 public class SendMessage extends edu.cmu.cs.stage3.alice.core.Response {
 	public final StringProperty message = new StringProperty( this, "message", null );

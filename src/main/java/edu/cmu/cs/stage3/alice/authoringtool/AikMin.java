@@ -4,6 +4,8 @@ import java.awt.Font;
 import javax.swing.UIManager;
 
 public class AikMin {
+	public static String locale = "en";
+	public static int target = 0;	// Compile with 1 for alice applet
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	//Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )

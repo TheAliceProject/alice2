@@ -7,7 +7,6 @@
 package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
-import edu.cmu.cs.stage3.alice.core.response.TransformAnimation;
 
 
 /**

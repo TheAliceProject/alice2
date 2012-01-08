@@ -28,7 +28,7 @@ package edu.cmu.cs.stage3.alice.authoringtool;
  */
 public interface Editor extends edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener {
 	/** implementers should override this with their own public static String name */
-	public String editorName = "Unnamed Editor";
+	public String editorName = Messages.getString("Editor.0"); //$NON-NLS-1$
 
 	/**
 	 * this method should return the viewer's main JComponent, suitable for being layed out in a user-interface.

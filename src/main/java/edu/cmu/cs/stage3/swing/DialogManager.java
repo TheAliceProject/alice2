@@ -33,6 +33,10 @@ abstract class ReturnValueTracker {
 }
 
 public class DialogManager {
+	private static boolean isResizable = false; // Aik Min - allow/disallow resizing of dialog.
+	public static void setResize(boolean resize){
+		isResizable = resize;
+	}
 	private static java.util.Stack s_stack = new java.util.Stack();
 	private static javax.swing.JDialog createModalDialog( String title ) {
 		java.awt.Component parent;
@@ -124,7 +128,7 @@ public class DialogManager {
 
 		ContentPaneReturnValueTracker returnValueTracker = new ContentPaneReturnValueTracker( dialog, contentPane );
 		
-		if (edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.isresizable == false)
+		if (isResizable == false)
 			dialog.setResizable(false);
 		
 		contentPane.preDialogShow( dialog );
@@ -173,6 +177,13 @@ public class DialogManager {
 		//		dialog.getRootPane().setWindowDecorationStyle( javax.swing.JRootPane.FILE_CHOOSER_DIALOG );
 		//	}
 		//}
+
+		//Aik Min
+		/*edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
+		java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
+		if (currentDir.exists()) {
+			fileChooser.setCurrentDirectory(currentDir);
+		}*/
 
 		dialog.pack();
 
