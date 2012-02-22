@@ -43,10 +43,10 @@ public class ScriptComboWidget extends javax.swing.JPanel {
 
 	private void actionInit() {
 		//runAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.Event.CTRL_MASK) );
-		runAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "go" );
+		runAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "go" ); //$NON-NLS-1$
 		//runAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'G' ) );
-		runAction.putValue( javax.swing.Action.NAME, "Go" );
-		runAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "Execute the given script" );
+		runAction.putValue( javax.swing.Action.NAME, Messages.getString("ScriptComboWidget.1") ); //$NON-NLS-1$
+		runAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("ScriptComboWidget.2") ); //$NON-NLS-1$
 		//runAction.putValue( javax.swing.Action.SMALL_ICON, newWorldIcon );
 	}
 
@@ -60,7 +60,7 @@ public class ScriptComboWidget extends javax.swing.JPanel {
 			String script = ((String)item).trim();
 			if( script.length() != 0 ) {
 				try {
-					edu.cmu.cs.stage3.alice.scripting.Code code = sandbox.compile( script, "<Run Line>", edu.cmu.cs.stage3.alice.scripting.CompileType.EXEC_SINGLE );
+					edu.cmu.cs.stage3.alice.scripting.Code code = sandbox.compile( script, "<Run Line>", edu.cmu.cs.stage3.alice.scripting.CompileType.EXEC_SINGLE ); //$NON-NLS-1$
 					sandbox.exec( code );
 
 					for( int i = 0; i < comboBox.getItemCount(); i++ ) { //this is not thread safe
@@ -74,7 +74,7 @@ public class ScriptComboWidget extends javax.swing.JPanel {
 				} catch( org.python.core.PyException e ) {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				} catch( Throwable t ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error running jython code.", t );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ScriptComboWidget.4"), t ); //$NON-NLS-1$
 				}
 			}
 		} else {

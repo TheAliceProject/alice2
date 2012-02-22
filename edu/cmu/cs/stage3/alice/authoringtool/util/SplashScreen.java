@@ -52,14 +52,14 @@ public class SplashScreen extends java.awt.Frame {
 				g.drawImage( SplashScreen.this.image, 0, 0, this );
 //				g.setColor( java.awt.Color.yellow );
 				g.setColor( java.awt.Color.white );
-				String versionString = "version: " + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion();
+				String versionString = Messages.getString("SplashScreen.0") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion(); //$NON-NLS-1$
 				int stringWidth = g.getFontMetrics().stringWidth( versionString );
 //				g.drawString( versionString, 6, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.
 				g.drawString( versionString, size.width - 6 - stringWidth, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.			
 				//if (hasNewVersion())
 				//	g.drawString("Loading...                      New Alice 2.2 update available ", 10, size.height - 6 );
 				//else
-					g.drawString("Loading...", 10, size.height - 6 );
+					g.drawString(Messages.getString("SplashScreen.1"), 10, size.height - 6 ); //$NON-NLS-1$
 			}
 		};
 		splashWindow.setSize( size );

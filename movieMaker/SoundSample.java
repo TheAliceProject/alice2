@@ -67,6 +67,6 @@ public class SoundSample
   
 public String toString()
   {
-    return "Sample at index " + frameNumber + " has value " + getValue();
+    return Messages.getString("SoundSample.0") + frameNumber + Messages.getString("SoundSample.1") + getValue(); //$NON-NLS-1$ //$NON-NLS-2$
   }
 } // end of SoundSample class

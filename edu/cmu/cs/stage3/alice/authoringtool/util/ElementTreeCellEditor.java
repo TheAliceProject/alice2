@@ -86,7 +86,7 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			iconLabel.setIcon( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( element ) );
 			textField.setText( element.name.getStringValue() );
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error: not an Element: " + value, null );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementTreeCellEditor.0") + value, null ); //$NON-NLS-1$
 		}
 		return this;
 	}
@@ -115,7 +115,7 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			return true;
 		} catch( edu.cmu.cs.stage3.alice.core.IllegalNameValueException e ) {
 //			ErrorDialog.showErrorDialog( e.getMessage(), e );
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), "Error setting name", javax.swing.JOptionPane.ERROR_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("ElementTreeCellEditor.1"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$
 			return false;
 		}
 	}

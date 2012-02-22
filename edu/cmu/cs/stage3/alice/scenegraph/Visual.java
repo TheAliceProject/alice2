@@ -27,12 +27,12 @@ package edu.cmu.cs.stage3.alice.scenegraph;
  * @author Dennis Cosgrove
  */
 public class Visual extends Component {
-	public static final Property FRONT_FACING_APPEARANCE_PROPERTY = new Property( Visual.class, "FRONT_FACING_APPEARANCE" );
-	public static final Property BACK_FACING_APPEARANCE_PROPERTY = new Property( Visual.class, "BACK_FACING_APPEARANCE" );
-	public static final Property GEOMETRY_PROPERTY = new Property( Visual.class, "GEOMETRY" );
-	public static final Property SCALE_PROPERTY = new Property( Visual.class, "SCALE" );
-	public static final Property IS_SHOWING_PROPERTY = new Property( Visual.class, "IS_SHOWING" );
-	public static final Property DISABLED_AFFECTORS_PROPERTY = new Property( Visual.class, "DISABLED_AFFECTORS" );
+	public static final Property FRONT_FACING_APPEARANCE_PROPERTY = new Property( Visual.class, "FRONT_FACING_APPEARANCE" ); //$NON-NLS-1$
+	public static final Property BACK_FACING_APPEARANCE_PROPERTY = new Property( Visual.class, "BACK_FACING_APPEARANCE" ); //$NON-NLS-1$
+	public static final Property GEOMETRY_PROPERTY = new Property( Visual.class, "GEOMETRY" ); //$NON-NLS-1$
+	public static final Property SCALE_PROPERTY = new Property( Visual.class, "SCALE" ); //$NON-NLS-1$
+	public static final Property IS_SHOWING_PROPERTY = new Property( Visual.class, "IS_SHOWING" ); //$NON-NLS-1$
+	public static final Property DISABLED_AFFECTORS_PROPERTY = new Property( Visual.class, "DISABLED_AFFECTORS" ); //$NON-NLS-1$
 
 	private Appearance m_frontFacingAppearance = null;
 	private Appearance m_backFacingAppearance = null;
@@ -48,21 +48,21 @@ public class Visual extends Component {
 	
 	protected void releasePass1() {
 		if( m_frontFacingAppearance != null ) {
-			warnln( "WARNING: released visual " + this + " still has front facing appearance " + m_frontFacingAppearance + "." );
+			warnln( Messages.getString("Visual.6") + this + Messages.getString("Visual.7") + m_frontFacingAppearance + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			setFrontFacingAppearance( null );
 		}
 		if( m_backFacingAppearance != null ) {
-			warnln( "WARNING: released visual " + this + " still has back facing appearance " + m_frontFacingAppearance + "." );
+			warnln( Messages.getString("Visual.9") + this + Messages.getString("Visual.10") + m_frontFacingAppearance + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			setBackFacingAppearance( null );
 		}
 		if( m_geometry != null ) {
-			warnln( "WARNING: released visual " + this + " still has geometry " + m_geometry + "." );
+			warnln( Messages.getString("Visual.12") + this + Messages.getString("Visual.13") + m_geometry + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			setGeometry( null );
 		}
 		if( m_disabledAffectors != null && m_disabledAffectors.length > 0 ) {
-			warnln( "WARNING: released visual " + this + " still has disabled affectors: " );
+			warnln( Messages.getString("Visual.15") + this + Messages.getString("Visual.16") ); //$NON-NLS-1$ //$NON-NLS-2$
 			for( int i=0; i<m_disabledAffectors.length; i++ ) {
-				warnln( "\t" + m_disabledAffectors[ i ] );
+				warnln( "\t" + m_disabledAffectors[ i ] ); //$NON-NLS-1$
 			}
 			setDisabledAffectors( null );
 		}

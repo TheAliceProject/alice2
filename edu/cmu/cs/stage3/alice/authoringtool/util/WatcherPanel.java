@@ -47,11 +47,13 @@ public class WatcherPanel extends javax.swing.JPanel /*implements edu.cmu.cs.sta
 	}
 
 	public void addVariableToWatch( edu.cmu.cs.stage3.alice.core.Variable variable ) {
+		variable.isWatch = true;
 		variablesToWatch.add( variable );
 		refreshGUI();
 	}
 
 	public void removeVariableBeingWatched( edu.cmu.cs.stage3.alice.core.Variable variable ) {
+		variable.isWatch = false;
 		variablesToWatch.remove( variable );
 		refreshGUI();
 	}
@@ -94,7 +96,7 @@ public class WatcherPanel extends javax.swing.JPanel /*implements edu.cmu.cs.sta
 			if( gui != null ) {
 				this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Unable to create gui for variable: " + variable, null );
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("WatcherPanel.0") + variable, null ); //$NON-NLS-1$
 			}
 		}
 
@@ -107,7 +109,7 @@ public class WatcherPanel extends javax.swing.JPanel /*implements edu.cmu.cs.sta
 			if( gui != null ) {
 				this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Unable to create gui for property: " + property, null );
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("WatcherPanel.1") + property, null ); //$NON-NLS-1$
 			}
 		}
 

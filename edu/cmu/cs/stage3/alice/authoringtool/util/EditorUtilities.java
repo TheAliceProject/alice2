@@ -40,7 +40,7 @@ public final class EditorUtilities {
 	static {
 		allEditors = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getEditorClasses();
 		if( allEditors == null ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "no editors found!", null );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorUtilities.0"), null ); //$NON-NLS-1$
 			allEditors = new Class[0];
 		}
 		//TODO: auto-find more editors?
@@ -108,7 +108,7 @@ public final class EditorUtilities {
 		try {
 			return (edu.cmu.cs.stage3.alice.authoringtool.Editor)editorClass.newInstance();
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error creating new editor of type " + editorClass, t );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorUtilities.1") + editorClass, t ); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -117,7 +117,7 @@ public final class EditorUtilities {
 		java.lang.reflect.Method [] methods = editorClass.getMethods();
 		for( int i = 0; i < methods.length; i++ ) {
 			java.lang.reflect.Method potentialMethod = methods[i];
-			if( potentialMethod.getName().equals( "setObject" ) ) {
+			if( potentialMethod.getName().equals( "setObject" ) ) { //$NON-NLS-1$
 				Class[] parameterTypes = potentialMethod.getParameterTypes();
 				if( parameterTypes.length == 1 ) {
 					if( Object.class.isAssignableFrom( parameterTypes[0] ) ) {
@@ -176,7 +176,7 @@ public final class EditorUtilities {
 		try {
 			setObject.invoke( editor, new Object[] { object } );
 		} catch( Exception e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error editing object: " + object, e );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorUtilities.3") + object, e ); //$NON-NLS-1$
 		}
 	}
 

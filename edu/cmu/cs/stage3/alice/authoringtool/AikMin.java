@@ -6,11 +6,13 @@ import javax.swing.UIManager;
 public class AikMin {
 	public static String locale = "en";
 	public static int target = 0;	// Compile with 1 for alice applet
+	public static String version ="02/01/2012";
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	//Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )
 	//System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")  
 	//edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" )
+	//System.getProperty( "file.separator" )
 	public static void setFontSize(int fontSize){
 		Font fontType = UIManager.getFont("Menu.font");
 	    String name = fontType.getName();

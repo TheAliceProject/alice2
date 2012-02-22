@@ -254,7 +254,7 @@ public class FeedBackEnabledJTree extends javax.swing.JTree {
 		try {
 			super.paintComponent( g );
 		} catch( NullPointerException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error painting tree.", e );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("FeedBackEnabledJTree.0"), e ); //$NON-NLS-1$
 		}
 		if( dropLinesActive && showDropLines ) {
 			paintLines( g, getBounds(), insets, fromPath, toPath );

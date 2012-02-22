@@ -23,14 +23,31 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.ProgressMonitor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.Messages;
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener;
+import edu.cmu.cs.stage3.swing.ContentPane;
 
 /**
  * @author Jason Pratt
@@ -680,7 +697,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		// try to quit on window close
 		jAliceFrameWindowListener = new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent e) {
-				AuthoringTool.this.quit();
+				AuthoringTool.this.quit(false);
 			}
 		};
 		jAliceFrame.addWindowListener(jAliceFrameWindowListener);
@@ -1419,7 +1436,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
 
-	public int quit() {
+	public int quit(boolean condition) {
 		try {
 			int retVal = leaveWorld(true);
 			if (retVal == Constants.SUCCEEDED) {
@@ -1428,10 +1445,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				aliceHasNotExitedFile.delete();
 				java.io.BufferedInputStream bis = null;
 				java.io.BufferedOutputStream bos = null;
-				java.io.File aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\aliceupdate.jar"); //$NON-NLS-1$
+				java.io.File aliceJAR;
+				if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").startsWith("Windows"))  ) {
+					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\aliceupdate.jar"); //$NON-NLS-1$
+				} else {
+					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/aliceupdate.jar"); //$NON-NLS-1$
+				}
 	            try {      
 					bis = new java.io.BufferedInputStream( new java.io.FileInputStream( aliceJAR ) );
-		            bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\alice.jar") ) ); //$NON-NLS-1$
+					if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").startsWith("Windows"))  ) {
+						bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\alice.jar") ) ); //$NON-NLS-1$
+					} else {
+						bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/alice.jar") ) ); //$NON-NLS-1$
+					}					
 		            int i;
 		            while ((i = bis.read()) != -1) {
 		            	bos.write( i );
@@ -1452,7 +1478,29 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		             } catch (java.io.IOException ioe) {
 		                 ioe.printStackTrace();
 		             }             
-				}	
+				}
+				if (condition) {
+					try {
+						String path = JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+						String decodedPath = java.net.URLDecoder.decode(path, "UTF-8");
+						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( decodedPath );
+
+						if (System.getProperty("os.name") != null){
+							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "os name OK" );
+							if (System.getProperty("os.name").startsWith("Windows") ){
+								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "is Windows" );
+								decodedPath=decodedPath.substring(1, decodedPath.lastIndexOf(".exe")+4);
+								Runtime.getRuntime().exec(decodedPath);
+							} else {
+								decodedPath=decodedPath.substring(0, decodedPath.lastIndexOf(".app")+4);
+								String params[] = {"open", "-n", decodedPath };
+								Runtime.getRuntime().exec(params);
+							}		
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 				System.exit(0);
 				return Constants.SUCCEEDED; // never reached
 			} else if (retVal == Constants.CANCELED) {
@@ -1904,7 +1952,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		replacements.put("__worldfile__", worldFile.getName()); //$NON-NLS-1$
 		replacements.put("__width__", Integer.toString(width)); //$NON-NLS-1$
 		replacements.put("__height__", Integer.toString(height)); //$NON-NLS-1$
-		replacements.put("__language__", AikMin.locale); //$NON-NLS-1$
+		//replacements.put("__language__", AikMin.locale); //$NON-NLS-1$
 
 		// write web page
 		java.io.File templateFile = new java.io.File(JAlice.getAliceHomeDirectory(), "etc/appletTemplate.html"); //$NON-NLS-1$
@@ -2171,7 +2219,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			boundsWidth = Integer.parseInt(st.nextToken());
 			boundsHeight = Integer.parseInt(st.nextToken());
 		}*/
-	    //if(currentWorldLocation==null)
+	    if(currentWorldLocation==null)
 	    	if(saveWorldAs()!=Constants.SUCCEEDED)
 	    		return Constants.CANCELED;
 		String directory = currentWorldLocation.getParent();
@@ -3306,11 +3354,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	protected void restoreLayout() {
 		jAliceFrame.setResizable(true);
-		jAliceFrame.leftRightSplitPane.setDividerLocation(oldLeftRightSplitPaneLocation);
-		jAliceFrame.worldTreeDragFromSplitPane.setDividerLocation(oldWorldTreeDragFromSplitPaneLocation);
-		jAliceFrame.editorBehaviorSplitPane.setDividerLocation(oldEditorBehaviorSplitPaneLocation);
-		jAliceFrame.smallSceneBehaviorSplitPane.setDividerLocation(oldSmallSceneBehaviorSplitPaneLocation);
-		jAliceFrame.doLayout();
 		if (oldShouldConstrain) {
 			authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "true"); //$NON-NLS-1$ //$NON-NLS-2$
 		} else {
@@ -3319,7 +3362,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		renderContentPane.saveRenderBounds(oldRenderBounds);
 		jAliceFrame.setSize(oldDimension);
 		jAliceFrame.setLocation(oldPosition);
-
+		jAliceFrame.validate();//.doLayout();
+		jAliceFrame.leftRightSplitPane.setDividerLocation(oldLeftRightSplitPaneLocation);
+		jAliceFrame.worldTreeDragFromSplitPane.setDividerLocation(oldWorldTreeDragFromSplitPaneLocation);
+		jAliceFrame.editorBehaviorSplitPane.setDividerLocation(oldEditorBehaviorSplitPaneLocation);
+		jAliceFrame.validate();//.doLayout();
+		jAliceFrame.smallSceneBehaviorSplitPane.setDividerLocation(oldSmallSceneBehaviorSplitPaneLocation);
 	}
 
 	protected void setLayout() {
@@ -3358,10 +3406,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				null);
 			shouldModifyStuff = false;
 		}
+		oldSmallSceneBehaviorSplitPaneLocation = jAliceFrame.smallSceneBehaviorSplitPane.getDividerLocation();
 		oldLeftRightSplitPaneLocation = jAliceFrame.leftRightSplitPane.getDividerLocation();
 		oldWorldTreeDragFromSplitPaneLocation = jAliceFrame.worldTreeDragFromSplitPane.getDividerLocation();
 		oldEditorBehaviorSplitPaneLocation = jAliceFrame.editorBehaviorSplitPane.getDividerLocation();
-		oldSmallSceneBehaviorSplitPaneLocation = jAliceFrame.smallSceneBehaviorSplitPane.getDividerLocation();
 		oldRenderWindowSize = renderContentPane.getSize();
 		oldRenderWindowPosition = renderContentPane.getLocation();
 
@@ -3369,7 +3417,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "false"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		oldRenderBounds = renderContentPane.getRenderBounds();
-		renderContentPane.saveRenderBounds(new java.awt.Rectangle(191, 199, 400, 300));
+		//renderContentPane.saveRenderBounds(new java.awt.Rectangle(191, 199, 400, 300));
 
 		if ((newHeight != oldDimension.height || newWidth != oldDimension.width) && shouldModifyStuff) {
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
@@ -3380,10 +3428,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		}
 		if (shouldModifyStuff) {
-			jAliceFrame.leftRightSplitPane.setDividerLocation(250);
+			jAliceFrame.smallSceneBehaviorSplitPane.setDividerLocation(224);
+			jAliceFrame.leftRightSplitPane.setDividerLocation(300);//250);
 			jAliceFrame.worldTreeDragFromSplitPane.setDividerLocation(237);
 			jAliceFrame.editorBehaviorSplitPane.setDividerLocation(204);
-			jAliceFrame.smallSceneBehaviorSplitPane.setDividerLocation(224);
 			try{
 				Thread.sleep(100);
 			}catch (Exception e){}
@@ -5359,56 +5407,241 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	// Aik Min
     private static boolean pulsing = true;   
     private static JLabel statusLabel = new JLabel(Messages.getString("AuthoringTool.503")); //$NON-NLS-1$
-    private static JFrame statusFrame;
+    private static javax.swing.JFrame statusFrame;
     
 	public void updateAlice() {
-		createStatusFrame();
-		pulsing = true;
-        Thread pulse = new Thread (new StatusPulsing(statusLabel, Messages.getString("AuthoringTool.504"))); //$NON-NLS-1$
-        statusFrame.setVisible(true);
-        pulse.start();
-        new Thread(new StartUpdating() ).start();
- 	}
-	
-	public static void createStatusFrame() {
-		Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		javax.swing.JPanel updateDialog;
+		final Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		
-   		statusFrame = new JFrame(Messages.getString("AuthoringTool.505")); //$NON-NLS-1$
-		statusFrame.setPreferredSize(new Dimension(250,100));
-		statusFrame.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
-		statusFrame.getContentPane().add( statusLabel );
-		statusFrame.setVisible(false);
-		statusFrame.setAlwaysOnTop(true);
-		statusFrame.pack();
-	}
+		final javax.swing.JDialog dlg = new javax.swing.JDialog(new JFrame(),Messages.getString("AuthoringTool.505"));
+   		dlg.setPreferredSize(new Dimension(250,180));
+   		dlg.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
+
+   		updateDialog = new javax.swing.JPanel();
+   		updateDialog.setLayout(new BorderLayout());
+
+		Box left = Box.createVerticalBox();
+        left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        
+        final JCheckBox UpdateJAR = new JCheckBox("Update alice.jar file");
+        UpdateJAR.setSelected(true);
+        left.add(UpdateJAR);
+
+        final JCheckBox EnglishGallery = new JCheckBox("Download English Gallery");
+        left.add(EnglishGallery);
+
+        final JCheckBox SpanishGallery = new JCheckBox("Download Spanish Gallery");
+        left.add(SpanishGallery);
+        updateDialog.add(left, BorderLayout.LINE_START);
+        
+        Box bottom = Box.createVerticalBox();
+        bottom.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
+        JButton ConfirmUpdate = new JButton("Update");
+        ConfirmUpdate.setAlignmentX((float)0.5);
+        ConfirmUpdate.addActionListener(new java.awt.event.ActionListener(){
+        	public void actionPerformed(java.awt.event.ActionEvent e) {
+        		dlg.dispose();
+        		
+//        		statusFrame = new JFrame(Messages.getString("AuthoringTool.505")); //$NON-NLS-1$
+//        		statusFrame.setPreferredSize(new Dimension(250,100));
+//        		statusFrame.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
+//        		statusFrame.getContentPane().add( statusLabel );
+//        		statusFrame.pack();
+//		        statusFrame.setVisible(true);
+//        		
+//        		pulsing = true;
+//		        Thread pulse = new Thread (new StatusPulsing(statusLabel, Messages.getString("AuthoringTool.504"))); //$NON-NLS-1$
+//		        pulse.start();
+		        new Thread(new StartUpdating(UpdateJAR.isSelected(),EnglishGallery.isSelected(),SpanishGallery.isSelected()) ).start();
+        	}
+        });
+        bottom.add(ConfirmUpdate);
+
+        updateDialog.add(bottom, BorderLayout.PAGE_END);
+        dlg.add(updateDialog);
+        dlg.setAlwaysOnTop(true);
+        dlg.setResizable(false);
+		dlg.pack();
+        dlg.setVisible(true);
+    }
+
   	
 	public class StartUpdating implements Runnable {
-			
+		private boolean UpdateJAR;
+		private boolean EnglishGallery;
+		private boolean SpanishGallery;
+		public StartUpdating(boolean jar, boolean eng, boolean sp) {
+			UpdateJAR = jar;
+			EnglishGallery = eng;
+			SpanishGallery = sp;
+		}
+
 		public void run() {
-			StringBuffer sb = new StringBuffer( "http://alicedownloads.org/alice.jar" ); //$NON-NLS-1$
 			java.io.BufferedInputStream bis = null;
 			java.io.BufferedOutputStream bos = null;
+        	ProgressMonitor monitor = new ProgressMonitor(null, "Updating Alice", "Getting Started...", 0, 0);
 	        try {
-				java.net.URL url = new java.net.URL( sb.toString() );
-				java.net.URLConnection urlc = url.openConnection();
-				
-				java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\aliceupdate.jar"); //$NON-NLS-1$
-				    	
-				bis = new java.io.BufferedInputStream( urlc.getInputStream() );
-				bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome ) );
-				
-				int i;
-				while ((i = bis.read()) != -1) {
-					bos.write( i );
+	        	if (UpdateJAR){
+	    			StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/alice.jar" ); //$NON-NLS-1$
+
+					java.net.URL url = new java.net.URL( sb.toString() );
+					java.net.URLConnection urlc = url.openConnection();
+					//long date = urlc.getDate();
+					monitor.setMaximum(urlc.getContentLength());
+					
+					java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar");
+
+					bis = new java.io.BufferedInputStream( urlc.getInputStream() );
+					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome ) );
+					monitor.setNote("Downloading alice.jar file");
+					int i, progress = 0;
+					while ((i = bis.read()) != -1) {
+						bos.write( i );
+						if (monitor.isCanceled()) {
+							break;
+						} else {
+							monitor.setProgress(progress++);
+						}						
+					}
 				}
-				pulsing = false;
-				statusFrame.dispose();
-				javax.swing.JOptionPane.showMessageDialog(null, Messages.getString("AuthoringTool.508"), Messages.getString("AuthoringTool.509"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+	        	if (EnglishGallery && !monitor.isCanceled()){
+	    			StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/EnglishGallery.zip" ); //$NON-NLS-1$
+
+					java.net.URL url = new java.net.URL( sb.toString() );
+					java.net.URLConnection urlc = url.openConnection();
+					
+					monitor.setMaximum(urlc.getContentLength());
+
+					java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
+							+ System.getProperty( "file.separator" ) + "English");
+					if (!aliceHome.exists()){
+						aliceHome.mkdir();
+					}
+
+					bis = new java.io.BufferedInputStream( urlc.getInputStream() );
+					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome + System.getProperty( "file.separator" ) + "EnglishGallery.zip"));
+					
+					monitor.setNote("Downloading English gallery");
+					int i, progress = 0;
+					while ((i = bis.read()) != -1) {
+						bos.write( i );
+						if (monitor.isCanceled()) {
+							break;
+						} else {
+							monitor.setProgress(progress++);
+						}
+					}
+					bis.close();
+					bos.close();
+					Enumeration entries;
+					ZipFile zipFile;
+
+					zipFile = new ZipFile(aliceHome + System.getProperty( "file.separator" ) + "EnglishGallery.zip");
+					entries = zipFile.entries();
+					
+					monitor.setNote("Copying models to Alice gallery");
+					monitor.setMaximum(zipFile.size());
+					progress = 0;
+					
+					while (entries.hasMoreElements()) {
+						ZipEntry entry = (ZipEntry) entries.nextElement();
+						if (entry.isDirectory()) {
+							(new File(aliceHome + System.getProperty( "file.separator" )+entry.getName())).mkdir();
+							continue;
+						}
+						InputStream in = zipFile.getInputStream(entry);
+						OutputStream out = new BufferedOutputStream(new FileOutputStream(aliceHome + System.getProperty( "file.separator" )+entry.getName()));
+						byte[] buffer = new byte[1024];
+						int len;
+						while ((len = in.read(buffer)) >= 0)
+							out.write(buffer, 0, len);
+						in.close();
+						out.close();				
+						monitor.setProgress(progress++);
+					}
+					zipFile.close();
+					new File(aliceHome + System.getProperty( "file.separator" )+"EnglishGallery.zip").delete();
+	        	}
+	        	if (SpanishGallery && !monitor.isCanceled()){
+	        		StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/SpanishGallery.zip" ); //$NON-NLS-1$
+
+					java.net.URL url = new java.net.URL( sb.toString() );
+					java.net.URLConnection urlc = url.openConnection();
+					
+					monitor.setMaximum(urlc.getContentLength());
+
+					java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
+							+ System.getProperty( "file.separator" ) + "Spanish");
+					if (!aliceHome.exists()){
+						aliceHome.mkdir();
+					}
+
+					bis = new java.io.BufferedInputStream( urlc.getInputStream() );
+					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome + System.getProperty( "file.separator" ) + "SpanishGallery.zip"));
+					
+					monitor.setNote("Downloading Spanish gallery");
+					int i, progress = 0;
+					while ((i = bis.read()) != -1) {
+						bos.write( i );
+						if (monitor.isCanceled()) {
+							break;
+						} else {
+							monitor.setProgress(progress++);
+						}
+					}
+					bis.close();
+					bos.close();
+					Enumeration entries;
+					ZipFile zipFile;
+
+					zipFile = new ZipFile(aliceHome + System.getProperty( "file.separator" ) + "SpanishGallery.zip");
+					entries = zipFile.entries();
+					
+					monitor.setNote("Copying models to Alice gallery");
+					monitor.setMaximum(zipFile.size());
+					progress = 0;
+					
+					while (entries.hasMoreElements()) {
+						ZipEntry entry = (ZipEntry) entries.nextElement();
+						if (entry.isDirectory()) {
+							(new File(aliceHome + System.getProperty( "file.separator" )+entry.getName())).mkdir();
+							continue;
+						}
+						InputStream in = zipFile.getInputStream(entry);
+						OutputStream out = new BufferedOutputStream(new FileOutputStream(aliceHome + System.getProperty( "file.separator" )+entry.getName()));
+						byte[] buffer = new byte[1024];
+						int len;
+						while ((len = in.read(buffer)) >= 0)
+							out.write(buffer, 0, len);
+						in.close();
+						out.close();				
+						monitor.setProgress(progress++);
+					}
+					zipFile.close();
+					new File(aliceHome + System.getProperty( "file.separator" )+"SpanishGallery.zip").delete();
+	        	}
+	        	monitor.close();
+				Object[] options = {Messages.getString("AuthoringTool.512"), Messages.getString("AuthoringTool.513")};
+				int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("AuthoringTool.508"), Messages.getString("AuthoringTool.509"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] ); //$NON-NLS-1$ //$NON-NLS-2$
+				if (result == ContentPane.OK_OPTION){
+					quit(true);
+				}
 	        } catch (Exception e1) {
-	        	pulsing = false;
-	        	statusFrame.dispose();
 	        	javax.swing.JOptionPane.showMessageDialog(null, Messages.getString("AuthoringTool.510"), Messages.getString("AuthoringTool.511"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 	        } finally {
+	        	if (monitor.isCanceled()) {
+	        		java.io.File temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar");
+	        		if (temp.exists())
+	        			temp.delete();
+	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
+							+ System.getProperty( "file.separator" ) + "English" + System.getProperty( "file.separator" ) + "EnglishGallery.zip");
+	        		if (temp.exists())
+	        			temp.delete();	
+	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
+							+ System.getProperty( "file.separator" ) + "Spanish" + System.getProperty( "file.separator" ) + "SpanishGallery.zip");
+	        		if (temp.exists())
+	        			temp.delete();	        		
+	        	}
 	        	if (bis != null)
 	            try {
 	            	bis.close();
@@ -5426,43 +5659,43 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
   	
-	public class StatusPulsing implements Runnable {
-		private JLabel label;
-
-		private String text;
-		
-		public StatusPulsing(JLabel l, String s) {
-			label = l;
-			text = s;
-		}
-
-		public void run() {
-
-			long time = 300;
-			while (AuthoringTool.pulsing) {
-				label.setText(text);
-				try {
-					Thread.sleep(time);
-				} catch (InterruptedException e) {
-				}
-				label.setText(text + "."); //$NON-NLS-1$
-				try {
-					Thread.sleep(time);
-				} catch (InterruptedException e) {
-				}
-				label.setText(text + ". ."); //$NON-NLS-1$
-				try {
-					Thread.sleep(time);
-				} catch (InterruptedException e) {
-				}
-				label.setText(text + ". . ."); //$NON-NLS-1$
-				try {
-					Thread.sleep(time);
-				} catch (InterruptedException e) {
-				}
-			}
-		}
-
-	}
+//	public class StatusPulsing implements Runnable {
+//		private JLabel label;
+//
+//		private String text;
+//		
+//		public StatusPulsing(JLabel l, String s) {
+//			label = l;
+//			text = s;
+//		}
+//
+//		public void run() {
+//
+//			long time = 300;
+//			while (AuthoringTool.pulsing) {
+//				label.setText(text);
+//				try {
+//					Thread.sleep(time);
+//				} catch (InterruptedException e) {
+//				}
+//				label.setText(text + "."); //$NON-NLS-1$
+//				try {
+//					Thread.sleep(time);
+//				} catch (InterruptedException e) {
+//				}
+//				label.setText(text + ". ."); //$NON-NLS-1$
+//				try {
+//					Thread.sleep(time);
+//				} catch (InterruptedException e) {
+//				}
+//				label.setText(text + ". . ."); //$NON-NLS-1$
+//				try {
+//					Thread.sleep(time);
+//				} catch (InterruptedException e) {
+//				}
+//			}
+//		}
+//
+//	}
 	
 }

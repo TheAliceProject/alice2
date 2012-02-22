@@ -42,8 +42,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 	protected int ticksPerFrame;
 	protected double timeScaleFactor; // = (1.0/ticksPerFrame) * (1.0/frameSpeed)
 
-	protected String currentObject = "<none>";
-	protected String currentlyLoading = "<none>";
+	protected String currentObject = Messages.getString("ASEImporter.0"); //$NON-NLS-1$
+	protected String currentlyLoading = Messages.getString("ASEImporter.1"); //$NON-NLS-1$
 	protected int currentProgress = 0;
 	//protected ASEOptionsDialog optionsDialog = new ASEOptionsDialog();
 	protected ProgressDialog progressDialog;
@@ -52,26 +52,26 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 	// config init
 	static {
-		if( importersConfig.getValue( "aseImporter.useSpecular" ) == null ) {
-			importersConfig.setValue( "aseImporter.useSpecular", "false" );
+		if( importersConfig.getValue( "aseImporter.useSpecular" ) == null ) { //$NON-NLS-1$
+			importersConfig.setValue( "aseImporter.useSpecular", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		if( importersConfig.getValue( "aseImporter.colorToWhiteWhenTextured" ) == null ) {
-			importersConfig.setValue( "aseImporter.colorToWhiteWhenTextured", "true" );
+		if( importersConfig.getValue( "aseImporter.colorToWhiteWhenTextured" ) == null ) { //$NON-NLS-1$
+			importersConfig.setValue( "aseImporter.colorToWhiteWhenTextured", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		if( importersConfig.getValue( "aseImporter.groupMultipleRootObjects" ) == null ) {
-			importersConfig.setValue( "aseImporter.groupMultipleRootObjects", "true" );
+		if( importersConfig.getValue( "aseImporter.groupMultipleRootObjects" ) == null ) { //$NON-NLS-1$
+			importersConfig.setValue( "aseImporter.groupMultipleRootObjects", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		if( importersConfig.getValue( "aseImporter.createNormalsIfNoneExist" ) == null ) {
-			importersConfig.setValue( "aseImporter.createNormalsIfNoneExist", "true" );
+		if( importersConfig.getValue( "aseImporter.createNormalsIfNoneExist" ) == null ) { //$NON-NLS-1$
+			importersConfig.setValue( "aseImporter.createNormalsIfNoneExist", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		if( importersConfig.getValue( "aseImporter.createUVsIfNoneExist" ) == null ) {
-			importersConfig.setValue( "aseImporter.createUVsIfNoneExist", "true" );
+		if( importersConfig.getValue( "aseImporter.createUVsIfNoneExist" ) == null ) { //$NON-NLS-1$
+			importersConfig.setValue( "aseImporter.createUVsIfNoneExist", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	public java.util.Map getExtensionMap() {
 		java.util.HashMap map = new java.util.HashMap();
-		map.put( "ASE", "3D Studio ascii export" );
+		map.put( "ASE", Messages.getString("ASEImporter.18") ); //$NON-NLS-1$ //$NON-NLS-2$
 		return map;
 	}
 
@@ -103,31 +103,31 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			while( true ) {
 				tokenizer.nextToken();
 
-				if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE" ) ) {
-					currentObject = "scene info";
+				if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE" ) ) { //$NON-NLS-1$
+					currentObject = Messages.getString("ASEImporter.20"); //$NON-NLS-1$
 					parseSceneInfo();
-					currentObject = "<none>";
-				} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*GEOMOBJECT" ) ) {
-					currentObject = "unnamed object";
+					currentObject = Messages.getString("ASEImporter.21"); //$NON-NLS-1$
+				} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*GEOMOBJECT" ) ) { //$NON-NLS-1$
+					currentObject = Messages.getString("ASEImporter.23"); //$NON-NLS-1$
 					parseGeomObject();
-					currentObject = "<none>";
-				} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*HELPEROBJECT" ) ) {
-					currentObject = "unnamed helper object";
+					currentObject = Messages.getString("ASEImporter.24"); //$NON-NLS-1$
+				} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*HELPEROBJECT" ) ) { //$NON-NLS-1$
+					currentObject = Messages.getString("ASEImporter.26"); //$NON-NLS-1$
 					parseHelperObject();
-					currentObject = "<none>";
-				} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_LIST" ) ) {
-					currentObject = "material list";
+					currentObject = Messages.getString("ASEImporter.27"); //$NON-NLS-1$
+				} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_LIST" ) ) { //$NON-NLS-1$
+					currentObject = Messages.getString("ASEImporter.29"); //$NON-NLS-1$
 					parseMaterialList();
-					currentObject = "<none>";
+					currentObject = Messages.getString("ASEImporter.30"); //$NON-NLS-1$
 				} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
 					break;
 				}
 			}
 		} catch( java.io.IOException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error parsing ASE: IOException caught at line " + tokenizer.lineno(), e );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.31") + tokenizer.lineno(), e ); //$NON-NLS-1$
 			return null;
 		} catch( InvalidFormatError e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error parsing ASE: Invalid Format: " + e.getMessage() + "; at line " + tokenizer.lineno(), e, false );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.32") + e.getMessage() + Messages.getString("ASEImporter.33") + tokenizer.lineno(), e, false ); //$NON-NLS-1$ //$NON-NLS-2$
 			return null;
 		}
 
@@ -143,7 +143,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				} else {
 					edu.cmu.cs.stage3.alice.core.Transformable parent = (edu.cmu.cs.stage3.alice.core.Transformable)namesToModels.get( parentString );
 					if( parent == null ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( model.name.getValue() + "'s parent (" + parentString + ") does not exist;  putting it at the top level...", null );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( model.name.getValue() + Messages.getString("ASEImporter.34") + parentString + Messages.getString("ASEImporter.35"), null ); //$NON-NLS-1$ //$NON-NLS-2$
 						rootModels.add( model );
 						model.isFirstClass.set( Boolean.TRUE );
 					} else {
@@ -158,7 +158,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			if( rootModels.size() == 1 ) {
 				element = (edu.cmu.cs.stage3.alice.core.Transformable)rootModels.get( 0 );
 			} else if( rootModels.size() > 1 ) {
-				if( importersConfig.getValue( "aseImporter.groupMultipleRootObjects" ).equalsIgnoreCase( "true" ) ) {
+				if( importersConfig.getValue( "aseImporter.groupMultipleRootObjects" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 					element = new edu.cmu.cs.stage3.alice.core.Model();
 					element.name.set( null );
 					element.isFirstClass.set( Boolean.TRUE );
@@ -186,7 +186,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			if( currentName == null ) {
 				element.name.set( plainName );
 			} else if( ! currentName.equalsIgnoreCase( plainName ) ) {
-				element.name.set( plainName + "_" + currentName );
+				element.name.set( plainName + "_" + currentName ); //$NON-NLS-1$
 			}
 
 			edu.cmu.cs.stage3.alice.core.Transformable dummyScene = new edu.cmu.cs.stage3.alice.core.Transformable();
@@ -194,12 +194,12 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				edu.cmu.cs.stage3.alice.core.Transformable trans = (edu.cmu.cs.stage3.alice.core.Transformable)element;
 				trans.vehicle.set( dummyScene );
 				currentObject = (String)trans.name.getValue();
-				currentlyLoading = "fixing transformations";
+				currentlyLoading = Messages.getString("ASEImporter.39"); //$NON-NLS-1$
 				fixTransformations( trans, dummyScene );
 				currentObject = (String)trans.name.getValue();
-				currentlyLoading = "fixing vertices";
+				currentlyLoading = Messages.getString("ASEImporter.40"); //$NON-NLS-1$
 				fixVertices( trans );
-				currentlyLoading = "<none>";
+				currentlyLoading = Messages.getString("ASEImporter.41"); //$NON-NLS-1$
 				trans.vehicle.set( null );
 				trans.localTransformation.set( edu.cmu.cs.stage3.math.MathUtilities.createIdentityMatrix4d() );
 			} else {
@@ -208,12 +208,12 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 					edu.cmu.cs.stage3.alice.core.Transformable trans = (edu.cmu.cs.stage3.alice.core.Transformable)children[i];
 					trans.vehicle.set( dummyScene );
 					currentObject = (String)trans.name.getValue();
-					currentlyLoading = "fixing transformations";
+					currentlyLoading = Messages.getString("ASEImporter.42"); //$NON-NLS-1$
 					fixTransformations( trans, dummyScene );
 					currentObject = (String)trans.name.getValue();
-					currentlyLoading = "fixing vertices";
+					currentlyLoading = Messages.getString("ASEImporter.43"); //$NON-NLS-1$
 					fixVertices( trans );
-					currentlyLoading = "<none>";
+					currentlyLoading = Messages.getString("ASEImporter.44"); //$NON-NLS-1$
 					trans.vehicle.set( null );
 				}
 			}
@@ -233,7 +233,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 						Material material = materials[materialIndex];
 						if( material != null ) {
 //							edu.cmu.cs.stage3.alice.scenegraph.Visual sgVisual = model.getSceneGraphVisual();
-							if( (material.diffuseTexture != null) && importersConfig.getValue( "aseImporter.colorToWhiteWhenTextured" ).equalsIgnoreCase( "true" ) ) {
+							if( (material.diffuseTexture != null) && importersConfig.getValue( "aseImporter.colorToWhiteWhenTextured" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 								model.ambientColor.set( edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE );
 								model.color.set( edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE );
 //								sgVisual.getFrontFacingAppearance().setAmbientColor( edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE );
@@ -244,7 +244,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 //								sgVisual.getFrontFacingAppearance().setAmbientColor( material.ambient );
 //								sgVisual.getFrontFacingAppearance().setDiffuseColor( material.diffuse );
 							}
-							if( importersConfig.getValue( "aseImporter.useSpecular" ).equalsIgnoreCase( "true" ) ) {
+							if( importersConfig.getValue( "aseImporter.useSpecular" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 								model.specularHighlightColor.set( material.specular );
 								model.specularHighlightExponent.set( new Double( material.shine + 1 ) ); // this is a kludge to get roughly the right shininess.  I don't have the MAX lighting equations...
 							}
@@ -255,7 +255,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 							model.bumpMap.set( material.bumpTexture );
 						}
 					} else if( materialIndex != -1 ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( model.name.getValue() + " referenced a material index out of range.  no material properties assigned.", null );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( model.name.getValue() + Messages.getString("ASEImporter.49"), null ); //$NON-NLS-1$
 					}
 				}
 			}
@@ -301,7 +301,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 							materialOwner.textureMaps.add( materials[i].bumpTexture );
 						}
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "ASEImporter Error: no materialOwner to attach textures to.", null );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.50"), null ); //$NON-NLS-1$
 					}
 				}
 			}
@@ -312,7 +312,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				edu.cmu.cs.stage3.alice.core.Transformable root = (edu.cmu.cs.stage3.alice.core.Transformable)iter.next();
 				//System.out.println( "root: " + root );
 				edu.cmu.cs.stage3.alice.core.response.DoTogether rootAnim = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
-				rootAnim.name.set( "keyframeAnimation" );
+				rootAnim.name.set( "keyframeAnimation" ); //$NON-NLS-1$
 				for( java.util.Iterator jter = models.iterator(); jter.hasNext(); ) {
 					edu.cmu.cs.stage3.alice.core.Transformable trans = (edu.cmu.cs.stage3.alice.core.Transformable)jter.next();
 					//System.out.println( "trans: " + trans );
@@ -326,7 +326,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 								edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse anim = (edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse)kter.next();
 								anim.duration.set( null );
 								String baseName = anim.name.getStringValue();
-								anim.name.set( prefix + "_" + baseName );
+								anim.name.set( prefix + "_" + baseName ); //$NON-NLS-1$
 								anim.subject.set( trans );
 								rootAnim.addChild( anim );
 								rootAnim.componentResponses.add( anim );
@@ -341,7 +341,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				}
 			}
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "An unexpected error occured while loading an ASE.", t );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.53"), t ); //$NON-NLS-1$
 		}
 
 		progressDialog.stop();
@@ -423,7 +423,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 		if( tokenizer.ttype == '"' ) {
 			return tokenizer.sval;
 		} else {
-			throw new InvalidFormatError( "String value expected" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.54") ); //$NON-NLS-1$
 		}
 	}
 
@@ -433,7 +433,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 		if( tokenizer.ttype == java.io.StreamTokenizer.TT_NUMBER ) {
 			return (int)tokenizer.nval;
 		} else {
-			throw new InvalidFormatError( "int value expected" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.55") ); //$NON-NLS-1$
 		}
 	}
 
@@ -443,7 +443,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 		if( tokenizer.ttype == java.io.StreamTokenizer.TT_NUMBER ) {
 			return tokenizer.nval;
 		} else {
-			throw new InvalidFormatError( "double value expected" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.56") ); //$NON-NLS-1$
 		}
 	}
 
@@ -453,7 +453,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 		if( tokenizer.ttype == java.io.StreamTokenizer.TT_NUMBER ) {
 			return (float)tokenizer.nval;
 		} else {
-			throw new InvalidFormatError( "double value expected" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.57") ); //$NON-NLS-1$
 		}
 	}
 
@@ -466,7 +466,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished block" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.58") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -480,19 +480,19 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *SCENE" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.59") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_FIRSTFRAME" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_FIRSTFRAME" ) ) { //$NON-NLS-1$
 				firstFrame = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_LASTFRAME" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_LASTFRAME" ) ) { //$NON-NLS-1$
 				lastFrame = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_FRAMESPEED" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_FRAMESPEED" ) ) { //$NON-NLS-1$
 				frameSpeed = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_TICKSPERFRAME" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*SCENE_TICKSPERFRAME" ) ) { //$NON-NLS-1$
 				ticksPerFrame = parseInt();
 			} else if( tokenizer.ttype == '}' ) {
 				try {
@@ -502,7 +502,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				}
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *SCENE" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.64") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -512,27 +512,27 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MATERIAL_LIST" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.65") ); //$NON-NLS-1$
 		}
 
 		currentProgress = 0;
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_COUNT" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_COUNT" ) ) { //$NON-NLS-1$
 				count = parseInt();
 				materials = new Material[count];
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL" ) ) { //$NON-NLS-1$
 				if( count < 1 ) {
-					throw new InvalidFormatError( "material declared before number of materials defined" );
+					throw new InvalidFormatError( Messages.getString("ASEImporter.68") ); //$NON-NLS-1$
 				}
 
 				parseMaterial();
-				currentObject = "<none>";
+				currentObject = Messages.getString("ASEImporter.69"); //$NON-NLS-1$
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH_VERTEX_LIST" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.70") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -544,47 +544,47 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MATERIAL <n>" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.71") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_NAME" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_NAME" ) ) { //$NON-NLS-1$
 				material.name = tokenizer.sval;
 				namesToMaterials.put( material.name, material );
 				currentObject = material.name;
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_AMBIENT" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_AMBIENT" ) ) { //$NON-NLS-1$
 				material.ambient = new edu.cmu.cs.stage3.alice.scenegraph.Color( parseDouble(), parseDouble(), parseDouble() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_DIFFUSE" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_DIFFUSE" ) ) { //$NON-NLS-1$
 				material.diffuse = new edu.cmu.cs.stage3.alice.scenegraph.Color( parseDouble(), parseDouble(), parseDouble() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_SPECULAR" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_SPECULAR" ) ) { //$NON-NLS-1$
 				material.specular = new edu.cmu.cs.stage3.alice.scenegraph.Color( parseDouble(), parseDouble(), parseDouble() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_SHINE" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_SHINE" ) ) { //$NON-NLS-1$
 				material.shine = parseDouble();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_SHINESTRENGTH" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_SHINESTRENGTH" ) ) { //$NON-NLS-1$
 				material.shinestrength = parseDouble();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_TRANSPARENCY" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_TRANSPARENCY" ) ) { //$NON-NLS-1$
 				material.transparency = parseDouble();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_AMBIENT" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_AMBIENT" ) ) { //$NON-NLS-1$
 				material.ambientTexture = parseMap();
 				currentObject = material.name;
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_DIFFUSE" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_DIFFUSE" ) ) { //$NON-NLS-1$
 				material.diffuseTexture = parseMap();
 				currentObject = material.name;
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_SHINE" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_SHINE" ) ) { //$NON-NLS-1$
 				material.shineTexture = parseMap();
 				currentObject = material.name;
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_SHINESTRENGTH" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_SHINESTRENGTH" ) ) { //$NON-NLS-1$
 				material.shineStrengthTexture = parseMap();
 				currentObject = material.name;
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_SELFILLUM" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_SELFILLUM" ) ) { //$NON-NLS-1$
 				material.selfIllumTexture = parseMap();
 				currentObject = material.name;
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_OPACITY" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_OPACITY" ) ) { //$NON-NLS-1$
 				material.opacityTexture = parseMap();
 				currentObject = material.name;
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_BUMP" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MAP_BUMP" ) ) { //$NON-NLS-1$
 				material.bumpTexture = parseMap();
 				currentObject = material.name;
 			} else if( tokenizer.ttype == '{' ) {
@@ -593,7 +593,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				materials[index] = material;
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MATERIAL" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.86") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -603,13 +603,13 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MAP_<map type>" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.87") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*BITMAP" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*BITMAP" ) ) { //$NON-NLS-1$
 				String filename = parseString();
 				currentObject = filename;
 
@@ -622,7 +622,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 					if( imageFile.canRead() ) {
 						bis = new java.io.BufferedInputStream( new java.io.FileInputStream( imageFile ) );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Cannot read from file \"" + filename + "\" specified on line " + tokenizer.lineno(), null, false );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.89") + filename + Messages.getString("ASEImporter.90") + tokenizer.lineno(), null, false ); //$NON-NLS-1$ //$NON-NLS-2$
 						continue;
 					}
 				} else {
@@ -636,11 +636,11 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 							if( imageFile.canRead() ) {
 								bis = new java.io.BufferedInputStream( new java.io.FileInputStream( imageFile ) );
 							} else {
-								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Cannot read from file \"" + filename + "\" specified on line " + tokenizer.lineno(), null, false );
+								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.91") + filename + Messages.getString("ASEImporter.92") + tokenizer.lineno(), null, false ); //$NON-NLS-1$ //$NON-NLS-2$
 								continue;
 							}
 						} else {
-							edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Unable to find file \"" + filename + "\" specified on line " + tokenizer.lineno(), null, false );
+							edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.93") + filename + Messages.getString("ASEImporter.94") + tokenizer.lineno(), null, false ); //$NON-NLS-1$ //$NON-NLS-2$
 							continue;
 						}
 					} else if( location instanceof java.net.URL ) {
@@ -651,39 +651,39 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 						for( int i = 0; i < chars.length; i++ ) {
 							char c = chars[i];
 							if( c == ' ' ) {
-								name.append( "%20" );
+								name.append( "%20" ); //$NON-NLS-1$
 							} else if( c == '#' ) {
-								name.append( "%23" );
+								name.append( "%23" ); //$NON-NLS-1$
 							} else if( c == ';' ) {
-								name.append( "%3B" );
+								name.append( "%3B" ); //$NON-NLS-1$
 							} else if( c == '@' ) {
-								name.append( "%40" );
+								name.append( "%40" ); //$NON-NLS-1$
 							} else if( c == '&' ) {
-								name.append( "%26" );
+								name.append( "%26" ); //$NON-NLS-1$
 							} else if( c == '=' ) {
-								name.append( "%3D" );
+								name.append( "%3D" ); //$NON-NLS-1$
 							} else if( c == '+' ) {
-								name.append( "%2B" );
+								name.append( "%2B" ); //$NON-NLS-1$
 							} else if( c == '$' ) {
-								name.append( "%24" );
+								name.append( "%24" ); //$NON-NLS-1$
 							} else if( c == ',' ) {
-								name.append( "%2C" );
+								name.append( "%2C" ); //$NON-NLS-1$
 							} else if( c == '%' ) {
-								name.append( "%25" );
+								name.append( "%25" ); //$NON-NLS-1$
 							} else if( c == '"' ) {
-								name.append( "%22" );
+								name.append( "%22" ); //$NON-NLS-1$
 							} else if( c == '{' ) {
-								name.append( "%7B" );
+								name.append( "%7B" ); //$NON-NLS-1$
 							} else if( c == '}' ) {
-								name.append( "%7D" );
+								name.append( "%7D" ); //$NON-NLS-1$
 							} else if( c == '^' ) {
-								name.append( "%5E" );
+								name.append( "%5E" ); //$NON-NLS-1$
 							} else if( c == '[' ) {
-								name.append( "%5B" );
+								name.append( "%5B" ); //$NON-NLS-1$
 							} else if( c == ']' ) {
-								name.append( "%5D" );
+								name.append( "%5D" ); //$NON-NLS-1$
 							} else if( c == '`' ) {
-								name.append( "%60" );
+								name.append( "%60" ); //$NON-NLS-1$
 							} else {
 								name.append( c );
 							}
@@ -692,23 +692,23 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 						url = new java.net.URL( url.toExternalForm() + name.toString() );
 						bis = new java.io.BufferedInputStream( url.openStream() );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "location is not a File or URL: " + location, null, false );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.112") + location, null, false ); //$NON-NLS-1$
 					}
 				}
 				if( bis == null ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "BufferedInputStream is null for " + filename, null );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.113") + filename, null ); //$NON-NLS-1$
 					continue;
 				}
 
 				String codec = edu.cmu.cs.stage3.image.ImageIO.mapExtensionToCodecName( extension );
 				if( codec == null ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Can't find appropriate codec for " + filename, null );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.114") + filename, null ); //$NON-NLS-1$
 					continue;
 				}
 
 				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load( codec, bis );
 				if( image == null ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Image loaded is null for " + filename, null );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ASEImporter.115") + filename, null ); //$NON-NLS-1$
 					continue;
 				}
 
@@ -727,7 +727,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return texture;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MAP_DIFFUSE" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.116") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -739,25 +739,25 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *HELPEROBJECT" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.117") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_NAME" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_NAME" ) ) { //$NON-NLS-1$
 				helper.name.set( parseString() );
 				namesToModels.put( helper.name.getValue(), helper );
 				currentObject = (String)helper.name.getValue();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_PARENT" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_PARENT" ) ) { //$NON-NLS-1$
 				modelsToParentStrings.put( helper, parseString() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_TM" ) ) {
-				currentlyLoading = "transformation";
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_TM" ) ) { //$NON-NLS-1$
+				currentlyLoading = Messages.getString("ASEImporter.121"); //$NON-NLS-1$
 				currentProgress = 0;
 				helper.localTransformation.set( parseTransformation() );
 				currentProgress = 0;
-				currentlyLoading = "<none>";
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ANIMATION" ) ) {
+				currentlyLoading = Messages.getString("ASEImporter.122"); //$NON-NLS-1$
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ANIMATION" ) ) { //$NON-NLS-1$
 				java.util.ArrayList anims = parseAnimationNode();
 				modelsToKeyframeAnims.put( helper, anims );
 			} else if( tokenizer.ttype == '{' ) {
@@ -765,7 +765,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *HELPEROBJECT" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.124") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -777,39 +777,39 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *GEOMOBJECT" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.125") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_NAME" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_NAME" ) ) { //$NON-NLS-1$
 				model.name.set( parseString() );
 				namesToModels.put( model.name.getValue(), model );
 				currentObject = (String)model.name.getValue();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_PARENT" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_PARENT" ) ) { //$NON-NLS-1$
 				modelsToParentStrings.put( model, parseString() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_TM" ) ) {
-				currentlyLoading = "transformation";
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*NODE_TM" ) ) { //$NON-NLS-1$
+				currentlyLoading = Messages.getString("ASEImporter.129"); //$NON-NLS-1$
 				currentProgress = 0;
 				model.localTransformation.set( parseTransformation() );
 				currentProgress = 0;
-				currentlyLoading = "<none>";
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH" ) ) {
-				currentlyLoading = "mesh";
+				currentlyLoading = Messages.getString("ASEImporter.130"); //$NON-NLS-1$
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH" ) ) { //$NON-NLS-1$
+				currentlyLoading = Messages.getString("ASEImporter.132"); //$NON-NLS-1$
 				currentProgress = 0;
 				model.geometry.set( parseMesh() );
 				model.geometry.getElementValue().setParent( model );
-				model.geometry.getElementValue().name.set( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( "__ita__", model ) );
+				model.geometry.getElementValue().name.set( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( "__ita__", model ) ); //$NON-NLS-1$
 				currentProgress = 0;
-				currentlyLoading = "<none>";
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*PROP_CASTSHADOW" ) ) {
+				currentlyLoading = Messages.getString("ASEImporter.134"); //$NON-NLS-1$
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*PROP_CASTSHADOW" ) ) { //$NON-NLS-1$
 				//TODO
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*PROP_RECVSHADOW" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*PROP_RECVSHADOW" ) ) { //$NON-NLS-1$
 				//TODO
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_REF" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MATERIAL_REF" ) ) { //$NON-NLS-1$
 				modelsToMaterialIndices.put( model, new Integer( parseInt() ) );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ANIMATION" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ANIMATION" ) ) { //$NON-NLS-1$
 				java.util.ArrayList anims = parseAnimationNode();
 				modelsToKeyframeAnims.put( model, anims );
 			} else if( tokenizer.ttype == '{' ) {
@@ -817,7 +817,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *GEOMOBJECT" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.139") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -828,25 +828,25 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *NODE_TM" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.140") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW0" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW0" ) ) { //$NON-NLS-1$
 				rot.m00 = parseDouble();
 				rot.m01 = parseDouble();
 				rot.m02 = parseDouble();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW1" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW1" ) ) { //$NON-NLS-1$
 				rot.m10 = parseDouble();
 				rot.m11 = parseDouble();
 				rot.m12 = parseDouble();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW2" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW2" ) ) { //$NON-NLS-1$
 				rot.m20 = parseDouble();
 				rot.m21 = parseDouble();
 				rot.m22 = parseDouble();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW3" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*TM_ROW3" ) ) { //$NON-NLS-1$
 				// X = -X, Y = Z, Z = -Y
 				m.m30 = -parseDouble();
 				m.m32 = -parseDouble();
@@ -877,7 +877,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				//m.makeAffine();  // should NOT be needed
 				return m;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *NODE_TM" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.145") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -897,69 +897,69 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MESH" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.146") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NUMVERTEX" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NUMVERTEX" ) ) { //$NON-NLS-1$
 				numVerts = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NUMFACES" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NUMFACES" ) ) { //$NON-NLS-1$
 				numFaces = parseInt();
 				coordIndices = new int[numFaces*3];
 				uvIndices = new int[numFaces*3];    // assuming same number of texture faces for now
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NUMTVERTEX" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NUMTVERTEX" ) ) { //$NON-NLS-1$
 				numUVs = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_VERTEX_LIST" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_VERTEX_LIST" ) ) { //$NON-NLS-1$
 				if( numVerts < 0 ) {
-					throw new InvalidFormatError( "illegal number of vertices defined or coordinates declared before number of vertices defined" );
+					throw new InvalidFormatError( Messages.getString("ASEImporter.151") ); //$NON-NLS-1$
 				}
 				coordinates = new double[numVerts*3];
 
-				currentlyLoading = "coordinates";
+				currentlyLoading = Messages.getString("ASEImporter.152"); //$NON-NLS-1$
 				progressDialog.setMax( numVerts );
 				parseVertexList( coordinates );
-				currentlyLoading = "mesh";
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TVERTLIST" ) ) {
+				currentlyLoading = Messages.getString("ASEImporter.153"); //$NON-NLS-1$
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TVERTLIST" ) ) { //$NON-NLS-1$
 				if( numUVs < 0 ) {
-					throw new InvalidFormatError( "uvs declared before number of texture vertices defined" );
+					throw new InvalidFormatError( Messages.getString("ASEImporter.155") ); //$NON-NLS-1$
 				}
 				uvs = new float[numUVs*2];
 
-				currentlyLoading = "uvs";
+				currentlyLoading = "uvs"; //$NON-NLS-1$
 				progressDialog.setMax( numUVs );
 				parseUVList( uvs );
-				currentlyLoading = "mesh";
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NORMALS" ) ) {
+				currentlyLoading = Messages.getString("ASEImporter.157"); //$NON-NLS-1$
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_NORMALS" ) ) { //$NON-NLS-1$
 				if( numVerts < 0 ) {
-					throw new InvalidFormatError( "normals declared before number of vertices defined" );
+					throw new InvalidFormatError( Messages.getString("ASEImporter.159") ); //$NON-NLS-1$
 				}
 				normals = new double[numFaces*3*3];
 
-				currentlyLoading = "normals";
+				currentlyLoading = Messages.getString("ASEImporter.160"); //$NON-NLS-1$
 				progressDialog.setMax( numFaces );
 				parseNormals( normals );
-				currentlyLoading = "mesh";
+				currentlyLoading = Messages.getString("ASEImporter.161"); //$NON-NLS-1$
 			//TODO vertex colors
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_FACE_LIST" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_FACE_LIST" ) ) { //$NON-NLS-1$
 				if( coordIndices == null ) {
-					throw new InvalidFormatError( "faces declared before number of faces defined" );
+					throw new InvalidFormatError( Messages.getString("ASEImporter.163") ); //$NON-NLS-1$
 				}
 
-				currentlyLoading = "coordinate indices";
+				currentlyLoading = Messages.getString("ASEImporter.164"); //$NON-NLS-1$
 				progressDialog.setMax( coordIndices.length/3 );
 				parseFaceList( coordIndices );
-				currentlyLoading = "mesh";
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TFACELIST" ) ) {
+				currentlyLoading = Messages.getString("ASEImporter.165"); //$NON-NLS-1$
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TFACELIST" ) ) { //$NON-NLS-1$
 				if( uvIndices == null ) {
-					throw new InvalidFormatError( "texture faces declared before number of faces defined" );
+					throw new InvalidFormatError( Messages.getString("ASEImporter.167") ); //$NON-NLS-1$
 				}
 
-				currentlyLoading = "texture indices";
+				currentlyLoading = Messages.getString("ASEImporter.168"); //$NON-NLS-1$
 				progressDialog.setMax( uvIndices.length/3 );
 				parseUVFaceList( uvIndices );
-				currentlyLoading = "mesh";
+				currentlyLoading = Messages.getString("ASEImporter.169"); //$NON-NLS-1$
 			} else if( tokenizer.ttype == '{' ) {
 				parseUnknownBlock();
 			} else if( tokenizer.ttype == '}' ) {
@@ -968,10 +968,10 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 					if( coordinates != null ) {
 						vertexFormat |= edu.cmu.cs.stage3.alice.scenegraph.Vertex3d.FORMAT_POSITION;
 					}
-					if( (normals != null) || importersConfig.getValue( "aseImporter.createNormalsIfNoneExist" ).equalsIgnoreCase( "true" ) ) {
+					if( (normals != null) || importersConfig.getValue( "aseImporter.createNormalsIfNoneExist" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 						vertexFormat |= edu.cmu.cs.stage3.alice.scenegraph.Vertex3d.FORMAT_NORMAL;
 					}
-					if( (uvs != null) || importersConfig.getValue( "aseImporter.createUVsIfNoneExist" ).equalsIgnoreCase( "true" ) ) {
+					if( (uvs != null) || importersConfig.getValue( "aseImporter.createUVsIfNoneExist" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 						vertexFormat |= edu.cmu.cs.stage3.alice.scenegraph.Vertex3d.FORMAT_TEXTURE_COORDINATE_0;
 					}
 					if( colors != null ) {
@@ -1011,14 +1011,14 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 					geometry.vertices.set( verts );
 					geometry.indices.set( indices );
 
-					if( (normals == null) && importersConfig.getValue( "aseImporter.createNormalsIfNoneExist" ).equalsIgnoreCase( "true" ) ) {
+					if( (normals == null) && importersConfig.getValue( "aseImporter.createNormalsIfNoneExist" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 						edu.cmu.cs.stage3.alice.gallery.ModelFixer.calculateNormals( geometry );
 					}
 				}
 
 				return geometry;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.176") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1026,14 +1026,14 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 	protected void parseVertexList( double[] coordinates ) throws InvalidFormatError, java.io.IOException {
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MESH_VERTEX_LIST" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.177") ); //$NON-NLS-1$
 		}
 
 		currentProgress = 0;
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_VERTEX" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_VERTEX" ) ) { //$NON-NLS-1$
 				int index = parseInt();
 				// X = -X, Y = Z, Z = -Y
 				coordinates[index*3 + 0] = -parseDouble();
@@ -1043,7 +1043,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH_VERTEX_LIST" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.179") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1051,14 +1051,14 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 	protected void parseUVList( float[] uvs ) throws InvalidFormatError, java.io.IOException {
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MESH_TVERTLIST" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.180") ); //$NON-NLS-1$
 		}
 
 		currentProgress = 0;
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TVERT" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TVERT" ) ) { //$NON-NLS-1$
 				int index = parseInt();
 				uvs[index*2 + 0] = parseFloat();
 				uvs[index*2 + 1] = parseFloat();
@@ -1066,7 +1066,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH_TVERTLIST" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.182") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1074,7 +1074,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 	protected void parseNormals( double[] normals ) throws InvalidFormatError, java.io.IOException {
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MESH_NORMALS" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.183") ); //$NON-NLS-1$
 		}
 
 		// this may not be exactly correct...
@@ -1084,7 +1084,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_VERTEXNORMAL" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_VERTEXNORMAL" ) ) { //$NON-NLS-1$
 				int index = parseInt();
 				int realv = v;
 				// reverse face order
@@ -1103,7 +1103,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH_NORMALS" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.185") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1115,20 +1115,20 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 	protected void parseFaceList( int[] indices ) throws InvalidFormatError, java.io.IOException {
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MESH_FACE_LIST" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.186") ); //$NON-NLS-1$
 		}
 
 		currentProgress = 0;
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_FACE" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_FACE" ) ) { //$NON-NLS-1$
 				parseMeshFace( indices );
 				currentProgress++;
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH_FACE_LIST" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.188") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1140,20 +1140,20 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			tokenizer.nextToken();
 
 			// reverse face order
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "A:" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "A:" ) ) { //$NON-NLS-1$
 				indices[index*3 + 0] = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "B:" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "B:" ) ) { //$NON-NLS-1$
 				indices[index*3 + 2] = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "C:" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "C:" ) ) { //$NON-NLS-1$
 				indices[index*3 + 1] = parseInt();
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_FACE" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_FACE" ) ) { //$NON-NLS-1$
 				tokenizer.pushBack();
 				return;
 			} else if( tokenizer.ttype == '}' ) {
 				tokenizer.pushBack();
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH_FACE" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.193") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1161,7 +1161,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 	protected void parseUVFaceList( int[] indices ) throws InvalidFormatError, java.io.IOException {
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *MESH_TFACELIST" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.194") ); //$NON-NLS-1$
 		}
 
 		currentProgress = 0;
@@ -1169,7 +1169,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			tokenizer.nextToken();
 
 			// reverse face order
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TFACE" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*MESH_TFACE" ) ) { //$NON-NLS-1$
 				int index = parseInt();
 				indices[index*3 + 0] = parseInt();
 				indices[index*3 + 2] = parseInt();
@@ -1178,7 +1178,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *MESH_TFACELIST" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.196") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1188,61 +1188,61 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *TM_ANIMATION" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.197") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_LINEAR" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_LINEAR" ) ) { //$NON-NLS-1$
 				anims.add( parseLinearPositionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_BEZIER" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_BEZIER" ) ) { //$NON-NLS-1$
 				anims.add( parseBezierPositionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_TCB" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_TCB" ) ) { //$NON-NLS-1$
 				anims.add( parseTCBPositionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_LINEAR" ) ) { // to the best of my knowledge, rotation animations are all handled by quaternion slerping
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_LINEAR" ) ) { // to the best of my knowledge, rotation animations are all handled by quaternion slerping //$NON-NLS-1$
 				anims.add( parseLinearQuaternionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_BEZIER" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_BEZIER" ) ) { //$NON-NLS-1$
 				anims.add( parseBezierQuaternionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_TCB" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_TCB" ) ) { //$NON-NLS-1$
 				anims.add( parseTCBQuaternionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_LINEAR" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_LINEAR" ) ) { //$NON-NLS-1$
 				//TODO
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_BEZIER" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_BEZIER" ) ) { //$NON-NLS-1$
 				//TODO
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_TCB" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_TCB" ) ) { //$NON-NLS-1$
 				//TODO
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_TRACK" ) ) { // sampled animations create CatmullRom based keyframe animations
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_TRACK" ) ) { // sampled animations create CatmullRom based keyframe animations //$NON-NLS-1$
 				anims.add( parseSampledPositionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_TRACK" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_TRACK" ) ) { //$NON-NLS-1$
 				anims.add( parseSampledQuaternionAnimation() );
-			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_TRACK" ) ) {
+			} else if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_TRACK" ) ) { //$NON-NLS-1$
 				//TODO
 			} else if( tokenizer.ttype == '{' ) {
 				parseUnknownBlock();
 			} else if( tokenizer.ttype == '}' ) {
 				return anims;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *TM_ANIMATION" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.210") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseLinearPositionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse();
-		keyframeResponse.name.set( "linearPositionKeyframeAnim" );
+		keyframeResponse.name.set( "linearPositionKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.LinearSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.LinearSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_POS_LINEAR" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.212") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_KEY" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1253,26 +1253,26 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_POS_LINEAR" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.214") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseBezierPositionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse();
-		keyframeResponse.name.set( "bezierPositionKeyframeAnim" );
+		keyframeResponse.name.set( "bezierPositionKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.BezierSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.BezierSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_POS_BEZIER" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.216") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_BEZIER_POS_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_BEZIER_POS_KEY" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1290,26 +1290,26 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				spline.convertMAXTangentsToBezierTangents( timeScaleFactor );
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_POS_BEZIER" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.218") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseTCBPositionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse();
-		keyframeResponse.name.set( "tcbPositionKeyframeAnim" );
+		keyframeResponse.name.set( "tcbPositionKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.TCBSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.TCBSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_POS_TCB" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.220") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_TCB_POS_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_TCB_POS_KEY" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1325,26 +1325,26 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_POS_TCB" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.222") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseLinearQuaternionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse();
-		keyframeResponse.name.set( "quaternionKeyframeAnim" );
+		keyframeResponse.name.set( "quaternionKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionSlerpSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionSlerpSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_ROT_LINEAR" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.224") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_KEY" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1356,26 +1356,26 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_ROT_LINEAR" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.226") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseBezierQuaternionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse();
-		keyframeResponse.name.set( "quaternionKeyframeAnim" );
+		keyframeResponse.name.set( "quaternionKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionSlerpSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionSlerpSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_ROT_BEZIER" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.228") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_KEY" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1387,26 +1387,26 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_ROT_BEZIER" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.230") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseTCBQuaternionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse();
-		keyframeResponse.name.set( "tcbQuaternionKeyframeAnim" );
+		keyframeResponse.name.set( "tcbQuaternionKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.TCBSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.TCBSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_ROT_TCB" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.232") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_TCB_ROT_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_TCB_ROT_KEY" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1424,99 +1424,99 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				spline.correctForMAXRelativeKeys();
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_ROT_TCB" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.234") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseLinearScaleAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse();
-		keyframeResponse.name.set( "linearScaleKeyframeAnim" );
+		keyframeResponse.name.set( "linearScaleKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.LinearSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.LinearSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_SCALE_LINEAR" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.236") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_SCALE_KEY" ) ) { //$NON-NLS-1$
 				//TODO
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_SCALE_LINEAR" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.238") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseBezierScaleAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse();
-		keyframeResponse.name.set( "bezierScaleKeyframeAnim" );
+		keyframeResponse.name.set( "bezierScaleKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.BezierSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.BezierSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_SCALE_BEZIER" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.240") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_BEZIER_SCALE_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_BEZIER_SCALE_KEY" ) ) { //$NON-NLS-1$
 				//TODO
 			} else if( tokenizer.ttype == '}' ) {
 				spline.convertMAXTangentsToBezierTangents( timeScaleFactor );
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_SCALE_BEZIER" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.242") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseTCBScaleAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse();
-		keyframeResponse.name.set( "tcbScaleKeyframeAnim" );
+		keyframeResponse.name.set( "tcbScaleKeyframeAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.TCBSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.TCBSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_SCALE_TCB" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.244") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_TCB_SCALE_KEY" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_TCB_SCALE_KEY" ) ) { //$NON-NLS-1$
 				//TODO
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_SCALE_TCB" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.246") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseSampledPositionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse();
-		keyframeResponse.name.set( "sampledPositionAnim" );
+		keyframeResponse.name.set( "sampledPositionAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.CatmullRomSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.CatmullRomSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_POS_TRACK" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.248") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_SAMPLE" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_POS_SAMPLE" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1527,26 +1527,26 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_POS_TRACK" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.250") ); //$NON-NLS-1$
 			}
 		}
 	}
 
 	protected edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse parseSampledQuaternionAnimation() throws InvalidFormatError, java.io.IOException {
 		edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse keyframeResponse = new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse();
-		keyframeResponse.name.set( "sampledQuaternionAnim" );
+		keyframeResponse.name.set( "sampledQuaternionAnim" ); //$NON-NLS-1$
 		edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionSlerpSpline spline = new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionSlerpSpline();
 		keyframeResponse.spline.set( spline );
 
 		tokenizer.nextToken();
 		if( tokenizer.ttype != '{' ) {
-			throw new InvalidFormatError( "Block expected after *CONTROL_ROT_TRACK" );
+			throw new InvalidFormatError( Messages.getString("ASEImporter.252") ); //$NON-NLS-1$
 		}
 
 		while( true ) {
 			tokenizer.nextToken();
 
-			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_SAMPLE" ) ) {
+			if( (tokenizer.sval != null) && tokenizer.sval.equalsIgnoreCase( "*CONTROL_ROT_SAMPLE" ) ) { //$NON-NLS-1$
 				double time = parseDouble()*timeScaleFactor;
 				// don't forget to convert MAX's coordinate system...
 				// X = -X, Y = Z, Z = -Y
@@ -1559,7 +1559,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				spline.correctForMAXRelativeKeys();
 				return keyframeResponse;
 			} else if( tokenizer.ttype == java.io.StreamTokenizer.TT_EOF ) {
-				throw new InvalidFormatError( "unfinished *CONTROL_ROT_TRACK" );
+				throw new InvalidFormatError( Messages.getString("ASEImporter.254") ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -1571,15 +1571,15 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 	}
 
 	class ProgressDialog extends javax.swing.JDialog {
-		protected javax.swing.JLabel linesLabel = new javax.swing.JLabel( "Lines read: 0" );
-		protected javax.swing.JLabel objectLabel = new javax.swing.JLabel( "Object: <none>" );
-		protected javax.swing.JLabel progressLabel = new javax.swing.JLabel( "Loading <none>: " );
+		protected javax.swing.JLabel linesLabel = new javax.swing.JLabel( Messages.getString("ASEImporter.255") ); //$NON-NLS-1$
+		protected javax.swing.JLabel objectLabel = new javax.swing.JLabel( Messages.getString("ASEImporter.256") ); //$NON-NLS-1$
+		protected javax.swing.JLabel progressLabel = new javax.swing.JLabel( Messages.getString("ASEImporter.257") ); //$NON-NLS-1$
 		protected javax.swing.JProgressBar progressBar = new javax.swing.JProgressBar();
 		protected javax.swing.JPanel progressPanel = new javax.swing.JPanel();
 		protected javax.swing.Timer timer = null;
 
 		public ProgressDialog() {
-			super( (java.awt.Frame)null, "Importing...", false );
+			super( (java.awt.Frame)null, Messages.getString("ASEImporter.258"), false ); //$NON-NLS-1$
 
 			progressBar.setMinimum( 0 );
 			linesLabel.setAlignmentX( 0.0f );
@@ -1600,9 +1600,9 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			timer = new javax.swing.Timer( 100,
 				new java.awt.event.ActionListener() {
 					public void actionPerformed( java.awt.event.ActionEvent ev ) {
-						linesLabel.setText( "Lines read: " + ASEImporter.this.tokenizer.lineno() );
-						objectLabel.setText( "Object: " + ASEImporter.this.currentObject );
-						progressLabel.setText( "Loading " + ASEImporter.this.currentlyLoading + ": " );
+						linesLabel.setText( Messages.getString("ASEImporter.259") + ASEImporter.this.tokenizer.lineno() ); //$NON-NLS-1$
+						objectLabel.setText( Messages.getString("ASEImporter.260") + ASEImporter.this.currentObject ); //$NON-NLS-1$
+						progressLabel.setText( Messages.getString("ASEImporter.261") + ASEImporter.this.currentlyLoading + ": " ); //$NON-NLS-1$ //$NON-NLS-2$
 						progressBar.setValue( ASEImporter.this.currentProgress );
 					}
 				}

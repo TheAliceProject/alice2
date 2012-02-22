@@ -64,15 +64,15 @@ public class Sound extends SimpleSound
   
 public String toString()
   {
-    String output = "Sound";
+    String output = "Sound"; //$NON-NLS-1$
     String fileName = getFileName();
     
     // if there is a file name then add that to the output
     if (fileName != null)
-      output = output + " file: " + fileName;
+      output = output + Messages.getString("Sound.1") + fileName; //$NON-NLS-1$
     
     // add the length in frames
-    output = output + " number of samples: " + getLengthInFrames();
+    output = output + Messages.getString("Sound.2") + getLengthInFrames(); //$NON-NLS-1$
     
     return output;
   }

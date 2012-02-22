@@ -63,7 +63,7 @@ public class ResizeMode extends RenderTargetManipulatorMode {
 			}
 
 			if( pickedTransformable.poses.size() > 0 ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "Warning: resizing objects with poses may make those poses unusable.", "Pose warning", javax.swing.JOptionPane.WARNING_MESSAGE );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ResizeMode.0"), Messages.getString("ResizeMode.1"), javax.swing.JOptionPane.WARNING_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}

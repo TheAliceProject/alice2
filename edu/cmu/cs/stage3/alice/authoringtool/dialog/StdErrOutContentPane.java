@@ -49,11 +49,11 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 		public void insertUpdate( final javax.swing.event.DocumentEvent ev ) {
 			try{	
 				lastError = ev.getDocument().getText(ev.getOffset(), ev.getLength());
-				if (lastError.startsWith("  Unable to handle format") == true){
-					lastError = "\n\nYour sound file cannot be played in Alice.\n"+
-						"Please find an audio editor to convert the file to one with a PCM encoding.\n"+
-						"See the tutorial on converting sound files at our Alice website.\n" +
-						"Right click to clear the messages here.\n\n" + lastError;
+				if (lastError.startsWith(Messages.getString("StdErrOutContentPane.0")) == true){ //$NON-NLS-1$
+					lastError = Messages.getString("StdErrOutContentPane.1")+ //$NON-NLS-1$
+						Messages.getString("StdErrOutContentPane.2")+ //$NON-NLS-1$
+						Messages.getString("StdErrOutContentPane.3") + //$NON-NLS-1$
+						Messages.getString("StdErrOutContentPane.4") + lastError; //$NON-NLS-1$
 				}
 				detailTextPane.getDocument().insertString(detailTextPane.getDocument().getLength(), lastError, detailTextPane.stdErrStyle);
 			}catch (Exception e){}
@@ -107,7 +107,7 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 
 	public StdErrOutContentPane( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool ) {
 		super();
-		titleString =  "Alice - Error Console";
+		titleString =  Messages.getString("StdErrOutContentPane.5"); //$NON-NLS-1$
 		this.authoringTool = authoringTool;
 		this.errOutputComponent = authoringTool.getStdErrOutputComponent();
 		this.stdOutputComponent = authoringTool.getStdOutOutputComponent();
@@ -117,8 +117,8 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 	}
 	
 	protected void writeGenericAliceHeaderToTextPane() {
-		detailTextPane.setText( "" );
-		detailStream.println( "Alice version: " + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() );
+		detailTextPane.setText( "" ); //$NON-NLS-1$
+		detailStream.println( Messages.getString("StdErrOutContentPane.7") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() ); //$NON-NLS-1$
 		//String[] systemProperties = { "os.name", "os.version", "os.arch", "java.vm.name", "java.vm.version", "user.dir" };
 		//for( int i = 0; i < systemProperties.length; i++ ) {
 		//	detailStream.println( systemProperties[i] + ": " + System.getProperty( systemProperties[i] ) );
@@ -191,24 +191,24 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 		
 		
 		if (errorContentAdded){
-			messageLabel.setText("Something bad has occurred.");
+			messageLabel.setText(Messages.getString("StdErrOutContentPane.8")); //$NON-NLS-1$
 		} else if (textContentAdded){
-			messageLabel.setText("Nothing bad has occurred.");
+			messageLabel.setText(Messages.getString("StdErrOutContentPane.9")); //$NON-NLS-1$
 		} else{
-			messageLabel.setText("Nothing bad has occurred.");
+			messageLabel.setText(Messages.getString("StdErrOutContentPane.10")); //$NON-NLS-1$
 		}
 	}
 
 	
 	protected void setLessDetail(){
 		super.setLessDetail();
-		messageLabel.setText("An unknown error has occurred.");
+		messageLabel.setText(Messages.getString("StdErrOutContentPane.11")); //$NON-NLS-1$
 	}
 	
 	
 	protected void setMoreDetail(){
 		super.setMoreDetail();
-		messageLabel.setText("An unknown error has occurred.");
+		messageLabel.setText(Messages.getString("StdErrOutContentPane.12")); //$NON-NLS-1$
 	}
 	
 
@@ -221,7 +221,7 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 		} else if (mode == HISTORY_MODE){
 			setHistoryDetail();
 		}  else {
-			throw new IllegalArgumentException( "Illegal mode: " + mode );
+			throw new IllegalArgumentException( Messages.getString("StdErrOutContentPane.13") + mode ); //$NON-NLS-1$
 		}
 		packDialog();
 	}

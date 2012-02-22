@@ -27,9 +27,9 @@ import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
 
 public abstract class AbstractPointAtAnimation extends OrientationAnimation {
-	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null );
-	public final Vector3Property offset = new Vector3Property( this, "offset", null );
-	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null );
+	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); //$NON-NLS-1$
+	public final Vector3Property offset = new Vector3Property( this, "offset", null ); //$NON-NLS-1$
+	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null ); //$NON-NLS-1$
 
 	public abstract class RuntimeAbstractPointAtAnimation extends RuntimeOrientationAnimation {
 		protected edu.cmu.cs.stage3.alice.core.ReferenceFrame m_target;
@@ -62,13 +62,13 @@ public abstract class AbstractPointAtAnimation extends OrientationAnimation {
 			m_upGuide = getUpguide();
 			m_onlyAffectYaw = onlyAffectYaw();
             if( m_target == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "target value must not be null.", null, AbstractPointAtAnimation.this.target );
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtAnimation.3"), null, AbstractPointAtAnimation.this.target ); //$NON-NLS-1$
             }
             if( m_target == m_subject ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "target value must not be equal to the subject value.", getCurrentStack(), AbstractPointAtAnimation.this.target );            
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtAnimation.4"), getCurrentStack(), AbstractPointAtAnimation.this.target );             //$NON-NLS-1$
             }
             if ( (m_onlyAffectYaw) && (m_subject.isAncestorOf(m_target))) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " can't turn to face or turn away from a part of itself.", getCurrentStack(), AbstractPointAtAnimation.this.target );            
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("AbstractPointAtAnimation.5"), getCurrentStack(), AbstractPointAtAnimation.this.target );             //$NON-NLS-1$
             }
 		}
 		protected edu.cmu.cs.stage3.math.Matrix33 getTargetMatrix33() {

@@ -20,7 +20,7 @@ public class SimpleOutput
   public static void showWarning(String message)
   {
     message = addNewLines(message);
-    JOptionPane.showMessageDialog(null,message,"Warning Display",
+    JOptionPane.showMessageDialog(null,message,Messages.getString("SimpleOutput.0"), //$NON-NLS-1$
                                   JOptionPane.WARNING_MESSAGE);
   }
   
@@ -31,7 +31,7 @@ public class SimpleOutput
   public static void showError(String message)
   {
     message = addNewLines(message);
-    JOptionPane.showMessageDialog(null,message,"Error Display",
+    JOptionPane.showMessageDialog(null,message,Messages.getString("SimpleOutput.1"), //$NON-NLS-1$
                                   JOptionPane.ERROR_MESSAGE);
   }
   
@@ -42,7 +42,7 @@ public class SimpleOutput
   public static void showInformation(String message)
   {
     message = addNewLines(message);
-    JOptionPane.showMessageDialog(null, message, "Information Display",
+    JOptionPane.showMessageDialog(null, message, Messages.getString("SimpleOutput.2"), //$NON-NLS-1$
                                   JOptionPane.INFORMATION_MESSAGE);
   }
   
@@ -58,8 +58,8 @@ public class SimpleOutput
       BreakIterator.getLineInstance();
     boundary.setText(message);
     int start = boundary.first();
-    String result = "";
-    String currLine = "";
+    String result = ""; //$NON-NLS-1$
+    String currLine = ""; //$NON-NLS-1$
     String temp = null;
     
     // loop till no more possible line breaks
@@ -77,7 +77,7 @@ public class SimpleOutput
        */
       if (temp.length() + currLine.length() > 100)
       {
-        result = result + currLine + "\n";
+        result = result + currLine + "\n"; //$NON-NLS-1$
         currLine = temp;
       }
       // else add the segment to the current line

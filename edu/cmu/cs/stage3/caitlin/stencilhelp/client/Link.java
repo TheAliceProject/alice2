@@ -21,7 +21,7 @@ public class Link implements StencilObject, MouseEventListener {
   protected RoundRectangle2D.Double underLink;
   protected RoundRectangle2D.Double bgLink;
   protected Shape messageShape = null;
-  private Font font = new Font("Arial", 1, 16);
+  private Font font = new Font("Arial", 1, 16); //$NON-NLS-1$
   protected boolean isModified = true;
 
   protected Vector shapes = null;
@@ -34,8 +34,8 @@ public class Link implements StencilObject, MouseEventListener {
     shapes = new Vector();
 
     if (next) {
-      message = "Load Next Chapter";
-    } else message = "Reload Last Chapter";
+      message = Messages.getString("Link.1"); //$NON-NLS-1$
+    } else message = Messages.getString("Link.2"); //$NON-NLS-1$
 
     createShapes();
   }

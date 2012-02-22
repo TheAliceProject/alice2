@@ -72,12 +72,12 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 	protected edu.cmu.cs.stage3.alice.core.event.PropertyListener nameListener = new edu.cmu.cs.stage3.alice.core.event.PropertyListener() {
 		public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {}
 		public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
-			DragFromComponent.this.ownerLabel.setText( ev.getValue().toString() + "'s details" );
+			DragFromComponent.this.ownerLabel.setText( ev.getValue().toString() + Messages.getString("DragFromComponent.0") ); //$NON-NLS-1$
 		}
 	};
-	protected javax.swing.JButton newAnimationButton = new javax.swing.JButton( "create new method" );
-	protected javax.swing.JButton newQuestionButton = new javax.swing.JButton( "create new "+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING );
-	protected javax.swing.JButton capturePoseButton = new javax.swing.JButton( "capture pose" );
+	protected javax.swing.JButton newAnimationButton = new javax.swing.JButton( Messages.getString("DragFromComponent.1") ); //$NON-NLS-1$
+	protected javax.swing.JButton newQuestionButton = new javax.swing.JButton( Messages.getString("DragFromComponent.2")+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING ); //$NON-NLS-1$
+	protected javax.swing.JButton capturePoseButton = new javax.swing.JButton( Messages.getString("DragFromComponent.3") ); //$NON-NLS-1$
 	protected edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse newlyCreatedAnimation;
 	protected edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion newlyCreatedQuestion;
 	protected edu.cmu.cs.stage3.alice.core.Pose newlyCreatedPose;
@@ -95,7 +95,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		newQuestionContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewQuestionContentPane();
 		soundsPanel =  new edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.SoundsPanel( authoringTool );
 		textureMapsPanel =  new edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.TextureMapsPanel( authoringTool );
-		miscPanel = new edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ObjectArrayPropertyPanel( "Misc", authoringTool );
+		miscPanel = new edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ObjectArrayPropertyPanel( Messages.getString("DragFromComponent.4"), authoringTool ); //$NON-NLS-1$
 		jbInit();
 		guiInit();
 	}
@@ -159,7 +159,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 						try {
 							edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)poses.getOwner(); 
 							edu.cmu.cs.stage3.alice.core.Pose pose = edu.cmu.cs.stage3.alice.core.Pose.manufacturePose( transformable, transformable );
-							pose.name.set( AuthoringToolResources.getNameForNewChild( "pose", poses.getOwner() ) );
+							pose.name.set( AuthoringToolResources.getNameForNewChild( "pose", poses.getOwner() ) ); //$NON-NLS-1$
 							poses.getOwner().addChild( pose );
 							poses.add( pose );
 						} finally {
@@ -186,15 +186,15 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 
 		// tooltips
 		String cappedQuestionString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(0,1).toUpperCase()+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(1);
-		comboPanel.setToolTipText( "<html><font face=arial size=-1>This area displays the details<p>of the Selected Object.</font></html>" );
-		tabbedPane.setToolTipTextAt( PROPERTIES_TAB, "<html><font face=arial size=-1>Open the Properties Tab<p>of the Selected Object.<p><p>Use this tab to view and edit<p>the Properties of the Selected Object.</font></html>" );
-		tabbedPane.setToolTipTextAt( ANIMATIONS_TAB, "<html><font face=arial size=-1>Open the Methods Tab<p>of the Selected Object.<p><p>Use this tab to view and edit<p>the Methods of the Selected Object.</font></html>" );
-		tabbedPane.setToolTipTextAt( QUESTIONS_TAB, "<html><font face=arial size=-1>Open the "+cappedQuestionString+"s"+" Tab<p>of the Selected Object.<p><p>Use this tab to view and edit<p>the "+cappedQuestionString+"s"+" of the Selected Object.</font></html>" );
-		newAnimationButton.setToolTipText( "<html><font face=arial size=-1>Create a New Blank Method<p>and Open it for Editing.</font></html>" );
-		newQuestionButton.setToolTipText( "<html><font face=arial size=-1>Create a New Blank "+cappedQuestionString+"<p>and Open it for Editing.</font></html>" );
-		propertiesPanel.setToolTipText( "<html><font face=arial size=-1>Properties Tab<p><p>This tab allows you to view and edit<p>the Properties of the Selected Object.</font></html>" );
-		animationsPanel.setToolTipText( "<html><font face=arial size=-1>Methods Tab<p><p>Methods are the actions that an object knows how to do.<p>Most objects come with default methods, and you can<p>create your own methods as well.</font></html>" );
-		questionsPanel.setToolTipText( "<html><font face=arial size=-1>"+cappedQuestionString+"s"+" Tab<p><p>"+cappedQuestionString+"s"+" are the things that an object can<p>answer about themselves or the world.</font></html>" );
+		comboPanel.setToolTipText( Messages.getString("DragFromComponent.6") ); //$NON-NLS-1$
+		tabbedPane.setToolTipTextAt( PROPERTIES_TAB, Messages.getString("DragFromComponent.7") ); //$NON-NLS-1$
+		tabbedPane.setToolTipTextAt( ANIMATIONS_TAB, Messages.getString("DragFromComponent.8") ); //$NON-NLS-1$
+		tabbedPane.setToolTipTextAt( QUESTIONS_TAB, Messages.getString("DragFromComponent.9")+cappedQuestionString+"s"+Messages.getString("DragFromComponent.11")+cappedQuestionString+"s"+Messages.getString("DragFromComponent.13") ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		newAnimationButton.setToolTipText( Messages.getString("DragFromComponent.14") ); //$NON-NLS-1$
+		newQuestionButton.setToolTipText( Messages.getString("DragFromComponent.15")+cappedQuestionString+Messages.getString("DragFromComponent.16") ); //$NON-NLS-1$ //$NON-NLS-2$
+		propertiesPanel.setToolTipText( Messages.getString("DragFromComponent.17") ); //$NON-NLS-1$
+		animationsPanel.setToolTipText( Messages.getString("DragFromComponent.18") ); //$NON-NLS-1$
+		questionsPanel.setToolTipText( "<html><font face=arial size=-1>"+cappedQuestionString+"s"+Messages.getString("DragFromComponent.21")+cappedQuestionString+"s"+Messages.getString("DragFromComponent.23") ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 	}
 
 	public void paintComponent( java.awt.Graphics g ) {
@@ -254,18 +254,18 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		this.element = element;
 
 		if( element != null ) {
-			ownerLabel.setText( AuthoringToolResources.getReprForValue( element ) + "'s details" );
+			ownerLabel.setText( AuthoringToolResources.getReprForValue( element ) + Messages.getString("DragFromComponent.24") ); //$NON-NLS-1$
 			if( element.getParent() != null ) {
 				element.getParent().addChildrenListener( parentListener );
 			}
 			element.name.addPropertyListener( nameListener );
 			if( element.getSandbox() == element ) { //HACK: only show user-defined stuff for sandboxes
-				vars = (edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)element.getPropertyNamed( "variables" );
-				responses = (edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)element.getPropertyNamed( "responses" );
+				vars = (edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)element.getPropertyNamed( "variables" ); //$NON-NLS-1$
+				responses = (edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)element.getPropertyNamed( "responses" ); //$NON-NLS-1$
 				if( responses != null ) {
 					responses.addObjectArrayPropertyListener( responsesListener );
 				}
-				questions = (edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)element.getPropertyNamed( "questions" );
+				questions = (edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)element.getPropertyNamed( "questions" ); //$NON-NLS-1$
 				if( questions != null ) {
 					questions.addObjectArrayPropertyListener( questionsListener );
 				}
@@ -277,7 +277,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 				}
 			}
 		} else {
-			ownerLabel.setText( "" );
+			ownerLabel.setText( "" ); //$NON-NLS-1$
 		}
 
 		int selectedIndex = tabbedPane.getSelectedIndex();
@@ -296,41 +296,41 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 	public String getKeyForComponent( java.awt.Component c ) {
 		edu.cmu.cs.stage3.alice.core.World world = authoringTool.getWorld();
 		if( c == variableGroupEditor.getNewVariableButton() ) {
-			return "newVariableButton";
+			return "newVariableButton"; //$NON-NLS-1$
 		} else if( c == newAnimationButton ) {
-			return "newAnimationButton";
+			return "newAnimationButton"; //$NON-NLS-1$
 		} else if( c == newQuestionButton ) {
-			return "newQuestionButton";
+			return "newQuestionButton"; //$NON-NLS-1$
 		} else if( c instanceof edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel ) {
 			try {
 				java.awt.datatransfer.Transferable transferable = ((edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel)c).getTransferable();
 				if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, ElementReferenceTransferable.variableReferenceFlavor ) ) {
 					edu.cmu.cs.stage3.alice.core.Variable v = (edu.cmu.cs.stage3.alice.core.Variable)transferable.getTransferData( ElementReferenceTransferable.variableReferenceFlavor );
-					return "variable<" + v.getKey( world ) + ">";
+					return "variable<" + v.getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, ElementReferenceTransferable.textureMapReferenceFlavor ) ) {
 					edu.cmu.cs.stage3.alice.core.TextureMap t = (edu.cmu.cs.stage3.alice.core.TextureMap)transferable.getTransferData( ElementReferenceTransferable.textureMapReferenceFlavor );
-					return "textureMap<" + t.getKey( world ) + ">";
+					return "textureMap<" + t.getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.Sound.class ) ) ) {
 					edu.cmu.cs.stage3.alice.core.Sound s = (edu.cmu.cs.stage3.alice.core.Sound)transferable.getTransferData( AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.Sound.class ) );
-					return "sound<" + s.getKey( world ) + ">";
+					return "sound<" + s.getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, ElementReferenceTransferable.elementReferenceFlavor ) ) {
 					edu.cmu.cs.stage3.alice.core.Element e = (edu.cmu.cs.stage3.alice.core.Element)transferable.getTransferData( ElementReferenceTransferable.elementReferenceFlavor );
-					return "misc<" + e.getKey( world ) + ">";
+					return "misc<" + e.getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.PropertyReferenceTransferable.propertyReferenceFlavor ) ) {
 					edu.cmu.cs.stage3.alice.core.Property p = (edu.cmu.cs.stage3.alice.core.Property)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.PropertyReferenceTransferable.propertyReferenceFlavor );
-					return "property<" + p.getName() + ">";
+					return "property<" + p.getName() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CallToUserDefinedResponsePrototypeReferenceTransferable.callToUserDefinedResponsePrototypeReferenceFlavor ) ) {
 					edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype p = (edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CallToUserDefinedResponsePrototypeReferenceTransferable.callToUserDefinedResponsePrototypeReferenceFlavor );
-					return "userDefinedResponse<" + p.getActualResponse().getKey( world ) + ">";
+					return "userDefinedResponse<" + p.getActualResponse().getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CallToUserDefinedQuestionPrototypeReferenceTransferable.callToUserDefinedQuestionPrototypeReferenceFlavor ) ) {
 					edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedQuestionPrototype p = (edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedQuestionPrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CallToUserDefinedQuestionPrototypeReferenceTransferable.callToUserDefinedQuestionPrototypeReferenceFlavor );
-					return "userDefinedQuestion<" + p.getActualQuestion().getKey( world ) + ">";
+					return "userDefinedQuestion<" + p.getActualQuestion().getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor ) ) {
 					edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype p = (edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor );
 					if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( p.getElementClass() ) ) {
-						return "responsePrototype<" + p.getElementClass().getName() + ">";
+						return "responsePrototype<" + p.getElementClass().getName() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 					} else if( edu.cmu.cs.stage3.alice.core.Question.class.isAssignableFrom( p.getElementClass() ) ) {
-						return "questionPrototype<" + p.getElementClass().getName() + ">";
+						return "questionPrototype<" + p.getElementClass().getName() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 					} else {
 						return null;
 					}
@@ -338,14 +338,14 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					return null;
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( "Error examining DnDGroupingPanel.", e );
+				AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.50"), e ); //$NON-NLS-1$
 				return null;
 			}
 		} else if( c instanceof edu.cmu.cs.stage3.alice.authoringtool.util.EditObjectButton ) {
 			Object o = ((edu.cmu.cs.stage3.alice.authoringtool.util.EditObjectButton)c).getObject();
 			if( o instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 				edu.cmu.cs.stage3.alice.core.Element e = (edu.cmu.cs.stage3.alice.core.Element)o;
-				return "editObjectButton<" + e.getKey( world ) + ">";
+				return "editObjectButton<" + e.getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				return null;
 			}
@@ -358,63 +358,63 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		String prefix = AuthoringToolResources.getPrefix( key );
 		String spec = AuthoringToolResources.getSpecifier( key );
 		edu.cmu.cs.stage3.alice.core.World world = authoringTool.getWorld();
-		if( key.equals( "newVariableButton" ) ) {
+		if( key.equals( "newVariableButton" ) ) { //$NON-NLS-1$
 			return variableGroupEditor.getNewVariableButton();
-		} else if( key.equals( "newAnimationButton" ) ) {
+		} else if( key.equals( "newAnimationButton" ) ) { //$NON-NLS-1$
 			return newAnimationButton;
-		} else if( key.equals( "newQuestionButton" ) ) {
+		} else if( key.equals( "newQuestionButton" ) ) { //$NON-NLS-1$
 			return newQuestionButton;
-		} else if( prefix.equals( "variable" ) && (spec != null) ) {
+		} else if( prefix.equals( "variable" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				return AuthoringToolResources.findElementDnDPanel( variableGroupEditor, e );
 			}
-		} else if( prefix.equals( "textureMap" ) && (spec != null) ) {
+		} else if( prefix.equals( "textureMap" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				return AuthoringToolResources.findElementDnDPanel( textureMapsPanel, e );
 			}
-		} else if( prefix.equals( "sound" ) && (spec != null) ) {
+		} else if( prefix.equals( "sound" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				return AuthoringToolResources.findElementDnDPanel( soundsPanel, e );
 			}
-		} else if( prefix.equals( "misc" ) && (spec != null) ) {
+		} else if( prefix.equals( "misc" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				return AuthoringToolResources.findElementDnDPanel( miscPanel, e );
 			}
-		} else if( prefix.equals( "property" ) && (spec != null) ) {
+		} else if( prefix.equals( "property" ) && (spec != null) ) { //$NON-NLS-1$
 			return AuthoringToolResources.findPropertyDnDPanel( propertiesPanel, this.element, spec );
-		} else if( prefix.equals( "userDefinedResponse" ) && (spec != null) ) {
+		} else if( prefix.equals( "userDefinedResponse" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Response actualResponse = (edu.cmu.cs.stage3.alice.core.Response)world.getDescendantKeyed( spec );
 			if( actualResponse != null ) {
 				return AuthoringToolResources.findUserDefinedResponseDnDPanel( animationsPanel, actualResponse );
 			}
-		} else if( prefix.equals( "userDefinedQuestion" ) && (spec != null) ) {
+		} else if( prefix.equals( "userDefinedQuestion" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Question actualQuestion = (edu.cmu.cs.stage3.alice.core.Question)world.getDescendantKeyed( spec );
 			if( actualQuestion != null ) {
 				return AuthoringToolResources.findUserDefinedQuestionDnDPanel( questionsPanel, actualQuestion );
 			}
-		} else if( prefix.equals( "responsePrototype" ) && (spec != null) ) {
+		} else if( prefix.equals( "responsePrototype" ) && (spec != null) ) { //$NON-NLS-1$
 			try {
 				Class elementClass = Class.forName( spec );
 				if( elementClass != null ) {
 					return AuthoringToolResources.findPrototypeDnDPanel( animationsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( "Error while looking for ProtoypeDnDPanel using class " + spec, e );
+				AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.64") + spec, e ); //$NON-NLS-1$
 			}
-		} else if( prefix.equals( "questionPrototype" ) && (spec != null) ) {
+		} else if( prefix.equals( "questionPrototype" ) && (spec != null) ) { //$NON-NLS-1$
 			try {
 				Class elementClass = Class.forName( spec );
 				if( elementClass != null ) {
 					return AuthoringToolResources.findPrototypeDnDPanel( questionsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( "Error while looking for ProtoypeDnDPanel using class " + spec, e );
+				AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.66") + spec, e ); //$NON-NLS-1$
 			}
-		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) {
+		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				if( e instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
@@ -434,63 +434,63 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		String prefix = AuthoringToolResources.getPrefix( key );
 		String spec = AuthoringToolResources.getSpecifier( key );
 		edu.cmu.cs.stage3.alice.core.World world = authoringTool.getWorld();
-		if( key.equals( "newVariableButton" ) ) {
+		if( key.equals( "newVariableButton" ) ) { //$NON-NLS-1$
 			return variableGroupEditor.getNewVariableButton();
-		} else if( key.equals( "newAnimationButton" ) ) {
+		} else if( key.equals( "newAnimationButton" ) ) { //$NON-NLS-1$
 			return newAnimationButton;
-		} else if( key.equals( "newQuestionButton" ) ) {
+		} else if( key.equals( "newQuestionButton" ) ) { //$NON-NLS-1$
 			return newQuestionButton;
-		} else if( prefix.equals( "variable" ) && (spec != null) ) {
+		} else if( prefix.equals( "variable" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
-				return AuthoringToolResources.findPropertyViewController( variableGroupEditor, e, "value" );
+				return AuthoringToolResources.findPropertyViewController( variableGroupEditor, e, "value" ); //$NON-NLS-1$
 			}
-		} else if( prefix.equals( "textureMap" ) && (spec != null) ) {
+		} else if( prefix.equals( "textureMap" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				return AuthoringToolResources.findElementDnDPanel( textureMapsPanel, e );
 			}
-		} else if( prefix.equals( "sound" ) && (spec != null) ) {
+		} else if( prefix.equals( "sound" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				return AuthoringToolResources.findElementDnDPanel( soundsPanel, e );
 			}
-		} else if( prefix.equals( "misc" ) && (spec != null) ) {
+		} else if( prefix.equals( "misc" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				return AuthoringToolResources.findElementDnDPanel( miscPanel, e );
 			}
-		} else if( prefix.equals( "property" ) && (spec != null) ) {
+		} else if( prefix.equals( "property" ) && (spec != null) ) { //$NON-NLS-1$
 			return AuthoringToolResources.findPropertyViewController( propertiesPanel, this.element, spec );
-		} else if( prefix.equals( "userDefinedResponse" ) && (spec != null) ) {
+		} else if( prefix.equals( "userDefinedResponse" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Response actualResponse = (edu.cmu.cs.stage3.alice.core.Response)world.getDescendantKeyed( spec );
 			if( actualResponse != null ) {
 				return AuthoringToolResources.findUserDefinedResponseDnDPanel( animationsPanel, actualResponse );
 			}
-		} else if( prefix.equals( "userDefinedQuestion" ) && (spec != null) ) {
+		} else if( prefix.equals( "userDefinedQuestion" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Question actualQuestion = (edu.cmu.cs.stage3.alice.core.Question)world.getDescendantKeyed( spec );
 			if( actualQuestion != null ) {
 				return AuthoringToolResources.findUserDefinedQuestionDnDPanel( questionsPanel, actualQuestion );
 			}
-		} else if( prefix.equals( "responsePrototype" ) && (spec != null) ) {
+		} else if( prefix.equals( "responsePrototype" ) && (spec != null) ) { //$NON-NLS-1$
 			try {
 				Class elementClass = Class.forName( spec );
 				if( elementClass != null ) {
 					return AuthoringToolResources.findPrototypeDnDPanel( animationsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( "Error while looking for ProtoypeDnDPanel using class " + spec, e );
+				AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.80") + spec, e ); //$NON-NLS-1$
 			}
-		} else if( prefix.equals( "questionPrototype" ) && (spec != null) ) {
+		} else if( prefix.equals( "questionPrototype" ) && (spec != null) ) { //$NON-NLS-1$
 			try {
 				Class elementClass = Class.forName( spec );
 				if( elementClass != null ) {
 					return AuthoringToolResources.findPrototypeDnDPanel( questionsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( "Error while looking for ProtoypeDnDPanel using class " + spec, e );
+				AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.82") + spec, e ); //$NON-NLS-1$
 			}
-		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) {
+		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
 				if( e instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
@@ -557,7 +557,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 							newlyCreatedPose = null;
 						}
 					} else {
-						AuthoringTool.showErrorDialog( "Unable to create gui for pose: " + pose, null );
+						AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.84") + pose, null ); //$NON-NLS-1$
 					}
 				}
 
@@ -582,9 +582,9 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					subPanel.setLayout( new java.awt.GridBagLayout() );
 					subPanel.setBorder( spacingBorder );
 					panelsToClean.add( subPanel );
-					if (groupName.compareTo("seldom used properties") == 0){
+					if (groupName.compareTo("seldom used properties") == 0){ //$NON-NLS-1$
 						edu.cmu.cs.stage3.alice.authoringtool.util.ExpandablePanel expandPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.ExpandablePanel();
-						expandPanel.setTitle( "Seldom Used Properties" );
+						expandPanel.setTitle( Messages.getString("DragFromComponent.86") ); //$NON-NLS-1$
 						expandPanel.setContent( subPanel );
 						expandPanel.setExpanded(false);
 						toAdd = expandPanel;
@@ -602,7 +602,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 											public void run() {
 												if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.Transformable) && (property == ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).vehicle) ) {
 													((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).setVehiclePreservingAbsoluteTransformation( (edu.cmu.cs.stage3.alice.core.ReferenceFrame)o );
-												} else if (property.getName().equals("localTransformation")){ //Animate and undo the point of view when set
+												} else if (property.getName().equals("localTransformation")){ //Animate and undo the point of view when set //$NON-NLS-1$
 													edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation povAnim = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
 													povAnim.subject.set( property.getOwner() );
 													povAnim.pointOfView.set( o );
@@ -645,10 +645,10 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 									subPanel.add( gui, constraints );
 									i++;
 								} else {
-									AuthoringTool.showErrorDialog( "Unable to create gui for property: " + property, null );
+									AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.88") + property, null ); //$NON-NLS-1$
 								}
 							} else {
-								AuthoringTool.showErrorDialog( "no property on " + element + " named " + name, null );
+								AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.89") + element + Messages.getString("DragFromComponent.90") + name, null ); //$NON-NLS-1$ //$NON-NLS-2$
 							}
 						}
 					}
@@ -676,25 +676,25 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 				constraints.gridy++;
 			}
 
-			if( element.data.get( "modeled by" ) != null ) {
-				propertiesPanel.add( new javax.swing.JLabel( "modeled by:  " + element.data.get( "modeled by" ) ), constraints );
+			if( element.data.get( "modeled by" ) != null ) { //$NON-NLS-1$
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("DragFromComponent.92") + element.data.get( "modeled by" ) ), constraints ); //$NON-NLS-1$ //$NON-NLS-2$
 				constraints.gridy++;
 			}
-			if( element.data.get( "painted by" ) != null ) {
-				propertiesPanel.add( new javax.swing.JLabel( "painted by:  " + element.data.get( "painted by" ) ), constraints );
+			if( element.data.get( "painted by" ) != null ) { //$NON-NLS-1$
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("DragFromComponent.95") + element.data.get( "painted by" ) ), constraints ); //$NON-NLS-1$ //$NON-NLS-2$
 				constraints.gridy++;
 			}
-			if( element.data.get( "programmed by" ) != null ) {
-				propertiesPanel.add( new javax.swing.JLabel( "programmed by:  " + element.data.get( "programmed by" ) ), constraints );
+			if( element.data.get( "programmed by" ) != null ) { //$NON-NLS-1$
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("DragFromComponent.98") + element.data.get( "programmed by" ) ), constraints ); //$NON-NLS-1$ //$NON-NLS-2$
 				constraints.gridy++;
 			}
-			if ( element.data.get( "modeled by" ) != null  ){
-				java.text.NumberFormat formatter = new java.text.DecimalFormat("#.####");
-				propertiesPanel.add( new javax.swing.JLabel( "depth:  " + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getDepth()) ), constraints );
+			if ( element.data.get( "modeled by" ) != null  ){ //$NON-NLS-1$
+				java.text.NumberFormat formatter = new java.text.DecimalFormat("#.####"); //$NON-NLS-1$
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("DragFromComponent.102") + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getDepth()) ), constraints ); //$NON-NLS-1$
 				constraints.gridy++;
-				propertiesPanel.add( new javax.swing.JLabel( "height:  " + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getHeight()) ), constraints );
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("DragFromComponent.103") + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getHeight()) ), constraints ); //$NON-NLS-1$
 				constraints.gridy++;
-				propertiesPanel.add( new javax.swing.JLabel( "width:  " + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getWidth()) ), constraints );
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("DragFromComponent.104") + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getWidth()) ), constraints ); //$NON-NLS-1$
 				constraints.gridy++;
 			}
 			glueConstraints.gridy = constraints.gridy;
@@ -721,7 +721,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 						javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( callToUserDefinedResponsePrototype );
 						if( gui != null ) {
 							edu.cmu.cs.stage3.alice.authoringtool.util.EditObjectButton editButton = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getEditObjectButton( response, gui );
-							editButton.setToolTipText( "<html><font face=arial size=-1>Open this method for editing.</font></html>" );
+							editButton.setToolTipText( Messages.getString("DragFromComponent.105") ); //$NON-NLS-1$
 							javax.swing.JPanel guiPanel = new javax.swing.JPanel();
 							panelsToClean.add( guiPanel );
 							guiPanel.setBackground( java.awt.Color.white );
@@ -737,10 +737,10 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 								newlyCreatedAnimation = null;
 							}
 						} else {
-							AuthoringTool.showErrorDialog( "Unable to create gui for callToUserDefinedResponsePrototype: " + callToUserDefinedResponsePrototype, null );
+							AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.106") + callToUserDefinedResponsePrototype, null ); //$NON-NLS-1$
 						}
 					} else {
-						AuthoringTool.showErrorDialog( "Response is not a userDefinedResponse: " + response, null );
+						AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.107") + response, null ); //$NON-NLS-1$
 					}
 				}
 
@@ -774,15 +774,15 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 							if( item instanceof String ) { // ignore hierarchy for now
 								String className = (String)item;
 								try {
-									if( ! className.startsWith( "edu.cmu.cs.stage3.alice.core.response.PropertyAnimation" ) ) { // ignore property animations for now
+									if( ! className.startsWith( "edu.cmu.cs.stage3.alice.core.response.PropertyAnimation" ) ) { // ignore property animations for now //$NON-NLS-1$
 										Class responseClass = Class.forName( className );
 										java.util.LinkedList known = new java.util.LinkedList();
 										String format = AuthoringToolResources.getFormat( responseClass );
 										edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 										while( tokenizer.hasMoreTokens() ) {
 											String token = tokenizer.nextToken();
-											if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {
-												String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );
+											if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+												String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ); //$NON-NLS-1$ //$NON-NLS-2$
 												known.add( new edu.cmu.cs.stage3.util.StringObjectPair( propertyName, element ) );
 											}
 										}
@@ -796,11 +796,11 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 											subPanel.add( gui, constraints );
 											i++;
 										} else {
-											AuthoringTool.showErrorDialog( "Unable to create gui for responsePrototype: " + responsePrototype, null );
+											AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.113") + responsePrototype, null ); //$NON-NLS-1$
 										}
 									}
 								} catch( ClassNotFoundException e ) {
-									AuthoringTool.showErrorDialog( "Error while looking for class " + className, e );
+									AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.114") + className, e ); //$NON-NLS-1$
 								}
 							}
 						}
@@ -834,7 +834,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 						javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( callToUserDefinedQuestionPrototype );
 						if( gui != null ) {
 							edu.cmu.cs.stage3.alice.authoringtool.util.EditObjectButton editButton = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getEditObjectButton( question, gui );
-							editButton.setToolTipText( "<html><font face=arial size=-1>Open this question for editing.</font></html>" );
+							editButton.setToolTipText( Messages.getString("DragFromComponent.115") ); //$NON-NLS-1$
 							javax.swing.JPanel guiPanel = new javax.swing.JPanel();
 							panelsToClean.add( guiPanel );
 							guiPanel.setBackground( java.awt.Color.white );
@@ -849,10 +849,10 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 								newlyCreatedQuestion = null;
 							}
 						} else {
-							AuthoringTool.showErrorDialog( "Unable to create gui for callToUserDefinedQuestionPrototype: " + callToUserDefinedQuestionPrototype, null );
+							AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.116") + callToUserDefinedQuestionPrototype, null ); //$NON-NLS-1$
 						}
 					} else {
-						throw new RuntimeException( "ERROR: question is not a userDefinedQuestion" );
+						throw new RuntimeException( Messages.getString("DragFromComponent.117") ); //$NON-NLS-1$
 					}
 				}
 
@@ -892,13 +892,13 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 								edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 								while( tokenizer.hasMoreTokens() ) {
 									String token = tokenizer.nextToken();
-									if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {
-										String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );
+									if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+										String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ); //$NON-NLS-1$ //$NON-NLS-2$
 										known.add( new edu.cmu.cs.stage3.util.StringObjectPair( propertyName, element ) );
 									}
 								}
 								if( edu.cmu.cs.stage3.alice.core.question.PartKeyed.class.isAssignableFrom( questionClass ) ) { // special case hack
-									known.add( new edu.cmu.cs.stage3.util.StringObjectPair( "key", "" ) );
+									known.add( new edu.cmu.cs.stage3.util.StringObjectPair( "key", "" ) ); //$NON-NLS-1$ //$NON-NLS-2$
 								}
 								edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues = (edu.cmu.cs.stage3.util.StringObjectPair[])known.toArray( new edu.cmu.cs.stage3.util.StringObjectPair[0] );
 
@@ -913,14 +913,14 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 									subPanel.add( gui, constraints );
 									i++;
 								} else {
-									AuthoringTool.showErrorDialog( "Unable to create gui for elementPrototype: " + elementPrototype, null );
+									AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.124") + elementPrototype, null ); //$NON-NLS-1$
 								}
 							} catch( ClassNotFoundException e ) {
-								AuthoringTool.showErrorDialog( "Unable to create gui for class: " + className, e );
+								AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.125") + className, e ); //$NON-NLS-1$
 							} catch( IllegalAccessException e ) {
-								AuthoringTool.showErrorDialog( "Unable to create gui for class: " + className, e );
+								AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.126") + className, e ); //$NON-NLS-1$
 							} catch( InstantiationException e ) {
-								AuthoringTool.showErrorDialog( "Unable to create gui for class: " + className, e );
+								AuthoringTool.showErrorDialog( Messages.getString("DragFromComponent.127") + className, e ); //$NON-NLS-1$
 							}
 						}
 					}
@@ -1045,7 +1045,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		borderLayout2.setVgap(6);
 		comboPanel.setLayout(gridBagLayout1);
 		ownerLabel.setForeground(Color.black);
-		ownerLabel.setText("owner\'s details");
+		ownerLabel.setText(Messages.getString("DragFromComponent.128")); //$NON-NLS-1$
 		propertiesPanel.setBackground(Color.white);
 		propertiesPanel.setLayout(gridBagLayout2);
 		animationsPanel.setBackground(Color.white);
@@ -1068,10 +1068,10 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		comboPanel.add(ownerLabel,  new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 8, 0, 0), 0, 0));
 		propertySubPanel.add(tabbedPane, BorderLayout.CENTER);
-		tabbedPane.add(propertiesScrollPane, "properties");
+		tabbedPane.add(propertiesScrollPane, Messages.getString("DragFromComponent.129")); //$NON-NLS-1$
 		propertiesScrollPane.getViewport().add(propertiesPanel, null);
-		tabbedPane.add(animationsScrollPane, "methods");
-		tabbedPane.add(questionsScrollPane, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING+"s");
+		tabbedPane.add(animationsScrollPane, Messages.getString("DragFromComponent.130")); //$NON-NLS-1$
+		tabbedPane.add(questionsScrollPane, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING+"s"); //$NON-NLS-1$
 //		tabbedPane.add(otherScrollPane, "other");
 		otherScrollPane.getViewport().add(otherPanel, null);
 		questionsScrollPane.getViewport().add(questionsPanel, null);

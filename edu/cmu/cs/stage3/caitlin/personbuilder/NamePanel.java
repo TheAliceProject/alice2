@@ -29,7 +29,7 @@ public class NamePanel extends javax.swing.JPanel {
 
 	public NamePanel() {
 		m_nameField = new javax.swing.JTextField();
-		m_createdByField = new javax.swing.JTextField("Anonymous");
+		m_createdByField = new javax.swing.JTextField(Messages.getString("NamePanel.0")); //$NON-NLS-1$
 		
 		setLayout( new java.awt.GridBagLayout() );
 		java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
@@ -38,7 +38,7 @@ public class NamePanel extends javax.swing.JPanel {
 
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.weightx = 0.0;
-		add( new javax.swing.JLabel( "Name:" ), gbc );
+		add( new javax.swing.JLabel( Messages.getString("NamePanel.1") ), gbc ); //$NON-NLS-1$
 
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;
@@ -46,7 +46,7 @@ public class NamePanel extends javax.swing.JPanel {
 
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.weightx = 0.0;
-		add( new javax.swing.JLabel( "Created By:" ), gbc );
+		add( new javax.swing.JLabel( Messages.getString("NamePanel.2") ), gbc ); //$NON-NLS-1$
 
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;

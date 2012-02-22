@@ -35,7 +35,7 @@ public class CreateNewWrapperTreeModel implements javax.swing.tree.TreeModel {
 			wrappedTreeModel = treeModelToWrap;
 			this.createNewObject = createNewObject;
 		} else {
-			throw new IllegalArgumentException( "treeModelToWrap and createNewObject cannot be null" );
+			throw new IllegalArgumentException( Messages.getString("CreateNewWrapperTreeModel.0") ); //$NON-NLS-1$
 		}
 	}
 

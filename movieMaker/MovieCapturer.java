@@ -299,12 +299,12 @@ public class MovieCapturer implements VideoCapturer
    //this.done = true;
  }
   
-  public static void main(String args[]) 
-  {
-    MovieCapturer capturer = new MovieCapturer(
-                 "c:/intro-prog-java/mediasources/aliceTest1/",
-                                               "alice1");
-    capturer.captureMovie(0,0,810,674,1);
-    capturer.playMovie();
-  }
+//  public static void main(String args[]) 
+//  {
+//    MovieCapturer capturer = new MovieCapturer(
+//                 "c:/intro-prog-java/mediasources/aliceTest1/",
+//                                               "alice1");
+//    capturer.captureMovie(0,0,810,674,1);
+//    capturer.playMovie();
+//  }
 }

@@ -58,7 +58,7 @@ public class Concat implements ControllerListener, DataSinkListener {
     int totalTracks;
 
     boolean transcodeMsg = false;
-    String TRANSCODE_MSG = "The given inputs require transcoding to have a common format for concatenation.";
+    String TRANSCODE_MSG = Messages.getString("Concat.0"); //$NON-NLS-1$
 
 
     /**
@@ -76,7 +76,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	int i = 0;
 	while (i < args.length) {
 
-	    if (args[i].equals("-o")) {
+	    if (args[i].equals("-o")) { //$NON-NLS-1$
 			i++;
 			if (i >= args.length)
 			    prUsage();
@@ -88,12 +88,12 @@ public class Concat implements ControllerListener, DataSinkListener {
 	}
 
 	if (inputURL.size() == 0) {
-	    System.err.println("No input url is specified");
+	    System.err.println(Messages.getString("Concat.2")); //$NON-NLS-1$
 	    prUsage();
 	}
 
 	if (outputURL == null) {
-	    System.err.println("No output url is specified");
+	    System.err.println(Messages.getString("Concat.3")); //$NON-NLS-1$
 	    prUsage();
 	}
 
@@ -103,20 +103,20 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	for (i = 0; i < inputURL.size(); i++) {
 	    if ((iml[i] = createMediaLocator((String)inputURL.elementAt(i))) == null) {
-		System.err.println("Cannot build media locator from: " + inputURL);
+		System.err.println(Messages.getString("Concat.4") + inputURL); //$NON-NLS-1$
 		System.exit(0);
 	    }
 	}
 
 	if ((oml = createMediaLocator(outputURL)) == null) {
-	    System.err.println("Cannot build media locator from: " + outputURL);
+	    System.err.println(Messages.getString("Concat.5") + outputURL); //$NON-NLS-1$
 	    System.exit(0);
 	}
 
 	Concat concat  = new Concat();
 
 	if (!concat.doIt(iml, oml)) {
-	    System.err.println("Failed to concatenate the inputs");
+	    System.err.println(Messages.getString("Concat.6")); //$NON-NLS-1$
 	}
 
 	System.exit(0);
@@ -134,7 +134,7 @@ public class Concat implements ControllerListener, DataSinkListener {
  	ContentDescriptor cd;
 
 	if ((cd = fileExtToCD(outML.getRemainder())) == null) {
-	    System.err.println("Couldn't figure out from the file extension the type of output needed!");
+	    System.err.println(Messages.getString("Concat.7")); //$NON-NLS-1$
 	    return false;
 	}
 
@@ -149,21 +149,21 @@ public class Concat implements ControllerListener, DataSinkListener {
 		//System.err.println("- Create processor for: " + inML[i]);
 		pInfo[i].p = Manager.createProcessor(inML[i]);
 	    } catch (Exception e) {
-		System.err.println("Cannot create a processor from the given url: " + e);
+		System.err.println(Messages.getString("Concat.8") + e); //$NON-NLS-1$
 		return false;
 	    }
 	}
 
 	// Try to match the tracks from different processors.
 	if (!matchTracks(pInfo, cd)) {
-	    System.err.println("Failed to match the tracks.");
+	    System.err.println(Messages.getString("Concat.9")); //$NON-NLS-1$
 	    return false;
 	}
 
 	// Program each processors to perform the necessary transcoding
 	// to concatenate the tracks.
 	if (!buildTracks(pInfo)) {
-	    System.err.println("Failed to build processors for the inputs.");
+	    System.err.println(Messages.getString("Concat.10")); //$NON-NLS-1$
 	    return false;
 	}
 
@@ -175,7 +175,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	try {
 	    p = Manager.createProcessor(ds);
 	} catch (Exception e) {
-	    System.err.println("Failed to create a processor to concatenate the inputs.");
+	    System.err.println(Messages.getString("Concat.11")); //$NON-NLS-1$
 	    return false;
 	}
 
@@ -183,21 +183,21 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	// Put the Processor into configured state.
 	if (!waitForState(p, Processor.Configured)) {
-	    System.err.println("Failed to configure the processor.");
+	    System.err.println(Messages.getString("Concat.12")); //$NON-NLS-1$
 	    return false;
 	}
 
 	// Set the output content descriptor on the final processor.
 	//System.err.println("- Set output content descriptor to: " + cd);
 	if ((p.setContentDescriptor(cd)) == null) {
-	    System.err.println("Failed to set the output content descriptor on the processor.");
+	    System.err.println(Messages.getString("Concat.13")); //$NON-NLS-1$
 	    return false;
 	}
 
 	// We are done with programming the processor.  Let's just
 	// realize it.
 	if (!waitForState(p, Controller.Realized)) {
-	    System.err.println("Failed to realize the processor.");
+	    System.err.println(Messages.getString("Concat.14")); //$NON-NLS-1$
 	    return false;
 	}
 
@@ -218,7 +218,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	    p.start();
 	    dsink.start();
 	} catch (IOException e) {
-	    System.err.println("IO error during concatenation");
+	    System.err.println(Messages.getString("Concat.15")); //$NON-NLS-1$
 	    return false;
 	}
 
@@ -265,7 +265,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	for (i = 0; i < pInfo.length; i++) {
 
 	    if (!waitForState(pInfo[i].p, Processor.Configured)) {
-		System.err.println("- Failed to configure the processor.");
+		System.err.println(Messages.getString("Concat.16")); //$NON-NLS-1$
 		return false;
 	    }
 
@@ -318,7 +318,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	}
 
 	if (total[AUDIO] < 1 && total[VIDEO] < 1) {
-	    System.err.println("There is no audio or video tracks to concatenate.");
+	    System.err.println(Messages.getString("Concat.17")); //$NON-NLS-1$
 	    return false;
 	}
 
@@ -333,8 +333,8 @@ public class Concat implements ControllerListener, DataSinkListener {
 		for (j = total[type]; j < pInfo[i].numTracksByType[type]; j++) {
 		    tInfo = pInfo[i].tracksByType[type][j];
 		    disableTrack(pInfo[i], tInfo);
-		    System.err.println("- Disable the following track since the other input media do not have a matching type.");
-		    System.err.println("  " + tInfo.tc.getFormat());
+		    System.err.println(Messages.getString("Concat.18")); //$NON-NLS-1$
+		    System.err.println("  " + tInfo.tc.getFormat()); //$NON-NLS-1$
 		}
 		pInfo[i].numTracksByType[type] = total[type];
 	    }
@@ -346,7 +346,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	for (type = AUDIO; type < MEDIA_TYPES; type++) {
 	    for (i = 0; i < total[type]; i++) {
 		if (!tryMatch(pInfo, type, i)) {
-		    System.err.println("- Cannot transcode the tracks to a common format for concatenation!  Sorry.");
+		    System.err.println(Messages.getString("Concat.20")); //$NON-NLS-1$
 		    return false;
 		}
 	    }
@@ -391,7 +391,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	    // We are done with programming the processor.  Let's just
 	    // realize the it.
 	    if (!waitForState(p, Controller.Realized)) {
-		System.err.println("- Failed to realize the processor.");
+		System.err.println(Messages.getString("Concat.21")); //$NON-NLS-1$
 		return false;
 	    }
 
@@ -460,10 +460,10 @@ public class Concat implements ControllerListener, DataSinkListener {
 			    System.err.println(TRANSCODE_MSG);
 			}
 
-			System.err.println("- Transcoding: " + pInfo[j].ml);
-			System.err.println("  " + oldFmt);
-			System.err.println("           to:");
-			System.err.println("  " + newFmt);
+			System.err.println(Messages.getString("Concat.22") + pInfo[j].ml); //$NON-NLS-1$
+			System.err.println("  " + oldFmt); //$NON-NLS-1$
+			System.err.println(Messages.getString("Concat.24")); //$NON-NLS-1$
+			System.err.println("  " + newFmt); //$NON-NLS-1$
 		    } 
 
 		    // For video, check if it requires scaling.
@@ -478,11 +478,11 @@ public class Concat implements ControllerListener, DataSinkListener {
 				transcodeMsg = true;
 				System.err.println(TRANSCODE_MSG);
 			    }
-			    System.err.println("- Scaling: " + pInfo[j].ml);
-			    System.err.println("  from: " + oldSize.width + 
-						" x " + oldSize.height);
-			    System.err.println("  to: " + newSize.width + 
-						" x " + newSize.height);
+			    System.err.println(Messages.getString("Concat.26") + pInfo[j].ml); //$NON-NLS-1$
+			    System.err.println(Messages.getString("Concat.27") + oldSize.width +  //$NON-NLS-1$
+						" x " + oldSize.height); //$NON-NLS-1$
+			    System.err.println(Messages.getString("Concat.29") + newSize.width +  //$NON-NLS-1$
+						" x " + newSize.height); //$NON-NLS-1$
 			    newFmt = (new VideoFormat(null, 
 					newSize, 
 					Format.NOT_SPECIFIED,
@@ -563,8 +563,8 @@ public class Concat implements ControllerListener, DataSinkListener {
 			if (fmts[j].matches(jpegFmt)) {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
-			    System.err.println("- Set quality to " + 
-					val + " on " + qc);
+			    System.err.println(Messages.getString("Concat.31") +  //$NON-NLS-1$
+					val + Messages.getString("Concat.32") + qc); //$NON-NLS-1$
 			    break;
 			}
 		    }
@@ -631,7 +631,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	DataSource ds;
 
 	if ((ds = p.getDataOutput()) == null) {
-	    System.err.println("Something is really wrong: the processor does not have an output DataSource");
+	    System.err.println(Messages.getString("Concat.33")); //$NON-NLS-1$
 	    return null;
 	}
 
@@ -677,7 +677,7 @@ public class Concat implements ControllerListener, DataSinkListener {
     public void controllerUpdate(ControllerEvent evt) {
 
 	if (evt instanceof ControllerErrorEvent) {
-	    System.err.println("Failed to concatenate the files.");
+	    System.err.println(Messages.getString("Concat.34")); //$NON-NLS-1$
 	    System.exit(-1);
 	} else if (evt instanceof EndOfMediaEvent) {
 	    evt.getSourceController().close();
@@ -745,10 +745,10 @@ public class Concat implements ControllerListener, DataSinkListener {
 	String type;
 
 	// Use the MimeManager to get the mime type from the file extension.
-	if ( ext.equals("mp3")) {
+	if ( ext.equals("mp3")) { //$NON-NLS-1$
 	    type = FileTypeDescriptor.MPEG_AUDIO;
         }
-	else if (ext.equals("wav"))
+	else if (ext.equals("wav")) //$NON-NLS-1$
 		type = FileTypeDescriptor.WAVE;
 	else {
 	    if ((type = com.sun.media.MimeManager.getMimeType(ext)) == null)
@@ -767,14 +767,14 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	MediaLocator ml;
 
-	if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null)
+	if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null) //$NON-NLS-1$
 	    return ml;
 
 	if (url.startsWith(File.separator)) {
-	    if ((ml = new MediaLocator("file:" + url)) != null)
+	    if ((ml = new MediaLocator("file:" + url)) != null) //$NON-NLS-1$
 		return ml;
 	} else {
-	    String file = "file:" + System.getProperty("user.dir") + File.separator + url;
+	    String file = "file:" + System.getProperty("user.dir") + File.separator + url; //$NON-NLS-1$ //$NON-NLS-2$
 	    if ((ml = new MediaLocator(file)) != null)
 		return ml;
 	}
@@ -784,9 +784,9 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 
     static void prUsage() {
-	System.err.println("Usage: java Concat -o <output> <input> ...");
-	System.err.println("     <output>: input URL or file name");
-	System.err.println("     <input>: output URL or file name");
+	System.err.println("Usage: java Concat -o <output> <input> ..."); //$NON-NLS-1$
+	System.err.println("     <output>: input URL or file name"); //$NON-NLS-1$
+	System.err.println("     <input>: output URL or file name"); //$NON-NLS-1$
 	System.exit(0);
     }
 
@@ -950,7 +950,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	
 	public void setLocator(MediaLocator ml) {
-	    System.err.println("Not interested in a media locator");
+	    System.err.println(Messages.getString("Concat.44")); //$NON-NLS-1$
 	}
     }
 

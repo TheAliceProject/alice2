@@ -29,7 +29,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 public class Add3DTextPanel extends AbstractFontPanel {
 	public Add3DTextPanel() {
-		super( "The quick brown fox", true );
+		super( "The quick brown fox", true ); //$NON-NLS-1$
 	}
 	public edu.cmu.cs.stage3.alice.core.Text3D createText3D() {
 		edu.cmu.cs.stage3.alice.core.Text3D text3D = new edu.cmu.cs.stage3.alice.core.Text3D();
@@ -53,10 +53,10 @@ public class Add3DTextPanel extends AbstractFontPanel {
 		if( name.length() > 20 ) {
 			name = name.substring( 0, 21 ).trim();
 		} 
-		if (name.compareTo(" ")==0) {
+		if (name.compareTo(" ")==0) { //$NON-NLS-1$
 			text3D.name.set( name );
 		} else {
-			text3D.name.set( "3D Text" );
+			text3D.name.set( Messages.getString("Add3DTextPanel.2") ); //$NON-NLS-1$
 		}
 		text3D.create3DTextGeometry();
 		return text3D;

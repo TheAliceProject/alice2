@@ -31,7 +31,7 @@ public class NewQuestionContentPane extends NewNamedTypedElementContentPane {
 	
 	public String getTitle() {
 		String cappedQuestionString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(0,1).toUpperCase()+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(1);
-		return "New "+cappedQuestionString;
+		return Messages.getString("NewQuestionContentPane.0")+cappedQuestionString; //$NON-NLS-1$
 	}
 	
 	

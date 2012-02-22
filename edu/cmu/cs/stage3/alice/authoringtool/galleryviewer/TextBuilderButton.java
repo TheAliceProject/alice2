@@ -42,7 +42,7 @@ public class TextBuilderButton extends GenericBuilderButton {
    
 protected String getToolTipString()
    {
-	   return "Click to create 3D text";
+	   return Messages.getString("TextBuilderButton.0"); //$NON-NLS-1$
    }
 
    public void set(GalleryViewer.ObjectXmlData dataIn, ImageIcon icon, AuthoringTool authoringTool)

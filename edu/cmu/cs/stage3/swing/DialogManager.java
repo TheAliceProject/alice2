@@ -43,7 +43,7 @@ public class DialogManager {
 		try {
 			parent = (java.awt.Component)s_stack.peek();
 		} catch( java.util.EmptyStackException ese ) {
-			parent = new java.awt.Frame( "empty stack" );
+			parent = new java.awt.Frame( Messages.getString("DialogManager.0") ); //$NON-NLS-1$
 			parent.setVisible( true );
 		}
 		javax.swing.JDialog dialog;
@@ -67,7 +67,7 @@ public class DialogManager {
 				s_stack.pop();
 			}
 		} else {
-			throw new RuntimeException( "DialogManager only handles *modal* dialogs" );
+			throw new RuntimeException( Messages.getString("DialogManager.1") ); //$NON-NLS-1$
 		}
 	}
 	private static void showModalDialog( javax.swing.JDialog dialog ) {
@@ -241,21 +241,21 @@ public class DialogManager {
 		//todo: java1.4
 		//java.awt.Component component = (java.awt.Component)s_stack.peek();
 		//return javax.swing.UIManager.getString( key, component.getLocale() );
-		if( key.equals( "OptionPane.inputDialogTitle" ) ) {
-			return "Input";
-		} else if( key.equals( "OptionPane.messageDialogTitle" ) ) {
-			return "Message";
-		} else if( key.equals( "OptionPane.titleText" ) ) {
-			return "Select an Option";
+		if( key.equals( "OptionPane.inputDialogTitle" ) ) { //$NON-NLS-1$
+			return Messages.getString("DialogManager.3"); //$NON-NLS-1$
+		} else if( key.equals( "OptionPane.messageDialogTitle" ) ) { //$NON-NLS-1$
+			return Messages.getString("DialogManager.5"); //$NON-NLS-1$
+		} else if( key.equals( "OptionPane.titleText" ) ) { //$NON-NLS-1$
+			return Messages.getString("DialogManager.7"); //$NON-NLS-1$
 		}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	public static String showInputDialog( Object message ) {
-		return showInputDialog( message, getUIManagerString( "OptionPane.inputDialogTitle" ), javax.swing.JOptionPane.QUESTION_MESSAGE );
+		return showInputDialog( message, getUIManagerString( "OptionPane.inputDialogTitle" ), javax.swing.JOptionPane.QUESTION_MESSAGE ); //$NON-NLS-1$
 	}
 	public static String showInputDialog( Object message, Object initialSelectionValue ) {
-		return (String)showInputDialog( message, getUIManagerString( "OptionPane.inputDialogTitle" ), javax.swing.JOptionPane.QUESTION_MESSAGE, null, null, initialSelectionValue );
+		return (String)showInputDialog( message, getUIManagerString( "OptionPane.inputDialogTitle" ), javax.swing.JOptionPane.QUESTION_MESSAGE, null, null, initialSelectionValue ); //$NON-NLS-1$
 	}
 
 	public static String showInputDialog( Object message, String title, int messageType ) {
@@ -288,7 +288,7 @@ public class DialogManager {
 	}
 
 	public static void showMessageDialog( Object message ) {
-		showMessageDialog( message, getUIManagerString( "OptionPane.messageDialogTitle" ), javax.swing.JOptionPane.INFORMATION_MESSAGE );
+		showMessageDialog( message, getUIManagerString( "OptionPane.messageDialogTitle" ), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$
 	}
 
 	public static void showMessageDialog( Object message, String title, int messageType ) {
@@ -300,7 +300,7 @@ public class DialogManager {
 	}
 
 	public static int showConfirmDialog( Object message ) {
-		return showConfirmDialog( message,  getUIManagerString( "OptionPane.titleText" ), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION );
+		return showConfirmDialog( message,  getUIManagerString( "OptionPane.titleText" ), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION ); //$NON-NLS-1$
 	}
 
 	public static int showConfirmDialog( Object message, String title, int optionType ) {

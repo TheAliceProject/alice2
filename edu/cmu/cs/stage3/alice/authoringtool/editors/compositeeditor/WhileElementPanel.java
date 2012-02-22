@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -39,8 +41,8 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
 
     public WhileElementPanel(){
         super();
-        headerText = "While";
-        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder");
+        headerText = Messages.getString("WhileElementPanel.0"); //$NON-NLS-1$
+        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"); //$NON-NLS-1$
     }
 
      
@@ -77,17 +79,17 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
         if (headerLabel != null){
             headerLabel.setText(headerText);
             if (CompositeElementEditor.IS_JAVA){
-                headerLabel.setText("while (");
+                headerLabel.setText("while ("); //$NON-NLS-1$
             }
         }
         if (endHeader != null){
-            endHeader.setText("");
+            endHeader.setText(""); //$NON-NLS-1$
             if (CompositeElementEditor.IS_JAVA){
                 if (!isExpanded){
-                    endHeader.setText(") { "+getDots()+" }");
+                    endHeader.setText(") { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$
                 }
                 else{
-                    endHeader.setText(") {");
+                    endHeader.setText(") {"); //$NON-NLS-1$
                 }
             }
         }

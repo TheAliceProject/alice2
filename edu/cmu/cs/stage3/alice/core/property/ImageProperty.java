@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.property;
 
 import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.alice.core.Messages;
 
 public class ImageProperty extends ObjectProperty {
 	public ImageProperty( Element owner, String name, java.awt.Image defaultValue ) {
@@ -52,9 +53,9 @@ public class ImageProperty extends ObjectProperty {
     
 	protected void encodeObject( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, edu.cmu.cs.stage3.alice.core.ReferenceGenerator referenceGenerator ) throws java.io.IOException {
 		java.awt.Image imageValue = getImageValue();  //todo: handle variable
-        String codecName = "png";
-        String extension = "png";
-        String filename = getName() + "." + extension;
+        String codecName = "png"; //$NON-NLS-1$
+        String extension = "png"; //$NON-NLS-1$
+        String filename = getName() + "." + extension; //$NON-NLS-1$
         Object associatedFileKey;
         try {
             associatedFileKey = storer.getKeepKey( filename );
@@ -79,21 +80,21 @@ public class ImageProperty extends ObjectProperty {
                 try {
                     storer.keepFile( filename );
                 } catch( edu.cmu.cs.stage3.io.KeepFileNotSupportedException kfnse ) {
-                    throw new Error( storer + " returns true for isKeepFileSupported(), but then throws " + kfnse );
+                    throw new Error( storer + Messages.getString("ImageProperty.3") + kfnse ); //$NON-NLS-1$
                 } catch( edu.cmu.cs.stage3.io.KeepFileDoesNotExistException kfdne ) {
                     throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( kfdne, filename );
                 }
             }
         }
-        node.appendChild( createNodeForString( document, "java.io.File["+filename+"]" ) );
+        node.appendChild( createNodeForString( document, "java.io.File["+filename+"]" ) ); //$NON-NLS-1$ //$NON-NLS-2$
     }
     
 	public void keepAnyAssociatedFiles( edu.cmu.cs.stage3.io.DirectoryTreeStorer storer ) throws edu.cmu.cs.stage3.io.KeepFileNotSupportedException, edu.cmu.cs.stage3.io.KeepFileDoesNotExistException {
         super.keepAnyAssociatedFiles( storer );
 	    java.awt.Image imageValue = getImageValue();  //todo: handle variable
 		if( imageValue instanceof java.awt.image.RenderedImage ) {
-	        String extension = "png";
-            String filename = getName() + "." + extension;
+	        String extension = "png"; //$NON-NLS-1$
+            String filename = getName() + "." + extension; //$NON-NLS-1$
             storer.keepFile( filename );
         }
     }

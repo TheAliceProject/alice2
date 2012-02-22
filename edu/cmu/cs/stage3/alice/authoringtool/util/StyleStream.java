@@ -41,7 +41,7 @@ public class StyleStream extends java.io.PrintStream {
 		try {
 			styledStreamTextPane.document.insertString( styledStreamTextPane.endPosition.getOffset() - 1, String.valueOf( b ), style );
 		} catch( javax.swing.text.BadLocationException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error while printing.", e );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyleStream.0"), e ); //$NON-NLS-1$
 		}
 	}
 
@@ -50,7 +50,7 @@ public class StyleStream extends java.io.PrintStream {
 		try {
 			styledStreamTextPane.document.insertString( styledStreamTextPane.endPosition.getOffset() - 1, new String( buf, off, len ), style );
 		} catch( javax.swing.text.BadLocationException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error while printing.", e );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyleStream.1"), e ); //$NON-NLS-1$
 		}
 	}
 }

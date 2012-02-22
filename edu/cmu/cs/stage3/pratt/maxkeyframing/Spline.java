@@ -41,7 +41,7 @@ public abstract class Spline {
 					return 0;
 				}
 			} else {
-				throw new ClassCastException( Key.class.getName() + " required." );
+				throw new ClassCastException( Key.class.getName() + Messages.getString("Spline.0") ); //$NON-NLS-1$
 			}
 		}
 	};
@@ -163,26 +163,26 @@ public abstract class Spline {
 	public String toString() {
 		StringBuffer repr = new StringBuffer();
 
-		repr.append( "{spline}" );
-		repr.append( "{splineType}" );
+		repr.append( "{spline}" ); //$NON-NLS-1$
+		repr.append( "{splineType}" ); //$NON-NLS-1$
 		repr.append( this.getClass().getName() );
-		repr.append( "{/splineType}" );
+		repr.append( "{/splineType}" ); //$NON-NLS-1$
 
-		repr.append( "{keys}" );
+		repr.append( "{keys}" ); //$NON-NLS-1$
 		for( java.util.Iterator iter = keys.iterator(); iter.hasNext(); ) {
 			Key key = (Key)iter.next();
-			repr.append( "{key}" );
-			repr.append( "{type}" );
+			repr.append( "{key}" ); //$NON-NLS-1$
+			repr.append( "{type}" ); //$NON-NLS-1$
 			repr.append( key.getClass().getName() );
-			repr.append( "{/type}" );
-			repr.append( "{data}" );
+			repr.append( "{/type}" ); //$NON-NLS-1$
+			repr.append( "{data}" ); //$NON-NLS-1$
 			repr.append( key.toString() );
-			repr.append( "{/data}" );
-			repr.append( "{/key}" );
+			repr.append( "{/data}" ); //$NON-NLS-1$
+			repr.append( "{/key}" ); //$NON-NLS-1$
 		}
-		repr.append( "{/keys}" );
+		repr.append( "{/keys}" ); //$NON-NLS-1$
 
-		repr.append( "{/spline}" );
+		repr.append( "{/spline}" ); //$NON-NLS-1$
 
 		return repr.toString();
 	}
@@ -203,7 +203,7 @@ public abstract class Spline {
 			addKeyMethod = null;
 			java.lang.reflect.Method[] methods = splineClass.getMethods();
 			for( int i = 0; i < methods.length; i++ ) {
-				if( methods[i].getName().equals( "addKey" ) ) {
+				if( methods[i].getName().equals( "addKey" ) ) { //$NON-NLS-1$
 					addKeyMethod = methods[i];
 				}
 			}
@@ -219,7 +219,7 @@ public abstract class Spline {
 		}
 
 		if( addKeyMethod == null ) {
-			System.err.println( "Unable to find addKey method for " + spline );
+			System.err.println( Messages.getString("Spline.14") + spline ); //$NON-NLS-1$
 			return null;
 		}
 
@@ -231,7 +231,7 @@ public abstract class Spline {
 
 			try {
 				Class keyClass = Class.forName( typeBlock.tokenContents );
-				java.lang.reflect.Method valueOfMethod = keyClass.getMethod( "valueOf", new Class[] { String.class } );
+				java.lang.reflect.Method valueOfMethod = keyClass.getMethod( "valueOf", new Class[] { String.class } ); //$NON-NLS-1$
 				Object key = valueOfMethod.invoke( null, new Object[] { dataBlock.tokenContents } );
 				addKeyMethod.invoke( spline, new Object[] { key } );
 			} catch( ClassNotFoundException e ) {

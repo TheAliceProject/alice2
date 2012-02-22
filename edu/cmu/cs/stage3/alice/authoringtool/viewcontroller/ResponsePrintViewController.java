@@ -29,8 +29,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel implements edu.cmu.cs.stage3.alice.authoringtool.util.GUIElement {
 	protected edu.cmu.cs.stage3.alice.core.response.Print printStatement;
 	protected javax.swing.JPanel subPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel();
-	protected javax.swing.JLabel printPrefixLabel = new javax.swing.JLabel( "Print: " );
-	protected javax.swing.JLabel printSuffixLabel = new javax.swing.JLabel( "" );
+	protected javax.swing.JLabel printPrefixLabel = new javax.swing.JLabel( Messages.getString("ResponsePrintViewController.0") ); //$NON-NLS-1$
+	protected javax.swing.JLabel printSuffixLabel = new javax.swing.JLabel( "" ); //$NON-NLS-1$
 	protected java.util.HashMap guiMap = new java.util.HashMap();
 	protected MouseListener mouseListener = new MouseListener();
 	protected edu.cmu.cs.stage3.alice.core.event.PropertyListener commentedListener = new edu.cmu.cs.stage3.alice.core.event.PropertyListener() {
@@ -77,7 +77,7 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 		this.printStatement = printStatement;
 		if( this.printStatement != null ) {
 			setTransferable( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( printStatement ) );
-			setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) );
+			setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) ); //$NON-NLS-1$
 
 			this.add( subPanel, java.awt.BorderLayout.CENTER );
 			this.addDragSourceComponent( subPanel );
@@ -157,16 +157,16 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 			if( formatTokenizer.hasMoreTokens() ) {
 				printPrefixLabel.setText( formatTokenizer.nextToken() );
 			} else {
-				printPrefixLabel.setText( "" );
+				printPrefixLabel.setText( "" ); //$NON-NLS-1$
 			}
 			String token = null;
 			while( formatTokenizer.hasMoreTokens() ) {
 				token = formatTokenizer.nextToken();
 			}
-			if( (token != null) && (! (token.startsWith( "<" ) && token.endsWith( ">" ))) ) {
+			if( (token != null) && (! (token.startsWith( "<" ) && token.endsWith( ">" ))) ) { //$NON-NLS-1$ //$NON-NLS-2$
 				printSuffixLabel.setText( token );
 			} else {
-				printSuffixLabel.setText( "" );
+				printSuffixLabel.setText( "" ); //$NON-NLS-1$
 			}
 
 			int i = 0;

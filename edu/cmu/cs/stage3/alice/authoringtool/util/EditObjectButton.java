@@ -37,9 +37,9 @@ public class EditObjectButton extends javax.swing.JButton implements edu.cmu.cs.
 	public EditObjectButton() {
 		setBackground( new java.awt.Color( 240, 240, 255 ) );
 		setMargin( new java.awt.Insets( 0, 2, 0, 2 ) );
-		setText( "edit" );
-		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
-		setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, (int)(11*fontSize/12.0) ) );
+		setText( Messages.getString("EditObjectButton.0") ); //$NON-NLS-1$
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
+		setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, (int)(11*fontSize/12.0) ) ); //$NON-NLS-1$
 		setFocusPainted( false );
 		setBorder( new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource( new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder() ) );
 //		setBorder( new javax.swing.plaf.metal.MetalBorders.ButtonBorder() {
@@ -58,10 +58,10 @@ public class EditObjectButton extends javax.swing.JButton implements edu.cmu.cs.
 							authoringTool.editObject( object );
 						}
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "object unexpectedly null in EditObjectButton", null );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditObjectButton.3"), null ); //$NON-NLS-1$
 					}
 				} else {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "authoringTool unexpectedly null in EditObjectButton", null );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditObjectButton.4"), null ); //$NON-NLS-1$
 				}
 			}
 		} );

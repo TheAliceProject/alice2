@@ -107,7 +107,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 				constrainToAspectRatio( newBounds, deltaWidth < deltaHeight );
 
-				RenderContentPane.this.config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height );
+				RenderContentPane.this.config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				renderPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, newBounds.height));
 				buttonPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, buttonPanel.getHeight()));
 				packDialog();
@@ -158,7 +158,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			focusTimer.setRepeats( false );
 			focusTimer.start();
 		}
-		stdOutOutputComponent.stdOutStream.println("*****Running World*****");
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("RenderContentPane.4")); //$NON-NLS-1$
 		stdOutOutputComponent.stdOutStream.flush();
 		this.stdOutOutputComponent.getTextPane().getDocument().addDocumentListener(textListener);
 		java.awt.Rectangle bounds = getRenderBounds();
@@ -167,7 +167,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		showStdOut = false;
 		keyMapInit();
 		updateGUI();
-		if ( config.getValue( "rendering.ensureRenderDialogIsOnScreen" ).equalsIgnoreCase( "true" ) ) {
+		if ( config.getValue( "rendering.ensureRenderDialogIsOnScreen" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 			java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 			java.awt.Dimension dialogSize = parentDialog.getSize();
 			java.awt.Point dialogLocation = parentDialog.getLocation();
@@ -185,7 +185,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if ( dialogLocation.y < 0 ) {
 					dialogLocation.y = 0;
 				}
-				if (config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "false" )) {
+				if (config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "false" )) { //$NON-NLS-1$ //$NON-NLS-2$
 					if ( dialogSize.width > screenSize.width ) {
 						java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 						renderSize.width = screenSize.width - 8;
@@ -228,15 +228,15 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		speedSlider.setValue(0);
 		saveRenderBounds();
 		showStdOut = false;
-		if ( config.getValue( "clearStdOutOnRun" ).equalsIgnoreCase( "true" ) ) {
-			detailTextPane.setText("");
+		if ( config.getValue( "clearStdOutOnRun" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+			detailTextPane.setText(""); //$NON-NLS-1$
 		}
 		java.awt.Component renderCanvas = getRenderCanvas();
 		if ( renderCanvas != null ) {
 			renderCanvas.removeFocusListener( renderCanvasFocusListener );
 		}
 		this.stdOutOutputComponent.getTextPane().getDocument().removeDocumentListener(textListener);
-		stdOutOutputComponent.stdOutStream.println("*****Stopping World*****");
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("RenderContentPane.12")); //$NON-NLS-1$
 		stdOutOutputComponent.stdOutStream.flush();
 
 	}
@@ -255,7 +255,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	
 	private void guiInit() {
-		title = "Alice World";
+		title = Messages.getString("RenderContentPane.13"); //$NON-NLS-1$
 		// on renderPanel resize, constrain to aspectRatio
 		setRenderWindowSizeBasedOnSavedBounds();
 	
@@ -276,9 +276,9 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		takePictureButton = new javax.swing.JButton( authoringTool.getActions().takePictureAction );
 		takePictureButton.setEnabled( true );
 		
-		speedLabel = new javax.swing.JLabel("Speed: 1x");
-		int fontSize = Integer.parseInt(config.getValue("fontSize"));
-		speedLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, 
+		speedLabel = new javax.swing.JLabel(Messages.getString("RenderContentPane.14")); //$NON-NLS-1$
+		int fontSize = Integer.parseInt(config.getValue("fontSize")); //$NON-NLS-1$
+		speedLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD,  //$NON-NLS-1$
 				(int)(12 * fontSize / 12.0) ));
 		speedLabel.setPreferredSize(new java.awt.Dimension(80, 12));
 		speedLabel.setMinimumSize(new java.awt.Dimension(20, 12));
@@ -380,16 +380,16 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} else {
 			javax.swing.SwingUtilities.convertPointToScreen( pos, renderPanel );
 		}
-		config.setValue( "rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height );
+		config.setValue( "rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
 	
 	public void saveRenderBounds(java.awt.Rectangle newBounds) {
-		config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height );
+		config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
 
 	protected boolean shouldConstrainAspectOnResize() {
 		return !(showStdOut || authoringTool.getWatcherPanel().isThereSomethingToWatch()) 
-			&& config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "true" );
+			&& config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "true" ); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public javax.swing.JPanel getRenderPanel() {
@@ -397,8 +397,8 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	public java.awt.Rectangle getRenderBounds() {
-		String boundsString = config.getValue( "rendering.renderWindowBounds" );
-		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," );
+		String boundsString = config.getValue( "rendering.renderWindowBounds" ); //$NON-NLS-1$
+		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," ); //$NON-NLS-1$
 		if ( st.countTokens() == 4 ) {
 			try {
 				int x = Integer.parseInt( st.nextToken() );
@@ -412,10 +412,10 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				}
 				return bounds;
 			} catch( NumberFormatException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Parse error in config value: rendering.renderWindowBounds", e );
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("RenderContentPane.29"), e ); //$NON-NLS-1$
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Incorrect number of tokens in config value: rendering.renderWindowBounds", null );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("RenderContentPane.30"), null ); //$NON-NLS-1$
 		}
 
 		return null;
@@ -436,20 +436,20 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		String speedText = java.text.NumberFormat.getInstance().format(newSpeed);
 		if (newSpeed < 1) {
 			if (newSpeed == .5) {
-				speedText = "1/2";
+				speedText = "1/2"; //$NON-NLS-1$
 			} else if (newSpeed == .25) {
-				speedText = "1/4";
+				speedText = "1/4"; //$NON-NLS-1$
 			} else if (newSpeed == .2) {
-				speedText = "1/5";
+				speedText = "1/5"; //$NON-NLS-1$
 			} else if (newSpeed > .3 && newSpeed < .34) {
-				speedText = "1/3";
+				speedText = "1/3"; //$NON-NLS-1$
 			} else if (newSpeed > .16 && newSpeed < .168) {
-				speedText = "1/6";
+				speedText = "1/6"; //$NON-NLS-1$
 			} else if (newSpeed > .14 && newSpeed < .143) {
-				speedText = "1/7";
+				speedText = "1/7"; //$NON-NLS-1$
 			}
 		}
-		speedLabel.setText("Speed: " + speedText + "x");
+		speedLabel.setText(Messages.getString("RenderContentPane.37") + speedText + "x"); //$NON-NLS-1$ //$NON-NLS-2$
 		speedLabel.repaint();
 	}
 	

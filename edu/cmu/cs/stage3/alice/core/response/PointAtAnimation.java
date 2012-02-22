@@ -26,7 +26,7 @@ package edu.cmu.cs.stage3.alice.core.response;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 
 public class PointAtAnimation extends AbstractPointAtAnimation {
-	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE );
+	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); //$NON-NLS-1$
 	public class RuntimePointAtAnimation extends RuntimeAbstractPointAtAnimation {
 		
 		protected boolean onlyAffectYaw() {
@@ -36,7 +36,7 @@ public class PointAtAnimation extends AbstractPointAtAnimation {
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( PointAtAnimation.this.onlyAffectYaw.getValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "only affect yaw value must not be null.", null, PointAtAnimation.this.onlyAffectYaw );
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PointAtAnimation.1"), null, PointAtAnimation.this.onlyAffectYaw ); //$NON-NLS-1$
 			}
 		}
 	}

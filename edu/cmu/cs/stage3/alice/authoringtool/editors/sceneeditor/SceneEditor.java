@@ -28,12 +28,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.*;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * @author Jason Pratt
  * @author Clifton Forlines
  */
 public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.authoringtool.Editor {
-	public String editorName = "Scene Editor";
+	public String editorName = Messages.getString("SceneEditor.0"); //$NON-NLS-1$
 
 	public static int LARGE_MODE = 1;
 	public static int SMALL_MODE = 2;
@@ -45,10 +47,10 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.ScriptComboWidget scriptComboWidget = new edu.cmu.cs.stage3.alice.authoringtool.util.ScriptComboWidget();
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 
-	protected java.awt.Image makeSceneEditorBigImage = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "makeSceneEditorBig" );
-	protected java.awt.Image makeSceneEditorSmallImage = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "makeSceneEditorSmall" );
-	protected javax.swing.JButton makeSceneEditorBigButton = new javax.swing.JButton( new javax.swing.ImageIcon( makeSceneEditorBigImage ) );
-	protected javax.swing.JButton makeSceneEditorSmallButton = new javax.swing.JButton( new javax.swing.ImageIcon( makeSceneEditorSmallImage ) );
+	protected java.awt.Image makeSceneEditorBigImage = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "makeSceneEditorBig" ); //$NON-NLS-1$
+	protected java.awt.Image makeSceneEditorSmallImage = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "makeSceneEditorSmall" ); //$NON-NLS-1$
+	protected javax.swing.JButton makeSceneEditorBigButton;
+	protected javax.swing.JButton makeSceneEditorSmallButton;
 
 	//////////////////
 	// Constructor
@@ -65,8 +67,8 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 			new edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationListener() {
 				public void changing( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {}
 				public void changed( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {
-					if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.enableScripting" ) ) {
-						if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {
+					if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.enableScripting" ) ) { //$NON-NLS-1$
+						if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 							topPanel.add( scriptComboWidget, BorderLayout.CENTER );
 						} else {
 							topPanel.remove( scriptComboWidget );
@@ -81,15 +83,27 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 
 	private void guiInit() {
 		// set the divider locations
-		int width = (int)(java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth() * .8);
+		//int width = (int)(java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth() * .8);
 		mainPanel.setMinimumSize( new java.awt.Dimension( 0, 0 ) );
 
-		if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {
+		if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 			topPanel.add( scriptComboWidget, BorderLayout.CENTER );
 		}
 
-		makeSceneEditorBigButton.setMargin( new java.awt.Insets( 0, 0, 0, 0 ) );
-		makeSceneEditorSmallButton.setMargin( new java.awt.Insets( 0, 0, 0, 0 ) );
+		if ( authoringToolConfig.getValue( "language" ).equalsIgnoreCase("english")) {
+			makeSceneEditorBigButton = new javax.swing.JButton(new javax.swing.ImageIcon( makeSceneEditorBigImage ) );
+			makeSceneEditorSmallButton = new javax.swing.JButton( new javax.swing.ImageIcon( makeSceneEditorSmallImage ) );
+			makeSceneEditorBigButton.setMargin( new java.awt.Insets( 2, 2, 2, 2 ) );
+			makeSceneEditorSmallButton.setMargin( new java.awt.Insets( 0, 0, 0, 0 ) );
+		} else {
+			makeSceneEditorBigButton = new javax.swing.JButton( Messages.getString("SceneEditor.1")); //$NON-NLS-1$
+			makeSceneEditorBigButton.setMargin( new java.awt.Insets( 4, 5, 4, 5 ) );
+			makeSceneEditorBigButton.setForeground(Color.white);
+			makeSceneEditorSmallButton = new javax.swing.JButton( Messages.getString("SceneEditor.2")); //$NON-NLS-1$
+			makeSceneEditorSmallButton.setMargin( new java.awt.Insets( 5, 10, 5, 10 ) );
+			makeSceneEditorSmallButton.setForeground(Color.white);
+			makeSceneEditorSmallButton.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,20));
+		}
 		makeSceneEditorBigButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent ev ) {
 				authoringTool.getJAliceFrame().setGuiMode( edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame.SCENE_EDITOR_LARGE_MODE );
@@ -100,15 +114,15 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 				authoringTool.getJAliceFrame().setGuiMode( edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame.SCENE_EDITOR_SMALL_MODE );
 			}
 		} );
-		makeSceneEditorBigButton.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "makeSceneEditorBigBackground" ) );
-		makeSceneEditorSmallButton.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "makeSceneEditorSmallBackground" ) );
+		makeSceneEditorBigButton.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "makeSceneEditorBigBackground" ) ); //$NON-NLS-1$
+		makeSceneEditorSmallButton.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "makeSceneEditorSmallBackground" ) ); //$NON-NLS-1$
 
 		cameraViewPanel.navPanel.add( makeSceneEditorBigButton, new java.awt.GridBagConstraints( 1, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHEAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 2, 2 ), 0, 0 ) );
 		cameraViewPanel.controlPanel.add( makeSceneEditorSmallButton, new java.awt.GridBagConstraints( 0, 9, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHEAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 8, 8 ), 0, 0 ) );
 
 		// tooltips
-		makeSceneEditorBigButton.setToolTipText( "<html><font face=arial size=-1>Open the Object Gallery and Layout Tool.<p><p>Objects are added to the world from the Gallery.<p>The Layout Tool has tools that will help you position objects in the world.<p>You will not be able to edit Methods or Events while the Gallery is open.</font></html>" );
-		makeSceneEditorSmallButton.setToolTipText( "<html><font face=arial size=-1>Close the Gallery and Layout Tool.<p><p>Closes the gallery and returns<p>to the Method and Event editors.</font></html>" );
+		makeSceneEditorBigButton.setToolTipText( Messages.getString("SceneEditor.10") ); //$NON-NLS-1$
+		makeSceneEditorSmallButton.setToolTipText( Messages.getString("SceneEditor.11") ); //$NON-NLS-1$
 	}
 
 	// big hack for now.  need to consolidate CameraViewPanel and LayoutViewPanel
@@ -232,30 +246,30 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 	protected java.util.HashMap componentsToIds = new java.util.HashMap();
 
 	protected void stencilInit() {
-		idsToComponents.put( "makeSceneEditorBigButton", makeSceneEditorBigButton );
-		idsToComponents.put( "makeSceneEditorSmallButton", makeSceneEditorSmallButton );
-		idsToComponents.put( "guiNavigatorSlidePanel", cameraViewPanel.guiNavigator.getSlidePanel() );
-		idsToComponents.put( "guiNavigatorDrivePanel", cameraViewPanel.guiNavigator.getDrivePanel() );
-		idsToComponents.put( "guiNavigatorTiltPanel", cameraViewPanel.guiNavigator.getTiltPanel() );
-		idsToComponents.put( "affectSubpartsCheckBox", cameraViewPanel.affectSubpartsCheckBox );
-		idsToComponents.put( "aspectRatioComboBox", cameraViewPanel.aspectRatioComboBox );
-		idsToComponents.put( "lensAngleSlider", cameraViewPanel.lensAngleSlider );
-		idsToComponents.put( "singleViewButton", cameraViewPanel.singleViewButton );
-		idsToComponents.put( "quadViewButton", cameraViewPanel.quadViewButton );
-		idsToComponents.put( "cameraDummyButton", cameraViewPanel.cameraDummyButton );
-		idsToComponents.put( "objectDummyButton", cameraViewPanel.objectDummyButton );
-		idsToComponents.put( "moveCameraCombo", cameraViewPanel.moveCameraCombo );
-		idsToComponents.put( "defaultMoveModeButton", cameraViewPanel.defaultMoveModeButton );
-		idsToComponents.put( "moveUpDownModeButton", cameraViewPanel.moveUpDownModeButton );
-		idsToComponents.put( "turnLeftRightModeButton", cameraViewPanel.turnLeftRightModeButton );
-		idsToComponents.put( "turnForwardBackwardModeButton", cameraViewPanel.turnForwardBackwardModeButton );
-		idsToComponents.put( "tumbleModeButton", cameraViewPanel.tumbleModeButton );
-		idsToComponents.put( "copyModeButton", cameraViewPanel.copyModeButton );
-		idsToComponents.put( "orthoScrollModeButton", cameraViewPanel.orthoScrollModeButton );
-		idsToComponents.put( "orthoZoomInModeButton", cameraViewPanel.orthoZoomInModeButton );
+		idsToComponents.put( "makeSceneEditorBigButton", makeSceneEditorBigButton ); //$NON-NLS-1$
+		idsToComponents.put( "makeSceneEditorSmallButton", makeSceneEditorSmallButton ); //$NON-NLS-1$
+		idsToComponents.put( "guiNavigatorSlidePanel", cameraViewPanel.guiNavigator.getSlidePanel() ); //$NON-NLS-1$
+		idsToComponents.put( "guiNavigatorDrivePanel", cameraViewPanel.guiNavigator.getDrivePanel() ); //$NON-NLS-1$
+		idsToComponents.put( "guiNavigatorTiltPanel", cameraViewPanel.guiNavigator.getTiltPanel() ); //$NON-NLS-1$
+		idsToComponents.put( "affectSubpartsCheckBox", cameraViewPanel.affectSubpartsCheckBox ); //$NON-NLS-1$
+		idsToComponents.put( "aspectRatioComboBox", cameraViewPanel.aspectRatioComboBox ); //$NON-NLS-1$
+		idsToComponents.put( "lensAngleSlider", cameraViewPanel.lensAngleSlider ); //$NON-NLS-1$
+		idsToComponents.put( "singleViewButton", cameraViewPanel.singleViewButton ); //$NON-NLS-1$
+		idsToComponents.put( "quadViewButton", cameraViewPanel.quadViewButton ); //$NON-NLS-1$
+		idsToComponents.put( "cameraDummyButton", cameraViewPanel.cameraDummyButton ); //$NON-NLS-1$
+		idsToComponents.put( "objectDummyButton", cameraViewPanel.objectDummyButton ); //$NON-NLS-1$
+		idsToComponents.put( "moveCameraCombo", cameraViewPanel.moveCameraCombo ); //$NON-NLS-1$
+		idsToComponents.put( "defaultMoveModeButton", cameraViewPanel.defaultMoveModeButton ); //$NON-NLS-1$
+		idsToComponents.put( "moveUpDownModeButton", cameraViewPanel.moveUpDownModeButton ); //$NON-NLS-1$
+		idsToComponents.put( "turnLeftRightModeButton", cameraViewPanel.turnLeftRightModeButton ); //$NON-NLS-1$
+		idsToComponents.put( "turnForwardBackwardModeButton", cameraViewPanel.turnForwardBackwardModeButton ); //$NON-NLS-1$
+		idsToComponents.put( "tumbleModeButton", cameraViewPanel.tumbleModeButton ); //$NON-NLS-1$
+		idsToComponents.put( "copyModeButton", cameraViewPanel.copyModeButton ); //$NON-NLS-1$
+		idsToComponents.put( "orthoScrollModeButton", cameraViewPanel.orthoScrollModeButton ); //$NON-NLS-1$
+		idsToComponents.put( "orthoZoomInModeButton", cameraViewPanel.orthoZoomInModeButton ); //$NON-NLS-1$
 //		idsToComponents.put( "orthoZoomOutModeButton", cameraViewPanel.orthoZoomOutModeButton );
-		idsToComponents.put( "superRenderPanel", cameraViewPanel.superRenderPanel );
-		idsToComponents.put( "renderPanel", cameraViewPanel.renderPanel );
+		idsToComponents.put( "superRenderPanel", cameraViewPanel.superRenderPanel ); //$NON-NLS-1$
+		idsToComponents.put( "renderPanel", cameraViewPanel.renderPanel ); //$NON-NLS-1$
 
 		for( java.util.Iterator iter = idsToComponents.keySet().iterator(); iter.hasNext(); ) {
 			 Object key = iter.next();

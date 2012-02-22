@@ -16,8 +16,8 @@ import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class BetterPlaceAnimation extends PointOfViewAnimation {
-	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF );
-	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 0 ) );
+	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF ); //$NON-NLS-1$
+	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 0 ) ); //$NON-NLS-1$
 	//public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null );
 
 	
@@ -57,14 +57,14 @@ public class BetterPlaceAnimation extends PointOfViewAnimation {
 			m_asSeenBy = BetterPlaceAnimation.this.asSeenBy.getReferenceFrameValue();
 			
 			if( m_asSeenBy == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " needs something or someone to move to.", null, BetterPlaceAnimation.this.asSeenBy );
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("BetterPlaceAnimation.2"), null, BetterPlaceAnimation.this.asSeenBy ); //$NON-NLS-1$
             }
             if( m_subject == m_asSeenBy ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " can't move to " + m_subject.name.getStringValue() + ".", getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );            
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("BetterPlaceAnimation.3") + m_subject.name.getStringValue() + ".", getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );             //$NON-NLS-1$ //$NON-NLS-2$
             }
             
             if (m_subject.isAncestorOf(m_asSeenBy)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " can't move to a part of itself", getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );            
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("BetterPlaceAnimation.5"), getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );             //$NON-NLS-1$
             }
 				
 			javax.vecmath.Matrix4d pov = asSeenBy.getReferenceFrameValue().getPointOfView();

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -51,16 +53,16 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	protected javax.swing.JPanel simplePanel;
 	protected javax.swing.JLabel complicatedEndBrace;
 	protected javax.swing.JButton switchButton;
-	protected String toComplicatedString = "show complicated version";
-	protected String toSimpleString = "show simple version";
+	protected String toComplicatedString = Messages.getString("LoopNElementPanel.0"); //$NON-NLS-1$
+	protected String toSimpleString = Messages.getString("LoopNElementPanel.1"); //$NON-NLS-1$
 	protected boolean isComplicated = false;
 	
-	protected static String IS_COMPLICATED_LOOP_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_COMPLICATED_LOOP_KEY";
+	protected static String IS_COMPLICATED_LOOP_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_COMPLICATED_LOOP_KEY"; //$NON-NLS-1$
 
     public LoopNElementPanel(){
         super();
-        headerText = "Loop";
-        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder");
+        headerText = Messages.getString("LoopNElementPanel.3"); //$NON-NLS-1$
+        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"); //$NON-NLS-1$
     }
 
 	protected int countPreviousInstances(java.awt.Component parent, Object toCheck){
@@ -74,7 +76,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	}
 
 	protected String getIndexName(){
-		String toReturn = "index";
+		String toReturn = Messages.getString("LoopNElementPanel.5"); //$NON-NLS-1$
 		int count = countPreviousInstances(this.getParent(), this);
 		if (count > 0){
 			toReturn += String.valueOf(count);
@@ -196,23 +198,23 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
             headerLabel.setText(headerText);
             if (CompositeElementEditor.IS_JAVA){
             	if (isComplicated){
-					headerLabel.setText("for (int");
+					headerLabel.setText("for (int"); //$NON-NLS-1$
             	} else{
             		int start = 0;
             		if (m_start != null){
             			start = m_start.intValue();
             		}
-					headerLabel.setText("for (int "+getIndexName()+"="+start+"; "+getIndexName()+"<");
+					headerLabel.setText("for (int "+getIndexName()+"="+start+"; "+getIndexName()+"<"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
             	}
             }
         }
         if (timesLabel != null){
         	Number number = m_end.getNumberValue();
         	if (number != null && number.intValue() <= 1){
-            	timesLabel.setText("time");
+            	timesLabel.setText(Messages.getString("LoopNElementPanel.11")); //$NON-NLS-1$
         	}
         	else{
-				timesLabel.setText("times");
+				timesLabel.setText(Messages.getString("LoopNElementPanel.12")); //$NON-NLS-1$
         	}
             if (CompositeElementEditor.IS_JAVA){
 				int increment = 1;
@@ -221,48 +223,48 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				}
                 if (!isExpanded){
                 	if (increment == 1){
-                    	timesLabel.setText("; "+getIndexName()+"++) { "+getDots()+" }");
+                    	timesLabel.setText("; "+getIndexName()+"++) { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 	} else{
-						timesLabel.setText("; "+getIndexName()+"+="+increment+") { "+getDots()+" }");
+						timesLabel.setText("; "+getIndexName()+"+="+increment+") { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                 	}
                 }
                 else{
                 	if (increment == 1){
-                    	timesLabel.setText("; "+getIndexName()+"++) {");
+                    	timesLabel.setText("; "+getIndexName()+"++) {"); //$NON-NLS-1$ //$NON-NLS-2$
                 	} else{
-						timesLabel.setText("; "+getIndexName()+"+="+increment+") {");
+						timesLabel.setText("; "+getIndexName()+"+="+increment+") {"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 	}
                 }
             }
         }
         if (fromLabel != null){
 			if (CompositeElementEditor.IS_JAVA){
-				fromLabel.setText("=");
+				fromLabel.setText("="); //$NON-NLS-1$
 			}
 			else{
-        		fromLabel.setText("from");
+        		fromLabel.setText(Messages.getString("LoopNElementPanel.26")); //$NON-NLS-1$
 			}
         }
 		if (upToLabel != null){
 			if (CompositeElementEditor.IS_JAVA){
-				upToLabel.setText("; "+getIndexName()+"<");
+				upToLabel.setText("; "+getIndexName()+"<"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			else{
-        		upToLabel.setText("up to (but not including)");
+        		upToLabel.setText(Messages.getString("LoopNElementPanel.29")); //$NON-NLS-1$
 			}
 		}
 		if (incrementLabel != null){
 			if (CompositeElementEditor.IS_JAVA){
-				incrementLabel.setText("; "+getIndexName()+" +=");
+				incrementLabel.setText("; "+getIndexName()+" +="); //$NON-NLS-1$ //$NON-NLS-2$
 			} else{
-        		incrementLabel.setText("incrementing by");
+        		incrementLabel.setText(Messages.getString("LoopNElementPanel.32")); //$NON-NLS-1$
 			}
 		}
 		if (complicatedEndBrace != null){
 			if (CompositeElementEditor.IS_JAVA){
-				complicatedEndBrace.setText("){");
+				complicatedEndBrace.setText("){"); //$NON-NLS-1$
 			} else{
-				complicatedEndBrace.setText("");
+				complicatedEndBrace.setText(""); //$NON-NLS-1$
 			}
 		}
 
@@ -346,7 +348,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	}
 	
 	protected void setAllNames(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentContainer, int currentLevel){
-		String baseName = "index";
+		String baseName = Messages.getString("LoopNElementPanel.35"); //$NON-NLS-1$
 		for (int i=0; i<currentContainer.size(); i++){
 			edu.cmu.cs.stage3.alice.core.Element var = null;
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder){
@@ -356,7 +358,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN)currentContainer.get(i)).index.get());
 			}
 			if (var != null){
-				var.name.set(baseName+"_#"+currentLevel);
+				var.name.set(baseName+"_#"+currentLevel); //$NON-NLS-1$
 			}
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
 				setAllNames( ((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)currentContainer.get(i)).componentResponses , currentLevel+1);
@@ -372,7 +374,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		startListening();
 		if (isTopOccurrance(m_element.getParent())){
 			edu.cmu.cs.stage3.alice.core.Variable v = ((edu.cmu.cs.stage3.alice.core.Variable)m_index.getValue());
-			v.name.set("index");
+			v.name.set(Messages.getString("LoopNElementPanel.37")); //$NON-NLS-1$
 			setAllNames(m_components, 2);
 		}
 	}

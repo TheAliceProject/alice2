@@ -56,13 +56,13 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 		} else if( pathname instanceof java.io.InputStream ) {
 			in = (java.io.InputStream)pathname;
 		} else if( pathname == null ) {
-			throw new IllegalArgumentException( "pathname is null" );
+			throw new IllegalArgumentException( Messages.getString("ZipTreeLoader.0") ); //$NON-NLS-1$
 		} else {
-			throw new IllegalArgumentException( "pathname must be an instance of String, java.io.File, java.net.URL, or java.io.InputStream" );
+			throw new IllegalArgumentException( Messages.getString("ZipTreeLoader.1") ); //$NON-NLS-1$
 		}
 
 		zipIn = new java.util.zip.ZipInputStream( new java.io.BufferedInputStream( in ) );
-		currentDirectory = "";
+		currentDirectory = ""; //$NON-NLS-1$
 		pathnamesToByteArrays = new java.util.Hashtable();
 		directories = new java.util.Vector();
 		loaderThread = new ZipLoaderThread();
@@ -86,7 +86,7 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 
 	public void setCurrentDirectory( String pathname ) throws IllegalArgumentException {
 		if( pathname == null ) {
-			pathname = "";
+			pathname = ""; //$NON-NLS-1$
 		}
 		else if( pathname.length() > 0 ) {
 			if( ! ((pathname.charAt( 0 ) == '/') || (pathname.charAt( 0 ) == '\\')) ) {
@@ -95,11 +95,11 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 
 			pathname = getCanonicalPathname( pathname );
 
-			if( ! pathname.endsWith( "/" ) ) {
-				pathname = pathname + "/";
+			if( ! pathname.endsWith( "/" ) ) { //$NON-NLS-1$
+				pathname = pathname + "/"; //$NON-NLS-1$
 			}
-			if( ! pathname.startsWith( "/" ) ) {
-				pathname = "/" + pathname + "/"; //todo: replace with line below? dennisc
+			if( ! pathname.startsWith( "/" ) ) { //$NON-NLS-1$
+				pathname = "/" + pathname + "/"; //todo: replace with line below? dennisc //$NON-NLS-1$ //$NON-NLS-2$
 				//pathname = "/" + pathname;
 			}
 		}
@@ -119,7 +119,7 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 
 		byte [] fileContents = (byte[])pathnamesToByteArrays.get( pathname );
 		if( fileContents == null ) {
-			throw new java.io.FileNotFoundException( "Not Found: " + pathname );
+			throw new java.io.FileNotFoundException( Messages.getString("ZipTreeLoader.9") + pathname ); //$NON-NLS-1$
 		}
 
 		currentlyOpenStream = new java.io.ByteArrayInputStream( fileContents );
@@ -195,7 +195,7 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 
 		// remove double separators
 		int index;
-		while( (index = pathname.indexOf( "//" )) != -1 ) {
+		while( (index = pathname.indexOf( "//" )) != -1 ) { //$NON-NLS-1$
 			pathname = pathname.substring( 0, index + 1 ) + pathname.substring( index + 2 );
 		}
 

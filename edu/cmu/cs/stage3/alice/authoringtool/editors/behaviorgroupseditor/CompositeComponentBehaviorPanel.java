@@ -100,7 +100,7 @@ public class CompositeComponentBehaviorPanel extends CompositeComponentElementPa
         }
         catch(Exception e)
         {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog("The drop failed.", e);
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("CompositeComponentBehaviorPanel.0"), e); //$NON-NLS-1$
             dropSuccess = false;
         }
         dtde.dropComplete(dropSuccess);

@@ -47,17 +47,17 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 		this.setTransferable( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( elementPrototype ) );
 
 		if( edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
-			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedResponse" ) );
+			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedResponse" ) ); //$NON-NLS-1$
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
-			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "response" ) );
+			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "response" ) ); //$NON-NLS-1$
 		} else if( edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
-			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedQuestion" ) );
+			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedQuestion" ) ); //$NON-NLS-1$
 		} else if( edu.cmu.cs.stage3.alice.core.Question.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
-			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "question" ) );
+			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "question" ) ); //$NON-NLS-1$
 		} else if( edu.cmu.cs.stage3.alice.core.question.userdefined.Component.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
-			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedQuestionComponent" ) );
+			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedQuestionComponent" ) ); //$NON-NLS-1$
 		} else {
-			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "elementPrototypeDnDPanel" ) );
+			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "elementPrototypeDnDPanel" ) ); //$NON-NLS-1$
 		}
 
 		elementName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( elementPrototype.getElementClass() );
@@ -110,26 +110,26 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 			edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 			while( tokenizer.hasMoreTokens() ) {
 				String token = tokenizer.nextToken();
-				if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {
-					String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );
+				if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+					String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ); //$NON-NLS-1$ //$NON-NLS-2$
 					if( keys.contains( propertyName ) ) {
 						addTile( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( propertyMap.get( propertyName ), false ), true );
 						constraints.gridx++;
 						keys.remove( propertyName );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "no value available for " + token, null );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPrototypeDnDPanel.10") + token, null ); //$NON-NLS-1$
 						addTile( token, true );
 						constraints.gridx++;
 					}
-				} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {
+				} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 					// skip this one
-				} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {
-					token = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );
+				} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+					token = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ); //$NON-NLS-1$ //$NON-NLS-2$
 					addTile( token, true );
 					constraints.gridx++;
 				} else {
-					while( token.indexOf( "&lt;" ) > -1 ) {
-						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();
+					while( token.indexOf( "&lt;" ) > -1 ) { //$NON-NLS-1$
+						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					}
 					addTile( token, false );
 					constraints.gridx++;
@@ -155,7 +155,7 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 		public Tile( String text ) {
 			this.text = text;
 			setLayout( new java.awt.BorderLayout() );
-			setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "prototypeParameter" ) );
+			setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "prototypeParameter" ) ); //$NON-NLS-1$
 			javax.swing.JLabel tileLabel = new javax.swing.JLabel( text );
 			tileLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 2, 0, 2 ) );
 			add( tileLabel, java.awt.BorderLayout.CENTER );

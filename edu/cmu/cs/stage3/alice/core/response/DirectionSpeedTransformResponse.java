@@ -31,8 +31,8 @@ import edu.cmu.cs.stage3.alice.core.property.DirectionProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public abstract class DirectionSpeedTransformResponse extends TransformResponse {
-	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() );
-	public final NumberProperty speed = new NumberProperty( this, "speed", new Double( 1 ) );
+	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() ); //$NON-NLS-1$
+	public final NumberProperty speed = new NumberProperty( this, "speed", new Double( 1 ) ); //$NON-NLS-1$
 	protected abstract Direction getDefaultDirection();
 	protected abstract boolean acceptsDirection( Direction direction );
 	
@@ -42,7 +42,7 @@ public abstract class DirectionSpeedTransformResponse extends TransformResponse 
 				if( acceptsDirection( (Direction)value ) ) {
 					//pass
 				} else {
-					throw new RuntimeException( this + " does not accept direction " + value );
+					throw new RuntimeException( this + Messages.getString("DirectionSpeedTransformResponse.2") + value ); //$NON-NLS-1$
 				}
 			}
 		} else {
@@ -67,10 +67,10 @@ public abstract class DirectionSpeedTransformResponse extends TransformResponse 
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( DirectionSpeedTransformResponse.this.direction.getDirectionValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "direction value must not be null.", null, DirectionSpeedTransformResponse.this.direction );
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("DirectionSpeedTransformResponse.3"), null, DirectionSpeedTransformResponse.this.direction ); //$NON-NLS-1$
 			}
 			if( DirectionSpeedTransformResponse.this.speed.getValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "speed value must not be null.", null, DirectionSpeedTransformResponse.this.speed );
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("DirectionSpeedTransformResponse.4"), null, DirectionSpeedTransformResponse.this.speed ); //$NON-NLS-1$
 			}
             Object o = DirectionSpeedTransformResponse.this.speed.get();
             if( o instanceof Expression ) {

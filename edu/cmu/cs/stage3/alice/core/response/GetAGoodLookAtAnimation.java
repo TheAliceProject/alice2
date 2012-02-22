@@ -26,7 +26,7 @@ package edu.cmu.cs.stage3.alice.core.response;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 
 public class GetAGoodLookAtAnimation extends OrientationAnimation {
-	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null );
+	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); //$NON-NLS-1$
 	public class RuntimeGetAGoodLookAtAnimation extends RuntimeOrientationAnimation {
         private edu.cmu.cs.stage3.alice.core.ReferenceFrame m_target;
 		private edu.cmu.cs.stage3.math.Matrix44 m_transformationBegin;
@@ -37,10 +37,10 @@ public class GetAGoodLookAtAnimation extends OrientationAnimation {
             m_target = GetAGoodLookAtAnimation.this.target.getReferenceFrameValue();
 
 			if( m_target == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "target value must not be null.", null, GetAGoodLookAtAnimation.this.target );
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("GetAGoodLookAtAnimation.1"), null, GetAGoodLookAtAnimation.this.target ); //$NON-NLS-1$
 			}
 			if( m_target == m_subject ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "target value must not be equal to the subject value.", getCurrentStack(), GetAGoodLookAtAnimation.this.target );            
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("GetAGoodLookAtAnimation.2"), getCurrentStack(), GetAGoodLookAtAnimation.this.target );             //$NON-NLS-1$
 			}
 
             m_transformationBegin = m_subject.getTransformation( m_asSeenBy );

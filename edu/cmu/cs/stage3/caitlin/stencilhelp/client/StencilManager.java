@@ -107,7 +107,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		}
 		int returnVal = chooser.showOpenDialog(stencilPanel);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			return chooser.getCurrentDirectory() + "\\" + chooser.getSelectedFile().getName();
+			return chooser.getCurrentDirectory() + "\\" + chooser.getSelectedFile().getName(); //$NON-NLS-1$
 		} else {
 			return null;
 		}
@@ -138,7 +138,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 				//check to see if the file already exists, if not we're fine
 				if (!(loadFile.exists())) {
-					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog("Can't find " + fileName + ". Please choose another", "Can't find file", javax.swing.JOptionPane.OK_CANCEL_OPTION);
+					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("StencilManager.1") + fileName + Messages.getString("StencilManager.2"), Messages.getString("StencilManager.3"), javax.swing.JOptionPane.OK_CANCEL_OPTION); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 					if (ans == javax.swing.JOptionPane.CANCEL_OPTION) {
 						return;
@@ -165,13 +165,13 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 			if (fileName != null) {
 				saveFile = new File(fileName);
 				// make sure this is an appropriate filename
-				if (!(fileName.endsWith(".stl"))) {
-					fileName = fileName + ".stl";
+				if (!(fileName.endsWith(".stl"))) { //$NON-NLS-1$
+					fileName = fileName + ".stl"; //$NON-NLS-1$
 				}
 				//check to see if the file already exists, if not we're fine
 				if (saveFile.exists()) {
-					String msg = "This file already exists, do you want to overwrite it?";
-					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(msg, "File already exists", javax.swing.JOptionPane.YES_NO_CANCEL_OPTION);
+					String msg = Messages.getString("StencilManager.6"); //$NON-NLS-1$
+					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(msg, Messages.getString("StencilManager.7"), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION); //$NON-NLS-1$
 
 					if (ans == javax.swing.JOptionPane.YES_OPTION) {
 						// we can proceed
@@ -200,14 +200,14 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		}
 
 		if (document != null) {
-			Element root = document.createElement("stencilStack");
-			root.setAttribute("access", "read");
+			Element root = document.createElement("stencilStack"); //$NON-NLS-1$
+			root.setAttribute("access", "read"); //$NON-NLS-1$ //$NON-NLS-2$
 			if (worldToLoad != null)
-				root.setAttribute("world", this.worldToLoad);
+				root.setAttribute("world", this.worldToLoad); //$NON-NLS-1$
 			if (nextStack != null)
-				root.setAttribute("nextStack", this.nextStack);
+				root.setAttribute("nextStack", this.nextStack); //$NON-NLS-1$
 			if (previousStack != null)
-				root.setAttribute("previousStack", this.previousStack);
+				root.setAttribute("previousStack", this.previousStack); //$NON-NLS-1$
 			for (int i = 0; i < stencilList.size(); i++) {
 				StencilManager.Stencil stencil = (StencilManager.Stencil) stencilList.elementAt(i);
 				stencil.write(document, root);
@@ -506,7 +506,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 	}
 	protected java.io.File getFile(String fileName) {
 		// get a valid fileString to open
-		int index = fileName.indexOf("/");
+		int index = fileName.indexOf("/"); //$NON-NLS-1$
 		int length = fileName.length();
 		String fileString = null;
 		if (index != -1) {
@@ -680,14 +680,14 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 	protected void loadWorld() {
 		if (worldToLoad != null) {
-			int index = worldToLoad.indexOf("/");
+			int index = worldToLoad.indexOf("/"); //$NON-NLS-1$
 			int length = worldToLoad.length();
 			String worldString = null;
 			if (index != -1) {
 				worldString = worldToLoad.substring(0, index) + java.io.File.separator + worldToLoad.substring(index + 1, length);
 			}
 			if (worldString != null) {
-				stencilApp.performTask("loadWorld<" + worldString + ">");
+				stencilApp.performTask("loadWorld<" + worldString + ">"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}
@@ -955,12 +955,12 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		}
 
 		public void write(Document document, Element element) {
-			Element stencilElement = document.createElement("stencil");
+			Element stencilElement = document.createElement("stencil"); //$NON-NLS-1$
 			String stencilTitle = null;
 
 			// figure out how to write out the statecapsule
 			if (endStateCapsule != null) {
-				Element stateNode = document.createElement("stateCapsule");
+				Element stateNode = document.createElement("stateCapsule"); //$NON-NLS-1$
 				CDATASection stateDataSection = document.createCDATASection(endStateCapsule.getStorableRepr());
 				stateNode.appendChild(stateDataSection);
 				stencilElement.appendChild(stateNode);
@@ -974,8 +974,8 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 				}
 			}
 			if (stencilTitle != null)
-				stencilElement.setAttribute("title", stencilTitle);
-			stencilElement.setAttribute("stepsToGoBack", Integer.toString(this.goBackSteps));
+				stencilElement.setAttribute("title", stencilTitle); //$NON-NLS-1$
+			stencilElement.setAttribute("stepsToGoBack", Integer.toString(this.goBackSteps)); //$NON-NLS-1$
 			element.appendChild(stencilElement);
 		}
 
@@ -1129,7 +1129,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 	protected class StencilFileFilter extends javax.swing.filechooser.FileFilter {
 		
 		public boolean accept(File pathname) {
-			if (pathname.getName().endsWith(".stl")) {
+			if (pathname.getName().endsWith(".stl")) { //$NON-NLS-1$
 				return true;
 			} else if (pathname.isDirectory()) {
 				return true;
@@ -1139,7 +1139,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 		
 		public String getDescription() {
-			return "Stencil Files";
+			return "Stencil Files"; //$NON-NLS-1$
 		}
 	}
 

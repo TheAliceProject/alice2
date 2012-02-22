@@ -16,8 +16,8 @@ public class MoviePlayer
   
   ///////////////// fields ///////////////////////////
  
-  private JFrame frame = new JFrame("Movie Player");
-  private JLabel frameLabel = new JLabel("No images yet!");
+  private JFrame frame = new JFrame(Messages.getString("MoviePlayer.0")); //$NON-NLS-1$
+  private JLabel frameLabel = new JLabel(Messages.getString("MoviePlayer.1")); //$NON-NLS-1$
   private AnimationPanel animationPanel = null;
   private String dir = null;
   
@@ -33,7 +33,7 @@ public class MoviePlayer
     Picture p = (Picture)pictureList.get(0);
     String fileName =  p.getFileName();
     File f = new File(fileName);
-    dir =  f.getParent() + "/";
+    dir =  f.getParent() + "/"; //$NON-NLS-1$
     init();
   }
   
@@ -56,8 +56,8 @@ public class MoviePlayer
    */
   public MoviePlayer()
   {
-    SimpleOutput.showInformation("Please pick a " +
-                   "directory that contains the JPEG frames");
+    SimpleOutput.showInformation(Messages.getString("MoviePlayer.3") + //$NON-NLS-1$
+                   Messages.getString("MoviePlayer.4")); //$NON-NLS-1$
     String directory = FileChooser.pickADirectory();
     dir = directory;
     animationPanel = new AnimationPanel(directory);
@@ -72,7 +72,7 @@ public class MoviePlayer
   public void showNext()
   {
    animationPanel.showNext();
-   frameLabel.setText("Frame Number " + 
+   frameLabel.setText(Messages.getString("MoviePlayer.5") +  //$NON-NLS-1$
                       animationPanel.getCurrIndex());
    frame.repaint();
   }
@@ -83,7 +83,7 @@ public class MoviePlayer
   public void showPrevious()
   {
     animationPanel.showPrev();
-    frameLabel.setText("Frame Number " + 
+    frameLabel.setText(Messages.getString("MoviePlayer.6") +  //$NON-NLS-1$
                        animationPanel.getCurrIndex());
     frame.repaint();
   }
@@ -93,10 +93,10 @@ public class MoviePlayer
    */
   public void playMovie()
   {
-    frameLabel.setText("Playing Movie");
+    frameLabel.setText(Messages.getString("MoviePlayer.7")); //$NON-NLS-1$
     frame.repaint();
     animationPanel.showAll();
-    frameLabel.setText("Frame Number " + 
+    frameLabel.setText(Messages.getString("MoviePlayer.8") +  //$NON-NLS-1$
                        animationPanel.getCurrIndex());
     frame.repaint();
   }  

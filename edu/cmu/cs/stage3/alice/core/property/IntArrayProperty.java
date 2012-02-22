@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.property;
 
 import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.alice.core.Messages;
 
 public class IntArrayProperty extends ObjectProperty {
 	public IntArrayProperty( Element owner, String name, int[] defaultValue ) {
@@ -47,7 +48,7 @@ public class IntArrayProperty extends ObjectProperty {
         String extension = filename.substring( filename.lastIndexOf( '.' )+1 );
         int[] indicesValue;
         java.io.InputStream is = loader.readFile( filename );
-        if( extension.equalsIgnoreCase( "vfb" ) ) {
+        if( extension.equalsIgnoreCase( "vfb" ) ) { //$NON-NLS-1$
             indicesValue = edu.cmu.cs.stage3.alice.scenegraph.io.VFB.loadIndices( is );
         } else {
             indicesValue = edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray.loadIndices( is );
@@ -63,7 +64,7 @@ public class IntArrayProperty extends ObjectProperty {
     
 	protected void encodeObject( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, edu.cmu.cs.stage3.alice.core.ReferenceGenerator referenceGenerator ) throws java.io.IOException {
 		int[] indicesValue = getIntArrayValue();
-        String filename = "indices.bin";
+        String filename = "indices.bin"; //$NON-NLS-1$
         Object associatedFileKey;
         try {
             associatedFileKey = storer.getKeepKey( filename );
@@ -81,18 +82,18 @@ public class IntArrayProperty extends ObjectProperty {
                 try {
                     storer.keepFile( filename );
                 } catch( edu.cmu.cs.stage3.io.KeepFileNotSupportedException kfnse ) {
-                    throw new Error( storer + " returns true for isKeepFileSupported(), but then throws " + kfnse );
+                    throw new Error( storer + Messages.getString("IntArrayProperty.2") + kfnse ); //$NON-NLS-1$
                 } catch( edu.cmu.cs.stage3.io.KeepFileDoesNotExistException kfdne ) {
                     throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( kfdne, filename );
                 }
             }
         }
-        node.appendChild( createNodeForString( document, "java.io.File["+filename+"]" ) );
+        node.appendChild( createNodeForString( document, "java.io.File["+filename+"]" ) ); //$NON-NLS-1$ //$NON-NLS-2$
     }
     
 	public void keepAnyAssociatedFiles( edu.cmu.cs.stage3.io.DirectoryTreeStorer storer ) throws edu.cmu.cs.stage3.io.KeepFileNotSupportedException, edu.cmu.cs.stage3.io.KeepFileDoesNotExistException {
         super.keepAnyAssociatedFiles( storer );
-        String filename = "indices.bin";
+        String filename = "indices.bin"; //$NON-NLS-1$
         storer.keepFile( filename );
     }
 }

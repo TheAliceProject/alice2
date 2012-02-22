@@ -15,16 +15,16 @@ public class ButtonPanel extends JPanel
   private JList frameRateList = null;
   /** label for frame rate */
   private JLabel frameRateLabel = null;
-  private JButton nextButton = new JButton("Next");
-  private JButton playButton = new JButton("Play Movie");
-  private JButton prevButton = new JButton("Prev");
+  private JButton nextButton = new JButton(Messages.getString("ButtonPanel.0")); //$NON-NLS-1$
+  private JButton playButton = new JButton(Messages.getString("ButtonPanel.1")); //$NON-NLS-1$
+  private JButton prevButton = new JButton(Messages.getString("ButtonPanel.2")); //$NON-NLS-1$
   private JButton delBeforeButton = 
-    new JButton("Delete All Previous");
+    new JButton(Messages.getString("ButtonPanel.3")); //$NON-NLS-1$
   private JButton delAfterButton = 
-    new JButton("Delete All After");
+    new JButton(Messages.getString("ButtonPanel.4")); //$NON-NLS-1$
   private JButton writeQuicktimeButton = 
-    new JButton("Write Quicktime");
-  private JButton writeAVIButton = new JButton("Write AVI");
+    new JButton(Messages.getString("ButtonPanel.5")); //$NON-NLS-1$
+  private JButton writeAVIButton = new JButton(Messages.getString("ButtonPanel.6")); //$NON-NLS-1$
   private MoviePlayer moviePlayer = null;
   
   ///////////////// Constructors /////////////////
@@ -41,14 +41,14 @@ public class ButtonPanel extends JPanel
     this.add(nextButton);
     
     // set up the frame rate list
-    frameRateLabel = new JLabel("Frames per Second: ");
+    frameRateLabel = new JLabel(Messages.getString("ButtonPanel.7")); //$NON-NLS-1$
     this.add(frameRateLabel);
-    String[] rates = {"16","24","30"};
+    String[] rates = {"16","24","30"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     frameRateList = new JList(rates);
     JScrollPane scrollPane = new JScrollPane(frameRateList);
     frameRateList.setSelectedIndex(0);
     frameRateList.setVisibleRowCount(1);
-    frameRateList.setToolTipText("The number of frames per second in the movie");
+    frameRateList.setToolTipText(Messages.getString("ButtonPanel.11")); //$NON-NLS-1$
     frameRateList.addListSelectionListener(new ListSelectionListener() {
       public void valueChanged(ListSelectionEvent e) {
         String rateS = (String) frameRateList.getSelectedValue();
@@ -65,37 +65,37 @@ public class ButtonPanel extends JPanel
     this.add(writeAVIButton);
     
     // add the action listeners to the buttons
-    nextButton.setToolTipText("Click to see the next frame");
+    nextButton.setToolTipText(Messages.getString("ButtonPanel.12")); //$NON-NLS-1$
     nextButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         moviePlayer.showNext();
       }});
-    prevButton.setToolTipText("Click to see the previous frame");
+    prevButton.setToolTipText(Messages.getString("ButtonPanel.13")); //$NON-NLS-1$
     prevButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)  {
         moviePlayer.showPrevious();
       }});
-    playButton.setToolTipText("Click to play the movie");
+    playButton.setToolTipText(Messages.getString("ButtonPanel.14")); //$NON-NLS-1$
     playButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         moviePlayer.playMovie();
       }});
-    delBeforeButton.setToolTipText("Click to delete all frames before the current one");
+    delBeforeButton.setToolTipText(Messages.getString("ButtonPanel.15")); //$NON-NLS-1$
     delBeforeButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         moviePlayer.delAllBefore();
       }});
-    delAfterButton.setToolTipText("Click to delete all frames after the current one");
+    delAfterButton.setToolTipText(Messages.getString("ButtonPanel.16")); //$NON-NLS-1$
     delAfterButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         moviePlayer.delAllAfter();
       }});
-    writeQuicktimeButton.setToolTipText("Click to write out a Quicktime movie from the frames");
+    writeQuicktimeButton.setToolTipText(Messages.getString("ButtonPanel.17")); //$NON-NLS-1$
     writeQuicktimeButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         moviePlayer.writeQuicktime();
       }});
-    writeAVIButton.setToolTipText("Click to write out an AVI movie from the frames");
+    writeAVIButton.setToolTipText(Messages.getString("ButtonPanel.18")); //$NON-NLS-1$
     writeAVIButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         moviePlayer.writeAVI();

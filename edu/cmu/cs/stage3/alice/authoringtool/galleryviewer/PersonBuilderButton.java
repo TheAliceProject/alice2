@@ -27,14 +27,14 @@ public class PersonBuilderButton extends GenericBuilderButton {
 	private edu.cmu.cs.stage3.caitlin.personbuilder.PersonBuilder m_personBuilder = null;
 	
 	protected String getToolTipString() {
-		return "Click to create your own custom character";
+		return Messages.getString("PersonBuilderButton.0"); //$NON-NLS-1$
 	}
 
 	
 	public void respondToMouse() {
 		if (mainViewer != null && PersonBuilderButton.this.isEnabled()) {
 			if (m_personBuilder == null) {
-				edu.cmu.cs.stage3.progress.ProgressPane progressPane = new edu.cmu.cs.stage3.progress.ProgressPane( "Progress", "Loading Character Builder..." ) {
+				edu.cmu.cs.stage3.progress.ProgressPane progressPane = new edu.cmu.cs.stage3.progress.ProgressPane( Messages.getString("PersonBuilderButton.1"), Messages.getString("PersonBuilderButton.2") ) { //$NON-NLS-1$ //$NON-NLS-2$
 					
 					protected void construct() throws edu.cmu.cs.stage3.progress.ProgressCancelException {
 						m_personBuilder = new edu.cmu.cs.stage3.caitlin.personbuilder.PersonBuilder( data.name, this );
@@ -45,7 +45,7 @@ public class PersonBuilderButton extends GenericBuilderButton {
 				m_personBuilder.reset();
 			}
 			if( m_personBuilder != null ) {
-				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( m_personBuilder, "Person Builder", javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE );
+				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( m_personBuilder, Messages.getString("PersonBuilderButton.3"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE ); //$NON-NLS-1$
 				if( result == javax.swing.JOptionPane.OK_OPTION ) {
 					 mainViewer.addObject( m_personBuilder.getModel() );
 				}

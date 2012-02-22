@@ -45,7 +45,7 @@ public class SimulationExceptionPanel extends javax.swing.JPanel {
 		gbc.fill = java.awt.GridBagConstraints.BOTH;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		
-		add( new javax.swing.JLabel( "Alice has detected a problem with your world:" ), gbc );
+		add( new javax.swing.JLabel( Messages.getString("SimulationExceptionPanel.0") ), gbc ); //$NON-NLS-1$
 		gbc.insets.left = 8;
 		add( m_descriptionLabel, gbc );
 		//add( m_stackPanel, gbc );
@@ -85,11 +85,11 @@ public class SimulationExceptionPanel extends javax.swing.JPanel {
 		String highlightID = null;
 		if( m_simulationException instanceof edu.cmu.cs.stage3.alice.core.SimulationPropertyException ) {
 			edu.cmu.cs.stage3.alice.core.SimulationPropertyException spe = (edu.cmu.cs.stage3.alice.core.SimulationPropertyException)m_simulationException;
-			highlightID = "editors:element<" + ancestor.getKey( world ) + ">:elementTile<" + element.getKey( world ) + ">:property<"+spe.getProperty().getName()+">";
+			highlightID = "editors:element<" + ancestor.getKey( world ) + ">:elementTile<" + element.getKey( world ) + ">:property<"+spe.getProperty().getName()+">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		}
 		if( highlightID == null ) {
 			if( (element != null) && (ancestor != null) ) {
-				highlightID = "editors:element<" + ancestor.getKey( world ) + ">:elementTile<" + element.getKey( world ) + ">";
+				highlightID = "editors:element<" + ancestor.getKey( world ) + ">:elementTile<" + element.getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 		}
 		m_glassPane.setHighlightID( highlightID );

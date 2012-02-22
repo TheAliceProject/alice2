@@ -25,6 +25,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
 import javax.swing.ScrollPaneConstants;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -36,7 +38,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class MainCompositeElementPanel extends CompositeElementPanel implements edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyListener{
 
-    protected java.awt.Color backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor");
+    protected java.awt.Color backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor"); //$NON-NLS-1$
     protected javax.swing.JPanel parameterPanel;
     protected javax.swing.JPanel variablePanel;
 
@@ -157,7 +159,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 
 	
 	protected String getHeaderHTML(){
-		String htmlToReturn = "<b>"+methodNameLabel.getText()+"</b>&nbsp;(&nbsp;";
+		String htmlToReturn = "<b>"+methodNameLabel.getText()+"</b>&nbsp;(&nbsp;"; //$NON-NLS-1$ //$NON-NLS-2$
 		for (int i=0; i<requiredParameters.size(); i++ ){
 			Class iconClass = ((edu.cmu.cs.stage3.alice.core.Variable)requiredParameters.get(i)).valueClass.getClassValue();
 			
@@ -168,17 +170,17 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 			}
 			String htmlName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getHTMLName(iconClass.getName());
 			if (isList){
-				htmlName += edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getHTMLName("edu.cmu.cs.stage3.alice.core.Collection");
+				htmlName += edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getHTMLName("edu.cmu.cs.stage3.alice.core.Collection"); //$NON-NLS-1$
 			}
-			htmlToReturn += htmlName+" <b>"+((edu.cmu.cs.stage3.alice.core.Element)requiredParameters.get(i)).name.getStringValue()+"</b>";
+			htmlToReturn += htmlName+" <b>"+((edu.cmu.cs.stage3.alice.core.Element)requiredParameters.get(i)).name.getStringValue()+"</b>"; //$NON-NLS-1$ //$NON-NLS-2$
 			if (i+1 != requiredParameters.size()){
-				htmlToReturn += ", ";
+				htmlToReturn += ", "; //$NON-NLS-1$
 			}
 		}
 		if (CompositeElementEditor.IS_JAVA){
-			htmlToReturn += ") <b>{</b>\n<br>&nbsp;&nbsp;&nbsp;&nbsp;";
+			htmlToReturn += ") <b>{</b>\n<br>&nbsp;&nbsp;&nbsp;&nbsp;"; //$NON-NLS-1$
 		} else{
-			htmlToReturn += ")\n<br>&nbsp;&nbsp;&nbsp;&nbsp;";
+			htmlToReturn += ")\n<br>&nbsp;&nbsp;&nbsp;&nbsp;"; //$NON-NLS-1$
 		}
 		htmlToReturn += edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(mainVariablePanel);
 		return htmlToReturn;
@@ -252,7 +254,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                         holder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0,0));
                         holder.setBackground(toCreate.getBackground());
                         holder.setDropTarget(new java.awt.dnd.DropTarget(holder, dropHandler));
-                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator);
+                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator); //$NON-NLS-1$
                         comma.setDropTarget(new java.awt.dnd.DropTarget(comma, dropHandler));
                         holder.add(variableGUI);
                         holder.add(comma);
@@ -296,9 +298,9 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     	typeName = typeName.substring( typeName.lastIndexOf( '.' ) + 1 );
                     }
                     if (isList){
-                    	typeName += "[]";
+                    	typeName += "[]"; //$NON-NLS-1$
                     }
-                    javax.swing.JLabel typeLabel = new javax.swing.JLabel(typeName+ " ");
+                    javax.swing.JLabel typeLabel = new javax.swing.JLabel(typeName+ " "); //$NON-NLS-1$
                     javax.swing.JComponent variableGUI = null;
                     
                     if (toCreate != parameterPanel){
@@ -327,7 +329,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                         holder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0,0));
                         holder.setBackground(toCreate.getBackground());
                         holder.setDropTarget(new java.awt.dnd.DropTarget(holder, dropHandler));
-                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator+" ");
+                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator+" "); //$NON-NLS-1$ //$NON-NLS-2$
                         comma.setDropTarget(new java.awt.dnd.DropTarget(comma, dropHandler));
                         typeLabel.setDropTarget(new java.awt.dnd.DropTarget(typeLabel, dropHandler));
                         holder.add(typeLabel);
@@ -381,7 +383,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         
         if (CompositeElementEditor.IS_JAVA){
             functionName = functionName.replace(' ', '_');
-            String typeName = "void";
+            String typeName = "void"; //$NON-NLS-1$
             if (this instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel){
 				edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion currentQuestion = (edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion )m_element;
 				String className = currentQuestion.getValueClass().getName();
@@ -396,17 +398,17 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 					typeName = typeName.substring( typeName.lastIndexOf( '.' ) + 1 );
 				}
 				if (isList){
-					typeName += "[]";
+					typeName += "[]"; //$NON-NLS-1$
 				}
             }
-			methodNameLabel.setText("public "+typeName+" "+functionName);
+			methodNameLabel.setText("public "+typeName+" "+functionName); //$NON-NLS-1$ //$NON-NLS-2$
             parameterPanel.add(methodNameLabel);
-            parameterPanel.add(new javax.swing.JLabel("("));
+            parameterPanel.add(new javax.swing.JLabel("(")); //$NON-NLS-1$
 //            nameLabel.setDropTarget(new java.awt.dnd.DropTarget(nameLabel, parameterDropHandler));
-            buildJavaVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3);
-            javax.swing.JLabel brace = new javax.swing.JLabel("{");
+            buildJavaVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3); //$NON-NLS-1$
+            javax.swing.JLabel brace = new javax.swing.JLabel("{"); //$NON-NLS-1$
             brace.setDropTarget(new java.awt.dnd.DropTarget(brace, parameterDropHandler));
-            javax.swing.JLabel paren = new javax.swing.JLabel(")");
+            javax.swing.JLabel paren = new javax.swing.JLabel(")"); //$NON-NLS-1$
             paren.setDropTarget(new java.awt.dnd.DropTarget(paren, parameterDropHandler));
             parameterPanel.add(paren);
      //       parameterPanel.add(newParameterButton);
@@ -415,7 +417,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         else{
             methodNameLabel.setText(m_element.getTrimmedKey());
             parameterPanel.add(methodNameLabel);
-            buildVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3);
+            buildVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3); //$NON-NLS-1$
          //   parameterPanel.add(newParameterButton);
         }
         newParameterButton.setDropTarget(new java.awt.dnd.DropTarget(newParameterButton, parameterDropHandler));
@@ -429,15 +431,15 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
     protected void buildVariablePanel(){
         variablePanel.removeAll();
         if (CompositeElementEditor.IS_JAVA){
-            int count = buildJavaVariablePanel(";",variablePanel, localVariables, newVariableButton, variableDropHandler,1);
+            int count = buildJavaVariablePanel(";",variablePanel, localVariables, newVariableButton, variableDropHandler,1); //$NON-NLS-1$
             if (count > 0){
-                javax.swing.JLabel semi = new javax.swing.JLabel(";");
+                javax.swing.JLabel semi = new javax.swing.JLabel(";"); //$NON-NLS-1$
                 semi.setDropTarget(new java.awt.dnd.DropTarget(semi, parameterDropHandler));
                 variablePanel.add(semi);
             }
         }
         else{
-            buildVariablePanel(",",variablePanel, localVariables, newVariableButton, variableDropHandler,1);
+            buildVariablePanel(",",variablePanel, localVariables, newVariableButton, variableDropHandler,1); //$NON-NLS-1$
         }
       //  variablePanel.add(newVariableButton);
         newVariableButton.setDropTarget(new java.awt.dnd.DropTarget(newVariableButton, variableDropHandler));
@@ -461,12 +463,12 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
     
 	protected void generateGUI(){
         java.awt.Component anchor = getAnchor(this);
-        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
+        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
         int buttonWidth = fontSize * 13;
         int buttonHeight = fontSize * 2 + 2;
         
         if (newParameterButton == null){
-            newParameterButton = new javax.swing.JButton("create new parameter");
+            newParameterButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.27")); //$NON-NLS-1$
             newParameterButton.setBackground(new java.awt.Color( 240, 240, 255 ));
             newParameterButton.setOpaque(true);
             newParameterButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -481,7 +483,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     ));*/
             newParameterButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed( java.awt.event.ActionEvent ev ) {
-                    edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog("Create New Parameter",  requiredParameters.getOwner(), false, false );
+                    edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.28"),  requiredParameters.getOwner(), false, false ); //$NON-NLS-1$
 					if( variable != null ) {
 						if( requiredParameters != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
@@ -497,16 +499,16 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                 }
             });
             newParameterButton.setDropTarget(new java.awt.dnd.DropTarget(newParameterButton, parameterDropHandler));
-            newParameterButton.setToolTipText("<html><body>"+
-                             "<p>Open the New Parameter Dialogue Box</p>"+
-                             "<p>Parameters allow you to send information</p>"+
-                             "<p>to a method when you run it. You may choose</p>"+
-                             "<p>among several types of information to send</p>"+
-                             "<p>(like numbers, objects, and Booleans).</p>"+
-                             "</body></html>");
+            newParameterButton.setToolTipText("<html><body>"+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.30")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.31")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.32")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.33")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.34")+ //$NON-NLS-1$
+                             "</body></html>"); //$NON-NLS-1$
         }
         if (newVariableButton == null){
-            newVariableButton = new javax.swing.JButton("create new variable");
+            newVariableButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.36")); //$NON-NLS-1$
             newVariableButton.setBackground(new java.awt.Color( 240, 240, 255 ));
             newVariableButton.setOpaque(true);
             newVariableButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -522,7 +524,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     ));*/
             newVariableButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed( java.awt.event.ActionEvent ev ) {
-					edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog("Create New Local Variable", localVariables.getOwner(), false, true);
+					edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.37"), localVariables.getOwner(), false, true); //$NON-NLS-1$
 					if( variable != null ) {
 						if( localVariables != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
@@ -537,13 +539,13 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                 }
             });
             newVariableButton.setDropTarget(new java.awt.dnd.DropTarget(newVariableButton, variableDropHandler));
-            newVariableButton.setToolTipText("<html><body>"+
-                             "<p>Open the New Variable Dialogue Box</p>"+
-                             "<p>Variables allow you to store information</p>"+
-                             "<p>in a method when it runs. You may choose</p>"+
-                             "<p>among several types of information (like</p>"+
-                             "<p>numbers, objects, and Booleans).</p>"+
-                             "</body></html>");
+            newVariableButton.setToolTipText("<html><body>"+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.39")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.40")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.41")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.42")+ //$NON-NLS-1$
+                             Messages.getString("MainCompositeElementPanel.43")+ //$NON-NLS-1$
+                             "</body></html>"); //$NON-NLS-1$
         }
         if (scrollPane == null){
             scrollPane = new javax.swing.JScrollPane(
@@ -610,15 +612,15 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             //headerPanel.setLayout(new javax.swing.BoxLayout(headerPanel, javax.swing.BoxLayout.Y_AXIS));
         }
         methodNameLabel = new javax.swing.JLabel();
-        java.awt.Font nameFont = new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int)(14 * fontSize/12.0));
+        java.awt.Font nameFont = new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int)(14 * fontSize/12.0)); //$NON-NLS-1$
         methodNameLabel.setFont(nameFont);
         methodNameLabel.setDropTarget(new java.awt.dnd.DropTarget(methodNameLabel, parameterDropHandler));
 
-        noParametersLabel = new javax.swing.JLabel("No parameters");
+        noParametersLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.46")); //$NON-NLS-1$
         noParametersLabel.setDropTarget(new java.awt.dnd.DropTarget(noParametersLabel, parameterDropHandler));
-        java.awt.Font noFont = new java.awt.Font("SansSerif", java.awt.Font.ITALIC, (int)(12 * fontSize/12.0));
+        java.awt.Font noFont = new java.awt.Font("SansSerif", java.awt.Font.ITALIC, (int)(12 * fontSize/12.0)); //$NON-NLS-1$
         noParametersLabel.setFont(noFont);
-        noVariablesLabel = new javax.swing.JLabel("No variables");
+        noVariablesLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.48")); //$NON-NLS-1$
         noVariablesLabel.setDropTarget(new java.awt.dnd.DropTarget(noVariablesLabel, variableDropHandler));
         noVariablesLabel.setFont(noFont);
 
@@ -684,7 +686,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         this.add(scrollPane, java.awt.BorderLayout.CENTER);
         this.add(headerPanel, java.awt.BorderLayout.NORTH);
         if (CompositeElementEditor.IS_JAVA){
-            closeBrace.setText(" }");
+            closeBrace.setText(" }"); //$NON-NLS-1$
             this.add(closeBrace, java.awt.BorderLayout.SOUTH);
         }
 

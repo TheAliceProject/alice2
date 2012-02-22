@@ -78,24 +78,24 @@ class ColorRenderer extends javax.swing.JLabel implements javax.swing.ListCellRe
 	}
 
 	public static String getTextFromColor( java.awt.Color color ) {
-		String text = "";
-		if( color.equals( java.awt.Color.black ) ) { text = "black"; }
-		else if( color.equals( java.awt.Color.blue ) ) { text = "blue"; }
-		else if( color.equals( java.awt.Color.cyan ) ) { text = "cyan"; }
-		else if( color.equals( java.awt.Color.darkGray ) ) { text = "darkGray"; }
-		else if( color.equals( java.awt.Color.gray ) ) { text = "gray"; }
-		else if( color.equals( java.awt.Color.green ) ) { text = "green"; }
-		else if( color.equals( java.awt.Color.lightGray ) ) { text = "lightGray"; }
-		else if( color.equals( java.awt.Color.magenta ) ) { text = "magenta"; }
-		else if( color.equals( java.awt.Color.orange ) ) { text = "orange"; }
-		else if( color.equals( java.awt.Color.pink ) ) { text = "pink"; }
-		else if( color.equals( java.awt.Color.red ) ) { text = "red"; }
-		else if( color.equals( java.awt.Color.white ) ) { text = "white"; }
-		else if( color.equals( java.awt.Color.yellow ) ) { text = "yellow"; }
+		String text = ""; //$NON-NLS-1$
+		if( color.equals( java.awt.Color.black ) ) { text = Messages.getString("ColorRenderer.1"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.blue ) ) { text = Messages.getString("ColorRenderer.2"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.cyan ) ) { text = Messages.getString("ColorRenderer.3"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.darkGray ) ) { text = Messages.getString("ColorRenderer.4"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.gray ) ) { text = Messages.getString("ColorRenderer.5"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.green ) ) { text = Messages.getString("ColorRenderer.6"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.lightGray ) ) { text = Messages.getString("ColorRenderer.7"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.magenta ) ) { text = Messages.getString("ColorRenderer.8"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.orange ) ) { text = Messages.getString("ColorRenderer.9"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.pink ) ) { text = Messages.getString("ColorRenderer.10"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.red ) ) { text = Messages.getString("ColorRenderer.11"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.white ) ) { text = Messages.getString("ColorRenderer.12"); } //$NON-NLS-1$
+		else if( color.equals( java.awt.Color.yellow ) ) { text = Messages.getString("ColorRenderer.13"); } //$NON-NLS-1$
 		else {
 			float[] rgba = new float[4];
 			color.getComponents( rgba );
-			text = "<red = " + rgba[0] + ", green = " + rgba[1] + ", blue = " + rgba[2] + ", alpha = " + rgba[3] + ">";
+			text = Messages.getString("ColorRenderer.14") + rgba[0] + Messages.getString("ColorRenderer.15") + rgba[1] + Messages.getString("ColorRenderer.16") + rgba[2] + Messages.getString("ColorRenderer.17") + rgba[3] + ">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		}
 
 		return text;

@@ -35,47 +35,47 @@ public final class Configuration {
 
 	// static access
 	public static String getValue( Package p, String relativeKey ) {
-		return _getValue( p.getName() + "." + relativeKey );
+		return _getValue( p.getName() + "." + relativeKey ); //$NON-NLS-1$
 	}
 
 	public static String[] getValueList( Package p, String relativeKey ) {
-		return _getValueList( p.getName() + "." + relativeKey );
+		return _getValueList( p.getName() + "." + relativeKey ); //$NON-NLS-1$
 	}
 
 	public static void setValue( Package p, String relativeKey, String value ) {
-		_setValue( p.getName() + "." + relativeKey, value );
+		_setValue( p.getName() + "." + relativeKey, value ); //$NON-NLS-1$
 	}
 
 	public static void setValueList( Package p, String relativeKey, String[] values ) {
-		_setValueList( p.getName() + "." + relativeKey, values );
+		_setValueList( p.getName() + "." + relativeKey, values ); //$NON-NLS-1$
 	}
 
 	public static void addToValueList( Package p, String relativeKey, String item ) {
-		_addToValueList( p.getName() + "." + relativeKey, item );
+		_addToValueList( p.getName() + "." + relativeKey, item ); //$NON-NLS-1$
 	}
 
 	public static void removeFromValueList( Package p, String relativeKey, String item ) {
-		_removeFromValueList( p.getName() + "." + relativeKey, item );
+		_removeFromValueList( p.getName() + "." + relativeKey, item ); //$NON-NLS-1$
 	}
 
 	public static boolean isList( Package p, String relativeKey ) {
-		return _isList( p.getName() + "." + relativeKey );
+		return _isList( p.getName() + "." + relativeKey ); //$NON-NLS-1$
 	}
 
 	public static boolean keyExists( Package p, String relativeKey ) {
-		return _keyExists( p.getName() + "." + relativeKey );
+		return _keyExists( p.getName() + "." + relativeKey ); //$NON-NLS-1$
 	}
 
 	public static void deleteKey( Package p, String relativeKey ) {
-		_deleteKey( p.getName() + "." + relativeKey );
+		_deleteKey( p.getName() + "." + relativeKey ); //$NON-NLS-1$
 	}
 
 	public static String[] getSubKeys( Package p, String relativeKey, int visibility ) {
-		return _getSubKeys( p.getName() + "." + relativeKey, visibility );
+		return _getSubKeys( p.getName() + "." + relativeKey, visibility ); //$NON-NLS-1$
 	}
 
 	public static void setVisibility( Package p, String relativeKey, int visibility ) {
-		_setVisibility( p.getName() + "." + relativeKey, visibility );
+		_setVisibility( p.getName() + "." + relativeKey, visibility ); //$NON-NLS-1$
 	}
 
 
@@ -83,7 +83,7 @@ public final class Configuration {
 	private String keyPrefix;
 
 	private Configuration( Package p ) {
-		keyPrefix = p.getName() + ".";
+		keyPrefix = p.getName() + "."; //$NON-NLS-1$
 	}
 
 	public static Configuration getLocalConfiguration( Package p ) {
@@ -135,19 +135,19 @@ public final class Configuration {
 	}
 
 	// internals
-	private static final java.io.File configLocation = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "AlicePreferences.xml" ).getAbsoluteFile();
+	private static final java.io.File configLocation = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "AlicePreferences.xml" ).getAbsoluteFile(); //$NON-NLS-1$
 	private static Key root;
 
 	static {
 		root = new Key();
-		root.name = "<root>";
+		root.name = "<root>"; //$NON-NLS-1$
 		root.subKeys = new java.util.HashMap();
-		java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt");
+		java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt"); //$NON-NLS-1$
 		if (aliceHasNotExitedFile.canRead()){
 			try {
 				storeConfig();
 			} catch( java.io.IOException e2 ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Unable to create new preferences file.", e2 );
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Configuration.15"), e2 ); //$NON-NLS-1$
 			}
 		}
 		else{
@@ -223,11 +223,11 @@ public final class Configuration {
 		
 		public String toString() {
 			StringBuffer s = new StringBuffer();
-			s.append( "\nname: " + name + "\n" );
-			s.append( "visibility: " + visibility + "\n" );
-			s.append( "value: " + value + "\n" );
-			s.append( "valueList: " + valueList + "\n" );
-			s.append( "subKeys: " + subKeys + "\n" );
+			s.append( Messages.getString("Configuration.16") + name + "\n" ); //$NON-NLS-1$ //$NON-NLS-2$
+			s.append( Messages.getString("Configuration.18") + visibility + "\n" ); //$NON-NLS-1$ //$NON-NLS-2$
+			s.append( Messages.getString("Configuration.20") + value + "\n" ); //$NON-NLS-1$ //$NON-NLS-2$
+			s.append( Messages.getString("Configuration.22") + valueList + "\n" ); //$NON-NLS-1$ //$NON-NLS-2$
+			s.append( Messages.getString("Configuration.24") + subKeys + "\n" ); //$NON-NLS-1$ //$NON-NLS-2$
 			return s.toString();
 		}
 	}
@@ -419,7 +419,7 @@ public final class Configuration {
 				if( childNode instanceof org.w3c.dom.Element ) {
 					org.w3c.dom.Element childElement = (org.w3c.dom.Element)childNode;
 					String tagName = childElement.getTagName();
-					if( tagName.equals( "key" ) ) {
+					if( tagName.equals( "key" ) ) { //$NON-NLS-1$
 						Key subKey = loadKey( childElement );
 						if( (subKey != null) && (subKey.name != null) ) {
 							root.subKeys.put( subKey.name, subKey );
@@ -445,44 +445,44 @@ public final class Configuration {
 //		}
 		}catch (Exception e){
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-				"Alice had trouble reading your preferences but will continue to run normally",
-				"Unable to load preferences",javax.swing.JOptionPane.WARNING_MESSAGE);
+				Messages.getString("Configuration.27"), //$NON-NLS-1$
+				Messages.getString("Configuration.28"),javax.swing.JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
 		}
 	}
 
 	private static Key loadKey( org.w3c.dom.Element keyElement ) {
 		Key key = new Key();
 
-		String visibility = keyElement.getAttribute( "visibility" ).trim();
-		if( visibility.equals( "open" ) ) {
+		String visibility = keyElement.getAttribute( "visibility" ).trim(); //$NON-NLS-1$
+		if( visibility.equals( "open" ) ) { //$NON-NLS-1$
 			key.visibility = VIS_OPEN;
-		} else if( visibility.equals( "advanced" ) ) {
+		} else if( visibility.equals( "advanced" ) ) { //$NON-NLS-1$
 			key.visibility = VIS_ADVANCED;
-		} else if( visibility.equals( "hidden" ) ) {
+		} else if( visibility.equals( "hidden" ) ) { //$NON-NLS-1$
 			key.visibility = VIS_HIDDEN;
 		}
 
 		java.util.HashMap map = parseSingleNode( keyElement );
 
-		org.w3c.dom.Element nameElement = (org.w3c.dom.Element)map.get( "name" );
+		org.w3c.dom.Element nameElement = (org.w3c.dom.Element)map.get( "name" ); //$NON-NLS-1$
 		if( nameElement != null ) {
-			org.w3c.dom.Text textNode = (org.w3c.dom.Text)parseSingleNode( nameElement ).get( "text" );
+			org.w3c.dom.Text textNode = (org.w3c.dom.Text)parseSingleNode( nameElement ).get( "text" ); //$NON-NLS-1$
 			if( textNode != null ) {
 				key.name = textNode.getData().trim();
 			}
 		}
 
-		org.w3c.dom.Element valueElement = (org.w3c.dom.Element)map.get( "value" );
+		org.w3c.dom.Element valueElement = (org.w3c.dom.Element)map.get( "value" ); //$NON-NLS-1$
 		if( valueElement != null ) {
-			org.w3c.dom.Element listElement = (org.w3c.dom.Element)parseSingleNode( valueElement ).get( "list" );
+			org.w3c.dom.Element listElement = (org.w3c.dom.Element)parseSingleNode( valueElement ).get( "list" ); //$NON-NLS-1$
 			if( listElement != null ) {
 				key.valueList = new java.util.ArrayList();
-				java.util.ArrayList items = (java.util.ArrayList)parseSingleNode( listElement ).get( "items" );
+				java.util.ArrayList items = (java.util.ArrayList)parseSingleNode( listElement ).get( "items" ); //$NON-NLS-1$
 				if( items != null ) {
 					for( java.util.Iterator iter = items.iterator(); iter.hasNext(); ) {
 						org.w3c.dom.Element itemElement = (org.w3c.dom.Element)iter.next();
 						if( itemElement != null ) {
-							org.w3c.dom.Text textNode = (org.w3c.dom.Text)parseSingleNode( itemElement ).get( "text" );
+							org.w3c.dom.Text textNode = (org.w3c.dom.Text)parseSingleNode( itemElement ).get( "text" ); //$NON-NLS-1$
 							if( textNode != null ) {
 								key.valueList.add( textNode.getData().trim() );
 							}
@@ -490,14 +490,14 @@ public final class Configuration {
 					}
 				}
 			} else {
-				org.w3c.dom.Text textNode = (org.w3c.dom.Text)parseSingleNode( valueElement ).get( "text" );
+				org.w3c.dom.Text textNode = (org.w3c.dom.Text)parseSingleNode( valueElement ).get( "text" ); //$NON-NLS-1$
 				if( textNode != null ) {
 					key.value = textNode.getData().trim();
 				}
 			}
 		}
 
-		java.util.ArrayList keys = (java.util.ArrayList)map.get( "keys" );
+		java.util.ArrayList keys = (java.util.ArrayList)map.get( "keys" ); //$NON-NLS-1$
 		if( keys != null ) {
 			for( java.util.Iterator iter = keys.iterator(); iter.hasNext(); ) {
 				org.w3c.dom.Element subKeyElement = (org.w3c.dom.Element)iter.next();
@@ -537,29 +537,29 @@ public final class Configuration {
 			if( childNode instanceof org.w3c.dom.Element ) {
 				org.w3c.dom.Element childElement = (org.w3c.dom.Element)childNode;
 				String tagName = childElement.getTagName();
-				if( tagName.equals( "name" ) ) {
-					map.put( "name", childElement );
-				} else if( tagName.equals( "value" ) ) {
-					map.put( "value", childElement );
-				} else if( tagName.equals( "list" ) ) {
-					map.put( "list", childElement );
-				} else if( tagName.equals( "item" ) ) {
-					java.util.ArrayList list = (java.util.ArrayList)map.get( "items" );
+				if( tagName.equals( "name" ) ) { //$NON-NLS-1$
+					map.put( "name", childElement ); //$NON-NLS-1$
+				} else if( tagName.equals( "value" ) ) { //$NON-NLS-1$
+					map.put( "value", childElement ); //$NON-NLS-1$
+				} else if( tagName.equals( "list" ) ) { //$NON-NLS-1$
+					map.put( "list", childElement ); //$NON-NLS-1$
+				} else if( tagName.equals( "item" ) ) { //$NON-NLS-1$
+					java.util.ArrayList list = (java.util.ArrayList)map.get( "items" ); //$NON-NLS-1$
 					if( list == null ) {
 						list = new java.util.ArrayList();
-						map.put( "items", list );
+						map.put( "items", list ); //$NON-NLS-1$
 					}
 					list.add( childElement );
-				} else if( tagName.equals( "key" ) ) {
-					java.util.ArrayList list = (java.util.ArrayList)map.get( "keys" );
+				} else if( tagName.equals( "key" ) ) { //$NON-NLS-1$
+					java.util.ArrayList list = (java.util.ArrayList)map.get( "keys" ); //$NON-NLS-1$
 					if( list == null ) {
 						list = new java.util.ArrayList();
-						map.put( "keys", list );
+						map.put( "keys", list ); //$NON-NLS-1$
 					}
 					list.add( childElement );
 				}
 			} else if( childNode instanceof org.w3c.dom.Text ) {
-				map.put( "text", childNode );
+				map.put( "text", childNode ); //$NON-NLS-1$
 			}
 		}
 
@@ -606,7 +606,7 @@ public final class Configuration {
 			javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
 			org.w3c.dom.Document document = builder.newDocument();
 
-			org.w3c.dom.Element rootElement = document.createElement( "configuration" );
+			org.w3c.dom.Element rootElement = document.createElement( "configuration" ); //$NON-NLS-1$
 			document.appendChild( rootElement );
 
 			if( root.subKeys != null ) {
@@ -629,35 +629,35 @@ public final class Configuration {
 //			((org.apache.crimson.tree.XmlDocument)document).write( os );
 //			((com.sun.xml.tree.XmlDocument)document).write( os );
 		} catch( javax.xml.parsers.ParserConfigurationException pce ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error parsing preferences file.", pce );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Configuration.55"), pce ); //$NON-NLS-1$
 		}
 	}
 
 	private static org.w3c.dom.Element makeKeyElement( org.w3c.dom.Document document, Key key ) {
-		org.w3c.dom.Element keyElement = document.createElement( "key" );
+		org.w3c.dom.Element keyElement = document.createElement( "key" ); //$NON-NLS-1$
 		if( (key.visibility & VIS_OPEN) > 0 ) {
-			keyElement.setAttribute( "visibility", "open" );
+			keyElement.setAttribute( "visibility", "open" ); //$NON-NLS-1$ //$NON-NLS-2$
 		} else if( (key.visibility & VIS_ADVANCED) > 0 ) {
-			keyElement.setAttribute( "visibility", "advanced" );
+			keyElement.setAttribute( "visibility", "advanced" ); //$NON-NLS-1$ //$NON-NLS-2$
 		} else if( (key.visibility & VIS_HIDDEN) > 0 ) {
-			keyElement.setAttribute( "visibility", "hidden" );
+			keyElement.setAttribute( "visibility", "hidden" ); //$NON-NLS-1$ //$NON-NLS-2$
 		} else {
-			keyElement.setAttribute( "visibility", "open" );
+			keyElement.setAttribute( "visibility", "open" ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		org.w3c.dom.Element nameElement = document.createElement( "name" );
+		org.w3c.dom.Element nameElement = document.createElement( "name" ); //$NON-NLS-1$
 		nameElement.appendChild( document.createTextNode( key.name ) );
 		keyElement.appendChild( nameElement );
 
 		if( key.value != null ) {
-			org.w3c.dom.Element valueElement = document.createElement( "value" );
+			org.w3c.dom.Element valueElement = document.createElement( "value" ); //$NON-NLS-1$
 			valueElement.appendChild( document.createTextNode( key.value ) );
 			keyElement.appendChild( valueElement );
 		} else if( key.valueList != null ) {
-			org.w3c.dom.Element valueElement = document.createElement( "value" );
-			org.w3c.dom.Element listElement = document.createElement( "list" );
+			org.w3c.dom.Element valueElement = document.createElement( "value" ); //$NON-NLS-1$
+			org.w3c.dom.Element listElement = document.createElement( "list" ); //$NON-NLS-1$
 			for( java.util.Iterator iter = key.valueList.iterator(); iter.hasNext(); ) {
-				org.w3c.dom.Element itemElement = document.createElement( "item" );
+				org.w3c.dom.Element itemElement = document.createElement( "item" ); //$NON-NLS-1$
 				itemElement.appendChild( document.createTextNode( (String)iter.next() ) );
 				listElement.appendChild( itemElement );
 			}

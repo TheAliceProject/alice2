@@ -91,7 +91,7 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 		moreTile.setLayout( new java.awt.BorderLayout() );
 		moreTile.setOpaque( false );
 		moreTile.setBorder( null );
-		javax.swing.JLabel moreLabel = new javax.swing.JLabel( "more...", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "popupArrow" ), SwingConstants.LEADING );
+		javax.swing.JLabel moreLabel = new javax.swing.JLabel( Messages.getString("FormattedElementViewController.0"), edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "popupArrow" ), SwingConstants.LEADING ); //$NON-NLS-1$ //$NON-NLS-2$
 		moreLabel.setHorizontalTextPosition( SwingConstants.LEADING );
 		moreLabel.setIconTextGap( 2 );
 		moreTile.add( moreLabel, java.awt.BorderLayout.CENTER );
@@ -151,27 +151,27 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 			setTransferable( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( element ) );
 
 			if( element instanceof edu.cmu.cs.stage3.alice.core.response.Comment ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Comment" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Comment" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Comment ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Comment" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Comment" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.response.Print ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "PropertyAssignment" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "PropertyAssignment" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Return ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Return" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Return" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedResponse" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedResponse" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.Response ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "response" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "response" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedQuestion" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedQuestion" ) ); //$NON-NLS-1$
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.Question ) { //TODO: specify in config
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "question" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "question" ) ); //$NON-NLS-1$
 			} else {
-				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "formattedElementViewController" ) );
+				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "formattedElementViewController" ) ); //$NON-NLS-1$
 			}
 			
 			
@@ -241,9 +241,9 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 	private void calculateVisibleProperties() {
 		visibleProperties = new java.util.LinkedList();
 		if( element != null ) {
-			String visiblePropertiesString = (String)element.data.get( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties" );
+			String visiblePropertiesString = (String)element.data.get( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties" ); //$NON-NLS-1$
 			if( visiblePropertiesString != null ) {
-				java.util.StringTokenizer tokenizer = new java.util.StringTokenizer( visiblePropertiesString, "," );
+				java.util.StringTokenizer tokenizer = new java.util.StringTokenizer( visiblePropertiesString, "," ); //$NON-NLS-1$
 				while( tokenizer.hasMoreTokens() ) {
 					String token = tokenizer.nextToken();
 
@@ -258,8 +258,8 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer formatTokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( this.format );
 		while( formatTokenizer.hasMoreTokens() ) {
 			String token = formatTokenizer.nextToken();
-			if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {
-				edu.cmu.cs.stage3.alice.core.Property property = element.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
+			if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+				edu.cmu.cs.stage3.alice.core.Property property = element.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
 				if( (property != null) && (! visibleProperties.contains( property )) ) {
 					visibleProperties.add( property );
 				}
@@ -274,10 +274,10 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 					o = ((edu.cmu.cs.stage3.alice.core.Property)o).getName();
 				}
 				sb.append( (String)o );
-				sb.append( "," );
+				sb.append( "," ); //$NON-NLS-1$
 			}
 			sb.setLength( sb.length() - 1 );
-			element.data.put( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties", sb.toString() );
+			element.data.put( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties", sb.toString() ); //$NON-NLS-1$
 		}
 	}
 
@@ -370,16 +370,16 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 			while( formatTokenizer.hasMoreTokens() ) {
 				String token = formatTokenizer.nextToken();
 				javax.swing.JComponent gui = null;
-				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {
-					edu.cmu.cs.stage3.alice.core.Property property = element.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
+				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+					edu.cmu.cs.stage3.alice.core.Property property = element.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
 					if( property != null ) {
-						if( ((element instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) || (element instanceof edu.cmu.cs.stage3.alice.core.question.PropertyValue)) && property.getName().equals( "propertyName" ) ) {
+						if( ((element instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) || (element instanceof edu.cmu.cs.stage3.alice.core.question.PropertyValue)) && property.getName().equals( "propertyName" ) ) { //$NON-NLS-1$
 							gui = new StringPropertyLabel( (edu.cmu.cs.stage3.alice.core.property.StringProperty)property );
-						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "propertyName" ) ) {
+						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "propertyName" ) ) { //$NON-NLS-1$
 							gui = new StringPropertyLabel( (edu.cmu.cs.stage3.alice.core.property.StringProperty)property );
-						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) {
+						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) { //$NON-NLS-1$
 							gui = new PropertyLabel( property );
-						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion) && property.getName().equals( "userDefinedQuestion" ) ) {
+						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion) && property.getName().equals( "userDefinedQuestion" ) ) { //$NON-NLS-1$
 							gui = new PropertyLabel( property );
 						} else {
 // why was the following line ever written?
@@ -392,12 +392,12 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 						unusedVisibleProperties.remove( property );
 					}
 				} else {
-					while( token.indexOf( "&lt;" ) > -1 ) {
-						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();
+					while( token.indexOf( "&lt;" ) > -1 ) { //$NON-NLS-1$
+						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					}
 					gui = new javax.swing.JLabel( token );
 					gui.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 3, 0, 3 ) );
-					int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
+					int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
 					/*if (element instanceof edu.cmu.cs.stage3.alice.core.question.BinaryNumberResultingInBooleanQuestion ||
 						element instanceof edu.cmu.cs.stage3.alice.core.question.BinaryNumberResultingInNumberQuestion ||
 						element instanceof edu.cmu.cs.stage3.alice.core.question.IsEqualTo ||
@@ -416,8 +416,8 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 								((javax.swing.JLabel)gui).setForeground(java.awt.Color.black);
 					}else */
 					if( ((element instanceof edu.cmu.cs.stage3.alice.core.response.Comment) || (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Comment)) ) { //TODO: put in config file
-						((javax.swing.JLabel)gui).setForeground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "commentForeground" ) );
-						((javax.swing.JLabel)gui).setFont( new java.awt.Font( "Helvetica", java.awt.Font.BOLD, (int)(13*fontSize/12.0) ) );
+						((javax.swing.JLabel)gui).setForeground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "commentForeground" ) ); //$NON-NLS-1$
+						((javax.swing.JLabel)gui).setFont( new java.awt.Font( "Helvetica", java.awt.Font.BOLD, (int)(13*fontSize/12.0) ) ); //$NON-NLS-1$
 					}
 				}
 				if( gui != null ) {
@@ -430,9 +430,9 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 				edu.cmu.cs.stage3.alice.core.Property property = (edu.cmu.cs.stage3.alice.core.Property)iter.next();
 				if( property != null ) {
 					javax.swing.JComponent gui = null;
-					if( (element instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "propertyName" ) ) {
+					if( (element instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "propertyName" ) ) { //$NON-NLS-1$
 						gui = new StringPropertyLabel( (edu.cmu.cs.stage3.alice.core.property.StringProperty)property );
-					} else if( (element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) {
+					} else if( (element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) { //$NON-NLS-1$
 						gui = new PropertyLabel( property );
 					} else {
 						boolean allowExpressions = ! String.class.isAssignableFrom( property.getValueClass() );
@@ -469,7 +469,7 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 			super.run( value );
 			if( addToVisibleProperties ) {
 				FormattedElementViewController.this.visibleProperties.add( SetPropertyImmediatelyFactory.this.property );
-				FormattedElementViewController.this.element.data.put( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties", ((String)FormattedElementViewController.this.element.data.get( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties" )) + "," + property.getName() );
+				FormattedElementViewController.this.element.data.put( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties", ((String)FormattedElementViewController.this.element.data.get( "edu.cmu.cs.stage3.alice.authoringtool.visibleProperties" )) + "," + property.getName() ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				FormattedElementViewController.this.refreshGUI();
 			}
 		}

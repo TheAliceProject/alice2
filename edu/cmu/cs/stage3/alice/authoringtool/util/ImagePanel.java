@@ -49,7 +49,7 @@ public class ImagePanel extends javax.swing.JPanel {
 			try {
 				tracker.waitForAll();
 			} catch( InterruptedException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Interrupted while waiting for image to load.", e );
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ImagePanel.0"), e ); //$NON-NLS-1$
 			}
 			revalidate();
 			repaint();

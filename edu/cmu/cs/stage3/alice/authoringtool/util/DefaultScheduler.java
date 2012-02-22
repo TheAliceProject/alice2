@@ -98,7 +98,7 @@ public class DefaultScheduler implements Runnable {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				}
 			} catch( Throwable t ) {
-				System.err.println( "Error during simulation:" );
+				System.err.println( Messages.getString("DefaultScheduler.0") ); //$NON-NLS-1$
 				t.printStackTrace();
 			}
 			iter.remove();
@@ -121,7 +121,7 @@ public class DefaultScheduler implements Runnable {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				}
 			} catch( Throwable t ) {
-				System.err.println( "Error during simulation:" );
+				System.err.println( Messages.getString("DefaultScheduler.1") ); //$NON-NLS-1$
 				t.printStackTrace();
 			}
 		}

@@ -54,7 +54,7 @@ class AliceWorldFilter implements java.io.FileFilter {
 
 class TutorialWorldFilter implements java.io.FileFilter {
 	public boolean accept(java.io.File file) {
-		if (file.getName().endsWith(".stl")) {
+		if (file.getName().endsWith(".stl")) { //$NON-NLS-1$
 			return true;
 		}
 		return false;
@@ -70,14 +70,14 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	public static final int EXAMPLE_TAB_ID = 5;
 	public static final int TEXTBOOK_EXAMPLE_TAB_ID = 6;
 
-	private static final String TUTORIAL_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Tutorial"+"</body></html>";
-	private static final String EXAMPLES_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Examples"+"</body></html>";
-	private static final String RECENT_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Recent Worlds"+"</body></html>";
-	private static final String TEXTBOOK_EXAMPLES_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Textbook"+"</body></html>";
-	private static final String OPEN_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Open a world"+"</body></html>";
-	private static final String TEMPLATES_STRING = "<html><body leftmargin=5 marginwidth=5>"+"Templates"+"</body></html>";
+	private static final String TUTORIAL_STRING = Messages.getString("StartUpContentPane.2"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private static final String EXAMPLES_STRING = Messages.getString("StartUpContentPane.5"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private static final String RECENT_STRING = Messages.getString("StartUpContentPane.8"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private static final String TEXTBOOK_EXAMPLES_STRING = Messages.getString("StartUpContentPane.11"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private static final String OPEN_STRING = Messages.getString("StartUpContentPane.14"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private static final String TEMPLATES_STRING = Messages.getString("StartUpContentPane.17"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-	private final int WIDTH = 530;
+	private final int WIDTH = 540;
 	private final int HEIGHT = 500;
 	//private final int INSET = 14;
 
@@ -159,30 +159,30 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	protected int currentTab = TUTORIAL_TAB_ID;
 
 	public StartUpContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
-		headerImage = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/StartupScreen.png"));
-		basicIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/aliceIcon.png"));
-		directoryIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/directoryIcon.png"));
-		upDirectoryIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/upDirectoryIcon.png"));
-		tutorialButtonIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/tutorialButton.png"));
+		headerImage = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/StartupScreen.png")); //$NON-NLS-1$
+		basicIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/aliceIcon.png")); //$NON-NLS-1$
+		directoryIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/directoryIcon.png")); //$NON-NLS-1$
+		upDirectoryIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/upDirectoryIcon.png")); //$NON-NLS-1$
+		tutorialButtonIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/tutorialButton.png")); //$NON-NLS-1$
 		
-		String[] recentWorldsStrings = authoringToolConfig.getValueList("recentWorlds.worlds");
-		String max = authoringToolConfig.getValue("recentWorlds.maxWorlds");
+		String[] recentWorldsStrings = authoringToolConfig.getValueList("recentWorlds.worlds"); //$NON-NLS-1$
+		String max = authoringToolConfig.getValue("recentWorlds.maxWorlds"); //$NON-NLS-1$
 		int maxRecentWorlds = Integer.parseInt(max);
 		if (maxRecentWorlds > 0 && maxRecentWorlds <= recentWorldsStrings.length) {
 			String[] cappedRecentWorlds = new String[maxRecentWorlds];
 			System.arraycopy(recentWorldsStrings, 0, cappedRecentWorlds, 0, maxRecentWorlds);
 			recentWorldsStrings = cappedRecentWorlds;
 		}
-		String filename = authoringToolConfig.getValue("directories.examplesDirectory");
+		String filename = authoringToolConfig.getValue("directories.examplesDirectory"); //$NON-NLS-1$
 
 		if (filename != null) {
 			exampleWorlds = new java.io.File(filename).getAbsoluteFile();
 		}
-		filename = authoringToolConfig.getValue("directories.templatesDirectory");
+		filename = authoringToolConfig.getValue("directories.templatesDirectory"); //$NON-NLS-1$
 		if (filename != null) {
 			templateWorlds = new java.io.File(filename).getAbsoluteFile();
 		}
-		filename = authoringToolConfig.getValue("directories.textbookExamplesDirectory");
+		filename = authoringToolConfig.getValue("directories.textbookExamplesDirectory"); //$NON-NLS-1$
 		if (filename != null) {
 			textbookExampleWorlds = new java.io.File(filename).getAbsoluteFile();
 		}
@@ -194,15 +194,15 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		guiInit();
 
 		int count = 0;
-		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
-		String font = "SansSerif";//"Dialog";
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
+		String font = "SansSerif";//"Dialog"; //$NON-NLS-1$
 		if (authoringTool != null) {
 			tutorialWorlds = authoringTool.getTutorialDirectory();
 			count = buildPanel(tutorialWorldsContainer, buildVectorFromDirectory(tutorialWorlds, tutorialFilter), false, null, StartUpIcon.TUTORIAL);
 			if (count <= 0) {
 				tutorialTopContainer.removeAll();
 				javax.swing.JLabel noTutorialWorldsLabel = new javax.swing.JLabel();
-				noTutorialWorldsLabel.setText("No tutorial found.");
+				noTutorialWorldsLabel.setText(Messages.getString("StartUpContentPane.31")); //$NON-NLS-1$
 				noTutorialWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int)(18*fontSize/12.0)));
 				tutorialTopContainer.add(noTutorialWorldsLabel);
 			}
@@ -211,7 +211,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (count <= 0) {
 			exampleWorldsContainer.removeAll();
 			javax.swing.JLabel noExampleWorldsLabel = new javax.swing.JLabel();
-			noExampleWorldsLabel.setText("No example worlds.");
+			noExampleWorldsLabel.setText(Messages.getString("StartUpContentPane.32")); //$NON-NLS-1$
 			noExampleWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int)(18*fontSize/12.0)));
 			exampleWorldsContainer.add(noExampleWorldsLabel);
 		}
@@ -219,7 +219,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (count <= 0) {
 			templateWorldsContainer.removeAll();
 			javax.swing.JLabel noTemplateWorldsLabel = new javax.swing.JLabel();
-			noTemplateWorldsLabel.setText("No templates.");
+			noTemplateWorldsLabel.setText(Messages.getString("StartUpContentPane.33")); //$NON-NLS-1$
 			noTemplateWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int)(18*fontSize/12.0)));
 			templateWorldsContainer.add(noTemplateWorldsLabel);
 		}
@@ -227,7 +227,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (count <= 0) {
 			recentWorldsContainer.removeAll();
 			javax.swing.JLabel noRecentWorldsLabel = new javax.swing.JLabel();
-			noRecentWorldsLabel.setText("No recent worlds.");
+			noRecentWorldsLabel.setText(Messages.getString("StartUpContentPane.34")); //$NON-NLS-1$
 			noRecentWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int)(18*fontSize/12.0)));
 			recentWorldsContainer.add(noRecentWorldsLabel);
 		}
@@ -268,7 +268,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	
 	//todo: adjust title based on tab
 	public String getTitle() {
-		return "Welcome to Alice!";
+		return Messages.getString("StartUpContentPane.35"); //$NON-NLS-1$
 	}
 	public void addOKActionListener( java.awt.event.ActionListener l ) {
 		openButton.addActionListener( l );
@@ -351,7 +351,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	public void setTabID( int tabID ) {
 		if( tabID == OPEN_TAB_ID ) {
 			//fileChooser.rescanCurrentDirectory();
-			java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
+			java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory")); //$NON-NLS-1$
 			if (currentDir.exists()) {
 				fileChooser.setCurrentDirectory(currentDir);
 			}
@@ -404,7 +404,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			toReturn = new java.util.Vector();
 			java.io.File[] files = dir.listFiles(f);
 			for (int i = 0; i < files.length; i++) {
-				String name = "";
+				String name = ""; //$NON-NLS-1$
 				if (files[i].isDirectory()) {
 					name = makeDirectoryNameFromFilename(files[i].getName());
 				} else {
@@ -421,26 +421,26 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		String filename = file.getAbsolutePath();
 		javax.swing.ImageIcon icon = null;
 		try {
-			if (filename.endsWith(".stl")) {
+			if (filename.endsWith(".stl")) { //$NON-NLS-1$
 				javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
 				org.w3c.dom.Document document;
 				//org.w3c.dom.Element xmlRoot;
 				javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
 				document = builder.parse(file);
-				org.w3c.dom.NodeList nl = document.getElementsByTagName("stencilStack");
+				org.w3c.dom.NodeList nl = document.getElementsByTagName("stencilStack"); //$NON-NLS-1$
 				if (nl != null && nl.getLength() > 0) {
 					org.w3c.dom.Node n = nl.item(0);
 					if (n instanceof org.w3c.dom.Element) {
-						String worldFileName = ((org.w3c.dom.Element) n).getAttribute("world");
+						String worldFileName = ((org.w3c.dom.Element) n).getAttribute("world"); //$NON-NLS-1$
 						file = new java.io.File(worldFileName);
 					}
 				}
 			}
 			java.util.zip.ZipFile zip = new java.util.zip.ZipFile(file);
-			java.util.zip.ZipEntry entry = zip.getEntry("thumbnail.png");
+			java.util.zip.ZipEntry entry = zip.getEntry("thumbnail.png"); //$NON-NLS-1$
 			if (entry != null) {
 				java.io.InputStream stream = zip.getInputStream(entry);
-				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load("png", stream);
+				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load("png", stream); //$NON-NLS-1$
 				if (image != null) {
 					icon = new javax.swing.ImageIcon(image);
 				}
@@ -477,7 +477,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} else if (topLevelOwner == textbookExampleScrollPane) {
 			return TEXTBOOK_EXAMPLES_STRING;
 		} else {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 	}
 
@@ -490,8 +490,8 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (parentDir != null || toAdd != null) {
 			toBuild.removeAll();
 		}
-		if (parentDir != null && parentDir.getName().compareToIgnoreCase("Required")!=0) {
-			String parentDirName = "Back";
+		if (parentDir != null && parentDir.getName().compareToIgnoreCase("Required")!=0) { //$NON-NLS-1$
+			String parentDirName = Messages.getString("StartUpContentPane.45"); //$NON-NLS-1$
 			StartUpIcon parentDirIcon = new StartUpIcon(parentDirName, upDirectoryIcon, parentDir.getAbsolutePath(), false, StartUpIcon.DIRECTORY, getTopContainer(toBuild));
 			toBuild.add(parentDirIcon);
 			count++;
@@ -533,12 +533,12 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	private void initializeFileChooser(){
-		String font = "SansSerif";
+		String font = "SansSerif"; //$NON-NLS-1$
 		try {
-			if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) )
-				UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//"com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); //$NON-NLS-1$
 			else
-				UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel");
+				UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel"); //$NON-NLS-1$
 				AikMin.setFontSize(12);
 		}
 		catch(Exception e) { }
@@ -557,7 +557,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		//if (currentDir.exists()) {
 		//	fileChooser.setCurrentDirectory(currentDir);
 		//} else {
-		java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
+		java.io.File currentDir =  new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory")); //$NON-NLS-1$
 		if (currentDir.exists()) {
 			fileChooser.setCurrentDirectory(currentDir);
 		}
@@ -572,13 +572,13 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		fileChooser.setFileSelectionMode( javax.swing.JFileChooser.FILES_ONLY );
 		mainTabPane.add(fileChooser, OPEN_STRING);
 		try {
-			AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ));
+			AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )); //$NON-NLS-1$
 		}
 		catch(Exception e) { }
 	}
 	
 	private void guiInit() {
-		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) );
+		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); //$NON-NLS-1$
 		if ( fontSize > 12)
 			setPreferredSize(new java.awt.Dimension(WIDTH, HEIGHT + fontSize * 3));
 		else
@@ -591,9 +591,9 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		recentWorldsContainer.setBorder(null);
 		templateWorldsContainer.setBorder(null);
 		textbookExampleWorldsContainer.setBorder(null);
-		authoringToolConfig.getValue("showStartUpDialog");
-		stopShowingCheckBox.setSelected(authoringToolConfig.getValue("showStartUpDialog").equalsIgnoreCase("true"));
-		int selectedTab = Integer.parseInt(authoringToolConfig.getValue("showStartUpDialog_OpenTab"));
+		authoringToolConfig.getValue("showStartUpDialog"); //$NON-NLS-1$
+		stopShowingCheckBox.setSelected(authoringToolConfig.getValue("showStartUpDialog").equalsIgnoreCase("true")); //$NON-NLS-1$ //$NON-NLS-2$
+		int selectedTab = Integer.parseInt(authoringToolConfig.getValue("showStartUpDialog_OpenTab")); //$NON-NLS-1$
 		setTabID(selectedTab);
 
 		mainTabPane.setUI(new edu.cmu.cs.stage3.alice.authoringtool.util.AliceTabbedPaneUI());
@@ -652,13 +652,13 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		buttonPanel.setOpaque(false);
 //		buttonPanel.setPreferredSize(new Dimension(480, 50));
 		//openButton.setMaximumSize(new Dimension(95, 27));
-		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) );
+		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); //$NON-NLS-1$
 		openButton.setMinimumSize(new Dimension(fontSize  * 8, fontSize * 2 + 5));
 		openButton.setPreferredSize(new Dimension(fontSize  * 8, fontSize * 2 + 5));
-		openButton.setText("Open");
+		openButton.setText(Messages.getString("StartUpContentPane.60")); //$NON-NLS-1$
 		openButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
-				authoringToolConfig.setValue( "showStartUpDialog_OpenTab", Integer.toString(getIDForTab(mainTabPane.getSelectedComponent())) );
+				authoringToolConfig.setValue( "showStartUpDialog_OpenTab", Integer.toString(getIDForTab(mainTabPane.getSelectedComponent())) ); //$NON-NLS-1$
 			}
 		} );
 
@@ -666,7 +666,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		//cancelButton.setMaximumSize(new Dimension(95, 27));
 		cancelButton.setMinimumSize(new Dimension(fontSize  * 8, fontSize * 2 + 5));
 		cancelButton.setPreferredSize(new Dimension(fontSize  * 8, fontSize * 2 + 5));
-		cancelButton.setText("Cancel");
+		cancelButton.setText(Messages.getString("StartUpContentPane.62")); //$NON-NLS-1$
 		/*
 		refreshButton.setMaximumSize(new Dimension(90, 22));
 		refreshButton.setMinimumSize(new Dimension(90, 22));
@@ -680,7 +680,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		});
 */
 		stopShowingCheckBox.setOpaque(false);
-		stopShowingCheckBox.setText("Show this dialog at start");
+		stopShowingCheckBox.setText(Messages.getString("StartUpContentPane.63")); //$NON-NLS-1$
 		stopShowingCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stopShowingCheckBox_actionPerformed(e);
@@ -729,7 +729,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		startTutorialButton.setMaximumSize(new Dimension(120, 90));
 		startTutorialButton.setMinimumSize(new Dimension(120, 90));
 		startTutorialButton.setPreferredSize(new Dimension(120, 90));
-		startTutorialButton.setToolTipText("Start the Alice tutorial");
+		startTutorialButton.setToolTipText(Messages.getString("StartUpContentPane.64")); //$NON-NLS-1$
 		startTutorialButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				startTutorialButton_actionPerformed(e);
@@ -745,7 +745,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		tutorialWorldsContainer.setBackground(Color.white);
 		tutorialWorldsContainer.setAlignmentX((float) 0.0);
 		tutorialWorldsContainer.setAlignmentY((float) 0.0);
-		jLabel1.setText("or continue a tutorial:");
+		jLabel1.setText(Messages.getString("StartUpContentPane.65")); //$NON-NLS-1$
 
 		exampleWorldsDirLabel.setText(getBaseDirString(exampleScrollPane));
 		exampleWorldsDirectoryContainer.setLayout(new GridBagLayout());
@@ -773,11 +773,11 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		buttonPanel.add(cancelButton, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
 		buttonPanel.add(Box.createGlue(), new GridBagConstraints(0, 1, 1, 2, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		add(mainTabPane, new GridBagConstraints(0, 1, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		mainTabPane.add(tutorialTopContainer, TUTORIAL_STRING);
-		mainTabPane.add(recentScrollPane, RECENT_STRING);
-		mainTabPane.add(templateWorldsDirectoryContainer, TEMPLATES_STRING);
-		mainTabPane.add(exampleWorldsDirectoryContainer, EXAMPLES_STRING);
-		mainTabPane.add(textbookExampleWorldsDirectoryContainer, TEXTBOOK_EXAMPLES_STRING);
+		mainTabPane.add(tutorialTopContainer, "<html><body leftmargin=5 marginwidth=5>"+TUTORIAL_STRING+"</body></html>");
+		mainTabPane.add(recentScrollPane, "<html><body leftmargin=5 marginwidth=5>"+RECENT_STRING+"</body></html>");
+		mainTabPane.add(templateWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>"+TEMPLATES_STRING+"</body></html>");
+		mainTabPane.add(exampleWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>"+EXAMPLES_STRING+"</body></html>");
+		mainTabPane.add(textbookExampleWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>"+TEXTBOOK_EXAMPLES_STRING+"</body></html>");
 
 		mainTabPane.add(fileChooser, OPEN_STRING);
 		tutorialTopContainer.add(tutorialButtonPanel, BorderLayout.NORTH);
@@ -843,9 +843,9 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 	private void stopShowingCheckBox_actionPerformed(ActionEvent e) {
 		if (stopShowingCheckBox.isSelected()) {
-			authoringToolConfig.setValue("showStartUpDialog", "true");
+			authoringToolConfig.setValue("showStartUpDialog", "true"); //$NON-NLS-1$ //$NON-NLS-2$
 		} else {
-			authoringToolConfig.setValue("showStartUpDialog", "false");
+			authoringToolConfig.setValue("showStartUpDialog", "false"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	private void fileChooser_actionPerformed(ActionEvent e) {
@@ -945,7 +945,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 
 		protected String getRelativePath(String current, String root) {
-			if (root==null) root="";
+			if (root==null) root=""; //$NON-NLS-1$
 			return current.substring(root.length());
 		}
 
@@ -975,7 +975,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				this.setBackground(BACKGROUND_COLOR);
 				this.setOpaque(false);
 				this.repaint();
-				this.setForeground((java.awt.Color) javax.swing.UIManager.get("Label.foreground"));
+				this.setForeground((java.awt.Color) javax.swing.UIManager.get("Label.foreground")); //$NON-NLS-1$
 			}
 		}
 

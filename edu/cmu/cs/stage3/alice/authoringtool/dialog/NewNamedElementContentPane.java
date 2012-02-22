@@ -27,8 +27,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
  * @author Jason Pratt, Dennis Cosgrove
  */
 public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
-	private javax.swing.JButton m_okButton = new javax.swing.JButton( "OK" );
-	private javax.swing.JButton m_cancelButton = new javax.swing.JButton( "Cancel" );
+	private javax.swing.JButton m_okButton = new javax.swing.JButton( Messages.getString("NewNamedElementContentPane.0") ); //$NON-NLS-1$
+	private javax.swing.JButton m_cancelButton = new javax.swing.JButton( Messages.getString("NewNamedElementContentPane.1") ); //$NON-NLS-1$
 	private java.util.HashMap validityHashmap = new java.util.HashMap();
 	private edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback validityChecker = new edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback(){
 		public void setValidity(Object source, boolean value){
@@ -61,7 +61,7 @@ public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.insets.top = 8;
 		gbc.insets.left = 8;
-		add( new javax.swing.JLabel( "Name:" ), gbc );
+		add( new javax.swing.JLabel( Messages.getString("NewNamedElementContentPane.2") ), gbc ); //$NON-NLS-1$
 		gbc.insets.right = 8;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;
@@ -95,7 +95,7 @@ public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing
 	}
 
 	public void reset( edu.cmu.cs.stage3.alice.core.Element parent ) {
-		m_nameTextField.setText( "" );
+		m_nameTextField.setText( "" ); //$NON-NLS-1$
 		m_nameTextField.setParent( parent );
 		m_nameTextField.grabFocus();
 	}
