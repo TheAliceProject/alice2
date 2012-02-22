@@ -28,6 +28,6 @@ package edu.cmu.cs.stage3.io;
  */
 public class KeepFileNotSupportedException extends Exception {
 	public KeepFileNotSupportedException() {
-		super( "keepFile() is not supported for this DirectoryTreeStorer" );
+		super( Messages.getString("KeepFileNotSupportedException.0") ); //$NON-NLS-1$
 	}
 }

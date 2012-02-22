@@ -25,6 +25,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
 import edu.cmu.cs.stage3.alice.authoringtool.*;
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel;
@@ -92,8 +93,8 @@ public abstract class CompositeElementEditor extends GroupingPanel
 
     private void configInit()
     {
-        if(AuthoringToolResources.getMiscItem("javaLikeSyntax") != null)
-            IS_JAVA = AuthoringToolResources.getMiscItem("javaLikeSyntax").equals("true");
+        if(AuthoringToolResources.getMiscItem("javaLikeSyntax") != null) //$NON-NLS-1$
+            IS_JAVA = AuthoringToolResources.getMiscItem("javaLikeSyntax").equals("true"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     public JComponent getJComponent()
@@ -187,8 +188,8 @@ public abstract class CompositeElementEditor extends GroupingPanel
         mainElementContainer.setBackground(getEditorColor());
         setLayout(new BorderLayout());
         setBackground(getEditorColor());
-        add(buttonPanel, "South");
-        add(mainElementContainer, "Center");
+        add(buttonPanel, "South"); //$NON-NLS-1$
+        add(mainElementContainer, "Center"); //$NON-NLS-1$
         updateGui();
     }
 
@@ -201,18 +202,18 @@ public abstract class CompositeElementEditor extends GroupingPanel
             compositeElementPanel = createElementTree(elementBeingEdited);
             if(compositeElementPanel != null)
             {
-                mainElementContainer.add(compositeElementPanel, "Center");
+                mainElementContainer.add(compositeElementPanel, "Center"); //$NON-NLS-1$
                 setBackground(compositeElementPanel.getBackground());
             }
         } else
         {
-            JLabel emptyLabel = new JLabel("Not an editable element");
+            JLabel emptyLabel = new JLabel(Messages.getString("CompositeElementEditor.6")); //$NON-NLS-1$
             emptyLabel.setFont(emptyLabel.getFont().deriveFont(2));
             JPanel emptyPanel = new JPanel();
             emptyPanel.setLayout(new GridBagLayout());
             emptyPanel.setBackground(getBackground());
             emptyPanel.add(emptyLabel, new GridBagConstraints(0, 0, 1, 1, 0.0D, 0.0D, 10, 1, new Insets(0, 0, 0, 0), 0, 0));
-            mainElementContainer.add(emptyPanel, "Center");
+            mainElementContainer.add(emptyPanel, "Center"); //$NON-NLS-1$
         }
         revalidate();
         repaint();
@@ -345,7 +346,7 @@ public abstract class CompositeElementEditor extends GroupingPanel
     }
 
 
-    public final String editorName = "Composite Editor";
+    public final String editorName = Messages.getString("CompositeElementEditor.8"); //$NON-NLS-1$
     protected Element elementBeingEdited;
     protected MainCompositeElementPanel compositeElementPanel;
     protected JPanel mainElementContainer;

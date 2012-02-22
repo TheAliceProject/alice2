@@ -30,8 +30,8 @@ public class SoundsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.Expa
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty sounds;
 	protected javax.swing.JPanel contentPanel = new javax.swing.JPanel();
 	protected java.util.HashMap soundGuiCache = new java.util.HashMap();
-	protected javax.swing.JButton importSoundButton = new javax.swing.JButton( "import sound" );
-	protected javax.swing.JButton recordSoundButton = new javax.swing.JButton( "record sound" );
+	protected javax.swing.JButton importSoundButton = new javax.swing.JButton( Messages.getString("SoundsPanel.0") ); //$NON-NLS-1$
+	protected javax.swing.JButton recordSoundButton = new javax.swing.JButton( Messages.getString("SoundsPanel.1") ); //$NON-NLS-1$
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected RefreshListener refreshListener = new RefreshListener();
 
@@ -41,7 +41,7 @@ public class SoundsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.Expa
 	}
 
 	private void guiInit() {
-		setTitle( "Sounds" );
+		setTitle( Messages.getString("SoundsPanel.2") ); //$NON-NLS-1$
 		contentPanel.setLayout( new java.awt.GridBagLayout() );
 		setContent( contentPanel );
 		importSoundButton.setBackground( new java.awt.Color( 240, 240, 255 ) );
@@ -50,7 +50,7 @@ public class SoundsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.Expa
 			new java.awt.event.ActionListener() {
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					//edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().promptUserForImportedSound( sounds.getOwner().getSandbox() );
-					authoringTool.setImportFileFilter( "Sound Files" );
+					authoringTool.setImportFileFilter( "Sound Files" ); //$NON-NLS-1$
 					authoringTool.importElement( null, SoundsPanel.this.sounds.getOwner() );
 				}
 			}
@@ -75,8 +75,8 @@ public class SoundsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.Expa
 		setOpaque( false );
 		contentPanel.setOpaque( false );
 
-		importSoundButton.setToolTipText( "<html><font face=arial size=-1>Load a Sound File into this World.<p><p>You can play a sound when the world runs by using an Object's <b>PlaySound</b> method.</font></html>" );
-		recordSoundButton.setToolTipText( "<html><font face=arial size=-1>Record a Sound.<p><p>Use a microphone or play a sound file while recording to capture a sound.<p>You can play a sound when the world runs by using an Object's <b>PlaySound</b> method.</font></html>" );
+		importSoundButton.setToolTipText( Messages.getString("SoundsPanel.4") ); //$NON-NLS-1$
+		recordSoundButton.setToolTipText( Messages.getString("SoundsPanel.5") ); //$NON-NLS-1$
 	}
 
 	public void setSounds( edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty sounds ) {
@@ -109,7 +109,7 @@ public class SoundsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.Expa
 					if( gui != null ) {
 						contentPanel.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets( 0, 2, 0, 2 ), 0, 0 ) );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Unable to create gui for sound: " + sound, null );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("SoundsPanel.6") + sound, null ); //$NON-NLS-1$
 					}
 				}
 			}

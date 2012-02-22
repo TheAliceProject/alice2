@@ -59,7 +59,7 @@ public class OrthographicZoomMode extends RenderTargetManipulatorMode {
 	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( ev.getPoint().equals( pressPoint ) ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "Click and drag to zoom.", "Zoom Message", javax.swing.JOptionPane.INFORMATION_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("OrthographicZoomMode.0"), Messages.getString("OrthographicZoomMode.1"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 		} else if( undoRedoStack != null ) {
 			if( ! ev.isPopupTrigger() ) { // TODO: this is a hack.  this method should never be called if the popup is triggered
 				//undoRedoStack.push( new SizeUndoableRedoable( pickedTransformable, oldSize, pickedTransformable.getSize(), scheduler ) );

@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.event;
 
+import edu.cmu.cs.stage3.alice.scenegraph.Messages;
 import edu.cmu.cs.stage3.alice.scenegraph.Property;
 
 public class PropertyEvent extends java.util.EventObject {
@@ -50,7 +51,7 @@ public class PropertyEvent extends java.util.EventObject {
 		if( m_isPreviousValueValid ) {
 			return m_previousValue;
 		} else {
-			throw new RuntimeException( "previous value in not valid" );
+			throw new RuntimeException( Messages.getString("PropertyEvent.0") ); //$NON-NLS-1$
 		}
 	}
 }

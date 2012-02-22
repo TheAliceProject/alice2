@@ -31,12 +31,12 @@ public class ElementTreeCellRenderer extends javax.swing.JPanel implements javax
 	protected javax.swing.JPanel elementPanel = new javax.swing.JPanel();
 	protected javax.swing.JLabel iconLabel = new javax.swing.JLabel();
 	protected javax.swing.JLabel elementLabel = new javax.swing.JLabel();
-	protected java.awt.Color selectedColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeSelected" );
-	protected java.awt.Color bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeBackground" );
-	protected java.awt.Color disabledColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeDisabled" );
-	protected java.awt.Color textColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeText" );
-	protected java.awt.Color disabledTextColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeDisabledText" );
-	protected java.awt.Color selectedTextColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeSelectedText" );
+	protected java.awt.Color selectedColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeSelected" ); //$NON-NLS-1$
+	protected java.awt.Color bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeBackground" ); //$NON-NLS-1$
+	protected java.awt.Color disabledColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeDisabled" ); //$NON-NLS-1$
+	protected java.awt.Color textColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeText" ); //$NON-NLS-1$
+	protected java.awt.Color disabledTextColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeDisabledText" ); //$NON-NLS-1$
+	protected java.awt.Color selectedTextColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "objectTreeSelectedText" ); //$NON-NLS-1$
 
 	public ElementTreeCellRenderer() {
 		setOpaque( false );
@@ -92,7 +92,7 @@ public class ElementTreeCellRenderer extends javax.swing.JPanel implements javax
 				}
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error: not an Element: " + value, null );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementTreeCellRenderer.6") + value, null ); //$NON-NLS-1$
 		}
 		this.doLayout();
 		return this;

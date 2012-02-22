@@ -76,7 +76,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 	private static byte[] s_wavHeader = new byte[ 44 ];
 	static {
-		System.arraycopy( "RIFF????WAVEfmt ".getBytes(), 0, s_wavHeader, 0, 16 );
+		System.arraycopy( "RIFF????WAVEfmt ".getBytes(), 0, s_wavHeader, 0, 16 ); //$NON-NLS-1$
 		s_wavHeader[16] = 0x10;
 		s_wavHeader[17] = 0;
 		s_wavHeader[18] = 0;
@@ -97,7 +97,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 		s_wavHeader[33] = 0;
 		s_wavHeader[34] = 16;
 		s_wavHeader[35] = 0;
-		System.arraycopy( "data????".getBytes(), 0, s_wavHeader, 36, 8 );
+		System.arraycopy( "data????".getBytes(), 0, s_wavHeader, 36, 8 ); //$NON-NLS-1$
 	}
 
 	Capture capture = new Capture();
@@ -141,14 +141,14 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 		m_durationLabel = new javax.swing.JLabel();
 		onDurationUpdate();
 
-		m_recordButton = new javax.swing.JButton( "Record" );
+		m_recordButton = new javax.swing.JButton( Messages.getString("SoundRecorder.2") ); //$NON-NLS-1$
 		m_recordButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				onRecord();
 			}
 		});
 
-		m_pauseButton = new javax.swing.JButton( "Pause" );
+		m_pauseButton = new javax.swing.JButton( Messages.getString("SoundRecorder.3") ); //$NON-NLS-1$
 		m_pauseButton.setEnabled(false);
 		m_pauseButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
@@ -156,7 +156,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 			}
 		});
 		
-		m_playButton = new javax.swing.JButton( "Play" );
+		m_playButton = new javax.swing.JButton( Messages.getString("SoundRecorder.4") ); //$NON-NLS-1$
 		m_playButton.setEnabled(false);
 		m_playButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
@@ -165,7 +165,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 		});
 
 		m_nameTextField = new javax.swing.JTextField();
-		m_nameTextField.setText( "unnamedSound" );
+		m_nameTextField.setText( Messages.getString("SoundRecorder.5") ); //$NON-NLS-1$
 		m_nameTextField.getDocument().addDocumentListener(
 			new javax.swing.event.DocumentListener() {
 				public void changedUpdate( javax.swing.event.DocumentEvent e ) { SoundRecorder.this.checkNameForValidity(); }
@@ -174,7 +174,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 			}
 		);
 
-		m_okButton = new javax.swing.JButton( "OK" );
+		m_okButton = new javax.swing.JButton( Messages.getString("SoundRecorder.6") ); //$NON-NLS-1$
 		m_okButton.setPreferredSize(new Dimension(80, 26));
 		m_okButton.setEnabled( false );
 		m_okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +183,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 			}
 		});
 
-		m_cancelButton = new javax.swing.JButton( "Cancel" );
+		m_cancelButton = new javax.swing.JButton( Messages.getString("SoundRecorder.7") ); //$NON-NLS-1$
 		m_cancelButton.setPreferredSize(new Dimension(80, 26));
 		m_cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
@@ -200,7 +200,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 		gbc = new java.awt.GridBagConstraints();
 		gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-		namePanel.add( new javax.swing.JLabel( "Name: " ), gbc );
+		namePanel.add( new javax.swing.JLabel( Messages.getString("SoundRecorder.8") ), gbc ); //$NON-NLS-1$
 		gbc.weightx = 1.0;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		namePanel.add( m_nameTextField, gbc );
@@ -301,7 +301,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 	
 	public void setParentToCheckForNameValidity( edu.cmu.cs.stage3.alice.core.Element parentToCheckForNameValidity ) {
 		m_parentToCheckForNameValidity = parentToCheckForNameValidity;
-		m_nameTextField.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( "unnamedSound", m_parentToCheckForNameValidity ) );
+		m_nameTextField.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( Messages.getString("SoundRecorder.9"), m_parentToCheckForNameValidity ) ); //$NON-NLS-1$
 	}
 	
 	private void checkNameForValidity() {
@@ -328,11 +328,11 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 
 	private String formatTime( double seconds ) {
 		if( Double.isNaN( seconds ) ) {
-			return "?:??";
+			return "?:??"; //$NON-NLS-1$
 		} else {
-			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" );
-			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" );
-			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" );
+			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" ); //$NON-NLS-1$
+			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" ); //$NON-NLS-1$
+			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" ); //$NON-NLS-1$
 
 			double secondsFloored = (int)Math.floor( seconds );
 			double decimal = seconds - secondsFloored;
@@ -342,10 +342,10 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 
 			String timeString = secMinFormatter1.format( secs ) + decFormatter.format( decimal );
 			if( hours > 0.0 ) {
-				timeString = secMinFormatter1.format( minutes ) + ":" + timeString;
-				timeString = secMinFormatter2.format( hours ) + ":" + timeString;
+				timeString = secMinFormatter1.format( minutes ) + ":" + timeString; //$NON-NLS-1$
+				timeString = secMinFormatter2.format( hours ) + ":" + timeString; //$NON-NLS-1$
 			} else {
-				timeString = secMinFormatter2.format( minutes ) + ":" + timeString;
+				timeString = secMinFormatter2.format( minutes ) + ":" + timeString; //$NON-NLS-1$
 			}
 
 			return timeString;
@@ -377,15 +377,15 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 			 }
 		break;		
 		}
-		m_durationLabel.setText( "Duration: " + formatTime( t ) );
+		m_durationLabel.setText( Messages.getString("SoundRecorder.17") + formatTime( t ) ); //$NON-NLS-1$
 	}
 
 	private void onStop() {
 		pauseTime = 0; totalPauseTime = 0;
 		m_state = IDLE;
-		m_playButton.setText( "Play" );
+		m_playButton.setText( Messages.getString("SoundRecorder.18") ); //$NON-NLS-1$
 		m_playButton.setEnabled( true );
-		m_recordButton.setText( "Record" );
+		m_recordButton.setText( Messages.getString("SoundRecorder.19") ); //$NON-NLS-1$
 		m_recordButton.setEnabled( true );
 		m_pauseButton.setEnabled(false);
 		m_durationUpdateTimer.stop();
@@ -393,11 +393,11 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 	}
 	
     private void onRecord() {
-   	 	if (m_recordButton.getText().startsWith("Record")) {	 		
+   	 	if (m_recordButton.getText().startsWith(Messages.getString("SoundRecorder.20"))) {	 		 //$NON-NLS-1$
 			capture.start();
 			m_playButton.setEnabled(false);
 			m_pauseButton.setEnabled(true);
-			m_recordButton.setText("Stop");
+			m_recordButton.setText(Messages.getString("SoundRecorder.21")); //$NON-NLS-1$
 			m_state = RECORDING;
 			m_durationT0 = System.currentTimeMillis();
 			m_durationUpdateTimer.start();		
@@ -407,7 +407,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
     }
     
     private void onPause() {
-		if (m_pauseButton.getText().startsWith("Pause")) {
+		if (m_pauseButton.getText().startsWith(Messages.getString("SoundRecorder.22"))) { //$NON-NLS-1$
 		    if (capture.thread != null) {
 		        capture.line.stop();
 		        m_state = PAUSE;
@@ -417,7 +417,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 		            m_state = PAUSE;
 		        }
 		    }
-		    m_pauseButton.setText("Resume");
+		    m_pauseButton.setText(Messages.getString("SoundRecorder.23")); //$NON-NLS-1$
 		} else {
 		    if (capture.thread != null) {
 		        capture.line.start();
@@ -428,16 +428,16 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 		            m_state = RESUME;
 		        }
 		    }
-		    m_pauseButton.setText("Pause");
+		    m_pauseButton.setText(Messages.getString("SoundRecorder.24")); //$NON-NLS-1$
 		}
     }
     
     private void onPlay() {
-    	if (m_playButton.getText().startsWith("Play")) {
+    	if (m_playButton.getText().startsWith(Messages.getString("SoundRecorder.25"))) { //$NON-NLS-1$
             playback.start();
             m_recordButton.setEnabled(false);
             m_pauseButton.setEnabled(true);
-            m_playButton.setText("Stop");
+            m_playButton.setText(Messages.getString("SoundRecorder.26")); //$NON-NLS-1$
             m_state = PLAYING;
             m_durationT0 = System.currentTimeMillis();
 			m_durationUpdateTimer.start();	
@@ -469,7 +469,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 
         public void start() {
             thread = new Thread(this);
-            thread.setName("Playback");
+            thread.setName(Messages.getString("SoundRecorder.27")); //$NON-NLS-1$
             thread.start();
         }
 
@@ -491,14 +491,14 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
         public void run() {
             // make sure we have something to play
             if (audioInputStream == null) {
-                shutDown("No loaded audio to play back");
+                shutDown(Messages.getString("SoundRecorder.28")); //$NON-NLS-1$
                 return;
             }
             // reset to the beginning of the stream
             try {
                 audioInputStream.reset();
             } catch (Exception e) {
-                shutDown("Unable to reset the stream\n" + e);
+                shutDown(Messages.getString("SoundRecorder.29") + e); //$NON-NLS-1$
                 return;
             }
 
@@ -507,7 +507,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
             AudioInputStream playbackInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
                         
             if (playbackInputStream == null) {
-                shutDown("Unable to convert stream of format " + audioInputStream + " to format " + format);
+                shutDown(Messages.getString("SoundRecorder.30") + audioInputStream + Messages.getString("SoundRecorder.31") + format); //$NON-NLS-1$ //$NON-NLS-2$
                 return;
             }
 
@@ -516,7 +516,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
             DataLine.Info info = new DataLine.Info(SourceDataLine.class, 
                 format);
             if (!AudioSystem.isLineSupported(info)) {
-                shutDown("Line matching " + info + " not supported.");
+                shutDown(Messages.getString("SoundRecorder.32") + info + Messages.getString("SoundRecorder.33")); //$NON-NLS-1$ //$NON-NLS-2$
                 return;
             }
 
@@ -525,7 +525,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
                 line = (SourceDataLine) AudioSystem.getLine(info);
                 line.open(format, bufSize);
             } catch (LineUnavailableException ex) { 
-                shutDown("Unable to open the line: " + ex);
+                shutDown(Messages.getString("SoundRecorder.34") + ex); //$NON-NLS-1$
                 return;
             }
 
@@ -549,7 +549,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
                         numBytesRemaining -= line.write(data, 0, numBytesRemaining);
                     }
                 } catch (Exception e) {
-                    shutDown("Error during playback: " + e);
+                    shutDown(Messages.getString("SoundRecorder.35") + e); //$NON-NLS-1$
                     break;
                 }
             }
@@ -575,7 +575,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 
 	        public void start() {
 	            thread = new Thread(this);
-	            thread.setName("Capture");
+	            thread.setName(Messages.getString("SoundRecorder.36")); //$NON-NLS-1$
 	            thread.start();
 	        }
 
@@ -603,7 +603,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 	            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
 	                        
 	            if (!AudioSystem.isLineSupported(info)) {
-	                shutDown("Line matching " + info + " not supported.");
+	                shutDown(Messages.getString("SoundRecorder.37") + info + Messages.getString("SoundRecorder.38")); //$NON-NLS-1$ //$NON-NLS-2$
 	                return;
 	            }
 
@@ -612,7 +612,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 	                line = (TargetDataLine) AudioSystem.getLine(info);
 	                line.open(format, line.getBufferSize());
 	            } catch (LineUnavailableException ex) { 
-	                shutDown("Unable to open the line: " + ex);
+	                shutDown(Messages.getString("SoundRecorder.39") + ex); //$NON-NLS-1$
 	                return;
 	            } catch (SecurityException ex) { 
 	                shutDown(ex.toString());	       
@@ -663,11 +663,11 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane{
 		            return;
 		        }
 		        
-		        File file = new File(soundDirectory + "/" + m_nameTextField.getText() + ".wav");		//TODO: make it work for MAC
+		        File file = new File(soundDirectory + "/" + m_nameTextField.getText() + ".wav");		//TODO: make it work for MAC //$NON-NLS-1$ //$NON-NLS-2$
 		        
 		        try {
 		            if (AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, file) == -1) {
-		                throw new IOException("Problems writing to file");
+		                throw new IOException(Messages.getString("SoundRecorder.42")); //$NON-NLS-1$
 		            }
 		        } catch (Exception ex) {  }
 		

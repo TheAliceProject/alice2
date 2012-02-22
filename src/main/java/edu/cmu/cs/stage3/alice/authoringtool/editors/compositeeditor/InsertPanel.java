@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * Title:
  * Description:
@@ -35,7 +37,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.DropTargetListener{
 
     protected javax.swing.JLabel m_label = new javax.swing.JLabel();
-    protected String m_doNothingLabel = " Do Nothing";
+    protected String m_doNothingLabel = Messages.getString("InsertPanel.0"); //$NON-NLS-1$
     private boolean highlight = false;
 
     public InsertPanel() {

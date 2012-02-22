@@ -41,10 +41,10 @@ public class NumberPropertyViewController extends TextFieldEditablePropertyViewC
 
 		if( value != null ) {
 			((Runnable)factory.createItem( value )).run();
-			String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName();
+			String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); //$NON-NLS-1$
 			property.getOwner().data.put( propertyKey, valueString );
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "I don't understand this number: " + valueString, null, false );
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("NumberPropertyViewController.1") + valueString, null, false ); //$NON-NLS-1$
 		}
 	}
 

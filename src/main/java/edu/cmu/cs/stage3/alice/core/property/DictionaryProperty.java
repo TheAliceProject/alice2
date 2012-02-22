@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.property;
 
 import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.alice.core.Messages;
 
 public class DictionaryProperty extends ObjectProperty {
 	public DictionaryProperty( Element owner, String name, java.util.Dictionary defaultValue ) {
@@ -35,13 +36,13 @@ public class DictionaryProperty extends ObjectProperty {
 	private static Object valueOf( Class cls, String text ) {
 		Class[] parameterTypes = { String.class };
 		try {
-			java.lang.reflect.Method valueOfMethod = cls.getMethod( "valueOf", parameterTypes );
+			java.lang.reflect.Method valueOfMethod = cls.getMethod( "valueOf", parameterTypes ); //$NON-NLS-1$
 			int modifiers = valueOfMethod.getModifiers();
 			if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
 				Object[] parameters = { text };
 				return valueOfMethod.invoke( null, parameters );
 			} else {
-				throw new RuntimeException( "valueOf method not public static." );
+				throw new RuntimeException( Messages.getString("DictionaryProperty.1") ); //$NON-NLS-1$
 			}
 		} catch( NoSuchMethodException nsme ) {
 			nsme.printStackTrace();
@@ -55,11 +56,11 @@ public class DictionaryProperty extends ObjectProperty {
     
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {
 		java.util.Dictionary dict = new java.util.Hashtable();
-        org.w3c.dom.NodeList entryNodeList = node.getElementsByTagName( "entry" );
+        org.w3c.dom.NodeList entryNodeList = node.getElementsByTagName( "entry" ); //$NON-NLS-1$
         for( int i=0; i<entryNodeList.getLength(); i++ ) {
             org.w3c.dom.Element entryNode = (org.w3c.dom.Element)entryNodeList.item( i );
-            org.w3c.dom.Element keyNode = (org.w3c.dom.Element)entryNode.getElementsByTagName( "key" ).item( 0 );
-            String keyTypeName = keyNode.getAttribute( "class" );
+            org.w3c.dom.Element keyNode = (org.w3c.dom.Element)entryNode.getElementsByTagName( "key" ).item( 0 ); //$NON-NLS-1$
+            String keyTypeName = keyNode.getAttribute( "class" ); //$NON-NLS-1$
             Object key;
             try {
                 Class keyType = Class.forName( keyTypeName );
@@ -72,8 +73,8 @@ public class DictionaryProperty extends ObjectProperty {
                 throw new RuntimeException( keyTypeName );
             }
 
-            org.w3c.dom.Element valueNode = (org.w3c.dom.Element)entryNode.getElementsByTagName( "value" ).item( 0 );
-            String valueTypeName = valueNode.getAttribute( "class" );
+            org.w3c.dom.Element valueNode = (org.w3c.dom.Element)entryNode.getElementsByTagName( "value" ).item( 0 ); //$NON-NLS-1$
+            String valueTypeName = valueNode.getAttribute( "class" ); //$NON-NLS-1$
             Object value;
             try {
                 Class valueType = Class.forName( valueTypeName );
@@ -98,14 +99,14 @@ public class DictionaryProperty extends ObjectProperty {
 				Object key = enum0.nextElement();
 				Object value = dict.get( key );
 
-                org.w3c.dom.Element entryNode = document.createElement( "entry" );
+                org.w3c.dom.Element entryNode = document.createElement( "entry" ); //$NON-NLS-1$
 
-                org.w3c.dom.Element keyNode = document.createElement( "key" );
-                keyNode.setAttribute( "class", key.getClass().getName() );
+                org.w3c.dom.Element keyNode = document.createElement( "key" ); //$NON-NLS-1$
+                keyNode.setAttribute( "class", key.getClass().getName() ); //$NON-NLS-1$
                 keyNode.appendChild( createNodeForString( document, key.toString() ) );
 
-                org.w3c.dom.Element valueNode = document.createElement( "value" );
-                valueNode.setAttribute( "class", value.getClass().getName() );
+                org.w3c.dom.Element valueNode = document.createElement( "value" ); //$NON-NLS-1$
+                valueNode.setAttribute( "class", value.getClass().getName() ); //$NON-NLS-1$
                 valueNode.appendChild( createNodeForString( document, value.toString() ) );
 
                 entryNode.appendChild( keyNode );

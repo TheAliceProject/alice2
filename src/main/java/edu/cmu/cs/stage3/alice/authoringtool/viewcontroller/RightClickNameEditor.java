@@ -39,7 +39,7 @@ public class RightClickNameEditor extends StringPropertyViewController {
 			}
 		} );
 		popupStructure = new java.util.Vector();
-		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "Rename", new Runnable() {
+		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("RightClickNameEditor.0"), new Runnable() { //$NON-NLS-1$
 			public void run() {
 				RightClickNameEditor.this.editValue();
 			}

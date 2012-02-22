@@ -23,30 +23,25 @@
 
 package edu.cmu.cs.stage3.image.codec;
 
-/*
- * The contents of this file are subject to the  JAVA ADVANCED IMAGING
- * SAMPLE INPUT-OUTPUT CODECS AND WIDGET HANDLING SOURCE CODE  License
- * Version 1.0 (the "License"); You may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- * http://www.sun.com/software/imaging/JAI/index.html
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific language governing rights and limitations
- * under the License.
- *
- * The Original Code is JAVA ADVANCED IMAGING SAMPLE INPUT-OUTPUT CODECS
- * AND WIDGET HANDLING SOURCE CODE.
- * The Initial Developer of the Original Code is: Sun Microsystems, Inc..
- * Portions created by: _______________________________________
- * are Copyright (C): _______________________________________
- * All Rights Reserved.
- * Contributor(s): _______________________________________
- */
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 
 class JaiI18N {
+	private static final String BUNDLE_NAME = "edu.cmu.cs.stage3.lang." + AikMin.locale + ".image_" + AikMin.locale; //$NON-NLS-1$"; //$NON-NLS-1$
 
-    public static String getString(String key) {
-        return PropertyUtil.getString(key);
-    }
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
+			.getBundle(BUNDLE_NAME);
+
+	private JaiI18N() {
+	}
+
+	public static String getString(String key) {
+		try {
+			return RESOURCE_BUNDLE.getString(key);
+		} catch (MissingResourceException e) {
+			return '!' + key + '!';
+		}
+	}
 }

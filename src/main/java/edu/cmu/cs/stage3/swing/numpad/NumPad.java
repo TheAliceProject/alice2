@@ -35,7 +35,7 @@ public class NumPad extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 	
 	public String getTitle() {
-		return "Custom Number";
+		return Messages.getString("NumPad.0"); //$NON-NLS-1$
 	}
 	
 	public void addOKActionListener(java.awt.event.ActionListener l) {
@@ -57,7 +57,7 @@ public class NumPad extends edu.cmu.cs.stage3.swing.ContentPane {
 		button.addActionListener(onClick);
 
 		java.awt.Image image = null;
-		java.net.URL resource = NumPad.class.getResource(imageString + ".gif");
+		java.net.URL resource = NumPad.class.getResource(imageString + ".gif"); //$NON-NLS-1$
 		if (resource != null) {
 			image = java.awt.Toolkit.getDefaultToolkit().getImage(resource);
 		}
@@ -87,79 +87,79 @@ public class NumPad extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	private void keyInit() {
-		doKey(oneButton, "one", new java.awt.event.ActionListener() {
+		doKey(oneButton, Messages.getString("NumPad.2"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '1'));
 			}
 		});
-		doKey(twoButton, "two", new java.awt.event.ActionListener() {
+		doKey(twoButton, Messages.getString("NumPad.3"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '2'));
 			}
 		});
-		doKey(threeButton, "three", new java.awt.event.ActionListener() {
+		doKey(threeButton, Messages.getString("NumPad.4"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '3'));
 			}
 		});
-		doKey(fourButton, "four", new java.awt.event.ActionListener() {
+		doKey(fourButton, Messages.getString("NumPad.5"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '4'));
 			}
 		});
-		doKey(fiveButton, "five", new java.awt.event.ActionListener() {
+		doKey(fiveButton, Messages.getString("NumPad.6"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '5'));
 			}
 		});
-		doKey(sixButton, "six", new java.awt.event.ActionListener() {
+		doKey(sixButton, Messages.getString("NumPad.7"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '6'));
 			}
 		});
-		doKey(sevenButton, "seven", new java.awt.event.ActionListener() {
+		doKey(sevenButton, Messages.getString("NumPad.8"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '7'));
 			}
 		});
-		doKey(eightButton, "eight", new java.awt.event.ActionListener() {
+		doKey(eightButton, Messages.getString("NumPad.9"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '8'));
 			}
 		});
-		doKey(nineButton, "nine", new java.awt.event.ActionListener() {
+		doKey(nineButton, Messages.getString("NumPad.10"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '9'));
 			}
 		});
-		doKey(zeroButton, "zero", new java.awt.event.ActionListener() {
+		doKey(zeroButton, Messages.getString("NumPad.11"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '0'));
 			}
 		});
-		doKey(decimalButton, "decimal", new java.awt.event.ActionListener() {
+		doKey(decimalButton, Messages.getString("NumPad.12"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '.'));
 			}
 		});
-		doKey(slashButton, "slash", new java.awt.event.ActionListener() {
+		doKey(slashButton, Messages.getString("NumPad.13"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				numberTextField.grabFocus();
 				numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, '/'));
 			}
 		});
-		doKey(backspaceButton, "backspace", new java.awt.event.ActionListener() {
+		doKey(backspaceButton, Messages.getString("NumPad.14"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				//numberTextField.grabFocus();
 				//numberTextField.dispatchEvent(new java.awt.event.KeyEvent(numberTextField, java.awt.event.KeyEvent.KEY_TYPED, System.currentTimeMillis(), 0, java.awt.event.KeyEvent.VK_UNDEFINED, (char) 8));
@@ -168,18 +168,18 @@ public class NumPad extends edu.cmu.cs.stage3.swing.ContentPane {
 				} catch (Exception e){}
 			}
 		});
-		doKey(clearButton, "clear", new java.awt.event.ActionListener() {
+		doKey(clearButton, Messages.getString("NumPad.15"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
-				numberTextField.setText("");
+				numberTextField.setText(""); //$NON-NLS-1$
 			}
 		});
-		doKey(this.plusMinusButton, "plusminus", new java.awt.event.ActionListener() {
+		doKey(this.plusMinusButton, Messages.getString("NumPad.17"), new java.awt.event.ActionListener() { //$NON-NLS-1$
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				try {
-					if ("-".equals(numberTextField.getDocument().getText(0, 1))) {
+					if ("-".equals(numberTextField.getDocument().getText(0, 1))) { //$NON-NLS-1$
 						numberTextField.getDocument().remove(0, 1);
 					} else {
-						numberTextField.getDocument().insertString(0, "-", null);
+						numberTextField.getDocument().insertString(0, "-", null); //$NON-NLS-1$
 					}
 				} catch (javax.swing.text.BadLocationException e) {
 					throw new RuntimeException(e.getMessage());
@@ -222,7 +222,7 @@ public class NumPad extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (value != null) {
 			numberTextField.setText(value);
 		} else {
-			numberTextField.setText("");
+			numberTextField.setText(""); //$NON-NLS-1$
 		}
 	}
 
@@ -248,9 +248,9 @@ public class NumPad extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	public static Double parseDouble(String doubleString) {
 		Double number = null;
-		if (doubleString.trim().equalsIgnoreCase("infinity")) {
+		if (doubleString.trim().equalsIgnoreCase("infinity")) { //$NON-NLS-1$
 			number = new Double(Double.POSITIVE_INFINITY);
-		} else if (doubleString.trim().equalsIgnoreCase("-infinity")) {
+		} else if (doubleString.trim().equalsIgnoreCase("-infinity")) { //$NON-NLS-1$
 			number = new Double(Double.NEGATIVE_INFINITY);
 		} else if (doubleString.indexOf('/') > -1) {
 			if (doubleString.lastIndexOf('/') == doubleString.indexOf('/')) {
@@ -362,26 +362,26 @@ public class NumPad extends edu.cmu.cs.stage3.swing.ContentPane {
 		setLayout(borderLayout1);
 		mainPanel.setLayout(gridBagLayout1);
 		buttonPanel.setLayout(gridBagLayout2);
-		okayButton.setText("Okay");
-		cancelButton.setText("Cancel");
-		numberTextField.setFont(new java.awt.Font("Dialog", 0, 24));
+		okayButton.setText(Messages.getString("NumPad.23")); //$NON-NLS-1$
+		cancelButton.setText(Messages.getString("NumPad.24")); //$NON-NLS-1$
+		numberTextField.setFont(new java.awt.Font("Dialog", 0, 24)); //$NON-NLS-1$
 		keyWell.setLayout(gridBagLayout3);
 		keyWell.setBackground(new java.awt.Color(17, 17, 17));
-		sevenButton.setText("7");
-		eightButton.setText("8");
-		nineButton.setText("9");
-		backspaceButton.setText("<");
-		fourButton.setText("4");
-		fiveButton.setText("5");
-		sixButton.setText("6");
-		clearButton.setText("C");
-		oneButton.setText("1");
-		twoButton.setText("2");
-		threeButton.setText("3");
-		plusMinusButton.setText("-");
-		zeroButton.setText("0");
-		decimalButton.setText(".");
-		slashButton.setText("/");
+		sevenButton.setText("7"); //$NON-NLS-1$
+		eightButton.setText("8"); //$NON-NLS-1$
+		nineButton.setText("9"); //$NON-NLS-1$
+		backspaceButton.setText("<"); //$NON-NLS-1$
+		fourButton.setText("4"); //$NON-NLS-1$
+		fiveButton.setText("5"); //$NON-NLS-1$
+		sixButton.setText("6"); //$NON-NLS-1$
+		clearButton.setText("C"); //$NON-NLS-1$
+		oneButton.setText("1"); //$NON-NLS-1$
+		twoButton.setText("2"); //$NON-NLS-1$
+		threeButton.setText("3"); //$NON-NLS-1$
+		plusMinusButton.setText("-"); //$NON-NLS-1$
+		zeroButton.setText("0"); //$NON-NLS-1$
+		decimalButton.setText("."); //$NON-NLS-1$
+		slashButton.setText("/"); //$NON-NLS-1$
 		add(mainPanel, java.awt.BorderLayout.NORTH);
 		mainPanel.add(numberTextField, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(8, 8, 8, 8), 0, 0));
 		add(buttonPanel, java.awt.BorderLayout.CENTER);

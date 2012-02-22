@@ -23,11 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
+import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 
 public abstract class BinaryBooleanResultingInBooleanQuestion extends BooleanQuestion {
-	public final BooleanProperty a = new BooleanProperty( this, "a", Boolean.TRUE );
-	public final BooleanProperty b = new BooleanProperty( this, "b", Boolean.TRUE );
+	public final BooleanProperty a = new BooleanProperty( this, "a", Boolean.TRUE ); //$NON-NLS-1$
+	public final BooleanProperty b = new BooleanProperty( this, "b", Boolean.TRUE ); //$NON-NLS-1$
 	protected abstract boolean getValue( boolean a, boolean b );
 	protected abstract boolean isShortCircuitable( boolean a );
 	
@@ -36,10 +37,10 @@ public abstract class BinaryBooleanResultingInBooleanQuestion extends BooleanQue
 		boolean returnValue;
 		if (this instanceof edu.cmu.cs.stage3.alice.core.question.And){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				"both " + aValue + " and " + b.booleanValue() + " is ";		
+				Messages.getString("BinaryBooleanResultingInBooleanQuestion.2") + aValue + Messages.getString("BinaryBooleanResultingInBooleanQuestion.3") + b.booleanValue() + Messages.getString("BinaryBooleanResultingInBooleanQuestion.4");		 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.Or){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				"either " + aValue + " or " + b.booleanValue() + " is ";		
+				Messages.getString("BinaryBooleanResultingInBooleanQuestion.5") + aValue + Messages.getString("BinaryBooleanResultingInBooleanQuestion.6") + b.booleanValue() + Messages.getString("BinaryBooleanResultingInBooleanQuestion.7");		 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} 
 		if( isShortCircuitable( aValue ) ) {
 			returnValue = aValue;

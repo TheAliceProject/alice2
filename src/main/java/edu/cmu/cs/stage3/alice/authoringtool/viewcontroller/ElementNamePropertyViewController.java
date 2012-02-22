@@ -36,7 +36,7 @@ public class ElementNamePropertyViewController extends StringPropertyViewControl
 		try {
 			super.stopEditing();
 		} catch( edu.cmu.cs.stage3.alice.core.IllegalNameValueException e ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), "Error setting name", javax.swing.JOptionPane.ERROR_MESSAGE );
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("ElementNamePropertyViewController.0"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$
 			editValue();
 		}
 	}
@@ -56,7 +56,7 @@ public class ElementNamePropertyViewController extends StringPropertyViewControl
 
 	public void setDefaultPopupStructure() {
 		popupStructure = new java.util.Vector();
-		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "Rename", new Runnable() {
+		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("ElementNamePropertyViewController.1"), new Runnable() { //$NON-NLS-1$
 			public void run() {
 				ElementNamePropertyViewController.this.editValue();
 			}
@@ -72,7 +72,7 @@ public class ElementNamePropertyViewController extends StringPropertyViewControl
 		return new java.awt.event.MouseAdapter() {
 			
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {				
-				if (ev.isPopupTrigger() || ((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown()){
+				if (ev.isPopupTrigger() || ((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown()){ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					if( isEnabled() ) {
 						ElementNamePropertyViewController.this.popupButton.doClick();
 					}

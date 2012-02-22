@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -45,10 +47,10 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 
     public ForEachElementPanel(){
         super();
-        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder");
-        headerText = "For all";
-        endHeaderText = "at a time";
-        middleHeaderText = ", one";
+        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder"); //$NON-NLS-1$
+        headerText = Messages.getString("ForEachElementPanel.1"); //$NON-NLS-1$
+        endHeaderText = Messages.getString("ForEachElementPanel.2"); //$NON-NLS-1$
+        middleHeaderText = Messages.getString("ForEachElementPanel.3"); //$NON-NLS-1$
     }
 
     
@@ -169,11 +171,11 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         if (m_element.getParent() != null && !(m_element.getParent() instanceof edu.cmu.cs.stage3.alice.core.Sandbox)){
             numPrevious = countPreviousInstances(m_element.getParent(), inputList);
         }
-        String toAdd = "";
+        String toAdd = ""; //$NON-NLS-1$
         if (numPrevious > 0){
-            toAdd = "_#"+(numPrevious+1);
+            toAdd = "_#"+(numPrevious+1); //$NON-NLS-1$
         }
-        return ("item_from_"+inputList.name.getStringValue()+toAdd);
+        return (Messages.getString("ForEachElementPanel.6")+inputList.name.getStringValue()+toAdd); //$NON-NLS-1$
     }
 
     
@@ -185,10 +187,10 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
             endHeader.setText(endHeaderText);
             if (CompositeElementEditor.IS_JAVA){
                 if (!isExpanded){
-                    endHeader.setText(endHeaderText+" { "+getDots()+" }");
+                    endHeader.setText(endHeaderText+" { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$
                 }
                 else{
-                    endHeader.setText(endHeaderText+" {");
+                    endHeader.setText(endHeaderText+" {"); //$NON-NLS-1$
                 }
             }
         }
@@ -301,7 +303,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 	}
 	
 	protected void setAllNames(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentContainer, int currentLevel){
-		String baseName = "item_from_"+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue();
+		String baseName = Messages.getString("ForEachElementPanel.10")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue(); //$NON-NLS-1$
 		for (int i=0; i<currentContainer.size(); i++){
 			Object list = null;
 			edu.cmu.cs.stage3.alice.core.Element var = null;
@@ -314,7 +316,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)currentContainer.get(i)).each.get());
 			}
 			if (list == m_list.get()){
-				var.name.set(baseName+"_#"+currentLevel);
+				var.name.set(baseName+"_#"+currentLevel); //$NON-NLS-1$
 			}
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
 				
@@ -330,7 +332,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		stopListening();
 		startListening();
 		if (isTopOccurrance(m_element.getParent(), m_list.get())){
-			m_each.getElementValue().name.set("item_from_"+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue());
+			m_each.getElementValue().name.set(Messages.getString("ForEachElementPanel.12")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue()); //$NON-NLS-1$
 			setAllNames(m_components, 2);
 		}
 	}

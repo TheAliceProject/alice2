@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
 import edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent;
 
 /**
@@ -66,7 +67,7 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
     protected java.awt.Insets insets;
     protected int dropPanelPosition = -2;
 
-    protected static java.awt.Color dndFeedBackColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("dndHighlight2");
+    protected static java.awt.Color dndFeedBackColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("dndHighlight2"); //$NON-NLS-1$
 
     protected static CompositeComponentElementPanel s_currentComponentPanel;
     protected static java.awt.Component s_componentPanelMoved;
@@ -822,11 +823,11 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
 
     protected void performDrop(edu.cmu.cs.stage3.alice.core.Element toDrop, java.awt.dnd.DropTargetDropEvent dtde){
         if (isRecursive(toDrop)){
-            Object[] options = {"Yes, I understand what I am doing.",
-                    "No, I made this call accidentally.",};
+            Object[] options = {Messages.getString("CompositeComponentElementPanel.1"), //$NON-NLS-1$
+                    Messages.getString("CompositeComponentElementPanel.2"),}; //$NON-NLS-1$
             int recursionReturn = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(
-                     "The code you have just dropped in creates a \"recursive method call\". We recommend that you understand\n"
-                    +"what recursion is before making a call like this.  Are you sure you want to do this?", "Recursion Warning", javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+                     Messages.getString("CompositeComponentElementPanel.3") //$NON-NLS-1$
+                    +Messages.getString("CompositeComponentElementPanel.4"), Messages.getString("CompositeComponentElementPanel.5"), javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE, null, options, options[1]); //$NON-NLS-1$ //$NON-NLS-2$
             if (recursionReturn != 0){
                 return;
             }

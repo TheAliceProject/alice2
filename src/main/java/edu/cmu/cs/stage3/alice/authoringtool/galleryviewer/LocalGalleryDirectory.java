@@ -31,7 +31,7 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
 
     
 	protected String getToolTipString(){
-        return "<html><body><p>Group of Objects</p><p>Click to open this group.</p></body></html>";
+        return Messages.getString("LocalGalleryDirectory.0"); //$NON-NLS-1$
     }
 
     
@@ -54,7 +54,7 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
 
 	
 	protected String getClassName(){
-		return " ";
+		return " "; //$NON-NLS-1$
 	}
 
     

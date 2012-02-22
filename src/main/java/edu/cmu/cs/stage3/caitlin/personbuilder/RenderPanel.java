@@ -35,7 +35,7 @@ public class RenderPanel extends JPanel {
 
 	public void initialize() {
 		this.add(modelWrapper.getRenderPanel(), java.awt.BorderLayout.CENTER);
-		javax.swing.JLabel label = new javax.swing.JLabel("Click and drag to rotate your person");
+		javax.swing.JLabel label = new javax.swing.JLabel(Messages.getString("RenderPanel.0")); //$NON-NLS-1$
 		label.setBackground(new java.awt.Color(155, 159, 206));
 		label.setForeground(java.awt.Color.black);
 		label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

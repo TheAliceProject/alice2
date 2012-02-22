@@ -36,9 +36,9 @@ import edu.cmu.cs.stage3.util.HowMuch;
 public abstract class ReferenceFrame extends Sandbox {
 	public static final ReferenceFrame ABSOLUTE = new World();
 
-	public final BooleanProperty eventsStopAscending = new BooleanProperty( this, "eventsStopAscending", null );
-	public final BooleanProperty isBoundingBoxShowing = new BooleanProperty( this, "isBoundingBoxShowing", Boolean.FALSE );
-	public final BooleanProperty isBoundingSphereShowing = new BooleanProperty( this, "isBoundingSphereShowing", Boolean.FALSE );
+	public final BooleanProperty eventsStopAscending = new BooleanProperty( this, "eventsStopAscending", null ); //$NON-NLS-1$
+	public final BooleanProperty isBoundingBoxShowing = new BooleanProperty( this, "isBoundingBoxShowing", Boolean.FALSE ); //$NON-NLS-1$
+	public final BooleanProperty isBoundingSphereShowing = new BooleanProperty( this, "isBoundingSphereShowing", Boolean.FALSE ); //$NON-NLS-1$
 
 	private edu.cmu.cs.stage3.alice.core.decorator.BoundingBoxDecorator m_boundingBoxDecorator = new edu.cmu.cs.stage3.alice.core.decorator.BoundingBoxDecorator();
 	private edu.cmu.cs.stage3.alice.core.decorator.BoundingSphereDecorator m_boundingSphereDecorator = new edu.cmu.cs.stage3.alice.core.decorator.BoundingSphereDecorator();
@@ -293,7 +293,7 @@ public abstract class ReferenceFrame extends Sandbox {
 			} else if( dimension==Dimension.FRONT_TO_BACK ) {
 				return box.getDepth();
 			} else {
-				throw new IllegalArgumentException( dimension + " is expected to be in [LEFT_TO_RIGHT, TOP_TO_BOTTOM, FRONT_TO_BACK]." );
+				throw new IllegalArgumentException( dimension + Messages.getString("ReferenceFrame.3") ); //$NON-NLS-1$
 			}
 		} else {
 			//todo: Double.NaN?
@@ -378,9 +378,9 @@ public abstract class ReferenceFrame extends Sandbox {
 	//todo: remove
 	protected static void HACK_syncPropertyToSceneGraph( String propertyName, edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray sgITA ) {
 		edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray ita = (edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray)sgITA.getBonus();
-		if( propertyName.equals( "vertices" ) ) {
+		if( propertyName.equals( "vertices" ) ) { //$NON-NLS-1$
 			ita.vertices.set( sgITA.getVertices() );
-		} else if( propertyName.equals( "indices" ) ) {
+		} else if( propertyName.equals( "indices" ) ) { //$NON-NLS-1$
 			ita.indices.set( sgITA.getIndices() );
 		}
 	}

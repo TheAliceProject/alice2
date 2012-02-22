@@ -16,9 +16,9 @@ import edu.cmu.cs.stage3.math.Matrix33;
  */
 public class WalkToAnimation extends AbstractWalkAnimation {
 	
-	public final edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty spatialRelation = new edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF );
-	public final edu.cmu.cs.stage3.alice.core.property.NumberProperty amount = new edu.cmu.cs.stage3.alice.core.property.NumberProperty( this, "amount", new Double( 1 ) );
-	public final edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty asSeenBy = new edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty( this, "target", null );
+	public final edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty spatialRelation = new edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF ); //$NON-NLS-1$
+	public final edu.cmu.cs.stage3.alice.core.property.NumberProperty amount = new edu.cmu.cs.stage3.alice.core.property.NumberProperty( this, "amount", new Double( 1 ) ); //$NON-NLS-1$
+	public final edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty asSeenBy = new edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty( this, "target", null ); //$NON-NLS-1$
 	
 	public class RuntimeWalkToAnimation extends RuntimeAbstractWalkAnimation {
 	
@@ -139,14 +139,14 @@ public class WalkToAnimation extends AbstractWalkAnimation {
 			m_transformationBegin = subject.getTransformation( m_asSeenBy );
 			
 			if( m_asSeenBy == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + " needs something or someone to walk to.", null, WalkToAnimation.this.asSeenBy );
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("WalkToAnimation.3"), null, WalkToAnimation.this.asSeenBy ); //$NON-NLS-1$
             }
             if( subject == m_asSeenBy ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + " can't walk to " + subject.name.getStringValue() + ".", getCurrentStack(), WalkToAnimation.this.asSeenBy );            
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("WalkToAnimation.4") + subject.name.getStringValue() + ".", getCurrentStack(), WalkToAnimation.this.asSeenBy );             //$NON-NLS-1$ //$NON-NLS-2$
             }
             
             if (subject.isAncestorOf(m_asSeenBy)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + " can't walk to a part of itself", getCurrentStack(), WalkToAnimation.this.asSeenBy );            
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("WalkToAnimation.6"), getCurrentStack(), WalkToAnimation.this.asSeenBy );             //$NON-NLS-1$
             }
 			
 			// find end transformation

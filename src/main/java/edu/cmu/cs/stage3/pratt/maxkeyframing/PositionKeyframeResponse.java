@@ -45,7 +45,7 @@ public class PositionKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyfram
 				}
 				//System.out.println( "getPosition: " + m_transformable.getPosition() );
 			} catch( ClassCastException e ) {
-				System.err.println( "Incorrect sample type from spline " + runtimeSpline + ".  Vector3 expected.  Instead, got: " + runtimeSpline.getSample( splineTimeElapsed ) );
+				System.err.println( Messages.getString("PositionKeyframeResponse.0") + runtimeSpline + Messages.getString("PositionKeyframeResponse.1") + runtimeSpline.getSample( splineTimeElapsed ) ); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch( Exception e ) {
 				e.printStackTrace();
 			}

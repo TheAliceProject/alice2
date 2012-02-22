@@ -34,13 +34,13 @@ public class WebGalleryObject extends GalleryObject {
 
     
 	protected String getToolTipString(){
-        return "<html><body><p>Object</p><p>Click to add this object to the world</p></body></html>";
+        return Messages.getString("WebGalleryObject.0"); //$NON-NLS-1$
     }
 
     
 	protected void guiInit(){
         super.guiInit();
-        location = "the Web";
+        location = Messages.getString("WebGalleryObject.1"); //$NON-NLS-1$
     }
 
     public static java.awt.Image retrieveImage(String root, String filename, long timestamp){

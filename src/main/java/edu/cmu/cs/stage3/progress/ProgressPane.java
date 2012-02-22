@@ -26,7 +26,7 @@ public abstract class ProgressPane extends edu.cmu.cs.stage3.swing.ContentPane i
 		m_progressBar = new javax.swing.JProgressBar();
 		m_progressBar.setPreferredSize( new java.awt.Dimension( 240, 16 ) );
 		
-		m_cancelButton = new javax.swing.JButton( "Cancel" );
+		m_cancelButton = new javax.swing.JButton( Messages.getString("ProgressPane.0") ); //$NON-NLS-1$
 		m_cancelButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				onCancel();
@@ -192,9 +192,9 @@ public abstract class ProgressPane extends edu.cmu.cs.stage3.swing.ContentPane i
 		} );
 	}
 	protected void fireOKActionListeners() {
-		fireActionListeners( m_okActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, "OK" ) );
+		fireActionListeners( m_okActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("ProgressPane.1") ) ); //$NON-NLS-1$
 	}
 	protected void fireCancelActionListeners() {
-		fireActionListeners( m_cancelActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, "Cancel" ) );
+		fireActionListeners( m_cancelActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("ProgressPane.2") ) ); //$NON-NLS-1$
 	}
 }

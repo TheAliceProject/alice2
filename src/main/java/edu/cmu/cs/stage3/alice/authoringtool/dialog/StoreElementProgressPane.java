@@ -45,19 +45,19 @@ public class StoreElementProgressPane extends edu.cmu.cs.stage3.progress.Progres
 			throw pce;
 		} catch( Throwable t ) {
 			StringBuffer sb = new StringBuffer();
-			sb.append( "An error has occurred while attempting to save your world.\n\n" );
-			sb.append( "This is a critical situation that needs to be dealt with immediately.\n\n" );
+			sb.append( Messages.getString("StoreElementProgressPane.0") ); //$NON-NLS-1$
+			sb.append( Messages.getString("StoreElementProgressPane.1") ); //$NON-NLS-1$
 			if( t instanceof java.io.IOException ) {
-				sb.append( "This may be the result of not having enough space on the target drive.\n" );			
-				sb.append( "If possible,\n    attempt to save your world to a different drive, or\n    free up some space and \"Save As\" to a different file.\n\n" );
-				sb.append( "NOTE: If unsuccessful, please" );
+				sb.append( Messages.getString("StoreElementProgressPane.2") );			 //$NON-NLS-1$
+				sb.append( Messages.getString("StoreElementProgressPane.3") ); //$NON-NLS-1$
+				sb.append( Messages.getString("StoreElementProgressPane.4") ); //$NON-NLS-1$
 			} else {
-				sb.append( "NOTE: Please" );
+				sb.append( Messages.getString("StoreElementProgressPane.5") ); //$NON-NLS-1$
 			}
-			sb.append( " check for a directory co-located with \nyour world named \"Backups of <YourWorldNameHere>\" which \nshould contain previously saved versions of your world.\n" );
+			sb.append( Messages.getString("StoreElementProgressPane.6") ); //$NON-NLS-1$
 
-			sb.append( "\nWe at the Alice Team apologize for any work you have lost\n" );
-			sb.append( "\nPlease accept our sincerest apologies.  The Alice Team." );
+			sb.append( Messages.getString("StoreElementProgressPane.7") ); //$NON-NLS-1$
+			sb.append( Messages.getString("StoreElementProgressPane.8") ); //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( sb.toString(), t );
 		}
 	}

@@ -195,6 +195,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 			AuthoringTool.showErrorDialog( Messages.getString("JAliceFrame.13"), null ); //$NON-NLS-1$
 		}
 		this.setBounds( x, y, width, height );
+		setExtendedState(MAXIMIZED_BOTH);
 
 		// set divider locations
 //		authoringOutputSplitPane.setDividerLocation( height );
@@ -340,7 +341,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		addObjectButton.setAction( actions.addCharacterAction );
 		teachMeButton.setAction( actions.launchTutorialAction );
 		selectTutorialMenuItem.setAction( actions.launchTutorialFileAction );
-		//softwareUpdate.setAction( actions.launchSoftwareUpdate );
+		softwareUpdate.setAction( actions.launchSoftwareUpdate );
 		showStdOutItem.setAction( actions.showStdOutDialogAction );
 		showStdErrItem.setAction( actions.showStdErrDialogAction );
 		printItem.setAction( actions.showPrintDialogAction );
@@ -663,7 +664,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		exportMovieItem.setText(Messages.getString("JAliceFrame.49")); //$NON-NLS-1$
 		teachMeButton.setText(Messages.getString("JAliceFrame.50")); //$NON-NLS-1$
 		selectTutorialMenuItem.setText(Messages.getString("JAliceFrame.51")); //$NON-NLS-1$
-		//softwareUpdate.setText("Software Updates");
+		softwareUpdate.setText("Software Updates");
 		showStdOutItem.setText(Messages.getString("JAliceFrame.52")); //$NON-NLS-1$
 		showStdErrItem.setText(Messages.getString("JAliceFrame.53")); //$NON-NLS-1$
 		printItem.setText(Messages.getString("JAliceFrame.54")); //$NON-NLS-1$
@@ -698,8 +699,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		
 		helpMenu.add(exampleWorldsItem);
 		helpMenu.add(selectTutorialMenuItem);
-/*		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) )
-			helpMenu.add(softwareUpdate);*/
+		helpMenu.add(softwareUpdate);
 		helpMenu.add(aboutItem);
 		this.getContentPane().add(toolBarPanel, BorderLayout.NORTH);
 		toolBarPanel.add(buttonPanel,   new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0

@@ -34,7 +34,7 @@ public class WebGalleryDirectory extends WebGalleryObject {
 
     
 	protected String getToolTipString(){
-        return "<html><body><p>Group of Objects</p><p>Click to open this group.</p></body></html>";
+        return Messages.getString("WebGalleryDirectory.0"); //$NON-NLS-1$
     }
 
     
@@ -47,7 +47,7 @@ public class WebGalleryDirectory extends WebGalleryObject {
     
 	
 	protected String getClassName(){
-		return " ";
+		return " "; //$NON-NLS-1$
 	}
 
 
@@ -80,8 +80,8 @@ public class WebGalleryDirectory extends WebGalleryObject {
         if (mainViewer != null){
         	int dialogVal = -1;
         	if (!GalleryViewer.alreadyEnteredWebGallery && mainViewer.shouldShowWebWarning()){
-				dialogVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog("You are about to enter the online gallery. This is accessed through the internet\n"
-				+" and is potentially slow depending on your connection.", "Web gallery may be slow", javax.swing.JOptionPane.WARNING_MESSAGE);
+				dialogVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("WebGalleryDirectory.2") //$NON-NLS-1$
+				+Messages.getString("WebGalleryDirectory.3"), Messages.getString("WebGalleryDirectory.4"), javax.swing.JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				if (dialogVal == javax.swing.JOptionPane.YES_OPTION){
 					GalleryViewer.enteredWebGallery();
 					mainViewer.changeDirectory(directoryData);

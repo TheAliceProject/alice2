@@ -34,10 +34,10 @@ public class TypeChooser extends javax.swing.JPanel {
 	private javax.swing.ButtonGroup buttonGroup;
 	private java.util.HashMap typeMap = new java.util.HashMap();
 	private java.util.HashSet changeListeners = new java.util.HashSet();
-	private JRadioButton numberButton = new JRadioButton( "Number" );
-	private JRadioButton booleanButton = new JRadioButton( "Boolean" );
-	private JRadioButton objectButton = new JRadioButton( "Object" );
-	private JRadioButton otherButton = new JRadioButton( "Other..." );
+	private JRadioButton numberButton = new JRadioButton( Messages.getString("TypeChooser.0") ); //$NON-NLS-1$
+	private JRadioButton booleanButton = new JRadioButton( Messages.getString("TypeChooser.1") ); //$NON-NLS-1$
+	private JRadioButton objectButton = new JRadioButton( Messages.getString("TypeChooser.2") ); //$NON-NLS-1$
+	private JRadioButton otherButton = new JRadioButton( Messages.getString("TypeChooser.3") ); //$NON-NLS-1$
 	private JComboBox otherCombo = new JComboBox();
 	private edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback okButtonCallback;
 

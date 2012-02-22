@@ -23,8 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import edu.cmu.cs.stage3.alice.authoringtool.Messages;
-
 public class AboutContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private javax.swing.JButton m_okButton = new javax.swing.JButton( Messages.getString("AboutContentPane.0") ); //$NON-NLS-1$
 	

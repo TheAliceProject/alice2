@@ -47,7 +47,7 @@ public class ErrorContentPane extends AliceAlertContentPane {
 
 	
 	public String getTitle() {
-		return "Alice - Error";
+		return Messages.getString("ErrorContentPane.0"); //$NON-NLS-1$
 	}
 	
 
@@ -62,19 +62,19 @@ public class ErrorContentPane extends AliceAlertContentPane {
 	
 	protected void writeThrowableToTextPane() {
 		if( throwable != null ) {
-			detailStream.println( "Throwable that caused the error:" );
+			detailStream.println( Messages.getString("ErrorContentPane.1") ); //$NON-NLS-1$
 			throwable.printStackTrace( detailStream );
 			if( throwable instanceof edu.cmu.cs.stage3.alice.core.ExceptionWrapper ) {
 				edu.cmu.cs.stage3.alice.core.ExceptionWrapper ew = (edu.cmu.cs.stage3.alice.core.ExceptionWrapper)throwable;
 				Exception e = ew.getWrappedException();
-				detailStream.println( "Wrapped exception:" );
+				detailStream.println( Messages.getString("ErrorContentPane.2") ); //$NON-NLS-1$
 				e.printStackTrace( detailStream );
 			}
 		} else {
 			if (message != null)
 				detailStream.println( message );
 			else
-				new Exception("No throwable given. Here's the stack trace:").printStackTrace(detailStream);
+				new Exception(Messages.getString("ErrorContentPane.3")).printStackTrace(detailStream); //$NON-NLS-1$
 		}
 		detailStream.println();
 	}

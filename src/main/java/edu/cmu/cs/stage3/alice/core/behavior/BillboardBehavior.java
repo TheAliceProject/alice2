@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core.behavior;
 
+import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
 import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.World;
@@ -32,12 +33,12 @@ import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
 
 public class BillboardBehavior extends InternalResponseBehavior implements edu.cmu.cs.stage3.alice.scenegraph.event.AbsoluteTransformationListener {
-	public final TransformableProperty subject = new TransformableProperty( this, "subject", null );
-	public final TransformableProperty target = new TransformableProperty( this, "target", null );
-	public final Vector3Property offset = new Vector3Property( this, "offset", null );
-	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null );
-	public final ReferenceFrameProperty asSeenBy = new ReferenceFrameProperty( this, "asSeenBy", null );
-	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE );
+	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); //$NON-NLS-1$
+	public final TransformableProperty target = new TransformableProperty( this, "target", null ); //$NON-NLS-1$
+	public final Vector3Property offset = new Vector3Property( this, "offset", null ); //$NON-NLS-1$
+	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null ); //$NON-NLS-1$
+	public final ReferenceFrameProperty asSeenBy = new ReferenceFrameProperty( this, "asSeenBy", null ); //$NON-NLS-1$
+	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); //$NON-NLS-1$
 
 	private Transformable m_subject;
 	private Transformable m_target;
@@ -52,7 +53,7 @@ public class BillboardBehavior extends InternalResponseBehavior implements edu.c
 	protected void propertyChanging( edu.cmu.cs.stage3.alice.core.Property property, Object value ) {
 		if( property == target ) {
 			if( value == subject.get() ) {
-				throw new IllegalArgumentException( "billboard cannot point at self" );
+				throw new IllegalArgumentException( Messages.getString("BillboardBehavior.6") ); //$NON-NLS-1$
 			}
 		} else {
 			super.propertyChanging( property, value );

@@ -27,8 +27,8 @@ import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 
 public abstract class Behavior extends Element {
-	public final BooleanProperty isEnabled = new BooleanProperty( this, "isEnabled", Boolean.TRUE );
-	public final ElementArrayProperty details = new ElementArrayProperty( this, "details", null, Expression[].class );
+	public final BooleanProperty isEnabled = new BooleanProperty( this, Messages.getString("Behavior.0"), Boolean.TRUE ); //$NON-NLS-1$
+	public final ElementArrayProperty details = new ElementArrayProperty( this, Messages.getString("Behavior.1"), null, Expression[].class ); //$NON-NLS-1$
 
 	private double m_prevT;
 	//private boolean m_exceptionHasBeenPreviouslyThrown = false;
@@ -267,12 +267,14 @@ public abstract class Behavior extends Element {
     private Variable createRuntimeVariable( Variable other ) {
     	
         Variable v = new Variable();
-        v = other; // Aik Min added this to make watch variable work.
-//        v.name.set( other.name.getStringValue() );
-//        Class cls = other.getValueClass();
-//		v.valueClass.set( cls );
-//		Object value = other.getValue();
-//        v.value.set( value );
+        if (other.isWatch) {
+        	v = other; // Aik Min added this to make watch variable work.
+        }
+        v.name.set( other.name.getStringValue() );
+        Class cls = other.getValueClass();
+		v.valueClass.set( cls );
+		Object value = other.getValue();
+        v.value.set( value );
         return v;
     }
     public Variable stackLookup( Variable variable ) {
@@ -348,7 +350,7 @@ public abstract class Behavior extends Element {
                     context.m_variableMap.put( formal, runtime );
                     break;
                 } else if( j==actualRequired.length-1 ) {
-                    throw new RuntimeException( "missing required parameter: " + nameValue );
+                    throw new RuntimeException( Messages.getString("Behavior.2") + nameValue ); //$NON-NLS-1$
                 }
             }
         }

@@ -33,14 +33,14 @@ public class ElementPrototype {
 
 	public ElementPrototype( Class elementClass, edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues, String[] desiredProperties ) {
 		if( ! edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( elementClass ) ) {
-			throw new IllegalArgumentException( "The elementClass given is not actually a subclass of Element." );
+			throw new IllegalArgumentException( Messages.getString("ElementPrototype.0") ); //$NON-NLS-1$
 		}
 
 		edu.cmu.cs.stage3.alice.core.Element testElement = null;
 		try {
 			testElement = (edu.cmu.cs.stage3.alice.core.Element)elementClass.newInstance();
 		} catch( Exception e ) {
-			throw new IllegalArgumentException( "Unable to create a new element of type: " + elementClass.getName() );
+			throw new IllegalArgumentException( Messages.getString("ElementPrototype.1") + elementClass.getName() ); //$NON-NLS-1$
 		}
 		if( ! (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) || edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass )) ) { // don't do checking for CallToUserDefinedResponse/Question, since they use known and desired properties for requiredParameters
 			if( knownPropertyValues != null ) {
@@ -49,7 +49,7 @@ public class ElementPrototype {
 					Object propertyValue = knownPropertyValues[i].getObject();
 					edu.cmu.cs.stage3.alice.core.Property property = testElement.getPropertyNamed( propertyName );
 					if( property == null ) {
-						throw new IllegalArgumentException( "property named " + propertyName + " does not exist in " + elementClass.getName() );
+						throw new IllegalArgumentException( Messages.getString("ElementPrototype.2") + propertyName + Messages.getString("ElementPrototype.3") + elementClass.getName() ); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 					if( propertyValue == null ) {
 //						if( ! property.isAcceptingOfNull() ) {
@@ -61,12 +61,12 @@ public class ElementPrototype {
 							// allow
 						} else {
 							if( ! property.getValueClass().isAssignableFrom( ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass() ) ) {
-								throw new IllegalArgumentException( "property named " + propertyName + " in class " + elementClass.getName() + " does not accept expressions of type " + ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass().getName() );
+								throw new IllegalArgumentException( Messages.getString("ElementPrototype.4") + propertyName + Messages.getString("ElementPrototype.5") + elementClass.getName() + Messages.getString("ElementPrototype.6") + ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass().getName() ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 							}
 						}
 					} else {
 						if( ! property.getValueClass().isAssignableFrom( propertyValue.getClass() ) ) {
-							throw new IllegalArgumentException( "property named " + propertyName + " in class " + elementClass.getName() + " does not accept values of type " + propertyValue.getClass().getName() + "; bad value: " + propertyValue );
+							throw new IllegalArgumentException( Messages.getString("ElementPrototype.7") + propertyName + Messages.getString("ElementPrototype.8") + elementClass.getName() + Messages.getString("ElementPrototype.9") + propertyValue.getClass().getName() + Messages.getString("ElementPrototype.10") + propertyValue ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 						}
 					}
 				}
@@ -77,7 +77,7 @@ public class ElementPrototype {
 				for( int i = 0; i < desiredProperties.length; i++ ) {
 					edu.cmu.cs.stage3.alice.core.Property property = testElement.getPropertyNamed( desiredProperties[i] );
 					if( property == null ) {
-						throw new IllegalArgumentException( "property named " + desiredProperties[i] + " does not exist in " + elementClass.getName() );
+						throw new IllegalArgumentException( Messages.getString("ElementPrototype.11") + desiredProperties[i] + Messages.getString("ElementPrototype.12") + elementClass.getName() ); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
 			} else {
@@ -111,7 +111,7 @@ public class ElementPrototype {
 						q.removeFromParent();
 						property.getOwner().addChild( q );
 						//What the hell is this used for?
-						q.data.put( "associatedProperty", property.getName() );
+						q.data.put( "associatedProperty", property.getName() ); //$NON-NLS-1$
 					}
 
 					// HACK; is this too aggressive?
@@ -119,7 +119,7 @@ public class ElementPrototype {
 						edu.cmu.cs.stage3.alice.core.Element e = (edu.cmu.cs.stage3.alice.core.Element)propertyValue;
 						if( (e.getParent() == null) && (! (e instanceof edu.cmu.cs.stage3.alice.core.World)) ) {
 							property.getOwner().addChild( e );
-							e.data.put( "associatedProperty", property.getName() );
+							e.data.put( "associatedProperty", property.getName() ); //$NON-NLS-1$
 						} 
 					}
 					// END HACK
@@ -134,35 +134,35 @@ public class ElementPrototype {
 					forResponse = (edu.cmu.cs.stage3.alice.core.response.ForEachTogether)element;
 				}
 				edu.cmu.cs.stage3.alice.core.Variable eachVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				eachVar.name.set( "item" );
+				eachVar.name.set( Messages.getString("ElementPrototype.15") ); //$NON-NLS-1$
 				eachVar.valueClass.set( Object.class );
 				forResponse.addChild( eachVar );
 				forResponse.each.set( eachVar );
 			} else if( edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach.class.isAssignableFrom( elementClass ) ) {
 				edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach forQuestion = (edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)element;
 				edu.cmu.cs.stage3.alice.core.Variable eachVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				eachVar.name.set( "item" );
+				eachVar.name.set( Messages.getString("ElementPrototype.16") ); //$NON-NLS-1$
 				eachVar.valueClass.set( Object.class );
 				forQuestion.addChild( eachVar );
 				forQuestion.each.set( eachVar );
 			} else if (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class.isAssignableFrom( elementClass ) ){
 				edu.cmu.cs.stage3.alice.core.response.LoopNInOrder loopN = (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder)element;
 				edu.cmu.cs.stage3.alice.core.Variable indexVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				indexVar.name.set( "index" );
+				indexVar.name.set( Messages.getString("ElementPrototype.17") ); //$NON-NLS-1$
 				indexVar.valueClass.set( Number.class );
 				loopN.addChild( indexVar );
 				loopN.index.set( indexVar );
 			} else if (edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN.class.isAssignableFrom( elementClass ) ){
 				edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN loopN = (edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN)element;
 				edu.cmu.cs.stage3.alice.core.Variable indexVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				indexVar.name.set( "index" );
+				indexVar.name.set( Messages.getString("ElementPrototype.18") ); //$NON-NLS-1$
 				indexVar.valueClass.set( Number.class );
 				loopN.addChild( indexVar );
 				loopN.index.set( indexVar );
 			}
 			return element;
 		} catch( Exception e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error creating new element.", e ); // should not be reached if we did adequate checking in Constructor.
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPrototype.19"), e ); // should not be reached if we did adequate checking in Constructor. //$NON-NLS-1$
 		}
 
 		return null;
@@ -219,30 +219,30 @@ public class ElementPrototype {
 	
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append( this.getClass().getName() + "[ " );
-		sb.append( "elementClass = " + elementClass.getName() + ", " );
-		sb.append( "knownPropertyValues = [ " );
+		sb.append( this.getClass().getName() + "[ " ); //$NON-NLS-1$
+		sb.append( "elementClass = " + elementClass.getName() + ", " ); //$NON-NLS-1$ //$NON-NLS-2$
+		sb.append( "knownPropertyValues = [ " ); //$NON-NLS-1$
 		if( knownPropertyValues != null ) {
 			for( int i = 0; i < knownPropertyValues.length; i++ ) {
 				//sb.append( knownPropertyValues[i].toString() + ", " );
-				sb.append( "StringObjectPair( " );
-				sb.append( knownPropertyValues[i].getString() + ", " );
-				sb.append( knownPropertyValues[i].getObject().toString() + ", " );
-				sb.append( "), " );
+				sb.append( "StringObjectPair( " ); //$NON-NLS-1$
+				sb.append( knownPropertyValues[i].getString() + ", " ); //$NON-NLS-1$
+				sb.append( knownPropertyValues[i].getObject().toString() + ", " ); //$NON-NLS-1$
+				sb.append( "), " ); //$NON-NLS-1$
 			}
 		} else {
-			sb.append( "<null>" );
+			sb.append( "<null>" ); //$NON-NLS-1$
 		}
-		sb.append( " ], " );
-		sb.append( "desiredProperties = [ " );
+		sb.append( " ], " ); //$NON-NLS-1$
+		sb.append( "desiredProperties = [ " ); //$NON-NLS-1$
 		if( desiredProperties != null ) {
 			for( int i = 0; i < desiredProperties.length; i++ ) {
-				sb.append( desiredProperties[i] + ", " );
+				sb.append( desiredProperties[i] + ", " ); //$NON-NLS-1$
 			}
 		} else {
-			sb.append( "<null>" );
+			sb.append( "<null>" ); //$NON-NLS-1$
 		}
-		sb.append( " ], ]" );
+		sb.append( " ], ]" ); //$NON-NLS-1$
 
 		return sb.toString();
 	}

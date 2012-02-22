@@ -26,23 +26,23 @@ package edu.cmu.cs.stage3.caitlin.personbuilder;
 public class PersonBuilder extends javax.swing.JPanel {
 	public static java.util.Vector getAllBuilders() {
 		java.util.Vector builders = new java.util.Vector();
-		String name = "";
+		String name = ""; //$NON-NLS-1$
 		javax.swing.ImageIcon icon = null;
-		org.w3c.dom.Document doc = (org.w3c.dom.Document) XMLDirectoryUtilities.loadFile("images/builders.xml");
+		org.w3c.dom.Document doc = (org.w3c.dom.Document) XMLDirectoryUtilities.loadFile("images/builders.xml"); //$NON-NLS-1$
 		org.w3c.dom.Node root = doc.getDocumentElement();
 
 		org.w3c.dom.NodeList nl = root.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++) {
 			org.w3c.dom.Node node = nl.item(i);
-			if (node.getNodeName().equals("builder")) {
+			if (node.getNodeName().equals("builder")) { //$NON-NLS-1$
 				org.w3c.dom.NamedNodeMap nodeMap = node.getAttributes();
 				for (int j = 0; j < nodeMap.getLength(); j++) {
 					org.w3c.dom.Node attr = nodeMap.item(j);
-					if (attr.getNodeName().equals("name")) {
+					if (attr.getNodeName().equals("name")) { //$NON-NLS-1$
 						name = attr.getNodeValue();
-					} else if (attr.getNodeName().equals("icon")) {
+					} else if (attr.getNodeName().equals("icon")) { //$NON-NLS-1$
 						String iconName = attr.getNodeValue();
-						icon = new javax.swing.ImageIcon(PersonBuilder.class.getResource("images/" + iconName), iconName);
+						icon = new javax.swing.ImageIcon(PersonBuilder.class.getResource("images/" + iconName), iconName); //$NON-NLS-1$
 					}
 				}
 				edu.cmu.cs.stage3.util.StringObjectPair sop = new edu.cmu.cs.stage3.util.StringObjectPair(name, icon);
@@ -58,11 +58,11 @@ public class PersonBuilder extends javax.swing.JPanel {
 	private RenderPanel renderPanel = null;
 	private NamePanel namePanel = null;
 	private ModelWrapper modelWrapper = null;
-	private String builderName = "";
+	private String builderName = ""; //$NON-NLS-1$
 
 	public PersonBuilder( String builderName, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws edu.cmu.cs.stage3.progress.ProgressCancelException {
 		this.builderName = builderName;
-		String builderFile = "images/" + builderName + ".xml";
+		String builderFile = "images/" + builderName + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 		int progressOffset = 0;
 		//progressObserver.progressBegin( edu.cmu.cs.stage3.progress.ProgressObserver.UNKNOWN_TOTAL );
 		progressObserver.progressBegin( 7 );
@@ -104,22 +104,22 @@ public class PersonBuilder extends javax.swing.JPanel {
 		edu.cmu.cs.stage3.alice.core.Model model = modelWrapper.getModel();
 		String text = namePanel.getCreatedBy();
 		if( text.length()== 0 ) {
-			text = "Anonymous";
+			text = Messages.getString("PersonBuilder.9"); //$NON-NLS-1$
 		}
-		model.data.put( "created by", text );
+		model.data.put( Messages.getString("PersonBuilder.10"), text ); //$NON-NLS-1$
 
 		text = namePanel.getName();
 		if( text.length()== 0 ) {
-			text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( "What would you like to name your character?" );
+			text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("PersonBuilder.11") ); //$NON-NLS-1$
 		}
 		if (text == null)	//Aik Min - Avoid NullPointer exception
-			text = "";
+			text = ""; //$NON-NLS-1$
 		else
 			text = text.trim();
-		if( text.startsWith( "\"" ) || text.startsWith( "'" ) ) {
+		if( text.startsWith( "\"" ) || text.startsWith( "'" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 			text = text.substring( 1 );
 		}
-		if( text.endsWith( "\"" ) || text.endsWith( "'" ) ) {
+		if( text.endsWith( "\"" ) || text.endsWith( "'" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 			text = text.substring( 0, text.length()-1 );
 		}
 		model.name.set( text );

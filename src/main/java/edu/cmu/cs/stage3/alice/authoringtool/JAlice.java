@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import java.util.Locale;
+
 /**
  * @author Jason Pratt
  */
@@ -32,10 +34,15 @@ public class JAlice {
 		if( authoringtoolConfig.getValue( "language" ) == null ) { //$NON-NLS-1$
 			authoringtoolConfig.setValue( "language", "English" ); //$NON-NLS-1$ //$NON-NLS-2$
 		} 
+		//Locale mexico = new Locale("es","MX");
+		//Locale spain = new Locale("es","ES");
 		if (authoringtoolConfig.getValue( "language" ).compareToIgnoreCase("spanish")==0){
 			AikMin.locale = "es";
-		} else 
+			Locale.setDefault(new Locale("es","MX"));
+		} else {
 			AikMin.locale = "en";
+			Locale.setDefault(new Locale("en","US"));
+		}
 	}
 	// version information
 	private static String version = Messages.getString("JAlice.0"); //$NON-NLS-1$
@@ -373,14 +380,11 @@ public class JAlice {
 			authoringtoolConfig.setValue( "directories.worldsDirectory", dir ); //$NON-NLS-1$
 		}
 
-//		if( authoringtoolConfig.getValue( "directories.galleryDirectory" ) == null ) {
-//			if( new java.io.File( "gallery" ).getAbsoluteFile().exists() ) {
-//				authoringtoolConfig.setValue( "directories.galleryDirectory", "gallery" );
-//			} else { // this is kind of silly
-//				String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop";
-//				authoringtoolConfig.setValue( "directories.galleryDirectory", dir );
-//			}
-//		}
+		java.io.File defaultGallery = new java.io.File( "gallery" ).getAbsoluteFile();
+		if( defaultGallery.exists() ) {
+			String[] list = defaultGallery.list();				
+			authoringtoolConfig.setValueList( "directories.galleryDirectory", list );
+		}	
 
 		if( authoringtoolConfig.getValue( "directories.importDirectory" ) == null ) { //$NON-NLS-1$
 			//TODO: be more cross-platform aware

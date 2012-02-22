@@ -26,6 +26,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.importers.mocap;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import edu.cmu.cs.stage3.alice.authoringtool.importers.Messages;
 import edu.cmu.cs.stage3.alice.core.Element;
 
 
@@ -67,28 +69,28 @@ public class BoneSelectDialog extends javax.swing.JDialog {
         for (int i=0; i<possibilities.length; i++) {
             listOfStuff.addElement(possibilities[i]);
         }
-        promptLabel.setText("Which Part is the bone "+matching+"?");
+        promptLabel.setText(Messages.getString("BoneSelectDialog.0")+matching+"?"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     private void jbInit() throws Exception {
         this.getContentPane().setLayout(gridBagLayout1);
         partsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        selectButton.setText("Select");
+        selectButton.setText(Messages.getString("BoneSelectDialog.2")); //$NON-NLS-1$
         selectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 selectButton_actionPerformed(e);
             }
         });
-        skipButton.setText("Skip Bone");
+        skipButton.setText(Messages.getString("BoneSelectDialog.3")); //$NON-NLS-1$
         skipButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 skipButton_actionPerformed(e);
             }
         });
-        promptLabel.setText("jLabel1");
+        promptLabel.setText("jLabel1"); //$NON-NLS-1$
         this.setModal(true);
-        this.setTitle("Select Matching Bone");
-        limpButton.setText("Skip Limb");
+        this.setTitle(Messages.getString("BoneSelectDialog.5")); //$NON-NLS-1$
+        limpButton.setText(Messages.getString("BoneSelectDialog.6")); //$NON-NLS-1$
         limpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpButton_actionPerformed(e);

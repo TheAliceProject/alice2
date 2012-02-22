@@ -25,9 +25,6 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 import java.awt.*;
 import javax.swing.*;
-
-import edu.cmu.cs.stage3.alice.authoringtool.Messages;
-
 import java.awt.event.*;
 
 

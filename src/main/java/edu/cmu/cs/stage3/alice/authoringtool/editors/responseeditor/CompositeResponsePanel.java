@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 
 /**
  * Title:
@@ -39,7 +41,7 @@ public abstract class CompositeResponsePanel extends edu.cmu.cs.stage3.alice.aut
 
     public CompositeResponsePanel(){
         super();
-        headerText = "Composite Response";
+        headerText = Messages.getString("CompositeResponsePanel.0"); //$NON-NLS-1$
     }
 
     public void set(edu.cmu.cs.stage3.alice.core.response.CompositeResponse response, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){

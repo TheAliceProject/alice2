@@ -21,7 +21,7 @@ public class FrameSequencer
   private String directory;
   
   /** stores the base file name for each frame file */
-  private String baseName = "frame";
+  private String baseName = "frame"; //$NON-NLS-1$
   
   /** stores the current frame number */
   private int frameNumber = 1;
@@ -187,10 +187,10 @@ public class FrameSequencer
   {
     frameNumber--;
     File f = new File(directory + baseName + 
-      numberFormat.format(frameNumber) + ".jpg");
+      numberFormat.format(frameNumber) + ".jpg"); //$NON-NLS-1$
     boolean result = f.delete();
     if (result != true)
-      System.out.println("trouble removing last frame");
+      System.out.println(Messages.getString("FrameSequencer.2")); //$NON-NLS-1$
     pictureList.remove(pictureList.size() - 1);
   }
   
@@ -213,8 +213,8 @@ public class FrameSequencer
         moviePlayer.setVisible(true);
       }
       else
-        System.out.println("There are no frames to show yet.  " +
-                           "When you add a frame it will be shown");
+        System.out.println(Messages.getString("FrameSequencer.3") + //$NON-NLS-1$
+                           Messages.getString("FrameSequencer.4")); //$NON-NLS-1$
     }  
   }
   
@@ -238,10 +238,10 @@ public class FrameSequencer
   
   public static void main(String[] args)
   {
-    String dir = "c:/intro-prog-java/movies/rectangle/";
+    String dir = "c:/intro-prog-java/movies/rectangle/"; //$NON-NLS-1$
     FrameSequencer frameSequencer = 
       new FrameSequencer(dir);
-    frameSequencer.play(1000/30);
+    //frameSequencer.play(1000/30);
     //frameSequencer.play();
   }
   

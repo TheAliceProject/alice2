@@ -24,23 +24,24 @@
 package edu.cmu.cs.stage3.alice.core.question;
 
 import edu.cmu.cs.stage3.alice.core.Dimension;
+import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 
 public abstract class SizeAlongDimensionQuestion extends Question {
-	public final TransformableProperty subject = new TransformableProperty( this, "subject", null );
+	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); //$NON-NLS-1$
 	protected abstract Dimension getDimension();
 	
 	public Object getValue() {
 		Transformable subjectValue = subject.getTransformableValue();
 		if( subjectValue!=null ) {
 			if (this instanceof Width){
-				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+"'s width is ";	
+				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("SizeAlongDimensionQuestion.1");	 //$NON-NLS-1$
 			} else if (this instanceof Height){
-				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+"'s height is ";
+				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("SizeAlongDimensionQuestion.2"); //$NON-NLS-1$
 			} else if (this instanceof Depth){
-				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+"'s depth is ";
+				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("SizeAlongDimensionQuestion.3"); //$NON-NLS-1$
 			} 
 			return new Double( subjectValue.getSizeAlongDimension( getDimension() ) );
 		} else {

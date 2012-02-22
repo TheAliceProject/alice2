@@ -36,7 +36,7 @@ public class QuaternionKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyfr
 					m_transformable.setOrientationRightNow( q );
 				}
 			} catch( ClassCastException e ) {
-				System.err.println( "Incorrect sample type from spline " + runtimeSpline + ".  Quaternion expected.  Found " + runtimeSpline.getSample( splineTimeElapsed ) );
+				System.err.println( Messages.getString("QuaternionKeyframeResponse.0") + runtimeSpline + Messages.getString("QuaternionKeyframeResponse.1") + runtimeSpline.getSample( splineTimeElapsed ) ); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}

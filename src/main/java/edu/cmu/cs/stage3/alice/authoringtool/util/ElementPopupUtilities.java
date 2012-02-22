@@ -66,13 +66,13 @@ public class ElementPopupUtilities {
 					edu.cmu.cs.stage3.util.StringObjectPair newPair = new edu.cmu.cs.stage3.util.StringObjectPair( r.getDefaultLabel(), r );
 					iter.set( newPair );
 				} catch( NoSuchMethodException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.0"), e ); //$NON-NLS-1$
 				} catch( IllegalAccessException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.1"), e ); //$NON-NLS-1$
 				} catch( InstantiationException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.2"), e ); //$NON-NLS-1$
 				} catch( java.lang.reflect.InvocationTargetException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.3"), e ); //$NON-NLS-1$
 				}
 			} else if( o instanceof ElementPopupRunnable ) {
 				ElementPopupRunnable r = (ElementPopupRunnable)o;
@@ -86,13 +86,13 @@ public class ElementPopupUtilities {
 						iter.set( newPair );
 //						pair.setObject( ((Class)pair.getObject()).getConstructor( elementPopupRunnableParams ).newInstance( initArgs ) );
 					} catch( NoSuchMethodException e ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.4"), e ); //$NON-NLS-1$
 					} catch( IllegalAccessException e ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.5"), e ); //$NON-NLS-1$
 					} catch( InstantiationException e ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.6"), e ); //$NON-NLS-1$
 					} catch( java.lang.reflect.InvocationTargetException e ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error building popup.", e );
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.7"), e ); //$NON-NLS-1$
 					}
 				} else if( pair.getObject() instanceof java.util.Vector ) {
 					substituteRunnables( initArgs, (java.util.Vector)pair.getObject() );
@@ -129,7 +129,7 @@ public class ElementPopupUtilities {
 					subStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( repr, runnable ) );
 				}
 				if (subStructure.size() > 0){
-					structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "change to", subStructure ) );
+					structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("ElementPopupUtilities.8"), subStructure ) ); //$NON-NLS-1$
 					return structure;
 				}
 				else{
@@ -164,17 +164,17 @@ public class ElementPopupUtilities {
 	public static java.util.Vector getDefaultCharacterStructure( edu.cmu.cs.stage3.alice.core.Element element, boolean elementEnabled, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool, javax.swing.JTree jtree, javax.swing.tree.TreePath treePath ) {
 		java.util.Vector popupStructure = new java.util.Vector();
 		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element ), null ) );
-		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "separator", javax.swing.JSeparator.class ) );
+		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "separator", javax.swing.JSeparator.class ) ); //$NON-NLS-1$
 //		popupStructure.add( MakeCopyRunnable.class );
 //		popupStructure.add( MakeSharedCopyRunnable.class );
 		if( elementEnabled ) {
-			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "methods", edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDefaultOneShotStructure( element ) ) );
+			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "methods", edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDefaultOneShotStructure( element ) ) ); //$NON-NLS-1$
 		}
 		if( (jtree != null) && (treePath != null) ) {
 			Runnable renameRunnable = new RenameRunnable( element, jtree, treePath );
 			popupStructure.add( renameRunnable );
 		}
-		if( (element instanceof edu.cmu.cs.stage3.alice.core.Sandbox) && authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {
+		if( (element instanceof edu.cmu.cs.stage3.alice.core.Sandbox) && authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 			popupStructure.add( edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.EditScriptRunnable.class );
 		}
 //		popupStructure.add( PrintStatisticsRunnable.class );
@@ -243,7 +243,7 @@ public class ElementPopupUtilities {
 		java.util.Vector structure =  new java.util.Vector();
 
 		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( group ), emptyRunnable ) );
-		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "separator", javax.swing.JSeparator.class ) );
+		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "separator", javax.swing.JSeparator.class ) ); //$NON-NLS-1$
 		structure.add( SortGroupAlphabeticallyRunnable.class );
 		if( (jtree != null) && (treePath != null) ) {
 			Runnable renameRunnable = new RenameRunnable( group, jtree, treePath );
@@ -284,7 +284,7 @@ public class ElementPopupUtilities {
 		public final static edu.cmu.cs.stage3.util.Criterion namedHeadCriterion = new edu.cmu.cs.stage3.util.Criterion() {
 			public boolean accept( Object o ) {
 				if( o instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
-					if( "head".equalsIgnoreCase( ((edu.cmu.cs.stage3.alice.core.Transformable)o).name.getStringValue() ) ) {
+					if( "head".equalsIgnoreCase( ((edu.cmu.cs.stage3.alice.core.Transformable)o).name.getStringValue() ) ) { //$NON-NLS-1$
 						return true;
 					}
 				}
@@ -305,20 +305,20 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "delete";
+			return Messages.getString("ElementPopupUtilities.15"); //$NON-NLS-1$
 		}
 
 		public void run() {
 			if( element instanceof edu.cmu.cs.stage3.alice.core.Camera ) {
-				String message = "The Camera is a critical part of the World.  Very bad things can happen if you delete the Camera.\nAre you sure you want to delete it?";
-				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( message, "Delete Camera?", javax.swing.JOptionPane.YES_NO_OPTION );
+				String message = Messages.getString("ElementPopupUtilities.16"); //$NON-NLS-1$
+				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( message, Messages.getString("ElementPopupUtilities.17"), javax.swing.JOptionPane.YES_NO_OPTION ); //$NON-NLS-1$
 				if( result != javax.swing.JOptionPane.YES_OPTION ) {
 					return;
 				}
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.light.DirectionalLight ) {
 				if( element.getRoot().getDescendants( edu.cmu.cs.stage3.alice.core.light.DirectionalLight.class ).length == 1 ) {
-					String message = "You are about to delete the last directional light in the World.  If you do this, everything will probably become very dark.\nAre you sure you want to delete it?";
-					int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( message, "Delete Light?", javax.swing.JOptionPane.YES_NO_OPTION );
+					String message = Messages.getString("ElementPopupUtilities.18"); //$NON-NLS-1$
+					int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( message, Messages.getString("ElementPopupUtilities.19"), javax.swing.JOptionPane.YES_NO_OPTION ); //$NON-NLS-1$
 					if( result != javax.swing.JOptionPane.YES_OPTION ) {
 						return;
 					}
@@ -338,7 +338,7 @@ public class ElementPopupUtilities {
 					edu.cmu.cs.stage3.alice.core.Element refReferenceI = references[ i ].getReference();
 					edu.cmu.cs.stage3.alice.core.Property refPropertyI = references[ i ].getProperty();
 					edu.cmu.cs.stage3.alice.core.Element refOwnerI = refPropertyI.getOwner();
-					if( references[ i ].getProperty().isAlsoKnownAs( edu.cmu.cs.stage3.alice.core.Sandbox.class, "textureMaps" ) ) {
+					if( references[ i ].getProperty().isAlsoKnownAs( edu.cmu.cs.stage3.alice.core.Sandbox.class, "textureMaps" ) ) { //$NON-NLS-1$
 						if( refOwnerI instanceof edu.cmu.cs.stage3.alice.core.Sandbox ) {
 							refReferenceI.setParent( refOwnerI );
 						}
@@ -346,7 +346,7 @@ public class ElementPopupUtilities {
 					//if( references[ i ].getProperty().isAlsoKnownAs( edu.cmu.cs.stage3.alice.core.Sandbox.class, "geometries" ) ) {
 					//	System.err.println( "geometries: " + references[ i ] );
 					//}
-					if( references[ i ].getProperty().isAlsoKnownAs( edu.cmu.cs.stage3.alice.core.Model.class, "geometry" ) ) {
+					if( references[ i ].getProperty().isAlsoKnownAs( edu.cmu.cs.stage3.alice.core.Model.class, "geometry" ) ) { //$NON-NLS-1$
 						if( refOwnerI instanceof edu.cmu.cs.stage3.alice.core.Model ) {
 							refReferenceI.setParent( refOwnerI );
 						}
@@ -433,7 +433,7 @@ public class ElementPopupUtilities {
 			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			opacityAnimation.element.set( model );
-			opacityAnimation.propertyName.set( "opacity" );
+			opacityAnimation.propertyName.set( Messages.getString("ElementPopupUtilities.22") ); //$NON-NLS-1$
 			opacityAnimation.value.set( new Double( 0.0 ) );
 			opacityAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
 			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
@@ -442,7 +442,7 @@ public class ElementPopupUtilities {
 			doTogether.componentResponses.add( opacityAnimation );
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			vehicleAnimation.element.set( model );
-			vehicleAnimation.propertyName.set( "vehicle" );
+			vehicleAnimation.propertyName.set( Messages.getString("ElementPopupUtilities.23") ); //$NON-NLS-1$
 			vehicleAnimation.value.set( null );
 			vehicleAnimation.duration.set( new Double( 0.0 ) );
 			vehicleAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE );
@@ -480,7 +480,7 @@ public class ElementPopupUtilities {
 			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			opacityAnimation.element.set( model );
-			opacityAnimation.propertyName.set( "opacity" );
+			opacityAnimation.propertyName.set( Messages.getString("ElementPopupUtilities.24") ); //$NON-NLS-1$
 			opacityAnimation.value.set( model.opacity.get() );
 			opacityAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS ); // won't work correctly if children have different opacities
 			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
@@ -490,7 +490,7 @@ public class ElementPopupUtilities {
 			doTogether.componentResponses.add( opacityAnimation );
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			vehicleAnimation.element.set( model );
-			vehicleAnimation.propertyName.set( "vehicle" );
+			vehicleAnimation.propertyName.set( Messages.getString("ElementPopupUtilities.25") ); //$NON-NLS-1$
 			vehicleAnimation.value.set( model.vehicle.get() );
 			vehicleAnimation.duration.set( new Double( 0.0 ) );
 			vehicleAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE );
@@ -541,7 +541,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "rename";
+			return Messages.getString("ElementPopupUtilities.26"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -556,7 +556,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "make copy";
+			return Messages.getString("ElementPopupUtilities.27"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -595,7 +595,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "make shared copy";
+			return Messages.getString("ElementPopupUtilities.28"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -616,7 +616,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "print statistics";
+			return Messages.getString("ElementPopupUtilities.29"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -626,12 +626,12 @@ public class ElementPopupUtilities {
 			element.visit( itaCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
 			element.visit( textureMapCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
 
-			System.out.println( "Statistics for " + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element ) + ":" );
-			System.out.println( "  object count: " + itaCounter.getShownIndexedTriangleArrayCount() );
-			System.out.println( "    face count: " + itaCounter.getShownIndexCount() / 3 );
-			System.out.println( "  vertex count: " + itaCounter.getShownVertexCount() );
-			System.out.println( " texture count: " + textureMapCounter.getTextureMapCount() );
-			System.out.println( "texture memory: " + textureMapCounter.getTextureMapMemoryCount() + " bytes" );
+			System.out.println( Messages.getString("ElementPopupUtilities.30") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element ) + ":" ); //$NON-NLS-1$ //$NON-NLS-2$
+			System.out.println( Messages.getString("ElementPopupUtilities.32") + itaCounter.getShownIndexedTriangleArrayCount() ); //$NON-NLS-1$
+			System.out.println( Messages.getString("ElementPopupUtilities.33") + itaCounter.getShownIndexCount() / 3 ); //$NON-NLS-1$
+			System.out.println( Messages.getString("ElementPopupUtilities.34") + itaCounter.getShownVertexCount() ); //$NON-NLS-1$
+			System.out.println( Messages.getString("ElementPopupUtilities.35") + textureMapCounter.getTextureMapCount() ); //$NON-NLS-1$
+			System.out.println( Messages.getString("ElementPopupUtilities.36") + textureMapCounter.getTextureMapMemoryCount() + " bytes" ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -649,7 +649,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "save object...";
+			return Messages.getString("ElementPopupUtilities.38"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -690,7 +690,7 @@ public class ElementPopupUtilities {
 		public ToggleCommentingRunnable( edu.cmu.cs.stage3.alice.core.Element element ) {
 			super( element );
 			if( ! (element instanceof edu.cmu.cs.stage3.alice.core.Code) ) {
-				throw new IllegalArgumentException( "ToggleCommentRunnable only accepts Responses or User-Defined Questions; found: " + element );
+				throw new IllegalArgumentException( Messages.getString("ElementPopupUtilities.39") + element ); //$NON-NLS-1$
 			}
 		}
 
@@ -698,9 +698,9 @@ public class ElementPopupUtilities {
 		public String getDefaultLabel() {
 			edu.cmu.cs.stage3.alice.core.Code code = (edu.cmu.cs.stage3.alice.core.Code)element;
 			if( code.isCommentedOut.booleanValue() ) {
-				return "enable";
+				return Messages.getString("ElementPopupUtilities.40"); //$NON-NLS-1$
 			} else {
-				return "disable";
+				return Messages.getString("ElementPopupUtilities.41"); //$NON-NLS-1$
 			}
 		}
 
@@ -720,7 +720,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "switch to this element's scope";
+			return Messages.getString("ElementPopupUtilities.42"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -742,14 +742,14 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "capture pose";
+			return Messages.getString("ElementPopupUtilities.43"); //$NON-NLS-1$
 		}
 
 		public void run() {
 			if( element instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
 				edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)element; 
 				edu.cmu.cs.stage3.alice.core.Pose pose = edu.cmu.cs.stage3.alice.core.Pose.manufacturePose( transformable, transformable );
-				pose.name.set( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( "pose", element ) );
+				pose.name.set( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( "pose", element ) ); //$NON-NLS-1$
 				element.addChild( pose );
 				transformable.poses.add( pose );
 			}
@@ -770,7 +770,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "edit script";
+			return Messages.getString("ElementPopupUtilities.45"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -849,7 +849,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "Camera get a good look at this";
+			return Messages.getString("ElementPopupUtilities.46"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -857,10 +857,10 @@ public class ElementPopupUtilities {
 				if( element instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
 					authoringTool.getAGoodLookAt( (edu.cmu.cs.stage3.alice.core.Transformable)element, (edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera)authoringTool.getCurrentCamera() );
 				} else {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Can't get a good look: element is not a Transformable", null );
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.47"), null ); //$NON-NLS-1$
 				}
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Can't get a good look: camera is not symmetric perspective", null );
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.48"), null ); //$NON-NLS-1$
 			}
 		}
 	}
@@ -884,7 +884,7 @@ public class ElementPopupUtilities {
 
 		
 		public String getDefaultLabel() {
-			return "sort alphabetically";
+			return Messages.getString("ElementPopupUtilities.49"); //$NON-NLS-1$
 		}
 
 		public void run() {
@@ -895,7 +895,7 @@ public class ElementPopupUtilities {
 				group.values.clear(); //HACK; shouldn't have to do this
 				group.values.set( values );
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Unable to sort " + element + " alphabetically because it is not a Group.", null );
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPopupUtilities.50") + element + Messages.getString("ElementPopupUtilities.51"), null ); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}

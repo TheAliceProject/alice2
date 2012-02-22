@@ -216,12 +216,12 @@ public class MovieWriter
   /**
    * Method to write the movie frames in AVI format
    */
-  public void writeAVI()
+  public boolean writeAVI()
   {
     JpegImagesToMovie imageToMovie = new JpegImagesToMovie();
     List frameNames = getFrameNames();
     Picture p = new Picture((String) frameNames.get(0));
-    imageToMovie.doItAVI(p.getWidth(),p.getHeight(),
+    return imageToMovie.doItAVI(p.getWidth(),p.getHeight(),
                          frameRate,frameNames,outputURL + ".avi");
   }
   
@@ -233,15 +233,15 @@ public class MovieWriter
     JpegImagesToMovie imageToMovie = new JpegImagesToMovie();
     List frameNames = getFrameNames();
     Picture p = new Picture((String) frameNames.get(0));
-   return imageToMovie.doItQuicktime(p.getWidth(),p.getHeight(),
-                         frameRate,frameNames,outputURL + ".mov");
+    return imageToMovie.doItQuicktime(p.getWidth(),p.getHeight(),
+            frameRate,frameNames,outputURL + ".mov");
   }
    
-  public static void main(String[] args)
-  {
-    MovieWriter writer = 
-      new MovieWriter("c:/Temp/tr1/");
-    writer.writeQuicktime();
-    writer.writeAVI();
-  }
+//  public static void main(String[] args)
+//  {
+//    MovieWriter writer = 
+//      new MovieWriter("c:/Temp/tr1/");
+//    writer.writeQuicktime();
+//    writer.writeAVI();
+//  }
 }

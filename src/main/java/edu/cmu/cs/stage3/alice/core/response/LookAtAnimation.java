@@ -17,11 +17,11 @@ import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 
 public class LookAtAnimation extends AbstractPointAtAnimation {
 	
-	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE );
+	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); //$NON-NLS-1$
 	
 	
 	private edu.cmu.cs.stage3.alice.core.Model getHead(edu.cmu.cs.stage3.alice.core.Transformable subject) {
-		edu.cmu.cs.stage3.alice.core.Element[] heads = subject.search(new edu.cmu.cs.stage3.alice.core.criterion.ElementNamedCriterion("head", true));
+		edu.cmu.cs.stage3.alice.core.Element[] heads = subject.search(new edu.cmu.cs.stage3.alice.core.criterion.ElementNamedCriterion("head", true)); //$NON-NLS-1$
 		if ((heads.length > 0) && (heads[0] instanceof edu.cmu.cs.stage3.alice.core.Model)) {
 			return (edu.cmu.cs.stage3.alice.core.Model)heads[0];
 		} else {
@@ -39,13 +39,13 @@ public class LookAtAnimation extends AbstractPointAtAnimation {
 		public void prologue( double t ) {
 			m_target = LookAtAnimation.this.target.getReferenceFrameValue();
 			if (m_target == null) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "character value must not be null.", getCurrentStack(), LookAtAnimation.this.target );            
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.2"), getCurrentStack(), LookAtAnimation.this.target );             //$NON-NLS-1$
 			}
 			super.prologue(t);
 			
 			m_turnAmountPrev = 0;							
 			if (m_subject == m_target) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "subject and character values must not be the same.", getCurrentStack(), LookAtAnimation.this.subject );            
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.3"), getCurrentStack(), LookAtAnimation.this.subject );             //$NON-NLS-1$
 			}		
 			
 			if (m_subject.equals(LookAtAnimation.this.subject.getTransformableValue())) {

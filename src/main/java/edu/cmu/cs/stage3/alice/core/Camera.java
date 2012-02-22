@@ -28,11 +28,11 @@ import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.RenderTargetProperty;
 
 public abstract class Camera extends Model /*Transformable*/ {
-	public final BooleanProperty isLetterboxedAsOpposedToDistorted = new BooleanProperty( this, "isLetterboxedAsOpposedToDistorted", Boolean.TRUE );
-	public final NumberProperty nearClippingPlaneDistance = new NumberProperty( this, "nearClippingPlaneDistance", new Double( 0.1 ) );
-	public final NumberProperty farClippingPlaneDistance = new NumberProperty( this, "farClippingPlaneDistance", new Double( 100.0 ) );
-	public final RenderTargetProperty renderTarget = new RenderTargetProperty( this, "renderTarget", null );
-	public final BooleanProperty isViewVolumeShowing = new BooleanProperty( this, "isViewVolumeShowing", Boolean.FALSE );
+	public final BooleanProperty isLetterboxedAsOpposedToDistorted = new BooleanProperty( this, "isLetterboxedAsOpposedToDistorted", Boolean.TRUE ); //$NON-NLS-1$
+	public final NumberProperty nearClippingPlaneDistance = new NumberProperty( this, "nearClippingPlaneDistance", new Double( 0.1 ) ); //$NON-NLS-1$
+	public final NumberProperty farClippingPlaneDistance = new NumberProperty( this, "farClippingPlaneDistance", new Double( 100.0 ) ); //$NON-NLS-1$
+	public final RenderTargetProperty renderTarget = new RenderTargetProperty( this, "renderTarget", null ); //$NON-NLS-1$
+	public final BooleanProperty isViewVolumeShowing = new BooleanProperty( this, "isViewVolumeShowing", Boolean.FALSE ); //$NON-NLS-1$
 	private edu.cmu.cs.stage3.alice.scenegraph.Camera m_sgCamera;
 	private edu.cmu.cs.stage3.alice.core.decorator.ViewVolumeDecorator m_viewVolumeDecorator;
 	protected Camera( edu.cmu.cs.stage3.alice.scenegraph.Camera sgCamera ) {
@@ -70,7 +70,7 @@ public abstract class Camera extends Model /*Transformable*/ {
 		super.nameValueChanged( value );
 		String s = null;
 		if( value!=null ) {
-			s = value+".m_sgCamera";
+			s = value+".m_sgCamera"; //$NON-NLS-1$
 		}
 		m_sgCamera.setName( s );
 	}

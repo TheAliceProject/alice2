@@ -37,7 +37,7 @@ public class BehaviorGroupEditor extends edu.cmu.cs.stage3.alice.authoringtool.u
     protected edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel componentElementPanel;
     protected edu.cmu.cs.stage3.alice.core.Element m_element;
     protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty m_components;
-    protected String headerText = "Events";
+    protected String headerText = Messages.getString("BehaviorGroupEditor.0"); //$NON-NLS-1$
     protected edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel headerPanel;
     protected javax.swing.JPanel containingPanel;
     protected javax.swing.JButton expandButton;
@@ -53,7 +53,7 @@ public class BehaviorGroupEditor extends edu.cmu.cs.stage3.alice.authoringtool.u
     protected boolean shouldShowLabel = true;
 
 
-    protected static String IS_EXPANDED_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.behavioreditor IS_EXPANDED_KEY";
+    protected static String IS_EXPANDED_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.behavioreditor IS_EXPANDED_KEY"; //$NON-NLS-1$
 
 
     public BehaviorGroupEditor(){
@@ -223,8 +223,8 @@ public class BehaviorGroupEditor extends edu.cmu.cs.stage3.alice.authoringtool.u
     protected void generateGUI(){
         this.setOpaque(false);
         this.setLayout(new java.awt.GridBagLayout());
-        plus = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel.class.getResource( "images/plus.gif" ) );
-        minus = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel.class.getResource( "images/minus.gif" ) );
+        plus = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel.class.getResource( "images/plus.gif" ) ); //$NON-NLS-1$
+        minus = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel.class.getResource( "images/minus.gif" ) ); //$NON-NLS-1$
         expandButton = new javax.swing.JButton();
         expandButton.setContentAreaFilled( false );
         expandButton.setMargin( new java.awt.Insets( 0, 0, 0, 0 ) );

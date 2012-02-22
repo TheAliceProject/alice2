@@ -2,6 +2,9 @@ package movieMaker;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+
+import movieMaker.SimpleOutput;
+
 import java.util.Properties;
 import java.io.*;
 import java.net.*;
@@ -26,13 +29,13 @@ public class FileChooser
   /**
    * Property key for the media directory
    */
-  private static final String MEDIA_DIRECTORY = "mediaDirectory";
+  private static final String MEDIA_DIRECTORY = "mediaDirectory"; //$NON-NLS-1$
   
   /**
    * Name for property file
    */
   private static final String PROPERTY_FILE_NAME = 
-    "SimplePictureProperties.txt";
+    "SimplePictureProperties.txt"; //$NON-NLS-1$
   
   /////////////////////// methods /////////////////////////////
   
@@ -122,7 +125,7 @@ public class FileChooser
     // pick the directory
     dirName = pickPath(fileChooser);
     
-    return dirName + "/";
+    return dirName + "/"; //$NON-NLS-1$
   }
   
    /**
@@ -138,18 +141,18 @@ public class FileChooser
    // if the directory is null ask the user for it
    if (directory == null)
    {
-     SimpleOutput.showError("The media path (directory)" +
-       " has not been set yet!  " +
-       "Please pick the directory " +
-       "that contains your media " +
-       "(usually called mediasources) " +
-       "with the following FileChooser.  " +
-       "The directory name will be stored " +
-       "in a file and remain unchanged unless you use " +
-       "FileChooser.pickMediaPath() or " +
-       "FileChooser.setMediaPath(\"full path name\") " +
-       "(ex: FileChooser.setMediaPath(\"c:/intro-prog-java/mediasources/\")) " +
-       " to change it.");
+     SimpleOutput.showError(Messages.getString("FileChooser.3") + //$NON-NLS-1$
+       Messages.getString("FileChooser.4") + //$NON-NLS-1$
+       Messages.getString("FileChooser.5") + //$NON-NLS-1$
+       Messages.getString("FileChooser.6") + //$NON-NLS-1$
+       Messages.getString("FileChooser.7") + //$NON-NLS-1$
+       Messages.getString("FileChooser.8") + //$NON-NLS-1$
+       Messages.getString("FileChooser.9") + //$NON-NLS-1$
+       Messages.getString("FileChooser.10") + //$NON-NLS-1$
+       Messages.getString("FileChooser.11") + //$NON-NLS-1$
+       Messages.getString("FileChooser.12") + //$NON-NLS-1$
+       Messages.getString("FileChooser.13") + //$NON-NLS-1$
+       Messages.getString("FileChooser.14")); //$NON-NLS-1$
      pickMediaPath();
      directory = getMediaDirectory();
    }
@@ -178,8 +181,8 @@ public class FileChooser
      // load the properties from a file
      try {
        // get the URL for where we loaded this class 
-       Class currClass = Class.forName("FileChooser");
-       URL classURL = currClass.getResource("FileChooser.class");
+       Class currClass = Class.forName("FileChooser"); //$NON-NLS-1$
+       URL classURL = currClass.getResource("FileChooser.class"); //$NON-NLS-1$
        URL fileURL = new URL(classURL,PROPERTY_FILE_NAME);
        FileInputStream in = new FileInputStream(fileURL.getPath());
        appProperties.load(in);
@@ -207,8 +210,8 @@ public class FileChooser
    File file = new File(directory);
    if (!file.exists())
    {
-     System.out.println("Sorry but " + directory + 
-                 " doesn't exist, try a different directory.");
+     System.out.println(Messages.getString("FileChooser.17") + directory +  //$NON-NLS-1$
+                 Messages.getString("FileChooser.18")); //$NON-NLS-1$
      FileChooser.pickMediaPath();
    }
    
@@ -227,17 +230,17 @@ public class FileChooser
      try {
        
        // get the URL for where we loaded this class 
-       Class currClass = Class.forName("FileChooser");
-       URL classURL = currClass.getResource("FileChooser.class");
+       Class currClass = Class.forName("FileChooser"); //$NON-NLS-1$
+       URL classURL = currClass.getResource("FileChooser.class"); //$NON-NLS-1$
        URL fileURL = new URL(classURL,PROPERTY_FILE_NAME);
        FileOutputStream out = 
          new FileOutputStream(fileURL.getPath());
        appProperties.store(out, 
-                     "Properties for the Simple Picture class");
+                     Messages.getString("FileChooser.21")); //$NON-NLS-1$
        out.close();
        //System.out.println("The media directory is now " + directory);
      } catch (Exception ex) {
-       System.err.println("Couldn't save media path to a file");
+       System.err.println(Messages.getString("FileChooser.22")); //$NON-NLS-1$
      }
    }
  }

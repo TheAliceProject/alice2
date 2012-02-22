@@ -56,7 +56,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	 * @see #getUIClassID
 	 * @see #readObject
 	 */
-	private static final String uiClassID = "MenuUI";
+	private static final String uiClassID = "MenuUI"; //$NON-NLS-1$
 
 	/*
 	 * The popup menu portion of the menu.
@@ -107,7 +107,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	 * Constructs a new <code>AliceMenu</code> with no text.
 	 */
 	public AliceMenu() {
-		this( "" );
+		this( "" ); //$NON-NLS-1$
 	}
 	/**
 	 * Constructs a new <code>AliceMenu</code> with the supplied string
@@ -261,7 +261,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 			return;
 		}
 		if( DEBUG ) {
-			System.out.println( "in AliceMenu.setPopupMenuVisible " + b );
+			System.out.println( "in AliceMenu.setPopupMenuVisible " + b ); //$NON-NLS-1$
 
 			// Thread.dumpStack();
 		}
@@ -400,7 +400,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public void setDelay( int d ) {
 		if( d < 0 ) {
-			throw new IllegalArgumentException( "Delay must be a positive integer" );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.3") ); //$NON-NLS-1$
 		}
 
 		delay = d;
@@ -600,7 +600,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 			if( e.getPropertyName().equals( Action.NAME ) ) {
 				String text = (String)e.getNewValue();
 				menuItem.setText( text );
-			} else if( propertyName.equals( "enabled" ) ) {
+			} else if( propertyName.equals( "enabled" ) ) { //$NON-NLS-1$
 				Boolean enabledState = (Boolean)e.getNewValue();
 				menuItem.setEnabled( enabledState.booleanValue() );
 			} else if( e.getPropertyName().equals( Action.SMALL_ICON ) ) {
@@ -637,7 +637,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public void insert( String s, int pos ) {
 		if( pos < 0 ) {
-			throw new IllegalArgumentException( "index less than zero." );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.5") ); //$NON-NLS-1$
 		}
 
 		ensurePopupMenuCreated();
@@ -656,7 +656,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public JMenuItem insert( JMenuItem mi, int pos ) {
 		if( pos < 0 ) {
-			throw new IllegalArgumentException( "index less than zero." );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.6") ); //$NON-NLS-1$
 		}
 
 		AccessibleContext ac = mi.getAccessibleContext();
@@ -679,7 +679,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public JMenuItem insert( Action a, int pos ) {
 		if( pos < 0 ) {
-			throw new IllegalArgumentException( "index less than zero." );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.7") ); //$NON-NLS-1$
 		}
 
 		ensurePopupMenuCreated();
@@ -704,7 +704,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public void insertSeparator( int index ) {
 		if( index < 0 ) {
-			throw new IllegalArgumentException( "index less than zero." );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.8") ); //$NON-NLS-1$
 		}
 
 		ensurePopupMenuCreated();
@@ -725,7 +725,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public JMenuItem getItem( int pos ) {
 		if( pos < 0 ) {
-			throw new IllegalArgumentException( "index less than zero." );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.9") ); //$NON-NLS-1$
 		}
 
 		Component c = getMenuComponent( pos );
@@ -759,7 +759,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	 */
 	
 	public boolean isTearOff() {
-		throw new Error( "boolean isTearOff() {} not yet implemented" );
+		throw new Error( Messages.getString("AliceMenu.10") ); //$NON-NLS-1$
 	}
 	/**
 	 * Removes the specified menu item from this menu.  If there is no
@@ -784,10 +784,10 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public void remove( int pos ) {
 		if( pos < 0 ) {
-			throw new IllegalArgumentException( "index less than zero." );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.11") ); //$NON-NLS-1$
 		}
 		if( pos > getItemCount() ) {
-			throw new IllegalArgumentException( "index greater than the number of items." );
+			throw new IllegalArgumentException( Messages.getString("AliceMenu.12") ); //$NON-NLS-1$
 		}
 		if( popupMenu != null ) {
 			popupMenu.remove( pos );
@@ -996,7 +996,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	protected void fireMenuSelected() {
 		if( DEBUG ) {
-			System.out.println( "In AliceMenu.fireMenuSelected" );
+			System.out.println( "In AliceMenu.fireMenuSelected" ); //$NON-NLS-1$
 		}
 
 		// Guaranteed to return a non-null array
@@ -1007,7 +1007,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 		for( int i = listeners.length - 2; i >= 0; i -= 2 ) {
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
-					throw new Error( getText() + " has a NULL Listener!! " + i );
+					throw new Error( getText() + Messages.getString("AliceMenu.14") + i ); //$NON-NLS-1$
 				} else {
 
 					// Lazily create the event:
@@ -1032,7 +1032,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	protected void fireMenuDeselected() {
 		if( DEBUG ) {
-			System.out.println( "In AliceMenu.fireMenuDeselected" );
+			System.out.println( "In AliceMenu.fireMenuDeselected" ); //$NON-NLS-1$
 		}
 
 		// Guaranteed to return a non-null array
@@ -1043,7 +1043,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 		for( int i = listeners.length - 2; i >= 0; i -= 2 ) {
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
-					throw new Error( getText() + " has a NULL Listener!! " + i );
+					throw new Error( getText() + Messages.getString("AliceMenu.16") + i ); //$NON-NLS-1$
 				} else {
 
 					// Lazily create the event:
@@ -1068,7 +1068,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	protected void fireMenuCanceled() {
 		if( DEBUG ) {
-			System.out.println( "In AliceMenu.fireMenuCanceled" );
+			System.out.println( "In AliceMenu.fireMenuCanceled" ); //$NON-NLS-1$
 		}
 
 		// Guaranteed to return a non-null array
@@ -1079,7 +1079,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 		for( int i = listeners.length - 2; i >= 0; i -= 2 ) {
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
-					throw new Error( getText() + " has a NULL Listener!! " + i );
+					throw new Error( getText() + Messages.getString("AliceMenu.18") + i ); //$NON-NLS-1$
 				} else {
 
 					// Lazily create the event:
@@ -1167,7 +1167,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	public void menuSelectionChanged( boolean isIncluded ) {
 		if( DEBUG ) {
-			System.out.println( "In AliceMenu.menuSelectionChanged to " + isIncluded );
+			System.out.println( "In AliceMenu.menuSelectionChanged to " + isIncluded ); //$NON-NLS-1$
 		}
 
 		setSelected( isIncluded );
@@ -1220,7 +1220,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	 */
 	
 	public void setAccelerator( KeyStroke keyStroke ) {
-		throw new Error( "setAccelerator() is not defined for AliceMenu.  Use setMnemonic() instead." );
+		throw new Error( Messages.getString("AliceMenu.20") ); //$NON-NLS-1$
 	}
 	/**
 	 * Processes any focus events, such as
@@ -1251,8 +1251,8 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	protected void processKeyEvent( KeyEvent e ) {
 		if( DEBUG ) {
-			System.out.println( "in AliceMenu.processKeyEvent for " + getText() + "  " + KeyStroke.getKeyStrokeForEvent( e ) );
-			System.out.println( "Event consumption = " + e.isConsumed() );
+			System.out.println( Messages.getString("AliceMenu.21") + getText() + "  " + KeyStroke.getKeyStrokeForEvent( e ) ); //$NON-NLS-1$ //$NON-NLS-2$
+			System.out.println( Messages.getString("AliceMenu.23") + e.isConsumed() ); //$NON-NLS-1$
 			Thread.dumpStack();
 		}
 
@@ -1305,7 +1305,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 			   also offends me...
 			   hania 23 July 1998 */
 		if( isSelected() && ( e.getKeyCode() == KeyEvent.VK_TAB || e.getKeyChar() == '\t' ) ) {
-			if( (Boolean)UIManager.get( "Menu.consumesTabs" ) == Boolean.TRUE ) {
+			if( (Boolean)UIManager.get( "Menu.consumesTabs" ) == Boolean.TRUE ) { //$NON-NLS-1$
 				e.consume();
 
 				return;

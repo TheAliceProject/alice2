@@ -43,7 +43,7 @@ public class CharacterViewAnimation extends AbstractPositionAnimation {
 			
 			if (asSeenBy.get() instanceof Model) {
 				Model character = (Model) asSeenBy.get();
-				edu.cmu.cs.stage3.alice.core.Element[] heads = character.search(new edu.cmu.cs.stage3.alice.core.criterion.ElementNamedCriterion("head", true) );
+				edu.cmu.cs.stage3.alice.core.Element[] heads = character.search(new edu.cmu.cs.stage3.alice.core.criterion.ElementNamedCriterion("head", true) ); //$NON-NLS-1$
 				if ((heads.length > 0) && (heads[0] instanceof Model)) {
 					m_characterHead = (Model) heads[0];
 					v = m_characterHead.getBoundingBox().getCenterOfFrontFace();
@@ -74,11 +74,11 @@ public class CharacterViewAnimation extends AbstractPositionAnimation {
 		public void prologue( double t ) {
 			m_asSeenBy = CharacterViewAnimation.this.asSeenBy.getReferenceFrameValue();
 			if (m_asSeenBy == null) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "character value must not be null.", getCurrentStack(), CharacterViewAnimation.this.asSeenBy );            
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CharacterViewAnimation.1"), getCurrentStack(), CharacterViewAnimation.this.asSeenBy );             //$NON-NLS-1$
 			}	
 			super.prologue( t );		
 			if (m_subject == m_asSeenBy) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "subject and character values must not be the same.", getCurrentStack(), CharacterViewAnimation.this.subject );            
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CharacterViewAnimation.2"), getCurrentStack(), CharacterViewAnimation.this.subject );             //$NON-NLS-1$
 			}
 			m_orientationBegin = getOrientationBegin();
 			m_orientationEnd = null;

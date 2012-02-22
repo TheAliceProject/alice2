@@ -39,15 +39,15 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 			if( value instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 				toolTipText = ((edu.cmu.cs.stage3.alice.core.Element)value).getKey();
 			} else if( value instanceof java.lang.String ) {
-				toolTipText = "\"" + getText() + "\"";
+				toolTipText = "\"" + getText() + "\""; //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				toolTipText = getText();
 			}
 			String classString = value.getClass().getName();
-			if( classString.startsWith( "edu.cmu.cs.stage3." ) ) {
-				classString = classString.substring( "edu.cmu.cs.stage3.".length() );
+			if( classString.startsWith( "edu.cmu.cs.stage3." ) ) { //$NON-NLS-1$
+				classString = classString.substring( "edu.cmu.cs.stage3.".length() ); //$NON-NLS-1$
 			}
-			toolTipText = toolTipText + " (" + classString + ")";
+			toolTipText = toolTipText + " (" + classString + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		this.setToolTipText( toolTipText );
 
@@ -57,15 +57,15 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 			colorRenderer.setToolTipText( toolTipText );
 			return colorRenderer.getTableCellRendererComponent( table, value, isSelected, hasFocus, row, column );
 		} else if( value != null && value.getClass().isArray() ) {
-			String text = "";
+			String text = ""; //$NON-NLS-1$
 			java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
 			nf.setMaximumFractionDigits( 3 );
-			text = "{ ";
+			text = "{ "; //$NON-NLS-1$
 			int m = java.lang.reflect.Array.getLength( value );
 			for( int i = 0; i < m; i++ ) {
 				Object o = java.lang.reflect.Array.get( value, i );
 				if( o.getClass().isArray() ) {
-					text += "{ ";
+					text += "{ "; //$NON-NLS-1$
 					int n = java.lang.reflect.Array.getLength( o );
 					for( int j=0; j<n; j++ ) {
 						Object p = java.lang.reflect.Array.get( o, j );
@@ -75,13 +75,13 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 							text += p;
 						}
 						if( j<n-1 ) {
-							text += ", ";
+							text += ", "; //$NON-NLS-1$
 						}
 						else {
-							text += " ";
+							text += " "; //$NON-NLS-1$
 						}
 					}
-					text += "}";
+					text += "}"; //$NON-NLS-1$
 				} else {
 					if( o instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 						text += edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( o );
@@ -92,21 +92,21 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 					}
 				}
 				if( i < m - 1 ) {
-					text += ", ";
+					text += ", "; //$NON-NLS-1$
 				} else {
-					text += " ";
+					text += " "; //$NON-NLS-1$
 				}
 				if( text.length() > 64 ) {
-					text += "...";
+					text += "..."; //$NON-NLS-1$
 					break;
 				}
 			}
-			text += "}";
+			text += "}"; //$NON-NLS-1$
 			setText( text );
 		} else if( value instanceof edu.cmu.cs.stage3.util.Enumerable ) {
 			setText( ((edu.cmu.cs.stage3.util.Enumerable)value).getRepr() );
 		} else if( value instanceof java.util.Enumeration ) {
-			setText( "<enumeration>" );
+			setText( Messages.getString("PropertyCellRenderer.16") ); //$NON-NLS-1$
 		}
 
 		return this;
@@ -146,24 +146,24 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 		}
 
 		public String getTextFromColor( java.awt.Color color ) {
-			String text = "";
-			if( color.equals( java.awt.Color.black ) ) { text = "black"; }
-			else if( color.equals( java.awt.Color.blue ) ) { text = "blue"; }
-			else if( color.equals( java.awt.Color.cyan ) ) { text = "cyan"; }
-			else if( color.equals( java.awt.Color.darkGray ) ) { text = "darkGray"; }
-			else if( color.equals( java.awt.Color.gray ) ) { text = "gray"; }
-			else if( color.equals( java.awt.Color.green ) ) { text = "green"; }
-			else if( color.equals( java.awt.Color.lightGray ) ) { text = "lightGray"; }
-			else if( color.equals( java.awt.Color.magenta ) ) { text = "magenta"; }
-			else if( color.equals( java.awt.Color.orange ) ) { text = "orange"; }
-			else if( color.equals( java.awt.Color.pink ) ) { text = "pink"; }
-			else if( color.equals( java.awt.Color.red ) ) { text = "red"; }
-			else if( color.equals( java.awt.Color.white ) ) { text = "white"; }
-			else if( color.equals( java.awt.Color.yellow ) ) { text = "yellow"; }
+			String text = ""; //$NON-NLS-1$
+			if( color.equals( java.awt.Color.black ) ) { text = Messages.getString("PropertyCellRenderer.18"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.blue ) ) { text = Messages.getString("PropertyCellRenderer.19"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.cyan ) ) { text = Messages.getString("PropertyCellRenderer.20"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.darkGray ) ) { text = Messages.getString("PropertyCellRenderer.21"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.gray ) ) { text = Messages.getString("PropertyCellRenderer.22"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.green ) ) { text = Messages.getString("PropertyCellRenderer.23"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.lightGray ) ) { text = Messages.getString("PropertyCellRenderer.24"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.magenta ) ) { text = Messages.getString("PropertyCellRenderer.25"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.orange ) ) { text = Messages.getString("PropertyCellRenderer.26"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.pink ) ) { text = Messages.getString("PropertyCellRenderer.27"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.red ) ) { text = Messages.getString("PropertyCellRenderer.28"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.white ) ) { text = Messages.getString("PropertyCellRenderer.29"); } //$NON-NLS-1$
+			else if( color.equals( java.awt.Color.yellow ) ) { text = Messages.getString("PropertyCellRenderer.30"); } //$NON-NLS-1$
 			else {
 				float[] rgba = new float[4];
 				color.getComponents( rgba );
-				text = "<red = " + rgba[0] + ", green = " + rgba[1] + ", blue = " + rgba[2] + ", alpha = " + rgba[3] + ">";
+				text = Messages.getString("PropertyCellRenderer.31") + rgba[0] + Messages.getString("PropertyCellRenderer.32") + rgba[1] + Messages.getString("PropertyCellRenderer.33") + rgba[2] + Messages.getString("PropertyCellRenderer.34") + rgba[3] + ">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 			}
 
 			return text;

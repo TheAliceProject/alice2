@@ -46,7 +46,7 @@ public class StylePropertyViewController extends PropertyViewController {
 		super.set( property, true, true, true, omitPropertyName, factory );
 		this.valueClass = property.getValueClass();
 		if( ! edu.cmu.cs.stage3.alice.core.Style.class.isAssignableFrom( this.valueClass ) ) {
-			throw new IllegalArgumentException( "valueClass of property " + property + " is not a Style; instead: " + valueClass );
+			throw new IllegalArgumentException( Messages.getString("StylePropertyViewController.0") + property + Messages.getString("StylePropertyViewController.1") + valueClass ); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		setPopupEnabled( true );
 		refreshGUI();

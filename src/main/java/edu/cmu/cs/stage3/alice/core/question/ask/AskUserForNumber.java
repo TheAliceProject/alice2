@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.question.ask;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 
 /**
@@ -42,8 +45,18 @@ public class AskUserForNumber extends edu.cmu.cs.stage3.alice.core.question.Numb
 		}
 		try {
 			String string = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( question.getStringValue(), title.getStringValue(), javax.swing.JOptionPane.QUESTION_MESSAGE );
-			if (string != null && ( string.matches( "-?\\d+" ) || string.matches( "-?\\d+.\\d+" ) ))
-				return new Double( string );
+			if (string != null) { 
+				if ( string.matches( "-?\\d+" ) || string.matches( "-?\\d*\\.\\d+" ) ) {
+					return new Double( string );
+				} else {
+					Pattern p = Pattern.compile("(-?\\d*\\.\\d+)|(-?\\d+)");
+					Matcher m = p.matcher(string);
+					if ( m.find() ){
+						String t = m.group();
+						return new Double (t);
+					}
+				}
+			}
 			return new Double( 0 );
 		} finally {
 			if( m_clock != null ) {

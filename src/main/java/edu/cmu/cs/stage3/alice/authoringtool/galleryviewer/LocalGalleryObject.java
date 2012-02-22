@@ -30,11 +30,11 @@ package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
 public class LocalGalleryObject extends GalleryObject {
 
-    public static final String tumbnailFilename = "thumbnail.png";
+    public static final String tumbnailFilename = "thumbnail.png"; //$NON-NLS-1$
 
     
 	protected String getToolTipString(){
-        return "<html><body><p>Object</p><p>Click to add this object to the world</p></body></html>";
+        return Messages.getString("LocalGalleryObject.1"); //$NON-NLS-1$
     }
 
     
@@ -42,10 +42,10 @@ public class LocalGalleryObject extends GalleryObject {
         super.guiInit();
 		if (data != null){
 	        if (data.type == GalleryViewer.CD){
-				location = "CD-ROM";
+				location = "CD-ROM"; //$NON-NLS-1$
 	        }
 	        else{    
-	        	location = "your computer";
+	        	location = Messages.getString("LocalGalleryObject.3"); //$NON-NLS-1$
 	        }
     	}
     }
@@ -55,10 +55,10 @@ public class LocalGalleryObject extends GalleryObject {
 		super.set(dataIn);
 		if (data != null){
 			if (data.type == GalleryViewer.CD){
-				location = "CD-ROM";
+				location = "CD-ROM"; //$NON-NLS-1$
 			}
 			else{    
-				location = "your computer";
+				location = Messages.getString("LocalGalleryObject.5"); //$NON-NLS-1$
 			}
 		}
 	}
@@ -68,12 +68,12 @@ public class LocalGalleryObject extends GalleryObject {
         javax.swing.ImageIcon  toReturn = null;
         if (imageFilename != null){
             try{
-                if (imageFilename.indexOf(".a2c") == (imageFilename.length()-4) || imageFilename.indexOf(".a2w") == (imageFilename.length()-4)){
+                if (imageFilename.indexOf(".a2c") == (imageFilename.length()-4) || imageFilename.indexOf(".a2w") == (imageFilename.length()-4)){ //$NON-NLS-1$ //$NON-NLS-2$
                     java.util.zip.ZipFile zip = new java.util.zip.ZipFile(imageFilename);
                     java.util.zip.ZipEntry entry = zip.getEntry(tumbnailFilename);
                     if (entry != null){
                         java.io.InputStream stream = zip.getInputStream(entry);
-                        java.awt.Image thumbImage = edu.cmu.cs.stage3.image.ImageIO.load("png", stream);
+                        java.awt.Image thumbImage = edu.cmu.cs.stage3.image.ImageIO.load("png", stream); //$NON-NLS-1$
                         if (thumbImage != null){
                             toReturn = new javax.swing.ImageIcon(thumbImage);
                         }
@@ -111,12 +111,12 @@ public class LocalGalleryObject extends GalleryObject {
             public void run(){
                 if (imageFilename != null){
                     try{
-                        if (imageFilename.indexOf(".a2c") == (imageFilename.length()-4) || imageFilename.indexOf(".a2w") == (imageFilename.length()-4)){
+                        if (imageFilename.indexOf(".a2c") == (imageFilename.length()-4) || imageFilename.indexOf(".a2w") == (imageFilename.length()-4)){ //$NON-NLS-1$ //$NON-NLS-2$
                             java.util.zip.ZipFile zip = new java.util.zip.ZipFile(imageFilename);
                             java.util.zip.ZipEntry entry = zip.getEntry(tumbnailFilename);
                             if (entry != null){
                                 java.io.InputStream stream = zip.getInputStream(entry);
-                                java.awt.Image thumbImage = edu.cmu.cs.stage3.image.ImageIO.load("png", stream);
+                                java.awt.Image thumbImage = edu.cmu.cs.stage3.image.ImageIO.load("png", stream); //$NON-NLS-1$
                                 if (thumbImage != null){
                                     image = new javax.swing.ImageIcon(thumbImage);
                                 }

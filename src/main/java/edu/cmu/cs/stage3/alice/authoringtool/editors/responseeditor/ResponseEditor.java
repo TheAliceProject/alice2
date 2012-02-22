@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * Title:
  * Description:
@@ -34,7 +36,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
 public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor{
 
-    public final String editorName = "Response Editor";
+    public final String editorName = Messages.getString("ResponseEditor.0"); //$NON-NLS-1$
 
     protected edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel doInOrderPrototype;
     protected edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel doTogetherPrototype;
@@ -63,7 +65,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
 
     
 	protected java.awt.Color getEditorColor(){
-        return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor");
+        return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor"); //$NON-NLS-1$
     }
 
     
@@ -97,22 +99,22 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         String scriptDefinedString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse.class);
         String loopIfTrueString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class);
         String commentString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.Comment.class);
-        String mathString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue("+ - * /");
+        String mathString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue("+ - * /"); //$NON-NLS-1$
 
-        java.awt.Color DO_IN_ORDER_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoInOrder");
-        java.awt.Color DO_TOGETHER_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoTogether");
-        java.awt.Color COUNT_LOOP_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder");
-        java.awt.Color DO_IF_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("IfElseInOrder");
+        java.awt.Color DO_IN_ORDER_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoInOrder"); //$NON-NLS-1$
+        java.awt.Color DO_TOGETHER_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoTogether"); //$NON-NLS-1$
+        java.awt.Color COUNT_LOOP_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"); //$NON-NLS-1$
+        java.awt.Color DO_IF_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("IfElseInOrder"); //$NON-NLS-1$
         // WAIT_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("Wait");
-        java.awt.Color SEQUENTIAL_LOOP_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder");
-        java.awt.Color FOR_ALL_TOGETHER_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForAllTogether");
-        java.awt.Color SCRIPT_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ScriptResponse");
-        java.awt.Color SCRIPT_DEFINED_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ScriptDefinedResponse");
-        java.awt.Color COMMENT_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("Comment");
-        java.awt.Color COMMENT_FOREGROUND = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("commentForeground");
-        java.awt.Color DO_WHILE_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder");
+        java.awt.Color SEQUENTIAL_LOOP_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder"); //$NON-NLS-1$
+        java.awt.Color FOR_ALL_TOGETHER_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForAllTogether"); //$NON-NLS-1$
+        java.awt.Color SCRIPT_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ScriptResponse"); //$NON-NLS-1$
+        java.awt.Color SCRIPT_DEFINED_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ScriptDefinedResponse"); //$NON-NLS-1$
+        java.awt.Color COMMENT_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("Comment"); //$NON-NLS-1$
+        java.awt.Color COMMENT_FOREGROUND = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("commentForeground"); //$NON-NLS-1$
+        java.awt.Color DO_WHILE_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"); //$NON-NLS-1$
         //PRINT_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("Print");
-        java.awt.Color MATH_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("question");
+        java.awt.Color MATH_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("question"); //$NON-NLS-1$
 
         doInOrderPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //doInOrderPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("SequentialResponse"));
@@ -141,14 +143,14 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         doIfTruePrototype.setBackground(DO_IF_COLOR);
         javax.swing.JLabel DITLabel = new javax.swing.JLabel(doIfTrueString);
         doIfTruePrototype.add(DITLabel, java.awt.BorderLayout.CENTER);
-        String DITdesired[] = {"condition"};
+        String DITdesired[] = {"condition"}; //$NON-NLS-1$
         doIfTruePrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
                 edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class, null, DITdesired)));
         doIfTruePrototype.addDragSourceComponent(DITLabel);
 
-        String CLdesired[] = {"end"};
+        String CLdesired[] = {"end"}; //$NON-NLS-1$
         loopPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"));
         loopPrototype.setBackground(COUNT_LOOP_COLOR);
@@ -160,7 +162,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class, null, CLdesired)));
         loopPrototype.addDragSourceComponent(LLabel);
 
-        String LITdesired[] = {"condition"};
+        String LITdesired[] = {"condition"}; //$NON-NLS-1$
         loopIfTruePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopIfTruePrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"));
         loopIfTruePrototype.setBackground(DO_WHILE_COLOR);
@@ -172,7 +174,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class, null, LITdesired)));
         loopIfTruePrototype.addDragSourceComponent(LITLabel);
 
-        String SLdesired[] = {"list"};
+        String SLdesired[] = {"list"}; //$NON-NLS-1$
         sequentialLoopPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //sequentialLoopPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder"));
         sequentialLoopPrototype.setBackground(SEQUENTIAL_LOOP_COLOR);
@@ -184,7 +186,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class, null, SLdesired)));
         sequentialLoopPrototype.addDragSourceComponent(SLLabel);
 
-        String FATdesired[] = {"list"};
+        String FATdesired[] = {"list"}; //$NON-NLS-1$
         forAllTogetherPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //sequentialLoopPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder"));
         forAllTogetherPrototype.setBackground(FOR_ALL_TOGETHER_COLOR);
@@ -196,7 +198,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class, null, FATdesired)));
         forAllTogetherPrototype.addDragSourceComponent(FATLabel);
 
-        String Wdesired[] = {"duration"};
+        String Wdesired[] = {"duration"}; //$NON-NLS-1$
         waitPrototype = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
                 edu.cmu.cs.stage3.alice.core.response.Wait.class, null, Wdesired));
@@ -224,7 +226,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.ScriptResponse.class, null, null)));
         scriptPrototype.addDragSourceComponent(scriptLabel);
 
-        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", "No comment")};
+        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", "No comment")}; //$NON-NLS-1$ //$NON-NLS-2$
         commentPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         commentPrototype.setBackground(COMMENT_COLOR);
         javax.swing.JLabel commentLabel = new javax.swing.JLabel(commentString);
@@ -243,8 +245,8 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         mathPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         mathPrototype.setBackground(MATH_COLOR);
         javax.swing.JLabel mathLabel = new javax.swing.JLabel(mathString);
-        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
-        mathLabel.setFont( new java.awt.Font( "Monospaced", java.awt.Font.BOLD, (int) (12 * (fontSize/12.0)) ) );
+        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
+        mathLabel.setFont( new java.awt.Font( "Monospaced", java.awt.Font.BOLD, (int) (12 * (fontSize/12.0)) ) ); //$NON-NLS-1$
         mathPrototype.add(mathLabel, java.awt.BorderLayout.CENTER);
         mathPrototype.setTransferable( new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CommonMathQuestionsTransferable() );
         mathPrototype.addDragSourceComponent(mathLabel);
@@ -265,7 +267,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         prototypeContainer.add(javax.swing.Box.createHorizontalStrut(10));
 
         prototypeContainer.add(waitPrototype);
-        if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {
+        if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
             prototypeContainer.add(scriptPrototype);
             prototypeContainer.add(scriptDefinedPrototype);
 

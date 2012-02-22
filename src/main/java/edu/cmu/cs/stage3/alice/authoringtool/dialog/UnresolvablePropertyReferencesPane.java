@@ -33,6 +33,6 @@ public class UnresolvablePropertyReferencesPane extends edu.cmu.cs.stage3.swing.
 	}
 	
 	public String getTitle() {
-		return "Unresolvable References";
+		return Messages.getString("UnresolvablePropertyReferencesPane.0"); //$NON-NLS-1$
 	}
 }

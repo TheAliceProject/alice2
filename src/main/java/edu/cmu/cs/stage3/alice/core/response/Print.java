@@ -28,14 +28,14 @@ import edu.cmu.cs.stage3.alice.core.property.ObjectProperty;
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 
 public class Print extends edu.cmu.cs.stage3.alice.core.Response {
-	public final StringProperty text = new StringProperty( this, "text", null );
-	public final ObjectProperty object = new ObjectProperty( this, "object", null, Object.class ) {
+	public final StringProperty text = new StringProperty( this, "text", null ); //$NON-NLS-1$
+	public final ObjectProperty object = new ObjectProperty( this, "object", null, Object.class ) { //$NON-NLS-1$
 		
 		protected boolean getValueOfExpression() {
 			return true;
 		}
 	};
-	public final BooleanProperty addNewLine = new BooleanProperty( this, "addNewLine", Boolean.TRUE );
+	public final BooleanProperty addNewLine = new BooleanProperty( this, "addNewLine", Boolean.TRUE ); //$NON-NLS-1$
 
 	
 	protected Number getDefaultDuration() {
@@ -50,9 +50,9 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 			Object o = object.get();
 			if( o != null ) {
 				if( o instanceof edu.cmu.cs.stage3.alice.core.Element ) {
-					return "the value of " + ((edu.cmu.cs.stage3.alice.core.Element)o).getTrimmedKey() + " is ";
+					return Messages.getString("Print.3") + ((edu.cmu.cs.stage3.alice.core.Element)o).getTrimmedKey() + Messages.getString("Print.4"); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
-					return "the value of " + o + " is ";
+					return Messages.getString("Print.5") + o + Messages.getString("Print.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			} else {
 				return null;
@@ -70,54 +70,54 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 			Object o = Print.this.object.get();	
 			// Time
 			if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart)
-				outputtext = "time elapsed is ";
+				outputtext = Messages.getString("Print.7"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.Year)
-				outputtext = "year is ";
+				outputtext = Messages.getString("Print.8"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.MonthOfYear)
-				outputtext = "month of year is ";
+				outputtext = Messages.getString("Print.9"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfYear)
-				outputtext = "day of year is ";
+				outputtext = Messages.getString("Print.10"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfMonth)
-				outputtext = "day of month is ";
+				outputtext = Messages.getString("Print.11"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfWeek)
-				outputtext = "day of week is ";
+				outputtext = Messages.getString("Print.12"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfWeekInMonth)
-				outputtext = "day of week in month is ";
+				outputtext = Messages.getString("Print.13"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.IsAM)
-				outputtext = "is AM is ";
+				outputtext = Messages.getString("Print.14"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.IsPM)
-				outputtext = "is PM is ";
+				outputtext = Messages.getString("Print.15"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.HourOfAMOrPM)
-				outputtext = "hour of AM or PM is ";
+				outputtext = Messages.getString("Print.16"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.HourOfDay)
-				outputtext = "hour of day is ";
+				outputtext = Messages.getString("Print.17"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.MinuteOfHour)
-				outputtext = "minutes of hour is ";
+				outputtext = Messages.getString("Print.18"); //$NON-NLS-1$
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.SecondOfMinute)
-				outputtext = "seconds of minute is ";
+				outputtext = Messages.getString("Print.19"); //$NON-NLS-1$
 			// Mouse
 			else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromLeftEdge)
-				outputtext = "mouse distance from left edge is ";
+				outputtext = Messages.getString("Print.20"); //$NON-NLS-1$
 			else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromTopEdge)
-				outputtext = "mouse distance from top edge is ";
+				outputtext = Messages.getString("Print.21"); //$NON-NLS-1$
 			//Ask User
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserForNumber)
-				outputtext = "ask user for a number is ";
+				outputtext = Messages.getString("Print.22"); //$NON-NLS-1$
 			else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserYesNo)
-				outputtext = "ask user for yes or no is ";
+				outputtext = Messages.getString("Print.23"); //$NON-NLS-1$
 			else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserForString)
-				outputtext = "ask user for a string is ";
+				outputtext = Messages.getString("Print.24"); //$NON-NLS-1$
 			//Random
 			else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.RandomNumber)
-				outputtext = "random number is ";
+				outputtext = Messages.getString("Print.25"); //$NON-NLS-1$
 			
 			Object value = Print.this.object.getValue();
 			if (value instanceof Double){
-				java.text.NumberFormat formatter = new java.text.DecimalFormat("#.######");
+				java.text.NumberFormat formatter = new java.text.DecimalFormat("#.######"); //$NON-NLS-1$
 				value = Double.valueOf(formatter.format( value ));
 			}
 			
-			String valueText = "None";
+			String valueText = Messages.getString("Print.27"); //$NON-NLS-1$
 			if( value instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 				valueText = ((edu.cmu.cs.stage3.alice.core.Element)value).getTrimmedKey();
 			} else if ( value instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
@@ -125,38 +125,38 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 				double green = ((edu.cmu.cs.stage3.alice.scenegraph.Color) value).getGreen();
 				double red = ((edu.cmu.cs.stage3.alice.scenegraph.Color) value).getRed();
 				if ( blue == 1 && green == 1 && red == 1)
-					valueText = "white";
+					valueText = Messages.getString("Print.28"); //$NON-NLS-1$
 				else if ( blue == 0 && green == 0 && red == 0)
-					valueText = "black";
+					valueText = Messages.getString("Print.29"); //$NON-NLS-1$
 				else if ( blue == 0 && green == 0 && red == 1)
-					valueText = "red";
+					valueText = Messages.getString("Print.30"); //$NON-NLS-1$
 				else if ( blue == 0 && green == 1 && red == 0)
-					valueText = "green";
+					valueText = Messages.getString("Print.31"); //$NON-NLS-1$
 				else if ( blue == 1 && green == 0 && red == 0)
-					valueText = "blue";
+					valueText = Messages.getString("Print.32"); //$NON-NLS-1$
 				else if ( blue == 0 && green == 1 && red == 1)
-					valueText = "yellow";
+					valueText = Messages.getString("Print.33"); //$NON-NLS-1$
 				else if ( blue == 0.501960813999176 && green == 0 && red == 0.501960813999176)
-					valueText = "purple";
+					valueText = Messages.getString("Print.34"); //$NON-NLS-1$
 				else if ( blue == 0 && green == 0.6470588445663452 && red == 1)
-					valueText = "orange";
+					valueText = Messages.getString("Print.35"); //$NON-NLS-1$
 				else if ( blue == 0.686274528503418 && green == 0.686274528503418 && red == 1)
-					valueText = "pink";
+					valueText = Messages.getString("Print.36"); //$NON-NLS-1$
 				else if ( blue == 0.16470588743686676 && green == 0.16470588743686676 && red == 0.6352941393852234)
-					valueText = "brown";
+					valueText = Messages.getString("Print.37"); //$NON-NLS-1$
 				else if ( blue == 1 && green == 1 && red == 0)
-					valueText = "cyan";
+					valueText = Messages.getString("Print.38"); //$NON-NLS-1$
 				else if ( blue == 1 && green == 0 && red == 1)
-					valueText = "magenta";
+					valueText = Messages.getString("Print.39"); //$NON-NLS-1$
 				else if ( blue == 0.501960813999176 && green == 0.501960813999176 && red == 0.501960813999176)
-					valueText = "gray";
+					valueText = Messages.getString("Print.40"); //$NON-NLS-1$
 				else if ( blue == 0.7529411911964417 && green == 0.7529411911964417 && red == 0.7529411911964417)
-					valueText = "light gray";
+					valueText = Messages.getString("Print.41"); //$NON-NLS-1$
 				else if ( blue == 0.250980406999588 && green == 0.250980406999588 && red == 0.250980406999588)
-					valueText = "dark gray";
+					valueText = Messages.getString("Print.42"); //$NON-NLS-1$
 				else {
 					valueText = value.toString();
-					valueText = valueText.substring(valueText.indexOf("Color") , valueText.length());
+					valueText = valueText.substring(valueText.indexOf(Messages.getString("Print.43")) , valueText.length()); //$NON-NLS-1$
 				}
 			} else if( value != null ) {
 				valueText = value.toString();
@@ -173,7 +173,7 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 				if( o != null ) {
 					output = Print.this.getPrefix();
 					if (outputtext != null)
-						output = output.substring(0,(output.indexOf("__")-1))+" "+outputtext+valueText;
+						output = output.substring(0,(output.indexOf("__")-1))+" "+outputtext+valueText; //$NON-NLS-1$ //$NON-NLS-2$
 					else
 						output = output + valueText;
 				} else {

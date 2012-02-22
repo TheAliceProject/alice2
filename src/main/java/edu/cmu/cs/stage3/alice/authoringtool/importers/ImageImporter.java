@@ -30,11 +30,11 @@ public class ImageImporter extends edu.cmu.cs.stage3.alice.authoringtool.Abstrac
 	
 	public java.util.Map getExtensionMap() {
 		java.util.HashMap knownCodecPrettyNames = new java.util.HashMap();
-		knownCodecPrettyNames.put( "BMP", "Windows Bitmap" );
-		knownCodecPrettyNames.put( "GIF", "Graphic Interchange Format" );
-		knownCodecPrettyNames.put( "JPEG", "Joint Photographic Experts Group format" );
-		knownCodecPrettyNames.put( "PNG", "Portable Network Graphics format" );
-		knownCodecPrettyNames.put( "TIFF", "Tagged Image File Format" );
+		knownCodecPrettyNames.put( "BMP", Messages.getString("ImageImporter.1") ); //$NON-NLS-1$ //$NON-NLS-2$
+		knownCodecPrettyNames.put( "GIF", Messages.getString("ImageImporter.3") ); //$NON-NLS-1$ //$NON-NLS-2$
+		knownCodecPrettyNames.put( "JPEG", Messages.getString("ImageImporter.5") ); //$NON-NLS-1$ //$NON-NLS-2$
+		knownCodecPrettyNames.put( "PNG", Messages.getString("ImageImporter.7") ); //$NON-NLS-1$ //$NON-NLS-2$
+		knownCodecPrettyNames.put( "TIFF", Messages.getString("ImageImporter.9") ); //$NON-NLS-1$ //$NON-NLS-2$
 
 		java.util.HashMap map = new java.util.HashMap();
 
@@ -57,7 +57,7 @@ public class ImageImporter extends edu.cmu.cs.stage3.alice.authoringtool.Abstrac
 	protected edu.cmu.cs.stage3.alice.core.Element load( java.io.InputStream istream, String ext ) throws java.io.IOException {
 		String codecName = edu.cmu.cs.stage3.image.ImageIO.mapExtensionToCodecName( ext );
 		if( codecName == null ) {
-			throw new IllegalArgumentException( "Unsupported Extension: " + ext );
+			throw new IllegalArgumentException( Messages.getString("ImageImporter.10") + ext ); //$NON-NLS-1$
 		}
 
 		java.io.BufferedInputStream bis;

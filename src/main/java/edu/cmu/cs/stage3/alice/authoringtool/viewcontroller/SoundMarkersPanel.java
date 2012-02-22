@@ -27,7 +27,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 public class SoundMarkersPanel extends javax.swing.JPanel {
 	protected edu.cmu.cs.stage3.alice.core.Media sound = null;
 	protected java.util.HashMap soundMarkersGuiCache = new java.util.HashMap();
-	protected javax.swing.JButton dropMarkerButton = new javax.swing.JButton( "Drop Marker" );
+	protected javax.swing.JButton dropMarkerButton = new javax.swing.JButton( Messages.getString("SoundMarkersPanel.0") ); //$NON-NLS-1$
 	protected RefreshListener refreshListener = new RefreshListener();
 
 	public SoundMarkersPanel() {
@@ -81,7 +81,7 @@ public class SoundMarkersPanel extends javax.swing.JPanel {
 				if( gui != null ) {
 					add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 				} else {
-					System.err.println( "Unable to create gui for marker: " + marker );
+					System.err.println( Messages.getString("SoundMarkersPanel.1") + marker ); //$NON-NLS-1$
 				}
 			}
 

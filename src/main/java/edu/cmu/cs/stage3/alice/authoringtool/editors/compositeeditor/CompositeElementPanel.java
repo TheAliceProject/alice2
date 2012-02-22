@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -37,9 +39,9 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
     protected edu.cmu.cs.stage3.alice.core.Element m_element;
     protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty m_components;
     protected edu.cmu.cs.stage3.alice.core.property.BooleanProperty m_isCommentedOut;
-    protected String headerText = "Composite Element";
+    protected String headerText = Messages.getString("CompositeElementPanel.0"); //$NON-NLS-1$
     protected javax.swing.JPanel headerPanel;
-    protected javax.swing.JLabel closeBrace = new javax.swing.JLabel("}");
+    protected javax.swing.JLabel closeBrace = new javax.swing.JLabel("}"); //$NON-NLS-1$
     protected javax.swing.JPanel containingPanel;
     protected javax.swing.JButton expandButton;
     protected javax.swing.JComponent nameInputField;
@@ -58,7 +60,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
         
 		public void mouseReleased( java.awt.event.MouseEvent ev ) {		// Aik Min
             if( ev.isPopupTrigger() ||	
-            		((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown() ){
+            		((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown() ){ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 if (CompositeElementPanel.this.getParent() != null){
                     java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.getDefaultStructure( CompositeElementPanel.this.m_element );
                     if ( !(ForEachElementPanel.class.isAssignableFrom(CompositeElementPanel.this.getClass())) && !(LoopNElementPanel.class.isAssignableFrom(CompositeElementPanel.this.getClass())) ){
@@ -67,7 +69,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
                                 dissolve();
                             }
                         };
-                        edu.cmu.cs.stage3.util.StringObjectPair dissolveEntry = new edu.cmu.cs.stage3.util.StringObjectPair("dissolve", dissolveRunnable);
+                        edu.cmu.cs.stage3.util.StringObjectPair dissolveEntry = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("CompositeElementPanel.5"), dissolveRunnable); //$NON-NLS-1$
                         if (structure != null){
                             structure.add(dissolveEntry);
                         }
@@ -81,11 +83,11 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
     };
 
 
-    protected static String IS_EXPANDED_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_EXPANDED_KEY";
+    protected static String IS_EXPANDED_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_EXPANDED_KEY"; //$NON-NLS-1$
 
 
     public CompositeElementPanel(){
-        headerText = "Element Response";
+        headerText = Messages.getString("CompositeElementPanel.7"); //$NON-NLS-1$
         actionListener = new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent e){
                 if (isExpanded){
@@ -334,8 +336,8 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 
     protected void generateGUI(){
         this.setOpaque(false);
-        plus = new javax.swing.ImageIcon( CompositeElementPanel.class.getResource( "images/plus.gif" ) );
-        minus = new javax.swing.ImageIcon( CompositeElementPanel.class.getResource( "images/minus.gif" ) );
+        plus = new javax.swing.ImageIcon( CompositeElementPanel.class.getResource( "images/plus.gif" ) ); //$NON-NLS-1$
+        minus = new javax.swing.ImageIcon( CompositeElementPanel.class.getResource( "images/minus.gif" ) ); //$NON-NLS-1$
         expandButton = new javax.swing.JButton();
         expandButton.setContentAreaFilled( false );
         expandButton.setMargin( new java.awt.Insets( 0, 0, 0, 0 ) );
@@ -435,10 +437,10 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
             headerLabel.setText(headerText);
             if (edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor.IS_JAVA){
                 if (!isExpanded){
-                    headerLabel.setText(headerText+" { "+getDots()+" }");
+                    headerLabel.setText(headerText+" { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$
                 }
                 else{
-                    headerLabel.setText(headerText+" {");
+                    headerLabel.setText(headerText+" {"); //$NON-NLS-1$
                 }
             }
         }
@@ -518,15 +520,15 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 		String b = Integer.toHexString(color.getBlue());
 	
 		if (r.length() == 1){
-			r = "0"+r;
+			r = "0"+r; //$NON-NLS-1$
 		}
 		if (g.length() == 1){
-			g = "0"+g;
+			g = "0"+g; //$NON-NLS-1$
 		}
 		if (b.length() == 1){
-			b = "0"+b;
+			b = "0"+b; //$NON-NLS-1$
 		}
-		return new String("#"+r+g+b);
+		return new String("#"+r+g+b); //$NON-NLS-1$
 	}
 
 	protected String getHeaderHTML(){
@@ -564,81 +566,81 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 	
 	public void getHTML(StringBuffer toWriteTo, int colSpan, boolean useColor, boolean isDisabled){
 		int totalRows = 0;
-		String colorString = "";
+		String colorString = ""; //$NON-NLS-1$
 		String borderColorString = getHTMLColorString(java.awt.Color.lightGray);
-		String styleString = "";
-		String strikeStart = "";
-		String strikeEnd = "";
+		String styleString = ""; //$NON-NLS-1$
+		String strikeStart = ""; //$NON-NLS-1$
+		String strikeEnd = ""; //$NON-NLS-1$
 		if (!isDisabled){
 			isDisabled = this.isDisabled();
 		}
 		if (useColor){
 			if (isDisabled){
-				colorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"))+"\"";
+				colorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"))+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			} else{
-				colorString = " bgcolor=\""+getHTMLColorString(getCustomBackgroundColor())+"\"";
+				colorString = " bgcolor=\""+getHTMLColorString(getCustomBackgroundColor())+"\""; //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		if (isDisabled){
-			strikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">";
-			strikeEnd = "</font></strike>";
+			strikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			strikeEnd = "</font></strike>"; //$NON-NLS-1$
 		}
 		totalRows = getTotalHTMLRows(this.m_element);
 		if (this instanceof  edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel){
 			totalRows++;
 		}
-		styleString = " style=\"border-left: 1px solid "+borderColorString+"; border-top: 1px solid "+borderColorString+"; border-right: 1px solid "+borderColorString+"\"";
-		toWriteTo.append("<td colspan=\""+colSpan+"\""+colorString+styleString+">&nbsp;&nbsp;");
+		styleString = " style=\"border-left: 1px solid "+borderColorString+"; border-top: 1px solid "+borderColorString+"; border-right: 1px solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		toWriteTo.append("<td colspan=\""+colSpan+"\""+colorString+styleString+">&nbsp;&nbsp;"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		toWriteTo.append(strikeStart+getHeaderHTML()+strikeEnd);
 		if (this instanceof IfElseElementPanel || edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
-			styleString = " style=\"border-left: 1px solid "+borderColorString+"\"";
+			styleString = " style=\"border-left: 1px solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$
 		} else{
-			styleString = " style=\"border-left: 1px solid "+borderColorString+"; border-bottom: 1px solid "+borderColorString+"\"";
+			styleString = " style=\"border-left: 1px solid "+borderColorString+"; border-bottom: 1px solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
-		toWriteTo.append("</td>\n</tr>\n<tr>\n<td width=\"20\" rowspan=\""+(totalRows)+"\""+colorString+styleString+">&nbsp;&nbsp;&nbsp;&nbsp;</td>\n");
+		toWriteTo.append("</td>\n</tr>\n<tr>\n<td width=\"20\" rowspan=\""+(totalRows)+"\""+colorString+styleString+">&nbsp;&nbsp;&nbsp;&nbsp;</td>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		for (int i=0; i<componentElementPanel.getElementComponentCount(); i++){
 			if (i>0){
-				toWriteTo.append("<tr>\n");
+				toWriteTo.append("<tr>\n"); //$NON-NLS-1$
 			}
 			java.awt.Component currentComponent = componentElementPanel.getComponent(i);
 			if (currentComponent instanceof CompositeElementPanel){
 				((CompositeElementPanel)currentComponent).getHTML(toWriteTo, colSpan-1, useColor, isDisabled);
 			} else{
-				String componentColorString = "";
-				String componentStrikeStart = "";
-				String componentStrikeEnd = "";
+				String componentColorString = ""; //$NON-NLS-1$
+				String componentStrikeStart = ""; //$NON-NLS-1$
+				String componentStrikeEnd = ""; //$NON-NLS-1$
 				boolean isComponentDisabled = (isDisabled || ((ComponentElementPanel)currentComponent).isDisabled());
 				if (currentComponent instanceof ComponentElementPanel){
 					if (isComponentDisabled){
-						componentColorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"))+"\"";
-						componentStrikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">";
-						componentStrikeEnd = "</font></strike>";
+						componentColorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"))+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						componentStrikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						componentStrikeEnd = "</font></strike>"; //$NON-NLS-1$
 					} else{
-						componentColorString = " bgcolor=\""+getHTMLColorString(((ComponentElementPanel)currentComponent).getCustomBackgroundColor())+"\"";
+						componentColorString = " bgcolor=\""+getHTMLColorString(((ComponentElementPanel)currentComponent).getCustomBackgroundColor())+"\""; //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
-				styleString = " style=\"border-bottom: 1px solid "+borderColorString+"; border-right: 1px solid "+borderColorString+"; border-left: 1px solid "+borderColorString+"; border-top: 1px solid "+borderColorString+"\"";
-				toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+componentColorString+styleString+">&nbsp;&nbsp;"+componentStrikeStart+edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(currentComponent)+componentStrikeEnd+"</td>\n");
+				styleString = " style=\"border-bottom: 1px solid "+borderColorString+"; border-right: 1px solid "+borderColorString+"; border-left: 1px solid "+borderColorString+"; border-top: 1px solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+				toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+componentColorString+styleString+">&nbsp;&nbsp;"+componentStrikeStart+edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(currentComponent)+componentStrikeEnd+"</td>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				
 			}
 			
 		}
 		if (componentElementPanel.getElementComponentCount() == 0){
 			if (this instanceof IfElseElementPanel || edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
-				styleString = " style=\"border-right: 1 solid "+borderColorString+"\"";
+				styleString = " style=\"border-right: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$
 			} else{
-				styleString = " style=\"border-right: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\"";
+				styleString = " style=\"border-right: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
-			toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+"<i> Do Nothing </i>"+strikeEnd+"</td>\n</tr>\n");
+			toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("CompositeElementPanel.75")+strikeEnd+"</td>\n</tr>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		}
 		if (this instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel){
 			edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel mainQuestion = (edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel)this;
-			styleString = " style=\"border-bottom: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"; border-left: 1 solid "+borderColorString+";\"";
-			colorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("Return"))+"\"";
-			toWriteTo.append("<tr>\n<td width=\"100%\" colspan=\""+(colSpan)+"\""+colorString+styleString+">"+
+			styleString = " style=\"border-bottom: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"; border-left: 1 solid "+borderColorString+";\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			colorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("Return"))+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			toWriteTo.append("<tr>\n<td width=\"100%\" colspan=\""+(colSpan)+"\""+colorString+styleString+">"+ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 							edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(mainQuestion.returnPanel)+
-							"</td>\n</tr>\n");
+							"</td>\n</tr>\n"); //$NON-NLS-1$
 		}
 		if (this instanceof IfElseElementPanel){
 			IfElseElementPanel ifElse = (IfElseElementPanel)this;
@@ -647,67 +649,67 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 			} else if (this.m_element instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
 				totalRows = getTotalRowsToRenderForIfElse(this.m_element, ((edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)this.m_element).elseComponentResponses );
 			}
-			styleString = " style=\"border-left: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"\"";
+			styleString = " style=\"border-left: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			
-			toWriteTo.append("<tr>\n<td colspan=\""+colSpan+"\""+colorString+styleString+">&nbsp;&nbsp;"+strikeStart+edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(((IfElseElementPanel)this).elsePanel)+ strikeEnd+"</td>\n");
+			toWriteTo.append("<tr>\n<td colspan=\""+colSpan+"\""+colorString+styleString+">&nbsp;&nbsp;"+strikeStart+edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(((IfElseElementPanel)this).elsePanel)+ strikeEnd+"</td>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
-				styleString = " style=\"border-left: 1 solid "+borderColorString+"\"";
+				styleString = " style=\"border-left: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$
 			} else{
-				styleString = " style=\"border-left: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\"";
+				styleString = " style=\"border-left: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
-			toWriteTo.append("</tr>\n<tr>\n<td width=\"20\" rowspan=\""+(totalRows)+"\""+colorString+styleString+">&nbsp;</td>\n");
+			toWriteTo.append("</tr>\n<tr>\n<td width=\"20\" rowspan=\""+(totalRows)+"\""+colorString+styleString+">&nbsp;</td>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			for (int i=0; i<ifElse.elseComponentPanel.getElementComponentCount(); i++){
 				if (i>0){
-				toWriteTo.append("<tr>\n");
+				toWriteTo.append("<tr>\n"); //$NON-NLS-1$
 				}
 				java.awt.Component currentComponent = ifElse.elseComponentPanel.getComponent(i);
 				if (currentComponent instanceof CompositeElementPanel){
 					((CompositeElementPanel)currentComponent).getHTML(toWriteTo, colSpan-1, useColor, isDisabled);
 				} else{
-					String componentColorString = "";
-					String componentStrikeStart = "";
-					String componentStrikeEnd = "";
+					String componentColorString = ""; //$NON-NLS-1$
+					String componentStrikeStart = ""; //$NON-NLS-1$
+					String componentStrikeEnd = ""; //$NON-NLS-1$
 					boolean isComponentDisabled = (isDisabled || ((ComponentElementPanel)currentComponent).isDisabled());
 					if (currentComponent instanceof ComponentElementPanel){
 						if (isComponentDisabled){
-							componentColorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"))+"\"";
-							componentStrikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">";
-							componentStrikeEnd = "</font></strike>";
+							componentColorString = " bgcolor=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"))+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							componentStrikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							componentStrikeEnd = "</font></strike>"; //$NON-NLS-1$
 						} else{
-							componentColorString = " bgcolor=\""+getHTMLColorString(((ComponentElementPanel)currentComponent).getCustomBackgroundColor())+"\"";
+							componentColorString = " bgcolor=\""+getHTMLColorString(((ComponentElementPanel)currentComponent).getCustomBackgroundColor())+"\""; //$NON-NLS-1$ //$NON-NLS-2$
 						}
 					}
-					styleString = " style=\"border-bottom: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"; border-left: 1 solid "+borderColorString+"; border-top: 1 solid "+borderColorString+"\"";
-					toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+componentColorString+styleString+">&nbsp;&nbsp;"+componentStrikeStart+edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(currentComponent)+componentStrikeEnd+"</td>\n");
+					styleString = " style=\"border-bottom: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"; border-left: 1 solid "+borderColorString+"; border-top: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+					toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+componentColorString+styleString+">&nbsp;&nbsp;"+componentStrikeStart+edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(currentComponent)+componentStrikeEnd+"</td>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 					
 					
 				}
-				toWriteTo.append("</tr>\n");
+				toWriteTo.append("</tr>\n"); //$NON-NLS-1$
 			}
 			if (ifElse.elseComponentPanel.getElementComponentCount() == 0){
 				if (!edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
-					styleString = " style=\"border-right: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\"";
+					styleString = " style=\"border-right: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				} else{
-					styleString = " style=\"border-right: 1 solid "+borderColorString+"\"";
+					styleString = " style=\"border-right: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+"<i> Do Nothing </i>"+strikeEnd+"</td>\n</tr>\n");
+				toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("CompositeElementPanel.134")+strikeEnd+"</td>\n</tr>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 			}
 		}
 		if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
-			styleString = " style=\"border-left: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"\"";
-			toWriteTo.append("<tr><td colspan=\""+colSpan+"\""+colorString+styleString+">"+strikeStart+"<b>&nbsp;&nbsp;}</b>"+strikeEnd+"</td></tr>");
+			styleString = " style=\"border-left: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"\""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			toWriteTo.append("<tr><td colspan=\""+colSpan+"\""+colorString+styleString+">"+strikeStart+"<b>&nbsp;&nbsp;}</b>"+strikeEnd+"</td></tr>"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		}
 	//	toWriteTo.append("</tr>\n");
 	}
 
     public String getDots(){
-        String dots = "";
+        String dots = ""; //$NON-NLS-1$
         for (int i=0; i<m_components.size(); i++){
             if (i == 0){
-                dots += ".";
+                dots += "."; //$NON-NLS-1$
             }
             else{
-                dots += " .";
+                dots += " ."; //$NON-NLS-1$
             }
         }
         return dots;

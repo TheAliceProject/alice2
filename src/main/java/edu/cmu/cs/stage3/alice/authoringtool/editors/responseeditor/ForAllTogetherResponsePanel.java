@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -36,9 +38,9 @@ public class ForAllTogetherResponsePanel extends ForEachInListSequentialLoopPane
 
     public ForAllTogetherResponsePanel(){
         super();
-        headerText = "For all";
-        endHeaderText = "together";
-        middleHeaderText = ", every";
+        headerText = Messages.getString("ForAllTogetherResponsePanel.0"); //$NON-NLS-1$
+        endHeaderText = Messages.getString("ForAllTogetherResponsePanel.1"); //$NON-NLS-1$
+        middleHeaderText = Messages.getString("ForAllTogetherResponsePanel.2"); //$NON-NLS-1$
     }
 
     public void set(edu.cmu.cs.stage3.alice.core.response.ForEachTogether r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn) {
@@ -47,7 +49,7 @@ public class ForAllTogetherResponsePanel extends ForEachInListSequentialLoopPane
 
     
 	protected java.awt.Color getCustomBackgroundColor(){
-        return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForAllTogether");
+        return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForAllTogether"); //$NON-NLS-1$
     }
 
 }

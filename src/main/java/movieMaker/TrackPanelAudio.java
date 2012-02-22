@@ -35,13 +35,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.media.*;
 import javax.media.control.*;
-//import javax.media.Format;
 import javax.media.format.*;
-//import javax.media.protocol.*;
 import jmapps.ui.*;
-
-//import com.sun.media.ui.AudioFormatChooser;
-
 
 public class TrackPanelAudio extends TrackPanel implements ActionListener {
 

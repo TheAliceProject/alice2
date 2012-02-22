@@ -35,21 +35,21 @@ public class WorldFileChooser extends javax.swing.JFileChooser implements java.b
 	public void approveSelection() {
 		if( getDialogType() == javax.swing.JFileChooser.OPEN_DIALOG ) {
 			java.io.File worldDir = getSelectedFile();
-			java.io.File worldFile = new java.io.File( worldDir, "elementData.xml" );
+			java.io.File worldFile = new java.io.File( worldDir, "elementData.xml" ); //$NON-NLS-1$
 			if( ! worldFile.exists() ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "Your selection is not a valid world folder." );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("WorldFileChooser.1") ); //$NON-NLS-1$
 			} else if( ! worldFile.canRead() ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "Cannot read world from disk.  Access denied." );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("WorldFileChooser.2") ); //$NON-NLS-1$
 			} else if( ! isWorld( worldFile ) ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "Your selection is not a valid world folder." );
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("WorldFileChooser.3") ); //$NON-NLS-1$
 			} else {
 				super.approveSelection();
 			}
 		} else if( getDialogType() == javax.swing.JFileChooser.SAVE_DIALOG ) {
 			java.io.File worldDir = getSelectedFile();
-			java.io.File worldFile = new java.io.File( worldDir, "elementData.xml" );
+			java.io.File worldFile = new java.io.File( worldDir, "elementData.xml" ); //$NON-NLS-1$
 			if( worldFile.exists() ) {
-				int retVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( "A World already exists in " + worldDir.getAbsolutePath() + ".\nWould you like to replace it?", "Replace World?", javax.swing.JOptionPane.YES_NO_OPTION );
+				int retVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( Messages.getString("WorldFileChooser.5") + worldDir.getAbsolutePath() + Messages.getString("WorldFileChooser.6"), Messages.getString("WorldFileChooser.7"), javax.swing.JOptionPane.YES_NO_OPTION ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				if( retVal == javax.swing.JOptionPane.YES_OPTION ) {
 					super.approveSelection();
 				}
@@ -64,7 +64,7 @@ public class WorldFileChooser extends javax.swing.JFileChooser implements java.b
 	public void propertyChange( java.beans.PropertyChangeEvent ev ) {
 		java.io.File currentDirectory = (java.io.File)ev.getNewValue();
 		if( (currentDirectory != null) && currentDirectory.canRead() ) {
-			java.io.File worldFile = new java.io.File( currentDirectory, "elementData.xml" );
+			java.io.File worldFile = new java.io.File( currentDirectory, "elementData.xml" ); //$NON-NLS-1$
 			if( worldFile.exists() && worldFile.canRead() && isWorld( worldFile ) ) {
 				this.setCurrentDirectory( currentDirectory.getParentFile() );
 				this.setSelectedFile( currentDirectory );
@@ -81,8 +81,8 @@ public class WorldFileChooser extends javax.swing.JFileChooser implements java.b
 
 			org.w3c.dom.Element rootElement = document.getDocumentElement();
 			rootElement.normalize();
-			String className = rootElement.getAttribute( "class" );
-			return (className != null) && className.trim().equals( "edu.cmu.cs.stage3.alice.core.World" );
+			String className = rootElement.getAttribute( "class" ); //$NON-NLS-1$
+			return (className != null) && className.trim().equals( "edu.cmu.cs.stage3.alice.core.World" ); //$NON-NLS-1$
 //			org.w3c.dom.NodeList classList = rootElement.getElementsByTagName( "class" );
 //			org.w3c.dom.Node classNode = classList.item( 0 );
 //			org.w3c.dom.Text classNameElement = (org.w3c.dom.Text)classNode.getFirstChild();

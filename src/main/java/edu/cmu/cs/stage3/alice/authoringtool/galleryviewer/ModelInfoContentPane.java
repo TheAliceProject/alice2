@@ -75,9 +75,9 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private void buildDetails() {
 		int count = 0;
 		detailsPanel.removeAll();
-		javax.swing.JLabel size = new javax.swing.JLabel("size:");
+		javax.swing.JLabel size = new javax.swing.JLabel(Messages.getString("ModelInfoContentPane.0")); //$NON-NLS-1$
 		size.setForeground(GalleryViewer.textColor);
-		javax.swing.JLabel sizeDetail = new javax.swing.JLabel(String.valueOf(String.valueOf(String.valueOf(data.size))).concat(" kb"));
+		javax.swing.JLabel sizeDetail = new javax.swing.JLabel(String.valueOf(String.valueOf(String.valueOf(data.size))).concat(" kb")); //$NON-NLS-1$
 		sizeDetail.setForeground(GalleryViewer.textColor);
 		detailsPanel.add(size, new java.awt.GridBagConstraints(0, count, 1, 1, 0.0D, 0.0D, 18, 0, new java.awt.Insets(2, 0, 0, 0), 0, 0));
 		detailsPanel.add(sizeDetail, new java.awt.GridBagConstraints(1, count, 1, 1, 0.0D, 0.0D, 18, 0, new java.awt.Insets(2, 4, 0, 0), 0, 0));
@@ -85,17 +85,17 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		for (int i = 0; i < data.details.size(); i++) {
 			edu.cmu.cs.stage3.util.StringObjectPair current = (edu.cmu.cs.stage3.util.StringObjectPair) data.details.get(i);
 			String currentString = current.getString();
-			if (currentString.equalsIgnoreCase("modeledby"))
-				currentString = "modeled by";
-			else if (currentString.equalsIgnoreCase("paintedby"))
-				currentString = "painted by";
-			else if (currentString.equalsIgnoreCase("physicalsize"))
-				currentString = "physical size";
-			javax.swing.JLabel title = new javax.swing.JLabel(String.valueOf(String.valueOf(currentString)).concat(":"));
+			if (currentString.equalsIgnoreCase(Messages.getString("ModelInfoContentPane.2"))) //$NON-NLS-1$
+				currentString = Messages.getString("ModelInfoContentPane.3"); //$NON-NLS-1$
+			else if (currentString.equalsIgnoreCase(Messages.getString("ModelInfoContentPane.4"))) //$NON-NLS-1$
+				currentString = Messages.getString("ModelInfoContentPane.5"); //$NON-NLS-1$
+			else if (currentString.equalsIgnoreCase(Messages.getString("ModelInfoContentPane.6"))) //$NON-NLS-1$
+				currentString = Messages.getString("ModelInfoContentPane.7"); //$NON-NLS-1$
+			javax.swing.JLabel title = new javax.swing.JLabel(String.valueOf(String.valueOf(currentString)).concat(":")); //$NON-NLS-1$
 			javax.swing.JLabel detail = new javax.swing.JLabel();
 			title.setForeground(GalleryViewer.textColor);
 			detail.setForeground(GalleryViewer.textColor);
-			if (current.getObject() == null || current.getObject().equals(""))
+			if (current.getObject() == null || current.getObject().equals("")) //$NON-NLS-1$
 				continue;
 			if (current.getObject() instanceof String) {
 				detail.setText(current.getObject().toString());
@@ -115,7 +115,7 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if (detailVector.get(index) == null || !(detailVector.get(index) instanceof String))
 					continue;
 				String currentDetail = (String) detailVector.get(index);
-				if (!currentDetail.equalsIgnoreCase("")) {
+				if (!currentDetail.equalsIgnoreCase("")) { //$NON-NLS-1$
 					javax.swing.JLabel detailLabel = new javax.swing.JLabel(currentDetail);
 					detailLabel.setForeground(GalleryViewer.textColor);
 					detailContainer.add(detailLabel);
@@ -138,8 +138,8 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		detailsPanel = new javax.swing.JPanel();
 		detailsPanel.setOpaque(false);
 		detailsPanel.setLayout(new java.awt.GridBagLayout());
-		addObjectButton = new javax.swing.JButton("Add instance to world");
-		cancelButton = new javax.swing.JButton("Cancel");
+		addObjectButton = new javax.swing.JButton(Messages.getString("ModelInfoContentPane.11")); //$NON-NLS-1$
+		cancelButton = new javax.swing.JButton(Messages.getString("ModelInfoContentPane.12")); //$NON-NLS-1$
 		setLayout(new java.awt.GridBagLayout());
 		add(nameLabel, new java.awt.GridBagConstraints(0, 0, 1, 1, 0.0D, 0.0D, 10, 0, new java.awt.Insets(2, 0, 0, 0), 0, 0));
 		add(imageLabel, new java.awt.GridBagConstraints(0, 1, 1, 1, 0.0D, 0.0D, 10, 0, new java.awt.Insets(0, 20, 20, 20), 0, 0));

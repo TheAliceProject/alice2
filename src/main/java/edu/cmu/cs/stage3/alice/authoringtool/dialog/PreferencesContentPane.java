@@ -28,12 +28,11 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import java.awt.event.*;
-import java.util.Collections;
-import java.util.Locale;
 
-import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
-import edu.cmu.cs.stage3.alice.authoringtool.Messages;
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
+import edu.cmu.cs.stage3.swing.ContentPane;
 
 /**
  * @author Jason Pratt, Aik Min Choong
@@ -283,8 +282,12 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	public void finalizeSelections(){
 		setInput();
 		if( restartRequired ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("PreferencesContentPane.55"), Messages.getString("PreferencesContentPane.56"), JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+			Object[] options = {Messages.getString("PreferencesContentPane.51"), Messages.getString("PreferencesContentPane.5")};
+			int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("PreferencesContentPane.55"), Messages.getString("PreferencesContentPane.56"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] ); //$NON-NLS-1$ //$NON-NLS-2$
 			restartRequired = false;
+			if (result == ContentPane.OK_OPTION){
+				authoringTool.quit(true);
+			}
 		} 
 		 else if( reloadRequired ) {
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("PreferencesContentPane.57"), Messages.getString("PreferencesContentPane.58"), JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
@@ -1137,7 +1140,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		resourcesLabel.setText(Messages.getString("PreferencesContentPane.169")); //$NON-NLS-1$
 		
-		java.io.File resourceDirectory = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" ).getAbsoluteFile(); //$NON-NLS-1$
+		java.io.File resourceDirectory = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" + System.getProperty( "file.separator" ) + AikMin.locale ).getAbsoluteFile(); //$NON-NLS-1$
 		java.io.File[] resourceFiles = resourceDirectory.listFiles( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.resourceFileFilter );
 		for( int i = 0; i < resourceFiles.length; i++ ) {
 			resourceFileComboBox.addItem( resourceFiles[i].getName() );
