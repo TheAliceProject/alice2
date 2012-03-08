@@ -120,8 +120,10 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 
 	protected void setLessDetail(){
 		detailButton.setText( Messages.getString("AliceAlertContentPane.1") ); //$NON-NLS-1$
-		this.remove(detailScrollPane);
-		this.add(detailPanel, BorderLayout.CENTER);
+		detailScrollPane.setEnabled(false);
+		detailPanel.setEnabled(true);
+		//this.remove(detailScrollPane);
+		//this.add(detailPanel, BorderLayout.CENTER);
 		
 		buttonPanel.removeAll();
 		buttonConstraints.gridx = 0;
@@ -136,8 +138,10 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 	}
 	protected void setMoreDetail(){
 		detailButton.setText( Messages.getString("AliceAlertContentPane.2") ); //$NON-NLS-1$
-		this.remove(detailPanel);
-		this.add(detailScrollPane, BorderLayout.CENTER);
+		detailScrollPane.setEnabled(true);
+		detailPanel.setEnabled(false);
+//		this.remove(detailPanel);
+//		this.add(detailScrollPane, BorderLayout.CENTER);
 		
 		buttonPanel.removeAll();
 		buttonConstraints.gridx = 0;
@@ -340,9 +344,10 @@ this.setLocation(1, 1);
 		detailStream = detailTextPane.getNewStyleStream( detailTextPane.stdErrStyle );
 		detailScrollPane.setViewportView( detailTextPane );
 		detailScrollPane.setPreferredSize(new java.awt.Dimension(492, 300));
-
+		//detailScrollPane.setEnabled(false);
 		add( messagePanel, BorderLayout.NORTH );
 		add(detailPanel, BorderLayout.CENTER);
+		//add(detailScrollPane, BorderLayout.CENTER);
 		add( buttonPanel, BorderLayout.SOUTH );
 		
 		

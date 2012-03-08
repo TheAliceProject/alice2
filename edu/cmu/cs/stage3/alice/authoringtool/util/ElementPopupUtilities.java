@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author Jason Pratt
  */
@@ -168,7 +170,7 @@ public class ElementPopupUtilities {
 //		popupStructure.add( MakeCopyRunnable.class );
 //		popupStructure.add( MakeSharedCopyRunnable.class );
 		if( elementEnabled ) {
-			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "methods", edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDefaultOneShotStructure( element ) ) ); //$NON-NLS-1$
+			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getProperty("methods"), edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDefaultOneShotStructure( element ) ) ); //$NON-NLS-1$
 		}
 		if( (jtree != null) && (treePath != null) ) {
 			Runnable renameRunnable = new RenameRunnable( element, jtree, treePath );

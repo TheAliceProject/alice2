@@ -86,7 +86,11 @@ public class DefaultUndoRedoStack extends java.util.LinkedList implements UndoRe
 			ur.undo();
 			removedItem = ur;
 		}
-		iter.remove();
+		try {
+			iter.remove();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		currentIndex--;
 		while( iter.nextIndex() <= currentIndex ) {
 			UndoableRedoable ur = (UndoableRedoable)iter.next();

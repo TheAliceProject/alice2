@@ -43,10 +43,15 @@ public class EditorManager {
 		if( editorClass == null ) {
 			return null;
 		}
+		
 		for( java.util.Iterator iter = availableEditors.listIterator(); iter.hasNext(); ) {
 			Object editor = iter.next();
 			if( editor.getClass() == editorClass ) {
-				iter.remove();
+				try {
+					iter.remove();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				inUseEditors.add( editor );
 				return (edu.cmu.cs.stage3.alice.authoringtool.Editor)editor;
 			}

@@ -33,7 +33,7 @@ abstract class ReturnValueTracker {
 }
 
 public class DialogManager {
-	private static boolean isResizable = false; // Aik Min - allow/disallow resizing of dialog.
+	private static boolean isResizable = true; // Aik Min - allow/disallow resizing of dialog.
 	public static void setResize(boolean resize){
 		isResizable = resize;
 	}

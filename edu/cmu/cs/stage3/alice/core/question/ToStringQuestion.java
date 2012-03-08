@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.Question;
@@ -34,7 +35,7 @@ import edu.cmu.cs.stage3.alice.core.response.Print;
  */
 
 public class ToStringQuestion extends Question {
-    public final ObjectProperty what = new ObjectProperty( this, Messages.getString("ToStringQuestion.0"), new String( "" ),Object.class ) { //$NON-NLS-1$ //$NON-NLS-2$
+    public final ObjectProperty what = new ObjectProperty( this, "what", new String( "" ),Object.class ) { //$NON-NLS-1$ //$NON-NLS-2$
 		
 		protected boolean getValueOfExpression() {
 			return true;

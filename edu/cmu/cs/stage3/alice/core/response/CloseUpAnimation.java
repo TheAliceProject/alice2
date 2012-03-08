@@ -13,6 +13,7 @@ package edu.cmu.cs.stage3.alice.core.response;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;

@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
 
 /**
@@ -317,7 +318,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     edu.cmu.cs.stage3.alice.core.Property property = (edu.cmu.cs.stage3.alice.core.Property)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.PropertyReferenceTransferable.propertyReferenceFlavor );
                     if (property instanceof edu.cmu.cs.stage3.alice.core.property.VehicleProperty){
                         //System.out.println("new vehicle animation");
-                        edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair("duration", new Double(0))}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair(AikMin.getProperty("duration"), new Double(0))}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                         known = newKnown;
                         animationClass = edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class;
                     }

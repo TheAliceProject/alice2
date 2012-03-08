@@ -281,7 +281,11 @@ public class Triangulator {
             Point2d curPoint = (Point2d)li2.next();
             boolean makeChange = false;
             while(pointCompare(curPoint,prevPoint)==0) {
-                li2.remove();
+                try {
+                	li2.remove();
+        		} catch (Exception e) {
+        			e.printStackTrace();
+        		}
                 makeChange = true;
                 if (!li2.hasNext())
                     break;

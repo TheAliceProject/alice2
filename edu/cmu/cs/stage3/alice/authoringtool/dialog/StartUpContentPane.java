@@ -233,7 +233,12 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 		count = buildPanel(textbookExampleWorldsContainer, buildVectorFromDirectory(textbookExampleWorlds, aliceFilter), false, null, StartUpIcon.STANDARD);
 		if (count <= 0) {
-			mainTabPane.remove(textbookExampleWorldsDirectoryContainer);
+			
+			try {
+				mainTabPane.remove(textbookExampleWorldsDirectoryContainer);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		addComponentListener( new java.awt.event.ComponentAdapter() {
@@ -543,7 +548,12 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 		catch(Exception e) { }
 
-		mainTabPane.remove(fileChooser);
+		try {
+			mainTabPane.remove(fileChooser);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//java.io.File currentDir = fileChooser.getCurrentDirectory();
 		fileChooser = new JFileChooser() {
 			public void setSelectedFile( java.io.File file ) {

@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.ColorProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;

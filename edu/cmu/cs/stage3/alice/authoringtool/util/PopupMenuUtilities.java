@@ -29,6 +29,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.util.StringObjectPair;
 
@@ -100,14 +101,16 @@ public class PopupMenuUtilities {
 	static {
 		javax.swing.JPopupMenu.setDefaultLightWeightPopupEnabled( false );  // since we mix heavy and lightweight components
 
-		specialStringMap.put( "<keyCode>", "a key" );
-		specialStringMap.put( "<keyCode>", "a key" );
-		specialStringMap.put( "<mouse>", "the mouse" );
-		specialStringMap.put( "<onWhat>", "something" );
-		specialStringMap.put( "<condition>", "something" );
-		specialStringMap.put( "<variable>", "a variable" );
-		specialStringMap.put( "<arrowKeys>", "the arrow keys" );
+		specialStringMap.put( "<keyCode>", AikMin.getProperty("a key") );
+		specialStringMap.put( "<keyCode>", AikMin.getProperty("a key") );
+		specialStringMap.put( "<mouse>", AikMin.getProperty("the mouse") );
+		specialStringMap.put( "<onWhat>", AikMin.getProperty("something") );
+		specialStringMap.put( "<condition>", AikMin.getProperty("something") );
+		specialStringMap.put( "<variable>", AikMin.getProperty("a variable") );
+		specialStringMap.put( "<arrowKeys>", AikMin.getProperty("the arrow keys") );
 		specialStringMap.put( "<button>", "" );
+		specialStringMap.put( "<objects>", AikMin.getProperty("objects") );
+		specialStringMap.put( "<subject>", AikMin.getProperty("subject") );
 	}
 
 	public static void addRecentlyUsedValue( Class valueClass, Object value ) {
@@ -654,7 +657,7 @@ public class PopupMenuUtilities {
 
 		// if it's a variable, allow user to set it
 		if( expression instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
-			edu.cmu.cs.stage3.util.StringObjectPair[] known = { new edu.cmu.cs.stage3.util.StringObjectPair( "element", expression ), new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", "value" ), new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Integer( 0 ) ) };
+			edu.cmu.cs.stage3.util.StringObjectPair[] known = { new edu.cmu.cs.stage3.util.StringObjectPair( "element", expression ), new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", AikMin.getProperty("value") ), new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Integer( 0 ) ) };
 			String[] desired = { "value" };
 			edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype rp = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, known, desired );
 			java.util.Vector setValueStructure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePrototypeStructure( rp, factory, context );
@@ -749,13 +752,13 @@ public class PopupMenuUtilities {
 					try {
 						if( className.startsWith( "edu.cmu.cs.stage3.alice.core.response.PropertyAnimation" ) ) {
 							String propertyName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getSpecifier( className );
-							if( propertyName.equals( "vehicle" ) ) {
+							if( propertyName.equals( AikMin.getProperty("vehicle") ) ) {
 								edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues = new edu.cmu.cs.stage3.util.StringObjectPair[] {
 									new edu.cmu.cs.stage3.util.StringObjectPair( "element", element ),
 									new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", propertyName ),
 									new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 0.0 ) ),
 								};
-								String[] desiredProperties = new String[] { "value" };
+								String[] desiredProperties = new String[] { AikMin.getProperty("value") };
 								edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class, knownPropertyValues, desiredProperties );
 								String responseName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getFormattedReprForValue( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, knownPropertyValues );
 								java.util.Vector subStructure = makePrototypeStructure( responsePrototype, factory, context );
@@ -765,7 +768,7 @@ public class PopupMenuUtilities {
 									new edu.cmu.cs.stage3.util.StringObjectPair( "element", element ),
 									new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", propertyName )
 								};
-								String[] desiredProperties = new String[] { "value" };
+								String[] desiredProperties = new String[] { AikMin.getProperty("value") };
 								edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, knownPropertyValues, desiredProperties );
 								String responseName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getFormattedReprForValue( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, knownPropertyValues );
 								java.util.Vector subStructure = makePrototypeStructure( responsePrototype, factory, context );
@@ -850,7 +853,7 @@ public class PopupMenuUtilities {
 			if( propertyRepr.equals( preRepr ) ) {
 				propertyRepr = desiredProperties[0];
 			}
-			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( propertyRepr, null ) );
+			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getString(propertyRepr), null ) );
 //			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "Separator", javax.swing.JSeparator.class ) );
 			Class preValueClass = null;
 			java.util.Vector preDefaultStructure = null;
@@ -1005,7 +1008,7 @@ public class PopupMenuUtilities {
 			edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues = elementPrototype.getKnownPropertyValues();
 			
 			//Don't get self criterion stuff!
-			if( (edu.cmu.cs.stage3.alice.core.response.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( "target" )) ||
+			if( (edu.cmu.cs.stage3.alice.core.response.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( AikMin.getProperty("target") )) ||
 				(edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class.isAssignableFrom(elementPrototype.elementClass)  && desiredProperties[0].equals( "value" )) ) {
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
 					String propertyName = knownPropertyValues[i].getString();
@@ -1162,8 +1165,8 @@ public class PopupMenuUtilities {
 						}
 					}
 				};
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "import sound file...", importRunnable ) );
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "record new sound...", recordRunnable ) );
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getString("import sound file..."), importRunnable ) );
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getString("record new sound..."), recordRunnable ) );
 			}
 
 			// expressions
@@ -1217,7 +1220,7 @@ public class PopupMenuUtilities {
 						edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.showOtherDialog( valueClass, null, otherFactory, context );
 					}
 				};
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "other...", runnable ) );
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getProperty("other..."), runnable ) );
 			}
 
 			// allow user to create new list
@@ -1229,7 +1232,7 @@ public class PopupMenuUtilities {
 					public void run() {
 						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack();
 						edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty variables = context.getSandbox().variables;
-						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( "Create new list", context.getRoot(), true, true );
+						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( AikMin.getString("Create new list"), context.getRoot(), true, true );
 						if( variable != null ) {
 							if( variables != null ) {
 								authoringTool.getUndoRedoStack().startCompound();
@@ -1244,7 +1247,7 @@ public class PopupMenuUtilities {
 						}
 					}
 				};
-				structure.add( new StringObjectPair( "create new list...", createNewListRunnable ) );
+				structure.add( new StringObjectPair( AikMin.getString("create new list..."), createNewListRunnable ) );
 			}
 		}
 
@@ -1321,7 +1324,7 @@ public class PopupMenuUtilities {
 					public void run() {
 						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack();
 						edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty variables = property.getOwner().getSandbox().variables;
-						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( "Create new list", property.getOwner().getRoot(), true, true );
+						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( AikMin.getString("Create new list"), property.getOwner().getRoot(), true, true );
 						if( variable != null ) {
 							if( variables != null ) {
 								variables.getOwner().addChild( variable );
@@ -1331,7 +1334,7 @@ public class PopupMenuUtilities {
 						}
 					}
 				};
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "create new list...", createNewListRunnable ) );
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getString("create new list..."), createNewListRunnable ) );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Array.class.isAssignableFrom( targetValueClass ) ) { // arrays are special too
 			edu.cmu.cs.stage3.alice.core.Element parent = property.getOwner().getParent();
@@ -1483,7 +1486,7 @@ public class PopupMenuUtilities {
 								}
 							};
 							criterion = new edu.cmu.cs.stage3.util.criterion.MatchesAllCriterion( new edu.cmu.cs.stage3.util.Criterion[] { hasProperty, isNamedElement } );
-						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtAnimation) && property.getName().equals( "target" ) ) {
+						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtAnimation) && property.getName().equals( AikMin.getProperty("target") ) ) {
 							final Object transformableValue = property.getOwner().getPropertyNamed( "subject" ).get();
 							edu.cmu.cs.stage3.util.Criterion notSelf = new edu.cmu.cs.stage3.util.Criterion() {
 								public boolean accept( Object o ) {
@@ -1509,7 +1512,7 @@ public class PopupMenuUtilities {
 							edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion instanceOf = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( targetValueClass );
 							InAppropriateObjectArrayPropertyCriterion inAppropriateOAPCriterion = new InAppropriateObjectArrayPropertyCriterion();
 							criterion = new edu.cmu.cs.stage3.util.criterion.MatchesAllCriterion( new edu.cmu.cs.stage3.util.Criterion[] { instanceOf, notSelf, isNamedElement, inAppropriateOAPCriterion } );
-						}else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtConstraint) && property.getName().equals( "target" ) ) {
+						}else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtConstraint) && property.getName().equals( AikMin.getProperty("target") ) ) {
 							final Object transformableValue = property.getOwner().getPropertyNamed( "subject" ).get();
 							edu.cmu.cs.stage3.util.Criterion notSelf = new edu.cmu.cs.stage3.util.Criterion() {
 								public boolean accept( Object o ) {
@@ -1556,7 +1559,7 @@ public class PopupMenuUtilities {
 									edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().importElement( null, world, propertyPopupPostImportRunnable ); // should probably somehow hook the sound up to the object playing it
 								}
 							};
-							structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "import sound file...", runnable ) );
+							structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getString("import sound file..."), runnable ) );
 						}
 					}
 				}
@@ -1633,7 +1636,7 @@ public class PopupMenuUtilities {
 						edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.showOtherPropertyDialog( property, factory, null, finalOtherValueClass );
 					}
 				};
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "other...", runnable ) );
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getProperty("other..."), runnable ) );
 			}
 		}
 
@@ -2095,7 +2098,7 @@ public class PopupMenuUtilities {
 	// property may be null if it is not available.  if it is available, though, it will be used to derive the value class.
 	public static java.util.Vector getUnlabeledDefaultValueStructureForProperty( Class elementClass, String propertyName, edu.cmu.cs.stage3.alice.core.Property property ) {
 		if( property != null ) {
-			if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) {
+			if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( AikMin.getProperty("value") ) ) {
 				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
 				if (propertyAnimation.element.getElementValue() != null)
 					elementClass = propertyAnimation.element.getElementValue().getClass();
@@ -2105,7 +2108,7 @@ public class PopupMenuUtilities {
 				}
 				propertyName = propertyAnimation.propertyName.getStringValue();
 				
-			} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "value" ) ) {
+			} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( AikMin.getProperty("value") ) ) {
 				edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment propertyAssignment = (edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment)property.getOwner();
 				if (propertyAssignment.element.getElementValue() != null)
 					elementClass = propertyAssignment.element.getElementValue().getClass();

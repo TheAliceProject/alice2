@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
 
 /**
@@ -143,14 +144,14 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         doIfTruePrototype.setBackground(DO_IF_COLOR);
         javax.swing.JLabel DITLabel = new javax.swing.JLabel(doIfTrueString);
         doIfTruePrototype.add(DITLabel, java.awt.BorderLayout.CENTER);
-        String DITdesired[] = {"condition"}; //$NON-NLS-1$
+        String DITdesired[] = {AikMin.getProperty("condition")}; //$NON-NLS-1$
         doIfTruePrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
                 edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class, null, DITdesired)));
         doIfTruePrototype.addDragSourceComponent(DITLabel);
 
-        String CLdesired[] = {"end"}; //$NON-NLS-1$
+        String CLdesired[] = {AikMin.getProperty("end")}; //$NON-NLS-1$
         loopPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"));
         loopPrototype.setBackground(COUNT_LOOP_COLOR);
@@ -162,7 +163,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class, null, CLdesired)));
         loopPrototype.addDragSourceComponent(LLabel);
 
-        String LITdesired[] = {"condition"}; //$NON-NLS-1$
+        String LITdesired[] = {AikMin.getProperty("condition")}; //$NON-NLS-1$
         loopIfTruePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopIfTruePrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"));
         loopIfTruePrototype.setBackground(DO_WHILE_COLOR);
@@ -198,7 +199,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class, null, FATdesired)));
         forAllTogetherPrototype.addDragSourceComponent(FATLabel);
 
-        String Wdesired[] = {"duration"}; //$NON-NLS-1$
+        String Wdesired[] = {AikMin.getProperty("duration")}; //$NON-NLS-1$
         waitPrototype = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
                 edu.cmu.cs.stage3.alice.core.response.Wait.class, null, Wdesired));

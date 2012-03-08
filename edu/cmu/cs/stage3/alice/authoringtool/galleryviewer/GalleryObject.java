@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author David Culyba
  *
@@ -317,7 +319,7 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
         sizeLabel.setForeground(sizeColor);
         imageLabel.setIcon(GalleryViewer.loadingImageIcon);
         sizeLabel.setText(String.valueOf(data.size)+" kb");
-        locationLabel.setText(" on "+location);
+        locationLabel.setText(AikMin.getProperty(" on ")+location);
         if (data.size > 0 && data.type == GalleryViewer.WEB){
             sizeLabel.setText((String.valueOf(data.size)+"kb"));
             sizeLabel.setForeground(sizeColor);

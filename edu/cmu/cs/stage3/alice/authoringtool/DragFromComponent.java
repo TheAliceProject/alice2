@@ -868,7 +868,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 			if( questionStructure != null ) {
 				for( java.util.Iterator iter = questionStructure.iterator(); iter.hasNext(); ) {
 					edu.cmu.cs.stage3.util.StringObjectPair sop = (edu.cmu.cs.stage3.util.StringObjectPair)iter.next();
-					String groupName = sop.getString();
+					String groupName = AikMin.getProperty(sop.getString());					// Aik Min - get the name of function categories
 					java.util.Vector questionNames = (java.util.Vector)sop.getObject();
 
 					javax.swing.JPanel subPanel = new javax.swing.JPanel();
@@ -1071,7 +1071,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		tabbedPane.add(propertiesScrollPane, Messages.getString("DragFromComponent.129")); //$NON-NLS-1$
 		propertiesScrollPane.getViewport().add(propertiesPanel, null);
 		tabbedPane.add(animationsScrollPane, Messages.getString("DragFromComponent.130")); //$NON-NLS-1$
-		tabbedPane.add(questionsScrollPane, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING+"s"); //$NON-NLS-1$
+		tabbedPane.add(questionsScrollPane, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING); //$NON-NLS-1$
 //		tabbedPane.add(otherScrollPane, "other");
 		otherScrollPane.getViewport().add(otherPanel, null);
 		questionsScrollPane.getViewport().add(questionsPanel, null);

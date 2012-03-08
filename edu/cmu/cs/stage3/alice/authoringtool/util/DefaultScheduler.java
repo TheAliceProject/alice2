@@ -86,8 +86,8 @@ public class DefaultScheduler implements Runnable {
 //	}
 
 	synchronized private void simulateOnce() {
-		for( java.util.Iterator iter = doOnceRunnables.iterator(); iter.hasNext(); ) {
-			Runnable runnable = (Runnable)iter.next();
+		for( java.util.Iterator <Runnable> iter = doOnceRunnables.iterator(); iter.hasNext(); ) {
+			Runnable runnable = iter.next();
 			try {
 				runnable.run();
 			} catch( org.python.core.PyException e ) {
@@ -101,7 +101,11 @@ public class DefaultScheduler implements Runnable {
 				System.err.println( Messages.getString("DefaultScheduler.0") ); //$NON-NLS-1$
 				t.printStackTrace();
 			}
-			iter.remove();
+			try {
+				iter.remove();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		for( java.util.Iterator iter = eachFrameRunnablesMarkedForRemoval.iterator(); iter.hasNext(); ) {
