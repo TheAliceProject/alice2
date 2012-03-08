@@ -1116,7 +1116,11 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
             CentralDirectoryHeader currentHeader = (CentralDirectoryHeader)i.next();
             if (currentHeader.shouldDelete){
                 // System.out.println("deleting "+currentHeader.fileName);
-                i.remove();
+            	try {
+					i.remove();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
             }
         }
     }

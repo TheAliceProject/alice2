@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.DictionaryProperty;
 import edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty;
@@ -128,10 +129,10 @@ public abstract class Element {
 		return (n&0xFF)==n;
 	}
 	public static String generateValidName( String invalidName ) {
-		byte[] bytes = invalidName.trim().getBytes();
+		char[] bytes = invalidName.trim().toCharArray();
 		StringBuffer sb = new StringBuffer( bytes.length );
 		for( int i=0; i<bytes.length; i++ ) {
-			char c = (char)bytes[ i ];
+			char c = bytes[ i ];
 			if( is8Bit( c ) ) {
 				if( isIllegal( c ) ) {
 					c = '_';
@@ -149,27 +150,28 @@ public abstract class Element {
 		return sb.toString();
 	}
 	public static boolean isPotentialNameValid( String nameValue ) {
-		if( nameValue == null ) {
-			return false;
-		}
-		if( nameValue.length() == 0  ) {
-			return false;
-		}
-		if( nameValue.trim().length() != nameValue.length() ) {
-			return false;
-		}
-		byte[] bytes = nameValue.getBytes();
-		for( int i=0; i<bytes.length; i++ ) {
-			char c = (char)bytes[ i ];
-			if( is8Bit( c ) ) {
-				if( isIllegal( c ) ) {
-					return false;
-				}
-			} else {
-				return false;
-			}
-		}
-		return true;
+//		if( nameValue == null ) {
+//			return false;
+//		}
+//		if( nameValue.length() == 0  ) {
+//			return false;
+//		}
+//		if( nameValue.trim().length() != nameValue.length() ) {
+//			return false;
+//		}
+//		byte[] bytes = nameValue.getBytes();
+//		for( int i=0; i<bytes.length; i++ ) {
+//			char c = (char)bytes[ i ];
+//			if( is8Bit( c ) ) {
+//				if( isIllegal( c ) ) {
+//					return false;
+//				}
+//			} else {
+//				return false;
+//			}
+//		}
+//		return true;
+		return AikMin.isValidName(nameValue);
 	}
     private void checkForInvalidName( String nameValue ) {
 		if( nameValue==null ) {
@@ -191,18 +193,18 @@ public abstract class Element {
 				}
 			}
 
-			byte[] bytes = nameValue.getBytes();
+			char[] bytes = nameValue.toCharArray();
 			for( int i=0; i<bytes.length; i++ ) {
-				if( is8Bit( (char)bytes[ i ] ) ) {
+				if( is8Bit( bytes[ i ] ) ) {
 					//pass
 				} else {
-					char c;
-					try {
-						c = nameValue.charAt( i );
-					} catch( Throwable t ) {
-						c = (char)bytes[ i ];
-					}
-					throw new IllegalNameValueException( nameValue, Messages.getString("Element.24") + c + Messages.getString("Element.25") ); //$NON-NLS-1$ //$NON-NLS-2$
+//					char c;
+//					try {
+//						c = nameValue.charAt( i );
+//					} catch( Throwable t ) {
+//						c = (char)bytes[ i ];
+//					}
+					throw new IllegalNameValueException( nameValue, Messages.getString("Element.24") + bytes[i] + Messages.getString("Element.25") ); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			}
         }
@@ -604,6 +606,9 @@ public abstract class Element {
 		Property[] properties = getProperties();
 		for( int i=0; i<properties.length; i++ ) {
 			Property property = properties[i];
+			if ( !AikMin.locale.equalsIgnoreCase( "en" ) ) {
+				name = AikMin.getProperty(name);			
+			} 
 			if( property.getName().equals( name ) ) {
 				return property;
 			}
@@ -615,7 +620,10 @@ public abstract class Element {
 		Property[] properties = getProperties();
 		for( int i=0; i<properties.length; i++ ) {
 			Property property = properties[i];
-			if( property.getName().equals( name ) ) {
+			if ( !AikMin.locale.equalsIgnoreCase( "en" ) ) {
+				name = AikMin.getProperty(name);			
+			} 
+			if( property.getName().equalsIgnoreCase( name ) ) {
 				return property;
 			}
 		}

@@ -25,6 +25,7 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,8 +44,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
+import javax.swing.border.Border;
 
-import edu.cmu.cs.stage3.alice.authoringtool.Messages;
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener;
 import edu.cmu.cs.stage3.swing.ContentPane;
@@ -1463,7 +1464,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		            	bos.write( i );
 		            }      
 				} catch (Exception e1){
-					
+					e1.printStackTrace();
 				} finally {
 					 if (bis != null)
 		             try {
@@ -1481,17 +1482,16 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 				if (condition) {
 					try {
-						String path = JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-						String decodedPath = java.net.URLDecoder.decode(path, "UTF-8");
-						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( decodedPath );
-
-						if (System.getProperty("os.name") != null){
-							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "os name OK" );
+						if (System.getProperty("os.name") != null){				
 							if (System.getProperty("os.name").startsWith("Windows") ){
-								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "is Windows" );
-								decodedPath=decodedPath.substring(1, decodedPath.lastIndexOf(".exe")+4);
-								Runtime.getRuntime().exec(decodedPath);
+								String file = JAlice.getAliceHomeDirectory().getParent().toString()+"\\Alice.exe";
+								if (new java.io.File(file).exists()) {
+									Runtime.getRuntime().exec(JAlice.getAliceHomeDirectory().getParent().toString()+"\\Alice.exe");
+								} else {
+									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice.exe in Alice directory. Please restart Alice manually.");
+								}
 							} else {
+								String decodedPath = java.net.URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
 								decodedPath=decodedPath.substring(0, decodedPath.lastIndexOf(".app")+4);
 								String params[] = {"open", "-n", decodedPath };
 								Runtime.getRuntime().exec(params);
@@ -5409,22 +5409,53 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
     private static JLabel statusLabel = new JLabel(Messages.getString("AuthoringTool.503")); //$NON-NLS-1$
     private static javax.swing.JFrame statusFrame;
     
+    private boolean checkForUpdate(){
+		StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/alice.jar" ); //$NON-NLS-1$
+		java.io.File old = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "alice.jar");
+    	try {
+    		java.net.URL url = new java.net.URL( sb.toString() );
+    		java.net.URLConnection urlc = url.openConnection();
+    		long date = urlc.getLastModified();
+    		long oldDate = old.lastModified();
+    		if (date > oldDate){
+    			return true;
+    		}
+    	} catch ( Exception e){
+    		
+    	}	
+    	return false;
+    }
+    
 	public void updateAlice() {
 		javax.swing.JPanel updateDialog;
 		final Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		
 		final javax.swing.JDialog dlg = new javax.swing.JDialog(new JFrame(),Messages.getString("AuthoringTool.505"));
-   		dlg.setPreferredSize(new Dimension(250,180));
+   		dlg.setPreferredSize(new Dimension(300,180));
+   		dlg.setSize(new Dimension(300,180));
    		dlg.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
-
+        dlg.setAlwaysOnTop(true);
+        dlg.setResizable(false);
+        dlg.setVisible(true);
+        
    		updateDialog = new javax.swing.JPanel();
    		updateDialog.setLayout(new BorderLayout());
 
 		Box left = Box.createVerticalBox();
         left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
-        final JCheckBox UpdateJAR = new JCheckBox("Update alice.jar file");
-        UpdateJAR.setSelected(true);
+        //UpdateJAR.setEnabled(true);
+        
+        final JCheckBox UpdateJAR = new JCheckBox("");
+        boolean updateAvailable = checkForUpdate();
+        if (updateAvailable) {
+        	UpdateJAR.setText("Update Alice 2.2 (New update available)");
+        	UpdateJAR.setSelected(true);
+        } else {
+        	UpdateJAR.setText("Update Alice 2.2 (No new updates)");
+        	UpdateJAR.setSelected(false);
+        	UpdateJAR.setEnabled(false);
+        }
         left.add(UpdateJAR);
 
         final JCheckBox EnglishGallery = new JCheckBox("Download English Gallery");
@@ -5441,7 +5472,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         ConfirmUpdate.addActionListener(new java.awt.event.ActionListener(){
         	public void actionPerformed(java.awt.event.ActionEvent e) {
         		dlg.dispose();
-        		
+        		if (UpdateJAR.isSelected() || EnglishGallery.isSelected() || SpanishGallery.isSelected()) {
+        			new Thread(new StartUpdating(UpdateJAR.isSelected(),EnglishGallery.isSelected(),SpanishGallery.isSelected()) ).start();
+        		} else {
+        			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("No update selected.");
+        		}
 //        		statusFrame = new JFrame(Messages.getString("AuthoringTool.505")); //$NON-NLS-1$
 //        		statusFrame.setPreferredSize(new Dimension(250,100));
 //        		statusFrame.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
@@ -5452,17 +5487,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 //        		pulsing = true;
 //		        Thread pulse = new Thread (new StatusPulsing(statusLabel, Messages.getString("AuthoringTool.504"))); //$NON-NLS-1$
 //		        pulse.start();
-		        new Thread(new StartUpdating(UpdateJAR.isSelected(),EnglishGallery.isSelected(),SpanishGallery.isSelected()) ).start();
+		        
         	}
         });
         bottom.add(ConfirmUpdate);
 
         updateDialog.add(bottom, BorderLayout.PAGE_END);
         dlg.add(updateDialog);
-        dlg.setAlwaysOnTop(true);
-        dlg.setResizable(false);
 		dlg.pack();
-        dlg.setVisible(true);
+        dlg.repaint();
     }
 
   	
@@ -5486,7 +5519,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 					java.net.URL url = new java.net.URL( sb.toString() );
 					java.net.URLConnection urlc = url.openConnection();
-					//long date = urlc.getDate();
 					monitor.setMaximum(urlc.getContentLength());
 					
 					java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar");
@@ -5620,28 +5652,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					zipFile.close();
 					new File(aliceHome + System.getProperty( "file.separator" )+"SpanishGallery.zip").delete();
 	        	}
-	        	monitor.close();
-				Object[] options = {Messages.getString("AuthoringTool.512"), Messages.getString("AuthoringTool.513")};
-				int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("AuthoringTool.508"), Messages.getString("AuthoringTool.509"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] ); //$NON-NLS-1$ //$NON-NLS-2$
-				if (result == ContentPane.OK_OPTION){
-					quit(true);
-				}
 	        } catch (Exception e1) {
 	        	javax.swing.JOptionPane.showMessageDialog(null, Messages.getString("AuthoringTool.510"), Messages.getString("AuthoringTool.511"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
 	        } finally {
-	        	if (monitor.isCanceled()) {
-	        		java.io.File temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar");
-	        		if (temp.exists())
-	        			temp.delete();
-	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
-							+ System.getProperty( "file.separator" ) + "English" + System.getProperty( "file.separator" ) + "EnglishGallery.zip");
-	        		if (temp.exists())
-	        			temp.delete();	
-	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
-							+ System.getProperty( "file.separator" ) + "Spanish" + System.getProperty( "file.separator" ) + "SpanishGallery.zip");
-	        		if (temp.exists())
-	        			temp.delete();	        		
-	        	}
 	        	if (bis != null)
 	            try {
 	            	bis.close();
@@ -5654,6 +5667,27 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				} catch (java.io.IOException ioe) {
 				    ioe.printStackTrace();
 				}             
+	        	if (monitor.isCanceled()) {
+	        		java.io.File temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar");
+	        		if (temp.exists())
+	        			temp.delete();
+	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
+							+ System.getProperty( "file.separator" ) + "English" + System.getProperty( "file.separator" ) + "EnglishGallery.zip");
+	        		if (temp.exists())
+	        			temp.delete();	
+	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
+							+ System.getProperty( "file.separator" ) + "Spanish" + System.getProperty( "file.separator" ) + "SpanishGallery.zip");
+	        		if (temp.exists())
+	        			temp.delete();	        		
+	        	} else {
+					Object[] options = {Messages.getString("AuthoringTool.512"), Messages.getString("AuthoringTool.513")};
+					int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("AuthoringTool.508"), Messages.getString("AuthoringTool.509"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] ); //$NON-NLS-1$ //$NON-NLS-2$
+					if (result == ContentPane.OK_OPTION){
+						monitor.close();
+						quit(true);
+					}
+	        	}
+	        	monitor.close();
 				
 	        }
 		}

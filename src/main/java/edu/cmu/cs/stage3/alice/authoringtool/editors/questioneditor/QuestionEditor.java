@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -104,14 +106,14 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         ifElsePrototype.setBackground(IF_ELSE_COLOR);
         javax.swing.JLabel DITLabel = new javax.swing.JLabel(ifElseString);
         ifElsePrototype.add(DITLabel, java.awt.BorderLayout.CENTER);
-        String DITdesired[] = {"condition"};
+        String DITdesired[] = {AikMin.getProperty("condition")};
         ifElsePrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype(
                 edu.cmu.cs.stage3.alice.core.question.userdefined.IfElse.class, null, DITdesired)));
         ifElsePrototype.addDragSourceComponent(DITLabel);
 
-        String CLdesired[] = {"end"};
+        String CLdesired[] = {AikMin.getProperty("end")};
         loopNPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopNPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"));
         loopNPrototype.setBackground(LOOP_N_COLOR);
@@ -123,7 +125,7 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN.class, null, CLdesired)));
         loopNPrototype.addDragSourceComponent(LLabel);
 
-        String LITdesired[] = {"condition"};
+        String LITdesired[] = {AikMin.getProperty("condition")};
         whilePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //whilePrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"));
         whilePrototype.setBackground(WHILE_COLOR);

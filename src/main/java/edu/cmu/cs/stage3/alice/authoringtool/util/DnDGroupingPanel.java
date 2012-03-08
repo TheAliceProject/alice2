@@ -112,7 +112,11 @@ public class DnDGroupingPanel extends GroupingPanel {
 			if( dgr.getComponent() == component ) {
 				dgr.removeDragGestureListener( dragGestureListener );
 				dgr.setComponent( null );
-				iter.remove();
+				try {
+					iter.remove();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			}
 		}
@@ -149,7 +153,11 @@ public class DnDGroupingPanel extends GroupingPanel {
 			java.awt.dnd.DragGestureRecognizer dgr = (java.awt.dnd.DragGestureRecognizer)iter.next();
 			if( dragGestureListener != null ) {
 				dgr.removeDragGestureListener( dragGestureListener );
-				iter.remove();
+				try {
+					iter.remove();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			} else {
 //				System.err.println( "dragGestureListener unexpectedly null" );
 //				Thread.dumpStack();

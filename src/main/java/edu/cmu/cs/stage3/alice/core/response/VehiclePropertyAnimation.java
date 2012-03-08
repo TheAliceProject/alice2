@@ -23,15 +23,17 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 public class VehiclePropertyAnimation extends PropertyAnimation {
 	public VehiclePropertyAnimation() {
 		super();
-		propertyName.set( "vehicle" );
+		propertyName.set( AikMin.getProperty("vehicle") );
 	}
 	
 	protected void propertyChanging( edu.cmu.cs.stage3.alice.core.Property property, Object value ) {
 		if( property == propertyName ) {
-			if( ((String)value).equals( "vehicle" ) ) {
+			if( ((String)value).equals( AikMin.getProperty("vehicle") ) ) {
 				//pass
 			} else {
                 System.err.println( "propertyName: " + value );

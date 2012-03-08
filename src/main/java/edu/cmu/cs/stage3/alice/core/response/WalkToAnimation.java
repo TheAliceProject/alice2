@@ -6,6 +6,7 @@
  */
 package edu.cmu.cs.stage3.alice.core.response;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.math.Matrix33;
 
 /**

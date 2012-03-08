@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core.behavior;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
 import edu.cmu.cs.stage3.alice.core.Transformable;

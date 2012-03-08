@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
@@ -61,7 +62,7 @@ public abstract class Property {
 
 	protected Property( Element owner, String name, Object defaultValue, Class valueClass ) {
 		m_owner = owner;
-		m_name = name;
+		m_name = AikMin.getProperty(name);
 		m_defaultValue = defaultValue;
 		m_valueClass = valueClass;
 		m_isAcceptingOfHowMuch = false;

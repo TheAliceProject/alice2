@@ -649,9 +649,10 @@ public class AuthoringToolResources {
 			Class elementClass = property.getOwner().getClass();
 			String propertyName = property.getName();
 			for( int i = 0; i < AuthoringToolResources.resources.propertyNamesToOmit.length; i++ ) {
-				if( AuthoringToolResources.resources.propertyNamesToOmit[i].getType().isAssignableFrom( elementClass ) && AuthoringToolResources.resources.propertyNamesToOmit[i].getString().equals( propertyName ) ) {
-					return true;
-				}
+				if( AuthoringToolResources.resources.propertyNamesToOmit[i].getType().isAssignableFrom( elementClass ))
+					if ( AikMin.getProperty(AuthoringToolResources.resources.propertyNamesToOmit[i].getString()).equals( propertyName ) ) {
+						return true;
+					}
 			}
 		}
 		return false;
@@ -686,7 +687,7 @@ public class AuthoringToolResources {
 	public static String getReprForValue( Object value, edu.cmu.cs.stage3.alice.core.Property property, Object extraContextInfo ) {
 		Class elementClass = property.getOwner().getClass();
 		String propertyName = property.getName();
-		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) { //$NON-NLS-1$
+		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( AikMin.getProperty("value") ) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
 			Object e = propertyAnimation.element.get();
 			if( e instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
@@ -700,7 +701,7 @@ public class AuthoringToolResources {
 				}
 			}
 			propertyName = propertyAnimation.propertyName.getStringValue();
-		} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "value" ) ) { //$NON-NLS-1$
+		} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( AikMin.getProperty("value") ) ) { //$NON-NLS-1$
 			edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment propertyAssignment = (edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment)property.getOwner();
 			elementClass = propertyAssignment.element.getElementValue().getClass();
 			propertyName = propertyAssignment.propertyName.getStringValue();
@@ -766,6 +767,9 @@ public class AuthoringToolResources {
 					java.util.HashMap map = getPropertyValueFormatMap( propertyKey );
 					if( map.containsKey( value ) ) {
 						reprString = (String)map.get( value );
+						String temp = reprString.replaceAll("<\\w*>","");
+						temp = temp.replaceAll("[^a-zA-Z ]", "").trim();
+						reprString = reprString.replace(temp, AikMin.getString(temp));
 					} else if( value == null ) { // is this right for all cases?
 						reprString = null;
 					} else if( map.containsKey( "default" ) ) { //$NON-NLS-1$
@@ -780,7 +784,7 @@ public class AuthoringToolResources {
 						String unitExpression = "<" + key + ">"; //$NON-NLS-1$ //$NON-NLS-2$
 						while( reprString.indexOf( unitExpression ) > -1 ) {
 							StringBuffer sb = new StringBuffer( reprString );
-							sb.replace( reprString.indexOf( unitExpression ), reprString.indexOf( unitExpression ) + unitExpression.length(), unitString );
+							sb.replace( reprString.indexOf( unitExpression ), reprString.indexOf( unitExpression ) + unitExpression.length(), AikMin.getString(unitString) );
 							reprString = sb.toString();
 						}
 					}
@@ -953,7 +957,6 @@ public class AuthoringToolResources {
 			edu.cmu.cs.stage3.alice.core.Question question = (edu.cmu.cs.stage3.alice.core.Question)value;
 			String format = getFormat( value.getClass() );
 			edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer formatTokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
-//			int i = 0;
 			while( formatTokenizer.hasMoreTokens() ) {
 				String token = formatTokenizer.nextToken();
 				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
@@ -1230,10 +1233,10 @@ public class AuthoringToolResources {
 			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
 				// skip this one
 				// should be in knownPropertyValues
-			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				desired.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
+			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$				
+				desired.add( AikMin.getProperty( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
 			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				desired.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
+				desired.add( AikMin.getProperty( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 
