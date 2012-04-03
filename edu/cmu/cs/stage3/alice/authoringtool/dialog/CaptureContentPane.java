@@ -156,7 +156,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 				constrainToAspectRatio(newBounds, deltaWidth < deltaHeight);
 								
-				CaptureContentPane.this.config.setValue( "rendering.renderWindowBounds", newBounds.x + ", "	+ newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				CaptureContentPane.this.config.setValue( "rendering.renderWindowBounds", newBounds.x + ", "	+ newBounds.y + ", " + newBounds.width + ", " + newBounds.height);    //$NON-NLS-4$
 				renderPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, newBounds.height));
 				buttonPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, buttonPanel.getHeight()));
 
@@ -214,7 +214,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			focusTimer.setRepeats( false );
 			focusTimer.start();
 		}
-		stdOutOutputComponent.stdOutStream.println(Messages.getString("CaptureContentPane.4")); //$NON-NLS-1$
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("CaptureContentPane.4")); 
 		stdOutOutputComponent.stdOutStream.flush();
 		this.stdOutOutputComponent.getTextPane().getDocument().addDocumentListener(textListener);
 		java.awt.Rectangle bounds = getRenderBounds();
@@ -223,7 +223,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		showStdOut = false;
 		keyMapInit();
 		updateGUI();
-		if ( config.getValue( "rendering.ensureRenderDialogIsOnScreen" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+		if ( config.getValue( "rendering.ensureRenderDialogIsOnScreen" ).equalsIgnoreCase( "true" ) ) {  
 			java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 			java.awt.Dimension dialogSize = parentDialog.getSize();
 			java.awt.Point dialogLocation = parentDialog.getLocation();
@@ -241,7 +241,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if ( dialogLocation.y < 0 ) {
 					dialogLocation.y = 0;
 				}
-				if (config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "false" )) { //$NON-NLS-1$ //$NON-NLS-2$
+				if (config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "false" )) {  
 					if ( dialogSize.width > screenSize.width ) {
 						java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 						renderSize.width = screenSize.width - 8;
@@ -295,7 +295,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		timeLabel.setText("0:00  "); //$NON-NLS-1$
+		timeLabel.setText("0:00  "); 
 		try {
 			if (capturing != null)
 				capturing.join();
@@ -307,15 +307,15 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		speedSlider.setValue(0);
 		saveRenderBounds();
 		showStdOut = false;
-		if ( config.getValue( "clearStdOutOnRun" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-			detailTextPane.setText(""); //$NON-NLS-1$
+		if ( config.getValue( "clearStdOutOnRun" ).equalsIgnoreCase( "true" ) ) {  
+			detailTextPane.setText(""); 
 		}
 		java.awt.Component renderCanvas = getRenderCanvas();
 		if ( renderCanvas != null ) {
 			renderCanvas.removeFocusListener( renderCanvasFocusListener );
 		}
 		this.stdOutOutputComponent.getTextPane().getDocument().removeDocumentListener(textListener);
-		stdOutOutputComponent.stdOutStream.println(Messages.getString("CaptureContentPane.13")); //$NON-NLS-1$
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("CaptureContentPane.13")); 
 		stdOutOutputComponent.stdOutStream.flush();
 
 	}
@@ -331,7 +331,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	private void guiInit() {
-		title = Messages.getString("CaptureContentPane.14"); //$NON-NLS-1$
+		title = Messages.getString("CaptureContentPane.14"); 
 		// on renderPanel resize, constrain to aspectRatio
 		setRenderWindowSizeBasedOnSavedBounds();
 	
@@ -352,9 +352,9 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		takePictureButton = new javax.swing.JButton( authoringTool.getActions().takePictureAction );
 		takePictureButton.setEnabled( true );
 
-		speedLabel = new javax.swing.JLabel(Messages.getString("CaptureContentPane.15")); //$NON-NLS-1$
-		int fontSize = Integer.parseInt(config.getValue("fontSize")); //$NON-NLS-1$
-		speedLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD,  //$NON-NLS-1$
+		speedLabel = new javax.swing.JLabel(Messages.getString("CaptureContentPane.15")); 
+		int fontSize = Integer.parseInt(config.getValue("fontSize")); 
+		speedLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD,  
 				(int)(12 * fontSize / 12.0) ));
 		speedLabel.setPreferredSize(new java.awt.Dimension(80, 12));
 		speedLabel.setMinimumSize(new java.awt.Dimension(20, 12));
@@ -367,34 +367,34 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		takePictureButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 
 		// Capture GUI section
-		stopCaptureButton = new JButton(Messages.getString("CaptureContentPane.18")); //$NON-NLS-1$
-		stopCaptureButton.setToolTipText(Messages.getString("CaptureContentPane.19")); //$NON-NLS-1$
+		stopCaptureButton = new JButton(Messages.getString("CaptureContentPane.18")); 
+		stopCaptureButton.setToolTipText(Messages.getString("CaptureContentPane.19")); 
 
-		startCaptureButton = new JButton(Messages.getString("CaptureContentPane.20")); //$NON-NLS-1$
-		startCaptureButton.setToolTipText(Messages.getString("CaptureContentPane.21")); //$NON-NLS-1$
+		startCaptureButton = new JButton(Messages.getString("CaptureContentPane.20")); 
+		startCaptureButton.setToolTipText(Messages.getString("CaptureContentPane.21")); 
 
-		encodeButton = new JButton(Messages.getString("CaptureContentPane.22")); //$NON-NLS-1$
-		encodeButton.setToolTipText(Messages.getString("CaptureContentPane.23")); //$NON-NLS-1$
+		encodeButton = new JButton(Messages.getString("CaptureContentPane.22")); 
+		encodeButton.setToolTipText(Messages.getString("CaptureContentPane.23")); 
 
-		clearButton = new JButton(Messages.getString("CaptureContentPane.24")); //$NON-NLS-1$
-		clearButton.setToolTipText(Messages.getString("CaptureContentPane.25")); //$NON-NLS-1$
+		clearButton = new JButton(Messages.getString("CaptureContentPane.24")); 
+		clearButton.setToolTipText(Messages.getString("CaptureContentPane.25")); 
 		clearButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 
 		stopCaptureButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 		startCaptureButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 		encodeButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 
-		String[] types = {"MOV"}; //$NON-NLS-1$
+		String[] types = {"MOV"}; 
 		fileType = new javax.swing.JComboBox(types);
 
-		fileName = new javax.swing.JTextField(Messages.getString("CaptureContentPane.27")); //$NON-NLS-1$
-		fileName.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0))); //$NON-NLS-1$
+		fileName = new javax.swing.JTextField(Messages.getString("CaptureContentPane.27")); 
+		fileName.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0))); 
 		fileName.setPreferredSize(new java.awt.Dimension(124, 24));
 		fileName.setMinimumSize(new java.awt.Dimension(60, 24));
 		fileName.setMaximumSize(new java.awt.Dimension(124, 24));
 
-		statusLabel = new javax.swing.JLabel(Messages.getString("CaptureContentPane.29")); //$NON-NLS-1$
-		timeLabel = new javax.swing.JLabel("0:00  "); //$NON-NLS-1$
+		statusLabel = new javax.swing.JLabel(Messages.getString("CaptureContentPane.29")); 
+		timeLabel = new javax.swing.JLabel("0:00  "); 
 
 		captureBar = new javax.swing.JPanel();
 		statusLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -411,7 +411,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		captureBar.add(recordLabel, new java.awt.GridBagConstraints(5, 0, 1, 2, 0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		captureBar.add(timeLabel, new java.awt.GridBagConstraints(6, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,	java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 
-		exportBar.add(new JLabel(Messages.getString("CaptureContentPane.31")), new java.awt.GridBagConstraints(1, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2), 0, 0)); //$NON-NLS-1$
+		exportBar.add(new JLabel(Messages.getString("CaptureContentPane.31")), new java.awt.GridBagConstraints(1, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2), 0, 0)); 
 		exportBar.add(fileName, new java.awt.GridBagConstraints(2, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		exportBar.add(fileType, new java.awt.GridBagConstraints(3, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		exportBar.add(new JLabel(), new java.awt.GridBagConstraints(4, 0, 1, 2, 0.5, 0.0, java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
@@ -522,16 +522,16 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} else {
 			javax.swing.SwingUtilities.convertPointToScreen( pos, renderPanel );
 		}
-		config.setValue( "rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		config.setValue( "rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height );    //$NON-NLS-4$
 	}
 	
 	public void saveRenderBounds(java.awt.Rectangle newBounds) {
-		config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height );    //$NON-NLS-4$
 	}
 
 	protected boolean shouldConstrainAspectOnResize() {
 		return !(showStdOut) //|| authoringTool.getWatcherPanel().isThereSomethingToWatch())
-			&& config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true"); //$NON-NLS-1$ //$NON-NLS-2$
+			&& config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true");  
 	}
 
 	public javax.swing.JPanel getRenderPanel() {
@@ -539,8 +539,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	public java.awt.Rectangle getRenderBounds() {
-		String boundsString = config.getValue( "rendering.renderWindowBounds" ); //$NON-NLS-1$
-		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," ); //$NON-NLS-1$
+		String boundsString = config.getValue( "rendering.renderWindowBounds" ); 
+		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," ); 
 		if ( st.countTokens() == 4 ) {
 			try {
 				int x = Integer.parseInt( st.nextToken() );
@@ -554,10 +554,10 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				}
 				return bounds;
 			} catch( NumberFormatException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CaptureContentPane.44"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CaptureContentPane.44"), e ); 
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CaptureContentPane.45"), null ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CaptureContentPane.45"), null ); 
 		}
 
 		return null;
@@ -578,20 +578,20 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		String speedText = java.text.NumberFormat.getInstance().format(newSpeed);
 		if (newSpeed < 1) {
 			if (newSpeed == .5) {
-				speedText = "1/2"; //$NON-NLS-1$
+				speedText = "1/2"; 
 			} else if (newSpeed == .25) {
-				speedText = "1/4"; //$NON-NLS-1$
+				speedText = "1/4"; 
 			} else if (newSpeed == .2) {
-				speedText = "1/5"; //$NON-NLS-1$
+				speedText = "1/5"; 
 			} else if (newSpeed > .3 && newSpeed < .34) {
-				speedText = "1/3"; //$NON-NLS-1$
+				speedText = "1/3"; 
 			} else if (newSpeed > .16 && newSpeed < .168) {
-				speedText = "1/6"; //$NON-NLS-1$
+				speedText = "1/6"; 
 			} else if (newSpeed > .14 && newSpeed < .143) {
-				speedText = "1/7"; //$NON-NLS-1$
+				speedText = "1/7"; 
 			}
 		}
-		speedLabel.setText(Messages.getString("CaptureContentPane.52") + speedText + "x"); //$NON-NLS-1$ //$NON-NLS-2$
+		speedLabel.setText(Messages.getString("CaptureContentPane.52") + speedText + "x");  
 		speedLabel.repaint();
 	}
 	
@@ -736,7 +736,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	//set up for capturing
 	public void captureInit() {
-		videoHandler = new MovieCapturer(exportDirectory + "/frames/"); //$NON-NLS-1$
+		videoHandler = new MovieCapturer(exportDirectory + "/frames/"); 
 		frameSequencer = videoHandler.getFrameSequencer();
 		authoringTool.pause();
 		
@@ -751,10 +751,10 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		String[] files = f.list();
 //		String[] files = f.list(new java.io.FilenameFilter() {
 //			public boolean accept(java.io.File dir, String name) {
-//				if (name.startsWith("frame") || name.endsWith(".wav") //$NON-NLS-1$ //$NON-NLS-2$
-//						|| name.endsWith(".mp3") || name.endsWith(".mov") //$NON-NLS-1$ //$NON-NLS-2$
-//						|| name.endsWith(".MP3") || name.endsWith(".WAV") || //$NON-NLS-1$ //$NON-NLS-2$
-//						name.endsWith(".MOV")) //$NON-NLS-1$
+//				if (name.startsWith("frame") || name.endsWith(".wav")  
+//						|| name.endsWith(".mp3") || name.endsWith(".mov")  
+//						|| name.endsWith(".MP3") || name.endsWith(".WAV") ||  
+//						name.endsWith(".MOV")) 
 //					return true;
 //				return false;
 //			}
@@ -835,7 +835,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		statusFrame.setSize(200,100);
 		statusFrame.setVisible(true);
 		try{
-			if (System.getProperty("os.name").startsWith("Window")) { //$NON-NLS-1$ //$NON-NLS-2$
+			if (System.getProperty("os.name").startsWith("Window")) {  
 				statusFrame.setAlwaysOnTop(true);
 				java.awt.Point location = captureBar.getLocationOnScreen();
 				statusFrame.setLocation(new java.awt.Point((int) (location.x),
@@ -880,7 +880,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		setClear(false);
 		
-		removeFiles(exportDirectory + "/frames/"); //$NON-NLS-1$
+		removeFiles(exportDirectory + "/frames/"); 
 				
 		try {
 			if (timerThread != null)
@@ -889,10 +889,10 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 
 		// todo: reset Storage
-		timeLabel.setText("0:00  "); //$NON-NLS-1$
+		timeLabel.setText("0:00  "); 
 		
 		authoringTool.setSoundStorage(new movieMaker.SoundStorage());
-		videoHandler = new MovieCapturer(exportDirectory + "/frames/"); //$NON-NLS-1$
+		videoHandler = new MovieCapturer(exportDirectory + "/frames/"); 
 		authoringTool.getSoundStorage().frameList=new java.util.ArrayList();
 		frameSequencer = videoHandler.getFrameSequencer();
 		traverseTree();
@@ -901,14 +901,14 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	//start capturing the momvie
 	public void startCaptureAction() {
 		setClear(false);
-		removeFiles(exportDirectory + "/frames/"); //$NON-NLS-1$
+		removeFiles(exportDirectory + "/frames/"); 
 		// captureBar.setBackground(java.awt.Color.RED);
 		timeLabel.setBackground(java.awt.Color.RED);
 		// If a new capture sequence
 		setButtonsCapturing(true);
 		//restartButton.setEnabled(true);
 		
-		recordLabel.setIcon(new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" ))); // Aik Min //$NON-NLS-1$
+		recordLabel.setIcon(new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" ))); // Aik Min 
 
 		recordLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 		if (movieCapture == null || capturing == null || !capturing.isAlive()) {
@@ -923,7 +923,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	
 			timerThread = new Thread(new StartTimer(timeLabel));
 			capturing = new Thread(movieCapture);
-			writing = new Thread(new WriteFrames(exportDirectory + "/frames", frameSequencer, frameSequencer.getFrameNumber())); //$NON-NLS-1$
+			writing = new Thread(new WriteFrames(exportDirectory + "/frames", frameSequencer, frameSequencer.getFrameNumber())); 
 			
 			capturing.start();
 			writing.start();
@@ -933,7 +933,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 		else {
 			running = true;
-			writing = new Thread(new WriteFrames(exportDirectory + "/frames", frameSequencer, frameSequencer.getFrameNumber())); //$NON-NLS-1$
+			writing = new Thread(new WriteFrames(exportDirectory + "/frames", frameSequencer, frameSequencer.getFrameNumber())); 
 			writing.start();
 		}
 		
@@ -962,7 +962,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		endCapturing = false;// kills previous thread of Capturing
 		pulsing = true;
 
-		timeLabel.setText("0:00  "); //$NON-NLS-1$
+		timeLabel.setText("0:00  "); 
 
 		try {
 			capturing.join();
@@ -972,7 +972,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		// Start Pulsing status
 		pulse = new Thread(
-				new StartStatusPulsing(statusLabel, Messages.getString("CaptureContentPane.71"))); //$NON-NLS-1$
+				new StartStatusPulsing(statusLabel, Messages.getString("CaptureContentPane.71"))); 
 		pulse.start();
 
 		// Show Pulsing Status
@@ -1038,9 +1038,9 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		
 			//create the movie with no sound
 			MovieWriter writer = new MovieWriter(videoHandler
-					.getFramesPerSecond(), exportDirectory + "/frames/", //$NON-NLS-1$
-					fileName.getText() + "_NoSound", exportDirectory //$NON-NLS-1$
-							+ "/frames/"); //$NON-NLS-1$
+					.getFramesPerSecond(), exportDirectory + "/frames/", 
+					fileName.getText() + "_NoSound", exportDirectory 
+							+ "/frames/"); 
 			if(writer==null){
 				afterEncoding(true);
 				return;
@@ -1061,13 +1061,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			writer=null;
 
 			if(result==false){
-				statusLabel.setText(Messages.getString("CaptureContentPane.75")); //$NON-NLS-1$
+				statusLabel.setText(Messages.getString("CaptureContentPane.75")); 
 				afterEncoding(true);
 				return;
 			}
 				
 			if(authoringTool.getSoundStorage()==null){
-				System.err.print(Messages.getString("CaptureContentPane.76")); //$NON-NLS-1$
+				System.err.print(Messages.getString("CaptureContentPane.76")); 
 				afterEncoding(true);
 				return;
 			}
@@ -1075,8 +1075,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			movieMaker.Merge m = new movieMaker.Merge(
 					authoringTool.getSoundStorage()
 							.createURL(
-									exportDirectory + "/" + fileName.getText() //$NON-NLS-1$
-											+ ".mov")); //$NON-NLS-1$
+									exportDirectory + "/" + fileName.getText() 
+											+ ".mov")); 
 			if(m==null){
 				afterEncoding(true);
 				return;
@@ -1086,7 +1086,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			
 			pulsing = true;
 			pulse = new Thread(new StartStatusPulsing(statusLabel,
-					Messages.getString("CaptureContentPane.79"))); //$NON-NLS-1$
+					Messages.getString("CaptureContentPane.79"))); 
 			pulse.start();
 
 			//get all the sound files	
@@ -1095,9 +1095,9 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 						.getSoundStorage()
 						.encodeFiles(
 								((double) (frameSequencer.getFrameNumber() + 1)) / 16.0,
-								exportDirectory + "/frames/"+authoringTool.numEncoded); //$NON-NLS-1$
+								exportDirectory + "/frames/"+authoringTool.numEncoded); 
 			else{
-				System.err.print(Messages.getString("CaptureContentPane.81")); //$NON-NLS-1$
+				System.err.print(Messages.getString("CaptureContentPane.81")); 
 				afterEncoding(true);
 				return;
 			}
@@ -1111,7 +1111,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			pulsing = true;
 
 			pulse = new Thread(new StartStatusPulsing(statusLabel,
-					Messages.getString("CaptureContentPane.82"))); //$NON-NLS-1$
+					Messages.getString("CaptureContentPane.82"))); 
 			pulse.start();
 			
 			if(sources==null){
@@ -1121,8 +1121,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			
 			
 			sources.add(authoringTool.getSoundStorage().createURL(
-					exportDirectory + "/frames/" + fileName.getText() //$NON-NLS-1$
-							+ "_NoSound.mov")); //$NON-NLS-1$
+					exportDirectory + "/frames/" + fileName.getText() 
+							+ "_NoSound.mov")); 
 			
 			//merge the sounds and silent movie together if sounds exist
 			if(sources.size()>0)
@@ -1145,16 +1145,16 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	//cleaning up after encoding (checks for error and does things differently accordingly)
 	void afterEncoding(boolean error) {	
 		//if there was an error don't delete files
-		authoringTool.stdErrOutContentPane.startReactingToError();
+		//authoringTool.stdErrOutContentPane.startReactingToError();
 		if(error){
-			System.err.print(Messages.getString("CaptureContentPane.85")); //$NON-NLS-1$
+			System.err.print(Messages.getString("CaptureContentPane.85")); 
 		}
 		
 		running = false;
 		pulsing = false;
 		statusFrame.setVisible(false);
 		authoringTool.setSoundStorage(new movieMaker.SoundStorage());
-		videoHandler = new MovieCapturer(exportDirectory + "/frames/"); //$NON-NLS-1$
+		videoHandler = new MovieCapturer(exportDirectory + "/frames/"); 
 		authoringTool.getSoundStorage().frameList=new java.util.ArrayList();
 		frameSequencer = videoHandler.getFrameSequencer();
 		traverseTree();
@@ -1179,12 +1179,12 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 			long time = 300;
 			while (pulsing) {
-				label.setText(text + "."); //$NON-NLS-1$
+				label.setText(text + "."); 
 				try {
 					Thread.sleep(time);
 				} catch (InterruptedException e) {
 				}
-				label.setText(text + ".."); //$NON-NLS-1$
+				label.setText(text + ".."); 
 				try {
 					Thread.sleep(time);
 				} catch (InterruptedException e) {
@@ -1218,7 +1218,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			
 				if(picture==null)
 					continue;
-				String fileName = fileLocation + "frame" + numberFormat.format(frameNumber) + ".jpg"; //$NON-NLS-1$ //$NON-NLS-2$
+				String fileName = fileLocation + "frame" + numberFormat.format(frameNumber) + ".jpg";  
 			    
 			    //set the file name
 				picture.setFileName(fileName);
@@ -1243,7 +1243,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 
 		public void run() {
-			java.text.DecimalFormat det = new java.text.DecimalFormat("00"); //$NON-NLS-1$
+			java.text.DecimalFormat det = new java.text.DecimalFormat("00"); 
 			while (endCapturing != false) {
 				if (getRunning()) {
 					try {
@@ -1254,7 +1254,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 					timer++;
 					int seconds = timer % 60;
 					int minutes = timer / 60;
-					label.setText(minutes + ":" + det.format(seconds) + "  "); //$NON-NLS-1$ //$NON-NLS-2$
+					label.setText(minutes + ":" + det.format(seconds) + "  ");  
 				}
 
 			}

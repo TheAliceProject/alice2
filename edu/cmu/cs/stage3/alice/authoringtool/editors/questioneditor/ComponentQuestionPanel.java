@@ -39,10 +39,9 @@ public class ComponentQuestionPanel extends edu.cmu.cs.stage3.alice.authoringtoo
 
     public ComponentQuestionPanel(){
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
-        this.remove(grip);
+        this.remove(grip);	// Aik Min - need work
     }
 
-    
 	public void set(edu.cmu.cs.stage3.alice.core.Element element) {
         if (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Component){
             m_question = (edu.cmu.cs.stage3.alice.core.question.userdefined.Component)element;

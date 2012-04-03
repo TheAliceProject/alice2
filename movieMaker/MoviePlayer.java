@@ -16,8 +16,8 @@ public class MoviePlayer
   
   ///////////////// fields ///////////////////////////
  
-  private JFrame frame = new JFrame(Messages.getString("MoviePlayer.0")); //$NON-NLS-1$
-  private JLabel frameLabel = new JLabel(Messages.getString("MoviePlayer.1")); //$NON-NLS-1$
+  private JFrame frame = new JFrame(Messages.getString("MoviePlayer.0")); 
+  private JLabel frameLabel = new JLabel(Messages.getString("MoviePlayer.1")); 
   private AnimationPanel animationPanel = null;
   private String dir = null;
   
@@ -33,7 +33,7 @@ public class MoviePlayer
     Picture p = (Picture)pictureList.get(0);
     String fileName =  p.getFileName();
     File f = new File(fileName);
-    dir =  f.getParent() + "/"; //$NON-NLS-1$
+    dir =  f.getParent() + "/"; 
     init();
   }
   
@@ -56,8 +56,8 @@ public class MoviePlayer
    */
   public MoviePlayer()
   {
-    SimpleOutput.showInformation(Messages.getString("MoviePlayer.3") + //$NON-NLS-1$
-                   Messages.getString("MoviePlayer.4")); //$NON-NLS-1$
+    SimpleOutput.showInformation(Messages.getString("MoviePlayer.3") + 
+                   Messages.getString("MoviePlayer.4")); 
     String directory = FileChooser.pickADirectory();
     dir = directory;
     animationPanel = new AnimationPanel(directory);
@@ -72,7 +72,7 @@ public class MoviePlayer
   public void showNext()
   {
    animationPanel.showNext();
-   frameLabel.setText(Messages.getString("MoviePlayer.5") +  //$NON-NLS-1$
+   frameLabel.setText(Messages.getString("MoviePlayer.5") +  
                       animationPanel.getCurrIndex());
    frame.repaint();
   }
@@ -83,7 +83,7 @@ public class MoviePlayer
   public void showPrevious()
   {
     animationPanel.showPrev();
-    frameLabel.setText(Messages.getString("MoviePlayer.6") +  //$NON-NLS-1$
+    frameLabel.setText(Messages.getString("MoviePlayer.6") +  
                        animationPanel.getCurrIndex());
     frame.repaint();
   }
@@ -93,10 +93,10 @@ public class MoviePlayer
    */
   public void playMovie()
   {
-    frameLabel.setText(Messages.getString("MoviePlayer.7")); //$NON-NLS-1$
+    frameLabel.setText(Messages.getString("MoviePlayer.7")); 
     frame.repaint();
     animationPanel.showAll();
-    frameLabel.setText(Messages.getString("MoviePlayer.8") +  //$NON-NLS-1$
+    frameLabel.setText(Messages.getString("MoviePlayer.8") +  
                        animationPanel.getCurrIndex());
     frame.repaint();
   }  

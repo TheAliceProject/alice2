@@ -32,7 +32,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 
 		// remove double separators
 		int index;
-		while( (index = pathname.indexOf( "//" )) != -1 ) { //$NON-NLS-1$
+		while( (index = pathname.indexOf( "//" )) != -1 ) { 
 			pathname = pathname.substring( 0, index + 1 ) + pathname.substring( index + 2 );
 		}
 
@@ -59,12 +59,12 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		} else if( pathname instanceof java.io.File ) {
             m_rootFile = (java.io.File)pathname;
 		} else if( pathname == null ) {
-			throw new IllegalArgumentException( Messages.getString("ZipFileTreeLoader.1") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("ZipFileTreeLoader.1") ); 
 		} else {
-			throw new IllegalArgumentException( Messages.getString("ZipFileTreeLoader.2") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("ZipFileTreeLoader.2") ); 
 		}
         m_zipFile = new java.util.zip.ZipFile( m_rootFile );
-		m_currentDirectory = ""; //$NON-NLS-1$
+		m_currentDirectory = ""; 
 		m_currentlyOpenStream = null;
 		m_pathnameToZipEntryMap.clear();
 		java.util.Enumeration enum0 = m_zipFile.entries();
@@ -84,7 +84,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 
 	public void setCurrentDirectory( String pathname ) throws IllegalArgumentException {
 		if( pathname == null ) {
-			pathname = ""; //$NON-NLS-1$
+			pathname = ""; 
 		} else if( pathname.length() > 0 ) {
 			if( ! ((pathname.charAt( 0 ) == '/') || (pathname.charAt( 0 ) == '\\')) ) {
 				pathname = m_currentDirectory + pathname;
@@ -92,12 +92,12 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 
 			pathname = getCanonicalPathname( pathname );
 
-			if( ! pathname.endsWith( "/" ) ) { //$NON-NLS-1$
-				pathname = pathname + "/"; //$NON-NLS-1$
+			if( ! pathname.endsWith( "/" ) ) { 
+				pathname = pathname + "/"; 
 			}
 
-			if( ! pathname.startsWith( "/" ) ) { //$NON-NLS-1$
-				pathname = "/" + pathname; //$NON-NLS-1$
+			if( ! pathname.startsWith( "/" ) ) { 
+				pathname = "/" + pathname; 
 			}
 		}
 
@@ -116,7 +116,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 			m_currentlyOpenStream = m_zipFile.getInputStream( zipEntry );
 			return m_currentlyOpenStream;
 		} else {
-			throw new java.io.FileNotFoundException( Messages.getString("ZipFileTreeLoader.9") + pathname ); //$NON-NLS-1$
+			throw new java.io.FileNotFoundException( Messages.getString("ZipFileTreeLoader.9") + pathname ); 
 		}
 	}
 
@@ -128,18 +128,18 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 	}
 
 	public String [] getFilesInCurrentDirectory() {
-		throw new RuntimeException( Messages.getString("ZipFileTreeLoader.10") ); //$NON-NLS-1$
+		throw new RuntimeException( Messages.getString("ZipFileTreeLoader.10") ); 
 	}
 
 	public String[] getDirectoriesInCurrentDirectory() {
-		throw new RuntimeException( Messages.getString("ZipFileTreeLoader.11") ); //$NON-NLS-1$
+		throw new RuntimeException( Messages.getString("ZipFileTreeLoader.11") ); 
 	}
 
     public boolean isKeepFileSupported() {
         return true;
     }
     static Object getKeepKey( java.io.File file, String currentDirectory, String filename ) {
-        return file.getAbsolutePath() + "____" + currentDirectory + filename; //$NON-NLS-1$
+        return file.getAbsolutePath() + "____" + currentDirectory + filename; 
     }
 	public Object getKeepKey( String filename ) {
 		return getKeepKey( m_rootFile, m_currentDirectory, filename );

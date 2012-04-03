@@ -44,7 +44,6 @@ public class InternalResponseBehaviorPanel extends BasicBehaviorPanel {
         super.set(behavior, authoringTool);
     }
 
-    
 	protected void removeAllListening(){
         super.removeAllListening();
         if (m_containingPanel != null ){
@@ -53,7 +52,6 @@ public class InternalResponseBehaviorPanel extends BasicBehaviorPanel {
         }
     }
 
-    
 	protected void guiInit(){
         if (m_containingPanel == null){
             m_containingPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel();
@@ -62,7 +60,7 @@ public class InternalResponseBehaviorPanel extends BasicBehaviorPanel {
             m_containingPanel.addMouseListener(behaviorMouseListener);
             m_containingPanel.setBorder(null);
         }
-        this.remove(m_containingPanel);
+        this.remove(m_containingPanel);	// Aik Min - need work
         this.addDragSourceComponent(m_containingPanel);
         m_containingPanel.removeAll();
         if (labelPanel == null){

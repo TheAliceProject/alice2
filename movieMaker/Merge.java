@@ -53,9 +53,9 @@ public class Merge implements ControllerListener, DataSinkListener {
 
 	String outputFile = null;
 
-	String videoEncoding = "JPEG"; //$NON-NLS-1$
+	String videoEncoding = "JPEG"; 
 
-	String audioEncoding = "LINEAR"; //$NON-NLS-1$
+	String audioEncoding = "LINEAR"; 
 
 	String outputType = FileTypeDescriptor.QUICKTIME;
 
@@ -102,7 +102,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 				dataOutputs[i] = processors[i].getDataOutput();
 				processors[i].start();
 			} catch (Exception e) {
-				System.err.println(Messages.getString("Merge.2") + e); //$NON-NLS-1$
+				System.err.println(Messages.getString("Merge.2") + e); 
 			}
 		}
 
@@ -112,11 +112,11 @@ public class Merge implements ControllerListener, DataSinkListener {
 			merger.connect();
 			merger.start();
 		} catch (Exception ex) {
-			System.err.println(Messages.getString("Merge.3") + ex); //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.3") + ex); 
 
 		}
 		if (merger == null) {
-			System.err.println(Messages.getString("Merge.4")); //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.4")); 
 
 		}
 		/*
@@ -132,7 +132,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 			outputProcessor = Manager.createRealizedProcessor(outputPM);
 			outputDataSource = outputProcessor.getDataOutput();
 		} catch (Exception exc) {
-			System.err.println(Messages.getString("Merge.5") + exc); //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.5") + exc); 
 
 		}
 
@@ -154,7 +154,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 			outputDataSink.start();
 			outputProcessor.start();
 		} catch (Exception excep) {
-			System.err.println(Messages.getString("Merge.6") + excep); //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.6") + excep); 
 
 		}
 
@@ -305,7 +305,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 
 	private void showUsage() {
 		System.err
-				.println(Messages.getString("Merge.7")); //$NON-NLS-1$
+				.println(Messages.getString("Merge.7")); 
 	}
 
 	public void doSingle(DataSource ds) {
@@ -318,7 +318,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 			// ...");
 			p = Manager.createProcessor(ds);
 		} catch (Exception e) {
-			System.err.println(Messages.getString("Merge.8")); //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.8")); 
 		}
 
 		p.addControllerListener(this);
@@ -327,7 +327,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 		// some processing options on the processor.
 		p.configure();
 		if (!waitForState(p, Processor.Configured)) {
-			System.err.println(Messages.getString("Merge.9")); //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.9")); 
 		}
 
 		// Set the output content descriptor to WAVE.
@@ -338,7 +338,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 		TrackControl tcs[] = p.getTrackControls();
 		Format f[] = tcs[0].getSupportedFormats();
 		if (f == null || f.length <= 0) {
-			System.err.println(Messages.getString("Merge.10") //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.10") 
 					+ tcs[0].getFormat());
 		}
 
@@ -350,7 +350,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 		// realize it.
 		p.realize();
 		if (!waitForState(p, Controller.Realized)) {
-			System.err.println(Messages.getString("Merge.11")); //$NON-NLS-1$
+			System.err.println(Messages.getString("Merge.11")); 
 		}
 
 		// Now, we'll need to create a DataSink.
@@ -477,7 +477,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 
 		if ((ds = p.getDataOutput()) == null) {
 			System.err
-					.println(Messages.getString("Merge.12")); //$NON-NLS-1$
+					.println(Messages.getString("Merge.12")); 
 			return null;
 		}
 

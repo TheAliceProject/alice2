@@ -29,7 +29,6 @@ import edu.cmu.cs.stage3.alice.core.camera.OrthographicCamera;
 public class OrthographicViewVolumeDecorator extends ViewVolumeDecorator {
 	private OrthographicCamera m_orthographicCamera = null;
 
-	
 	protected Camera getCamera() {
 		return getOrthographicCamera();
 	}
@@ -44,7 +43,6 @@ public class OrthographicViewVolumeDecorator extends ViewVolumeDecorator {
 		}
 	}
 
-	
 	protected double[] getXYNearAndXYFar( double zNear, double zFar ) {
 		//todo
 		double angle = 0.5;

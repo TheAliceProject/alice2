@@ -46,15 +46,15 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
     protected javax.swing.JPanel m_header;
     protected javax.swing.JScrollPane scrollPane;
     protected java.awt.Component glue;
-    protected final String BEHAVIOR_NAME = Messages.getString("BehaviorGroupsEditor.0"); //$NON-NLS-1$
-    protected static final String DEFAULT_NAME = Messages.getString("BehaviorGroupsEditor.1"); //$NON-NLS-1$
+    protected final String BEHAVIOR_NAME = Messages.getString("BehaviorGroupsEditor.0"); 
+    protected static final String DEFAULT_NAME = Messages.getString("BehaviorGroupsEditor.1"); 
     protected static final int SPACE = 8;
     protected static final int OBJECT = 1;
     protected static final int BEHAVIOR = 2;
     protected static final int BAD = -1;
     protected int editorCount = 0;
     protected int counter = 0;
-    protected final java.awt.Color BACKGROUND_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behaviorBackground");; //$NON-NLS-1$
+    protected final java.awt.Color BACKGROUND_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behaviorBackground");; 
     protected edu.cmu.cs.stage3.alice.core.World world;
     protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
     protected javax.swing.JButton newBehaviorButton;
@@ -67,13 +67,13 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
 
 
 
-    protected java.awt.Color dndHighlightColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight" ); //$NON-NLS-1$
-    protected java.awt.Color dndHighlightColor2 = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight2" ); //$NON-NLS-1$
+    protected java.awt.Color dndHighlightColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight" ); 
+    protected java.awt.Color dndHighlightColor2 = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight2" ); 
     protected DropPotentialFeedbackListener dropPotentialFeedbackListener = new DropPotentialFeedbackListener();
 
     public final javax.swing.AbstractAction newBehaviorAction = new javax.swing.AbstractAction(){
         public void actionPerformed(java.awt.event.ActionEvent e){
-            setRunnables(world, ""); //$NON-NLS-1$
+            setRunnables(world, ""); 
             createNewBehavior(e);
         }
     };
@@ -156,13 +156,12 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             internalComponent.doLayout();
             java.awt.image.BufferedImage image = new java.awt.image.BufferedImage(dim.width, dim.height, java.awt.image.BufferedImage.TYPE_INT_ARGB);
             // visibleComponent.print(image.createGraphics());
-            javax.swing.JLabel l = new javax.swing.JLabel(Messages.getString("BehaviorGroupsEditor.6")); //$NON-NLS-1$
+            javax.swing.JLabel l = new javax.swing.JLabel(Messages.getString("BehaviorGroupsEditor.6")); 
 
             l.print(image.createGraphics());
             this.setIcon(new javax.swing.ImageIcon(image));
         }
 
-        
 		public void menuSelectionChanged(boolean isIncluded){
             super.menuSelectionChanged(isIncluded);
             if (isIncluded){
@@ -189,7 +188,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             Class currentBehavior = behaviors[i];
             String behaviorName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(currentBehavior);
             if (behaviorName == null){
-                behaviorName = Messages.getString("BehaviorGroupsEditor.7"); //$NON-NLS-1$
+                behaviorName = Messages.getString("BehaviorGroupsEditor.7"); 
             }
             CreateNewBehaviorRunnable runnable = new CreateNewBehaviorRunnable( currentBehavior, world );
             behaviorRunnables.add(runnable);
@@ -198,7 +197,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         if( structure.size() > 0 ) {
             behaviorMenu = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePopupMenu( structure );
         } else {
-            behaviorMenu = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDisabledPopup( Messages.getString("BehaviorGroupsEditor.8") ); //$NON-NLS-1$
+            behaviorMenu = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDisabledPopup( Messages.getString("BehaviorGroupsEditor.8") ); 
         }
         behaviorMenu.add(menuLabel, 0);
         initGUI();
@@ -313,7 +312,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             if (editorCount == 1){
                 worldEditor.removeLabel();
             }
-            m_containingPanel.remove(toRemove);
+            m_containingPanel.remove(toRemove);	// Aik Min - need work
             if (!checkGUI()){
                 refreshGUI();
             }
@@ -396,7 +395,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                 BehaviorGroupEditor editor = new BehaviorGroupEditor();
                 editor.set(currentGroup.getOwner(), authoringTool);
                 editor.setDropTarget( new java.awt.dnd.DropTarget( editor, editor ));
-                m_containingPanel.remove(glue);
+                m_containingPanel.remove(glue);	// Aik Min - need work
                 m_containingPanel.add(editor, new java.awt.GridBagConstraints(0,m_containingPanel.getComponentCount(),1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,2), 0,0));
                 m_containingPanel.add(glue, new java.awt.GridBagConstraints(0,m_containingPanel.getComponentCount(),1,1,1,1,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
                 if (!checkGUI()){
@@ -444,12 +443,11 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
 					authoringTool.getUndoRedoStack().stopCompound();
 				}
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BehaviorGroupsEditor.9"), t ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BehaviorGroupsEditor.9"), t ); 
             }
         }
     }
 
-    
 	public void release(){
         super.release();
         if (world != null){
@@ -493,7 +491,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         world = theWorld;
         //newBehaviorDialog.set(theWorld);
         if (world != null){
-            setRunnables(world, ""); //$NON-NLS-1$
+            setRunnables(world, ""); 
             world.sandboxes.addObjectArrayPropertyListener(this);
             world.groups.addObjectArrayPropertyListener(this);
             for (int i=0; i<world.sandboxes.size(); i++){
@@ -569,11 +567,11 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                 BehaviorGroupsEditor.this.dropActionChanged(dtde);
             }
         };
-        String toolTipText = "<html><body>"+ //$NON-NLS-1$
-                             Messages.getString("BehaviorGroupsEditor.12")+ //$NON-NLS-1$
-                             Messages.getString("BehaviorGroupsEditor.13")+ //$NON-NLS-1$
-                             Messages.getString("BehaviorGroupsEditor.14")+ //$NON-NLS-1$
-                             Messages.getString("BehaviorGroupsEditor.15"); //$NON-NLS-1$
+        String toolTipText = "<html><body>"+ 
+                             Messages.getString("BehaviorGroupsEditor.12")+ 
+                             Messages.getString("BehaviorGroupsEditor.13")+ 
+                             Messages.getString("BehaviorGroupsEditor.14")+ 
+                             Messages.getString("BehaviorGroupsEditor.15"); 
         containingPanelLayout = new java.awt.GridBagLayout();
         m_containingPanel.setLayout(containingPanelLayout);
         m_containingPanel.setBorder(null);
@@ -581,8 +579,8 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         m_containingPanel.setToolTipText(toolTipText);
         scrollPane.setViewportView(m_containingPanel);
 
-        newBehaviorButton = new javax.swing.JButton(Messages.getString("BehaviorGroupsEditor.16")); //$NON-NLS-1$
-        newBehaviorButton.setToolTipText(Messages.getString("BehaviorGroupsEditor.17")); //$NON-NLS-1$
+        newBehaviorButton = new javax.swing.JButton(Messages.getString("BehaviorGroupsEditor.16")); 
+        newBehaviorButton.setToolTipText(Messages.getString("BehaviorGroupsEditor.17")); 
         newBehaviorButton.setMargin(new java.awt.Insets(2,2,2,2));
         newBehaviorButton.addActionListener(newBehaviorAction);
         newBehaviorButton.setBackground(new java.awt.Color( 240, 240, 255 ));
@@ -594,8 +592,8 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         m_header.setBorder(javax.swing.BorderFactory.createMatteBorder(0,0,1,0,java.awt.Color.gray));
         m_header.setToolTipText(toolTipText);
         javax.swing.JLabel behaviorLabel = new javax.swing.JLabel(BEHAVIOR_NAME);
-        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
-        java.awt.Font behaviorFont = new java.awt.Font("Helvetica", java.awt.Font.BOLD, (int)(16*fontSize/12.0)); //$NON-NLS-1$
+        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); 
+        java.awt.Font behaviorFont = new java.awt.Font("Helvetica", java.awt.Font.BOLD, (int)(16*fontSize/12.0)); 
         behaviorLabel.setFont(behaviorFont);
         behaviorLabel.setDropTarget(new java.awt.dnd.DropTarget( behaviorLabel, this));
         m_header.add(behaviorLabel);
@@ -617,7 +615,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             int count = 0;
             worldEditor = new BehaviorGroupEditor();
             worldEditor.set(world, authoringTool);
-            worldEditor.setEmptyString(Messages.getString("BehaviorGroupsEditor.20")); //$NON-NLS-1$
+            worldEditor.setEmptyString(Messages.getString("BehaviorGroupsEditor.20")); 
             m_containingPanel.add(worldEditor, new java.awt.GridBagConstraints(0,count,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,2), 0,0));
             BehaviorGroupEditor editor = null;
             for (int i=0; i<world.sandboxes.size(); i++){
@@ -645,7 +643,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
     }
 
     protected void printComponents(java.awt.Container c){
-        System.out.println(c+"n\n"); //$NON-NLS-1$
+        System.out.println(c+"n\n"); 
         for (int i=0; i<c.getComponentCount(); i++){
             if (c.getComponent(i) instanceof java.awt.Container){
                 printComponents((java.awt.Container)c.getComponent(i));
@@ -748,7 +746,6 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
     // DropTargetListener interface
     ///////////////////////////////////////////////
 
-    
 	public void dragEnter( java.awt.dnd.DropTargetDragEvent dtde ) {
         try{
             int type = checkDragEvent(dtde);
@@ -771,7 +768,6 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         }
     }
 
-    
 	public void dragExit( java.awt.dnd.DropTargetEvent dte ) {
         if( beingDroppedOn ) {
             beingDroppedOn = false;
@@ -781,7 +777,6 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         }
     }
 
-    
 	public void dragOver( java.awt.dnd.DropTargetDragEvent dtde ) {
         try{
             int type = checkDragEvent(dtde);
@@ -816,7 +811,6 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         }
     }
 
-    
 	public void drop( java.awt.dnd.DropTargetDropEvent dtde ) {
         java.awt.datatransfer.Transferable transferable = dtde.getTransferable();
         boolean dropSuccess = true;
@@ -829,7 +823,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             else if (type == OBJECT) {
                 dtde.acceptDrop(java.awt.dnd.DnDConstants.ACTION_MOVE);
                 edu.cmu.cs.stage3.alice.core.Transformable droppedElement = (edu.cmu.cs.stage3.alice.core.Transformable)dtde.getTransferable().getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.transformableReferenceFlavor );
-                setRunnables(droppedElement, Messages.getString("BehaviorGroupsEditor.22")+droppedElement.name.get()+Messages.getString("BehaviorGroupsEditor.23")); //$NON-NLS-1$ //$NON-NLS-2$
+                setRunnables(droppedElement, Messages.getString("BehaviorGroupsEditor.22")+droppedElement.name.get()+Messages.getString("BehaviorGroupsEditor.23"));  
                 behaviorMenu.show( dtde.getDropTargetContext().getComponent(), (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
                 edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( behaviorMenu );
             }
@@ -844,7 +838,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             }
         }
         catch (Exception e){
-            edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BehaviorGroupsEditor.24"), e); //$NON-NLS-1$
+            edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BehaviorGroupsEditor.24"), e); 
             dropSuccess = false;
         }
         beingDroppedOn = false;
@@ -853,11 +847,9 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         dtde.dropComplete(dropSuccess);
     }
 
-    
 	public void dropActionChanged( java.awt.dnd.DropTargetDragEvent dtde ) {
     }
 
-    
 	public void paintForeground( java.awt.Graphics g ) {
         super.paintForeground( g );
         java.awt.Point p = javax.swing.SwingUtilities.convertPoint(m_containingPanel, m_containingPanel.getLocation(), this);

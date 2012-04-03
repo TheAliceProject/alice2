@@ -34,7 +34,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
 public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel implements edu.cmu.cs.stage3.alice.authoringtool.util.GUIElement, edu.cmu.cs.stage3.alice.core.event.PropertyListener {
 
-    public static final java.awt.Color COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behavior"); //$NON-NLS-1$
+    public static final java.awt.Color COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behavior"); 
 
     protected javax.swing.JPopupMenu popUpMenu;
 
@@ -87,28 +87,28 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
 		String b = Integer.toHexString(color.getBlue());
 	
 		if (r.length() == 1){
-			r = "0"+r; //$NON-NLS-1$
+			r = "0"+r; 
 		}
 		if (g.length() == 1){
-			g = "0"+g; //$NON-NLS-1$
+			g = "0"+g; 
 		}
 		if (b.length() == 1){
-			b = "0"+b; //$NON-NLS-1$
+			b = "0"+b; 
 		}
-		return new String("#"+r+g+b); //$NON-NLS-1$
+		return new String("#"+r+g+b); 
 	}
     
 	public void getHTML(StringBuffer toWriteTo, boolean useColor){
 		java.awt.Color bgColor = COLOR;
-		String strikeStart = ""; //$NON-NLS-1$
-		String strikeEnd = ""; //$NON-NLS-1$
+		String strikeStart = ""; 
+		String strikeEnd = ""; 
 		if (!m_behavior.isEnabled.booleanValue()){
-			bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"); //$NON-NLS-1$
-			strikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			strikeEnd = "</font></strike>"; //$NON-NLS-1$
+			bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"); 
+			strikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">";   
+			strikeEnd = "</font></strike>"; 
 		}
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+"><b>"+strikeStart+ //$NON-NLS-1$ //$NON-NLS-2$
-											edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(this)+"</b>"+strikeEnd+"</td>\n</tr>\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+"><b>"+strikeStart+  
+											edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(this)+"</b>"+strikeEnd+"</td>\n</tr>\n");  
 	}
 
 	public edu.cmu.cs.stage3.alice.core.Behavior getBehavior(){
@@ -131,7 +131,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                     BasicBehaviorPanel.this.repaint();
                 }
             };
-            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("BasicBehaviorPanel.16"), setEnabled); //$NON-NLS-1$
+            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("BasicBehaviorPanel.16"), setEnabled); 
         }
         else{
             Runnable setEnabled = new Runnable(){
@@ -140,7 +140,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                     BasicBehaviorPanel.this.repaint();
                 }
             };
-            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("BasicBehaviorPanel.17"), setEnabled); //$NON-NLS-1$
+            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("BasicBehaviorPanel.17"), setEnabled); 
         }
         popupStructure.add(commentOut);
         return edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.makeElementPopupMenu( m_behavior, popupStructure );
@@ -158,7 +158,6 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
         }
     }
 
-    
 	public void release() {
         super.release();
         releasePanel(m_containingPanel);
@@ -254,7 +253,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                 boolean shouldAllowExpressions = true;
                 Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(prop);
                 //Aik Min - When mouse is clicked on object under mouse cursor bug in create new event
-                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase(Messages.getString("BasicBehaviorPanel.19"))){ //$NON-NLS-1$ //$NON-NLS-2$
+                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase(Messages.getString("BasicBehaviorPanel.19"))){  
                 	shouldAllowExpressions = false;
                 }
                 toAdd = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(prop, true, shouldAllowExpressions ,edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(prop), propPIF);
@@ -262,7 +261,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
             else{
                 toAdd = new javax.swing.JLabel(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue(key));
                 if (toAdd == null){
-                    toAdd = new javax.swing.JLabel(Messages.getString("BasicBehaviorPanel.20")); //$NON-NLS-1$
+                    toAdd = new javax.swing.JLabel(Messages.getString("BasicBehaviorPanel.20")); 
                 }
             }
             container.add(new javax.swing.JLabel(currentSubstring), new java.awt.GridBagConstraints(insertX,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
@@ -286,7 +285,6 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
     public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent){
     }
 
-    
 	public void paintForeground( java.awt.Graphics g ) {
         super.paintForeground( g );
         if( !m_behavior.isEnabled.booleanValue() ) {

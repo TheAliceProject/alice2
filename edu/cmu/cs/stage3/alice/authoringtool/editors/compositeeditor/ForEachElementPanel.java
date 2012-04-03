@@ -47,10 +47,10 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 
     public ForEachElementPanel(){
         super();
-        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder"); //$NON-NLS-1$
-        headerText = Messages.getString("ForEachElementPanel.1"); //$NON-NLS-1$
-        endHeaderText = Messages.getString("ForEachElementPanel.2"); //$NON-NLS-1$
-        middleHeaderText = Messages.getString("ForEachElementPanel.3"); //$NON-NLS-1$
+        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder"); 
+        headerText = Messages.getString("ForEachElementPanel.1"); 
+        endHeaderText = Messages.getString("ForEachElementPanel.2"); 
+        middleHeaderText = Messages.getString("ForEachElementPanel.3"); 
     }
 
     
@@ -68,7 +68,6 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         }
     }
 
-    
 	protected void setDropTargets(){
         super.setDropTargets();
         endHeader.setDropTarget(new java.awt.dnd.DropTarget( endHeader, componentElementPanel));
@@ -107,7 +106,6 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		}
 	}
 
-    
 	protected void startListening() {
 		super.startListening();
         if (m_list != null){
@@ -123,7 +121,6 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         listenToChildren(this.m_components);
 	}
 
-	
 	protected void stopListening() {
         super.stopListening();
 		if (m_list != null){
@@ -171,14 +168,13 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         if (m_element.getParent() != null && !(m_element.getParent() instanceof edu.cmu.cs.stage3.alice.core.Sandbox)){
             numPrevious = countPreviousInstances(m_element.getParent(), inputList);
         }
-        String toAdd = ""; //$NON-NLS-1$
+        String toAdd = ""; 
         if (numPrevious > 0){
-            toAdd = "_#"+(numPrevious+1); //$NON-NLS-1$
+            toAdd = "_#"+(numPrevious+1); 
         }
-        return (Messages.getString("ForEachElementPanel.6")+inputList.name.getStringValue()+toAdd); //$NON-NLS-1$
+        return (Messages.getString("ForEachElementPanel.6")+inputList.name.getStringValue()+toAdd); 
     }
 
-    
 	public void setHeaderLabel(){
         if (headerLabel != null){
             headerLabel.setText(headerText);
@@ -187,17 +183,16 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
             endHeader.setText(endHeaderText);
             if (CompositeElementEditor.IS_JAVA){
                 if (!isExpanded){
-                    endHeader.setText(endHeaderText+" { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$
+                    endHeader.setText(endHeaderText+" { "+getDots()+" }");  
                 }
                 else{
-                    endHeader.setText(endHeaderText+" {"); //$NON-NLS-1$
+                    endHeader.setText(endHeaderText+" {"); 
                 }
             }
         }
 
     }
 
-    
 	protected void generateGUI(){
         super.generateGUI();
         if (endHeader == null){
@@ -205,7 +200,6 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         }
     }
 
-    
 	protected void restoreDrag(){
         super.restoreDrag();
         this.addDragSourceComponent(endHeader);
@@ -219,11 +213,9 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		headerPanel.add(variable, new java.awt.GridBagConstraints(5,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 	}
 
-    
 	protected void updateGUI(){
         super.updateGUI();
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory pif = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(m_list){
-            
 			public void run(Object v){
                 edu.cmu.cs.stage3.alice.core.Element inputList;
                 String name;
@@ -303,7 +295,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 	}
 	
 	protected void setAllNames(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentContainer, int currentLevel){
-		String baseName = Messages.getString("ForEachElementPanel.10")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue(); //$NON-NLS-1$
+		String baseName = Messages.getString("ForEachElementPanel.10")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue(); 
 		for (int i=0; i<currentContainer.size(); i++){
 			Object list = null;
 			edu.cmu.cs.stage3.alice.core.Element var = null;
@@ -316,7 +308,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)currentContainer.get(i)).each.get());
 			}
 			if (list == m_list.get()){
-				var.name.set(baseName+"_#"+currentLevel); //$NON-NLS-1$
+				var.name.set(baseName+"_#"+currentLevel); 
 			}
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
 				
@@ -332,13 +324,12 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		stopListening();
 		startListening();
 		if (isTopOccurrance(m_element.getParent(), m_list.get())){
-			m_each.getElementValue().name.set(Messages.getString("ForEachElementPanel.12")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue()); //$NON-NLS-1$
+			m_each.getElementValue().name.set(Messages.getString("ForEachElementPanel.12")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue()); 
 			setAllNames(m_components, 2);
 		}
 	}
 
 
-    
 	public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ){
 		if (propertyEvent.getProperty() == m_each){
 			if (m_each.get() != null){

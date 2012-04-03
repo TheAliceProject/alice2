@@ -30,7 +30,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty textureMaps;
 	protected javax.swing.JPanel contentPanel = new javax.swing.JPanel();
 	protected java.util.HashMap textureMapGuiCache = new java.util.HashMap();
-	protected javax.swing.JButton importTextureMapButton = new javax.swing.JButton( Messages.getString("TextureMapsPanel.0") ); //$NON-NLS-1$
+	protected javax.swing.JButton importTextureMapButton = new javax.swing.JButton( Messages.getString("TextureMapsPanel.0") ); 
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected RefreshListener refreshListener = new RefreshListener();
 
@@ -40,7 +40,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 	}
 
 	private void guiInit() {
-		setTitle( Messages.getString("TextureMapsPanel.1") ); //$NON-NLS-1$
+		setTitle( Messages.getString("TextureMapsPanel.1") ); 
 		contentPanel.setLayout( new java.awt.GridBagLayout() );
 		setContent( contentPanel );
 		importTextureMapButton.setBackground( new java.awt.Color( 240, 240, 255 ) );
@@ -48,7 +48,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		importTextureMapButton.addActionListener(
 			new java.awt.event.ActionListener() {
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
-					authoringTool.setImportFileFilter( "Image Files" ); //$NON-NLS-1$
+					authoringTool.setImportFileFilter( "Image Files" ); 
 					authoringTool.importElement( null, TextureMapsPanel.this.textureMaps.getOwner() );
 				}
 			}
@@ -56,7 +56,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		setOpaque( false );
 		contentPanel.setOpaque( false );
 
-		importTextureMapButton.setToolTipText( Messages.getString("TextureMapsPanel.3") ); //$NON-NLS-1$
+		importTextureMapButton.setToolTipText( Messages.getString("TextureMapsPanel.3") ); 
 	}
 
 	public void setTextureMaps( edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty textureMaps ) {
@@ -88,7 +88,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 				if( gui != null ) {
 					contentPanel.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 2, 0, 2 ), 0, 0 ) );
 				} else {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TextureMapsPanel.4") + textureMap, null ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TextureMapsPanel.4") + textureMap, null ); 
 				}
 			}
 

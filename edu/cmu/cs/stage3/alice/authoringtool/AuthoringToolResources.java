@@ -28,7 +28,7 @@ package edu.cmu.cs.stage3.alice.authoringtool;
  */
 public class AuthoringToolResources {
 	public final static long startTime = System.currentTimeMillis();
-	public final static String QUESTION_STRING = Messages.getString("AuthoringToolResources.0"); //$NON-NLS-1$
+	public final static String QUESTION_STRING = Messages.getString("AuthoringToolResources.0"); 
 	public static edu.cmu.cs.stage3.util.Criterion characterCriterion = new edu.cmu.cs.stage3.util.Criterion() {
 		public boolean accept( Object o ) {
 			return o instanceof edu.cmu.cs.stage3.alice.core.Sandbox;
@@ -36,10 +36,10 @@ public class AuthoringToolResources {
 	};
 	public static java.io.FileFilter resourceFileFilter = new java.io.FileFilter() {
 		public String getDescription() {
-			return Messages.getString("AuthoringToolResources.1"); //$NON-NLS-1$
+			return Messages.getString("AuthoringToolResources.1"); 
 		}
 		public boolean accept( java.io.File file ) {
-			return file.isFile() && file.canRead() && file.getName().toLowerCase().endsWith( ".py" ); //$NON-NLS-1$
+			return file.isFile() && file.canRead() && file.getName().toLowerCase().endsWith( ".py" ); 
 		}
 	};
 
@@ -71,7 +71,7 @@ public class AuthoringToolResources {
 		public String[] oneShotGroupsToInclude;
 		public String[] questionPropertiesToOmit;
 		public java.util.HashMap colorMap = new java.util.HashMap();
-		public java.text.DecimalFormat decimalFormatter = new java.text.DecimalFormat( "#0.##" ); //$NON-NLS-1$
+		public java.text.DecimalFormat decimalFormatter = new java.text.DecimalFormat( "#0.##" ); 
 		public java.util.HashMap stringImageMap = new java.util.HashMap();
 		public java.util.HashMap stringIconMap = new java.util.HashMap();
 		public java.util.HashMap disabledIconMap = new java.util.HashMap();
@@ -84,6 +84,7 @@ public class AuthoringToolResources {
 		public java.net.URL mainWebGalleryURL = null;
 		public java.io.File mainDiskGalleryDirectory = null;
 		public java.io.File mainCDGalleryDirectory = null;
+		public java.net.URL mainUpdateURL = null;
 	}
 	protected static Resources resources;
 
@@ -92,16 +93,16 @@ public class AuthoringToolResources {
 	protected static java.io.File resourcesPyFile;
 	protected static java.io.FilenameFilter pyFilenameFilter = new java.io.FilenameFilter() {
 		public boolean accept( java.io.File dir, String name ) {
-			return name.toLowerCase().endsWith( ".py" ); //$NON-NLS-1$
+			return name.toLowerCase().endsWith( ".py" ); 
 		}
 	};
 
 	static {
-		resourcesDirectory = new java.io.File( JAlice.getAliceHomeDirectory(), "resources" + System.getProperty( "file.separator" ) + AikMin.locale ).getAbsoluteFile(); //$NON-NLS-1$
-		resourcesCacheFile = new java.io.File( resourcesDirectory, "resourcesCache.bin" ).getAbsoluteFile(); //$NON-NLS-1$
-		resourcesPyFile = new java.io.File( resourcesDirectory, authoringToolConfig.getValue( "resourceFile" ) ).getAbsoluteFile(); //$NON-NLS-1$
+		resourcesDirectory = new java.io.File( JAlice.getAliceHomeDirectory(), "resources" + System.getProperty( "file.separator" ) + AikMin.locale ).getAbsoluteFile(); 
+		resourcesCacheFile = new java.io.File( resourcesDirectory, "resourcesCache.bin" ).getAbsoluteFile(); 
+		resourcesPyFile = new java.io.File( resourcesDirectory, authoringToolConfig.getValue( "resourceFile" ) ).getAbsoluteFile(); 
 		if (!resourcesPyFile.canRead()){
-			resourcesPyFile = new java.io.File(resourcesDirectory, "Alice Style.py").getAbsoluteFile(); //$NON-NLS-1$
+			resourcesPyFile = new java.io.File(resourcesDirectory, "Alice Style.py").getAbsoluteFile(); 
 		}
 		loadResourcesPy();
 //
@@ -212,7 +213,7 @@ public class AuthoringToolResources {
 			oos.flush();
 			oos.close();
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.9") + resourcesCacheFile.getAbsolutePath(), t ); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.9") + resourcesCacheFile.getAbsolutePath(), t ); 
 		}
 	}
 
@@ -220,7 +221,7 @@ public class AuthoringToolResources {
 		try {
 			resourcesCacheFile.delete();
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.10") + resourcesCacheFile.getAbsolutePath(), t ); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.10") + resourcesCacheFile.getAbsolutePath(), t ); 
 		}
 	}
 
@@ -233,10 +234,10 @@ public class AuthoringToolResources {
 					try {
 						Class.forName( className );
 					} catch( java.lang.ClassNotFoundException e ) {
-						throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.11") + className + Messages.getString("AuthoringToolResources.12") ); //$NON-NLS-1$ //$NON-NLS-2$
+						throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.11") + className + Messages.getString("AuthoringToolResources.12") );  
 					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.13") + o ); //$NON-NLS-1$
+					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.13") + o ); 
 				}
 			}
 		}
@@ -256,10 +257,10 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.14") + className, e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.14") + className, e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.15") + o, null ); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.15") + o, null ); 
 				}
 			}
 		}
@@ -294,7 +295,7 @@ public class AuthoringToolResources {
 			}
 
 			if( leftovers.size() > 0 ) {
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "leftovers", leftovers ) ); //$NON-NLS-1$
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "leftovers", leftovers ) ); 
 			}
 		}
 
@@ -323,22 +324,22 @@ public class AuthoringToolResources {
 											if( (className2 instanceof String) || (className2 instanceof edu.cmu.cs.stage3.util.StringObjectPair) ) {
 												// do nothing
 											} else {
-												throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.17") + className ); //$NON-NLS-1$
+												throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.17") + className ); 
 											}
 										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.18") + groupChunk ); //$NON-NLS-1$
+									throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.18") + groupChunk ); 
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.19") + groups ); //$NON-NLS-1$
+							throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.19") + groups ); 
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "oneShotStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.20") + classChunk ); //$NON-NLS-1$
+					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.20") + classChunk ); 
 				}
 			}
 		}
@@ -358,10 +359,10 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.21") + className, e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.21") + className, e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.22") + o, null ); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.22") + o, null ); 
 				}
 			}
 		}
@@ -391,25 +392,25 @@ public class AuthoringToolResources {
 												try {
 													Class.forName( (String)className2 );
 												} catch( ClassNotFoundException e ) {
-													throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.23") + className2 + Messages.getString("AuthoringToolResources.24") ); //$NON-NLS-1$ //$NON-NLS-2$
+													throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.23") + className2 + Messages.getString("AuthoringToolResources.24") );  
 												}
 											} else {
-												throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.25") + className ); //$NON-NLS-1$
+												throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.25") + className ); 
 											}
 										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.26") + groupChunk ); //$NON-NLS-1$
+									throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.26") + groupChunk ); 
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.27") + groups ); //$NON-NLS-1$
+							throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.27") + groups ); 
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "questionStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.28") + classChunk ); //$NON-NLS-1$
+					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.28") + classChunk ); 
 				}
 			}
 		}
@@ -429,10 +430,10 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.29") + className, e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.29") + className, e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.30") + o, null ); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.30") + o, null ); 
 				}
 			}
 		}
@@ -456,24 +457,24 @@ public class AuthoringToolResources {
 								if( propertyChunk instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 									Object values = ((edu.cmu.cs.stage3.util.StringObjectPair)propertyChunk).getObject();
 									if( ! (values instanceof java.util.Vector) ) {
-										throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.31") + values ); //$NON-NLS-1$
+										throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.31") + values ); 
 //									} else {
 //										for( java.util.Iterator kter = ((java.util.Vector)values).iterator(); kter.hasNext(); ) {
 //											System.out.println( kter.next() );
 //										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.32") + propertyChunk ); //$NON-NLS-1$
+									throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.32") + propertyChunk ); 
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.33") + properties ); //$NON-NLS-1$
+							throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.33") + properties ); 
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "defaultPropertyValuesStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.34") + classChunk ); //$NON-NLS-1$
+					throw new IllegalArgumentException( Messages.getString("AuthoringToolResources.34") + classChunk ); 
 				}
 			}
 		}
@@ -498,7 +499,7 @@ public class AuthoringToolResources {
 						}
 					}
 				} catch( java.lang.ClassNotFoundException e ) {
-					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.35") + className, e ); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.35") + className, e ); 
 				}
 			}
 		}
@@ -545,9 +546,9 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( (! token.startsWith( "<<" )) || token.startsWith( "<<<" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				while( token.indexOf( "&lt;" ) > -1 ) { //$NON-NLS-1$
-					token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if( (! token.startsWith( "<<" )) || token.startsWith( "<<<" ) ) {  
+				while( token.indexOf( "&lt;" ) > -1 ) { 
+					token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();   
 				}
 				sb.append( token );
 			}
@@ -663,7 +664,7 @@ public class AuthoringToolResources {
 	}
 
 	public static boolean shouldGUIOmitScriptDefined( edu.cmu.cs.stage3.alice.core.Property property ) {
-		if( ! authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+		if( ! authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
 			return true;
 		} else if( AuthoringToolResources.resources.propertiesToOmitScriptDefinedFor != null ) {
 			Class elementClass = property.getOwner().getClass();
@@ -687,7 +688,7 @@ public class AuthoringToolResources {
 	public static String getReprForValue( Object value, edu.cmu.cs.stage3.alice.core.Property property, Object extraContextInfo ) {
 		Class elementClass = property.getOwner().getClass();
 		String propertyName = property.getName();
-		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( AikMin.getProperty("value") ) ) { //$NON-NLS-1$
+		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( AikMin.getProperty("value") ) ) { 
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
 			Object e = propertyAnimation.element.get();
 			if( e instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
@@ -701,7 +702,7 @@ public class AuthoringToolResources {
 				}
 			}
 			propertyName = propertyAnimation.propertyName.getStringValue();
-		} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( AikMin.getProperty("value") ) ) { //$NON-NLS-1$
+		} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( AikMin.getProperty("value") ) ) { 
 			edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment propertyAssignment = (edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment)property.getOwner();
 			elementClass = propertyAssignment.element.getElementValue().getClass();
 			propertyName = propertyAssignment.propertyName.getStringValue();
@@ -723,8 +724,8 @@ public class AuthoringToolResources {
 			return getReprForValue( value );
 		}
 
-		if( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedResponse" )) || //$NON-NLS-1$
-			(edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedQuestion" )) ) //$NON-NLS-1$
+		if( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedResponse" )) || 
+			(edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedQuestion" )) ) 
 		{
 			verbose = true;
 		}
@@ -734,17 +735,17 @@ public class AuthoringToolResources {
 
 		try {
 			while( edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( elementClass ) ) {
-				String propertyKey = elementClass.getName() + "." + propertyName; //$NON-NLS-1$
+				String propertyKey = elementClass.getName() + "." + propertyName; 
 
 				String userRepr = null;
-				if( (extraContextInfo != null) && extraContextInfo.equals( "menuContext" ) ) { // if the repr is going to be shown in a menu //$NON-NLS-1$
-					if( propertyValueFormatMapContainsKey( propertyKey + ".menuContext" ) ) { //$NON-NLS-1$
-						propertyKey = propertyKey + ".menuContext"; //$NON-NLS-1$
+				if( (extraContextInfo != null) && extraContextInfo.equals( "menuContext" ) ) { // if the repr is going to be shown in a menu 
+					if( propertyValueFormatMapContainsKey( propertyKey + ".menuContext" ) ) { 
+						propertyKey = propertyKey + ".menuContext"; 
 					}
 				} else if( extraContextInfo instanceof edu.cmu.cs.stage3.alice.core.property.DictionaryProperty ) { // if there is extra info stored in the element's data property
 					edu.cmu.cs.stage3.alice.core.property.DictionaryProperty data = (edu.cmu.cs.stage3.alice.core.property.DictionaryProperty)extraContextInfo;
-					if( data.getName().equals( "data" ) ) {  // sanity check //$NON-NLS-1$
-						Object repr = data.get( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName ); //$NON-NLS-1$
+					if( data.getName().equals( "data" ) ) {  // sanity check 
+						Object repr = data.get( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName ); 
 						if( repr != null ) {
 							if( repr instanceof String ) {
 								if( Number.class.isAssignableFrom( valueClass ) && (value instanceof Double) ) { // if it's a number, check to make sure the string is still valid
@@ -752,7 +753,7 @@ public class AuthoringToolResources {
 									if( (d != null) && d.equals( value ) ) {
 										userRepr = (String)repr;
 									} else {
-										data.remove( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName ); //$NON-NLS-1$
+										data.remove( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName ); 
 									}
 								} else {
 									userRepr = (String)repr;
@@ -772,8 +773,8 @@ public class AuthoringToolResources {
 						reprString = reprString.replace(temp, AikMin.getString(temp));
 					} else if( value == null ) { // is this right for all cases?
 						reprString = null;
-					} else if( map.containsKey( "default" ) ) { //$NON-NLS-1$
-						reprString = (String)map.get( "default" ); //$NON-NLS-1$
+					} else if( map.containsKey( "default" ) ) { 
+						reprString = (String)map.get( "default" ); 
 					}
 				}
 
@@ -781,7 +782,7 @@ public class AuthoringToolResources {
 					for( java.util.Iterator iter = AuthoringToolResources.resources.unitMap.keySet().iterator(); iter.hasNext(); ) {
 						String key = (String)iter.next();
 						String unitString = getUnitString( key );
-						String unitExpression = "<" + key + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						String unitExpression = "<" + key + ">";  
 						while( reprString.indexOf( unitExpression ) > -1 ) {
 							StringBuffer sb = new StringBuffer( reprString );
 							sb.replace( reprString.indexOf( unitExpression ), reprString.indexOf( unitExpression ) + unitExpression.length(), AikMin.getString(unitString) );
@@ -789,23 +790,23 @@ public class AuthoringToolResources {
 						}
 					}
 
-					while( reprString.indexOf( "<value>" ) > -1 ) { //$NON-NLS-1$
+					while( reprString.indexOf( "<value>" ) > -1 ) { 
 						String valueString = (userRepr != null) ? userRepr : getReprForValue( value );
 						StringBuffer sb = new StringBuffer( reprString );
-						sb.replace( reprString.indexOf( "<value>" ), reprString.indexOf( "<value>" ) + "<value>".length(), valueString ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						sb.replace( reprString.indexOf( "<value>" ), reprString.indexOf( "<value>" ) + "<value>".length(), valueString );   
 						reprString = sb.toString();
 					}
-					while( (reprString.indexOf( "<percentValue>" ) > -1) && (value instanceof Double) ) { //$NON-NLS-1$
+					while( (reprString.indexOf( "<percentValue>" ) > -1) && (value instanceof Double) ) { 
 						double v = ((Double)value).doubleValue() * 100.0;
-						String valueString = AuthoringToolResources.resources.decimalFormatter.format( v ) + "%"; //$NON-NLS-1$
+						String valueString = AuthoringToolResources.resources.decimalFormatter.format( v ) + "%"; 
 						StringBuffer sb = new StringBuffer( reprString );
-						sb.replace( reprString.indexOf( "<percentValue>" ), reprString.indexOf( "<percentValue>" ) + "<percentValue>".length(), valueString ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						sb.replace( reprString.indexOf( "<percentValue>" ), reprString.indexOf( "<percentValue>" ) + "<percentValue>".length(), valueString );   
 						reprString = sb.toString();
 					}
-					while( (reprString.indexOf( "<keyCodeValue>" ) > -1) && (value instanceof Integer) ) { //$NON-NLS-1$
+					while( (reprString.indexOf( "<keyCodeValue>" ) > -1) && (value instanceof Integer) ) { 
 						String valueString = java.awt.event.KeyEvent.getKeyText( ((Integer)value).intValue() );
 						StringBuffer sb = new StringBuffer( reprString );
-						sb.replace( reprString.indexOf( "<keyCodeValue>" ), reprString.indexOf( "<keyCodeValue>" ) + "<keyCodeValue>".length(), valueString ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						sb.replace( reprString.indexOf( "<keyCodeValue>" ), reprString.indexOf( "<keyCodeValue>" ) + "<keyCodeValue>".length(), valueString );   
 						reprString = sb.toString();
 					}
 
@@ -815,7 +816,7 @@ public class AuthoringToolResources {
 				elementClass = elementClass.getSuperclass();
 			}
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.72") + value, t ); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.72") + value, t ); 
 		}
 		return getReprForValue( value, verbose );
 	}
@@ -828,8 +829,8 @@ public class AuthoringToolResources {
 	protected static void initWebGalleryURL(){
 		java.net.URL galleryURL = null;
 		try {
-			galleryURL = new java.net.URL("http://www.alice.org/gallery/"); //$NON-NLS-1$
-			java.io.File urlFile = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "etc/AliceWebGalleryURL.txt" ).getAbsoluteFile(); //$NON-NLS-1$
+			galleryURL = new java.net.URL("http://www.alice.org/gallery/"); 
+			java.io.File urlFile = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "etc/AliceWebGalleryURL.txt" ).getAbsoluteFile(); 
 			if( urlFile.exists() ) {
 				if( urlFile.canRead() ) {
 					java.io.BufferedReader br = new java.io.BufferedReader( new java.io.FileReader( urlFile ) );
@@ -850,8 +851,8 @@ public class AuthoringToolResources {
 							try{
 								galleryURL = new java.net.URL( urlString );
 							} catch (java.net.MalformedURLException badURL){
-								if (urlString.startsWith("www")){ //$NON-NLS-1$
-									urlString = "http://"+urlString; //$NON-NLS-1$
+								if (urlString.startsWith("www")){ 
+									urlString = "http://"+urlString; 
 									try{
 										galleryURL = new java.net.URL( urlString );
 									} catch (java.net.MalformedURLException badURLAgain){}
@@ -873,8 +874,8 @@ public class AuthoringToolResources {
 
 	protected static String stripUnnamedsFromName(Object value){
 		String toStrip = new String(value.toString());
-		String toReturn = ""; //$NON-NLS-1$
-		String toMatch = "__Unnamed"; //$NON-NLS-1$
+		String toReturn = ""; 
+		String toMatch = "__Unnamed"; 
 		boolean notDone = true;
 		while (notDone){
 			int nextIndex = toStrip.indexOf(toMatch);
@@ -891,7 +892,7 @@ public class AuthoringToolResources {
 					notDone = false;
 					break;
 				}
-				nextIndex = toStrip.indexOf("."); //$NON-NLS-1$
+				nextIndex = toStrip.indexOf("."); 
 				if (nextIndex >= 0){
 					newToStrip = toStrip.substring(nextIndex+1, toStrip.length());
 					if (newToStrip != null){
@@ -941,32 +942,32 @@ public class AuthoringToolResources {
 			try {
 				Class declaringClass = valueClass.getField( propertyName ).getDeclaringClass();
 				if( declaringClass != null ) {
-					String key = declaringClass.getName() + "." + propertyName; //$NON-NLS-1$
+					String key = declaringClass.getName() + "." + propertyName; 
 					if( nameMapContainsKey( key ) ) {
 						propertyName = getName( key );
 					}
 				}
 			} catch( NoSuchFieldException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.81") + propertyName + Messages.getString("AuthoringToolResources.82") + valueClass, e ); //$NON-NLS-1$ //$NON-NLS-2$
+				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.81") + propertyName + Messages.getString("AuthoringToolResources.82") + valueClass, e );  
 			}
 
-			value = getReprForValue( element, false ) + "." + propertyName; //$NON-NLS-1$
+			value = getReprForValue( element, false ) + "." + propertyName; 
 		}
 		if( (value instanceof edu.cmu.cs.stage3.alice.core.Question) && formatMapContainsKey( value.getClass() ) ) {
-			String questionRepr = ""; //$NON-NLS-1$
+			String questionRepr = ""; 
 			edu.cmu.cs.stage3.alice.core.Question question = (edu.cmu.cs.stage3.alice.core.Question)value;
 			String format = getFormat( value.getClass() );
 			edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer formatTokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 			while( formatTokenizer.hasMoreTokens() ) {
 				String token = formatTokenizer.nextToken();
-				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-					edu.cmu.cs.stage3.alice.core.Property property = question.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
+				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
+					edu.cmu.cs.stage3.alice.core.Property property = question.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
 					if( property != null ) {
 						questionRepr += getReprForValue( property.get(), property );
 					}
 				} else {
-					while( token.indexOf( "&lt;" ) > -1 ) { //$NON-NLS-1$
-						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					while( token.indexOf( "&lt;" ) > -1 ) { 
+						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();   
 					}
 					questionRepr += token;
 				}
@@ -1051,59 +1052,59 @@ public class AuthoringToolResources {
 //		}
 		if( value instanceof javax.vecmath.Vector3d ) {
 			javax.vecmath.Vector3d vec = (javax.vecmath.Vector3d)value;
-			value = "Vector3( " + AuthoringToolResources.resources.decimalFormatter.format( vec.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( vec.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( vec.z ) + " )"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			value = "Vector3( " + AuthoringToolResources.resources.decimalFormatter.format( vec.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( vec.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( vec.z ) + " )";    //$NON-NLS-4$
 		}
 		if( value instanceof javax.vecmath.Matrix4d ) {
 			edu.cmu.cs.stage3.math.Matrix44 m = new edu.cmu.cs.stage3.math.Matrix44( (javax.vecmath.Matrix4d)value );
 			edu.cmu.cs.stage3.math.Vector3 position = m.getPosition();
 			edu.cmu.cs.stage3.math.Quaternion quaternion = m.getAxes().getQuaternion();
-			value = Messages.getString("AuthoringToolResources.97") + AuthoringToolResources.resources.decimalFormatter.format( position.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.z ) + ";  " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-					Messages.getString("AuthoringToolResources.101") + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			value = Messages.getString("AuthoringToolResources.97") + AuthoringToolResources.resources.decimalFormatter.format( position.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.z ) + ";  " +    //$NON-NLS-4$
+					Messages.getString("AuthoringToolResources.101") + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );    //$NON-NLS-4$
 		}
 		if( value instanceof edu.cmu.cs.stage3.math.Quaternion ) {
 			edu.cmu.cs.stage3.math.Quaternion quaternion = (edu.cmu.cs.stage3.math.Quaternion)value;
-			value = "(" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			value = "(" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );    //$NON-NLS-4$
 		}
 		if( value instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
 			edu.cmu.cs.stage3.alice.scenegraph.Color color = (edu.cmu.cs.stage3.alice.scenegraph.Color)value;
 			if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.BLACK ) ) {
-				value = Messages.getString("AuthoringToolResources.109"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.109"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.BLUE ) ) {
-				value = Messages.getString("AuthoringToolResources.110"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.110"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.BROWN ) ) {
-				value = Messages.getString("AuthoringToolResources.111"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.111"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.CYAN ) ) {
-				value = Messages.getString("AuthoringToolResources.112"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.112"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.DARK_GRAY ) ) {
-				value = Messages.getString("AuthoringToolResources.113"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.113"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.GRAY ) ) {
-				value = Messages.getString("AuthoringToolResources.114"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.114"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.GREEN ) ) {
-				value = Messages.getString("AuthoringToolResources.115"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.115"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.LIGHT_GRAY ) ) {
-				value = Messages.getString("AuthoringToolResources.116"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.116"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.MAGENTA ) ) {
-				value = Messages.getString("AuthoringToolResources.117"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.117"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.ORANGE ) ) {
-				value = Messages.getString("AuthoringToolResources.118"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.118"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.PINK ) ) {
-				value = Messages.getString("AuthoringToolResources.119"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.119"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.PURPLE ) ) {
-				value = Messages.getString("AuthoringToolResources.120"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.120"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.RED ) ) {
-				value = Messages.getString("AuthoringToolResources.121"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.121"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE ) ) {
-				value = Messages.getString("AuthoringToolResources.122"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.122"); 
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.YELLOW ) ) {
-				value = Messages.getString("AuthoringToolResources.123"); //$NON-NLS-1$
+				value = Messages.getString("AuthoringToolResources.123"); 
 			} else {
-				value = Messages.getString("AuthoringToolResources.124") + AuthoringToolResources.resources.decimalFormatter.format( color.getRed() ) + ", g:" + AuthoringToolResources.resources.decimalFormatter.format( color.getGreen() ) + ", b:" + AuthoringToolResources.resources.decimalFormatter.format( color.getBlue() ) + ", a:" + AuthoringToolResources.resources.decimalFormatter.format( color.getAlpha() ) + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+				value = Messages.getString("AuthoringToolResources.124") + AuthoringToolResources.resources.decimalFormatter.format( color.getRed() ) + ", g:" + AuthoringToolResources.resources.decimalFormatter.format( color.getGreen() ) + ", b:" + AuthoringToolResources.resources.decimalFormatter.format( color.getBlue() ) + ", a:" + AuthoringToolResources.resources.decimalFormatter.format( color.getAlpha() ) + ")";    //$NON-NLS-4$ //$NON-NLS-5$
 			}
 		}
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Property ) {
 			String simpleName = ((edu.cmu.cs.stage3.alice.core.Property)value).getName();
 			if( ((edu.cmu.cs.stage3.alice.core.Property)value).getDeclaredClass() != null ) {
-				String key = ((edu.cmu.cs.stage3.alice.core.Property)value).getDeclaredClass().getName() + "." + ((edu.cmu.cs.stage3.alice.core.Property)value).getName(); //$NON-NLS-1$
+				String key = ((edu.cmu.cs.stage3.alice.core.Property)value).getDeclaredClass().getName() + "." + ((edu.cmu.cs.stage3.alice.core.Property)value).getName(); 
 				if( nameMapContainsKey( key ) ) {
 					simpleName = getName( key );
 				} else {
@@ -1114,13 +1115,13 @@ public class AuthoringToolResources {
 			if( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 				value = getReprForValue( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner(), verbose );
 			} else if( verbose && (((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() != null) ) {
-				value = getReprForValue( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() ) + "." + simpleName; //$NON-NLS-1$
+				value = getReprForValue( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() ) + "." + simpleName; 
 			} else {
 				value = simpleName;
 			}
 		}
 		if( value == null ) {
-			value = Messages.getString("AuthoringToolResources.131"); //$NON-NLS-1$
+			value = Messages.getString("AuthoringToolResources.131"); 
 		}
 
 		return value.toString();
@@ -1132,18 +1133,18 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ); //$NON-NLS-1$ //$NON-NLS-2$
+			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {  
+				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );  
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
 					if( knownPropertyValues[i].getString().equals( propertyName ) ) {
 						sb.append( AuthoringToolResources.getReprForValue( knownPropertyValues[i].getObject(), true ) );
 						break;
 					}
 				}
-			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {  
 				// leave blank
-			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ); //$NON-NLS-1$ //$NON-NLS-2$
+			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
+				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );  
 				boolean appendedValue = false;
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
 					if( knownPropertyValues[i].getString().equals( propertyName ) ) {
@@ -1184,7 +1185,7 @@ public class AuthoringToolResources {
 //					t = dataSourceValue.getDurationHint();
 //				}
 			}
-			return getReprForValue( element, true ) + " (" + formatTime( t ) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+			return getReprForValue( element, true ) + " (" + formatTime( t ) + ")";  
 		}
 
 		return getReprForValue( element, true );
@@ -1212,12 +1213,12 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
-			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
-			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
+			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {  
+				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
+			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {  
+				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
+			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
+				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
 			}
 		}
 
@@ -1230,13 +1231,13 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {  
 				// skip this one
 				// should be in knownPropertyValues
-			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) { //$NON-NLS-1$ //$NON-NLS-2$				
-				desired.add( AikMin.getProperty( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
-			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-				desired.add( AikMin.getProperty( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) ); //$NON-NLS-1$ //$NON-NLS-2$
+			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {  				
+				desired.add( AikMin.getProperty( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
+			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
+				desired.add( AikMin.getProperty( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
 			}
 		}
 
@@ -1252,7 +1253,11 @@ public class AuthoringToolResources {
 	}
 
 	public static void setParameterizedPropertiesToOmit( String[] parameterizedPropertiesToOmit ) {
-		AuthoringToolResources.resources.parameterizedPropertiesToOmit = parameterizedPropertiesToOmit;
+		String [] temp = new String [parameterizedPropertiesToOmit.length];
+		for (int i=0; i<parameterizedPropertiesToOmit.length; i++) {
+			temp[i] =  AikMin.getProperty(parameterizedPropertiesToOmit[i]);
+		}
+		AuthoringToolResources.resources.parameterizedPropertiesToOmit =temp;
 	}
 
 	public static String[] getParameterizedPropertiesToOmit() {
@@ -1284,10 +1289,10 @@ public class AuthoringToolResources {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.166") + className, e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.166") + className, e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.167") + o, null ); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.167") + o, null ); 
 				}
 			}
 		}
@@ -1387,25 +1392,25 @@ public class AuthoringToolResources {
 //	}
 	public static java.awt.Color getColor( String key ) {
 		java.awt.Color toReturn = (java.awt.Color)AuthoringToolResources.resources.colorMap.get( key );
-		if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase( "true" ) &&  //$NON-NLS-1$ //$NON-NLS-2$
-			!key.equalsIgnoreCase("mainFontColor") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("objectTreeDisabledText") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("objectTreeSelectedText") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("disabledHTMLText") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("disabledHTML") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("stdErrTextColor") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("commentForeground") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("objectTreeSelected") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("dndHighlight") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("dndHighlight2") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("dndHighlight3") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("guiEffectsShadow") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("guiEffectsEdge") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("guiEffectsTroughShadow") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("guiEffectsDisabledLine") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("makeSceneEditorBigBackground") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("makeSceneEditorSmallBackground") && //$NON-NLS-1$
-			!key.equalsIgnoreCase("objectTreeText")){ //$NON-NLS-1$
+		if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase( "true" ) &&   
+			!key.equalsIgnoreCase("mainFontColor") && 
+			!key.equalsIgnoreCase("objectTreeDisabledText") && 
+			!key.equalsIgnoreCase("objectTreeSelectedText") && 
+			!key.equalsIgnoreCase("disabledHTMLText") && 
+			!key.equalsIgnoreCase("disabledHTML") && 
+			!key.equalsIgnoreCase("stdErrTextColor") && 
+			!key.equalsIgnoreCase("commentForeground") && 
+			!key.equalsIgnoreCase("objectTreeSelected") && 
+			!key.equalsIgnoreCase("dndHighlight") && 
+			!key.equalsIgnoreCase("dndHighlight2") && 
+			!key.equalsIgnoreCase("dndHighlight3") && 
+			!key.equalsIgnoreCase("guiEffectsShadow") && 
+			!key.equalsIgnoreCase("guiEffectsEdge") && 
+			!key.equalsIgnoreCase("guiEffectsTroughShadow") && 
+			!key.equalsIgnoreCase("guiEffectsDisabledLine") && 
+			!key.equalsIgnoreCase("makeSceneEditorBigBackground") && 
+			!key.equalsIgnoreCase("makeSceneEditorSmallBackground") && 
+			!key.equalsIgnoreCase("objectTreeText")){ 
 				float[] hsl = rgbToHSL(toReturn);
 				hsl[2] = Math.max(hsl[2], .95f);
 				java.awt.Color convertedColor = hslToRGB(hsl);
@@ -1439,6 +1444,14 @@ public class AuthoringToolResources {
 		return AuthoringToolResources.resources.mainCDGalleryDirectory;
 	}
 
+	public static void setMainUpdateURL ( java.net.URL url) {
+		AuthoringToolResources.resources.mainUpdateURL = url;
+	}
+	
+	public static java.net.URL getMainUpdateURL() {
+		return AuthoringToolResources.resources.mainUpdateURL;
+	}
+	
 	public static void autodetectMainCDGalleryDirectory( String galleryName ) {
 		java.io.File[] cdRoots = edu.cmu.cs.stage3.alice.authoringtool.util.CDUtil.getCDRoots();
 
@@ -1454,21 +1467,21 @@ public class AuthoringToolResources {
 	}
 
 	public static java.awt.Image getAliceSystemIconImage() {
-		return getImageForString( "aliceHead" ); //$NON-NLS-1$
+		return getImageForString( "aliceHead" ); 
 	}
 	public static javax.swing.ImageIcon getAliceSystemIcon() {
-		return getIconForString( "aliceHead" ); //$NON-NLS-1$
+		return getIconForString( "aliceHead" ); 
 	}
 	
 
 	public static java.awt.Image getImageForString( String s ) {
 		if( ! AuthoringToolResources.resources.stringImageMap.containsKey( s ) ) {
-			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" ); //$NON-NLS-1$ //$NON-NLS-2$
+			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" );  
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" ); //$NON-NLS-1$ //$NON-NLS-2$
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" );  
 			}
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" ); //$NON-NLS-1$ //$NON-NLS-2$
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" );  
 			}
 			if( resource != null ) {
 				java.awt.Image image = java.awt.Toolkit.getDefaultToolkit().getImage( resource );
@@ -1483,12 +1496,12 @@ public class AuthoringToolResources {
 
 	public static javax.swing.ImageIcon getIconForString( String s ) {
 		if( ! AuthoringToolResources.resources.stringIconMap.containsKey( s ) ) {
-			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" ); //$NON-NLS-1$ //$NON-NLS-2$
+			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" );  
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" ); //$NON-NLS-1$ //$NON-NLS-2$
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" );  
 			}
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" ); //$NON-NLS-1$ //$NON-NLS-2$
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" );  
 			}
 			if( resource != null ) {
 				AuthoringToolResources.resources.stringIconMap.put( s, new javax.swing.ImageIcon( resource ) );
@@ -1500,16 +1513,16 @@ public class AuthoringToolResources {
 		return (javax.swing.ImageIcon)AuthoringToolResources.resources.stringIconMap.get( s );
 	}
 
-	static final javax.swing.ImageIcon cameraIcon = getIconForString( "camera" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon ambientLightIcon = getIconForString( "ambientLight" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon directionalLightIcon = getIconForString( "directionalLight" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon pointLightIcon = getIconForString( "pointLight" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon defaultLightIcon = getIconForString( "pointLight" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon modelIcon = getIconForString( "model" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon subpartIcon = getIconForString( "subpart" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon sceneIcon = getIconForString( "scene" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon folderIcon = getIconForString( "folder" ); //$NON-NLS-1$
-	static final javax.swing.ImageIcon defaultIcon = getIconForString( "default" ); //$NON-NLS-1$
+	static final javax.swing.ImageIcon cameraIcon = getIconForString( "camera" ); 
+	static final javax.swing.ImageIcon ambientLightIcon = getIconForString( "ambientLight" ); 
+	static final javax.swing.ImageIcon directionalLightIcon = getIconForString( "directionalLight" ); 
+	static final javax.swing.ImageIcon pointLightIcon = getIconForString( "pointLight" ); 
+	static final javax.swing.ImageIcon defaultLightIcon = getIconForString( "pointLight" ); 
+	static final javax.swing.ImageIcon modelIcon = getIconForString( "model" ); 
+	static final javax.swing.ImageIcon subpartIcon = getIconForString( "subpart" ); 
+	static final javax.swing.ImageIcon sceneIcon = getIconForString( "scene" ); 
+	static final javax.swing.ImageIcon folderIcon = getIconForString( "folder" ); 
+	static final javax.swing.ImageIcon defaultIcon = getIconForString( "default" ); 
 	
 	public static javax.swing.ImageIcon getIconForValue( Object value ) {
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Camera ) { //TODO: perspective and orthographic
@@ -1539,7 +1552,7 @@ public class AuthoringToolResources {
 		} else if( value instanceof Integer ) {
 			String s = (String)AuthoringToolResources.resources.keyCodesToStrings.get( value );
 			if( s != null ) {
-				return getIconForString( "keyboardKeys/" + s ); //$NON-NLS-1$
+				return getIconForString( "keyboardKeys/" + s ); 
 			} else {
 				return null;
 			}
@@ -1568,25 +1581,25 @@ public class AuthoringToolResources {
 	}
 
 	public static void openURL( String urlString ) throws java.io.IOException {
-		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) {   
 			String[] cmdarray = new String[3];
-			cmdarray[0] = "rundll32"; //$NON-NLS-1$
-			cmdarray[1] = "url.dll,FileProtocolHandler"; //$NON-NLS-1$
+			cmdarray[0] = "rundll32"; 
+			cmdarray[1] = "url.dll,FileProtocolHandler"; 
 			cmdarray[2] = urlString;
 
-			if( urlString.indexOf( "&stacktrace" ) > -1 ) { //$NON-NLS-1$
+			if( urlString.indexOf( "&stacktrace" ) > -1 ) { 
 				try {
-					java.io.File tempURL = java.io.File.createTempFile( "tempURLHolder", ".url" ); //$NON-NLS-1$ //$NON-NLS-2$
+					java.io.File tempURL = java.io.File.createTempFile( "tempURLHolder", ".url" );  
 					tempURL = tempURL.getAbsoluteFile();
 					tempURL.deleteOnExit();
 					java.io.PrintWriter urlWriter = new java.io.PrintWriter( new java.io.BufferedWriter( new java.io.FileWriter( tempURL ) ) );
-					urlWriter.println( "[InternetShortcut]" ); //$NON-NLS-1$
-					urlWriter.println( "URL=" + urlString ); //$NON-NLS-1$
+					urlWriter.println( "[InternetShortcut]" ); 
+					urlWriter.println( "URL=" + urlString ); 
 					urlWriter.flush();
 					urlWriter.close();
 					cmdarray[2] = tempURL.getAbsolutePath();
 				} catch( Throwable t ) {
-					cmdarray[2] = urlString.substring( 0, urlString.indexOf( "&stacktrace" ) ); //$NON-NLS-1$
+					cmdarray[2] = urlString.substring( 0, urlString.indexOf( "&stacktrace" ) ); 
 				}
 			}
 
@@ -1625,12 +1638,12 @@ public class AuthoringToolResources {
 		} else {
 			// try netscape
 		    try {
-				String[] cmd = new String[] { "netscape", urlString }; //$NON-NLS-1$
+				String[] cmd = new String[] { "netscape", urlString }; 
 				Runtime.getRuntime().exec( cmd );
 		    } catch( Throwable t ) {
-		        String lcOSName = System.getProperty( "os.name" ).toLowerCase(); //$NON-NLS-1$
-		        if( lcOSName.startsWith( "mac os x" ) ) { //$NON-NLS-1$
-		            Runtime.getRuntime().exec( "open " + urlString ); //$NON-NLS-1$
+		        String lcOSName = System.getProperty( "os.name" ).toLowerCase(); 
+		        if( lcOSName.startsWith( "mac os x" ) ) { 
+		            Runtime.getRuntime().exec( "open " + urlString ); 
 		        }
 		    }
 		}
@@ -1676,9 +1689,9 @@ public class AuthoringToolResources {
 
 	public static Double parseDouble( String doubleString ) {
 		Double number = null;
-		if( doubleString.trim().equalsIgnoreCase( Messages.getString("AuthoringToolResources.228") ) ) { //$NON-NLS-1$
+		if( doubleString.trim().equalsIgnoreCase( Messages.getString("AuthoringToolResources.228") ) ) { 
 			number = new Double( Double.POSITIVE_INFINITY );
-		} else if( doubleString.trim().equalsIgnoreCase( Messages.getString("AuthoringToolResources.229") ) ) { //$NON-NLS-1$
+		} else if( doubleString.trim().equalsIgnoreCase( Messages.getString("AuthoringToolResources.229") ) ) { 
 			number = new Double( Double.NEGATIVE_INFINITY );
 		} else if( doubleString.indexOf( '/' ) > -1 ) {
 			if( doubleString.lastIndexOf( '/' ) == doubleString.indexOf( '/' ) ) {
@@ -1703,14 +1716,14 @@ public class AuthoringToolResources {
 	public static edu.cmu.cs.stage3.alice.core.Group getDummyObjectGroup( edu.cmu.cs.stage3.alice.core.World world ) {
 		edu.cmu.cs.stage3.alice.core.Element[] groups = world.getChildren( edu.cmu.cs.stage3.alice.core.Group.class );
 		for( int i = 0; i < groups.length; i++ ) {
-			if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) {   
 				return (edu.cmu.cs.stage3.alice.core.Group)groups[i];
 			}
 		}
 
 		edu.cmu.cs.stage3.alice.core.Group dummyObjectGroup = new edu.cmu.cs.stage3.alice.core.Group();
-		dummyObjectGroup.name.set( Messages.getString("AuthoringToolResources.233") ); //$NON-NLS-1$
-		dummyObjectGroup.data.put( "dummyObjectGroup", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		dummyObjectGroup.name.set( Messages.getString("AuthoringToolResources.233") ); 
+		dummyObjectGroup.data.put( "dummyObjectGroup", "true" );  
 		dummyObjectGroup.valueClass.set( edu.cmu.cs.stage3.alice.core.Dummy.class );
 		world.addChild( dummyObjectGroup );
 		world.groups.add( dummyObjectGroup );
@@ -1721,7 +1734,7 @@ public class AuthoringToolResources {
 		if( world != null ) {
 			edu.cmu.cs.stage3.alice.core.Element[] groups = world.getChildren( edu.cmu.cs.stage3.alice.core.Group.class );
 			for( int i = 0; i < groups.length; i++ ) {
-				if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) {   
 					return true;
 				}
 			}
@@ -1781,9 +1794,9 @@ public class AuthoringToolResources {
 				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).asSeenBy.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).asSeenBy.get() );
 				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).style.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).style.get() );
 			} catch( IllegalAccessException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.239") + responseClass, e ); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.239") + responseClass, e ); 
 			} catch( InstantiationException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.240") + responseClass, e ); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.240") + responseClass, e ); 
 			}
 		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.TransformAnimation ) {
 			undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
@@ -1821,7 +1834,7 @@ public class AuthoringToolResources {
 		} else {
 			undoResponse = new edu.cmu.cs.stage3.alice.core.response.Wait();
 			undoResponse.duration.set( new Double( 0.0 ) );
-			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.241") + response, null ); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.241") + response, null ); 
 		}
 
 		return undoResponse;
@@ -1943,9 +1956,9 @@ public class AuthoringToolResources {
 				billboard.textureMaps.add( textureMap );
 				billboard.diffuseColorMap.set( textureMap );
 				billboard.name.set( textureMap.name.getStringValue() );
-				textureMap.name.set( textureMap.name.getStringValue() + "_Texture" ); //$NON-NLS-1$
+				textureMap.name.set( textureMap.name.getStringValue() + "_Texture" ); 
 			} else {
-				billboard.name.set( textureMap.name.getStringValue() + "_Billboard" ); //$NON-NLS-1$
+				billboard.name.set( textureMap.name.getStringValue() + "_Billboard" ); 
 				billboard.diffuseColorMap.set( textureMap );
 			}
 
@@ -2008,7 +2021,7 @@ public class AuthoringToolResources {
 		}
 
 		if( baseName.length() < 1 ) {
-			baseName = Messages.getString("AuthoringToolResources.244"); //$NON-NLS-1$
+			baseName = Messages.getString("AuthoringToolResources.244"); 
 		}
 
 		// take baseName, strip a number off the end if necessary, and use next available number after the stripped number
@@ -2032,7 +2045,7 @@ public class AuthoringToolResources {
 			}
 		}
 
-		throw new RuntimeException( Messages.getString("AuthoringToolResources.245") + baseName + Messages.getString("AuthoringToolResources.246") + parent ); //$NON-NLS-1$ //$NON-NLS-2$
+		throw new RuntimeException( Messages.getString("AuthoringToolResources.245") + baseName + Messages.getString("AuthoringToolResources.246") + parent );  
 	}
 
 	/*
@@ -2061,10 +2074,10 @@ public class AuthoringToolResources {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.247") + className, e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.247") + className, e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.248") + o, null ); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.248") + o, null ); 
 				}
 			}
 		}
@@ -2175,9 +2188,9 @@ public class AuthoringToolResources {
 	public static java.awt.datatransfer.DataFlavor getReferenceFlavorForClass( Class c ) {
 		if( ! AuthoringToolResources.resources.flavorMap.containsKey( c ) ) {
 			try {
-				AuthoringToolResources.resources.flavorMap.put( c, new java.awt.datatransfer.DataFlavor( java.awt.datatransfer.DataFlavor.javaJVMLocalObjectMimeType + Messages.getString("AuthoringToolResources.249") + c.getName() ) ); //$NON-NLS-1$
+				AuthoringToolResources.resources.flavorMap.put( c, new java.awt.datatransfer.DataFlavor( java.awt.datatransfer.DataFlavor.javaJVMLocalObjectMimeType + Messages.getString("AuthoringToolResources.249") + c.getName() ) ); 
 			} catch( ClassNotFoundException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.250") + c.getName(), e ); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.250") + c.getName(), e ); 
 			}
 		}
 		return (java.awt.datatransfer.DataFlavor)AuthoringToolResources.resources.flavorMap.get( c );
@@ -2189,7 +2202,7 @@ public class AuthoringToolResources {
 		} else if( cls == Number.class ) {
 			return new Double( 1 );
 		} else if( cls == String.class ) {
-			return new String( Messages.getString("AuthoringToolResources.251") ); //$NON-NLS-1$
+			return new String( Messages.getString("AuthoringToolResources.251") ); 
 		} else if( cls == javax.vecmath.Vector3d.class ) {
 			return edu.cmu.cs.stage3.math.MathUtilities.createXAxis();
 		} else if( cls == edu.cmu.cs.stage3.math.Vector3.class ) {
@@ -2293,26 +2306,26 @@ public class AuthoringToolResources {
 	public static String formatMemorySize( long bytes ) {
 		String sizeString = null;
 		if( bytes < 1024 ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + Messages.getString("AuthoringToolResources.252"); //$NON-NLS-1$
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + Messages.getString("AuthoringToolResources.252"); 
 		} else if( bytes < 1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024) ) + " KB"; //$NON-NLS-1$
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024) ) + " KB"; 
 		} else if( bytes < 1024L*1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L) ) + " MB"; //$NON-NLS-1$
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L) ) + " MB"; 
 		} else if( bytes < 1024L*1024L*1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L*1024L) ) + " GB"; //$NON-NLS-1$
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L*1024L) ) + " GB"; 
 		} else {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L*1024L*1024L) ) + " TB"; //$NON-NLS-1$
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L*1024L*1024L) ) + " TB"; 
 		}
 		return sizeString;
 	}
 
 	public static String formatTime( double seconds ) {
 		if( Double.isNaN( seconds ) ) {
-			return "?:??"; //$NON-NLS-1$
+			return "?:??"; 
 		} else {
-			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" ); //$NON-NLS-1$
-			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" ); //$NON-NLS-1$
-			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" ); //$NON-NLS-1$
+			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" ); 
+			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" ); 
+			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" ); 
 
 			double secondsFloored = (int)Math.floor( seconds );
 			double decimal = seconds - secondsFloored;
@@ -2322,10 +2335,10 @@ public class AuthoringToolResources {
 
 			String timeString = secMinFormatter1.format( secs ) + decFormatter.format( decimal );
 			if( hours > 0.0 ) {
-				timeString = secMinFormatter1.format( minutes ) + ":" + timeString; //$NON-NLS-1$
-				timeString = secMinFormatter2.format( hours ) + ":" + timeString; //$NON-NLS-1$
+				timeString = secMinFormatter1.format( minutes ) + ":" + timeString; 
+				timeString = secMinFormatter2.format( hours ) + ":" + timeString; 
 			} else {
-				timeString = secMinFormatter2.format( minutes ) + ":" + timeString; //$NON-NLS-1$
+				timeString = secMinFormatter2.format( minutes ) + ":" + timeString; 
 			}
 
 			return timeString;
@@ -2336,11 +2349,11 @@ public class AuthoringToolResources {
 		printHierarchy( c, 0 );
 	}
 	private static void printHierarchy( java.awt.Component c, int level ) {
-		String tabs = ""; //$NON-NLS-1$
+		String tabs = ""; 
 		for( int i = 0; i < level; i++ ) {
-			tabs += "--"; //$NON-NLS-1$
+			tabs += "--"; 
 		}
-		System.out.println( tabs + c.getClass().getName() + "_" + c.hashCode() ); //$NON-NLS-1$
+		System.out.println( tabs + c.getClass().getName() + "_" + c.hashCode() ); 
 
 		if( c instanceof java.awt.Container ) {
 			java.awt.Component[] children = ((java.awt.Container)c).getComponents();
@@ -2351,48 +2364,48 @@ public class AuthoringToolResources {
 	}
 
 	private static void initKeyCodesToStrings() {
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_0 ), "0" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_1 ), "1" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_2 ), "2" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_3 ), "3" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_4 ), "4" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_5 ), "5" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_6 ), "6" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_7 ), "7" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_8 ), "8" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_9 ), "9" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_A ), "A" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_B ), "B" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_C ), "C" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_D ), "D" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_E ), "E" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_F ), "F" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_G ), "G" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_H ), "H" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_I ), "I" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_J ), "J" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_K ), "K" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_L ), "L" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_M ), "M" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_N ), "N" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_O ), "O" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_P ), "P" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Q ), "Q" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_R ), "R" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_S ), "S" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_T ), "T" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_U ), "U" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_V ), "V" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_W ), "W" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_X ), "X" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Y ), "Y" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Z ), "Z" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ENTER ), "enter" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SPACE ), "space" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_UP ), "upArrow" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DOWN ), "downArrow" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_LEFT ), "leftArrow" ); //$NON-NLS-1$
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_RIGHT ), "rightArrow" ); //$NON-NLS-1$
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_0 ), "0" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_1 ), "1" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_2 ), "2" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_3 ), "3" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_4 ), "4" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_5 ), "5" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_6 ), "6" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_7 ), "7" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_8 ), "8" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_9 ), "9" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_A ), "A" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_B ), "B" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_C ), "C" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_D ), "D" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_E ), "E" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_F ), "F" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_G ), "G" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_H ), "H" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_I ), "I" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_J ), "J" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_K ), "K" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_L ), "L" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_M ), "M" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_N ), "N" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_O ), "O" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_P ), "P" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Q ), "Q" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_R ), "R" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_S ), "S" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_T ), "T" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_U ), "U" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_V ), "V" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_W ), "W" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_X ), "X" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Y ), "Y" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Z ), "Z" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ENTER ), "enter" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SPACE ), "space" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_UP ), "upArrow" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DOWN ), "downArrow" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_LEFT ), "leftArrow" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_RIGHT ), "rightArrow" ); 
 	}
 
 	public static void copyFile( java.io.File from, java.io.File to ) throws java.io.IOException {
@@ -2418,19 +2431,19 @@ public class AuthoringToolResources {
 	/////////////////////////////
 
 	public static String getPrefix( String token ) {
-		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			return token.substring( 0, token.indexOf( "<" ) ); //$NON-NLS-1$
+		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {   
+			return token.substring( 0, token.indexOf( "<" ) ); 
 		} else {
 			return token;
 		}
 	}
 
 	public static String getSpecifier( String token ) {
-		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			if (!System.getProperty("os.name").startsWith("Window")) { //$NON-NLS-1$ //$NON-NLS-2$
-				token = token.replaceAll("\\\\", java.io.File.separator); //$NON-NLS-1$
+		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {   
+			if (!System.getProperty("os.name").startsWith("Window")) {  
+				token = token.replaceAll("\\\\", java.io.File.separator); 
 			}
-			return token.substring( token.indexOf( "<" ) + 1, token.indexOf( ">" ) ); //$NON-NLS-1$ //$NON-NLS-2$
+			return token.substring( token.indexOf( "<" ) + 1, token.indexOf( ">" ) );  
 		} else {
 			return null;
 		}
@@ -2449,7 +2462,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.321"), e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.321"), e ); 
 					}
 				}
 				return false;
@@ -2478,7 +2491,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.322"), e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.322"), e ); 
 					}
 				}
 				return false;
@@ -2501,7 +2514,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.323"), e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.323"), e ); 
 					}
 				}
 				return false;
@@ -2524,7 +2537,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.324"), e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.324"), e ); 
 					}
 				}
 				return false;
@@ -2547,7 +2560,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.325"), e ); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog( Messages.getString("AuthoringToolResources.325"), e ); 
 					}
 				}
 				return false;

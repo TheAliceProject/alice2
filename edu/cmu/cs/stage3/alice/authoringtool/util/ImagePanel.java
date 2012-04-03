@@ -49,14 +49,13 @@ public class ImagePanel extends javax.swing.JPanel {
 			try {
 				tracker.waitForAll();
 			} catch( InterruptedException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ImagePanel.0"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ImagePanel.0"), e ); 
 			}
 			revalidate();
 			repaint();
 		}
 	}
 
-	
 	protected void paintComponent( java.awt.Graphics g ) {
 		if( image != null ) {
 			g.drawImage( image, 0, 0, null );
@@ -72,7 +71,6 @@ public class ImagePanel extends javax.swing.JPanel {
 		return size;
 	}
 
-	
 	public java.awt.Dimension getMinimumSize() {
 		return getImageSize();
 	}

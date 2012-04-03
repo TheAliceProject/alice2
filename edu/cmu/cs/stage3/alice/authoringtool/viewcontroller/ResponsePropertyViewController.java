@@ -45,10 +45,8 @@ public class ResponsePropertyViewController extends PropertyViewController {
 		refreshGUI();
 	}
 
-	
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
-			
 			public void mousePressed( java.awt.event.MouseEvent ev ) {
 				ResponsePropertyViewController.this.popupButton.doClick();
 			}
@@ -59,14 +57,12 @@ public class ResponsePropertyViewController extends PropertyViewController {
 		this.root = root;
 	}
 	
-	
 	protected String getHTMLColorString(java.awt.Color color){
 		int r = color.getRed();
 		int g = color.getGreen();
 		int b = color.getBlue();
 		return new String("#"+Integer.toHexString(r)+Integer.toHexString(g)+Integer.toHexString(b));
 	}
-	
 	
 	public void getHTML(StringBuffer toWriteTo){
 		boolean isEnabled = false;
@@ -104,22 +100,18 @@ public class ResponsePropertyViewController extends PropertyViewController {
 	}
 
 
-	
 	protected void updatePopupStructure() {
 		popupStructure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePropertyStructure( property, factory, includeDefaults, allowExpressions, includeOther, root );
 	}
 
-	
 	protected java.awt.Component getNativeComponent() {
 		return responsePanel;
 	}
 
-	
 	protected Class getNativeClass() {
 		return edu.cmu.cs.stage3.alice.core.Response.class;
 	}
 
-	
 	protected void updateNativeComponent() {
 		responsePanel.removeAll();
 		edu.cmu.cs.stage3.alice.core.Response response = (edu.cmu.cs.stage3.alice.core.Response)property.get();

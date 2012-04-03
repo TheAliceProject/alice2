@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.set;
 
 public class Size extends SetNumberQuestion {
-	
 	public int getValue( edu.cmu.cs.stage3.alice.core.Set setValue ) {
 		return setValue.size();
 	}

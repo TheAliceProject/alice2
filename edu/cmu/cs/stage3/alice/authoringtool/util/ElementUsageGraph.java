@@ -131,7 +131,6 @@ public class ElementUsageGraph extends javax.swing.JPanel {
 			setOpaque( false );
 		}
 
-		
 		public void paintComponent( java.awt.Graphics g ) {
 			super.paintComponent( g );
 

@@ -27,7 +27,6 @@ import edu.cmu.cs.stage3.alice.core.property.ObjectProperty;
 
 public class Contains extends SetBooleanQuestion {
 	public final ObjectProperty item = new ObjectProperty( this, "item", null, Object.class );
-	
 	protected boolean getValue( edu.cmu.cs.stage3.alice.core.Set setValue ) {
         return setValue.containsValue( item.getValue() );
     }

@@ -47,7 +47,6 @@ class SubText {
 	private String m_text;
 	private java.awt.geom.Rectangle2D m_bound;
 
-	
 	public String toString() {
 		return m_text + " " + m_bound.getX() + " " + m_bound.getY() + " " + m_bound.getWidth() + " " + m_bound.getHeight();
 	}

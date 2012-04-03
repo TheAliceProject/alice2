@@ -30,7 +30,6 @@ public class BoundingBoxDecorator extends Decorator {
 	private edu.cmu.cs.stage3.alice.scenegraph.LineArray m_sgLineArray = null;
 	private ReferenceFrame m_referenceFrame = null;
 
-	
 	public ReferenceFrame getReferenceFrame() {
 		return m_referenceFrame;
 	}

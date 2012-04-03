@@ -43,7 +43,7 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 					if( CollectionPropertyViewController.this.property != null ) {
 						edu.cmu.cs.stage3.alice.authoringtool.util.CollectionEditorPanel collectionEditorPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getCollectionEditorPanel();
 						collectionEditorPanel.setCollection( (edu.cmu.cs.stage3.alice.core.Collection)CollectionPropertyViewController.this.property.getValue() );
-						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( collectionEditorPanel, Messages.getString("CollectionPropertyViewController.0"), javax.swing.JOptionPane.PLAIN_MESSAGE ); //$NON-NLS-1$
+						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( collectionEditorPanel, Messages.getString("CollectionPropertyViewController.0"), javax.swing.JOptionPane.PLAIN_MESSAGE ); 
 					}
 				}
 			}
@@ -54,7 +54,7 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 		clean();
 		this.property = property;
 		this.omitPropertyName = omitPropertyName;
-		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyViewControllerBackground" ) ); //$NON-NLS-1$
+		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyViewControllerBackground" ) ); 
 		setMargin( new java.awt.Insets( 0, 4, 0, 4 ) );
 		startListening();
 		refreshGUI();
@@ -107,27 +107,27 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 		StringBuffer repr = new StringBuffer();
 
 		if( ! omitPropertyName ) {
-			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property ) + " = " ); //$NON-NLS-1$
+			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property ) + " = " ); 
 		}
 
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
 			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameInContext( (edu.cmu.cs.stage3.alice.core.Element)value, property.getOwner() ) );
 		} else if( value == null ) {
-			repr.append( Messages.getString("CollectionPropertyViewController.3") ); //$NON-NLS-1$
+			repr.append( Messages.getString("CollectionPropertyViewController.3") ); 
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.Collection ) {
 			Object[] items = ((edu.cmu.cs.stage3.alice.core.Collection)value).values.getArrayValue();
 			if( items != null ) {
 				for( int i = 0; i < items.length; i++ ) {
 					repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( items[i] ) );
 					if( i < items.length - 1 ) {
-						repr.append( ", " ); //$NON-NLS-1$
+						repr.append( ", " ); 
 					}
 				}
 			} else {
-				repr.append( Messages.getString("CollectionPropertyViewController.5") ); //$NON-NLS-1$
+				repr.append( Messages.getString("CollectionPropertyViewController.5") ); 
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("CollectionPropertyViewController.6") + value ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("CollectionPropertyViewController.6") + value ); 
 		}
 
 		setText( repr.toString() );

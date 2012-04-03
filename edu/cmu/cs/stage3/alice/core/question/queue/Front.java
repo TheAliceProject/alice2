@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.queue;
 
 public class Front extends QueueObjectQuestion {
-	
 	protected Object getValue( edu.cmu.cs.stage3.alice.core.Queue queueValue ) {
         return queueValue.frontValue();
 	}

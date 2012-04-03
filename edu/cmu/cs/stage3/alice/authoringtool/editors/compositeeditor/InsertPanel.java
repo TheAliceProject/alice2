@@ -37,7 +37,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messag
 public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.DropTargetListener{
 
     protected javax.swing.JLabel m_label = new javax.swing.JLabel();
-    protected String m_doNothingLabel = Messages.getString("InsertPanel.0"); //$NON-NLS-1$
+    protected String m_doNothingLabel = Messages.getString("InsertPanel.0"); 
     private boolean highlight = false;
 
     public InsertPanel() {
@@ -61,7 +61,6 @@ public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.Drop
         }
     }
 
-    
 	public void paintComponent( java.awt.Graphics g ) {
         java.awt.Rectangle r = new java.awt.Rectangle(0,0,this.getWidth(), this.getHeight());
         if (highlight){

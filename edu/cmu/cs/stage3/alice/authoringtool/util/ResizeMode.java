@@ -37,17 +37,14 @@ public class ResizeMode extends RenderTargetManipulatorMode {
 		this.scheduler = scheduler;
 	}
 
-	
 	public boolean requiresPickedObject() {
 		return true;
 	}
 
-	
 	public boolean hideCursorOnDrag() {
 		return true;
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev, edu.cmu.cs.stage3.alice.core.Transformable pickedTransformable, edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo ) {
 		this.pickedTransformable = pickedTransformable;
 		if( pickedTransformable != null ) {
@@ -55,7 +52,6 @@ public class ResizeMode extends RenderTargetManipulatorMode {
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( (pickedTransformable != null) && (undoRedoStack != null)  ) {
 			if( ! ev.isPopupTrigger() ) { // TODO: this is a hack.  this method should never be called if the popup is triggered
@@ -63,20 +59,16 @@ public class ResizeMode extends RenderTargetManipulatorMode {
 			}
 
 			if( pickedTransformable.poses.size() > 0 ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ResizeMode.0"), Messages.getString("ResizeMode.1"), javax.swing.JOptionPane.WARNING_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ResizeMode.0"), Messages.getString("ResizeMode.1"), javax.swing.JOptionPane.WARNING_MESSAGE );  
 			}
 		}
 	}
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
-		javax.vecmath.Vector3d currentSize = pickedTransformable.getSize();
-//		if ( (currentSize.x > 0 && currentSize.y > 0 ) || dy < 0 ) { //Aik Min
 			if( (pickedTransformable != null) && (dy != 0) ) {
 				double divisor = ev.isShiftDown() ? 1000.0 : 100.0;
 				double scaleFactor = 1.0 - (dy)/divisor;
 				pickedTransformable.resizeRightNow( scaleFactor );
 			}
-//		} 
 	}
 }

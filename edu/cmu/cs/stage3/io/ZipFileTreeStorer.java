@@ -1111,16 +1111,12 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
     }
 
     private void deleteDirectories(){
-        java.util.Iterator i = centralDirectory.iterator();
+        final java.util.Iterator i = centralDirectory.iterator();
         while (i.hasNext()){
             CentralDirectoryHeader currentHeader = (CentralDirectoryHeader)i.next();
             if (currentHeader.shouldDelete){
-                // System.out.println("deleting "+currentHeader.fileName);
-            	try {
-					i.remove();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				// System.out.println("deleting "+currentHeader.fileName);
+				i.remove();
             }
         }
     }

@@ -94,7 +94,6 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 	
 	protected class RenderComponentListener extends java.awt.event.ComponentAdapter{
-		
 		public void componentResized( java.awt.event.ComponentEvent ev ) {
 			if( RenderContentPane.this.shouldConstrainAspectOnResize() && !doNotListenToResize) {
 				doNotListenToResize = true;
@@ -107,7 +106,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 				constrainToAspectRatio( newBounds, deltaWidth < deltaHeight );
 
-				RenderContentPane.this.config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				RenderContentPane.this.config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height );    //$NON-NLS-4$
 				renderPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, newBounds.height));
 				buttonPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, buttonPanel.getHeight()));
 				packDialog();
@@ -129,7 +128,6 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		this.aspectRatio = aspectRatio;
 	}
 
-	
 	public String getTitle() {
 		return title;
 	}
@@ -143,7 +141,6 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width, bounds.height));
 	}
 
-	
 	public void preDialogShow(javax.swing.JDialog parentDialog) {
 		super.preDialogShow(parentDialog);
 		final java.awt.Component renderCanvas = getRenderCanvas();
@@ -158,7 +155,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			focusTimer.setRepeats( false );
 			focusTimer.start();
 		}
-		stdOutOutputComponent.stdOutStream.println(Messages.getString("RenderContentPane.4")); //$NON-NLS-1$
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("RenderContentPane.4")); 
 		stdOutOutputComponent.stdOutStream.flush();
 		this.stdOutOutputComponent.getTextPane().getDocument().addDocumentListener(textListener);
 		java.awt.Rectangle bounds = getRenderBounds();
@@ -167,7 +164,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		showStdOut = false;
 		keyMapInit();
 		updateGUI();
-		if ( config.getValue( "rendering.ensureRenderDialogIsOnScreen" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+		if ( config.getValue( "rendering.ensureRenderDialogIsOnScreen" ).equalsIgnoreCase( "true" ) ) {  
 			java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 			java.awt.Dimension dialogSize = parentDialog.getSize();
 			java.awt.Point dialogLocation = parentDialog.getLocation();
@@ -185,7 +182,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if ( dialogLocation.y < 0 ) {
 					dialogLocation.y = 0;
 				}
-				if (config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "false" )) { //$NON-NLS-1$ //$NON-NLS-2$
+				if (config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "false" )) {  
 					if ( dialogSize.width > screenSize.width ) {
 						java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 						renderSize.width = screenSize.width - 8;
@@ -220,7 +217,6 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 	}
 
-	
 	public void postDialogShow(javax.swing.JDialog parentDialog) {
 		super.postDialogShow(parentDialog);
 		authoringTool.worldStopRunning();
@@ -228,25 +224,23 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		speedSlider.setValue(0);
 		saveRenderBounds();
 		showStdOut = false;
-		if ( config.getValue( "clearStdOutOnRun" ).equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
-			detailTextPane.setText(""); //$NON-NLS-1$
+		if ( config.getValue( "clearStdOutOnRun" ).equalsIgnoreCase( "true" ) ) {  
+			detailTextPane.setText(""); 
 		}
 		java.awt.Component renderCanvas = getRenderCanvas();
 		if ( renderCanvas != null ) {
 			renderCanvas.removeFocusListener( renderCanvasFocusListener );
 		}
 		this.stdOutOutputComponent.getTextPane().getDocument().removeDocumentListener(textListener);
-		stdOutOutputComponent.stdOutStream.println(Messages.getString("RenderContentPane.12")); //$NON-NLS-1$
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("RenderContentPane.12")); 
 		stdOutOutputComponent.stdOutStream.flush();
 
 	}
-	
 	
 	public void addOKActionListener( java.awt.event.ActionListener l ) {
 		okActionListener = l;
 		stopButton.addActionListener(l);
 	}
-	
 	
 	public void removeOKActionListener( java.awt.event.ActionListener l ) {
 		okActionListener = null;
@@ -255,7 +249,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	
 	private void guiInit() {
-		title = Messages.getString("RenderContentPane.13"); //$NON-NLS-1$
+		title = Messages.getString("RenderContentPane.13"); 
 		// on renderPanel resize, constrain to aspectRatio
 		setRenderWindowSizeBasedOnSavedBounds();
 	
@@ -276,9 +270,9 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		takePictureButton = new javax.swing.JButton( authoringTool.getActions().takePictureAction );
 		takePictureButton.setEnabled( true );
 		
-		speedLabel = new javax.swing.JLabel(Messages.getString("RenderContentPane.14")); //$NON-NLS-1$
-		int fontSize = Integer.parseInt(config.getValue("fontSize")); //$NON-NLS-1$
-		speedLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD,  //$NON-NLS-1$
+		speedLabel = new javax.swing.JLabel(Messages.getString("RenderContentPane.14")); 
+		int fontSize = Integer.parseInt(config.getValue("fontSize")); 
+		speedLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD,  
 				(int)(12 * fontSize / 12.0) ));
 		speedLabel.setPreferredSize(new java.awt.Dimension(80, 12));
 		speedLabel.setMinimumSize(new java.awt.Dimension(20, 12));
@@ -293,7 +287,6 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		speedSlider = new javax.swing.JSlider(0, 9, 0);
 
 		speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
-			
 			public void paintTrack(java.awt.Graphics g) {
 				super.paintTrack(g);
 			}
@@ -380,16 +373,16 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} else {
 			javax.swing.SwingUtilities.convertPointToScreen( pos, renderPanel );
 		}
-		config.setValue( "rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		config.setValue( "rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height );    //$NON-NLS-4$
 	}
 	
 	public void saveRenderBounds(java.awt.Rectangle newBounds) {
-		config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		config.setValue( "rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height );    //$NON-NLS-4$
 	}
 
 	protected boolean shouldConstrainAspectOnResize() {
 		return !(showStdOut || authoringTool.getWatcherPanel().isThereSomethingToWatch()) 
-			&& config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+			&& config.getValue( "rendering.constrainRenderDialogAspectRatio" ).equalsIgnoreCase( "true" );  
 	}
 
 	public javax.swing.JPanel getRenderPanel() {
@@ -397,8 +390,8 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	public java.awt.Rectangle getRenderBounds() {
-		String boundsString = config.getValue( "rendering.renderWindowBounds" ); //$NON-NLS-1$
-		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," ); //$NON-NLS-1$
+		String boundsString = config.getValue( "rendering.renderWindowBounds" ); 
+		java.util.StringTokenizer st = new java.util.StringTokenizer( boundsString, " \t," ); 
 		if ( st.countTokens() == 4 ) {
 			try {
 				int x = Integer.parseInt( st.nextToken() );
@@ -412,10 +405,10 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				}
 				return bounds;
 			} catch( NumberFormatException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("RenderContentPane.29"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("RenderContentPane.29"), e ); 
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("RenderContentPane.30"), null ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("RenderContentPane.30"), null ); 
 		}
 
 		return null;
@@ -436,20 +429,20 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		String speedText = java.text.NumberFormat.getInstance().format(newSpeed);
 		if (newSpeed < 1) {
 			if (newSpeed == .5) {
-				speedText = "1/2"; //$NON-NLS-1$
+				speedText = "1/2"; 
 			} else if (newSpeed == .25) {
-				speedText = "1/4"; //$NON-NLS-1$
+				speedText = "1/4"; 
 			} else if (newSpeed == .2) {
-				speedText = "1/5"; //$NON-NLS-1$
+				speedText = "1/5"; 
 			} else if (newSpeed > .3 && newSpeed < .34) {
-				speedText = "1/3"; //$NON-NLS-1$
+				speedText = "1/3"; 
 			} else if (newSpeed > .16 && newSpeed < .168) {
-				speedText = "1/6"; //$NON-NLS-1$
+				speedText = "1/6"; 
 			} else if (newSpeed > .14 && newSpeed < .143) {
-				speedText = "1/7"; //$NON-NLS-1$
+				speedText = "1/7"; 
 			}
 		}
-		speedLabel.setText(Messages.getString("RenderContentPane.37") + speedText + "x"); //$NON-NLS-1$ //$NON-NLS-2$
+		speedLabel.setText(Messages.getString("RenderContentPane.37") + speedText + "x");  
 		speedLabel.repaint();
 	}
 	
@@ -495,7 +488,6 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		packDialog();
 	}
 
-	
 	public void addNotify() {
 		super.addNotify();
 		showStdOut = false;

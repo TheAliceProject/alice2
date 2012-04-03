@@ -35,7 +35,7 @@ public class CollectionEditorPanel extends javax.swing.JPanel {
 
 		setLayout( new java.awt.BorderLayout() );
 
-		add( new javax.swing.JLabel(Messages.getString("CollectionEditorPanel.0")), java.awt.BorderLayout.NORTH ); //$NON-NLS-1$
+		add( new javax.swing.JLabel(Messages.getString("CollectionEditorPanel.0")), java.awt.BorderLayout.NORTH ); 
 		add( editorScrollPane, java.awt.BorderLayout.CENTER );
 
 		setPreferredSize( new java.awt.Dimension( 350, 350 ) );

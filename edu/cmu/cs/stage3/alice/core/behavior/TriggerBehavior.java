@@ -58,7 +58,6 @@ public class TriggerBehavior extends Behavior {
 		trigger( System.currentTimeMillis()*0.001 );
 	}
 
-	
 	protected void internalSchedule( double time, double dt ) {
 		MultipleRuntimeResponsePolicy mrrp = (MultipleRuntimeResponsePolicy)multipleRuntimeResponsePolicy.getValue();
         Response.RuntimeResponse[] rra = getRuntimeResponseArray();

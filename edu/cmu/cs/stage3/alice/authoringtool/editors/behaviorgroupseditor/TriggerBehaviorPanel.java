@@ -53,30 +53,28 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
     
 	
     
-	
 	public void getHTML(StringBuffer toWriteTo, boolean useColor){
 		java.awt.Color bgColor = COLOR;
-		String strikeStart = ""; //$NON-NLS-1$
-		String strikeEnd = ""; //$NON-NLS-1$
+		String strikeStart = ""; 
+		String strikeEnd = ""; 
 		if (!m_behavior.isEnabled.booleanValue()){
-			bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"); //$NON-NLS-1$
-			strikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			strikeEnd = "</font></strike>"; //$NON-NLS-1$
+			bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTML"); 
+			strikeStart = "<strike><font color=\""+getHTMLColorString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("disabledHTMLText"))+"\">";   
+			strikeEnd = "</font></strike>"; 
 		}
 		
 		edu.cmu.cs.stage3.alice.core.Response response = (edu.cmu.cs.stage3.alice.core.Response)((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse.get();
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" colspan=\"2\">"+strikeStart); //$NON-NLS-1$ //$NON-NLS-2$
-		labelPanel.remove(lastLabel);
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" colspan=\"2\">"+strikeStart);  
+		labelPanel.remove(lastLabel);	// Aik Min - need work
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(labelPanel));
 		labelPanel.add(lastLabel, new java.awt.GridBagConstraints(labelPanel.getComponentCount(),0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
-		toWriteTo.append(strikeEnd+"</td>\n</tr>\n"); //$NON-NLS-1$
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("TriggerBehaviorPanel.0")+strikeEnd+"</td>\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">"); //$NON-NLS-1$ //$NON-NLS-2$
+		toWriteTo.append(strikeEnd+"</td>\n</tr>\n"); 
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("TriggerBehaviorPanel.0")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(triggerPanel));
-		toWriteTo.append("</table>\n</td>\n</tr>\n"); //$NON-NLS-1$
+		toWriteTo.append("</table>\n</td>\n</tr>\n"); 
 	}
 
-    
 	protected void removeAllListening(){
         super.removeAllListening();
         if (m_containingPanel != null ){
@@ -91,12 +89,10 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         }
     }
 
-    
 	public void release(){
         super.release();
     }
 
-    
 	protected void guiInit(){
         super.guiInit();
         if (m_containingPanel == null){
@@ -106,7 +102,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
             m_containingPanel.setBackground(COLOR);
             m_containingPanel.addMouseListener(behaviorMouseListener);
         }
-        this.remove(m_containingPanel);
+        this.remove(m_containingPanel);	// Aik Min - need work ?
         this.addDragSourceComponent(m_containingPanel);
         m_containingPanel.removeAll();
         if (labelPanel == null){
@@ -123,10 +119,10 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         int x = labelPanel.getComponentCount();
 		lastLabel = new javax.swing.JLabel();
         if (isSecondLine){
-        	lastLabel.setText(","); //$NON-NLS-1$
+        	lastLabel.setText(","); 
         }
         else{
-			lastLabel.setText(Messages.getString("TriggerBehaviorPanel.18")); //$NON-NLS-1$
+			lastLabel.setText(Messages.getString("TriggerBehaviorPanel.18")); 
         }
 		labelPanel.add(lastLabel, new java.awt.GridBagConstraints(x,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory triggerFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse);
@@ -134,7 +130,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         triggerPanel.addComponentListener(this);
         m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         if (isSecondLine){
-            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("TriggerBehaviorPanel.19")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); //$NON-NLS-1$
+            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("TriggerBehaviorPanel.19")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); 
             m_containingPanel.add(triggerPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         }
         else{

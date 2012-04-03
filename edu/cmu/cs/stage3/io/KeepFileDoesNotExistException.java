@@ -28,6 +28,6 @@ package edu.cmu.cs.stage3.io;
  */
 public class KeepFileDoesNotExistException extends Exception {
 	public KeepFileDoesNotExistException( String pathname, String filename ) {
-		super( "\'" + filename + Messages.getString("KeepFileDoesNotExistException.1") + pathname + Messages.getString("KeepFileDoesNotExistException.2") ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		super( "\'" + filename + Messages.getString("KeepFileDoesNotExistException.1") + pathname + Messages.getString("KeepFileDoesNotExistException.2") );   
 	}
 }

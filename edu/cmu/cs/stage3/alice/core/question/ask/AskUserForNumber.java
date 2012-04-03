@@ -38,7 +38,6 @@ public class AskUserForNumber extends edu.cmu.cs.stage3.alice.core.question.Numb
 
 	private edu.cmu.cs.stage3.alice.core.Clock m_clock;
 
-    
 	public Object getValue() {
 		if( m_clock != null ) {
 			m_clock.pause();
@@ -65,7 +64,6 @@ public class AskUserForNumber extends edu.cmu.cs.stage3.alice.core.question.Numb
 		}
     }
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		if( world != null ) {

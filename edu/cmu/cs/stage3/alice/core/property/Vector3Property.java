@@ -41,7 +41,6 @@ public class Vector3Property extends ObjectProperty {
 		}
 	}
 
-    
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {
         org.w3c.dom.Node xNode = node.getElementsByTagName( "x" ).item( 0 );
         org.w3c.dom.Node yNode = node.getElementsByTagName( "y" ).item( 0 );

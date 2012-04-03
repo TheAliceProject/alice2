@@ -27,9 +27,9 @@ package edu.cmu.cs.stage3.alice.scenegraph;
  * @author Dennis Cosgrove
  */
 public class IndexedTriangleArray extends VertexGeometry {
-	public static final Property INDICES_PROPERTY = new Property( IndexedTriangleArray.class, "INDICES" ); //$NON-NLS-1$
-	public static final Property INDEX_LOWER_BOUND_PROPERTY = new Property( IndexedTriangleArray.class, "INDEX_LOWER_BOUND" ); //$NON-NLS-1$
-	public static final Property INDEX_UPPER_BOUND_PROPERTY = new Property( IndexedTriangleArray.class, "INDEX_UPPER_BOUND" ); //$NON-NLS-1$
+	public static final Property INDICES_PROPERTY = new Property( IndexedTriangleArray.class, "INDICES" ); 
+	public static final Property INDEX_LOWER_BOUND_PROPERTY = new Property( IndexedTriangleArray.class, "INDEX_LOWER_BOUND" ); 
+	public static final Property INDEX_UPPER_BOUND_PROPERTY = new Property( IndexedTriangleArray.class, "INDEX_UPPER_BOUND" ); 
 
 	//public static final Property EDGES_PROPERTY = new Property( IndexedTriangleArray.class, "EDGES" );
 	//public static final Property SUBDIVISION_REFINEMENT_LEVEL_PROPERTY = new Property( IndexedTriangleArray.class, "SUBDIVISION_REFINEMENT_LEVEL" );
@@ -130,7 +130,7 @@ public class IndexedTriangleArray extends VertexGeometry {
 				indices[i] = dis.readInt();
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("IndexedTriangleArray.3") + version ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("IndexedTriangleArray.3") + version ); 
 		}
 		return indices;
 	}

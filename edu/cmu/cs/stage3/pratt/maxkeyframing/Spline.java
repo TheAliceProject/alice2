@@ -41,7 +41,7 @@ public abstract class Spline {
 					return 0;
 				}
 			} else {
-				throw new ClassCastException( Key.class.getName() + Messages.getString("Spline.0") ); //$NON-NLS-1$
+				throw new ClassCastException( Key.class.getName() + Messages.getString("Spline.0") ); 
 			}
 		}
 	};
@@ -56,7 +56,7 @@ public abstract class Spline {
 	}
 
 	protected boolean removeKey( Key key ) {
-		return keys.remove( key );
+		return keys.remove( key );	// Aik Min - need work
 	}
 
 	public void clearKeys() {
@@ -163,26 +163,26 @@ public abstract class Spline {
 	public String toString() {
 		StringBuffer repr = new StringBuffer();
 
-		repr.append( "{spline}" ); //$NON-NLS-1$
-		repr.append( "{splineType}" ); //$NON-NLS-1$
+		repr.append( "{spline}" ); 
+		repr.append( "{splineType}" ); 
 		repr.append( this.getClass().getName() );
-		repr.append( "{/splineType}" ); //$NON-NLS-1$
+		repr.append( "{/splineType}" ); 
 
-		repr.append( "{keys}" ); //$NON-NLS-1$
+		repr.append( "{keys}" ); 
 		for( java.util.Iterator iter = keys.iterator(); iter.hasNext(); ) {
 			Key key = (Key)iter.next();
-			repr.append( "{key}" ); //$NON-NLS-1$
-			repr.append( "{type}" ); //$NON-NLS-1$
+			repr.append( "{key}" ); 
+			repr.append( "{type}" ); 
 			repr.append( key.getClass().getName() );
-			repr.append( "{/type}" ); //$NON-NLS-1$
-			repr.append( "{data}" ); //$NON-NLS-1$
+			repr.append( "{/type}" ); 
+			repr.append( "{data}" ); 
 			repr.append( key.toString() );
-			repr.append( "{/data}" ); //$NON-NLS-1$
-			repr.append( "{/key}" ); //$NON-NLS-1$
+			repr.append( "{/data}" ); 
+			repr.append( "{/key}" ); 
 		}
-		repr.append( "{/keys}" ); //$NON-NLS-1$
+		repr.append( "{/keys}" ); 
 
-		repr.append( "{/spline}" ); //$NON-NLS-1$
+		repr.append( "{/spline}" ); 
 
 		return repr.toString();
 	}
@@ -203,7 +203,7 @@ public abstract class Spline {
 			addKeyMethod = null;
 			java.lang.reflect.Method[] methods = splineClass.getMethods();
 			for( int i = 0; i < methods.length; i++ ) {
-				if( methods[i].getName().equals( "addKey" ) ) { //$NON-NLS-1$
+				if( methods[i].getName().equals( "addKey" ) ) { 
 					addKeyMethod = methods[i];
 				}
 			}
@@ -219,7 +219,7 @@ public abstract class Spline {
 		}
 
 		if( addKeyMethod == null ) {
-			System.err.println( Messages.getString("Spline.14") + spline ); //$NON-NLS-1$
+			System.err.println( Messages.getString("Spline.14") + spline ); 
 			return null;
 		}
 
@@ -231,7 +231,7 @@ public abstract class Spline {
 
 			try {
 				Class keyClass = Class.forName( typeBlock.tokenContents );
-				java.lang.reflect.Method valueOfMethod = keyClass.getMethod( "valueOf", new Class[] { String.class } ); //$NON-NLS-1$
+				java.lang.reflect.Method valueOfMethod = keyClass.getMethod( "valueOf", new Class[] { String.class } ); 
 				Object key = valueOfMethod.invoke( null, new Object[] { dataBlock.tokenContents } );
 				addKeyMethod.invoke( spline, new Object[] { key } );
 			} catch( ClassNotFoundException e ) {

@@ -8,7 +8,6 @@ package edu.cmu.cs.stage3.alice.core.response;
 
 import javax.vecmath.Vector3d;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Limb;
 import edu.cmu.cs.stage3.alice.core.property.LimbProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;

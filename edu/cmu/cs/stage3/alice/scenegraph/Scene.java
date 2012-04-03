@@ -30,12 +30,12 @@ import edu.cmu.cs.stage3.math.Matrix44;
  * @author Dennis Cosgrove
  */
 public class Scene extends ReferenceFrame {
-	public static final Property BACKGROUND_PROPERTY = new Property( Scene.class, "BACKGROUND" ); //$NON-NLS-1$
+	public static final Property BACKGROUND_PROPERTY = new Property( Scene.class, "BACKGROUND" ); 
 	private Background m_background = null;
 	
 	protected void releasePass1() {
 		if( m_background != null ) {
-			warnln( Messages.getString("Scene.1") + this + Messages.getString("Scene.2") + m_background + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Scene.1") + this + Messages.getString("Scene.2") + m_background + "." );   
 			setBackground( null );
 		}
 		super.releasePass1();

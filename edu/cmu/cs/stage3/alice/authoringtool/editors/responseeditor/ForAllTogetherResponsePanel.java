@@ -38,18 +38,17 @@ public class ForAllTogetherResponsePanel extends ForEachInListSequentialLoopPane
 
     public ForAllTogetherResponsePanel(){
         super();
-        headerText = Messages.getString("ForAllTogetherResponsePanel.0"); //$NON-NLS-1$
-        endHeaderText = Messages.getString("ForAllTogetherResponsePanel.1"); //$NON-NLS-1$
-        middleHeaderText = Messages.getString("ForAllTogetherResponsePanel.2"); //$NON-NLS-1$
+        headerText = Messages.getString("ForAllTogetherResponsePanel.0"); 
+        endHeaderText = Messages.getString("ForAllTogetherResponsePanel.1"); 
+        middleHeaderText = Messages.getString("ForAllTogetherResponsePanel.2"); 
     }
 
     public void set(edu.cmu.cs.stage3.alice.core.response.ForEachTogether r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn) {
         super.set(r, authoringToolIn);
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
-        return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForAllTogether"); //$NON-NLS-1$
+        return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForAllTogether"); 
     }
 
 }

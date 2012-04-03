@@ -69,28 +69,28 @@ public class BoneSelectDialog extends javax.swing.JDialog {
         for (int i=0; i<possibilities.length; i++) {
             listOfStuff.addElement(possibilities[i]);
         }
-        promptLabel.setText(Messages.getString("BoneSelectDialog.0")+matching+"?"); //$NON-NLS-1$ //$NON-NLS-2$
+        promptLabel.setText(Messages.getString("BoneSelectDialog.0")+matching+"?");  
     }
 
     private void jbInit() throws Exception {
         this.getContentPane().setLayout(gridBagLayout1);
         partsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        selectButton.setText(Messages.getString("BoneSelectDialog.2")); //$NON-NLS-1$
+        selectButton.setText(Messages.getString("BoneSelectDialog.2")); 
         selectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 selectButton_actionPerformed(e);
             }
         });
-        skipButton.setText(Messages.getString("BoneSelectDialog.3")); //$NON-NLS-1$
+        skipButton.setText(Messages.getString("BoneSelectDialog.3")); 
         skipButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 skipButton_actionPerformed(e);
             }
         });
-        promptLabel.setText("jLabel1"); //$NON-NLS-1$
+        promptLabel.setText("jLabel1"); 
         this.setModal(true);
-        this.setTitle(Messages.getString("BoneSelectDialog.5")); //$NON-NLS-1$
-        limpButton.setText(Messages.getString("BoneSelectDialog.6")); //$NON-NLS-1$
+        this.setTitle(Messages.getString("BoneSelectDialog.5")); 
+        limpButton.setText(Messages.getString("BoneSelectDialog.6")); 
         limpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpButton_actionPerformed(e);

@@ -66,7 +66,6 @@ public class CopyMode extends DefaultMoveMode {
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( isButton1( ev ) ) {
 //			super.mouseReleased( ev );
@@ -94,7 +93,6 @@ public class CopyMode extends DefaultMoveMode {
 			undoRedoStack.stopCompound();
 		}
 	}
-	
 	
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
 		if( isButton1( ev ) ) {

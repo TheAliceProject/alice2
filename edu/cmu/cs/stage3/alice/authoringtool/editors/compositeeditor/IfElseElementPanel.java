@@ -73,7 +73,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
     }
 
 
-    
 	protected void setDropTargets(){
         headerLabel.setDropTarget(new java.awt.dnd.DropTarget( headerLabel, componentElementPanel));
         this.setDropTarget(new java.awt.dnd.DropTarget( this, ifElseDropHandler));
@@ -90,7 +89,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         elseEndBrace.setDropTarget(new java.awt.dnd.DropTarget( elseEndBrace, ifElseDropHandler));
     }
 
-    
 	protected void variableInit(){
         super.variableInit();
         if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
@@ -115,7 +113,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
     }
 
-    
 	public void release() {
         super.release();
         if (elseComponentPanel != null){
@@ -123,7 +120,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
 	}
 
-     
 	protected void startListening() {
 		super.startListening();
         if (m_condition != null){
@@ -131,7 +127,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
 	}
 
-	
 	protected void stopListening() {
         super.stopListening();
         if (m_condition != null){
@@ -139,7 +134,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
 	}
 
-    
 	public void goToSleep() {
         super.goToSleep();
         if (elseComponentPanel != null){
@@ -147,7 +141,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
 	}
 
-	
 	public void wakeUp() {
         super.wakeUp();
         if (elseComponentPanel != null){
@@ -155,17 +148,15 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
 	}
 
-	
 	public void clean() {
 		super.clean();
 		if( elseComponentPanel != null ) {
-			containingPanel.remove( elseComponentPanel );
+			containingPanel.remove( elseComponentPanel );	// Aik Min - need work
             elseComponentPanel.release();
 			elseComponentPanel = null;
 		}
 	}
 
-    
 	protected void removeAllListening(){
         super.removeAllListening();
         this.removeDragSourceComponent(elseComponentPanel);
@@ -174,7 +165,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         this.removeDragSourceComponent(elsePanel);
     }
 
-    
 	public void setHeaderLabel(){
         if (headerLabel != null){
             headerLabel.setText(headerText);
@@ -202,7 +192,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
 
     }
 
-    
 	public String getDots(){
         String dots = "";
         int elses = m_elseComponents.size();
@@ -217,7 +206,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         return dots;
     }
 
-    
 	protected void generateGUI(){
         super.generateGUI();
         if (elseGlue == null){
@@ -246,7 +234,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
     }
 
-    
 	protected void restoreDrag(){
         super.restoreDrag();
         this.addDragSourceComponent(endHeader);
@@ -256,7 +243,6 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         this.addDragSourceComponent(elseGlue);
     }
 
-    
 	protected void updateGUI(){
         setHeaderLabel();
         containingPanel.removeAll();
@@ -291,7 +277,7 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         this.setBackground(backgroundColor);
     }
 
-    
+
 	public void expandComponentElementPanel(){
         if (!isExpanded){
             m_element.data.put( IS_EXPANDED_KEY, Boolean.TRUE );
@@ -307,16 +293,15 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
     }
 
-    
 	public void reduceComponentElementPanel(){
         if (isExpanded){
             m_element.data.put( IS_EXPANDED_KEY, Boolean.FALSE );
             isExpanded = false;
             setHeaderLabel();
             expandButton.setIcon(plus);
-            containingPanel.remove(ifElsePanel);
+            containingPanel.remove(ifElsePanel);	// Aik Min - need work
             if (CompositeElementEditor.IS_JAVA){
-                containingPanel.remove(closeBrace);
+                containingPanel.remove(closeBrace);	// Aik Min - need work
             }
             this.revalidate();
          //   this.repaint();

@@ -40,7 +40,7 @@ public class ComponentElementPanel extends edu.cmu.cs.stage3.alice.authoringtool
 
     public ComponentElementPanel(){
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
-        this.remove(grip);
+        this.remove(grip);	// Aik Min - need work
     }
 
     public void set(edu.cmu.cs.stage3.alice.core.Element element) {
@@ -49,7 +49,7 @@ public class ComponentElementPanel extends edu.cmu.cs.stage3.alice.authoringtool
             this.add(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(m_element));
         }
         catch (Exception e){
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ComponentElementPanel.0"), e ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ComponentElementPanel.0"), e ); 
         }
        // edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel added = (edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel)this.getComponent(0);
     }

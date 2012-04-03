@@ -38,12 +38,10 @@ public class GenericBehaviorPanel extends BasicBehaviorPanel {
         super();
     }
 
-	
 	public void set(edu.cmu.cs.stage3.alice.core.Behavior behavior, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		super.set(behavior, authoringTool);
 	}
 
-    
 	protected void removeAllListening(){
         super.removeAllListening();
         if (m_containingPanel != null ){
@@ -52,7 +50,6 @@ public class GenericBehaviorPanel extends BasicBehaviorPanel {
         }
     }
 
-	
 	protected void guiInit(){
         super.guiInit();
         if (m_containingPanel == null){

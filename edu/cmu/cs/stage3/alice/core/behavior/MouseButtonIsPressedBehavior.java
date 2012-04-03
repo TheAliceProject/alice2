@@ -49,7 +49,6 @@ public class MouseButtonIsPressedBehavior extends AbstractConditionalBehavior im
 
 	private edu.cmu.cs.stage3.alice.core.RenderTarget[] m_renderTargets = null;
 
-	
 	public void manufactureAnyNecessaryDetails() {
 		if( details.size()==2 ) {
 			Question what = new PickQuestion();

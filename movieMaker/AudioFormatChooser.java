@@ -18,8 +18,8 @@ import com.sun.media.util.JMFI18N;
 
 public class AudioFormatChooser extends Panel implements ItemListener {
 
-    public static final String    ACTION_TRACK_ENABLED = "ACTION_AUDIO_TRACK_ENABLED"; //$NON-NLS-1$
-    public static final String    ACTION_TRACK_DISABLED = "ACTION_AUDIO_TRACK_DISABLED"; //$NON-NLS-1$
+    public static final String    ACTION_TRACK_ENABLED = "ACTION_AUDIO_TRACK_ENABLED"; 
+    public static final String    ACTION_TRACK_DISABLED = "ACTION_AUDIO_TRACK_DISABLED"; 
 
     private AudioFormat     formatOld;
     private Format          arrSupportedFormats [] = null;
@@ -244,7 +244,7 @@ public class AudioFormatChooser extends Panel implements ItemListener {
         this.setLayout ( new BorderLayout(6,6) );
         panel = this;
 
-        checkEnableTrack = new Checkbox ( Messages.getString("AudioFormatChooser.2"), true ); //$NON-NLS-1$
+        checkEnableTrack = new Checkbox ( Messages.getString("AudioFormatChooser.2"), true ); 
         checkEnableTrack.addItemListener ( this );
         if ( boolDisplayEnableTrack == true ) {
         	panelGroup = new Panel ( new BorderLayout() );
@@ -263,53 +263,53 @@ public class AudioFormatChooser extends Panel implements ItemListener {
         panelData = new Panel ( new GridLayout(0,1,6,6) );
         panelGroup.add ( panelData, BorderLayout.CENTER );
 
-        labelEncoding = new Label ( Messages.getString("AudioFormatChooser.3"), Label.LEFT ); //$NON-NLS-1$
+        labelEncoding = new Label ( Messages.getString("AudioFormatChooser.3"), Label.LEFT ); 
         panelLabel.add ( labelEncoding );
         comboEncoding = new Choice ();
         comboEncoding.addItemListener ( this );
         panelData.add ( comboEncoding );
 
-        labelSampleRate = new Label ( Messages.getString("AudioFormatChooser.4"), Label.LEFT ); //$NON-NLS-1$
+        labelSampleRate = new Label ( Messages.getString("AudioFormatChooser.4"), Label.LEFT ); 
         panelLabel.add ( labelSampleRate );
         panelEntry = new Panel ( new BorderLayout(6,6) );
         panelData.add ( panelEntry );
         comboSampleRate = new Choice ();
         comboSampleRate.addItemListener ( this );
         panelEntry.add ( comboSampleRate, BorderLayout.CENTER );
-        labelHz = new Label ( "Hz" ); //$NON-NLS-1$
+        labelHz = new Label ( "Hz" ); 
         panelEntry.add ( labelHz, BorderLayout.EAST );
 
-        labelBitsPerSample = new Label ( Messages.getString("AudioFormatChooser.6"), Label.LEFT ); //$NON-NLS-1$
+        labelBitsPerSample = new Label ( Messages.getString("AudioFormatChooser.6"), Label.LEFT ); 
         panelLabel.add ( labelBitsPerSample );
         panelEntry = new Panel ( new GridLayout(1,0,6,6) );
         panelData.add ( panelEntry );
         groupBitsPerSample = new CheckboxGroup ();
         
-        checkBits16 = new Checkbox ( Messages.getString("AudioFormatChooser.7"), groupBitsPerSample, false ); //$NON-NLS-1$
+        checkBits16 = new Checkbox ( Messages.getString("AudioFormatChooser.7"), groupBitsPerSample, false ); 
         checkBits16.addItemListener ( this );
         panelEntry.add ( checkBits16 );
 
-        labelChannels = new Label ( Messages.getString("AudioFormatChooser.8"), Label.LEFT ); //$NON-NLS-1$
+        labelChannels = new Label ( Messages.getString("AudioFormatChooser.8"), Label.LEFT ); 
         panelLabel.add ( labelChannels );
         panelEntry = new Panel ( new GridLayout(1,0,6,6) );
         panelData.add ( panelEntry );
         groupChannels = new CheckboxGroup ();
-        checkMono = new Checkbox ( Messages.getString("AudioFormatChooser.9"), groupChannels, false ); //$NON-NLS-1$
+        checkMono = new Checkbox ( Messages.getString("AudioFormatChooser.9"), groupChannels, false ); 
         checkMono.addItemListener ( this );
         panelEntry.add ( checkMono );
-        checkStereo = new Checkbox ( Messages.getString("AudioFormatChooser.10"), groupChannels, false ); //$NON-NLS-1$
+        checkStereo = new Checkbox ( Messages.getString("AudioFormatChooser.10"), groupChannels, false ); 
         checkStereo.addItemListener ( this );
         panelEntry.add ( checkStereo );
 
-        labelEndian = new Label ( JMFI18N.getResource("formatchooser.endian"), Label.LEFT ); //$NON-NLS-1$
+        labelEndian = new Label ( JMFI18N.getResource("formatchooser.endian"), Label.LEFT ); 
         panelLabel.add ( labelEndian );
         panelEntry = new Panel ( new GridLayout(1,0,6,6) );
         panelData.add ( panelEntry );
         groupEndian = new CheckboxGroup ();
-        checkEndianBig = new Checkbox ( JMFI18N.getResource("formatchooser.endian.big"), groupEndian, false ); //$NON-NLS-1$
+        checkEndianBig = new Checkbox ( JMFI18N.getResource("formatchooser.endian.big"), groupEndian, false ); 
         checkEndianBig.addItemListener ( this );
         panelEntry.add ( checkEndianBig );
-        checkEndianLittle = new Checkbox ( JMFI18N.getResource("formatchooser.endian.little"), groupEndian, false ); //$NON-NLS-1$
+        checkEndianLittle = new Checkbox ( JMFI18N.getResource("formatchooser.endian.little"), groupEndian, false ); 
         checkEndianLittle.addItemListener ( this );
         panelEntry.add ( checkEndianLittle );
 
@@ -319,7 +319,7 @@ public class AudioFormatChooser extends Panel implements ItemListener {
         panelGroup = new Panel ( new BorderLayout() );
         panel.add ( panelGroup, BorderLayout.NORTH );
 
-        checkSigned = new Checkbox ( JMFI18N.getResource("formatchooser.signed"), true ); //$NON-NLS-1$
+        checkSigned = new Checkbox ( JMFI18N.getResource("formatchooser.signed"), true ); 
         checkSigned.addItemListener ( this );
         panelGroup.add ( checkSigned, BorderLayout.WEST );
 
@@ -335,9 +335,9 @@ public class AudioFormatChooser extends Panel implements ItemListener {
         comboEncoding.setEnabled ( false );
         comboEncoding.removeAll ();
 
-        comboEncoding.addItem ( "LINEAR" ); //$NON-NLS-1$
-        vectorEncoding.addElement ( "LINEAR" ); //$NON-NLS-1$
-        comboEncoding.select ( "LINEAR" ); //$NON-NLS-1$
+        comboEncoding.addItem ( "LINEAR" ); 
+        vectorEncoding.addElement ( "LINEAR" ); 
+        comboEncoding.select ( "LINEAR" ); 
 
         updateFieldsFromEncoding ( formatDefault );
         comboEncoding.setEnabled ( boolEnable );

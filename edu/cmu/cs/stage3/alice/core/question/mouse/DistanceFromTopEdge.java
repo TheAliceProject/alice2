@@ -29,11 +29,9 @@ public class DistanceFromTopEdge extends edu.cmu.cs.stage3.alice.core.question.N
 	public final BooleanProperty relativeToRenderTarget = new BooleanProperty( this, "relativeToRenderTarget", Boolean.TRUE );
 	private static Class[] s_supportedCoercionClasses = { DistanceFromLeftEdge.class };
 	private edu.cmu.cs.stage3.alice.core.RenderTarget[] m_renderTargets = null;
-	
 	public Class[] getSupportedCoercionClasses() {
 		return s_supportedCoercionClasses;
 	}
-	
 	public Object getValue() {
 		java.awt.Point p = edu.cmu.cs.stage3.awt.AWTUtilities.getCursorLocation();
 		if( p!= null ) {
@@ -50,12 +48,10 @@ public class DistanceFromTopEdge extends edu.cmu.cs.stage3.alice.core.question.N
 			return null;
 		}
 	}
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		m_renderTargets = (edu.cmu.cs.stage3.alice.core.RenderTarget[])world.getDescendants( edu.cmu.cs.stage3.alice.core.RenderTarget.class );
 	}
-	
 	protected void stopped( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.stopped( world, time );
 		m_renderTargets = null;

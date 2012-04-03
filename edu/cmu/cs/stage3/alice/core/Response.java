@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public abstract class Response extends Code {

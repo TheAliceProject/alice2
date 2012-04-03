@@ -51,21 +51,21 @@ public class TokenBlock {
 		}
 		int openTokenStop = content.indexOf( '>', openTokenStart );
 		if( openTokenStop == -1 ) {
-			System.out.println( Messages.getString("TokenBlock.0") ); //$NON-NLS-1$
+			System.out.println( Messages.getString("TokenBlock.0") ); 
 			return null;
 		}
 
 		String tokenName = content.substring( openTokenStart + 1, openTokenStop ).trim();
 		String tokenArgs = new String();
 		/* modification to allow arguments in token name tags */
-		int whiteSpace = tokenName.indexOf(" "); //$NON-NLS-1$
+		int whiteSpace = tokenName.indexOf(" "); 
 		if ( whiteSpace != -1 ) {
 		    tokenArgs = tokenName.substring(whiteSpace + 1, tokenName.length()).trim();
 		    tokenName = tokenName.substring(0, whiteSpace);
 		}
-		int closeTokenStart = content.indexOf( "</" + tokenName + ">", openTokenStop ); //$NON-NLS-1$ //$NON-NLS-2$
+		int closeTokenStart = content.indexOf( "</" + tokenName + ">", openTokenStop );  
 		if( closeTokenStart == -1 ) {
-			System.out.println( Messages.getString("TokenBlock.4") + tokenName + Messages.getString("TokenBlock.5") ); //$NON-NLS-1$ //$NON-NLS-2$
+			System.out.println( Messages.getString("TokenBlock.4") + tokenName + Messages.getString("TokenBlock.5") );  
 			return null;
 		}
 

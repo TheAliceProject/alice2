@@ -83,7 +83,6 @@ public abstract class CompositeElementEditor extends GroupingPanel
         return compositeElementPanel;
     }
 
-    
 	public void setBackground(Color backgroundColor)
     {
         super.setBackground(backgroundColor);
@@ -93,8 +92,8 @@ public abstract class CompositeElementEditor extends GroupingPanel
 
     private void configInit()
     {
-        if(AuthoringToolResources.getMiscItem("javaLikeSyntax") != null) //$NON-NLS-1$
-            IS_JAVA = AuthoringToolResources.getMiscItem("javaLikeSyntax").equals("true"); //$NON-NLS-1$ //$NON-NLS-2$
+        if(AuthoringToolResources.getMiscItem("javaLikeSyntax") != null) 
+            IS_JAVA = AuthoringToolResources.getMiscItem("javaLikeSyntax").equals("true");  
     }
 
     public JComponent getJComponent()
@@ -132,7 +131,6 @@ public abstract class CompositeElementEditor extends GroupingPanel
         buttonPanel.setMinimumSize(new Dimension(0, 0));
         buttonPanel.setLayout(new FlowLayout(0) {
 
-            
 			public Dimension preferredLayoutSize(Container target)
             {
                 Insets insets = target.getParent().getInsets();
@@ -170,7 +168,6 @@ public abstract class CompositeElementEditor extends GroupingPanel
                 return new Dimension(target.getParent().getWidth() - (insets.left + insets.right), y + rowh + vgap);
             }
 
-            
 			public Dimension minimumLayoutSize(Container target)
             {
                 return preferredLayoutSize(target);
@@ -188,8 +185,8 @@ public abstract class CompositeElementEditor extends GroupingPanel
         mainElementContainer.setBackground(getEditorColor());
         setLayout(new BorderLayout());
         setBackground(getEditorColor());
-        add(buttonPanel, "South"); //$NON-NLS-1$
-        add(mainElementContainer, "Center"); //$NON-NLS-1$
+        add(buttonPanel, "South"); 
+        add(mainElementContainer, "Center"); 
         updateGui();
     }
 
@@ -202,18 +199,18 @@ public abstract class CompositeElementEditor extends GroupingPanel
             compositeElementPanel = createElementTree(elementBeingEdited);
             if(compositeElementPanel != null)
             {
-                mainElementContainer.add(compositeElementPanel, "Center"); //$NON-NLS-1$
+                mainElementContainer.add(compositeElementPanel, "Center"); 
                 setBackground(compositeElementPanel.getBackground());
             }
         } else
         {
-            JLabel emptyLabel = new JLabel(Messages.getString("CompositeElementEditor.6")); //$NON-NLS-1$
+            JLabel emptyLabel = new JLabel(Messages.getString("CompositeElementEditor.6")); 
             emptyLabel.setFont(emptyLabel.getFont().deriveFont(2));
             JPanel emptyPanel = new JPanel();
             emptyPanel.setLayout(new GridBagLayout());
             emptyPanel.setBackground(getBackground());
             emptyPanel.add(emptyLabel, new GridBagConstraints(0, 0, 1, 1, 0.0D, 0.0D, 10, 1, new Insets(0, 0, 0, 0), 0, 0));
-            mainElementContainer.add(emptyPanel, "Center"); //$NON-NLS-1$
+            mainElementContainer.add(emptyPanel, "Center"); 
         }
         revalidate();
         repaint();
@@ -346,7 +343,7 @@ public abstract class CompositeElementEditor extends GroupingPanel
     }
 
 
-    public final String editorName = Messages.getString("CompositeElementEditor.8"); //$NON-NLS-1$
+    public final String editorName = Messages.getString("CompositeElementEditor.8"); 
     protected Element elementBeingEdited;
     protected MainCompositeElementPanel compositeElementPanel;
     protected JPanel mainElementContainer;

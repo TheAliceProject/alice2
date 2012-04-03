@@ -34,12 +34,12 @@ import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
 
 public class BillboardBehavior extends InternalResponseBehavior implements edu.cmu.cs.stage3.alice.scenegraph.event.AbsoluteTransformationListener {
-	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); //$NON-NLS-1$
-	public final TransformableProperty target = new TransformableProperty( this, "target", null ); //$NON-NLS-1$
-	public final Vector3Property offset = new Vector3Property( this, "offset", null ); //$NON-NLS-1$
-	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null ); //$NON-NLS-1$
-	public final ReferenceFrameProperty asSeenBy = new ReferenceFrameProperty( this, "asSeenBy", null ); //$NON-NLS-1$
-	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); //$NON-NLS-1$
+	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); 
+	public final TransformableProperty target = new TransformableProperty( this, "target", null ); 
+	public final Vector3Property offset = new Vector3Property( this, "offset", null ); 
+	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null ); 
+	public final ReferenceFrameProperty asSeenBy = new ReferenceFrameProperty( this, "asSeenBy", null ); 
+	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); 
 
 	private Transformable m_subject;
 	private Transformable m_target;
@@ -50,11 +50,10 @@ public class BillboardBehavior extends InternalResponseBehavior implements edu.c
 
 	private boolean m_isDirty = false;
 
-	
 	protected void propertyChanging( edu.cmu.cs.stage3.alice.core.Property property, Object value ) {
 		if( property == target ) {
 			if( value == subject.get() ) {
-				throw new IllegalArgumentException( Messages.getString("BillboardBehavior.6") ); //$NON-NLS-1$
+				throw new IllegalArgumentException( Messages.getString("BillboardBehavior.6") ); 
 			}
 		} else {
 			super.propertyChanging( property, value );
@@ -73,7 +72,6 @@ public class BillboardBehavior extends InternalResponseBehavior implements edu.c
 		m_isDirty = true;
 	}
 
-	
 	public void internalSchedule( double time, double dt ) {
 		if( m_isDirty ) {
 			if( m_subject != null && m_target != null ) {
@@ -83,7 +81,6 @@ public class BillboardBehavior extends InternalResponseBehavior implements edu.c
 		}
 	}
 
-	
 	public void started( World world, double time ) {
 		super.started( world, time );
 		m_subject = subject.getTransformableValue();

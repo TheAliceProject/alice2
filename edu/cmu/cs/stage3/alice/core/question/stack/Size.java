@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.stack;
 
 public class Size extends StackNumberQuestion {
-	
 	public int getValue( edu.cmu.cs.stage3.alice.core.Stack stackValue ) {
 		return stackValue.size();
 	}

@@ -48,7 +48,6 @@ public class ScenegraphImporter extends AbstractImporter {
 		return map;
     }
 
-	
 	protected Element load(InputStream is, String ext) throws java.io.IOException {
         edu.cmu.cs.stage3.alice.scenegraph.Component sgSrc = edu.cmu.cs.stage3.alice.scenegraph.io.XML.load( is );
         return edu.cmu.cs.stage3.alice.core.util.ScenegraphConverter.convert( (edu.cmu.cs.stage3.alice.scenegraph.Container)sgSrc );

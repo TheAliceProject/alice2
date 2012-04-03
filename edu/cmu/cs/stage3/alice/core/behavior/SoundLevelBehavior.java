@@ -76,7 +76,6 @@ public class SoundLevelBehavior extends TriggerBehavior implements ControllerLis
         this.multipleRuntimeResponsePolicy.set(edu.cmu.cs.stage3.alice.core.behavior.MultipleRuntimeResponsePolicy.IGNORE_MULTIPLE);
     }
 
-	
 	public void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 
@@ -174,7 +173,6 @@ public class SoundLevelBehavior extends TriggerBehavior implements ControllerLis
         player.start();
     }
 
-	
 	public void stopped( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.stopped( world, time );
         try {

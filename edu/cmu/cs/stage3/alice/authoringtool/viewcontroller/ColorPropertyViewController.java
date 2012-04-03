@@ -64,7 +64,6 @@ public class ColorPropertyViewController extends PropertyViewController {
 		return toReturn;
 	}
 		
-	
 	public void getHTML(StringBuffer toWriteTo){
 		if (property.get() instanceof edu.cmu.cs.stage3.alice.scenegraph.Color){
 			edu.cmu.cs.stage3.alice.scenegraph.Color color = (edu.cmu.cs.stage3.alice.scenegraph.Color)property.get();
@@ -83,22 +82,18 @@ public class ColorPropertyViewController extends PropertyViewController {
 	}
 	
 
-	
 	protected java.awt.Component getNativeComponent() {
 		return strut;
 	}
 
-	
 	protected Class getNativeClass() {
 		return edu.cmu.cs.stage3.alice.scenegraph.Color.class;
 	}
 
-	
 	protected void updateNativeComponent() {
 		setBackground( ((edu.cmu.cs.stage3.alice.scenegraph.Color)property.getValue()).createAWTColor() );
 	}
 
-	
 	protected void refreshGUI() {
 		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyViewControllerBackground" ) );
 		super.refreshGUI();

@@ -78,7 +78,7 @@ public class AnimationPanel extends JComponent
     // loop through the files
     for (int i = 0; i < fileArray.length; i++)
     {
-      if (fileArray[i].indexOf(".jpg") >= 0) //$NON-NLS-1$
+      if (fileArray[i].indexOf(".jpg") >= 0) 
       {
         
         imageIcon = new ImageIcon(directory + fileArray[i]);
@@ -240,7 +240,7 @@ public class AnimationPanel extends JComponent
       f = new File((String)nameList.get(i));
       result = f.delete();
       if (result != true)
-        System.out.println(Messages.getString("AnimationPanel.1") + //$NON-NLS-1$
+        System.out.println(Messages.getString("AnimationPanel.1") + 
                            nameList.get(i));
       imageList.remove(0);
     }
@@ -260,7 +260,7 @@ public class AnimationPanel extends JComponent
       f = new File((String)nameList.get(index++));
       result = f.delete();
       if (result != true)
-        System.out.println(Messages.getString("AnimationPanel.2") + //$NON-NLS-1$
+        System.out.println(Messages.getString("AnimationPanel.2") + 
                            nameList.get(index-1));
       imageList.remove(i);
     }
@@ -283,7 +283,7 @@ public class AnimationPanel extends JComponent
 public void paintComponent(Graphics g)
   {
     if (imageList.size() == 0)
-      g.drawString(Messages.getString("AnimationPanel.3"),20,20); //$NON-NLS-1$
+      g.drawString(Messages.getString("AnimationPanel.3"),20,20); 
     else
       draw(g);
   }
@@ -294,7 +294,7 @@ public void paintComponent(Graphics g)
   public static void main(String[] args)
   {
     JFrame frame = new JFrame();
-    AnimationPanel panel = new AnimationPanel("c:/intro-prog-java/mediasources/fish/"); //$NON-NLS-1$
+    AnimationPanel panel = new AnimationPanel("c:/intro-prog-java/mediasources/fish/"); 
     frame.getContentPane().add(panel);
     frame.pack();
     frame.setVisible(true);

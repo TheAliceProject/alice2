@@ -54,9 +54,9 @@ public abstract class AbstractFontPanel extends javax.swing.JPanel {
 		javax.swing.JScrollPane textScrollPane = new javax.swing.JScrollPane();
 		textScrollPane.getViewport().add(textArea, null);
 
-		add( new javax.swing.JLabel( Messages.getString("AbstractFontPanel.0") ), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0, 0, 4, 4), 0, 0)); //$NON-NLS-1$
+		add( new javax.swing.JLabel( Messages.getString("AbstractFontPanel.0") ), new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0, 0, 4, 4), 0, 0)); 
 		add( textScrollPane, new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH, new Insets(0, 0, 4, 0), 0, 0));
-		add( new javax.swing.JLabel( Messages.getString("AbstractFontPanel.1") ), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 4), 0, 0)); //$NON-NLS-1$
+		add( new javax.swing.JLabel( Messages.getString("AbstractFontPanel.1") ), new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 4), 0, 0)); 
 		add( fontChooser, new GridBagConstraints(1, 1, 1, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 		setPreferredSize( new java.awt.Dimension( 500, 200 ) );

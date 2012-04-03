@@ -11,7 +11,6 @@ public class CollisionBehavior extends TriggerBehavior {
 	public final CollectionProperty a = new CollectionProperty( this, "a", null );
 	public final CollectionProperty b = new CollectionProperty( this, "b", null );
 
-	
 	public void manufactureDetails() {
 		super.manufactureDetails();
 	}

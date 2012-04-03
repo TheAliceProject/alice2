@@ -299,12 +299,10 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 			//return PopupMenuUtilities.makeFlatElementStructure( element.getRoot(), new edu.cmu.cs.stage3.alice.core.criterion.ExpressionIsAssignableToCriterion( PropertyCellEditor.this.currentValueClass ), objectRunnableFactory );
 		}
 
-		
 		public Object getCellEditorValue() {
 			return currentObject;
 		}
 
-		
 		public java.awt.Component getTableCellEditorComponent( javax.swing.JTable table, Object value, boolean isSelected, int row, int column ) {
 			currentObject = value;
 			return editorComponent;
@@ -325,7 +323,6 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 	}
 
 	class EnumerableEditor extends DefaultEditor {
-		
 		protected java.util.Vector createPopupStructure() {
 			java.util.Vector structure = new java.util.Vector();
 			edu.cmu.cs.stage3.util.Enumerable[] items = edu.cmu.cs.stage3.util.Enumerable.getItems( PropertyCellEditor.this.currentValueClass );
@@ -373,7 +370,6 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 			}
 		};
 
-		
 		protected javax.swing.JPopupMenu createPopupMenu() {
 			javax.swing.JMenu menu = new javax.swing.JMenu( "" );
 
@@ -437,7 +433,6 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 			return menu.getPopupMenu();
 		}
 
-		
 		public java.awt.Component getTableCellEditorComponent( javax.swing.JTable table, Object value, boolean isSelected, int row, int column ) {
 			if( value instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
 				edu.cmu.cs.stage3.alice.scenegraph.Color c = (edu.cmu.cs.stage3.alice.scenegraph.Color)value;
@@ -448,7 +443,6 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 	}
 
 	class ElementEditor extends DefaultEditor {
-		
 		protected java.util.Vector createPopupStructure() {
 			/*
 			if( PropertyCellEditor.this.currentValueClass == edu.cmu.cs.stage3.alice.core.Expression.class ) {
@@ -554,12 +548,10 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 			);
 		}
 
-		
 		public Object getCellEditorValue() {
 			return currentNumber;
 		}
 
-		
 		public java.awt.Component getTableCellEditorComponent( javax.swing.JTable table, Object value, boolean isSelected, int row, int column ) {
 			currentNumber = value;
 
@@ -596,7 +588,6 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 	}
 
 	class BooleanEditor extends DefaultEditor {
-		
 		protected java.util.Vector createPopupStructure() {
 			java.util.Vector structure = new java.util.Vector();
 

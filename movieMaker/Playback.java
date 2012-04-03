@@ -100,7 +100,7 @@ public void run()
     AudioInputStream audioInputStream = sound.makeAIS();
     if(audioInputStream == null)
     {
-      shutDown(Messages.getString("Playback.0"), null); //$NON-NLS-1$
+      shutDown(Messages.getString("Playback.0"), null); 
       return;
     }
     
@@ -108,7 +108,7 @@ public void run()
     try {
       audioInputStream.reset();
     } catch(Exception e) {
-      shutDown(Messages.getString("Playback.1"), e); //$NON-NLS-1$
+      shutDown(Messages.getString("Playback.1"), e); 
       return;
     }
     
@@ -118,7 +118,7 @@ public void run()
                                            audioFileFormat.getFormat());
     if(!AudioSystem.isLineSupported(info))
     {
-      shutDown(Messages.getString("Playback.2") + info + Messages.getString("Playback.3"), null); //$NON-NLS-1$ //$NON-NLS-2$
+      shutDown(Messages.getString("Playback.2") + info + Messages.getString("Playback.3"), null);  
       return;
     }
     
@@ -129,7 +129,7 @@ public void run()
         line.addLineListener(soundExplorer);
       line.open(audioFileFormat.getFormat(), BUFFER_SIZE);
     } catch(LineUnavailableException e) {
-      shutDown(Messages.getString("Playback.4"), e); //$NON-NLS-1$
+      shutDown(Messages.getString("Playback.4"), e); 
       return;
     }
     
@@ -160,7 +160,7 @@ public void run()
             line.write(data, 0, numBytesRemaining);
         }//while
       } catch(Exception e) {
-        shutDown(Messages.getString("Playback.5"), e); //$NON-NLS-1$
+        shutDown(Messages.getString("Playback.5"), e); 
         break;
       }//catch
     }//while
@@ -176,7 +176,7 @@ public void run()
     line = null;
     shutDown(null, null);
     if(sound.getDEBUG())
-      System.out.println(Messages.getString("Playback.6")); //$NON-NLS-1$
+      System.out.println(Messages.getString("Playback.6")); 
     /*
      this thread is about to die.  remove itself from the collection
      of threads playing this sound

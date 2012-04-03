@@ -29,8 +29,8 @@ import edu.cmu.cs.stage3.alice.core.property.DirectionProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public abstract class DirectionAmountTransformAnimation extends TransformAnimation {
-	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() ); //$NON-NLS-1$
-	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); //$NON-NLS-1$
+	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() ); 
+	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); 
 	protected abstract Direction getDefaultDirection();
 	protected abstract boolean acceptsDirection( Direction direction );
 	
@@ -41,7 +41,7 @@ public abstract class DirectionAmountTransformAnimation extends TransformAnimati
 				if( acceptsDirection( (Direction)value ) ) {
 					//pass
 				} else {
-					throw new RuntimeException( this + Messages.getString("DirectionAmountTransformAnimation.2") + value ); //$NON-NLS-1$
+					throw new RuntimeException( this + Messages.getString("DirectionAmountTransformAnimation.2") + value ); 
 				}
 			}
 		} else {
@@ -54,7 +54,7 @@ public abstract class DirectionAmountTransformAnimation extends TransformAnimati
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( DirectionAmountTransformAnimation.this.direction.getDirectionValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("DirectionAmountTransformAnimation.3"), null, DirectionAmountTransformAnimation.this.direction ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("DirectionAmountTransformAnimation.3"), null, DirectionAmountTransformAnimation.this.direction ); 
 			}
 			//if( DirectionAmountTransformAnimation.this.amount.getValue() == null ) {
 			//	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "amount value must not be null.", null, DirectionAmountTransformAnimation.this.amount );

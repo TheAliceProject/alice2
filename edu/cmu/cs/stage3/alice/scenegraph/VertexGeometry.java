@@ -27,9 +27,9 @@ package edu.cmu.cs.stage3.alice.scenegraph;
  * @author Dennis Cosgrove
  */
 public abstract class VertexGeometry extends Geometry {
-	public static final Property VERTICES_PROPERTY = new Property( VertexGeometry.class, "VERTICES" ); //$NON-NLS-1$
-	public static final Property VERTEX_LOWER_BOUND_PROPERTY = new Property( VertexGeometry.class, "VERTEX_LOWER_BOUND" ); //$NON-NLS-1$
-	public static final Property VERTEX_UPPER_BOUND_PROPERTY = new Property( VertexGeometry.class, "VERTEX_UPPER_BOUND" ); //$NON-NLS-1$
+	public static final Property VERTICES_PROPERTY = new Property( VertexGeometry.class, "VERTICES" ); 
+	public static final Property VERTEX_LOWER_BOUND_PROPERTY = new Property( VertexGeometry.class, "VERTEX_LOWER_BOUND" ); 
+	public static final Property VERTEX_UPPER_BOUND_PROPERTY = new Property( VertexGeometry.class, "VERTEX_UPPER_BOUND" ); 
 	private Vertex3d[] m_vertices = null;
 	private int m_vertexLowerBound = 0;
 	private int m_vertexUpperBound = -1;
@@ -57,7 +57,7 @@ public abstract class VertexGeometry extends Geometry {
                 javax.vecmath.Vector3d maximum = new javax.vecmath.Vector3d( max.x, max.y, max.z );
                 m_boundingBox = new edu.cmu.cs.stage3.math.Box( minimum, maximum );
             } else {
-                throw new RuntimeException( this + Messages.getString("VertexGeometry.3") ); //$NON-NLS-1$
+                throw new RuntimeException( this + Messages.getString("VertexGeometry.3") ); 
                 //m_boundingBox = null;
             }
 		} else {
@@ -217,7 +217,7 @@ public abstract class VertexGeometry extends Geometry {
 				}
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("VertexGeometry.4") + version ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("VertexGeometry.4") + version ); 
 		}
 		return vertices;
 	}

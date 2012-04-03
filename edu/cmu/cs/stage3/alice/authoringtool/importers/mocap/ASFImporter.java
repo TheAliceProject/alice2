@@ -50,7 +50,6 @@ public class ASFImporter extends AbstractImporter {
         skel = new ASFSkeleton();
     }
 
-    
 	public Map getExtensionMap() {
 		java.util.HashMap map = new java.util.HashMap();
 		map.put( "ASF", "Acclaim Skeleton File" );
@@ -275,7 +274,6 @@ public class ASFImporter extends AbstractImporter {
 
     }
 
-	
 	protected Element load(InputStream is, String ext) throws java.io.IOException {
 	    return parseASF(is);
     }

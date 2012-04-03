@@ -44,7 +44,6 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
         renderTarget.addKeyListener( ((KeyMapping)keyMap.get()) );
     }
 
-	
 	public void started( World world, double time ) {
 		super.started( world, time );
 		if( isEnabled.booleanValue() ) {
@@ -69,7 +68,6 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
 		}
 	}
 
-	
 	public void stopped( World world, double time ) {
 		super.stopped( world, time );
 		if( isEnabled.booleanValue() ) {
@@ -77,7 +75,6 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
 		}
 	}
 
-	
 	public void internalSchedule( double time, double dt ) {
 		KeyMapping keyMapping = (KeyMapping)keyMap.getElementValue();
 		int actions;

@@ -37,9 +37,9 @@ public class EditObjectButton extends javax.swing.JButton implements edu.cmu.cs.
 	public EditObjectButton() {
 		setBackground( new java.awt.Color( 240, 240, 255 ) );
 		setMargin( new java.awt.Insets( 0, 2, 0, 2 ) );
-		setText( Messages.getString("EditObjectButton.0") ); //$NON-NLS-1$
-		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
-		setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, (int)(11*fontSize/12.0) ) ); //$NON-NLS-1$
+		setText( Messages.getString("EditObjectButton.0") ); 
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); 
+		setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, (int)(11*fontSize/12.0) ) ); 
 		setFocusPainted( false );
 		setBorder( new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource( new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder() ) );
 //		setBorder( new javax.swing.plaf.metal.MetalBorders.ButtonBorder() {
@@ -58,10 +58,10 @@ public class EditObjectButton extends javax.swing.JButton implements edu.cmu.cs.
 							authoringTool.editObject( object );
 						}
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditObjectButton.3"), null ); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditObjectButton.3"), null ); 
 					}
 				} else {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditObjectButton.4"), null ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditObjectButton.4"), null ); 
 				}
 			}
 		} );
@@ -111,7 +111,6 @@ public class EditObjectButton extends javax.swing.JButton implements edu.cmu.cs.
 //		protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder( raisedBevel, spacer );
 //		protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder( loweredBevel, spacer );
 
-		
 		public void paintBorder( java.awt.Component c, java.awt.Graphics g, int x, int y, int w, int h ) {
 			javax.swing.JButton button = (javax.swing.JButton)c;
 			javax.swing.ButtonModel model = button.getModel();
@@ -127,7 +126,6 @@ public class EditObjectButton extends javax.swing.JButton implements edu.cmu.cs.
 			}
 		}
 
-		
 		public java.awt.Insets getBorderInsets( java.awt.Component c ) {
 			return insets;
 		}
@@ -138,7 +136,6 @@ public class EditObjectButton extends javax.swing.JButton implements edu.cmu.cs.
 			super( type );
 		}
 
-		
 		public java.awt.Color getHighlightInnerColor( java.awt.Component c ) {
 			return c.getBackground();
 		}

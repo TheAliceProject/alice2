@@ -35,7 +35,7 @@ import edu.cmu.cs.stage3.alice.core.response.Print;
  */
 
 public class ToStringQuestion extends Question {
-    public final ObjectProperty what = new ObjectProperty( this, "what", new String( "" ),Object.class ) { //$NON-NLS-1$ //$NON-NLS-2$
+    public final ObjectProperty what = new ObjectProperty( this, "what", new String( "" ),Object.class ) {  
 		
 		protected boolean getValueOfExpression() {
 			return true;
@@ -50,48 +50,48 @@ public class ToStringQuestion extends Question {
     	Object value = what.getValue();
     	Object o = what.get();
 		if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart)
-			Print.outputtext = Messages.getString("ToStringQuestion.2"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.2"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.Year)
-			Print.outputtext = Messages.getString("ToStringQuestion.3"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.3"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.MonthOfYear)
-			Print.outputtext = Messages.getString("ToStringQuestion.4"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.4"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfYear)
-			Print.outputtext = Messages.getString("ToStringQuestion.5"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.5"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfMonth)
-			Print.outputtext = Messages.getString("ToStringQuestion.6"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.6"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfWeek)
-			Print.outputtext = Messages.getString("ToStringQuestion.7"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.7"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.DayOfWeekInMonth)
-			Print.outputtext = Messages.getString("ToStringQuestion.8"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.8"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.IsAM)
-			Print.outputtext = Messages.getString("ToStringQuestion.9"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.9"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.IsPM)
-			Print.outputtext = Messages.getString("ToStringQuestion.10"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.10"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.HourOfAMOrPM)
-			Print.outputtext = Messages.getString("ToStringQuestion.11"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.11"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.HourOfDay)
-			Print.outputtext = Messages.getString("ToStringQuestion.12"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.12"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.MinuteOfHour)
-			Print.outputtext = Messages.getString("ToStringQuestion.13"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.13"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.SecondOfMinute)
-			Print.outputtext = Messages.getString("ToStringQuestion.14"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.14"); 
 		// Mouse
 		else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromLeftEdge)
-			Print.outputtext = Messages.getString("ToStringQuestion.15"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.15"); 
 		else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromTopEdge)
-			Print.outputtext = Messages.getString("ToStringQuestion.16"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.16"); 
 		//Ask User
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserForNumber)
-			Print.outputtext = Messages.getString("ToStringQuestion.17"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.17"); 
 		else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserYesNo)
-			Print.outputtext = Messages.getString("ToStringQuestion.18"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.18"); 
 		else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.ask.AskUserForString)
-			Print.outputtext = Messages.getString("ToStringQuestion.19"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.19"); 
 		//Random
 		else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.RandomNumber)
-			Print.outputtext = Messages.getString("ToStringQuestion.20"); //$NON-NLS-1$
+			Print.outputtext = Messages.getString("ToStringQuestion.20"); 
 		else if (Print.outputtext != null)
-			Print.outputtext = Print.outputtext.substring(0, Print.outputtext.length()-4)+Messages.getString("ToStringQuestion.21"); //$NON-NLS-1$
+			Print.outputtext = Print.outputtext.substring(0, Print.outputtext.length()-4)+Messages.getString("ToStringQuestion.21"); 
 
 		if( value instanceof Element ) {
 			return ((Element)value).getTrimmedKey();

@@ -27,8 +27,8 @@ import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public abstract class BinaryNumberResultingInBooleanQuestion extends BooleanQuestion {
-	public final NumberProperty a = new NumberProperty( this, "a", new Double( 0 ) ); //$NON-NLS-1$
-	public final NumberProperty b = new NumberProperty( this, "b", new Double( 0 ) ); //$NON-NLS-1$
+	public final NumberProperty a = new NumberProperty( this, "a", new Double( 0 ) ); 
+	public final NumberProperty b = new NumberProperty( this, "b", new Double( 0 ) ); 
 	protected abstract boolean getValue( double a, double b );
 	
 	public Object getValue() {
@@ -36,22 +36,22 @@ public abstract class BinaryNumberResultingInBooleanQuestion extends BooleanQues
 		double bValue = b.doubleValue();
 		if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsEqualTo){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				aValue + " == " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		 //$NON-NLS-1$ //$NON-NLS-2$
+				aValue + " == " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsNotEqualTo){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				aValue + " != " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		 //$NON-NLS-1$ //$NON-NLS-2$
+				aValue + " != " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsGreaterThan){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				aValue + " > " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		 //$NON-NLS-1$ //$NON-NLS-2$
+				aValue + " > " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsGreaterThanOrEqualTo){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				aValue + " >= " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		 //$NON-NLS-1$ //$NON-NLS-2$
+				aValue + " >= " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsLessThan){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				aValue + " <= " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		 //$NON-NLS-1$ //$NON-NLS-2$
+				aValue + " <= " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsLessThanOrEqualTo){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				aValue + " <= " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		 //$NON-NLS-1$ //$NON-NLS-2$
+				aValue + " <= " + bValue + Messages.getString("BinaryNumberResultingInBooleanQuestion.3");		  
 		}
 		if( getValue( aValue , bValue ) ) {
 			return Boolean.TRUE;

@@ -41,7 +41,6 @@ public class ResponsePrototype extends ElementPrototype {
 
 	// a rather inelegant solution for creating copies of the correct type.
 	// subclasses should override this method and call their own constructor
-	
 	protected ElementPrototype createInstance( Class elementClass, edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues, String[] desiredProperties ) {
 		return new ResponsePrototype( elementClass, knownPropertyValues, desiredProperties );
 	}

@@ -38,7 +38,6 @@ public class BackslashConverterFilterInputStream extends java.io.FilterInputStre
 		this.newChar = newChar;
 	}
 
-	
 	public int read() throws java.io.IOException {
 		int c = super.read();
 		if( c == '\\' ) {
@@ -47,7 +46,6 @@ public class BackslashConverterFilterInputStream extends java.io.FilterInputStre
 		return c;
 	}
 
-	
 	public int read( byte[] b, int off, int len ) throws java.io.IOException {
 		int result = super.read( b, off, len );
 		for( int i = 0; i < result; i++ ) {

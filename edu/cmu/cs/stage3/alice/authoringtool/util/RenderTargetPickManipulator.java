@@ -157,7 +157,6 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		popupEnabled = b;
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev ) {
 		if( enabled ) {
 			super.mousePressed( ev );
@@ -224,13 +223,11 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( (! isActionAborted()) && hideCursorOnDrag && doWrap ) {
 			ev.getComponent().setCursor( savedCursor );
 			//TODO: position mouse based on object of interest's position in the picture plane;  for now, it does a rough approximation
 			java.awt.Point tempPoint = ev.getPoint();
-
 			javax.swing.SwingUtilities.convertPointToScreen( tempPoint, ev.getComponent() );
 			javax.swing.SwingUtilities.convertPointToScreen( originalMousePoint, ev.getComponent() );
 			edu.cmu.cs.stage3.awt.AWTUtilities.setCursorLocation( tempPoint.x, originalMousePoint.y);
@@ -251,7 +248,6 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		super.mouseReleased( ev );
 	}
 
-	
 	public void abortAction() {
 		component.setCursor( savedCursor );
 		super.abortAction();
@@ -277,7 +273,6 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 			public void run() {}
 		};
 
-		
 		protected void popupResponse( java.awt.event.MouseEvent e ) {
 			if( lastEPickedTransformable != null ) {
 				javax.swing.JPopupMenu popup = createPopup( lastEPickedTransformable );

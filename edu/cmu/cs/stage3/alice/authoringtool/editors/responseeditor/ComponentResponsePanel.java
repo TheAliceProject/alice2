@@ -41,7 +41,6 @@ public class ComponentResponsePanel extends edu.cmu.cs.stage3.alice.authoringtoo
         this.remove(grip);
     }
 
-    
 	public void set(edu.cmu.cs.stage3.alice.core.Element element) {
         if (element instanceof edu.cmu.cs.stage3.alice.core.Response){
             m_response = (edu.cmu.cs.stage3.alice.core.Response)element;

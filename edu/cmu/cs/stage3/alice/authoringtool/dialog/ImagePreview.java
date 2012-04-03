@@ -43,7 +43,7 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 	
 	public ImagePreview(JFileChooser fc) {
 		setPreferredSize(new Dimension(300, 300));
-		setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12 )); //$NON-NLS-1$
+		setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12 )); 
 		fc.addPropertyChangeListener(this);
 	}
 
@@ -103,7 +103,7 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 			}
 
 			thumbnail.paintIcon(this, g, x, y);
-			g.drawString(Messages.getString("ImagePreview.1") + width + " x " + height, 50, 30); //$NON-NLS-1$ //$NON-NLS-2$
+			g.drawString(Messages.getString("ImagePreview.1") + width + " x " + height, 50, 30);  
 
 		}
 	}

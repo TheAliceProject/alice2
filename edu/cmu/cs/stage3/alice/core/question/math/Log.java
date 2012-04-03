@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.math;
 
 public class Log extends edu.cmu.cs.stage3.alice.core.question.UnaryNumberResultingInNumberQuestion {
-	
 	protected double getValue( double aValue ) {
 		return Math.log( aValue );
 	}

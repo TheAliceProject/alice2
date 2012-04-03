@@ -29,7 +29,6 @@ import edu.cmu.cs.stage3.alice.core.camera.PerspectiveCamera;
 public class PerspectiveViewVolumeDecorator extends ViewVolumeDecorator {
 	private PerspectiveCamera m_perspectiveCamera = null;
 
-	
 	protected Camera getCamera() {
 		return getPerspectiveCamera();
 	}

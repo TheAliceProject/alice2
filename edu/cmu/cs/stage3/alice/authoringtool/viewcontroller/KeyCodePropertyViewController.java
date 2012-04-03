@@ -34,17 +34,14 @@ public class KeyCodePropertyViewController extends PropertyViewController {
 		refreshGUI();
 	}
 
-	
 	protected java.awt.Component getNativeComponent() {
 		return keyLabel;
 	}
 
-	
 	protected Class getNativeClass() {
 		return Integer.class;
 	}
 
-	
 	protected void updateNativeComponent() {
 		javax.swing.ImageIcon icon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( property.get() );
 		if( icon != null ) {
@@ -55,7 +52,6 @@ public class KeyCodePropertyViewController extends PropertyViewController {
 			keyLabel.setIcon( null );
 		}
 	}
-	
 	
 	public void getHTML(StringBuffer toWriteTo){
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property.get(), property, property.getOwner().data ) );

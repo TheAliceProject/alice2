@@ -39,11 +39,11 @@ public abstract class RotateAtSpeed extends DirectionSpeedTransformResponse {
 			Direction directionValue = RotateAtSpeed.this.direction.getDirectionValue();
 			m_axis = getAxis( directionValue );
 			if( m_axis == null ) {
-				StringBuffer sb = new StringBuffer( Messages.getString("RotateAtSpeed.0") ); //$NON-NLS-1$
+				StringBuffer sb = new StringBuffer( Messages.getString("RotateAtSpeed.0") ); 
 				if( directionValue != null ) {
 					sb.append( directionValue.getRepr() );
 				} else {
-					sb.append( Messages.getString("RotateAtSpeed.1") ); //$NON-NLS-1$
+					sb.append( Messages.getString("RotateAtSpeed.1") ); 
 				}
 				sb.append( '.' );
 				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( sb.toString(), null, RotateAtSpeed.this.direction );

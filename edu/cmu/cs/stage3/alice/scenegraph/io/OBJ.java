@@ -33,7 +33,7 @@ public class OBJ {
 				double f = streamTokenizer.nval;
 				streamTokenizer.nextToken();
 				if (streamTokenizer.ttype==java.io.StreamTokenizer.TT_WORD ) {
-					if( streamTokenizer.sval.startsWith( "E" ) ) { //$NON-NLS-1$
+					if( streamTokenizer.sval.startsWith( "E" ) ) { 
 						int exponent = Integer.parseInt( streamTokenizer.sval.substring( 1 ) );
 						return f*Math.pow( 10, exponent );
 					}
@@ -60,24 +60,24 @@ public class OBJ {
 		java.util.Vector uvs = new java.util.Vector();
 		java.util.Vector fs = new java.util.Vector();
 		while (st.nextToken()==java.io.StreamTokenizer.TT_WORD) {
-			if( st.sval.startsWith( "vt" ) ) { //$NON-NLS-1$
+			if( st.sval.startsWith( "vt" ) ) { 
 				double uv[] = new double[3];
 				uv[0] = getNextNumber( st );
 				uv[1] = getNextNumber( st );
 				uvs.addElement( uv );
-			} else if( st.sval.startsWith( "vn" ) ) { //$NON-NLS-1$
+			} else if( st.sval.startsWith( "vn" ) ) { 
 				double ijk[] = new double[3];
 				ijk[0] = getNextNumber( st );
 				ijk[1] = getNextNumber( st );
 				ijk[2] = getNextNumber( st );
 				ijks.addElement( ijk );
-			} else if( st.sval.startsWith( "v" ) ) { //$NON-NLS-1$
+			} else if( st.sval.startsWith( "v" ) ) { 
 				double xyz[] = new double[3];
 				xyz[0] = getNextNumber( st );
 				xyz[1] = getNextNumber( st );
 				xyz[2] = getNextNumber( st );
 				xyzs.addElement( xyz );
-			} else if( st.sval.startsWith( "f" ) ) { //$NON-NLS-1$
+			} else if( st.sval.startsWith( "f" ) ) { 
 				java.util.Vector f = new java.util.Vector();
 				while( st.nextToken()==java.io.StreamTokenizer.TT_NUMBER ) {
 					f.addElement( new Integer((int)st.nval-1) );
@@ -135,7 +135,7 @@ public class OBJ {
 				indices[i++] = ((Integer)face.elementAt( 6 )).intValue();
 				break;
 			default:
-				throw new RuntimeException( Messages.getString("OBJ.5") ); //$NON-NLS-1$
+				throw new RuntimeException( Messages.getString("OBJ.5") ); 
 			}
 		}
 		Object[] array = { vertices, indices };
@@ -146,7 +146,7 @@ public class OBJ {
 			java.io.BufferedOutputStream bos = new java.io.BufferedOutputStream( os );
 			java.io.PrintWriter pw = new java.io.PrintWriter( bos );
 			if( groupNames!=null ) {
-				pw.println( "g " + groupNames ); //$NON-NLS-1$
+				pw.println( "g " + groupNames ); 
 			}
 			for( int lcv=0; lcv<vertices.length; lcv++ ) {
 				double x = vertices[lcv].position.x;
@@ -167,31 +167,31 @@ public class OBJ {
 					j = ijkw.y;
 					k = ijkw.z;
 				}
-				pw.print( "v " ); //$NON-NLS-1$
+				pw.print( "v " ); 
 				pw.print( x );
-				pw.print( " " ); //$NON-NLS-1$
+				pw.print( " " ); 
 				pw.print( y );
-				pw.print( " " ); //$NON-NLS-1$
+				pw.print( " " ); 
 				pw.print( z );
 				pw.println();
-				pw.print( "vt " ); //$NON-NLS-1$
+				pw.print( "vt " ); 
 				pw.print( u );
-				pw.print( " " ); //$NON-NLS-1$
+				pw.print( " " ); 
 				pw.print( v );
 				pw.println();
-				pw.print( "vn " ); //$NON-NLS-1$
+				pw.print( "vn " ); 
 				pw.print( i );
-				pw.print( " " ); //$NON-NLS-1$
+				pw.print( " " ); 
 				pw.print( j );
-				pw.print( " " ); //$NON-NLS-1$
+				pw.print( " " ); 
 				pw.print( k );
 				pw.println();
 			}
 			for( int i=0; i<indices.length; i+=3 ) {
-				pw.print( "f " ); //$NON-NLS-1$
+				pw.print( "f " ); 
 				for( int j=0; j<3; j++ ) {
 					int a = indices[i+j]-vertices.length;
-					pw.print( a+"/"+a+"/"+a+" " ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					pw.print( a+"/"+a+"/"+a+" " );   
 				}
 				pw.println();
 			}
@@ -210,16 +210,16 @@ public class OBJ {
 	private static void store( java.io.OutputStream os, edu.cmu.cs.stage3.alice.scenegraph.Transformable transformable, edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame root, String groupNames ) throws java.io.IOException {
 		String name = transformable.getName();
 		if( name!=null ) {
-			int k = name.indexOf( ".m_sgTransformable" ); //$NON-NLS-1$
+			int k = name.indexOf( ".m_sgTransformable" ); 
 			if( k != -1 ) {
 				name = name.substring( 0, k );
 			}
 		} else {
-			name = "null"; //$NON-NLS-1$
+			name = "null"; 
 		}
 		if( groupNames.length()>0 ) {
 			//groups heirarchy should be space delimitted, but for uniqueness in 3dsmax we use underscores
-			groupNames = name + "_" + groupNames; //$NON-NLS-1$
+			groupNames = name + "_" + groupNames; 
 		} else {
 			groupNames = name;
 		}
@@ -233,6 +233,6 @@ public class OBJ {
 		}
 	}
 	public static void store( java.io.OutputStream os, edu.cmu.cs.stage3.alice.scenegraph.Transformable transformable ) throws java.io.IOException {
-		store( os, transformable, transformable, "" ); //$NON-NLS-1$
+		store( os, transformable, transformable, "" ); 
 	}
 }

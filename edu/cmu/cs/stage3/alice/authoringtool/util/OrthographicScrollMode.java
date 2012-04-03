@@ -53,17 +53,14 @@ public class OrthographicScrollMode extends RenderTargetManipulatorMode {
 		this.scheduler = scheduler;
 	}
 
-	
 	public boolean requiresPickedObject() {
 		return false;
 	}
 
-	
 	public boolean hideCursorOnDrag() {
 		return false;
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev, edu.cmu.cs.stage3.alice.core.Transformable pickedTransformable, edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo ) {
 		camera = (edu.cmu.cs.stage3.alice.core.Camera)pickInfo.getSource().getBonus();
 		if( camera instanceof edu.cmu.cs.stage3.alice.core.camera.OrthographicCamera ) {
@@ -74,7 +71,6 @@ public class OrthographicScrollMode extends RenderTargetManipulatorMode {
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( (camera instanceof edu.cmu.cs.stage3.alice.core.camera.OrthographicCamera) && (undoRedoStack != null) && (scheduler != null) ) {
 			if( ! ev.isPopupTrigger() ) { // TODO: this is a hack.  this method should never be called if the popup is triggered
@@ -83,7 +79,6 @@ public class OrthographicScrollMode extends RenderTargetManipulatorMode {
 		}
 	}
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
 		if( camera instanceof edu.cmu.cs.stage3.alice.core.camera.OrthographicCamera ) {
 			boolean controlDown = ev.isControlDown();

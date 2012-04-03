@@ -29,8 +29,8 @@ import edu.cmu.cs.stage3.alice.core.Variable;
  * @author Jason Pratt
  */
 public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.DropTargetListener {
-	protected javax.swing.ImageIcon trashOpenIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "trashOpen" ); //$NON-NLS-1$
-	protected javax.swing.ImageIcon trashClosedIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "trashClosed" ); //$NON-NLS-1$
+	protected javax.swing.ImageIcon trashOpenIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "trashOpen" ); 
+	protected javax.swing.ImageIcon trashClosedIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "trashClosed" ); 
 	protected javax.swing.JLabel trashLabel = new javax.swing.JLabel( trashClosedIcon );
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected boolean paintDropPotential = false;
@@ -46,30 +46,27 @@ public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.D
 		trashLabel.setDropTarget( new java.awt.dnd.DropTarget( trashLabel, this ) );
 		edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.addListener( dropPotentialFeedbackListener );
 
-		setToolTipText( Messages.getString("TrashComponent.2") ); //$NON-NLS-1$
+		setToolTipText( Messages.getString("TrashComponent.2") ); 
 
 		addMouseListener( new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
-			
 			public void singleClickResponse( java.awt.event.MouseEvent ev ) {
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( TrashComponent.this.getToolTipText() );
 			}
 		} );
 	}
 
-	
 	public java.awt.Dimension getMaximumSize() {
 		return trashLabel.getMaximumSize();
 	}
 
-	
 	public void paintComponent( java.awt.Graphics g ) {
 		if( paintDropPotential ) {
 //			trashLabel.setEnabled( true );
 			java.awt.Dimension size = getSize();
 			if( beingDroppedOn ) {
-				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight2" ) ); //$NON-NLS-1$
+				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight2" ) ); 
 			} else {
-				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight" ) ); //$NON-NLS-1$
+				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight" ) ); 
 			}
 			g.drawRect( 0, 0, size.width - 1, size.height - 1 );
 			g.drawRect( 1, 1, size.width - 3, size.height - 3 );
@@ -189,13 +186,13 @@ public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.D
 				dtde.dropComplete( false );
 			}
 		} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.5"), e ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.5"), e ); 
 			dtde.dropComplete( false );
 		} catch( java.io.IOException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.6"), e ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.6"), e ); 
 			dtde.dropComplete( false );
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.7"), t ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.7"), t ); 
 			dtde.dropComplete( false );
 		}
 		trashLabel.setIcon( trashClosedIcon );

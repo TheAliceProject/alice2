@@ -42,7 +42,6 @@ public class CallToUserDefinedResponsePrototypeReferenceTransferable extends Res
 		flavors[3] = java.awt.datatransfer.DataFlavor.stringFlavor;
 	}
 
-	
 	public Object getTransferData( java.awt.datatransfer.DataFlavor flavor ) throws java.awt.datatransfer.UnsupportedFlavorException, java.io.IOException {
 		if( flavor.equals( callToUserDefinedResponsePrototypeReferenceFlavor ) ) {
 			return callToUserDefinedResponsePrototype;

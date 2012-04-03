@@ -28,9 +28,9 @@ import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
 
 public class AbstractPointAtConstraint extends TransformResponse {
-	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); //$NON-NLS-1$
-	public final Vector3Property offset = new Vector3Property( this, "offset", null ); //$NON-NLS-1$
-	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null ); //$NON-NLS-1$
+	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); 
+	public final Vector3Property offset = new Vector3Property( this, "offset", null ); 
+	public final Vector3Property upGuide = new Vector3Property( this, "upGuide", null ); 
 
 	public abstract class RuntimeAbstractPointAtConstraint extends RuntimeTransformResponse {
 		private javax.vecmath.Vector3d m_upGuide;
@@ -46,10 +46,10 @@ public class AbstractPointAtConstraint extends TransformResponse {
 			m_upGuide = AbstractPointAtConstraint.this.upGuide.getVector3Value();
 			m_onlyAffectYaw = onlyAffectYaw();
 			if( m_target == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtConstraint.3"), null, AbstractPointAtConstraint.this.target ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtConstraint.3"), null, AbstractPointAtConstraint.this.target ); 
 			}
 			if( m_target == m_subject ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtConstraint.4"), getCurrentStack(), AbstractPointAtConstraint.this.target );             //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtConstraint.4"), getCurrentStack(), AbstractPointAtConstraint.this.target );             
 			}
 		}
 		//todo: rework this hack added from TurnAwayFromConstraint

@@ -39,7 +39,7 @@ public class RightClickNameEditor extends StringPropertyViewController {
 			}
 		} );
 		popupStructure = new java.util.Vector();
-		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("RightClickNameEditor.0"), new Runnable() { //$NON-NLS-1$
+		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("RightClickNameEditor.0"), new Runnable() { 
 			public void run() {
 				RightClickNameEditor.this.editValue();
 			}
@@ -47,10 +47,8 @@ public class RightClickNameEditor extends StringPropertyViewController {
 		setPopupEnabled( false );
 	}
 
-	
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
-			
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {
 				if( isEnabled() && ev.isPopupTrigger() ) {
 					RightClickNameEditor.this.popupButton.doClick();
@@ -59,6 +57,5 @@ public class RightClickNameEditor extends StringPropertyViewController {
 		};
 	}
 
-	
 	protected void updatePopupStructure() {}
 }

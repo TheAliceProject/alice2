@@ -29,7 +29,6 @@ import edu.cmu.cs.stage3.alice.core.property.StackProperty;
 public abstract class StackBooleanQuestion extends edu.cmu.cs.stage3.alice.core.question.BooleanQuestion {
 	public final StackProperty stack = new StackProperty( this, "stack", null );
 	protected abstract boolean getValue( Stack stack );
-	
 	public Object getValue() {
 		Stack stackValue = stack.getStackValue();
 		if( stackValue!=null ) {

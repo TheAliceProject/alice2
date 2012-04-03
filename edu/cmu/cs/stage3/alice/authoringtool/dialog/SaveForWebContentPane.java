@@ -50,9 +50,8 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		});
 	}
 
-	
 	public String getTitle() {
-		return Messages.getString("SaveForWebContentPane.0"); //$NON-NLS-1$
+		return Messages.getString("SaveForWebContentPane.0"); 
 	}
 	
 	public void addOKActionListener( java.awt.event.ActionListener l ) {
@@ -71,7 +70,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		cancelButton.removeActionListener( l );
 	}
 	private void fireOKActionListeners() {
-		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("SaveForWebContentPane.1") ); //$NON-NLS-1$
+		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("SaveForWebContentPane.1") ); 
 		for( int i=0; i<m_okActionListeners.size(); i++ ) {
 			java.awt.event.ActionListener l = (java.awt.event.ActionListener)m_okActionListeners.elementAt( i );
 			l.actionPerformed( e );
@@ -99,8 +98,8 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	private void guiInit() {
 		setSize( 575, 510 );
-		widthTextField.setText( "320" ); //$NON-NLS-1$
-		heightTextField.setText( "240" ); //$NON-NLS-1$
+		widthTextField.setText( "320" ); 
+		heightTextField.setText( "240" ); 
 		constrainAspectRatioCheckBox.setSelected( true );
 
 		widthTextField.getDocument().addDocumentListener( new javax.swing.event.DocumentListener() {
@@ -179,7 +178,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		
 		browseDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showDialog( htmlFileChooser, Messages.getString("SaveForWebContentPane.4")); //$NON-NLS-1$
+				int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showDialog( htmlFileChooser, Messages.getString("SaveForWebContentPane.4")); 
 			}
 		});
 		
@@ -205,26 +204,26 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 							SaveForWebContentPane.this.fireOKActionListeners();
 						} else {
 							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-								Messages.getString("SaveForWebContentPane.5"), //$NON-NLS-1$
-								Messages.getString("SaveForWebContentPane.6"), //$NON-NLS-1$
+								Messages.getString("SaveForWebContentPane.5"), 
+								Messages.getString("SaveForWebContentPane.6"), 
 								javax.swing.JOptionPane.WARNING_MESSAGE);
 						}
 					} else {
 						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-							Messages.getString("SaveForWebContentPane.7"), //$NON-NLS-1$
-							Messages.getString("SaveForWebContentPane.8"), //$NON-NLS-1$
+							Messages.getString("SaveForWebContentPane.7"), 
+							Messages.getString("SaveForWebContentPane.8"), 
 							javax.swing.JOptionPane.WARNING_MESSAGE);
 					}
 				} else {
 					edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-						Messages.getString("SaveForWebContentPane.9"), //$NON-NLS-1$
-						Messages.getString("SaveForWebContentPane.10"), //$NON-NLS-1$
+						Messages.getString("SaveForWebContentPane.9"), 
+						Messages.getString("SaveForWebContentPane.10"), 
 						javax.swing.JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
 		
-		final java.io.File currentDir = new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory")); //$NON-NLS-1$
+		final java.io.File currentDir = new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory")); 
 		try {
 			if (currentDir.exists()){
 				rootDirectoryPath = currentDir.getAbsolutePath()+java.io.File.separator;
@@ -271,7 +270,6 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} );
 	}
 
-	
 	public void setVisible(boolean visibility){
 		super.setVisible(visibility);
 		if (visibility){
@@ -279,7 +277,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				java.io.File currentName = authoringTool.getCurrentWorldLocation();
 				if (currentName != null){
 					String newTitle = currentName.getName();
-					newTitle = newTitle.substring(0, newTitle.lastIndexOf(".")); //$NON-NLS-1$
+					newTitle = newTitle.substring(0, newTitle.lastIndexOf(".")); 
 					setTitleTextField.setText(newTitle);
 					updateDirectory();
 					updateTextFields();
@@ -340,8 +338,8 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if( saveDirectoryCheckBox.isSelected()) {
 			updateDirectory();
 		}
-		a2wFileName.setText(newValue+".a2w"); //$NON-NLS-1$
-		htmlFileName.setText(newValue+".html"); //$NON-NLS-1$
+		a2wFileName.setText(newValue+".a2w"); 
+		htmlFileName.setText(newValue+".html"); 
 	}
 	
 	private void updateRatio(){
@@ -395,52 +393,52 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private javax.swing.JCheckBox constrainAspectRatioCheckBox = new javax.swing.JCheckBox();
 	private javax.swing.JPanel controlsPanel = new javax.swing.JPanel();
 	private javax.swing.JPanel setTitlePanel = new javax.swing.JPanel();
-	private javax.swing.JTextField setTitleTextField = new javax.swing.JTextField(Messages.getString("SaveForWebContentPane.15")); //$NON-NLS-1$
+	private javax.swing.JTextField setTitleTextField = new javax.swing.JTextField(Messages.getString("SaveForWebContentPane.15")); 
 	private java.awt.GridBagLayout gridBagLayout2 = new java.awt.GridBagLayout();
 	private javax.swing.border.Border border4;
 	private javax.swing.border.TitledBorder titledBorder1;
 	private java.awt.GridBagLayout gridBagLayout3 = new java.awt.GridBagLayout();
 	private javax.swing.JPanel directoryPathPanel = new javax.swing.JPanel();
-	private String rootDirectoryPath = "c:\\"; //$NON-NLS-1$
-	private String localDirectoryPath = Messages.getString("SaveForWebContentPane.17"); //$NON-NLS-1$
+	private String rootDirectoryPath = "c:\\"; 
+	private String localDirectoryPath = Messages.getString("SaveForWebContentPane.17"); 
 	private javax.swing.JLabel directoryPath = new javax.swing.JLabel(rootDirectoryPath+localDirectoryPath+java.io.File.separator);
-	private javax.swing.JButton browseDirectoryButton = new javax.swing.JButton(Messages.getString("SaveForWebContentPane.18")); //$NON-NLS-1$
-	private javax.swing.JLabel a2wFileName = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.19")); //$NON-NLS-1$
-	private javax.swing.JLabel htmlFileName = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.20")); //$NON-NLS-1$
-	private javax.swing.JLabel appletLabel = new javax.swing.JLabel("aliceapplet.jar"); //$NON-NLS-1$
+	private javax.swing.JButton browseDirectoryButton = new javax.swing.JButton(Messages.getString("SaveForWebContentPane.18")); 
+	private javax.swing.JLabel a2wFileName = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.19")); 
+	private javax.swing.JLabel htmlFileName = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.20")); 
+	private javax.swing.JLabel appletLabel = new javax.swing.JLabel("aliceapplet.jar"); 
 	private javax.swing.JTextField authorNameTextField = new javax.swing.JTextField();
-	private javax.swing.JLabel authorLabel = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.22")); //$NON-NLS-1$
+	private javax.swing.JLabel authorLabel = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.22")); 
 	
 	
-	private String a2wTitle = Messages.getString("SaveForWebContentPane.23"); //$NON-NLS-1$
-	private String htmlTitle = Messages.getString("SaveForWebContentPane.24"); //$NON-NLS-1$
-	private String appletTitle = Messages.getString("SaveForWebContentPane.25"); //$NON-NLS-1$
+	private String a2wTitle = Messages.getString("SaveForWebContentPane.23"); 
+	private String htmlTitle = Messages.getString("SaveForWebContentPane.24"); 
+	private String appletTitle = Messages.getString("SaveForWebContentPane.25"); 
 	
 	private javax.swing.JCheckBox saveDirectoryCheckBox = new javax.swing.JCheckBox();
 	private javax.swing.JCheckBox saveCodeCheckBox = new javax.swing.JCheckBox();
 //	private JLabel makeDirectoryLabel = new JLabel("Use title to create new directory for the files below");
-	private javax.swing.JLabel filesToSaveLabel = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.26")); //$NON-NLS-1$
-	private javax.swing.JButton saveButton = new javax.swing.JButton(Messages.getString("SaveForWebContentPane.27")); //$NON-NLS-1$
-	private javax.swing.JButton cancelButton = new javax.swing.JButton(Messages.getString("SaveForWebContentPane.28")); //$NON-NLS-1$
+	private javax.swing.JLabel filesToSaveLabel = new javax.swing.JLabel(Messages.getString("SaveForWebContentPane.26")); 
+	private javax.swing.JButton saveButton = new javax.swing.JButton(Messages.getString("SaveForWebContentPane.27")); 
+	private javax.swing.JButton cancelButton = new javax.swing.JButton(Messages.getString("SaveForWebContentPane.28")); 
 
 	private void jbInit() {
-		border1 = new javax.swing.border.TitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white,new java.awt.Color(142, 142, 142)),Messages.getString("SaveForWebContentPane.29")); //$NON-NLS-1$
-		setTitleBorder = new javax.swing.border.TitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white,new java.awt.Color(142, 142, 142)),Messages.getString("SaveForWebContentPane.30")); //$NON-NLS-1$
+		border1 = new javax.swing.border.TitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white,new java.awt.Color(142, 142, 142)),Messages.getString("SaveForWebContentPane.29")); 
+		setTitleBorder = new javax.swing.border.TitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white,new java.awt.Color(142, 142, 142)),Messages.getString("SaveForWebContentPane.30")); 
 		border2 = javax.swing.BorderFactory.createEmptyBorder(8,8,0,8);
 		border3 = javax.swing.BorderFactory.createEmptyBorder(12,12,12,12);
 		border4 = javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white,new java.awt.Color(142, 142, 142));
-		titledBorder1 = new javax.swing.border.TitledBorder(border4,Messages.getString("SaveForWebContentPane.31")); //$NON-NLS-1$
+		titledBorder1 = new javax.swing.border.TitledBorder(border4,Messages.getString("SaveForWebContentPane.31")); 
 		fileChooserPanel.setLayout(gridBagLayout3);
 		setLayout(borderLayout1);
 		mainPanel.setLayout(gridBagLayout2);
 		mainPanel.setBorder(border3);
 		heightTextField.setColumns(6);
 		widthTextField.setColumns(6);
-		heightLabel.setText(Messages.getString("SaveForWebContentPane.32")); //$NON-NLS-1$
-		widthLabel.setText(Messages.getString("SaveForWebContentPane.33")); //$NON-NLS-1$
+		heightLabel.setText(Messages.getString("SaveForWebContentPane.32")); 
+		widthLabel.setText(Messages.getString("SaveForWebContentPane.33")); 
 		setTitleTextField.setColumns(36);
 		authorNameTextField.setColumns(28);
-		constrainAspectRatioCheckBox.setText(Messages.getString("SaveForWebContentPane.34")); //$NON-NLS-1$
+		constrainAspectRatioCheckBox.setText(Messages.getString("SaveForWebContentPane.34")); 
 		constrainAspectRatioCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				constrainAspectRatioCheckBox_actionPerformed(e);
@@ -455,7 +453,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		fileChooserPanel.setBorder(titledBorder1);
 		htmlFileChooser.setFileSelectionMode( javax.swing.JFileChooser.DIRECTORIES_ONLY );
 		//browseDirectoryButton.setPreferredSize(new java.awt.Dimension(80, 21));
-		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); //$NON-NLS-1$
+		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); 
 		directoryPathPanel.setPreferredSize(new java.awt.Dimension(300, fontSize * 2 - 5));
 		directoryPathPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.black, 1));
 		directoryPathPanel.setLayout(new java.awt.BorderLayout());
@@ -463,9 +461,9 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		add(mainPanel,  java.awt.BorderLayout.CENTER);
 		filesToSaveLabel.setForeground(java.awt.Color.black);
 		saveDirectoryCheckBox.setSelected(true);
-		saveDirectoryCheckBox.setText(Messages.getString("SaveForWebContentPane.36")); //$NON-NLS-1$
+		saveDirectoryCheckBox.setText(Messages.getString("SaveForWebContentPane.36")); 
 		saveCodeCheckBox.setSelected(false);
-		saveCodeCheckBox.setText(Messages.getString("SaveForWebContentPane.37")); //$NON-NLS-1$
+		saveCodeCheckBox.setText(Messages.getString("SaveForWebContentPane.37")); 
 
 		a2wFileName.setToolTipText(a2wTitle);
 		a2wFileName.setBounds(2,2,2,2);

@@ -27,9 +27,9 @@ package edu.cmu.cs.stage3.alice.scenegraph;
  * @author Dennis Cosgrove
  */
 public abstract class Camera extends Component {
-	public static final Property NEAR_CLIPPING_PLANE_DISTANCE_PROPERTY = new Property( Camera.class, "NEAR_CLIPPING_PLANE_DISTANCE" ); //$NON-NLS-1$
-	public static final Property FAR_CLIPPING_PLANE_DISTANCE_PROPERTY = new Property( Camera.class, "FAR_CLIPPING_PLANE_DISTANCE" ); //$NON-NLS-1$
-	public static final Property BACKGROUND_PROPERTY = new Property( Camera.class, "BACKGROUND" ); //$NON-NLS-1$
+	public static final Property NEAR_CLIPPING_PLANE_DISTANCE_PROPERTY = new Property( Camera.class, "NEAR_CLIPPING_PLANE_DISTANCE" ); 
+	public static final Property FAR_CLIPPING_PLANE_DISTANCE_PROPERTY = new Property( Camera.class, "FAR_CLIPPING_PLANE_DISTANCE" ); 
+	public static final Property BACKGROUND_PROPERTY = new Property( Camera.class, "BACKGROUND" ); 
 	private double m_nearClippingPlaneDistance = 0.125;
 	private double m_farClippingPlaneDistance = 256;
 	private Background m_background = null;
@@ -37,7 +37,7 @@ public abstract class Camera extends Component {
 	
 	protected void releasePass1() {
 		if( m_background != null ) {
-			warnln( Messages.getString("Camera.3") + this + Messages.getString("Camera.4") + m_background + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Camera.3") + this + Messages.getString("Camera.4") + m_background + "." );   
 			setBackground( null );
 		}
 		super.releasePass1();

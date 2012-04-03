@@ -74,7 +74,6 @@ public class DefaultMouseInteractionBehavior extends InternalResponseBehavior {
 		}
 	}
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		manipulators.clear();
@@ -92,7 +91,6 @@ public class DefaultMouseInteractionBehavior extends InternalResponseBehavior {
 		setIsEnabled( isEnabled.booleanValue() );
 	}
 
-	
 	protected void stopped( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.stopped( world, time );
 		java.util.Enumeration enum0 = manipulators.elements();

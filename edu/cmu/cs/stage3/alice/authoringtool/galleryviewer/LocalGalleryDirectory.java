@@ -29,12 +29,10 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
 
     protected static java.awt.Color localDirColor = new java.awt.Color(189,184,139);
 
-    
 	protected String getToolTipString(){
-        return Messages.getString("LocalGalleryDirectory.0"); //$NON-NLS-1$
+        return Messages.getString("LocalGalleryDirectory.0"); 
     }
 
-    
 	public void set(GalleryViewer.ObjectXmlData dataIn) throws java.lang.IllegalArgumentException{
         if (dataIn != null){
             directoryData = dataIn.directoryData;
@@ -42,7 +40,6 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
         }
     }
 
-    
 	public void setImage(javax.swing.ImageIcon imageIcon){
         if (imageIcon == GalleryViewer.noImageIcon){
             super.setImage(GalleryViewer.noFolderImageIcon);
@@ -52,28 +49,24 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
         }
     }
 
-	
 	protected String getClassName(){
-		return " "; //$NON-NLS-1$
+		return " "; 
 	}
 
-    
 	protected void guiInit(){
         super.guiInit();
         this.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         this.setBackground(localDirColor);
         this.setDragEnabled(false);
-        this.remove(grip);
+        this.remove(grip);	// Aik Min - need work !
     }
 
-    
 	public void respondToMouse(){
         if (mainViewer != null){
             mainViewer.changeDirectory(directoryData);
         }
     }
 
-    
 	public void galleryMouseExited(){
        /* if (mouseOver){
             mouseOver = false;
@@ -81,7 +74,6 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
         }*/
     }
 
-    
 	public void galleryMouseEntered(){
        /* if (!mouseOver){
             mouseOver = true;

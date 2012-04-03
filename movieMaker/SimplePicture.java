@@ -83,9 +83,9 @@ public class SimplePicture implements DigitalPicture
  public  SimplePicture(int width, int height)
  {
    bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-   title = "None"; //$NON-NLS-1$
-   fileName = "None"; //$NON-NLS-1$
-   extension = "jpg"; //$NON-NLS-1$
+   title = "None"; 
+   fileName = "None"; 
+   extension = "jpg"; 
    setAllPixelsToAColor(Color.white);
  }
  
@@ -131,9 +131,9 @@ public class SimplePicture implements DigitalPicture
  public SimplePicture(BufferedImage image)
  {
    this.bufferedImage = image;
-   title = "None"; //$NON-NLS-1$
-   fileName = "None"; //$NON-NLS-1$
-   extension = "jpg"; //$NON-NLS-1$
+   title = "None"; 
+   fileName = "None"; 
+   extension = "jpg"; 
  }
  
  ////////////////////////// Methods //////////////////////////////////
@@ -448,7 +448,7 @@ public class SimplePicture implements DigitalPicture
      if (!file.canRead())
      {
        throw new IOException(this.fileName +
-                             Messages.getString("SimplePicture.6")); //$NON-NLS-1$
+                             Messages.getString("SimplePicture.6")); 
      }
    }
    
@@ -469,10 +469,10 @@ public class SimplePicture implements DigitalPicture
          return true;
 
      } catch (Exception ex) {
-         System.out.println(Messages.getString("SimplePicture.7") + fileName); //$NON-NLS-1$
+         System.out.println(Messages.getString("SimplePicture.7") + fileName); 
          bufferedImage = new BufferedImage(600,200,
                                            BufferedImage.TYPE_INT_RGB);
-         addMessage(Messages.getString("SimplePicture.8") + fileName,5,100); //$NON-NLS-1$
+         addMessage(Messages.getString("SimplePicture.8") + fileName,5,100); 
          return false;
      }
          
@@ -505,7 +505,7 @@ public class SimplePicture implements DigitalPicture
    graphics2d.setPaint(Color.white);
    
    // set the font to Helvetica bold style and size 16
-   graphics2d.setFont(new Font("Helvetica",Font.BOLD,16)); //$NON-NLS-1$
+   graphics2d.setFont(new Font("Helvetica",Font.BOLD,16)); 
    
    // draw the message
    graphics2d.drawString(message,xPos,yPos);
@@ -615,7 +615,7 @@ public class SimplePicture implements DigitalPicture
    if (!fileLoc.canWrite()) {
        // System.err.println("can't write the file but trying anyway? ...");
         throw new IOException(fileName +
-        Messages.getString("SimplePicture.10")); //$NON-NLS-1$
+        Messages.getString("SimplePicture.10")); 
    }
    
    // get the extension
@@ -640,7 +640,7 @@ public class SimplePicture implements DigitalPicture
          this.writeOrFail(fileName);
          return true;
      } catch (Exception ex) {
-         System.out.println(Messages.getString("SimplePicture.11") + fileName); //$NON-NLS-1$
+         System.out.println(Messages.getString("SimplePicture.11") + fileName); 
          return false;
      }
          
@@ -717,8 +717,8 @@ public class SimplePicture implements DigitalPicture
  
 public String toString()
  {
-   String output = Messages.getString("SimplePicture.12") + fileName +  //$NON-NLS-1$
-     Messages.getString("SimplePicture.13") + getHeight() + Messages.getString("SimplePicture.14") + getWidth(); //$NON-NLS-1$ //$NON-NLS-2$
+   String output = Messages.getString("SimplePicture.12") + fileName +  
+     Messages.getString("SimplePicture.13") + getHeight() + Messages.getString("SimplePicture.14") + getWidth();  
    return output;
  }
 

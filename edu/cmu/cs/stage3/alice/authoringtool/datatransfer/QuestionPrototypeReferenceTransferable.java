@@ -41,7 +41,6 @@ public class QuestionPrototypeReferenceTransferable extends ElementPrototypeRefe
 		flavors[2] = java.awt.datatransfer.DataFlavor.stringFlavor;
 	}
 
-	
 	public Object getTransferData( java.awt.datatransfer.DataFlavor flavor ) throws java.awt.datatransfer.UnsupportedFlavorException, java.io.IOException {
 		if( flavor.equals( questionPrototypeReferenceFlavor ) ) {
 			return questionPrototype;

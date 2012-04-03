@@ -47,7 +47,7 @@ public abstract class Container extends Component {
 	protected void releasePass1() {
 		Component[] children = getChildren();
 		for( int i=0; i<children.length; i++ ) {
-			warnln( Messages.getString("Container.0") + this + Messages.getString("Container.1") + children[ i ] + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Container.0") + this + Messages.getString("Container.1") + children[ i ] + "." );   
 			children[ i ].setParent( null );
 		}
 		super.releasePass1();
@@ -63,7 +63,7 @@ public abstract class Container extends Component {
 		java.util.Enumeration enum0 = m_childrenListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			ChildrenListener childrenListener = (ChildrenListener)enum0.nextElement();
-			warnln( Messages.getString("Container.3") + this + Messages.getString("Container.4") + childrenListener + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Container.3") + this + Messages.getString("Container.4") + childrenListener + "." );   
 		}
 		m_childrenListeners = null;
 		m_childrenListenerArray = null;
@@ -71,10 +71,10 @@ public abstract class Container extends Component {
 	}
 	protected void onAddChild( Component child ) {
 		if( isReleased() ) {
-			warnln( Messages.getString("Container.6") + child + Messages.getString("Container.7") + this + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Container.6") + child + Messages.getString("Container.7") + this + "." );   
 		} else {
 			if( child.isReleased() ) {
-				warnln( Messages.getString("Container.9") + this + Messages.getString("Container.10") + child + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				warnln( Messages.getString("Container.9") + this + Messages.getString("Container.10") + child + "." );   
 			} else {
 				m_children.addElement( child );
 				m_childArray = null;
@@ -88,10 +88,10 @@ public abstract class Container extends Component {
 	}
 	protected void onRemoveChild( Component child ) {
 		if( isReleased() ) {
-			warnln( Messages.getString("Container.12") + child + Messages.getString("Container.13") + this + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Container.12") + child + Messages.getString("Container.13") + this + "." );   
 		} else {
 			if( child.isReleased() ) {
-				warnln( Messages.getString("Container.15") + this + Messages.getString("Container.16") + child + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				warnln( Messages.getString("Container.15") + this + Messages.getString("Container.16") + child + "." );   
 			} else {
 				m_children.removeElement( child );
 				m_childArray = null;

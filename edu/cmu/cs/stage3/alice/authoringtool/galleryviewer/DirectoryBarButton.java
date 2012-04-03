@@ -36,7 +36,7 @@ public class DirectoryBarButton extends javax.swing.JButton {
         super();
         this.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         if (dirData == null){
-            super.setText(Messages.getString("DirectoryBarButton.0")); //$NON-NLS-1$
+            super.setText(Messages.getString("DirectoryBarButton.0")); 
         }
         else{
             super.setText(dirData.name);

@@ -31,7 +31,6 @@ public class RaiseLowerMode extends DefaultMoveMode {
 		super( undoRedoStack, scheduler );
 	}
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
 		if( pickedTransformable != null ) {
 			double deltaFactor;

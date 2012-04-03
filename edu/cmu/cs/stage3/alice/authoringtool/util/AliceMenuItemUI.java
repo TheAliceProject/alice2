@@ -32,7 +32,6 @@ import java.awt.event.*;
  * @author Jason Pratt
  */
 public class AliceMenuItemUI extends javax.swing.plaf.basic.BasicMenuItemUI {
-	
 	protected MouseInputListener createMouseInputListener( JComponent c ) {
 		return new MouseInputHandler();
 	}
@@ -108,7 +107,6 @@ public class AliceMenuItemUI extends javax.swing.plaf.basic.BasicMenuItemUI {
 		public void mouseMoved( MouseEvent e ) {}
 	}
 
-	
 	public MenuElement[] getPath() {
 		MenuSelectionManager m = MenuSelectionManager.defaultManager();
 		MenuElement[] oldPath = m.getSelectedPath();

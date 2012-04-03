@@ -31,8 +31,8 @@ import java.util.Locale;
 public class JAlice {
 	static{
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
-		if( authoringtoolConfig.getValue( "language" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "language", "English" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "language" ) == null ) { 
+			authoringtoolConfig.setValue( "language", "English" );  
 		} 
 		//Locale mexico = new Locale("es","MX");
 		//Locale spain = new Locale("es","ES");
@@ -45,12 +45,12 @@ public class JAlice {
 		}
 	}
 	// version information
-	private static String version = Messages.getString("JAlice.0"); //$NON-NLS-1$
+	private static String version = Messages.getString("JAlice.0"); 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString();
 	private static String directory = null;
 	static {
 		try {
-			java.io.File versionFile = new java.io.File( getAliceHomeDirectory(), "etc/version.txt" ).getAbsoluteFile(); //$NON-NLS-1$
+			java.io.File versionFile = new java.io.File( getAliceHomeDirectory(), "etc/version.txt" ).getAbsoluteFile(); 
 			if( versionFile.exists() ) {
 				if( versionFile.canRead() ) {
 					java.io.BufferedReader br = new java.io.BufferedReader( new java.io.FileReader( versionFile ) );
@@ -62,8 +62,8 @@ public class JAlice {
 						colorString = colorString.trim();
 						if( colorString.length() > 0 ) {
 							try{
-								if (colorString.startsWith("0x") == false){ //$NON-NLS-1$
-									String [] color = colorString.split(","); //$NON-NLS-1$
+								if (colorString.startsWith("0x") == false){ 
+									String [] color = colorString.split(","); 
 									double red = Integer.decode(color[0]).doubleValue() / 255.0;
 									double green = Integer.decode(color[1]).doubleValue() / 255.0;
 									double blue = Integer.decode(color[2]).doubleValue() / 255.0;
@@ -80,20 +80,20 @@ public class JAlice {
 						if( versionString.length() > 0 ) {
 							version = versionString;
 						} else {
-							version = Messages.getString("JAlice.4"); //$NON-NLS-1$
+							version = Messages.getString("JAlice.4"); 
 						}
 					} else {
-						version = Messages.getString("JAlice.5"); //$NON-NLS-1$
+						version = Messages.getString("JAlice.5"); 
 					}
 				} else {
-					version = Messages.getString("JAlice.6"); //$NON-NLS-1$
+					version = Messages.getString("JAlice.6"); 
 				}
 			} else {
-				version = Messages.getString("JAlice.7"); //$NON-NLS-1$
+				version = Messages.getString("JAlice.7"); 
 			}
 		} catch( Throwable t ) {
 			t.printStackTrace();
-			version = Messages.getString("JAlice.8"); //$NON-NLS-1$
+			version = Messages.getString("JAlice.8"); 
 		}
 	}
 
@@ -122,7 +122,7 @@ public class JAlice {
 		try {
 		    String[] mp3args = new String[ 0 ];
 		    //System.out.println( "attempting to register mp3 capability... " );
-		    com.sun.media.codec.audio.mp3.JavaDecoder.main( mp3args );
+	    	com.sun.media.codec.audio.mp3.JavaDecoder.main( mp3args );
 		} catch( Throwable t ) {
 		    //System.out.println( "FAILED." );
 		    t.printStackTrace( System.out );
@@ -130,8 +130,8 @@ public class JAlice {
 
 		try {
 			boolean useJavaBasedSplashScreen = true;
-			String useSplashScreenString = System.getProperty( "alice.useJavaBasedSplashScreen" ); //$NON-NLS-1$
-			if( (useSplashScreenString != null) && (! useSplashScreenString.equalsIgnoreCase( "true" )) ) { //$NON-NLS-1$
+			String useSplashScreenString = System.getProperty( "alice.useJavaBasedSplashScreen" ); 
+			if( (useSplashScreenString != null) && (! useSplashScreenString.equalsIgnoreCase( "true" )) ) { 
 				useJavaBasedSplashScreen = false;
 			}
 			parseCommandLineArgs( args );
@@ -139,22 +139,22 @@ public class JAlice {
 				splashScreen = initSplashScreen();
 				splashScreen.showSplash();
 			}
-			defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default.a2w" ).getAbsoluteFile(); //$NON-NLS-1$
-			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); //$NON-NLS-1$
+			defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default.a2w" ).getAbsoluteFile(); 
+			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 			configInit();
 			try{
-				java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt"); //$NON-NLS-1$
+				java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt"); 
 				if (aliceHasNotExitedFile.exists()){
 					aliceHasNotExitedFile.delete();
 				}
 				aliceHasNotExitedFile.createNewFile();
 				java.io.OutputStreamWriter writer = new java.io.OutputStreamWriter(new java.io.FileOutputStream(aliceHasNotExitedFile));
-				writer.write(Messages.getString("JAlice.14")); //$NON-NLS-1$
+				writer.write(Messages.getString("JAlice.14")); 
 				writer.flush();
 				writer.close();
 			}catch (Exception e){}
-			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources" ); //$NON-NLS-1$
-			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities" ); //$NON-NLS-1$
+			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources" ); 
+			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities" ); 
 			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
 				splashScreen.hideSplash();
@@ -168,7 +168,7 @@ public class JAlice {
 	}
 
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen initSplashScreen() {
-		java.io.File splashFile = new java.io.File( getAliceHomeDirectory(), "etc/AliceSplash.jpg" ).getAbsoluteFile(); //$NON-NLS-1$
+		java.io.File splashFile = new java.io.File( getAliceHomeDirectory(), "etc/AliceSplash.jpg" ).getAbsoluteFile(); 
 		java.awt.Image splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( splashFile.getAbsolutePath() );
 		return new edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen( splashImage );
 	}
@@ -177,96 +177,96 @@ public class JAlice {
 		final edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
 //		System.out.println(backgroundColor);
 //		System.out.println(new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString());
-		authoringtoolConfig.setValue( "backgroundColor", backgroundColor ); //$NON-NLS-1$
-		if( authoringtoolConfig.getValue( "recentWorlds.maxWorlds" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "recentWorlds.maxWorlds", Integer.toString( 8 ) ); //$NON-NLS-1$
+		authoringtoolConfig.setValue( "backgroundColor", backgroundColor ); 
+		if( authoringtoolConfig.getValue( "recentWorlds.maxWorlds" ) == null ) { 
+			authoringtoolConfig.setValue( "recentWorlds.maxWorlds", Integer.toString( 8 ) ); 
 		}
-		if( authoringtoolConfig.getValueList( "recentWorlds.worlds" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValueList( "recentWorlds.worlds", new String[] {} ); //$NON-NLS-1$
-		}
-		
-		if( authoringtoolConfig.getValue( "enableHighContrastMode" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "enableHighContrastMode", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		if( authoringtoolConfig.getValue( "enableLoggingMode" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "enableLoggingMode", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValueList( "recentWorlds.worlds" ) == null ) { 
+			authoringtoolConfig.setValueList( "recentWorlds.worlds", new String[] {} ); 
 		}
 		
-		if( authoringtoolConfig.getValue( "disableTooltipMode" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "disableTooltipMode", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "enableHighContrastMode" ) == null ) { 
+			authoringtoolConfig.setValue( "enableHighContrastMode", "false" );  
+		}
+
+		if( authoringtoolConfig.getValue( "enableLoggingMode" ) == null ) { 
+			authoringtoolConfig.setValue( "enableLoggingMode", "false" );  
 		}
 		
-		if( authoringtoolConfig.getValue( "fontSize" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "fontSize", Integer.toString( 12 ) ); //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "disableTooltipMode" ) == null ) { 
+			authoringtoolConfig.setValue( "disableTooltipMode", "false" );  
 		}
 		
-		if( authoringtoolConfig.getValue( "showObjectLoadFeedback" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "showObjectLoadFeedback", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "fontSize" ) == null ) { 
+			authoringtoolConfig.setValue( "fontSize", Integer.toString( 12 ) ); 
 		}
 		
-		if( authoringtoolConfig.getValue( "maximumWorldBackupCount" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "maximumWorldBackupCount", Integer.toString( 5 ) ); //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "showObjectLoadFeedback" ) == null ) { 
+			authoringtoolConfig.setValue( "showObjectLoadFeedback", "true" );  
+		}
+		
+		if( authoringtoolConfig.getValue( "maximumWorldBackupCount" ) == null ) { 
+			authoringtoolConfig.setValue( "maximumWorldBackupCount", Integer.toString( 5 ) ); 
 		}
 
-		if( authoringtoolConfig.getValue( "maxRecentlyUsedValues" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "maxRecentlyUsedValues", Integer.toString( 5 ) ); //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "maxRecentlyUsedValues" ) == null ) { 
+			authoringtoolConfig.setValue( "maxRecentlyUsedValues", Integer.toString( 5 ) ); 
 		}
 
-		if( authoringtoolConfig.getValue( "numberOfClipboards" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "numberOfClipboards", Integer.toString( 1 ) ); //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "numberOfClipboards" ) == null ) { 
+			authoringtoolConfig.setValue( "numberOfClipboards", Integer.toString( 1 ) ); 
 		}
 
-		if( authoringtoolConfig.getValue( "showWorldStats" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "showWorldStats", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "showWorldStats" ) == null ) { 
+			authoringtoolConfig.setValue( "showWorldStats", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "enableScripting" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "enableScripting", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "enableScripting" ) == null ) { 
+			authoringtoolConfig.setValue( "enableScripting", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "promptToSaveInterval" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "promptToSaveInterval", Integer.toString( 15 ) ); //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "promptToSaveInterval" ) == null ) { 
+			authoringtoolConfig.setValue( "promptToSaveInterval", Integer.toString( 15 ) ); 
 		}
 
-		if (authoringtoolConfig.getValue("doNotShowUnhookedMethodWarning") == null){ //$NON-NLS-1$
-			authoringtoolConfig.setValue("doNotShowUnhookedMethodWarning", "false"); //$NON-NLS-1$ //$NON-NLS-2$
+		if (authoringtoolConfig.getValue("doNotShowUnhookedMethodWarning") == null){ 
+			authoringtoolConfig.setValue("doNotShowUnhookedMethodWarning", "false");  
 		}
 
 //		if( authoringtoolConfig.getValue( "backgroundColor" ) == null ) {
 //			authoringtoolConfig.setValue( "backgroundColor", new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString() );
 //		}
 
-		if( authoringtoolConfig.getValue( "clearStdOutOnRun" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "clearStdOutOnRun", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "clearStdOutOnRun" ) == null ) { 
+			authoringtoolConfig.setValue( "clearStdOutOnRun", "true" );  
 		}
 
-		if( authoringtoolConfig.getValue( "resourceFile" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "resourceFile", "Alice Style.py" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "resourceFile" ) == null ) { 
+			authoringtoolConfig.setValue( "resourceFile", "Alice Style.py" );  
 		}
 	
-		if( authoringtoolConfig.getValue( "watcherPanelEnabled" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "watcherPanelEnabled", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "watcherPanelEnabled" ) == null ) { 
+			authoringtoolConfig.setValue( "watcherPanelEnabled", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "showStartUpDialog" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "showStartUpDialog", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "showStartUpDialog" ) == null ) { 
+			authoringtoolConfig.setValue( "showStartUpDialog", "true" );  
 		}
 		
-		if( authoringtoolConfig.getValue( "showWebWarningDialog" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "showWebWarningDialog", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "showWebWarningDialog" ) == null ) { 
+			authoringtoolConfig.setValue( "showWebWarningDialog", "true" );  
 		}
 		
-		if( authoringtoolConfig.getValue( "showStartUpDialog_OpenTab" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "showStartUpDialog_OpenTab", Integer.toString(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TEMPLATE_TAB_ID) ); //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "showStartUpDialog_OpenTab" ) == null ) { 
+			authoringtoolConfig.setValue( "showStartUpDialog_OpenTab", Integer.toString(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TEMPLATE_TAB_ID) ); 
 		}
 		
-		if( authoringtoolConfig.getValue( "loadSavedTabs" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "loadSavedTabs", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "loadSavedTabs" ) == null ) { 
+			authoringtoolConfig.setValue( "loadSavedTabs", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "saveThumbnailWithWorld" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "saveThumbnailWithWorld", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "saveThumbnailWithWorld" ) == null ) { 
+			authoringtoolConfig.setValue( "saveThumbnailWithWorld", "true" );  
 		}
 
 //		if( authoringtoolConfig.getValue( "useJavaSyntax" ) == null ) {
@@ -289,45 +289,45 @@ public class JAlice {
 //			}
 //		);
 
-		if( authoringtoolConfig.getValue( "mainWindowBounds" ) == null ) { //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "mainWindowBounds" ) == null ) { 
 			int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 			int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 			int x = 0;
 			int y = 0;
 			int height = screenHeight - 30;
-			authoringtoolConfig.setValue( "mainWindowBounds", (x+80) + ", " + y + ", " + (screenWidth-80) + ", " + height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			authoringtoolConfig.setValue( "mainWindowBounds", (x+80) + ", " + y + ", " + (screenWidth-80) + ", " + height );    //$NON-NLS-4$
 		}
 
-		if( authoringtoolConfig.getValueList( "rendering.orderedRendererList" ) == null ) { //$NON-NLS-1$
+		if( authoringtoolConfig.getValueList( "rendering.orderedRendererList" ) == null ) { 
 			Class[] rendererClasses =  edu.cmu.cs.stage3.alice.scenegraph.renderer.DefaultRenderTargetFactory.getPotentialRendererClasses();
 			String[] list = new String[rendererClasses.length];
 			for( int i = 0; i < rendererClasses.length; i++ ) {
 				list[i] = rendererClasses[ i ].getName();
 			}
-			authoringtoolConfig.setValueList( "rendering.orderedRendererList", list ); //$NON-NLS-1$
+			authoringtoolConfig.setValueList( "rendering.orderedRendererList", list ); 
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.showFPS" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.showFPS", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.showFPS" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.showFPS", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.forceSoftwareRendering" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.forceSoftwareRendering", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.forceSoftwareRendering" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.forceSoftwareRendering", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.deleteFiles" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.deleteFiles", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.deleteFiles" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.deleteFiles", "true" );  
 		}
 		
-		if( authoringtoolConfig.getValue( "rendering.renderWindowMatchesSceneEditor" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.renderWindowMatchesSceneEditor", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.renderWindowMatchesSceneEditor" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.renderWindowMatchesSceneEditor", "true" );  
 		}
 		
-		if( authoringtoolConfig.getValue( "rendering.ensureRenderDialogIsOnScreen" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.ensureRenderDialogIsOnScreen", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.ensureRenderDialogIsOnScreen" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.ensureRenderDialogIsOnScreen", "true" );  
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.renderWindowBounds" ) == null ) { //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "rendering.renderWindowBounds" ) == null ) { 
 			int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 			int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 			int width = 480; //(int)(screenWidth*.5);
@@ -335,23 +335,23 @@ public class JAlice {
 			int x = (screenWidth - width)/2;
 			int y = (screenHeight - height)/2;
 
-			authoringtoolConfig.setValue( "rendering.renderWindowBounds", x + ", " + y + ", " + width + ", " + height ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			authoringtoolConfig.setValue( "rendering.renderWindowBounds", x + ", " + y + ", " + width + ", " + height );    //$NON-NLS-4$
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.runtimeScratchPadEnabled" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.runtimeScratchPadEnabled", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.runtimeScratchPadEnabled" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.runtimeScratchPadEnabled", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.runtimeScratchPadHeight" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.runtimeScratchPadHeight", "300" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.runtimeScratchPadHeight" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.runtimeScratchPadHeight", "300" );  
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.useBorderlessWindow" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.useBorderlessWindow", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.useBorderlessWindow" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.useBorderlessWindow", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "rendering.constrainRenderDialogAspectRatio" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "rendering.constrainRenderDialogAspectRatio", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "rendering.constrainRenderDialogAspectRatio" ) == null ) { 
+			authoringtoolConfig.setValue( "rendering.constrainRenderDialogAspectRatio", "true" );  
 		}
 
 //		if( authoringtoolConfig.getValue( "printing.scaleFactor" ) == null ) {
@@ -362,22 +362,22 @@ public class JAlice {
 //			authoringtoolConfig.setValue( "printing.fillBackground", "true" );
 //		}
 
-		if( authoringtoolConfig.getValue( "gui.pickUpTiles" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "gui.pickUpTiles", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "gui.pickUpTiles" ) == null ) { 
+			authoringtoolConfig.setValue( "gui.pickUpTiles", "true" );  
 		}
 
-		if( authoringtoolConfig.getValue( "gui.useAlphaTiles" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "gui.useAlphaTiles", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "gui.useAlphaTiles" ) == null ) { 
+			authoringtoolConfig.setValue( "gui.useAlphaTiles", "false" );  
 		}
 
-		if( authoringtoolConfig.getValue( "useSingleFileLoadStore" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "useSingleFileLoadStore", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "useSingleFileLoadStore" ) == null ) { 
+			authoringtoolConfig.setValue( "useSingleFileLoadStore", "true" );  
 		}
 
-		if( authoringtoolConfig.getValue( "directories.worldsDirectory" ) == null ) { //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "directories.worldsDirectory" ) == null ) { 
 			//TODO: be more cross-platform aware
-			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			authoringtoolConfig.setValue( "directories.worldsDirectory", dir ); //$NON-NLS-1$
+			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop";   
+			authoringtoolConfig.setValue( "directories.worldsDirectory", dir ); 
 		}
 
 		java.io.File defaultGallery = new java.io.File( "gallery" ).getAbsoluteFile();
@@ -386,65 +386,65 @@ public class JAlice {
 			authoringtoolConfig.setValueList( "directories.galleryDirectory", list );
 		}	
 
-		if( authoringtoolConfig.getValue( "directories.importDirectory" ) == null ) { //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "directories.importDirectory" ) == null ) { 
 			//TODO: be more cross-platform aware
-			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			authoringtoolConfig.setValue( "directories.importDirectory", dir ); //$NON-NLS-1$
+			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop";   
+			authoringtoolConfig.setValue( "directories.importDirectory", dir ); 
 		}
 
-		if( authoringtoolConfig.getValue( "directories.examplesDirectory" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "directories.examplesDirectory", "exampleWorlds" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "directories.examplesDirectory" ) == null ) { 
+			authoringtoolConfig.setValue( "directories.examplesDirectory", "exampleWorlds" );  
 		}
 
-		if( authoringtoolConfig.getValue( "directories.charactersDirectory" ) == null ) { //$NON-NLS-1$
-			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if( authoringtoolConfig.getValue( "directories.charactersDirectory" ) == null ) { 
+			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop";   
 			java.io.File captureDir = new java.io.File(dir);
 			if (captureDir.canWrite()){
-				authoringtoolConfig.setValue( "directories.charactersDirectory", dir ); //$NON-NLS-1$
+				authoringtoolConfig.setValue( "directories.charactersDirectory", dir ); 
 			}
 			else{
-				authoringtoolConfig.setValue( "directories.charactersDirectory", null ); //$NON-NLS-1$
+				authoringtoolConfig.setValue( "directories.charactersDirectory", null ); 
 			}
 		}
 		
-		if( authoringtoolConfig.getValue( "directories.templatesDirectory" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "directories.templatesDirectory", "templateWorlds" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "directories.templatesDirectory" ) == null ) { 
+			authoringtoolConfig.setValue( "directories.templatesDirectory", "templateWorlds" );  
 		}
 				
-		if( authoringtoolConfig.getValue( "directories.textbookExamplesDirectory" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "directories.textbookExamplesDirectory", "textbookExampleWorlds" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "directories.textbookExamplesDirectory" ) == null ) { 
+			authoringtoolConfig.setValue( "directories.textbookExamplesDirectory", "textbookExampleWorlds" );  
 		}
 
 //		if( authoringtoolConfig.getValue( "reloadWorldScriptOnRun" ) == null ) {
 //			authoringtoolConfig.setValue( "reloadWorldScriptOnRun", "false" );
 //		}
 
-		if( authoringtoolConfig.getValue( "screenCapture.directory" ) == null ) { //$NON-NLS-1$
-			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			authoringtoolConfig.setValue( "screenCapture.directory", dir ); //$NON-NLS-1$
+		if( authoringtoolConfig.getValue( "screenCapture.directory" ) == null ) { 
+			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop";   
+			authoringtoolConfig.setValue( "screenCapture.directory", dir ); 
 		}
-		if( authoringtoolConfig.getValue( "screenCapture.baseName" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "screenCapture.baseName", "capture" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "screenCapture.baseName" ) == null ) { 
+			authoringtoolConfig.setValue( "screenCapture.baseName", "capture" );  
 		}
-		if( authoringtoolConfig.getValue( "screenCapture.numDigits" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "screenCapture.numDigits", "2" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "screenCapture.numDigits" ) == null ) { 
+			authoringtoolConfig.setValue( "screenCapture.numDigits", "2" );  
 		}
-		if( authoringtoolConfig.getValue( "screenCapture.codec" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "screenCapture.codec", "jpeg" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "screenCapture.codec" ) == null ) { 
+			authoringtoolConfig.setValue( "screenCapture.codec", "jpeg" );  
 		}
-		if( authoringtoolConfig.getValue( "screenCapture.codec" ).equalsIgnoreCase("gif") ) { //$NON-NLS-1$ //$NON-NLS-2$
-			authoringtoolConfig.setValue( "screenCapture.codec", "jpeg" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "screenCapture.codec" ).equalsIgnoreCase("gif") ) {  
+			authoringtoolConfig.setValue( "screenCapture.codec", "jpeg" );  
 		}
-		if( authoringtoolConfig.getValue( "screenCapture.informUser" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "screenCapture.informUser", "true" ); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		if( authoringtoolConfig.getValue( "saveInfiniteBackups" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "saveInfiniteBackups", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "screenCapture.informUser" ) == null ) { 
+			authoringtoolConfig.setValue( "screenCapture.informUser", "true" );  
 		}
 
-		if( authoringtoolConfig.getValue( "doProfiling" ) == null ) { //$NON-NLS-1$
-			authoringtoolConfig.setValue( "doProfiling", "false" ); //$NON-NLS-1$ //$NON-NLS-2$
+		if( authoringtoolConfig.getValue( "saveInfiniteBackups" ) == null ) { 
+			authoringtoolConfig.setValue( "saveInfiniteBackups", "false" );  
+		}
+
+		if( authoringtoolConfig.getValue( "doProfiling" ) == null ) { 
+			authoringtoolConfig.setValue( "doProfiling", "false" );  
 		}
 	}
 
@@ -452,39 +452,39 @@ public class JAlice {
 		int c;
 		//String arg;
 		gnu.getopt.LongOpt[] options = {
-			new gnu.getopt.LongOpt("stdOutToConsole", gnu.getopt.LongOpt.NO_ARGUMENT, null, 'o'), //$NON-NLS-1$
-			new gnu.getopt.LongOpt("stdErrToConsole", gnu.getopt.LongOpt.NO_ARGUMENT, null, 'e'), //$NON-NLS-1$
-			new gnu.getopt.LongOpt("defaultRenderer", gnu.getopt.LongOpt.REQUIRED_ARGUMENT, null, 'r'), //$NON-NLS-1$
+			new gnu.getopt.LongOpt("stdOutToConsole", gnu.getopt.LongOpt.NO_ARGUMENT, null, 'o'), 
+			new gnu.getopt.LongOpt("stdErrToConsole", gnu.getopt.LongOpt.NO_ARGUMENT, null, 'e'), 
+			new gnu.getopt.LongOpt("defaultRenderer", gnu.getopt.LongOpt.REQUIRED_ARGUMENT, null, 'r'), 
 			//new gnu.getopt.LongOpt("customStartupClass", gnu.getopt.LongOpt.REQUIRED_ARGUMENT, null, 'c'),
-			new gnu.getopt.LongOpt("help", gnu.getopt.LongOpt.NO_ARGUMENT, null, 'h'), //$NON-NLS-1$
+			new gnu.getopt.LongOpt("help", gnu.getopt.LongOpt.NO_ARGUMENT, null, 'h'), 
 		};
 
-		String helpMessage = "" + //$NON-NLS-1$
-"\nUsage: JAlice <options> <world>\n" + //$NON-NLS-1$
-"\n" + //$NON-NLS-1$
-"options:\n" + //$NON-NLS-1$
-"    --stdOutToConsole|-o:\n" + //$NON-NLS-1$
-"        directs System.stdOut to the console instead of the output text area.\n" + //$NON-NLS-1$
-"    --stdErrToConsole|-e:\n" + //$NON-NLS-1$
-"        directs System.stdOut to the console instead of the output text area.\n" + //$NON-NLS-1$
-"    --defaultRenderer|-r <classname>:\n" + //$NON-NLS-1$
-"        the Renderer specified by <classname> will be used as the default Renderer\n" + //$NON-NLS-1$
+		String helpMessage = "" + 
+"\nUsage: JAlice <options> <world>\n" + 
+"\n" + 
+"options:\n" + 
+"    --stdOutToConsole|-o:\n" + 
+"        directs System.stdOut to the console instead of the output text area.\n" + 
+"    --stdErrToConsole|-e:\n" + 
+"        directs System.stdOut to the console instead of the output text area.\n" + 
+"    --defaultRenderer|-r <classname>:\n" + 
+"        the Renderer specified by <classname> will be used as the default Renderer\n" + 
 //"    --customStartupClass|-c <classname>:\n" +
 //"        calls <classname>.customSetup( String [] args, <JAlice instance>,\n" +
 //"                  <world instance> )\n" +
 //"        during system initialization\n" +
-"    --help|-h:\n" + //$NON-NLS-1$
-"        prints this help message\n" + //$NON-NLS-1$
-"\n" + //$NON-NLS-1$
-"world:\n" + //$NON-NLS-1$
-"    a pathname to a world on disk to be loaded at startup.\n"; //$NON-NLS-1$
+"    --help|-h:\n" + 
+"        prints this help message\n" + 
+"\n" + 
+"world:\n" + 
+"    a pathname to a world on disk to be loaded at startup.\n"; 
 
 		// for the options string:
 		// --a lone character has no options
 		// --a character preceded by a colon has a required argument
 		// --a character preceded by two colons has a non-required argument
 		// --if the whole string starts with a colon, then ':' is returned for valid options that do not have their required argument
-		gnu.getopt.Getopt g = new gnu.getopt.Getopt( "JAlice", args, ":oeh", options ); //$NON-NLS-1$ //$NON-NLS-2$
+		gnu.getopt.Getopt g = new gnu.getopt.Getopt( "JAlice", args, ":oeh", options );  
 		while( (c = g.getopt()) != -1 ) {
 			switch( c ) {
 				case 'o': //stdOut to console...
@@ -519,14 +519,14 @@ public class JAlice {
 					System.exit( 0 );
 					break;
 				default:
-					System.err.println( "ignoring " + c + " on the command line." ); //$NON-NLS-1$ //$NON-NLS-2$
+					System.err.println( "ignoring " + c + " on the command line." );  
 					break;
 			}
 		}
 
 		int i = g.getOptind();
 		if( (i >= 0) && (i < args.length) ) {
-			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")) {   
 				char ch = ':';
 				String file = args[i].toString(); 
 				file = file.substring(file.lastIndexOf(ch)-1, file.length()-1);
@@ -546,10 +546,10 @@ public class JAlice {
 
 	public static java.io.File getAliceHomeDirectory() {
 		if( aliceHomeDirectory == null ) {
-			if( System.getProperty( "alice.home" ) != null ) { //$NON-NLS-1$
-				setAliceHomeDirectory( new java.io.File( System.getProperty( "alice.home" ) ).getAbsoluteFile() ); //$NON-NLS-1$
+			if( System.getProperty( "alice.home" ) != null ) { 
+				setAliceHomeDirectory( new java.io.File( System.getProperty( "alice.home" ) ).getAbsoluteFile() ); 
 			} else {
-				setAliceHomeDirectory( new java.io.File( System.getProperty( "user.dir" ) ).getAbsoluteFile() ); //$NON-NLS-1$
+				setAliceHomeDirectory( new java.io.File( System.getProperty( "user.dir" ) ).getAbsoluteFile() ); 
 			}
 		}
 
@@ -569,20 +569,20 @@ public class JAlice {
 	public static java.io.File getAliceUserDirectory() {
 		if( aliceUserDirectory == null) {
 			java.io.File dirFromProperties = null;
-			if( System.getProperty( "alice.userDir" ) != null ) { //$NON-NLS-1$
-				dirFromProperties = new java.io.File( System.getProperty( "alice.userDir" ) ).getAbsoluteFile(); //$NON-NLS-1$
+			if( System.getProperty( "alice.userDir" ) != null ) { 
+				dirFromProperties = new java.io.File( System.getProperty( "alice.userDir" ) ).getAbsoluteFile(); 
 			}
-			java.io.File userHome = new java.io.File( System.getProperty( "user.home" ) ).getAbsoluteFile(); //$NON-NLS-1$
+			java.io.File userHome = new java.io.File( System.getProperty( "user.home" ) ).getAbsoluteFile(); 
 			java.io.File aliceHome = getAliceHomeDirectory();
 			java.io.File aliceUser = null;
 			if( directory != null) {
-				aliceUser = new java.io.File( directory, ".alice2" ); //$NON-NLS-1$
+				aliceUser = new java.io.File( directory, ".alice2" ); 
 			} else if (dirFromProperties != null ) {
 				aliceUser = dirFromProperties;
 			} else if( userHome.exists() && userHome.canRead() && userHome.canWrite() ) {
-				aliceUser = new java.io.File( userHome, ".alice2" ); //$NON-NLS-1$
+				aliceUser = new java.io.File( userHome, ".alice2" ); 
 			} else if( (aliceHome != null) && aliceHome.exists() && aliceHome.canRead() && aliceHome.canWrite() ) {
-				aliceUser = new java.io.File( aliceHome, ".alice2" ); //$NON-NLS-1$
+				aliceUser = new java.io.File( aliceHome, ".alice2" ); 
 			}
 			setAliceUserDirectory( aliceUser );
 

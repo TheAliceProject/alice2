@@ -30,12 +30,12 @@ import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 
 public abstract class AbstractBubbleAnimation extends edu.cmu.cs.stage3.alice.core.Response {
-	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); //$NON-NLS-1$
-	public final StringProperty what = new StringProperty( this, "what", "hello" ); //$NON-NLS-1$ //$NON-NLS-2$
-	public final ColorProperty bubbleColor = new ColorProperty( this, "bubbleColor", edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE ); //$NON-NLS-1$
-	public final ColorProperty textColor = new ColorProperty( this, "textColor", edu.cmu.cs.stage3.alice.scenegraph.Color.BLACK ); //$NON-NLS-1$
-	public final NumberProperty fontSize = new NumberProperty( this, "fontSize", new Integer(20) ); //$NON-NLS-1$
-	public final StringProperty fontName = new StringProperty( this, "fontName", "Arial"); //$NON-NLS-1$ //$NON-NLS-2$
+	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); 
+	public final StringProperty what = new StringProperty( this, "what", "hello" );  
+	public final ColorProperty bubbleColor = new ColorProperty( this, "bubbleColor", edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE ); 
+	public final ColorProperty textColor = new ColorProperty( this, "textColor", edu.cmu.cs.stage3.alice.scenegraph.Color.BLACK ); 
+	public final NumberProperty fontSize = new NumberProperty( this, "fontSize", new Integer(20) ); 
+	public final StringProperty fontName = new StringProperty( this, "fontName", "Arial");  
 
 	private edu.cmu.cs.stage3.alice.core.World m_world;
 
@@ -48,11 +48,11 @@ public abstract class AbstractBubbleAnimation extends edu.cmu.cs.stage3.alice.co
 			super.prologue( t );
 			edu.cmu.cs.stage3.alice.core.Transformable subjectValue = AbstractBubbleAnimation.this.subject.getTransformableValue();
 			if( subjectValue == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractBubbleAnimation.8"), getCurrentStack(), AbstractBubbleAnimation.this.subject ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractBubbleAnimation.8"), getCurrentStack(), AbstractBubbleAnimation.this.subject ); 
 			}
 			String whatValue = AbstractBubbleAnimation.this.what.getStringValue();
 			if (( whatValue == null ) || (whatValue.length() == 0)) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractBubbleAnimation.9"), getCurrentStack(), AbstractBubbleAnimation.this.what ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractBubbleAnimation.9"), getCurrentStack(), AbstractBubbleAnimation.this.what ); 
 			}
 
 			if( m_bubble == null ) {

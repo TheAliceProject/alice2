@@ -27,7 +27,7 @@ import edu.cmu.cs.stage3.alice.core.Response;
 import edu.cmu.cs.stage3.alice.core.property.ScriptProperty;
 
 public class ScriptDefinedResponse extends Response {
-	public final ScriptProperty script = new ScriptProperty( this, "script", "" ); //$NON-NLS-1$ //$NON-NLS-2$
+	public final ScriptProperty script = new ScriptProperty( this, "script", "" );  
 	public class RuntimeScriptDefinedResponse extends RuntimeResponse {
 		RuntimeResponse m_actual = null;
 		
@@ -51,7 +51,7 @@ public class ScriptDefinedResponse extends Response {
 					//warnln( "no actual response prologue" );
 				}
 			} else {
-				throw new RuntimeException( script.getStringValue() + Messages.getString("ScriptDefinedResponse.2") ); //$NON-NLS-1$
+				throw new RuntimeException( script.getStringValue() + Messages.getString("ScriptDefinedResponse.2") ); 
 			}
 		}
 		

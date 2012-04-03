@@ -29,7 +29,6 @@ package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 public abstract class TextFieldEditablePropertyViewController extends PropertyViewController {
 	protected javax.swing.JTextField textField = new javax.swing.JTextField();
 	protected java.awt.event.FocusListener focusListener = new java.awt.event.FocusAdapter() {
-		
 		public void focusLost( java.awt.event.FocusEvent ev ) {
 			stopEditing();
 		}
@@ -49,7 +48,6 @@ public abstract class TextFieldEditablePropertyViewController extends PropertyVi
 		);
 		textField.addKeyListener(
 			new java.awt.event.KeyAdapter() {
-				
 				public void keyPressed( java.awt.event.KeyEvent ev ) {
 					if( ev.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE ) {
 						ev.consume();
@@ -61,15 +59,12 @@ public abstract class TextFieldEditablePropertyViewController extends PropertyVi
 		);
 	}
 
-	
 	public void set( edu.cmu.cs.stage3.alice.core.Property property, boolean includeDefaults, boolean allowExpressions, boolean includeOther, boolean omitPropertyName, final edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory ) {
 		super.set( property, includeDefaults, allowExpressions, includeOther, omitPropertyName, factory );
 	}
 
-	
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
-			
 			public void mousePressed( java.awt.event.MouseEvent ev ) {
 				if( TextFieldEditablePropertyViewController.this.allowEasyEditWithClick && (TextFieldEditablePropertyViewController.this.isAncestorOf( getNativeComponent() ) || (TextFieldEditablePropertyViewController.this.property.get() == null)) ) {
 					TextFieldEditablePropertyViewController.this.editValue();
@@ -92,9 +87,9 @@ public abstract class TextFieldEditablePropertyViewController extends PropertyVi
 				}
 			}
 			if( this.isAncestorOf( getNativeComponent() ) ) {
-				this.remove( getNativeComponent() );
+				this.remove( getNativeComponent() );	// Aik Min - need work
 			} else if( this.isAncestorOf( expressionLabel ) ) {
-				this.remove( expressionLabel );
+				this.remove( expressionLabel );	// Aik Min - need work
 			}
 			if( ! this.isAncestorOf( textField ) ) {
 				this.add( textField, java.awt.BorderLayout.CENTER );
@@ -127,7 +122,6 @@ public abstract class TextFieldEditablePropertyViewController extends PropertyVi
 		refreshGUI();
 	}
 
-	
 	protected void refreshGUI() {
 		if( this.isAncestorOf( textField ) ) {
 			remove( textField );

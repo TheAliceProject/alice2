@@ -33,13 +33,12 @@ public class PropertyDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 	protected java.util.Vector popupStructure = new java.util.Vector();
 
 	public PropertyDnDPanel() {
-		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyDnDPanel" ) ); //$NON-NLS-1$
+		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyDnDPanel" ) ); 
 
 		add( nameLabel, java.awt.BorderLayout.CENTER );
 		addDragSourceComponent( nameLabel );
 
 		java.awt.event.MouseListener mouseListener = new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
-			
 			public void popupResponse( java.awt.event.MouseEvent ev ) {
 				PropertyDnDPanel.this.updatePopupStructure();
 				edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.createAndShowPopupMenu( popupStructure, PropertyDnDPanel.this, ev.getX(), ev.getY() );
@@ -54,10 +53,10 @@ public class PropertyDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		this.authoringTool = authoringTool;
 		this.property = property;
 		nameLabel.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property ) );
-		String iconName = "types/" + property.getValueClass().getName(); //$NON-NLS-1$
+		String iconName = "types/" + property.getValueClass().getName(); 
 		javax.swing.ImageIcon icon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( iconName );
 		if( icon == null ) {
-			icon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "types/other" ); //$NON-NLS-1$
+			icon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "types/other" ); 
 		}
 		if( icon != null ) {
 //			nameLabel.setIcon( icon );
@@ -71,13 +70,13 @@ public class PropertyDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		final edu.cmu.cs.stage3.alice.authoringtool.util.WatcherPanel watcherPanel = authoringTool.getWatcherPanel();
 
 		if( watcherPanel.isPropertyBeingWatched( property ) ) {
-			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("PropertyDnDPanel.3"), new Runnable() { //$NON-NLS-1$
+			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("PropertyDnDPanel.3"), new Runnable() { 
 				public void run() {
 					watcherPanel.removePropertyBeingWatched( PropertyDnDPanel.this.property );
 				}
 			} ) );
 		} else {
-			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("PropertyDnDPanel.4"), new Runnable() { //$NON-NLS-1$
+			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("PropertyDnDPanel.4"), new Runnable() { 
 				public void run() {
 					watcherPanel.addPropertyToWatch( PropertyDnDPanel.this.property );
 				}
@@ -96,7 +95,6 @@ public class PropertyDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		clean();
 	}
 
-	
 	public void release() {
 		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
 	}

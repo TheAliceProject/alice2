@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.math;
 
 public class Pow extends edu.cmu.cs.stage3.alice.core.question.BinaryNumberResultingInNumberQuestion {
-	
 	protected double getValue( double aValue, double bValue ) {
 		return Math.pow( aValue, bValue );
 	}

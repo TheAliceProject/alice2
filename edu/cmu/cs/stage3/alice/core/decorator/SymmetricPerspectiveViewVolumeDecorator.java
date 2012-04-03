@@ -29,7 +29,6 @@ import edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera;
 public class SymmetricPerspectiveViewVolumeDecorator extends ViewVolumeDecorator {
 	private SymmetricPerspectiveCamera m_symmetricPerspectiveCamera = null;
 
-	
 	protected Camera getCamera() {
 		return getSymmetricPerspectiveCamera();
 	}
@@ -44,7 +43,6 @@ public class SymmetricPerspectiveViewVolumeDecorator extends ViewVolumeDecorator
 		}
 	}
 
-	
 	protected double[] getXYNearAndXYFar( double zNear, double zFar ) {
 		/*
 		Number verticalViewingAngleValue = SymmetricPerspectiveCamera.this.verticalViewingAngle.getNumberValue();

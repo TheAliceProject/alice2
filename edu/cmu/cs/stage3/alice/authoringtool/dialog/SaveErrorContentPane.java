@@ -27,15 +27,13 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
  * @author David Culyba
  */
 public class SaveErrorContentPane extends ErrorContentPane {
-	
 	public String getTitle() {
-		return Messages.getString("SaveErrorContentPane.0"); //$NON-NLS-1$
+		return Messages.getString("SaveErrorContentPane.0"); 
 	}
 
-	
 	protected void init() {
 		super.init();
-		messageLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, 16 ) ); //$NON-NLS-1$
+		messageLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, 16 ) ); 
 		messageLabel.setPreferredSize( null );
 		messageLabel.setLineWrap( false );
 	}

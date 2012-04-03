@@ -29,8 +29,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel implements edu.cmu.cs.stage3.alice.authoringtool.util.GUIElement {
 	protected edu.cmu.cs.stage3.alice.core.response.Print printStatement;
 	protected javax.swing.JPanel subPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel();
-	protected javax.swing.JLabel printPrefixLabel = new javax.swing.JLabel( Messages.getString("ResponsePrintViewController.0") ); //$NON-NLS-1$
-	protected javax.swing.JLabel printSuffixLabel = new javax.swing.JLabel( "" ); //$NON-NLS-1$
+	protected javax.swing.JLabel printPrefixLabel = new javax.swing.JLabel( Messages.getString("ResponsePrintViewController.0") ); 
+	protected javax.swing.JLabel printSuffixLabel = new javax.swing.JLabel( "" ); 
 	protected java.util.HashMap guiMap = new java.util.HashMap();
 	protected MouseListener mouseListener = new MouseListener();
 	protected edu.cmu.cs.stage3.alice.core.event.PropertyListener commentedListener = new edu.cmu.cs.stage3.alice.core.event.PropertyListener() {
@@ -77,7 +77,7 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 		this.printStatement = printStatement;
 		if( this.printStatement != null ) {
 			setTransferable( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( printStatement ) );
-			setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) ); //$NON-NLS-1$
+			setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) ); 
 
 			this.add( subPanel, java.awt.BorderLayout.CENTER );
 			this.addDragSourceComponent( subPanel );
@@ -104,7 +104,6 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 		}
 	}
 
-	
 	public void setEnabled( boolean b ) {
 		super.setEnabled( b );
 		java.awt.Component[] children = subPanel.getComponents();
@@ -113,7 +112,6 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 		}
 	}
 
-	
 	public void paintForeground( java.awt.Graphics g ) {
 		super.paintForeground( g );
 		if( printStatement.isCommentedOut.booleanValue() ) {
@@ -142,7 +140,6 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 		clean();
 	}
 
-	
 	public void release() {
 		super.release();
 		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
@@ -157,16 +154,16 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 			if( formatTokenizer.hasMoreTokens() ) {
 				printPrefixLabel.setText( formatTokenizer.nextToken() );
 			} else {
-				printPrefixLabel.setText( "" ); //$NON-NLS-1$
+				printPrefixLabel.setText( "" ); 
 			}
 			String token = null;
 			while( formatTokenizer.hasMoreTokens() ) {
 				token = formatTokenizer.nextToken();
 			}
-			if( (token != null) && (! (token.startsWith( "<" ) && token.endsWith( ">" ))) ) { //$NON-NLS-1$ //$NON-NLS-2$
+			if( (token != null) && (! (token.startsWith( "<" ) && token.endsWith( ">" ))) ) {  
 				printSuffixLabel.setText( token );
 			} else {
-				printSuffixLabel.setText( "" ); //$NON-NLS-1$
+				printSuffixLabel.setText( "" ); 
 			}
 
 			int i = 0;
@@ -204,7 +201,6 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 	}
 
 	class MouseListener extends edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter {
-		
 		public void popupResponse( java.awt.event.MouseEvent ev ) {
 			java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.getDefaultStructure( ResponsePrintViewController.this.printStatement );
 			if( (structure != null) && (! structure.isEmpty()) ) {

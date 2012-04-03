@@ -45,7 +45,7 @@ public class PositionKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyfram
 				}
 				//System.out.println( "getPosition: " + m_transformable.getPosition() );
 			} catch( ClassCastException e ) {
-				System.err.println( Messages.getString("PositionKeyframeResponse.0") + runtimeSpline + Messages.getString("PositionKeyframeResponse.1") + runtimeSpline.getSample( splineTimeElapsed ) ); //$NON-NLS-1$ //$NON-NLS-2$
+				System.err.println( Messages.getString("PositionKeyframeResponse.0") + runtimeSpline + Messages.getString("PositionKeyframeResponse.1") + runtimeSpline.getSample( splineTimeElapsed ) );  
 			} catch( Exception e ) {
 				e.printStackTrace();
 			}

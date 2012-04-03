@@ -41,7 +41,6 @@ public class TextureMapReferenceTransferable extends ElementReferenceTransferabl
 		flavors[2] = java.awt.datatransfer.DataFlavor.stringFlavor;
 	}
 
-	
 	public Object getTransferData( java.awt.datatransfer.DataFlavor flavor ) throws java.awt.datatransfer.UnsupportedFlavorException, java.io.IOException {
 		if( flavor.equals( textureMapReferenceFlavor ) ) {
 			return textureMap;
@@ -54,7 +53,6 @@ public class TextureMapReferenceTransferable extends ElementReferenceTransferabl
 		}
 	}
 
-	
 	public ElementReferenceTransferable createCopy() {
 		if( element != null ) {
 			edu.cmu.cs.stage3.alice.core.Element copy = element.createCopyNamed( element.name.getStringValue() );

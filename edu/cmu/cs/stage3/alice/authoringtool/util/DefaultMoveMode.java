@@ -55,17 +55,14 @@ public class DefaultMoveMode extends RenderTargetManipulatorMode {
 		helper.name.set( "helper" );
 	}
 
-	
 	public boolean requiresPickedObject() {
 		return true;
 	}
 
-	
 	public boolean hideCursorOnDrag() {
 		return true;
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev, edu.cmu.cs.stage3.alice.core.Transformable pickedTransformable, edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo ) {
 		this.pickedTransformable = pickedTransformable;
 		if( pickedTransformable != null ) {
@@ -77,7 +74,6 @@ public class DefaultMoveMode extends RenderTargetManipulatorMode {
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( (pickedTransformable != null) && (undoRedoStack != null)  ) {
 			if( ! ev.isPopupTrigger() ) { // TODO: this is a hack.  this method should never be called if the popup is triggered
@@ -86,7 +82,6 @@ public class DefaultMoveMode extends RenderTargetManipulatorMode {
 		}
 	}
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
 		if( pickedTransformable != null ) {
 			boolean controlDown = ev.isControlDown();

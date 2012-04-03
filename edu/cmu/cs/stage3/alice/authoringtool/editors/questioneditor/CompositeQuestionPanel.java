@@ -40,10 +40,9 @@ public abstract class CompositeQuestionPanel extends edu.cmu.cs.stage3.alice.aut
 
     public CompositeQuestionPanel(){
         super();
-        headerText = Messages.getString("CompositeQuestionPanel.0"); //$NON-NLS-1$
+        headerText = Messages.getString("CompositeQuestionPanel.0"); 
     }
 
-    
 	public void set(edu.cmu.cs.stage3.alice.core.Element question, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         m_question = (edu.cmu.cs.stage3.alice.core.question.userdefined.Composite)m_element;
         super.set(question, authoringToolIn);

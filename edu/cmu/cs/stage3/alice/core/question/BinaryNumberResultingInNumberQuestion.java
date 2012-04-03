@@ -27,23 +27,23 @@ import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public abstract class BinaryNumberResultingInNumberQuestion extends NumberQuestion {
-	public final NumberProperty a = new NumberProperty( this, "a", new Double( 0 ) ); //$NON-NLS-1$
-	public final NumberProperty b = new NumberProperty( this, "b", new Double( 0 ) ); //$NON-NLS-1$
+	public final NumberProperty a = new NumberProperty( this, "a", new Double( 0 ) ); 
+	public final NumberProperty b = new NumberProperty( this, "b", new Double( 0 ) ); 
 	protected abstract double getValue( double a, double b );
 	
 	public Object getValue() {
 		double aValue= a.doubleValue();
 		double bValue= b.doubleValue();
 		if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Min){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("BinaryNumberResultingInNumberQuestion.2")+aValue+ Messages.getString("BinaryNumberResultingInNumberQuestion.3")+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");			 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("BinaryNumberResultingInNumberQuestion.2")+aValue+ Messages.getString("BinaryNumberResultingInNumberQuestion.3")+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");			   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Max){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("BinaryNumberResultingInNumberQuestion.5")+aValue+ Messages.getString("BinaryNumberResultingInNumberQuestion.3")+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");			 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("BinaryNumberResultingInNumberQuestion.5")+aValue+ Messages.getString("BinaryNumberResultingInNumberQuestion.3")+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");			   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.ATan2){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= "arctan2 "+aValue+" "+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");		 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= "arctan2 "+aValue+" "+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");		   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Pow){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= aValue+Messages.getString("BinaryNumberResultingInNumberQuestion.11")+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.12");		 //$NON-NLS-1$ //$NON-NLS-2$
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= aValue+Messages.getString("BinaryNumberResultingInNumberQuestion.11")+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.12");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.IEEERemainder){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= "IEEERemainder of "+aValue+"/"+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");		 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= "IEEERemainder of "+aValue+"/"+bValue+Messages.getString("BinaryNumberResultingInNumberQuestion.4");		   
 		} 
 		return new Double( getValue( aValue, bValue ) );
 	}

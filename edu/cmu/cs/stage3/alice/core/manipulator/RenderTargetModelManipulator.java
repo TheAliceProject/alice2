@@ -59,7 +59,6 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev ) {
 		if( enabled ) {
 			super.mousePressed( ev );
@@ -96,7 +95,6 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 	}
 	*/
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev ) {
 		if( enabled ) {
 			super.mouseDragged( ev );

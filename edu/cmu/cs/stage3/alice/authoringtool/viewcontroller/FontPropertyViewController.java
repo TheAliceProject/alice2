@@ -51,7 +51,7 @@ public class FontPropertyViewController extends javax.swing.JButton implements e
 							currentFont = (java.awt.Font)FontPropertyViewController.this.property.getValue();
 						}
 						edu.cmu.cs.stage3.alice.authoringtool.dialog.FontPanel fontPanel = new edu.cmu.cs.stage3.alice.authoringtool.dialog.FontPanel( currentFont, ! isFor3DText, true, sampleText );
-						if( edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( fontPanel, Messages.getString("FontPropertyViewController.0"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE ) == javax.swing.JOptionPane.OK_OPTION ) { //$NON-NLS-1$
+						if( edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( fontPanel, Messages.getString("FontPropertyViewController.0"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE ) == javax.swing.JOptionPane.OK_OPTION ) { 
 							java.awt.Font font = fontPanel.getChosenFont();
 							if( font != null ) {
 								FontPropertyViewController.this.property.set( font );
@@ -67,7 +67,7 @@ public class FontPropertyViewController extends javax.swing.JButton implements e
 		clean();
 		this.property = property;
 		this.omitPropertyName = omitPropertyName;
-		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyViewControllerBackground" ) ); //$NON-NLS-1$
+		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyViewControllerBackground" ) ); 
 		setMargin( new java.awt.Insets( 0, 4, 0, 4 ) );
 		startListening();
 		refreshGUI();
@@ -110,21 +110,21 @@ public class FontPropertyViewController extends javax.swing.JButton implements e
 		StringBuffer repr = new StringBuffer();
 
 		if( ! omitPropertyName ) {
-			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property ) + " = " ); //$NON-NLS-1$
+			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property ) + " = " ); 
 		}
 
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
 			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameInContext( (edu.cmu.cs.stage3.alice.core.Element)value, property.getOwner() ) );
 		} else if( value == null ) {
-			repr.append( Messages.getString("FontPropertyViewController.3") ); //$NON-NLS-1$
+			repr.append( Messages.getString("FontPropertyViewController.3") ); 
 		} else if( value instanceof java.awt.Font ) {
 			java.awt.Font font = (java.awt.Font)value;
 			repr.append( font.getFontName() );
 			if( ! (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.Text3D) ) {
-				repr.append( ", " + font.getSize() ); //$NON-NLS-1$
+				repr.append( ", " + font.getSize() ); 
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("FontPropertyViewController.5") + value ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("FontPropertyViewController.5") + value ); 
 		}
 
 		setText( repr.toString() );

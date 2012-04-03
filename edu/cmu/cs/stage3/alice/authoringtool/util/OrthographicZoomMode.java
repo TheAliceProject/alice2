@@ -40,26 +40,22 @@ public class OrthographicZoomMode extends RenderTargetManipulatorMode {
 		this.scheduler = scheduler;
 	}
 
-	
 	public boolean requiresPickedObject() {
 		return false;
 	}
 
-	
 	public boolean hideCursorOnDrag() {
 		return true;
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev, edu.cmu.cs.stage3.alice.core.Transformable pickedTransformable, edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo ) {
 		camera = (edu.cmu.cs.stage3.alice.core.Camera)pickInfo.getSource().getBonus();
 		pressPoint.setLocation( ev.getPoint() );
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( ev.getPoint().equals( pressPoint ) ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("OrthographicZoomMode.0"), Messages.getString("OrthographicZoomMode.1"), javax.swing.JOptionPane.INFORMATION_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("OrthographicZoomMode.0"), Messages.getString("OrthographicZoomMode.1"), javax.swing.JOptionPane.INFORMATION_MESSAGE );  
 		} else if( undoRedoStack != null ) {
 			if( ! ev.isPopupTrigger() ) { // TODO: this is a hack.  this method should never be called if the popup is triggered
 				//undoRedoStack.push( new SizeUndoableRedoable( pickedTransformable, oldSize, pickedTransformable.getSize(), scheduler ) );
@@ -67,7 +63,6 @@ public class OrthographicZoomMode extends RenderTargetManipulatorMode {
 		}
 	}
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
 		if( camera instanceof edu.cmu.cs.stage3.alice.core.camera.OrthographicCamera ) {
 			if( (dx != 0) || (dy != 0) ) {

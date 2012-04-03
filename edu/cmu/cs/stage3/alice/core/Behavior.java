@@ -27,8 +27,8 @@ import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 
 public abstract class Behavior extends Element {
-	public final BooleanProperty isEnabled = new BooleanProperty( this, Messages.getString("Behavior.0"), Boolean.TRUE ); //$NON-NLS-1$
-	public final ElementArrayProperty details = new ElementArrayProperty( this, Messages.getString("Behavior.1"), null, Expression[].class ); //$NON-NLS-1$
+	public final BooleanProperty isEnabled = new BooleanProperty( this, Messages.getString("Behavior.0"), Boolean.TRUE ); 
+	public final ElementArrayProperty details = new ElementArrayProperty( this, Messages.getString("Behavior.1"), null, Expression[].class ); 
 
 	private double m_prevT;
 	//private boolean m_exceptionHasBeenPreviouslyThrown = false;
@@ -350,7 +350,7 @@ public abstract class Behavior extends Element {
                     context.m_variableMap.put( formal, runtime );
                     break;
                 } else if( j==actualRequired.length-1 ) {
-                    throw new RuntimeException( Messages.getString("Behavior.2") + nameValue ); //$NON-NLS-1$
+                    throw new RuntimeException( Messages.getString("Behavior.2") + nameValue ); 
                 }
             }
         }

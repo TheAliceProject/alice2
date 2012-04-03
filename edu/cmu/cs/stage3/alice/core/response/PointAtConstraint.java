@@ -26,7 +26,7 @@ package edu.cmu.cs.stage3.alice.core.response;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 
 public class PointAtConstraint extends AbstractPointAtConstraint {
-	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); //$NON-NLS-1$
+	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); 
 	public class RuntimePointAtConstraint extends RuntimeAbstractPointAtConstraint {
 		
 		protected boolean onlyAffectYaw() {
@@ -36,7 +36,7 @@ public class PointAtConstraint extends AbstractPointAtConstraint {
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( PointAtConstraint.this.onlyAffectYaw.getValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PointAtConstraint.1"), null, PointAtConstraint.this.onlyAffectYaw ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PointAtConstraint.1"), null, PointAtConstraint.this.onlyAffectYaw ); 
 			}
 		}
 	}

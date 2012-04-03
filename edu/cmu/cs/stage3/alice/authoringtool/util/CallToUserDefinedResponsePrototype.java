@@ -64,7 +64,6 @@ public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
 		}
 	}
 
-	
 	public edu.cmu.cs.stage3.alice.core.Element createNewElement() {
 		java.util.HashMap knownMap = new java.util.HashMap();
 		for( int i = 0; i < knownPropertyValues.length; i++ ) {
@@ -91,7 +90,6 @@ public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
 		return callToUserDefinedResponse;
 	}
 
-	
 	public ElementPrototype createCopy( edu.cmu.cs.stage3.util.StringObjectPair[] newKnownPropertyValues ) {
 		return super.createCopy( newKnownPropertyValues );
 	}
@@ -100,7 +98,6 @@ public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
 		return actualResponse;
 	}
 
-	
 	public String[] getDesiredProperties() {
 		return desiredProperties;
 	}
@@ -115,7 +112,6 @@ public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
 
 	// a rather inelegant solution for creating copies of the correct type.
 	// subclasses should override this method and call their own constructor
-	
 	protected ElementPrototype createInstance( Class elementClass, edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues, String[] desiredProperties ) {
 		return new CallToUserDefinedResponsePrototype( actualResponse, knownPropertyValues, desiredProperties );
 	}

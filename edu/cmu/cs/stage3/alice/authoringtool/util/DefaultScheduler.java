@@ -86,7 +86,7 @@ public class DefaultScheduler implements Runnable {
 //	}
 
 	synchronized private void simulateOnce() {
-		for( java.util.Iterator <Runnable> iter = doOnceRunnables.iterator(); iter.hasNext(); ) {
+		for( final java.util.Iterator <Runnable> iter = doOnceRunnables.iterator(); iter.hasNext(); ) {
 			Runnable runnable = iter.next();
 			try {
 				runnable.run();
@@ -98,14 +98,10 @@ public class DefaultScheduler implements Runnable {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				}
 			} catch( Throwable t ) {
-				System.err.println( Messages.getString("DefaultScheduler.0") ); //$NON-NLS-1$
+				System.err.println( Messages.getString("DefaultScheduler.0") ); 
 				t.printStackTrace();
 			}
-			try {
-				iter.remove();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			iter.remove();			
 		}
 
 		for( java.util.Iterator iter = eachFrameRunnablesMarkedForRemoval.iterator(); iter.hasNext(); ) {
@@ -125,7 +121,7 @@ public class DefaultScheduler implements Runnable {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				}
 			} catch( Throwable t ) {
-				System.err.println( Messages.getString("DefaultScheduler.1") ); //$NON-NLS-1$
+				System.err.println( Messages.getString("DefaultScheduler.1") ); 
 				t.printStackTrace();
 			}
 		}

@@ -28,8 +28,8 @@ import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 
 public abstract class AbstractMoveInDirectionOfAnimation extends TransformAnimation {
-	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); //$NON-NLS-1$
-	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); //$NON-NLS-1$
+	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); 
+	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); 
 
 	public abstract class RuntimeAbstractMoveInDirectionOfAnimationAnimation extends RuntimeTransformAnimation {
 		private edu.cmu.cs.stage3.alice.core.ReferenceFrame m_target;
@@ -56,7 +56,7 @@ public abstract class AbstractMoveInDirectionOfAnimation extends TransformAnimat
 			super.prologue( t );
             m_target = AbstractMoveInDirectionOfAnimation.this.target.getReferenceFrameValue();
 			if( m_target == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractMoveInDirectionOfAnimation.2"), getCurrentStack(), AbstractMoveInDirectionOfAnimation.this.target ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractMoveInDirectionOfAnimation.2"), getCurrentStack(), AbstractMoveInDirectionOfAnimation.this.target ); 
 			}
 
 			m_vectorPrev = new javax.vecmath.Vector3d();

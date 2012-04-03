@@ -46,13 +46,12 @@ public class DragWindow extends Window {
 				height = edu.cmu.cs.stage3.image.ImageUtilities.getHeight( image );
 				setSize( width, height );
 			} catch( InterruptedException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DragWindow.0"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DragWindow.0"), e ); 
 			}
 		}
 		repaint();
 	}
 
-	
 	public void paint( java.awt.Graphics g ) {
 		g.drawImage( image, 0, 0, this );
 	}

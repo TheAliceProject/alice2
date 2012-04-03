@@ -16,8 +16,8 @@ import edu.cmu.cs.stage3.alice.core.Direction;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class SitAnimation extends AbstractBodyPositionAnimation {
-	public final edu.cmu.cs.stage3.alice.core.property.TransformableProperty target = new edu.cmu.cs.stage3.alice.core.property.TransformableProperty( this, "target", null ); //$NON-NLS-1$
-	public final edu.cmu.cs.stage3.alice.core.property.DirectionProperty side = new edu.cmu.cs.stage3.alice.core.property.DirectionProperty( this, "side", Direction.FORWARD ); //$NON-NLS-1$
+	public final edu.cmu.cs.stage3.alice.core.property.TransformableProperty target = new edu.cmu.cs.stage3.alice.core.property.TransformableProperty( this, "target", null ); 
+	public final edu.cmu.cs.stage3.alice.core.property.DirectionProperty side = new edu.cmu.cs.stage3.alice.core.property.DirectionProperty( this, "side", Direction.FORWARD ); 
 	
 	public class RuntimeSitAnimation extends RuntimeAbstractBodyPositionAnimation {
 		edu.cmu.cs.stage3.alice.core.Transformable m_target;
@@ -34,14 +34,14 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 			m_positionEnd = null;
 			
 			if( m_target == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.2"), null, SitAnimation.this.target ); //$NON-NLS-1$
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.2"), null, SitAnimation.this.target ); 
             }
             if( m_target == m_subject ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.3") + m_target.name.getStringValue() + ".", getCurrentStack(), SitAnimation.this.target );             //$NON-NLS-1$ //$NON-NLS-2$
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.3") + m_target.name.getStringValue() + ".", getCurrentStack(), SitAnimation.this.target );              
             }
             
             if (m_subject.isAncestorOf(m_target)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.5"), getCurrentStack(), SitAnimation.this.target );             //$NON-NLS-1$
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.5"), getCurrentStack(), SitAnimation.this.target );             
             }
 	
 			findLegs();
@@ -58,11 +58,11 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 			m_subject.setPositionRightNow( edu.cmu.cs.stage3.math.MathUtilities.interpolate( m_positionBegin, m_positionEnd, getPortion( t ) ), edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE );
 	
 			setOrientation(rightUpper, rightUpperInitialOrient, rightUpperFinalOrient, getPortion(t));
-			if ( !(m_target.name.getStringValue().equals("ground")) ) //$NON-NLS-1$
+			if ( !(m_target.name.getStringValue().equals("ground")) ) 
 				setOrientation(rightLower, rightLowerInitialOrient, rightLowerFinalOrient, getPortion(t));
 	
 			setOrientation(leftUpper, leftUpperInitialOrient, leftUpperFinalOrient, getPortion(t));
-			if ( !(m_target.name.getStringValue().equals("ground")) ) //$NON-NLS-1$
+			if ( !(m_target.name.getStringValue().equals("ground")) ) 
 				setOrientation(leftLower, leftLowerInitialOrient, leftLowerFinalOrient, getPortion(t));
 	
 			adjustHeight(); 
@@ -71,7 +71,7 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 		
 		
 		protected void adjustHeight() {	
-			if ((m_target != null) && !(m_target.name.getStringValue().equals("ground")) ){ //$NON-NLS-1$
+			if ((m_target != null) && !(m_target.name.getStringValue().equals("ground")) ){ 
 				
 			} else {
 				super.adjustHeight();
@@ -91,7 +91,7 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 				orient.rotateY(Math.PI/2.0);
 			}
 			
-			if (m_target.name.getStringValue().equals("ground")) { //$NON-NLS-1$
+			if (m_target.name.getStringValue().equals("ground")) { 
 				edu.cmu.cs.stage3.math.Matrix44 currentTrans = m_subject.getTransformation(m_subject.getWorld());
 				m_subject.standUpRightNow();
 				orient = m_subject.getOrientationAsAxes(m_subject.getWorld());
@@ -106,7 +106,7 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 				javax.vecmath.Vector3d endPos = m_target.getBoundingBox(m_target.getWorld()).getCenterOfTopFace();
 				javax.vecmath.Vector3d[] forwardAndUp = m_target.getOrientationAsForwardAndUpGuide(m_target.getWorld());
 				
-				if ( ((leftUpper != null)  && (leftLower == null) ) || m_target.name.getStringValue().equals("ground")){ //$NON-NLS-1$
+				if ( ((leftUpper != null)  && (leftLower == null) ) || m_target.name.getStringValue().equals("ground")){ 
 					double xOffset = m_subject.getBoundingBox().getCenter().x;
 					double yOffset = leftUpper.getPosition(m_subject).y;
 					double zStart = 0.0;
@@ -143,7 +143,7 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 						endPos = m_target.getPosition(endPos, m_target.getWorld());
 						
 					}	
-					if (m_target.name.getStringValue().equals("ground")){ //$NON-NLS-1$
+					if (m_target.name.getStringValue().equals("ground")){ 
 						endPos = m_subject.getPosition(m_subject.getWorld());
 						endPos.y -= depthSeat;
 					}

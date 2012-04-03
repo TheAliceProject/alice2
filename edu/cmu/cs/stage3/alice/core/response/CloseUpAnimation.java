@@ -19,9 +19,9 @@ import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
 
 public class CloseUpAnimation extends AbstractPositionAnimation {
-	public final Vector3Property position = new Vector3Property( this, "position", new javax.vecmath.Vector3d( 0,0,0 ) ); //$NON-NLS-1$
-	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF ); //$NON-NLS-1$
-	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); //$NON-NLS-1$
+	public final Vector3Property position = new Vector3Property( this, "position", new javax.vecmath.Vector3d( 0,0,0 ) ); 
+	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF ); 
+	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); 
 	
 	private edu.cmu.cs.stage3.math.Matrix33 m_cameraEndOrientation;
 	private edu.cmu.cs.stage3.math.Matrix33 m_cameraBeginOrientation;
@@ -108,19 +108,19 @@ public class CloseUpAnimation extends AbstractPositionAnimation {
 			m_asSeenBy = CloseUpAnimation.this.asSeenBy.getReferenceFrameValue();
 			m_amount = CloseUpAnimation.this.amount.getNumberValue().doubleValue();
 			if( m_asSeenBy == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.3"), getCurrentStack(), CloseUpAnimation.this.asSeenBy );             //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.3"), getCurrentStack(), CloseUpAnimation.this.asSeenBy );             
 			}
 			
 			super.prologue(t);
 			
 		    if( m_subject == null ) {
-			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.4"), getCurrentStack(), CloseUpAnimation.this.subject );             //$NON-NLS-1$
+			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.4"), getCurrentStack(), CloseUpAnimation.this.subject );             
 		    }
 		    if (m_subject == m_asSeenBy) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.5"), getCurrentStack(), CloseUpAnimation.this.subject );             //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.5"), getCurrentStack(), CloseUpAnimation.this.subject );             
 		    }
 			if (m_amount < 0) {
-			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.6"), getCurrentStack(), CloseUpAnimation.this.amount );             //$NON-NLS-1$
+			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.6"), getCurrentStack(), CloseUpAnimation.this.amount );             
 		    }
 		}
 		

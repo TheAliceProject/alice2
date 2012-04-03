@@ -35,7 +35,6 @@ public class UserDefinedQuestion extends edu.cmu.cs.stage3.alice.core.Question {
 	public final ElementArrayProperty keywordFormalParameters = new ElementArrayProperty( this, "keywordFormalParameters", null, Variable[].class );
 	public final ElementArrayProperty localVariables = new ElementArrayProperty( this, "localVariables", null, Variable[].class );
 
-	
 	protected void internalFindAccessibleExpressions( Class cls, java.util.Vector v ) {
 		for( int i=0; i<requiredFormalParameters.size(); i++ ) {
 			internalAddExpressionIfAssignableTo( (Expression)requiredFormalParameters.get( i ), cls, v );
@@ -49,7 +48,6 @@ public class UserDefinedQuestion extends edu.cmu.cs.stage3.alice.core.Question {
 		super.internalFindAccessibleExpressions( cls, v );
 	}
 
-	
 	public Object getValue() {
         for( int i=0; i<components.size(); i++ ) {
             Component component = (Component)components.get( i );

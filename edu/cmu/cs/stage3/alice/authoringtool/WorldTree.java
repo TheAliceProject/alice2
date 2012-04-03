@@ -55,11 +55,10 @@ public class WorldTree extends javax.swing.JTree {
 		dropLinesActive = false;
 		getSelectionModel().setSelectionMode( javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION );
 
-		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("WorldTree.1")+"<p><p>"+Messages.getString("WorldTree.3")+"</font></html>" ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("WorldTree.1")+"<p><p>"+Messages.getString("WorldTree.3")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
 		javax.swing.ToolTipManager.sharedInstance().registerComponent( this );
 	}
 
-	
 	public String getToolTipText( java.awt.event.MouseEvent ev ) {
 		String tip = super.getToolTipText( ev );
 		if( tip != null ) {
@@ -235,12 +234,11 @@ public class WorldTree extends javax.swing.JTree {
 		return getPathBetweenRows( getRowForPath( fromPath ), getRowForPath( toPath ) );
 	}
 
-	
 	public void paintComponent( java.awt.Graphics g ) {
 		try {
 			super.paintComponent( g );
 		} catch( NullPointerException e ) {
-			AuthoringTool.showErrorDialog( Messages.getString("WorldTree.5"), e ); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog( Messages.getString("WorldTree.5"), e ); 
 		}
 		if( dropLinesActive && showDropLines ) {
 			paintLines( g, getBounds(), insets, fromPath, toPath );

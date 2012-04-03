@@ -6,7 +6,6 @@ import edu.cmu.cs.stage3.alice.core.camera.ProjectionCamera;
 public class ProjectionViewVolumeDecorator extends ViewVolumeDecorator {
 	private ProjectionCamera m_projectionCamera = null;
 
-	
 	protected Camera getCamera() {
 		return getProjectionCamera();
 	}

@@ -83,12 +83,10 @@ public class TreeTableModelAdapter extends AbstractTableModel implements TypedTa
 		return treeTableModel.getColumnCount();
 	}
 
-	
 	public String getColumnName(int column) {
 		return treeTableModel.getColumnName( column );
 	}
 
-	
 	public Class getColumnClass(int column) {
 		return treeTableModel.getColumnClass( column );
 	}
@@ -114,12 +112,10 @@ public class TreeTableModelAdapter extends AbstractTableModel implements TypedTa
 		return treeTableModel.isNullValidAt( nodeForRow( row ), column );
 	}
 
-	
 	public boolean isCellEditable( int row, int column ) {
 		 return treeTableModel.isCellEditable( nodeForRow(row), column );
 	}
 
-	
 	public void setValueAt( Object value, int row, int column ) {
 		treeTableModel.setValueAt( value, nodeForRow(row), column );
 	}

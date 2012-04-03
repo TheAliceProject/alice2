@@ -317,213 +317,213 @@ public class Actions {
 		
 
 		newWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.Event.CTRL_MASK) );
-		newWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "newWorld" ); //$NON-NLS-1$
+		newWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "newWorld" ); 
 		newWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'N' ) );
-		newWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.1") ); //$NON-NLS-1$
-		newWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.2") ); //$NON-NLS-1$
-		newWorldAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "new" ) ); //$NON-NLS-1$
+		newWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.1") ); 
+		newWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.2") ); 
+		newWorldAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "new" ) ); 
 		applicationActions.add( newWorldAction );
 
 		openWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.Event.CTRL_MASK) );
-		openWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "openWorld" ); //$NON-NLS-1$
+		openWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "openWorld" ); 
 		openWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'O' ) );
-		openWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.5") ); //$NON-NLS-1$
-		openWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.6") ); //$NON-NLS-1$
-		openWorldAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "open" ) ); //$NON-NLS-1$
+		openWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.5") ); 
+		openWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.6") ); 
+		openWorldAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "open" ) ); 
 		applicationActions.add( openWorldAction );
 
 		saveWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK) );
-		saveWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveWorld" ); //$NON-NLS-1$
+		saveWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveWorld" ); 
 		saveWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'S' ) );
-		saveWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.9") ); //$NON-NLS-1$
-		saveWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.10") ); //$NON-NLS-1$
-		saveWorldAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "save" ) ); //$NON-NLS-1$
+		saveWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.9") ); 
+		saveWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.10") ); 
+		saveWorldAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "save" ) ); 
 		applicationActions.add( saveWorldAction );
 
 		saveWorld.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0) );
-		saveWorld.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveWorld" ); //$NON-NLS-1$
-		saveWorld.putValue( javax.swing.Action.NAME, Messages.getString("Actions.13") );	 //$NON-NLS-1$
+		saveWorld.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveWorld" ); 
+		saveWorld.putValue( javax.swing.Action.NAME, Messages.getString("Actions.13") );	 
 		applicationActions.add( saveWorld );
 		
 		//saveWorldAsAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK) );
-		saveWorldAsAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveWorldAs" ); //$NON-NLS-1$
+		saveWorldAsAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveWorldAs" ); 
 		saveWorldAsAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'v' ) );
-		saveWorldAsAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.15") ); //$NON-NLS-1$
-		saveWorldAsAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.16") ); //$NON-NLS-1$
+		saveWorldAsAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.15") ); 
+		saveWorldAsAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.16") ); 
 		//saveWorldAsAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "save" ) );
 		applicationActions.add( saveWorldAsAction );
 
 		//saveForWebAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK) );
-		saveForWebAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveForWeb" ); //$NON-NLS-1$
+		saveForWebAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "saveForWeb" ); 
 		saveForWebAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'w' ) );
-		saveForWebAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.18") ); //$NON-NLS-1$
-		saveForWebAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.19") ); //$NON-NLS-1$
+		saveForWebAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.18") ); 
+		saveForWebAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.19") ); 
 		//saveForWebAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "save" ) );
 		applicationActions.add( saveForWebAction );
 
 		//importObjectAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		importObjectAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "importObject" ); //$NON-NLS-1$
+		importObjectAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "importObject" ); 
 		importObjectAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'I' ) );
-		importObjectAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.21") ); //$NON-NLS-1$
-		importObjectAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.22") ); //$NON-NLS-1$
-		importObjectAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "import" ) ); //$NON-NLS-1$
+		importObjectAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.21") ); 
+		importObjectAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.22") ); 
+		importObjectAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "import" ) ); 
 		applicationActions.add( importObjectAction );
 
 		//quitAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		quitAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "quit" ); //$NON-NLS-1$
+		quitAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "quit" ); 
 		quitAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'x' ) );
-		quitAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.25") ); //$NON-NLS-1$
-		quitAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.26") ); //$NON-NLS-1$
+		quitAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.25") ); 
+		quitAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.26") ); 
 		//quitAction.putValue( javax.swing.Action.SMALL_ICON,  );
 		applicationActions.add( quitAction );
 
 		cutAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.Event.CTRL_MASK) );
-		cutAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "cut" ); //$NON-NLS-1$
+		cutAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "cut" ); 
 		cutAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 't' ) );
-		cutAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.28") ); //$NON-NLS-1$
-		cutAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.29") ); //$NON-NLS-1$
-		cutAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "cut" ) ); //$NON-NLS-1$
+		cutAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.28") ); 
+		cutAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.29") ); 
+		cutAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "cut" ) ); 
 		applicationActions.add( cutAction );
 
 		copyAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.Event.CTRL_MASK) );
-		copyAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "copy" ); //$NON-NLS-1$
+		copyAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "copy" ); 
 		copyAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'C' ) );
-		copyAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.32") ); //$NON-NLS-1$
-		copyAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.33") ); //$NON-NLS-1$
-		copyAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "copy" ) ); //$NON-NLS-1$
+		copyAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.32") ); 
+		copyAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.33") ); 
+		copyAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "copy" ) ); 
 		applicationActions.add( copyAction );
 
 		pasteAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.Event.CTRL_MASK) );
-		pasteAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "paste" ); //$NON-NLS-1$
+		pasteAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "paste" ); 
 		pasteAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'P' ) );
-		pasteAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.36") ); //$NON-NLS-1$
-		pasteAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.37") ); //$NON-NLS-1$
-		pasteAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "paste" ) ); //$NON-NLS-1$
+		pasteAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.36") ); 
+		pasteAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.37") ); 
+		pasteAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "paste" ) ); 
 		applicationActions.add( pasteAction );
 
 		undoAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.Event.CTRL_MASK) );
-		undoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "undo" ); //$NON-NLS-1$
+		undoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "undo" ); 
 		undoAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'U' ) );
-		undoAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.40") ); //$NON-NLS-1$
-		undoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.41") ); //$NON-NLS-1$
-		undoAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "undo" ) ); //$NON-NLS-1$
+		undoAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.40") ); 
+		undoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.41") ); 
+		undoAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "undo" ) ); 
 		applicationActions.add( undoAction );
 
 		redoAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.Event.CTRL_MASK) );
-		redoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "redo" ); //$NON-NLS-1$
+		redoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "redo" ); 
 		redoAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'R' ) );
-		redoAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.44") ); //$NON-NLS-1$
-		redoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.45") ); //$NON-NLS-1$
-		redoAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "redo" ) ); //$NON-NLS-1$
+		redoAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.44") ); 
+		redoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.45") ); 
+		redoAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "redo" ) ); 
 		applicationActions.add( redoAction );
 
 		//aboutAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		aboutAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "about" ); //$NON-NLS-1$
+		aboutAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "about" ); 
 		aboutAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'A' ) );
-		aboutAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.48") ); //$NON-NLS-1$
-		aboutAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.49") ); //$NON-NLS-1$
-		aboutAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "about" ) ); //$NON-NLS-1$
+		aboutAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.48") ); 
+		aboutAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.49") ); 
+		aboutAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "about" ) ); 
 		applicationActions.add( aboutAction );
 
 		//onScreenHelpAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		onScreenHelpAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "onScreenHelp" ); //$NON-NLS-1$
+		onScreenHelpAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "onScreenHelp" ); 
 		onScreenHelpAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'O' ) );
-		onScreenHelpAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.52") ); //$NON-NLS-1$
-		onScreenHelpAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.53") ); //$NON-NLS-1$
+		onScreenHelpAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.52") ); 
+		onScreenHelpAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.53") ); 
 		//onScreenHelpAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "onScreenHelp" ) );
 		applicationActions.add( onScreenHelpAction );
 
 		playAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0) );// java.awt.Event.CTRL_MASK) );
-		playAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "play" ); //$NON-NLS-1$
+		playAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "play" ); 
 		//playAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'P' ) );
-		playAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.55") ); //$NON-NLS-1$
-		playAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.56") ); //$NON-NLS-1$
-		playAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "play" ) ); //$NON-NLS-1$
+		playAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.55") ); 
+		playAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "<html><font face=arial size=-1>" + Messages.getString("Actions.56") + "<p><p>" + Messages.getString("Actions.57") + "</font></html>"); 
+		playAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "play" ) ); 
 		applicationActions.add( playAction );
 
 		//addCharacterAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		addCharacterAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "addObject" ); //$NON-NLS-1$
+		addCharacterAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "addObject" ); 
 		//addCharacterAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'A' ) );
-		addCharacterAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.59") ); //$NON-NLS-1$
-		addCharacterAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.60") ); //$NON-NLS-1$
+		addCharacterAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.59") ); 
+		addCharacterAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.60") ); 
 		//addCharacterAction.putValue( javax.swing.Action.SMALL_ICON,  );
 		applicationActions.add( addCharacterAction );
 
 		//add3DTextAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		add3DTextAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "add3DText" ); //$NON-NLS-1$
+		add3DTextAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "add3DText" ); 
 		//add3DTextAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'A' ) );
-		add3DTextAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.0") ); //$NON-NLS-1$
-		add3DTextAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.63") ); //$NON-NLS-1$
+		add3DTextAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.0") ); 
+		add3DTextAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.63") ); 
 		//add3DTextAction.putValue( javax.swing.Action.SMALL_ICON,  );
 		applicationActions.add( add3DTextAction );
 		
 		exportMovieAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0) );
-	    exportMovieAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "exportVideo" ); //$NON-NLS-1$
-		exportMovieAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.65") ); //$NON-NLS-1$
-		exportMovieAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.66") ); //$NON-NLS-1$
+	    exportMovieAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "exportVideo" ); 
+		exportMovieAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.65") ); 
+		exportMovieAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.66") ); 
 	  	applicationActions.add( exportMovieAction );
 
 		//trashAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		trashAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "trash" ); //$NON-NLS-1$
+		trashAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "trash" ); 
 		//trashAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
 		//trashAction.putValue( javax.swing.Action.NAME, "Trash" );
-		trashAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.68") ); //$NON-NLS-1$
+		trashAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "<html><font face=arial size=-1>" + Messages.getString("Actions.68") + "<p><p>" + Messages.getString("Actions.69") + "</font></html>"); 
 		//trashAction.putValue( javax.swing.Action.SMALL_ICON,   );
 		applicationActions.add( trashAction );
 
 		//openExampleWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_, java.awt.Event.CTRL_MASK) );
-		openExampleWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "openExampleWorld" ); //$NON-NLS-1$
+		openExampleWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "openExampleWorld" ); 
 		//openExampleWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
-		openExampleWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.70") ); //$NON-NLS-1$
-		openExampleWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.71") ); //$NON-NLS-1$
+		openExampleWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.70") ); 
+		openExampleWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.71") ); 
 		//openExampleWorldAction.putValue( javax.swing.Action.SMALL_ICON,  );
 		applicationActions.add( openExampleWorldAction );
 
 		//helpAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
-		helpAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "help" ); //$NON-NLS-1$
+		helpAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "help" ); 
 		helpAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'H' ) );
-		helpAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.73") ); //$NON-NLS-1$
-		helpAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.74") ); //$NON-NLS-1$
+		helpAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.73") ); 
+		helpAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.74") ); 
 		//helpAction.putValue( javax.swing.Action.SMALL_ICON,  );
 		applicationActions.add( helpAction );
 
 		preferencesAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F8, 0 ) );
-		preferencesAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "preferences" ); //$NON-NLS-1$
+		preferencesAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "preferences" ); 
 		preferencesAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'P' ) );
-		preferencesAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.76") ); //$NON-NLS-1$
-		preferencesAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.77") ); //$NON-NLS-1$
+		preferencesAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.76") ); 
+		preferencesAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.77") ); 
 		//preferencesAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( preferencesAction );
 
 		makeBillboardAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_B, java.awt.Event.CTRL_MASK ) );
-		makeBillboardAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "makeBillboard" ); //$NON-NLS-1$
+		makeBillboardAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "makeBillboard" ); 
 		makeBillboardAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'B' ) );
-		makeBillboardAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.79") ); //$NON-NLS-1$
-		makeBillboardAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.80") ); //$NON-NLS-1$
+		makeBillboardAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.79") ); 
+		makeBillboardAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.80") ); 
 		//makeBillboardAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( makeBillboardAction );
 
 		//showWorldInfoAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
-		showWorldInfoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showWorldInfo" ); //$NON-NLS-1$
+		showWorldInfoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showWorldInfo" ); 
 		showWorldInfoAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'I' ) );
-		showWorldInfoAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.82") ); //$NON-NLS-1$
-		showWorldInfoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.83") ); //$NON-NLS-1$
+		showWorldInfoAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.82") ); 
+		showWorldInfoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.83") ); 
 		//showWorldInfoAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( showWorldInfoAction );
 
 		//launchTutorialAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
-		launchTutorialAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchTutorial" ); //$NON-NLS-1$
+		launchTutorialAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchTutorial" ); 
 		launchTutorialAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
-		launchTutorialAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.85") ); //$NON-NLS-1$
-		launchTutorialAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.86") ); //$NON-NLS-1$
+		launchTutorialAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.85") ); 
+		launchTutorialAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.86") ); 
 		//launchTutorialAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( launchTutorialAction );
 
 		launchTutorialFileAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
-		launchTutorialFileAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchTutorialFile" ); //$NON-NLS-1$
+		launchTutorialFileAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchTutorialFile" ); 
 		launchTutorialFileAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
-		launchTutorialFileAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.88") ); //$NON-NLS-1$
-		launchTutorialFileAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.89") ); //$NON-NLS-1$
+		launchTutorialFileAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.88") ); 
+		launchTutorialFileAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.89") ); 
 		//launchTutorialFileAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( launchTutorialFileAction );
 
@@ -536,85 +536,85 @@ public class Actions {
 		applicationActions.add( launchSoftwareUpdate );	
     
 		//showStdOutDialogAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
-		showStdOutDialogAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showStdOutDialog" ); //$NON-NLS-1$
+		showStdOutDialogAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showStdOutDialog" ); 
 		showStdOutDialogAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'O' ) );
-		showStdOutDialogAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.91") ); //$NON-NLS-1$
-		showStdOutDialogAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.92") ); //$NON-NLS-1$
+		showStdOutDialogAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.91") ); 
+		showStdOutDialogAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.92") ); 
 		//showStdOutDialogAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( showStdOutDialogAction );
 
 		//showStdErrDialogAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
-		showStdErrDialogAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showStdErrDialog" ); //$NON-NLS-1$
+		showStdErrDialogAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showStdErrDialog" ); 
 		showStdErrDialogAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'E' ) );
-		showStdErrDialogAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.94") ); //$NON-NLS-1$
-		showStdErrDialogAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.95") ); //$NON-NLS-1$
+		showStdErrDialogAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.94") ); 
+		showStdErrDialogAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.95") ); 
 		//showStdErrDialogAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( showStdErrDialogAction );
 
 		showPrintDialogAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_P, java.awt.Event.CTRL_MASK ) );
-		showPrintDialogAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showPrintDialog" ); //$NON-NLS-1$
+		showPrintDialogAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "showPrintDialog" ); 
 		//showPrintDialogAction.putValue( javax.swing.Action.DISPLAYED_MNEMONIC_INDEX_KEY, 16);
 		showPrintDialogAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'P' ) );
-		showPrintDialogAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.97") ); //$NON-NLS-1$
-		showPrintDialogAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.98") ); //$NON-NLS-1$
+		showPrintDialogAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.97") ); 
+		showPrintDialogAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.98") ); 
 		//showPrintDialogAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( showPrintDialogAction );
 
 		pauseWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_PAUSE, 0 ) );
-		pauseWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "pauseWorld" ); //$NON-NLS-1$
+		pauseWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "pauseWorld" ); 
 //		pauseWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'P' ) );
-		pauseWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.100") ); //$NON-NLS-1$
-		pauseWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.101") ); //$NON-NLS-1$
+		pauseWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.100") ); 
+		pauseWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.101") ); 
 		//pauseWorldAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( pauseWorldAction );
 
 		resumeWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_PAGE_UP, 0 ) );
-		resumeWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "resumeWorld" ); //$NON-NLS-1$
+		resumeWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "resumeWorld" ); 
 //		resumeWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'R' ) );
-		resumeWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.103") ); //$NON-NLS-1$
-		resumeWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.104") ); //$NON-NLS-1$
+		resumeWorldAction.putValue( javax.swing.Action.NAME, "  " + Messages.getString("Actions.103") ); 
+		resumeWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.104") ); 
 		//resumeWorldAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( resumeWorldAction );
 
 		restartWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_BACK_SPACE, 0 ) );
-		restartWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "restartWorld" ); //$NON-NLS-1$
+		restartWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "restartWorld" ); 
 //		restartWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
-		restartWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.106") ); //$NON-NLS-1$
-		restartWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.107") ); //$NON-NLS-1$
+		restartWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.106") ); 
+		restartWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.107") ); 
 		//restartWorldAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( restartWorldAction );
 
 		restartStopWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_BACK_SPACE, 0 ) );
-		restartStopWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "restartWorld" ); //$NON-NLS-1$
+		restartStopWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "restartWorld" ); 
 //		restartWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
-		restartStopWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.109") ); //$NON-NLS-1$
-		restartStopWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.110") ); //$NON-NLS-1$
+		restartStopWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.109") ); 
+		restartStopWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.110") ); 
 		//restartWorldAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( restartStopWorldAction );
 
 		
 		stopWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_ESCAPE, 0 ) );
-		stopWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "stopWorld" ); //$NON-NLS-1$
+		stopWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "stopWorld" ); 
 //		stopWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'S' ) );
-		stopWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.112") ); //$NON-NLS-1$
-		stopWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.113") ); //$NON-NLS-1$
+		stopWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.112") ); 
+		stopWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.113") ); 
 		//stopWorldAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( stopWorldAction );
 
 		takePictureAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_G, java.awt.event.KeyEvent.CTRL_MASK ) );
-		takePictureAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "takePicture" ); //$NON-NLS-1$
+		takePictureAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "takePicture" ); 
 //		takePictureAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'c' ) );
-		takePictureAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.115") ); //$NON-NLS-1$
-		takePictureAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.116") ); //$NON-NLS-1$
+		takePictureAction.putValue( javax.swing.Action.NAME, Messages.getString("Actions.115") ); 
+		takePictureAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.116") ); 
 		//takePictureAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( takePictureAction );
 		
 //		logging instructor intervention...
-		  logInstructorIntervention.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "logInstructor" ); //$NON-NLS-1$
+		  logInstructorIntervention.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "logInstructor" ); 
 		  logInstructorIntervention.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'L' ) );
-		  logInstructorIntervention.putValue( javax.swing.Action.NAME, Messages.getString("Actions.118") ); //$NON-NLS-1$
-		  logInstructorIntervention.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.119") ); //$NON-NLS-1$
-		  logInstructorIntervention.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "log" )); //$NON-NLS-1$
+		  logInstructorIntervention.putValue( javax.swing.Action.NAME, Messages.getString("Actions.118") ); 
+		  logInstructorIntervention.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Actions.119") ); 
+		  logInstructorIntervention.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "log" )); 
 		  applicationActions.add( logInstructorIntervention );
 		
 	}

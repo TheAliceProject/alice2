@@ -41,7 +41,7 @@ public abstract class CompositeResponsePanel extends edu.cmu.cs.stage3.alice.aut
 
     public CompositeResponsePanel(){
         super();
-        headerText = Messages.getString("CompositeResponsePanel.0"); //$NON-NLS-1$
+        headerText = Messages.getString("CompositeResponsePanel.0"); 
     }
 
     public void set(edu.cmu.cs.stage3.alice.core.response.CompositeResponse response, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){

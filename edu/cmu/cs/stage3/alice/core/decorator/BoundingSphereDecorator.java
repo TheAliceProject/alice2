@@ -42,7 +42,6 @@ public class BoundingSphereDecorator extends Decorator {
 	private edu.cmu.cs.stage3.alice.scenegraph.LineStrip m_sgLineStrip = null;
 	private ReferenceFrame m_referenceFrame = null;
 
-	
 	public ReferenceFrame getReferenceFrame() {
 		return m_referenceFrame;
 	}
@@ -66,7 +65,6 @@ public class BoundingSphereDecorator extends Decorator {
         super.internalRelease( pass );
     }
 
-	
 	protected void update() {
 		super.update();
 		edu.cmu.cs.stage3.math.Sphere sphere = m_referenceFrame.getBoundingSphere();

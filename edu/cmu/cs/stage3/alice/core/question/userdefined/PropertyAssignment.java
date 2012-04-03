@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.question.userdefined;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Expression;
 import edu.cmu.cs.stage3.alice.core.property.OverridableElementProperty;

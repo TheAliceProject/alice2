@@ -43,7 +43,6 @@ public class DataSourceProperty extends ObjectProperty {
 				+ dataSourceValue.getExtension();
 	}
 
-	
 	protected void decodeObject(org.w3c.dom.Element node,
 			edu.cmu.cs.stage3.io.DirectoryTreeLoader loader,
 			java.util.Vector referencesToBeResolved, double version)
@@ -74,7 +73,6 @@ public class DataSourceProperty extends ObjectProperty {
         }
     }
 
-	
 	protected void encodeObject(org.w3c.dom.Document document,
 			org.w3c.dom.Element node,
 			edu.cmu.cs.stage3.io.DirectoryTreeStorer storer,
@@ -122,7 +120,6 @@ public class DataSourceProperty extends ObjectProperty {
 		}
 	}
 
-	
 	public void keepAnyAssociatedFiles(
 			edu.cmu.cs.stage3.io.DirectoryTreeStorer storer)
 			throws edu.cmu.cs.stage3.io.KeepFileNotSupportedException,

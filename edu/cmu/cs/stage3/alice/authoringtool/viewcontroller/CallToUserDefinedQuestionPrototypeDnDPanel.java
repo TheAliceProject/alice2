@@ -118,7 +118,6 @@ public class CallToUserDefinedQuestionPrototypeDnDPanel extends edu.cmu.cs.stage
 		removeAll();
 	}
 
-	
 	public void release() {
 		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
 	}
@@ -190,7 +189,6 @@ public class CallToUserDefinedQuestionPrototypeDnDPanel extends edu.cmu.cs.stage
 	}
 
 	class MouseListener extends edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter {
-		
 		public void singleClickResponse( java.awt.event.MouseEvent ev ) {
 			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().editObject( callToUserDefinedQuestionPrototype.getActualQuestion(), CallToUserDefinedQuestionPrototypeDnDPanel.this );
 		}

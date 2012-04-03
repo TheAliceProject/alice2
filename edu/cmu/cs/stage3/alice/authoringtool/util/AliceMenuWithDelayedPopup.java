@@ -35,7 +35,6 @@ public class AliceMenuWithDelayedPopup extends AliceMenu {
 		this.structure = structure;
 	}
 
-	
 	public javax.swing.JPopupMenu getPopupMenu() {
 		if( ! menuHasBeenPopulated ) {
 			PopupMenuUtilities.populateDelayedMenu( this, structure );

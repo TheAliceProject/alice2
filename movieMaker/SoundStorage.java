@@ -137,12 +137,12 @@ public class SoundStorage {
 	{
 		Vector newDS = new Vector();
 
-		String 	orig_file = "",  //$NON-NLS-1$
-				final_sound = "",  //$NON-NLS-1$
-				sound_slice = "",  //$NON-NLS-1$
-				sound_cut = "", //$NON-NLS-1$
-				track_file = "", //$NON-NLS-1$
-				silence = exportDirectory + "silence.wav"; //$NON-NLS-1$
+		String 	orig_file = "",  
+				final_sound = "",  
+				sound_slice = "",  
+				sound_cut = "", 
+				track_file = "", 
+				silence = exportDirectory + "silence.wav"; 
 
 		int currentChunk = 0;
 		int currentLength = 0;
@@ -185,15 +185,15 @@ public class SoundStorage {
 				blankLength = currentLength;
 			}
 			
-			orig_file = exportDirectory + "sound" + y + "."	+ sd.data.getExtension(); //$NON-NLS-1$ //$NON-NLS-2$
+			orig_file = exportDirectory + "sound" + y + "."	+ sd.data.getExtension();  
 			
-			sound_slice = exportDirectory + "sound" + y + ".wav"; //$NON-NLS-1$ //$NON-NLS-2$
-			sound_cut = exportDirectory + "soundCut" + y + ".wav"; //$NON-NLS-1$ //$NON-NLS-2$
-			track_file = exportDirectory + "track" + y + ".wav"; //$NON-NLS-1$ //$NON-NLS-2$
+			sound_slice = exportDirectory + "sound" + y + ".wav";  
+			sound_cut = exportDirectory + "soundCut" + y + ".wav";  
+			track_file = exportDirectory + "track" + y + ".wav";  
 
 			writeToFile(sd.data.getJMFDataSource(), createURL(orig_file));
 
-			if (sd.data.getExtension().equals("MP3")){ //$NON-NLS-1$
+			if (sd.data.getExtension().equals("MP3")){ 
 				//print("About to try and Convert!" + sound_slice + " " + orig_file);
 				SimpleSound.convert(orig_file, sound_slice);
 			}
@@ -225,7 +225,7 @@ public class SoundStorage {
 				SimpleSound blank = new SimpleSound(blankLength, s);
 				blank.writeToFile(silence);
 			} catch (SoundException e) {
-				AuthoringTool.showErrorDialog( Messages.getString("SoundStorage.0"), e); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog( Messages.getString("SoundStorage.0"), e); 
 				return null;
 			}
 
@@ -325,10 +325,10 @@ public class SoundStorage {
 			url=new java.io.File(s).toURL().toString();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			return ""; //$NON-NLS-1$
+			return ""; 
 		}
 		//need to fix??
-		String mod = url.replaceFirst("file:/", "file:///"); //$NON-NLS-1$ //$NON-NLS-2$
+		String mod = url.replaceFirst("file:/", "file:///");  
 		return mod;
 
 	}

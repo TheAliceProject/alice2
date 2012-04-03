@@ -32,7 +32,6 @@ public class InvisibleSplitPaneUI extends javax.swing.plaf.basic.BasicSplitPaneU
 		return new InvisibleSplitPaneUI();
 	}
 
-	
 	public javax.swing.plaf.basic.BasicSplitPaneDivider createDefaultDivider() {
 		return new InvisibleSplitPaneDivider( this );
 	}
@@ -45,7 +44,6 @@ public class InvisibleSplitPaneUI extends javax.swing.plaf.basic.BasicSplitPaneU
 			super( ui );
 		}
 
-		
 		public void paint( java.awt.Graphics g ) {
 		}
 	}

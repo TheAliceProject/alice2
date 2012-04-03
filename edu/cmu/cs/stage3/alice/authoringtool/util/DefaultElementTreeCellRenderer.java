@@ -31,7 +31,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class DefaultElementTreeCellRenderer extends DefaultTreeCellRenderer {
 
 	//TODO: make this more sophisticated
-	
 	public java.awt.Component getTreeCellRendererComponent( javax.swing.JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus ) {
 		String stringValue;
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Element ) {

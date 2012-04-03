@@ -42,7 +42,6 @@ public class ForEachInListSequentialLoopPanel extends edu.cmu.cs.stage3.alice.au
         super.set(r, authoringToolIn);
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder");
     }

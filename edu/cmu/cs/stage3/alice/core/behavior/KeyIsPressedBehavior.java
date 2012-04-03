@@ -39,7 +39,6 @@ public class KeyIsPressedBehavior extends AbstractConditionalBehavior implements
 
 	private edu.cmu.cs.stage3.alice.core.RenderTarget[] m_renderTargets = null;
 
-	
 	public void manufactureDetails() {
 		super.manufactureDetails();
 		edu.cmu.cs.stage3.alice.core.Variable keyChar = new edu.cmu.cs.stage3.alice.core.Variable();

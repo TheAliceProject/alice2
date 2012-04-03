@@ -84,7 +84,6 @@ public class ElementDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.
 		clean();
 	}
 
-	
 	public void release() {
 		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
 	}

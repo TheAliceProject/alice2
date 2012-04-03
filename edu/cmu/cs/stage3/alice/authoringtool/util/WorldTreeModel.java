@@ -123,7 +123,7 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 
 	public int getChildCount( Object parent ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.0") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.0") ); 
 		}
 
 		int childCount = 0;
@@ -153,7 +153,7 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 
 	public Object getChild( Object parent, int index ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.1") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.1") ); 
 		}
 
 		int childCount = 0;
@@ -186,10 +186,10 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 			return -1;
 		}
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.2") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.2") ); 
 		}
 		if( ! (child instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.3") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.3") ); 
 		}
 
 		int childCount = 0;
@@ -228,7 +228,7 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 				element.name.set( previousName );
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("WorldTreeModel.4") ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("WorldTreeModel.4") ); 
 		}
 	}
 

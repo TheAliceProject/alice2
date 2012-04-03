@@ -33,7 +33,6 @@ public class FontProperty extends ObjectProperty {
 		return (java.awt.Font)getValue();
 	}
 
-    
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {
         org.w3c.dom.Node familyNode = node.getElementsByTagName( "family" ).item( 0 );
         org.w3c.dom.Node nameNode = node.getElementsByTagName( "name" ).item( 0 );
@@ -46,7 +45,6 @@ public class FontProperty extends ObjectProperty {
         set( new java.awt.Font( name, style, size ) );
     }
 
-    
 	protected void encodeObject( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, edu.cmu.cs.stage3.alice.core.ReferenceGenerator referenceGenerator ) throws java.io.IOException {
         java.awt.Font f = getFontValue();
 

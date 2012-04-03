@@ -41,25 +41,25 @@ public class LoadElementProgressPane extends edu.cmu.cs.stage3.progress.Progress
 			//edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane unresolvablePropertyReferencesPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane( upre );
 			//edu.cmu.cs.stage3.swing.DialogManager.showDialog( unresolvablePropertyReferencesPane );
 			StringBuffer sb = new StringBuffer();
-			sb.append( Messages.getString("LoadElementProgressPane.0") ); //$NON-NLS-1$
+			sb.append( Messages.getString("LoadElementProgressPane.0") ); 
 			edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] propertyReferences = upre.getPropertyReferences();
 			for( int i=0; i<propertyReferences.length; i++ ) {
 				edu.cmu.cs.stage3.alice.core.Property property = propertyReferences[ i ].getProperty();
-				sb.append( "    " ); //$NON-NLS-1$
+				sb.append( "    " ); 
 				sb.append( property.getOwner().toString() );
 				sb.append( '[' );
 				sb.append( property.getName() );
-				sb.append( "] -> " ); //$NON-NLS-1$
+				sb.append( "] -> " ); 
 				sb.append( propertyReferences[ i ].getCriterion() );
 				sb.append( '\n' );
 			}
 			sb.append( '\n' );
-			sb.append( Messages.getString("LoadElementProgressPane.3") ); //$NON-NLS-1$
-			if( edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( sb.toString(), Messages.getString("LoadElementProgressPane.4"), javax.swing.JOptionPane.YES_NO_OPTION ) == javax.swing.JOptionPane.YES_OPTION ) { //$NON-NLS-1$
+			sb.append( Messages.getString("LoadElementProgressPane.3") ); 
+			if( edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( sb.toString(), Messages.getString("LoadElementProgressPane.4"), javax.swing.JOptionPane.YES_NO_OPTION ) == javax.swing.JOptionPane.YES_OPTION ) { 
 				m_loadedElement = upre.getElement();
 			}
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("LoadElementProgressPane.5"), t ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("LoadElementProgressPane.5"), t ); 
 		}
 //		} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
 //			javax.swing.SwingUtilities.invokeAndWait( new Runnable() {

@@ -94,7 +94,7 @@ public class StartMovieCapture implements Runnable {
 					if (endTime - startTime < timeToSleep)
 						Thread.sleep(timeToSleep - (endTime - startTime));
 				} catch (Exception ex) {
-					System.err.println(Messages.getString("StartMovieCapture.0")); //$NON-NLS-1$
+					System.err.println(Messages.getString("StartMovieCapture.0")); 
 					//done = true;
 				}
 			}

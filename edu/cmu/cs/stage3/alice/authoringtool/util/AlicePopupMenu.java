@@ -41,7 +41,6 @@ public class AlicePopupMenu extends JPopupMenu {
 	}
 
 	// HACK for gray boxes bug; this can go away in 1.4
-	
 	public void setVisible( boolean b ) {
 		super.setVisible( b );
 		java.awt.Container popup = null;
@@ -65,7 +64,6 @@ public class AlicePopupMenu extends JPopupMenu {
 		}
 	}
 
-	
 	public void menuSelectionChanged( boolean isIncluded ) {
 		if( setPopupVisibleTrueTimer == null ) {
 			setPopupVisibleTrueTimer = new javax.swing.Timer( millisecondDelay, new java.awt.event.ActionListener() {
@@ -113,7 +111,6 @@ public class AlicePopupMenu extends JPopupMenu {
 		return ( (getInvoker() != null) && ! (getInvoker() instanceof AliceMenu) );
 	}
 
-	
 	public void show( java.awt.Component invoker, int x, int y ) {
 		super.show( invoker, x, y );
 		PopupMenuUtilities.ensurePopupIsOnScreen( this );

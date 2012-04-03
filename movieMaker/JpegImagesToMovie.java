@@ -216,7 +216,7 @@ public class JpegImagesToMovie implements ControllerListener,
     	dsink.stop();
     	dsink.close();
     } catch (Exception e) {
-    	System.err.println(Messages.getString("JpegImagesToMovie.0")); //$NON-NLS-1$
+    	System.err.println(Messages.getString("JpegImagesToMovie.0")); 
     	
     }
     p.removeControllerListener(this);
@@ -247,10 +247,10 @@ public class JpegImagesToMovie implements ControllerListener,
     Processor p;
     
     try {
-      System.err.println(Messages.getString("JpegImagesToMovie.1")); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.1")); 
       p = Manager.createProcessor(ids);
     } catch (Exception e) {
-      System.err.println(Messages.getString("JpegImagesToMovie.2")); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.2")); 
       return false;
     }
     
@@ -260,7 +260,7 @@ public class JpegImagesToMovie implements ControllerListener,
     // some processing options on the processor.
     p.configure();
     if (!waitForState(p, Processor.Configured)) {
-      System.err.println(Messages.getString("JpegImagesToMovie.3")); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.3")); 
       return false;
     }
     
@@ -286,28 +286,28 @@ public class JpegImagesToMovie implements ControllerListener,
     // realize it.
     p.realize();
     if (!waitForState(p, Controller.Realized)) {
-      System.err.println(Messages.getString("JpegImagesToMovie.4")); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.4")); 
       return false;
     }
     
     // Now, we'll need to create a DataSink.
     DataSink dsink;
     if ((dsink = createDataSink(p, outML)) == null) {
-      System.err.println(Messages.getString("JpegImagesToMovie.5") + outML); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.5") + outML); 
       return false;
     }
     
     dsink.addDataSinkListener(this);
     fileDone = false;
     
-    System.err.println(Messages.getString("JpegImagesToMovie.6")); //$NON-NLS-1$
+    System.err.println(Messages.getString("JpegImagesToMovie.6")); 
     
     // OK, we can now start the actual transcoding.
     try {
       p.start();
       dsink.start();
     } catch (IOException e) {
-      System.err.println(Messages.getString("JpegImagesToMovie.7")); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.7")); 
       return false;
     }
     
@@ -468,22 +468,22 @@ public class JpegImagesToMovie implements ControllerListener,
     
     while (i < args.length) {
       
-      if (args[i].equals("-w")) { //$NON-NLS-1$
+      if (args[i].equals("-w")) { 
         i++;
         if (i >= args.length)
           prUsage();
         width = new Integer(args[i]).intValue();
-      } else if (args[i].equals("-h")) { //$NON-NLS-1$
+      } else if (args[i].equals("-h")) { 
         i++;
         if (i >= args.length)
           prUsage();
         height = new Integer(args[i]).intValue();
-      } else if (args[i].equals("-f")) { //$NON-NLS-1$
+      } else if (args[i].equals("-f")) { 
         i++;
         if (i >= args.length)
           prUsage();
         frameRate = new Integer(args[i]).intValue();
-      } else if (args[i].equals("-o")) { //$NON-NLS-1$
+      } else if (args[i].equals("-o")) { 
         i++;
         if (i >= args.length)
           prUsage();
@@ -498,13 +498,13 @@ public class JpegImagesToMovie implements ControllerListener,
       prUsage();
     
     // Check for output file extension.
-    if (!outputURL.endsWith(".mov") && !outputURL.endsWith(".MOV")) { //$NON-NLS-1$ //$NON-NLS-2$
-      System.err.println(Messages.getString("JpegImagesToMovie.14")); //$NON-NLS-1$
+    if (!outputURL.endsWith(".mov") && !outputURL.endsWith(".MOV")) {  
+      System.err.println(Messages.getString("JpegImagesToMovie.14")); 
       prUsage();
     }
     
     if (width < 0 || height < 0) {
-      System.err.println(Messages.getString("JpegImagesToMovie.15")); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.15")); 
       prUsage();
     }
     
@@ -516,7 +516,7 @@ public class JpegImagesToMovie implements ControllerListener,
     MediaLocator oml;
     
     if ((oml = createMediaLocator(outputURL)) == null) {
-      System.err.println(Messages.getString("JpegImagesToMovie.16") + outputURL); //$NON-NLS-1$
+      System.err.println(Messages.getString("JpegImagesToMovie.16") + outputURL); 
       System.exit(0);
     }
     
@@ -527,7 +527,7 @@ public class JpegImagesToMovie implements ControllerListener,
   }
   
   static void prUsage() {
-    System.err.println(Messages.getString("JpegImagesToMovie.17")); //$NON-NLS-1$
+    System.err.println(Messages.getString("JpegImagesToMovie.17")); 
     System.exit(-1);
   }
   
@@ -538,14 +538,14 @@ public class JpegImagesToMovie implements ControllerListener,
     
     MediaLocator ml;
     
-    if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null) //$NON-NLS-1$
+    if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null) 
       return ml;
     
     if (url.startsWith(File.separator)) {
-      if ((ml = new MediaLocator("file:" + url)) != null) //$NON-NLS-1$
+      if ((ml = new MediaLocator("file:" + url)) != null) 
         return ml;
     } else {
-      String file = "file:" + System.getProperty("user.dir") + File.separator + url; //$NON-NLS-1$ //$NON-NLS-2$
+      String file = "file:" + System.getProperty("user.dir") + File.separator + url;  
       if ((ml = new MediaLocator(file)) != null)
         return ml;
     }
@@ -698,7 +698,7 @@ public class JpegImagesToMovie implements ControllerListener,
       
       // Open a random access file for the next image. 
       RandomAccessFile raFile;
-      raFile = new RandomAccessFile(imageFile, "r"); //$NON-NLS-1$
+      raFile = new RandomAccessFile(imageFile, "r"); 
       
       byte data[] = null;
       

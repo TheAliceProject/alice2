@@ -88,7 +88,8 @@ public class TreeModelSupport {
 				Enumeration listeners = vector.elements();
 				while ( listeners.hasMoreElements() ) {
 					TreeModelListener listener = (TreeModelListener)listeners.nextElement();
-					listener.treeStructureChanged( e );
+					if (listener != null)
+						listener.treeStructureChanged( e );
 				}
 			}
 		} );

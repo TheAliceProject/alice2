@@ -68,13 +68,11 @@ public class VariableGUI extends edu.cmu.cs.stage3.alice.authoringtool.util.Grou
 		clean();
 	}
 
-	
 	public void release() {
 		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
 	}
 
-	
 	public void remove( java.awt.Component c ) {
-		super.remove( c );
+		super.remove( c );	// Aik Min - need work
 	}
 }

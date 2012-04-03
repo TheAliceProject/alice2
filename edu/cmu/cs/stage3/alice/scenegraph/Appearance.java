@@ -27,20 +27,20 @@ package edu.cmu.cs.stage3.alice.scenegraph;
  * @author Dennis Cosgrove
  */
 public class Appearance extends Element {
-	public static final Property AMBIENT_COLOR_PROPERTY = new Property( Appearance.class, "AMBIENT_COLOR" ); //$NON-NLS-1$
-	public static final Property DIFFUSE_COLOR_PROPERTY = new Property( Appearance.class, "DIFFUSE_COLOR" ); //$NON-NLS-1$
-	public static final Property FILLING_STYLE_PROPERTY = new Property( Appearance.class, "FILLING_STYLE" ); //$NON-NLS-1$
-	public static final Property SHADING_STYLE_PROPERTY = new Property( Appearance.class, "SHADING_STYLE" ); //$NON-NLS-1$
-	public static final Property OPACITY_PROPERTY = new Property( Appearance.class, "OPACITY" ); //$NON-NLS-1$
-	public static final Property SPECULAR_HIGHLIGHT_COLOR_PROPERTY = new Property( Appearance.class, "SPECULAR_HIGHLIGHT_COLOR" ); //$NON-NLS-1$
-	public static final Property SPECULAR_HIGHLIGHT_EXPONENT_PROPERTY = new Property( Appearance.class, "SPECULAR_HIGHLIGHT_EXPONENT" ); //$NON-NLS-1$
-	public static final Property EMISSIVE_COLOR_PROPERTY = new Property( Appearance.class, "EMISSIVE_COLOR" ); //$NON-NLS-1$
-	public static final Property DIFFUSE_COLOR_MAP_PROPERTY = new Property( Appearance.class, "DIFFUSE_COLOR_MAP" ); //$NON-NLS-1$
-	public static final Property OPACITY_MAP_PROPERTY = new Property( Appearance.class, "OPACITY_MAP" ); //$NON-NLS-1$
-	public static final Property EMISSIVE_COLOR_MAP_PROPERTY = new Property( Appearance.class, "EMISSIVE_COLOR_MAP" ); //$NON-NLS-1$
-	public static final Property SPECULAR_HIGHLIGHT_COLOR_MAP_PROPERTY = new Property( Appearance.class, "SPECULAR_HIGHLIGHT_COLOR_MAP" ); //$NON-NLS-1$
-	public static final Property BUMP_MAP_PROPERTY = new Property( Appearance.class, "BUMP_MAP" ); //$NON-NLS-1$
-	public static final Property DETAIL_MAP_PROPERTY = new Property( Appearance.class, "DETAIL_MAP" ); //$NON-NLS-1$
+	public static final Property AMBIENT_COLOR_PROPERTY = new Property( Appearance.class, "AMBIENT_COLOR" ); 
+	public static final Property DIFFUSE_COLOR_PROPERTY = new Property( Appearance.class, "DIFFUSE_COLOR" ); 
+	public static final Property FILLING_STYLE_PROPERTY = new Property( Appearance.class, "FILLING_STYLE" ); 
+	public static final Property SHADING_STYLE_PROPERTY = new Property( Appearance.class, "SHADING_STYLE" ); 
+	public static final Property OPACITY_PROPERTY = new Property( Appearance.class, "OPACITY" ); 
+	public static final Property SPECULAR_HIGHLIGHT_COLOR_PROPERTY = new Property( Appearance.class, "SPECULAR_HIGHLIGHT_COLOR" ); 
+	public static final Property SPECULAR_HIGHLIGHT_EXPONENT_PROPERTY = new Property( Appearance.class, "SPECULAR_HIGHLIGHT_EXPONENT" ); 
+	public static final Property EMISSIVE_COLOR_PROPERTY = new Property( Appearance.class, "EMISSIVE_COLOR" ); 
+	public static final Property DIFFUSE_COLOR_MAP_PROPERTY = new Property( Appearance.class, "DIFFUSE_COLOR_MAP" ); 
+	public static final Property OPACITY_MAP_PROPERTY = new Property( Appearance.class, "OPACITY_MAP" ); 
+	public static final Property EMISSIVE_COLOR_MAP_PROPERTY = new Property( Appearance.class, "EMISSIVE_COLOR_MAP" ); 
+	public static final Property SPECULAR_HIGHLIGHT_COLOR_MAP_PROPERTY = new Property( Appearance.class, "SPECULAR_HIGHLIGHT_COLOR_MAP" ); 
+	public static final Property BUMP_MAP_PROPERTY = new Property( Appearance.class, "BUMP_MAP" ); 
+	public static final Property DETAIL_MAP_PROPERTY = new Property( Appearance.class, "DETAIL_MAP" ); 
 
 	private edu.cmu.cs.stage3.alice.scenegraph.Color m_ambientColor = null;
 	private edu.cmu.cs.stage3.alice.scenegraph.Color m_diffuseColor = new edu.cmu.cs.stage3.alice.scenegraph.Color( 1,1,1,1 );
@@ -60,27 +60,27 @@ public class Appearance extends Element {
 	
 	protected void releasePass1() {
 		if( m_diffuseColorMap != null ) {
-			warnln( Messages.getString("Appearance.0") + this + Messages.getString("Appearance.15") + m_diffuseColorMap + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Appearance.0") + this + Messages.getString("Appearance.15") + m_diffuseColorMap + "." );   
 			setDiffuseColorMap( null );
 		}
 		if( m_opacityMap != null ) {
-			warnln( Messages.getString("Appearance.17") + this + Messages.getString("Appearance.18") + m_opacityMap + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Appearance.17") + this + Messages.getString("Appearance.18") + m_opacityMap + "." );   
 			setOpacityMap( null );
 		}
 		if( m_emissiveColorMap != null ) {
-			warnln( Messages.getString("Appearance.20") + this + Messages.getString("Appearance.21") + m_emissiveColorMap + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Appearance.20") + this + Messages.getString("Appearance.21") + m_emissiveColorMap + "." );   
 			setEmissiveColorMap( null );
 		}
 		if( m_specularHighlightColorMap != null ) {
-			warnln( Messages.getString("Appearance.23") + this + Messages.getString("Appearance.24") + m_specularHighlightColorMap + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Appearance.23") + this + Messages.getString("Appearance.24") + m_specularHighlightColorMap + "." );   
 			setSpecularHighlightColorMap( null );
 		}
 		if( m_bumpMap != null ) {
-			warnln( Messages.getString("Appearance.26") + this + Messages.getString("Appearance.27") + m_bumpMap + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Appearance.26") + this + Messages.getString("Appearance.27") + m_bumpMap + "." );   
 			setBumpMap( null );
 		}
 		if( m_detailMap != null ) {
-			warnln( Messages.getString("Appearance.29") + this + Messages.getString("Appearance.30") + m_detailMap + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Appearance.29") + this + Messages.getString("Appearance.30") + m_detailMap + "." );   
 			setDetailMap( null );
 		}
 		super.releasePass1();

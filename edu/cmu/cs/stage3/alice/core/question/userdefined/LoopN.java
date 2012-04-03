@@ -35,13 +35,11 @@ public class LoopN extends Composite {
 	public final NumberProperty end = new NumberProperty( this, "end", new Double( Double.POSITIVE_INFINITY ) );
 	public final NumberProperty increment = new NumberProperty( this, "increment", new Double( 1 ) );
 
-	
 	protected void internalFindAccessibleExpressions( Class cls, java.util.Vector v ) {
 		internalAddExpressionIfAssignableTo( (edu.cmu.cs.stage3.alice.core.Expression)index.get(), cls, v );
 		super.internalFindAccessibleExpressions( cls, v );
 	}
 
-    
 	public Object[] execute() {
 		if( start.get()==null ) {
 			throw new NullPointerException();

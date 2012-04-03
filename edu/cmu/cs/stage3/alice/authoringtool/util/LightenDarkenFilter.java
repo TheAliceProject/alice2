@@ -49,7 +49,6 @@ public class LightenDarkenFilter extends java.awt.image.RGBImageFilter {
 		canFilterIndexColorModel = true;
 	}
 
-	
 	public int filterRGB( int x, int y, int rgb ) {
 		int r = (rgb >> 16) & 0xff;
 		int g = (rgb >> 8) & 0xff;

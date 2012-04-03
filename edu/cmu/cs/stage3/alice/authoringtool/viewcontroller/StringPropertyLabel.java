@@ -31,7 +31,6 @@ public class StringPropertyLabel extends PropertyLabel {
 		super( property );
 	}
 
-	
 	public void update() {
 		String propertyName = ((edu.cmu.cs.stage3.alice.core.property.StringProperty)property).getStringValue();
 		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "propertyName" ) ) {

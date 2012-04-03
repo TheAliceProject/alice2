@@ -35,12 +35,10 @@ public class ExtensionFileFilter extends javax.swing.filechooser.FileFilter impl
 		this.description = description;
 	}
 
-	
 	public boolean accept( java.io.File f ) {
 		return f.isDirectory() || getExtension( f ).equalsIgnoreCase( extension );
 	}
 
-	
 	public String getDescription() {
 		return description;
 	}

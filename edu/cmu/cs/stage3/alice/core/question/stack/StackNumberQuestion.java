@@ -30,7 +30,6 @@ public abstract class StackNumberQuestion extends edu.cmu.cs.stage3.alice.core.q
 	public final StackProperty stack = new StackProperty( this, "stack", null );
 	//protected abstract double getValue( Stack stack );
 	protected abstract int getValue( Stack stack );
-	
 	public Object getValue() {
 		Stack stackValue = stack.getStackValue();
 		if( stackValue!=null ) {

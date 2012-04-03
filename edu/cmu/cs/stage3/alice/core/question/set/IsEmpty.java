@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.set;
 
 public class IsEmpty extends SetBooleanQuestion {
-	
 	protected boolean getValue( edu.cmu.cs.stage3.alice.core.Set setValue ) {
         return setValue.isEmpty();
     }

@@ -43,14 +43,12 @@ class CustomCheckBox extends javax.swing.JCheckBox implements java.awt.image.Ima
 		this.index = index;
 	}
 	
-	
 	public void paint(java.awt.Graphics g){
 		super.paint(g);
 		if (image != null){
 			g.drawImage(image, 14,0, java.awt.Color.white, this);
 		}
 	}
-	
 	
 	public java.awt.Dimension getPreferredSize(){
 		if (image == null){
@@ -62,7 +60,6 @@ class CustomCheckBox extends javax.swing.JCheckBox implements java.awt.image.Ima
 		}
 	}
 	
-	
 	public java.awt.Dimension getMinimumSize(){
 		if (image == null){
 			return super.getMinimumSize();
@@ -73,7 +70,6 @@ class CustomCheckBox extends javax.swing.JCheckBox implements java.awt.image.Ima
 		}
 	}
 	
-	
 	public java.awt.Dimension getMaximumSize(){
 		if (image == null){
 			return super.getMaximumSize();
@@ -83,7 +79,6 @@ class CustomCheckBox extends javax.swing.JCheckBox implements java.awt.image.Ima
 			return new java.awt.Dimension((x+14), y);
 		}
 	}
-	
 	
 	
 	public boolean imageUpdate(java.awt.Image img, int infoflags, int x, int y, int width, int height){
@@ -137,19 +132,19 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 	private javax.swing.JPanel m_elementsToBeExportedPanel = new javax.swing.JPanel();
 
 	private java.util.Vector m_okActionListeners = new java.util.Vector();
-	private javax.swing.JButton m_exportButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.0") ); //$NON-NLS-1$
-	private javax.swing.JButton m_cancelButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.1") ); //$NON-NLS-1$
+	private javax.swing.JButton m_exportButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.0") ); 
+	private javax.swing.JButton m_cancelButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.1") ); 
 
 	public ExportCodeForPrintingContentPane( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool ) {
 		m_authoringTool = authoringTool;
 
 		java.util.ArrayList extensions = new java.util.ArrayList();
-		extensions.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter( "htm", "*.htm" )); //$NON-NLS-1$ //$NON-NLS-2$
-		extensions.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter( "html", "*.html" )); //$NON-NLS-1$ //$NON-NLS-2$
-		m_pathFileChooser.setFileFilter( new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter( extensions, Messages.getString("ExportCodeForPrintingContentPane.6") )); //$NON-NLS-1$
+		extensions.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter( "htm", "*.htm" ));  
+		extensions.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter( "html", "*.html" ));  
+		m_pathFileChooser.setFileFilter( new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter( extensions, Messages.getString("ExportCodeForPrintingContentPane.6") )); 
 
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
-		String path = authoringToolConfig.getValue( "directories.worldsDirectory" ); //$NON-NLS-1$
+		String path = authoringToolConfig.getValue( "directories.worldsDirectory" ); 
 		if( path != null ) {
 			final java.io.File dir = new java.io.File( path );
 			if( dir != null && dir.exists() && dir.isDirectory() ) {
@@ -174,16 +169,16 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 
 		m_pathFileChooser.setDialogType( javax.swing.JFileChooser.OPEN_DIALOG );
 		m_pathFileChooser.setFileSelectionMode( javax.swing.JFileChooser.FILES_ONLY );
-		m_pathFileChooser.setApproveButtonText( Messages.getString("ExportCodeForPrintingContentPane.8") ); //$NON-NLS-1$
+		m_pathFileChooser.setApproveButtonText( Messages.getString("ExportCodeForPrintingContentPane.8") ); 
 		
-		javax.swing.JButton selectAllButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.9") ); //$NON-NLS-1$
+		javax.swing.JButton selectAllButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.9") ); 
 		selectAllButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				ExportCodeForPrintingContentPane.this.setAllSelected( true );
 			}
 		} );
 
-		javax.swing.JButton deselectAllButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.10") ); //$NON-NLS-1$
+		javax.swing.JButton deselectAllButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.10") ); 
 		deselectAllButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				ExportCodeForPrintingContentPane.this.setAllSelected( false );
@@ -203,7 +198,7 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		} );
 
 		
-		javax.swing.JButton browseButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.11") ); //$NON-NLS-1$
+		javax.swing.JButton browseButton = new javax.swing.JButton( Messages.getString("ExportCodeForPrintingContentPane.11") ); 
 		browseButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				ExportCodeForPrintingContentPane.this.handleBrowseButton();
@@ -242,7 +237,7 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		gbcPath.anchor = GridBagConstraints.NORTHWEST;
 		gbcPath.fill = GridBagConstraints.BOTH;
 		gbcPath.gridwidth = GridBagConstraints.RELATIVE;
-		pathPanel.add( new javax.swing.JLabel( Messages.getString("ExportCodeForPrintingContentPane.12") ), gbcPath ); //$NON-NLS-1$
+		pathPanel.add( new javax.swing.JLabel( Messages.getString("ExportCodeForPrintingContentPane.12") ), gbcPath ); 
 		gbcPath.gridwidth = GridBagConstraints.REMAINDER;
 		gbcPath.weightx = 1.0;
 		pathPanel.add( m_pathTextField, gbcPath );
@@ -254,7 +249,7 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		gbcAuthor.anchor = GridBagConstraints.NORTHWEST;
 		gbcAuthor.fill = GridBagConstraints.BOTH;
 		gbcAuthor.gridwidth = GridBagConstraints.RELATIVE;
-		authorPanel.add( new javax.swing.JLabel( Messages.getString("ExportCodeForPrintingContentPane.13") ), gbcAuthor ); //$NON-NLS-1$
+		authorPanel.add( new javax.swing.JLabel( Messages.getString("ExportCodeForPrintingContentPane.13") ), gbcAuthor ); 
 		gbcAuthor.gridwidth = GridBagConstraints.REMAINDER;
 		gbcAuthor.weightx = 1.0;
 		authorPanel.add( m_authorNameTextField, gbcAuthor );
@@ -276,7 +271,7 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		gbc.insets.right = 8;
 		
 		gbc.gridwidth = GridBagConstraints.RELATIVE;
-		add( new javax.swing.JLabel( Messages.getString("ExportCodeForPrintingContentPane.14") ), gbc ); //$NON-NLS-1$
+		add( new javax.swing.JLabel( Messages.getString("ExportCodeForPrintingContentPane.14") ), gbc ); 
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		add( new javax.swing.JLabel(), gbc );
 
@@ -311,22 +306,20 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		setPreferredSize( new java.awt.Dimension( width, height ) );
 	}
 
-	
 	public void preDialogShow( javax.swing.JDialog dialog ) {
 		super.preDialogShow( dialog );
-		initialize( "" ); //$NON-NLS-1$
+		initialize( "" ); 
 	}
 	
 	public void postDialogShow( javax.swing.JDialog dialog ) {
 		super.postDialogShow( dialog );
 	}
 
-	
 	public String getTitle() {
-		return Messages.getString("ExportCodeForPrintingContentPane.16"); //$NON-NLS-1$
+		return Messages.getString("ExportCodeForPrintingContentPane.16"); 
 	}
 	private void fireOKActionListeners() {
-		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("ExportCodeForPrintingContentPane.17") ); //$NON-NLS-1$
+		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("ExportCodeForPrintingContentPane.17") ); 
 		for( int i=0; i<m_okActionListeners.size(); i++ ) {
 			java.awt.event.ActionListener l = (java.awt.event.ActionListener)m_okActionListeners.elementAt( i );
 			l.actionPerformed( e );
@@ -357,7 +350,7 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 
 		//Aik Min
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
-		java.io.File file = new java.io.File( authoringToolConfig.getValue( "directories.worldsDirectory" ), getWorldName( m_authoringTool.getCurrentWorldLocation() )+".html" ); //$NON-NLS-1$ //$NON-NLS-2$
+		java.io.File file = new java.io.File( authoringToolConfig.getValue( "directories.worldsDirectory" ), getWorldName( m_authoringTool.getCurrentWorldLocation() )+".html" );  
 		m_pathTextField.setText( file.getAbsolutePath() );
 
 		edu.cmu.cs.stage3.alice.core.World world = m_authoringTool.getWorld();
@@ -413,13 +406,13 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 				currentButton.setText(currentObject.toString());
 				toAdd = currentButton;
 				leftIndent = 0;
-				if (currentButton.getText().equalsIgnoreCase("world")){ //$NON-NLS-1$
+				if (currentButton.getText().equalsIgnoreCase("world")){ 
 					isWorld = true;
 				} else{
 					isWorld = false;
 				}
 			} else {			
-				String checkBoxText = ""; //$NON-NLS-1$
+				String checkBoxText = ""; 
 				toAdd = new CustomCheckBox();
 				if (currentButton != null){
 					currentButton.addCheckBox((CustomCheckBox)toAdd);
@@ -455,11 +448,11 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 			} 
 			java.awt.Color bgColor = java.awt.Color.white;
 			if (currentObject instanceof edu.cmu.cs.stage3.alice.core.Response){
-				bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor"); //$NON-NLS-1$
+				bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor"); 
 			} else if (currentObject instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion){
-				bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedQuestionEditor"); //$NON-NLS-1$
+				bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedQuestionEditor"); 
 			} else if (currentObject instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.BasicBehaviorPanel){
-				bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behavior"); //$NON-NLS-1$
+				bgColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behavior"); 
 			} 
 //			toAdd.setBorder(javax.swing.BorderFactory.createLineBorder(bgColor, 2));
 			toAdd.setBackground(bgColor);
@@ -478,25 +471,25 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 			java.io.File file = m_pathFileChooser.getSelectedFile();
 			if( file != null ) {
 				String path = file.getAbsolutePath();
-				if( path.endsWith( ".html" ) || path.endsWith( ".htm" ) ) { //$NON-NLS-1$ //$NON-NLS-2$
+				if( path.endsWith( ".html" ) || path.endsWith( ".htm" ) ) {  
 					//pass
 				} else {
-					path += ".html"; //$NON-NLS-1$
+					path += ".html"; 
 				}
 				m_pathTextField.setText( path );
 			}
 		}
 	}
 	private void handleWriteProblem( java.io.File file ) {
-		edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ExportCodeForPrintingContentPane.28") + file.getAbsolutePath() + "\"", Messages.getString("ExportCodeForPrintingContentPane.30"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ExportCodeForPrintingContentPane.28") + file.getAbsolutePath() + "\"", Messages.getString("ExportCodeForPrintingContentPane.30"), javax.swing.JOptionPane.ERROR_MESSAGE );   
 	}
 	private void handleExportButton() {
 		if( m_authorNameTextField.getText().length()==0 ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ExportCodeForPrintingContentPane.31"), Messages.getString("ExportCodeForPrintingContentPane.32"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ExportCodeForPrintingContentPane.31"), Messages.getString("ExportCodeForPrintingContentPane.32"), javax.swing.JOptionPane.ERROR_MESSAGE );  
 		} else {
 			java.io.File file = getFileToExportTo();
 			if( file.exists() ) {
-				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( Messages.getString("ExportCodeForPrintingContentPane.33"), Messages.getString("ExportCodeForPrintingContentPane.34"), javax.swing.JOptionPane.YES_NO_OPTION ); //$NON-NLS-1$ //$NON-NLS-2$
+				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( Messages.getString("ExportCodeForPrintingContentPane.33"), Messages.getString("ExportCodeForPrintingContentPane.34"), javax.swing.JOptionPane.YES_NO_OPTION );  
 				if( result == javax.swing.JOptionPane.YES_OPTION ) {
 					//pass
 				} else {
@@ -522,7 +515,7 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 		if( worldFile != null ) {
 			return edu.cmu.cs.stage3.io.FileUtilities.getBaseName( worldFile );
 		} else {
-			return Messages.getString("ExportCodeForPrintingContentPane.35");  //$NON-NLS-1$
+			return Messages.getString("ExportCodeForPrintingContentPane.35");  
 		}
 	}
 
@@ -545,22 +538,22 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 
 		String worldName = getWorldName( worldFile );
 		if( addHeaderAndFooter ) {
-			buffer.append( "<html>\n<head>\n<title>"+worldName+"'s Code</title>\n</head>\n<body>\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			buffer.append( "<html>\n<head>\n<title>"+worldName+"'s Code</title>\n</head>\n<body>\n");  
 		}
 
-		buffer.append("<h1>"+worldName+"'s Code</h1>\n"); //$NON-NLS-1$ //$NON-NLS-2$
+		buffer.append("<h1>"+worldName+"'s Code</h1>\n");  
 		if( addAuthor ){
-			buffer.append("<h1> Created by: "+m_authorNameTextField.getText()+"</h1>\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			buffer.append("<h1> Created by: "+m_authorNameTextField.getText()+"</h1>\n");  
 		}
 		boolean notOnBehaviorsYet = true;
 		boolean notOnResponsesYet = true;
 		boolean notOnQuestionsYet = true;
-		String currentTitle = ""; //$NON-NLS-1$
+		String currentTitle = ""; 
 		boolean anyItemsYet = false;
 		for( int i = 0 ; i < m_elementsToBeExportedPanel.getComponentCount(); i++ ) {
 			if (m_elementsToBeExportedPanel.getComponent(i) instanceof CustomListButton){
 				String name = ((CustomListButton)m_elementsToBeExportedPanel.getComponent(i)).getText();
-				currentTitle = "<h2>"+name+"</h2>\n"; //$NON-NLS-1$ //$NON-NLS-2$
+				currentTitle = "<h2>"+name+"</h2>\n";  
 				anyItemsYet = false;
 				notOnBehaviorsYet = true;
 				notOnResponsesYet = true;
@@ -578,31 +571,31 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 						if (currentEditor instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor){
 							if (currentEditor instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor){
 								if (notOnResponsesYet){
-									buffer.append("<h3>Methods</h3>\n"); //$NON-NLS-1$
+									buffer.append("<h3>Methods</h3>\n"); 
 									notOnResponsesYet = false;
 								}
 							} else{
 								if (notOnQuestionsYet){
 									String cappedQuestionString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(0,1).toUpperCase()+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(1);
-									buffer.append("<h3>"+cappedQuestionString+"s</h3>\n"); //$NON-NLS-1$ //$NON-NLS-2$
+									buffer.append("<h3>"+cappedQuestionString+"s</h3>\n");  
 									notOnQuestionsYet = false;
 								}
 							}
-							buffer.append("<table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">\n"); //$NON-NLS-1$
+							buffer.append("<table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">\n"); 
 							((edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor)currentEditor).getHTML(buffer, true);
-							buffer.append("\n</table>\n<br>\n<br>\n"); //$NON-NLS-1$
+							buffer.append("\n</table>\n<br>\n<br>\n"); 
 						}
 					} else {
 						if (notOnBehaviorsYet){
-							buffer.append("<h3>Events</h3>\n"); //$NON-NLS-1$
+							buffer.append("<h3>Events</h3>\n"); 
 							notOnBehaviorsYet = false;
 						}
 						javax.swing.JComponent component = getComponentForObject(currentBox.object);
 						if (component instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.BasicBehaviorPanel){
 							edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.BasicBehaviorPanel behaviorPanel = (edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.BasicBehaviorPanel)component;
-							buffer.append("<table  style=\"border-left: 1px solid #c0c0c0; border-top: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-right: 1px solid #c0c0c0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">\n"); //$NON-NLS-1$
+							buffer.append("<table  style=\"border-left: 1px solid #c0c0c0; border-top: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-right: 1px solid #c0c0c0\" cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">\n"); 
 							(behaviorPanel).getHTML(buffer, true);
-							buffer.append("\n</table>\n<br>\n<br>\n"); //$NON-NLS-1$
+							buffer.append("\n</table>\n<br>\n<br>\n"); 
 						}
 					}
 				}
@@ -612,7 +605,7 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 			}
 		}
 		if( addHeaderAndFooter ) {
-			buffer.append( "</body>\n</html>\n" ); //$NON-NLS-1$
+			buffer.append( "</body>\n</html>\n" ); 
 		}
 		if( progressObserver!=null ) {
 			progressObserver.progressEnd();
