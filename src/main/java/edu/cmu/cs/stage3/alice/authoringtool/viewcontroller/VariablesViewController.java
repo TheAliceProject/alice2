@@ -72,7 +72,6 @@ public class VariablesViewController extends edu.cmu.cs.stage3.alice.authoringto
 		variables = null;
 	}
 
-	
 	public void release() {
 		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
 	}

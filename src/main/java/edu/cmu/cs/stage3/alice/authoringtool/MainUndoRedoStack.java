@@ -109,7 +109,6 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 		inCompound = false;
 	}
 
-	
 	synchronized public edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable undo() {
 		stopCompound();
 		boolean temp = isListening;
@@ -121,7 +120,6 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 		return ur;
 	}
 
-	
 	synchronized public edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable redo() {
 		stopCompound();
 		boolean temp = isListening;
@@ -140,7 +138,6 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 		authoringTool.setContext( context );
 	}
 
-	
 	synchronized public void push( edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable ur ) {
 //		Thread.dumpStack();
 		// Logging 
@@ -159,7 +156,6 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 		fireChange();
 	}
 
-	
 	synchronized public edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable pop_() {
 		stopCompound();
 		edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable ur = super.pop_();
@@ -167,14 +163,12 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 		return ur;
 	}
 
-	
 	synchronized public void clear() {
 		super.clear();
 		setUnmodified();
 		fireChange();
 	}
 
-	
 	synchronized public edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable removeUndoable( int index ) {
 		edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable ur = super.removeUndoable( index );
 		fireChange();

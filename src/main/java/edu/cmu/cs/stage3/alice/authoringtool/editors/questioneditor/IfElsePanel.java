@@ -38,7 +38,6 @@ public class IfElsePanel extends edu.cmu.cs.stage3.alice.authoringtool.editors.c
         super();
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("IfElseInOrder");
     }

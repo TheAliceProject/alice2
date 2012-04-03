@@ -37,10 +37,10 @@ import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 
 public class Text3D extends Model {
-	public final StringProperty text = new StringProperty( this, "text", null ); //$NON-NLS-1$
-	public final FontProperty font = new FontProperty( this, "font", null ); //$NON-NLS-1$
-	public final NumberProperty extrusion = new NumberProperty( this, "extrusion", new Double(0.25) ); //$NON-NLS-1$
-    public final NumberProperty curvature = new NumberProperty( this, "curvature", new Integer(2) ); //$NON-NLS-1$
+	public final StringProperty text = new StringProperty( this, "text", null ); 
+	public final FontProperty font = new FontProperty( this, "font", null ); 
+	public final NumberProperty extrusion = new NumberProperty( this, "extrusion", new Double(0.25) ); 
+    public final NumberProperty curvature = new NumberProperty( this, "curvature", new Integer(2) ); 
 
     public void create3DTextGeometry() {
         edu.cmu.cs.stage3.alice.core.geometry.Text3D geom = new edu.cmu.cs.stage3.alice.core.geometry.Text3D();
@@ -71,7 +71,7 @@ public class Text3D extends Model {
     
 	protected void propertyChanging( edu.cmu.cs.stage3.alice.core.Property property, Object value ) {
         if (property==geometry && value!=null && !(value instanceof edu.cmu.cs.stage3.alice.core.geometry.Text3D))
-            throw new java.lang.ClassCastException(Messages.getString("Text3D.4")); //$NON-NLS-1$
+            throw new java.lang.ClassCastException(Messages.getString("Text3D.4")); 
         else
             super.propertyChanging(property,value);
     }

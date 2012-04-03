@@ -113,7 +113,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 	protected javax.swing.JLabel unitLabel = new javax.swing.JLabel();
 //	protected edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel rightPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel();
 	protected javax.swing.JPanel rightPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel() {
-		
 		public void release() {
 			// do nothing
 		}
@@ -310,7 +309,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 //		refreshThread.halt();
 	}
 
-	
 	public void release() {
 //		if( getParent() != null ) {
 //			getParent().remove( this );
@@ -333,7 +331,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 				}
 			} else {
 //				this.remove( popupButton );
-				rightPanel.remove( popupButton ); // unit hack
+				rightPanel.remove( popupButton ); // unit hack	// Aik Min - need work !
 			}
 		}
 	}
@@ -344,7 +342,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 			if( ! editingEnabled ) {
 				if( popupEnabled ) {
 //					this.remove( popupButton );
-					rightPanel.remove( popupButton ); // unit hack
+					rightPanel.remove( popupButton ); // unit hack	// Aik Min - need work
 				}
 			} else {
 				if( popupEnabled ) {
@@ -384,7 +382,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
-			
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {
 				if( (ev.getX() >= 0) && (ev.getX() < ev.getComponent().getWidth()) && (ev.getY() >= 0) && (ev.getY() < ev.getComponent().getHeight()) ) {
 					if( isEnabled() ) {
@@ -505,13 +502,13 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 					}
 				} else {
 					if( this.isAncestorOf( unitLabel ) ) {
-						rightPanel.remove( unitLabel );
+						rightPanel.remove( unitLabel );	// Aik Min - need work !
 					}
 				}
 			}
 		} else {
 			if( this.isAncestorOf( unitLabel ) ) {
-				rightPanel.remove( unitLabel );
+				rightPanel.remove( unitLabel );	// Aik Min - need work
 			}
 		}
 
@@ -543,7 +540,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		}
 	}
 
-	
 	public void paintForeground( java.awt.Graphics g ) {
 		super.paintForeground( g );
 		if( beingDroppedOn && editingEnabled ) {
@@ -789,7 +785,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		return checkTransferable( transferable );
 	}
 
-	
 	public void dragEnter( java.awt.dnd.DropTargetDragEvent dtde ) {
 		if( checkDrag( dtde ) ) {
 			beingDroppedOn = true;
@@ -799,7 +794,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		}
 	}
 
-	
 	public void dragExit( java.awt.dnd.DropTargetEvent dte ) {
 		if( beingDroppedOn ) {
 			beingDroppedOn = false;
@@ -810,7 +804,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 	}
 
 	// not currently handling the case where a drag becomes valid after a dragEnter...
-	
 	public void dragOver( java.awt.dnd.DropTargetDragEvent dtde ) {
 //		System.out.println(property);
 		if( beingDroppedOn ) {
@@ -824,7 +817,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		}
 	}
 
-	
 	public void dropActionChanged( java.awt.dnd.DropTargetDragEvent dtde ) {
 		if( beingDroppedOn ) {
 			if( ! checkDrag( dtde ) ) {
@@ -837,7 +829,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		}
 	}
 
-	
 	public void drop( java.awt.dnd.DropTargetDropEvent dtde ) {
 		java.awt.datatransfer.Transferable transferable = edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.getCurrentTransferable();
 		Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(property);
@@ -1510,7 +1501,6 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 			}
 		}
 
-		
 		public void run() {
 			while( ! haltThread ) {
 				synchronized( PropertyViewController.propertyViewControllersToRefresh ) {

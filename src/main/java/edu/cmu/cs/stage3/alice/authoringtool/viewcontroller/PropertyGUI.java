@@ -71,8 +71,7 @@ public class PropertyGUI extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
 	}
 
-	
 	public void remove( java.awt.Component c ) {
-		super.remove( c );
+		super.remove( c );	// Aik Min - need work
 	}
 }

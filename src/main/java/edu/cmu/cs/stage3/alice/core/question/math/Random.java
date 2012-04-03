@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.math;
 
 public class Random extends edu.cmu.cs.stage3.alice.core.question.NumberQuestion {
-	
 	public Object getValue() {
 		return new Double( Math.random() );
 	}

@@ -27,7 +27,6 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  * @author Jason Pratt
  */
 public class PropertyReferenceListCellRenderer extends javax.swing.DefaultListCellRenderer {
-	
 	public java.awt.Component getListCellRendererComponent( javax.swing.JList list, Object value, int index, boolean isSelected, boolean cellHasFocus ) {
 		setComponentOrientation( list.getComponentOrientation() );
 

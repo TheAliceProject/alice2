@@ -48,17 +48,14 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
     protected GalleryMouseAdapter mouseAdapter = new GalleryMouseAdapter();
 
     protected class GalleryMouseAdapter extends edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter{
-        
 		public void mouseExited(java.awt.event.MouseEvent m){
             galleryMouseExited();
         }
 
-        
 		public void mouseEntered(java.awt.event.MouseEvent m){
             galleryMouseEntered();
         }
 
-        
 		protected void singleClickResponse( java.awt.event.MouseEvent ev ) {
             respondToMouse();
         }
@@ -85,7 +82,6 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
         return "";
     }
 
-    
 	public void setToolTipText(String text){
         super.setToolTipText(text);
        // nameLabel.setToolTipText(text);
@@ -104,7 +100,6 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
 	public javax.vecmath.Vector3d getBoundingBox(){
 		return data.dimensions;
 	}
-	
 	
 	public java.awt.Image getImage(){
 		return super.getImage();
@@ -357,7 +352,6 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
     }
 
 
-    
 	public void paintForeground( java.awt.Graphics g ) {
         super.paintForeground( g );
         if (mouseOver){

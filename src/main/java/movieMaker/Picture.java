@@ -75,9 +75,9 @@ public class Picture extends SimplePicture
   
 public String toString()
   {
-    String output = Messages.getString("Picture.0") + getFileName() +  //$NON-NLS-1$
-      Messages.getString("Picture.1") + getHeight()  //$NON-NLS-1$
-      + Messages.getString("Picture.2") + getWidth(); //$NON-NLS-1$
+    String output = Messages.getString("Picture.0") + getFileName() +  
+      Messages.getString("Picture.1") + getHeight()  
+      + Messages.getString("Picture.2") + getWidth(); 
     return output;
     
   }

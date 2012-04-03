@@ -27,8 +27,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  * @author Jason Pratt
  */
 public class DnDClipboard extends javax.swing.JPanel {
-	protected javax.swing.ImageIcon clipboardIcon = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/clipboard.gif" ) ); //$NON-NLS-1$
-	protected javax.swing.ImageIcon clipboardWithPaperIcon = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/clipboardWithPaper.gif" ) ); //$NON-NLS-1$
+	protected javax.swing.ImageIcon clipboardIcon = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/clipboard.gif" ) ); 
+	protected javax.swing.ImageIcon clipboardWithPaperIcon = new javax.swing.ImageIcon( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/clipboardWithPaper.gif" ) ); 
 	protected java.awt.Dimension size;
 	protected java.awt.datatransfer.Transferable transferable;
 	protected java.awt.dnd.DragSource dragSource = new java.awt.dnd.DragSource();
@@ -44,10 +44,9 @@ public class DnDClipboard extends javax.swing.JPanel {
 		setDropTarget( new java.awt.dnd.DropTarget( this, new ClipboardDropTargetListener() ) );
 		edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.addListener( dropPotentialFeedbackListener );
 
-		setToolTipText( Messages.getString("DnDClipboard.2") ); //$NON-NLS-1$
+		setToolTipText( Messages.getString("DnDClipboard.2") ); 
 
 		addMouseListener( new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
-			
 			public void singleClickResponse( java.awt.event.MouseEvent ev ) {
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( DnDClipboard.this.getToolTipText() );
 			}
@@ -68,7 +67,7 @@ public void clear (){
 		if( paintDropPotential ) {
 			java.awt.Dimension size = getSize();
 			if( underDrag ) {
-				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight2" ) ); //$NON-NLS-1$
+				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight2" ) ); 
 			} else {
 				//g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight" ) );
 			}
@@ -82,7 +81,6 @@ public void clear (){
 		}
 	}
 
-	
 	public java.awt.Dimension getMinimumSize() {
 		java.awt.Insets insets = getInsets();
 		return new java.awt.Dimension( size.width + insets.left + insets.right, size.height + insets.top + insets.bottom );
@@ -169,9 +167,9 @@ public void clear (){
 						transferable = edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( element.createCopyFactory() );
 					}
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DnDClipboard.4"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DnDClipboard.4"), e ); 
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DnDClipboard.5"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DnDClipboard.5"), e ); 
 				}
 			}
 

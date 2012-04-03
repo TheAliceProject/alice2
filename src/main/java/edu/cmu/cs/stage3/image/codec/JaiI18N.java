@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 
 class JaiI18N {
-	private static final String BUNDLE_NAME = "edu.cmu.cs.stage3.lang." + AikMin.locale + ".image_" + AikMin.locale; //$NON-NLS-1$"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "edu.cmu.cs.stage3.lang." + AikMin.locale + ".image_" + AikMin.locale; 
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
 			.getBundle(BUNDLE_NAME);

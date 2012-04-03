@@ -53,23 +53,19 @@ public class BooleanPropertyViewController extends PropertyViewController {
 		refreshGUI();
 	}
 
-	
 	public void setEditingEnabled( boolean editingEnabled ) {
 		super.setEditingEnabled( editingEnabled );
 		checkBox.setEnabled( editingEnabled );
 	}
 
-	
 	protected java.awt.Component getNativeComponent() {
 		return booleanLabel;
 	}
 
-	
 	protected Class getNativeClass() {
 		return Boolean.class;
 	}
 
-	
 	protected void updateNativeComponent() {
 //		boolean b = ((Boolean)property.get()).booleanValue();
 //		if( checkBox.isSelected() != b ) {

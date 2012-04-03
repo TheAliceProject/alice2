@@ -35,7 +35,6 @@ public class AskUserForString extends edu.cmu.cs.stage3.alice.core.Question {
 
 	private edu.cmu.cs.stage3.alice.core.Clock m_clock;
 
-    
 	public Class getValueClass() {
         return String.class;
     }
@@ -53,7 +52,6 @@ public class AskUserForString extends edu.cmu.cs.stage3.alice.core.Question {
 		}
     }
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		if( world != null ) {

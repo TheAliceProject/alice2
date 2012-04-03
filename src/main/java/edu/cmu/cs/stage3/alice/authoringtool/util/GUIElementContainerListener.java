@@ -33,7 +33,6 @@ public class GUIElementContainerListener extends java.awt.event.ContainerAdapter
 		return staticListener;
 	}
 
-	
 	public void componentRemoved( java.awt.event.ContainerEvent ev ) {
 //		releaseRecursively( ev.getChild() );
 //

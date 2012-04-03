@@ -113,7 +113,6 @@ public class HighlightingGlassPane extends javax.swing.JPanel {
 		return r;
 	}
 
-	
 	protected void paintComponent( java.awt.Graphics g ) {
 		super.paintComponent( g );
 	

@@ -41,11 +41,10 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
 
     public WhileElementPanel(){
         super();
-        headerText = Messages.getString("WhileElementPanel.0"); //$NON-NLS-1$
-        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"); //$NON-NLS-1$
+        headerText = Messages.getString("WhileElementPanel.0"); 
+        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"); 
     }
 
-     
 	protected void variableInit(){
         super.variableInit();
         if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder){
@@ -58,7 +57,6 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
         }
     }
 
-    
 	protected void startListening() {
 		super.startListening();
         if (m_condition != null){
@@ -66,7 +64,6 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
         }
 	}
 
-	
 	protected void stopListening() {
         super.stopListening();
         if (m_condition != null){
@@ -74,29 +71,27 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
         }
 	}
 
-    
 	public void setHeaderLabel(){
         if (headerLabel != null){
             headerLabel.setText(headerText);
             if (CompositeElementEditor.IS_JAVA){
-                headerLabel.setText("while ("); //$NON-NLS-1$
+                headerLabel.setText("while ("); 
             }
         }
         if (endHeader != null){
-            endHeader.setText(""); //$NON-NLS-1$
+            endHeader.setText(""); 
             if (CompositeElementEditor.IS_JAVA){
                 if (!isExpanded){
-                    endHeader.setText(") { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$
+                    endHeader.setText(") { "+getDots()+" }");  
                 }
                 else{
-                    endHeader.setText(") {"); //$NON-NLS-1$
+                    endHeader.setText(") {"); 
                 }
             }
         }
 
     }
 
-    
 	protected void generateGUI(){
         super.generateGUI();
         if (endHeader == null){
@@ -104,18 +99,16 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
         }
     }
 
-    
 	protected void restoreDrag(){
         super.restoreDrag();
         this.addDragSourceComponent(endHeader);
     }
 
-    
 	protected void updateGUI(){
         super.updateGUI();
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory pif = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(m_condition);
         conditionalInput = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(m_condition, true, true, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(m_condition), pif);
-        headerPanel.remove(glue);
+        headerPanel.remove(glue);	// Aik Min - need work
         headerPanel.add(conditionalInput, new java.awt.GridBagConstraints(3,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         headerPanel.add(endHeader, new java.awt.GridBagConstraints(4,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         headerPanel.add(glue, new java.awt.GridBagConstraints(5,0,1,1,1,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));

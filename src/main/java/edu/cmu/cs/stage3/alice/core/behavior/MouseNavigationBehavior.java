@@ -71,7 +71,6 @@ public class MouseNavigationBehavior extends InternalResponseBehavior implements
         mouseActive = false;
 	}
 
-	
 	public void started( World world, double time ) {
 		super.started( world, time );
 		if( isEnabled.booleanValue() ) {
@@ -89,7 +88,6 @@ public class MouseNavigationBehavior extends InternalResponseBehavior implements
 		}
 	}
 
-	
 	public void stopped( World world, double time ) {
 		super.stopped( world, time );
 		if( isEnabled.booleanValue() ) {
@@ -97,7 +95,6 @@ public class MouseNavigationBehavior extends InternalResponseBehavior implements
 		}
 	}
 
-	
 	public void internalSchedule( double time, double dt ) {
 
         if (!mouseActive) return;

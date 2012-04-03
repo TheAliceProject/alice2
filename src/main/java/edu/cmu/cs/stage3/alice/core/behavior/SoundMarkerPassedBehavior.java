@@ -36,7 +36,6 @@ public class SoundMarkerPassedBehavior extends TriggerBehavior implements SoundM
 		    trigger( System.currentTimeMillis()*0.001 );
 	}
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		m_marker = (SoundMarker)marker.getValue();

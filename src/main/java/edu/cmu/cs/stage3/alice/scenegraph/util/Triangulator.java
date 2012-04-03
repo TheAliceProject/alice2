@@ -276,17 +276,13 @@ public class Triangulator {
 
     private void removeDuplicates() {
         Point2d prevPoint = (Point2d)points.firstElement();
-        java.util.ListIterator li2 = points.listIterator(1);
+        final java.util.ListIterator li2 = points.listIterator(1);
         while(li2.hasNext()) {
             Point2d curPoint = (Point2d)li2.next();
             boolean makeChange = false;
             while(pointCompare(curPoint,prevPoint)==0) {
-                try {
-                	li2.remove();
-        		} catch (Exception e) {
-        			e.printStackTrace();
-        		}
-                makeChange = true;
+				li2.remove();
+				makeChange = true;
                 if (!li2.hasNext())
                     break;
                 curPoint = (Point2d)li2.next();

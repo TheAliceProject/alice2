@@ -25,11 +25,9 @@ package edu.cmu.cs.stage3.alice.core.question.math;
 
 public class ToRadians extends edu.cmu.cs.stage3.alice.core.question.UnaryNumberResultingInNumberQuestion {
 	private static Class[] s_supportedCoercionClasses = { ToDegrees.class };
-	
 	public Class[] getSupportedCoercionClasses() {
 		return s_supportedCoercionClasses;
 	}
-	
 	protected double getValue( double aValue ) {
 		return Math.toRadians( aValue );
 	}

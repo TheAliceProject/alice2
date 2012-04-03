@@ -44,14 +44,10 @@ public class EditorManager {
 			return null;
 		}
 		
-		for( java.util.Iterator iter = availableEditors.listIterator(); iter.hasNext(); ) {
+		for( final java.util.Iterator iter = availableEditors.listIterator(); iter.hasNext(); ) {
 			Object editor = iter.next();
 			if( editor.getClass() == editorClass ) {
-				try {
-					iter.remove();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				iter.remove();
 				inUseEditors.add( editor );
 				return (edu.cmu.cs.stage3.alice.authoringtool.Editor)editor;
 			}

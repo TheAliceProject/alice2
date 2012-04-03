@@ -100,13 +100,11 @@ public class JTreeTable extends JTable {
 	 * is not the right thing to do for an editor. Returning -1 for the
 	 * editing row in this case, ensures the editor is never painted.
 	 */
-	
 	public int getEditingRow() {
 		return (getColumnClass(editingColumn) == TreeTableModel.class) ? -1 : editingRow;
 	}
 
 	// prevent keystrokes from starting an edit -JFP
-	
 	protected boolean processKeyBinding( javax.swing.KeyStroke ks, java.awt.event.KeyEvent e, int condition, boolean pressed ) {
 		return false;
 	}
@@ -121,12 +119,10 @@ public class JTreeTable extends JTable {
 			super( model );
 		}
 
-		
 		public void setBounds( int x, int y, int w, int h ) {
 			super.setBounds( x, 0, w, JTreeTable.this.getHeight() );
 		}
 
-		
 		public void paint( Graphics g ) {
 			g.translate( 0, -visibleRow * getRowHeight() );
 			super.paint( g );
@@ -153,12 +149,10 @@ public class JTreeTable extends JTable {
 		}
 	}
 
-	
 	public void editingCanceled( javax.swing.event.ChangeEvent ev ) {
 		super.editingCanceled( ev );
 	}
 
-	
 	public void removeEditor() {
 		super.removeEditor();
 	}

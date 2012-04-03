@@ -32,7 +32,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messag
  * @author Jason Pratt
  */
 public class TextureMapViewer extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.authoringtool.Editor {
-	public String editorName = Messages.getString("TextureMapViewer.0"); //$NON-NLS-1$
+	public String editorName = Messages.getString("TextureMapViewer.0"); 
 
 	protected edu.cmu.cs.stage3.alice.core.TextureMap textureMap;
 	protected ImagePanel texturePanel = new ImagePanel();
@@ -86,7 +86,7 @@ public class TextureMapViewer extends javax.swing.JPanel implements edu.cmu.cs.s
 					setMinimumSize( size );
 					setPreferredSize( size );
 				} catch( java.lang.InterruptedException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TextureMapViewer.1"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TextureMapViewer.1"), e ); 
 				}
 			} else {
 				java.awt.Dimension size = new java.awt.Dimension( buffer*2, buffer*2 );
@@ -95,7 +95,6 @@ public class TextureMapViewer extends javax.swing.JPanel implements edu.cmu.cs.s
 			}
 		}
 
-		
 		public void paintComponent( java.awt.Graphics g ) {
 			super.paintComponent( g );
 			if( image != null ) {

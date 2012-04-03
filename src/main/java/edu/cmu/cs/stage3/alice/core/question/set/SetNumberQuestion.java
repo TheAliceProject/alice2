@@ -30,7 +30,6 @@ public abstract class SetNumberQuestion extends edu.cmu.cs.stage3.alice.core.que
 	public final SetProperty set = new SetProperty( this, "set", null );
 	//protected abstract double getValue( Set set );
 	protected abstract int getValue( Set set );
-	
 	public Object getValue() {
 		Set setValue = set.getSetValue();
 		if( setValue!=null ) {

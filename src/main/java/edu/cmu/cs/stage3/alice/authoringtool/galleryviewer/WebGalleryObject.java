@@ -32,15 +32,13 @@ public class WebGalleryObject extends GalleryObject {
 
     protected boolean needToWriteThumbnail = false;
 
-    
 	protected String getToolTipString(){
-        return Messages.getString("WebGalleryObject.0"); //$NON-NLS-1$
+        return Messages.getString("WebGalleryObject.0"); 
     }
 
-    
 	protected void guiInit(){
         super.guiInit();
-        location = Messages.getString("WebGalleryObject.1"); //$NON-NLS-1$
+        location = Messages.getString("WebGalleryObject.1"); 
     }
 
     public static java.awt.Image retrieveImage(String root, String filename, long timestamp){
@@ -78,7 +76,6 @@ public class WebGalleryObject extends GalleryObject {
         return toReturn.getImage();
     }
 
-    
 	public void loadImage(){
         String tempFilename = null;
         if (data != null && data.imageFilename != null){

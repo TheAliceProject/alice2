@@ -349,8 +349,8 @@ public class Pixel
   
 public String toString()
   {
-    return Messages.getString("Pixel.0") + getRed() + Messages.getString("Pixel.1") + getGreen() +  //$NON-NLS-1$ //$NON-NLS-2$
-      Messages.getString("Pixel.2") + getBlue(); //$NON-NLS-1$
+    return Messages.getString("Pixel.0") + getRed() + Messages.getString("Pixel.1") + getGreen() +   
+      Messages.getString("Pixel.2") + getBlue(); 
   }
 
 }

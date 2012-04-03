@@ -94,7 +94,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
     * @param    format     possible capture format
     */
     public SaveAsDialog ( Frame frame, String inputURL, Format format, JMAppsCfg cfgJMApps ) {
-        super ( frame, JMFI18N.getResource("jmstudio.saveas.title"), false ); //$NON-NLS-1$
+        super ( frame, JMFI18N.getResource("jmstudio.saveas.title"), false ); 
 
         this.cfgJMApps = cfgJMApps;
         this.inputURL = inputURL;
@@ -118,11 +118,11 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
     * @param    format     possible capture format
     */
     public SaveAsDialog ( Frame frame, DataSource dataSource, JMAppsCfg cfgJMApps ) {
-        super ( frame, JMFI18N.getResource("jmstudio.saveas.title"), false ); //$NON-NLS-1$
+        super ( frame, JMFI18N.getResource("jmstudio.saveas.title"), false ); 
 
         this.cfgJMApps = cfgJMApps;
         this.dataSource = dataSource;
-        this.inputURL = "Capture"; //$NON-NLS-1$
+        this.inputURL = "Capture"; 
 
         try {
             init();
@@ -149,8 +149,8 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         Dimension       dim;
 
 
-        imageAudioEn = ImageArea.loadImage ( "audio.gif", this, true ); //$NON-NLS-1$
-        imageAudioDis = ImageArea.loadImage ( "audio-disabled.gif", this, true ); //$NON-NLS-1$
+        imageAudioEn = ImageArea.loadImage ( "audio.gif", this, true ); 
+        imageAudioDis = ImageArea.loadImage ( "audio-disabled.gif", this, true ); 
 
         frameOwner.setCursor ( new Cursor(Cursor.WAIT_CURSOR) );
 
@@ -160,7 +160,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
                 dataSource = Manager.createDataSource ( mediaSource );
             }
             catch ( Exception exception ) {
-            	AuthoringTool.showErrorDialog(Messages.getString("SaveAsDialog.5"), exception); //$NON-NLS-1$
+            	AuthoringTool.showErrorDialog(Messages.getString("SaveAsDialog.5"), exception); 
                 frameOwner.setCursor ( Cursor.getDefaultCursor() );
                 throw exception;
             }
@@ -171,7 +171,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
             processor = Manager.createProcessor ( dataSource );
         }
         catch ( NoPlayerException exception ) {
-        	AuthoringTool.showErrorDialog(Messages.getString("SaveAsDialog.6"), exception); //$NON-NLS-1$
+        	AuthoringTool.showErrorDialog(Messages.getString("SaveAsDialog.6"), exception); 
             frameOwner.setCursor ( Cursor.getDefaultCursor() );
             throw exception;
         }
@@ -231,7 +231,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
 
         TrackPanelAudio         panelAudio;       
         Format                  format;
-        String                  strAudio = "Audio"; //$NON-NLS-1$
+        String                  strAudio = "Audio"; 
         
         JMAppsCfg.TrackData     dataTrack;
 
@@ -273,10 +273,10 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         panelFormat = new Panel ( new BorderLayout() );
         panelGeneral.add ( panelFormat );
 
-        label = new Label ( Messages.getString("SaveAsDialog.8") ); //$NON-NLS-1$
+        label = new Label ( Messages.getString("SaveAsDialog.8") ); 
         panelFormat.add ( label, BorderLayout.WEST );
 
-        label = new Label("Wave(wav)"); //$NON-NLS-1$
+        label = new Label("Wave(wav)"); 
         panelFormat.add ( label, BorderLayout.CENTER );
 
         return ( panelGeneral );
@@ -342,12 +342,12 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
 
             dataSource = processor.getDataOutput ();
             
-            inputURL = inputURL.substring(0, inputURL.lastIndexOf(".")) + "a.wav";  //$NON-NLS-1$ //$NON-NLS-2$
+            inputURL = inputURL.substring(0, inputURL.lastIndexOf(".")) + "a.wav";   
             mediaDest = new MediaLocator ( inputURL );
             dataSink = Manager.createDataSink ( dataSource, mediaDest );
             boolSaving = true;
             monitorControl = (MonitorControl)
-            processor.getControl("javax.media.control.MonitorControl"); //$NON-NLS-1$
+            processor.getControl("javax.media.control.MonitorControl"); 
             if (monitorControl != null)
                 monitor = monitorControl.getControlComponent();
 
@@ -367,13 +367,13 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
             if ( nMediaDuration > 0  &&  duration != Duration.DURATION_UNBOUNDED
                                      &&  duration != Duration.DURATION_UNKNOWN ) {
                 dlgProgress = new ProgressDialog ( frameOwner,
-                                JMFI18N.getResource("jmstudio.saveprogress.title"), //$NON-NLS-1$
+                                JMFI18N.getResource("jmstudio.saveprogress.title"), 
                                 0, nMediaDuration, this );
             }
             else {
                 dlgProgress = new ProgressDialog ( frameOwner,
-                                JMFI18N.getResource("jmstudio.saveprogress.title"), //$NON-NLS-1$
-                                JMFI18N.getResource("jmstudio.saveprogress.label"), //$NON-NLS-1$
+                                JMFI18N.getResource("jmstudio.saveprogress.title"), 
+                                JMFI18N.getResource("jmstudio.saveprogress.label"), 
                                 monitor, this );
             }
             //dlgProgress.setVisible ( true );
@@ -384,7 +384,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         }
         catch ( Exception exception ) {
             boolSaving = false;
-            AuthoringTool.showErrorDialog( Messages.getString("SaveAsDialog.16"), exception ); //$NON-NLS-1$
+            AuthoringTool.showErrorDialog( Messages.getString("SaveAsDialog.16"), exception ); 
         }
 
         setCursor ( Cursor.getDefaultCursor() );
@@ -471,14 +471,14 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
             if ( boolSaving == true ) {
                 stopSaving ();
                 MessageDialog.createErrorDialogModeless ( frameOwner,
-                                JMFI18N.getResource("jmstudio.error.processor.savefile") //$NON-NLS-1$
-                                + "\n" + JMFI18N.getResource("jmstudio.error.controller") //$NON-NLS-1$ //$NON-NLS-2$
-                                + "\n" + strFailMessage ); //$NON-NLS-1$
+                                JMFI18N.getResource("jmstudio.error.processor.savefile") 
+                                + "\n" + JMFI18N.getResource("jmstudio.error.controller")  
+                                + "\n" + strFailMessage ); 
             }
             else {
                 MessageDialog.createErrorDialogModeless ( frameOwner,
-                                JMFI18N.getResource("jmstudio.error.controller") //$NON-NLS-1$
-                                + "\n" + strFailMessage ); //$NON-NLS-1$
+                                JMFI18N.getResource("jmstudio.error.controller") 
+                                + "\n" + strFailMessage ); 
             }
         }
         else if ( event instanceof EndOfMediaEvent ) {
@@ -499,7 +499,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         else if ( event instanceof DataSinkErrorEvent ) {
             stopSaving ();
             MessageDialog.createErrorDialogModeless ( frameOwner,
-                        JMFI18N.getResource("jmstudio.error.processor.writefile") ); //$NON-NLS-1$
+                        JMFI18N.getResource("jmstudio.error.processor.writefile") ); 
         }
     }
 
@@ -578,7 +578,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         //strContentTypeExt = "wav";
  
         if ( processor.setContentDescriptor(new FileTypeDescriptor(strContentType)) == null) {
-            System.err.println ( Messages.getString("SaveAsDialog.24") ); //$NON-NLS-1$
+            System.err.println ( Messages.getString("SaveAsDialog.24") ); 
         }
 
         enumPanels = hashtablePanelsAudio.elements ();

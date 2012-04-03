@@ -17,11 +17,11 @@ import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 
 public class LookAtAnimation extends AbstractPointAtAnimation {
 	
-	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); //$NON-NLS-1$
+	public final BooleanProperty onlyAffectYaw = new BooleanProperty( this, "onlyAffectYaw", Boolean.FALSE ); 
 	
 	
 	private edu.cmu.cs.stage3.alice.core.Model getHead(edu.cmu.cs.stage3.alice.core.Transformable subject) {
-		edu.cmu.cs.stage3.alice.core.Element[] heads = subject.search(new edu.cmu.cs.stage3.alice.core.criterion.ElementNamedCriterion("head", true)); //$NON-NLS-1$
+		edu.cmu.cs.stage3.alice.core.Element[] heads = subject.search(new edu.cmu.cs.stage3.alice.core.criterion.ElementNamedCriterion("head", true)); 
 		if ((heads.length > 0) && (heads[0] instanceof edu.cmu.cs.stage3.alice.core.Model)) {
 			return (edu.cmu.cs.stage3.alice.core.Model)heads[0];
 		} else {
@@ -39,13 +39,13 @@ public class LookAtAnimation extends AbstractPointAtAnimation {
 		public void prologue( double t ) {
 			m_target = LookAtAnimation.this.target.getReferenceFrameValue();
 			if (m_target == null) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.2"), getCurrentStack(), LookAtAnimation.this.target );             //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.2"), getCurrentStack(), LookAtAnimation.this.target );             
 			}
 			super.prologue(t);
 			
 			m_turnAmountPrev = 0;							
 			if (m_subject == m_target) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.3"), getCurrentStack(), LookAtAnimation.this.subject );             //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.3"), getCurrentStack(), LookAtAnimation.this.subject );             
 			}		
 			
 			if (m_subject.equals(LookAtAnimation.this.subject.getTransformableValue())) {

@@ -30,7 +30,6 @@ public abstract class QueueNumberQuestion extends edu.cmu.cs.stage3.alice.core.q
 	public final QueueProperty queue = new QueueProperty( this, "queue", null );
 	//protected abstract double getValue( Queue queue );
 	protected abstract int getValue( Queue queue );
-	
 	public Object getValue() {
 		Queue queueValue = queue.getQueueValue();
 		if( queueValue!=null ) {

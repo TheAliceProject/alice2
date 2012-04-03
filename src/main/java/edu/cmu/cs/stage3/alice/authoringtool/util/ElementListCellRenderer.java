@@ -37,7 +37,6 @@ public class ElementListCellRenderer extends javax.swing.DefaultListCellRenderer
 		this.verbosity = verbosity;
 	}
 
-	
 	public java.awt.Component getListCellRendererComponent( javax.swing.JList list, Object value, int index, boolean isSelected,  boolean cellHasFocus ) {
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 			edu.cmu.cs.stage3.alice.core.Element element = (edu.cmu.cs.stage3.alice.core.Element)value;

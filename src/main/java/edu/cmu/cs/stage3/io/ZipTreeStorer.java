@@ -54,7 +54,7 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 			out = (java.io.OutputStream)pathname;
 		}
 		else {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.0") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.0") ); 
 		}
 
 		zipOut = new java.util.zip.ZipOutputStream( new java.io.BufferedOutputStream( out ) );
@@ -63,7 +63,7 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 		} else {
 			zipOut.setMethod( java.util.zip.ZipOutputStream.STORED );
 		}
-		currentDirectory = ""; //$NON-NLS-1$
+		currentDirectory = ""; 
 	}
 
 	public void close() throws java.io.IOException {
@@ -78,32 +78,32 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 
 	public void createDirectory( String pathname ) throws IllegalArgumentException, java.io.IOException {
 		if( (pathname.indexOf( '/' ) != -1) || (pathname.indexOf( '\\' ) != -1) ) {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.2") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.2") ); 
 		}
 		if( pathname.length() <= 0 ) {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.3") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.3") ); 
 		}
 
-		java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry( currentDirectory + pathname + "/" ); //$NON-NLS-1$
+		java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry( currentDirectory + pathname + "/" ); 
 		if( zipOut != null ) {
 			zipOut.putNextEntry( newEntry );
 			zipOut.closeEntry();
 		}
 		else {
-			throw new java.io.IOException( Messages.getString("ZipTreeStorer.5") ); //$NON-NLS-1$
+			throw new java.io.IOException( Messages.getString("ZipTreeStorer.5") ); 
 		}
 	}
 
 	public void setCurrentDirectory( String pathname ) throws IllegalArgumentException {
 		if( pathname == null ) {
-			pathname = ""; //$NON-NLS-1$
+			pathname = ""; 
 		}
 		else if( pathname.length() > 0 ) {
 			pathname = pathname.replace( '\\', '/' );
 
 			// remove double separators
 			int index;
-			while( (index = pathname.indexOf( "//" )) != -1 ) { //$NON-NLS-1$
+			while( (index = pathname.indexOf( "//" )) != -1 ) { 
 				pathname = pathname.substring( 0, index + 1 ) + pathname.substring( index + 2 );
 			}
 
@@ -114,11 +114,11 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 				pathname = currentDirectory + pathname;
 			}
 
-			if( ! pathname.endsWith( "/" ) ) { //$NON-NLS-1$
-				pathname = pathname + "/"; //$NON-NLS-1$
+			if( ! pathname.endsWith( "/" ) ) { 
+				pathname = pathname + "/"; 
 			}
-			if( ! pathname.startsWith( "/" ) ) { //$NON-NLS-1$
-				pathname = "/" + pathname; //$NON-NLS-1$
+			if( ! pathname.startsWith( "/" ) ) { 
+				pathname = "/" + pathname; 
 			}
 		}
 
@@ -141,7 +141,7 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 			zipOut.putNextEntry( currentEntry );
 		}
 		else {
-			throw new java.io.IOException( Messages.getString("ZipTreeStorer.12") ); //$NON-NLS-1$
+			throw new java.io.IOException( Messages.getString("ZipTreeStorer.12") ); 
 		}
 
 		return zipOut;

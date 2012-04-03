@@ -50,13 +50,11 @@ public class CompositeComponentBehaviorPanel extends CompositeComponentElementPa
         super.set(elements, owner, authoringToolIn);
     }
 
-    
 	protected boolean isInverted()
     {
         return true;
     }
 
-    
 	protected Component makeGUI(Element currentElement)
     {
         JComponent toAdd = null;
@@ -70,7 +68,6 @@ public class CompositeComponentBehaviorPanel extends CompositeComponentElementPa
         }
     }
 
-    
 	public void drop(DropTargetDropEvent dtde)
     {
         Transferable transferable = dtde.getTransferable();
@@ -100,13 +97,12 @@ public class CompositeComponentBehaviorPanel extends CompositeComponentElementPa
         }
         catch(Exception e)
         {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("CompositeComponentBehaviorPanel.0"), e); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("CompositeComponentBehaviorPanel.0"), e); 
             dropSuccess = false;
         }
         dtde.dropComplete(dropSuccess);
     }
 
-    
 	public void dragOver(DropTargetDragEvent dtde)
     {
         if(!super.m_owner.isExpanded() && (super.m_owner.getParent() instanceof DropTargetListener))

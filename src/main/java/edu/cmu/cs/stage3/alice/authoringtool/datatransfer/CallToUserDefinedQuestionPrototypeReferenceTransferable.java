@@ -42,7 +42,6 @@ public class CallToUserDefinedQuestionPrototypeReferenceTransferable extends Que
 		flavors[3] = java.awt.datatransfer.DataFlavor.stringFlavor;
 	}
 
-	
 	public Object getTransferData( java.awt.datatransfer.DataFlavor flavor ) throws java.awt.datatransfer.UnsupportedFlavorException, java.io.IOException {
 		if( flavor.equals( callToUserDefinedQuestionPrototypeReferenceFlavor ) ) {
 			return callToUserDefinedQuestionPrototype;

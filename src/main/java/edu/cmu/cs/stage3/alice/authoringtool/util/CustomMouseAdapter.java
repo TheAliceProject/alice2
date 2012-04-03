@@ -59,7 +59,6 @@ public class CustomMouseAdapter extends java.awt.event.MouseAdapter {
 		multipleClickTimeMargin = time;
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev ) {
 		long dt = System.currentTimeMillis() - pressTime;
 		if( dt > multipleClickTimeMargin ) {
@@ -75,7 +74,6 @@ public class CustomMouseAdapter extends java.awt.event.MouseAdapter {
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( ev.isPopupTrigger() ) {
 			popupResponse( ev );

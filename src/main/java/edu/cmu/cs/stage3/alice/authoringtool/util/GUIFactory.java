@@ -234,7 +234,7 @@ public class GUIFactory {
 			try {
 				return (javax.swing.JComponent)guiClass.newInstance();
 			} catch( Throwable t ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.0") + guiClass, t ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.0") + guiClass, t ); 
 			}
 		}
 		return null;
@@ -249,59 +249,59 @@ public class GUIFactory {
 	}
 
 	public static String cleanHTMLString(String toReturn){
-		if (toReturn == ""){return toReturn;} //$NON-NLS-1$
-		while (toReturn != null && toReturn.indexOf("<") > -1){ //$NON-NLS-1$
-			toReturn = toReturn.substring(0, toReturn.indexOf("<"))+ "&lt;"+toReturn.substring(toReturn.indexOf("<")+1, toReturn.length()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (toReturn == ""){return toReturn;} 
+		while (toReturn != null && toReturn.indexOf("<") > -1){ 
+			toReturn = toReturn.substring(0, toReturn.indexOf("<"))+ "&lt;"+toReturn.substring(toReturn.indexOf("<")+1, toReturn.length());   
 		}
-		if (toReturn == ""){return toReturn;} //$NON-NLS-1$
-		while (toReturn != null && toReturn.indexOf(">") > -1){ //$NON-NLS-1$
-			toReturn = toReturn.substring(0, toReturn.indexOf(">"))+ "&gt;"+toReturn.substring(toReturn.indexOf(">")+1, toReturn.length()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (toReturn == ""){return toReturn;} 
+		while (toReturn != null && toReturn.indexOf(">") > -1){ 
+			toReturn = toReturn.substring(0, toReturn.indexOf(">"))+ "&gt;"+toReturn.substring(toReturn.indexOf(">")+1, toReturn.length());   
 		}
-		if (toReturn == ""){return toReturn;} //$NON-NLS-1$
-		while (toReturn != null &&  toReturn.indexOf("\"") > -1){ //$NON-NLS-1$
-			toReturn = toReturn.substring(0, toReturn.indexOf("\""))+ "&quot;"+toReturn.substring(toReturn.indexOf("\"")+1, toReturn.length()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (toReturn == ""){return toReturn;} 
+		while (toReturn != null &&  toReturn.indexOf("\"") > -1){ 
+			toReturn = toReturn.substring(0, toReturn.indexOf("\""))+ "&quot;"+toReturn.substring(toReturn.indexOf("\"")+1, toReturn.length());   
 		}
 		return toReturn;
 	}
 
 	public static String getHTMLStringForComponent(java.awt.Component c){
-		String toReturn = ""; //$NON-NLS-1$
+		String toReturn = ""; 
 
 		if (c instanceof javax.swing.JLabel){
 			if (((javax.swing.JLabel)c).getIcon() != null){
 				javax.swing.Icon icon = ((javax.swing.JLabel)c).getIcon();
-				if (icon.equals(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue("mouse"))){ //$NON-NLS-1$
-					toReturn = Messages.getString("GUIFactory.18"); //$NON-NLS-1$
-				} else if (icon.equals(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue("arrowKeys"))){ //$NON-NLS-1$
-					toReturn = Messages.getString("GUIFactory.20"); //$NON-NLS-1$
+				if (icon.equals(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue("mouse"))){ 
+					toReturn = Messages.getString("GUIFactory.18"); 
+				} else if (icon.equals(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue("arrowKeys"))){ 
+					toReturn = Messages.getString("GUIFactory.20"); 
 				} 
 			}
 			String labelText = cleanHTMLString(((javax.swing.JLabel)c).getText());
 			if (((javax.swing.JLabel)c).getFont().isBold()){
-				toReturn += "<b>"+labelText+"</b>"; //$NON-NLS-1$ //$NON-NLS-2$
+				toReturn += "<b>"+labelText+"</b>";  
 			}
 			if (((javax.swing.JLabel)c).getFont().isItalic()){
-				toReturn += "<i>"+labelText+"</i>"; //$NON-NLS-1$ //$NON-NLS-2$
+				toReturn += "<i>"+labelText+"</i>";  
 			}
-			toReturn = " "+toReturn+" "; //$NON-NLS-1$ //$NON-NLS-2$
-			if (((javax.swing.JLabel)c).getText() == null || ((javax.swing.JLabel)c).getText().equals("more...")){ //$NON-NLS-1$
-				toReturn = ""; //$NON-NLS-1$
+			toReturn = " "+toReturn+" ";  
+			if (((javax.swing.JLabel)c).getText() == null || ((javax.swing.JLabel)c).getText().equals("more...")){ 
+				toReturn = ""; 
 			}
 		} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.PropertyViewController){
 			edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.PropertyViewController viewControllerC = (edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.PropertyViewController)c;
 			StringBuffer htmlStringBuf = new StringBuffer();
 			viewControllerC.getHTML(htmlStringBuf);
-			toReturn = " "+htmlStringBuf.toString()+" "; //$NON-NLS-1$ //$NON-NLS-2$
+			toReturn = " "+htmlStringBuf.toString()+" ";  
 		} else if (c instanceof java.awt.Container){
 			java.awt.Container containerC = (java.awt.Container)c;
 			for (int i=0; i<containerC.getComponentCount(); i++){
-				toReturn += getHTMLStringForComponent(containerC.getComponent(i))+" "; //$NON-NLS-1$
+				toReturn += getHTMLStringForComponent(containerC.getComponent(i))+" "; 
 			}
 		} else {
 		}
 		toReturn = toReturn.trim();
-		while ( toReturn.indexOf("  ") > -1){ //$NON-NLS-1$
-			int index = toReturn.indexOf("  "); //$NON-NLS-1$
+		while ( toReturn.indexOf("  ") > -1){ 
+			int index = toReturn.indexOf("  "); 
 			toReturn = toReturn.substring(0, index)+toReturn.substring(index+1, toReturn.length());
 		}
 		
@@ -326,7 +326,7 @@ public class GUIFactory {
 		javax.swing.JComponent viewController = null;
 		Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(property);
 
-		if( property.getName().equals( "keyCode" ) && Integer.class.isAssignableFrom( desiredValueClass ) ) { //$NON-NLS-1$
+		if( property.getName().equals( "keyCode" ) && Integer.class.isAssignableFrom( desiredValueClass ) ) { 
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.KeyCodePropertyViewController.class );
 			if( viewController != null ) {
 				((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.KeyCodePropertyViewController)viewController).set( property, allowExpressions, factory );
@@ -354,7 +354,7 @@ public class GUIFactory {
 			}
 		} else if( String.class.isAssignableFrom( desiredValueClass ) ) {
 			boolean emptyStringWritesNull = true;
-			if( property.getName().equals( "script" ) ) { //$NON-NLS-1$
+			if( property.getName().equals( "script" ) ) { 
 				allowExpressions = false;
 				emptyStringWritesNull = false;
 			}
@@ -553,9 +553,9 @@ public class GUIFactory {
 			valueClass = property.getValueClass();
 		}
 		if( Number.class.isAssignableFrom( valueClass ) ) {
-			String initialValue = ""; //$NON-NLS-1$
+			String initialValue = ""; 
 			if( property.getValue() != null ) {
-				String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); //$NON-NLS-1$
+				String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); 
 				Object userRepr = property.getOwner().data.get( propertyKey );
 				if( userRepr instanceof String ) {
 					initialValue = (String)userRepr;
@@ -571,42 +571,42 @@ public class GUIFactory {
 				String numberString = numPad.getNumberString();
 				Double number = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.parseDouble( numberString );
 				((Runnable)factory.createItem( number )).run();
-				String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); //$NON-NLS-1$
+				String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); 
 				property.getOwner().data.put( propertyKey, numberString );
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, number );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Style.class.isAssignableFrom( valueClass ) ) {
-			System.out.println( Messages.getString("GUIFactory.39") ); //$NON-NLS-1$
+			System.out.println( Messages.getString("GUIFactory.39") ); 
 		} else if( edu.cmu.cs.stage3.alice.scenegraph.Color.class.isAssignableFrom( valueClass ) ) {
 			java.awt.Color currentColor = java.awt.Color.white;
 			if( property.getValue() instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
 				currentColor = ((edu.cmu.cs.stage3.alice.scenegraph.Color)property.getValue()).createAWTColor();
 			}
 			javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("GUIFactory.40"), currentColor ); //$NON-NLS-1$
+			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("GUIFactory.40"), currentColor ); 
 			if( color != null ) {
 				((Runnable)factory.createItem( new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) );
 			}
 		} else if( String.class.isAssignableFrom( valueClass ) ) {
 			Object currentValue = property.getValue();
-			String currentString = ""; //$NON-NLS-1$
+			String currentString = ""; 
 			if (currentValue != null){
 				currentString = currentValue.toString();
 			}
-			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.42"), Messages.getString("GUIFactory.43"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString ); //$NON-NLS-1$ //$NON-NLS-2$
+			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.42"), Messages.getString("GUIFactory.43"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString );  
 			if( string != null ) {
 				((Runnable)factory.createItem( string )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, string );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( valueClass ) ) {
-			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.44"), Messages.getString("GUIFactory.45"), javax.swing.JOptionPane.PLAIN_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.44"), Messages.getString("GUIFactory.45"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
 			edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse();
 			scriptResponse.script.set( script );
 			property.getOwner().addChild( scriptResponse );
 			((Runnable)factory.createItem( scriptResponse )).run();
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.46") + valueClass.getName(), null ); // should not see this //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.46") + valueClass.getName(), null ); // should not see this 
 		}
 	}
 
@@ -618,7 +618,7 @@ public class GUIFactory {
 
 		if( Number.class.isAssignableFrom( valueClass ) ) {
 			if( initialValue == null ) {
-				initialValue = "1"; //$NON-NLS-1$
+				initialValue = "1"; 
 			}
 			edu.cmu.cs.stage3.swing.numpad.NumPad numPad = new edu.cmu.cs.stage3.swing.numpad.NumPad();
 			numPad.setNumberString( (String)initialValue );
@@ -640,23 +640,23 @@ public class GUIFactory {
 				currentColor = ((edu.cmu.cs.stage3.alice.scenegraph.Color)initialValue).createAWTColor();
 			}
 			javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("GUIFactory.48"), currentColor ); //$NON-NLS-1$
+			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("GUIFactory.48"), currentColor ); 
 			if (color != null){
 				((Runnable)factory.createItem( new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) );
 			}
 		} else if( String.class.isAssignableFrom( valueClass ) ) {
-			String currentString = ""; //$NON-NLS-1$
+			String currentString = ""; 
 			if( initialValue != null ) {
 				currentString = (String)initialValue;
 			}
-			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.50"), Messages.getString("GUIFactory.51"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString ); //$NON-NLS-1$ //$NON-NLS-2$
+			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.50"), Messages.getString("GUIFactory.51"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString );  
 			if( string != null ) {
 				((Runnable)factory.createItem( string )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, string );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( valueClass ) ) {
-			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.52"), Messages.getString("GUIFactory.53"), javax.swing.JOptionPane.PLAIN_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.52"), Messages.getString("GUIFactory.53"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
 			edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse();
 			scriptResponse.script.set( script );
 			if( anchorForAnonymousItems != null ) {
@@ -664,17 +664,17 @@ public class GUIFactory {
 			}
 			((Runnable)factory.createItem( scriptResponse )).run();
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.54") + valueClass.getName(), null ); // should not see this //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.54") + valueClass.getName(), null ); // should not see this 
 		}
 	}
 
 	public static void showScriptDefinedPropertyDialog( edu.cmu.cs.stage3.alice.core.Property property, PopupItemFactory factory ) {
 		Class valueClass = property.getValueClass();
-		String initialValue = ""; //$NON-NLS-1$
+		String initialValue = ""; 
 		if( property.get() instanceof edu.cmu.cs.stage3.alice.core.question.AbstractScriptDefinedObject ) {
 			initialValue = ((edu.cmu.cs.stage3.alice.core.question.AbstractScriptDefinedObject)property.get()).evalScript.getStringValue();
 		}
-		String script = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.56"), Messages.getString("GUIFactory.57"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, initialValue ); //$NON-NLS-1$ //$NON-NLS-2$
+		String script = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.56"), Messages.getString("GUIFactory.57"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, initialValue );  
 		if( script != null ) {
 			edu.cmu.cs.stage3.alice.core.question.ScriptDefinedObject scriptDefinedObject = new edu.cmu.cs.stage3.alice.core.question.ScriptDefinedObject();
 			scriptDefinedObject.valueClass.set( valueClass );

@@ -21,7 +21,7 @@ public class FrameSequencer
   private String directory;
   
   /** stores the base file name for each frame file */
-  private String baseName = "frame"; //$NON-NLS-1$
+  private String baseName = "frame"; 
   
   /** stores the current frame number */
   private int frameNumber = 1;
@@ -187,10 +187,10 @@ public class FrameSequencer
   {
     frameNumber--;
     File f = new File(directory + baseName + 
-      numberFormat.format(frameNumber) + ".jpg"); //$NON-NLS-1$
+      numberFormat.format(frameNumber) + ".jpg"); 
     boolean result = f.delete();
     if (result != true)
-      System.out.println(Messages.getString("FrameSequencer.2")); //$NON-NLS-1$
+      System.out.println(Messages.getString("FrameSequencer.2")); 
     pictureList.remove(pictureList.size() - 1);
   }
   
@@ -213,8 +213,8 @@ public class FrameSequencer
         moviePlayer.setVisible(true);
       }
       else
-        System.out.println(Messages.getString("FrameSequencer.3") + //$NON-NLS-1$
-                           Messages.getString("FrameSequencer.4")); //$NON-NLS-1$
+        System.out.println(Messages.getString("FrameSequencer.3") + 
+                           Messages.getString("FrameSequencer.4")); 
     }  
   }
   
@@ -238,7 +238,7 @@ public class FrameSequencer
   
   public static void main(String[] args)
   {
-    String dir = "c:/intro-prog-java/movies/rectangle/"; //$NON-NLS-1$
+    String dir = "c:/intro-prog-java/movies/rectangle/"; 
     FrameSequencer frameSequencer = 
       new FrameSequencer(dir);
     //frameSequencer.play(1000/30);

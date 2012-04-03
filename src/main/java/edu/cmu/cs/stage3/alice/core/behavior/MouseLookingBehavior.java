@@ -71,7 +71,6 @@ public class MouseLookingBehavior extends InternalResponseBehavior implements ja
 	}
 
 
-	
 	public void started( World world, double time ) {
 		super.started( world, time );
 
@@ -91,7 +90,6 @@ public class MouseLookingBehavior extends InternalResponseBehavior implements ja
 		}
 	}
 
-	
 	public void stopped( World world, double time ) {
 		super.stopped( world, time );
 		if( isEnabled.booleanValue() ) {
@@ -99,7 +97,6 @@ public class MouseLookingBehavior extends InternalResponseBehavior implements ja
 		}
 	}
 
-	
 	public void internalSchedule( double time, double dt ) {
 
         // look

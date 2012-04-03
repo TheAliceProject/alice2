@@ -69,19 +69,19 @@ public class Cut implements ControllerListener, DataSinkListener {
 	int i = 0;
 	while (i < args.length) {
 
-	    if (args[i].equals("-o")) { //$NON-NLS-1$
+	    if (args[i].equals("-o")) { 
 		i++;
 		if (i >= args.length)
 		    prUsage();
 		outputURL = args[i];
-	    } else if (args[i].equals("-f")) { //$NON-NLS-1$
+	    } else if (args[i].equals("-f")) { 
 		frameMode = true;
-	    } else if (args[i].equals("-s")) { //$NON-NLS-1$
+	    } else if (args[i].equals("-s")) { 
 		i++;
 		if (i >= args.length)
 		    prUsage();
 		startV.addElement(new Long(args[i]));
-	    } else if (args[i].equals("-e")) { //$NON-NLS-1$
+	    } else if (args[i].equals("-e")) { 
 		i++;
 		if (i >= args.length)
 		    prUsage();
@@ -102,17 +102,17 @@ public class Cut implements ControllerListener, DataSinkListener {
 	}
 
 	if (inputURL == null) {
-	    System.err.println(Messages.getString("Cut.4")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.4")); 
 	    prUsage();
 	}
 
 	if (outputURL == null) {
-	    System.err.println(Messages.getString("Cut.5")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.5")); 
 	    prUsage();
 	}
 
 	if (startV.size() == 0 && endV.size() == 0) {
-	    System.err.println(Messages.getString("Cut.6")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.6")); 
 	    prUsage();
 	}
 
@@ -135,10 +135,10 @@ public class Cut implements ControllerListener, DataSinkListener {
 	    end[j] = ((Long)endV.elementAt(j)).longValue();
 
 	    if (prevEnd > start[j]) {
-		System.err.println(Messages.getString("Cut.7")); //$NON-NLS-1$
+		System.err.println(Messages.getString("Cut.7")); 
 		prUsage();
 	    } else if (start[j] >= end[j]) {
-		System.err.println(Messages.getString("Cut.8")); //$NON-NLS-1$
+		System.err.println(Messages.getString("Cut.8")); 
 		prUsage();
 	    }
 
@@ -146,14 +146,14 @@ public class Cut implements ControllerListener, DataSinkListener {
 	}
 
 	if (frameMode) {
-	    System.err.println(Messages.getString("Cut.9")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.9")); 
 	} else {
 	    // Times are in millseconds.  We'll turn them into nanoseconds.
 	    for (int j = 0; j < start.length; j++) {
 		start[j] *= 1000000;
 		if (end[j] != Long.MAX_VALUE)
 		    end[j] *= 1000000;
-	    System.err.println(Messages.getString("Cut.10") + start[j] + Messages.getString("Cut.11") +end[j]); //$NON-NLS-1$ //$NON-NLS-2$
+	    System.err.println(Messages.getString("Cut.10") + start[j] + Messages.getString("Cut.11") +end[j]);  
 	    }
 	}
 
@@ -162,12 +162,12 @@ public class Cut implements ControllerListener, DataSinkListener {
 	MediaLocator oml;
 
 	if ((iml = createMediaLocator(inputURL)) == null) {
-	    System.err.println(Messages.getString("Cut.12") + inputURL); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.12") + inputURL); 
 	    System.exit(0);
 	}
 
 	if ((oml = createMediaLocator(outputURL)) == null) {
-	    System.err.println(Messages.getString("Cut.13") + outputURL); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.13") + outputURL); 
 	    System.exit(0);
 	}
 
@@ -175,7 +175,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	Cut cut  = new Cut();
 
 	if (!cut.doIt(iml, oml, start, end, frameMode)) {
-	    System.err.println(Messages.getString("Cut.14")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.14")); 
 	}
 	
 	System.exit(0);
@@ -247,7 +247,7 @@ public class Cut implements ControllerListener, DataSinkListener {
  	ContentDescriptor cd;
 
 	if ((cd = fileExtToCD(outML.getRemainder())) == null) {
-	    System.err.println(Messages.getString("Cut.15")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.15")); 
 	    return false;
 	}
 
@@ -257,13 +257,13 @@ public class Cut implements ControllerListener, DataSinkListener {
 	 //   System.err.println("- Create processor for: " + inML);
 	    p = Manager.createProcessor(inML);
 	} catch (Exception e) {
-	    System.err.println(Messages.getString("Cut.16") + e); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.16") + e); 
 	    return false;
 	}
 
 	//System.err.println("- Configure the processor for: " + inML);
 	if (!waitForState(p, Processor.Configured)) {
-	    System.err.println(Messages.getString("Cut.17")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.17")); 
 	    return false;
 	}
 
@@ -271,7 +271,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 //	System.err.println("- Realize the processor for: " + inML);
 	if (!waitForState(p, Controller.Realized)) {
-	    System.err.println(Messages.getString("Cut.18")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.18")); 
 	    return false;
 	}
 
@@ -280,7 +280,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 	// Translate frame # into time.
 	if (frameMode) {
-	    FramePositioningControl fpc = (FramePositioningControl)p.getControl("javax.media.control.FramePositioningControl"); //$NON-NLS-1$
+	    FramePositioningControl fpc = (FramePositioningControl)p.getControl("javax.media.control.FramePositioningControl"); 
 
 	    if (fpc != null) {
 		Time t;
@@ -322,21 +322,21 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 	// Put the Processor into configured state.
 	if (!waitForState(p, Processor.Configured)) {
-	    System.err.println(Messages.getString("Cut.20")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.20")); 
 	    return false;
 	}
 
 	// Set the output content descriptor on the final processor.
 //	System.err.println("- Set output content descriptor to: " + cd);
 	if ((p.setContentDescriptor(cd)) == null) {
-	    System.err.println(Messages.getString("Cut.21")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.21")); 
 	    return false;
 	}
 
 	// We are done with programming the processor.  Let's just
 	// realize and prefetch it.
 	if (!waitForState(p, Controller.Prefetched)) {
-	    System.err.println(Messages.getString("Cut.22")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.22")); 
 	    return false;
 	}
 
@@ -357,7 +357,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	    p.start();
 	    dsink.start();
 	} catch (IOException e) {
-	    System.err.println(Messages.getString("Cut.23")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.23")); 
 	    return false;
 	}
 
@@ -413,9 +413,9 @@ public class Cut implements ControllerListener, DataSinkListener {
 		}
 
 		if (selected != null) {
-		    System.err.println(Messages.getString("Cut.24")); //$NON-NLS-1$
-		    System.err.println(Messages.getString("Cut.25") + tc[i].getFormat()); //$NON-NLS-1$
-		    System.err.println(Messages.getString("Cut.26") + selected); //$NON-NLS-1$
+		    System.err.println(Messages.getString("Cut.24")); 
+		    System.err.println(Messages.getString("Cut.25") + tc[i].getFormat()); 
+		    System.err.println(Messages.getString("Cut.26") + selected); 
 		    tc[i].setFormat(selected);
 		}
 	    }
@@ -449,8 +449,8 @@ public class Cut implements ControllerListener, DataSinkListener {
 			if (fmts[j].matches(jpegFmt)) {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
-			    System.err.println(Messages.getString("Cut.27") +  //$NON-NLS-1$
-					val + Messages.getString("Cut.28") + qc); //$NON-NLS-1$
+			    System.err.println(Messages.getString("Cut.27") +  
+					val + Messages.getString("Cut.28") + qc); 
 			    break;
 			}
 		    }
@@ -526,7 +526,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	DataSource ds;
 
 	if ((ds = p.getDataOutput()) == null) {
-	    System.err.println(Messages.getString("Cut.29")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.29")); 
 	    return null;
 	}
 
@@ -560,7 +560,7 @@ public class Cut implements ControllerListener, DataSinkListener {
     public void controllerUpdate(ControllerEvent evt) {
 
 	if (evt instanceof ControllerErrorEvent) {
-	    System.err.println(Messages.getString("Cut.30")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.30")); 
 	    //System.exit(-1);
 	} else if (evt instanceof EndOfMediaEvent) {
 	    evt.getSourceController().close();
@@ -628,10 +628,10 @@ public class Cut implements ControllerListener, DataSinkListener {
 	String type;
 
 	// Use the MimeManager to get the mime type from the file extension.
-	if ( ext.equals("mp3")) { //$NON-NLS-1$
+	if ( ext.equals("mp3")) { 
 	    type = FileTypeDescriptor.MPEG_AUDIO;
         }
-	else if(ext.equals("wav")) //$NON-NLS-1$
+	else if(ext.equals("wav")) 
 	{
 		type = FileTypeDescriptor.WAVE;
 	}else {
@@ -651,14 +651,14 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 	MediaLocator ml;
 
-	if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null) //$NON-NLS-1$
+	if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null) 
 	    return ml;
 
 	if (url.startsWith(File.separator)) {
-	    if ((ml = new MediaLocator("file:" + url)) != null) //$NON-NLS-1$
+	    if ((ml = new MediaLocator("file:" + url)) != null) 
 		return ml;
 	} else {
-	    String file = "file:" + System.getProperty("user.dir") + File.separator + url; //$NON-NLS-1$ //$NON-NLS-2$
+	    String file = "file:" + System.getProperty("user.dir") + File.separator + url;  
 	    if ((ml = new MediaLocator(file)) != null)
 		return ml;
 	}
@@ -760,7 +760,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 	
 	public void setLocator(MediaLocator ml) {
-	    System.err.println(Messages.getString("Cut.37")); //$NON-NLS-1$
+	    System.err.println(Messages.getString("Cut.37")); 
 	}
     }
 

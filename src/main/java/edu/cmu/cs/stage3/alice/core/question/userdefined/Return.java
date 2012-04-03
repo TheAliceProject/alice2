@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.question.userdefined;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
 import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 

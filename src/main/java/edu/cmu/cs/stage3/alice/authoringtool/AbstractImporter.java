@@ -84,20 +84,20 @@ public abstract class AbstractImporter implements edu.cmu.cs.stage3.alice.author
 
 	private String getExtension( String filename ) {
 		if( filename == null ) {
-			throw new IllegalArgumentException( Messages.getString("AbstractImporter.0") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("AbstractImporter.0") ); 
 		}
 		filename.trim();
-		int i = filename.lastIndexOf( "." ); //$NON-NLS-1$
+		int i = filename.lastIndexOf( "." ); 
 		if( i == -1 ) {
-			throw new IllegalArgumentException( Messages.getString("AbstractImporter.2") + filename ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("AbstractImporter.2") + filename ); 
 		}
 		String ext = filename.substring( i + 1 );
 		if( ext.length() < 1 ) {
-			throw new IllegalArgumentException( Messages.getString("AbstractImporter.3") + filename ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("AbstractImporter.2") + filename ); 
 		}
 		ext = ext.toUpperCase();
 		if( getExtensionMap().get( ext ) == null ) {
-			throw new IllegalArgumentException( ext + Messages.getString("AbstractImporter.4") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( ext + " " + Messages.getString("AbstractImporter.4") ); 
 		}
 		return ext;
 	}

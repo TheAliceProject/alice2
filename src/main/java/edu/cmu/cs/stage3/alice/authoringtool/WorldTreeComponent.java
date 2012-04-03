@@ -349,7 +349,6 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 							}
 					} else
 						return true;
-						
 				} else if( child.getParent() == null ) {
 					// 
 					return true;
@@ -410,12 +409,10 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 
 	// avoid editing on drag... and other mouse enhancements
 	public class CustomTreeUI extends javax.swing.plaf.metal.MetalTreeUI {
-		
 		protected java.awt.event.MouseListener createMouseListener() {
 			return new CustomMouseHandler();
 		}
 
-		
 		protected boolean startEditing( javax.swing.tree.TreePath path, java.awt.event.MouseEvent ev ) {
 			boolean result = super.startEditing( path, ev );
 			if( result ) {
@@ -431,7 +428,6 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 			protected long clickDelay = 300;
 			protected double clickDistance = 8.0;
 
-			
 			public void mousePressed( java.awt.event.MouseEvent ev ) {
 				pressTime = ev.getWhen();
 				pressPoint = ev.getPoint();
@@ -451,7 +447,6 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 				}
 			}
 
-			
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {
 				if( (tree != null) && tree.isEnabled() ) {
 					tree.requestFocus();
@@ -511,7 +506,6 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 	protected final java.awt.event.MouseListener worldTreeMouseListener = new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
 		protected java.util.Vector defaultStructure;
 
-		
 		protected void popupResponse( java.awt.event.MouseEvent ev ) {
 			javax.swing.JTree tree = (javax.swing.JTree)ev.getSource();
 			javax.swing.tree.TreePath path = tree.getPathForLocation( ev.getX(), ev.getY() );
@@ -588,7 +582,6 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 	public static class HackBorder extends AbstractBorder { // a hack to simulate a Metal ScrollPane border
 	   private static final Insets insets = new Insets( 1, 1, 2, 2 );
 
-		
 		public void paintBorder( Component c, Graphics g, int x, int y, int w, int h ) {
 			g.translate( x, y );
 
@@ -606,7 +599,6 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 			g.translate( -x, -y );
 		}
 
-		
 		public Insets getBorderInsets( Component c ) {
 			return insets;
 		}

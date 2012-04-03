@@ -32,14 +32,14 @@ import edu.cmu.cs.stage3.alice.scenegraph.event.HierarchyListener;
  * @author Dennis Cosgrove
  */
 public abstract class Component extends Element {
-	public static final Property PARENT_PROPERTY = new Property( Component.class, "PARENT" ); //$NON-NLS-1$
+	public static final Property PARENT_PROPERTY = new Property( Component.class, "PARENT" ); 
 	private Container m_parent = null;
 	private java.util.Vector m_absoluteTransformationListeners = new java.util.Vector();
 	private java.util.Vector m_hierarchyListeners = new java.util.Vector();
 	
 	protected void releasePass1() {
 		if( m_parent != null ) {
-			warnln( Messages.getString("Component.1") + this + Messages.getString("Component.2") + m_parent + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Component.1") + this + Messages.getString("Component.2") + m_parent + "." );   
 			setParent( null );
 		}
 		super.releasePass1();
@@ -50,7 +50,7 @@ public abstract class Component extends Element {
 		enum0 = m_absoluteTransformationListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			AbsoluteTransformationListener absoluteTransformationListener = (AbsoluteTransformationListener)enum0.nextElement();
-			warnln( Messages.getString("Component.4") + this + Messages.getString("Component.5") + absoluteTransformationListener + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Component.4") + this + Messages.getString("Component.5") + absoluteTransformationListener + "." );   
 		}
 		//todo
 		//m_absoluteTransformationListeners = null;
@@ -59,7 +59,7 @@ public abstract class Component extends Element {
 		enum0 = m_hierarchyListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			HierarchyListener hierarchyListener = (HierarchyListener)enum0.nextElement();
-			warnln( Messages.getString("Component.7") + this + Messages.getString("Component.8") + hierarchyListener + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Component.7") + this + Messages.getString("Component.8") + hierarchyListener + "." );   
 		}
 		//todo
 		//m_hierarchyListeners = null;
@@ -142,7 +142,7 @@ public abstract class Component extends Element {
 	}
 	protected void onAbsoluteTransformationChange() {
 		if( isReleased() ) {
-			warnln( Messages.getString("Component.10") + this + "." ); //$NON-NLS-1$ //$NON-NLS-2$
+			warnln( Messages.getString("Component.10") + this + "." );  
 		} else {
 			onAbsoluteTransformationChange( new AbsoluteTransformationEvent( this ) );
 		}
@@ -168,7 +168,7 @@ public abstract class Component extends Element {
 	}
 	protected void onHierarchyChange() {
 		if( isReleased() ) {
-			warnln( Messages.getString("Component.12") + this + "." ); //$NON-NLS-1$ //$NON-NLS-2$
+			warnln( Messages.getString("Component.12") + this + "." );  
 		} else {
 			//if( this instanceof Camera ) {
 			//	Thread.dumpStack();

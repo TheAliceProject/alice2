@@ -29,7 +29,6 @@ import edu.cmu.cs.stage3.alice.core.property.SetProperty;
 public abstract class SetBooleanQuestion extends edu.cmu.cs.stage3.alice.core.question.BooleanQuestion {
 	public final SetProperty set = new SetProperty( this, "set", null );
 	protected abstract boolean getValue( Set set );
-	
 	public Object getValue() {
 		Set setValue = set.getSetValue();
 		if( setValue!=null ) {

@@ -31,8 +31,8 @@ import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 
 //todo: absolute transformation listener
 public abstract class TransformResponse extends edu.cmu.cs.stage3.alice.core.Response {
-	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); //$NON-NLS-1$
-	public final ReferenceFrameProperty asSeenBy = new ReferenceFrameProperty( this, "asSeenBy", null ); //$NON-NLS-1$
+	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); 
+	public final ReferenceFrameProperty asSeenBy = new ReferenceFrameProperty( this, "asSeenBy", null ); 
 	public abstract class RuntimeTransformResponse extends RuntimeResponse {
 		protected Transformable m_subject;
 		protected ReferenceFrame m_asSeenBy;
@@ -42,7 +42,7 @@ public abstract class TransformResponse extends edu.cmu.cs.stage3.alice.core.Res
 			m_subject = TransformResponse.this.subject.getTransformableValue();
 			m_asSeenBy = TransformResponse.this.asSeenBy.getReferenceFrameValue();
             if( m_subject == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TransformResponse.2"), getCurrentStack(), TransformResponse.this.subject ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TransformResponse.2"), getCurrentStack(), TransformResponse.this.subject ); 
             }
 		}
 	}

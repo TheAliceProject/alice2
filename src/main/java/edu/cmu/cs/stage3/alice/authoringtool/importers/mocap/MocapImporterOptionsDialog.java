@@ -57,7 +57,6 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
             obj = o;
         }
 
-        
 		public String toString() {
             if (text!=null)
                 return text;
@@ -84,8 +83,8 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
     public Element selectedPart = null;
     public double fps = 30;
     public int nativeFPS = 60;
-    public String asfFile = "etc/Skeleton.asf"; //$NON-NLS-1$
-    public File ASFPath=new File(""); //$NON-NLS-1$
+    public String asfFile = "etc/Skeleton.asf"; 
+    public File ASFPath=new File(""); 
     public boolean ok = false;
 
 
@@ -104,7 +103,7 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
         DefaultListModel listOfStuff = new DefaultListModel();
         partsList.setModel(listOfStuff);
 
-        listOfStuff.addElement(new ElementOrNullWrapper(null,Messages.getString("MocapImporterOptionsDialog.2"))); //$NON-NLS-1$
+        listOfStuff.addElement(new ElementOrNullWrapper(null,Messages.getString("MocapImporterOptionsDialog.2"))); 
 
         Sandbox[] possibilities = (Sandbox[])AuthoringTool.getHack().getWorld().sandboxes.getArrayValue();
 
@@ -113,33 +112,33 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
         }
         partsList.setSelectedIndex(0);
 
-        aliceFPSCombo.insertItemAt("15",0); //$NON-NLS-1$
-        aliceFPSCombo.insertItemAt("30",1); //$NON-NLS-1$
+        aliceFPSCombo.insertItemAt("15",0); 
+        aliceFPSCombo.insertItemAt("30",1); 
         aliceFPSCombo.setSelectedIndex(1);
 
-        nativeFPSCombo.insertItemAt("60",0); //$NON-NLS-1$
-        nativeFPSCombo.insertItemAt("120",1); //$NON-NLS-1$
+        nativeFPSCombo.insertItemAt("60",0); 
+        nativeFPSCombo.insertItemAt("120",1); 
         nativeFPSCombo.setSelectedIndex(0);
     }
 
     private void jbInit() throws Exception {
         this.getContentPane().setLayout(gridBagLayout1);
         partsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        promptLabel.setText(Messages.getString("MocapImporterOptionsDialog.7")); //$NON-NLS-1$
+        promptLabel.setText(Messages.getString("MocapImporterOptionsDialog.7")); 
         this.setModal(true);
-        this.setTitle(Messages.getString("MocapImporterOptionsDialog.8")); //$NON-NLS-1$
-        jLabel1.setText(Messages.getString("MocapImporterOptionsDialog.9")); //$NON-NLS-1$
-        jLabel2.setText(Messages.getString("MocapImporterOptionsDialog.10")); //$NON-NLS-1$
-        okButton.setText("OK"); //$NON-NLS-1$
+        this.setTitle(Messages.getString("MocapImporterOptionsDialog.8")); 
+        jLabel1.setText(Messages.getString("MocapImporterOptionsDialog.9")); 
+        jLabel2.setText(Messages.getString("MocapImporterOptionsDialog.10")); 
+        okButton.setText("OK"); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 okButton_actionPerformed(e);
             }
         });
-        jLabel3.setText(Messages.getString("MocapImporterOptionsDialog.12")); //$NON-NLS-1$
+        jLabel3.setText(Messages.getString("MocapImporterOptionsDialog.12")); 
         jSkelFile.setPreferredSize(new Dimension(100, 21));
-        jSkelFile.setText("etc/Skeleton.asf"); //$NON-NLS-1$
-        jFileBoxButton.setText("..."); //$NON-NLS-1$
+        jSkelFile.setText("etc/Skeleton.asf"); 
+        jFileBoxButton.setText("..."); 
         jFileBoxButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jFileBoxButton_actionPerformed(e);
@@ -147,7 +146,7 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
         });
         nativeFPSCombo.setEditable(true);
         aliceFPSCombo.setEditable(true);
-        cancelButton.setText(Messages.getString("MocapImporterOptionsDialog.15")); //$NON-NLS-1$
+        cancelButton.setText(Messages.getString("MocapImporterOptionsDialog.15")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cancelButton_actionPerformed(e);
@@ -227,19 +226,17 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
         JFileChooser chooser = new JFileChooser();
 
         class ASFFileFilter extends FileFilter {
-            
 			public boolean accept (File f) {
                 if (f.isDirectory())
                     return true;
-                if (f.toString().toLowerCase().endsWith(".asf")) //$NON-NLS-1$
+                if (f.toString().toLowerCase().endsWith(".asf")) 
                     return true;
                 else
                     return false;
             }
 
-            
 			public String getDescription() {
-                return "ASF - Acclaim Skeleton File"; //$NON-NLS-1$
+                return "ASF - Acclaim Skeleton File"; 
             }
         }
         chooser.setFileFilter(new ASFFileFilter());

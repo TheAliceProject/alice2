@@ -33,10 +33,10 @@ import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 
 public class PropertyAnimation extends Animation {
-	public final OverridableElementProperty element = new OverridableElementProperty( this, "element", null ); //$NON-NLS-1$
-	public final StringProperty propertyName = new StringProperty( this, "propertyName", null ); //$NON-NLS-1$
-	public final ValueProperty value = new ValueProperty( this, "value", null ); //$NON-NLS-1$
-	public final ObjectProperty howMuch = new ObjectProperty( this, "howMuch", edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_PARTS, edu.cmu.cs.stage3.util.HowMuch.class ); //$NON-NLS-1$
+	public final OverridableElementProperty element = new OverridableElementProperty( this, "element", null ); 
+	public final StringProperty propertyName = new StringProperty( this, "propertyName", null ); 
+	public final ValueProperty value = new ValueProperty( this, "value", null ); 
+	public final ObjectProperty howMuch = new ObjectProperty( this, "howMuch", edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_PARTS, edu.cmu.cs.stage3.util.HowMuch.class ); 
 	private void updateOverrideValueClasses() {
 		Class elementOverrideValueClass = null;
 		Class valueOverrideValueClass = null;
@@ -114,13 +114,13 @@ public class PropertyAnimation extends Animation {
                             m_howMuch = edu.cmu.cs.stage3.util.HowMuch.INSTANCE;
                         }
                     } else {
-                        throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, m_propertyName, m_element + Messages.getString("PropertyAnimation.4") + m_propertyName ); //$NON-NLS-1$
+                        throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, m_propertyName, m_element + Messages.getString("PropertyAnimation.4") + m_propertyName ); 
                     }
                 } else {
-                    throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, null, Messages.getString("PropertyAnimation.5") ); //$NON-NLS-1$
+                    throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, null, Messages.getString("PropertyAnimation.5") ); 
                 }
 			} else {
-				throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.element, null, Messages.getString("PropertyAnimation.6") ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.element, null, Messages.getString("PropertyAnimation.6") ); 
 			}
 		}
 		

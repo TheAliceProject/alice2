@@ -38,7 +38,6 @@ public class MainParallelResponsePanel extends MainCompositeResponsePanel{
         super();
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoTogether");
     }

@@ -40,29 +40,29 @@ public class Dummy extends Model {
 		if( s_sgITA == null ) {
 			s_sgITA = new edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray();
 			try {
-				java.io.InputStream is = Dummy.class.getResourceAsStream( "axesIndices.bin" ); //$NON-NLS-1$
+				java.io.InputStream is = Dummy.class.getResourceAsStream( "axesIndices.bin" ); 
 				s_sgITA.setIndices( edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray.loadIndices( is ) );
 				is.close();
 			} catch( java.io.IOException ioe ) {
-				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.1") ); //$NON-NLS-1$
+				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.1") ); 
 			}
 			try {
-				java.io.InputStream is = Dummy.class.getResourceAsStream( "axesVertices.bin" ); //$NON-NLS-1$
+				java.io.InputStream is = Dummy.class.getResourceAsStream( "axesVertices.bin" ); 
 				s_sgITA.setVertices( VertexGeometry.loadVertices( is ) );
 				is.close();
 			} catch( java.io.IOException ioe ) {
-				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.3") ); //$NON-NLS-1$
+				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.3") ); 
 			}
 		}
 		if( s_sgTexture == null ) {
 			s_sgTexture = new edu.cmu.cs.stage3.alice.scenegraph.TextureMap();
 			try {
-				java.io.InputStream is = Dummy.class.getResourceAsStream( "axesImage.png" ); //$NON-NLS-1$
-				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load( "png", is ); //$NON-NLS-1$
+				java.io.InputStream is = Dummy.class.getResourceAsStream( "axesImage.png" ); 
+				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load( "png", is ); 
 				is.close();
 				s_sgTexture.setImage( image );
 			} catch( java.io.IOException ioe ) {
-				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.6") ); //$NON-NLS-1$
+				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.6") ); 
 			}
 		}
 		getSceneGraphVisual().setGeometry( s_sgITA );

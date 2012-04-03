@@ -66,7 +66,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 	public DeleteContentPane( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool ) {
 		DeleteContentPane.authoringTool = authoringTool;
 		jbInit();
-		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/error.gif" ); //$NON-NLS-1$
+		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/error.gif" ); 
 		errorIconPanel.setImage( java.awt.Toolkit.getDefaultToolkit().createImage( errorImageResources ) );
 		iconPanel.add( errorIconPanel, java.awt.BorderLayout.CENTER );
 
@@ -83,7 +83,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 
 	
 	public String getTitle() {
-		return Messages.getString("DeleteContentPane.1"); //$NON-NLS-1$
+		return Messages.getString("DeleteContentPane.1"); 
 	}
 	
 	public void addOKActionListener( java.awt.event.ActionListener l ) {
@@ -121,7 +121,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 			edu.cmu.cs.stage3.alice.core.event.ChildrenListener[] childrenListeners = elements[i].getChildrenListeners();
 			for (int j=0; j<childrenListeners.length; j++){
 				if (childrenListeners[j] == this){
-					System.out.println(Messages.getString("DeleteContentPane.2")+elements[i]); //$NON-NLS-1$
+					System.out.println(Messages.getString("DeleteContentPane.2")+elements[i]); 
 				}
 			}
 			edu.cmu.cs.stage3.alice.core.Property[] properties = elements[i].getProperties();
@@ -129,7 +129,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 				edu.cmu.cs.stage3.alice.core.event.PropertyListener[] propertyListeners = properties[j].getPropertyListeners();
 				for (int k=0; k<propertyListeners.length; k++){
 					if (propertyListeners[k] == this){
-						System.out.println(Messages.getString("DeleteContentPane.3")+properties[j]); //$NON-NLS-1$
+						System.out.println(Messages.getString("DeleteContentPane.3")+properties[j]); 
 					}
 				}
 			}
@@ -297,15 +297,15 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 				okayButton.setEnabled( false );
 				removeReferenceButton.setEnabled( true );
 				removeAllReferenceButton.setEnabled( true );
-				messageArea.setText( elementRepr + Messages.getString("DeleteContentPane.4") + elementRepr + ".\n\n" + //$NON-NLS-1$ //$NON-NLS-2$
-											Messages.getString("DeleteContentPane.6") ); //$NON-NLS-1$
+				messageArea.setText( elementRepr + Messages.getString("DeleteContentPane.4") + elementRepr + ".\n\n" +  
+											Messages.getString("DeleteContentPane.6") ); 
 				referencesList.setSelectedIndex( 0 );
 			} else {
 				okayButton.setEnabled( true );
 				removeReferenceButton.setEnabled( false );
 				removeAllReferenceButton.setEnabled( false );
-				messageArea.setText( Messages.getString("DeleteContentPane.7") + elementRepr + "." ); //$NON-NLS-1$ //$NON-NLS-2$
-				setDialogTitle( Messages.getString("DeleteContentPane.0") ); //$NON-NLS-1$
+				messageArea.setText( Messages.getString("DeleteContentPane.7") + elementRepr + "." );  
+				setDialogTitle( Messages.getString("DeleteContentPane.0") ); 
 			}
 		}
 	}
@@ -318,12 +318,12 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 			edu.cmu.cs.stage3.alice.core.World world = authoringTool.getWorld();
 	//		System.out.println("source is: "+source);
 			if( source == world ) {
-				highlightID = "details<>:viewController<>:property<" + reference.getProperty().getName() + ">";				 //$NON-NLS-1$ //$NON-NLS-2$
+				highlightID = "details<>:viewController<>:property<" + reference.getProperty().getName() + ">";				  
 			}
 	
 			if( highlightID == null ) {
 				if( source instanceof edu.cmu.cs.stage3.alice.core.Model ) {
-					highlightID = "details<" + source.getKey( world ) + ">:viewController<>:property<" + reference.getProperty().getName() + ">";						 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					highlightID = "details<" + source.getKey( world ) + ">:viewController<>:property<" + reference.getProperty().getName() + ">";						   
 				}
 			}
 	
@@ -332,17 +332,17 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					edu.cmu.cs.stage3.alice.core.Element sourceParent = source.getParent();
 		//			System.out.println("parent: "+sourceParent);
 					if (sourceParent == world){
-						highlightID = "details<>:viewController<>:variable<" + reference.getProperty().getOwner().getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						highlightID = "details<>:viewController<>:variable<" + reference.getProperty().getOwner().getKey(world) + ">";  
 					}
 					else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.Model){
-						highlightID = "details<" + sourceParent.getKey( world ) + ">:viewController<>:variable<" + reference.getProperty().getOwner().getKey(sourceParent) + ">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						highlightID = "details<" + sourceParent.getKey( world ) + ">:viewController<>:variable<" + reference.getProperty().getOwner().getKey(sourceParent) + ">";   
 					}
 					else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse || sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse){
 						edu.cmu.cs.stage3.alice.core.Element[] userDefinedResponses = world.getDescendants( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class );
 						for( int i = 0; i < userDefinedResponses.length; i++ ) {
 			//				System.out.println(userDefinedResponses[i]);
 							if( userDefinedResponses[i] == sourceParent || userDefinedResponses[i].isAncestorOf( sourceParent ) ) {
-								highlightID = "editors:element<" + userDefinedResponses[i].getKey( world ) + ">:elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+								highlightID = "editors:element<" + userDefinedResponses[i].getKey( world ) + ">:elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">";    //$NON-NLS-4$
 								break;
 							}
 						}
@@ -351,7 +351,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 							for( int i = 0; i < behaviors.length; i++ ) {
 					//			System.out.println(behaviors[i]);
 								if( behaviors[i].isAncestorOf( sourceParent ) ) {
-									highlightID = "behaviors:elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+									highlightID = "behaviors:elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">";   
 									break;
 								}
 							}
@@ -367,10 +367,10 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.Variable){
 						edu.cmu.cs.stage3.alice.core.Element variableParent = sourceParent.getParent();
 						if (variableParent == world){
-							highlightID = "details<>:viewController<>:variable<" + sourceParent.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+							highlightID = "details<>:viewController<>:variable<" + sourceParent.getKey(world) + ">";  
 						}
 						else if (variableParent instanceof edu.cmu.cs.stage3.alice.core.Model){
-							highlightID = "details<" + variableParent.getKey( world ) + ">:viewController<>:variable<" + sourceParent.getKey(variableParent) + ">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							highlightID = "details<" + variableParent.getKey( world ) + ">:viewController<>:variable<" + sourceParent.getKey(variableParent) + ">";   
 						}
 					}
 	
@@ -381,10 +381,10 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					edu.cmu.cs.stage3.alice.core.Element sourceParent = source.getParent();
 				//	System.out.println("parent: "+sourceParent);
 					if (sourceParent == world){
-						highlightID = "details<>:viewController<>:variable<" + reference.getProperty().getOwner().getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						highlightID = "details<>:viewController<>:variable<" + reference.getProperty().getOwner().getKey(world) + ">";  
 					}
 					else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.Model){
-						highlightID = "details<" + sourceParent.getKey( world ) + ">:viewController<>:variable<" + reference.getProperty().getOwner().getKey(sourceParent) + ">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						highlightID = "details<" + sourceParent.getKey( world ) + ">:viewController<>:variable<" + reference.getProperty().getOwner().getKey(sourceParent) + ">";   
 					}
 	
 				}
@@ -398,7 +398,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 				edu.cmu.cs.stage3.alice.core.Element sourceParent = source.getParent();
 				for( int i = 0; i < userDefinedResponsesAndQuestions.length; i++ ) {
 					if( userDefinedResponsesAndQuestions[i].isAncestorOf( source )) {
-						highlightID = "editors:element<" + userDefinedResponsesAndQuestions[i].getKey( world ) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						highlightID = "editors:element<" + userDefinedResponsesAndQuestions[i].getKey( world ) + ">";  
 						break;
 					}
 				}
@@ -406,7 +406,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					edu.cmu.cs.stage3.alice.core.Element[] behaviors = world.getDescendants( edu.cmu.cs.stage3.alice.core.Behavior.class );
 					for( int i = 0; i < behaviors.length; i++ ) {
 						if( behaviors[i].isAncestorOf( source )) {
-							highlightID = "behaviors"; //$NON-NLS-1$
+							highlightID = "behaviors"; 
 							break;
 						}
 					}
@@ -419,16 +419,16 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					boolean setIt = false;
 					for (int p=0; p<properties.length; p++){
 						if (properties[p].get() == source){
-							highlightID += ":elementTile<" + sourceParent.getKey( world ) + ">:property<"+properties[p].getName()+">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							highlightID += ":elementTile<" + sourceParent.getKey( world ) + ">:property<"+properties[p].getName()+">";   
 							setIt = true;
 						}
 					}
 					if (!setIt){
-						highlightID += ":elementTile<" + source.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						highlightID += ":elementTile<" + source.getKey(world) + ">";  
 					}
 				}
 				else{
-					highlightID += ":elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					highlightID += ":elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">";   
 				}
 				
 		
@@ -459,12 +459,12 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 			String ourName = reference.getReference().name.getStringValue();
 			
 			if( source == world ) {
-				highlightID = Messages.getString("DeleteContentPane.48") + reference.getProperty().getName()+Messages.getString("DeleteContentPane.49")+ourName;				 //$NON-NLS-1$ //$NON-NLS-2$
+				highlightID = Messages.getString("DeleteContentPane.48") + reference.getProperty().getName()+Messages.getString("DeleteContentPane.49")+ourName;				  
 			}
 
 			if( highlightID == null ) {
 				if( source instanceof edu.cmu.cs.stage3.alice.core.Model ) {
-					highlightID = Messages.getString("DeleteContentPane.50")+source.name.getStringValue() + Messages.getString("DeleteContentPane.51") + reference.getProperty().getName()+Messages.getString("DeleteContentPane.52")+ourName;						 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					highlightID = Messages.getString("DeleteContentPane.50")+source.name.getStringValue() + Messages.getString("DeleteContentPane.51") + reference.getProperty().getName()+Messages.getString("DeleteContentPane.52")+ourName;						   
 				}
 			}
 
@@ -472,17 +472,17 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 				if( source instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 					edu.cmu.cs.stage3.alice.core.Element sourceParent = source.getParent();
 					if (sourceParent == world){
-						highlightID = Messages.getString("DeleteContentPane.53") + reference.getProperty().getOwner().name.getStringValue()+Messages.getString("DeleteContentPane.54")+ourName; //$NON-NLS-1$ //$NON-NLS-2$
+						highlightID = Messages.getString("DeleteContentPane.53") + reference.getProperty().getOwner().name.getStringValue()+Messages.getString("DeleteContentPane.54")+ourName;  
 					}
 					else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.Model){
-						highlightID = Messages.getString("DeleteContentPane.55")+sourceParent.name.getStringValue() + Messages.getString("DeleteContentPane.56") + reference.getProperty().getOwner().name.getStringValue()+Messages.getString("DeleteContentPane.57")+ourName; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						highlightID = Messages.getString("DeleteContentPane.55")+sourceParent.name.getStringValue() + Messages.getString("DeleteContentPane.56") + reference.getProperty().getOwner().name.getStringValue()+Messages.getString("DeleteContentPane.57")+ourName;   
 					}
 					else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse || sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse){
 						edu.cmu.cs.stage3.alice.core.Element[] userDefinedResponses = world.getDescendants( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class );
 						for( int i = 0; i < userDefinedResponses.length; i++ ) {
 						//	System.out.println(userDefinedResponses[i]);
 							if( userDefinedResponses[i] == sourceParent || userDefinedResponses[i].isAncestorOf( sourceParent ) ) {
-								highlightID = Messages.getString("DeleteContentPane.58") + userDefinedResponses[i].getKey() + Messages.getString("DeleteContentPane.59") + source.getRepr()+Messages.getString("DeleteContentPane.60")+ourName; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+								highlightID = Messages.getString("DeleteContentPane.58") + userDefinedResponses[i].getKey() + Messages.getString("DeleteContentPane.59") + source.getRepr()+Messages.getString("DeleteContentPane.60")+ourName;   
 								break;
 							}
 						}
@@ -491,7 +491,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 							for( int i = 0; i < behaviors.length; i++ ) {
 							//	System.out.println(behaviors[i]);
 								if( behaviors[i].isAncestorOf( sourceParent ) ) {
-									highlightID = Messages.getString("DeleteContentPane.61") + source.getRepr() + Messages.getString("DeleteContentPane.62")+reference.getProperty().getName(); //$NON-NLS-1$ //$NON-NLS-2$
+									highlightID = Messages.getString("DeleteContentPane.61") + source.getRepr() + Messages.getString("DeleteContentPane.62")+reference.getProperty().getName();  
 									break;
 								}
 							}
@@ -506,10 +506,10 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.Variable){
 						edu.cmu.cs.stage3.alice.core.Element variableParent = sourceParent.getParent();
 						if (variableParent == world){
-							highlightID = Messages.getString("DeleteContentPane.63") + sourceParent.name.getStringValue() + Messages.getString("DeleteContentPane.64")+((edu.cmu.cs.stage3.alice.core.Collection)source).getIndexOfChild(reference.getReference())+Messages.getString("DeleteContentPane.65")+ourName; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							highlightID = Messages.getString("DeleteContentPane.63") + sourceParent.name.getStringValue() + Messages.getString("DeleteContentPane.64")+((edu.cmu.cs.stage3.alice.core.Collection)source).getIndexOfChild(reference.getReference())+Messages.getString("DeleteContentPane.65")+ourName;   
 						}
 						else if (variableParent instanceof edu.cmu.cs.stage3.alice.core.Model){
-							highlightID = Messages.getString("DeleteContentPane.66") + variableParent.name.getStringValue() + Messages.getString("DeleteContentPane.67") + sourceParent.name.getStringValue() + Messages.getString("DeleteContentPane.68")+((edu.cmu.cs.stage3.alice.core.Collection)source).getIndexOfChild(reference.getReference())+Messages.getString("DeleteContentPane.69")+ourName; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+							highlightID = Messages.getString("DeleteContentPane.66") + variableParent.name.getStringValue() + Messages.getString("DeleteContentPane.67") + sourceParent.name.getStringValue() + Messages.getString("DeleteContentPane.68")+((edu.cmu.cs.stage3.alice.core.Collection)source).getIndexOfChild(reference.getReference())+Messages.getString("DeleteContentPane.69")+ourName;    //$NON-NLS-4$
 						}
 					}
 
@@ -524,7 +524,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 				edu.cmu.cs.stage3.alice.core.Element sourceParent = source.getParent();
 				for( int i = 0; i < userDefinedResponsesAndQuestions.length; i++ ) {
 					if( userDefinedResponsesAndQuestions[i].isAncestorOf( source )) {
-						highlightID = Messages.getString("DeleteContentPane.70") + userDefinedResponsesAndQuestions[i].getKey() + "\""; //$NON-NLS-1$ //$NON-NLS-2$
+						highlightID = Messages.getString("DeleteContentPane.70") + userDefinedResponsesAndQuestions[i].getKey() + "\"";  
 						break;
 					}
 				}
@@ -532,7 +532,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					edu.cmu.cs.stage3.alice.core.Element[] behaviors = world.getDescendants( edu.cmu.cs.stage3.alice.core.Behavior.class );
 					for( int i = 0; i < behaviors.length; i++ ) {
 						if( behaviors[i].isAncestorOf( source )) {
-							highlightID = Messages.getString("DeleteContentPane.72"); //$NON-NLS-1$
+							highlightID = Messages.getString("DeleteContentPane.72"); 
 							break;
 						}
 					}
@@ -545,16 +545,16 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 					boolean setIt = false;
 					for (int p=0; p<properties.length; p++){
 						if (properties[p].get() == source){
-							highlightID += Messages.getString("DeleteContentPane.73") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(source.getClass()) + Messages.getString("DeleteContentPane.74")+properties[p].getName()+Messages.getString("DeleteContentPane.75")+ourName; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+							highlightID += Messages.getString("DeleteContentPane.73") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(source.getClass()) + Messages.getString("DeleteContentPane.74")+properties[p].getName()+Messages.getString("DeleteContentPane.75")+ourName;   
 							setIt = true;
 						}
 					}
 					if (!setIt){
-						highlightID += ":elementTile<" + source.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						highlightID += ":elementTile<" + source.getKey(world) + ">";  
 					}
 				}
 				else{
-					highlightID += ":elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					highlightID += ":elementTile<" + source.getKey(world) + ">:property<"+reference.getProperty().getName()+">";   
 				}
 			//	System.out.println("made it: "+highlightID);
 	
@@ -701,15 +701,15 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 		border1 = javax.swing.BorderFactory.createEmptyBorder(10,10,10,10);
 		border2 = javax.swing.BorderFactory.createEmptyBorder(0,10,10,10);
 		setLayout(borderLayout1);
-		okayButton.setText(Messages.getString("DeleteContentPane.81")); //$NON-NLS-1$
-		removeReferenceButton.setText(Messages.getString("DeleteContentPane.82")); //$NON-NLS-1$
+		okayButton.setText(Messages.getString("DeleteContentPane.81")); 
+		removeReferenceButton.setText(Messages.getString("DeleteContentPane.82")); 
 		removeReferenceButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				removeReferenceButton_actionPerformed(e);
 			}
 		});
 		
-		removeAllReferenceButton.setText(Messages.getString("DeleteContentPane.83")); //$NON-NLS-1$
+		removeAllReferenceButton.setText(Messages.getString("DeleteContentPane.83")); 
 		removeAllReferenceButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				removeAllReferenceButton_actionPerformed(e);
@@ -720,11 +720,11 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 		iconPanel.setLayout(borderLayout2);
 		messagePanel.setLayout(borderLayout3);
 		referencesPanel.setLayout(borderLayout4);
-		messageArea.setText(Messages.getString("DeleteContentPane.84")); //$NON-NLS-1$
+		messageArea.setText(Messages.getString("DeleteContentPane.84")); 
 		mainPanel.setBorder(border1);
 		buttonPanel.setBorder(border2);
 		buttonPanel.setLayout(gridBagLayout2);
-		cancelButton.setText(Messages.getString("DeleteContentPane.85")); //$NON-NLS-1$
+		cancelButton.setText(Messages.getString("DeleteContentPane.85")); 
 		referencesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		add(buttonPanel, java.awt.BorderLayout.SOUTH);
 		add(mainPanel, java.awt.BorderLayout.CENTER);

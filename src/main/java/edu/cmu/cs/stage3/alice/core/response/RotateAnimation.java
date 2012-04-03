@@ -42,11 +42,11 @@ public abstract class RotateAnimation extends DirectionAmountTransformAnimation 
 			m_amount = RotateAnimation.this.amount.doubleValue();
 			m_axis = getAxis( directionValue );
 			if( m_axis == null ) {
-				StringBuffer sb = new StringBuffer( Messages.getString("RotateAnimation.0") ); //$NON-NLS-1$
+				StringBuffer sb = new StringBuffer( Messages.getString("RotateAnimation.0") ); 
 				if( directionValue != null ) {
 					sb.append( directionValue.getRepr() );
 				} else {
-					sb.append( Messages.getString("RotateAnimation.1") ); //$NON-NLS-1$
+					sb.append( Messages.getString("RotateAnimation.1") ); 
 				}
 				sb.append( '.' );
 				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( sb.toString(), null, RotateAnimation.this.direction );

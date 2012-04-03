@@ -27,7 +27,6 @@ package edu.cmu.cs.stage3.alice.authoringtool.importers;
  * @author Jason Pratt
  */
 public class MediaImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractImporter {
-	
 	public java.util.Map getExtensionMap() {
 //		java.util.HashMap knownCodecPrettyNames = new java.util.HashMap();
 //		knownCodecPrettyNames.put( "AUDIO.XMP3", "Mpeg layer 3" );
@@ -58,7 +57,6 @@ public class MediaImporter extends edu.cmu.cs.stage3.alice.authoringtool.Abstrac
 		return map;
 	}
 
-	
 	protected edu.cmu.cs.stage3.alice.core.Element load( java.io.InputStream istream, String ext ) throws java.io.IOException {
 		edu.cmu.cs.stage3.media.DataSource dataSource = edu.cmu.cs.stage3.media.Manager.createDataSource( istream, ext );
 		edu.cmu.cs.stage3.alice.core.Sound sound = new edu.cmu.cs.stage3.alice.core.Sound();

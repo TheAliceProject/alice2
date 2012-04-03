@@ -80,22 +80,22 @@ public class ItemChooser extends JPanel {
 		for (int i = 0; i < choiceNodeList.getLength(); i++) {
 			Node choiceNode = choiceNodeList.item(i);
 
-			if (choiceNode.getNodeName().equals("addTexture")) { //$NON-NLS-1$
+			if (choiceNode.getNodeName().equals("addTexture")) { 
 				CommandInfo cmdInfo = new CommandInfo();
-				cmdInfo.id = "addTexture"; //$NON-NLS-1$
+				cmdInfo.id = "addTexture"; 
 				NamedNodeMap attrs = choiceNode.getAttributes();
 				for (int j = 0; j < attrs.getLength(); j++) {
 					Node attr = attrs.item(j);
-					if (attr.getNodeName().equals("icon")) { //$NON-NLS-1$
-						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					if (attr.getNodeName().equals("icon")) { 
+						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						try {
 							ImageIcon icon = new ImageIcon(PersonBuilder.class.getResource(imageFileName), imageFileName);
 							cmdInfo.imageIcon = icon;
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-					} else if (attr.getNodeName().equals("texture")) { //$NON-NLS-1$
-						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("texture")) { 
+						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Image img = toolkit.createImage(PersonBuilder.class.getResource(imageFileName));
 						try {
 							java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
@@ -104,33 +104,33 @@ public class ItemChooser extends JPanel {
 						} catch (java.lang.InterruptedException ie) {
 						}
 						cmdInfo.texture = img;
-					} else if (attr.getNodeName().equals("layer")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("layer")) { 
 						String layerString = attr.getNodeValue();
 						int layer = Integer.parseInt(layerString);
 						cmdInfo.level = layer;
-					} else if (attr.getNodeName().equals("useAltModel")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("useAltModel")) { 
 						String altModelName = attr.getNodeValue();
 						cmdInfo.altModelName = altModelName;
 					}
 				}
 				commandInfos.addElement(cmdInfo);
 
-			} else if (choiceNode.getNodeName().equals("setModel")) { //$NON-NLS-1$
+			} else if (choiceNode.getNodeName().equals("setModel")) { 
 				CommandInfo cmdInfo = new CommandInfo();
-				cmdInfo.id = "setModel"; //$NON-NLS-1$
+				cmdInfo.id = "setModel"; 
 				NamedNodeMap attrs = choiceNode.getAttributes();
 				for (int j = 0; j < attrs.getLength(); j++) {
 					Node attr = attrs.item(j);
-					if (attr.getNodeName().equals("icon")) { //$NON-NLS-1$
-						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					if (attr.getNodeName().equals("icon")) { 
+						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						try {
 							ImageIcon icon = new ImageIcon(PersonBuilder.class.getResource(imageFileName), imageFileName);
 							cmdInfo.imageIcon = icon;
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-					} else if (attr.getNodeName().equals("model")) { //$NON-NLS-1$
-						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("model")) { 
+						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Model part = null;
 						try {
 							part = (Model) Element.load(PersonBuilder.class.getResource(modelString), null);
@@ -143,11 +143,11 @@ public class ItemChooser extends JPanel {
 						cmdInfo.model = part;
 						cmdInfo.modelFactory = part.createCopyFactory();
 						cmdInfo.modelString = modelString;
-					} else if (attr.getNodeName().equals("parent")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("parent")) { 
 						String parentString = attr.getNodeValue();
 						cmdInfo.parentString = parentString;
-					} else if (attr.getNodeName().equals("altModel")) { //$NON-NLS-1$
-						String altModelName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("altModel")) { 
+						String altModelName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Model altModel = null;
 						try {
 							altModel = (Model) Element.load(PersonBuilder.class.getResource(altModelName), null);
@@ -165,18 +165,18 @@ public class ItemChooser extends JPanel {
 
 				commandInfos.addElement(cmdInfo);
 
-			} else if (choiceNode.getNodeName().equals("addModelAndTexture")) { //$NON-NLS-1$
+			} else if (choiceNode.getNodeName().equals("addModelAndTexture")) { 
 				CommandInfo cmdInfo = new CommandInfo();
-				cmdInfo.id = "addModelAndTexture"; //$NON-NLS-1$
+				cmdInfo.id = "addModelAndTexture"; 
 				NamedNodeMap attrs = choiceNode.getAttributes();
 				for (int j = 0; j < attrs.getLength(); j++) {
 					Node attr = attrs.item(j);
-					if (attr.getNodeName().equals("icon")) { //$NON-NLS-1$
-						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					if (attr.getNodeName().equals("icon")) { 
+						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						ImageIcon icon = new ImageIcon(PersonBuilder.class.getResource(imageFileName), imageFileName);
 						cmdInfo.imageIcon = icon;
-					} else if (attr.getNodeName().equals("model")) { //$NON-NLS-1$
-						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("model")) { 
+						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Model part = null;
 						try {
 							part = (Model) Element.load(PersonBuilder.class.getResource(modelString), null);
@@ -189,11 +189,11 @@ public class ItemChooser extends JPanel {
 						cmdInfo.model = part;
 						cmdInfo.modelFactory = part.createCopyFactory();
 						cmdInfo.modelString = modelString;
-					} else if (attr.getNodeName().equals("parent")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("parent")) { 
 						String parentString = attr.getNodeValue();
 						cmdInfo.parentString = parentString;
-					} else if (attr.getNodeName().equals("texture")) { //$NON-NLS-1$
-						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("texture")) { 
+						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Image img = toolkit.createImage(PersonBuilder.class.getResource(imageFileName));
 						try {
 							java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
@@ -202,34 +202,34 @@ public class ItemChooser extends JPanel {
 						} catch (java.lang.InterruptedException ie) {
 						}
 						cmdInfo.texture = img;
-					} else if (attr.getNodeName().equals("layer")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("layer")) { 
 						String layerString = attr.getNodeValue();
 						int layer = Integer.parseInt(layerString);
 						cmdInfo.level = layer;
-					} else if (attr.getNodeName().equals("useAltModel")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("useAltModel")) { 
 						String altModelName = attr.getNodeValue();
 						cmdInfo.altModelName = altModelName;
-					} else if (attr.getNodeName().equals("x")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("x")) { 
 						cmdInfo.x = Double.parseDouble(attr.getNodeValue());
-					} else if (attr.getNodeName().equals("y")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("y")) { 
 						cmdInfo.y = Double.parseDouble(attr.getNodeValue());
-					} else if (attr.getNodeName().equals("z")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("z")) { 
 						cmdInfo.z = Double.parseDouble(attr.getNodeValue());
 					}
 				}
 				commandInfos.addElement(cmdInfo);
-			} else if (choiceNode.getNodeName().equals("setMultipleModelsAndTexture")) { //$NON-NLS-1$
+			} else if (choiceNode.getNodeName().equals("setMultipleModelsAndTexture")) { 
 				CommandInfo cmdInfo = new CommandInfo();
-				cmdInfo.id = "setMultipleModelsAndTexture"; //$NON-NLS-1$
+				cmdInfo.id = "setMultipleModelsAndTexture"; 
 				NamedNodeMap attrs = choiceNode.getAttributes();
 				for (int j = 0; j < attrs.getLength(); j++) {
 					Node attr = attrs.item(j);
-					if (attr.getNodeName().equals("icon")) { //$NON-NLS-1$
-						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					if (attr.getNodeName().equals("icon")) { 
+						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						ImageIcon icon = new ImageIcon(PersonBuilder.class.getResource(imageFileName), imageFileName);
 						cmdInfo.imageIcon = icon;
-					} else if (attr.getNodeName().equals("model1")) { //$NON-NLS-1$
-						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("model1")) { 
+						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Model part = null;
 						try {
 							part = (Model) Element.load(PersonBuilder.class.getResource(modelString), null);
@@ -242,11 +242,11 @@ public class ItemChooser extends JPanel {
 						cmdInfo.model = part;
 						cmdInfo.modelFactory = part.createCopyFactory();
 						cmdInfo.modelString = modelString;
-					} else if (attr.getNodeName().equals("parent1")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("parent1")) { 
 						String parentString = attr.getNodeValue();
 						cmdInfo.parentString = parentString;
-					} else if (attr.getNodeName().equals("model2")) { //$NON-NLS-1$
-						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("model2")) { 
+						String modelString = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Model part = null;
 						try {
 							part = (Model) Element.load(PersonBuilder.class.getResource(modelString), null);
@@ -259,11 +259,11 @@ public class ItemChooser extends JPanel {
 						cmdInfo.altModel = part;
 						cmdInfo.altModelFactory = part.createCopyFactory();
 						//cmdInfo.altModelName = modelString;
-					} else if (attr.getNodeName().equals("parent2")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("parent2")) { 
 						String parentString = attr.getNodeValue();
 						cmdInfo.altParentString = parentString;
-					} else if (attr.getNodeName().equals("texture")) { //$NON-NLS-1$
-						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("texture")) { 
+						String imageFileName = XMLDirectoryUtilities.getPath(dirNode) + "/" + attr.getNodeValue(); 
 						Image img = toolkit.createImage(PersonBuilder.class.getResource(imageFileName));
 						try {
 							java.awt.MediaTracker tracker = new java.awt.MediaTracker(this);
@@ -272,7 +272,7 @@ public class ItemChooser extends JPanel {
 						} catch (java.lang.InterruptedException ie) {
 						}
 						cmdInfo.texture = img;
-					} else if (attr.getNodeName().equals("layer")) { //$NON-NLS-1$
+					} else if (attr.getNodeName().equals("layer")) { 
 						String layerString = attr.getNodeValue();
 						int layer = Integer.parseInt(layerString);
 						cmdInfo.level = layer;
@@ -316,9 +316,9 @@ public class ItemChooser extends JPanel {
 
 		Vector xmlFiles = XMLDirectoryUtilities.getXMLURLs(itemsNode);
 		if (xmlFiles.size() == 0) {
-			System.out.println(Messages.getString("ItemChooser.44")); //$NON-NLS-1$
+			System.out.println(Messages.getString("ItemChooser.44")); 
 		} else if (xmlFiles.size() > 1) {
-			System.out.println(Messages.getString("ItemChooser.45")); //$NON-NLS-1$
+			System.out.println(Messages.getString("ItemChooser.45")); 
 		} else {
 			fileURL = (java.net.URL) xmlFiles.elementAt(0);
 		}
@@ -330,11 +330,11 @@ public class ItemChooser extends JPanel {
 	private void currentLosingFocus() {
 		if ((index >= 0) && (index < commandInfos.size())) {
 			CommandInfo currentInfo = (CommandInfo) commandInfos.elementAt(index);
-			if ((currentInfo.id.equals("addTexture")) && (currentInfo.altModelName != null)) { //$NON-NLS-1$
+			if ((currentInfo.id.equals("addTexture")) && (currentInfo.altModelName != null)) { 
 				modelWrapper.switchToOrigModel(currentInfo.altModelName);
-			} else if (currentInfo.id.equals("addTexture")) { //$NON-NLS-1$
+			} else if (currentInfo.id.equals("addTexture")) { 
 				modelWrapper.clearLevel(currentInfo.level);
-			} else if (currentInfo.id.equals("addModelAndTexture")) { //$NON-NLS-1$
+			} else if (currentInfo.id.equals("addModelAndTexture")) { 
 				// remove model
 				modelWrapper.removeModel(currentInfo.model.name.getStringValue());
 
@@ -353,15 +353,15 @@ public class ItemChooser extends JPanel {
 			if ((index >= 0) && (index < commandInfos.size())) {
 				CommandInfo currentInfo = (CommandInfo) commandInfos.elementAt(index);
 				itemPicture.setIcon(currentInfo.imageIcon);
-				if (currentInfo.id.equals("addTexture")) { //$NON-NLS-1$
+				if (currentInfo.id.equals("addTexture")) { 
 					modelWrapper.addTexture(currentInfo.texture, currentInfo.level);
 					if (currentInfo.altModelName != null) {
 						modelWrapper.switchToAltModel(currentInfo.altModelName);
 					}
-				} else if (currentInfo.id.equals("setModel")) { //$NON-NLS-1$
+				} else if (currentInfo.id.equals("setModel")) { 
 					Model modelCopy = (Model) currentInfo.modelFactory.manufactureCopy(null);
 					modelWrapper.setModel(modelCopy, currentInfo.parentString);
-				} else if (currentInfo.id.equals("addModelAndTexture")) { //$NON-NLS-1$
+				} else if (currentInfo.id.equals("addModelAndTexture")) { 
 					// add texture
 					modelWrapper.addTexture(currentInfo.texture, currentInfo.level);
 
@@ -374,7 +374,7 @@ public class ItemChooser extends JPanel {
 					if (currentInfo.altModelName != null) {
 						modelWrapper.switchToAltModel(currentInfo.altModelName);
 					}
-				} else if (currentInfo.id.equals("setMultipleModelsAndTexture")) { //$NON-NLS-1$
+				} else if (currentInfo.id.equals("setMultipleModelsAndTexture")) { 
 					// swap models
 					Model modelCopy = (Model) currentInfo.modelFactory.manufactureCopy(null);
 					modelWrapper.setModel(modelCopy, currentInfo.parentString);
@@ -387,7 +387,7 @@ public class ItemChooser extends JPanel {
 				}
 			}
 		} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
-			throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); //$NON-NLS-1$
+			throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); 
 		}
 	}
 
@@ -400,7 +400,7 @@ public class ItemChooser extends JPanel {
 			try {
 				return (edu.cmu.cs.stage3.alice.core.Model) currentInfo.altModelFactory.manufactureCopy(null);
 			} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
-				throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); 
 			}
 		} else {
 			return null;
@@ -413,7 +413,7 @@ public class ItemChooser extends JPanel {
 			try {
 				return (edu.cmu.cs.stage3.alice.core.Model) currentInfo.modelFactory.manufactureCopy(null);
 			} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
-				throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); 
 			}
 		} else {
 			return null;
@@ -453,7 +453,7 @@ public class ItemChooser extends JPanel {
 				backButton_actionPerformed(e);
 			}
 		});
-		forwardButton.setActionCommand("next"); //$NON-NLS-1$
+		forwardButton.setActionCommand("next"); 
 		forwardButton.setIcon(nextImage);
 		forwardButton.setBackground(new java.awt.Color(155, 159, 206));
 		forwardButton.setBorder(null);

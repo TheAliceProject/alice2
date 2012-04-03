@@ -45,19 +45,19 @@ public class StoreElementProgressPane extends edu.cmu.cs.stage3.progress.Progres
 			throw pce;
 		} catch( Throwable t ) {
 			StringBuffer sb = new StringBuffer();
-			sb.append( Messages.getString("StoreElementProgressPane.0") ); //$NON-NLS-1$
-			sb.append( Messages.getString("StoreElementProgressPane.1") ); //$NON-NLS-1$
+			sb.append( Messages.getString("StoreElementProgressPane.0") ); 
+			sb.append( Messages.getString("StoreElementProgressPane.1") ); 
 			if( t instanceof java.io.IOException ) {
-				sb.append( Messages.getString("StoreElementProgressPane.2") );			 //$NON-NLS-1$
-				sb.append( Messages.getString("StoreElementProgressPane.3") ); //$NON-NLS-1$
-				sb.append( Messages.getString("StoreElementProgressPane.4") ); //$NON-NLS-1$
+				sb.append( Messages.getString("StoreElementProgressPane.2") );			 
+				sb.append( Messages.getString("StoreElementProgressPane.3") ); 
+				sb.append( Messages.getString("StoreElementProgressPane.4") ); 
 			} else {
-				sb.append( Messages.getString("StoreElementProgressPane.5") ); //$NON-NLS-1$
+				sb.append( Messages.getString("StoreElementProgressPane.5") ); 
 			}
-			sb.append( Messages.getString("StoreElementProgressPane.6") ); //$NON-NLS-1$
+			sb.append( Messages.getString("StoreElementProgressPane.6") ); 
 
-			sb.append( Messages.getString("StoreElementProgressPane.7") ); //$NON-NLS-1$
-			sb.append( Messages.getString("StoreElementProgressPane.8") ); //$NON-NLS-1$
+			sb.append( Messages.getString("StoreElementProgressPane.7") ); 
+			sb.append( Messages.getString("StoreElementProgressPane.8") ); 
 			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( sb.toString(), t );
 		}
 	}

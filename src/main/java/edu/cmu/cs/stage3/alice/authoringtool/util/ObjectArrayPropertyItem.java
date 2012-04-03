@@ -47,22 +47,18 @@ public class ObjectArrayPropertyItem extends edu.cmu.cs.stage3.alice.core.Proper
 		return index;
 	}
 
-	
 	public Object get() {
 		return objectArrayProperty.get( index );
 	}
 
-	
 	public Object getValue() {
 		return objectArrayProperty.get( index );
 	}
 
-	
 	public Class getValueClass() {
 		return type;
 	}
 
-	
 	public void set( Object value ) throws IllegalArgumentException {
 		objectArrayProperty.set( index, value );
 		//super.set( value );

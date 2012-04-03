@@ -27,7 +27,7 @@ import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public class ItemAtIndex extends ArrayObjectQuestion {
-	public final NumberProperty index = new NumberProperty( this, "index", new Integer( -1 ) ); //$NON-NLS-1$
+	public final NumberProperty index = new NumberProperty( this, "index", new Integer( -1 ) ); 
 	
 	public Object getValue( edu.cmu.cs.stage3.alice.core.Array arrayValue ) {
         int i = index.intValue();
@@ -35,7 +35,7 @@ public class ItemAtIndex extends ArrayObjectQuestion {
         if( i >= 0 && i < n ) {
     		return arrayValue.itemValueAtIndex( i );
         } else {
-            throw new edu.cmu.cs.stage3.alice.core.SimulationException( Messages.getString("ItemAtIndex.1") + i + Messages.getString("ItemAtIndex.2") + n + ")", null, this ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            throw new edu.cmu.cs.stage3.alice.core.SimulationException( Messages.getString("ItemAtIndex.1") + i + Messages.getString("ItemAtIndex.2") + n + ")", null, this );   
         }
 	}
 }

@@ -28,10 +28,10 @@ import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 
 public class RandomBoolean extends Question {
-	public final NumberProperty probabilityOfTrue = new NumberProperty( this, "probabilityOfTrue", new Double( 0.5 ) ); //$NON-NLS-1$
+	public final NumberProperty probabilityOfTrue = new NumberProperty( this, "probabilityOfTrue", new Double( 0.5 ) ); 
 	
 	public Object getValue() {
-		edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("RandomBoolean.1")+(int)(probabilityOfTrue.doubleValue()*100)+Messages.getString("RandomBoolean.2"); //$NON-NLS-1$ //$NON-NLS-2$
+		edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("RandomBoolean.1")+(int)(probabilityOfTrue.doubleValue()*100)+Messages.getString("RandomBoolean.2");  
 		if( Math.random() < probabilityOfTrue.doubleValue() ) {
 			return Boolean.TRUE;
 		} else {

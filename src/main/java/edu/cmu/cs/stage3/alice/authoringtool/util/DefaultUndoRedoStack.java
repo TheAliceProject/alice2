@@ -77,7 +77,7 @@ public class DefaultUndoRedoStack extends java.util.LinkedList implements UndoRe
 		}
 
 		UndoableRedoable removedItem = null;
-		java.util.ListIterator iter = listIterator();
+		final java.util.ListIterator iter = listIterator();
 		while( iter.nextIndex() <= currentIndex ) {
 			iter.next();
 		}
@@ -86,11 +86,7 @@ public class DefaultUndoRedoStack extends java.util.LinkedList implements UndoRe
 			ur.undo();
 			removedItem = ur;
 		}
-		try {
-			iter.remove();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		iter.remove();
 		currentIndex--;
 		while( iter.nextIndex() <= currentIndex ) {
 			UndoableRedoable ur = (UndoableRedoable)iter.next();
@@ -108,7 +104,6 @@ public class DefaultUndoRedoStack extends java.util.LinkedList implements UndoRe
 		return (UndoableRedoable)get( currentIndex );
 	}
 
-	
 	synchronized public void clear() {
 		super.clear();
 		currentIndex = -1;

@@ -64,7 +64,6 @@ public class ExtensionGroupFileFilter extends javax.swing.filechooser.FileFilter
 		description = d.toString();
 	}
 
-	
 	public boolean accept( java.io.File f ) {
 		for( java.util.Iterator iter = extensions.iterator(); iter.hasNext(); ) {
 			ExtensionFileFilter ext = (ExtensionFileFilter)iter.next();
@@ -76,7 +75,6 @@ public class ExtensionGroupFileFilter extends javax.swing.filechooser.FileFilter
 		return false;
 	}
 
-	
 	public String getDescription() {
 		recalculateDescription();
 		return description;

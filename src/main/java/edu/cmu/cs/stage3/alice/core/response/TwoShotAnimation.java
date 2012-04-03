@@ -20,9 +20,9 @@ import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 
 public class TwoShotAnimation extends AbstractPositionAnimation {
-	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.RIGHT_OF ); //$NON-NLS-1$
-	public final ReferenceFrameProperty asSeenBy2 = new ReferenceFrameProperty( this, "asSeenBy2", null ); //$NON-NLS-1$
-	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); //$NON-NLS-1$
+	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.RIGHT_OF ); 
+	public final ReferenceFrameProperty asSeenBy2 = new ReferenceFrameProperty( this, "asSeenBy2", null ); 
+	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); 
 	
 	private double angleToRotate = java.lang.Math.PI/6; // 5 degrees, for now
 	
@@ -46,7 +46,7 @@ public class TwoShotAnimation extends AbstractPositionAnimation {
 
 				m_asSeenBy = TwoShotAnimation.this.asSeenBy.getReferenceFrameValue();
 				if( m_asSeenBy == null ) {
-					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.3"), null, TwoShotAnimation.this.asSeenBy ); //$NON-NLS-1$
+					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.3"), null, TwoShotAnimation.this.asSeenBy ); 
 				  }
 
 				super.prologue(t);
@@ -55,19 +55,19 @@ public class TwoShotAnimation extends AbstractPositionAnimation {
 				
 //				CLK - begin	
 				  if( m_asSeenBy2 == null ) {
-					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.4"), getCurrentStack(), TwoShotAnimation.this.asSeenBy2 );             //$NON-NLS-1$
+					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.4"), getCurrentStack(), TwoShotAnimation.this.asSeenBy2 );             
 				  }
 				  if( m_subject == null ) {
-					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.5"), getCurrentStack(), TwoShotAnimation.this.subject );             //$NON-NLS-1$
+					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.5"), getCurrentStack(), TwoShotAnimation.this.subject );             
 				  }
 				  if( m_asSeenBy2 == m_asSeenBy ) {
-					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.6"), getCurrentStack(), TwoShotAnimation.this.asSeenBy2 );             //$NON-NLS-1$
+					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.6"), getCurrentStack(), TwoShotAnimation.this.asSeenBy2 );             
 				  }
 				  if ((m_subject == m_asSeenBy) || ( m_subject == m_asSeenBy2 )) {
-					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.7"), getCurrentStack(), TwoShotAnimation.this.subject );             //$NON-NLS-1$
+					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.7"), getCurrentStack(), TwoShotAnimation.this.subject );             
 				  }
 				  if (m_amount < 0) {
-					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.8"), getCurrentStack(), TwoShotAnimation.this.amount );             //$NON-NLS-1$
+					  throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TwoShotAnimation.8"), getCurrentStack(), TwoShotAnimation.this.amount );             
 				  }
 				  //CLK - end
 				  

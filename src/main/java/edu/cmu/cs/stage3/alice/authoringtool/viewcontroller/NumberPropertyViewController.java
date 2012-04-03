@@ -35,28 +35,24 @@ public class NumberPropertyViewController extends TextFieldEditablePropertyViewC
 		refreshGUI();
 	}
 
-	
 	protected void setValueFromString( String valueString ) {
 		Double value = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.parseDouble( valueString );
 
 		if( value != null ) {
 			((Runnable)factory.createItem( value )).run();
-			String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); //$NON-NLS-1$
+			String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); 
 			property.getOwner().data.put( propertyKey, valueString );
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("NumberPropertyViewController.1") + valueString, null, false ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("NumberPropertyViewController.1") + valueString, null, false ); 
 		}
 	}
 
-	
 	protected java.awt.Component getNativeComponent() {
 		return numberLabel;
 	}
 	
-	
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
-			
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {
 				if( (ev.getX() >= 0) && (ev.getX() < ev.getComponent().getWidth()) && (ev.getY() >= 0) && (ev.getY() < ev.getComponent().getHeight()) ) {
 					if( isEnabled() ) {
@@ -67,18 +63,14 @@ public class NumberPropertyViewController extends TextFieldEditablePropertyViewC
 		};
 	}
 
-	
 	protected Class getNativeClass() {
 		return Number.class;
 	}
 
-	
 	protected void updateNativeComponent() {
-		String text = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property.get(), property, property.getOwner().data );
 		numberLabel.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property.get(), property, property.getOwner().data ) );
 	}
 
-	
 	protected void refreshGUI() {
 		if( this.isAncestorOf( textField ) ) {
 			remove( textField );

@@ -40,7 +40,6 @@ public class StringPropertyViewController extends TextFieldEditablePropertyViewC
 		set( property, allowExpressions, omitPropertyName, true, factory );
 	}
 
-	
 	public void set( edu.cmu.cs.stage3.alice.core.Property property, boolean includeDefaults, boolean allowExpressions, boolean omitPropertyName, boolean emptyStringWritesNull, final edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory ) {
 		super.set( property, includeDefaults, allowExpressions, true, omitPropertyName, factory );
 		this.emptyStringWritesNull = emptyStringWritesNull && (! edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitNone( property ));
@@ -59,7 +58,6 @@ public class StringPropertyViewController extends TextFieldEditablePropertyViewC
 		set( property, false, allowExpressions, omitPropertyName, emptyStringWritesNull, factory );
 	}
 
-	
 	protected void setValueFromString( String valueString ) {
 		if( valueString.trim().equals( "" ) ) {
 			if( emptyStringWritesNull ) {
@@ -69,22 +67,18 @@ public class StringPropertyViewController extends TextFieldEditablePropertyViewC
 		((Runnable)factory.createItem( valueString )).run();
 	}
 
-	
 	protected java.awt.Component getNativeComponent() {
 		return stringLabel;
 	}
 
-	
 	protected Class getNativeClass() {
 		return String.class;
 	}
 
-	
 	protected void updateNativeComponent() {
 		stringLabel.setText( property.get().toString() );
 	}
 
-	
 	protected void refreshGUI() {
 		//if( (property.getValue() != null) && (property.getValue().toString()).trim().equals( "" ) ) {
 		//	stringLabel.setPreferredSize( minSize );

@@ -29,11 +29,11 @@ import edu.cmu.cs.stage3.alice.core.property.Matrix44Property;
 import edu.cmu.cs.stage3.alice.core.property.VehicleProperty;
 
 public class Transformable extends ReferenceFrame {
-	public final ElementArrayProperty parts = new ElementArrayProperty( this, "parts", null, Transformable[].class ); //$NON-NLS-1$
-	public final ElementArrayProperty poses = new ElementArrayProperty( this, "poses", null, Pose[].class ); //$NON-NLS-1$
-	public final Matrix44Property localTransformation = new Matrix44Property( this, "localTransformation", new edu.cmu.cs.stage3.math.Matrix44() ); //$NON-NLS-1$
-	public final VehicleProperty vehicle = new VehicleProperty( this, "vehicle", null ); //$NON-NLS-1$
-	public final BooleanProperty isPivotShowing = new BooleanProperty( this, "isPivotShowing", Boolean.FALSE ); //$NON-NLS-1$
+	public final ElementArrayProperty parts = new ElementArrayProperty( this, "parts", null, Transformable[].class ); 
+	public final ElementArrayProperty poses = new ElementArrayProperty( this, "poses", null, Pose[].class ); 
+	public final Matrix44Property localTransformation = new Matrix44Property( this, "localTransformation", new edu.cmu.cs.stage3.math.Matrix44() ); 
+	public final VehicleProperty vehicle = new VehicleProperty( this, "vehicle", null ); 
+	public final BooleanProperty isPivotShowing = new BooleanProperty( this, "isPivotShowing", Boolean.FALSE ); 
 	private edu.cmu.cs.stage3.alice.scenegraph.Transformable m_sgTransformable;
 	private edu.cmu.cs.stage3.alice.core.decorator.PivotDecorator m_pivotDecorator = new edu.cmu.cs.stage3.alice.core.decorator.PivotDecorator();
 
@@ -112,7 +112,7 @@ public class Transformable extends ReferenceFrame {
 	}
 
 	private Transformable internalGetPartKeyed( String key, int fromIndex, boolean ignoreCase ) {
-		if( key.equals( "" ) ) { //$NON-NLS-1$
+		if( key.equals( "" ) ) { 
 			return this;
 		} else {
 			int toIndex = key.indexOf( SEPARATOR, fromIndex );
@@ -170,7 +170,7 @@ public class Transformable extends ReferenceFrame {
 		super.nameValueChanged( value );
 		String s = null;
 		if( value!=null ) {
-			s = value+".m_sgTransformable"; //$NON-NLS-1$
+			s = value+".m_sgTransformable"; 
 		}
 		m_sgTransformable.setName( s );
 	}
@@ -181,11 +181,11 @@ public class Transformable extends ReferenceFrame {
 			ReferenceFrame vehicleToBe = (ReferenceFrame)value;
 			if( vehicleToBe != null ) {
 				if( vehicleToBe==this ) {
-					throw new RuntimeException( this + Messages.getString("Transformable.0") ); //$NON-NLS-1$
+					throw new RuntimeException( this + Messages.getString("Transformable.0") ); 
 				}
 				//if( vehicleToBe.isDescendantOf( this ) ) {
 				if( vehicleToBe.getSceneGraphContainer().isDescendantOf( getSceneGraphContainer() ) ) {
-					throw new RuntimeException( this + Messages.getString("Transformable.1")+vehicleToBe+Messages.getString("Transformable.2") ); //$NON-NLS-1$ //$NON-NLS-2$
+					throw new RuntimeException( this + Messages.getString("Transformable.1")+vehicleToBe+Messages.getString("Transformable.2") );  
 				}
 			}
 		} else if( property == localTransformation ) {
@@ -396,7 +396,7 @@ public class Transformable extends ReferenceFrame {
     public javax.vecmath.Matrix4d calculateGoodLookAt( ReferenceFrame target, ReferenceFrame asSeenBy, edu.cmu.cs.stage3.util.HowMuch howMuch ) {
         if( s_getAGoodLookDummy == null ) {
             s_getAGoodLookDummy = new edu.cmu.cs.stage3.alice.core.Transformable();
-			s_getAGoodLookDummy.name.set( "s_getAGoodLookDummy" ); //$NON-NLS-1$
+			s_getAGoodLookDummy.name.set( "s_getAGoodLookDummy" ); 
         }
 
         //todo: rework all of this
@@ -664,7 +664,7 @@ public class Transformable extends ReferenceFrame {
         if( edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.NaN ) ||
             edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.POSITIVE_INFINITY ) ||
             edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.NEGATIVE_INFINITY ) ) {
-            throw new IllegalArgumentException( Messages.getString("Transformable.11") + size + Messages.getString("Transformable.12") + prevSize ); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new IllegalArgumentException( Messages.getString("Transformable.11") + size + Messages.getString("Transformable.12") + prevSize );  
         }
 		resizeRightNow( deltaSize, asSeenBy );
 	}
@@ -952,7 +952,7 @@ public class Transformable extends ReferenceFrame {
 			} else if( sgChild instanceof edu.cmu.cs.stage3.alice.scenegraph.Visual ) {
 				edu.cmu.cs.stage3.alice.scenegraph.Geometry sgGeometry = ((edu.cmu.cs.stage3.alice.scenegraph.Visual)sgChild).getGeometry();
 				if( sgGeometry instanceof edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray ) {
-					HACK_syncPropertyToSceneGraph( "vertices", (edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray)sgGeometry ); //$NON-NLS-1$
+					HACK_syncPropertyToSceneGraph( "vertices", (edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray)sgGeometry ); 
 				}
 			}
 		}

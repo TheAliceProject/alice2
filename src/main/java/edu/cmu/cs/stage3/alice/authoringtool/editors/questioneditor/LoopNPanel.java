@@ -38,7 +38,6 @@ public class LoopNPanel extends edu.cmu.cs.stage3.alice.authoringtool.editors.co
         super();
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder");
     }

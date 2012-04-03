@@ -28,8 +28,8 @@ import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 
 public class PlaceAnimation extends AbstractPositionAnimation {
-	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF ); //$NON-NLS-1$
-	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 0 ) ); //$NON-NLS-1$
+	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF ); 
+	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 0 ) ); 
 	public class RuntimePlaceAnimation extends RuntimeAbstractPositionAnimation {
 		private edu.cmu.cs.stage3.math.Box m_subjectBoundingBox;
 		private edu.cmu.cs.stage3.math.Box m_asSeenByBoundingBox;
@@ -62,10 +62,10 @@ public class PlaceAnimation extends AbstractPositionAnimation {
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( PlaceAnimation.this.spatialRelation.getSpatialRelationValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PlaceAnimation.2"), null, PlaceAnimation.this.spatialRelation ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PlaceAnimation.2"), null, PlaceAnimation.this.spatialRelation ); 
 			}
 			if( PlaceAnimation.this.amount.getValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PlaceAnimation.3"), null, PlaceAnimation.this.amount ); //$NON-NLS-1$
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PlaceAnimation.3"), null, PlaceAnimation.this.amount ); 
 			}
 		}
 	}

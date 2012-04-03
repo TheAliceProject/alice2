@@ -177,7 +177,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 			return false;
 		}
 		if( ! (node instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.0") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.0") ); 
 		}
 
 		edu.cmu.cs.stage3.alice.core.Element element = (edu.cmu.cs.stage3.alice.core.Element)node;
@@ -193,7 +193,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 
 	public int getChildCount( Object parent ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.1") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.1") ); 
 		}
 
 		int childCount = 0;
@@ -210,7 +210,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 
 	public Object getChild( Object parent, int index ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.2") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.2") ); 
 		}
 
 		int childCount = 0;
@@ -231,10 +231,10 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 
 	public int getIndexOfChild( Object parent, Object child ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.3") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.3") ); 
 		}
 		if( ! (child instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.4") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.4") ); 
 		}
 
 		int childCount = 0;
@@ -263,7 +263,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 				element.name.set( previousName );
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("FilteringElementTreeModel.5") ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("FilteringElementTreeModel.5") ); 
 		}
 	}
 

@@ -39,7 +39,6 @@ public class AxesDecorator extends Decorator {
 		markDirty();
 	}
 
-	
 	public ReferenceFrame getReferenceFrame() {
 		return m_referenceFrame;
 	}
@@ -51,7 +50,6 @@ public class AxesDecorator extends Decorator {
 		}
 	}
 
-    
 	public void internalRelease( int pass ) {
         switch( pass ) {
         case 2:
@@ -64,7 +62,6 @@ public class AxesDecorator extends Decorator {
         super.internalRelease( pass );
     }
 
-	
 	protected void update() {
 		super.update();
 		edu.cmu.cs.stage3.math.Box box = m_referenceFrame.getBoundingBox();

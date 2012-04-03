@@ -51,7 +51,7 @@ public class PropertyEvent extends java.util.EventObject {
 		if( m_isPreviousValueValid ) {
 			return m_previousValue;
 		} else {
-			throw new RuntimeException( Messages.getString("PropertyEvent.0") ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("PropertyEvent.0") ); 
 		}
 	}
 }

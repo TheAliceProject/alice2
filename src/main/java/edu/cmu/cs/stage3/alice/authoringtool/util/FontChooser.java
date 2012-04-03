@@ -65,7 +65,6 @@ public class FontChooser extends javax.swing.JPanel {
 		fontSizeCombo.setSelectedIndex( 0 );
 		fontSizeCombo.setInputVerifier( // TODO: should be more user-friendly
 			new javax.swing.InputVerifier() {
-				
 				public boolean verify( javax.swing.JComponent c ) {
 					try {
 						String text = (String)((javax.swing.JComboBox)c).getSelectedItem();

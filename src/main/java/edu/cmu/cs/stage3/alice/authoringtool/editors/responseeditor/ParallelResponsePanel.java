@@ -48,12 +48,10 @@ public class ParallelResponsePanel extends CompositeResponsePanel {
         super(r, depth, authoringToolIn);
     }
 */
-    
 	protected void updateGUI(){
         super.updateGUI();
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoTogether");
     }

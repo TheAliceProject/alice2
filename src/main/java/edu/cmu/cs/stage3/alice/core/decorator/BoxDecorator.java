@@ -30,7 +30,6 @@ public class BoxDecorator extends edu.cmu.cs.stage3.alice.core.Decorator {
 	private double m_height;
 	private double m_depth;
 
-	
 	public edu.cmu.cs.stage3.alice.core.ReferenceFrame getReferenceFrame() {
 		return m_referenceFrame;
 	}
@@ -59,7 +58,6 @@ public class BoxDecorator extends edu.cmu.cs.stage3.alice.core.Decorator {
 		markDirty();
 	}
 
-    
 	public void internalRelease( int pass ) {
         switch( pass ) {
         case 2:
@@ -72,7 +70,6 @@ public class BoxDecorator extends edu.cmu.cs.stage3.alice.core.Decorator {
         super.internalRelease( pass );
     }
 
-	
 	protected void update() {
 		super.update();
         boolean requiresVerticesToBeUpdated = isDirty();

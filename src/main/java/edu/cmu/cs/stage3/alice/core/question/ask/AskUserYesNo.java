@@ -35,7 +35,6 @@ public class AskUserYesNo extends edu.cmu.cs.stage3.alice.core.question.BooleanQ
 
 	private edu.cmu.cs.stage3.alice.core.Clock m_clock;
 
-	
 	public Object getValue() {
 		if( m_clock != null ) {
 			m_clock.pause();
@@ -50,7 +49,6 @@ public class AskUserYesNo extends edu.cmu.cs.stage3.alice.core.question.BooleanQ
 		}
 	}
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		if( world != null ) {

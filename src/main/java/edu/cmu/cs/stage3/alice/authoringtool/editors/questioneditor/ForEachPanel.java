@@ -38,7 +38,6 @@ public class ForEachPanel extends edu.cmu.cs.stage3.alice.authoringtool.editors.
         super();
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder");
     }

@@ -249,12 +249,11 @@ public class FeedBackEnabledJTree extends javax.swing.JTree {
 	}
 
 	// overrides JComponent.paintComponent
-	
 	public void paintComponent( java.awt.Graphics g ) {
 		try {
 			super.paintComponent( g );
 		} catch( NullPointerException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("FeedBackEnabledJTree.0"), e ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("FeedBackEnabledJTree.0"), e ); 
 		}
 		if( dropLinesActive && showDropLines ) {
 			paintLines( g, getBounds(), insets, fromPath, toPath );

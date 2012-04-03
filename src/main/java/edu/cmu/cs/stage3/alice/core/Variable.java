@@ -27,8 +27,8 @@ import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
 
 public class Variable extends Expression {
-	public final ValueProperty value = new ValueProperty( this, "value", null ); //$NON-NLS-1$
-	public final ClassProperty valueClass = new ClassProperty( this, "valueClass", null ); //$NON-NLS-1$
+	public final ValueProperty value = new ValueProperty( this, "value", null ); 
+	public final ClassProperty valueClass = new ClassProperty( this, "valueClass", null ); 
 	public boolean isWatch = false;
 	
 	public Object getValue() {
@@ -50,7 +50,7 @@ public class Variable extends Expression {
 					if( Element.s_isLoading ) {
 						//pass
 					} else {
-						throw new RuntimeException( Messages.getString("Variable.2") + clsToBe + Messages.getString("Variable.3") + o ); //$NON-NLS-1$ //$NON-NLS-2$
+						throw new RuntimeException( Messages.getString("Variable.2") + clsToBe + Messages.getString("Variable.3") + o );  
 					}
 				}
 			} else {
@@ -60,7 +60,7 @@ public class Variable extends Expression {
 					if( Element.s_isLoading ) {
 						//pass
 					} else {
-						throw new RuntimeException( Messages.getString("Variable.4") + clsToBe + Messages.getString("Variable.5") + o ); //$NON-NLS-1$ //$NON-NLS-2$
+						throw new RuntimeException( Messages.getString("Variable.4") + clsToBe + Messages.getString("Variable.5") + o );  
 					}
 				}
 			}
@@ -86,7 +86,7 @@ public class Variable extends Expression {
 						if( valueCls.isAssignableFrom( cls ) ) {
 							//pass
 						} else {
-							throw new RuntimeException( o + Messages.getString("Variable.6") + valueClass + Messages.getString("Variable.7") + cls ); //$NON-NLS-1$ //$NON-NLS-2$
+							throw new RuntimeException( o + Messages.getString("Variable.6") + valueClass + Messages.getString("Variable.7") + cls );  
 						}
 					}
 	
@@ -99,7 +99,7 @@ public class Variable extends Expression {
 						if( valueCls.isAssignableFrom( cls ) ) {
 							//pass
 						} else {
-							throw new RuntimeException( o + Messages.getString("Variable.8") + valueClass + Messages.getString("Variable.9") + cls ); //$NON-NLS-1$ //$NON-NLS-2$
+							throw new RuntimeException( o + Messages.getString("Variable.8") + valueClass + Messages.getString("Variable.9") + cls );  
 						}
 					}
 				}

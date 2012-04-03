@@ -59,7 +59,6 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev ) {
 		//DEBUG System.out.println( "mousePressed" );
 		if( enabled ) {
@@ -89,7 +88,6 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		//DEBUG System.out.println( "mouseReleased" );
 		if( (ePickedTransformable != null) && (! isActionAborted()) ) {
@@ -103,7 +101,6 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 		super.mouseReleased( ev );
 	}
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev ) {
 		//DEBUG System.out.println( "mouseDragged" );
 		if( enabled ) {

@@ -38,7 +38,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messag
 
 public class MainCompositeElementPanel extends CompositeElementPanel implements edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyListener{
 
-    protected java.awt.Color backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor"); //$NON-NLS-1$
+    protected java.awt.Color backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedResponseEditor"); 
     protected javax.swing.JPanel parameterPanel;
     protected javax.swing.JPanel variablePanel;
 
@@ -75,22 +75,18 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 
     }
 
-    
 	public void set(edu.cmu.cs.stage3.alice.core.Element element, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
         super.set(element, authoringTool);
     }
 
-    
 	protected void setDropTargets(){
     }
 
-    
 	protected void variableInit(){
         super.variableInit();
         setVariableObjects(m_element);
     }
 
-    
 	protected void startListening() {
         super.startListening();
         if (keywordParameters != null){
@@ -104,7 +100,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         }
     }
 
-    
 	protected void stopListening() {
         super.stopListening();
         if (keywordParameters != null){
@@ -118,7 +113,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         }
     }
 
-    
 	protected void removeAllListening(){
         super.removeAllListening();
         variablePanel.setDropTarget(null);
@@ -157,9 +151,8 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         }
     }
 
-	
 	protected String getHeaderHTML(){
-		String htmlToReturn = "<b>"+methodNameLabel.getText()+"</b>&nbsp;(&nbsp;"; //$NON-NLS-1$ //$NON-NLS-2$
+		String htmlToReturn = "<b>"+methodNameLabel.getText()+"</b>&nbsp;(&nbsp;";  
 		for (int i=0; i<requiredParameters.size(); i++ ){
 			Class iconClass = ((edu.cmu.cs.stage3.alice.core.Variable)requiredParameters.get(i)).valueClass.getClassValue();
 			
@@ -170,17 +163,17 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 			}
 			String htmlName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getHTMLName(iconClass.getName());
 			if (isList){
-				htmlName += edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getHTMLName("edu.cmu.cs.stage3.alice.core.Collection"); //$NON-NLS-1$
+				htmlName += edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getHTMLName("edu.cmu.cs.stage3.alice.core.Collection"); 
 			}
-			htmlToReturn += htmlName+" <b>"+((edu.cmu.cs.stage3.alice.core.Element)requiredParameters.get(i)).name.getStringValue()+"</b>"; //$NON-NLS-1$ //$NON-NLS-2$
+			htmlToReturn += htmlName+" <b>"+((edu.cmu.cs.stage3.alice.core.Element)requiredParameters.get(i)).name.getStringValue()+"</b>";  
 			if (i+1 != requiredParameters.size()){
-				htmlToReturn += ", "; //$NON-NLS-1$
+				htmlToReturn += ", "; 
 			}
 		}
 		if (CompositeElementEditor.IS_JAVA){
-			htmlToReturn += ") <b>{</b>\n<br>&nbsp;&nbsp;&nbsp;&nbsp;"; //$NON-NLS-1$
+			htmlToReturn += ") <b>{</b>\n<br>&nbsp;&nbsp;&nbsp;&nbsp;"; 
 		} else{
-			htmlToReturn += ")\n<br>&nbsp;&nbsp;&nbsp;&nbsp;"; //$NON-NLS-1$
+			htmlToReturn += ")\n<br>&nbsp;&nbsp;&nbsp;&nbsp;"; 
 		}
 		htmlToReturn += edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(mainVariablePanel);
 		return htmlToReturn;
@@ -254,7 +247,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                         holder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0,0));
                         holder.setBackground(toCreate.getBackground());
                         holder.setDropTarget(new java.awt.dnd.DropTarget(holder, dropHandler));
-                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator); //$NON-NLS-1$
+                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator); 
                         comma.setDropTarget(new java.awt.dnd.DropTarget(comma, dropHandler));
                         holder.add(variableGUI);
                         holder.add(comma);
@@ -298,9 +291,9 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     	typeName = typeName.substring( typeName.lastIndexOf( '.' ) + 1 );
                     }
                     if (isList){
-                    	typeName += "[]"; //$NON-NLS-1$
+                    	typeName += "[]"; 
                     }
-                    javax.swing.JLabel typeLabel = new javax.swing.JLabel(typeName+ " "); //$NON-NLS-1$
+                    javax.swing.JLabel typeLabel = new javax.swing.JLabel(typeName+ " "); 
                     javax.swing.JComponent variableGUI = null;
                     
                     if (toCreate != parameterPanel){
@@ -329,7 +322,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                         holder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0,0));
                         holder.setBackground(toCreate.getBackground());
                         holder.setDropTarget(new java.awt.dnd.DropTarget(holder, dropHandler));
-                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator+" "); //$NON-NLS-1$ //$NON-NLS-2$
+                        javax.swing.JLabel comma = new javax.swing.JLabel(" "+seperator+" ");  
                         comma.setDropTarget(new java.awt.dnd.DropTarget(comma, dropHandler));
                         typeLabel.setDropTarget(new java.awt.dnd.DropTarget(typeLabel, dropHandler));
                         holder.add(typeLabel);
@@ -354,7 +347,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         return itemCount;
     }
 
-    
 	public void setBackground(java.awt.Color color){
         super.setBackground(color);
         if (parameterPanel != null) {parameterPanel.setBackground(color);}
@@ -383,7 +375,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         
         if (CompositeElementEditor.IS_JAVA){
             functionName = functionName.replace(' ', '_');
-            String typeName = "void"; //$NON-NLS-1$
+            String typeName = "void"; 
             if (this instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel){
 				edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion currentQuestion = (edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion )m_element;
 				String className = currentQuestion.getValueClass().getName();
@@ -398,17 +390,17 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 					typeName = typeName.substring( typeName.lastIndexOf( '.' ) + 1 );
 				}
 				if (isList){
-					typeName += "[]"; //$NON-NLS-1$
+					typeName += "[]"; 
 				}
             }
-			methodNameLabel.setText("public "+typeName+" "+functionName); //$NON-NLS-1$ //$NON-NLS-2$
+			methodNameLabel.setText("public "+typeName+" "+functionName);  
             parameterPanel.add(methodNameLabel);
-            parameterPanel.add(new javax.swing.JLabel("(")); //$NON-NLS-1$
+            parameterPanel.add(new javax.swing.JLabel("(")); 
 //            nameLabel.setDropTarget(new java.awt.dnd.DropTarget(nameLabel, parameterDropHandler));
-            buildJavaVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3); //$NON-NLS-1$
-            javax.swing.JLabel brace = new javax.swing.JLabel("{"); //$NON-NLS-1$
+            buildJavaVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3); 
+            javax.swing.JLabel brace = new javax.swing.JLabel("{"); 
             brace.setDropTarget(new java.awt.dnd.DropTarget(brace, parameterDropHandler));
-            javax.swing.JLabel paren = new javax.swing.JLabel(")"); //$NON-NLS-1$
+            javax.swing.JLabel paren = new javax.swing.JLabel(")"); 
             paren.setDropTarget(new java.awt.dnd.DropTarget(paren, parameterDropHandler));
             parameterPanel.add(paren);
      //       parameterPanel.add(newParameterButton);
@@ -417,7 +409,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         else{
             methodNameLabel.setText(m_element.getTrimmedKey());
             parameterPanel.add(methodNameLabel);
-            buildVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3); //$NON-NLS-1$
+            buildVariablePanel(",",parameterPanel, requiredParameters, newParameterButton, parameterDropHandler, 3); 
          //   parameterPanel.add(newParameterButton);
         }
         newParameterButton.setDropTarget(new java.awt.dnd.DropTarget(newParameterButton, parameterDropHandler));
@@ -431,15 +423,15 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
     protected void buildVariablePanel(){
         variablePanel.removeAll();
         if (CompositeElementEditor.IS_JAVA){
-            int count = buildJavaVariablePanel(";",variablePanel, localVariables, newVariableButton, variableDropHandler,1); //$NON-NLS-1$
+            int count = buildJavaVariablePanel(";",variablePanel, localVariables, newVariableButton, variableDropHandler,1); 
             if (count > 0){
-                javax.swing.JLabel semi = new javax.swing.JLabel(";"); //$NON-NLS-1$
+                javax.swing.JLabel semi = new javax.swing.JLabel(";"); 
                 semi.setDropTarget(new java.awt.dnd.DropTarget(semi, parameterDropHandler));
                 variablePanel.add(semi);
             }
         }
         else{
-            buildVariablePanel(",",variablePanel, localVariables, newVariableButton, variableDropHandler,1); //$NON-NLS-1$
+            buildVariablePanel(",",variablePanel, localVariables, newVariableButton, variableDropHandler,1); 
         }
       //  variablePanel.add(newVariableButton);
         newVariableButton.setDropTarget(new java.awt.dnd.DropTarget(newVariableButton, variableDropHandler));
@@ -460,15 +452,14 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         }
     }
 
-    
 	protected void generateGUI(){
         java.awt.Component anchor = getAnchor(this);
-        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
+        int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); 
         int buttonWidth = fontSize * 13;
         int buttonHeight = fontSize * 2 + 2;
         
         if (newParameterButton == null){
-            newParameterButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.27")); //$NON-NLS-1$
+            newParameterButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.27")); 
             newParameterButton.setBackground(new java.awt.Color( 240, 240, 255 ));
             newParameterButton.setOpaque(true);
             newParameterButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -483,7 +474,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     ));*/
             newParameterButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed( java.awt.event.ActionEvent ev ) {
-                    edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.28"),  requiredParameters.getOwner(), false, false ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.28"),  requiredParameters.getOwner(), false, false ); 
 					if( variable != null ) {
 						if( requiredParameters != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
@@ -499,16 +490,16 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                 }
             });
             newParameterButton.setDropTarget(new java.awt.dnd.DropTarget(newParameterButton, parameterDropHandler));
-            newParameterButton.setToolTipText("<html><body>"+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.30")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.31")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.32")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.33")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.34")+ //$NON-NLS-1$
-                             "</body></html>"); //$NON-NLS-1$
+            newParameterButton.setToolTipText("<html><body>"+ 
+                             Messages.getString("MainCompositeElementPanel.30")+ 
+                             Messages.getString("MainCompositeElementPanel.31")+ 
+                             Messages.getString("MainCompositeElementPanel.32")+ 
+                             Messages.getString("MainCompositeElementPanel.33")+ 
+                             Messages.getString("MainCompositeElementPanel.34")+ 
+                             "</body></html>"); 
         }
         if (newVariableButton == null){
-            newVariableButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.36")); //$NON-NLS-1$
+            newVariableButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.36")); 
             newVariableButton.setBackground(new java.awt.Color( 240, 240, 255 ));
             newVariableButton.setOpaque(true);
             newVariableButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -524,7 +515,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     ));*/
             newVariableButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed( java.awt.event.ActionEvent ev ) {
-					edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.37"), localVariables.getOwner(), false, true); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.37"), localVariables.getOwner(), false, true); 
 					if( variable != null ) {
 						if( localVariables != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
@@ -539,13 +530,13 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                 }
             });
             newVariableButton.setDropTarget(new java.awt.dnd.DropTarget(newVariableButton, variableDropHandler));
-            newVariableButton.setToolTipText("<html><body>"+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.39")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.40")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.41")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.42")+ //$NON-NLS-1$
-                             Messages.getString("MainCompositeElementPanel.43")+ //$NON-NLS-1$
-                             "</body></html>"); //$NON-NLS-1$
+            newVariableButton.setToolTipText("<html><body>"+ 
+                             Messages.getString("MainCompositeElementPanel.39")+ 
+                             Messages.getString("MainCompositeElementPanel.40")+ 
+                             Messages.getString("MainCompositeElementPanel.41")+ 
+                             Messages.getString("MainCompositeElementPanel.42")+ 
+                             Messages.getString("MainCompositeElementPanel.43")+ 
+                             "</body></html>"); 
         }
         if (scrollPane == null){
             scrollPane = new javax.swing.JScrollPane(
@@ -566,7 +557,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         }
         if (parameterPanel == null){
             parameterPanel = new javax.swing.JPanel(){
-                
 				public void paintComponent( java.awt.Graphics g ) {
                     super.paintComponent( g );
                     if( lineLocation > -1 && paintParameter) {
@@ -587,7 +577,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         }
         if (variablePanel == null){
             variablePanel = new javax.swing.JPanel(){
-                
 				public void paintComponent( java.awt.Graphics g ) {
                     super.paintComponent( g );
                     if( lineLocation > -1 && paintVariable) {
@@ -612,15 +601,15 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             //headerPanel.setLayout(new javax.swing.BoxLayout(headerPanel, javax.swing.BoxLayout.Y_AXIS));
         }
         methodNameLabel = new javax.swing.JLabel();
-        java.awt.Font nameFont = new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int)(14 * fontSize/12.0)); //$NON-NLS-1$
+        java.awt.Font nameFont = new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int)(14 * fontSize/12.0)); 
         methodNameLabel.setFont(nameFont);
         methodNameLabel.setDropTarget(new java.awt.dnd.DropTarget(methodNameLabel, parameterDropHandler));
 
-        noParametersLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.46")); //$NON-NLS-1$
+        noParametersLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.46")); 
         noParametersLabel.setDropTarget(new java.awt.dnd.DropTarget(noParametersLabel, parameterDropHandler));
-        java.awt.Font noFont = new java.awt.Font("SansSerif", java.awt.Font.ITALIC, (int)(12 * fontSize/12.0)); //$NON-NLS-1$
+        java.awt.Font noFont = new java.awt.Font("SansSerif", java.awt.Font.ITALIC, (int)(12 * fontSize/12.0)); 
         noParametersLabel.setFont(noFont);
-        noVariablesLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.48")); //$NON-NLS-1$
+        noVariablesLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.48")); 
         noVariablesLabel.setDropTarget(new java.awt.dnd.DropTarget(noVariablesLabel, variableDropHandler));
         noVariablesLabel.setFont(noFont);
 
@@ -674,7 +663,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
     }
 
 
-    
 	protected void updateGUI(){
         this.removeAll();
         buildParameterPanel();
@@ -686,7 +674,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         this.add(scrollPane, java.awt.BorderLayout.CENTER);
         this.add(headerPanel, java.awt.BorderLayout.NORTH);
         if (CompositeElementEditor.IS_JAVA){
-            closeBrace.setText(" }"); //$NON-NLS-1$
+            closeBrace.setText(" }"); 
             this.add(closeBrace, java.awt.BorderLayout.SOUTH);
         }
 
@@ -704,7 +692,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         return false;
     }
 
-    
 	public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ){
         if (isInGroup(propertyEvent.getProperty().getOwner(), requiredParameters)){
         	

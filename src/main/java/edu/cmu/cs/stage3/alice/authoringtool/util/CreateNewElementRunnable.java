@@ -46,9 +46,9 @@ public class CreateNewElementRunnable implements Runnable {
 			}
 		} catch( Throwable t ) {
 			if( elementClass != null ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CreateNewElementRunnable.0") + elementClass.getName(), t ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CreateNewElementRunnable.0") + elementClass.getName(), t ); 
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CreateNewElementRunnable.1"), t ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CreateNewElementRunnable.1"), t ); 
 			}
 		}
 	}

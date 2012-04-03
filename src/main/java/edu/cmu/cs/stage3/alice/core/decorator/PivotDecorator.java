@@ -32,7 +32,6 @@ public class PivotDecorator extends Decorator {
 	private Transformable m_transformable = null;
 	private edu.cmu.cs.stage3.math.Box m_overrideBoundingBox = null;
 
-	
 	protected ReferenceFrame getReferenceFrame() {
 		return getTransformable();
 	}
@@ -56,7 +55,6 @@ public class PivotDecorator extends Decorator {
 	}
 	
 
-    
 	public void internalRelease( int pass ) {
         switch( pass ) {
         case 2:

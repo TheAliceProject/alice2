@@ -125,15 +125,15 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
  {
    //create menu
    menuBar = new JMenuBar();
-   zoomMenu = new JMenu(Messages.getString("PictureExplorer.0")); //$NON-NLS-1$
-   twentyFive = new JMenuItem("25%"); //$NON-NLS-1$
-   fifty = new JMenuItem("50%"); //$NON-NLS-1$
-   seventyFive = new JMenuItem("75%"); //$NON-NLS-1$
-   hundred = new JMenuItem("100%"); //$NON-NLS-1$
+   zoomMenu = new JMenu(Messages.getString("PictureExplorer.0")); 
+   twentyFive = new JMenuItem("25%"); 
+   fifty = new JMenuItem("50%"); 
+   seventyFive = new JMenuItem("75%"); 
+   hundred = new JMenuItem("100%"); 
    hundred.setEnabled(false);
-   hundredFifty = new JMenuItem("150%"); //$NON-NLS-1$
-   twoHundred = new JMenuItem("200%"); //$NON-NLS-1$
-   fiveHundred = new JMenuItem("500%"); //$NON-NLS-1$
+   hundredFifty = new JMenuItem("150%"); 
+   twoHundred = new JMenuItem("200%"); 
+   fiveHundred = new JMenuItem("500%"); 
    
    // add the action listeners
    twentyFive.addActionListener(this);
@@ -169,7 +169,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    imageDisplay = new ImageDisplay(bimg);
    imageDisplay.addMouseMotionListener(this);
    imageDisplay.addMouseListener(this);
-   imageDisplay.setToolTipText(Messages.getString("PictureExplorer.8")); //$NON-NLS-1$
+   imageDisplay.setToolTipText(Messages.getString("PictureExplorer.8")); 
    scrollPane.setViewportView(imageDisplay);
    pictureFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
  }
@@ -203,10 +203,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
  private void setUpNextAndPreviousButtons()
  {
    // create the image icons for the buttons
-   Icon prevIcon = new ImageIcon(SoundExplorer.class.getResource("leftArrow.gif"),  //$NON-NLS-1$
-                                 Messages.getString("PictureExplorer.10")); //$NON-NLS-1$
-   Icon nextIcon = new ImageIcon(SoundExplorer.class.getResource("rightArrow.gif"),  //$NON-NLS-1$
-                                 Messages.getString("PictureExplorer.12")); //$NON-NLS-1$
+   Icon prevIcon = new ImageIcon(SoundExplorer.class.getResource("leftArrow.gif"),  
+                                 Messages.getString("PictureExplorer.10")); 
+   Icon nextIcon = new ImageIcon(SoundExplorer.class.getResource("rightArrow.gif"),  
+                                 Messages.getString("PictureExplorer.12")); 
    // create the arrow buttons
    xPrevButton = new JButton(prevIcon);
    xNextButton = new JButton(nextIcon);
@@ -214,10 +214,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    yNextButton = new JButton(nextIcon);
    
    // set the tool tip text
-   xNextButton.setToolTipText(Messages.getString("PictureExplorer.13")); //$NON-NLS-1$
-   xPrevButton.setToolTipText(Messages.getString("PictureExplorer.14")); //$NON-NLS-1$
-   yNextButton.setToolTipText(Messages.getString("PictureExplorer.15")); //$NON-NLS-1$
-   yPrevButton.setToolTipText(Messages.getString("PictureExplorer.16")); //$NON-NLS-1$
+   xNextButton.setToolTipText(Messages.getString("PictureExplorer.13")); 
+   xPrevButton.setToolTipText(Messages.getString("PictureExplorer.14")); 
+   yNextButton.setToolTipText(Messages.getString("PictureExplorer.15")); 
+   yPrevButton.setToolTipText(Messages.getString("PictureExplorer.16")); 
    
    // set the sizes of the buttons
    int prevWidth = prevIcon.getIconWidth() + 2;
@@ -285,8 +285,8 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    Box hBox = Box.createHorizontalBox();
    
    // create the labels
-   xLabel = new JLabel("X:"); //$NON-NLS-1$
-   yLabel = new JLabel("Y:"); //$NON-NLS-1$
+   xLabel = new JLabel("X:"); 
+   yLabel = new JLabel("Y:"); 
    
    // create the text fields
    xValue = new JTextField(Integer.toString(xIndex + numberBase),6);
@@ -343,12 +343,12 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    Pixel pixel = new Pixel(picture,xIndex,yIndex);
    
    // create the labels
-   rValue = new JLabel("R: " + pixel.getRed()); //$NON-NLS-1$
-   gValue = new JLabel("G: " + pixel.getGreen()); //$NON-NLS-1$
-   bValue = new JLabel("B: " + pixel.getBlue()); //$NON-NLS-1$
+   rValue = new JLabel("R: " + pixel.getRed()); 
+   gValue = new JLabel("G: " + pixel.getGreen()); 
+   bValue = new JLabel("B: " + pixel.getBlue()); 
    
    // create the sample color panel and label
-   colorLabel = new JLabel(Messages.getString("PictureExplorer.22")); //$NON-NLS-1$
+   colorLabel = new JLabel(Messages.getString("PictureExplorer.22")); 
    colorPanel = new JPanel();
    colorPanel.setBorder(new LineBorder(Color.black,1));
    
@@ -550,9 +550,9 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
      // set the values based on the pixel
      xValue.setText(Integer.toString(xIndex  + numberBase));
      yValue.setText(Integer.toString(yIndex + numberBase));
-     rValue.setText("R: " + pixel.getRed()); //$NON-NLS-1$
-     gValue.setText("G: " + pixel.getGreen()); //$NON-NLS-1$
-     bValue.setText("B: " + pixel.getBlue()); //$NON-NLS-1$
+     rValue.setText("R: " + pixel.getRed()); 
+     gValue.setText("G: " + pixel.getGreen()); 
+     bValue.setText("B: " + pixel.getBlue()); 
      colorPanel.setBackground(new Color(pixel.getRed(), pixel.getGreen(), pixel.getBlue()));
      
    } 
@@ -592,11 +592,11 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   */
  private void clearInformation()
  {
-   xValue.setText("N/A"); //$NON-NLS-1$
-   yValue.setText("N/A"); //$NON-NLS-1$
-   rValue.setText("R: N/A"); //$NON-NLS-1$
-   gValue.setText("G: N/A"); //$NON-NLS-1$
-   bValue.setText("B: N/A"); //$NON-NLS-1$
+   xValue.setText("N/A"); 
+   yValue.setText("N/A"); 
+   rValue.setText("R: N/A"); 
+   gValue.setText("G: N/A"); 
+   bValue.setText("B: N/A"); 
    colorPanel.setBackground(Color.black);
    xIndex = -1;
    yIndex = -1;
@@ -673,54 +673,54 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
  public void actionPerformed(ActionEvent a)
  {
    
-   if(a.getActionCommand().equals(Messages.getString("PictureExplorer.31"))) //$NON-NLS-1$
+   if(a.getActionCommand().equals(Messages.getString("PictureExplorer.31"))) 
    {
      this.repaint();
    }
    
-   if(a.getActionCommand().equals("25%")) //$NON-NLS-1$
+   if(a.getActionCommand().equals("25%")) 
    {
      this.zoom(.25);
      enableZoomItems();
      twentyFive.setEnabled(false);
    }
    
-   if(a.getActionCommand().equals("50%")) //$NON-NLS-1$
+   if(a.getActionCommand().equals("50%")) 
    {
      this.zoom(.50);
      enableZoomItems();
      fifty.setEnabled(false);
    }
    
-   if(a.getActionCommand().equals("75%")) //$NON-NLS-1$
+   if(a.getActionCommand().equals("75%")) 
    {
      this.zoom(.75);
      enableZoomItems();
      seventyFive.setEnabled(false);
    }
    
-   if(a.getActionCommand().equals("100%")) //$NON-NLS-1$
+   if(a.getActionCommand().equals("100%")) 
    {
      this.zoom(1.0);
      enableZoomItems();
      hundred.setEnabled(false);
    }
    
-   if(a.getActionCommand().equals("150%")) //$NON-NLS-1$
+   if(a.getActionCommand().equals("150%")) 
    {
      this.zoom(1.5);
      enableZoomItems();
      hundredFifty.setEnabled(false);
    }
    
-   if(a.getActionCommand().equals("200%")) //$NON-NLS-1$
+   if(a.getActionCommand().equals("200%")) 
    {
      this.zoom(2.0);
      enableZoomItems();
      twoHundred.setEnabled(false);
    }
    
-   if(a.getActionCommand().equals("500%")) //$NON-NLS-1$
+   if(a.getActionCommand().equals("500%")) 
    {
      this.zoom(5.0);
      enableZoomItems();

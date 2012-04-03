@@ -75,7 +75,6 @@ public class PerspectiveCamera extends edu.cmu.cs.stage3.alice.core.Camera {
 		getSceneGraphPerspectiveCamera().setPlane( plane );
 	}
 
-	
 	protected void propertyChanged( edu.cmu.cs.stage3.alice.core.Property property, Object value ) {
 		if( property == minimumX ) {
 			minimumXValueChanged( (Number)value );

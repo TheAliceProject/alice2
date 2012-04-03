@@ -33,7 +33,6 @@ import java.awt.event.*;
  * @author Jason Pratt
  */
 public class AliceMenuUI extends javax.swing.plaf.basic.BasicMenuUI {
-	
 	protected MouseInputListener createMouseInputListener( JComponent c ) {
 		return new AliceMouseInputHandler();
 	}
@@ -144,7 +143,6 @@ public class AliceMenuUI extends javax.swing.plaf.basic.BasicMenuUI {
 		public void mouseMoved( MouseEvent e ) {}
 	}
 
-	
 	protected void setupPostTimer( JMenu menu ) {
 		Timer timer = new Timer( menu.getDelay(), new AlicePostAction( menu ) );
 		timer.setRepeats( false );
@@ -167,13 +165,11 @@ public class AliceMenuUI extends javax.swing.plaf.basic.BasicMenuUI {
 			defaultManager.setSelectedPath( newPath );
 		}
 
-		
 		public boolean isEnabled() {
 			return menu.getModel().isEnabled();
 		}
 	}
 
-	
 	public MenuElement[] getPath() {
 		java.util.Vector path = new java.util.Vector();
 		MenuElement me = menuItem;

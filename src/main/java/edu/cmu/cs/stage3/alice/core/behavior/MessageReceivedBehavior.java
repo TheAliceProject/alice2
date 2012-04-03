@@ -81,7 +81,6 @@ public class MessageReceivedBehavior extends TriggerBehavior implements edu.cmu.
 		}
 	}
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		world.addMessageListener( this );

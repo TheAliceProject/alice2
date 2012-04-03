@@ -169,7 +169,6 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 	}
 	*/
 
-	
 	public void mousePressed( java.awt.event.MouseEvent ev ) {
 		if( enabled ) {
 			super.mousePressed( ev );
@@ -229,7 +228,6 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		}
 	}
 
-	
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( (! isActionAborted()) && hideCursorOnDrag && doWrap ) {
 			ev.getComponent().setCursor( savedCursor );
@@ -256,7 +254,6 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		super.mouseReleased( ev );
 	}
 
-	
 	public void abortAction() {
 		component.setCursor( savedCursor );
 		super.abortAction();

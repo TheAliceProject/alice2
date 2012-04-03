@@ -53,7 +53,7 @@ public class ScriptScratchPad extends javax.swing.JPanel {
 		if( b ) {
 			this.add( scratchPadLabel, new GridBagConstraints(0, 0, 3, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(1, 4, 1, 4), 0, 0) );
 		} else {
-			this.remove( scratchPadLabel );
+			this.remove( scratchPadLabel );	// Aik Min - need work
 		}
 	}
 
@@ -71,10 +71,10 @@ public class ScriptScratchPad extends javax.swing.JPanel {
 	private void jbInit() {
 		this.setLayout(gridBagLayout1);
 		scriptPanel.setLayout(borderLayout1);
-		performAllButton.setText(Messages.getString("ScriptScratchPad.0")); //$NON-NLS-1$
-		performSelectedButton.setText(Messages.getString("ScriptScratchPad.1")); //$NON-NLS-1$
-		scratchPadLabel.setFont(new java.awt.Font("Dialog", 1, 16)); //$NON-NLS-1$
-		scratchPadLabel.setText(Messages.getString("ScriptScratchPad.3")); //$NON-NLS-1$
+		performAllButton.setText(Messages.getString("ScriptScratchPad.0")); 
+		performSelectedButton.setText(Messages.getString("ScriptScratchPad.1")); 
+		scratchPadLabel.setFont(new java.awt.Font("Dialog", 1, 16)); 
+		scratchPadLabel.setText(Messages.getString("ScriptScratchPad.3")); 
 		this.add(scriptPanel, new GridBagConstraints(0, 1, 3, 1, 1.0, 1.0
 			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		this.add(performSelectedButton, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0

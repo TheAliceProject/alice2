@@ -51,7 +51,6 @@ public class GroupingPanel extends javax.swing.JPanel implements java.awt.dnd.Dr
 			this.includeRight = includeRight;
 		}
 
-		
 		public void paintBorder( java.awt.Component c, java.awt.Graphics g, int x, int y, int width, int height ) {
 			java.awt.Color oldColor = g.getColor();
 			g.setColor( color );
@@ -72,12 +71,10 @@ public class GroupingPanel extends javax.swing.JPanel implements java.awt.dnd.Dr
 			g.setColor( oldColor );
 		}
 
-		
 		public java.awt.Insets getBorderInsets( java.awt.Component c ) {
 			return new java.awt.Insets( includeTop ? thickness : 0, includeLeft ? thickness : 0, includeBottom ? thickness : 0, includeRight ? thickness : 0 );
 		}
 
-		
 		public java.awt.Insets getBorderInsets( java.awt.Component c, java.awt.Insets insets ) {
 			insets.top = includeTop ? thickness : 0;
 			insets.left = includeLeft ? thickness : 0;
@@ -94,7 +91,6 @@ public class GroupingPanel extends javax.swing.JPanel implements java.awt.dnd.Dr
 			return thickness;
 		}
 
-		
 		public boolean isBorderOpaque() {
 			return true;
 		}
@@ -113,13 +109,11 @@ public class GroupingPanel extends javax.swing.JPanel implements java.awt.dnd.Dr
 
 		addContainerListener(
 			new java.awt.event.ContainerAdapter() {
-				
 				public void componentAdded( java.awt.event.ContainerEvent ev ) {
 					if( ev.getChild().getDropTarget() == null ) { // is this heavy-handed?
 						ev.getChild().setDropTarget( new java.awt.dnd.DropTarget( ev.getChild(), GroupingPanel.this ) );
 					}
 				}
-				
 				public void componentRemoved( java.awt.event.ContainerEvent ev ) { //MEMFIX
 					if( ev.getChild().getDropTarget() != null ) { // is this heavy-handed?
 						ev.getChild().getDropTarget().setActive( false );
@@ -149,19 +143,16 @@ public class GroupingPanel extends javax.swing.JPanel implements java.awt.dnd.Dr
 	public void paintForeground( java.awt.Graphics g ) {
 	}
 
-	
 	public void paintComponent( java.awt.Graphics g ) {
 		super.paintComponent( g );
 		paintBackground( g );
 	}
 
-	
 	public void paintChildren( java.awt.Graphics g ) {
 		super.paintChildren( g );
 		paintForeground( g );
 	}
 
-	
 	public void printComponent( java.awt.Graphics g ) {
 		if( authoringToolConfig.getValue( "printing.fillBackground" ).equalsIgnoreCase( "true" ) ) {
 			super.printComponent( g );

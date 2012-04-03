@@ -54,22 +54,18 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 		init();
 	}
 
-	
 	public void preDialogShow( javax.swing.JDialog dialog ) {
 		super.preDialogShow( dialog );
 	}
 
-	
 	public void postDialogShow( javax.swing.JDialog dialog ) {
 		super.postDialogShow( dialog );
 	}	
 
-	
 	public String getTitle() {
-		return Messages.getString("AliceAlertContentPane.0"); //$NON-NLS-1$
+		return Messages.getString("AliceAlertContentPane.0"); 
 	}
 
-	
 	public void addOKActionListener( java.awt.event.ActionListener l ) {
 		cancelButton.addActionListener(l);
 	}
@@ -80,7 +76,6 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 		largeSize = new java.awt.Dimension(700, 350);
 		setMode( LESS_DETAIL_MODE );
 		addComponentListener( new java.awt.event.ComponentAdapter() {
-			
 			public void componentResized( java.awt.event.ComponentEvent e ) {
 				if (mode == LESS_DETAIL_MODE){
 					smallSize = AliceAlertContentPane.this.getSize();
@@ -106,7 +101,6 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 	}
 
 
-	
 	public java.awt.Dimension getPreferredSize() {
 		java.awt.Dimension preferredSize = super.getPreferredSize();
 //		if( mode == LESS_DETAIL_MODE) {
@@ -119,11 +113,9 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 	}
 
 	protected void setLessDetail(){
-		detailButton.setText( Messages.getString("AliceAlertContentPane.1") ); //$NON-NLS-1$
-		detailScrollPane.setEnabled(false);
-		detailPanel.setEnabled(true);
-		//this.remove(detailScrollPane);
-		//this.add(detailPanel, BorderLayout.CENTER);
+		detailButton.setText( Messages.getString("AliceAlertContentPane.1") ); 
+		this.remove(detailScrollPane);	// Aik Min - need work !
+		this.add(detailPanel, BorderLayout.CENTER);
 		
 		buttonPanel.removeAll();
 		buttonConstraints.gridx = 0;
@@ -137,11 +129,9 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 		buttonPanel.add(detailButton, buttonConstraints);
 	}
 	protected void setMoreDetail(){
-		detailButton.setText( Messages.getString("AliceAlertContentPane.2") ); //$NON-NLS-1$
-		detailScrollPane.setEnabled(true);
-		detailPanel.setEnabled(false);
-//		this.remove(detailPanel);
-//		this.add(detailScrollPane, BorderLayout.CENTER);
+		detailButton.setText( Messages.getString("AliceAlertContentPane.2") ); 
+		this.remove(detailPanel);	// Aik Min - need work !
+		this.add(detailScrollPane, BorderLayout.CENTER);
 		
 		buttonPanel.removeAll();
 		buttonConstraints.gridx = 0;
@@ -163,7 +153,7 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 		} else if( mode == MORE_DETAIL_MODE ) {
 			setMoreDetail();
 		} else {
-			throw new IllegalArgumentException( Messages.getString("AliceAlertContentPane.3") + mode ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("AliceAlertContentPane.3") + mode ); 
 		}
 	}
 	
@@ -186,15 +176,15 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 	}
 
 	protected void writeAliceHeaderToTextPane() {
-		detailTextPane.setText( "" ); //$NON-NLS-1$
-		detailStream.println( messageLabel.getText() + "\n" ); //$NON-NLS-1$
+		detailTextPane.setText( "" ); 
+		detailStream.println( messageLabel.getText() + "\n" ); 
 		detailStream.println();
 
-		detailStream.println( Messages.getString("AliceAlertContentPane.6") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() ); //$NON-NLS-1$
-		//String[] systemProperties = { "os.name", "os.version", "os.arch", "java.vm.name", "java.vm.version", "user.dir" };
-		//for( int i = 0; i < systemProperties.length; i++ ) {
-		//	detailStream.println( systemProperties[i] + ": " + System.getProperty( systemProperties[i] ) );
-		//}
+		detailStream.println( Messages.getString("AliceAlertContentPane.6") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() ); 
+		String[] systemProperties = { "os.name", "os.version", "os.arch", "java.vm.name", "java.vm.version", "user.dir" };
+		for( int i = 0; i < systemProperties.length; i++ ) {
+			detailStream.println( systemProperties[i] + ": " + System.getProperty( systemProperties[i] ) );
+		}
 		detailStream.println();
 	}
 
@@ -217,19 +207,19 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 
 	protected String postStacktrace() {
 		try {
-			java.net.URL url = new java.net.URL( "http://www.alice.org/bugreport/stacktrace.php" ); //$NON-NLS-1$
+			java.net.URL url = new java.net.URL( "http://www.alice.org/bugreport/stacktrace.php" ); 
 			java.net.URLConnection connection = url.openConnection();
 			connection.setDoInput( true );
 			connection.setDoOutput( true );
 			connection.setUseCaches( false );
-			connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" ); //$NON-NLS-1$ //$NON-NLS-2$
+			connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded" );  
 
 			String stacktrace = java.net.URLEncoder.encode( detailTextPane.getText() );
-			while( stacktrace.indexOf( "%0D" ) > -1 ) { // delete the carriage returns //$NON-NLS-1$
-				int i = stacktrace.indexOf( "%0D" ); //$NON-NLS-1$
+			while( stacktrace.indexOf( "%0D" ) > -1 ) { // delete the carriage returns 
+				int i = stacktrace.indexOf( "%0D" ); 
 				stacktrace = stacktrace.substring( 0, i ) + stacktrace.substring( i + 3 );
 			}
-			String content = "stacktrace=" + stacktrace; //$NON-NLS-1$
+			String content = "stacktrace=" + stacktrace; 
 			java.io.DataOutputStream output = new java.io.DataOutputStream( new java.io.BufferedOutputStream( connection.getOutputStream() ) );
 			output.writeBytes( content );
 			output.flush();
@@ -241,8 +231,8 @@ public abstract class AliceAlertContentPane extends edu.cmu.cs.stage3.swing.Cont
 			input.close();
 			return stacktraceIDString;
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("AliceAlertContentPane.13"), t ); //$NON-NLS-1$
-			return "0"; //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("AliceAlertContentPane.13"), t ); 
+			return "0"; 
 		}
 	}
 
@@ -302,11 +292,11 @@ this.setLocation(1, 1);
 		messageLabel.setOpaque(false);
 		messageLabel.setPreferredSize(new java.awt.Dimension(402, 1));
 		messageLabel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		messageLabel.setText(Messages.getString("AliceAlertContentPane.15")); //$NON-NLS-1$
+		messageLabel.setText(Messages.getString("AliceAlertContentPane.15"));  //An unknown error has occurred.
 				
-		cancelButton.setText(Messages.getString("AliceAlertContentPane.16")); //$NON-NLS-1$
+		cancelButton.setText(Messages.getString("AliceAlertContentPane.16"));  //OK
 		
-		detailButton.setText(Messages.getString("AliceAlertContentPane.17")); //$NON-NLS-1$
+		detailButton.setText(Messages.getString("AliceAlertContentPane.17")); 	//More Detail >>
 		detailButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				detailButton_actionPerformed(e);
@@ -318,7 +308,7 @@ this.setLocation(1, 1);
 				submitBugButton_actionPerformed(e);
 			}
 		});*/
-		copyButton.setText(Messages.getString("AliceAlertContentPane.18")); //$NON-NLS-1$
+		copyButton.setText(Messages.getString("AliceAlertContentPane.18")); 
 		copyButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				copyButton_actionPerformed(e);
@@ -335,7 +325,7 @@ this.setLocation(1, 1);
 		
 		
 		
-		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/errorDialogueIcon.png" ); //$NON-NLS-1$
+		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/errorDialogueIcon.png" ); 
 		errorIconPanel.setImage( java.awt.Toolkit.getDefaultToolkit().createImage( errorImageResources ) );
 		messagePanel.add( errorIconPanel, java.awt.BorderLayout.WEST );
 		messagePanel.add(messageLabel, BorderLayout.CENTER);
@@ -344,10 +334,9 @@ this.setLocation(1, 1);
 		detailStream = detailTextPane.getNewStyleStream( detailTextPane.stdErrStyle );
 		detailScrollPane.setViewportView( detailTextPane );
 		detailScrollPane.setPreferredSize(new java.awt.Dimension(492, 300));
-		//detailScrollPane.setEnabled(false);
+
 		add( messagePanel, BorderLayout.NORTH );
 		add(detailPanel, BorderLayout.CENTER);
-		//add(detailScrollPane, BorderLayout.CENTER);
 		add( buttonPanel, BorderLayout.SOUTH );
 		
 		

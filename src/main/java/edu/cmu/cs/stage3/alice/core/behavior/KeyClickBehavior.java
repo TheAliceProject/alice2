@@ -47,7 +47,6 @@ public class KeyClickBehavior extends TriggerBehavior implements java.awt.event.
 		}
 	}
 
-	
 	public void manufactureDetails() {
 		super.manufactureDetails();
 		edu.cmu.cs.stage3.alice.core.Variable keyChar = new edu.cmu.cs.stage3.alice.core.Variable();
@@ -90,7 +89,6 @@ public class KeyClickBehavior extends TriggerBehavior implements java.awt.event.
 	public void keyTyped( java.awt.event.KeyEvent keyEvent ) {
 	}
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		m_renderTargets = (edu.cmu.cs.stage3.alice.core.RenderTarget[])renderTargets.get();

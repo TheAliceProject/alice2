@@ -65,7 +65,6 @@ public class CallToUserDefinedQuestionPrototype extends QuestionPrototype {
 		this.actualQuestion = actualQuestion;
 	}
 
-	
 	public edu.cmu.cs.stage3.alice.core.Element createNewElement() {
 		java.util.HashMap knownMap = new java.util.HashMap();
 		for( int i = 0; i < knownPropertyValues.length; i++ ) {
@@ -92,7 +91,6 @@ public class CallToUserDefinedQuestionPrototype extends QuestionPrototype {
 		return callToUserDefinedQuestion;
 	}
 
-	
 	public ElementPrototype createCopy( edu.cmu.cs.stage3.util.StringObjectPair[] newKnownPropertyValues ) {
 		return super.createCopy( newKnownPropertyValues );
 	}
@@ -111,7 +109,6 @@ public class CallToUserDefinedQuestionPrototype extends QuestionPrototype {
 
 	// a rather inelegant solution for creating copies of the correct type.
 	// subclasses should override this method and call their own constructor
-	
 	protected ElementPrototype createInstance( Class elementClass, edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues, String[] desiredProperties ) {
 		return new CallToUserDefinedQuestionPrototype( actualQuestion, knownPropertyValues, desiredProperties );
 	}

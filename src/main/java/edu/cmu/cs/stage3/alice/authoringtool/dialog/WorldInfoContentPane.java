@@ -39,9 +39,8 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		guiInit();
 	}
 
-	
 	public String getTitle() {
-		return Messages.getString("WorldInfoContentPane.0"); //$NON-NLS-1$
+		return Messages.getString("WorldInfoContentPane.0"); 
 	}
 
 	private void guiInit() {
@@ -69,28 +68,28 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			int saveCount = 0;
 			long worldOpenTime = 0;
 
-			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.playCount" ) != null ) { //$NON-NLS-1$
-				playCount = Integer.parseInt( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.playCount" ) ); //$NON-NLS-1$
+			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.playCount" ) != null ) { 
+				playCount = Integer.parseInt( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.playCount" ) ); 
 			}
-			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.saveCount" ) != null ) { //$NON-NLS-1$
-				saveCount = Integer.parseInt( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.saveCount" ) ); //$NON-NLS-1$
+			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.saveCount" ) != null ) { 
+				saveCount = Integer.parseInt( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.saveCount" ) ); 
 			}
-			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime" ) != null ) { //$NON-NLS-1$
-				worldOpenTime = Long.parseLong( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime" ) ); //$NON-NLS-1$
+			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime" ) != null ) { 
+				worldOpenTime = Long.parseLong( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime" ) ); 
 			}
 			worldOpenTime /= 60000L;
 
-			objectCountLabel.setText( Messages.getString("WorldInfoContentPane.7") + itaCounter.getShownIndexedTriangleArrayCount() ); //$NON-NLS-1$
-			polyCountLabel.setText( Messages.getString("WorldInfoContentPane.8") + (itaCounter.getShownIndexCount() / 3) ); //$NON-NLS-1$
-			textureCountLabel.setText( Messages.getString("WorldInfoContentPane.9") + textureMapCounter.getTextureMapCount() ); //$NON-NLS-1$
-			textureMemoryLabel.setText( Messages.getString("WorldInfoContentPane.10") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.formatMemorySize( textureMapCounter.getTextureMapMemoryCount() ) ); //$NON-NLS-1$
-			userDefinedResponseCountLabel.setText( Messages.getString("WorldInfoContentPane.11") + world.getDescendants( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class ).length ); //$NON-NLS-1$
-			userDefinedQuestionCountLabel.setText( Messages.getString("WorldInfoContentPane.12") + world.getDescendants( edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class ).length ); //$NON-NLS-1$
-			behaviorCountLabel.setText( Messages.getString("WorldInfoContentPane.13") + world.getDescendants( edu.cmu.cs.stage3.alice.core.Behavior.class ).length ); //$NON-NLS-1$
-			playCountLabel.setText( Messages.getString("WorldInfoContentPane.14") + playCount ); //$NON-NLS-1$
-			saveCountLabel.setText( Messages.getString("WorldInfoContentPane.15") + saveCount ); //$NON-NLS-1$
-			worldOpenTimeLabel.setText( Messages.getString("WorldInfoContentPane.16") + worldOpenTime + ((worldOpenTime == 1) ? Messages.getString("WorldInfoContentPane.17") : Messages.getString("WorldInfoContentPane.18")) ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			currentRendererLabel.setText(Messages.getString("WorldInfoContentPane.19")+edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getCurrentRendererText()); //$NON-NLS-1$
+			objectCountLabel.setText( Messages.getString("WorldInfoContentPane.7") + itaCounter.getShownIndexedTriangleArrayCount() ); 
+			polyCountLabel.setText( Messages.getString("WorldInfoContentPane.8") + (itaCounter.getShownIndexCount() / 3) ); 
+			textureCountLabel.setText( Messages.getString("WorldInfoContentPane.9") + textureMapCounter.getTextureMapCount() ); 
+			textureMemoryLabel.setText( Messages.getString("WorldInfoContentPane.10") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.formatMemorySize( textureMapCounter.getTextureMapMemoryCount() ) ); 
+			userDefinedResponseCountLabel.setText( Messages.getString("WorldInfoContentPane.11") + world.getDescendants( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class ).length ); 
+			userDefinedQuestionCountLabel.setText( Messages.getString("WorldInfoContentPane.12") + world.getDescendants( edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class ).length ); 
+			behaviorCountLabel.setText( Messages.getString("WorldInfoContentPane.13") + world.getDescendants( edu.cmu.cs.stage3.alice.core.Behavior.class ).length ); 
+			playCountLabel.setText( Messages.getString("WorldInfoContentPane.14") + playCount ); 
+			saveCountLabel.setText( Messages.getString("WorldInfoContentPane.15") + saveCount ); 
+			worldOpenTimeLabel.setText( Messages.getString("WorldInfoContentPane.16") + worldOpenTime + ((worldOpenTime == 1) ? Messages.getString("WorldInfoContentPane.17") : Messages.getString("WorldInfoContentPane.18")) );   
+			currentRendererLabel.setText(Messages.getString("WorldInfoContentPane.19")+edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getCurrentRendererText()); 
 
 			responseUsageGraph.refresh();
 		}
@@ -133,25 +132,25 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		setLayout(borderLayout1);
 		buttonPanel.setOpaque(false);
 		buttonPanel.setLayout(gridBagLayout1);
-		doneButton.setText(Messages.getString("WorldInfoContentPane.20")); //$NON-NLS-1$
-		textureMemoryLabel.setText(Messages.getString("WorldInfoContentPane.21")); //$NON-NLS-1$
+		doneButton.setText(Messages.getString("WorldInfoContentPane.20")); 
+		textureMemoryLabel.setText(Messages.getString("WorldInfoContentPane.21")); 
 		mainPanel.setBorder(border2);
 		mainPanel.setOpaque(false);
 		mainPanel.setLayout(gridBagLayout2);
-		responseUsageLabel.setText(Messages.getString("WorldInfoContentPane.22")); //$NON-NLS-1$
-		objectCountLabel.setText(Messages.getString("WorldInfoContentPane.23")); //$NON-NLS-1$
-		polyCountLabel.setText(Messages.getString("WorldInfoContentPane.24")); //$NON-NLS-1$
+		responseUsageLabel.setText(Messages.getString("WorldInfoContentPane.22")); 
+		objectCountLabel.setText(Messages.getString("WorldInfoContentPane.23")); 
+		polyCountLabel.setText(Messages.getString("WorldInfoContentPane.24")); 
 		responseUsagePanel.setOpaque(false);
 		responseUsagePanel.setLayout(borderLayout2);
-		behaviorCountLabel.setText(Messages.getString("WorldInfoContentPane.25")); //$NON-NLS-1$
-		userDefinedResponseCountLabel.setText(Messages.getString("WorldInfoContentPane.26")); //$NON-NLS-1$
+		behaviorCountLabel.setText(Messages.getString("WorldInfoContentPane.25")); 
+		userDefinedResponseCountLabel.setText(Messages.getString("WorldInfoContentPane.26")); 
 		mainScrollPane.getViewport().setBackground(new Color(232, 230, 255));
 		mainScrollPane.setOpaque(false);
-		textureCountLabel.setText(Messages.getString("WorldInfoContentPane.27")); //$NON-NLS-1$
-		playCountLabel.setText(Messages.getString("WorldInfoContentPane.28")); //$NON-NLS-1$
-		saveCountLabel.setText(Messages.getString("WorldInfoContentPane.29")); //$NON-NLS-1$
-		worldOpenTimeLabel.setText(Messages.getString("WorldInfoContentPane.30")); //$NON-NLS-1$
-		userDefinedQuestionCountLabel.setText(Messages.getString("WorldInfoContentPane.31")); //$NON-NLS-1$
+		textureCountLabel.setText(Messages.getString("WorldInfoContentPane.27")); 
+		playCountLabel.setText(Messages.getString("WorldInfoContentPane.28")); 
+		saveCountLabel.setText(Messages.getString("WorldInfoContentPane.29")); 
+		worldOpenTimeLabel.setText(Messages.getString("WorldInfoContentPane.30")); 
+		userDefinedQuestionCountLabel.setText(Messages.getString("WorldInfoContentPane.31")); 
 		add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.add(doneButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
 			,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 0, 2, 0), 0, 0));
@@ -188,7 +187,6 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
 	}
 
-	
 	public void addOKActionListener( java.awt.event.ActionListener l ) {
 		doneButton.addActionListener( l );
 	}

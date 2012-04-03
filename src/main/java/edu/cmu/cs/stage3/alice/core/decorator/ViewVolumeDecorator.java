@@ -33,13 +33,11 @@ public abstract class ViewVolumeDecorator extends Decorator {
 	private edu.cmu.cs.stage3.alice.scenegraph.Visual m_sgVisualFaces = null;
 	private edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray m_sgITA = null;
 
-	
 	protected ReferenceFrame getReferenceFrame() {
 		return getCamera();
 	}
 	protected abstract Camera getCamera();
 
-    
 	public void internalRelease( int pass ) {
         switch( pass ) {
         case 1:
@@ -75,7 +73,6 @@ public abstract class ViewVolumeDecorator extends Decorator {
     }
 	protected abstract double[] getXYNearAndXYFar( double zNear, double zFar );
 
-	
 	protected void update() {
 		super.update();
         boolean requiresVerticesToBeUpdated = isDirty();

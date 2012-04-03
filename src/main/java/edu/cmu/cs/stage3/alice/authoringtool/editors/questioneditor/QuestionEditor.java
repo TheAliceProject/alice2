@@ -61,12 +61,10 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         updateGui();
     }
 
-    
 	protected java.awt.Color getEditorColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedQuestionEditor");
     }
 
-    
 	protected edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel createElementTree(edu.cmu.cs.stage3.alice.core.Element selected){
         if (selected instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion){
             MainCompositeQuestionPanel toReturn = new MainCompositeQuestionPanel();
@@ -77,7 +75,6 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
     }
 
 
-    
 	protected void initPrototypes(){
 
         String ifElseString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class);
@@ -188,7 +185,6 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
 
     }
 
-    
 	protected void addPrototypes(java.awt.Container prototypeContainer){
 
         prototypeContainer.add(ifElsePrototype);

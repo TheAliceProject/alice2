@@ -27,8 +27,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
  * @author Jason Pratt, Dennis Cosgrove
  */
 public class NewResponseContentPane extends NewNamedElementContentPane {
-	
 	public String getTitle() {
-		return Messages.getString("NewResponseContentPane.0"); //$NON-NLS-1$
+		return Messages.getString("NewResponseContentPane.0"); 
 	}
 }

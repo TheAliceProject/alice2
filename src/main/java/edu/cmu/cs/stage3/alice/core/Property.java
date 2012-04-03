@@ -90,7 +90,7 @@ public abstract class Property {
                             propertyNames.addElement( propertyName );
                         }
                     } else {
-                        System.err.println( ownerClass + " " + propertyName ); //$NON-NLS-1$
+                        System.err.println( ownerClass + " " + propertyName ); 
                     }
                 }
             }
@@ -169,7 +169,7 @@ public abstract class Property {
 					if( field.get( m_owner ) == this ) {
 						return cls;
 					} else {
-						throw new RuntimeException( m_owner + Messages.getString("Property.1") +  m_name + Messages.getString("Property.2") + this ); //$NON-NLS-1$ //$NON-NLS-2$
+						throw new RuntimeException( m_owner + Messages.getString("Property.1") +  m_name + Messages.getString("Property.2") + this );  
 					}
 				} catch( NoSuchFieldException nsfe ) {
 					cls = cls.getSuperclass();
@@ -194,22 +194,22 @@ public abstract class Property {
 				try {
 					Class[] parameterTypes = {};
 					Object[] parameterValues = {};
-					java.lang.reflect.Method method = m_value.getClass().getMethod( "clone", parameterTypes ); //$NON-NLS-1$
+					java.lang.reflect.Method method = m_value.getClass().getMethod( "clone", parameterTypes ); 
 					if( method.isAccessible() ) {
 						return method.invoke( m_value, parameterValues );
 					} else {
 						return m_value;
 					}
 				} catch( NoSuchMethodException nsme ) {
-					Element.warnln( Messages.getString("Property.4") + this + " " + nsme ); //$NON-NLS-1$ //$NON-NLS-2$
+					Element.warnln( Messages.getString("Property.4") + this + " " + nsme );  
 					//nsme.printStackTrace();
 					return m_value;
 				} catch( IllegalAccessException iae ) {
-					Element.warnln( Messages.getString("Property.6") + this + " " + iae ); //$NON-NLS-1$ //$NON-NLS-2$
+					Element.warnln( Messages.getString("Property.6") + this + " " + iae );  
 					//iae.printStackTrace();
 					return m_value;
 				} catch( java.lang.reflect.InvocationTargetException ite ) {
-					Element.warnln( Messages.getString("Property.8") + this + " " + ite ); //$NON-NLS-1$ //$NON-NLS-2$
+					Element.warnln( Messages.getString("Property.8") + this + " " + ite );  
 					//ite.getTargetException().printStackTrace();
 					return m_value;
 				}
@@ -235,12 +235,12 @@ public abstract class Property {
             Object[] array = (Object[])value;
             for( int i=0; i<array.length; i++ ) {
                 if( isValueInADifferentWorld( array[ i ] ) ) {
-                    throw new edu.cmu.cs.stage3.alice.core.IllegalArrayPropertyValueException( this, i, value, Messages.getString("Property.10") ); //$NON-NLS-1$
+                    throw new edu.cmu.cs.stage3.alice.core.IllegalArrayPropertyValueException( this, i, value, Messages.getString("Property.10") ); 
                 }
             }
         } else {
             if( isValueInADifferentWorld( value ) ) {
-                throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( this, value, Messages.getString("Property.11") ); //$NON-NLS-1$
+                throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( this, value, Messages.getString("Property.11") ); 
             }
         }
     }
@@ -267,14 +267,14 @@ public abstract class Property {
 						//pass
 					} else {
 						//Element.debugln( this + " " + value );
-						throw new IllegalPropertyValueException( this, value, Messages.getString("Property.12") + getName() + Messages.getString("Property.13") + getOwner() + ".  " + valueClass + Messages.getString("Property.15") + expression.getValueClass() ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+						throw new IllegalPropertyValueException( this, value, Messages.getString("Property.12") + getName() + Messages.getString("Property.13") + getOwner() + ".  " + valueClass + Messages.getString("Property.15") + expression.getValueClass() );    //$NON-NLS-4$
 					}
 				}
 			} else {
 				if( valueClass.isAssignableFrom( value.getClass() ) ) {
 					//pass
 				} else {
-					throw new IllegalPropertyValueException( this, value, Messages.getString("Property.16") + getName() + Messages.getString("Property.17") + getOwner() + ".  " + valueClass + Messages.getString("Property.19") + value.getClass() ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					throw new IllegalPropertyValueException( this, value, Messages.getString("Property.16") + getName() + Messages.getString("Property.17") + getOwner() + ".  " + valueClass + Messages.getString("Property.19") + value.getClass() );    //$NON-NLS-4$
 				}
 			}
 		} else {
@@ -540,9 +540,9 @@ public abstract class Property {
 //	}
     protected Object getValueOf( Class type, String text ) {
         if( type.equals( Double.class ) ) {
-            if( text.equals( "Infinity" ) ) { //$NON-NLS-1$
+            if( text.equals( "Infinity" ) ) { 
                 return new Double( Double.POSITIVE_INFINITY );
-            } else if( text.equals( "NaN" ) ) { //$NON-NLS-1$
+            } else if( text.equals( "NaN" ) ) { 
                 return new Double( Double.NaN );
             } else {
                 return Double.valueOf( text );
@@ -552,20 +552,20 @@ public abstract class Property {
         } else {
             try {
                 Class[] parameterTypes = { String.class };
-                java.lang.reflect.Method valueOfMethod = type.getMethod( "valueOf", parameterTypes ); //$NON-NLS-1$
+                java.lang.reflect.Method valueOfMethod = type.getMethod( "valueOf", parameterTypes ); 
                 int modifiers = valueOfMethod.getModifiers();
                 if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
                     Object[] parameters = { text };
                     return valueOfMethod.invoke( null, parameters );
                 } else {
-                    throw new RuntimeException( Messages.getString("Property.23") ); //$NON-NLS-1$
+                    throw new RuntimeException( Messages.getString("Property.23") ); 
                 }
             } catch( NoSuchMethodException nsme ) {
-                throw new RuntimeException( "NoSuchMethodException:" + type ); //$NON-NLS-1$
+                throw new RuntimeException( "NoSuchMethodException:" + type ); 
             } catch( IllegalAccessException iae ) {
-                throw new RuntimeException( "IllegalAccessException: " + type ); //$NON-NLS-1$
+                throw new RuntimeException( "IllegalAccessException: " + type ); 
             } catch( java.lang.reflect.InvocationTargetException ite ) {
-                throw new RuntimeException( "java.lang.reflect.InvocationTargetException: " + type + " " + text ); //$NON-NLS-1$ //$NON-NLS-2$
+                throw new RuntimeException( "java.lang.reflect.InvocationTargetException: " + type + " " + text );  
             }
         }
     }
@@ -585,7 +585,7 @@ public abstract class Property {
     }
 
     protected String getFilename( String text ) {
-        String[] markers = { "java.io.File[", "]" }; //$NON-NLS-1$ //$NON-NLS-2$
+        String[] markers = { "java.io.File[", "]" };  
         int begin = text.indexOf( markers[0] ) + markers[0].length();
         int end = text.lastIndexOf( markers[1] );
         return text.substring( begin, end );
@@ -595,8 +595,8 @@ public abstract class Property {
             Class type = Class.forName( typeName );
             String text = getNodeText( node );
             //todo?
-            if( text.equals( "." ) ) { //$NON-NLS-1$
-                text = ""; //$NON-NLS-1$
+            if( text.equals( "." ) ) { 
+                text = ""; 
             }
             edu.cmu.cs.stage3.util.Criterion criterion;
             if( type.isAssignableFrom( edu.cmu.cs.stage3.alice.core.criterion.InternalReferenceKeyedCriterion.class ) ) {
@@ -619,7 +619,7 @@ public abstract class Property {
     }
 
     protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {
-        String typeName = node.getAttribute( "class" ); //$NON-NLS-1$
+        String typeName = node.getAttribute( "class" ); 
         if( typeName.length() > 0 ) {
             String text = getNodeText( node );
             try {
@@ -635,7 +635,7 @@ public abstract class Property {
     }
     public final void decode( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {
         if( node.hasChildNodes() ) {
-            String criterionClassname = node.getAttribute( "criterionClass" ); //$NON-NLS-1$
+            String criterionClassname = node.getAttribute( "criterionClass" ); 
             if( criterionClassname.length()>0 ) {
                 decodeReference( node, referencesToBeResolved, version, criterionClassname );
             } else {
@@ -651,7 +651,7 @@ public abstract class Property {
         //try {
             edu.cmu.cs.stage3.util.Criterion criterion = referenceGenerator.generateReference( owner );
             if( criterion != null ) {
-                node.setAttribute( "criterionClass", criterion.getClass().getName() ); //$NON-NLS-1$
+                node.setAttribute( "criterionClass", criterion.getClass().getName() ); 
                 String s;
                 if( criterion instanceof edu.cmu.cs.stage3.alice.core.criterion.InternalReferenceKeyedCriterion ) {
                     s = ((edu.cmu.cs.stage3.alice.core.criterion.InternalReferenceKeyedCriterion)criterion).getKey();
@@ -662,7 +662,7 @@ public abstract class Property {
                 }
                 //todo?
                 if( s.length() == 0 ) {
-                    s = "."; //$NON-NLS-1$
+                    s = "."; 
                 }
                 node.appendChild( createNodeForString( document, s ) );
             }
@@ -672,7 +672,7 @@ public abstract class Property {
     }
     protected void encodeObject( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, ReferenceGenerator referenceGenerator ) throws java.io.IOException {
         Object o = get();
-        node.setAttribute( "class", o.getClass().getName() ); //$NON-NLS-1$
+        node.setAttribute( "class", o.getClass().getName() ); 
         node.appendChild( createNodeForString( document, o.toString() ) );
     }
     public final void encode( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, ReferenceGenerator referenceGenerator ) throws java.io.IOException {
@@ -697,6 +697,6 @@ public abstract class Property {
 	}
 	
 	public String toString() {
-		return getClass().getName()+"[name="+m_name+",owner="+m_owner+"]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return getClass().getName()+"[name="+m_name+",owner="+m_owner+"]";   
 	}
 }

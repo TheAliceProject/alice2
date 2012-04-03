@@ -31,12 +31,10 @@ public class DefaultElementCellEditor extends javax.swing.DefaultCellEditor {
 		super( textField );
 	}
 
-	
 	public boolean shouldSelectCell( java.util.EventObject e ) {
 		return true;
 	}
 
-	
 	public java.awt.Component getTableCellEditorComponent( javax.swing.JTable table, Object value, boolean isSelected, int row, int column ) {
 		java.awt.Component c = super.getTableCellEditorComponent( table, value, isSelected, row, column );
 

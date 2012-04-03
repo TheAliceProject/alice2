@@ -39,7 +39,7 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			textField = new javax.swing.JTextField();
 			cellEditorListeners = new java.util.HashSet();
 
-			elementPanel.remove( elementLabel );
+			elementPanel.remove( elementLabel );	// Aik Min - need work !
 			elementPanel.add( textField, new java.awt.GridBagConstraints( 1, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 2, 0, 2 ), 0, 0 ) );
 
 			textField.addActionListener(
@@ -51,7 +51,6 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			);
 			textField.addKeyListener(
 				new java.awt.event.KeyAdapter() {
-					
 					public void keyPressed( java.awt.event.KeyEvent ev ) {
 						if( ev.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE ) {
 							cancelCellEditing();
@@ -61,7 +60,6 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			);
 			textField.addFocusListener(
 				new java.awt.event.FocusAdapter() {
-					
 					public void focusLost( java.awt.event.FocusEvent ev ) {
 						if( ! ev.isTemporary() ) {
 							stopCellEditing();
@@ -71,7 +69,6 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			);
 
 			dndPanel.addMouseListener( new java.awt.event.MouseAdapter() {
-				
 				public void mousePressed( java.awt.event.MouseEvent ev ) {
 					ElementTreeCellEditor.this.stopCellEditing();
 				}
@@ -86,7 +83,7 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			iconLabel.setIcon( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( element ) );
 			textField.setText( element.name.getStringValue() );
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementTreeCellEditor.0") + value, null ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementTreeCellEditor.0") + value, null ); 
 		}
 		return this;
 	}
@@ -115,7 +112,7 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			return true;
 		} catch( edu.cmu.cs.stage3.alice.core.IllegalNameValueException e ) {
 //			ErrorDialog.showErrorDialog( e.getMessage(), e );
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("ElementTreeCellEditor.1"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("ElementTreeCellEditor.1"), javax.swing.JOptionPane.ERROR_MESSAGE ); 
 			return false;
 		}
 	}

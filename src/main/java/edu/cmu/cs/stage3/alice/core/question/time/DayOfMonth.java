@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question.time;
 
 public class DayOfMonth extends edu.cmu.cs.stage3.alice.core.question.IntegerQuestion {
-	
 	public Object getValue() {
 		java.util.Calendar calendar = new java.util.GregorianCalendar();
 		java.util.Date date = new java.util.Date();

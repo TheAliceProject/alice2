@@ -38,16 +38,14 @@ public class ErrorContentPane extends AliceAlertContentPane {
 		super();
 	}
 	
-	
 	public void preDialogShow( javax.swing.JDialog dialog ) {
 		super.preDialogShow( dialog );
 		writeAliceHeaderToTextPane();
 		writeThrowableToTextPane();
 	}
 
-	
 	public String getTitle() {
-		return Messages.getString("ErrorContentPane.0"); //$NON-NLS-1$
+		return Messages.getString("ErrorContentPane.0"); 
 	}
 	
 
@@ -62,19 +60,19 @@ public class ErrorContentPane extends AliceAlertContentPane {
 	
 	protected void writeThrowableToTextPane() {
 		if( throwable != null ) {
-			detailStream.println( Messages.getString("ErrorContentPane.1") ); //$NON-NLS-1$
+			detailStream.println( Messages.getString("ErrorContentPane.1") ); 
 			throwable.printStackTrace( detailStream );
 			if( throwable instanceof edu.cmu.cs.stage3.alice.core.ExceptionWrapper ) {
 				edu.cmu.cs.stage3.alice.core.ExceptionWrapper ew = (edu.cmu.cs.stage3.alice.core.ExceptionWrapper)throwable;
 				Exception e = ew.getWrappedException();
-				detailStream.println( Messages.getString("ErrorContentPane.2") ); //$NON-NLS-1$
+				detailStream.println( Messages.getString("ErrorContentPane.2") ); 
 				e.printStackTrace( detailStream );
 			}
 		} else {
 			if (message != null)
 				detailStream.println( message );
 			else
-				new Exception(Messages.getString("ErrorContentPane.3")).printStackTrace(detailStream); //$NON-NLS-1$
+				new Exception(Messages.getString("ErrorContentPane.3")).printStackTrace(detailStream); 
 		}
 		detailStream.println();
 	}

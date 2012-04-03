@@ -41,7 +41,6 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
     protected javax.swing.JPanel questionArea;
 
     protected class MainCompositeComponentQuestionPanel extends CompositeComponentQuestionPanel{
-        
 		protected void updateGUI(){
             if (componentElements.size() > 1){
                 this.removeAll();
@@ -63,18 +62,15 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
             this.repaint();
         }
 
-        
 		protected boolean componentsIsEmpty(){
             return (componentElements.size() == 1);
 
         }
 
-        
 		protected int getLastElementLocation(){
             return componentElements.size()-1;
         }
 
-        
 		protected boolean checkGUI(){
             java.awt.Component c[] = this.getComponents();
             edu.cmu.cs.stage3.alice.core.Element elements[] = (edu.cmu.cs.stage3.alice.core.Element[])componentElements.get();
@@ -112,7 +108,6 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
             return aOkay;
         }
 
-        
 		protected void addToElement(edu.cmu.cs.stage3.alice.core.Element toAdd, edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty toAddTo, int location){
             if (location < 0){
                 super.addToElement(toAdd, toAddTo, componentElements.size()-1);
@@ -127,11 +122,9 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
         super();
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("userDefinedQuestionEditor");
     }
-	
 	
 	protected String getHeaderHTML(){
 		String htmlToReturn = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(returnQuestion.valueClass.getClassValue())+" "+super.getHeaderHTML();
@@ -142,7 +135,6 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
 		super.getHTML(toWriteTo, colSpan, useColor, false);
 	}
 
-    
 	public void set(edu.cmu.cs.stage3.alice.core.Element question, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
         if (question instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion){
             edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion setQuestion = (edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion) question;
@@ -177,7 +169,6 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
         }
     }
 
-    
 	protected void generateGUI(){
         super.generateGUI();
         returnPanel = new ComponentQuestionPanel();
@@ -192,7 +183,6 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
         }
     }
 
-    
 	protected void updateGUI(){
             this.removeAll();
             buildParameterPanel();
@@ -216,7 +206,6 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
             this.revalidate();
         }
 
-        
 		protected void variableInit(){
             super.variableInit();
             if (m_element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion){

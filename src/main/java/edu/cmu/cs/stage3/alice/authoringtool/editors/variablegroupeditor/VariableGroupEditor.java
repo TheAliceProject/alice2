@@ -30,7 +30,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messag
  */
 public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyListener, java.awt.dnd.DropTargetListener {
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty variables;
-	protected javax.swing.JButton newVariableButton = new javax.swing.JButton( Messages.getString("VariableGroupEditor.0") ); //$NON-NLS-1$
+	protected javax.swing.JButton newVariableButton = new javax.swing.JButton( Messages.getString("VariableGroupEditor.0") ); 
 	//protected edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane newVariableDialog;
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 
@@ -52,7 +52,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 			new java.awt.event.ActionListener() {
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					if( authoringTool != null ) {
-						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( Messages.getString("VariableGroupEditor.1"), variables.getOwner()); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( Messages.getString("VariableGroupEditor.1"), variables.getOwner()); 
 						if( variable != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
 							try {
@@ -68,7 +68,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 		);
 		addContainerListener( edu.cmu.cs.stage3.alice.authoringtool.util.GUIElementContainerListener.getStaticListener() );
 		setDropTarget( new java.awt.dnd.DropTarget( this, this ) );
-		newVariableButton.setToolTipText( Messages.getString("VariableGroupEditor.2") ); //$NON-NLS-1$
+		newVariableButton.setToolTipText( Messages.getString("VariableGroupEditor.2") ); 
 
 		refreshGUI();
 	}
@@ -118,7 +118,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 					if( gui != null ) {
 						this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.3") + variable, null ); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.3") + variable, null ); 
 					}
 				}
 			}
@@ -134,7 +134,6 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 	}
 
 	// line drawing
-	
 	public void paintComponent( java.awt.Graphics g ) {
 		super.paintComponent( g );
 		if( lineLocation > -1 ) {
@@ -236,13 +235,13 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 					dtde.dropComplete( true );
 				}
 			} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.4"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.4"), e ); 
 				dtde.dropComplete( false );
 			} catch( java.io.IOException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.5"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.5"), e ); 
 				dtde.dropComplete( false );
 			} catch( Throwable t ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.6"), t ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.6"), t ); 
 				dtde.dropComplete( false );
 			}
 		} else {

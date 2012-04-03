@@ -107,16 +107,12 @@ public class DnDGroupingPanel extends GroupingPanel {
 	}
 
 	public void removeDragSourceComponent( java.awt.Component component ) {
-		for( java.util.ListIterator iter = dragGestureRecognizers.listIterator(); iter.hasNext(); ) {
+		for( final java.util.ListIterator iter = dragGestureRecognizers.listIterator(); iter.hasNext(); ) {
 			java.awt.dnd.DragGestureRecognizer dgr = (java.awt.dnd.DragGestureRecognizer)iter.next();
 			if( dgr.getComponent() == component ) {
 				dgr.removeDragGestureListener( dragGestureListener );
 				dgr.setComponent( null );
-				try {
-					iter.remove();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				iter.remove();
 				break;
 			}
 		}
@@ -132,7 +128,6 @@ public class DnDGroupingPanel extends GroupingPanel {
 		addDragSourceComponent( this );
 	}
 
-	
 	public void release() {
 		super.release();
 //		if( grip != null ) { //MEMFIX
@@ -149,15 +144,11 @@ public class DnDGroupingPanel extends GroupingPanel {
 //			dragWindow2.hide();
 //		}
 //		dragWindow2 = null;
-		for( java.util.Iterator iter = dragGestureRecognizers.listIterator(); iter.hasNext(); ) { //MEMFIX
+		for( final java.util.Iterator iter = dragGestureRecognizers.listIterator(); iter.hasNext(); ) { //MEMFIX
 			java.awt.dnd.DragGestureRecognizer dgr = (java.awt.dnd.DragGestureRecognizer)iter.next();
 			if( dragGestureListener != null ) {
 				dgr.removeDragGestureListener( dragGestureListener );
-				try {
-					iter.remove();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				iter.remove();
 			} else {
 //				System.err.println( "dragGestureListener unexpectedly null" );
 //				Thread.dumpStack();
@@ -175,7 +166,6 @@ public class DnDGroupingPanel extends GroupingPanel {
 		return image;
 	}
 
-	
 	public void paintComponent( java.awt.Graphics g ) {
 //		if( g instanceof java.awt.Graphics2D ) {
 //			if( drawFaded ) {
@@ -201,7 +191,6 @@ public class DnDGroupingPanel extends GroupingPanel {
 		}
 	}
 
-	
 	public void paintForeground( java.awt.Graphics g ) {
 		super.paintForeground( g );
 
@@ -244,7 +233,6 @@ public class DnDGroupingPanel extends GroupingPanel {
 //		}
 //	}
 
-	
 	public void printComponent( java.awt.Graphics g ) {
 		if( ! authoringToolConfig.getValue( "printing.fillBackground" ).equalsIgnoreCase( "true" ) ) {
 			Object oldAntialiasing = null;
@@ -267,7 +255,6 @@ public class DnDGroupingPanel extends GroupingPanel {
 
 	public class GroupingPanelDragGestureListener implements java.awt.dnd.DragGestureListener {
 		protected class DragListener extends java.awt.event.MouseAdapter implements java.awt.event.MouseMotionListener {
-			
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {	
 				drawFaded = false;
 				DnDGroupingPanel.this.repaint();
@@ -427,12 +414,10 @@ public class DnDGroupingPanel extends GroupingPanel {
 			setPreferredSize( new java.awt.Dimension( 6, 0 ) );
 		}
 
-		
 		protected void printComponent( java.awt.Graphics g ) {
 			// do nothing
 		}
 
-		
 		protected void paintComponent( java.awt.Graphics g ) {
 			java.awt.Dimension size = getSize();
 

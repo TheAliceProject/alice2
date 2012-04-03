@@ -64,14 +64,12 @@ public class AMCImporter extends AbstractImporter {
     public AMCImporter() {
     }
 
-    
 	public Map getExtensionMap() {
 		java.util.HashMap map = new java.util.HashMap();
 		map.put( "AMC", "Acclaim Motion Capture" );
 		return map;
     }
 
-    
 	public Element load( String filename ) throws java.io.IOException {
 		animationName = new File( filename ).getName();
 		animationName = animationName.substring( 0, animationName.lastIndexOf( '.' ) );
@@ -83,7 +81,6 @@ public class AMCImporter extends AbstractImporter {
         return super.load(filename);
 	}
 
-	
 	public Element load( File file ) throws java.io.IOException {
 		animationName = file.getName();
 		animationName = animationName.substring( 0, animationName.lastIndexOf( '.' ) );
@@ -95,7 +92,6 @@ public class AMCImporter extends AbstractImporter {
 		return super.load(file);
 	}
 
-	
 	public Element load( java.net.URL url ) throws java.io.IOException {
 		String externalForm = url.toExternalForm();
 		String fullName = externalForm.substring( externalForm.lastIndexOf( '/' ) + 1 );
@@ -106,7 +102,6 @@ public class AMCImporter extends AbstractImporter {
         return super.load(url);
 	}
 
-    
 	protected Element load(InputStream is, String ext) throws java.io.IOException {
         EStreamTokenizer tokenizer;
         edu.cmu.cs.stage3.alice.authoringtool.util.BackslashConverterFilterInputStream bcfis = new edu.cmu.cs.stage3.alice.authoringtool.util.BackslashConverterFilterInputStream( is );

@@ -31,7 +31,6 @@ public class TurnForwardBackwardMode extends DefaultMoveMode {
 		super( undoRedoStack, scheduler );
 	}
 
-	
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
 		if( pickedTransformable != null ) {
 			helper.setTransformationRightNow( edu.cmu.cs.stage3.math.MathUtilities.createIdentityMatrix4d(), camera );

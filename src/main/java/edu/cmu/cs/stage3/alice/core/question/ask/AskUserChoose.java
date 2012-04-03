@@ -35,7 +35,6 @@ public class AskUserChoose extends edu.cmu.cs.stage3.alice.core.question.list.Li
 
 	private edu.cmu.cs.stage3.alice.core.Clock m_clock;
 
-    
 	public Object getValue( edu.cmu.cs.stage3.alice.core.List listValue ) {
 		if( m_clock != null ) {
 			m_clock.pause();
@@ -52,14 +51,12 @@ public class AskUserChoose extends edu.cmu.cs.stage3.alice.core.question.list.Li
 		}
     }
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		if( world != null ) {
 			m_clock = world.getClock();
 		} 
 	}
-	
 	protected void stopped( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		m_clock = null;
 		super.stopped( world, time );

@@ -44,7 +44,6 @@ public class CountLoopPanel extends edu.cmu.cs.stage3.alice.authoringtool.editor
         super.set(r, authoringToolIn);
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder");
     }

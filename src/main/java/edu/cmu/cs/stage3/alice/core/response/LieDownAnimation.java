@@ -16,8 +16,8 @@ import edu.cmu.cs.stage3.alice.core.property.DirectionProperty;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class LieDownAnimation extends BetterStandUpAnimation {
-	public final edu.cmu.cs.stage3.alice.core.property.TransformableProperty target = new edu.cmu.cs.stage3.alice.core.property.TransformableProperty( this, "target", null ); //$NON-NLS-1$
-	public final DirectionProperty feetFaceDirection = new DirectionProperty(this, "feetFacingDirection", edu.cmu.cs.stage3.alice.core.Direction.FORWARD); //$NON-NLS-1$
+	public final edu.cmu.cs.stage3.alice.core.property.TransformableProperty target = new edu.cmu.cs.stage3.alice.core.property.TransformableProperty( this, "target", null ); 
+	public final DirectionProperty feetFaceDirection = new DirectionProperty(this, "feetFacingDirection", edu.cmu.cs.stage3.alice.core.Direction.FORWARD); 
 	
 	public class RuntimeLieDownAnimation extends RuntimeBetterStandUpAnimation {
 		edu.cmu.cs.stage3.alice.core.Transformable target = null;
@@ -32,14 +32,14 @@ public class LieDownAnimation extends BetterStandUpAnimation {
 			target = LieDownAnimation.this.target.getTransformableValue();
 			
 			if( target == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("LieDownAnimation.2"), null, LieDownAnimation.this.target ); //$NON-NLS-1$
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("LieDownAnimation.2"), null, LieDownAnimation.this.target ); 
             }
             if( m_subject == target ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("LieDownAnimation.3") + target.name.getStringValue() + ".", getCurrentStack(), LieDownAnimation.this.target );             //$NON-NLS-1$ //$NON-NLS-2$
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("LieDownAnimation.3") + target.name.getStringValue() + ".", getCurrentStack(), LieDownAnimation.this.target );              
             }
             
             if (m_subject.isAncestorOf(target)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("LieDownAnimation.5"), getCurrentStack(), LieDownAnimation.this.target );             //$NON-NLS-1$
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("LieDownAnimation.5"), getCurrentStack(), LieDownAnimation.this.target );             
             }
 			
 			m_positionBegin = m_subject.getPosition(m_subject.getWorld());
@@ -69,7 +69,7 @@ public class LieDownAnimation extends BetterStandUpAnimation {
 				
 				javax.vecmath.Vector3d endPos = null;
 				
-				if (target.name.getStringValue().equals("ground")){ //$NON-NLS-1$
+				if (target.name.getStringValue().equals("ground")){ 
 					endPos = m_subject.getBoundingBox(m_subject.getWorld()).getCenterOfBottomFace();
 				} else {
 					endPos = target.getBoundingBox(target.getWorld()).getCenterOfTopFace();
@@ -125,7 +125,7 @@ public class LieDownAnimation extends BetterStandUpAnimation {
 			edu.cmu.cs.stage3.math.Quaternion quat = m_subject.calculateStandUp( m_subject.getWorld() ).getQuaternion();
 			
 		
-			if ( (target == null) || (target.name.getStringValue().equals("ground")) ){ //$NON-NLS-1$
+			if ( (target == null) || (target.name.getStringValue().equals("ground")) ){ 
 				edu.cmu.cs.stage3.math.Matrix33 orient = quat.getMatrix33();		
 				quat.setMatrix33(getGoalOrientation(orient, quat.getMatrix33().getRow(1)));
 			} else {

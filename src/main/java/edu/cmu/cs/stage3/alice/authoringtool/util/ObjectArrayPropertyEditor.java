@@ -28,8 +28,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  */
 public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.core.event.PropertyListener, java.awt.dnd.DropTargetListener {
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty objectArrayProperty;
-	protected javax.swing.JButton newItemButton = new javax.swing.JButton( Messages.getString("ObjectArrayPropertyEditor.0") ); //$NON-NLS-1$
-	protected javax.swing.JButton removeItemButton = new javax.swing.JButton( Messages.getString("ObjectArrayPropertyEditor.1") ); //$NON-NLS-1$
+	protected javax.swing.JButton newItemButton = new javax.swing.JButton( Messages.getString("ObjectArrayPropertyEditor.0") ); 
+	protected javax.swing.JButton removeItemButton = new javax.swing.JButton( Messages.getString("ObjectArrayPropertyEditor.1") ); 
 	protected Class type = Object.class;  //hack
 	
 	protected int lineLocation = -1;
@@ -99,7 +99,7 @@ public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu
 					if( gui != null ) {
 						this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.2") + item, null ); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.2") + item, null ); 
 					}
 				}
 			}
@@ -117,7 +117,6 @@ public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu
 	}
 
 	// line drawing
-	
 	public void paintComponent( java.awt.Graphics g ) {
 		super.paintComponent( g );
 		if( lineLocation > -1 ) {
@@ -194,13 +193,13 @@ public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu
 				item.getObjectArrayProperty().add( position, value );
 				dtde.dropComplete( true );
 			} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.3"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.3"), e ); 
 				dtde.dropComplete( false );
 			} catch( java.io.IOException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.4"), e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.4"), e ); 
 				dtde.dropComplete( false );
 			} catch( Throwable t ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.5"), t ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ObjectArrayPropertyEditor.5"), t ); 
 				dtde.dropComplete( false );
 			}
 		} else {

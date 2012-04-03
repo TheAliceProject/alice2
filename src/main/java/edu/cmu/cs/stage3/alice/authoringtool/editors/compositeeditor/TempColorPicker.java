@@ -54,11 +54,11 @@ public class TempColorPicker extends javax.swing.JPanel {
 			tile = new javax.swing.JLabel(name);
 			tile.setOpaque(true);
 			tile.setBackground(toChange);
-			openPicker = new javax.swing.JButton(Messages.getString("TempColorPicker.0")); //$NON-NLS-1$
+			openPicker = new javax.swing.JButton(Messages.getString("TempColorPicker.0")); 
 			openPicker.addActionListener(new java.awt.event.ActionListener(){
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("TempColorPicker.1")+TileColorPicker.this.tile.getText(), TileColorPicker.this.toChange ); //$NON-NLS-1$
+					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("TempColorPicker.1")+TileColorPicker.this.tile.getText(), TileColorPicker.this.toChange ); 
 					TileColorPicker.this.tile.setBackground(newColor);
 					TileColorPicker.this.toChange = newColor;
 					edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.putColor(TileColorPicker.this.nameKey, newColor);
@@ -78,11 +78,11 @@ public class TempColorPicker extends javax.swing.JPanel {
 			this.foregroundNameKey = foregroundNameKey;
 			this.foregroundToChange = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor(foregroundNameKey);
 			tile.setForeground(this.foregroundToChange);
-			openPicker2 = new javax.swing.JButton(Messages.getString("TempColorPicker.2")); //$NON-NLS-1$
+			openPicker2 = new javax.swing.JButton(Messages.getString("TempColorPicker.2")); 
 			openPicker2.addActionListener(new java.awt.event.ActionListener(){
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("TempColorPicker.3")+TileColorPicker.this.tile.getText(), TileColorPicker.this.foregroundToChange ); //$NON-NLS-1$
+					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("TempColorPicker.3")+TileColorPicker.this.tile.getText(), TileColorPicker.this.foregroundToChange ); 
 					TileColorPicker.this.tile.setForeground(newColor);
 					TileColorPicker.this.foregroundToChange = newColor;
 					edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.putColor(TileColorPicker.this.foregroundNameKey, newColor);
@@ -98,27 +98,27 @@ public class TempColorPicker extends javax.swing.JPanel {
     public TempColorPicker(CompositeElementEditor r) {
         editor = r;
         setLayout(new java.awt.GridBagLayout());
-        add(new TileColorPicker(Messages.getString("TempColorPicker.4"), edu.cmu.cs.stage3.alice.core.response.DoInOrder.class),  new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.4"), edu.cmu.cs.stage3.alice.core.response.DoInOrder.class),  new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.5"), edu.cmu.cs.stage3.alice.core.response.DoTogether.class),  new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.5"), edu.cmu.cs.stage3.alice.core.response.DoTogether.class),  new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.6"), edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class),  new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.6"), edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class),  new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.7"), edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class),  new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.7"), edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class),  new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.8"), edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class),  new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.8"), edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class),  new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.9"), edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class),  new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.9"), edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class),  new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.10"), edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class),  new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.10"), edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class),  new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.11"), "response"),  new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0 //$NON-NLS-1$ //$NON-NLS-2$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.11"), "response"),  new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0  
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.13"), edu.cmu.cs.stage3.alice.core.response.Comment.class, "commentForeground"),  new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0 //$NON-NLS-1$ //$NON-NLS-2$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.13"), edu.cmu.cs.stage3.alice.core.response.Comment.class, "commentForeground"),  new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0  
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING, "+ - * /"),  new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0 //$NON-NLS-1$
+        add(new TileColorPicker(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING, "+ - * /"),  new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("TempColorPicker.16"), edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING+" editor"),  new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0 //$NON-NLS-1$ //$NON-NLS-2$
+        add(new TileColorPicker(Messages.getString("TempColorPicker.16"), edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING+" editor"),  new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0  
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
     }
 }

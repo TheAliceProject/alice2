@@ -53,16 +53,16 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	protected javax.swing.JPanel simplePanel;
 	protected javax.swing.JLabel complicatedEndBrace;
 	protected javax.swing.JButton switchButton;
-	protected String toComplicatedString = Messages.getString("LoopNElementPanel.0"); //$NON-NLS-1$
-	protected String toSimpleString = Messages.getString("LoopNElementPanel.1"); //$NON-NLS-1$
+	protected String toComplicatedString = Messages.getString("LoopNElementPanel.0"); 
+	protected String toSimpleString = Messages.getString("LoopNElementPanel.1"); 
 	protected boolean isComplicated = false;
 	
-	protected static String IS_COMPLICATED_LOOP_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_COMPLICATED_LOOP_KEY"; //$NON-NLS-1$
+	protected static String IS_COMPLICATED_LOOP_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_COMPLICATED_LOOP_KEY"; 
 
     public LoopNElementPanel(){
         super();
-        headerText = Messages.getString("LoopNElementPanel.3"); //$NON-NLS-1$
-        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"); //$NON-NLS-1$
+        headerText = Messages.getString("LoopNElementPanel.3"); 
+        backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"); 
     }
 
 	protected int countPreviousInstances(java.awt.Component parent, Object toCheck){
@@ -76,7 +76,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	}
 
 	protected String getIndexName(){
-		String toReturn = Messages.getString("LoopNElementPanel.5"); //$NON-NLS-1$
+		String toReturn = Messages.getString("LoopNElementPanel.5"); 
 		int count = countPreviousInstances(this.getParent(), this);
 		if (count > 0){
 			toReturn += String.valueOf(count);
@@ -84,7 +84,6 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		return toReturn;	
 	}
 	
-    
 	protected void variableInit(){
         super.variableInit();
         if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder){
@@ -115,7 +114,6 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		   }
     }
 
-    
 	protected void startListening() {
 		super.startListening();
         if (m_end != null){
@@ -124,7 +122,6 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		listenToChildren(this.m_components);
 	}
 
-	
 	protected void stopListening() {
         super.stopListening();
         if (m_end != null){
@@ -166,7 +163,6 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		}
 	}
 
-    
 	protected void removeAllListening(){
         super.removeAllListening();
         this.removeDragSourceComponent(timesLabel);
@@ -178,7 +174,6 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		this.removeDragSourceComponent(complicatedEndBrace);
     }
     
-	
 	protected void setDropTargets(){
 		super.setDropTargets();
 		timesLabel.setDropTarget(new java.awt.dnd.DropTarget( timesLabel, componentElementPanel));
@@ -192,29 +187,28 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 					
 	}
 
-    
 	public void setHeaderLabel(){
         if (headerLabel != null){
             headerLabel.setText(headerText);
             if (CompositeElementEditor.IS_JAVA){
             	if (isComplicated){
-					headerLabel.setText("for (int"); //$NON-NLS-1$
+					headerLabel.setText("for (int"); 
             	} else{
             		int start = 0;
             		if (m_start != null){
             			start = m_start.intValue();
             		}
-					headerLabel.setText("for (int "+getIndexName()+"="+start+"; "+getIndexName()+"<"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					headerLabel.setText("for (int "+getIndexName()+"="+start+"; "+getIndexName()+"<");    //$NON-NLS-4$
             	}
             }
         }
         if (timesLabel != null){
         	Number number = m_end.getNumberValue();
         	if (number != null && number.intValue() <= 1){
-            	timesLabel.setText(Messages.getString("LoopNElementPanel.11")); //$NON-NLS-1$
+            	timesLabel.setText(Messages.getString("LoopNElementPanel.11")); 
         	}
         	else{
-				timesLabel.setText(Messages.getString("LoopNElementPanel.12")); //$NON-NLS-1$
+				timesLabel.setText(Messages.getString("LoopNElementPanel.12")); 
         	}
             if (CompositeElementEditor.IS_JAVA){
 				int increment = 1;
@@ -223,54 +217,53 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				}
                 if (!isExpanded){
                 	if (increment == 1){
-                    	timesLabel.setText("; "+getIndexName()+"++) { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                    	timesLabel.setText("; "+getIndexName()+"++) { "+getDots()+" }");   
                 	} else{
-						timesLabel.setText("; "+getIndexName()+"+="+increment+") { "+getDots()+" }"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+						timesLabel.setText("; "+getIndexName()+"+="+increment+") { "+getDots()+" }");    //$NON-NLS-4$
                 	}
                 }
                 else{
                 	if (increment == 1){
-                    	timesLabel.setText("; "+getIndexName()+"++) {"); //$NON-NLS-1$ //$NON-NLS-2$
+                    	timesLabel.setText("; "+getIndexName()+"++) {");  
                 	} else{
-						timesLabel.setText("; "+getIndexName()+"+="+increment+") {"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						timesLabel.setText("; "+getIndexName()+"+="+increment+") {");   
                 	}
                 }
             }
         }
         if (fromLabel != null){
 			if (CompositeElementEditor.IS_JAVA){
-				fromLabel.setText("="); //$NON-NLS-1$
+				fromLabel.setText("="); 
 			}
 			else{
-        		fromLabel.setText(Messages.getString("LoopNElementPanel.26")); //$NON-NLS-1$
+        		fromLabel.setText(Messages.getString("LoopNElementPanel.26")); 
 			}
         }
 		if (upToLabel != null){
 			if (CompositeElementEditor.IS_JAVA){
-				upToLabel.setText("; "+getIndexName()+"<"); //$NON-NLS-1$ //$NON-NLS-2$
+				upToLabel.setText("; "+getIndexName()+"<");  
 			}
 			else{
-        		upToLabel.setText(Messages.getString("LoopNElementPanel.29")); //$NON-NLS-1$
+        		upToLabel.setText(Messages.getString("LoopNElementPanel.29")); 
 			}
 		}
 		if (incrementLabel != null){
 			if (CompositeElementEditor.IS_JAVA){
-				incrementLabel.setText("; "+getIndexName()+" +="); //$NON-NLS-1$ //$NON-NLS-2$
+				incrementLabel.setText("; "+getIndexName()+" +=");  
 			} else{
-        		incrementLabel.setText(Messages.getString("LoopNElementPanel.32")); //$NON-NLS-1$
+        		incrementLabel.setText(Messages.getString("LoopNElementPanel.32")); 
 			}
 		}
 		if (complicatedEndBrace != null){
 			if (CompositeElementEditor.IS_JAVA){
-				complicatedEndBrace.setText("){"); //$NON-NLS-1$
+				complicatedEndBrace.setText("){"); 
 			} else{
-				complicatedEndBrace.setText(""); //$NON-NLS-1$
+				complicatedEndBrace.setText(""); 
 			}
 		}
 
     }
 
-    
 	protected void generateGUI(){
         super.generateGUI();
         timesLabel = new javax.swing.JLabel();
@@ -309,7 +302,6 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		});	
     }
 
-    
 	protected void restoreDrag(){
         super.restoreDrag();
         this.addDragSourceComponent(timesLabel);
@@ -324,7 +316,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	protected void updateName(){
 		edu.cmu.cs.stage3.alice.core.Variable v = ((edu.cmu.cs.stage3.alice.core.Variable)m_index.getValue());
 		v.name.set(getIndexName());
-		complicatedPanel.remove(indexTile);
+		complicatedPanel.remove(indexTile);	// Aik Min - need work
 		indexTile = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getVariableDnDPanel((edu.cmu.cs.stage3.alice.core.Variable)m_index.get());
 		complicatedPanel.add(indexTile, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 	}
@@ -348,7 +340,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	}
 	
 	protected void setAllNames(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentContainer, int currentLevel){
-		String baseName = Messages.getString("LoopNElementPanel.35"); //$NON-NLS-1$
+		String baseName = Messages.getString("LoopNElementPanel.35"); 
 		for (int i=0; i<currentContainer.size(); i++){
 			edu.cmu.cs.stage3.alice.core.Element var = null;
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder){
@@ -358,7 +350,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN)currentContainer.get(i)).index.get());
 			}
 			if (var != null){
-				var.name.set(baseName+"_#"+currentLevel); //$NON-NLS-1$
+				var.name.set(baseName+"_#"+currentLevel); 
 			}
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
 				setAllNames( ((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)currentContainer.get(i)).componentResponses , currentLevel+1);
@@ -374,13 +366,12 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		startListening();
 		if (isTopOccurrance(m_element.getParent())){
 			edu.cmu.cs.stage3.alice.core.Variable v = ((edu.cmu.cs.stage3.alice.core.Variable)m_index.getValue());
-			v.name.set(Messages.getString("LoopNElementPanel.37")); //$NON-NLS-1$
+			v.name.set(Messages.getString("LoopNElementPanel.37")); 
 			setAllNames(m_components, 2);
 		}
 	}
 
 
-    
 	protected void updateGUI(){
         super.updateGUI();
   
@@ -412,7 +403,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		simplePanel.add(countInput, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 		simplePanel.add(timesLabel, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 		
-        headerPanel.remove(glue);
+        headerPanel.remove(glue);	// Aik Min - need work
         if (isComplicated){
         	headerPanel.add(complicatedPanel, new java.awt.GridBagConstraints(3,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         }

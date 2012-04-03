@@ -47,17 +47,17 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 			root = (java.io.File)pathname;
 		}
 		else {
-			throw new IllegalArgumentException( Messages.getString("FileSystemTreeLoader.0") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( Messages.getString("FileSystemTreeLoader.0") ); 
 		}
 
 		if( root.exists() ) {
 			if( ! root.canRead() ) {
-				throw new java.io.IOException( Messages.getString("FileSystemTreeLoader.1") + root ); //$NON-NLS-1$
+				throw new java.io.IOException( Messages.getString("FileSystemTreeLoader.1") + root ); 
 			}
 		}
 		else {
 			//throw new IllegalArgumentException( root + " does not exist" );
-			throw new java.io.FileNotFoundException( root + Messages.getString("FileSystemTreeLoader.2") ); //$NON-NLS-1$
+			throw new java.io.FileNotFoundException( root + Messages.getString("FileSystemTreeLoader.2") ); 
 		}
 
 		currentDirectory = root;
@@ -75,14 +75,14 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 			newCurrentDirectory = new java.io.File( root.getAbsolutePath() + pathname );
 		}
 		else {
-			newCurrentDirectory = new java.io.File( currentDirectory.getAbsolutePath() + "/" + pathname ); //$NON-NLS-1$
+			newCurrentDirectory = new java.io.File( currentDirectory.getAbsolutePath() + "/" + pathname ); 
 		}
 
 		if( ! newCurrentDirectory.exists() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeLoader.4") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeLoader.4") ); 
 		}
 		if( ! newCurrentDirectory.isDirectory() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeLoader.5") ); //$NON-NLS-1$
+			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeLoader.5") ); 
 		}
 
 		currentDirectory = newCurrentDirectory;
@@ -99,10 +99,10 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 		java.io.File file = new java.io.File( currentDirectory, filename );
 		if( ! file.exists() ) {
 			//throw new IllegalArgumentException( file + " does not exist" );
-			throw new java.io.FileNotFoundException( file + Messages.getString("FileSystemTreeLoader.6") ); //$NON-NLS-1$
+			throw new java.io.FileNotFoundException( file + Messages.getString("FileSystemTreeLoader.6") ); 
 		}
 		if( ! file.canRead() ) {
-			throw new java.io.IOException( Messages.getString("FileSystemTreeLoader.7") + file ); //$NON-NLS-1$
+			throw new java.io.IOException( Messages.getString("FileSystemTreeLoader.7") + file ); 
 		}
 
 		currentlyOpenStream = new java.io.FileInputStream( file );

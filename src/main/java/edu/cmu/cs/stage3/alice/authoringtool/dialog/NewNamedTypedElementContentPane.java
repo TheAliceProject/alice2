@@ -60,7 +60,6 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		showValue = true;
 	}
 	
-	
 	protected void initTopComponents( java.awt.GridBagConstraints gbc ) {
 		super.initTopComponents( gbc );
 		initVariables();
@@ -89,9 +88,9 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		objectArrayScrollPane = new javax.swing.JScrollPane( objectArrayPropertyEditor );
 		objectArrayScrollPane.setPreferredSize( new java.awt.Dimension( 1, 150 ) );
 		
-		makeCollectionCheckBox = new javax.swing.JCheckBox( Messages.getString("NewNamedTypedElementContentPane.0") ); //$NON-NLS-1$
-		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); //$NON-NLS-1$
-		makeCollectionCheckBox.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, (int)(12*fontSize/12.0) ) ); //$NON-NLS-1$
+		makeCollectionCheckBox = new javax.swing.JCheckBox( Messages.getString("NewNamedTypedElementContentPane.0") ); 
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); 
+		makeCollectionCheckBox.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, (int)(12*fontSize/12.0) ) ); 
 		makeCollectionCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				refreshValuePanel();
@@ -111,7 +110,7 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 			public java.awt.Component getListCellRendererComponent( javax.swing.JList list, Object value, int index, boolean isSelected,  boolean cellHasFocus ) {
 				if( value instanceof Class ) {
 					String className = ((Class)value).getName();
-					value = className.substring( className.lastIndexOf( "." ) + 1 ); //$NON-NLS-1$
+					value = className.substring( className.lastIndexOf( "." ) + 1 ); 
 				}
 				return super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
 			}
@@ -126,7 +125,7 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.insets.right = 0;
-		add( new javax.swing.JLabel( Messages.getString("NewNamedTypedElementContentPane.4") ), gbc ); //$NON-NLS-1$
+		add( new javax.swing.JLabel( Messages.getString("NewNamedTypedElementContentPane.4") ), gbc ); 
 		gbc.insets.right = 8;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;
@@ -137,7 +136,6 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		add(valuePanel, gbc);
 	}
 	
-	
 	public void reset( edu.cmu.cs.stage3.alice.core.Element context ) {
 		super.reset(context);
 		this.context = context;
@@ -146,7 +144,6 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		layoutValuePanel();
 	}
 	
-	
 	public void preDialogShow( javax.swing.JDialog dialog ) {
 		super.preDialogShow( dialog );
 		if (!getListsOnly()){
@@ -154,11 +151,9 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		}
 	}
 	
-	
 	public void postDialogShow( javax.swing.JDialog dialog ) {
 		super.postDialogShow( dialog );
 	}
-	
 	
 	
 	public boolean isReadyToDispose( int option ) {
@@ -194,7 +189,7 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 			try {
 				collection = (edu.cmu.cs.stage3.alice.core.Collection)collectionType.newInstance();
 			} catch( Exception e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("NewNamedTypedElementContentPane.5") + collectionType, e ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("NewNamedTypedElementContentPane.5") + collectionType, e ); 
 				collection = new edu.cmu.cs.stage3.alice.core.List();
 			}
 			collection.valueClass.set( type );
@@ -304,11 +299,11 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		valuesComponent.removeAll();
 		valueComponent.removeAll();
 		if( makeCollectionCheckBox.isSelected() ) {
-			valueLabel.setText( Messages.getString("NewNamedTypedElementContentPane.6") ); //$NON-NLS-1$
+			valueLabel.setText( Messages.getString("NewNamedTypedElementContentPane.6") ); 
 			valueComponent.add(placeholder, java.awt.BorderLayout.CENTER);
 			valuesComponent.add(objectArrayScrollPane, java.awt.BorderLayout.CENTER);
 		} else {
-			valueLabel.setText( Messages.getString("NewNamedTypedElementContentPane.7") ); //$NON-NLS-1$
+			valueLabel.setText( Messages.getString("NewNamedTypedElementContentPane.7") ); 
 			if (valueViewController != null){
 				valueComponent.add(valueViewController, java.awt.BorderLayout.CENTER);
 			}

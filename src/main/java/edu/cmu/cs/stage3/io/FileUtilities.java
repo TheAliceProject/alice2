@@ -10,7 +10,7 @@ public class FileUtilities {
 	
 	static {
 		try {
-			System.loadLibrary( "jni_fileutilities" ); //$NON-NLS-1$
+			System.loadLibrary( "jni_fileutilities" ); 
 			s_successfullyLoadedLibrary = true;
 			//} catch( UnsatisfiedLinkError ule ) {
 		} catch( Throwable t ) {
@@ -36,14 +36,14 @@ public class FileUtilities {
 				}
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("FileUtilities.1") ); //$NON-NLS-1$
+			throw new RuntimeException( Messages.getString("FileUtilities.1") ); 
 		}
 	}
 	public static void copy( java.io.File src, java.io.File dst, boolean overwriteIfNecessary ) {
 		try {
 			copy( src, dst, overwriteIfNecessary, null );
 		} catch( edu.cmu.cs.stage3.progress.ProgressCancelException pce ) {
-			throw new Error( Messages.getString("FileUtilities.2") ); //$NON-NLS-1$
+			throw new Error( Messages.getString("FileUtilities.2") ); 
 		}
 	}
 
@@ -89,7 +89,7 @@ public class FileUtilities {
 		if (directory == null || !directory.isDirectory()){
 			return BAD_DIRECTORY_INPUT;
 		}
-		java.io.File testFile = new java.io.File(directory, "test.test"); //$NON-NLS-1$
+		java.io.File testFile = new java.io.File(directory, "test.test"); 
 		boolean writable;
 		if ( testFile.exists() ) {
 			writable = testFile.canWrite();

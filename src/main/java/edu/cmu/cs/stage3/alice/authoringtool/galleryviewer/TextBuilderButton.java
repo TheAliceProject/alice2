@@ -39,10 +39,9 @@ public class TextBuilderButton extends GenericBuilderButton {
 	   {
 	   }
 
-   
 protected String getToolTipString()
    {
-	   return Messages.getString("TextBuilderButton.0"); //$NON-NLS-1$
+	   return Messages.getString("TextBuilderButton.0"); 
    }
 
    public void set(GalleryViewer.ObjectXmlData dataIn, ImageIcon icon, AuthoringTool authoringTool)
@@ -52,7 +51,6 @@ protected String getToolTipString()
 	   this.authoringTool = authoringTool;
    }
 
-   
 public void respondToMouse()
    {
 	   if(authoringTool != null)

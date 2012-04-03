@@ -34,7 +34,6 @@ public class AliceTabbedPaneUI extends javax.swing.plaf.metal.MetalTabbedPaneUI 
 		setTabAreaInsets( new java.awt.Insets( 0, 0, 0, 0 ) );
 	}
 
-	
 	protected void installDefaults() {
 		super.installDefaults();
 
@@ -55,7 +54,6 @@ public class AliceTabbedPaneUI extends javax.swing.plaf.metal.MetalTabbedPaneUI 
 		this.tabAreaInsets = insets;
 	}
 
-	
 	public void update( java.awt.Graphics g, javax.swing.JComponent c ) {
 		int tabPlacement = tabPane.getTabPlacement();
 		java.awt.Insets insets = c.getInsets();
@@ -77,7 +75,6 @@ public class AliceTabbedPaneUI extends javax.swing.plaf.metal.MetalTabbedPaneUI 
 	/**
 	 * overridden for tab fonts
 	 */
-	
 	protected void paintTab( java.awt.Graphics g, int tabPlacement, java.awt.Rectangle[] rects, int tabIndex, java.awt.Rectangle iconRect, java.awt.Rectangle textRect ) {
 		java.awt.Rectangle tabRect = rects[tabIndex];
 		int selectedIndex = tabPane.getSelectedIndex();
@@ -144,7 +141,6 @@ public class AliceTabbedPaneUI extends javax.swing.plaf.metal.MetalTabbedPaneUI 
 		return (runCount > 0 ? runCount * (maxTabHeight-tabRunOverlay) + tabRunOverlay : 0);
 	}
 
-	
 	protected java.awt.FontMetrics getFontMetrics() {
 		java.awt.Font font = tabPane.getFont().deriveFont( java.awt.Font.BOLD );
 		return java.awt.Toolkit.getDefaultToolkit().getFontMetrics( font );

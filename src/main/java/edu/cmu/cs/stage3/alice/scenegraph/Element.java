@@ -35,7 +35,7 @@ public abstract class Element {
 	private static boolean s_printWarnings = false;
 	static {
 		try {
-			s_printWarnings = Boolean.getBoolean( "alice.printWarnings" ); //$NON-NLS-1$
+			s_printWarnings = Boolean.getBoolean( "alice.printWarnings" ); 
 		} catch( Throwable t ) {
 			s_printWarnings = false;
 		}
@@ -56,8 +56,8 @@ public abstract class Element {
 		}
 	}
 
-	public static final Property BONUS_PROPERTY = new Property( Element.class, "BONUS" ); //$NON-NLS-1$
-	public static final Property NAME_PROPERTY = new Property( Element.class, "NAME" ); //$NON-NLS-1$
+	public static final Property BONUS_PROPERTY = new Property( Element.class, "BONUS" ); 
+	public static final Property NAME_PROPERTY = new Property( Element.class, "NAME" ); 
 	private Object m_bonus = null;
 	private String m_name = null;
 	private java.util.Vector m_releaseListeners = new java.util.Vector();
@@ -85,7 +85,7 @@ public abstract class Element {
 		enum0 = m_propertyListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			PropertyListener propertyListener = (PropertyListener)enum0.nextElement();
-			warnln( Messages.getString("Element.3") + this + Messages.getString("Element.4") + propertyListener + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Element.3") + this + Messages.getString("Element.4") + propertyListener + "." );   
 		}
 		m_propertyListeners = null;
 		m_propertyListenerArray = null;
@@ -93,7 +93,7 @@ public abstract class Element {
 		enum0 = m_releaseListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			ReleaseListener releaseListener = (ReleaseListener)enum0.nextElement();
-			warnln( Messages.getString("Element.6") + this + Messages.getString("Element.7") + releaseListener + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Element.6") + this + Messages.getString("Element.7") + releaseListener + "." );   
 		}
 		m_releaseListeners = null;
 		m_releaseListenerArray = null;
@@ -156,7 +156,7 @@ public abstract class Element {
 	}
 	protected void onPropertyChange( Property property ) {
 		if( isReleased() ) {
-			warnln( Messages.getString("Element.9") + property + Messages.getString("Element.10") + this + "." ); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			warnln( Messages.getString("Element.9") + property + Messages.getString("Element.10") + this + "." );   
 		} else {
 			onPropertyChange( new PropertyEvent( this, property ) );
 		}

@@ -46,7 +46,6 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 	protected boolean invokeEndOnStop() {
 		return false;
 	}
-	
 	public void stopAllRuntimeResponses( double time ) {
 		if( m_runtimeBeginResponse!=null ) {
 			if( m_runtimeBeginResponse.isActive() ) {
@@ -75,7 +74,6 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 		m_booleanValue = booleanValue;
 	}
 
-	
 	protected void internalSchedule( double t, double dt ) {
 		double timeRemaining = 0;
 		if( m_runtimeState==RUNTIME_STATE_CHECKING_FOR_TRUE ) {
@@ -131,7 +129,6 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 		}
 	}
 
-	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
 		//todo: delay this binding

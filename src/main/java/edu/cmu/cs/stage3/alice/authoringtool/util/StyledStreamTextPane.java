@@ -39,10 +39,10 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 		setDocument( document );
 		endPosition = document.getEndPosition();
 
-		javax.swing.text.StyleConstants.setFontFamily( defaultStyle, "Monospaced" ); //$NON-NLS-1$
-		stdOutStyle = this.addStyle( "stdOut", defaultStyle ); //$NON-NLS-1$
-		stdErrStyle = this.addStyle( "stdErr", defaultStyle ); //$NON-NLS-1$
-		javax.swing.text.StyleConstants.setForeground( stdErrStyle, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("stdErrTextColor") ); //$NON-NLS-1$
+		javax.swing.text.StyleConstants.setFontFamily( defaultStyle, "Monospaced" ); 
+		stdOutStyle = this.addStyle( "stdOut", defaultStyle ); 
+		stdErrStyle = this.addStyle( "stdErr", defaultStyle ); 
+		javax.swing.text.StyleConstants.setForeground( stdErrStyle, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("stdErrTextColor") ); 
 
 		defaultStream = getNewStyleStream( defaultStyle );
 
@@ -55,7 +55,6 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 	}
 
 	// prevent word wrapping
-	
 	public boolean getScrollableTracksViewportWidth() {
 		java.awt.Component parent = getParent();
 		if( parent != null ) {
@@ -111,7 +110,6 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 //	}
 
 	protected final java.awt.event.MouseListener mouseListener = new CustomMouseAdapter() {
-		
 		protected void popupResponse( java.awt.event.MouseEvent e ) {
 			javax.swing.JPopupMenu popup = createPopup();
 			popup.show( e.getComponent(), e.getX(), e.getY() );
@@ -121,12 +119,12 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 		private javax.swing.JPopupMenu createPopup() {
 			Runnable clearAllRunnable = new Runnable() {
 				public void run() {
-					StyledStreamTextPane.this.setText( "" ); //$NON-NLS-1$
+					StyledStreamTextPane.this.setText( "" ); 
 				}
 			};
 
 			java.util.Vector structure = new java.util.Vector();
-			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("StyledStreamTextPane.5"), clearAllRunnable ) ); //$NON-NLS-1$
+			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("StyledStreamTextPane.5"), clearAllRunnable ) ); 
 
 			return PopupMenuUtilities.makePopupMenu( structure );
 		}
@@ -192,9 +190,9 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					dtde.getDropTargetContext().dropComplete( true );
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.6"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.6"), e ); 
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.7"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.7"), e ); 
 				}
 			}
 
@@ -206,9 +204,9 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					dtde.getDropTargetContext().dropComplete( true );
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.8"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.8"), e ); 
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.9"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.9"), e ); 
 				}
 			} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, java.awt.datatransfer.DataFlavor.getTextPlainUnicodeFlavor() ) ) {
 				try {
@@ -232,7 +230,7 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 								}
 								fileReader.close();
 							} catch( java.io.IOException e ) {
-								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.10"), e ); //$NON-NLS-1$
+								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.10"), e ); 
 							}
 						}
 					};
@@ -241,9 +239,9 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					dtde.getDropTargetContext().dropComplete( true );
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.11"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.11"), e ); 
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.12"), e ); //$NON-NLS-1$
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.12"), e ); 
 				}
 			}
 			dtde.rejectDrop();

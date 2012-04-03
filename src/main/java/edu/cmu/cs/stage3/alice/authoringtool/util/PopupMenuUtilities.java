@@ -2052,7 +2052,7 @@ public class PopupMenuUtilities {
 		String[] propertyNames = getPropertyNames( elementClass, valueClass );
 		String prefix = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element, false ) + ".";
 		for( int i = 0; i < propertyNames.length; i++ ) {
-			if( (! propertyNames[i].equals( "visualization" )) && (! propertyNames[i].equals( "isFirstClass" )) ) { // HACK suppression
+			if( (! propertyNames[i].equals( "visualization" )) && (! propertyNames[i].equals( AikMin.getProperty("isFirstClass") )) ) { // HACK suppression
 				String propertyName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( propertyNames[i], false );
 				structure.add( new StringObjectPair( prefix + propertyName, factory.createItem( prototype.createCopy( new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", propertyName ) ) ) ) );
 			}

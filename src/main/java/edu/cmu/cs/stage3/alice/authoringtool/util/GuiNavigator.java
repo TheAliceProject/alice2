@@ -49,30 +49,30 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 	protected int buffer = 4;
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 
-	protected java.awt.Image slide = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slide" ); //$NON-NLS-1$
-	protected java.awt.Image slideDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDown" ); //$NON-NLS-1$
-	protected java.awt.Image slideDownLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownLeft" ); //$NON-NLS-1$
-	protected java.awt.Image slideDownRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownRight" ); //$NON-NLS-1$
-	protected java.awt.Image slideHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideHighlight" ); //$NON-NLS-1$
-	protected java.awt.Image slideLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideLeft" ); //$NON-NLS-1$
-	protected java.awt.Image slideRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideRight" ); //$NON-NLS-1$
-	protected java.awt.Image slideUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUp" ); //$NON-NLS-1$
-	protected java.awt.Image slideUpLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpLeft" ); //$NON-NLS-1$
-	protected java.awt.Image slideUpRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpRight" ); //$NON-NLS-1$
-	protected java.awt.Image drive = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/drive" ); //$NON-NLS-1$
-	protected java.awt.Image driveBack = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBack" ); //$NON-NLS-1$
-	protected java.awt.Image driveBackLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackLeft" ); //$NON-NLS-1$
-	protected java.awt.Image driveBackRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackRight" ); //$NON-NLS-1$
-	protected java.awt.Image driveForward = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForward" ); //$NON-NLS-1$
-	protected java.awt.Image driveForwardLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardLeft" ); //$NON-NLS-1$
-	protected java.awt.Image driveForwardRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardRight" ); //$NON-NLS-1$
-	protected java.awt.Image driveHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveHighlight" ); //$NON-NLS-1$
-	protected java.awt.Image driveLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveLeft" ); //$NON-NLS-1$
-	protected java.awt.Image driveRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveRight" ); //$NON-NLS-1$
-	protected java.awt.Image tilt = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tilt" ); //$NON-NLS-1$
-	protected java.awt.Image tiltDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltDown" ); //$NON-NLS-1$
-	protected java.awt.Image tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltHighlight" ); //$NON-NLS-1$
-	protected java.awt.Image tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltUp" ); //$NON-NLS-1$
+	protected java.awt.Image slide = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slide" ); 
+	protected java.awt.Image slideDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDown" ); 
+	protected java.awt.Image slideDownLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownLeft" ); 
+	protected java.awt.Image slideDownRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownRight" ); 
+	protected java.awt.Image slideHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideHighlight" ); 
+	protected java.awt.Image slideLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideLeft" ); 
+	protected java.awt.Image slideRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideRight" ); 
+	protected java.awt.Image slideUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUp" ); 
+	protected java.awt.Image slideUpLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpLeft" ); 
+	protected java.awt.Image slideUpRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpRight" ); 
+	protected java.awt.Image drive = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/drive" ); 
+	protected java.awt.Image driveBack = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBack" ); 
+	protected java.awt.Image driveBackLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackLeft" ); 
+	protected java.awt.Image driveBackRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackRight" ); 
+	protected java.awt.Image driveForward = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForward" ); 
+	protected java.awt.Image driveForwardLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardLeft" ); 
+	protected java.awt.Image driveForwardRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardRight" ); 
+	protected java.awt.Image driveHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveHighlight" ); 
+	protected java.awt.Image driveLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveLeft" ); 
+	protected java.awt.Image driveRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveRight" ); 
+	protected java.awt.Image tilt = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tilt" ); 
+	protected java.awt.Image tiltDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltDown" ); 
+	protected java.awt.Image tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltHighlight" ); 
+	protected java.awt.Image tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltUp" ); 
 
 	public GuiNavigator() {
 		setOpaque( false );
@@ -90,9 +90,9 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 		drivePanel.addMouseListener( navMouseListener );
 		tiltPanel.addMouseListener( navMouseListener );
 
-		slidePanel.setToolTipText( Messages.getString("GuiNavigator.24") ); //$NON-NLS-1$
-		drivePanel.setToolTipText( Messages.getString("GuiNavigator.25") ); //Aik Min //$NON-NLS-1$
-		tiltPanel.setToolTipText( Messages.getString("GuiNavigator.26") ); //$NON-NLS-1$
+		slidePanel.setToolTipText( Messages.getString("GuiNavigator.24") ); 
+		drivePanel.setToolTipText( Messages.getString("GuiNavigator.25") ); //Aik Min 
+		tiltPanel.setToolTipText( Messages.getString("GuiNavigator.26") ); 
 	}
 
 	public void setAuthoringTool( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool ) {
@@ -123,58 +123,58 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 	public void setImageSize( int size ) {
 		if( size == SMALL_IMAGES ) {
 			imageSize = size;
-			slide = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slide" ); //$NON-NLS-1$
-			slideDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideDown" ); //$NON-NLS-1$
-			slideDownLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideDownLeft" ); //$NON-NLS-1$
-			slideDownRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideDownRight" ); //$NON-NLS-1$
-			slideHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideHighlight" ); //$NON-NLS-1$
-			slideLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideLeft" ); //$NON-NLS-1$
-			slideRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideRight" ); //$NON-NLS-1$
-			slideUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideUp" ); //$NON-NLS-1$
-			slideUpLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideUpLeft" ); //$NON-NLS-1$
-			slideUpRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideUpRight" ); //$NON-NLS-1$
-			drive = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/drive" ); //$NON-NLS-1$
-			driveBack = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveBack" ); //$NON-NLS-1$
-			driveBackLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveBackLeft" ); //$NON-NLS-1$
-			driveBackRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveBackRight" ); //$NON-NLS-1$
-			driveForward = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveForward" ); //$NON-NLS-1$
-			driveForwardLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveForwardLeft" ); //$NON-NLS-1$
-			driveForwardRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveForwardRight" ); //$NON-NLS-1$
-			driveHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveHighlight" ); //$NON-NLS-1$
-			driveLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveLeft" ); //$NON-NLS-1$
-			driveRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveRight" ); //$NON-NLS-1$
-			tilt = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tilt" ); //$NON-NLS-1$
-			tiltDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tiltDown" ); //$NON-NLS-1$
-			tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tiltHighlight" ); //$NON-NLS-1$
-			tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tiltUp" ); //$NON-NLS-1$
+			slide = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slide" ); 
+			slideDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideDown" ); 
+			slideDownLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideDownLeft" ); 
+			slideDownRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideDownRight" ); 
+			slideHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideHighlight" ); 
+			slideLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideLeft" ); 
+			slideRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideRight" ); 
+			slideUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideUp" ); 
+			slideUpLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideUpLeft" ); 
+			slideUpRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/slideUpRight" ); 
+			drive = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/drive" ); 
+			driveBack = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveBack" ); 
+			driveBackLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveBackLeft" ); 
+			driveBackRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveBackRight" ); 
+			driveForward = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveForward" ); 
+			driveForwardLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveForwardLeft" ); 
+			driveForwardRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveForwardRight" ); 
+			driveHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveHighlight" ); 
+			driveLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveLeft" ); 
+			driveRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/driveRight" ); 
+			tilt = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tilt" ); 
+			tiltDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tiltDown" ); 
+			tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tiltHighlight" ); 
+			tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "smallGuiNavigator/tiltUp" ); 
 		} else if( size == LARGE_IMAGES ) {
 			imageSize = size;
-			slide = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slide" ); //$NON-NLS-1$
-			slideDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDown" ); //$NON-NLS-1$
-			slideDownLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownLeft" ); //$NON-NLS-1$
-			slideDownRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownRight" ); //$NON-NLS-1$
-			slideHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideHighlight" ); //$NON-NLS-1$
-			slideLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideLeft" ); //$NON-NLS-1$
-			slideRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideRight" ); //$NON-NLS-1$
-			slideUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUp" ); //$NON-NLS-1$
-			slideUpLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpLeft" ); //$NON-NLS-1$
-			slideUpRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpRight" ); //$NON-NLS-1$
-			drive = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/drive" ); //$NON-NLS-1$
-			driveBack = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBack" ); //$NON-NLS-1$
-			driveBackLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackLeft" ); //$NON-NLS-1$
-			driveBackRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackRight" ); //$NON-NLS-1$
-			driveForward = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForward" ); //$NON-NLS-1$
-			driveForwardLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardLeft" ); //$NON-NLS-1$
-			driveForwardRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardRight" ); //$NON-NLS-1$
-			driveHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveHighlight" ); //$NON-NLS-1$
-			driveLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveLeft" ); //$NON-NLS-1$
-			driveRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveRight" ); //$NON-NLS-1$
-			tilt = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tilt" ); //$NON-NLS-1$
-			tiltDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltDown" ); //$NON-NLS-1$
-			tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltHighlight" ); //$NON-NLS-1$
-			tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltUp" ); //$NON-NLS-1$
+			slide = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slide" ); 
+			slideDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDown" ); 
+			slideDownLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownLeft" ); 
+			slideDownRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideDownRight" ); 
+			slideHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideHighlight" ); 
+			slideLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideLeft" ); 
+			slideRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideRight" ); 
+			slideUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUp" ); 
+			slideUpLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpLeft" ); 
+			slideUpRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/slideUpRight" ); 
+			drive = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/drive" ); 
+			driveBack = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBack" ); 
+			driveBackLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackLeft" ); 
+			driveBackRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveBackRight" ); 
+			driveForward = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForward" ); 
+			driveForwardLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardLeft" ); 
+			driveForwardRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveForwardRight" ); 
+			driveHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveHighlight" ); 
+			driveLeft = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveLeft" ); 
+			driveRight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/driveRight" ); 
+			tilt = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tilt" ); 
+			tiltDown = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltDown" ); 
+			tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltHighlight" ); 
+			tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltUp" ); 
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GuiNavigator.75") + imageSize, null ); //$NON-NLS-1$
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GuiNavigator.75") + imageSize, null ); 
 		}
 		updateImages();
 	}
@@ -362,7 +362,6 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			//System.out.println( "setMode( " + ev + " ): " + mode );
 		}
 
-		
 		public void mousePressed( java.awt.event.MouseEvent ev ) {
 			super.mousePressed( ev );
 
@@ -396,7 +395,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 					pressedy = 20;
 				}
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GuiNavigator.76") + imageSize, null ); //$NON-NLS-1$
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GuiNavigator.76") + imageSize, null ); 
 			}
 
 			super.mouseDragged( ev );
@@ -413,7 +412,6 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			GuiNavigator.this.updateImages();
 		}
 
-		
 		public void mouseReleased( java.awt.event.MouseEvent ev ) {
 			super.mouseReleased( ev );
 
@@ -429,7 +427,6 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			GuiNavigator.this.updateImages();
 		}
 
-		
 		public void mouseDragged( java.awt.event.MouseEvent ev ) {
 			super.mouseDragged( ev );
 
@@ -439,22 +436,18 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			GuiNavigator.this.updateImages();
 		}
 
-		
 		public void mouseEntered( java.awt.event.MouseEvent ev ) {
 			setMode( ev );
 			GuiNavigator.this.updateImages();
 		}
-		
 		public void mouseExited( java.awt.event.MouseEvent ev ) {
 			setMode( null );
 			GuiNavigator.this.updateImages();
 		}
-		
 		public void mouseMoved( java.awt.event.MouseEvent ev ) {
 			setMode( ev );
 			GuiNavigator.this.updateImages();
 		}
-		
 		public void mouseClicked( java.awt.event.MouseEvent ev ) {}
 	}
 }

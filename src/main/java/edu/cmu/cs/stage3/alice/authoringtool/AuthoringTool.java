@@ -55,8 +55,8 @@ import edu.cmu.cs.stage3.swing.ContentPane;
  */
 public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.cmu.cs.stage3.caitlin.stencilhelp.application.StencilApplication {
 	// file extensions
-	public static final String CHARACTER_EXTENSION = "a2c"; //$NON-NLS-1$
-	public static final String WORLD_EXTENSION = "a2w"; //$NON-NLS-1$
+	public static final String CHARACTER_EXTENSION = "a2c"; 
+	public static final String WORLD_EXTENSION = "a2w"; 
 
 	// python standard out/err
 	private static org.python.core.PyFile pyStdOut;
@@ -173,24 +173,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			v.copyInto( calls );
 			return calls;
 		}
-		
 		protected void handleChildrenChanging( edu.cmu.cs.stage3.alice.core.event.ChildrenEvent e ) {
 		}
-		
 		protected void handleChildrenChanged( edu.cmu.cs.stage3.alice.core.event.ChildrenEvent e ) {
 		}
-		
 		
 		protected void handlePropertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent e ) {
 			m_previousPropertyValue = e.getProperty().get();
 		}
-		
 		protected void handlePropertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent e ) {
 			edu.cmu.cs.stage3.alice.core.Property property = e.getProperty();
 			edu.cmu.cs.stage3.alice.core.Element owner = property.getOwner();
 			if( owner instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 				edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)owner;
-				if( property.getName().equals( "name" ) ) { //$NON-NLS-1$
+				if( property.getName().equals( "name" ) ) { 
 					edu.cmu.cs.stage3.alice.core.Element parent = variable.getParent();
 					if( parent instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
 						edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse userDefined = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)parent;
@@ -220,16 +216,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			}
 		}
-		
 		protected void handleObjectArrayPropertyChanging( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent e ) {
 		}
-		
 		protected void handleObjectArrayPropertyChanged( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent e ) {
 			edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty oap = e.getObjectArrayProperty();
 			edu.cmu.cs.stage3.alice.core.Element owner = oap.getOwner();
 			if( owner instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
 				edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse userDefined = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)owner;
-				if( oap.getName().equals( "requiredFormalParameters" ) ) { //$NON-NLS-1$
+				if( oap.getName().equals( "requiredFormalParameters" ) ) { 
 					Object item = e.getItem();
 					if( item instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 						edu.cmu.cs.stage3.alice.core.Variable formalParameter = (edu.cmu.cs.stage3.alice.core.Variable)item;
@@ -274,7 +268,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			} else if( owner instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion ) {
 				edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion userDefined = (edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion)owner;
-				if( oap.getName().equals( "requiredFormalParameters" ) ) { //$NON-NLS-1$
+				if( oap.getName().equals( "requiredFormalParameters" ) ) { 
 					Object item = e.getItem();
 					if( item instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 						edu.cmu.cs.stage3.alice.core.Variable formalParameter = (edu.cmu.cs.stage3.alice.core.Variable)item;
@@ -313,11 +307,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			}
 		}
-		
 		protected boolean isPropertyListeningRequired( edu.cmu.cs.stage3.alice.core.Property property ) {
 			return true;
 		}
-		
 		protected boolean isObjectArrayPropertyListeningRequired( edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty oap ) {
 			return true;
 		}
@@ -347,9 +339,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	// constructor
 	public AuthoringTool(java.io.File defaultWorld, java.io.File worldToLoad, boolean stdOutToConsole, boolean stdErrToConsole) {
-		String font = "SansSerif"; // "Tahoma"; //$NON-NLS-1$
+		String font = "SansSerif"; // "Tahoma"; 
 		try {
-			javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); //$NON-NLS-1$
+			javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); 
 
 			//			javax.swing.UIManager.put( "Button.focus", new java.awt.Color( 255, 255, 255, 0 ) ); // don't show focus  // makes printing slow, unfortunately
 
@@ -383,37 +375,39 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					return insets;
 				}
 			}
-			javax.swing.UIManager.put("Button.border", new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource(new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder())); //$NON-NLS-1$
+			javax.swing.UIManager.put("Button.border", new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource(new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder())); 
 
 			//necessary for 1.4
 	
-			javax.swing.UIManager.put("Label.font", new java.awt.Font(font, java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			javax.swing.UIManager.put("Label.foreground", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("mainFontColor")); //$NON-NLS-1$ //$NON-NLS-2$
-			javax.swing.UIManager.put("TabbedPane.selected", new java.awt.Color(255, 255, 255, 0)); //$NON-NLS-1$
-			javax.swing.UIManager.put("TabbedPane.tabInsets", new java.awt.Insets(1, 4, 1, 3)); //$NON-NLS-1$
+			javax.swing.UIManager.put("Label.font", new java.awt.Font(font, java.awt.Font.BOLD, 12)); 
+			javax.swing.UIManager.put("Label.foreground", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("mainFontColor"));  
+			javax.swing.UIManager.put("TabbedPane.selected", new java.awt.Color(255, 255, 255, 0)); 
+			javax.swing.UIManager.put("TabbedPane.tabInsets", new java.awt.Insets(1, 4, 1, 3)); 
 
-			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI"); //$NON-NLS-1$ //$NON-NLS-2$
+			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")) {   
+				javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  
 			}
 		} catch (Exception e) {
-			showErrorDialog(Messages.getString("AuthoringTool.18"), e); //$NON-NLS-1$
+			showErrorDialog(Messages.getString("AuthoringTool.18"), e); 
 		}
 
 		AuthoringTool.hack = this;
 		this.defaultWorld = defaultWorld;
 		if (!(defaultWorld.exists() && defaultWorld.canRead())) {
 			this.defaultWorld = null;
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(defaultWorld.getAbsolutePath() + Messages.getString("AuthoringTool.19"), Messages.getString("AuthoringTool.20"), javax.swing.JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(defaultWorld.getAbsolutePath() + " " + Messages.getString("AuthoringTool.19"), Messages.getString("AuthoringTool.20"), javax.swing.JOptionPane.WARNING_MESSAGE);  
 		}
 
 		filterInit();
 		configInit();	
 		try{
-			AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		 //$NON-NLS-1$
-			if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase("true")){ //$NON-NLS-1$ //$NON-NLS-2$
-				javax.swing.UIManager.put("Label.foreground", java.awt.Color.black); //$NON-NLS-1$
+			AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		 
+			if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase("true")){  
+				javax.swing.UIManager.put("Label.foreground", java.awt.Color.black); 
 			}
-		} catch (Exception e){}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 		mainInit();
 		this.stdOutToConsole = stdOutToConsole;
 		this.stdErrToConsole = stdErrToConsole;
@@ -448,15 +442,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		jAliceFrame.setVisible(true);
 		worldInit(worldToLoad);
 		if( worldToLoad == null ) {
-			if (authoringToolConfig.getValue("showStartUpDialog").equalsIgnoreCase("true")) { //$NON-NLS-1$ //$NON-NLS-2$
+			if (authoringToolConfig.getValue("showStartUpDialog").equalsIgnoreCase("true")) {  
 				showStartUpDialog(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.DO_NOT_CHANGE_TAB_ID);
 			}
 		}
 	}
 
 	private void filterInit() {
-		worldFileFilter = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(WORLD_EXTENSION, WORLD_EXTENSION.toUpperCase() + Messages.getString("AuthoringTool.27")); //$NON-NLS-1$
-		characterFileFilter = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(CHARACTER_EXTENSION, CHARACTER_EXTENSION.toUpperCase() + Messages.getString("AuthoringTool.28")); //$NON-NLS-1$
+		worldFileFilter = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(WORLD_EXTENSION, WORLD_EXTENSION.toUpperCase() + " " + Messages.getString("AuthoringTool.27")); 
+		characterFileFilter = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(CHARACTER_EXTENSION, CHARACTER_EXTENSION.toUpperCase() + " " + Messages.getString("AuthoringTool.28")); 
 	}
 
 	private void mainInit() {
@@ -481,7 +475,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	private void worldsDirectoryChanged() {
-		String worldsDirPath = authoringToolConfig.getValue("directories.worldsDirectory"); //$NON-NLS-1$
+		String worldsDirPath = authoringToolConfig.getValue("directories.worldsDirectory"); 
 		if (worldsDirPath != null) {
 			java.io.File worldsDir = new java.io.File(worldsDirPath);
 			if (worldsDir != null && worldsDir.exists() && worldsDir.isDirectory()) {
@@ -498,7 +492,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
 	private void importDirectoryChanged() {
-		String importDirPath = authoringToolConfig.getValue("directories.importDirectory"); //$NON-NLS-1$
+		String importDirPath = authoringToolConfig.getValue("directories.importDirectory"); 
 		if (importDirPath != null) {
 			java.io.File importDir = new java.io.File(importDirPath);
 			if (importDir != null && importDir.exists() && importDir.isDirectory()) {
@@ -515,7 +509,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
 	private void charactersDirectoryChanged() {
-		String charactersDirPath = authoringToolConfig.getValue("directories.charactersDirectory"); //$NON-NLS-1$
+		String charactersDirPath = authoringToolConfig.getValue("directories.charactersDirectory"); 
 		if (charactersDirPath != null) {
 			java.io.File charactersDir = new java.io.File(charactersDirPath);
 			if (charactersDir != null && charactersDir.exists() && charactersDir.isDirectory()) {
@@ -540,17 +534,17 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			}
 
 			public void changed(edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev) {
-				if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.recentWorlds.maxWorlds")) { //$NON-NLS-1$
+				if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.recentWorlds.maxWorlds")) { 
 					AuthoringTool.this.jAliceFrame.updateRecentWorlds();
-				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.numberOfClipboards")) { //$NON-NLS-1$
+				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.numberOfClipboards")) { 
 					AuthoringTool.this.jAliceFrame.updateClipboards();
-				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.showWorldStats")) { //$NON-NLS-1$
-					AuthoringTool.this.jAliceFrame.showStatusPanel(ev.getNewValue().equalsIgnoreCase("true")); //$NON-NLS-1$
-				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.directories.worldsDirectory")) { //$NON-NLS-1$
+				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.showWorldStats")) { 
+					AuthoringTool.this.jAliceFrame.showStatusPanel(ev.getNewValue().equalsIgnoreCase("true")); 
+				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.directories.worldsDirectory")) { 
 					AuthoringTool.this.worldsDirectoryChanged();
-				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.directories.importDirectory")) { //$NON-NLS-1$
+				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.directories.importDirectory")) { 
 					AuthoringTool.this.importDirectoryChanged();
-				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.directories.charactersDirectory")) { //$NON-NLS-1$
+				} else if (ev.getKeyName().equals("edu.cmu.cs.stage3.alice.authoringtool.directories.charactersDirectory")) { 
 					AuthoringTool.this.charactersDirectoryChanged();
 				}
 			}
@@ -566,16 +560,16 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					if (shouldAllowOverwrite(desiredFile)) {
 						super.approveSelection();
 					} else {
-						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.39")); //$NON-NLS-1$
+						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.39")); 
 					}
 				} else if (desiredFile.exists()) {
 					if (shouldAllowOverwrite(desiredFile)) {
-						int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.40"), Messages.getString("AuthoringTool.41"), javax.swing.JOptionPane.YES_NO_OPTION); //$NON-NLS-1$ //$NON-NLS-2$
+						int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.40"), Messages.getString("AuthoringTool.41"), javax.swing.JOptionPane.YES_NO_OPTION);  
 						if (n == javax.swing.JOptionPane.YES_OPTION) {
 							super.approveSelection();
 						}
 					} else {
-						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.42")); //$NON-NLS-1$
+						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.39")); 
 					}
 
 				}
@@ -604,20 +598,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			}
 		};
 */		
-		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); //$NON-NLS-1$
+		int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); 
 		int x = 700 + ( fontSize - 12 ) * 25;
 		int y = 405 + (fontSize - 12);
 				
-		saveCharacterFileDialog.setDialogTitle(Messages.getString("AuthoringTool.44")); //$NON-NLS-1$
+		saveCharacterFileDialog.setDialogTitle(Messages.getString("AuthoringTool.44")); 
 		saveCharacterFileDialog.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		saveCharacterFileDialog.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
 		saveCharacterFileDialog.setFileFilter(characterFileFilter);
 		saveCharacterFileDialog.setPreferredSize(new java.awt.Dimension(x, y));
 
-		worldLoadProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LoadElementProgressPane(Messages.getString("AuthoringTool.45"), Messages.getString("AuthoringTool.46")); //$NON-NLS-1$ //$NON-NLS-2$
-		worldStoreProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StoreElementProgressPane(Messages.getString("AuthoringTool.47"), Messages.getString("AuthoringTool.48")); //$NON-NLS-1$ //$NON-NLS-2$
-		characterLoadProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LoadElementProgressPane(Messages.getString("AuthoringTool.49"), Messages.getString("AuthoringTool.50")); //$NON-NLS-1$ //$NON-NLS-2$
-		characterStoreProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StoreElementProgressPane(Messages.getString("AuthoringTool.51"), Messages.getString("AuthoringTool.52")); //$NON-NLS-1$ //$NON-NLS-2$
+		worldLoadProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LoadElementProgressPane(Messages.getString("AuthoringTool.45"), Messages.getString("AuthoringTool.46"));  
+		worldStoreProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StoreElementProgressPane(Messages.getString("AuthoringTool.47"), Messages.getString("AuthoringTool.48"));  
+		characterLoadProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LoadElementProgressPane(Messages.getString("AuthoringTool.49"), Messages.getString("AuthoringTool.50"));  
+		characterStoreProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StoreElementProgressPane(Messages.getString("AuthoringTool.51"), Messages.getString("AuthoringTool.52"));  
 
 		preferencesContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.PreferencesContentPane();
 		preferencesContentPane.setAuthoringTool(this);
@@ -629,20 +623,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		renderPanel.setLayout(new java.awt.BorderLayout());
 
-		importFileChooser.setApproveButtonText(Messages.getString("AuthoringTool.53")); //$NON-NLS-1$
-		importFileChooser.setDialogTitle(Messages.getString("AuthoringTool.54")); //$NON-NLS-1$
+		importFileChooser.setApproveButtonText(Messages.getString("AuthoringTool.53")); 
+		importFileChooser.setDialogTitle(Messages.getString("AuthoringTool.54")); 
 		importFileChooser.setDialogType(javax.swing.JFileChooser.OPEN_DIALOG);
 		importFileChooser.setPreferredSize(new java.awt.Dimension(x, y));
 
-		saveWorldFileChooser.setApproveButtonText(Messages.getString("AuthoringTool.55")); //$NON-NLS-1$
-		saveWorldFileChooser.setDialogTitle(Messages.getString("AuthoringTool.56")); //$NON-NLS-1$
+		saveWorldFileChooser.setApproveButtonText(Messages.getString("AuthoringTool.55")); 
+		saveWorldFileChooser.setDialogTitle(Messages.getString("AuthoringTool.56")); 
 		saveWorldFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		saveWorldFileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
 		saveWorldFileChooser.setFileFilter(worldFileFilter);
 		saveWorldFileChooser.setPreferredSize(new java.awt.Dimension(x, y));
 
-		addCharacterFileChooser.setApproveButtonText(Messages.getString("AuthoringTool.57")); //$NON-NLS-1$
-		addCharacterFileChooser.setDialogTitle(Messages.getString("AuthoringTool.58")); //$NON-NLS-1$
+		addCharacterFileChooser.setApproveButtonText(Messages.getString("AuthoringTool.57")); 
+		addCharacterFileChooser.setDialogTitle(Messages.getString("AuthoringTool.58")); 
 		addCharacterFileChooser.setDialogType(javax.swing.JFileChooser.OPEN_DIALOG);
 		addCharacterFileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
 		addCharacterFileChooser.setFileFilter(characterFileFilter);
@@ -762,11 +756,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		// track framerate
 		javax.swing.Timer fpsTimer = new javax.swing.Timer(500, new java.awt.event.ActionListener() {
-			java.text.DecimalFormat formater = new java.text.DecimalFormat("#0.00"); //$NON-NLS-1$
+			java.text.DecimalFormat formater = new java.text.DecimalFormat("#0.00"); 
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
-				String fps = formater.format(AuthoringTool.this.scheduler.getSimulationFPS()) + Messages.getString("AuthoringTool.60"); //$NON-NLS-1$
-				if (authoringToolConfig.getValue("rendering.showFPS").equalsIgnoreCase("true")) { //$NON-NLS-1$ //$NON-NLS-2$
-					AuthoringTool.this.renderContentPane.setTitle(Messages.getString("AuthoringTool.63") + fps); //$NON-NLS-1$
+				String fps = formater.format(AuthoringTool.this.scheduler.getSimulationFPS()) + Messages.getString("AuthoringTool.60"); 
+				if (authoringToolConfig.getValue("rendering.showFPS").equalsIgnoreCase("true")) {  
+					AuthoringTool.this.renderContentPane.setTitle(Messages.getString("AuthoringTool.63") + fps); 
 				}
 			}
 		});
@@ -803,19 +797,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				if ((!modalShowing) && (!skipThisWorld)) {
 					long time = System.currentTimeMillis();
 					long dt = time - lastSaveTime;
-					int interval = Integer.parseInt(authoringToolConfig.getValue("promptToSaveInterval")); //$NON-NLS-1$
+					int interval = Integer.parseInt(authoringToolConfig.getValue("promptToSaveInterval")); 
 					long intervalMillis = ((long) interval) * ((long) 60000);
 					if (dt > intervalMillis) {
 						//							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "You have not saved in more than" + interval + " minutes.\nIt is recommended that you save early and often to avoid losing work." );
 						int result =
 							edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(
-								Messages.getString("AuthoringTool.65") + interval + Messages.getString("AuthoringTool.66"), //$NON-NLS-1$ //$NON-NLS-2$
-								Messages.getString("AuthoringTool.67"), //$NON-NLS-1$
+								Messages.getString("AuthoringTool.65") + interval + Messages.getString("AuthoringTool.66"),  
+								Messages.getString("AuthoringTool.67"), 
 								javax.swing.JOptionPane.YES_NO_OPTION,
 								javax.swing.JOptionPane.WARNING_MESSAGE,
 								null,
-								new Object[] { Messages.getString("AuthoringTool.68"), Messages.getString("AuthoringTool.69") }, //$NON-NLS-1$ //$NON-NLS-2$
-								Messages.getString("AuthoringTool.70")); //$NON-NLS-1$
+								new Object[] { Messages.getString("AuthoringTool.68"), Messages.getString("AuthoringTool.69") },  
+								Messages.getString("AuthoringTool.70")); 
 						if (result == javax.swing.JOptionPane.YES_OPTION) {
 							AuthoringTool.this.getActions().saveWorldAction.actionPerformed(null);
 						}
@@ -863,17 +857,17 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	private void importInit() {
 		java.util.List importers = importing.getImporters();
-		edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter imageFiles = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(Messages.getString("AuthoringTool.71")); //$NON-NLS-1$
-		extensionStringsToFileFilterMap.put(Messages.getString("AuthoringTool.72"), imageFiles); //$NON-NLS-1$
-		edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter soundFiles = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(Messages.getString("AuthoringTool.73")); //$NON-NLS-1$
-		extensionStringsToFileFilterMap.put(Messages.getString("AuthoringTool.74"), soundFiles); //$NON-NLS-1$
+		edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter imageFiles = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(Messages.getString("AuthoringTool.71")); 
+		extensionStringsToFileFilterMap.put(Messages.getString("AuthoringTool.72"), imageFiles); 
+		edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter soundFiles = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(Messages.getString("AuthoringTool.73")); 
+		extensionStringsToFileFilterMap.put(Messages.getString("AuthoringTool.74"), soundFiles); 
 		java.util.TreeSet extensions = new java.util.TreeSet();
 		for (java.util.Iterator iter = importers.iterator(); iter.hasNext();) {
 			edu.cmu.cs.stage3.alice.authoringtool.Importer importer = (edu.cmu.cs.stage3.alice.authoringtool.Importer) iter.next();
 			java.util.Map map = importer.getExtensionMap();
 			for (java.util.Iterator jter = map.keySet().iterator(); jter.hasNext();) {
 				String extension = (String) jter.next();
-				String description = extension + " (" + map.get(extension) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+				String description = extension + " (" + map.get(extension) + ")";  
 				edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter ext = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(extension, description);
 				extensions.add(ext);
 				extensionStringsToFileFilterMap.put(extension, ext);
@@ -912,10 +906,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						return;
 					}
 				} else {
-					AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.77") + worldToLoad, null, false); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.77") + worldToLoad, null, false); 
 				}
 			} else {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.78") + worldToLoad, null, false); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.78") + worldToLoad, null, false); 
 			}
 		}
 
@@ -969,23 +963,23 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			Class rendererClass = null;
 			boolean isSoftwareEmulationForced = false;
 			try {
-				String[] renderers = authoringToolConfig.getValueList( "rendering.orderedRendererList" ); //$NON-NLS-1$
+				String[] renderers = authoringToolConfig.getValueList( "rendering.orderedRendererList" ); 
 				rendererClass = Class.forName( renderers[ 0 ] );
 			} catch( Throwable t ) {
 				//todo: inform user of configuration problem?
 				//pass
 			}
 			try {
-				String s = authoringToolConfig.getValue( "rendering.forceSoftwareRendering" ); //$NON-NLS-1$
+				String s = authoringToolConfig.getValue( "rendering.forceSoftwareRendering" ); 
 				if( s != null ) {
-					isSoftwareEmulationForced = s.equals( "true" ); //$NON-NLS-1$
+					isSoftwareEmulationForced = s.equals( "true" ); 
 				}
 			} catch( Throwable t ) {
 				//todo: inform user of configuration problem?
 				//pass
 			}
-			String commandLineOption = System.getProperty( "alice.forceSoftwareRendering" ); //$NON-NLS-1$
-			if( commandLineOption != null && commandLineOption.equalsIgnoreCase( "true" ) ) { //$NON-NLS-1$
+			String commandLineOption = System.getProperty( "alice.forceSoftwareRendering" ); 
+			if( commandLineOption != null && commandLineOption.equalsIgnoreCase( "true" ) ) { 
 				isSoftwareEmulationForced = true;
 			}
 			renderTargetFactory = new edu.cmu.cs.stage3.alice.scenegraph.renderer.DefaultRenderTargetFactory( rendererClass );
@@ -1078,7 +1072,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.stateChanging(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.84"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.84"), t); 
 			}
 		}
 	}
@@ -1090,7 +1084,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldLoading(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.85"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.85"), t); 
 			}
 		}
 	}
@@ -1102,7 +1096,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldUnLoading(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.86"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.86"), t); 
 			}
 		}
 	}
@@ -1114,7 +1108,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldStarting(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.87"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.87"), t); 
 			}
 		}
 	}
@@ -1126,7 +1120,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldStopping(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.88"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.88"), t); 
 			}
 		}
 	}
@@ -1138,7 +1132,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldPausing(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.89"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.89"), t); 
 			}
 		}
 	}
@@ -1150,7 +1144,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldSaving(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.90"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.90"), t); 
 			}
 		}
 	}
@@ -1162,7 +1156,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.stateChanged(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.91"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.91"), t); 
 			}
 		}
 	}
@@ -1174,7 +1168,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldLoaded(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.92"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.92"), t); 
 			}
 		}
 	}
@@ -1186,7 +1180,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldUnLoaded(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.93"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.93"), t); 
 			}
 		}
 	}
@@ -1198,7 +1192,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldStarted(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.94"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.94"), t); 
 			}
 		}
 	}
@@ -1210,7 +1204,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldStopped(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.95"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.95"), t); 
 			}
 		}
 	}
@@ -1222,7 +1216,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldPaused(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.96"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.96"), t); 
 			}
 		}
 	}
@@ -1234,7 +1228,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				listener.worldSaved(ev);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.97"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.97"), t); 
 			}
 		}
 	}
@@ -1356,17 +1350,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	
 	public void resetClipboards() {
 		try {
-			int numClipboards = Integer.parseInt( authoringToolConfig.getValue( "numberOfClipboards" ) ); //$NON-NLS-1$
-			for( int i = 0; i < numClipboards; i++ ) {
-				jAliceFrame.clipboardPanel.remove( 0 );
-			}
+			final int numClipboards = Integer.parseInt( authoringToolConfig.getValue( "numberOfClipboards" ) ); 
+			jAliceFrame.clipboardPanel.remove(0);
 			for( int i = 0; i < numClipboards; i++ ) {
 				jAliceFrame.clipboardPanel.add( new edu.cmu.cs.stage3.alice.authoringtool.util.DnDClipboard() );
 			}
 			jAliceFrame.clipboardPanel.revalidate();
 			jAliceFrame.clipboardPanel.repaint();
 		} catch( NumberFormatException e ) {
-			AuthoringTool.showErrorDialog( Messages.getString("AuthoringTool.99") + authoringToolConfig.getValue( "numberOfClipboards" ), null ); //$NON-NLS-1$ //$NON-NLS-2$
+			AuthoringTool.showErrorDialog( Messages.getString("AuthoringTool.99") + authoringToolConfig.getValue( "numberOfClipboards" ), null );  
 		}
 	}
 	
@@ -1392,7 +1384,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				return saveWorldToFile(currentWorldLocation, false);
 			} catch (java.io.IOException e) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.101") + currentWorldLocation.getAbsolutePath(), e); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.101") + ": "+ currentWorldLocation.getAbsolutePath(), e); 
 				return Constants.FAILED;
 			}
 		} else {
@@ -1409,13 +1401,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				file.delete();
 				return Constants.FAILED;
 			}*/
-			if (!file.getName().endsWith("." + WORLD_EXTENSION)) { //$NON-NLS-1$
-				file = new java.io.File(file.getParent(), file.getName() + "." + WORLD_EXTENSION); //$NON-NLS-1$
+			if (!file.getName().endsWith("." + WORLD_EXTENSION)) { 
+				file = new java.io.File(file.getParent(), file.getName() + "." + WORLD_EXTENSION); 
 			}
 			try {
 				return saveWorldToFile(file, false);
 			} catch (java.io.IOException e) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.104") + file, e); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.101") + ": " + file, e); 
 				file.delete();
 				return Constants.FAILED;
 			}
@@ -1429,11 +1421,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	private void finalCleanUp() {
 		try {
 			java.awt.Rectangle bounds = jAliceFrame.getBounds();
-			authoringToolConfig.setValue("mainWindowBounds", bounds.x + ", " + bounds.y + ", " + bounds.width + ", " + bounds.height); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			authoringToolConfig.setValue("mainWindowBounds", bounds.x + ", " + bounds.y + ", " + bounds.width + ", " + bounds.height);    //$NON-NLS-4$
 			edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.storeConfig();
 			renderTargetFactory.release();
 		} catch (Throwable t) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.109"), t); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.109"), t); 
 		}
 	}
 
@@ -1442,43 +1434,45 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			int retVal = leaveWorld(true);
 			if (retVal == Constants.SUCCEEDED) {
 				finalCleanUp();
-				java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt"); //$NON-NLS-1$
+				java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt"); 
 				aliceHasNotExitedFile.delete();
 				java.io.BufferedInputStream bis = null;
 				java.io.BufferedOutputStream bos = null;
 				java.io.File aliceJAR;
 				if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").startsWith("Windows"))  ) {
-					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\aliceupdate.jar"); //$NON-NLS-1$
+					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\aliceupdate.jar"); 
 				} else {
-					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/aliceupdate.jar"); //$NON-NLS-1$
+					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/aliceupdate.jar"); 
 				}
-	            try {      
-					bis = new java.io.BufferedInputStream( new java.io.FileInputStream( aliceJAR ) );
-					if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").startsWith("Windows"))  ) {
-						bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\alice.jar") ) ); //$NON-NLS-1$
-					} else {
-						bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/alice.jar") ) ); //$NON-NLS-1$
-					}					
-		            int i;
-		            while ((i = bis.read()) != -1) {
-		            	bos.write( i );
-		            }      
-				} catch (Exception e1){
-					e1.printStackTrace();
-				} finally {
-					 if (bis != null)
-		             try {
-		            	 bis.close();
-		            	 aliceJAR.delete();
-		             } catch (java.io.IOException ioe) {
-		                 ioe.printStackTrace();
-		             }
-		             if (bos != null)
-		             try {
-		                 bos.close();
-		             } catch (java.io.IOException ioe) {
-		                 ioe.printStackTrace();
-		             }             
+				if (aliceJAR.exists()) {
+		            try {      
+						bis = new java.io.BufferedInputStream( new java.io.FileInputStream( aliceJAR ) );
+						if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").startsWith("Windows"))  ) {
+							bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\alice.jar") ) ); 
+						} else {
+							bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/alice.jar") ) ); 
+						}					
+			            int i;
+			            while ((i = bis.read()) != -1) {
+			            	bos.write( i );
+			            }      
+					} catch (Exception e1){
+						e1.printStackTrace();
+					} finally {
+						 if (bis != null)
+			             try {
+			            	 bis.close();
+			            	 aliceJAR.delete();
+			             } catch (java.io.IOException ioe) {
+			                 ioe.printStackTrace();
+			             }
+			             if (bos != null)
+			             try {
+			                 bos.close();
+			             } catch (java.io.IOException ioe) {
+			                 ioe.printStackTrace();
+			             }             
+					}
 				}
 				if (condition) {
 					try {
@@ -1506,7 +1500,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			} else if (retVal == Constants.CANCELED) {
 				return Constants.CANCELED;
 			} else if (retVal == Constants.FAILED) {
-				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.113")); //$NON-NLS-1$
+				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.113")); 
 				if (result == javax.swing.JOptionPane.YES_OPTION) {
 					finalCleanUp();
 					System.exit(1);
@@ -1514,7 +1508,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			}
 		} catch (Throwable t) {
 			try {
-				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.114") ); // TODO: give information about the error //$NON-NLS-1$
+				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.114") ); // TODO: give information about the error 
 				if (result == javax.swing.JOptionPane.YES_OPTION) {
 					finalCleanUp();
 					System.exit(1);
@@ -1532,8 +1526,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			if ((currentWorldLocation != null) && currentWorldLocation.getAbsolutePath().startsWith(getTutorialDirectory().getAbsolutePath())) { // skip tutorial worlds
 				return Constants.SUCCEEDED;
 			} else if ((currentWorldLocation == null) || (!shouldAllowOverwrite(currentWorldLocation))) {
-				String question = Messages.getString("AuthoringTool.115"); //$NON-NLS-1$
-				int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(question, Messages.getString("AuthoringTool.116"), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION); //$NON-NLS-1$
+				String question = Messages.getString("AuthoringTool.115"); 
+				int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(question, Messages.getString("AuthoringTool.116"), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION); 
 				if (n == javax.swing.JOptionPane.YES_OPTION) {
 					int retVal = saveWorldAs();
 					if (retVal == Constants.CANCELED) {
@@ -1549,8 +1543,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					return Constants.CANCELED;
 				}
 			} else {
-				String question = Messages.getString("AuthoringTool.117"); //$NON-NLS-1$
-				int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(question, Messages.getString("AuthoringTool.118"), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION); //$NON-NLS-1$
+				String question = Messages.getString("AuthoringTool.117"); 
+				int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(question, Messages.getString("AuthoringTool.118"), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION); 
 				if (n == javax.swing.JOptionPane.YES_OPTION) {
 					int retVal = saveWorld();
 					if (retVal == Constants.CANCELED) {
@@ -1641,7 +1635,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 			return Constants.SUCCEEDED;
 		} catch (Exception e) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.119"), e); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.119"), e); 
 			return Constants.FAILED;
 		}
 	}
@@ -1655,68 +1649,70 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				public void run() {
 					java.io.File parentDir = src.getParentFile();
 					String name = src.getName();
-					if( name.endsWith( ".a2w" ) ) { //$NON-NLS-1$
+					if( name.endsWith( ".a2w" ) ) { 
 						name = name.substring( 0, name.length()-4 );
 					}
-					java.io.File dstDir = new java.io.File( parentDir, Messages.getString("AuthoringTool.121") + name ); //$NON-NLS-1$
+					java.io.File dstDir = new java.io.File( parentDir, Messages.getString("AuthoringTool.121") + name ); 
 
 					StringBuffer sb = new StringBuffer();
 					java.util.Calendar calendar = java.util.Calendar.getInstance();
 					sb.append( name );
-					sb.append( Messages.getString("AuthoringTool.122") ); //$NON-NLS-1$
+					sb.append( " " );
+					sb.append( Messages.getString("AuthoringTool.122") ); 
 					switch( calendar.get( java.util.Calendar.MONTH ) ) {
 					case java.util.Calendar.JANUARY:
-						sb.append( Messages.getString("AuthoringTool.123") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.123") ); 
 						break;
 					case java.util.Calendar.FEBRUARY:
-						sb.append( Messages.getString("AuthoringTool.124") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.124") ); 
 						break;
 					case java.util.Calendar.MARCH:
-						sb.append( Messages.getString("AuthoringTool.125") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.125") ); 
 						break;
 					case java.util.Calendar.APRIL:
-						sb.append( Messages.getString("AuthoringTool.126") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.126") ); 
 						break;
 					case java.util.Calendar.MAY:
-						sb.append( Messages.getString("AuthoringTool.127") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.127") ); 
 						break;
 					case java.util.Calendar.JUNE:
-						sb.append( Messages.getString("AuthoringTool.128") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.128") ); 
 						break;
 					case java.util.Calendar.JULY:
-						sb.append( Messages.getString("AuthoringTool.129") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.129") ); 
 						break;
 					case java.util.Calendar.AUGUST:
-						sb.append( Messages.getString("AuthoringTool.130") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.130") ); 
 						break;
 					case java.util.Calendar.SEPTEMBER:
-						sb.append( Messages.getString("AuthoringTool.131") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.131") ); 
 						break;
 					case java.util.Calendar.OCTOBER:
-						sb.append( Messages.getString("AuthoringTool.132") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.132") ); 
 						break;
 					case java.util.Calendar.NOVEMBER:
-						sb.append( Messages.getString("AuthoringTool.133") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.133") ); 
 						break;
 					case java.util.Calendar.DECEMBER:
-						sb.append( Messages.getString("AuthoringTool.134") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.134") ); 
 						break;
 					}
 					sb.append( calendar.get( java.util.Calendar.DAY_OF_MONTH ) );
-					sb.append( " " ); //$NON-NLS-1$
+					sb.append( " " ); 
 					sb.append( calendar.get( java.util.Calendar.YEAR ) );
-					sb.append( Messages.getString("AuthoringTool.136") ); //$NON-NLS-1$
+					sb.append( " " );
+					sb.append( Messages.getString("AuthoringTool.136") ); 
 					sb.append( calendar.get( java.util.Calendar.HOUR ) );
-					sb.append( Messages.getString("AuthoringTool.137") ); //$NON-NLS-1$
+					sb.append( Messages.getString("AuthoringTool.137") ); 
 					sb.append( calendar.get( java.util.Calendar.MINUTE ) );
-					sb.append( Messages.getString("AuthoringTool.138") ); //$NON-NLS-1$
+					sb.append( Messages.getString("AuthoringTool.138") ); 
 					sb.append( calendar.get( java.util.Calendar.SECOND ) );
 					switch( calendar.get( java.util.Calendar.AM_PM ) ) {
 					case java.util.Calendar.AM:
-						sb.append( Messages.getString("AuthoringTool.139") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.139") ); 
 						break;
 					case java.util.Calendar.PM:
-						sb.append( Messages.getString("AuthoringTool.140") ); //$NON-NLS-1$
+						sb.append( Messages.getString("AuthoringTool.140") ); 
 						break;
 					}
 
@@ -1727,7 +1723,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							edu.cmu.cs.stage3.io.FileUtilities.copy( src, dst, true );
 							java.io.File[] siblings = dstDir.listFiles( new java.io.FilenameFilter() {
 								public boolean accept( java.io.File dir, String name ) {
-									return name.endsWith( ".a2w" ); //$NON-NLS-1$
+									return name.endsWith( ".a2w" ); 
 								}
 							} );
 							if( siblings.length > maxBackups ) {
@@ -1769,7 +1765,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						//Delete older file if total BACKUP file > maxBackups
 						java.io.File[] siblings = dstDir.listFiles( new java.io.FilenameFilter() {
 							public boolean accept( java.io.File dir, String name ) {
-								return name.endsWith( ".a2w" ); //$NON-NLS-1$
+								return name.endsWith( ".a2w" ); 
 							}
 						} );
 						if( siblings.length > maxBackups ) {
@@ -1793,7 +1789,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	public int saveWorldToFile(java.io.File file, boolean saveForWeb) throws java.io.IOException {
 		if (file.exists() && (!file.canWrite())) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.143") + file.getAbsolutePath() + Messages.getString("AuthoringTool.144"), Messages.getString("AuthoringTool.145"), javax.swing.JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.143") + file.getAbsolutePath() + " " + Messages.getString("AuthoringTool.144"), Messages.getString("AuthoringTool.145"), javax.swing.JOptionPane.ERROR_MESSAGE);   
 			return Constants.FAILED;
 		}
 		if (saveForWeb && file.exists()) {
@@ -1816,14 +1812,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			saveTabs();
 
 			// save count
-			countSomething("edu.cmu.cs.stage3.alice.authoringtool.saveCount"); //$NON-NLS-1$
+			countSomething("edu.cmu.cs.stage3.alice.authoringtool.saveCount"); 
 
 			// world open time
 			updateWorldOpenTime();
 
 			// store the world
 			java.util.Dictionary map = new java.util.Hashtable();
-			if (authoringToolConfig.getValue("saveThumbnailWithWorld").equalsIgnoreCase("true")) { //$NON-NLS-1$ //$NON-NLS-2$
+			if (authoringToolConfig.getValue("saveThumbnailWithWorld").equalsIgnoreCase("true")) {  
 				try {
 					edu.cmu.cs.stage3.alice.core.Camera[] cameras = (edu.cmu.cs.stage3.alice.core.Camera[]) world.getDescendants(edu.cmu.cs.stage3.alice.core.Camera.class);
 					if (cameras.length > 0) {
@@ -1834,8 +1830,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						java.awt.Image image = rt.getOffscreenImage();
 						if (image != null) {
 							java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-							edu.cmu.cs.stage3.image.ImageIO.store("png", baos, image); //$NON-NLS-1$
-							map.put("thumbnail.png", baos.toByteArray()); //$NON-NLS-1$
+							edu.cmu.cs.stage3.image.ImageIO.store("png", baos, image); 
+							map.put("thumbnail.png", baos.toByteArray()); 
 						}
 						rt.release();
 					}
@@ -1864,7 +1860,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							jAliceFrame.updateRecentWorlds( file.getAbsolutePath() );
 							int backupCount = 0;
 							try {
-								backupCount = Integer.parseInt( authoringToolConfig.getValue( "maximumWorldBackupCount" ) ); //$NON-NLS-1$
+								backupCount = Integer.parseInt( authoringToolConfig.getValue( "maximumWorldBackupCount" ) ); 
 							} catch( Throwable t ) {
 								t.printStackTrace();
 							}
@@ -1885,7 +1881,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				return Constants.CANCELED;
 			}
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("AuthoringTool.152") + file, t ); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog( Messages.getString("AuthoringTool.152") + file, t ); 
 			//file.delete();
 			return Constants.FAILED;
 		} finally {
@@ -1915,47 +1911,47 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 				saveWorldForWeb(file, width, height, authorName, htmlCode);
 			} catch (Throwable t) {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.153"), t); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.153"), t); 
 			}
 		}
 	}
 
 	public int saveWorldForWeb(java.io.File htmlFile, int width, int height, String authorName, String code) throws java.io.IOException {
 		String baseName = htmlFile.getName();
-		int dotIndex = htmlFile.getName().lastIndexOf("."); //$NON-NLS-1$
+		int dotIndex = htmlFile.getName().lastIndexOf("."); 
 		if (dotIndex > 0) {
 			baseName = htmlFile.getName().substring(0, dotIndex);
 		}
 
-		java.io.File worldFile = new java.io.File(htmlFile.getParentFile(), baseName + "." + WORLD_EXTENSION); //$NON-NLS-1$
+		java.io.File worldFile = new java.io.File(htmlFile.getParentFile(), baseName + "." + WORLD_EXTENSION); 
 
 		if (htmlFile.exists() && (!htmlFile.canWrite())) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.156") + htmlFile.getAbsolutePath() + Messages.getString("AuthoringTool.157"), Messages.getString("AuthoringTool.158"), javax.swing.JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.156") + htmlFile.getAbsolutePath() + " " + Messages.getString("AuthoringTool.144"), Messages.getString("AuthoringTool.158"), javax.swing.JOptionPane.ERROR_MESSAGE);   
 			return Constants.FAILED;
 		}
 		if (worldFile.exists() && (!worldFile.canWrite())) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.159") + worldFile.getAbsolutePath() + Messages.getString("AuthoringTool.160"), Messages.getString("AuthoringTool.161"), javax.swing.JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.159") + worldFile.getAbsolutePath() + " " + Messages.getString("AuthoringTool.144"), Messages.getString("AuthoringTool.161"), javax.swing.JOptionPane.ERROR_MESSAGE);   
 			return Constants.FAILED;
 		}
 		if (authorName != null) {
-			authorName = Messages.getString("AuthoringTool.162") + authorName + "</h2>\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			authorName = "<h2>" + Messages.getString("AuthoringTool.162") + authorName + "</h2>\n";  
 		} else {
-			authorName = " "; //$NON-NLS-1$
+			authorName = " "; 
 		}
 		if (code == null) {
-			code = " "; //$NON-NLS-1$
+			code = " "; 
 		}
 		java.util.HashMap replacements = new java.util.HashMap();
-		replacements.put("__worldname__", baseName); //$NON-NLS-1$
-		replacements.put("__code__", code); //$NON-NLS-1$
-		replacements.put("__authorname__", authorName); //$NON-NLS-1$
-		replacements.put("__worldfile__", worldFile.getName()); //$NON-NLS-1$
-		replacements.put("__width__", Integer.toString(width)); //$NON-NLS-1$
-		replacements.put("__height__", Integer.toString(height)); //$NON-NLS-1$
-		//replacements.put("__language__", AikMin.locale); //$NON-NLS-1$
+		replacements.put("__worldname__", baseName); 
+		replacements.put("__code__", code); 
+		replacements.put("__authorname__", authorName); 
+		replacements.put("__worldfile__", worldFile.getName()); 
+		replacements.put("__width__", Integer.toString(width)); 
+		replacements.put("__height__", Integer.toString(height)); 
+		//replacements.put("__language__", AikMin.locale); 
 
 		// write web page
-		java.io.File templateFile = new java.io.File(JAlice.getAliceHomeDirectory(), "etc/appletTemplate.html"); //$NON-NLS-1$
+		java.io.File templateFile = new java.io.File(JAlice.getAliceHomeDirectory(), "etc/appletTemplate.html"); 
 		if (!templateFile.exists()) {
 			templateFile.createNewFile();
 		}
@@ -1985,8 +1981,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 
 		// write applet
-		java.io.File appletSourceFile = new java.io.File(JAlice.getAliceHomeDirectory(), "etc/aliceapplet.jar"); //$NON-NLS-1$
-		java.io.File appletDestinationFile = new java.io.File(htmlFile.getParentFile(), "aliceapplet.jar"); //$NON-NLS-1$
+		java.io.File appletSourceFile = new java.io.File(JAlice.getAliceHomeDirectory(), "etc/aliceapplet.jar"); 
+		java.io.File appletDestinationFile = new java.io.File(htmlFile.getParentFile(), "aliceapplet.jar"); 
 		AuthoringToolResources.copyFile(appletSourceFile, appletDestinationFile);
 
 		return Constants.SUCCEEDED;
@@ -2003,7 +1999,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} else if (file.isDirectory()) {
 			result = loadWorld(new edu.cmu.cs.stage3.io.FileSystemTreeLoader(), file, askForSaveIfNecessary);
 		} else {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.175") + file, null); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.175") + file, null); 
 			result = Constants.FAILED;
 		}
 		return result;
@@ -2019,7 +2015,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			if (retVal == Constants.CANCELED) {
 				return Constants.CANCELED;
 			} else if (retVal == Constants.FAILED) {
-				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.176")); //$NON-NLS-1$
+				int result = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("AuthoringTool.176")); 
 				if (result != javax.swing.JOptionPane.YES_OPTION) {
 					return Constants.CANCELED;
 				}
@@ -2046,7 +2042,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				loader.close();
 			}
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.177") + path, t); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.177") + path, t); 
 		}
 //
 //		try {
@@ -2176,7 +2172,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		edu.cmu.cs.stage3.alice.authoringtool.dialog.Add3DTextPanel add3DTextPanel = new edu.cmu.cs.stage3.alice.authoringtool.dialog.Add3DTextPanel();
 		//this.setTitle("Add 3D Text");
 
-		if (edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(add3DTextPanel, Messages.getString("AuthoringTool.178"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE) == javax.swing.JOptionPane.OK_OPTION) { //$NON-NLS-1$
+		if (edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(add3DTextPanel, Messages.getString("AuthoringTool.178"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE) == javax.swing.JOptionPane.OK_OPTION) { 
 			edu.cmu.cs.stage3.alice.core.Text3D text3D = add3DTextPanel.createText3D();
 			if (text3D != null) {
 				undoRedoStack.startCompound();
@@ -2224,19 +2220,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	    		return Constants.CANCELED;
 		String directory = currentWorldLocation.getParent();
     	directory = directory.replace('\\', '/');
-    	java.io.File dir = new java.io.File(directory +"/frames"); //$NON-NLS-1$
+    	java.io.File dir = new java.io.File(directory +"/frames"); 
     	dir.mkdir();
     	
     	soundStorage = new movieMaker.SoundStorage();
     	playWhileEncoding(directory);
 		soundStorage = null;
-    	if (authoringToolConfig.getValue("rendering.deleteFiles").equalsIgnoreCase("true") == true){ //$NON-NLS-1$ //$NON-NLS-2$
-	    	captureContentPane.removeFiles(directory+"/frames/"); //$NON-NLS-1$
+    	if (authoringToolConfig.getValue("rendering.deleteFiles").equalsIgnoreCase("true") == true){  
+	    	captureContentPane.removeFiles(directory+"/frames/"); 
 	    	dir.delete();
 	    	if (dir.exists()){
-    			showErrorDialog(Messages.getString("AuthoringTool.183"), //$NON-NLS-1$
-    					Messages.getString("AuthoringTool.184") + //$NON-NLS-1$
-    					Messages.getString("AuthoringTool.185") + dir + Messages.getString("AuthoringTool.186")); //$NON-NLS-1$ //$NON-NLS-2$
+    			showErrorDialog(Messages.getString("AuthoringTool.183"), 
+    					Messages.getString("AuthoringTool.184") + "\n" +
+    					Messages.getString("AuthoringTool.185") + dir + " " + Messages.getString("AuthoringTool.186"));  
     		}
 		} 		
 		return Constants.SUCCEEDED;
@@ -2253,7 +2249,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} else if (file.isDirectory()) {
 			character = loadAndAddCharacter(new edu.cmu.cs.stage3.io.FileSystemTreeLoader(), file, null);
 		} else {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.187") + file, null); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.187") + file, null); 
 		}
 		return character;
 	}
@@ -2269,7 +2265,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} else if (file.isDirectory()) {
 			character = loadAndAddCharacter(new edu.cmu.cs.stage3.io.FileSystemTreeLoader(), file, targetTransformation);
 		} else {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.188") + file, null); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.188") + file, null); 
 		}
 		return character;
 	}
@@ -2293,9 +2289,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				addCharacter(character, targetTransformation);
 			}
 		} catch (java.util.zip.ZipException e) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.189") + CHARACTER_EXTENSION + ": " + pathname, e, false); //$NON-NLS-1$ //$NON-NLS-2$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.189") + CHARACTER_EXTENSION + ": " + pathname, e, false);  
 		} catch (Exception e) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.191") + pathname, e); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.191") + pathname, e); 
 		} finally {
 			undoRedoStack.stopCompound();
 		}
@@ -2341,7 +2337,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			}
 		} else {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.192"), null); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.192"), null); 
 		}
 	}
 
@@ -2355,22 +2351,22 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	public void promptForVisualizationInfo(edu.cmu.cs.stage3.alice.core.Element element) {
 		if (element instanceof edu.cmu.cs.stage3.alice.core.visualization.CollectionOfModelsVisualization) {
-			String typeString = Messages.getString("AuthoringTool.0"); //$NON-NLS-1$
+			String typeString = Messages.getString("AuthoringTool.0"); 
 			if (element instanceof edu.cmu.cs.stage3.alice.core.visualization.ListOfModelsVisualization) {
-				typeString = Messages.getString("AuthoringTool.194"); //$NON-NLS-1$
+				typeString = Messages.getString("AuthoringTool.194"); 
 			} else if (element instanceof edu.cmu.cs.stage3.alice.core.visualization.ArrayOfModelsVisualization) {
-				typeString = Messages.getString("AuthoringTool.195"); //$NON-NLS-1$
+				typeString = Messages.getString("AuthoringTool.195"); 
 			}
 			edu.cmu.cs.stage3.alice.core.visualization.CollectionOfModelsVisualization visualization = (edu.cmu.cs.stage3.alice.core.visualization.CollectionOfModelsVisualization) element;
 
 			edu.cmu.cs.stage3.alice.authoringtool.util.CollectionEditorPanel collectionEditorPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getCollectionEditorPanel();
 			collectionEditorPanel.setCollection(visualization.getItemsCollection());
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(collectionEditorPanel, Messages.getString("AuthoringTool.196") + typeString, javax.swing.JOptionPane.PLAIN_MESSAGE); //$NON-NLS-1$
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(collectionEditorPanel, Messages.getString("AuthoringTool.196") + typeString, javax.swing.JOptionPane.PLAIN_MESSAGE); 
 		}
 	}
 
 	public void saveCharacter(edu.cmu.cs.stage3.alice.core.Element element) {
-		String characterFilename = element.name.getStringValue() + "." + CHARACTER_EXTENSION; //$NON-NLS-1$
+		String characterFilename = element.name.getStringValue() + "." + CHARACTER_EXTENSION; 
 		characterFilename = characterFilename.substring(0, 1).toUpperCase() + characterFilename.substring(1);
 		saveCharacterFileDialog.setSelectedFile(new java.io.File(characterFilename));
 		saveCharacterFileDialog.setVisible(true);
@@ -2410,18 +2406,18 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		edu.cmu.cs.stage3.alice.core.Element element = null;
 
 		if (path == null) {	
-			if (importFileChooser.getFileFilter().getDescription().compareToIgnoreCase(Messages.getString("AuthoringTool.198")) == 0) { //$NON-NLS-1$
+			if (importFileChooser.getFileFilter().getDescription().compareToIgnoreCase(Messages.getString("AuthoringTool.198")) == 0) { 
 				importFileChooser.setAccessory(new edu.cmu.cs.stage3.alice.authoringtool.dialog.ImagePreview(importFileChooser));	//Aik Min - image preview for import texture map
-				importFileChooser.setCurrentDirectory( new java.io.File(JAlice.getAliceHomeDirectory(), "textureMap") ); //$NON-NLS-1$
-				java.io.File file = new java.io.File(JAlice.getAliceHomeDirectory(), "textureMap/GrassTexture.png") ; //$NON-NLS-1$
+				importFileChooser.setCurrentDirectory( new java.io.File(JAlice.getAliceHomeDirectory(), "textureMap") ); 
+				java.io.File file = new java.io.File(JAlice.getAliceHomeDirectory(), "textureMap/GrassTexture.png") ; 
 				if ( file.exists() ) {
 					importFileChooser.setSelectedFile( file ); 
 				}
 			} else {
 				importFileChooser.setAccessory(null);
-				importFileChooser.setSelectedFile( new java.io.File("") );  //$NON-NLS-1$
+				importFileChooser.setSelectedFile( new java.io.File("") );  
 				edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage() );
-				importFileChooser.setCurrentDirectory( new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory")) ); //$NON-NLS-1$
+				importFileChooser.setCurrentDirectory( new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory")) ); 
 			}
 			importFileChooser.rescanCurrentDirectory();
 			int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showDialog(importFileChooser, null);
@@ -2449,7 +2445,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				s = ((java.net.URL) path).getPath();
 				ext = s.substring(s.lastIndexOf('.') + 1).toUpperCase();
 			} else {
-				throw new IllegalArgumentException(Messages.getString("AuthoringTool.203")); //$NON-NLS-1$
+				throw new IllegalArgumentException(Messages.getString("AuthoringTool.203")); 
 			}
 
 			if (parent == null) {
@@ -2497,14 +2493,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							}
 						}
 					} else {
-						AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.204"), null, false); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.204"), null, false); 
 					}
 				} catch (java.io.IOException e) {
-					AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.205"), e); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.205"), e); 
 				}
 				AuthoringTool.this.undoRedoStack.stopCompound();
 			} else {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.206"), Messages.getString("AuthoringTool.207"), javax.swing.JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.206"), Messages.getString("AuthoringTool.207"), javax.swing.JOptionPane.ERROR_MESSAGE);  
 			}
 		} else {
 			return null;
@@ -2574,13 +2570,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			// getAGoodLook response
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation setupOpacity = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			setupOpacity.element.set(model);
-			setupOpacity.propertyName.set("opacity"); //$NON-NLS-1$
+			setupOpacity.propertyName.set("opacity"); 
 			setupOpacity.value.set(new Double(0.0));
 			setupOpacity.duration.set(new Double(0.0));
 			setupOpacity.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			vehicleAnimation.element.set(model);
-			vehicleAnimation.propertyName.set("vehicle"); //$NON-NLS-1$
+			vehicleAnimation.propertyName.set("vehicle"); 
 			vehicleAnimation.value.set(vehicle);
 			vehicleAnimation.duration.set(new Double(0.0));
 			vehicleAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
@@ -2603,13 +2599,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClipping = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			if (shouldAnimateCamera){
 				farClipping.element.set(camera);
-				farClipping.propertyName.set("farClippingPlaneDistance"); //$NON-NLS-1$
+				farClipping.propertyName.set("farClippingPlaneDistance"); 
 				farClipping.value.set(new Double(distanceToBackOfObject));
 			}
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClipping2 = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			if (shouldAnimateCamera){
 				farClipping2.element.set(camera);
-				farClipping2.propertyName.set("farClippingPlaneDistance"); //$NON-NLS-1$
+				farClipping2.propertyName.set("farClippingPlaneDistance"); 
 				farClipping2.value.set(camera.farClippingPlaneDistance.get());
 			}
 			edu.cmu.cs.stage3.alice.core.response.DoTogether opacityDoTogether = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
@@ -2618,7 +2614,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				Object opacity = opacityMap.get(m);
 				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 				opacityAnimation.element.set(m);
-				opacityAnimation.propertyName.set("opacity"); //$NON-NLS-1$
+				opacityAnimation.propertyName.set("opacity"); 
 				opacityAnimation.value.set(opacity);
 				opacityAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
 				opacityDoTogether.componentResponses.add(opacityAnimation);
@@ -2646,7 +2642,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			// getAGoodLook undoResponse
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoVehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			undoVehicleAnimation.element.set(model);
-			undoVehicleAnimation.propertyName.set("vehicle"); //$NON-NLS-1$
+			undoVehicleAnimation.propertyName.set("vehicle"); 
 			undoVehicleAnimation.value.set(null);
 			undoVehicleAnimation.duration.set(new Double(0.0));
 			undoVehicleAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
@@ -2668,14 +2664,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoFarClipping = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			if (shouldAnimateCamera){
 				undoFarClipping.element.set(camera);
-				undoFarClipping.propertyName.set("farClippingPlaneDistance"); //$NON-NLS-1$
+				undoFarClipping.propertyName.set("farClippingPlaneDistance"); 
 				undoFarClipping.value.set(new Double(distanceToBackOfObject));
 				undoFarClipping.duration.set(new Double(.2));
 			}
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoFarClipping2 = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 			if (shouldAnimateCamera){
 				undoFarClipping2.element.set(camera);
-				undoFarClipping2.propertyName.set("farClippingPlaneDistance"); //$NON-NLS-1$
+				undoFarClipping2.propertyName.set("farClippingPlaneDistance"); 
 				undoFarClipping2.value.set(camera.farClippingPlaneDistance.get());
 				undoFarClipping2.duration.set(new Double(.2));
 			}
@@ -2687,7 +2683,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				edu.cmu.cs.stage3.alice.core.Model m = (edu.cmu.cs.stage3.alice.core.Model) iter.next();
 				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 				opacityAnimation.element.set(m);
-				opacityAnimation.propertyName.set("opacity"); //$NON-NLS-1$
+				opacityAnimation.propertyName.set("opacity"); 
 				opacityAnimation.value.set(new Double(0.0));
 				opacityAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
 				undoOpacityDoTogether.componentResponses.add(opacityAnimation);
@@ -2722,11 +2718,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	private void displayDurations(edu.cmu.cs.stage3.alice.core.Response r){
 		if (r instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
 			edu.cmu.cs.stage3.alice.core.response.CompositeResponse c = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)r;
-			System.out.println("COMPOSITE("); //$NON-NLS-1$
+			System.out.println("COMPOSITE("); 
 			for (int i=0; i<c.componentResponses.size(); i++){
 				displayDurations((edu.cmu.cs.stage3.alice.core.Response)c.componentResponses.get(i));
 			}
-			System.out.println(")"); //$NON-NLS-1$
+			System.out.println(")"); 
 		}
 		else{
 			System.out.println(r.duration.doubleValue());
@@ -2757,12 +2753,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.219"), e); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.219"), e); 
 					}
 					int result =
 						edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(
-							Messages.getString("AuthoringTool.220"), //$NON-NLS-1$
-							Messages.getString("AuthoringTool.221"), //$NON-NLS-1$
+							Messages.getString("AuthoringTool.220"), 
+							Messages.getString("AuthoringTool.221"), 
 							javax.swing.JOptionPane.YES_NO_OPTION,
 							javax.swing.JOptionPane.INFORMATION_MESSAGE);
 					if (result == javax.swing.JOptionPane.YES_OPTION) {
@@ -2770,12 +2766,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 						edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClippingAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 						farClippingAnimation.element.set(camera);
-						farClippingAnimation.propertyName.set("farClippingPlaneDistance"); //$NON-NLS-1$
+						farClippingAnimation.propertyName.set("farClippingPlaneDistance"); 
 						farClippingAnimation.value.set(new Double(distanceToBackOfObject));
 
 						edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
 						undoResponse.element.set(camera);
-						undoResponse.propertyName.set("farClippingPlaneDistance"); //$NON-NLS-1$
+						undoResponse.propertyName.set("farClippingPlaneDistance"); 
 						undoResponse.value.set(camera.farClippingPlaneDistance.get());
 
 						performOneShot(farClippingAnimation, undoResponse, affectedProperties);
@@ -2789,22 +2785,22 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public void saveTabs() {
 		if (saveTabsEnabled && (world != null)) {
 			Object[] objects = jAliceFrame.getTabbedEditorComponent().getObjectsBeingEdited();
-			String tabObjectsString = ""; //$NON-NLS-1$
+			String tabObjectsString = ""; 
 			for (int i = 0; i < objects.length; i++) {
 				if (objects[i] instanceof edu.cmu.cs.stage3.alice.core.Element) { //TODO: handle non Elements?
-					tabObjectsString += ((edu.cmu.cs.stage3.alice.core.Element) objects[i]).getKey() + ":"; //$NON-NLS-1$
+					tabObjectsString += ((edu.cmu.cs.stage3.alice.core.Element) objects[i]).getKey() + ":"; 
 				}
 			}
-			world.data.put("edu.cmu.cs.stage3.alice.authoringtool.tabObjects", tabObjectsString); //$NON-NLS-1$
+			world.data.put("edu.cmu.cs.stage3.alice.authoringtool.tabObjects", tabObjectsString); 
 		}
 	}
 
 	public void loadTabs() {
-		if (authoringToolConfig.getValue("loadSavedTabs").equalsIgnoreCase("true")) { //$NON-NLS-1$ //$NON-NLS-2$
+		if (authoringToolConfig.getValue("loadSavedTabs").equalsIgnoreCase("true")) {  
 			if (world != null) {
-				String tabObjectsString = (String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.tabObjects"); //$NON-NLS-1$
+				String tabObjectsString = (String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.tabObjects"); 
 				if (tabObjectsString != null) {
-					java.util.StringTokenizer st = new java.util.StringTokenizer(tabObjectsString, ":"); //$NON-NLS-1$
+					java.util.StringTokenizer st = new java.util.StringTokenizer(tabObjectsString, ":"); 
 					getJAliceFrame().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
 					while (st.hasMoreTokens()) {
 						String key = st.nextToken();
@@ -2848,16 +2844,16 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	private java.text.DecimalFormat captureFormatter = new java.text.DecimalFormat();
 
 	public void storeCapturedImage(java.awt.Image image) {
-		java.io.File dir = new java.io.File(authoringToolConfig.getValue("screenCapture.directory")); //$NON-NLS-1$
+		java.io.File dir = new java.io.File(authoringToolConfig.getValue("screenCapture.directory")); 
 
-		int numDigits = Integer.parseInt(authoringToolConfig.getValue("screenCapture.numDigits")); //$NON-NLS-1$
-		StringBuffer pattern = new StringBuffer(authoringToolConfig.getValue("screenCapture.baseName")); //$NON-NLS-1$
-		String codec = authoringToolConfig.getValue("screenCapture.codec"); //$NON-NLS-1$
-		pattern.append("#"); //$NON-NLS-1$
+		int numDigits = Integer.parseInt(authoringToolConfig.getValue("screenCapture.numDigits")); 
+		StringBuffer pattern = new StringBuffer(authoringToolConfig.getValue("screenCapture.baseName")); 
+		String codec = authoringToolConfig.getValue("screenCapture.codec"); 
+		pattern.append("#"); 
 		for (int i = 0; i < numDigits; i++) {
-			pattern.append("0"); //$NON-NLS-1$
+			pattern.append("0"); 
 		}
-		pattern.append("."); //$NON-NLS-1$
+		pattern.append("."); 
 		pattern.append(codec);
 		captureFormatter.applyPattern(pattern.toString());
 
@@ -2879,11 +2875,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 
 		if (!writable) {
-			Object[] options = { Messages.getString("AuthoringTool.238"), Messages.getString("AuthoringTool.239") }; //$NON-NLS-1$ //$NON-NLS-2$
+			Object[] options = { Messages.getString("AuthoringTool.238"), Messages.getString("AuthoringTool.239") };  
 			int dialogVal =
 				edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(
-					Messages.getString("AuthoringTool.240"), //$NON-NLS-1$
-					Messages.getString("AuthoringTool.241"), //$NON-NLS-1$
+					Messages.getString("AuthoringTool.240"), 
+					Messages.getString("AuthoringTool.241"), 
 					javax.swing.JOptionPane.YES_NO_OPTION,
 					javax.swing.JOptionPane.QUESTION_MESSAGE,
 					null,
@@ -2901,7 +2897,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showOpenDialog(browseFileChooser);
 					if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
 						java.io.File selectedFile = browseFileChooser.getSelectedFile();
-						java.io.File testCaptureFile = new java.io.File(selectedFile, "test.jpg"); //$NON-NLS-1$
+						java.io.File testCaptureFile = new java.io.File(selectedFile, "test.jpg"); 
 						if (testCaptureFile.exists()) {
 							writable = testCaptureFile.canWrite();
 						} else {
@@ -2916,23 +2912,23 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							}
 						}
 						if (!writable) {
-							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.243")); //$NON-NLS-1$
+							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("AuthoringTool.243")); 
 						} else {
 							done = true;
 							dir = selectedFile;
 						}
 					} else {
 						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-							Messages.getString("AuthoringTool.244") + Messages.getString("AuthoringTool.245"), //$NON-NLS-1$ //$NON-NLS-2$
-							Messages.getString("AuthoringTool.246"), //$NON-NLS-1$
+							Messages.getString("AuthoringTool.244") + "\n" + Messages.getString("AuthoringTool.245"),  
+							Messages.getString("AuthoringTool.246"), 
 							javax.swing.JOptionPane.WARNING_MESSAGE);
 						return;
 					}
 				}
 			} else {
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-					Messages.getString("AuthoringTool.247") + Messages.getString("AuthoringTool.248"), //$NON-NLS-1$ //$NON-NLS-2$
-					Messages.getString("AuthoringTool.249"), //$NON-NLS-1$
+					Messages.getString("AuthoringTool.244") + "\n" + Messages.getString("AuthoringTool.245"),  
+					Messages.getString("AuthoringTool.246"), 
 					javax.swing.JOptionPane.WARNING_MESSAGE);
 				return;
 			}
@@ -2951,7 +2947,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			dos.flush();
 			fos.close();
 
-			if (authoringToolConfig.getValue("screenCapture.informUser").equalsIgnoreCase("true")) { //$NON-NLS-1$ //$NON-NLS-2$
+			if (authoringToolConfig.getValue("screenCapture.informUser").equalsIgnoreCase("true")) {  
 				java.awt.image.BufferedImage scaledImage = edu.cmu.cs.stage3.alice.authoringtool.util.GUIEffects.getImageScaledToLongestDimension(image, 128);
 				edu.cmu.cs.stage3.alice.authoringtool.dialog.CapturedImageContentPane capturedImageContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.CapturedImageContentPane();
 				capturedImageContentPane.setStoreLocation(file.getCanonicalPath());
@@ -2961,7 +2957,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			//} catch( InterruptedException ie ) {
 			//} catch( java.io.IOException ioe ) {
 		} catch (Throwable t) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.252"), t); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.252"), t); 
 		}
 	}
 
@@ -3005,7 +3001,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	*/
 
 	public void makeBillboard() {
-		setImportFileFilter("Image Files"); //$NON-NLS-1$
+		setImportFileFilter("Image Files"); 
 		importElement(null, null, new edu.cmu.cs.stage3.alice.authoringtool.util.PostImportRunnable() {
 			public void run() {
 				edu.cmu.cs.stage3.alice.core.TextureMap textureMap = (edu.cmu.cs.stage3.alice.core.TextureMap) getImportedElement();
@@ -3116,7 +3112,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				if( t instanceof edu.cmu.cs.stage3.alice.core.SimulationException ) {
 					showSimulationExceptionDialog( (edu.cmu.cs.stage3.alice.core.SimulationException)t );
 				} else {
-					showErrorDialog( Messages.getString("AuthoringTool.254"), t ); //$NON-NLS-1$
+					showErrorDialog( Messages.getString("AuthoringTool.254"), t ); 
 				}
 			}
 		} );
@@ -3126,7 +3122,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		edu.cmu.cs.stage3.alice.authoringtool.dialog.SimulationExceptionPanel simulationExceptionPanel = new edu.cmu.cs.stage3.alice.authoringtool.dialog.SimulationExceptionPanel(this);
 		simulationExceptionPanel.setSimulationException(simulationException);
 		simulationExceptionPanel.setErrorHighlightingEnabled(true);
-		edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(simulationExceptionPanel, Messages.getString("AuthoringTool.255"), javax.swing.JOptionPane.ERROR_MESSAGE, AuthoringToolResources.getAliceSystemIcon() ); //$NON-NLS-1$
+		edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(simulationExceptionPanel, Messages.getString("AuthoringTool.255"), javax.swing.JOptionPane.ERROR_MESSAGE, AuthoringToolResources.getAliceSystemIcon() ); 
 		simulationExceptionPanel.setErrorHighlightingEnabled(false);
 	}
 
@@ -3150,14 +3146,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	public void updateWorldOpenTime() {
 		if (world != null) {
-			String worldOpenTimeString = (String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime"); //$NON-NLS-1$
+			String worldOpenTimeString = (String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime"); 
 			long worldOpenTime = 0;
 			if (worldOpenTimeString != null) {
 				worldOpenTime = Long.parseLong(worldOpenTimeString);
 			}
 			worldOpenTime += System.currentTimeMillis() - worldLoadedTime;
 			worldLoadedTime = System.currentTimeMillis();
-			world.data.put("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime", Long.toString(worldOpenTime)); //$NON-NLS-1$
+			world.data.put("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime", Long.toString(worldOpenTime)); 
 		}
 	}
 
@@ -3175,7 +3171,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog(exportCodeForPrintingContentPane);
 		if (result == edu.cmu.cs.stage3.swing.ContentPane.OK_OPTION) {
 			final java.io.File fileToExportTo = exportCodeForPrintingContentPane.getFileToExportTo();
-			edu.cmu.cs.stage3.progress.ProgressPane progressPane = new edu.cmu.cs.stage3.progress.ProgressPane( Messages.getString("AuthoringTool.258"), Messages.getString("AuthoringTool.259") ) { //$NON-NLS-1$ //$NON-NLS-2$
+			edu.cmu.cs.stage3.progress.ProgressPane progressPane = new edu.cmu.cs.stage3.progress.ProgressPane( Messages.getString("AuthoringTool.258"), Messages.getString("AuthoringTool.259") ) {  
 				protected void construct() throws edu.cmu.cs.stage3.progress.ProgressCancelException {
 					try {
 						StringBuffer htmlOutput = new StringBuffer();
@@ -3188,7 +3184,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						fileToExportTo.delete();
 						throw pce;
 					} catch( Throwable t ) {
-						AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.260") + fileToExportTo, t); //$NON-NLS-1$
+						AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.260") + fileToExportTo, t); 
 						fileToExportTo.delete();
 					}
 				}
@@ -3210,7 +3206,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 
 	private void updateTitle() {
-		String path = ""; //$NON-NLS-1$
+		String path = ""; 
 		if (currentWorldLocation != null) {
 			try {
 				path = currentWorldLocation.getCanonicalPath();
@@ -3219,12 +3215,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			}
 		}
 
-		String modifiedStatus = ""; //$NON-NLS-1$
+		String modifiedStatus = ""; 
 		if (worldHasBeenModified) {
-			modifiedStatus = Messages.getString("AuthoringTool.263"); //$NON-NLS-1$
+			modifiedStatus = Messages.getString("AuthoringTool.263"); 
 		}
 
-		jAliceFrame.setTitle("Alice (" + JAlice.getVersion() + ") " + path + modifiedStatus); //$NON-NLS-1$ //$NON-NLS-2$
+		jAliceFrame.setTitle("Alice (" + JAlice.getVersion() + ") " + path + modifiedStatus);  
 	}
 
 	public java.awt.Component getEditorForElement(edu.cmu.cs.stage3.alice.core.Element elementToEdit) {
@@ -3249,7 +3245,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	protected boolean stencilDragging = false;
 	protected java.awt.Component dragStartSource;
 	protected java.io.File tutorialOne;
-	protected java.io.File tutorialDirectory = new java.io.File(JAlice.getAliceHomeDirectory(), "tutorial").getAbsoluteFile(); //$NON-NLS-1$
+	protected java.io.File tutorialDirectory = new java.io.File(JAlice.getAliceHomeDirectory(), "tutorial").getAbsoluteFile(); 
 	protected java.util.ArrayList wayPoints = new java.util.ArrayList();
 
 	private void stencilInit() {
@@ -3277,21 +3273,21 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		classesToStopOn.add(edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryObject.class);
 		//		classesToStopOn.add( edu.cmu.cs.stage3.alice.authoringtool.util.GuiNavigator.class );
 
-		componentMap.put("fileMenu", jAliceFrame.fileMenu); //$NON-NLS-1$
-		componentMap.put("editMenu", jAliceFrame.editMenu); //$NON-NLS-1$
-		componentMap.put("toolsMenu", jAliceFrame.toolsMenu); //$NON-NLS-1$
-		componentMap.put("helpMenu", jAliceFrame.helpMenu); //$NON-NLS-1$
-		componentMap.put("playButton", jAliceFrame.playButton); //$NON-NLS-1$
-		componentMap.put("addObjectButton", jAliceFrame.addObjectButton); //$NON-NLS-1$
-		componentMap.put("undoButton", jAliceFrame.undoButton); //$NON-NLS-1$
-		componentMap.put("redoButton", jAliceFrame.redoButton); //$NON-NLS-1$
-		componentMap.put("trashComponent", jAliceFrame.trashComponent); //$NON-NLS-1$
-		componentMap.put("clipboardPanel", jAliceFrame.clipboardPanel); //$NON-NLS-1$
-		componentMap.put("objectTree", jAliceFrame.worldTreeComponent); //$NON-NLS-1$
-		componentMap.put("sceneEditor", jAliceFrame.sceneEditor); //$NON-NLS-1$
-		componentMap.put("details", jAliceFrame.dragFromComponent); //$NON-NLS-1$
-		componentMap.put("behaviors", jAliceFrame.behaviorGroupsEditor); //$NON-NLS-1$
-		componentMap.put("editors", jAliceFrame.tabbedEditorComponent); //$NON-NLS-1$
+		componentMap.put("fileMenu", jAliceFrame.fileMenu); 
+		componentMap.put("editMenu", jAliceFrame.editMenu); 
+		componentMap.put("toolsMenu", jAliceFrame.toolsMenu); 
+		componentMap.put("helpMenu", jAliceFrame.helpMenu); 
+		componentMap.put("playButton", jAliceFrame.playButton); 
+		componentMap.put("addObjectButton", jAliceFrame.addObjectButton); 
+		componentMap.put("undoButton", jAliceFrame.undoButton); 
+		componentMap.put("redoButton", jAliceFrame.redoButton); 
+		componentMap.put("trashComponent", jAliceFrame.trashComponent); 
+		componentMap.put("clipboardPanel", jAliceFrame.clipboardPanel); 
+		componentMap.put("objectTree", jAliceFrame.worldTreeComponent); 
+		componentMap.put("sceneEditor", jAliceFrame.sceneEditor); 
+		componentMap.put("details", jAliceFrame.dragFromComponent); 
+		componentMap.put("behaviors", jAliceFrame.behaviorGroupsEditor); 
+		componentMap.put("editors", jAliceFrame.tabbedEditorComponent); 
 
 		updateTimer = new javax.swing.Timer(100, new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
@@ -3322,7 +3318,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			}
 		});
 
-		tutorialOne = new java.io.File(JAlice.getAliceHomeDirectory(), "tutorial" + java.io.File.separator + "Tutorial1.stl"); //$NON-NLS-1$ //$NON-NLS-2$
+		tutorialOne = new java.io.File(JAlice.getAliceHomeDirectory(), "tutorial" + java.io.File.separator + "Tutorial1.stl");  
 	}
 
 	public void hackStencilUpdate() { // used in specific places in authoringtool code to notify stencils of updates not otherwise caught
@@ -3349,15 +3345,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		jAliceFrame.addKeyListener(stencilManager);
 		jAliceFrame.requestFocus();
 		stencilManager.showStencils(true);
-		authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "true"); //$NON-NLS-1$ //$NON-NLS-2$
+		authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "true");  
 	}
 
 	protected void restoreLayout() {
 		jAliceFrame.setResizable(true);
 		if (oldShouldConstrain) {
-			authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "true"); //$NON-NLS-1$ //$NON-NLS-2$
+			authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "true");  
 		} else {
-			authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "false"); //$NON-NLS-1$ //$NON-NLS-2$
+			authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "false");  
 		}
 		renderContentPane.saveRenderBounds(oldRenderBounds);
 		jAliceFrame.setSize(oldDimension);
@@ -3400,8 +3396,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		boolean shouldModifyStuff = true;
 		if (screenWidth < 1024 || screenHeight < 740) {
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-				Messages.getString("AuthoringTool.290") + Messages.getString("AuthoringTool.291"), //$NON-NLS-1$ //$NON-NLS-2$
-				Messages.getString("AuthoringTool.292"), //$NON-NLS-1$
+				Messages.getString("AuthoringTool.290") + Messages.getString("AuthoringTool.291"),  
+				Messages.getString("AuthoringTool.292"), 
 				javax.swing.JOptionPane.WARNING_MESSAGE,
 				null);
 			shouldModifyStuff = false;
@@ -3413,16 +3409,16 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		oldRenderWindowSize = renderContentPane.getSize();
 		oldRenderWindowPosition = renderContentPane.getLocation();
 
-		oldShouldConstrain = authoringToolConfig.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true"); //$NON-NLS-1$ //$NON-NLS-2$
-		authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "false"); //$NON-NLS-1$ //$NON-NLS-2$
+		oldShouldConstrain = authoringToolConfig.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true");  
+		authoringToolConfig.setValue("rendering.constrainRenderDialogAspectRatio", "false");  
 
 		oldRenderBounds = renderContentPane.getRenderBounds();
 		//renderContentPane.saveRenderBounds(new java.awt.Rectangle(191, 199, 400, 300));
 
 		if ((newHeight != oldDimension.height || newWidth != oldDimension.width) && shouldModifyStuff) {
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-				Messages.getString("AuthoringTool.297") + Messages.getString("AuthoringTool.298"), //$NON-NLS-1$ //$NON-NLS-2$
-				Messages.getString("AuthoringTool.299"), //$NON-NLS-1$
+				Messages.getString("AuthoringTool.297") + Messages.getString("AuthoringTool.298"),  
+				Messages.getString("AuthoringTool.299"), 
 				javax.swing.JOptionPane.WARNING_MESSAGE,
 				null);
 
@@ -3447,7 +3443,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public void hideStencils() {
 		restoreLayout();
 		stencilManager.showStencils(false);
-		authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "false"); //$NON-NLS-1$ //$NON-NLS-2$
+		authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "false");  
 		jAliceFrame.removeKeyListener(stencilManager);
 		jAliceFrame.requestFocus();
 	}
@@ -3459,13 +3455,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public void setVisible(boolean visible) {
 		if (visible) {
 			setLayout();
-			authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "true"); //$NON-NLS-1$ //$NON-NLS-2$
+			authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "true");  
 			jAliceFrame.removeKeyListener(stencilManager);
 			jAliceFrame.addKeyListener(stencilManager);
 			jAliceFrame.requestFocus();
 		} else {
 			restoreLayout();
-			authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "false"); //$NON-NLS-1$ //$NON-NLS-2$
+			authoringToolConfig.setValue("doNotShowUnhookedMethodWarning", "false");  
 			jAliceFrame.removeKeyListener(stencilManager);
 			jAliceFrame.requestFocus();
 		}
@@ -3506,7 +3502,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				c = c.getParent();
 			} else if ((c instanceof edu.cmu.cs.stage3.alice.authoringtool.util.ImagePanel) && (c.getParent() instanceof edu.cmu.cs.stage3.alice.authoringtool.util.GuiNavigator)) {
 				return c;
-			} else if ((c instanceof javax.swing.JLabel) && Messages.getString("AuthoringTool.306").equals(((javax.swing.JLabel) c).getText())) { //$NON-NLS-1$
+			} else if ((c instanceof javax.swing.JLabel) && Messages.getString("AuthoringTool.306").equals(((javax.swing.JLabel) c).getText())) { 
 				return c;
 			} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.SceneEditor) {
 				return ((edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.SceneEditor) c).getRenderPanel();
@@ -3549,13 +3545,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			javax.swing.JTree tree = (javax.swing.JTree) c;
 			javax.swing.tree.TreePath treePath = tree.getClosestPathForLocation(localPoint.x, localPoint.y);
 			java.awt.Rectangle bounds = tree.getPathBounds(treePath);
-			key = "objectTree"; //$NON-NLS-1$
+			key = "objectTree"; 
 			if (bounds.contains(localPoint)) {
 				String elementKey = ((edu.cmu.cs.stage3.alice.core.Element) treePath.getLastPathComponent()).getKey(world);
-				key += "<" + elementKey + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+				key += "<" + elementKey + ">";  
 			}
 		} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.util.DnDClipboard) {
-			key = "clipboard"; //$NON-NLS-1$
+			key = "clipboard"; 
 			java.awt.Component[] components = c.getParent().getComponents();
 			int index = -1;
 			for (int i = 0; i < components.length; i++) {
@@ -3563,27 +3559,27 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					index = i;
 				}
 			}
-			key += "<" + Integer.toString(index) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+			key += "<" + Integer.toString(index) + ">";  
 
 		} else if (jAliceFrame.sceneEditor.isAncestorOf(c) || (c == jAliceFrame.sceneEditor)) {
 			if (jAliceFrame.sceneEditor.getGuiMode() == edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.SceneEditor.LARGE_MODE) {
-				key = "sceneEditor<large>"; //$NON-NLS-1$
+				key = "sceneEditor<large>"; 
 			} else {
-				key = "sceneEditor<small>"; //$NON-NLS-1$
+				key = "sceneEditor<small>"; 
 			}
 			if (jAliceFrame.sceneEditor.getViewMode() == edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.CameraViewPanel.QUAD_VIEW_MODE) {
-				key += ":quadView"; //$NON-NLS-1$
+				key += ":quadView"; 
 			} else {
-				key += ":singleView"; //$NON-NLS-1$
+				key += ":singleView"; 
 			}
 
 			if (jAliceFrame.sceneEditor.getGalleryViewer().isAncestorOf(c) || (c == jAliceFrame.sceneEditor.getGalleryViewer())) {
-				key += ":galleryViewer<" + jAliceFrame.sceneEditor.getGalleryViewer().getDirectory() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+				key += ":galleryViewer<" + jAliceFrame.sceneEditor.getGalleryViewer().getDirectory() + ">";  
 
 				if (c instanceof javax.swing.JButton) {
-					key += ":button<" + ((javax.swing.JButton) c).getText() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+					key += ":button<" + ((javax.swing.JButton) c).getText() + ">";  
 				} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryObject) {
-					key += ":galleryObject<" + ((edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryObject) c).getUniqueIdentifier() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+					key += ":galleryObject<" + ((edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryObject) c).getUniqueIdentifier() + ">";  
 				} else if (c != jAliceFrame.sceneEditor.getGalleryViewer()) {
 					key = null;
 				}
@@ -3591,70 +3587,70 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				String id = jAliceFrame.sceneEditor.getIdForComponent(c);
 				//				System.out.println( c + " --> " + id );
 				if (id != null) {
-					key += ":" + id; //$NON-NLS-1$
+					key += ":" + id; 
 				} else if (c != jAliceFrame.sceneEditor) {
 					key = null;
 				}
 			}
 		} else if (jAliceFrame.dragFromComponent.isAncestorOf(c) || (c == jAliceFrame.dragFromComponent)) {
 			if (jAliceFrame.dragFromComponent.getElement() == null) {
-				key = "details"; //$NON-NLS-1$
+				key = "details"; 
 			} else {
-				key = "details<" + jAliceFrame.dragFromComponent.getElement().getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+				key = "details<" + jAliceFrame.dragFromComponent.getElement().getKey(world) + ">";  
 				if (c instanceof javax.swing.JTabbedPane) {
 					int whichTab = ((javax.swing.JTabbedPane) c).getUI().tabForCoordinate((javax.swing.JTabbedPane) c, localPoint.x, localPoint.y);
 					if (whichTab > -1) {
-						key += ":tab<" + Integer.toString(whichTab) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						key += ":tab<" + Integer.toString(whichTab) + ">";  
 					}
 				} else if (c != jAliceFrame.dragFromComponent) {
-					key += ":" + jAliceFrame.dragFromComponent.getKeyForComponent(c); //$NON-NLS-1$
+					key += ":" + jAliceFrame.dragFromComponent.getKeyForComponent(c); 
 				}
 			}
 		} else if (jAliceFrame.behaviorGroupsEditor.isAncestorOf(c)) {
-			key = "behaviors"; //$NON-NLS-1$
+			key = "behaviors"; 
 			if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel) {
 				try {
 					java.awt.datatransfer.Transferable transferable = ((edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel) c).getTransferable();
 					if (AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor)) {
 						edu.cmu.cs.stage3.alice.core.Element e = (edu.cmu.cs.stage3.alice.core.Element) transferable.getTransferData(edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor);
-						key += ":elementTile<" + e.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						key += ":elementTile<" + e.getKey(world) + ">";  
 					} else {
 						key = null;
 					}
 				} catch (Exception e) {
-					AuthoringTool.showErrorDialog("Error while examining DnDGroupingPanel.", e); //$NON-NLS-1$
+					AuthoringTool.showErrorDialog("Error while examining DnDGroupingPanel.", e); 
 					key = null;
 				}
 			} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.PropertyViewController) {
 				edu.cmu.cs.stage3.alice.core.Property property = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.PropertyViewController) c).getProperty();
 				edu.cmu.cs.stage3.alice.core.Element element = property.getOwner();
-				key += ":elementTile<" + element.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
-				key += ":property<" + property.getName() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+				key += ":elementTile<" + element.getKey(world) + ">";  
+				key += ":property<" + property.getName() + ">";  
 				//TODO: handle user-defined parameters
-			} else if ((c instanceof javax.swing.JLabel) && ((javax.swing.JLabel) c).getText().equals("more...")) { //$NON-NLS-1$
+			} else if ((c instanceof javax.swing.JLabel) && ((javax.swing.JLabel) c).getText().equals("more...")) { 
 				if (c.getParent().getParent().getParent() instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 					edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController vc = (edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) c.getParent().getParent().getParent();
 					edu.cmu.cs.stage3.alice.core.Element element = vc.getElement();
-					key += ":elementTile<" + element.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
-					key += ":more"; //$NON-NLS-1$
+					key += ":elementTile<" + element.getKey(world) + ">";  
+					key += ":more"; 
 				} else {
 					key = null;
 				}
 			} else if (c instanceof javax.swing.JButton) {
-				if (((javax.swing.JButton) c).getText().equals("create new event")) { // HACK //$NON-NLS-1$
-					key += ":createNewEventButton"; //$NON-NLS-1$
+				if (((javax.swing.JButton) c).getText().equals("create new event")) { // HACK 
+					key += ":createNewEventButton"; 
 				} else {
 					key = null;
 				}
 			}
 		} else if (jAliceFrame.tabbedEditorComponent.isAncestorOf(c)) {
-			key = "editors"; //$NON-NLS-1$
+			key = "editors"; 
 			if (c instanceof javax.swing.JTabbedPane) {
 				int whichTab = ((javax.swing.JTabbedPane) c).getUI().tabForCoordinate((javax.swing.JTabbedPane) c, localPoint.x, localPoint.y);
 				if (whichTab > -1) {
 					Object o = jAliceFrame.tabbedEditorComponent.getObjectBeingEditedAt(whichTab);
 					if (o instanceof edu.cmu.cs.stage3.alice.core.Element) {
-						key += ":element<" + ((edu.cmu.cs.stage3.alice.core.Element) o).getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						key += ":element<" + ((edu.cmu.cs.stage3.alice.core.Element) o).getKey(world) + ">";  
 					} else {
 						key = null;
 					}
@@ -3662,7 +3658,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			} else {
 				Object o = jAliceFrame.tabbedEditorComponent.getObjectBeingEdited();
 				if (o instanceof edu.cmu.cs.stage3.alice.core.Element) {
-					key += ":element<" + ((edu.cmu.cs.stage3.alice.core.Element) o).getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+					key += ":element<" + ((edu.cmu.cs.stage3.alice.core.Element) o).getKey(world) + ">";  
 					//					edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor responseEditor = null;
 					//					if( jAliceFrame.tabbedEditorComponent.getCurrentEditor() instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor ) {
 					//						responseEditor = (edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor)jAliceFrame.tabbedEditorComponent.getCurrentEditor();
@@ -3676,40 +3672,40 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					//					} else if( (c instanceof javax.swing.JPanel) && (c.getParent() != null) && (c.getParent().getParent() instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel) && (c == ((edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel)c.getParent().getParent()).getDoNothingPanel()) ) {
 					//						key += ":compositeEditorDoNothingPanel";
 					if (c instanceof javax.swing.JButton) {
-						key += ":button<" + ((javax.swing.JButton) c).getText() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						key += ":button<" + ((javax.swing.JButton) c).getText() + ">";  
 					} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel) {
 						try {
 							java.awt.datatransfer.Transferable transferable = ((edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel) c).getTransferable();
 							if (AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor)) {
 								edu.cmu.cs.stage3.alice.core.Element e =
 									(edu.cmu.cs.stage3.alice.core.Element) transferable.getTransferData(edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor);
-								key += ":elementTile<" + e.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+								key += ":elementTile<" + e.getKey(world) + ">";  
 							} else if (AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor)) {
 								edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype ep =
 									(edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype) transferable.getTransferData(
 										edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor);
-								key += ":elementPrototypeTile<" + ep.getElementClass().getName() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+								key += ":elementPrototypeTile<" + ep.getElementClass().getName() + ">";  
 							} else {
 								key = null;
 							}
 							//TODO: handle other DnDGroupingPanels
 						} catch (Exception e) {
-							AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.1"), e); //$NON-NLS-1$
+							AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.1"), e); 
 							key = null;
 						}
 					} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.PropertyViewController) {
 						edu.cmu.cs.stage3.alice.core.Property property = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.PropertyViewController) c).getProperty();
 						edu.cmu.cs.stage3.alice.core.Element element = property.getOwner();
-						key += ":elementTile<" + element.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
-						key += ":property<" + property.getName() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+						key += ":elementTile<" + element.getKey(world) + ">";  
+						key += ":property<" + property.getName() + ">";  
 						//TODO: handle user-defined parameters
-					} else if ((c instanceof javax.swing.JLabel) && ((javax.swing.JLabel) c).getText().equals("more...")) { //$NON-NLS-1$
+					} else if ((c instanceof javax.swing.JLabel) && ((javax.swing.JLabel) c).getText().equals("more...")) { 
 						if (c.getParent().getParent().getParent() instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 							edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController vc =
 								(edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) c.getParent().getParent().getParent();
 							edu.cmu.cs.stage3.alice.core.Element element = vc.getElement();
-							key += ":elementTile<" + element.getKey(world) + ">"; //$NON-NLS-1$ //$NON-NLS-2$
-							key += ":more"; //$NON-NLS-1$
+							key += ":elementTile<" + element.getKey(world) + ">";  
+							key += ":more"; 
 						} else {
 							key = null;
 						}
@@ -3742,12 +3738,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public java.awt.Image getImageForID(String id) {
 		java.awt.Rectangle r = null;
 		java.awt.Image image = null;
-		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); //$NON-NLS-1$
+		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); 
 		if (st.hasMoreTokens()) {
 			String token = st.nextToken();
 			String prefix = AuthoringToolResources.getPrefix(token);
 			String spec = AuthoringToolResources.getSpecifier(token);
-			if (prefix.equals("objectTree")) { //$NON-NLS-1$
+			if (prefix.equals("objectTree")) { 
 				if (spec != null) {
 					edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 					if (element != null) {
@@ -3766,7 +3762,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					r = jAliceFrame.worldTreeComponent.getBounds();
 					r = javax.swing.SwingUtilities.convertRectangle(jAliceFrame.worldTreeComponent.getParent(), r, jAliceFrame.getGlassPane());
 				}
-			} else if (prefix.equals("clipboard")) { //$NON-NLS-1$
+			} else if (prefix.equals("clipboard")) { 
 				if (spec != null) {
 					try {
 						int index = Integer.parseInt(spec);
@@ -3779,25 +3775,25 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					} catch (Exception e) {
 					}
 				}
-			} else if (prefix.equals("sceneEditor")) { //$NON-NLS-1$
+			} else if (prefix.equals("sceneEditor")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken(); // pull off singleView/quadView, assume we're in the right mode
 					if (st.hasMoreTokens()) {
 						token = st.nextToken();
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
-						if (prefix.equals("galleryViewer")) { //$NON-NLS-1$
+						if (prefix.equals("galleryViewer")) { 
 							jAliceFrame.sceneEditor.getGalleryViewer().setDirectory(spec);
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("button")) { //$NON-NLS-1$
+								if (prefix.equals("button")) { 
 									java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 									if (c != null) {
 										image = getComponentImage(c);
 									}
-								} else if (prefix.equals("galleryObject")) { //$NON-NLS-1$
+								} else if (prefix.equals("galleryObject")) { 
 									java.awt.Component c = AuthoringToolResources.findGalleryObject(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 									if (c != null) {
 										image = getComponentImage(c);
@@ -3812,7 +3808,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("details")) { //$NON-NLS-1$
+			} else if (prefix.equals("details")) { 
 				if (spec != null) {
 					edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 					if (jAliceFrame.dragFromComponent.getElement().equals(element)) {
@@ -3820,7 +3816,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							token = st.nextToken();
 							prefix = AuthoringToolResources.getPrefix(token);
 							spec = AuthoringToolResources.getSpecifier(token);
-							if (prefix.equals("viewController")) { //$NON-NLS-1$
+							if (prefix.equals("viewController")) { 
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
 									prefix = AuthoringToolResources.getPrefix(token);
@@ -3843,29 +3839,29 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				} else {
 					image = getComponentImage(jAliceFrame.dragFromComponent);
 				}
-			} else if (prefix.equals("behaviors")) { //$NON-NLS-1$
+			} else if (prefix.equals("behaviors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("createNewEventButton")) { //$NON-NLS-1$
-						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new event"); //$NON-NLS-1$
+					if (prefix.equals("createNewEventButton")) { 
+						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new event"); 
 						if (c != null) {
 							image = getComponentImage(c);
 						}
-					} else if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+					} else if (prefix.equals("elementTile") && (spec != null)) { 
 						edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 						if (element != null) {
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+								if (prefix.equals("property") && (spec != null)) { 
 									java.awt.Component c = AuthoringToolResources.findPropertyViewController(jAliceFrame.behaviorGroupsEditor, element, spec);
 									if (c != null) {
 										image = getComponentImage(c);
 									}
-								} else if (prefix.equals("more")) { //$NON-NLS-1$
+								} else if (prefix.equals("more")) { 
 									java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(jAliceFrame.behaviorGroupsEditor, element);
 									if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 										java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -3883,12 +3879,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("editors")) { //$NON-NLS-1$
+			} else if (prefix.equals("editors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("element")) { //$NON-NLS-1$
+					if (prefix.equals("element")) { 
 						edu.cmu.cs.stage3.alice.core.Element elementBeingEdited = world.getDescendantKeyed(spec);
 						if (st.hasMoreTokens()) {
 							if ((jAliceFrame.tabbedEditorComponent.getObjectBeingEdited() != null) && jAliceFrame.tabbedEditorComponent.getObjectBeingEdited().equals(elementBeingEdited)) {
@@ -3897,24 +3893,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("button")) { //$NON-NLS-1$
+								if (prefix.equals("button")) { 
 									java.awt.Component c = AuthoringToolResources.findButton(container, spec);
 									if (c != null) {
 										image = getComponentImage(c);
 									}
-								} else if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+								} else if (prefix.equals("elementTile") && (spec != null)) { 
 									edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 									if (element != null) {
 										if (st.hasMoreTokens()) {
 											token = st.nextToken();
 											prefix = AuthoringToolResources.getPrefix(token);
 											spec = AuthoringToolResources.getSpecifier(token);
-											if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+											if (prefix.equals("property") && (spec != null)) { 
 												java.awt.Component c = AuthoringToolResources.findPropertyViewController(container, element, spec);
 												if (c != null) {
 													image = getComponentImage(c);
 												}
-											} else if (prefix.equals("more")) { //$NON-NLS-1$
+											} else if (prefix.equals("more")) { 
 												java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(container, element);
 												if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 													java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -3930,7 +3926,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									}
-								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { //$NON-NLS-1$
+								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
 										Class elementClass = Class.forName(spec);
 										if (elementClass != null) {
@@ -3940,7 +3936,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									} catch (Exception e) {
-										AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.386") + spec, e); //$NON-NLS-1$
+										AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.386") + spec, e); 
 									}
 								}
 							}
@@ -3968,12 +3964,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	public java.awt.Rectangle getBoxForID(String id) throws edu.cmu.cs.stage3.caitlin.stencilhelp.application.IDDoesNotExistException {
 		java.awt.Rectangle r = null;
-		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); //$NON-NLS-1$
+		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); 
 		if (st.hasMoreTokens()) {
 			String token = st.nextToken();
 			String prefix = AuthoringToolResources.getPrefix(token);
 			String spec = AuthoringToolResources.getSpecifier(token);
-			if (prefix.equals("objectTree")) { //$NON-NLS-1$
+			if (prefix.equals("objectTree")) { 
 				if (spec != null) {
 					edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 					if (element != null) {
@@ -3992,7 +3988,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					r = jAliceFrame.worldTreeComponent.getBounds();
 					r = javax.swing.SwingUtilities.convertRectangle(jAliceFrame.worldTreeComponent.getParent(), r, jAliceFrame.getGlassPane());
 				}
-			} else if (prefix.equals("clipboard")) { //$NON-NLS-1$
+			} else if (prefix.equals("clipboard")) { 
 				if (spec != null) {
 					try {
 						int index = Integer.parseInt(spec);
@@ -4007,26 +4003,26 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					}
 				}
 
-			} else if (prefix.equals("sceneEditor")) { //$NON-NLS-1$
+			} else if (prefix.equals("sceneEditor")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken(); // pull off singleView/quadView, assume we're in the right mode
 					if (st.hasMoreTokens()) {
 						token = st.nextToken();
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
-						if (prefix.equals("galleryViewer")) { //$NON-NLS-1$
+						if (prefix.equals("galleryViewer")) { 
 							jAliceFrame.sceneEditor.getGalleryViewer().setDirectory(spec);
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("button")) { //$NON-NLS-1$
+								if (prefix.equals("button")) { 
 									java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 									if (c != null) {
 										r = c.getBounds();
 										r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
 									}
-								} else if (prefix.equals("galleryObject")) { //$NON-NLS-1$
+								} else if (prefix.equals("galleryObject")) { 
 									java.awt.Component c = AuthoringToolResources.findGalleryObject(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 									if (c != null) {
 										r = c.getBounds();
@@ -4052,7 +4048,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					r = jAliceFrame.sceneEditor.getBounds();
 					r = javax.swing.SwingUtilities.convertRectangle(jAliceFrame.sceneEditor.getParent(), r, jAliceFrame.getGlassPane());
 				}
-			} else if (prefix.equals("details")) { //$NON-NLS-1$
+			} else if (prefix.equals("details")) { 
 				if (spec != null) {
 					edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 					if (jAliceFrame.dragFromComponent.getElement().equals(element)) {
@@ -4060,12 +4056,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							token = st.nextToken();
 							prefix = AuthoringToolResources.getPrefix(token);
 							spec = AuthoringToolResources.getSpecifier(token);
-							if (prefix.equals("tab")) { //$NON-NLS-1$
+							if (prefix.equals("tab")) { 
 								int tabIndex = Integer.parseInt(spec);
 								r = jAliceFrame.dragFromComponent.tabbedPane.getUI().getTabBounds(jAliceFrame.dragFromComponent.tabbedPane, tabIndex);
 								r = javax.swing.SwingUtilities.convertRectangle(jAliceFrame.dragFromComponent.tabbedPane, r, jAliceFrame.getGlassPane());
 								return r;
-							} else if (prefix.equals("viewController")) { //$NON-NLS-1$
+							} else if (prefix.equals("viewController")) { 
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
 									prefix = AuthoringToolResources.getPrefix(token);
@@ -4092,31 +4088,31 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					r = jAliceFrame.dragFromComponent.getBounds();
 					r = javax.swing.SwingUtilities.convertRectangle(jAliceFrame.dragFromComponent.getParent(), r, jAliceFrame.getGlassPane());
 				}
-			} else if (prefix.equals("behaviors")) { //$NON-NLS-1$
+			} else if (prefix.equals("behaviors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("createNewEventButton")) { //$NON-NLS-1$
-						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new event"); //$NON-NLS-1$
+					if (prefix.equals("createNewEventButton")) { 
+						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new event"); 
 						if (c != null) {
 							r = c.getBounds();
 							r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
 						}
-					} else if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+					} else if (prefix.equals("elementTile") && (spec != null)) { 
 						edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 						if (element != null) {
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+								if (prefix.equals("property") && (spec != null)) { 
 									java.awt.Component c = AuthoringToolResources.findPropertyViewController(jAliceFrame.behaviorGroupsEditor, element, spec);
 									if (c != null) {
 										r = c.getBounds();
 										r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
 									}
-								} else if (prefix.equals("more")) { //$NON-NLS-1$
+								} else if (prefix.equals("more")) { 
 									java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(jAliceFrame.behaviorGroupsEditor, element);
 									if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 										java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -4139,12 +4135,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					r = jAliceFrame.behaviorGroupsEditor.getBounds();
 					r = javax.swing.SwingUtilities.convertRectangle(jAliceFrame.behaviorGroupsEditor.getParent(), r, jAliceFrame.getGlassPane());
 				}
-			} else if (prefix.equals("editors")) { //$NON-NLS-1$
+			} else if (prefix.equals("editors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("element")) { //$NON-NLS-1$
+					if (prefix.equals("element")) { 
 						edu.cmu.cs.stage3.alice.core.Element elementBeingEdited = world.getDescendantKeyed(spec);
 						if (st.hasMoreTokens()) {
 							if ((jAliceFrame.tabbedEditorComponent.getObjectBeingEdited() != null) && jAliceFrame.tabbedEditorComponent.getObjectBeingEdited().equals(elementBeingEdited)) {
@@ -4153,26 +4149,26 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("button")) { //$NON-NLS-1$
+								if (prefix.equals("button")) { 
 									java.awt.Component c = AuthoringToolResources.findButton(container, spec);
 									if (c != null) {
 										r = c.getBounds();
 										r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
 									}
-								} else if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+								} else if (prefix.equals("elementTile") && (spec != null)) { 
 									edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 									if (element != null) {
 										if (st.hasMoreTokens()) {
 											token = st.nextToken();
 											prefix = AuthoringToolResources.getPrefix(token);
 											spec = AuthoringToolResources.getSpecifier(token);
-											if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+											if (prefix.equals("property") && (spec != null)) { 
 												java.awt.Component c = AuthoringToolResources.findPropertyViewController(container, element, spec);
 												if (c != null) {
 													r = c.getBounds();
 													r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
 												}
-											} else if (prefix.equals("more")) { //$NON-NLS-1$
+											} else if (prefix.equals("more")) { 
 												java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(container, element);
 												if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 													java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -4190,7 +4186,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									}
-								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { //$NON-NLS-1$
+								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
 										Class elementClass = Class.forName(spec);
 										if (elementClass != null) {
@@ -4201,7 +4197,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									} catch (Exception e) {
-										AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.410") + spec, e); //$NON-NLS-1$
+										AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.410") + spec, e); 
 									}
 								}
 							}
@@ -4253,13 +4249,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	public boolean isIDVisible(String id) throws edu.cmu.cs.stage3.caitlin.stencilhelp.application.IDDoesNotExistException {
-		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); //$NON-NLS-1$
+		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); 
 
 		if (st.hasMoreTokens()) {
 			String token = st.nextToken();
 			String prefix = AuthoringToolResources.getPrefix(token);
 			String spec = AuthoringToolResources.getSpecifier(token);
-			if (prefix.equals("objectTree")) { //$NON-NLS-1$
+			if (prefix.equals("objectTree")) { 
 				if (spec != null) {
 					edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 					if (element != null) {
@@ -4273,7 +4269,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("clipboard")) { //$NON-NLS-1$
+			} else if (prefix.equals("clipboard")) { 
 				if (spec != null) {
 					try {
 						int index = Integer.parseInt(spec);
@@ -4294,27 +4290,27 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					return false;
 				}
 
-			} else if (prefix.equals("sceneEditor")) { //$NON-NLS-1$
+			} else if (prefix.equals("sceneEditor")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken(); // pull off singleView/quadView
 					if (st.hasMoreTokens()) {
 						token = st.nextToken();
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
-						if (prefix.equals("galleryViewer")) { //$NON-NLS-1$
+						if (prefix.equals("galleryViewer")) { 
 							if (jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().equals(spec)) {
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
 									prefix = AuthoringToolResources.getPrefix(token);
 									spec = AuthoringToolResources.getSpecifier(token);
-									if (prefix.equals("button")) { //$NON-NLS-1$
+									if (prefix.equals("button")) { 
 										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 										if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 											return true;
 										} else {
 											return false;
 										}
-									} else if (prefix.equals("galleryObject")) { //$NON-NLS-1$
+									} else if (prefix.equals("galleryObject")) { 
 										java.awt.Component c = AuthoringToolResources.findGalleryObject(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 										if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 											return true;
@@ -4342,9 +4338,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("details")) { //$NON-NLS-1$
+			} else if (prefix.equals("details")) { 
 				if (spec == null) {
-					spec = ""; //$NON-NLS-1$
+					spec = ""; 
 				}
 				edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 				if (jAliceFrame.dragFromComponent.getElement().equals(element)) {
@@ -4352,7 +4348,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						token = st.nextToken();
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
-						if (prefix.equals("tab")) { //$NON-NLS-1$
+						if (prefix.equals("tab")) { 
 							return true;
 						} else {
 							java.awt.Component c = jAliceFrame.dragFromComponent.getComponentForKey(token);
@@ -4383,26 +4379,26 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					//TODO is this safe?
 					return false;
 				}
-			} else if (prefix.equals("behaviors")) { //$NON-NLS-1$
+			} else if (prefix.equals("behaviors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("createNewBehaviorButton")) { //$NON-NLS-1$
-						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new behavior"); //$NON-NLS-1$
+					if (prefix.equals("createNewBehaviorButton")) { 
+						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new behavior"); 
 						if ((c != null) && c.isShowing()) {
 							return true;
 						} else {
 							return false;
 						}
-					} else if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+					} else if (prefix.equals("elementTile") && (spec != null)) { 
 						edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 						if (element != null) {
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+								if (prefix.equals("property") && (spec != null)) { 
 									java.awt.Component c = AuthoringToolResources.findPropertyViewController(jAliceFrame.behaviorGroupsEditor, element, spec);
 									if ((c != null) && c.isShowing()) {
 										java.awt.Rectangle bounds = c.getBounds();
@@ -4418,7 +4414,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									} else {
 										return false;
 									}
-								} else if (prefix.equals("more")) { //$NON-NLS-1$
+								} else if (prefix.equals("more")) { 
 									java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(jAliceFrame.behaviorGroupsEditor, element);
 									if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 										java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -4460,12 +4456,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("editors")) { //$NON-NLS-1$
+			} else if (prefix.equals("editors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("element")) { //$NON-NLS-1$
+					if (prefix.equals("element")) { 
 						edu.cmu.cs.stage3.alice.core.Element elementBeingEdited = world.getDescendantKeyed(spec);
 						if (st.hasMoreTokens()) {
 							if ((jAliceFrame.tabbedEditorComponent.getObjectBeingEdited() != null) && jAliceFrame.tabbedEditorComponent.getObjectBeingEdited().equals(elementBeingEdited)) {
@@ -4474,28 +4470,28 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("button")) { //$NON-NLS-1$
+								if (prefix.equals("button")) { 
 									java.awt.Component c = AuthoringToolResources.findButton(container, spec);
 									if ((c != null) && c.isShowing()) {
 										return true;
 									} else {
 										return false;
 									}
-								} else if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+								} else if (prefix.equals("elementTile") && (spec != null)) { 
 									edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 									if (element != null) {
 										if (st.hasMoreTokens()) {
 											token = st.nextToken();
 											prefix = AuthoringToolResources.getPrefix(token);
 											spec = AuthoringToolResources.getSpecifier(token);
-											if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+											if (prefix.equals("property") && (spec != null)) { 
 												java.awt.Component c = AuthoringToolResources.findPropertyViewController(container, element, spec);
 												if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 													return true;
 												} else {
 													return false;
 												}
-											} else if (prefix.equals("more")) { //$NON-NLS-1$
+											} else if (prefix.equals("more")) { 
 												java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(container, element);
 												if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 													java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -4515,7 +4511,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									}
-								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { //$NON-NLS-1$
+								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
 										Class elementClass = Class.forName(spec);
 										if (elementClass != null) {
@@ -4527,7 +4523,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									} catch (Exception e) {
-										AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.434") + spec, e); //$NON-NLS-1$
+										AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.434") + spec, e); 
 									}
 								}
 							} else {
@@ -4557,14 +4553,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	public void makeIDVisible(String id) throws edu.cmu.cs.stage3.caitlin.stencilhelp.application.IDDoesNotExistException {
-		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); //$NON-NLS-1$
+		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); 
 
 		if (st.hasMoreTokens()) {
 			String token = st.nextToken();
 			String prefix = AuthoringToolResources.getPrefix(token);
 			String spec = AuthoringToolResources.getSpecifier(token);
 
-			if (prefix.equals("objectTree")) { //$NON-NLS-1$
+			if (prefix.equals("objectTree")) { 
 				if (spec != null) {
 					edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 					if (element != null) {
@@ -4573,23 +4569,23 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						tree.scrollPathToVisible(new javax.swing.tree.TreePath(worldTreeModel.getPath(element)));
 					}
 				}
-			} else if (prefix.equals("clipboard")) { //$NON-NLS-1$
+			} else if (prefix.equals("clipboard")) { 
 				//Do nothing
 
-			} else if (prefix.equals("sceneEditor")) { //$NON-NLS-1$
-				if (spec.equals("large")) { //$NON-NLS-1$
+			} else if (prefix.equals("sceneEditor")) { 
+				if (spec.equals("large")) { 
 					jAliceFrame.sceneEditor.setGuiMode(edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.SceneEditor.LARGE_MODE);
 					//	System.out.println("just made scene editor large");
-				} else if (spec.equals("small")) { //$NON-NLS-1$
+				} else if (spec.equals("small")) { 
 					jAliceFrame.sceneEditor.setGuiMode(edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.SceneEditor.SMALL_MODE);
 					//	System.out.println("just made scene editor small");
 				}
 				if (st.hasMoreTokens()) {
 					token = st.nextToken(); // pull off singleView/quadView
-					if (token.equals("singleView")) { //$NON-NLS-1$
+					if (token.equals("singleView")) { 
 						jAliceFrame.sceneEditor.setViewMode(edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.CameraViewPanel.SINGLE_VIEW_MODE);
 						//	System.out.println("just set single view");
-					} else if (token.equals("quadView")) { //$NON-NLS-1$
+					} else if (token.equals("quadView")) { 
 						jAliceFrame.sceneEditor.setViewMode(edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor.CameraViewPanel.QUAD_VIEW_MODE);
 						//	System.out.println("just made set quad view");
 					}
@@ -4598,19 +4594,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						token = st.nextToken();
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
-						if (prefix.equals("galleryViewer")) { //$NON-NLS-1$
+						if (prefix.equals("galleryViewer")) { 
 							//jAliceFrame.sceneEditor.getGalleryViewer().setDirectory( spec );
 							//		System.out.println("trying to show gallery viewer");
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("button")) { //$NON-NLS-1$
+								if (prefix.equals("button")) { 
 									java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 									if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {
 										((javax.swing.JComponent) c).scrollRectToVisible(c.getBounds());
 									}
-								} else if (prefix.equals("galleryObject")) { //$NON-NLS-1$
+								} else if (prefix.equals("galleryObject")) { 
 									java.awt.Component c = AuthoringToolResources.findGalleryObject(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 									if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {
 										((javax.swing.JComponent) c).scrollRectToVisible(c.getBounds());
@@ -4627,9 +4623,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("details")) { //$NON-NLS-1$
+			} else if (prefix.equals("details")) { 
 				if (spec == null) {
-					spec = ""; //$NON-NLS-1$
+					spec = ""; 
 				}
 				edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 				if (!jAliceFrame.dragFromComponent.getElement().equals(element)) {
@@ -4641,9 +4637,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
 
-						if (!prefix.equals("tab")) { //$NON-NLS-1$
+						if (!prefix.equals("tab")) { 
 							boolean isViewController = false;
-							if (prefix.equals("viewController")) { //$NON-NLS-1$
+							if (prefix.equals("viewController")) { 
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
 									prefix = AuthoringToolResources.getPrefix(token);
@@ -4651,13 +4647,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									isViewController = true;
 								}
 							}
-							if (prefix.equals("property") || prefix.equals("variable") || prefix.equals("textureMap") || prefix.equals("sound") || prefix.equals("other")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+							if (prefix.equals("property") || prefix.equals("variable") || prefix.equals("textureMap") || prefix.equals("sound") || prefix.equals("other")) {    //$NON-NLS-4$ //$NON-NLS-5$
 								jAliceFrame.dragFromComponent.selectTab(edu.cmu.cs.stage3.alice.authoringtool.DragFromComponent.PROPERTIES_TAB);
 							}
-							if (prefix.equals("userDefinedResponse") || prefix.equals("responsePrototype")) { //$NON-NLS-1$ //$NON-NLS-2$
+							if (prefix.equals("userDefinedResponse") || prefix.equals("responsePrototype")) {  
 								jAliceFrame.dragFromComponent.selectTab(edu.cmu.cs.stage3.alice.authoringtool.DragFromComponent.ANIMATIONS_TAB);
 							}
-							if (prefix.equals("userDefinedQuestion") || prefix.equals("questionPrototype")) { //$NON-NLS-1$ //$NON-NLS-2$
+							if (prefix.equals("userDefinedQuestion") || prefix.equals("questionPrototype")) {  
 								jAliceFrame.dragFromComponent.selectTab(edu.cmu.cs.stage3.alice.authoringtool.DragFromComponent.QUESTIONS_TAB);
 							}
 							java.awt.Component c = null;
@@ -4676,24 +4672,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("behaviors")) { //$NON-NLS-1$
+			} else if (prefix.equals("behaviors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+					if (prefix.equals("elementTile") && (spec != null)) { 
 						edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 						if (element != null) {
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+								if (prefix.equals("property") && (spec != null)) { 
 									java.awt.Component c = AuthoringToolResources.findPropertyViewController(jAliceFrame.behaviorGroupsEditor, element, spec);
 									if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {
 										((javax.swing.JComponent) c).scrollRectToVisible(c.getBounds());
 									}
-								} else if (prefix.equals("more")) { //$NON-NLS-1$
+								} else if (prefix.equals("more")) { 
 									java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(jAliceFrame.behaviorGroupsEditor, element);
 									if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 										java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -4712,12 +4708,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						}
 					}
 				}
-			} else if (prefix.equals("editors")) { //$NON-NLS-1$
+			} else if (prefix.equals("editors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
-					if (prefix.equals("element")) { //$NON-NLS-1$
+					if (prefix.equals("element")) { 
 						edu.cmu.cs.stage3.alice.core.Element elementBeingEdited = world.getDescendantKeyed(spec);
 						if (elementBeingEdited == null) {
 							throw new edu.cmu.cs.stage3.caitlin.stencilhelp.application.IDDoesNotExistException(spec);
@@ -4732,24 +4728,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							token = st.nextToken();
 							prefix = AuthoringToolResources.getPrefix(token);
 							spec = AuthoringToolResources.getSpecifier(token);
-							if (prefix.equals("button")) { //$NON-NLS-1$
+							if (prefix.equals("button")) { 
 								java.awt.Component c = AuthoringToolResources.findButton(container, spec);
 								if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {
 									((javax.swing.JComponent) c).scrollRectToVisible(c.getBounds());
 								}
-							} else if (prefix.equals("elementTile") && (spec != null)) { //$NON-NLS-1$
+							} else if (prefix.equals("elementTile") && (spec != null)) { 
 								edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 								if (element != null) {
 									if (st.hasMoreTokens()) {
 										token = st.nextToken();
 										prefix = AuthoringToolResources.getPrefix(token);
 										spec = AuthoringToolResources.getSpecifier(token);
-										if (prefix.equals("property") && (spec != null)) { //$NON-NLS-1$
+										if (prefix.equals("property") && (spec != null)) { 
 											java.awt.Component c = AuthoringToolResources.findPropertyViewController(container, element, spec);
 											if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {
 												((javax.swing.JComponent) c).scrollRectToVisible(c.getBounds());
 											}
-										} else if (prefix.equals("more")) { //$NON-NLS-1$
+										} else if (prefix.equals("more")) { 
 											java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(container, element);
 											if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 												java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
@@ -4765,7 +4761,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 										}
 									}
 								}
-							} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { //$NON-NLS-1$
+							} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 								try {
 									Class elementClass = Class.forName(spec);
 									if (elementClass != null) {
@@ -4775,7 +4771,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 										}
 									}
 								} catch (Exception e) {
-									AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.470") + spec, e); //$NON-NLS-1$
+									AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.470") + spec, e); 
 								}
 							}
 						} else {
@@ -4864,19 +4860,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				if (element != null) {
 					int actualPosition = element.getParent().getIndexOfChild(element);
 					if (element instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
-						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("responses"); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("responses"); 
 						if (resp instanceof edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) {
 							actualPosition = ((edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) resp).indexOf(element);
 							//									System.out.println("index in responses: " + actualPosition);
 						}
 					} else if (element instanceof edu.cmu.cs.stage3.alice.core.Response) {
-						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("componentResponses"); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("componentResponses"); 
 						if (resp instanceof edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) {
 							actualPosition = ((edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) resp).indexOf(element);
 							//									System.out.println("index in componentResponses: " + actualPosition);
 						}
 					} else if (element instanceof edu.cmu.cs.stage3.alice.core.Behavior) {
-						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("behaviors"); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("behaviors"); 
 						if (resp instanceof edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) {
 							actualPosition = ((edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) resp).indexOf(element);
 							//									System.out.println("index in responses: " + actualPosition);
@@ -4899,7 +4895,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			for (java.util.Iterator iter = propertyValueKeys.iterator(); iter.hasNext();) {
 				String propertyKey = (String) iter.next();
 				String valueRepr = stencilStateCapsule.getPropertyValue(propertyKey);
-				int dotIndex = propertyKey.lastIndexOf("."); //$NON-NLS-1$
+				int dotIndex = propertyKey.lastIndexOf("."); 
 				String elementKey = propertyKey.substring(0, dotIndex);
 				String propertyName = propertyKey.substring(dotIndex + 1);
 
@@ -4908,7 +4904,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 					// getting "properties" of a call to a user defined response
 					if (propertyOwner instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
-						edu.cmu.cs.stage3.alice.core.Property requiredParams = propertyOwner.getPropertyNamed("requiredActualParameters"); //$NON-NLS-1$
+						edu.cmu.cs.stage3.alice.core.Property requiredParams = propertyOwner.getPropertyNamed("requiredActualParameters"); 
 
 						Object udobj = requiredParams.getValue();
 						if (udobj instanceof edu.cmu.cs.stage3.alice.core.Variable[]) {
@@ -5007,7 +5003,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		String prefix = AuthoringToolResources.getPrefix(task);
 		String spec = AuthoringToolResources.getSpecifier(task);
 
-		if (prefix.equals("loadWorld")) { //$NON-NLS-1$
+		if (prefix.equals("loadWorld")) { 
 			//boolean askForSave = !((currentWorldLocation != null) && currentWorldLocation.getAbsolutePath().startsWith(tutorialDirectory.getAbsolutePath()));
 			boolean askForSave = false;
 			loadWorld(spec, askForSave);
@@ -5022,10 +5018,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		launchTutorialFile(null);
 	}
 	public void launchTutorialFile(java.io.File tutorialFile) {
-		if (Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ) > 12) { //$NON-NLS-1$
+		if (Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ) > 12) { 
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-					Messages.getString("AuthoringTool.478") + Messages.getString("AuthoringTool.479"), //$NON-NLS-1$ //$NON-NLS-2$
-					Messages.getString("AuthoringTool.480"), //$NON-NLS-1$
+					Messages.getString("AuthoringTool.478") + Messages.getString("AuthoringTool.479"),  
+					Messages.getString("AuthoringTool.480"), 
 					javax.swing.JOptionPane.WARNING_MESSAGE);
 		} else {
 		if (tutorialFile == null) {
@@ -5040,10 +5036,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		return tutorialDirectory;
 	}
 	public java.io.File getExampleWorldsDirectory() {
-		return new java.io.File(authoringToolConfig.getValue("directories.examplesDirectory")).getAbsoluteFile(); //$NON-NLS-1$
+		return new java.io.File(authoringToolConfig.getValue("directories.examplesDirectory")).getAbsoluteFile(); 
 	}
 	public java.io.File getTemplateWorldsDirectory() {
-		return new java.io.File(authoringToolConfig.getValue("directories.templatesDirectory")).getAbsoluteFile(); //$NON-NLS-1$
+		return new java.io.File(authoringToolConfig.getValue("directories.templatesDirectory")).getAbsoluteFile(); 
 	}
 
 	public javax.swing.filechooser.FileFilter getWorldFileFilter() {
@@ -5091,7 +5087,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
     	}
 		String directory = currentWorldLocation.getParent();
 		directory = directory.replace('\\', '/');
-		java.io.File dir = new java.io.File(directory + "/sound"); //$NON-NLS-1$
+		java.io.File dir = new java.io.File(directory + "/sound"); 
 		dir.mkdir();
 	
 		final edu.cmu.cs.stage3.alice.authoringtool.dialog.SoundRecorder soundRecorder = new edu.cmu.cs.stage3.alice.authoringtool.dialog.SoundRecorder(dir);
@@ -5128,9 +5124,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	// Logging
 	public void logInstructorIntervention(){
 		//get comment if starting something new
-		String comment = ""; //$NON-NLS-1$
+		String comment = ""; 
 		if (instructorInControl == false) {
-			comment = javax.swing.JOptionPane.showInputDialog(Messages.getString("AuthoringTool.485")); //$NON-NLS-1$
+			comment = javax.swing.JOptionPane.showInputDialog(Messages.getString("AuthoringTool.485")); 
 			if (comment != null) instructorInControl = true;
 		} else {
 			instructorInControl = false;
@@ -5138,9 +5134,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		//log it
 		if (undoRedoStack != null){
 			if (instructorInControl){
-				undoRedoStack.logInstructorIntervention(Messages.getString("AuthoringTool.486"), comment); //$NON-NLS-1$
+				undoRedoStack.logInstructorIntervention(Messages.getString("AuthoringTool.486"), comment); 
 			} else {
-				if (comment != null) undoRedoStack.logInstructorIntervention(Messages.getString("AuthoringTool.487"), comment); //$NON-NLS-1$
+				if (comment != null) undoRedoStack.logInstructorIntervention(Messages.getString("AuthoringTool.487"), comment); 
 			}	
 		}
 	}
@@ -5165,7 +5161,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		//		}
 
 		// play count
-		countSomething("edu.cmu.cs.stage3.alice.authoringtool.playCount"); //$NON-NLS-1$
+		countSomething("edu.cmu.cs.stage3.alice.authoringtool.playCount"); 
 
 		world.preserve();
 		try {
@@ -5185,7 +5181,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			fireWorldStarted(AuthoringToolStateChangedEvent.AUTHORING_STATE, AuthoringToolStateChangedEvent.RUNTIME_STATE, world);
 		} catch (org.python.core.PyException e) {
 			world.restore();
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.489"), null); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.489"), null); 
 			if (org.python.core.Py.matchException(e, org.python.core.Py.SystemExit)) {
 				//TODO
 			} else {
@@ -5202,12 +5198,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			if (wrappedException instanceof edu.cmu.cs.stage3.alice.core.SimulationException) {
 				showSimulationExceptionDialog((edu.cmu.cs.stage3.alice.core.SimulationException) wrappedException);
 			} else {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.490"), wrappedException); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.490"), wrappedException); 
 			}
 			return false;
 		} catch (Throwable t) {
 			world.restore();
-			showErrorDialog(Messages.getString("AuthoringTool.491"), t); //$NON-NLS-1$
+			showErrorDialog(Messages.getString("AuthoringTool.491"), t); 
 			return false;
 		}
 		return true;
@@ -5222,14 +5218,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			//world.stop(AuthoringToolResources.getCurrentTime());
 			worldClock.stop();
 		} catch (org.python.core.PyException e) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.492"), null); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.492"), null); 
 			if (org.python.core.Py.matchException(e, org.python.core.Py.SystemExit)) {
 				//TODO
 			} else {
 				org.python.core.Py.printException(e, null, pyStdErr);
 			}
 		} catch (Throwable t) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.493"), t); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.493"), t); 
 		}
 		world.restore();
 		undoRedoStack.setIsListening(true);
@@ -5254,11 +5250,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	private void checkForUnreferencedCurrentMethod() {
 		Object object = getObjectBeingEdited();
 		if (object instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
-			if (!AuthoringToolResources.isMethodHookedUp((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) object, world) && !authoringToolConfig.getValue(Messages.getString("AuthoringTool.494")).equalsIgnoreCase("true")) { //$NON-NLS-1$ //$NON-NLS-2$
+			if (!AuthoringToolResources.isMethodHookedUp((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) object, world) && !authoringToolConfig.getValue(Messages.getString("AuthoringTool.494")).equalsIgnoreCase("true")) {  
 				String objectRepr = AuthoringToolResources.getReprForValue(object, true);
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-					Messages.getString("AuthoringTool.496") + objectRepr + Messages.getString("AuthoringTool.497"), //$NON-NLS-1$ //$NON-NLS-2$
-					Messages.getString("AuthoringTool.498"), //$NON-NLS-1$
+					Messages.getString("AuthoringTool.496") + objectRepr + Messages.getString("AuthoringTool.497"),  
+					Messages.getString("AuthoringTool.498"), 
 					javax.swing.JOptionPane.WARNING_MESSAGE);
 			}
 		}
@@ -5334,7 +5330,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			Thread.sleep(100);	// Need this pause so the world starts from the beginning. 
 			worldClock.start();
 		} catch (org.python.core.PyException e) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.499"), null); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.499"), null); 
 			if (org.python.core.Py.matchException(e, org.python.core.Py.SystemExit)) {
 				//TODO
 			} else {
@@ -5347,10 +5343,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			if (wrappedException instanceof edu.cmu.cs.stage3.alice.core.SimulationException) {
 				showSimulationExceptionDialog((edu.cmu.cs.stage3.alice.core.SimulationException) wrappedException);
 			} else {
-				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.500"), wrappedException); //$NON-NLS-1$
+				AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.500"), wrappedException); 
 			}
 		} catch (Throwable t) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.501"), t); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.501"), t); 
 		}
 		renderTarget.getAWTComponent().requestFocus();
 	}
@@ -5368,7 +5364,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		try {
 			storeCapturedImage(renderTarget.getOffscreenImage());
 		} catch (Throwable t) {
-			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.502"), t); //$NON-NLS-1$
+			AuthoringTool.showErrorDialog(Messages.getString("AuthoringTool.502"), t); 
 		}
 		renderTarget.getAWTComponent().requestFocus();
 	}
@@ -5406,22 +5402,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	
 	// Aik Min
     private static boolean pulsing = true;   
-    private static JLabel statusLabel = new JLabel(Messages.getString("AuthoringTool.503")); //$NON-NLS-1$
+    private static JLabel statusLabel = new JLabel(Messages.getString("AuthoringTool.503")); 
     private static javax.swing.JFrame statusFrame;
     
     private boolean checkForUpdate(){
-		StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/alice.jar" ); //$NON-NLS-1$
-		java.io.File old = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "alice.jar");
-    	try {
-    		java.net.URL url = new java.net.URL( sb.toString() );
-    		java.net.URLConnection urlc = url.openConnection();
+    	java.net.URL url;
+    	java.net.URLConnection urlc = null;
+		try {
+			url = new java.net.URL(AuthoringToolResources.getMainUpdateURL().toString()+"alice.jar");
+			urlc = url.openConnection();
+			java.io.File old = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "alice.jar");
     		long date = urlc.getLastModified();
     		long oldDate = old.lastModified();
     		if (date > oldDate){
     			return true;
     		}
     	} catch ( Exception e){
-    		
+			javax.swing.JOptionPane.showMessageDialog(null, 
+					"Update failed", "Cannot access required file.", javax.swing.JOptionPane.ERROR_MESSAGE );  
     	}	
     	return false;
     }
@@ -5443,9 +5441,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		Box left = Box.createVerticalBox();
         left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
-        //UpdateJAR.setEnabled(true);
-        
+               
         final JCheckBox UpdateJAR = new JCheckBox("");
         boolean updateAvailable = checkForUpdate();
         if (updateAvailable) {
@@ -5473,21 +5469,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         	public void actionPerformed(java.awt.event.ActionEvent e) {
         		dlg.dispose();
         		if (UpdateJAR.isSelected() || EnglishGallery.isSelected() || SpanishGallery.isSelected()) {
-        			new Thread(new StartUpdating(UpdateJAR.isSelected(),EnglishGallery.isSelected(),SpanishGallery.isSelected()) ).start();
+        			if ( UpdateJAR.isSelected() ) {
+        				new Thread(new StartUpdating( "alice.jar", 
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar",
+        						false )).start();
+        			}
+        			if ( EnglishGallery.isSelected() ) {
+        				new Thread(new StartUpdating( "EnglishGallery.zip", 
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "English" ,
+        						true )).start();
+        			}
+        			if ( SpanishGallery.isSelected() ) {
+        				new Thread(new StartUpdating( "SpanishGallery.zip",
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "Spanish" ,
+        						true )).start();
+        			}
         		} else {
         			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("No update selected.");
-        		}
-//        		statusFrame = new JFrame(Messages.getString("AuthoringTool.505")); //$NON-NLS-1$
-//        		statusFrame.setPreferredSize(new Dimension(250,100));
-//        		statusFrame.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
-//        		statusFrame.getContentPane().add( statusLabel );
-//        		statusFrame.pack();
-//		        statusFrame.setVisible(true);
-//        		
-//        		pulsing = true;
-//		        Thread pulse = new Thread (new StatusPulsing(statusLabel, Messages.getString("AuthoringTool.504"))); //$NON-NLS-1$
-//		        pulse.start();
-		        
+        		}		        
         	}
         });
         bottom.add(ConfirmUpdate);
@@ -5500,75 +5499,59 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
   	
 	public class StartUpdating implements Runnable {
-		private boolean UpdateJAR;
-		private boolean EnglishGallery;
-		private boolean SpanishGallery;
-		public StartUpdating(boolean jar, boolean eng, boolean sp) {
-			UpdateJAR = jar;
-			EnglishGallery = eng;
-			SpanishGallery = sp;
+		private boolean isGallery;
+		private String file;
+		private String dest;
+    	private ProgressMonitor monitor = new ProgressMonitor(null, "Updating Alice", "Getting Started...", 0, 0);
+    	
+		public StartUpdating(String filename, String location, boolean dir) {
+	        file = filename;
+	        dest = location;
+	        isGallery = dir;
+		
 		}
-
+		
 		public void run() {
 			java.io.BufferedInputStream bis = null;
 			java.io.BufferedOutputStream bos = null;
-        	ProgressMonitor monitor = new ProgressMonitor(null, "Updating Alice", "Getting Started...", 0, 0);
-	        try {
-	        	if (UpdateJAR){
-	    			StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/alice.jar" ); //$NON-NLS-1$
-
-					java.net.URL url = new java.net.URL( sb.toString() );
-					java.net.URLConnection urlc = url.openConnection();
-					monitor.setMaximum(urlc.getContentLength());
+			java.net.URLConnection urlc = null;
+			try {
+				java.net.URL url = new java.net.URL(AuthoringToolResources.getMainUpdateURL().toString()+file);
+				urlc = url.openConnection();
+				monitor.setMaximum(urlc.getContentLength());
 					
-					java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar");
+				java.io.File aliceHome = new java.io.File( dest );
+				bis = new java.io.BufferedInputStream( urlc.getInputStream() );
 
-					bis = new java.io.BufferedInputStream( urlc.getInputStream() );
+				if (isGallery){
+					if (!aliceHome.exists()){
+						aliceHome.mkdir();
+					}
+					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome + System.getProperty( "file.separator" ) + file ) );	
+					monitor.setNote("Downloading gallery");
+				} else {
 					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome ) );
 					monitor.setNote("Downloading alice.jar file");
-					int i, progress = 0;
-					while ((i = bis.read()) != -1) {
-						bos.write( i );
-						if (monitor.isCanceled()) {
-							break;
-						} else {
-							monitor.setProgress(progress++);
-						}						
-					}
 				}
-	        	if (EnglishGallery && !monitor.isCanceled()){
-	    			StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/EnglishGallery.zip" ); //$NON-NLS-1$
+				
+				int i, progress = 0;
+				while ((i = bis.read()) != -1) {
+					bos.write( i );
+					if (monitor.isCanceled()) {
+						break;
+					} else {
+						monitor.setProgress(progress++);
+					}						
+				}
 
-					java.net.URL url = new java.net.URL( sb.toString() );
-					java.net.URLConnection urlc = url.openConnection();
-					
-					monitor.setMaximum(urlc.getContentLength());
-
-					java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
-							+ System.getProperty( "file.separator" ) + "English");
-					if (!aliceHome.exists()){
-						aliceHome.mkdir();
-					}
-
-					bis = new java.io.BufferedInputStream( urlc.getInputStream() );
-					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome + System.getProperty( "file.separator" ) + "EnglishGallery.zip"));
-					
-					monitor.setNote("Downloading English gallery");
-					int i, progress = 0;
-					while ((i = bis.read()) != -1) {
-						bos.write( i );
-						if (monitor.isCanceled()) {
-							break;
-						} else {
-							monitor.setProgress(progress++);
-						}
-					}
-					bis.close();
-					bos.close();
+				bis.close();
+				bos.close();
+				
+				if ( isGallery && !monitor.isCanceled()) {
 					Enumeration entries;
 					ZipFile zipFile;
 
-					zipFile = new ZipFile(aliceHome + System.getProperty( "file.separator" ) + "EnglishGallery.zip");
+					zipFile = new ZipFile(aliceHome + System.getProperty( "file.separator" ) + file);
 					entries = zipFile.entries();
 					
 					monitor.setNote("Copying models to Alice gallery");
@@ -5582,7 +5565,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							continue;
 						}
 						InputStream in = zipFile.getInputStream(entry);
-						OutputStream out = new BufferedOutputStream(new FileOutputStream(aliceHome + System.getProperty( "file.separator" )+entry.getName()));
+						OutputStream out = new BufferedOutputStream(new FileOutputStream(aliceHome + System.getProperty( "file.separator" ) + entry.getName()));
 						byte[] buffer = new byte[1024];
 						int len;
 						while ((len = in.read(buffer)) >= 0)
@@ -5592,68 +5575,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						monitor.setProgress(progress++);
 					}
 					zipFile.close();
-					new File(aliceHome + System.getProperty( "file.separator" )+"EnglishGallery.zip").delete();
+					new File(aliceHome + System.getProperty( "file.separator" ) + file).delete();
 	        	}
-	        	if (SpanishGallery && !monitor.isCanceled()){
-	        		StringBuffer sb = new StringBuffer( "http://www.cs.purdue.edu/homes/aik_min/SpanishGallery.zip" ); //$NON-NLS-1$
-
-					java.net.URL url = new java.net.URL( sb.toString() );
-					java.net.URLConnection urlc = url.openConnection();
-					
-					monitor.setMaximum(urlc.getContentLength());
-
-					java.io.File aliceHome = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
-							+ System.getProperty( "file.separator" ) + "Spanish");
-					if (!aliceHome.exists()){
-						aliceHome.mkdir();
-					}
-
-					bis = new java.io.BufferedInputStream( urlc.getInputStream() );
-					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome + System.getProperty( "file.separator" ) + "SpanishGallery.zip"));
-					
-					monitor.setNote("Downloading Spanish gallery");
-					int i, progress = 0;
-					while ((i = bis.read()) != -1) {
-						bos.write( i );
-						if (monitor.isCanceled()) {
-							break;
-						} else {
-							monitor.setProgress(progress++);
-						}
-					}
-					bis.close();
-					bos.close();
-					Enumeration entries;
-					ZipFile zipFile;
-
-					zipFile = new ZipFile(aliceHome + System.getProperty( "file.separator" ) + "SpanishGallery.zip");
-					entries = zipFile.entries();
-					
-					monitor.setNote("Copying models to Alice gallery");
-					monitor.setMaximum(zipFile.size());
-					progress = 0;
-					
-					while (entries.hasMoreElements()) {
-						ZipEntry entry = (ZipEntry) entries.nextElement();
-						if (entry.isDirectory()) {
-							(new File(aliceHome + System.getProperty( "file.separator" )+entry.getName())).mkdir();
-							continue;
-						}
-						InputStream in = zipFile.getInputStream(entry);
-						OutputStream out = new BufferedOutputStream(new FileOutputStream(aliceHome + System.getProperty( "file.separator" )+entry.getName()));
-						byte[] buffer = new byte[1024];
-						int len;
-						while ((len = in.read(buffer)) >= 0)
-							out.write(buffer, 0, len);
-						in.close();
-						out.close();				
-						monitor.setProgress(progress++);
-					}
-					zipFile.close();
-					new File(aliceHome + System.getProperty( "file.separator" )+"SpanishGallery.zip").delete();
-	        	}
-	        } catch (Exception e1) {
-	        	javax.swing.JOptionPane.showMessageDialog(null, Messages.getString("AuthoringTool.510"), Messages.getString("AuthoringTool.511"), javax.swing.JOptionPane.ERROR_MESSAGE ); //$NON-NLS-1$ //$NON-NLS-2$
+	        } catch ( java.io.FileNotFoundException e){
+	        	javax.swing.JOptionPane.showMessageDialog(null, "File not found", "File not found", javax.swing.JOptionPane.ERROR_MESSAGE );
+			} catch (Exception e1) {
+	        	javax.swing.JOptionPane.showMessageDialog(null, Messages.getString("AuthoringTool.510"), Messages.getString("AuthoringTool.511"), javax.swing.JOptionPane.ERROR_MESSAGE );  
 	        } finally {
 	        	if (bis != null)
 	            try {
@@ -5668,20 +5595,17 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				    ioe.printStackTrace();
 				}             
 	        	if (monitor.isCanceled()) {
-	        		java.io.File temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar");
-	        		if (temp.exists())
-	        			temp.delete();
-	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
-							+ System.getProperty( "file.separator" ) + "English" + System.getProperty( "file.separator" ) + "EnglishGallery.zip");
-	        		if (temp.exists())
-	        			temp.delete();	
-	        		temp = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" 
-							+ System.getProperty( "file.separator" ) + "Spanish" + System.getProperty( "file.separator" ) + "SpanishGallery.zip");
-	        		if (temp.exists())
-	        			temp.delete();	        		
+	        		java.io.File temp;
+	        		if ( isGallery ) {
+	        			temp = new java.io.File( dest + System.getProperty( "file.separator" ) + file);
+	        		} else {
+	        			temp = new java.io.File( dest );
+	        		}
+	        		if ( temp.exists() )
+	        			temp.delete();        		
 	        	} else {
 					Object[] options = {Messages.getString("AuthoringTool.512"), Messages.getString("AuthoringTool.513")};
-					int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("AuthoringTool.508"), Messages.getString("AuthoringTool.509"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] ); //$NON-NLS-1$ //$NON-NLS-2$
+					int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("AuthoringTool.508"), Messages.getString("AuthoringTool.509"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] );  
 					if (result == ContentPane.OK_OPTION){
 						monitor.close();
 						quit(true);
@@ -5692,44 +5616,5 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	        }
 		}
 	}
-  	
-//	public class StatusPulsing implements Runnable {
-//		private JLabel label;
-//
-//		private String text;
-//		
-//		public StatusPulsing(JLabel l, String s) {
-//			label = l;
-//			text = s;
-//		}
-//
-//		public void run() {
-//
-//			long time = 300;
-//			while (AuthoringTool.pulsing) {
-//				label.setText(text);
-//				try {
-//					Thread.sleep(time);
-//				} catch (InterruptedException e) {
-//				}
-//				label.setText(text + "."); //$NON-NLS-1$
-//				try {
-//					Thread.sleep(time);
-//				} catch (InterruptedException e) {
-//				}
-//				label.setText(text + ". ."); //$NON-NLS-1$
-//				try {
-//					Thread.sleep(time);
-//				} catch (InterruptedException e) {
-//				}
-//				label.setText(text + ". . ."); //$NON-NLS-1$
-//				try {
-//					Thread.sleep(time);
-//				} catch (InterruptedException e) {
-//				}
-//			}
-//		}
-//
-//	}
-	
+  
 }

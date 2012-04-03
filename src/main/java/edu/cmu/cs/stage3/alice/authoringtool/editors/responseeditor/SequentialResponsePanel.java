@@ -48,12 +48,10 @@ public class SequentialResponsePanel extends CompositeResponsePanel {
         super.set(r, authoringToolIn);
     }
 
-    
 	protected java.awt.Color getCustomBackgroundColor(){
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoInOrder");
     }
 
-    
 	protected void updateGUI(){
         super.updateGUI();
     }

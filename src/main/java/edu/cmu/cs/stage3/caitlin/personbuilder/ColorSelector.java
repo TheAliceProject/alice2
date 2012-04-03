@@ -81,7 +81,7 @@ public class ColorSelector extends javax.swing.JPanel implements java.awt.event.
 		otherColorPanel.setBackground(new java.awt.Color(155, 159, 206));
 		otherColorPanel.setLayout(new java.awt.FlowLayout());
 
-		otherColorsButton = new javax.swing.JButton(Messages.getString("ColorSelector.0")); //$NON-NLS-1$
+		otherColorsButton = new javax.swing.JButton(Messages.getString("ColorSelector.0")); 
 		otherColorsButton.addActionListener(this);
 		otherColorsButton.setEnabled(false);
 
@@ -97,7 +97,7 @@ public class ColorSelector extends javax.swing.JPanel implements java.awt.event.
 			if( colorChooser == null ) {
 				colorChooser = new javax.swing.JColorChooser();
 			}
-			java.awt.Color selectedColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("ColorSelector.1"), skinColor ); //$NON-NLS-1$
+			java.awt.Color selectedColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("ColorSelector.1"), skinColor ); 
 			if (selectedColor != null)
 				modelWrapper.setColor(selectedColor);
 		} else if (ae.getSource() == otherColorsRadio) {

@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
 import edu.cmu.cs.stage3.alice.core.SpatialRelation;
 import edu.cmu.cs.stage3.alice.core.Transformable;

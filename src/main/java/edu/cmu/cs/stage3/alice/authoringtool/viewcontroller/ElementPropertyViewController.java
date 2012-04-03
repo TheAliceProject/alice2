@@ -55,22 +55,18 @@ public class ElementPropertyViewController extends PropertyViewController {
 		this.root = root;
 	}
 
-	
 	protected void updatePopupStructure() {
 		popupStructure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePropertyStructure( property, factory, includeDefaults, allowExpressions, includeOther, root );
 	}
 
-	
 	protected java.awt.Component getNativeComponent() {
 		return elementLabel;
 	}
 
-	
 	protected Class getNativeClass() {
 		return edu.cmu.cs.stage3.alice.core.Element.class;
 	}
 
-	
 	protected void updateNativeComponent() {
 		elementLabel.setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameInContext( (edu.cmu.cs.stage3.alice.core.Element)property.get(), property.getOwner() ) );
 	}

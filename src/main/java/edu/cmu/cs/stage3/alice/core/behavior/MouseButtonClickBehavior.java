@@ -53,7 +53,6 @@ public class MouseButtonClickBehavior extends TriggerBehavior implements java.aw
 	public long m_clickTimeThreshold = 300;
 	public int m_clickDistanceThresholdSquared = 100;
 
-	
 	public void manufactureAnyNecessaryDetails() {
 		if( details.size()==2 ) {
 			Question what = new PickQuestion();

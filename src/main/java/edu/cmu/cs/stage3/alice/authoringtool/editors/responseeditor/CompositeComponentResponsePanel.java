@@ -45,7 +45,6 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
         super.set(elements, owner, authoringToolIn);
     }
 
-    
 	protected java.awt.Component makeGUI(edu.cmu.cs.stage3.alice.core.Element currentElement){
         javax.swing.JComponent toAdd = null;
         if (currentElement instanceof edu.cmu.cs.stage3.alice.core.Response){
@@ -68,7 +67,6 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
         }
     }
 
-    
 	public void dragOver( java.awt.dnd.DropTargetDragEvent dtde ) {
         java.awt.Component sourceComponent = edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.getCurrentDragComponent();
         int action = dtde.getDropAction();
@@ -167,7 +165,6 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
         }
     }
 
-    
 	public void drop( final java.awt.dnd.DropTargetDropEvent dtde ) {
         HACK_started = false;
         boolean successful = true;
@@ -184,7 +181,6 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
         java.awt.datatransfer.Transferable transferable = dtde.getTransferable();
 
         if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CopyFactoryTransferable.copyFactoryFlavor ) ) {
-            // Copy item from clip board
             try {
                 edu.cmu.cs.stage3.alice.core.CopyFactory copyFactory = (edu.cmu.cs.stage3.alice.core.CopyFactory)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CopyFactoryTransferable.copyFactoryFlavor );
                 Class valueClass = copyFactory.getValueClass();
@@ -201,13 +197,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     dtde.rejectDrop();
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.0"), e ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.0"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.1"), e ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.1"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.2"), t ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.2"), t ); 
                 successful = false;
             }
         }
@@ -231,13 +227,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     successful = true;
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.3"), e ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.3"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.4"), e ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.4"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.5"), t ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.5"), t ); 
                 successful = false;
             }
         }
@@ -291,13 +287,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                         edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
                     }
                 } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.6"), e ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.6"), e ); 
                     successful = false;
                 } catch( java.io.IOException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.7"), e ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.7"), e ); 
                     successful = false;
                 } catch( Throwable t ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.8"), t ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.8"), t ); 
                     successful = false;
                 }
             }
@@ -318,12 +314,12 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     edu.cmu.cs.stage3.alice.core.Property property = (edu.cmu.cs.stage3.alice.core.Property)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.PropertyReferenceTransferable.propertyReferenceFlavor );
                     if (property instanceof edu.cmu.cs.stage3.alice.core.property.VehicleProperty){
                         //System.out.println("new vehicle animation");
-                        edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair(AikMin.getProperty("duration"), new Double(0))}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair(AikMin.getProperty("duration"), new Double(0))};   
                         known = newKnown;
                         animationClass = edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class;
                     }
                     else{
-                        edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName())}; //$NON-NLS-1$ //$NON-NLS-2$
+                        edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName())};  
                         known = newKnown;
                         animationClass = edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class;
                     }
@@ -344,7 +340,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                             };
                         }
                     };
-                    String[] desired = {"value"}; //$NON-NLS-1$
+                    String[] desired = {"value"}; 
                     //   System.out.println("class: "+ animationClass +", known: "+known+", desired: "+desired);
                     edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype rp = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(animationClass, known, desired);
                     java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePrototypeStructure( rp, factory, componentElements.getOwner()  );
@@ -354,13 +350,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     popup.show(dtde.getDropTargetContext().getComponent(), (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
                     edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
                 } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.15"), e ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.15"), e ); 
                     successful = false;
                 } catch( java.io.IOException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.16"), e ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.16"), e ); 
                     successful = false;
                 } catch( Throwable t ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.17"), t ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.17"), t ); 
                     successful = false;
                 }
             }
@@ -406,13 +402,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                         edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
                     }
                 } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.18"), e ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.18"), e ); 
                     successful = false;
                 } catch( java.io.IOException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.19"), e ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.19"), e ); 
                     successful = false;
                 } catch( Throwable t ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.20"), t ); //$NON-NLS-1$
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.20"), t ); 
                     successful = false;
                 }
             }
@@ -478,13 +474,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     }
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.21"), e ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.21"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.22"), e ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.22"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.23"), t ); //$NON-NLS-1$
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.23"), t ); 
                 successful = false;
             }
         }else{

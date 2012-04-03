@@ -19,7 +19,6 @@ public class IsCollidingBehavior extends AbstractConditionalBehavior {
     private java.util.Vector m_a = new java.util.Vector();
     private java.util.Vector m_b = new java.util.Vector();
 
-	
 	protected void started( World world, double time ) {
 		super.started( world, time );
         m_world = world;
@@ -43,7 +42,6 @@ public class IsCollidingBehavior extends AbstractConditionalBehavior {
             m_world.addCollisionManagementFor( (Transformable)m_b.elementAt( i ) );
         }
 	}
-	
 	protected void stopped( World world, double time ) {
 		super.stopped( world, time );
         if( m_world != world ) {
