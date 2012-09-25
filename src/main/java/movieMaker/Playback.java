@@ -1,6 +1,12 @@
 package movieMaker;
 
-import javax.sound.sampled.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
 
 /**
  * The class <code>Playback</code> extends from <code>Thread</code>
@@ -100,7 +106,7 @@ public void run()
     AudioInputStream audioInputStream = sound.makeAIS();
     if(audioInputStream == null)
     {
-      shutDown(Messages.getString("Playback.0"), null); 
+      shutDown(Messages.getString("There_is_no_input_stream_to_play"), null); 
       return;
     }
     
@@ -108,7 +114,7 @@ public void run()
     try {
       audioInputStream.reset();
     } catch(Exception e) {
-      shutDown(Messages.getString("Playback.1"), e); 
+      shutDown(Messages.getString("Problems_resetting_the_stream_n"), e); 
       return;
     }
     
@@ -118,7 +124,7 @@ public void run()
                                            audioFileFormat.getFormat());
     if(!AudioSystem.isLineSupported(info))
     {
-      shutDown(Messages.getString("Playback.2") + info + Messages.getString("Playback.3"), null);  
+      shutDown(Messages.getString("Line_matching_") + info + Messages.getString("not_supported_"), null);  
       return;
     }
     
@@ -129,7 +135,7 @@ public void run()
         line.addLineListener(soundExplorer);
       line.open(audioFileFormat.getFormat(), BUFFER_SIZE);
     } catch(LineUnavailableException e) {
-      shutDown(Messages.getString("Playback.4"), e); 
+      shutDown(Messages.getString("Unable_to_open_the_line__"), e); 
       return;
     }
     
@@ -160,7 +166,7 @@ public void run()
             line.write(data, 0, numBytesRemaining);
         }//while
       } catch(Exception e) {
-        shutDown(Messages.getString("Playback.5"), e); 
+        shutDown(Messages.getString("Error_during_playback__"), e); 
         break;
       }//catch
     }//while
@@ -176,7 +182,7 @@ public void run()
     line = null;
     shutDown(null, null);
     if(sound.getDEBUG())
-      System.out.println(Messages.getString("Playback.6")); 
+      System.out.println(Messages.getString("exiting_run_method")); 
     /*
      this thread is about to die.  remove itself from the collection
      of threads playing this sound

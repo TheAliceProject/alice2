@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core;
 
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.math.Box;
 import edu.cmu.cs.stage3.math.EulerAngles;
 import edu.cmu.cs.stage3.math.Matrix33;
@@ -293,7 +294,7 @@ public abstract class ReferenceFrame extends Sandbox {
 			} else if( dimension==Dimension.FRONT_TO_BACK ) {
 				return box.getDepth();
 			} else {
-				throw new IllegalArgumentException( dimension + Messages.getString("ReferenceFrame.3") ); 
+				throw new IllegalArgumentException( dimension + Messages.getString("_is_expected_to_be_in__LEFT_TO_RIGHT__TOP_TO_BOTTOM__FRONT_TO_BACK__") ); 
 			}
 		} else {
 			//todo: Double.NaN?

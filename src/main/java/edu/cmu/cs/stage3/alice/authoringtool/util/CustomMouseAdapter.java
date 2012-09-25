@@ -67,7 +67,7 @@ public class CustomMouseAdapter extends java.awt.event.MouseAdapter {
 
 		pressPoint.setLocation( ev.getPoint() );
 		pressTime = System.currentTimeMillis();
-		if( ev.isPopupTrigger() ) {
+		if( ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3 ) {
 			popupResponse( ev );
 		} else {
 			mouseDownResponse( ev );
@@ -75,7 +75,7 @@ public class CustomMouseAdapter extends java.awt.event.MouseAdapter {
 	}
 
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
-		if( ev.isPopupTrigger() ) {
+		if( ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3 ) {
 			popupResponse( ev );
 		} else {
 			mouseUpResponse( ev );

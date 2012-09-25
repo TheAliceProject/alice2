@@ -23,9 +23,20 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 /**
  * @author Jason Pratt, Dennis Cosgrove
@@ -40,64 +51,106 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	public String getTitle() {
-		return Messages.getString("WorldInfoContentPane.0"); 
+		return Messages.getString("World_Statistics");
 	}
 
 	private void guiInit() {
-		setSize( 500, 600 );
+		setSize(500, 600);
 		responseUsageGraph = new edu.cmu.cs.stage3.alice.authoringtool.util.ElementUsageGraph();
-		responseUsageGraph.setElementCriterion( new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( edu.cmu.cs.stage3.alice.core.Response.class ) );
-		this.responseUsagePanel.add( responseUsageGraph, java.awt.BorderLayout.CENTER );
+		responseUsageGraph
+				.setElementCriterion(new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
+						edu.cmu.cs.stage3.alice.core.Response.class));
+		this.responseUsagePanel.add(responseUsageGraph,
+				java.awt.BorderLayout.CENTER);
 	}
 
-	public void setWorld( edu.cmu.cs.stage3.alice.core.World world ) {
+	public void setWorld(edu.cmu.cs.stage3.alice.core.World world) {
 		this.world = world;
-		responseUsageGraph.setRoot( world );
+		responseUsageGraph.setRoot(world);
 		refresh();
 	}
 
 	private void refresh() {
-		if( world != null ) {
+		if (world != null) {
 			edu.cmu.cs.stage3.alice.core.util.IndexedTriangleArrayCounter itaCounter = new edu.cmu.cs.stage3.alice.core.util.IndexedTriangleArrayCounter();
 			edu.cmu.cs.stage3.alice.core.util.TextureMapCounter textureMapCounter = new edu.cmu.cs.stage3.alice.core.util.TextureMapCounter();
 
-			world.visit( itaCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
-			world.visit( textureMapCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
+			world.visit(itaCounter,
+					edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
+			world.visit(textureMapCounter,
+					edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
 
 			int playCount = 0;
 			int saveCount = 0;
 			long worldOpenTime = 0;
 
-			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.playCount" ) != null ) { 
-				playCount = Integer.parseInt( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.playCount" ) ); 
+			if (world.data
+					.get("edu.cmu.cs.stage3.alice.authoringtool.playCount") != null) {
+				playCount = Integer
+						.parseInt((String) world.data
+								.get("edu.cmu.cs.stage3.alice.authoringtool.playCount"));
 			}
-			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.saveCount" ) != null ) { 
-				saveCount = Integer.parseInt( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.saveCount" ) ); 
+			if (world.data
+					.get("edu.cmu.cs.stage3.alice.authoringtool.saveCount") != null) {
+				saveCount = Integer
+						.parseInt((String) world.data
+								.get("edu.cmu.cs.stage3.alice.authoringtool.saveCount"));
 			}
-			if( world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime" ) != null ) { 
-				worldOpenTime = Long.parseLong( (String)world.data.get( "edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime" ) ); 
+			if (world.data
+					.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime") != null) {
+				worldOpenTime = Long
+						.parseLong((String) world.data
+								.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime"));
 			}
 			worldOpenTime /= 60000L;
 
-			objectCountLabel.setText( Messages.getString("WorldInfoContentPane.7") + itaCounter.getShownIndexedTriangleArrayCount() ); 
-			polyCountLabel.setText( Messages.getString("WorldInfoContentPane.8") + (itaCounter.getShownIndexCount() / 3) ); 
-			textureCountLabel.setText( Messages.getString("WorldInfoContentPane.9") + textureMapCounter.getTextureMapCount() ); 
-			textureMemoryLabel.setText( Messages.getString("WorldInfoContentPane.10") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.formatMemorySize( textureMapCounter.getTextureMapMemoryCount() ) ); 
-			userDefinedResponseCountLabel.setText( Messages.getString("WorldInfoContentPane.11") + world.getDescendants( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class ).length ); 
-			userDefinedQuestionCountLabel.setText( Messages.getString("WorldInfoContentPane.12") + world.getDescendants( edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class ).length ); 
-			behaviorCountLabel.setText( Messages.getString("WorldInfoContentPane.13") + world.getDescendants( edu.cmu.cs.stage3.alice.core.Behavior.class ).length ); 
-			playCountLabel.setText( Messages.getString("WorldInfoContentPane.14") + playCount ); 
-			saveCountLabel.setText( Messages.getString("WorldInfoContentPane.15") + saveCount ); 
-			worldOpenTimeLabel.setText( Messages.getString("WorldInfoContentPane.16") + worldOpenTime + ((worldOpenTime == 1) ? Messages.getString("WorldInfoContentPane.17") : Messages.getString("WorldInfoContentPane.18")) );   
-			currentRendererLabel.setText(Messages.getString("WorldInfoContentPane.19")+edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getCurrentRendererText()); 
+			objectCountLabel.setText(Messages
+					.getString("Number_of_3D_objects__")
+					+ itaCounter.getShownIndexedTriangleArrayCount());
+			polyCountLabel.setText(Messages.getString("Number_of_polygons__")
+					+ (itaCounter.getShownIndexCount() / 3));
+			textureCountLabel.setText(Messages
+					.getString("Number_of_textures__")
+					+ textureMapCounter.getTextureMapCount());
+			textureMemoryLabel
+					.setText(Messages.getString("Texture_memory_used__")
+							+ edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources
+									.formatMemorySize(textureMapCounter
+											.getTextureMapMemoryCount()));
+			userDefinedResponseCountLabel
+					.setText(Messages
+							.getString("Number_of_user_defined_animations__")
+							+ world.getDescendants(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class).length);
+			userDefinedQuestionCountLabel
+					.setText(Messages
+							.getString("Number_of_user_defined_questions__")
+							+ world.getDescendants(edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class).length);
+			behaviorCountLabel
+					.setText(Messages.getString("Number_of_behaviors__")
+							+ world.getDescendants(edu.cmu.cs.stage3.alice.core.Behavior.class).length);
+			playCountLabel.setText(Messages
+					.getString("Number_of_times_the_world_has_been_run__")
+					+ playCount);
+			saveCountLabel.setText(Messages
+					.getString("Number_of_times_the_world_has_been_saved__")
+					+ saveCount);
+			worldOpenTimeLabel.setText(Messages
+					.getString("Amount_of_time_the_world_has_been_open__")
+					+ worldOpenTime + " "
+					+ ((worldOpenTime == 1) ? Messages.getString("_minute")
+							: Messages.getString("_minutes")));
+			currentRendererLabel.setText(Messages
+					.getString("Current_renderer__")
+					+ edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool
+							.getHack().getCurrentRendererText());
 
 			responseUsageGraph.refresh();
 		}
 	}
 
-	///////////////////
+	// /////////////////
 	// Autogenerated
-	///////////////////
+	// /////////////////
 
 	Border border1;
 	BorderLayout borderLayout1 = new BorderLayout();
@@ -125,73 +178,93 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	JLabel userDefinedQuestionCountLabel = new JLabel();
 
 	private void jbInit() {
-		border1 = BorderFactory.createEmptyBorder(8,8,8,8);
-		border2 = BorderFactory.createEmptyBorder(8,8,8,8);
+		border1 = BorderFactory.createEmptyBorder(8, 8, 8, 8);
+		border2 = BorderFactory.createEmptyBorder(8, 8, 8, 8);
 		component1 = Box.createGlue();
 		setBackground(new Color(232, 230, 255));
 		setLayout(borderLayout1);
 		buttonPanel.setOpaque(false);
 		buttonPanel.setLayout(gridBagLayout1);
-		doneButton.setText(Messages.getString("WorldInfoContentPane.20")); 
-		textureMemoryLabel.setText(Messages.getString("WorldInfoContentPane.21")); 
+		doneButton.setText(Messages.getString("Done"));
+		textureMemoryLabel.setText(Messages.getString("Texture_memory_used__"));
 		mainPanel.setBorder(border2);
 		mainPanel.setOpaque(false);
 		mainPanel.setLayout(gridBagLayout2);
-		responseUsageLabel.setText(Messages.getString("WorldInfoContentPane.22")); 
-		objectCountLabel.setText(Messages.getString("WorldInfoContentPane.23")); 
-		polyCountLabel.setText(Messages.getString("WorldInfoContentPane.24")); 
+		responseUsageLabel.setText(Messages.getString("Animation_usage_"));
+		objectCountLabel.setText(Messages.getString("Number_of_3D_objects__"));
+		polyCountLabel.setText(Messages.getString("Number_of_polygons__"));
 		responseUsagePanel.setOpaque(false);
 		responseUsagePanel.setLayout(borderLayout2);
-		behaviorCountLabel.setText(Messages.getString("WorldInfoContentPane.25")); 
-		userDefinedResponseCountLabel.setText(Messages.getString("WorldInfoContentPane.26")); 
+		behaviorCountLabel.setText(Messages.getString("Number_of_behaviors__"));
+		userDefinedResponseCountLabel.setText(Messages
+				.getString("Number_of_user_defined_animations_"));
 		mainScrollPane.getViewport().setBackground(new Color(232, 230, 255));
 		mainScrollPane.setOpaque(false);
-		textureCountLabel.setText(Messages.getString("WorldInfoContentPane.27")); 
-		playCountLabel.setText(Messages.getString("WorldInfoContentPane.28")); 
-		saveCountLabel.setText(Messages.getString("WorldInfoContentPane.29")); 
-		worldOpenTimeLabel.setText(Messages.getString("WorldInfoContentPane.30")); 
-		userDefinedQuestionCountLabel.setText(Messages.getString("WorldInfoContentPane.31")); 
+		textureCountLabel.setText(Messages.getString("Number_of_textures__"));
+		playCountLabel.setText(Messages
+				.getString("Number_of_times_the_world_has_been_run__"));
+		saveCountLabel.setText(Messages
+				.getString("Number_of_times_the_world_has_been_saved__"));
+		worldOpenTimeLabel.setText(Messages
+				.getString("Amount_of_time_the_world_has_been_open__"));
+		userDefinedQuestionCountLabel.setText(Messages
+				.getString("Number_of_user_defined_questions__"));
 		add(buttonPanel, BorderLayout.SOUTH);
-		buttonPanel.add(doneButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 0, 2, 0), 0, 0));
+		buttonPanel.add(doneButton, new GridBagConstraints(0, 0, 1, 1, 0.0,
+				0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
+				new Insets(2, 0, 2, 0), 0, 0));
 		add(mainScrollPane, BorderLayout.CENTER);
 		mainScrollPane.getViewport().add(mainPanel, null);
-		mainPanel.add(objectCountLabel,      new GridBagConstraints(0, 0, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(polyCountLabel,      new GridBagConstraints(0, 1, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(textureMemoryLabel,      new GridBagConstraints(0, 3, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(userDefinedResponseCountLabel,       new GridBagConstraints(0, 4, 2, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(behaviorCountLabel,       new GridBagConstraints(0, 6, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(responseUsageLabel,          new GridBagConstraints(0, 11, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(8, 0, 2, 0), 0, 0));
-		mainPanel.add(responseUsagePanel,       new GridBagConstraints(0, 12, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 4, 0), 0, 0));
-		mainPanel.add(component1,       new GridBagConstraints(0, 13, 2, 1, 1.0, 1.0
-			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		mainPanel.add(textureCountLabel,      new GridBagConstraints(0, 2, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(playCountLabel,         new GridBagConstraints(0, 7, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(saveCountLabel,     new GridBagConstraints(0, 8, 2, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(worldOpenTimeLabel,    new GridBagConstraints(0, 9, 1, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(currentRendererLabel,    new GridBagConstraints(0, 10, 1, 1, 1.0, 0.0
-					,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-			
-		mainPanel.add(userDefinedQuestionCountLabel,   new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(objectCountLabel, new GridBagConstraints(0, 0, 2, 1, 1.0,
+				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(polyCountLabel, new GridBagConstraints(0, 1, 2, 1, 1.0,
+				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(textureMemoryLabel, new GridBagConstraints(0, 3, 2, 1,
+				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(userDefinedResponseCountLabel, new GridBagConstraints(0,
+				4, 2, 1, 0.0, 0.0, GridBagConstraints.WEST,
+				GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(behaviorCountLabel, new GridBagConstraints(0, 6, 2, 1,
+				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(responseUsageLabel, new GridBagConstraints(0, 11, 2, 1,
+				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(8, 0, 2, 0), 0, 0));
+		mainPanel.add(responseUsagePanel, new GridBagConstraints(0, 12, 2, 1,
+				1.0, 0.0, GridBagConstraints.WEST,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 4, 0), 0, 0));
+		mainPanel.add(component1, new GridBagConstraints(0, 13, 2, 1, 1.0, 1.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+						0, 0, 0, 0), 0, 0));
+		mainPanel.add(textureCountLabel, new GridBagConstraints(0, 2, 2, 1,
+				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(playCountLabel, new GridBagConstraints(0, 7, 2, 1, 1.0,
+				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(saveCountLabel, new GridBagConstraints(0, 8, 2, 1, 1.0,
+				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(worldOpenTimeLabel, new GridBagConstraints(0, 9, 1, 1,
+				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(currentRendererLabel, new GridBagConstraints(0, 10, 1, 1,
+				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
+				new Insets(0, 0, 2, 0), 0, 0));
+
+		mainPanel.add(userDefinedQuestionCountLabel, new GridBagConstraints(0,
+				5, 2, 1, 0.0, 0.0, GridBagConstraints.WEST,
+				GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
 	}
 
-	public void addOKActionListener( java.awt.event.ActionListener l ) {
-		doneButton.addActionListener( l );
+	public void addOKActionListener(java.awt.event.ActionListener l) {
+		doneButton.addActionListener(l);
 	}
-	
-	public void removeOKActionListener( java.awt.event.ActionListener l ) {
-		doneButton.removeActionListener( l );
+
+	public void removeOKActionListener(java.awt.event.ActionListener l) {
+		doneButton.removeActionListener(l);
 	}
 }

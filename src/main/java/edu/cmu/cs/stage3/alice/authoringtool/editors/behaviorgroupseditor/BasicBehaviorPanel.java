@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * Title:
  * Description:
@@ -131,7 +133,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                     BasicBehaviorPanel.this.repaint();
                 }
             };
-            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("BasicBehaviorPanel.16"), setEnabled); 
+            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("disable"), setEnabled); 
         }
         else{
             Runnable setEnabled = new Runnable(){
@@ -140,7 +142,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                     BasicBehaviorPanel.this.repaint();
                 }
             };
-            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("BasicBehaviorPanel.17"), setEnabled); 
+            commentOut = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("enable"), setEnabled); 
         }
         popupStructure.add(commentOut);
         return edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.makeElementPopupMenu( m_behavior, popupStructure );
@@ -253,7 +255,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                 boolean shouldAllowExpressions = true;
                 Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(prop);
                 //Aik Min - When mouse is clicked on object under mouse cursor bug in create new event
-                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase(Messages.getString("BasicBehaviorPanel.19"))){  
+                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase("onWhat")){//Messages.getString("onWhat"))){  
                 	shouldAllowExpressions = false;
                 }
                 toAdd = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(prop, true, shouldAllowExpressions ,edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(prop), propPIF);
@@ -261,7 +263,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
             else{
                 toAdd = new javax.swing.JLabel(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue(key));
                 if (toAdd == null){
-                    toAdd = new javax.swing.JLabel(Messages.getString("BasicBehaviorPanel.20")); 
+                    toAdd = new javax.swing.JLabel(Messages.getString("_no_image_")); 
                 }
             }
             container.add(new javax.swing.JLabel(currentSubstring), new java.awt.GridBagConstraints(insertX,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));

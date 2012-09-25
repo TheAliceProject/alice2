@@ -27,6 +27,7 @@ import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.alice.core.property.Matrix44Property;
 import edu.cmu.cs.stage3.alice.core.property.VehicleProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class Transformable extends ReferenceFrame {
 	public final ElementArrayProperty parts = new ElementArrayProperty( this, "parts", null, Transformable[].class ); 
@@ -181,11 +182,11 @@ public class Transformable extends ReferenceFrame {
 			ReferenceFrame vehicleToBe = (ReferenceFrame)value;
 			if( vehicleToBe != null ) {
 				if( vehicleToBe==this ) {
-					throw new RuntimeException( this + Messages.getString("Transformable.0") ); 
+					throw new RuntimeException( this + Messages.getString("_cannot_be_its_own_vehicle_") ); 
 				}
 				//if( vehicleToBe.isDescendantOf( this ) ) {
 				if( vehicleToBe.getSceneGraphContainer().isDescendantOf( getSceneGraphContainer() ) ) {
-					throw new RuntimeException( this + Messages.getString("Transformable.1")+vehicleToBe+Messages.getString("Transformable.2") );  
+					throw new RuntimeException( this + Messages.getString("_cannot_have_a_scenegraph_descendant__")+vehicleToBe+Messages.getString("__as_its_vehicle_") );  
 				}
 			}
 		} else if( property == localTransformation ) {
@@ -664,7 +665,7 @@ public class Transformable extends ReferenceFrame {
         if( edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.NaN ) ||
             edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.POSITIVE_INFINITY ) ||
             edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.NEGATIVE_INFINITY ) ) {
-            throw new IllegalArgumentException( Messages.getString("Transformable.11") + size + Messages.getString("Transformable.12") + prevSize );  
+            throw new IllegalArgumentException( Messages.getString("size__") + size + Messages.getString("__previous_size__") + prevSize );  
         }
 		resizeRightNow( deltaSize, asSeenBy );
 	}
@@ -959,4 +960,3 @@ public class Transformable extends ReferenceFrame {
         m_pivotDecorator.markDirty();
 	}
 }
-

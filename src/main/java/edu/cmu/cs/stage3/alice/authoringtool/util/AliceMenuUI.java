@@ -23,10 +23,20 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.Timer;
+import javax.swing.event.MouseInputListener;
 
 /**
  * adapted from javax.swing.plaf.basic.BasicMenuUI to improve on popup menu behavior.

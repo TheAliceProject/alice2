@@ -30,13 +30,14 @@
 
 package movieMaker;
 
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.media.*;
-import javax.media.control.*;
-import javax.media.format.*;
-import jmapps.ui.*;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+import javax.media.Format;
+import javax.media.control.TrackControl;
+import javax.media.format.AudioFormat;
+import jmapps.ui.TrackPanel;
 
 public class TrackPanelAudio extends TrackPanel implements ActionListener {
 
@@ -126,5 +127,3 @@ public class TrackPanelAudio extends TrackPanel implements ActionListener {
 
 
 }
-
-

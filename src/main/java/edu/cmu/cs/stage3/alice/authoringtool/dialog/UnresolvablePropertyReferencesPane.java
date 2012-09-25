@@ -23,16 +23,21 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-public class UnresolvablePropertyReferencesPane extends edu.cmu.cs.stage3.swing.ContentPane {
-	public UnresolvablePropertyReferencesPane( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
-		System.err.println( upre.getElement() );
-		edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] propertyReferences = upre.getPropertyReferences();
-		for( int i=0; i<propertyReferences.length; i++ ) {
-			System.err.println( propertyReferences[ i ] );
+import edu.cmu.cs.stage3.lang.Messages;
+
+public class UnresolvablePropertyReferencesPane extends
+		edu.cmu.cs.stage3.swing.ContentPane {
+	public UnresolvablePropertyReferencesPane(
+			edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre) {
+		System.err.println(upre.getElement());
+		edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] propertyReferences = upre
+				.getPropertyReferences();
+		for (int i = 0; i < propertyReferences.length; i++) {
+			System.err.println(propertyReferences[i]);
 		}
 	}
-	
+
 	public String getTitle() {
-		return Messages.getString("UnresolvablePropertyReferencesPane.0"); 
+		return Messages.getString("Unresolvable_References");
 	}
 }

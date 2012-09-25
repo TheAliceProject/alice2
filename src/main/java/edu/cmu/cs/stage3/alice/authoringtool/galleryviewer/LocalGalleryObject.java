@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author David Culyba
  *
@@ -33,7 +35,7 @@ public class LocalGalleryObject extends GalleryObject {
     public static final String tumbnailFilename = "thumbnail.png"; 
 
 	protected String getToolTipString(){
-        return Messages.getString("LocalGalleryObject.1"); 
+        return "<html><body><p>"+Messages.getString("Object")+"</p><p>"+Messages.getString("Click_to_add_this_object_to_the_world")+"</p></body></html>"; 
     }
 
 	protected void guiInit(){
@@ -43,7 +45,7 @@ public class LocalGalleryObject extends GalleryObject {
 				location = "CD-ROM"; 
 	        }
 	        else{    
-	        	location = Messages.getString("LocalGalleryObject.3"); 
+	        	location = Messages.getString("your_computer"); 
 	        }
     	}
     }
@@ -55,7 +57,7 @@ public class LocalGalleryObject extends GalleryObject {
 				location = "CD-ROM"; 
 			}
 			else{    
-				location = Messages.getString("LocalGalleryObject.5"); 
+				location = Messages.getString("your_computer"); 
 			}
 		}
 	}

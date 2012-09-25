@@ -1,10 +1,11 @@
 package movieMaker;
 
-import java.io.*;
-import java.util.*;
-import java.net.*;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import javax.imageio.ImageIO;
 
 /** 
  * Class to write out an AVI or Quicktime movie from

@@ -1,7 +1,7 @@
 package movieMaker;
 
-import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /** 
  * Interface for working with video capture 

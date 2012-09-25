@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -59,7 +61,7 @@ public class ResizeMode extends RenderTargetManipulatorMode {
 			}
 
 			if( pickedTransformable.poses.size() > 0 ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ResizeMode.0"), Messages.getString("ResizeMode.1"), javax.swing.JOptionPane.WARNING_MESSAGE );  
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Warning__resizing_objects_with_poses_may_make_those_poses_unusable_"), Messages.getString("Pose_warning"), javax.swing.JOptionPane.WARNING_MESSAGE );  
 			}
 		}
 	}

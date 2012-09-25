@@ -23,12 +23,18 @@
 
 package edu.cmu.cs.stage3.caitlin.stencilhelp.application;
 
-import edu.cmu.cs.stage3.caitlin.stencilhelp.client.*;
-import javax.swing.*;
-import java.awt.*;
-
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.util.Hashtable;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import edu.cmu.cs.stage3.caitlin.stencilhelp.client.StencilManager;
 
 /**
  * Title:        Show Me

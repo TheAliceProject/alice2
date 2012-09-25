@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -116,7 +118,7 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 						constraints.gridx++;
 						keys.remove( propertyName );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPrototypeDnDPanel.10") + token, null ); 
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("no_value_available_for_") + token, null ); 
 						addTile( token, true );
 						constraints.gridx++;
 					}

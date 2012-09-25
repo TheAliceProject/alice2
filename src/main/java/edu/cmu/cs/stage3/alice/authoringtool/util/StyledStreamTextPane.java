@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -124,7 +126,7 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 			};
 
 			java.util.Vector structure = new java.util.Vector();
-			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("StyledStreamTextPane.5"), clearAllRunnable ) ); 
+			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("Clear_All"), clearAllRunnable ) ); 
 
 			return PopupMenuUtilities.makePopupMenu( structure );
 		}
@@ -190,9 +192,9 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					dtde.getDropTargetContext().dropComplete( true );
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.6"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.7"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
 				}
 			}
 
@@ -204,9 +206,9 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					dtde.getDropTargetContext().dropComplete( true );
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.8"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.9"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
 				}
 			} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, java.awt.datatransfer.DataFlavor.getTextPlainUnicodeFlavor() ) ) {
 				try {
@@ -230,7 +232,7 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 								}
 								fileReader.close();
 							} catch( java.io.IOException e ) {
-								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.10"), e ); 
+								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_reading_file_"), e ); 
 							}
 						}
 					};
@@ -239,9 +241,9 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					dtde.getDropTargetContext().dropComplete( true );
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.11"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyledStreamTextPane.12"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
 				}
 			}
 			dtde.rejectDrop();
@@ -253,4 +255,3 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 		public void dragExit( java.awt.dnd.DropTargetEvent dte ) {}
 	}
 }
-

@@ -1053,4 +1053,3 @@ public class ComponentSampleModelJAI extends ComponentSampleModel {
         return ret;
     }
 }
-

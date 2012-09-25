@@ -24,7 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.property;
 
 import edu.cmu.cs.stage3.alice.core.Element;
-import edu.cmu.cs.stage3.alice.core.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class ImageProperty extends ObjectProperty {
 	public ImageProperty( Element owner, String name, java.awt.Image defaultValue ) {
@@ -80,7 +80,7 @@ public class ImageProperty extends ObjectProperty {
                 try {
                     storer.keepFile( filename );
                 } catch( edu.cmu.cs.stage3.io.KeepFileNotSupportedException kfnse ) {
-                    throw new Error( storer + Messages.getString("ImageProperty.3") + kfnse ); 
+                    throw new Error( storer + Messages.getString("_returns_true_for_isKeepFileSupported____but_then_throws_") + kfnse ); 
                 } catch( edu.cmu.cs.stage3.io.KeepFileDoesNotExistException kfdne ) {
                     throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( kfdne, filename );
                 }

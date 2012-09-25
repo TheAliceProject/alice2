@@ -23,9 +23,14 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
-import javax.swing.JPanel;
 import java.util.Vector;
-import org.w3c.dom.*;
+
+import javax.swing.JPanel;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class StringPropertySetter extends JPanel implements javax.swing.event.DocumentListener {
 	String propertyName = "";

@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -41,7 +42,7 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
 
     public WhileElementPanel(){
         super();
-        headerText = Messages.getString("WhileElementPanel.0"); 
+        headerText = Messages.getString("While"); 
         backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"); 
     }
 

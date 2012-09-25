@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.Direction;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class RotateAtSpeed extends DirectionSpeedTransformResponse {
 	
@@ -39,11 +40,11 @@ public abstract class RotateAtSpeed extends DirectionSpeedTransformResponse {
 			Direction directionValue = RotateAtSpeed.this.direction.getDirectionValue();
 			m_axis = getAxis( directionValue );
 			if( m_axis == null ) {
-				StringBuffer sb = new StringBuffer( Messages.getString("RotateAtSpeed.0") ); 
+				StringBuffer sb = new StringBuffer( Messages.getString("direction_value_must_not_be_") ); 
 				if( directionValue != null ) {
 					sb.append( directionValue.getRepr() );
 				} else {
-					sb.append( Messages.getString("RotateAtSpeed.1") ); 
+					sb.append( Messages.getString("null") ); 
 				}
 				sb.append( '.' );
 				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( sb.toString(), null, RotateAtSpeed.this.direction );

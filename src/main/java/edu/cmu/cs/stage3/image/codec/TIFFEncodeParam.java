@@ -97,7 +97,7 @@ public class TIFFEncodeParam implements ImageEncodeParam {
 
 	// Writing out compressed TIFF images is not implemented yet, 04/02/99.
 	if (compression != COMPRESSION_NONE) {
-	    throw new Error(JaiI18N.getString("TIFFEncodeParam0"));
+	    throw new Error(JaiI18N.getString("This_compression_scheme_is_not_implemented_yet_"));
 	}
 
 	if (compression != COMPRESSION_NONE &&
@@ -107,7 +107,7 @@ public class TIFFEncodeParam implements ImageEncodeParam {
 	    compression != COMPRESSION_GROUP4 &&
 	    compression != COMPRESSION_LZW) {
 
-	    throw new Error(JaiI18N.getString("TIFFEncodeParam1"));
+	    throw new Error(JaiI18N.getString("Unsupported_compression_scheme_specified_"));
 	}
 
 	this.compression = compression;
@@ -131,7 +131,7 @@ public class TIFFEncodeParam implements ImageEncodeParam {
 
 	// Currently only writing out in strips is implemented
 	if (writeTiled == true) {
-	    throw new Error(JaiI18N.getString("TIFFEncodeParam2"));
+	    throw new Error(JaiI18N.getString("Writing_out_Tiled_TIFF_images_is_not_implemented_yet_"));
 	}
 
 	this.writeTiled = writeTiled;

@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.io;
 
-import edu.cmu.cs.stage3.alice.scenegraph.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class OBJ {
 	private static double getNextNumber( java.io.StreamTokenizer streamTokenizer ) {
@@ -135,7 +135,7 @@ public class OBJ {
 				indices[i++] = ((Integer)face.elementAt( 6 )).intValue();
 				break;
 			default:
-				throw new RuntimeException( Messages.getString("OBJ.5") ); 
+				throw new RuntimeException( Messages.getString("unhandled_face_index_size") ); 
 			}
 		}
 		Object[] array = { vertices, indices };

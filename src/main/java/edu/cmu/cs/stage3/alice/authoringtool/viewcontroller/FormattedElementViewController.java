@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.SwingConstants;
 
 /**
@@ -91,7 +92,7 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 		moreTile.setLayout( new java.awt.BorderLayout() );
 		moreTile.setOpaque( false );
 		moreTile.setBorder( null );
-		javax.swing.JLabel moreLabel = new javax.swing.JLabel( Messages.getString("FormattedElementViewController.0"), edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "popupArrow" ), SwingConstants.LEADING );  
+		javax.swing.JLabel moreLabel = new javax.swing.JLabel( Messages.getString("more___"), edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "popupArrow" ), SwingConstants.LEADING );  
 		moreLabel.setHorizontalTextPosition( SwingConstants.LEADING );
 		moreLabel.setIconTextGap( 2 );
 		moreTile.add( moreLabel, java.awt.BorderLayout.CENTER );

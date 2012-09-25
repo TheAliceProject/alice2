@@ -24,18 +24,33 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.*;
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources;
+import edu.cmu.cs.stage3.alice.authoringtool.Editor;
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 // Referenced classes of package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor:
 //            TempColorPicker, MainCompositeElementPanel, CompositeElementPanel
@@ -204,7 +219,7 @@ public abstract class CompositeElementEditor extends GroupingPanel
             }
         } else
         {
-            JLabel emptyLabel = new JLabel(Messages.getString("CompositeElementEditor.6")); 
+            JLabel emptyLabel = new JLabel(Messages.getString("Not_an_editable_element")); 
             emptyLabel.setFont(emptyLabel.getFont().deriveFont(2));
             JPanel emptyPanel = new JPanel();
             emptyPanel.setLayout(new GridBagLayout());
@@ -343,7 +358,7 @@ public abstract class CompositeElementEditor extends GroupingPanel
     }
 
 
-    public final String editorName = Messages.getString("CompositeElementEditor.8"); 
+    public final String editorName = Messages.getString("Composite_Editor"); 
     protected Element elementBeingEdited;
     protected MainCompositeElementPanel compositeElementPanel;
     protected JPanel mainElementContainer;

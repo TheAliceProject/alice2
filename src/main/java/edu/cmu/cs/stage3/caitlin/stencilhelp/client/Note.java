@@ -1,19 +1,22 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
-import java.util.Vector;
-import java.awt.Rectangle;
-import java.awt.Point;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.geom.Line2D;
-import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.font.TextLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
-import org.w3c.dom.*;
+import java.awt.geom.Line2D;
+import java.awt.geom.RoundRectangle2D;
+import java.util.Vector;
+
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class Note implements StencilObject, MouseEventListener, KeyEventListener, StencilObjectPositionListener,
   ReadWriteListener, LayoutChangeListener{

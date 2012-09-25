@@ -23,10 +23,17 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import javax.swing.*;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
 import javax.swing.event.MouseInputListener;
-import java.awt.*;
-import java.awt.event.*;
 
 /**
  * @author Jason Pratt

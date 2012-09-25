@@ -24,7 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.property;
 
 import edu.cmu.cs.stage3.alice.core.Element;
-import edu.cmu.cs.stage3.alice.core.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class DictionaryProperty extends ObjectProperty {
 	public DictionaryProperty( Element owner, String name, java.util.Dictionary defaultValue ) {
@@ -42,7 +42,7 @@ public class DictionaryProperty extends ObjectProperty {
 				Object[] parameters = { text };
 				return valueOfMethod.invoke( null, parameters );
 			} else {
-				throw new RuntimeException( Messages.getString("DictionaryProperty.1") ); 
+				throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") ); 
 			}
 		} catch( NoSuchMethodException nsme ) {
 			nsme.printStackTrace();

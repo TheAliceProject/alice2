@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * Title:
@@ -69,7 +71,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(labelPanel));
 		labelPanel.add(lastLabel, new java.awt.GridBagConstraints(labelPanel.getComponentCount(),0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
 		toWriteTo.append(strikeEnd+"</td>\n</tr>\n"); 
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("TriggerBehaviorPanel.0")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("_b_Do___b_")+strikeEnd+"</td>\n");    //$NON-NLS-4$
 		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(triggerPanel));
 		toWriteTo.append("</table>\n</td>\n</tr>\n"); 
@@ -122,7 +124,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         	lastLabel.setText(","); 
         }
         else{
-			lastLabel.setText(Messages.getString("TriggerBehaviorPanel.18")); 
+			lastLabel.setText(Messages.getString("___do")); 
         }
 		labelPanel.add(lastLabel, new java.awt.GridBagConstraints(x,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory triggerFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse);
@@ -130,7 +132,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         triggerPanel.addComponentListener(this);
         m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         if (isSecondLine){
-            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("TriggerBehaviorPanel.19")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); 
+            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("do_")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); 
             m_containingPanel.add(triggerPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         }
         else{

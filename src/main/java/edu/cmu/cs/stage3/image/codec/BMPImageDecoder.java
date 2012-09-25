@@ -67,7 +67,7 @@ public class BMPImageDecoder extends ImageDecoderImpl {
     
 	public RenderedImage decodeAsRenderedImage(int page) throws IOException {
         if (page != 0) {
-            throw new IOException(JaiI18N.getString("BMPImageDecoder8"));
+            throw new IOException(JaiI18N.getString("Illegal_page_requested_from_a_BMP_file_"));
         }
         return new BMPImage(input);
     }
@@ -143,7 +143,7 @@ class BMPImage extends SimpleRenderedImage {
 	    if (!(readUnsignedByte(inputStream) == 'B' &&
  		  readUnsignedByte(inputStream) == 'M')) {
 		throw new
-		    RuntimeException(JaiI18N.getString("BMPImageDecoder0"));
+		    RuntimeException(JaiI18N.getString("Invalid_magic_value_for_BMP_file"));
 	    }
 
 	    // Read file size
@@ -310,7 +310,7 @@ class BMPImage extends SimpleRenderedImage {
 
 		    default:
 			throw new
-			 RuntimeException(JaiI18N.getString("BMPImageDecoder1"));
+			 RuntimeException(JaiI18N.getString("Invalid_compression_specified_in_BMP_file_"));
 		    }
 		} else if (size == 108) {
 		    // Windows 4.x BMP
@@ -366,7 +366,7 @@ class BMPImage extends SimpleRenderedImage {
 
 			// break;
 			throw new
-			 RuntimeException(JaiI18N.getString("BMPImageDecoder2"));
+			 RuntimeException(JaiI18N.getString("Not_implemented_yet_"));
 
 		    case LCS_sRGB:
 			// Default Windows color space
@@ -377,7 +377,7 @@ class BMPImage extends SimpleRenderedImage {
 			properties.put("color_space", "LCS_CMYK");
 			//		    break;
 			throw new
-			 RuntimeException(JaiI18N.getString("BMPImageDecoder2"));
+			 RuntimeException(JaiI18N.getString("Not_implemented_yet_"));
 		    }
 
 		    if (bitsPerPixel == 1) {
@@ -413,11 +413,11 @@ class BMPImage extends SimpleRenderedImage {
 		} else {
 		    properties.put("bmp_version", "BMP v. 5.x");
 		    throw new
-			RuntimeException(JaiI18N.getString("BMPImageDecoder4"));
+			RuntimeException(JaiI18N.getString("BMP_version_5_not_implemented_yet_"));
 		}
 	    }
 	} catch (IOException ioe) {
-	    throw new RuntimeException(JaiI18N.getString("BMPImageDecoder5"));
+	    throw new RuntimeException(JaiI18N.getString("IOException_while_reading_the_BMP_file_headers_"));
 	}
 
 	if (height > 0) {
@@ -531,7 +531,7 @@ class BMPImage extends SimpleRenderedImage {
 	    }
 	} catch (IOException ioe) {
 	    throw new
-		RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+		RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	}
 
 	if (isBottomUp) {
@@ -581,7 +581,7 @@ class BMPImage extends SimpleRenderedImage {
 	    }
 	} catch (IOException ioe) {
 	    throw new
-		RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+		RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	}
 
 	if (isBottomUp) {
@@ -631,7 +631,7 @@ class BMPImage extends SimpleRenderedImage {
 	    }
 	} catch (IOException ioe) {
 	    throw new
-		RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+		RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	}
 
 	if (isBottomUp) {
@@ -682,7 +682,7 @@ class BMPImage extends SimpleRenderedImage {
 					      imSize - bytesRead);
 	    }
 	} catch (IOException ioe) {
-	    // throw new RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+	    // throw new RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	    throw new RuntimeException(ioe.getMessage());
 	}
 
@@ -763,7 +763,7 @@ class BMPImage extends SimpleRenderedImage {
 		}
 	    }
 	} catch (IOException ioe) {
-	    throw new RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+	    throw new RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	}
     }
 
@@ -800,7 +800,7 @@ class BMPImage extends SimpleRenderedImage {
 		}
 	    }
 	} catch (IOException ioe) {
-	    throw new RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+	    throw new RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	}
     }
 
@@ -829,7 +829,7 @@ class BMPImage extends SimpleRenderedImage {
 					      imSize - bytesRead);
 	    }
 	} catch (IOException ioe) {
-	    throw new RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+	    throw new RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	}
 
 	// Since data is compressed, decompress it
@@ -939,7 +939,7 @@ class BMPImage extends SimpleRenderedImage {
 		values[i] = inputStream.read();
 	    }
 	} catch(IOException ioe) {
-	    throw new RuntimeException(JaiI18N.getString("BMPImageDecoder6"));
+	    throw new RuntimeException(JaiI18N.getString("Error_while_reading_the_BMP_file_"));
 	}
 
 	// Decompress the RLE4 compressed data.
@@ -1171,7 +1171,7 @@ class BMPImage extends SimpleRenderedImage {
 
 	    default:
 		throw new
-		    RuntimeException(JaiI18N.getString("BMPImageDecoder3"));
+		    RuntimeException(JaiI18N.getString("Invalid_compression_specified_for_BMP_file_"));
 	    }
 	    break;
 
@@ -1187,7 +1187,7 @@ class BMPImage extends SimpleRenderedImage {
 
 	    default:
 		throw new
-		    RuntimeException(JaiI18N.getString("BMPImageDecoder3"));
+		    RuntimeException(JaiI18N.getString("Invalid_compression_specified_for_BMP_file_"));
 	    }
 
 	    break;
@@ -1223,7 +1223,7 @@ class BMPImage extends SimpleRenderedImage {
 
 	    default:
 		throw new
-		    RuntimeException(JaiI18N.getString("BMPImageDecoder3"));
+		    RuntimeException(JaiI18N.getString("Invalid_compression_specified_for_BMP_file_"));
 	    }
 
 	case VERSION_4_8_BIT:
@@ -1239,7 +1239,7 @@ class BMPImage extends SimpleRenderedImage {
 
 	    default:
 		throw new
-		    RuntimeException(JaiI18N.getString("BMPImageDecoder3"));
+		    RuntimeException(JaiI18N.getString("Invalid_compression_specified_for_BMP_file_"));
 	    }
 	    break;
 
@@ -1264,7 +1264,7 @@ class BMPImage extends SimpleRenderedImage {
     public synchronized Raster getTile(int tileX, int tileY) {
         if ((tileX != 0) || (tileY != 0)) {
             throw new
-		IllegalArgumentException(JaiI18N.getString("BMPImageDecoder7"));
+		IllegalArgumentException(JaiI18N.getString("Illegal_tile_requested_from_a_BMPImage_"));
         }
         return computeTile(tileX, tileY);
     }

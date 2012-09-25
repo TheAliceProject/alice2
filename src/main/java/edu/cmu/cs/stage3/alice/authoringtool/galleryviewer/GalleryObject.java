@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 
 /**
@@ -314,7 +315,7 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
         sizeLabel.setForeground(sizeColor);
         imageLabel.setIcon(GalleryViewer.loadingImageIcon);
         sizeLabel.setText(String.valueOf(data.size)+" kb");
-        locationLabel.setText(AikMin.getProperty(" on ")+location);
+        locationLabel.setText(Messages.getString("_on_")+location);
         if (data.size > 0 && data.type == GalleryViewer.WEB){
             sizeLabel.setText((String.valueOf(data.size)+"kb"));
             sizeLabel.setForeground(sizeColor);

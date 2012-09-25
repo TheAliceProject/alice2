@@ -23,11 +23,11 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.ColorProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class AbstractBubbleAnimation extends edu.cmu.cs.stage3.alice.core.Response {
 	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); 
@@ -48,11 +48,11 @@ public abstract class AbstractBubbleAnimation extends edu.cmu.cs.stage3.alice.co
 			super.prologue( t );
 			edu.cmu.cs.stage3.alice.core.Transformable subjectValue = AbstractBubbleAnimation.this.subject.getTransformableValue();
 			if( subjectValue == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractBubbleAnimation.8"), getCurrentStack(), AbstractBubbleAnimation.this.subject ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("subject_must_not_be_null_"), getCurrentStack(), AbstractBubbleAnimation.this.subject ); 
 			}
 			String whatValue = AbstractBubbleAnimation.this.what.getStringValue();
 			if (( whatValue == null ) || (whatValue.length() == 0)) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractBubbleAnimation.9"), getCurrentStack(), AbstractBubbleAnimation.this.what ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("what_must_not_be_null_"), getCurrentStack(), AbstractBubbleAnimation.this.what ); 
 			}
 
 			if( m_bubble == null ) {

@@ -1,5 +1,7 @@
 package movieMaker;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * Class that represents a sound.  This class is used by the students
@@ -69,10 +71,10 @@ public String toString()
     
     // if there is a file name then add that to the output
     if (fileName != null)
-      output = output + Messages.getString("Sound.1") + fileName; 
+      output = output + Messages.getString("_file__") + fileName; 
     
     // add the length in frames
-    output = output + Messages.getString("Sound.2") + getLengthInFrames(); 
+    output = output + Messages.getString("_number_of_samples__") + getLengthInFrames(); 
     
     return output;
   }

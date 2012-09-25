@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.pratt.maxkeyframing;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class ScaleKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse {
 	public class RuntimeScaleKeyframeResponse extends RuntimeKeyframeResponse {
 		
@@ -35,7 +37,7 @@ public class ScaleKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyframing
 				//TODO
 				//m_transformable.setScaledSpaceRightNow( scale.x, scale.y, scale.z );
 			} catch( ClassCastException e ) {
-				System.err.println( Messages.getString("ScaleKeyframeResponse.0") + runtimeSpline + Messages.getString("ScaleKeyframeResponse.1") );  
+				System.err.println( Messages.getString("Incorrect_sample_type_from_spline_") + runtimeSpline + Messages.getString("___Vector3_expected_") );  
 			}
 		}
 	}

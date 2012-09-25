@@ -175,7 +175,7 @@ public final class FileCacheSeekableStream extends SeekableStream {
     
 	public void seek(long pos) throws IOException {
         if (pos < 0) {
-            throw new IOException(JaiI18N.getString("FileCacheSeekableStream0"));
+            throw new IOException(JaiI18N.getString("pos___0_"));
         }
         pointer = pos;
     }

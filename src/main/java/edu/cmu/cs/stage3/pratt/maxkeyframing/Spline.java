@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.pratt.maxkeyframing;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -41,7 +43,7 @@ public abstract class Spline {
 					return 0;
 				}
 			} else {
-				throw new ClassCastException( Key.class.getName() + Messages.getString("Spline.0") ); 
+				throw new ClassCastException( Key.class.getName() + Messages.getString("_required_") ); 
 			}
 		}
 	};
@@ -219,7 +221,7 @@ public abstract class Spline {
 		}
 
 		if( addKeyMethod == null ) {
-			System.err.println( Messages.getString("Spline.14") + spline ); 
+			System.err.println( Messages.getString("Unable_to_find_addKey_method_for_") + spline ); 
 			return null;
 		}
 

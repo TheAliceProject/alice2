@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.math.Matrix44;
 
 /**
@@ -35,7 +36,7 @@ public class Scene extends ReferenceFrame {
 	
 	protected void releasePass1() {
 		if( m_background != null ) {
-			warnln( Messages.getString("Scene.1") + this + Messages.getString("Scene.2") + m_background + "." );   
+			warnln( Messages.getString("WARNING__released_scene_") + this + Messages.getString("_still_has_background_") + m_background + "." );   
 			setBackground( null );
 		}
 		super.releasePass1();

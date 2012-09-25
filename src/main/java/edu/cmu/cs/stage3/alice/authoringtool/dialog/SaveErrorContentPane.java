@@ -23,18 +23,21 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author David Culyba
  */
 public class SaveErrorContentPane extends ErrorContentPane {
 	public String getTitle() {
-		return Messages.getString("SaveErrorContentPane.0"); 
+		return Messages.getString("Alice___Save_Error___CRITICAL");
 	}
 
 	protected void init() {
 		super.init();
-		messageLabel.setFont( new java.awt.Font( "SansSerif", java.awt.Font.BOLD, 16 ) ); 
-		messageLabel.setPreferredSize( null );
-		messageLabel.setLineWrap( false );
+		messageLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD,
+				16));
+		messageLabel.setPreferredSize(null);
+		messageLabel.setLineWrap(false);
 	}
 }

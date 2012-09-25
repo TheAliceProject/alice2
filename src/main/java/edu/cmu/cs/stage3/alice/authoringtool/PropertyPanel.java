@@ -23,9 +23,17 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.SystemColor;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 /**
  * @author Jason Pratt

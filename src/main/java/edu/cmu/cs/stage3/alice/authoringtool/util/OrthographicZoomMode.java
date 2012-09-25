@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -55,7 +57,7 @@ public class OrthographicZoomMode extends RenderTargetManipulatorMode {
 
 	public void mouseReleased( java.awt.event.MouseEvent ev ) {
 		if( ev.getPoint().equals( pressPoint ) ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("OrthographicZoomMode.0"), Messages.getString("OrthographicZoomMode.1"), javax.swing.JOptionPane.INFORMATION_MESSAGE );  
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Click_and_drag_to_zoom_"), Messages.getString("Zoom_Message"), javax.swing.JOptionPane.INFORMATION_MESSAGE );  
 		} else if( undoRedoStack != null ) {
 			if( ! ev.isPopupTrigger() ) { // TODO: this is a hack.  this method should never be called if the popup is triggered
 				//undoRedoStack.push( new SizeUndoableRedoable( pickedTransformable, oldSize, pickedTransformable.getSize(), scheduler ) );

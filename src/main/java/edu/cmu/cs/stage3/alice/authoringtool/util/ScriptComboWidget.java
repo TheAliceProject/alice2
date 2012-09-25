@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -45,8 +47,8 @@ public class ScriptComboWidget extends javax.swing.JPanel {
 		//runAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.Event.CTRL_MASK) );
 		runAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "go" ); 
 		//runAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'G' ) );
-		runAction.putValue( javax.swing.Action.NAME, Messages.getString("ScriptComboWidget.1") ); 
-		runAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("ScriptComboWidget.2") ); 
+		runAction.putValue( javax.swing.Action.NAME, Messages.getString("Go") ); 
+		runAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Execute_the_given_script") ); 
 		//runAction.putValue( javax.swing.Action.SMALL_ICON, newWorldIcon );
 	}
 
@@ -74,7 +76,7 @@ public class ScriptComboWidget extends javax.swing.JPanel {
 				} catch( org.python.core.PyException e ) {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				} catch( Throwable t ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ScriptComboWidget.4"), t ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_running_jython_code_"), t ); 
 				}
 			}
 		} else {

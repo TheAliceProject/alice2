@@ -23,9 +23,19 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import javax.swing.*;
-import java.awt.*;
-import javax.swing.border.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JToggleButton;
+import javax.swing.border.Border;
 
 public class FontChooser extends javax.swing.JPanel {
 	protected java.util.HashSet changeListeners = new java.util.HashSet();
@@ -212,4 +222,3 @@ public class FontChooser extends javax.swing.JPanel {
 		previewScrollPane.getViewport().add(previewTextArea, null);
 	}
 }
-

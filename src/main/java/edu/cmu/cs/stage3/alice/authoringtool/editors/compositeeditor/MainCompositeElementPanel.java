@@ -23,9 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.ScrollPaneConstants;
-
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
 
 /**
  * <p>Title: </p>
@@ -455,11 +454,12 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 	protected void generateGUI(){
         java.awt.Component anchor = getAnchor(this);
         int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); 
-        int buttonWidth = fontSize * 13;
+        int len = Messages.getString("create_new_parameter").length();
+        int buttonWidth = fontSize * 13 + len;
         int buttonHeight = fontSize * 2 + 2;
         
         if (newParameterButton == null){
-            newParameterButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.27")); 
+            newParameterButton = new javax.swing.JButton(Messages.getString("create_new_parameter")); 
             newParameterButton.setBackground(new java.awt.Color( 240, 240, 255 ));
             newParameterButton.setOpaque(true);
             newParameterButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -474,7 +474,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     ));*/
             newParameterButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed( java.awt.event.ActionEvent ev ) {
-                    edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.28"),  requiredParameters.getOwner(), false, false ); 
+                    edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("Create_New_Parameter"),  requiredParameters.getOwner(), false, false ); 
 					if( variable != null ) {
 						if( requiredParameters != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
@@ -491,15 +491,15 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             });
             newParameterButton.setDropTarget(new java.awt.dnd.DropTarget(newParameterButton, parameterDropHandler));
             newParameterButton.setToolTipText("<html><body>"+ 
-                             Messages.getString("MainCompositeElementPanel.30")+ 
-                             Messages.getString("MainCompositeElementPanel.31")+ 
-                             Messages.getString("MainCompositeElementPanel.32")+ 
-                             Messages.getString("MainCompositeElementPanel.33")+ 
-                             Messages.getString("MainCompositeElementPanel.34")+ 
+                             Messages.getString("_p_Open_the_New_Parameter_Dialogue_Box__p_")+ "/n" +
+                             Messages.getString("_p_Parameters_allow_you_to_send_information__p_")+ 
+                             Messages.getString("_p_to_a_method_when_you_run_it__You_may_choose__p_")+ 
+                             Messages.getString("_p_among_several_types_of_information_to_send__p_")+ 
+                             Messages.getString("_p__like_numbers__objects__and_Booleans____p_")+ 
                              "</body></html>"); 
         }
         if (newVariableButton == null){
-            newVariableButton = new javax.swing.JButton(Messages.getString("MainCompositeElementPanel.36")); 
+            newVariableButton = new javax.swing.JButton(Messages.getString("create_new_variable")); 
             newVariableButton.setBackground(new java.awt.Color( 240, 240, 255 ));
             newVariableButton.setOpaque(true);
             newVariableButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -515,7 +515,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                     ));*/
             newVariableButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed( java.awt.event.ActionEvent ev ) {
-					edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("MainCompositeElementPanel.37"), localVariables.getOwner(), false, true); 
+					edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog(Messages.getString("Create_New_Local_Variable"), localVariables.getOwner(), false, true); 
 					if( variable != null ) {
 						if( localVariables != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
@@ -531,11 +531,11 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             });
             newVariableButton.setDropTarget(new java.awt.dnd.DropTarget(newVariableButton, variableDropHandler));
             newVariableButton.setToolTipText("<html><body>"+ 
-                             Messages.getString("MainCompositeElementPanel.39")+ 
-                             Messages.getString("MainCompositeElementPanel.40")+ 
-                             Messages.getString("MainCompositeElementPanel.41")+ 
-                             Messages.getString("MainCompositeElementPanel.42")+ 
-                             Messages.getString("MainCompositeElementPanel.43")+ 
+                             Messages.getString("_p_Open_the_New_Variable_Dialogue_Box__p_")+ "/n" +
+                             Messages.getString("_p_Variables_allow_you_to_store_information__p_")+ 
+                             Messages.getString("_p_in_a_method_when_it_runs__You_may_choose__p_")+ 
+                             Messages.getString("_p_among_several_types_of_information__like__p_")+ 
+                             Messages.getString("_p_numbers__objects__and_Booleans____p_")+ 
                              "</body></html>"); 
         }
         if (scrollPane == null){
@@ -605,11 +605,11 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         methodNameLabel.setFont(nameFont);
         methodNameLabel.setDropTarget(new java.awt.dnd.DropTarget(methodNameLabel, parameterDropHandler));
 
-        noParametersLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.46")); 
+        noParametersLabel = new javax.swing.JLabel(Messages.getString("No_parameters")); 
         noParametersLabel.setDropTarget(new java.awt.dnd.DropTarget(noParametersLabel, parameterDropHandler));
         java.awt.Font noFont = new java.awt.Font("SansSerif", java.awt.Font.ITALIC, (int)(12 * fontSize/12.0)); 
         noParametersLabel.setFont(noFont);
-        noVariablesLabel = new javax.swing.JLabel(Messages.getString("MainCompositeElementPanel.48")); 
+        noVariablesLabel = new javax.swing.JLabel(Messages.getString("No_variables")); 
         noVariablesLabel.setDropTarget(new java.awt.dnd.DropTarget(noVariablesLabel, variableDropHandler));
         noVariablesLabel.setFont(noFont);
 

@@ -846,4 +846,3 @@ public class AbstractWalkAnimation extends Animation implements PropertyListener
 		}
 	}
 }
-

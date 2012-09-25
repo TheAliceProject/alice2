@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -40,7 +41,7 @@ public abstract class CompositeQuestionPanel extends edu.cmu.cs.stage3.alice.aut
 
     public CompositeQuestionPanel(){
         super();
-        headerText = Messages.getString("CompositeQuestionPanel.0"); 
+        headerText = Messages.getString("Composite_Question"); 
     }
 
 	public void set(edu.cmu.cs.stage3.alice.core.Element question, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){

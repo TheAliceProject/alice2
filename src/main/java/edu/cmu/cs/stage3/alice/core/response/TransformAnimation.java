@@ -23,11 +23,11 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
 import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 //todo: absolute transformation listener
 public abstract class TransformAnimation extends Animation {
@@ -42,7 +42,7 @@ public abstract class TransformAnimation extends Animation {
 			m_subject = TransformAnimation.this.subject.getTransformableValue();
 			m_asSeenBy = TransformAnimation.this.asSeenBy.getReferenceFrameValue();
             if( m_subject == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("TransformAnimation.2"), getCurrentStack(), TransformAnimation.this.subject ); 
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("subject_must_not_be_null_"), getCurrentStack(), TransformAnimation.this.subject ); 
             }
 		}
 	}

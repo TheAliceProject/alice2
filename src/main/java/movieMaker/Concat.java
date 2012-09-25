@@ -30,17 +30,42 @@ package movieMaker;
  * redistribute the Software for such purposes.
  */
 
-import java.awt.*;
-import java.util.Vector;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Dimension;
 import java.io.File;
-import javax.media.*;
-import javax.media.control.TrackControl;
-import javax.media.control.QualityControl;
-import javax.media.Format;
-import javax.media.format.*;
-import javax.media.datasink.*;
-import javax.media.protocol.*;
 import java.io.IOException;
+import java.util.Vector;
+import javax.media.Buffer;
+import javax.media.Codec;
+import javax.media.Control;
+import javax.media.Controller;
+import javax.media.ControllerErrorEvent;
+import javax.media.ControllerEvent;
+import javax.media.ControllerListener;
+import javax.media.DataSink;
+import javax.media.Duration;
+import javax.media.EndOfMediaEvent;
+import javax.media.Format;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.Owned;
+import javax.media.Player;
+import javax.media.Processor;
+import javax.media.Time;
+import javax.media.control.QualityControl;
+import javax.media.control.TrackControl;
+import javax.media.datasink.DataSinkErrorEvent;
+import javax.media.datasink.DataSinkEvent;
+import javax.media.datasink.DataSinkListener;
+import javax.media.datasink.EndOfStreamEvent;
+import javax.media.format.AudioFormat;
+import javax.media.format.VideoFormat;
+import javax.media.protocol.BufferTransferHandler;
+import javax.media.protocol.ContentDescriptor;
+import javax.media.protocol.DataSource;
+import javax.media.protocol.FileTypeDescriptor;
+import javax.media.protocol.PushBufferDataSource;
+import javax.media.protocol.PushBufferStream;
 
 
 /**
@@ -58,7 +83,7 @@ public class Concat implements ControllerListener, DataSinkListener {
     int totalTracks;
 
     boolean transcodeMsg = false;
-    String TRANSCODE_MSG = Messages.getString("Concat.0"); 
+    String TRANSCODE_MSG = Messages.getString("The_given_inputs_require_transcoding_to_have_a_common_format_for_concatenation_"); 
 
 
     /**
@@ -88,12 +113,12 @@ public class Concat implements ControllerListener, DataSinkListener {
 	}
 
 	if (inputURL.size() == 0) {
-	    System.err.println(Messages.getString("Concat.2")); 
+	    System.err.println(Messages.getString("No_input_url_is_specified")); 
 	    prUsage();
 	}
 
 	if (outputURL == null) {
-	    System.err.println(Messages.getString("Concat.3")); 
+	    System.err.println(Messages.getString("No_output_url_is_specified")); 
 	    prUsage();
 	}
 
@@ -103,20 +128,20 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	for (i = 0; i < inputURL.size(); i++) {
 	    if ((iml[i] = createMediaLocator((String)inputURL.elementAt(i))) == null) {
-		System.err.println(Messages.getString("Concat.4") + inputURL); 
+		System.err.println(Messages.getString("Cannot_build_media_locator_from__") + inputURL); 
 		System.exit(0);
 	    }
 	}
 
 	if ((oml = createMediaLocator(outputURL)) == null) {
-	    System.err.println(Messages.getString("Concat.5") + outputURL); 
+	    System.err.println(Messages.getString("Cannot_build_media_locator_from__") + outputURL); 
 	    System.exit(0);
 	}
 
 	Concat concat  = new Concat();
 
 	if (!concat.doIt(iml, oml)) {
-	    System.err.println(Messages.getString("Concat.6")); 
+	    System.err.println(Messages.getString("Failed_to_concatenate_the_inputs")); 
 	}
 
 	System.exit(0);
@@ -134,7 +159,7 @@ public class Concat implements ControllerListener, DataSinkListener {
  	ContentDescriptor cd;
 
 	if ((cd = fileExtToCD(outML.getRemainder())) == null) {
-	    System.err.println(Messages.getString("Concat.7")); 
+	    System.err.println(Messages.getString("Couldn_t_figure_out_from_the_file_extension_the_type_of_output_needed")); 
 	    return false;
 	}
 
@@ -149,21 +174,21 @@ public class Concat implements ControllerListener, DataSinkListener {
 		//System.err.println("- Create processor for: " + inML[i]);
 		pInfo[i].p = Manager.createProcessor(inML[i]);
 	    } catch (Exception e) {
-		System.err.println(Messages.getString("Concat.8") + e); 
+		System.err.println(Messages.getString("Cannot_create_a_processor_from_the_given_url__") + e); 
 		return false;
 	    }
 	}
 
 	// Try to match the tracks from different processors.
 	if (!matchTracks(pInfo, cd)) {
-	    System.err.println(Messages.getString("Concat.9")); 
+	    System.err.println(Messages.getString("Failed_to_match_the_tracks_")); 
 	    return false;
 	}
 
 	// Program each processors to perform the necessary transcoding
 	// to concatenate the tracks.
 	if (!buildTracks(pInfo)) {
-	    System.err.println(Messages.getString("Concat.10")); 
+	    System.err.println(Messages.getString("Failed_to_build_processors_for_the_inputs_")); 
 	    return false;
 	}
 
@@ -175,7 +200,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	try {
 	    p = Manager.createProcessor(ds);
 	} catch (Exception e) {
-	    System.err.println(Messages.getString("Concat.11")); 
+	    System.err.println(Messages.getString("Failed_to_create_a_processor_to_concatenate_the_inputs_")); 
 	    return false;
 	}
 
@@ -183,21 +208,21 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	// Put the Processor into configured state.
 	if (!waitForState(p, Processor.Configured)) {
-	    System.err.println(Messages.getString("Concat.12")); 
+	    System.err.println(Messages.getString("Failed_to_configure_the_processor_")); 
 	    return false;
 	}
 
 	// Set the output content descriptor on the final processor.
 	//System.err.println("- Set output content descriptor to: " + cd);
 	if ((p.setContentDescriptor(cd)) == null) {
-	    System.err.println(Messages.getString("Concat.13")); 
+	    System.err.println(Messages.getString("Failed_to_set_the_output_content_descriptor_on_the_processor_")); 
 	    return false;
 	}
 
 	// We are done with programming the processor.  Let's just
 	// realize it.
 	if (!waitForState(p, Controller.Realized)) {
-	    System.err.println(Messages.getString("Concat.14")); 
+	    System.err.println(Messages.getString("Failed_to_realize_the_processor_")); 
 	    return false;
 	}
 
@@ -218,7 +243,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	    p.start();
 	    dsink.start();
 	} catch (IOException e) {
-	    System.err.println(Messages.getString("Concat.15")); 
+	    System.err.println(Messages.getString("IO_error_during_concatenation")); 
 	    return false;
 	}
 
@@ -265,7 +290,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	for (i = 0; i < pInfo.length; i++) {
 
 	    if (!waitForState(pInfo[i].p, Processor.Configured)) {
-		System.err.println(Messages.getString("Concat.16")); 
+		System.err.println(Messages.getString("__Failed_to_configure_the_processor_")); 
 		return false;
 	    }
 
@@ -318,7 +343,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	}
 
 	if (total[AUDIO] < 1 && total[VIDEO] < 1) {
-	    System.err.println(Messages.getString("Concat.17")); 
+	    System.err.println(Messages.getString("There_is_no_audio_or_video_tracks_to_concatenate_")); 
 	    return false;
 	}
 
@@ -333,7 +358,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 		for (j = total[type]; j < pInfo[i].numTracksByType[type]; j++) {
 		    tInfo = pInfo[i].tracksByType[type][j];
 		    disableTrack(pInfo[i], tInfo);
-		    System.err.println(Messages.getString("Concat.18")); 
+		    System.err.println(Messages.getString("__Disable_the_following_track_since_the_other_input_media_do_not_have_a_matching_type_")); 
 		    System.err.println("  " + tInfo.tc.getFormat()); 
 		}
 		pInfo[i].numTracksByType[type] = total[type];
@@ -346,7 +371,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	for (type = AUDIO; type < MEDIA_TYPES; type++) {
 	    for (i = 0; i < total[type]; i++) {
 		if (!tryMatch(pInfo, type, i)) {
-		    System.err.println(Messages.getString("Concat.20")); 
+		    System.err.println(Messages.getString("__Cannot_transcode_the_tracks_to_a_common_format_for_concatenation_")); 
 		    return false;
 		}
 	    }
@@ -391,7 +416,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	    // We are done with programming the processor.  Let's just
 	    // realize the it.
 	    if (!waitForState(p, Controller.Realized)) {
-		System.err.println(Messages.getString("Concat.21")); 
+		System.err.println(Messages.getString("__Failed_to_realize_the_processor_")); 
 		return false;
 	    }
 
@@ -460,9 +485,9 @@ public class Concat implements ControllerListener, DataSinkListener {
 			    System.err.println(TRANSCODE_MSG);
 			}
 
-			System.err.println(Messages.getString("Concat.22") + pInfo[j].ml); 
+			System.err.println(Messages.getString("__Transcoding__") + pInfo[j].ml); 
 			System.err.println("  " + oldFmt); 
-			System.err.println(Messages.getString("Concat.24")); 
+			System.err.println(Messages.getString("___________to_")); 
 			System.err.println("  " + newFmt); 
 		    } 
 
@@ -478,10 +503,10 @@ public class Concat implements ControllerListener, DataSinkListener {
 				transcodeMsg = true;
 				System.err.println(TRANSCODE_MSG);
 			    }
-			    System.err.println(Messages.getString("Concat.26") + pInfo[j].ml); 
-			    System.err.println(Messages.getString("Concat.27") + oldSize.width +  
+			    System.err.println(Messages.getString("__Scaling__") + pInfo[j].ml); 
+			    System.err.println(Messages.getString("__from__") + oldSize.width +  
 						" x " + oldSize.height); 
-			    System.err.println(Messages.getString("Concat.29") + newSize.width +  
+			    System.err.println(Messages.getString("__to__") + newSize.width +  
 						" x " + newSize.height); 
 			    newFmt = (new VideoFormat(null, 
 					newSize, 
@@ -563,8 +588,8 @@ public class Concat implements ControllerListener, DataSinkListener {
 			if (fmts[j].matches(jpegFmt)) {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
-			    System.err.println(Messages.getString("Concat.31") +  
-					val + Messages.getString("Concat.32") + qc); 
+			    System.err.println(Messages.getString("__Set_quality_to_") +  
+					val + Messages.getString("_on_") + qc); 
 			    break;
 			}
 		    }
@@ -631,7 +656,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 	DataSource ds;
 
 	if ((ds = p.getDataOutput()) == null) {
-	    System.err.println(Messages.getString("Concat.33")); 
+	    System.err.println(Messages.getString("Something_is_really_wrong__the_processor_does_not_have_an_output_DataSource")); 
 	    return null;
 	}
 
@@ -677,7 +702,7 @@ public class Concat implements ControllerListener, DataSinkListener {
     public void controllerUpdate(ControllerEvent evt) {
 
 	if (evt instanceof ControllerErrorEvent) {
-	    System.err.println(Messages.getString("Concat.34")); 
+	    System.err.println(Messages.getString("Failed_to_concatenate_the_files_")); 
 	    System.exit(-1);
 	} else if (evt instanceof EndOfMediaEvent) {
 	    evt.getSourceController().close();
@@ -950,7 +975,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	
 	public void setLocator(MediaLocator ml) {
-	    System.err.println(Messages.getString("Concat.44")); 
+	    System.err.println(Messages.getString("Not_interested_in_a_media_locator")); 
 	}
     }
 
@@ -1072,4 +1097,3 @@ public class Concat implements ControllerListener, DataSinkListener {
 
     } // class SuperGlueStream
 }
-

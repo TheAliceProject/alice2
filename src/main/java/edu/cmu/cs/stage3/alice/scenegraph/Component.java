@@ -27,6 +27,7 @@ import edu.cmu.cs.stage3.alice.scenegraph.event.AbsoluteTransformationEvent;
 import edu.cmu.cs.stage3.alice.scenegraph.event.AbsoluteTransformationListener;
 import edu.cmu.cs.stage3.alice.scenegraph.event.HierarchyEvent;
 import edu.cmu.cs.stage3.alice.scenegraph.event.HierarchyListener;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Dennis Cosgrove
@@ -39,7 +40,7 @@ public abstract class Component extends Element {
 	
 	protected void releasePass1() {
 		if( m_parent != null ) {
-			warnln( Messages.getString("Component.1") + this + Messages.getString("Component.2") + m_parent + "." );   
+			warnln( Messages.getString("WARNING__released_component_") + this + Messages.getString("_still_has_parent_") + m_parent + "." );   
 			setParent( null );
 		}
 		super.releasePass1();
@@ -50,7 +51,7 @@ public abstract class Component extends Element {
 		enum0 = m_absoluteTransformationListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			AbsoluteTransformationListener absoluteTransformationListener = (AbsoluteTransformationListener)enum0.nextElement();
-			warnln( Messages.getString("Component.4") + this + Messages.getString("Component.5") + absoluteTransformationListener + "." );   
+			warnln( Messages.getString("WARNING__released_component_") + this + Messages.getString("_still_has_absoluteTransformationListener_") + absoluteTransformationListener + "." );   
 		}
 		//todo
 		//m_absoluteTransformationListeners = null;
@@ -59,7 +60,7 @@ public abstract class Component extends Element {
 		enum0 = m_hierarchyListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			HierarchyListener hierarchyListener = (HierarchyListener)enum0.nextElement();
-			warnln( Messages.getString("Component.7") + this + Messages.getString("Component.8") + hierarchyListener + "." );   
+			warnln( Messages.getString("WARNING__released_component_") + this + Messages.getString("_still_has_hierarchyListener_") + hierarchyListener + "." );   
 		}
 		//todo
 		//m_hierarchyListeners = null;
@@ -142,7 +143,7 @@ public abstract class Component extends Element {
 	}
 	protected void onAbsoluteTransformationChange() {
 		if( isReleased() ) {
-			warnln( Messages.getString("Component.10") + this + "." );  
+			warnln( Messages.getString("WARNING__absolute_transformation_change_on_already_released_") + this + "." );  
 		} else {
 			onAbsoluteTransformationChange( new AbsoluteTransformationEvent( this ) );
 		}
@@ -168,7 +169,7 @@ public abstract class Component extends Element {
 	}
 	protected void onHierarchyChange() {
 		if( isReleased() ) {
-			warnln( Messages.getString("Component.12") + this + "." );  
+			warnln( Messages.getString("WARNING__scenegraph_heirarchy_change_on_already_released_") + this + "." );  
 		} else {
 			//if( this instanceof Camera ) {
 			//	Thread.dumpStack();

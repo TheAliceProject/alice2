@@ -1,13 +1,39 @@
 package movieMaker;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.util.Vector;
-import javax.sound.sampled.*;
-import java.lang.Math;
-import java.awt.geom.*;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JViewport;
+import javax.swing.WindowConstants;
 
 /**
  * This class allows you to explore a Sound.  You can see the line drawing
@@ -23,7 +49,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
   MouseListener, LineListener
 {
   private static final String zoomInHint = 
-     Messages.getString("SoundExplorer.0"); 
+     Messages.getString("Click_to_see_all_the_samples__the_number_of_samples_between_pixels_is_1_"); 
   /** set to true for debugging and false for normal */
   private boolean DEBUG = false;
   
@@ -152,17 +178,17 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
   private int selectionStop;
   
   ///CONSTANTS///
-  private static final String currentIndexText = Messages.getString("SoundExplorer.1"); 
-  private static final String startIndexText = Messages.getString("SoundExplorer.2"); 
-  private static final String stopIndexText = Messages.getString("SoundExplorer.3"); 
+  private static final String currentIndexText = Messages.getString("Current_Index__"); 
+  private static final String startIndexText = Messages.getString("Start_Index__"); 
+  private static final String stopIndexText = Messages.getString("Stop_Index__"); 
   private static final Color selectionColor = Color.gray;
   private static final Color backgroundColor = Color.black;
   private static final Color waveColor = Color.white;
   private static final Color barColor = Color.cyan;
   
   ///////////////////////// class fields ///////////////////////////
-  private static String leftSampleText = Messages.getString("SoundExplorer.4"); 
-  private static String rightSampleText = Messages.getString("SoundExplorer.5"); 
+  private static String leftSampleText = Messages.getString("Sample_Value__"); 
+  private static String rightSampleText = Messages.getString("Right__Bottom__Sample_Value__"); 
   
   /**
    * Constructor that takes a sound and a boolean flag
@@ -175,7 +201,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     this.inStereo = inStereo;
     
     if(inStereo)
-      leftSampleText = Messages.getString("SoundExplorer.6"); 
+      leftSampleText = Messages.getString("Left__Top__Sample_Value__"); 
     
     //this causes the Sound class to add this SoundExplorer 
     //as the line listener for any SourceDataLines created so
@@ -235,7 +261,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
   {
     String fileName = sound.getFileName();
     if(fileName==null)
-      fileName = Messages.getString("SoundExplorer.7"); 
+      fileName = Messages.getString("no_file_name"); 
     
     soundFrame = new JFrame(fileName);
     
@@ -334,8 +360,8 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     JPanel selectionPanel = new JPanel();
     startIndexLabel = new JLabel(startIndexText + "N/A"); 
     stopIndexLabel = new JLabel(stopIndexText + "N/A"); 
-    playSelectionButton = makeButton(Messages.getString("SoundExplorer.12"), false, selectionPanel); 
-    clearSelectionButton = makeButton(Messages.getString("SoundExplorer.13"),false,selectionPanel); 
+    playSelectionButton = makeButton(Messages.getString("Play_Selection"), false, selectionPanel); 
+    clearSelectionButton = makeButton(Messages.getString("Clear_Selection"),false,selectionPanel); 
     clearSelectionButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         clearSelection();
@@ -346,19 +372,19 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     
     // set up the button panel
     buttonPanel = new JPanel();
-    playEntireButton = makeButton(Messages.getString("SoundExplorer.14"), true, buttonPanel); 
+    playEntireButton = makeButton(Messages.getString("Play_Entire_Sound"), true, buttonPanel); 
     selectionPrevState = false;
-    playBeforeButton = makeButton(Messages.getString("SoundExplorer.15"), false, buttonPanel); 
-    playAfterButton = makeButton(Messages.getString("SoundExplorer.16"), true, buttonPanel); 
-    stopButton = makeButton(Messages.getString("SoundExplorer.17"), false, buttonPanel); 
+    playBeforeButton = makeButton(Messages.getString("Play_Before"), false, buttonPanel); 
+    playAfterButton = makeButton(Messages.getString("Play_After"), true, buttonPanel); 
+    stopButton = makeButton(Messages.getString("Stop"), false, buttonPanel); 
     
     // add tool tip text
-    playBeforeButton.setToolTipText(Messages.getString("SoundExplorer.18")); 
-    playAfterButton.setToolTipText(Messages.getString("SoundExplorer.19")); 
-    playEntireButton.setToolTipText(Messages.getString("SoundExplorer.20")); 
-    playSelectionButton.setToolTipText(Messages.getString("SoundExplorer.21")); 
-    stopButton.setToolTipText(Messages.getString("SoundExplorer.22")); 
-    clearSelectionButton.setToolTipText(Messages.getString("SoundExplorer.23")); 
+    playBeforeButton.setToolTipText(Messages.getString("Play_sound_up_to_the_current_index")); 
+    playAfterButton.setToolTipText(Messages.getString("Play_sound_starting_at_the_current_index")); 
+    playEntireButton.setToolTipText(Messages.getString("Play_the_entire_sound")); 
+    playSelectionButton.setToolTipText(Messages.getString("Play_sound_between_start_and_stop_index")); 
+    stopButton.setToolTipText(Messages.getString("Stop_playing_the_sound")); 
+    clearSelectionButton.setToolTipText(Messages.getString("Click_to_clear__remove__the_selection")); 
     
     // add the button panel and selection panel to the play panel
     playPanel.add(buttonPanel, BorderLayout.NORTH);
@@ -490,13 +516,13 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     
      // create the image icons for the buttons
     Icon prevIcon = new ImageIcon(SoundExplorer.class.getResource("leftArrow.gif"),  
-                                  Messages.getString("SoundExplorer.25")); 
+                                  Messages.getString("previous_index")); 
     Icon nextIcon = new ImageIcon(SoundExplorer.class.getResource("rightArrow.gif"),  
-                                  Messages.getString("SoundExplorer.27")); 
+                                  Messages.getString("next_index")); 
     Icon firstIcon = new ImageIcon(SoundExplorer.class.getResource("endLeft.gif"),  
-                                   Messages.getString("SoundExplorer.29")); 
+                                   Messages.getString("first_index")); 
     Icon lastIcon = new ImageIcon(SoundExplorer.class.getResource("endRight.gif"),  
-                                  Messages.getString("SoundExplorer.31")); 
+                                  Messages.getString("last_index")); 
     
     // create the arrow buttons
     prevButton = new JButton(prevIcon);
@@ -505,10 +531,10 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     lastButton = new JButton(lastIcon);
     
     // set the tool tip text
-    prevButton.setToolTipText(Messages.getString("SoundExplorer.32")); 
-    firstButton.setToolTipText(Messages.getString("SoundExplorer.33")); 
-    nextButton.setToolTipText(Messages.getString("SoundExplorer.34")); 
-    lastButton.setToolTipText(Messages.getString("SoundExplorer.35")); 
+    prevButton.setToolTipText(Messages.getString("Click_to_view_previous_index__sample_at_previous_pixel_")); 
+    firstButton.setToolTipText(Messages.getString("Click_to_view_first_index__sample_at_first_pixel_")); 
+    nextButton.setToolTipText(Messages.getString("Click_to_view_next_index__sample_at_next_pixel_")); 
+    lastButton.setToolTipText(Messages.getString("Click_to_view_last_index__sample_at_last_pixel_")); 
     
     // set the preferred sizes of the buttons
     prevButton.setPreferredSize(new Dimension(prevIcon.getIconWidth() + 2,
@@ -606,9 +632,9 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     
     // create bottom panel
     JPanel bottomPanel = new JPanel();
-    bottomPanel.add(new JLabel(Messages.getString("SoundExplorer.36"))); 
+    bottomPanel.add(new JLabel(Messages.getString("The_number_of_samples_between_pixels__"))); 
     numSamplesPerPixelField = new JTextField(Integer.toString((int) framesPerPixel),8);
-    numSamplesPerPixelField.setToolTipText(Messages.getString("SoundExplorer.37")); 
+    numSamplesPerPixelField.setToolTipText(Messages.getString("Click_here_to_zoom_in__decrease__or_out__increase__")); 
     numSamplesPerPixelField.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         
@@ -648,7 +674,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     
     // create a zoom panel with a zoom button
     zoomButtonPanel = new JPanel();
-    zoomButton = makeButton(Messages.getString("SoundExplorer.38"), true, zoomButtonPanel); 
+    zoomButton = makeButton(Messages.getString("Zoom_In"), true, zoomButtonPanel); 
     zoomButton.setToolTipText(zoomInHint);
     
     infoPanel.add(BorderLayout.NORTH,indexPanel);
@@ -679,9 +705,6 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
       playBeforeButton.setEnabled(true);
       playAfterButton.setEnabled(false);
     }
-    
-    if(DEBUG)
-      System.out.println(Messages.getString("SoundExplorer.39") + currentPixelPosition); 
     
     updateIndexValues();
     soundPanel.repaint();
@@ -825,7 +848,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
    */
   public void actionPerformed(ActionEvent e)
   {
-    if(e.getActionCommand() == Messages.getString("SoundExplorer.40")) 
+    if(e.getActionCommand() == Messages.getString("Play_Entire_Sound")) 
     {
       try
       {
@@ -836,7 +859,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
         catchException(ex);
       }
     }
-    else if(e.getActionCommand() == Messages.getString("SoundExplorer.41")) 
+    else if(e.getActionCommand() == Messages.getString("Play_Selection")) 
     {
       try
       {
@@ -847,7 +870,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
         catchException(ex);
       }
     }
-    else if(e.getActionCommand().equals(Messages.getString("SoundExplorer.42"))) 
+    else if(e.getActionCommand().equals(Messages.getString("Stop"))) 
     {
       //stop all playback threads related to this sound
       for(int i = 0; i < sound.getPlaybacks().size(); i++)
@@ -856,15 +879,15 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
           .stopPlaying();
       }
     }
-    else if(e.getActionCommand().equals(Messages.getString("SoundExplorer.43"))) 
+    else if(e.getActionCommand().equals(Messages.getString("Zoom_In"))) 
     {
       handleZoomIn(true);
     }
-    else if (e.getActionCommand().equals(Messages.getString("SoundExplorer.44"))) 
+    else if (e.getActionCommand().equals(Messages.getString("Zoom_Out"))) 
     {
       handleZoomOut();
     }
-    else if(e.getActionCommand().equals(Messages.getString("SoundExplorer.45"))) 
+    else if(e.getActionCommand().equals(Messages.getString("Play_Before"))) 
     {
       try
       {
@@ -876,7 +899,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
         catchException(ex);
       }
     }
-    else if(e.getActionCommand().equals(Messages.getString("SoundExplorer.46"))) 
+    else if(e.getActionCommand().equals(Messages.getString("Play_After"))) 
     {
       try
       {
@@ -943,17 +966,13 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
   private void handleZoomIn(boolean checkScrollFlag)
   {
     // change the zoom button to zoom out information
-    zoomButton.setText(Messages.getString("SoundExplorer.47")); 
-    zoomButton.setToolTipText(Messages.getString("SoundExplorer.48")); 
+    zoomButton.setText(Messages.getString("Zoom_Out")); 
+    zoomButton.setToolTipText(Messages.getString("Click_to_zoom_out__see_the_whole_sound_")); 
     
     // get the frame index current position, selection start and stop
     currentPixelPosition = (int)(currentPixelPosition*framesPerPixel);
     selectionStart = (int)(selectionStart*framesPerPixel);
     selectionStop = (int)(selectionStop*framesPerPixel);
-    
-    if(DEBUG)
-      System.out.println(Messages.getString("SoundExplorer.49") + 
-                         currentPixelPosition);
     
     sampleWidth = zoomInWidth;
     framesPerPixel = sound.getLengthInFrames() / sampleWidth;
@@ -997,29 +1016,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
       
       rightSamplePanel.createWaveForm(false);
     }
-    if(DEBUG)
-    {
-      System.out.println(Messages.getString("SoundExplorer.50")); 
-      System.out.println("\tleftSamplePanel: " +  
-                         leftSamplePanel.getSize());
-      System.out.println("\t\tpreferred: " +  
-                         leftSamplePanel.getPreferredSize());
-      
-      System.out.println("\tleftSampleWrapper: " +  
-                         leftSampleWrapper.getSize());
-      System.out.println("\t\tpreferred: " +  
-                         leftSampleWrapper.getPreferredSize());
-      
-      System.out.println("\tleftSoundPanel: " + 
-                         leftSoundPanel.getSize());
-      System.out.println("\t\tpreferred: " +  
-                         leftSoundPanel.getPreferredSize());
-      
-      System.out.println("\tsoundPanel: " +  
-                         soundPanel.getSize());
-      System.out.println("\t\tpreferred: " +  
-                         soundPanel.getPreferredSize());
-    }
+
     
     // revalidate to handle the new preferred sizes
     scrollSound.revalidate();
@@ -1059,7 +1056,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
    */
   private void handleZoomOut() 
   {
-    zoomButton.setText(Messages.getString("SoundExplorer.59")); 
+    zoomButton.setText(Messages.getString("Zoom_In")); 
     zoomButton.setToolTipText(zoomInHint);
     
     sampleWidth = zoomOutWidth;
@@ -1069,10 +1066,6 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
     currentPixelPosition = (currentPixelPosition/divisor);
     selectionStart = (selectionStart/divisor);
     selectionStop = (selectionStop/divisor);
-    
-    if(DEBUG)
-      System.out.println(Messages.getString("SoundExplorer.60") + 
-                         currentPixelPosition);
     
     soundPanel.setPreferredSize
       (new Dimension(zoomOutWidth, 
@@ -1227,17 +1220,17 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
       forLeftSample = inputForLeftSample;
       
       if(DEBUG)
-        System.out.println(Messages.getString("SoundExplorer.61") +  
-                           Messages.getString("SoundExplorer.62")+forLeftSample + 
-                           Messages.getString("SoundExplorer.63") + sampleWidth + 
-                           Messages.getString("SoundExplorer.64") + sampleHeight); 
+        System.out.println("creating_new_sampling_panel__" +  
+                           "_n_tfor_left_sample__"+forLeftSample + 
+                           "_n_tsampleWidth__" + sampleWidth + 
+                           "_n_tsampleHeight__" + sampleHeight); 
       
       setBackground(backgroundColor);
       setPreferredSize(new Dimension(sampleWidth, sampleHeight));
       setSize(getPreferredSize());
       if(DEBUG)
-        System.out.println(Messages.getString("SoundExplorer.65") +  
-                           getPreferredSize() + Messages.getString("SoundExplorer.66") + getSize()); 
+        System.out.println("_tSample_panel_preferred_size__" +  
+                           getPreferredSize() + "_n_tSample_panel_size__" + getSize()); 
       
       points = new Vector();
       createWaveForm(forLeftSample);
@@ -1274,7 +1267,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
       {
         try
         {
-          sound.printError(Messages.getString("SoundExplorer.67")); 
+          sound.printError(Messages.getString("InvalidSampleSize")); 
         }
         catch(Exception ex)
         {
@@ -1326,7 +1319,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
       }//for - collecting points
       
       if(DEBUG)
-        System.out.println(Messages.getString("SoundExplorer.68") + points.size()); 
+        System.out.println("number of points: " + points.size()); 
       repaint();
       
     }//createWaveForm()
@@ -1343,12 +1336,12 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
       
       if(DEBUG)
       {
-        System.out.println(Messages.getString("SoundExplorer.69") + rectToPaint); 
-        System.out.println(Messages.getString("SoundExplorer.70") + sampleWidth); 
-        System.out.println(Messages.getString("SoundExplorer.71") + framesPerPixel); 
-        System.out.println(Messages.getString("SoundExplorer.72") + getSize()); 
-        System.out.println(Messages.getString("SoundExplorer.73") + getWidth()); 
-        System.out.println(Messages.getString("SoundExplorer.74") + getHeight()); 
+        System.out.println("Repainting: " + rectToPaint); 
+        System.out.println("SampleWidth: " + sampleWidth); 
+        System.out.println("framesPerPixel: " + framesPerPixel); 
+        System.out.println("Sample_panel_size: " + getSize()); 
+        System.out.println("SamplePanel_Width: " + getWidth()); 
+        System.out.println("SamplePanel_Height: " + getHeight()); 
       }
       
       //clear out the image

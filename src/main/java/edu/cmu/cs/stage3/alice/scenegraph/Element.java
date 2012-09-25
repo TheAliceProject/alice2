@@ -27,6 +27,7 @@ import edu.cmu.cs.stage3.alice.scenegraph.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.scenegraph.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.scenegraph.event.ReleaseEvent;
 import edu.cmu.cs.stage3.alice.scenegraph.event.ReleaseListener;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Dennis Cosgrove
@@ -85,7 +86,7 @@ public abstract class Element {
 		enum0 = m_propertyListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			PropertyListener propertyListener = (PropertyListener)enum0.nextElement();
-			warnln( Messages.getString("Element.3") + this + Messages.getString("Element.4") + propertyListener + "." );   
+			warnln( Messages.getString("WARNING__released_element_") + this + Messages.getString("_still_has_propertyListener_") + propertyListener + "." );   
 		}
 		m_propertyListeners = null;
 		m_propertyListenerArray = null;
@@ -93,7 +94,7 @@ public abstract class Element {
 		enum0 = m_releaseListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			ReleaseListener releaseListener = (ReleaseListener)enum0.nextElement();
-			warnln( Messages.getString("Element.6") + this + Messages.getString("Element.7") + releaseListener + "." );   
+			warnln( Messages.getString("WARNING__released_element_") + this + Messages.getString("_still_has_releaseListener_") + releaseListener + "." );   
 		}
 		m_releaseListeners = null;
 		m_releaseListenerArray = null;
@@ -156,7 +157,7 @@ public abstract class Element {
 	}
 	protected void onPropertyChange( Property property ) {
 		if( isReleased() ) {
-			warnln( Messages.getString("Element.9") + property + Messages.getString("Element.10") + this + "." );   
+			warnln( Messages.getString("WARNING__scenegraph_property_change_") + property + Messages.getString("_on_already_released_") + this + "." );   
 		} else {
 			onPropertyChange( new PropertyEvent( this, property ) );
 		}

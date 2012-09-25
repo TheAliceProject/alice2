@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.bubble;
 
+import java.io.UnsupportedEncodingException;
+
+
 class SubText {
 	public SubText( String text, java.awt.geom.Rectangle2D bound, int yOffset ) {
 		m_text = text;
@@ -218,7 +221,6 @@ public abstract class Bubble {
 						//g.setColor( m_foregroundColor );
 						g.drawString( subTextI.getText(), x, y );
 					}
-
 				}
 				//g.drawString( m_text, m_rect.x + PAD, m_rect.y + PAD + 16 );
 			}

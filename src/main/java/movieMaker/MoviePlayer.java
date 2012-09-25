@@ -1,10 +1,13 @@
 package movieMaker;
 
-import javax.swing.*;
-import java.util.*;
-import java.io.*;
-import java.awt.Container;
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.BorderLayout;
+import java.awt.Container;
+import java.io.File;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Class that can play movies from multiple frames
@@ -16,8 +19,8 @@ public class MoviePlayer
   
   ///////////////// fields ///////////////////////////
  
-  private JFrame frame = new JFrame(Messages.getString("MoviePlayer.0")); 
-  private JLabel frameLabel = new JLabel(Messages.getString("MoviePlayer.1")); 
+  private JFrame frame = new JFrame(Messages.getString("Movie_Player")); 
+  private JLabel frameLabel = new JLabel(Messages.getString("No_images_yet__")); 
   private AnimationPanel animationPanel = null;
   private String dir = null;
   
@@ -56,8 +59,8 @@ public class MoviePlayer
    */
   public MoviePlayer()
   {
-    SimpleOutput.showInformation(Messages.getString("MoviePlayer.3") + 
-                   Messages.getString("MoviePlayer.4")); 
+    SimpleOutput.showInformation(Messages.getString("Please_pick_a_") + 
+                   Messages.getString("directory_that_contains_the_JPEG_frames")); 
     String directory = FileChooser.pickADirectory();
     dir = directory;
     animationPanel = new AnimationPanel(directory);
@@ -72,7 +75,7 @@ public class MoviePlayer
   public void showNext()
   {
    animationPanel.showNext();
-   frameLabel.setText(Messages.getString("MoviePlayer.5") +  
+   frameLabel.setText(Messages.getString("Frame_Number_") +  
                       animationPanel.getCurrIndex());
    frame.repaint();
   }
@@ -83,7 +86,7 @@ public class MoviePlayer
   public void showPrevious()
   {
     animationPanel.showPrev();
-    frameLabel.setText(Messages.getString("MoviePlayer.6") +  
+    frameLabel.setText(Messages.getString("Frame_Number_") +  
                        animationPanel.getCurrIndex());
     frame.repaint();
   }
@@ -93,10 +96,10 @@ public class MoviePlayer
    */
   public void playMovie()
   {
-    frameLabel.setText(Messages.getString("MoviePlayer.7")); 
+    frameLabel.setText(Messages.getString("Playing_Movie")); 
     frame.repaint();
     animationPanel.showAll();
-    frameLabel.setText(Messages.getString("MoviePlayer.8") +  
+    frameLabel.setText(Messages.getString("Frame_Number_") +  
                        animationPanel.getCurrIndex());
     frame.repaint();
   }  
@@ -215,4 +218,3 @@ public class MoviePlayer
   }
   
 }
-  

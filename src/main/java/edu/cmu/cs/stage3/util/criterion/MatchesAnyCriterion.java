@@ -43,4 +43,3 @@ public class MatchesAnyCriterion implements edu.cmu.cs.stage3.util.Criterion {
 		}
 	}
 }
-

@@ -23,19 +23,24 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.border.*;
-
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ComponentEvent;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 /**
  * @author Jason Pratt
  * @author Clifton Forlines
  */
 public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.authoringtool.Editor {
-	public String editorName = Messages.getString("SceneEditor.0"); 
+	public String editorName = Messages.getString("Scene_Editor"); 
 
 	public static int LARGE_MODE = 1;
 	public static int SMALL_MODE = 2;
@@ -96,10 +101,10 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 			makeSceneEditorBigButton.setMargin( new java.awt.Insets( 2, 2, 2, 2 ) );
 			makeSceneEditorSmallButton.setMargin( new java.awt.Insets( 0, 0, 0, 0 ) );
 		} else {
-			makeSceneEditorBigButton = new javax.swing.JButton( Messages.getString("SceneEditor.1")); 
+			makeSceneEditorBigButton = new javax.swing.JButton( Messages.getString("Add_Object")); 
 			makeSceneEditorBigButton.setMargin( new java.awt.Insets( 4, 5, 4, 5 ) );
 			makeSceneEditorBigButton.setForeground(Color.white);
-			makeSceneEditorSmallButton = new javax.swing.JButton( Messages.getString("SceneEditor.2")); 
+			makeSceneEditorSmallButton = new javax.swing.JButton( Messages.getString("Done")); 
 			makeSceneEditorSmallButton.setMargin( new java.awt.Insets( 5, 10, 5, 10 ) );
 			makeSceneEditorSmallButton.setForeground(Color.white);
 			makeSceneEditorSmallButton.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,20));
@@ -121,8 +126,8 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		cameraViewPanel.controlPanel.add( makeSceneEditorSmallButton, new java.awt.GridBagConstraints( 0, 9, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHEAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 8, 8 ), 0, 0 ) );
 
 		// tooltips
-		makeSceneEditorBigButton.setToolTipText( Messages.getString("SceneEditor.10") ); 
-		makeSceneEditorSmallButton.setToolTipText( Messages.getString("SceneEditor.11") ); 
+		makeSceneEditorBigButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Open_the_Object_Gallery_and_Layout_Tool__p__p_Objects_are_added_to_the_world_from_the_Gallery__p_The_Layout_Tool_has_tools_that_will_help_you_position_objects_in_the_world__p_You_will_not_be_able_to_edit_Methods_or_Events_while_the_Gallery_is_open_")+"</font></html>" ); 
+		makeSceneEditorSmallButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Close_the_Gallery_and_Layout_Tool__p__p_Closes_the_gallery_and_returns_p_to_the_Method_and_Event_editors_")+"</font></html>" ); 
 	}
 
 	// big hack for now.  need to consolidate CameraViewPanel and LayoutViewPanel

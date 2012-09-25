@@ -36,4 +36,3 @@ public class ResponsePropertyLabel extends PropertyLabel {
 		setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property.get(), property ) );
 	}
 }
-

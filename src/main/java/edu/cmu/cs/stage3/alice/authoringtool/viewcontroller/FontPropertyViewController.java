@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -51,7 +53,7 @@ public class FontPropertyViewController extends javax.swing.JButton implements e
 							currentFont = (java.awt.Font)FontPropertyViewController.this.property.getValue();
 						}
 						edu.cmu.cs.stage3.alice.authoringtool.dialog.FontPanel fontPanel = new edu.cmu.cs.stage3.alice.authoringtool.dialog.FontPanel( currentFont, ! isFor3DText, true, sampleText );
-						if( edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( fontPanel, Messages.getString("FontPropertyViewController.0"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE ) == javax.swing.JOptionPane.OK_OPTION ) { 
+						if( edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( fontPanel, Messages.getString("Choose_a_Font"), javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.PLAIN_MESSAGE ) == javax.swing.JOptionPane.OK_OPTION ) { 
 							java.awt.Font font = fontPanel.getChosenFont();
 							if( font != null ) {
 								FontPropertyViewController.this.property.set( font );
@@ -116,7 +118,7 @@ public class FontPropertyViewController extends javax.swing.JButton implements e
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
 			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameInContext( (edu.cmu.cs.stage3.alice.core.Element)value, property.getOwner() ) );
 		} else if( value == null ) {
-			repr.append( Messages.getString("FontPropertyViewController.3") ); 
+			repr.append( Messages.getString("_None_") ); 
 		} else if( value instanceof java.awt.Font ) {
 			java.awt.Font font = (java.awt.Font)value;
 			repr.append( font.getFontName() );
@@ -124,7 +126,7 @@ public class FontPropertyViewController extends javax.swing.JButton implements e
 				repr.append( ", " + font.getSize() ); 
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("FontPropertyViewController.5") + value ); 
+			throw new RuntimeException( Messages.getString("Bad_value__") + value ); 
 		}
 
 		setText( repr.toString() );

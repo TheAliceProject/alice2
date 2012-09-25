@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -43,7 +45,7 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 					if( CollectionPropertyViewController.this.property != null ) {
 						edu.cmu.cs.stage3.alice.authoringtool.util.CollectionEditorPanel collectionEditorPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getCollectionEditorPanel();
 						collectionEditorPanel.setCollection( (edu.cmu.cs.stage3.alice.core.Collection)CollectionPropertyViewController.this.property.getValue() );
-						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( collectionEditorPanel, Messages.getString("CollectionPropertyViewController.0"), javax.swing.JOptionPane.PLAIN_MESSAGE ); 
+						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( collectionEditorPanel, Messages.getString("Collection_Editor"), javax.swing.JOptionPane.PLAIN_MESSAGE ); 
 					}
 				}
 			}
@@ -113,7 +115,7 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
 			repr.append( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameInContext( (edu.cmu.cs.stage3.alice.core.Element)value, property.getOwner() ) );
 		} else if( value == null ) {
-			repr.append( Messages.getString("CollectionPropertyViewController.3") ); 
+			repr.append( Messages.getString("_None_") ); 
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.Collection ) {
 			Object[] items = ((edu.cmu.cs.stage3.alice.core.Collection)value).values.getArrayValue();
 			if( items != null ) {
@@ -124,10 +126,10 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 					}
 				}
 			} else {
-				repr.append( Messages.getString("CollectionPropertyViewController.5") ); 
+				repr.append( Messages.getString("_None_") ); 
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("CollectionPropertyViewController.6") + value ); 
+			throw new RuntimeException( Messages.getString("Bad_value__") + value ); 
 		}
 
 		setText( repr.toString() );

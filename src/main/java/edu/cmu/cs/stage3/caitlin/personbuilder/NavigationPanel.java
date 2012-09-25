@@ -23,13 +23,15 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.util.Vector;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.util.Vector;
-import java.awt.Color;
-import org.w3c.dom.*;
+import javax.swing.JPanel;
+
+import org.w3c.dom.Node;
 
 //TODO: disable the next and previous buttons for first/last step
 

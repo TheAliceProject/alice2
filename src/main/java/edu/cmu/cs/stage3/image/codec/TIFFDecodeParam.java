@@ -141,8 +141,3 @@ public class TIFFDecodeParam implements ImageDecodeParam {
     }
 
 }
-
-
-
-
-

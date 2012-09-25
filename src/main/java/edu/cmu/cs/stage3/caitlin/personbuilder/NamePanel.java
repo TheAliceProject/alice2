@@ -23,13 +23,15 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class NamePanel extends javax.swing.JPanel {
 	protected javax.swing.JTextField m_nameField = null;
 	protected javax.swing.JTextField m_createdByField = null;
 
 	public NamePanel() {
 		m_nameField = new javax.swing.JTextField();
-		m_createdByField = new javax.swing.JTextField(Messages.getString("NamePanel.0")); 
+		m_createdByField = new javax.swing.JTextField(Messages.getString("Anonymous")); 
 		
 		setLayout( new java.awt.GridBagLayout() );
 		java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
@@ -38,7 +40,7 @@ public class NamePanel extends javax.swing.JPanel {
 
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.weightx = 0.0;
-		add( new javax.swing.JLabel( Messages.getString("NamePanel.1") ), gbc ); 
+		add( new javax.swing.JLabel( Messages.getString("Name_") ), gbc ); 
 
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;
@@ -46,7 +48,7 @@ public class NamePanel extends javax.swing.JPanel {
 
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.weightx = 0.0;
-		add( new javax.swing.JLabel( Messages.getString("NamePanel.2") ), gbc ); 
+		add( new javax.swing.JLabel( Messages.getString("Created_By_") ), gbc ); 
 
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;

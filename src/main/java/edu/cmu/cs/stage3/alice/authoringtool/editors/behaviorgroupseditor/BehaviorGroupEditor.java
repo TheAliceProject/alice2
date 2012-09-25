@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * Title:
  * Description:
@@ -37,7 +39,7 @@ public class BehaviorGroupEditor extends edu.cmu.cs.stage3.alice.authoringtool.u
     protected edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel componentElementPanel;
     protected edu.cmu.cs.stage3.alice.core.Element m_element;
     protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty m_components;
-    protected String headerText = Messages.getString("BehaviorGroupEditor.0"); 
+    protected String headerText = Messages.getString("Events"); 
     protected edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel headerPanel;
     protected javax.swing.JPanel containingPanel;
     protected javax.swing.JButton expandButton;

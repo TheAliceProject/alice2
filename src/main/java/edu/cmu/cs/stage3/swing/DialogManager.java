@@ -1,5 +1,6 @@
 package edu.cmu.cs.stage3.swing;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.WindowConstants;
 
 abstract class ReturnValueTracker {
@@ -43,7 +44,7 @@ public class DialogManager {
 		try {
 			parent = (java.awt.Component)s_stack.peek();
 		} catch( java.util.EmptyStackException ese ) {
-			parent = new java.awt.Frame( Messages.getString("DialogManager.0") ); 
+			parent = new java.awt.Frame( Messages.getString("empty_stack") ); 
 			parent.setVisible( true );
 		}
 		javax.swing.JDialog dialog;
@@ -67,7 +68,7 @@ public class DialogManager {
 				s_stack.pop();
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("DialogManager.1") ); 
+			throw new RuntimeException( Messages.getString("DialogManager_only_handles__modal__dialogs") ); 
 		}
 	}
 	private static void showModalDialog( javax.swing.JDialog dialog ) {
@@ -242,11 +243,11 @@ public class DialogManager {
 		//java.awt.Component component = (java.awt.Component)s_stack.peek();
 		//return javax.swing.UIManager.getString( key, component.getLocale() );
 		if( key.equals( "OptionPane.inputDialogTitle" ) ) { 
-			return Messages.getString("DialogManager.3"); 
+			return Messages.getString("Input"); 
 		} else if( key.equals( "OptionPane.messageDialogTitle" ) ) { 
-			return Messages.getString("DialogManager.5"); 
+			return Messages.getString("Message"); 
 		} else if( key.equals( "OptionPane.titleText" ) ) { 
-			return Messages.getString("DialogManager.7"); 
+			return Messages.getString("Select_an_Option"); 
 		}
 		return ""; 
 	}

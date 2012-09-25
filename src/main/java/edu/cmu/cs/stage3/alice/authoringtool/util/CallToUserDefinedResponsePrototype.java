@@ -138,4 +138,3 @@ public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
 		}
 	}
 }
-

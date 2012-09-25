@@ -23,12 +23,19 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.importers.mocap;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
-import edu.cmu.cs.stage3.alice.authoringtool.importers.Messages;
 import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 
 /**
@@ -69,19 +76,19 @@ public class BoneSelectDialog extends javax.swing.JDialog {
         for (int i=0; i<possibilities.length; i++) {
             listOfStuff.addElement(possibilities[i]);
         }
-        promptLabel.setText(Messages.getString("BoneSelectDialog.0")+matching+"?");  
+        promptLabel.setText(Messages.getString("Which_Part_is_the_bone_")+matching+"?");  
     }
 
     private void jbInit() throws Exception {
         this.getContentPane().setLayout(gridBagLayout1);
         partsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        selectButton.setText(Messages.getString("BoneSelectDialog.2")); 
+        selectButton.setText(Messages.getString("Select")); 
         selectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 selectButton_actionPerformed(e);
             }
         });
-        skipButton.setText(Messages.getString("BoneSelectDialog.3")); 
+        skipButton.setText(Messages.getString("Skip_Bone")); 
         skipButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 skipButton_actionPerformed(e);
@@ -89,8 +96,8 @@ public class BoneSelectDialog extends javax.swing.JDialog {
         });
         promptLabel.setText("jLabel1"); 
         this.setModal(true);
-        this.setTitle(Messages.getString("BoneSelectDialog.5")); 
-        limpButton.setText(Messages.getString("BoneSelectDialog.6")); 
+        this.setTitle(Messages.getString("Select_Matching_Bone")); 
+        limpButton.setText(Messages.getString("Skip_Limb")); 
         limpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpButton_actionPerformed(e);

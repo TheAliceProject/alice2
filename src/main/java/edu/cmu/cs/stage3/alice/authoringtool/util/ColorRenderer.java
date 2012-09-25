@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 class ColorRenderer extends javax.swing.JLabel implements javax.swing.ListCellRenderer, javax.swing.table.TableCellRenderer, javax.swing.tree.TreeCellRenderer {
 	//TODO: cache icons while paying attention to width and height?
 	//static java.util.Hashtable colorsToIcons = new java.util.Hashtable();
@@ -79,23 +81,23 @@ class ColorRenderer extends javax.swing.JLabel implements javax.swing.ListCellRe
 
 	public static String getTextFromColor( java.awt.Color color ) {
 		String text = ""; 
-		if( color.equals( java.awt.Color.black ) ) { text = Messages.getString("ColorRenderer.1"); } 
-		else if( color.equals( java.awt.Color.blue ) ) { text = Messages.getString("ColorRenderer.2"); } 
-		else if( color.equals( java.awt.Color.cyan ) ) { text = Messages.getString("ColorRenderer.3"); } 
-		else if( color.equals( java.awt.Color.darkGray ) ) { text = Messages.getString("ColorRenderer.4"); } 
-		else if( color.equals( java.awt.Color.gray ) ) { text = Messages.getString("ColorRenderer.5"); } 
-		else if( color.equals( java.awt.Color.green ) ) { text = Messages.getString("ColorRenderer.6"); } 
-		else if( color.equals( java.awt.Color.lightGray ) ) { text = Messages.getString("ColorRenderer.7"); } 
-		else if( color.equals( java.awt.Color.magenta ) ) { text = Messages.getString("ColorRenderer.8"); } 
-		else if( color.equals( java.awt.Color.orange ) ) { text = Messages.getString("ColorRenderer.9"); } 
-		else if( color.equals( java.awt.Color.pink ) ) { text = Messages.getString("ColorRenderer.10"); } 
-		else if( color.equals( java.awt.Color.red ) ) { text = Messages.getString("ColorRenderer.11"); } 
-		else if( color.equals( java.awt.Color.white ) ) { text = Messages.getString("ColorRenderer.12"); } 
-		else if( color.equals( java.awt.Color.yellow ) ) { text = Messages.getString("ColorRenderer.13"); } 
+		if( color.equals( java.awt.Color.black ) ) { text = Messages.getString("black"); } 
+		else if( color.equals( java.awt.Color.blue ) ) { text = Messages.getString("blue"); } 
+		else if( color.equals( java.awt.Color.cyan ) ) { text = Messages.getString("cyan"); } 
+		else if( color.equals( java.awt.Color.darkGray ) ) { text = Messages.getString("darkGray"); } 
+		else if( color.equals( java.awt.Color.gray ) ) { text = Messages.getString("gray"); } 
+		else if( color.equals( java.awt.Color.green ) ) { text = Messages.getString("green"); } 
+		else if( color.equals( java.awt.Color.lightGray ) ) { text = Messages.getString("lightGray"); } 
+		else if( color.equals( java.awt.Color.magenta ) ) { text = Messages.getString("magenta"); } 
+		else if( color.equals( java.awt.Color.orange ) ) { text = Messages.getString("orange"); } 
+		else if( color.equals( java.awt.Color.pink ) ) { text = Messages.getString("pink"); } 
+		else if( color.equals( java.awt.Color.red ) ) { text = Messages.getString("red"); } 
+		else if( color.equals( java.awt.Color.white ) ) { text = Messages.getString("white"); } 
+		else if( color.equals( java.awt.Color.yellow ) ) { text = Messages.getString("yellow"); } 
 		else {
 			float[] rgba = new float[4];
 			color.getComponents( rgba );
-			text = Messages.getString("ColorRenderer.14") + rgba[0] + Messages.getString("ColorRenderer.15") + rgba[1] + Messages.getString("ColorRenderer.16") + rgba[2] + Messages.getString("ColorRenderer.17") + rgba[3] + ">";    //$NON-NLS-4$ //$NON-NLS-5$
+			text = Messages.getString("_red___") + rgba[0] + Messages.getString("__green___") + rgba[1] + Messages.getString("__blue___") + rgba[2] + Messages.getString("__alpha___") + rgba[3] + ">";    //$NON-NLS-4$ //$NON-NLS-5$
 		}
 
 		return text;

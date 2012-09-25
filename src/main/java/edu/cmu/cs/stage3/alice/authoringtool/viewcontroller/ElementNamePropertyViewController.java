@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -35,7 +37,7 @@ public class ElementNamePropertyViewController extends StringPropertyViewControl
 		try {
 			super.stopEditing();
 		} catch( edu.cmu.cs.stage3.alice.core.IllegalNameValueException e ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("ElementNamePropertyViewController.0"), javax.swing.JOptionPane.ERROR_MESSAGE ); 
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("Error_setting_name"), javax.swing.JOptionPane.ERROR_MESSAGE ); 
 			editValue();
 		}
 	}
@@ -55,7 +57,7 @@ public class ElementNamePropertyViewController extends StringPropertyViewControl
 
 	public void setDefaultPopupStructure() {
 		popupStructure = new java.util.Vector();
-		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("ElementNamePropertyViewController.1"), new Runnable() { 
+		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("Rename"), new Runnable() { 
 			public void run() {
 				ElementNamePropertyViewController.this.editValue();
 			}
@@ -69,7 +71,7 @@ public class ElementNamePropertyViewController extends StringPropertyViewControl
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {				
-				if (ev.isPopupTrigger() || ((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown()){   
+				if (ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3 || ((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown()){   
 					if( isEnabled() ) {
 						ElementNamePropertyViewController.this.popupButton.doClick();
 					}

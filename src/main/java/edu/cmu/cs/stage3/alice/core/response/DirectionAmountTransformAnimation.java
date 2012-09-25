@@ -23,10 +23,10 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Direction;
 import edu.cmu.cs.stage3.alice.core.property.DirectionProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class DirectionAmountTransformAnimation extends TransformAnimation {
 	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() ); 
@@ -41,7 +41,7 @@ public abstract class DirectionAmountTransformAnimation extends TransformAnimati
 				if( acceptsDirection( (Direction)value ) ) {
 					//pass
 				} else {
-					throw new RuntimeException( this + Messages.getString("DirectionAmountTransformAnimation.2") + value ); 
+					throw new RuntimeException( this + Messages.getString("_does_not_accept_direction_") + value ); 
 				}
 			}
 		} else {
@@ -54,7 +54,7 @@ public abstract class DirectionAmountTransformAnimation extends TransformAnimati
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( DirectionAmountTransformAnimation.this.direction.getDirectionValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("DirectionAmountTransformAnimation.3"), null, DirectionAmountTransformAnimation.this.direction ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("direction_value_must_not_be_null_"), null, DirectionAmountTransformAnimation.this.direction ); 
 			}
 			//if( DirectionAmountTransformAnimation.this.amount.getValue() == null ) {
 			//	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( "amount value must not be null.", null, DirectionAmountTransformAnimation.this.amount );

@@ -642,9 +642,9 @@ class TIFFFaxDecoder {
 
 		    updatePointer(4 - bits);
 		} else if (bits == 0) {     // ERROR
-		    throw new Error(JaiI18N.getString("TIFFFaxDecoder0"));
+		    throw new Error(JaiI18N.getString("Invalid_code_encountered_"));
 		} else if (bits == 15) {    // EOL
-		    throw new Error(JaiI18N.getString("TIFFFaxDecoder1"));
+		    throw new Error(JaiI18N.getString("EOL_code_word_encountered_in_White_run_"));
 		} else {
 		    // 11 bits - 0000 0111 1111 1111 = 0x07ff
 		    code = (entry >>> 5) & 0x07ff;
@@ -700,7 +700,7 @@ class TIFFFaxDecoder {
 			updatePointer(4 - bits);
 		    } else if (bits == 15) {
 			// EOL code
-			throw new Error(JaiI18N.getString("TIFFFaxDecoder2"));
+			throw new Error(JaiI18N.getString("EOL_code_word_encountered_in_Black_run_"));
 		    } else {
                         setToBlack(buffer, lineOffset, bitOffset, code);
                         bitOffset += code;
@@ -781,7 +781,7 @@ class TIFFFaxDecoder {
 
 	// The data must start with an EOL code
 	if (readEOL() != 1) {
-	    throw new Error(JaiI18N.getString("TIFFFaxDecoder3"));
+	    throw new Error(JaiI18N.getString("First_scanline_must_be_1D_encoded_"));
 	}
 
         int lineOffset = 0;
@@ -883,7 +883,7 @@ class TIFFFaxDecoder {
 
                         updatePointer(7 - bits);
 		    } else {
-			throw new Error(JaiI18N.getString("TIFFFaxDecoder4"));
+			throw new Error(JaiI18N.getString("Invalid_code_encountered_while_decoding_2D_group_3_compressed_data_"));
 		    }
 		}
 
@@ -1032,7 +1032,7 @@ class TIFFFaxDecoder {
 		    updatePointer(7 - bits);
 		} else if (code == 11) {
 		    if (nextLesserThan8Bits(3) != 7) {
-			throw new Error(JaiI18N.getString("TIFFFaxDecoder5"));
+			throw new Error(JaiI18N.getString("Invalid_code_encountered_while_decoding_2D_group_4_compressed_data_"));
 		    }
 
 		    int zeros = 0;
@@ -1098,7 +1098,7 @@ class TIFFFaxDecoder {
 
 		    }
 		} else {
-		    throw new Error(JaiI18N.getString("TIFFFaxDecoder5"));
+		    throw new Error(JaiI18N.getString("Invalid_code_encountered_while_decoding_2D_group_4_compressed_data_"));
 		}
 	    }
 
@@ -1174,9 +1174,9 @@ class TIFFFaxDecoder {
                 runLength += code;
 		updatePointer(4 - bits);
 	    } else if (bits == 0) {     // ERROR
-		throw new Error(JaiI18N.getString("TIFFFaxDecoder0"));
+		throw new Error(JaiI18N.getString("Invalid_code_encountered_"));
 	    } else if (bits == 15) {    // EOL
-		throw new Error(JaiI18N.getString("TIFFFaxDecoder1"));
+		throw new Error(JaiI18N.getString("EOL_code_word_encountered_in_White_run_"));
 	    } else {
 		// 11 bits - 0000 0111 1111 1111 = 0x07ff
 		code = (entry >>> 5) & 0x07ff;
@@ -1227,7 +1227,7 @@ class TIFFFaxDecoder {
 		    updatePointer(4 - bits);
 		} else if (bits == 15) {
 		    // EOL code
-		    throw new Error(JaiI18N.getString("TIFFFaxDecoder2"));
+		    throw new Error(JaiI18N.getString("EOL_code_word_encountered_in_Black_run_"));
 		} else {
                     runLength += code;
 		    updatePointer(9 - bits);
@@ -1258,7 +1258,7 @@ class TIFFFaxDecoder {
     private int readEOL() {
 	if (fillBits == 0) {
 	    if (nextNBits(12) != 1) {
-		throw new Error(JaiI18N.getString("TIFFFaxDecoder6"));
+		throw new Error(JaiI18N.getString("Scanline_must_begin_with_EOL_code_word_"));
 	    }
 	} else if (fillBits == 1) {
 
@@ -1269,7 +1269,7 @@ class TIFFFaxDecoder {
 	    int bitsLeft = 8 - bitPointer;
 
 	    if (nextNBits(bitsLeft) != 0) {
-		    throw new Error(JaiI18N.getString("TIFFFaxDecoder8"));
+		    throw new Error(JaiI18N.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
 	    }
 
 	    // If the number of bitsLeft is less than 8, then to have a 12
@@ -1278,7 +1278,7 @@ class TIFFFaxDecoder {
 	    // that.
 	    if (bitsLeft < 4) {
 		if (nextNBits(8) != 0) {
-		    throw new Error(JaiI18N.getString("TIFFFaxDecoder8"));
+		    throw new Error(JaiI18N.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
 		}
 	    }
 
@@ -1290,7 +1290,7 @@ class TIFFFaxDecoder {
 
 		// If not all zeros
 		if (n != 0) {
-		    throw new Error(JaiI18N.getString("TIFFFaxDecoder8"));
+		    throw new Error(JaiI18N.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
 		}
 	    }
 	}
@@ -1367,7 +1367,7 @@ class TIFFFaxDecoder {
 		next2next = flipTable[data[bp + 2] & 0xff];
 	    }
 	} else {
-	    throw new Error(JaiI18N.getString("TIFFFaxDecoder7"));
+	    throw new Error(JaiI18N.getString("TIFF_FILL_ORDER_tag_must_be_either_1_or_2_"));
 	}
 
 	int bitsLeft = 8 - bitPointer;
@@ -1424,7 +1424,7 @@ class TIFFFaxDecoder {
 		next = flipTable[data[bp + 1] & 0xff];
 	    }
 	} else {
-	    throw new Error(JaiI18N.getString("TIFFFaxDecoder7"));
+	    throw new Error(JaiI18N.getString("TIFF_FILL_ORDER_tag_must_be_either_1_or_2_"));
 	}
 
 	int bitsLeft = 8 - bitPointer;
@@ -1473,4 +1473,3 @@ class TIFFFaxDecoder {
 	return true;
     }
 }
-

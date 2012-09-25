@@ -79,4 +79,3 @@ public class FixedFrameRateClock implements edu.cmu.cs.stage3.alice.core.Clock {
 		}
 	}
 }
-

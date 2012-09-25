@@ -10,8 +10,8 @@ package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
  * @version 1.0
  */
 
- import java.util.EventListener;
  import java.awt.event.KeyEvent;
+import java.util.EventListener;
 
 public interface KeyEventListener extends EventListener {
   public boolean keyTyped(KeyEvent e);

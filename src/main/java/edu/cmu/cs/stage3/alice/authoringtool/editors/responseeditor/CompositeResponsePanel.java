@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 
 /**
@@ -41,7 +42,7 @@ public abstract class CompositeResponsePanel extends edu.cmu.cs.stage3.alice.aut
 
     public CompositeResponsePanel(){
         super();
-        headerText = Messages.getString("CompositeResponsePanel.0"); 
+        headerText = Messages.getString("Composite_Response"); 
     }
 
     public void set(edu.cmu.cs.stage3.alice.core.response.CompositeResponse response, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){

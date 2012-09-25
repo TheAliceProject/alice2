@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -39,7 +40,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
     protected edu.cmu.cs.stage3.alice.core.Element m_element;
     protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty m_components;
     protected edu.cmu.cs.stage3.alice.core.property.BooleanProperty m_isCommentedOut;
-    protected String headerText = Messages.getString("CompositeElementPanel.0"); 
+    protected String headerText = Messages.getString("Composite_Element"); 
     protected javax.swing.JPanel headerPanel;
     protected javax.swing.JLabel closeBrace = new javax.swing.JLabel("}"); 
     protected javax.swing.JPanel containingPanel;
@@ -59,7 +60,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
     protected java.awt.event.MouseListener elementMouseListener = new java.awt.event.MouseAdapter() {
         
 		public void mouseReleased( java.awt.event.MouseEvent ev ) {		// Aik Min
-            if( ev.isPopupTrigger() ||	
+            if( ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3 ||
             		((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown() ){   
                 if (CompositeElementPanel.this.getParent() != null){
                     java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.getDefaultStructure( CompositeElementPanel.this.m_element );
@@ -69,7 +70,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
                                 dissolve();
                             }
                         };
-                        edu.cmu.cs.stage3.util.StringObjectPair dissolveEntry = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("CompositeElementPanel.5"), dissolveRunnable); 
+                        edu.cmu.cs.stage3.util.StringObjectPair dissolveEntry = new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("dissolve"), dissolveRunnable); 
                         if (structure != null){
                             structure.add(dissolveEntry);
                         }
@@ -87,7 +88,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 
 
     public CompositeElementPanel(){
-        headerText = Messages.getString("CompositeElementPanel.7"); 
+        headerText = Messages.getString("Element_Response"); 
         actionListener = new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent e){
                 if (isExpanded){
@@ -632,7 +633,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 			} else{
 				styleString = " style=\"border-right: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\"";   
 			}
-			toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("CompositeElementPanel.75")+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
+			toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("_i__Do_Nothing___i_")+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
 		}
 		if (this instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel){
 			edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel mainQuestion = (edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel)this;
@@ -692,7 +693,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 				} else{
 					styleString = " style=\"border-right: 1 solid "+borderColorString+"\"";  
 				}
-				toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("CompositeElementPanel.134")+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
+				toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("_i__Do_Nothing___i_")+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
 			}
 		}
 		if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){

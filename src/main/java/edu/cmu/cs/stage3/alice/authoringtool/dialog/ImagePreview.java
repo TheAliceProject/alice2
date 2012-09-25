@@ -31,19 +31,25 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import javax.swing.*;
-import java.beans.*;
-import java.awt.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 
 public class ImagePreview extends JComponent implements PropertyChangeListener {
 	ImageIcon thumbnail = null;
 	File file = null;
 	int width = 0, height = 0;
-	
+
 	public ImagePreview(JFileChooser fc) {
 		setPreferredSize(new Dimension(300, 300));
-		setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12 )); 
+		setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
 		fc.addPropertyChangeListener(this);
 	}
 
@@ -75,12 +81,12 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 			file = null;
 			update = true;
 
-		// If a file became selected, find out which one.
+			// If a file became selected, find out which one.
 		} else if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(prop)) {
 			file = (File) e.getNewValue();
 			update = true;
 		}
-		
+
 		// Update the preview accordingly.
 		if (update) {
 			thumbnail = null;
@@ -103,7 +109,8 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 			}
 
 			thumbnail.paintIcon(this, g, x, y);
-			g.drawString(Messages.getString("ImagePreview.1") + width + " x " + height, 50, 30);  
+			g.drawString(Messages.getString("Dimensions___") + width + " x "
+					+ height, 50, 30);
 
 		}
 	}

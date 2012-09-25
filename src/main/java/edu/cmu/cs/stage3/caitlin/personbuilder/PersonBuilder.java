@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class PersonBuilder extends javax.swing.JPanel {
 	public static java.util.Vector getAllBuilders() {
 		java.util.Vector builders = new java.util.Vector();
@@ -104,13 +106,13 @@ public class PersonBuilder extends javax.swing.JPanel {
 		edu.cmu.cs.stage3.alice.core.Model model = modelWrapper.getModel();
 		String text = namePanel.getCreatedBy();
 		if( text.length()== 0 ) {
-			text = Messages.getString("PersonBuilder.9"); 
+			text = Messages.getString("Anonymous"); 
 		}
-		model.data.put( Messages.getString("PersonBuilder.10"), text ); 
+		model.data.put( Messages.getString("created_by"), text ); 
 
 		text = namePanel.getName();
 		if( text.length()== 0 ) {
-			text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("PersonBuilder.11") ); 
+			text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("What_would_you_like_to_name_your_character_") ); 
 		}
 		if (text == null)	//Aik Min - Avoid NullPointer exception
 			text = ""; 

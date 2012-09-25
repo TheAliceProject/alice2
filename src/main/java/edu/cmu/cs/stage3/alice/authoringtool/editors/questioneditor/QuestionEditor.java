@@ -103,14 +103,14 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         ifElsePrototype.setBackground(IF_ELSE_COLOR);
         javax.swing.JLabel DITLabel = new javax.swing.JLabel(ifElseString);
         ifElsePrototype.add(DITLabel, java.awt.BorderLayout.CENTER);
-        String DITdesired[] = {AikMin.getProperty("condition")};
+        String DITdesired[] = {"condition"};
         ifElsePrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype(
                 edu.cmu.cs.stage3.alice.core.question.userdefined.IfElse.class, null, DITdesired)));
         ifElsePrototype.addDragSourceComponent(DITLabel);
 
-        String CLdesired[] = {AikMin.getProperty("end")};
+        String CLdesired[] = {"end"};
         loopNPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopNPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"));
         loopNPrototype.setBackground(LOOP_N_COLOR);
@@ -122,7 +122,7 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN.class, null, CLdesired)));
         loopNPrototype.addDragSourceComponent(LLabel);
 
-        String LITdesired[] = {AikMin.getProperty("condition")};
+        String LITdesired[] = {"condition"};
         whilePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //whilePrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"));
         whilePrototype.setBackground(WHILE_COLOR);
@@ -147,7 +147,7 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         forEachPrototype.addDragSourceComponent(SLLabel);
 
 
-        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", "No comment")};
+        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", AikMin.getName("No comment"))};
         commentPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         commentPrototype.setBackground(COMMENT_COLOR);
         javax.swing.JLabel commentLabel = new javax.swing.JLabel(commentString);

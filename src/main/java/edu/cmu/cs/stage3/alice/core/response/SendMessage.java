@@ -46,4 +46,3 @@ public class SendMessage extends edu.cmu.cs.stage3.alice.core.Response {
 		}
 	}
 }
-

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -56,9 +58,9 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 		} else if( pathname instanceof java.io.InputStream ) {
 			in = (java.io.InputStream)pathname;
 		} else if( pathname == null ) {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeLoader.0") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_is_null") ); 
 		} else {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeLoader.1") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_must_be_an_instance_of_String__java_io_File__java_net_URL__or_java_io_InputStream") ); 
 		}
 
 		zipIn = new java.util.zip.ZipInputStream( new java.io.BufferedInputStream( in ) );
@@ -119,7 +121,7 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 
 		byte [] fileContents = (byte[])pathnamesToByteArrays.get( pathname );
 		if( fileContents == null ) {
-			throw new java.io.FileNotFoundException( Messages.getString("ZipTreeLoader.9") + pathname ); 
+			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__") + pathname ); 
 		}
 
 		currentlyOpenStream = new java.io.ByteArrayInputStream( fileContents );
@@ -311,5 +313,3 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 		throw new KeepFileNotSupportedException();
 	}
 }
-
-

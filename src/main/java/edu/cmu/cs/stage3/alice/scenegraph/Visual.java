@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Dennis Cosgrove
  */
@@ -48,19 +50,19 @@ public class Visual extends Component {
 	
 	protected void releasePass1() {
 		if( m_frontFacingAppearance != null ) {
-			warnln( Messages.getString("Visual.6") + this + Messages.getString("Visual.7") + m_frontFacingAppearance + "." );   
+			warnln( Messages.getString("WARNING__released_visual_") + this + Messages.getString("_still_has_front_facing_appearance_") + m_frontFacingAppearance + "." );   
 			setFrontFacingAppearance( null );
 		}
 		if( m_backFacingAppearance != null ) {
-			warnln( Messages.getString("Visual.9") + this + Messages.getString("Visual.10") + m_frontFacingAppearance + "." );   
+			warnln( Messages.getString("WARNING__released_visual_") + this + Messages.getString("_still_has_back_facing_appearance_") + m_frontFacingAppearance + "." );   
 			setBackFacingAppearance( null );
 		}
 		if( m_geometry != null ) {
-			warnln( Messages.getString("Visual.12") + this + Messages.getString("Visual.13") + m_geometry + "." );   
+			warnln( Messages.getString("WARNING__released_visual_") + this + Messages.getString("_still_has_geometry_") + m_geometry + "." );   
 			setGeometry( null );
 		}
 		if( m_disabledAffectors != null && m_disabledAffectors.length > 0 ) {
-			warnln( Messages.getString("Visual.15") + this + Messages.getString("Visual.16") );  
+			warnln( Messages.getString("WARNING__released_visual_") + this + Messages.getString("_still_has_disabled_affectors__") );  
 			for( int i=0; i<m_disabledAffectors.length; i++ ) {
 				warnln( "\t" + m_disabledAffectors[ i ] ); 
 			}

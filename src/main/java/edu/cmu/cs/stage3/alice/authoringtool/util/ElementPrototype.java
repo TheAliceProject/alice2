@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -33,14 +36,14 @@ public class ElementPrototype {
 
 	public ElementPrototype( Class elementClass, edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues, String[] desiredProperties ) {
 		if( ! edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( elementClass ) ) {
-			throw new IllegalArgumentException( Messages.getString("ElementPrototype.0") ); 
+			throw new IllegalArgumentException( Messages.getString("The_elementClass_given_is_not_actually_a_subclass_of_Element_") ); 
 		}
 
 		edu.cmu.cs.stage3.alice.core.Element testElement = null;
 		try {
 			testElement = (edu.cmu.cs.stage3.alice.core.Element)elementClass.newInstance();
 		} catch( Exception e ) {
-			throw new IllegalArgumentException( Messages.getString("ElementPrototype.1") + elementClass.getName() ); 
+			throw new IllegalArgumentException( Messages.getString("Unable_to_create_a_new_element_of_type__") + elementClass.getName() ); 
 		}
 		if( ! (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) || edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass )) ) { // don't do checking for CallToUserDefinedResponse/Question, since they use known and desired properties for requiredParameters
 			if( knownPropertyValues != null ) {
@@ -49,7 +52,7 @@ public class ElementPrototype {
 					Object propertyValue = knownPropertyValues[i].getObject();
 					edu.cmu.cs.stage3.alice.core.Property property = testElement.getPropertyNamed( propertyName );
 					if( property == null ) {
-						throw new IllegalArgumentException( Messages.getString("ElementPrototype.2") + propertyName + Messages.getString("ElementPrototype.3") + elementClass.getName() );  
+						throw new IllegalArgumentException( Messages.getString("property_named_") + propertyName + Messages.getString("_does_not_exist_in_") + elementClass.getName() );  
 					}
 					if( propertyValue == null ) {
 //						if( ! property.isAcceptingOfNull() ) {
@@ -61,12 +64,12 @@ public class ElementPrototype {
 							// allow
 						} else {
 							if( ! property.getValueClass().isAssignableFrom( ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass() ) ) {
-								throw new IllegalArgumentException( Messages.getString("ElementPrototype.4") + propertyName + Messages.getString("ElementPrototype.5") + elementClass.getName() + Messages.getString("ElementPrototype.6") + ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass().getName() );   
+								throw new IllegalArgumentException( Messages.getString("property_named_") + propertyName + Messages.getString("_in_class_") + elementClass.getName() + Messages.getString("_does_not_accept_expressions_of_type_") + ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass().getName() );   
 							}
 						}
 					} else {
 						if( ! property.getValueClass().isAssignableFrom( propertyValue.getClass() ) ) {
-							throw new IllegalArgumentException( Messages.getString("ElementPrototype.7") + propertyName + Messages.getString("ElementPrototype.8") + elementClass.getName() + Messages.getString("ElementPrototype.9") + propertyValue.getClass().getName() + Messages.getString("ElementPrototype.10") + propertyValue );    //$NON-NLS-4$
+							throw new IllegalArgumentException( Messages.getString("property_named_") + propertyName + Messages.getString("_in_class_") + elementClass.getName() + Messages.getString("_does_not_accept_values_of_type_") + propertyValue.getClass().getName() + Messages.getString("__bad_value__") + propertyValue );    //$NON-NLS-4$
 						}
 					}
 				}
@@ -75,9 +78,10 @@ public class ElementPrototype {
 			}
 			if( desiredProperties != null ) {
 				for( int i = 0; i < desiredProperties.length; i++ ) {
+					//desiredProperties[i] = AikMin.getName( desiredProperties[i] );
 					edu.cmu.cs.stage3.alice.core.Property property = testElement.getPropertyNamed( desiredProperties[i] );
 					if( property == null ) {
-						throw new IllegalArgumentException( Messages.getString("ElementPrototype.11") + desiredProperties[i] + Messages.getString("ElementPrototype.12") + elementClass.getName() );  
+						throw new IllegalArgumentException( Messages.getString("property_named_") + desiredProperties[i] + Messages.getString("_does_not_exist_in_") + elementClass.getName() );  
 					}
 				}
 			} else {
@@ -134,35 +138,35 @@ public class ElementPrototype {
 					forResponse = (edu.cmu.cs.stage3.alice.core.response.ForEachTogether)element;
 				}
 				edu.cmu.cs.stage3.alice.core.Variable eachVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				eachVar.name.set( Messages.getString("ElementPrototype.15") ); 
+				eachVar.name.set( Messages.getString("item") ); 
 				eachVar.valueClass.set( Object.class );
 				forResponse.addChild( eachVar );
 				forResponse.each.set( eachVar );
 			} else if( edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach.class.isAssignableFrom( elementClass ) ) {
 				edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach forQuestion = (edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)element;
 				edu.cmu.cs.stage3.alice.core.Variable eachVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				eachVar.name.set( Messages.getString("ElementPrototype.16") ); 
+				eachVar.name.set( Messages.getString("item") ); 
 				eachVar.valueClass.set( Object.class );
 				forQuestion.addChild( eachVar );
 				forQuestion.each.set( eachVar );
 			} else if (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class.isAssignableFrom( elementClass ) ){
 				edu.cmu.cs.stage3.alice.core.response.LoopNInOrder loopN = (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder)element;
 				edu.cmu.cs.stage3.alice.core.Variable indexVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				indexVar.name.set( Messages.getString("ElementPrototype.17") ); 
+				indexVar.name.set( Messages.getString("index") ); 
 				indexVar.valueClass.set( Number.class );
 				loopN.addChild( indexVar );
 				loopN.index.set( indexVar );
 			} else if (edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN.class.isAssignableFrom( elementClass ) ){
 				edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN loopN = (edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN)element;
 				edu.cmu.cs.stage3.alice.core.Variable indexVar = new edu.cmu.cs.stage3.alice.core.Variable();
-				indexVar.name.set( Messages.getString("ElementPrototype.18") ); 
+				indexVar.name.set( Messages.getString("index") ); 
 				indexVar.valueClass.set( Number.class );
 				loopN.addChild( indexVar );
 				loopN.index.set( indexVar );
 			}
 			return element;
 		} catch( Exception e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementPrototype.19"), e ); // should not be reached if we did adequate checking in Constructor. 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_element_"), e ); // should not be reached if we did adequate checking in Constructor. 
 		}
 
 		return null;

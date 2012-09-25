@@ -24,13 +24,10 @@
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
 import java.awt.AWTException;
-import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Window;
 
 import javax.media.opengl.GL;
-import javax.swing.JFrame;
 
 public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.renderer.AbstractProxyRenderTarget {
 	protected RenderTarget( Renderer renderer ) {

@@ -1,32 +1,14 @@
 package movieMaker;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
+import edu.cmu.cs.stage3.lang.Messages;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Vector;
-
 import javax.media.ControllerClosedEvent;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
-//import javax.media.DataSink;
-//import javax.media.Duration;
-//import javax.media.Manager;
 import javax.media.MediaLocator;
-//import javax.media.NoPlayerException;
-//import javax.media.Processor;
-//import javax.media.Time;
-//import javax.media.control.MonitorControl;
-//import javax.media.protocol.DataSource;
-//import javax.media.protocol.FileTypeDescriptor;
-
-//import movieMaker.SaveAsDialog.StateListener;
-
-//import jmapps.ui.MessageDialog;
-//import jmapps.ui.ProgressDialog;
-//import jmapps.ui.ProgressThread;
-
-//import com.sun.media.util.JMFI18N;
-
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 
 public class SoundStorage {
 	 
@@ -225,7 +207,7 @@ public class SoundStorage {
 				SimpleSound blank = new SimpleSound(blankLength, s);
 				blank.writeToFile(silence);
 			} catch (SoundException e) {
-				AuthoringTool.showErrorDialog( Messages.getString("SoundStorage.0"), e); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_encoding_sound_file__"), e); 
 				return null;
 			}
 

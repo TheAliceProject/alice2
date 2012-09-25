@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class AbstractPointAtConstraint extends TransformResponse {
 	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); 
@@ -46,10 +46,10 @@ public class AbstractPointAtConstraint extends TransformResponse {
 			m_upGuide = AbstractPointAtConstraint.this.upGuide.getVector3Value();
 			m_onlyAffectYaw = onlyAffectYaw();
 			if( m_target == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtConstraint.3"), null, AbstractPointAtConstraint.this.target ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_value_must_not_be_null_"), null, AbstractPointAtConstraint.this.target ); 
 			}
 			if( m_target == m_subject ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtConstraint.4"), getCurrentStack(), AbstractPointAtConstraint.this.target );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_value_must_not_be_equal_to_the_subject_value_"), getCurrentStack(), AbstractPointAtConstraint.this.target );             
 			}
 		}
 		//todo: rework this hack added from TurnAwayFromConstraint

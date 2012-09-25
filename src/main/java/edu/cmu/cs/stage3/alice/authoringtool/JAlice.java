@@ -25,6 +25,8 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.util.Locale;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -45,16 +47,15 @@ public class JAlice {
 		}
 	}
 	// version information
-	private static String version = Messages.getString("JAlice.0"); 
+	private static String version = "2.3"; 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString();
 	private static String directory = null;
 	static {
 		try {
-			java.io.File versionFile = new java.io.File( getAliceHomeDirectory(), "etc/version.txt" ).getAbsoluteFile(); 
+			java.io.File versionFile = new java.io.File( getAliceHomeDirectory(), "etc/config.txt" ).getAbsoluteFile(); 
 			if( versionFile.exists() ) {
 				if( versionFile.canRead() ) {
 					java.io.BufferedReader br = new java.io.BufferedReader( new java.io.FileReader( versionFile ) );
-					String versionString = br.readLine();
 					String colorString = br.readLine();
 					directory = br.readLine();
 					br.close();
@@ -75,25 +76,15 @@ public class JAlice {
 							} catch (Throwable colorT){colorT.printStackTrace();}							
 						} 
 					}
-					if( versionString != null ) {
-						versionString = versionString.trim();
-						if( versionString.length() > 0 ) {
-							version = versionString;
-						} else {
-							version = Messages.getString("JAlice.4"); 
-						}
-					} else {
-						version = Messages.getString("JAlice.5"); 
-					}
 				} else {
-					version = Messages.getString("JAlice.6"); 
+					version = Messages.getString("cannot_read_version_txt"); 
 				}
 			} else {
-				version = Messages.getString("JAlice.7"); 
+				version = Messages.getString("version_txt_does_not_exist"); 
 			}
 		} catch( Throwable t ) {
 			t.printStackTrace();
-			version = Messages.getString("JAlice.8"); 
+			version = Messages.getString("error_while_reading_version_txt"); 
 		}
 	}
 
@@ -139,7 +130,11 @@ public class JAlice {
 				splashScreen = initSplashScreen();
 				splashScreen.showSplash();
 			}
-			defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default.a2w" ).getAbsoluteFile(); 
+			if (AikMin.locale.equals("en")){
+				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default.a2w" ).getAbsoluteFile();
+			} else {
+				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale+".a2w" ).getAbsoluteFile();
+			}
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 			configInit();
 			try{
@@ -149,7 +144,7 @@ public class JAlice {
 				}
 				aliceHasNotExitedFile.createNewFile();
 				java.io.OutputStreamWriter writer = new java.io.OutputStreamWriter(new java.io.FileOutputStream(aliceHasNotExitedFile));
-				writer.write(Messages.getString("JAlice.14")); 
+				writer.write(Messages.getString("Alice_has_not_exited_propertly_yet_")); 
 				writer.flush();
 				writer.close();
 			}catch (Exception e){}
@@ -168,8 +163,14 @@ public class JAlice {
 	}
 
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen initSplashScreen() {
-		java.io.File splashFile = new java.io.File( getAliceHomeDirectory(), "etc/AliceSplash.jpg" ).getAbsoluteFile(); 
-		java.awt.Image splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( splashFile.getAbsolutePath() );
+		java.awt.Image splashImage;
+		if (AikMin.locale.equals("en")){
+			splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+					.getResource("images/AliceSplash.png") ); 
+		} else {
+			splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+					.getResource("images/AliceSplash_"+AikMin.locale+".png") ); 
+		}
 		return new edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen( splashImage );
 	}
 
@@ -545,7 +546,7 @@ public class JAlice {
 	}
 
 	public static java.io.File getAliceHomeDirectory() {
-		if( aliceHomeDirectory == null ) {
+		if( aliceHomeDirectory == null ) {			
 			if( System.getProperty( "alice.home" ) != null ) { 
 				setAliceHomeDirectory( new java.io.File( System.getProperty( "alice.home" ) ).getAbsoluteFile() ); 
 			} else {
@@ -590,4 +591,3 @@ public class JAlice {
 		return aliceUserDirectory;
 	}
 }
-

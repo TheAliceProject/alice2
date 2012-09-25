@@ -37,11 +37,11 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  * you entered into with Sun.
  */
 
-import javax.swing.table.AbstractTableModel;
 import javax.swing.JTree;
-import javax.swing.tree.TreePath;
 import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeExpansionListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.tree.TreePath;
 
 /**
  * This is a wrapper class takes a TreeTableModel and implements
@@ -120,4 +120,3 @@ public class TreeTableModelAdapter extends AbstractTableModel implements TypedTa
 		treeTableModel.setValueAt( value, nodeForRow(row), column );
 	}
 }
-

@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.question;
 
-import edu.cmu.cs.stage3.alice.core.Messages;
 import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class SubjectObjectQuestion extends SubjectQuestion {
 	public final TransformableProperty object = new TransformableProperty( this, "object", null ); 
@@ -41,66 +41,66 @@ public abstract class SubjectObjectQuestion extends SubjectQuestion {
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext=""; 
 		else if (this instanceof DistanceTo)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.2") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_distance_to_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof DistanceToTheLeftOf)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.4") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_distance_to_the_left_of_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof DistanceToTheRightOf)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.6") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_distance_to_the_right_of_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof DistanceAbove)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.8") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_distance_above_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof DistanceBelow)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.10") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_distance_below_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof DistanceInFrontOf)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.12") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_distance_in_front_of_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof DistanceBehind)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.14") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_distance_behind_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		// Size
 		else if (this instanceof IsSmallerThan)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-			subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.16") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+			subjectValue.name.getStringValue()+Messages.getString("_is_smaller_than_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsLargerThan)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-			subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.18") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+			subjectValue.name.getStringValue()+Messages.getString("_is_larger_than_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsNarrowerThan)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-			subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.20") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+			subjectValue.name.getStringValue()+Messages.getString("_is_narrower_than_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsWiderThan)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-			subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.22") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+			subjectValue.name.getStringValue()+Messages.getString("_is_wider_than_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsShorterThan)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-			subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.24") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+			subjectValue.name.getStringValue()+Messages.getString("_is_shorter_than_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsTallerThan)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-			subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.26") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+			subjectValue.name.getStringValue()+Messages.getString("_is_taller_than_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		// Spatial relation
 		else if (this instanceof IsLeftOf)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.28") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_is_to_the_left_of_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsRightOf)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.30") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_is_to_the_right_of_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsAbove)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.32") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_is_above_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsBelow)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.34") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_is_below_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsInFrontOf)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.36") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_is_in_front_of_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else if (this instanceof IsBehind)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+Messages.getString("SubjectObjectQuestion.38") + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.3");  
+				subjectValue.name.getStringValue()+Messages.getString("_is_behind_") + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		else 
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+" __Unknown__ " + objectValue.name.getStringValue() + Messages.getString("SubjectObjectQuestion.41");  
+				subjectValue.name.getStringValue()+" __Unknown__ " + objectValue.name.getStringValue() + Messages.getString("_is_");  
 		return getValue( subjectValue, objectValue );
 	}
 }

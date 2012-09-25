@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Window;
 
 /**
@@ -46,7 +47,7 @@ public class DragWindow extends Window {
 				height = edu.cmu.cs.stage3.image.ImageUtilities.getHeight( image );
 				setSize( width, height );
 			} catch( InterruptedException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DragWindow.0"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Interrupted_while_waiting_for_drag_image_to_load_"), e ); 
 			}
 		}
 		repaint();

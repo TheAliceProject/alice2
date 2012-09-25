@@ -11,7 +11,7 @@ package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
  */
 
  import java.awt.Color;
- import java.awt.Shape;
+import java.awt.Shape;
 
 public class ScreenShape {
   protected Color color = null;

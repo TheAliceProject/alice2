@@ -23,8 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
-import java.awt.Color;
-
+import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.ScrollPaneConstants;
 
 
@@ -46,8 +45,8 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
     protected javax.swing.JPanel m_header;
     protected javax.swing.JScrollPane scrollPane;
     protected java.awt.Component glue;
-    protected final String BEHAVIOR_NAME = Messages.getString("BehaviorGroupsEditor.0"); 
-    protected static final String DEFAULT_NAME = Messages.getString("BehaviorGroupsEditor.1"); 
+    protected final String BEHAVIOR_NAME = Messages.getString("Events"); 
+    protected static final String DEFAULT_NAME = Messages.getString("event"); 
     protected static final int SPACE = 8;
     protected static final int OBJECT = 1;
     protected static final int BEHAVIOR = 2;
@@ -156,7 +155,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             internalComponent.doLayout();
             java.awt.image.BufferedImage image = new java.awt.image.BufferedImage(dim.width, dim.height, java.awt.image.BufferedImage.TYPE_INT_ARGB);
             // visibleComponent.print(image.createGraphics());
-            javax.swing.JLabel l = new javax.swing.JLabel(Messages.getString("BehaviorGroupsEditor.6")); 
+            javax.swing.JLabel l = new javax.swing.JLabel(Messages.getString("TEST")); 
 
             l.print(image.createGraphics());
             this.setIcon(new javax.swing.ImageIcon(image));
@@ -188,7 +187,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             Class currentBehavior = behaviors[i];
             String behaviorName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(currentBehavior);
             if (behaviorName == null){
-                behaviorName = Messages.getString("BehaviorGroupsEditor.7"); 
+                behaviorName = Messages.getString("No_Name"); 
             }
             CreateNewBehaviorRunnable runnable = new CreateNewBehaviorRunnable( currentBehavior, world );
             behaviorRunnables.add(runnable);
@@ -197,7 +196,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         if( structure.size() > 0 ) {
             behaviorMenu = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePopupMenu( structure );
         } else {
-            behaviorMenu = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDisabledPopup( Messages.getString("BehaviorGroupsEditor.8") ); 
+            behaviorMenu = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDisabledPopup( Messages.getString("None_Available") ); 
         }
         behaviorMenu.add(menuLabel, 0);
         initGUI();
@@ -443,7 +442,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
 					authoringTool.getUndoRedoStack().stopCompound();
 				}
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BehaviorGroupsEditor.9"), t ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Failed_to_create_new_event"), t ); 
             }
         }
     }
@@ -568,10 +567,10 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             }
         };
         String toolTipText = "<html><body>"+ 
-                             Messages.getString("BehaviorGroupsEditor.12")+ 
-                             Messages.getString("BehaviorGroupsEditor.13")+ 
-                             Messages.getString("BehaviorGroupsEditor.14")+ 
-                             Messages.getString("BehaviorGroupsEditor.15"); 
+                             Messages.getString("_p_Events__p_")+ 
+                             Messages.getString("_p_Events_run_Methods_when_certain_things_happen__p_")+ 
+                             Messages.getString("_p__like_when_the_mouse_is_clicked_on_an_Object_or__p_")+ 
+                             Messages.getString("_p_when_a_certain_key_is_pressed___p_") + "</body></html>"; 
         containingPanelLayout = new java.awt.GridBagLayout();
         m_containingPanel.setLayout(containingPanelLayout);
         m_containingPanel.setBorder(null);
@@ -579,8 +578,8 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         m_containingPanel.setToolTipText(toolTipText);
         scrollPane.setViewportView(m_containingPanel);
 
-        newBehaviorButton = new javax.swing.JButton(Messages.getString("BehaviorGroupsEditor.16")); 
-        newBehaviorButton.setToolTipText(Messages.getString("BehaviorGroupsEditor.17")); 
+        newBehaviorButton = new javax.swing.JButton(Messages.getString("create_new_event")); 
+        newBehaviorButton.setToolTipText(Messages.getString("Display_Menu_of_New_Event_Types")); 
         newBehaviorButton.setMargin(new java.awt.Insets(2,2,2,2));
         newBehaviorButton.addActionListener(newBehaviorAction);
         newBehaviorButton.setBackground(new java.awt.Color( 240, 240, 255 ));
@@ -615,7 +614,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             int count = 0;
             worldEditor = new BehaviorGroupEditor();
             worldEditor.set(world, authoringTool);
-            worldEditor.setEmptyString(Messages.getString("BehaviorGroupsEditor.20")); 
+            worldEditor.setEmptyString(Messages.getString("_No_events")); 
             m_containingPanel.add(worldEditor, new java.awt.GridBagConstraints(0,count,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,2), 0,0));
             BehaviorGroupEditor editor = null;
             for (int i=0; i<world.sandboxes.size(); i++){
@@ -823,7 +822,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             else if (type == OBJECT) {
                 dtde.acceptDrop(java.awt.dnd.DnDConstants.ACTION_MOVE);
                 edu.cmu.cs.stage3.alice.core.Transformable droppedElement = (edu.cmu.cs.stage3.alice.core.Transformable)dtde.getTransferable().getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.transformableReferenceFlavor );
-                setRunnables(droppedElement, Messages.getString("BehaviorGroupsEditor.22")+droppedElement.name.get()+Messages.getString("BehaviorGroupsEditor.23"));  
+                setRunnables(droppedElement, Messages.getString("New_")+droppedElement.name.get()+Messages.getString("_event"));  
                 behaviorMenu.show( dtde.getDropTargetContext().getComponent(), (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
                 edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( behaviorMenu );
             }
@@ -838,7 +837,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             }
         }
         catch (Exception e){
-            edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BehaviorGroupsEditor.24"), e); 
+            edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), e); 
             dropSuccess = false;
         }
         beingDroppedOn = false;

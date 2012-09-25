@@ -32,23 +32,29 @@ package edu.cmu.cs.stage3.alice.authoringtool.importers.mocap;
  * @version 1.0
  */
 
-import java.util.Vector;
 import java.util.ListIterator;
-import edu.cmu.cs.stage3.pratt.maxkeyframing.*;
-import edu.cmu.cs.stage3.alice.core.Model;
-import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
-import edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray;
-//import edu.cmu.cs.stage3.alice.core.ReferenceFrame;
-import edu.cmu.cs.stage3.alice.core.Direction;
-import edu.cmu.cs.stage3.alice.core.Response;
-import edu.cmu.cs.stage3.alice.core.response.CompositeResponse;
-import edu.cmu.cs.stage3.alice.core.Pose;
+import java.util.Vector;
 
+import edu.cmu.cs.stage3.alice.core.Direction;
+import edu.cmu.cs.stage3.alice.core.Model;
+import edu.cmu.cs.stage3.alice.core.Pose;
+import edu.cmu.cs.stage3.alice.core.Response;
+import edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray;
+import edu.cmu.cs.stage3.alice.core.response.CompositeResponse;
+import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
 import edu.cmu.cs.stage3.math.MathUtilities;
-import edu.cmu.cs.stage3.math.Quaternion;
 import edu.cmu.cs.stage3.math.Matrix33;
 import edu.cmu.cs.stage3.math.Matrix44;
+import edu.cmu.cs.stage3.math.Quaternion;
 import edu.cmu.cs.stage3.math.Vector3;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.CatmullRomSpline;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.Key;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKey;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionSlerpSpline;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse;
+import edu.cmu.cs.stage3.pratt.maxkeyframing.Vector3SimpleKey;
 
 public class ASFBone {
     public static final Integer DOF_TX = new Integer(0);

@@ -1,12 +1,38 @@
 package movieMaker;
 
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
-import java.awt.image.*;
-import javax.swing.border.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.FocusTraversalPolicy;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JViewport;
+import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 /**
  * Displays a picture and lets you explore the picture by displaying the x, y, red,
  * green, and blue values of the pixel at the cursor when you click a mouse button or
@@ -125,7 +151,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
  {
    //create menu
    menuBar = new JMenuBar();
-   zoomMenu = new JMenu(Messages.getString("PictureExplorer.0")); 
+   zoomMenu = new JMenu(Messages.getString("Zoom")); 
    twentyFive = new JMenuItem("25%"); 
    fifty = new JMenuItem("50%"); 
    seventyFive = new JMenuItem("75%"); 
@@ -169,7 +195,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    imageDisplay = new ImageDisplay(bimg);
    imageDisplay.addMouseMotionListener(this);
    imageDisplay.addMouseListener(this);
-   imageDisplay.setToolTipText(Messages.getString("PictureExplorer.8")); 
+   imageDisplay.setToolTipText(Messages.getString("Click_a_mouse_button_on_a_pixel_to_see_the_pixel_information")); 
    scrollPane.setViewportView(imageDisplay);
    pictureFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
  }
@@ -204,9 +230,9 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
  {
    // create the image icons for the buttons
    Icon prevIcon = new ImageIcon(SoundExplorer.class.getResource("leftArrow.gif"),  
-                                 Messages.getString("PictureExplorer.10")); 
+                                 Messages.getString("previous_index")); 
    Icon nextIcon = new ImageIcon(SoundExplorer.class.getResource("rightArrow.gif"),  
-                                 Messages.getString("PictureExplorer.12")); 
+                                 Messages.getString("next_index")); 
    // create the arrow buttons
    xPrevButton = new JButton(prevIcon);
    xNextButton = new JButton(nextIcon);
@@ -214,10 +240,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    yNextButton = new JButton(nextIcon);
    
    // set the tool tip text
-   xNextButton.setToolTipText(Messages.getString("PictureExplorer.13")); 
-   xPrevButton.setToolTipText(Messages.getString("PictureExplorer.14")); 
-   yNextButton.setToolTipText(Messages.getString("PictureExplorer.15")); 
-   yPrevButton.setToolTipText(Messages.getString("PictureExplorer.16")); 
+   xNextButton.setToolTipText(Messages.getString("Click_to_go_to_the_next_x_value")); 
+   xPrevButton.setToolTipText(Messages.getString("Click_to_go_to_the_previous_x_value")); 
+   yNextButton.setToolTipText(Messages.getString("Click_to_go_to_the_next_y_value")); 
+   yPrevButton.setToolTipText(Messages.getString("Click_to_go_to_the_previous_y_value")); 
    
    // set the sizes of the buttons
    int prevWidth = prevIcon.getIconWidth() + 2;
@@ -348,7 +374,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    bValue = new JLabel("B: " + pixel.getBlue()); 
    
    // create the sample color panel and label
-   colorLabel = new JLabel(Messages.getString("PictureExplorer.22")); 
+   colorLabel = new JLabel(Messages.getString("Color_at_location__")); 
    colorPanel = new JPanel();
    colorPanel.setBorder(new LineBorder(Color.black,1));
    
@@ -673,7 +699,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
  public void actionPerformed(ActionEvent a)
  {
    
-   if(a.getActionCommand().equals(Messages.getString("PictureExplorer.31"))) 
+   if(a.getActionCommand().equals(Messages.getString("Update"))) 
    {
      this.repaint();
    }

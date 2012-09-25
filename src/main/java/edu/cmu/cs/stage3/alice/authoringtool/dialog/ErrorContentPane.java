@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author David Culyba
  */
@@ -33,46 +35,46 @@ public class ErrorContentPane extends AliceAlertContentPane {
 	protected Throwable throwable;
 	protected String message;
 
-
 	public ErrorContentPane() {
 		super();
 	}
-	
-	public void preDialogShow( javax.swing.JDialog dialog ) {
-		super.preDialogShow( dialog );
+
+	public void preDialogShow(javax.swing.JDialog dialog) {
+		super.preDialogShow(dialog);
 		writeAliceHeaderToTextPane();
 		writeThrowableToTextPane();
 	}
 
 	public String getTitle() {
-		return Messages.getString("ErrorContentPane.0"); 
+		return Messages.getString("Alice___Error");
 	}
-	
 
-	public void setThrowable( Throwable t ) {
+	public void setThrowable(Throwable t) {
 		throwable = t;
 	}
 
-
-	public void setDetails( String m ) {
+	public void setDetails(String m) {
 		message = m;
 	}
-	
+
 	protected void writeThrowableToTextPane() {
-		if( throwable != null ) {
-			detailStream.println( Messages.getString("ErrorContentPane.1") ); 
-			throwable.printStackTrace( detailStream );
-			if( throwable instanceof edu.cmu.cs.stage3.alice.core.ExceptionWrapper ) {
-				edu.cmu.cs.stage3.alice.core.ExceptionWrapper ew = (edu.cmu.cs.stage3.alice.core.ExceptionWrapper)throwable;
+		if (throwable != null) {
+			detailStream.println(Messages
+					.getString("Throwable_that_caused_the_error_"));
+			throwable.printStackTrace(detailStream);
+			if (throwable instanceof edu.cmu.cs.stage3.alice.core.ExceptionWrapper) {
+				edu.cmu.cs.stage3.alice.core.ExceptionWrapper ew = (edu.cmu.cs.stage3.alice.core.ExceptionWrapper) throwable;
 				Exception e = ew.getWrappedException();
-				detailStream.println( Messages.getString("ErrorContentPane.2") ); 
-				e.printStackTrace( detailStream );
+				detailStream.println(Messages.getString("Wrapped_exception_"));
+				e.printStackTrace(detailStream);
 			}
 		} else {
 			if (message != null)
-				detailStream.println( message );
+				detailStream.println(message);
 			else
-				new Exception(Messages.getString("ErrorContentPane.3")).printStackTrace(detailStream); 
+				new Exception(
+						Messages.getString("No_throwable_given__Here_s_the_stack_trace_"))
+						.printStackTrace(detailStream);
 		}
 		detailStream.println();
 	}

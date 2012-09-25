@@ -27,6 +27,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class Property {
 	private static boolean HACK_s_isListeningEnabled = true;
@@ -62,7 +63,7 @@ public abstract class Property {
 
 	protected Property( Element owner, String name, Object defaultValue, Class valueClass ) {
 		m_owner = owner;
-		m_name = AikMin.getProperty(name);
+		m_name = name;//AikMin.getName(name);
 		m_defaultValue = defaultValue;
 		m_valueClass = valueClass;
 		m_isAcceptingOfHowMuch = false;
@@ -169,7 +170,7 @@ public abstract class Property {
 					if( field.get( m_owner ) == this ) {
 						return cls;
 					} else {
-						throw new RuntimeException( m_owner + Messages.getString("Property.1") +  m_name + Messages.getString("Property.2") + this );  
+						throw new RuntimeException( m_owner + Messages.getString("_has_field_named_") +  m_name + Messages.getString("_that_is_not_") + this );  
 					}
 				} catch( NoSuchFieldException nsfe ) {
 					cls = cls.getSuperclass();
@@ -201,15 +202,15 @@ public abstract class Property {
 						return m_value;
 					}
 				} catch( NoSuchMethodException nsme ) {
-					Element.warnln( Messages.getString("Property.4") + this + " " + nsme );  
+					Element.warnln( Messages.getString("property_get_failure_to_clone__") + this + " " + nsme );  
 					//nsme.printStackTrace();
 					return m_value;
 				} catch( IllegalAccessException iae ) {
-					Element.warnln( Messages.getString("Property.6") + this + " " + iae );  
+					Element.warnln( Messages.getString("property_get_failure_to_clone__") + this + " " + iae );  
 					//iae.printStackTrace();
 					return m_value;
 				} catch( java.lang.reflect.InvocationTargetException ite ) {
-					Element.warnln( Messages.getString("Property.8") + this + " " + ite );  
+					Element.warnln( Messages.getString("property_get_failure_to_clone__") + this + " " + ite );  
 					//ite.getTargetException().printStackTrace();
 					return m_value;
 				}
@@ -235,12 +236,12 @@ public abstract class Property {
             Object[] array = (Object[])value;
             for( int i=0; i<array.length; i++ ) {
                 if( isValueInADifferentWorld( array[ i ] ) ) {
-                    throw new edu.cmu.cs.stage3.alice.core.IllegalArrayPropertyValueException( this, i, value, Messages.getString("Property.10") ); 
+                    throw new edu.cmu.cs.stage3.alice.core.IllegalArrayPropertyValueException( this, i, value, Messages.getString("value_must_be_in_world") ); 
                 }
             }
         } else {
             if( isValueInADifferentWorld( value ) ) {
-                throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( this, value, Messages.getString("Property.11") ); 
+                throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( this, value, Messages.getString("value_must_be_in_world") ); 
             }
         }
     }
@@ -267,14 +268,14 @@ public abstract class Property {
 						//pass
 					} else {
 						//Element.debugln( this + " " + value );
-						throw new IllegalPropertyValueException( this, value, Messages.getString("Property.12") + getName() + Messages.getString("Property.13") + getOwner() + ".  " + valueClass + Messages.getString("Property.15") + expression.getValueClass() );    //$NON-NLS-4$
+						throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_") + getName() + Messages.getString("_on_") + getOwner() + ".  " + valueClass + Messages.getString("_is_not_assignable_from_") + expression.getValueClass() );    //$NON-NLS-4$
 					}
 				}
 			} else {
 				if( valueClass.isAssignableFrom( value.getClass() ) ) {
 					//pass
 				} else {
-					throw new IllegalPropertyValueException( this, value, Messages.getString("Property.16") + getName() + Messages.getString("Property.17") + getOwner() + ".  " + valueClass + Messages.getString("Property.19") + value.getClass() );    //$NON-NLS-4$
+					throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_") + getName() + Messages.getString("_on_") + getOwner() + ".  " + valueClass + Messages.getString("_is_not_assignable_from_") + value.getClass() );    //$NON-NLS-4$
 				}
 			}
 		} else {
@@ -558,7 +559,7 @@ public abstract class Property {
                     Object[] parameters = { text };
                     return valueOfMethod.invoke( null, parameters );
                 } else {
-                    throw new RuntimeException( Messages.getString("Property.23") ); 
+                    throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") ); 
                 }
             } catch( NoSuchMethodException nsme ) {
                 throw new RuntimeException( "NoSuchMethodException:" + type ); 

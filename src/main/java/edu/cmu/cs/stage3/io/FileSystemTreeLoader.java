@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -47,17 +49,17 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 			root = (java.io.File)pathname;
 		}
 		else {
-			throw new IllegalArgumentException( Messages.getString("FileSystemTreeLoader.0") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_must_be_an_instance_of_String_or_java_io_File") ); 
 		}
 
 		if( root.exists() ) {
 			if( ! root.canRead() ) {
-				throw new java.io.IOException( Messages.getString("FileSystemTreeLoader.1") + root ); 
+				throw new java.io.IOException( Messages.getString("cannot_read_") + root ); 
 			}
 		}
 		else {
 			//throw new IllegalArgumentException( root + " does not exist" );
-			throw new java.io.FileNotFoundException( root + Messages.getString("FileSystemTreeLoader.2") ); 
+			throw new java.io.FileNotFoundException( root + Messages.getString("_does_not_exist") ); 
 		}
 
 		currentDirectory = root;
@@ -79,10 +81,10 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 		}
 
 		if( ! newCurrentDirectory.exists() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeLoader.4") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_doesn_t_exist") ); 
 		}
 		if( ! newCurrentDirectory.isDirectory() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeLoader.5") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_isn_t_a_directory") ); 
 		}
 
 		currentDirectory = newCurrentDirectory;
@@ -99,10 +101,10 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 		java.io.File file = new java.io.File( currentDirectory, filename );
 		if( ! file.exists() ) {
 			//throw new IllegalArgumentException( file + " does not exist" );
-			throw new java.io.FileNotFoundException( file + Messages.getString("FileSystemTreeLoader.6") ); 
+			throw new java.io.FileNotFoundException( file + Messages.getString("_does_not_exist") ); 
 		}
 		if( ! file.canRead() ) {
-			throw new java.io.IOException( Messages.getString("FileSystemTreeLoader.7") + file ); 
+			throw new java.io.IOException( Messages.getString("cannot_read_") + file ); 
 		}
 
 		currentlyOpenStream = new java.io.FileInputStream( file );

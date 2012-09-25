@@ -30,22 +30,58 @@
 
 package movieMaker;
 
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.media.*;
-import javax.media.control.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
-import javax.media.datasink.*;
-
-import com.sun.media.util.JMFI18N;
 import com.sun.media.ui.TabControl;
-
+import com.sun.media.util.JMFI18N;
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
-
-import jmapps.util.*;
-import jmapps.ui.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FileDialog;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import javax.media.Controller;
+import javax.media.ControllerClosedEvent;
+import javax.media.ControllerErrorEvent;
+import javax.media.ControllerEvent;
+import javax.media.ControllerListener;
+import javax.media.DataSink;
+import javax.media.Duration;
+import javax.media.EndOfMediaEvent;
+import javax.media.Format;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.NoPlayerException;
+import javax.media.Processor;
+import javax.media.Time;
+import javax.media.control.MonitorControl;
+import javax.media.control.TrackControl;
+import javax.media.datasink.DataSinkErrorEvent;
+import javax.media.datasink.DataSinkEvent;
+import javax.media.datasink.DataSinkListener;
+import javax.media.datasink.EndOfStreamEvent;
+import javax.media.format.AudioFormat;
+import javax.media.protocol.DataSource;
+import javax.media.protocol.FileTypeDescriptor;
+import jmapps.ui.ImageArea;
+import jmapps.ui.JMDialog;
+import jmapps.ui.JMPanel;
+import jmapps.ui.MessageDialog;
+import jmapps.ui.ProgressDialog;
+import jmapps.ui.ProgressThread;
+import jmapps.util.JMAppsCfg;
 
 
 /**
@@ -160,7 +196,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
                 dataSource = Manager.createDataSource ( mediaSource );
             }
             catch ( Exception exception ) {
-            	AuthoringTool.showErrorDialog(Messages.getString("SaveAsDialog.5"), exception); 
+            	AuthoringTool.showErrorDialog(Messages.getString("Alice_has_encountered_an_error"), exception); 
                 frameOwner.setCursor ( Cursor.getDefaultCursor() );
                 throw exception;
             }
@@ -171,7 +207,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
             processor = Manager.createProcessor ( dataSource );
         }
         catch ( NoPlayerException exception ) {
-        	AuthoringTool.showErrorDialog(Messages.getString("SaveAsDialog.6"), exception); 
+        	AuthoringTool.showErrorDialog(Messages.getString("Alice_has_encountered_an_error"), exception); 
             frameOwner.setCursor ( Cursor.getDefaultCursor() );
             throw exception;
         }
@@ -273,7 +309,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         panelFormat = new Panel ( new BorderLayout() );
         panelGeneral.add ( panelFormat );
 
-        label = new Label ( Messages.getString("SaveAsDialog.8") ); 
+        label = new Label ( Messages.getString("Format_") ); 
         panelFormat.add ( label, BorderLayout.WEST );
 
         label = new Label("Wave(wav)"); 
@@ -384,7 +420,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         }
         catch ( Exception exception ) {
             boolSaving = false;
-            AuthoringTool.showErrorDialog( Messages.getString("SaveAsDialog.16"), exception ); 
+            AuthoringTool.showErrorDialog( Messages.getString("Alice_has_encountered_an_error__"), exception ); 
         }
 
         setCursor ( Cursor.getDefaultCursor() );
@@ -578,7 +614,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         //strContentTypeExt = "wav";
  
         if ( processor.setContentDescriptor(new FileTypeDescriptor(strContentType)) == null) {
-            System.err.println ( Messages.getString("SaveAsDialog.24") ); 
+            System.err.println ( Messages.getString("Error_setting_content_descriptor_on_processor") ); 
         }
 
         enumPanels = hashtablePanelsAudio.elements ();
@@ -603,5 +639,3 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
     }
 
 }
-
-

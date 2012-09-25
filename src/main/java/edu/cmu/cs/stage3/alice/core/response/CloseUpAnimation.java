@@ -13,10 +13,10 @@ package edu.cmu.cs.stage3.alice.core.response;
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class CloseUpAnimation extends AbstractPositionAnimation {
 	public final Vector3Property position = new Vector3Property( this, "position", new javax.vecmath.Vector3d( 0,0,0 ) ); 
@@ -108,19 +108,19 @@ public class CloseUpAnimation extends AbstractPositionAnimation {
 			m_asSeenBy = CloseUpAnimation.this.asSeenBy.getReferenceFrameValue();
 			m_amount = CloseUpAnimation.this.amount.getNumberValue().doubleValue();
 			if( m_asSeenBy == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.3"), getCurrentStack(), CloseUpAnimation.this.asSeenBy );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("character_value_must_not_be_null_"), getCurrentStack(), CloseUpAnimation.this.asSeenBy );             
 			}
 			
 			super.prologue(t);
 			
 		    if( m_subject == null ) {
-			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.4"), getCurrentStack(), CloseUpAnimation.this.subject );             
+			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("subject_value_must_not_be_null_"), getCurrentStack(), CloseUpAnimation.this.subject );             
 		    }
 		    if (m_subject == m_asSeenBy) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.5"), getCurrentStack(), CloseUpAnimation.this.subject );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("subject_and_character_values_must_not_be_the_same_"), getCurrentStack(), CloseUpAnimation.this.subject );             
 		    }
 			if (m_amount < 0) {
-			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CloseUpAnimation.6"), getCurrentStack(), CloseUpAnimation.this.amount );             
+			    throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("amount_must_be_greater_than_0"), getCurrentStack(), CloseUpAnimation.this.amount );             
 		    }
 		}
 		

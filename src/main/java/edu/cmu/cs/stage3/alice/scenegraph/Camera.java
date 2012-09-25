@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Dennis Cosgrove
  */
@@ -37,7 +39,7 @@ public abstract class Camera extends Component {
 	
 	protected void releasePass1() {
 		if( m_background != null ) {
-			warnln( Messages.getString("Camera.3") + this + Messages.getString("Camera.4") + m_background + "." );   
+			warnln( Messages.getString("WARNING__released_camera_") + this + Messages.getString("_still_has_background_") + m_background + "." );   
 			setBackground( null );
 		}
 		super.releasePass1();

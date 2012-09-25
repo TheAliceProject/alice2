@@ -47,4 +47,3 @@ public class Amount extends edu.cmu.cs.stage3.util.Enumerable {
 		return (Amount)edu.cmu.cs.stage3.util.Enumerable.valueOf( s, Amount.class );
 	}
 }
-

@@ -1,14 +1,18 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
-import java.io.*;
-
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-import java.util.Vector;
-import java.awt.Point;
 import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StencilApplication;
-
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Point;
+import java.io.IOException;
+import java.util.Vector;
 import javax.swing.ProgressMonitor;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 public class StencilParser { //extends org.xml.sax.helpers.DefaultHandler{
   StringBuffer textBuffer;
   StencilManager stencilManager;
@@ -230,7 +234,7 @@ public class StencilParser { //extends org.xml.sax.helpers.DefaultHandler{
         stencilManager.setNextAndPreviousStacks(previousStack, nextStack);
       }
       NodeList stencils = document.getElementsByTagName( "stencil" ); 
-      ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("StencilParser.28"), "", 0, stencils.getLength());  
+      ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Loading_Tutorial"), "", 0, stencils.getLength());  
       monitor.setProgress(0);
       monitor.setMillisToDecideToPopup(1000);
       for (int i = 0; i < stencils.getLength(); i++) {
@@ -242,7 +246,7 @@ public class StencilParser { //extends org.xml.sax.helpers.DefaultHandler{
       monitor.close();
       return stencilList;
     } else {
-      System.out.println(Messages.getString("StencilParser.30")); 
+      System.out.println(Messages.getString("Could_not_parse_stencil_file")); 
       System.out.flush();
       return null;
     }
@@ -258,8 +262,8 @@ public class StencilParser { //extends org.xml.sax.helpers.DefaultHandler{
     // create note
     Point p = new Point( (int)( (float)stencilApp.getScreenSize().getWidth() * 0.292), (int)( (float)stencilApp.getScreenSize().getHeight() * 0.448) );
     Note note = new Note( p, new Point(0,0), null, positionManager, stencilManager, false );
-    note.addText(Messages.getString("StencilParser.32"), null); 
-    note.addText(Messages.getString("StencilParser.33"), null); 
+    note.addText(Messages.getString("The_Alice_tutorial_thinks_maybe_you_didn_t_follow_the_instructions_carefully_"), null); 
+    note.addText(Messages.getString("Please_back_up_to_your_mistake_or_restart_"), null); 
     note.initializeNote();
 
     newStencil.addObject(note);

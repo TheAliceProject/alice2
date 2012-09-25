@@ -1,10 +1,10 @@
 package movieMaker;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
-
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 
 /**
  * Class that is Runnable to start Movie Capture and stop it Copyright Georgia
@@ -94,7 +94,7 @@ public class StartMovieCapture implements Runnable {
 					if (endTime - startTime < timeToSleep)
 						Thread.sleep(timeToSleep - (endTime - startTime));
 				} catch (Exception ex) {
-					System.err.println(Messages.getString("StartMovieCapture.0")); 
+					System.err.println(Messages.getString("Caught_exception_in_StartMovieCapture")); 
 					//done = true;
 				}
 			}

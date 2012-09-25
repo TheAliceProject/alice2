@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import java.util.Vector; //TODO: move up to Collections interface
+import edu.cmu.cs.stage3.lang.Messages;
+import java.util.Vector;
 
 /**
  * Utilities for Editors.
@@ -40,7 +41,7 @@ public final class EditorUtilities {
 	static {
 		allEditors = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getEditorClasses();
 		if( allEditors == null ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorUtilities.0"), null ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("no_editors_found__"), null ); 
 			allEditors = new Class[0];
 		}
 		//TODO: auto-find more editors?
@@ -108,7 +109,7 @@ public final class EditorUtilities {
 		try {
 			return (edu.cmu.cs.stage3.alice.authoringtool.Editor)editorClass.newInstance();
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorUtilities.1") + editorClass, t ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_editor_of_type_") + editorClass, t ); 
 		}
 		return null;
 	}
@@ -176,7 +177,7 @@ public final class EditorUtilities {
 		try {
 			setObject.invoke( editor, new Object[] { object } );
 		} catch( Exception e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorUtilities.3") + object, e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_editing_object__") + object, e ); 
 		}
 	}
 

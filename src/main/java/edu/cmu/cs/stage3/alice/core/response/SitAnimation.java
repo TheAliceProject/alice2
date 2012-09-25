@@ -6,8 +6,8 @@
  */
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Direction;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author caitlin
@@ -34,14 +34,14 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 			m_positionEnd = null;
 			
 			if( m_target == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.2"), null, SitAnimation.this.target ); 
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_needs_something_or_someone_to_sit_on_"), null, SitAnimation.this.target ); 
             }
             if( m_target == m_subject ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.3") + m_target.name.getStringValue() + ".", getCurrentStack(), SitAnimation.this.target );              
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_sit_on_") + m_target.name.getStringValue() + ".", getCurrentStack(), SitAnimation.this.target );              
             }
             
             if (m_subject.isAncestorOf(m_target)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("SitAnimation.5"), getCurrentStack(), SitAnimation.this.target );             
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_sit_on_a_part_of_itself"), getCurrentStack(), SitAnimation.this.target );             
             }
 	
 			findLegs();

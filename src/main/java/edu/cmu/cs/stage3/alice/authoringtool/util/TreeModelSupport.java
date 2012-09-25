@@ -23,8 +23,11 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import javax.swing.event.*;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Vector;
+
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 
 /**
  * From the Swing Connection article: http://java.sun.com/products/jfc/tsc/articles/jtree/
@@ -95,4 +98,3 @@ public class TreeModelSupport {
 		} );
 	}
 }
-

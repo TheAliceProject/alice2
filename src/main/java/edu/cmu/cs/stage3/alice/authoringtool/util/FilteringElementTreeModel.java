@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -177,7 +179,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 			return false;
 		}
 		if( ! (node instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.0") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 
 		edu.cmu.cs.stage3.alice.core.Element element = (edu.cmu.cs.stage3.alice.core.Element)node;
@@ -193,7 +195,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 
 	public int getChildCount( Object parent ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.1") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 
 		int childCount = 0;
@@ -210,7 +212,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 
 	public Object getChild( Object parent, int index ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.2") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 
 		int childCount = 0;
@@ -231,10 +233,10 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 
 	public int getIndexOfChild( Object parent, Object child ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.3") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 		if( ! (child instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("FilteringElementTreeModel.4") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 
 		int childCount = 0;
@@ -263,7 +265,7 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 				element.name.set( previousName );
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("FilteringElementTreeModel.5") ); 
+			throw new RuntimeException( Messages.getString("FilteringElementTreeModel_only_allows_name_changes_through_the_model") ); 
 		}
 	}
 

@@ -7,13 +7,22 @@
 
 package movieMaker;
 
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.media.*;
-import javax.media.format.*;
-
 import com.sun.media.util.JMFI18N;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
+import java.awt.Choice;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Vector;
+import javax.media.Format;
+import javax.media.format.AudioFormat;
 
 
 public class AudioFormatChooser extends Panel implements ItemListener {
@@ -244,7 +253,7 @@ public class AudioFormatChooser extends Panel implements ItemListener {
         this.setLayout ( new BorderLayout(6,6) );
         panel = this;
 
-        checkEnableTrack = new Checkbox ( Messages.getString("AudioFormatChooser.2"), true ); 
+        checkEnableTrack = new Checkbox ( Messages.getString("Enable_Track"), true ); 
         checkEnableTrack.addItemListener ( this );
         if ( boolDisplayEnableTrack == true ) {
         	panelGroup = new Panel ( new BorderLayout() );
@@ -263,13 +272,13 @@ public class AudioFormatChooser extends Panel implements ItemListener {
         panelData = new Panel ( new GridLayout(0,1,6,6) );
         panelGroup.add ( panelData, BorderLayout.CENTER );
 
-        labelEncoding = new Label ( Messages.getString("AudioFormatChooser.3"), Label.LEFT ); 
+        labelEncoding = new Label ( Messages.getString("Encoding_"), Label.LEFT ); 
         panelLabel.add ( labelEncoding );
         comboEncoding = new Choice ();
         comboEncoding.addItemListener ( this );
         panelData.add ( comboEncoding );
 
-        labelSampleRate = new Label ( Messages.getString("AudioFormatChooser.4"), Label.LEFT ); 
+        labelSampleRate = new Label ( Messages.getString("Sample_Rate_"), Label.LEFT ); 
         panelLabel.add ( labelSampleRate );
         panelEntry = new Panel ( new BorderLayout(6,6) );
         panelData.add ( panelEntry );
@@ -279,25 +288,25 @@ public class AudioFormatChooser extends Panel implements ItemListener {
         labelHz = new Label ( "Hz" ); 
         panelEntry.add ( labelHz, BorderLayout.EAST );
 
-        labelBitsPerSample = new Label ( Messages.getString("AudioFormatChooser.6"), Label.LEFT ); 
+        labelBitsPerSample = new Label ( Messages.getString("Bits_per_Sample_"), Label.LEFT ); 
         panelLabel.add ( labelBitsPerSample );
         panelEntry = new Panel ( new GridLayout(1,0,6,6) );
         panelData.add ( panelEntry );
         groupBitsPerSample = new CheckboxGroup ();
         
-        checkBits16 = new Checkbox ( Messages.getString("AudioFormatChooser.7"), groupBitsPerSample, false ); 
+        checkBits16 = new Checkbox ( Messages.getString("16_bit"), groupBitsPerSample, false ); 
         checkBits16.addItemListener ( this );
         panelEntry.add ( checkBits16 );
 
-        labelChannels = new Label ( Messages.getString("AudioFormatChooser.8"), Label.LEFT ); 
+        labelChannels = new Label ( Messages.getString("Channels_"), Label.LEFT ); 
         panelLabel.add ( labelChannels );
         panelEntry = new Panel ( new GridLayout(1,0,6,6) );
         panelData.add ( panelEntry );
         groupChannels = new CheckboxGroup ();
-        checkMono = new Checkbox ( Messages.getString("AudioFormatChooser.9"), groupChannels, false ); 
+        checkMono = new Checkbox ( Messages.getString("mono"), groupChannels, false ); 
         checkMono.addItemListener ( this );
         panelEntry.add ( checkMono );
-        checkStereo = new Checkbox ( Messages.getString("AudioFormatChooser.10"), groupChannels, false ); 
+        checkStereo = new Checkbox ( Messages.getString("stereo"), groupChannels, false ); 
         checkStereo.addItemListener ( this );
         panelEntry.add ( checkStereo );
 
@@ -813,5 +822,3 @@ public class AudioFormatChooser extends Panel implements ItemListener {
 
 
 }
-
-

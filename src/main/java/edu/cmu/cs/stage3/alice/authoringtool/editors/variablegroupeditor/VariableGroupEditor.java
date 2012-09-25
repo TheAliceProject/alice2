@@ -23,14 +23,15 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.variablegroupeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * @author Jason Pratt
  */
 public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyListener, java.awt.dnd.DropTargetListener {
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty variables;
-	protected javax.swing.JButton newVariableButton = new javax.swing.JButton( Messages.getString("VariableGroupEditor.0") ); 
+	protected javax.swing.JButton newVariableButton = new javax.swing.JButton( Messages.getString("create_new_variable") ); 
 	//protected edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane newVariableDialog;
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 
@@ -52,7 +53,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 			new java.awt.event.ActionListener() {
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					if( authoringTool != null ) {
-						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( Messages.getString("VariableGroupEditor.1"), variables.getOwner()); 
+						edu.cmu.cs.stage3.alice.core.Variable variable = authoringTool.showNewVariableDialog( Messages.getString("create_new_variable"), variables.getOwner()); 
 						if( variable != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
 							try {
@@ -68,7 +69,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 		);
 		addContainerListener( edu.cmu.cs.stage3.alice.authoringtool.util.GUIElementContainerListener.getStaticListener() );
 		setDropTarget( new java.awt.dnd.DropTarget( this, this ) );
-		newVariableButton.setToolTipText( Messages.getString("VariableGroupEditor.2") ); 
+		newVariableButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Open_New_Variable_Dialog__p__p_Variables_allow_you_to_store_information__p_You_may_choose_among_several_types_p_of_information__like_Numbers__Booleans__and_Objects__")+"</font></html>" ); 
 
 		refreshGUI();
 	}
@@ -118,7 +119,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 					if( gui != null ) {
 						this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.3") + variable, null ); 
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_variable__") + variable, null ); 
 					}
 				}
 			}
@@ -235,13 +236,13 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 					dtde.dropComplete( true );
 				}
 			} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.4"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
 				dtde.dropComplete( false );
 			} catch( java.io.IOException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.5"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
 				dtde.dropComplete( false );
 			} catch( Throwable t ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("VariableGroupEditor.6"), t ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work_"), t ); 
 				dtde.dropComplete( false );
 			}
 		} else {

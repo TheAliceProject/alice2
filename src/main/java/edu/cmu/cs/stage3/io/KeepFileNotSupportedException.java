@@ -23,11 +23,13 @@
 
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
 public class KeepFileNotSupportedException extends Exception {
 	public KeepFileNotSupportedException() {
-		super( Messages.getString("KeepFileNotSupportedException.0") ); 
+		super( Messages.getString("keepFile___is_not_supported_for_this_DirectoryTreeStorer") ); 
 	}
 }

@@ -280,7 +280,10 @@ public class Graphics extends java.awt.Graphics {
 	    m_renderContext.gl.glPushMatrix();
 	    m_renderContext.gl.glTranslatef( x, y, 0 );
 	    m_renderContext.gl.glScalef( scale, -scale, 1.0f );
-	    m_renderContext.glut.glutStrokeString( com.sun.opengl.util.GLUT.STROKE_ROMAN, str );
+	    m_renderContext.glut.glutStrokeString( com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str);//com.sun.opengl.util.GLUT.STROKE_ROMAN, str );
+	    //for (int i = 0;i < str.length(); i++){
+	    //	m_renderContext.glut.glutBitmapCharacter(com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str.charAt(i));
+	    //}
 	    m_renderContext.gl.glPopMatrix();
 	}
 	

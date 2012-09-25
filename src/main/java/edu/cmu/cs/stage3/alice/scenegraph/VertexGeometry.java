@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Dennis Cosgrove
  */
@@ -57,7 +59,7 @@ public abstract class VertexGeometry extends Geometry {
                 javax.vecmath.Vector3d maximum = new javax.vecmath.Vector3d( max.x, max.y, max.z );
                 m_boundingBox = new edu.cmu.cs.stage3.math.Box( minimum, maximum );
             } else {
-                throw new RuntimeException( this + Messages.getString("VertexGeometry.3") ); 
+                throw new RuntimeException( this + Messages.getString("_vertex__0___has_somehow_become_null_") ); 
                 //m_boundingBox = null;
             }
 		} else {
@@ -217,7 +219,7 @@ public abstract class VertexGeometry extends Geometry {
 				}
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("VertexGeometry.4") + version ); 
+			throw new RuntimeException( Messages.getString("invalid_file_version__") + version ); 
 		}
 		return vertices;
 	}

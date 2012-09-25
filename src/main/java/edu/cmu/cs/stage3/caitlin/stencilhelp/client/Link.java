@@ -1,16 +1,17 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
-import java.util.Vector;
-import java.awt.Rectangle;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.font.TextLayout;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
-import java.awt.Shape;
-import java.awt.Font;
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.RoundRectangle2D;
+import java.util.Vector;
 
 public class Link implements StencilObject, MouseEventListener {
   protected StencilManager stencilManager = null;
@@ -34,8 +35,8 @@ public class Link implements StencilObject, MouseEventListener {
     shapes = new Vector();
 
     if (next) {
-      message = Messages.getString("Link.1"); 
-    } else message = Messages.getString("Link.2"); 
+      message = Messages.getString("Load_Next_Chapter"); 
+    } else message = Messages.getString("Reload_Last_Chapter"); 
 
     createShapes();
   }

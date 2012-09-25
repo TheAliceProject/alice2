@@ -23,17 +23,22 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.scripteditor;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
-
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 /**
  * @author Jason Pratt
  */
 public class ScriptEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.authoringtool.Editor {
-	public String editorName = Messages.getString("ScriptEditor.0"); 
+	public String editorName = Messages.getString("Script_Editor"); 
 
 	protected edu.cmu.cs.stage3.alice.core.property.ScriptProperty scriptProperty;
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
@@ -96,7 +101,7 @@ public class ScriptEditor extends javax.swing.JPanel implements edu.cmu.cs.stage
 
 	public void updateLineNumber() {
 		//TODO: better formatting
-		this.lineNumberLabel.setText( Messages.getString("ScriptEditor.2") + (scriptEditorPane.getCurrentLineNumber() + 1) + "     " );  
+		this.lineNumberLabel.setText( Messages.getString("__line_number__") + (scriptEditorPane.getCurrentLineNumber() + 1) + "     " );  
 	}
 
 	///////////////////////////////////////////////
@@ -141,7 +146,7 @@ public class ScriptEditor extends javax.swing.JPanel implements edu.cmu.cs.stage
 		border4 = BorderFactory.createBevelBorder(BevelBorder.LOWERED,Color.white,Color.lightGray,new Color(99, 99, 99),new Color(142, 142, 142));
 		this.setLayout(borderLayout1);
 		lineNumberLabel.setBorder(border1);
-		lineNumberLabel.setText(Messages.getString("ScriptEditor.4")); 
+		lineNumberLabel.setText(Messages.getString("__line_number______")); 
 		southPanel.setLayout(boxLayout1);
 		southPanel.setBorder(border3);
 		bogusPanel.setBorder(border4);

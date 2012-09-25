@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -46,7 +48,7 @@ public class StylePropertyViewController extends PropertyViewController {
 		super.set( property, true, true, true, omitPropertyName, factory );
 		this.valueClass = property.getValueClass();
 		if( ! edu.cmu.cs.stage3.alice.core.Style.class.isAssignableFrom( this.valueClass ) ) {
-			throw new IllegalArgumentException( Messages.getString("StylePropertyViewController.0") + property + Messages.getString("StylePropertyViewController.1") + valueClass );  
+			throw new IllegalArgumentException( Messages.getString("valueClass_of_property_") + property + Messages.getString("_is_not_a_Style__instead__") + valueClass );  
 		}
 		setPopupEnabled( true );
 		refreshGUI();

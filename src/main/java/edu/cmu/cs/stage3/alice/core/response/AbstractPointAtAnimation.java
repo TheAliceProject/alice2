@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class AbstractPointAtAnimation extends OrientationAnimation {
 	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); 
@@ -63,13 +63,13 @@ public abstract class AbstractPointAtAnimation extends OrientationAnimation {
 			m_upGuide = getUpguide();
 			m_onlyAffectYaw = onlyAffectYaw();
             if( m_target == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtAnimation.3"), null, AbstractPointAtAnimation.this.target ); 
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_value_must_not_be_null_"), null, AbstractPointAtAnimation.this.target ); 
             }
             if( m_target == m_subject ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractPointAtAnimation.4"), getCurrentStack(), AbstractPointAtAnimation.this.target );             
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_value_must_not_be_equal_to_the_subject_value_"), getCurrentStack(), AbstractPointAtAnimation.this.target );             
             }
             if ( (m_onlyAffectYaw) && (m_subject.isAncestorOf(m_target))) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("AbstractPointAtAnimation.5"), getCurrentStack(), AbstractPointAtAnimation.this.target );             
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_turn_to_face_or_turn_away_from_a_part_of_itself_"), getCurrentStack(), AbstractPointAtAnimation.this.target );             
             }
 		}
 		protected edu.cmu.cs.stage3.math.Matrix33 getTargetMatrix33() {

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class WorldTree extends javax.swing.JTree {
 	protected java.awt.Point cursorLocation;
 	protected boolean dropLinesActive;
@@ -55,7 +57,7 @@ public class WorldTree extends javax.swing.JTree {
 		dropLinesActive = false;
 		getSelectionModel().setSelectionMode( javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION );
 
-		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("WorldTree.1")+"<p><p>"+Messages.getString("WorldTree.3")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
+		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Object_Tree")+"<p><p>"+Messages.getString("The_Object_Tree_shows_all_p_of_the_objects_in_the_world__p_Some_objects_have_parts_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
 		javax.swing.ToolTipManager.sharedInstance().registerComponent( this );
 	}
 
@@ -238,7 +240,7 @@ public class WorldTree extends javax.swing.JTree {
 		try {
 			super.paintComponent( g );
 		} catch( NullPointerException e ) {
-			AuthoringTool.showErrorDialog( Messages.getString("WorldTree.5"), e ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Error_painting_tree_"), e ); 
 		}
 		if( dropLinesActive && showDropLines ) {
 			paintLines( g, getBounds(), insets, fromPath, toPath );
@@ -263,4 +265,3 @@ public class WorldTree extends javax.swing.JTree {
 		}
 	}
 }
-

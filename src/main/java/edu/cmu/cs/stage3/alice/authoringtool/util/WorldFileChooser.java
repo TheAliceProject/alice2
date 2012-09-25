@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -36,11 +38,11 @@ public class WorldFileChooser extends javax.swing.JFileChooser implements java.b
 			java.io.File worldDir = getSelectedFile();
 			java.io.File worldFile = new java.io.File( worldDir, "elementData.xml" ); 
 			if( ! worldFile.exists() ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("WorldFileChooser.1") ); 
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Your_selection_is_not_a_valid_world_folder_") ); 
 			} else if( ! worldFile.canRead() ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("WorldFileChooser.2") ); 
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Cannot_read_world_from_disk___Access_denied_") ); 
 			} else if( ! isWorld( worldFile ) ) {
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("WorldFileChooser.3") ); 
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Your_selection_is_not_a_valid_world_folder_") ); 
 			} else {
 				super.approveSelection();
 			}
@@ -48,7 +50,7 @@ public class WorldFileChooser extends javax.swing.JFileChooser implements java.b
 			java.io.File worldDir = getSelectedFile();
 			java.io.File worldFile = new java.io.File( worldDir, "elementData.xml" ); 
 			if( worldFile.exists() ) {
-				int retVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( Messages.getString("WorldFileChooser.5") + worldDir.getAbsolutePath() + Messages.getString("WorldFileChooser.6"), Messages.getString("WorldFileChooser.7"), javax.swing.JOptionPane.YES_NO_OPTION );   
+				int retVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( Messages.getString("A_World_already_exists_in_") + worldDir.getAbsolutePath() + Messages.getString("__nWould_you_like_to_replace_it_"), Messages.getString("Replace_World_"), javax.swing.JOptionPane.YES_NO_OPTION );   
 				if( retVal == javax.swing.JOptionPane.YES_OPTION ) {
 					super.approveSelection();
 				}

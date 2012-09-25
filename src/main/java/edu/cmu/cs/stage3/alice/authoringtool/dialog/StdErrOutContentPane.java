@@ -23,81 +23,113 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import java.awt.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
 
 /**
  * @author Jason Pratt, David Culyba
  */
 
-public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.dialog.AliceAlertContentPane {
+public class StdErrOutContentPane extends
+		edu.cmu.cs.stage3.alice.authoringtool.dialog.AliceAlertContentPane {
 	public final static int HISTORY_MODE = 2;
-	
+
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected OutputComponent errOutputComponent;
 	protected OutputComponent stdOutputComponent;
-	
+
 	protected String lastError;
 	protected String titleString;
-	
+
 	protected boolean isShowing = false;
 	protected boolean errorContentAdded = false;
 	protected boolean textContentAdded = false;
 	protected boolean shouldListenToErrors = true;
 	protected boolean shouldListenToPrint = true;
-	
-	protected class ErrOutputDocumentListener implements javax.swing.event.DocumentListener{
-		public void insertUpdate( final javax.swing.event.DocumentEvent ev ) {
-			try{	
-				lastError = ev.getDocument().getText(ev.getOffset(), ev.getLength());
-				if (lastError.startsWith(Messages.getString("StdErrOutContentPane.0")) == true){ 
-					lastError = Messages.getString("StdErrOutContentPane.1")+ 
-						Messages.getString("StdErrOutContentPane.2")+ 
-						Messages.getString("StdErrOutContentPane.3") + 
-						Messages.getString("StdErrOutContentPane.4") + lastError; 
+
+	protected class ErrOutputDocumentListener implements
+			javax.swing.event.DocumentListener {
+		public void insertUpdate(final javax.swing.event.DocumentEvent ev) {
+			try {
+				lastError = ev.getDocument().getText(ev.getOffset(),
+						ev.getLength());
+				if (lastError.startsWith(Messages
+						.getString("__Unable_to_handle_format")) == true) {
+					lastError = Messages
+							.getString("_n_nYour_sound_file_cannot_be_played_in_Alice__n")
+							+ Messages
+									.getString("Please_find_an_audio_editor_to_convert_the_file_to_one_with_a_PCM_encoding__n")
+							+ Messages
+									.getString("See_the_tutorial_on_converting_sound_files_at_our_Alice_website__n")
+							+ Messages
+									.getString("Right_click_to_clear_the_messages_here__n_n")
+							+ lastError;
 				}
-				detailTextPane.getDocument().insertString(detailTextPane.getDocument().getLength(), lastError, detailTextPane.stdErrStyle);
-			}catch (Exception e){}
+				detailTextPane.getDocument().insertString(
+						detailTextPane.getDocument().getLength(), lastError,
+						detailTextPane.stdErrStyle);
+			} catch (Exception e) {
+			}
 			errorContentAdded = true;
 			update();
 		}
-		public void removeUpdate( javax.swing.event.DocumentEvent ev ) { update(); }
-		public void changedUpdate( javax.swing.event.DocumentEvent ev ) { update(); }
+
+		public void removeUpdate(javax.swing.event.DocumentEvent ev) {
+			update();
+		}
+
+		public void changedUpdate(javax.swing.event.DocumentEvent ev) {
+			update();
+		}
 
 		private void update() {
-			if (shouldListenToErrors){
-				javax.swing.SwingUtilities.invokeLater( new Runnable() {
+			if (shouldListenToErrors) {
+				javax.swing.SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						if( !isShowing) {
+						if (!isShowing) {
 							isShowing = true;
-							int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog( StdErrOutContentPane.this );
-						} 
+							int result = edu.cmu.cs.stage3.swing.DialogManager
+									.showDialog(StdErrOutContentPane.this);
+						}
 					}
 				});
 			}
 
 		}
 	}
-	
-	protected class StdOutputDocumentListener implements javax.swing.event.DocumentListener{
-		public void insertUpdate( final javax.swing.event.DocumentEvent ev ) {
-			try{
-				lastError = ev.getDocument().getText(ev.getOffset(), ev.getLength());
-				detailTextPane.getDocument().insertString(detailTextPane.getDocument().getLength(), lastError, detailTextPane.stdOutStyle);
-			}catch (Exception e){}
+
+	protected class StdOutputDocumentListener implements
+			javax.swing.event.DocumentListener {
+		public void insertUpdate(final javax.swing.event.DocumentEvent ev) {
+			try {
+				lastError = ev.getDocument().getText(ev.getOffset(),
+						ev.getLength());
+				detailTextPane.getDocument().insertString(
+						detailTextPane.getDocument().getLength(), lastError,
+						detailTextPane.stdOutStyle);
+			} catch (Exception e) {
+			}
 			textContentAdded = true;
-			update(); 
+			update();
 		}
-		public void removeUpdate( javax.swing.event.DocumentEvent ev ) { update(); }
-		public void changedUpdate( javax.swing.event.DocumentEvent ev ) { update(); }
+
+		public void removeUpdate(javax.swing.event.DocumentEvent ev) {
+			update();
+		}
+
+		public void changedUpdate(javax.swing.event.DocumentEvent ev) {
+			update();
+		}
 
 		private void update() {
-			if (shouldListenToPrint){
-				javax.swing.SwingUtilities.invokeLater( new Runnable() {
+			if (shouldListenToPrint) {
+				javax.swing.SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						if( !isShowing ) {
+						if (!isShowing) {
 							isShowing = true;
-							int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog( StdErrOutContentPane.this );
-						} 
+							int result = edu.cmu.cs.stage3.swing.DialogManager
+									.showDialog(StdErrOutContentPane.this);
+						}
 					}
 				});
 			}
@@ -105,121 +137,128 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 		}
 	}
 
-	public StdErrOutContentPane( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool ) {
+	public StdErrOutContentPane(
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		super();
-		titleString =  Messages.getString("StdErrOutContentPane.5"); 
+		titleString = Messages.getString("Alice___Error_Console");
 		this.authoringTool = authoringTool;
 		this.errOutputComponent = authoringTool.getStdErrOutputComponent();
 		this.stdOutputComponent = authoringTool.getStdOutOutputComponent();
 		writeGenericAliceHeaderToTextPane();
-		this.errOutputComponent.getTextPane().getDocument().addDocumentListener(new ErrOutputDocumentListener());
-		this.stdOutputComponent.getTextPane().getDocument().addDocumentListener(new StdOutputDocumentListener());
+		this.errOutputComponent.getTextPane().getDocument()
+				.addDocumentListener(new ErrOutputDocumentListener());
+		this.stdOutputComponent.getTextPane().getDocument()
+				.addDocumentListener(new StdOutputDocumentListener());
 	}
-	
+
 	protected void writeGenericAliceHeaderToTextPane() {
-		detailTextPane.setText( "" ); 
-		detailStream.println( Messages.getString("StdErrOutContentPane.7") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() ); 
-		String[] systemProperties = { "os.name", "os.version", "os.arch", "java.vm.name", "java.vm.version", "user.dir" };
-		for( int i = 0; i < systemProperties.length; i++ ) {
-			detailStream.println( systemProperties[i] + ": " + System.getProperty( systemProperties[i] ) );
+		detailTextPane.setText("");
+		detailStream.println(Messages.getString("Alice_version__")
+				+ edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion());
+		String[] systemProperties = { "os.name", "os.version", "os.arch",
+				"java.vm.name", "java.vm.version", "user.dir" };
+		for (int i = 0; i < systemProperties.length; i++) {
+			detailStream.println(systemProperties[i] + ": "
+					+ System.getProperty(systemProperties[i]));
 		}
 		detailStream.println();
 	}
 
-	
 	public void preDialogShow(javax.swing.JDialog parentDialog) {
 		super.preDialogShow(parentDialog);
 	}
 
-	public void stopReactingToPrint(){
+	public void stopReactingToPrint() {
 		shouldListenToPrint = false;
 	}
-	
-	public void startReactingToPrint(){
+
+	public void startReactingToPrint() {
 		stdOutputComponent.stdErrStream.flush();
 		stdOutputComponent.stdOutStream.flush();
 		shouldListenToPrint = true;
 	}
-	
-	public void stopReactingToError(){
+
+	public void stopReactingToError() {
 		shouldListenToErrors = false;
 	}
 
-	public void startReactingToError(){
+	public void startReactingToError() {
 		errOutputComponent.stdErrStream.flush();
 		errOutputComponent.stdOutStream.flush();
 		shouldListenToErrors = true;
 	}
-	
+
 	public void postDialogShow(javax.swing.JDialog parentDialog) {
 		isShowing = false;
 		setMode(LESS_DETAIL_MODE);
 		super.postDialogShow(parentDialog);
-	}	
-	
-	public int showStdErrOutDialog(){
-		if( !isShowing ) {
+	}
+
+	public int showStdErrOutDialog() {
+		if (!isShowing) {
 			isShowing = true;
-			return edu.cmu.cs.stage3.swing.DialogManager.showDialog( this );
-		} else{
+			return edu.cmu.cs.stage3.swing.DialogManager.showDialog(this);
+		} else {
 			return -1;
 		}
 	}
-	
+
 	public String getTitle() {
 		return titleString;
 	}
 
-	protected void setHistoryDetail(){
-//		detailPanel.add(detailScrollPane, BorderLayout.CENTER);
+	protected void setHistoryDetail() {
+		// detailPanel.add(detailScrollPane, BorderLayout.CENTER);
 		this.add(detailScrollPane, BorderLayout.CENTER);
 		buttonPanel.removeAll();
 		buttonConstraints.gridx = 0;
-		buttonPanel.add(cancelButton, buttonConstraints );
-		//buttonConstraints.gridx++;
-		//buttonPanel.add(submitBugButton, buttonConstraints);
-		buttonConstraints.gridx++;			
+		buttonPanel.add(cancelButton, buttonConstraints);
+		// buttonConstraints.gridx++;
+		// buttonPanel.add(submitBugButton, buttonConstraints);
+		buttonConstraints.gridx++;
 		buttonPanel.add(copyButton, buttonConstraints);
 		buttonConstraints.gridx++;
-		buttonPanel.add(cancelButton, buttonConstraints );
+		buttonPanel.add(cancelButton, buttonConstraints);
 		buttonConstraints.gridx++;
 		glueConstraints.gridx = buttonConstraints.gridx;
 		buttonPanel.add(buttonGlue, glueConstraints);
-		
-		
-		if (errorContentAdded){
-			messageLabel.setText(Messages.getString("StdErrOutContentPane.8")); 
-		} else if (textContentAdded){
-			messageLabel.setText(Messages.getString("StdErrOutContentPane.9")); 
-		} else{
-			messageLabel.setText(Messages.getString("StdErrOutContentPane.10")); 
+
+		if (errorContentAdded) {
+			messageLabel.setText(Messages
+					.getString("Something_bad_has_occurred_"));
+		} else if (textContentAdded) {
+			messageLabel.setText(Messages
+					.getString("Nothing_bad_has_occurred_"));
+		} else {
+			messageLabel.setText(Messages
+					.getString("Nothing_bad_has_occurred_"));
 		}
 	}
 
-	protected void setLessDetail(){
+	protected void setLessDetail() {
 		super.setLessDetail();
-		messageLabel.setText(Messages.getString("StdErrOutContentPane.11")); 
+		messageLabel.setText(Messages
+				.getString("An_unknown_error_has_occurred_"));
 	}
-	
-	protected void setMoreDetail(){
-		super.setMoreDetail();
-		messageLabel.setText(Messages.getString("StdErrOutContentPane.12")); 
-	}
-	
 
-	protected void handleModeSwitch(int mode){
-		if( mode == LESS_DETAIL_MODE ) {
+	protected void setMoreDetail() {
+		super.setMoreDetail();
+		messageLabel.setText(Messages
+				.getString("An_unknown_error_has_occurred_"));
+	}
+
+	protected void handleModeSwitch(int mode) {
+		if (mode == LESS_DETAIL_MODE) {
 			setLessDetail();
-		} else if( mode == MORE_DETAIL_MODE ) {
+		} else if (mode == MORE_DETAIL_MODE) {
 			setMoreDetail();
-		} else if (mode == HISTORY_MODE){
+		} else if (mode == HISTORY_MODE) {
 			setHistoryDetail();
-		}  else {
-			throw new IllegalArgumentException( Messages.getString("StdErrOutContentPane.13") + mode ); 
+		} else {
+			throw new IllegalArgumentException(
+					Messages.getString("Illegal_mode__") + mode);
 		}
 		packDialog();
 	}
-	
-	
-	
+
 }

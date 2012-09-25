@@ -23,64 +23,94 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-public class LoadElementProgressPane extends edu.cmu.cs.stage3.progress.ProgressPane {
+import edu.cmu.cs.stage3.lang.Messages;
+
+public class LoadElementProgressPane extends
+		edu.cmu.cs.stage3.progress.ProgressPane {
 	private edu.cmu.cs.stage3.io.DirectoryTreeLoader m_loader;
 	private edu.cmu.cs.stage3.alice.core.Element m_externalRoot;
 	private edu.cmu.cs.stage3.alice.core.Element m_loadedElement;
-	public LoadElementProgressPane( String title, String preDescription ) {
-		super( title, preDescription );
+
+	public LoadElementProgressPane(String title, String preDescription) {
+		super(title, preDescription);
 	}
-	
-	protected void construct() throws edu.cmu.cs.stage3.progress.ProgressCancelException {
+
+	protected void construct()
+			throws edu.cmu.cs.stage3.progress.ProgressCancelException {
 		m_loadedElement = null;
 		try {
-			m_loadedElement = edu.cmu.cs.stage3.alice.core.Element.load( m_loader, m_externalRoot, this );
-		} catch( edu.cmu.cs.stage3.progress.ProgressCancelException pce ) {
+			m_loadedElement = edu.cmu.cs.stage3.alice.core.Element.load(
+					m_loader, m_externalRoot, this);
+		} catch (edu.cmu.cs.stage3.progress.ProgressCancelException pce) {
 			throw pce;
-		} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
-			//edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane unresolvablePropertyReferencesPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane( upre );
-			//edu.cmu.cs.stage3.swing.DialogManager.showDialog( unresolvablePropertyReferencesPane );
+		} catch (edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre) {
+			// edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane
+			// unresolvablePropertyReferencesPane = new
+			// edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane(
+			// upre );
+			// edu.cmu.cs.stage3.swing.DialogManager.showDialog(
+			// unresolvablePropertyReferencesPane );
 			StringBuffer sb = new StringBuffer();
-			sb.append( Messages.getString("LoadElementProgressPane.0") ); 
-			edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] propertyReferences = upre.getPropertyReferences();
-			for( int i=0; i<propertyReferences.length; i++ ) {
-				edu.cmu.cs.stage3.alice.core.Property property = propertyReferences[ i ].getProperty();
-				sb.append( "    " ); 
-				sb.append( property.getOwner().toString() );
-				sb.append( '[' );
-				sb.append( property.getName() );
-				sb.append( "] -> " ); 
-				sb.append( propertyReferences[ i ].getCriterion() );
-				sb.append( '\n' );
+			sb.append(Messages
+					.getString("WARNING__unable_to_resolve_references___n"));
+			edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] propertyReferences = upre
+					.getPropertyReferences();
+			for (int i = 0; i < propertyReferences.length; i++) {
+				edu.cmu.cs.stage3.alice.core.Property property = propertyReferences[i]
+						.getProperty();
+				sb.append("    ");
+				sb.append(property.getOwner().toString());
+				sb.append('[');
+				sb.append(property.getName());
+				sb.append("] -> ");
+				sb.append(propertyReferences[i].getCriterion());
+				sb.append('\n');
 			}
-			sb.append( '\n' );
-			sb.append( Messages.getString("LoadElementProgressPane.3") ); 
-			if( edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( sb.toString(), Messages.getString("LoadElementProgressPane.4"), javax.swing.JOptionPane.YES_NO_OPTION ) == javax.swing.JOptionPane.YES_OPTION ) { 
+			sb.append('\n');
+			sb.append(Messages
+					.getString("Would_you_like_to_continue__setting_all_values_to_None_"));
+			if (edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(
+					sb.toString(), Messages.getString("Unable_to_load_world"),
+					javax.swing.JOptionPane.YES_NO_OPTION) == javax.swing.JOptionPane.YES_OPTION) {
 				m_loadedElement = upre.getElement();
 			}
-		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("LoadElementProgressPane.5"), t ); 
+		} catch (Throwable t) {
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool
+					.showErrorDialog(
+							Messages.getString("Unable_to_load_world"), t);
 		}
-//		} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
-//			javax.swing.SwingUtilities.invokeAndWait( new Runnable() {
-//				public void run() {
-//					edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane unresolvablePropertyReferencesPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane( upre );
-//					edu.cmu.cs.stage3.swing.DialogManager.showDialog( unresolvablePropertyReferencesPane );
-//				}
-//			} );
-//			edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] propertyReferences = e.getPropertyReferences();
-//			//System.err.println("Unable to load object: " + pathname + ".  Couldn't resolve the following references:");
-//			for (int i = 0; i < propertyReferences.length; i++) {
-//				System.err.println("\t" + propertyReferences[i]);
-//			}
-//		}
+		// } catch(
+		// edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException
+		// upre ) {
+		// javax.swing.SwingUtilities.invokeAndWait( new Runnable() {
+		// public void run() {
+		// edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane
+		// unresolvablePropertyReferencesPane = new
+		// edu.cmu.cs.stage3.alice.authoringtool.dialog.UnresolvablePropertyReferencesPane(
+		// upre );
+		// edu.cmu.cs.stage3.swing.DialogManager.showDialog(
+		// unresolvablePropertyReferencesPane );
+		// }
+		// } );
+		// edu.cmu.cs.stage3.alice.core.reference.PropertyReference[]
+		// propertyReferences = e.getPropertyReferences();
+		// //System.err.println("Unable to load object: " + pathname +
+		// ".  Couldn't resolve the following references:");
+		// for (int i = 0; i < propertyReferences.length; i++) {
+		// System.err.println("\t" + propertyReferences[i]);
+		// }
+		// }
 	}
-	public void setLoader( edu.cmu.cs.stage3.io.DirectoryTreeLoader loader ) {
+
+	public void setLoader(edu.cmu.cs.stage3.io.DirectoryTreeLoader loader) {
 		m_loader = loader;
 	}
-	public void setExternalRoot( edu.cmu.cs.stage3.alice.core.Element externalRoot ) {
+
+	public void setExternalRoot(
+			edu.cmu.cs.stage3.alice.core.Element externalRoot) {
 		m_externalRoot = externalRoot;
 	}
+
 	public edu.cmu.cs.stage3.alice.core.Element getLoadedElement() {
 		return m_loadedElement;
 	}

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public abstract class AbstractImporter implements edu.cmu.cs.stage3.alice.authoringtool.Importer {
 	private Object location = null;
 	protected String plainName = null;
@@ -84,20 +86,20 @@ public abstract class AbstractImporter implements edu.cmu.cs.stage3.alice.author
 
 	private String getExtension( String filename ) {
 		if( filename == null ) {
-			throw new IllegalArgumentException( Messages.getString("AbstractImporter.0") ); 
+			throw new IllegalArgumentException( Messages.getString("null_filename_encountered") ); 
 		}
 		filename.trim();
 		int i = filename.lastIndexOf( "." ); 
 		if( i == -1 ) {
-			throw new IllegalArgumentException( Messages.getString("AbstractImporter.2") + filename ); 
+			throw new IllegalArgumentException( Messages.getString("unable_to_determine_the_extension_of_") + filename ); 
 		}
 		String ext = filename.substring( i + 1 );
 		if( ext.length() < 1 ) {
-			throw new IllegalArgumentException( Messages.getString("AbstractImporter.2") + filename ); 
+			throw new IllegalArgumentException( Messages.getString("unable_to_determine_the_extension_of_") + filename ); 
 		}
 		ext = ext.toUpperCase();
 		if( getExtensionMap().get( ext ) == null ) {
-			throw new IllegalArgumentException( ext + " " + Messages.getString("AbstractImporter.4") ); 
+			throw new IllegalArgumentException( ext + " " + Messages.getString("files_are_not_supported_by_this_Importer") ); 
 		}
 		return ext;
 	}

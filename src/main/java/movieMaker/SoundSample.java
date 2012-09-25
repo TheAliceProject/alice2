@@ -1,5 +1,7 @@
 package movieMaker;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * Class that represents a sample of a sound.  It knows what sound object
@@ -67,6 +69,6 @@ public class SoundSample
   
 public String toString()
   {
-    return Messages.getString("SoundSample.0") + frameNumber + Messages.getString("SoundSample.1") + getValue();  
+    return Messages.getString("Sample_at_index_") + frameNumber + Messages.getString("_has_value_") + getValue();  
   }
 } // end of SoundSample class

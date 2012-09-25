@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.SpatialRelationProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class PlaceAnimation extends AbstractPositionAnimation {
 	public final SpatialRelationProperty spatialRelation = new SpatialRelationProperty( this, "spatialRelation", edu.cmu.cs.stage3.alice.core.SpatialRelation.IN_FRONT_OF ); 
@@ -62,10 +62,10 @@ public class PlaceAnimation extends AbstractPositionAnimation {
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( PlaceAnimation.this.spatialRelation.getSpatialRelationValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PlaceAnimation.2"), null, PlaceAnimation.this.spatialRelation ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("spatial_relation_value_must_not_be_null_"), null, PlaceAnimation.this.spatialRelation ); 
 			}
 			if( PlaceAnimation.this.amount.getValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("PlaceAnimation.3"), null, PlaceAnimation.this.amount ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("amount_value_must_not_be_null_"), null, PlaceAnimation.this.amount ); 
 			}
 		}
 	}

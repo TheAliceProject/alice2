@@ -9,7 +9,10 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  * @version 1.0
  */
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 
 import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
 
