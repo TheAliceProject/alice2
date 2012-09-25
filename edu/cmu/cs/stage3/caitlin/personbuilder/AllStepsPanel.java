@@ -23,10 +23,12 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
 import java.util.Vector;
-import org.w3c.dom.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import org.w3c.dom.Node;
 
 public class AllStepsPanel extends JPanel {
 	protected java.awt.CardLayout cLayout = null;

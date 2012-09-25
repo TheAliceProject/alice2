@@ -1,10 +1,18 @@
 package movieMaker;
 
-import javax.imageio.ImageIO;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.awt.*;
-import java.io.*;
-import java.awt.geom.*;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  * A class that represents a simple picture.  A simple picture may have
@@ -448,7 +456,7 @@ public class SimplePicture implements DigitalPicture
      if (!file.canRead())
      {
        throw new IOException(this.fileName +
-                             Messages.getString("SimplePicture.6")); 
+                             Messages.getString("_could_not_be_opened__Check_that_you_specified_the_path")); 
      }
    }
    
@@ -469,10 +477,10 @@ public class SimplePicture implements DigitalPicture
          return true;
 
      } catch (Exception ex) {
-         System.out.println(Messages.getString("SimplePicture.7") + fileName); 
+         System.out.println(Messages.getString("There_was_an_error_trying_to_open_") + fileName); 
          bufferedImage = new BufferedImage(600,200,
                                            BufferedImage.TYPE_INT_RGB);
-         addMessage(Messages.getString("SimplePicture.8") + fileName,5,100); 
+         addMessage(Messages.getString("Couldn_t_load_") + fileName,5,100); 
          return false;
      }
          
@@ -615,7 +623,7 @@ public class SimplePicture implements DigitalPicture
    if (!fileLoc.canWrite()) {
        // System.err.println("can't write the file but trying anyway? ...");
         throw new IOException(fileName +
-        Messages.getString("SimplePicture.10")); 
+        Messages.getString("_could_not_be_opened__Check_to_see_if_you_can_write_to_the_directory_")); 
    }
    
    // get the extension
@@ -640,7 +648,7 @@ public class SimplePicture implements DigitalPicture
          this.writeOrFail(fileName);
          return true;
      } catch (Exception ex) {
-         System.out.println(Messages.getString("SimplePicture.11") + fileName); 
+         System.out.println(Messages.getString("There_was_an_error_trying_to_write_") + fileName); 
          return false;
      }
          
@@ -717,8 +725,8 @@ public class SimplePicture implements DigitalPicture
  
 public String toString()
  {
-   String output = Messages.getString("SimplePicture.12") + fileName +  
-     Messages.getString("SimplePicture.13") + getHeight() + Messages.getString("SimplePicture.14") + getWidth();  
+   String output = Messages.getString("Simple_Picture__filename_") + fileName +  
+     Messages.getString("_height_") + getHeight() + Messages.getString("_width_") + getWidth();  
    return output;
  }
 

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * Title:
@@ -84,17 +86,17 @@ public class ConditionalBehaviorPanel extends BasicBehaviorPanel {
 		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" colspan=\"2\" >"+strikeStart);  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(labelPanel));
 		toWriteTo.append(strikeEnd+"</td>\n</tr>\n"); 
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("ConditionalBehaviorPanel.12")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("_b_Begin___b_")+strikeEnd+"</td>\n");    //$NON-NLS-4$
 		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(beginPanel));
 		toWriteTo.append("</table>\n</td>\n</tr>\n"); 
 		
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("ConditionalBehaviorPanel.19")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("_b_During___b_")+strikeEnd+"</td>\n");    //$NON-NLS-4$
 		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(duringPanel));
 		toWriteTo.append("</table>\n</td>\n</tr>\n"); 
 
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("ConditionalBehaviorPanel.26")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("_b_End___b_")+strikeEnd+"</td>\n");    //$NON-NLS-4$
 		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(endPanel));
 		toWriteTo.append("</table>\n</td>\n</tr>\n"); 
@@ -126,18 +128,18 @@ public class ConditionalBehaviorPanel extends BasicBehaviorPanel {
         buildLabel(labelPanel);
         m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
 
-        m_containingPanel.add(new javax.swing.JLabel(Messages.getString("ConditionalBehaviorPanel.31")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
+        m_containingPanel.add(new javax.swing.JLabel(Messages.getString("Begin_")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
 
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory beginFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).beginResponse);
         beginPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).beginResponse, false, true, true, beginFactory);
 		m_containingPanel.add(beginPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 
-		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("ConditionalBehaviorPanel.32")), new java.awt.GridBagConstraints(0,2,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
+		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("During_")), new java.awt.GridBagConstraints(0,2,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
 		edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory duringFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).duringResponse);
         duringPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).duringResponse, false, true, true, duringFactory);
         m_containingPanel.add(duringPanel, new java.awt.GridBagConstraints(1,2,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 
-		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("ConditionalBehaviorPanel.33")), new java.awt.GridBagConstraints(0,3,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
+		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("End_")), new java.awt.GridBagConstraints(0,3,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
 		edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory endFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).endResponse);
         endPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).endResponse, false, true, true, endFactory);
 

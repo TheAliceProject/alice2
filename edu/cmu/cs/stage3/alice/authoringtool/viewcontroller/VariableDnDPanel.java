@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -142,7 +144,7 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 			add( nameLabel, java.awt.BorderLayout.CENTER );
 			nameLabel.requestFocus();
 		} catch( edu.cmu.cs.stage3.alice.core.IllegalNameValueException e ) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("VariableDnDPanel.6"), javax.swing.JOptionPane.ERROR_MESSAGE ); 
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( e.getMessage(), Messages.getString("Error_setting_name"), javax.swing.JOptionPane.ERROR_MESSAGE ); 
 			textField.setText( prevName );
 			//textField.selectAll();
 		}
@@ -176,7 +178,7 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		popupStructure.clear();
 
 		if( variable != null ) {
-			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("VariableDnDPanel.7"), new Runnable() { 
+			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("rename"), new Runnable() { 
 				public void run() {
 					VariableDnDPanel.this.editName();
 				}
@@ -184,19 +186,19 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 
 			final edu.cmu.cs.stage3.alice.authoringtool.util.WatcherPanel watcherPanel = authoringTool.getWatcherPanel();
 			if( watcherPanel.isVariableBeingWatched( variable ) ) {
-				popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("VariableDnDPanel.8"), new Runnable() { 
+				popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("stop_watching_this_variable"), new Runnable() { 
 					public void run() {
 						watcherPanel.removeVariableBeingWatched( VariableDnDPanel.this.variable );
 					}
 				} ) );
 			} else {
-				popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("VariableDnDPanel.9"), new Runnable() { 
+				popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("watch_this_variable"), new Runnable() { 
 					public void run() {
 						watcherPanel.addVariableToWatch( VariableDnDPanel.this.variable );
 					}
 				} ) );
 			}
-			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("VariableDnDPanel.10"), new Runnable() { 
+			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("delete"), new Runnable() { 
 				public void run() {
 					edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable deleteRunnable = new edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable( variable, authoringTool );
 					deleteRunnable.run();
@@ -231,4 +233,3 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		}
 	}
 }
-

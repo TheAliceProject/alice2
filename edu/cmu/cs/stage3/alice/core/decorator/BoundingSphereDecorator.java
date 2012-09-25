@@ -107,4 +107,3 @@ public class BoundingSphereDecorator extends Decorator {
         setIsDirty( false );
 	}
 }
-

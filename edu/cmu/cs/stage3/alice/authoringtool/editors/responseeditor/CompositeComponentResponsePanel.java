@@ -24,7 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * Title:
@@ -197,13 +197,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     dtde.rejectDrop();
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.0"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.1"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.2"), t ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed__Methods_with_parameters_cannot_be_copied_"), t ); 
                 successful = false;
             }
         }
@@ -227,13 +227,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     successful = true;
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.3"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.4"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.5"), t ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed__Methods_with_parameters_cannot_be_copied_"), t ); 
                 successful = false;
             }
         }
@@ -287,13 +287,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                         edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
                     }
                 } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.6"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                     successful = false;
                 } catch( java.io.IOException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.7"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                     successful = false;
                 } catch( Throwable t ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.8"), t ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                     successful = false;
                 }
             }
@@ -314,7 +314,8 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     edu.cmu.cs.stage3.alice.core.Property property = (edu.cmu.cs.stage3.alice.core.Property)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.PropertyReferenceTransferable.propertyReferenceFlavor );
                     if (property instanceof edu.cmu.cs.stage3.alice.core.property.VehicleProperty){
                         //System.out.println("new vehicle animation");
-                        edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair(AikMin.getProperty("duration"), new Double(0))};   
+                        //edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair(AikMin.getName("duration"), new Double(0))};
+                    	edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair("duration", new Double(0))};
                         known = newKnown;
                         animationClass = edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class;
                     }
@@ -350,13 +351,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     popup.show(dtde.getDropTargetContext().getComponent(), (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
                     edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
                 } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.15"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                     successful = false;
                 } catch( java.io.IOException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.16"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                     successful = false;
                 } catch( Throwable t ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.17"), t ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                     successful = false;
                 }
             }
@@ -402,13 +403,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                         edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
                     }
                 } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.18"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                     successful = false;
                 } catch( java.io.IOException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.19"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                     successful = false;
                 } catch( Throwable t ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.20"), t ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                     successful = false;
                 }
             }
@@ -474,13 +475,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     }
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.21"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.22"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentResponsePanel.23"), t ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                 successful = false;
             }
         }else{

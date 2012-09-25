@@ -10,4 +10,3 @@ public class StackVisualizationAnimation extends edu.cmu.cs.stage3.alice.core.re
 		}
     }
 }
-

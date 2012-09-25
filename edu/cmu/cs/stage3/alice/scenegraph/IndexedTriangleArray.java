@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Dennis Cosgrove
  */
@@ -130,7 +132,7 @@ public class IndexedTriangleArray extends VertexGeometry {
 				indices[i] = dis.readInt();
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("IndexedTriangleArray.3") + version ); 
+			throw new RuntimeException( Messages.getString("invalid_file_version__") + version ); 
 		}
 		return indices;
 	}

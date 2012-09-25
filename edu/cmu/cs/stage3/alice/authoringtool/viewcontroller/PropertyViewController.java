@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 
 /**
  * @author Jason Pratt
@@ -488,7 +490,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 				String unitString = null;
 				java.util.Collection unitMapValues = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getUnitMapValues();
 				for( java.util.Iterator iter = unitMapValues.iterator(); iter.hasNext(); ) {
-					String s = (String)iter.next();
+					String s = AikMin.getName( (String)iter.next() );
 					if( mainString.endsWith( " " + s ) ) {
 						unitString = s;
 						break;

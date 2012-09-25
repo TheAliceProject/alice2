@@ -35,6 +35,7 @@ package edu.cmu.cs.stage3.alice.core;
 import edu.cmu.cs.stage3.alice.core.property.FontProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class Text3D extends Model {
 	public final StringProperty text = new StringProperty( this, "text", null ); 
@@ -71,7 +72,7 @@ public class Text3D extends Model {
     
 	protected void propertyChanging( edu.cmu.cs.stage3.alice.core.Property property, Object value ) {
         if (property==geometry && value!=null && !(value instanceof edu.cmu.cs.stage3.alice.core.geometry.Text3D))
-            throw new java.lang.ClassCastException(Messages.getString("Text3D.4")); 
+            throw new java.lang.ClassCastException(Messages.getString("A_3D_text_model_s_geometry_must_be_a_3D_text_geometry")); 
         else
             super.propertyChanging(property,value);
     }

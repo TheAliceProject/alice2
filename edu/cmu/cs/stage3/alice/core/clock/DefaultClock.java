@@ -101,4 +101,3 @@ public class DefaultClock implements edu.cmu.cs.stage3.alice.core.Clock {
 		}
 	}
 }
-

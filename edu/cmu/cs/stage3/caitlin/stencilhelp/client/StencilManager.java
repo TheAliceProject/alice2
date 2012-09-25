@@ -1,21 +1,27 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
+import edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter;
+import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StateCapsule;
+import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StencilApplication;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.awt.Point;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Vector;
-import java.awt.Component;
-import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StencilApplication;
-import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StateCapsule;
 import javax.swing.JFileChooser;
-import java.io.*;
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
-import edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class StencilManager implements MouseListener, MouseMotionListener, KeyListener, StencilClient, StencilStackChangeListener {
 	StencilApplication stencilApp = null;
@@ -138,7 +144,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 				//check to see if the file already exists, if not we're fine
 				if (!(loadFile.exists())) {
-					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("StencilManager.1") + fileName + Messages.getString("StencilManager.2"), Messages.getString("StencilManager.3"), javax.swing.JOptionPane.OK_CANCEL_OPTION);   
+					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("Can_t_find_") + fileName + Messages.getString("__Please_choose_another"), Messages.getString("Can_t_find_file"), javax.swing.JOptionPane.OK_CANCEL_OPTION);   
 
 					if (ans == javax.swing.JOptionPane.CANCEL_OPTION) {
 						return;
@@ -170,8 +176,8 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 				}
 				//check to see if the file already exists, if not we're fine
 				if (saveFile.exists()) {
-					String msg = Messages.getString("StencilManager.6"); 
-					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(msg, Messages.getString("StencilManager.7"), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION); 
+					String msg = Messages.getString("This_file_already_exists__do_you_want_to_overwrite_it_"); 
+					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(msg, Messages.getString("File_already_exists"), javax.swing.JOptionPane.YES_NO_CANCEL_OPTION); 
 
 					if (ans == javax.swing.JOptionPane.YES_OPTION) {
 						// we can proceed

@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -49,7 +50,7 @@ public class ComponentElementPanel extends edu.cmu.cs.stage3.alice.authoringtool
             this.add(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(m_element));
         }
         catch (Exception e){
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ComponentElementPanel.0"), e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("An_error_occurred_while_creating_the_graphics_component_for_this_object_"), e ); 
         }
        // edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel added = (edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel)this.getComponent(0);
     }

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -54,7 +56,7 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 			out = (java.io.OutputStream)pathname;
 		}
 		else {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.0") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_must_be_an_instance_of_String__java_io_File__or_java_io_OutputStream") ); 
 		}
 
 		zipOut = new java.util.zip.ZipOutputStream( new java.io.BufferedOutputStream( out ) );
@@ -78,10 +80,10 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 
 	public void createDirectory( String pathname ) throws IllegalArgumentException, java.io.IOException {
 		if( (pathname.indexOf( '/' ) != -1) || (pathname.indexOf( '\\' ) != -1) ) {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.2") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_cannot_contain_path_separators") ); 
 		}
 		if( pathname.length() <= 0 ) {
-			throw new IllegalArgumentException( Messages.getString("ZipTreeStorer.3") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_has_no_length") ); 
 		}
 
 		java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry( currentDirectory + pathname + "/" ); 
@@ -90,7 +92,7 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 			zipOut.closeEntry();
 		}
 		else {
-			throw new java.io.IOException( Messages.getString("ZipTreeStorer.5") ); 
+			throw new java.io.IOException( Messages.getString("No_zip_file_currently_open") ); 
 		}
 	}
 
@@ -141,7 +143,7 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 			zipOut.putNextEntry( currentEntry );
 		}
 		else {
-			throw new java.io.IOException( Messages.getString("ZipTreeStorer.12") ); 
+			throw new java.io.IOException( Messages.getString("No_zip_file_currently_open") ); 
 		}
 
 		return zipOut;

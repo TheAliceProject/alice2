@@ -1,5 +1,7 @@
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class FileUtilities {
 	private static boolean s_successfullyLoadedLibrary;
 	
@@ -36,14 +38,14 @@ public class FileUtilities {
 				}
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("FileUtilities.1") ); 
+			throw new RuntimeException( Messages.getString("file_copy_not_supported") ); 
 		}
 	}
 	public static void copy( java.io.File src, java.io.File dst, boolean overwriteIfNecessary ) {
 		try {
 			copy( src, dst, overwriteIfNecessary, null );
 		} catch( edu.cmu.cs.stage3.progress.ProgressCancelException pce ) {
-			throw new Error( Messages.getString("FileUtilities.2") ); 
+			throw new Error( Messages.getString("caught_ProgressCancelException_without_ProgressObserver") ); 
 		}
 	}
 

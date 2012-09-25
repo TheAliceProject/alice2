@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  * @deprecated  use ElementNamePropertyViewController
@@ -39,7 +41,7 @@ public class RightClickNameEditor extends StringPropertyViewController {
 			}
 		} );
 		popupStructure = new java.util.Vector();
-		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("RightClickNameEditor.0"), new Runnable() { 
+		popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("Rename"), new Runnable() { 
 			public void run() {
 				RightClickNameEditor.this.editValue();
 			}
@@ -50,7 +52,7 @@ public class RightClickNameEditor extends StringPropertyViewController {
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {
-				if( isEnabled() && ev.isPopupTrigger() ) {
+				if( isEnabled() && (ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3) ) {
 					RightClickNameEditor.this.popupButton.doClick();
 				}
 			}

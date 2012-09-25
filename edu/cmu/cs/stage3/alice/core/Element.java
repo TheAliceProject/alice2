@@ -31,6 +31,7 @@ import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
 import edu.cmu.cs.stage3.io.DirectoryTreeStorer;
+import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.util.Criterion;
 import edu.cmu.cs.stage3.util.HowMuch;
 
@@ -180,22 +181,22 @@ public abstract class Element {
 			String trimmedNameValue = nameValue.trim();
 			if( trimmedNameValue.length() != nameValue.length() ) {
                 //throw new IllegalNameValueException( nameValue, "an element's name cannot begin or end with whitespace." );
-                throw new IllegalNameValueException( nameValue, Messages.getString("Element.20") ); 
+                throw new IllegalNameValueException( nameValue, Messages.getString("We_re_sorry__but_names_in_Alice_may_not_have_spaces_at_the_beginning_or_end_") ); 
 			}
 			if( nameValue.length() == 0 ) {
-				throw new IllegalNameValueException( nameValue, Messages.getString("Element.21") ); 
+				throw new IllegalNameValueException( nameValue, Messages.getString("We_re_sorry__but_names_in_Alice_may_not_be_empty_") ); 
 			}
 			char[] illegalCharacters = { '\t', '\n', '\\', '/', ':', '*', '?', '"', '<', '>', '|', SEPARATOR };
 			for( int i=0; i<illegalCharacters.length; i++ ) {
 				if( nameValue.indexOf( illegalCharacters[i] )!=-1 ) {
                     //throw new IllegalNameValueException( nameValue, "an element's name cannot contain any of the following characters: " + new String( illegalCharacters ) );
-                    throw new IllegalNameValueException( nameValue, Messages.getString("Element.22") + illegalCharacters[i] + Messages.getString("Element.23") );  
+                    throw new IllegalNameValueException( nameValue, Messages.getString("We_re_sorry__but_names_in_Alice_may_only_contain_letters_and_numbers___The_character__") + illegalCharacters[i] + Messages.getString("__can_not_be_used_in_a_name_") );  
 				}
 			}
 
-			char[] bytes = nameValue.toCharArray();
-			for( int i=0; i<bytes.length; i++ ) {
-				if( is8Bit( bytes[ i ] ) ) {
+			//char[] bytes = nameValue.toCharArray();
+			//for( int i=0; i<bytes.length; i++ ) {
+				if( AikMin.isValidName(nameValue) ) {
 					//pass
 				} else {
 //					char c;
@@ -204,9 +205,9 @@ public abstract class Element {
 //					} catch( Throwable t ) {
 //						c = (char)bytes[ i ];
 //					}
-					throw new IllegalNameValueException( nameValue, Messages.getString("Element.24") + bytes[i] + Messages.getString("Element.25") );  
+					throw new IllegalNameValueException( nameValue, Messages.getString("We_re_sorry__but_names_in_Alice_may_only_contain_letters_and_numbers___The_character__") + "??" + Messages.getString("__can_not_be_used_in_a_name_") );  
 				}
-			}
+			//}
         }
     }
 	private void checkForNameCollision( Element parentValue, String nameValue ) {
@@ -217,7 +218,7 @@ public abstract class Element {
 //			System.out.println("\n\n"+nameValue+", "+parentValue.hashCode());
 //			Thread.dumpStack();
 			if( siblingToBe!=null && siblingToBe!=this ) {
-				throw new IllegalNameValueException( nameValue, Messages.getString("Element.26") + nameValue + Messages.getString("Element.27") );  
+				throw new IllegalNameValueException( nameValue, Messages.getString("Unfortunately__something_else_in_this_world_is_already_named__") + nameValue + Messages.getString("___so_you_can_t_use_that_name_here_") );  
 			} 
 		}
 	}
@@ -256,13 +257,13 @@ public abstract class Element {
 	}
 	public final void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ) {
 		if( isReleased() ) {
-			throw new RuntimeException( Messages.getString("Element.28") + propertyEvent.getProperty() ); 
+			throw new RuntimeException( Messages.getString("property_change_attempted_on_released_element__") + propertyEvent.getProperty() ); 
 		}
 		propertyChanging( propertyEvent.getProperty(), propertyEvent.getValue() );
 	}
 	public final void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ) {
 		if( isReleased() ) {
-			throw new RuntimeException( Messages.getString("Element.29") + propertyEvent.getProperty() ); 
+			throw new RuntimeException( Messages.getString("property_changed_on_released_element") + propertyEvent.getProperty() ); 
 		}
 		propertyChanged( propertyEvent.getProperty(), propertyEvent.getValue() );
         if( propertyEvent.getProperty() == name ) {
@@ -412,7 +413,7 @@ public abstract class Element {
                 original.setParent( null );
             } else {
                 //todo
-                System.err.println( Messages.getString("Element.32") + replacement ); 
+                System.err.println( Messages.getString("WARNING__original_is_null_for_") + replacement ); 
                 parent = null;
             }
             if( parent != null ) {
@@ -588,7 +589,7 @@ public abstract class Element {
 								properties.addElement( property );
 							}
 						} else {
-							debugln( Messages.getString("Element.33") + field.getName() ); 
+							debugln( Messages.getString("warning__cannot_find_property_field__") + field.getName() ); 
 						}
 					} catch( IllegalAccessException iae ) {
 						iae.printStackTrace();
@@ -606,10 +607,7 @@ public abstract class Element {
 		Property[] properties = getProperties();
 		for( int i=0; i<properties.length; i++ ) {
 			Property property = properties[i];
-			if ( !AikMin.locale.equalsIgnoreCase( "en" ) ) {
-				name = AikMin.getProperty(name);			
-			} 
-			if( property.getName().equals( name ) ) {
+			if( property.getName().equals( name ) ) {//AikMin.getName(name) ) ) {
 				return property;
 			}
 		}
@@ -619,11 +617,8 @@ public abstract class Element {
 	public Property getPropertyNamedIgnoreCase( String name ) {
 		Property[] properties = getProperties();
 		for( int i=0; i<properties.length; i++ ) {
-			Property property = properties[i];
-			if ( !AikMin.locale.equalsIgnoreCase( "en" ) ) {
-				name = AikMin.getProperty(name);			
-			} 
-			if( property.getName().equalsIgnoreCase( name ) ) {
+			Property property = properties[i]; 
+			if( property.getName().equalsIgnoreCase( name ) ) {// AikMin.getName(name) ) ) {
 				return property;
 			}
 		}
@@ -684,10 +679,10 @@ public abstract class Element {
 		if( parentValue != null ) {
 			checkForNameCollision( parentValue, name.getStringValue() );
 			if( parentValue == this ) {
-				throw new RuntimeException( this + Messages.getString("Element.34") ); 
+				throw new RuntimeException( this + Messages.getString("_cannot_be_its_own_parent_") ); 
 			}
 			if( parentValue.isDescendantOf( this ) ) {
-				throw new RuntimeException( this + Messages.getString("Element.35") + parentValue + Messages.getString("Element.36") );  
+				throw new RuntimeException( this + Messages.getString("_cannot_have_descendant_") + parentValue + Messages.getString("_as_its_parent_") );  
 			}
 		}
 		Element prevParent = m_parent;
@@ -1050,7 +1045,7 @@ public abstract class Element {
 				index = m_children.size();
 			}
 			if( m_children.contains( child ) ) {
-				throw new RuntimeException( child + Messages.getString("Element.51") + this ); 
+				throw new RuntimeException( child + Messages.getString("_is_already_a_child_of_") + this ); 
 			}
 			child.internalSetParent( this );
 			edu.cmu.cs.stage3.alice.core.event.ChildrenEvent childrenEvent = new edu.cmu.cs.stage3.alice.core.event.ChildrenEvent( this, child, edu.cmu.cs.stage3.alice.core.event.ChildrenEvent.CHILD_INSERTED, -1, index );
@@ -1066,7 +1061,7 @@ public abstract class Element {
 		if( internalRemoveChild( child ) ) {
 			child.internalSetParent( null );
 		} else {
-			warnln( Messages.getString("Element.52") + child + Messages.getString("Element.53") + this );  
+			warnln( Messages.getString("WARNING__could_not_remove_child_") + child + Messages.getString("___it_is_not_a_child_of_") + this );  
 		}
 	}
 	public void addChildrenListener( edu.cmu.cs.stage3.alice.core.event.ChildrenListener childrenListener ) {
@@ -1437,7 +1432,12 @@ public abstract class Element {
     protected static Element load( javax.xml.parsers.DocumentBuilder builder, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws java.io.IOException, edu.cmu.cs.stage3.progress.ProgressCancelException {
 		String currentDirectory = loader.getCurrentDirectory();
         try {
-            java.io.InputStream is = loader.readFile( XML_FILENAME );
+            java.io.InputStream inputStream = loader.readFile( XML_FILENAME );
+            java.io.Reader reader = new java.io.InputStreamReader(inputStream,"UTF-8");
+            
+            org.xml.sax.InputSource is = new org.xml.sax.InputSource(reader);
+            is.setEncoding("UTF-8");
+            
             org.w3c.dom.Document document = builder.parse( is );
             org.w3c.dom.Element elementNode = document.getDocumentElement();
             elementNode.normalize();
@@ -1487,7 +1487,7 @@ public abstract class Element {
                     if( childName != null ) {
                         if( element.getChildNamed( childName ) != null ) {
                             child = null;
-                            System.err.println( element + Messages.getString("Element.71") + childName + Messages.getString("Element.72") );  
+                            System.err.println( element + Messages.getString("_already_has_child_named_") + childName + Messages.getString("___skipping_") );  
                         }
                     }
                     if( child != null ) {
@@ -1574,7 +1574,7 @@ public abstract class Element {
 				loader = new edu.cmu.cs.stage3.io.ZipFileTreeLoader();
 			} else {
 				//too restrictive?
-				throw new IllegalArgumentException( file + Messages.getString("Element.85") ); 
+				throw new IllegalArgumentException( file + Messages.getString("_must_be_a_directory_or_end_in___a2w_____a2c___or___zip__") ); 
 			}
 		}
 		loader.open( file );
@@ -1631,7 +1631,7 @@ public abstract class Element {
 	}
 
     private void writeXMLDocument( org.w3c.dom.Document xmlDocument, DirectoryTreeStorer storer, String filename ) throws java.io.IOException {
-        java.io.OutputStream os = storer.createFile( filename, true );
+        java.io.OutputStream os = storer.createFile( filename, true );      
 		edu.cmu.cs.stage3.xml.Encoder.write( xmlDocument, os );
         storer.closeCurrentFile();
     }
@@ -1722,13 +1722,15 @@ public abstract class Element {
 		}
 
 		String thisDirectory = storer.getCurrentDirectory();
+		String thisDirectory2 = new String (thisDirectory.getBytes(),"UTF-8");
 		for( int i=0; i<getChildCount(); i++ ) {
 			Element child = (Element)getChildAt( i );
 			String name = child.getRepr( i );
-			storer.createDirectory( name );
-			storer.setCurrentDirectory( name );
+			String name2 = new String(name.getBytes(), "UTF-8");		//AikMin new
+			storer.createDirectory( name2 );
+			storer.setCurrentDirectory( name2 );
 			count = child.internalStore( builder, storer, progressObserver, howMuch, referenceGenerator, count );
-			storer.setCurrentDirectory( thisDirectory );
+			storer.setCurrentDirectory( thisDirectory2 );
 		}
 		return count;
 	}
@@ -1775,7 +1777,7 @@ public abstract class Element {
             javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
             int storeCount = internalStore( builder, storer, progressObserver, howMuch, referenceGenerator, 0 );
             if( elementCount != storeCount ) {
-                warnln( Messages.getString("Element.96") + elementCount + Messages.getString("Element.97") + storeCount );  
+                warnln( Messages.getString("WARNING__elementCount_") + elementCount + Messages.getString("_not_equal_storeCount_") + storeCount );  
             }
         } catch( javax.xml.parsers.ParserConfigurationException pce ) {
             pce.printStackTrace();

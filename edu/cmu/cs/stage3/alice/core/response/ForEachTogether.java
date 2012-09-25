@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class ForEachTogether extends ForEach {
 	//todo:
 	//private static Class[] s_supportedCoercionClasses = { ForEachInOrder.class };
@@ -40,7 +42,7 @@ public class ForEachTogether extends ForEach {
             if( m_listIndex>=0 && m_listIndex < m_runtimeResponsesArray.length ) {
                 return m_runtimeResponsesArray[ m_listIndex ];
             } else {
-                throw new ArrayIndexOutOfBoundsException( m_listIndex + Messages.getString("ForEachTogether.0")+" [0,"+m_runtimeResponsesArray.length+")." );   
+                throw new ArrayIndexOutOfBoundsException( m_listIndex + Messages.getString("_is_out_of_bounds")+" [0,"+m_runtimeResponsesArray.length+")." );   
             }
 		}
         
@@ -111,4 +113,3 @@ public class ForEachTogether extends ForEach {
 		}
 	}
 }
-

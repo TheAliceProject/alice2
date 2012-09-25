@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -40,7 +42,7 @@ public class StyleStream extends java.io.PrintStream {
 		try {
 			styledStreamTextPane.document.insertString( styledStreamTextPane.endPosition.getOffset() - 1, String.valueOf( b ), style );
 		} catch( javax.swing.text.BadLocationException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyleStream.0"), e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_while_printing_"), e ); 
 		}
 	}
 
@@ -48,7 +50,7 @@ public class StyleStream extends java.io.PrintStream {
 		try {
 			styledStreamTextPane.document.insertString( styledStreamTextPane.endPosition.getOffset() - 1, new String( buf, off, len ), style );
 		} catch( javax.swing.text.BadLocationException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("StyleStream.1"), e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_while_printing_"), e ); 
 		}
 	}
 }

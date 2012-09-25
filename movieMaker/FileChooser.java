@@ -1,13 +1,13 @@
 package movieMaker;
 
+import edu.cmu.cs.stage3.lang.Messages;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.net.URL;
+import java.util.Properties;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
-import movieMaker.SimpleOutput;
-
-import java.util.Properties;
-import java.io.*;
-import java.net.*;
   
 /**
  * A class to make working with a file chooser easier
@@ -141,18 +141,18 @@ public class FileChooser
    // if the directory is null ask the user for it
    if (directory == null)
    {
-     SimpleOutput.showError(Messages.getString("FileChooser.3") + 
-       Messages.getString("FileChooser.4") + 
-       Messages.getString("FileChooser.5") + 
-       Messages.getString("FileChooser.6") + 
-       Messages.getString("FileChooser.7") + 
-       Messages.getString("FileChooser.8") + 
-       Messages.getString("FileChooser.9") + 
-       Messages.getString("FileChooser.10") + 
-       Messages.getString("FileChooser.11") + 
-       Messages.getString("FileChooser.12") + 
-       Messages.getString("FileChooser.13") + 
-       Messages.getString("FileChooser.14")); 
+     SimpleOutput.showError(Messages.getString("The_media_path__directory_") + 
+       Messages.getString("_has_not_been_set_yet__") + 
+       Messages.getString("Please_pick_the_directory_") + 
+       Messages.getString("that_contains_your_media_") + 
+       Messages.getString("_usually_called_mediasources__") + 
+       Messages.getString("with_the_following_FileChooser___") + 
+       Messages.getString("The_directory_name_will_be_stored_") + 
+       Messages.getString("in_a_file_and_remain_unchanged_unless_you_use_") + 
+       Messages.getString("FileChooser_pickMediaPath___or_") + 
+       Messages.getString("FileChooser_setMediaPath__full_path_name___") + 
+       Messages.getString("_ex__FileChooser_setMediaPath__c__intro_prog_java_mediasources_____") + 
+       Messages.getString("_to_change_it_")); 
      pickMediaPath();
      directory = getMediaDirectory();
    }
@@ -210,8 +210,8 @@ public class FileChooser
    File file = new File(directory);
    if (!file.exists())
    {
-     System.out.println(Messages.getString("FileChooser.17") + directory +  
-                 Messages.getString("FileChooser.18")); 
+     System.out.println(Messages.getString("Sorry_but_") + directory +  
+                 Messages.getString("_doesn_t_exist__try_a_different_directory_")); 
      FileChooser.pickMediaPath();
    }
    
@@ -236,11 +236,11 @@ public class FileChooser
        FileOutputStream out = 
          new FileOutputStream(fileURL.getPath());
        appProperties.store(out, 
-                     Messages.getString("FileChooser.21")); 
+                     Messages.getString("Properties_for_the_Simple_Picture_class")); 
        out.close();
        //System.out.println("The media directory is now " + directory);
      } catch (Exception ex) {
-       System.err.println(Messages.getString("FileChooser.22")); 
+       System.err.println(Messages.getString("Couldn_t_save_media_path_to_a_file")); 
      }
    }
  }

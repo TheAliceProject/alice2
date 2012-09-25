@@ -32,12 +32,13 @@ package edu.cmu.cs.stage3.alice.authoringtool.importers.mocap;
  * @version 1.0
  */
 
+import java.io.InputStream;
+import java.io.StreamTokenizer;
 import java.util.Map;
+
 import edu.cmu.cs.stage3.alice.authoringtool.AbstractImporter;
 import edu.cmu.cs.stage3.alice.core.Element;
-import java.io.InputStream;
 import edu.cmu.cs.stage3.alice.core.Model;
-import java.io.StreamTokenizer;
 import edu.cmu.cs.stage3.io.EStreamTokenizer;
 
 

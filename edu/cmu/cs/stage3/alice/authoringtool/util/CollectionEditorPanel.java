@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt, Dennis Cosgrove
  */
@@ -35,7 +37,7 @@ public class CollectionEditorPanel extends javax.swing.JPanel {
 
 		setLayout( new java.awt.BorderLayout() );
 
-		add( new javax.swing.JLabel(Messages.getString("CollectionEditorPanel.0")), java.awt.BorderLayout.NORTH ); 
+		add( new javax.swing.JLabel(Messages.getString("Values_")), java.awt.BorderLayout.NORTH ); 
 		add( editorScrollPane, java.awt.BorderLayout.CENTER );
 
 		setPreferredSize( new java.awt.Dimension( 350, 350 ) );

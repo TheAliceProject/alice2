@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.JPanel;
 
 public class RenderPanel extends JPanel {
@@ -35,7 +36,7 @@ public class RenderPanel extends JPanel {
 
 	public void initialize() {
 		this.add(modelWrapper.getRenderPanel(), java.awt.BorderLayout.CENTER);
-		javax.swing.JLabel label = new javax.swing.JLabel(Messages.getString("RenderPanel.0")); 
+		javax.swing.JLabel label = new javax.swing.JLabel(Messages.getString("Click_and_drag_to_rotate_your_person")); 
 		label.setBackground(new java.awt.Color(155, 159, 206));
 		label.setForeground(java.awt.Color.black);
 		label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

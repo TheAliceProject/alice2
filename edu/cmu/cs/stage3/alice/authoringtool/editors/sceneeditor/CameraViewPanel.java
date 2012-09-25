@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -33,7 +34,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -46,13 +46,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
-import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
 
 
 /**
@@ -70,7 +66,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	public final static int MORE_CONTROLS = 0;
 	public final static int FEWER_CONTROLS = 1;
 
-	public final static String NONE_DUMMY = Messages.getString("CameraViewPanel.0"); 
+	public final static String NONE_DUMMY = Messages.getString("_None_"); 
 
 	protected edu.cmu.cs.stage3.alice.core.World world;
 	protected SceneEditor sceneEditor;
@@ -169,11 +165,11 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 
 	protected javax.swing.JPanel quadPanel = new javax.swing.JPanel();
 	
-	protected String fromRightText = Messages.getString("CameraViewPanel.3"); 
-	protected String fromTopText = Messages.getString("CameraViewPanel.4"); 
-	protected String fromFrontText = Messages.getString("CameraViewPanel.5"); 
+	protected String fromRightText = Messages.getString("from_the_right"); 
+	protected String fromTopText = Messages.getString("from_the_top"); 
+	protected String fromFrontText = Messages.getString("from_the_front"); 
 	
-	protected String selectedButtonText = Messages.getString("CameraViewPanel.6"); 
+	protected String selectedButtonText = Messages.getString("Mouse_Controls"); 
 	protected java.awt.Color defaultBorderColor = new java.awt.Color(102,102,153);
 	protected java.awt.Color highlightBorderColor = new java.awt.Color(102,153,102);
 	
@@ -558,7 +554,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 										billboard.vehicle.set( world );
 										CameraViewPanel.this.renderTarget.markDirty();
 									} else {
-										edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( file.getAbsolutePath() + Messages.getString("CameraViewPanel.21"), null, false ); 
+										edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( file.getAbsolutePath() + Messages.getString("_did_not_produce_a_TextureMap_when_loaded_"), null, false ); 
 										continue;
 									}
 								} else if( extension.equalsIgnoreCase( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.CHARACTER_EXTENSION ) ) {
@@ -577,11 +573,11 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 									authoringTool.importElement( file, world, null, false );
 								} else {
 									//TODO: make this a message dialog
-									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("CameraViewPanel.22")+file.getAbsolutePath() ); 
+									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Alice_does_not_know_how_to_open_this_file___n")+file.getAbsolutePath() ); 
 									continue;
 								}
 							} else {
-								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("CameraViewPanel.23")+file.getAbsolutePath() ); 
+								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("This_file_does_not_exist__cannot_be_read__or_is_a_directory__n")+file.getAbsolutePath() ); 
 								continue;
 							}
 						}
@@ -673,9 +669,9 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 					dtde.dropComplete( false );
 				}
 			} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CameraViewPanel.25"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
 			} catch( java.io.IOException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CameraViewPanel.26"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
 			}
 		}
 	};
@@ -782,7 +778,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 			galleryPanel.removeAll();
 			galleryPanel.add( galleryViewer, java.awt.BorderLayout.CENTER );
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CameraViewPanel.30"), t ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_the_gallery_viewer"), t ); 
 		}
 
 		// aspect ratio controls
@@ -812,16 +808,16 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		objectDummyButton.setIcon( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForString( "dummyAtObject" ) ); 
 
 		// tooltips
-		singleViewButton.setToolTipText( Messages.getString("CameraViewPanel.33") ); 
-		quadViewButton.setToolTipText( Messages.getString("CameraViewPanel.34") ); 
-		affectSubpartsCheckBox.setToolTipText( Messages.getString("CameraViewPanel.35") ); 
-		aspectRatioComboBox.setToolTipText( Messages.getString("CameraViewPanel.36") ); 
-		aspectRatioLabel.setToolTipText( Messages.getString("CameraViewPanel.37") ); 
-		lensAngleSlider.setToolTipText( Messages.getString("CameraViewPanel.38") ); 
-		lensAngleLabel.setToolTipText( Messages.getString("CameraViewPanel.39") ); 
-		cameraDummyButton.setToolTipText( Messages.getString("CameraViewPanel.40") ); 
-		objectDummyButton.setToolTipText( Messages.getString("CameraViewPanel.41") ); 
-		moveCameraCombo.setToolTipText( Messages.getString("CameraViewPanel.42") ); 
+		singleViewButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Switch_to_a_Single_View_of_the_World_")+"</font></html>" ); 
+		quadViewButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Switch_to_a_Quad_View_of_the_World__p__p_The_Quad_View_shows_the_world_from_p_the_Right__Top__Front__and_regular_view_")+"</font></html>" ); 
+		affectSubpartsCheckBox.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Affect_Subparts__p__p_When_selected__the_mouse_will_p_manipulate_the_part_of_an_Object_p_clicked_on_instead_of_the_whole_Object_")+"</font></html>" ); 
+		aspectRatioComboBox.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Change_the_Aspect_Ratio_of_the_World__p__p_The_Aspect_Ratio_is_a_measure_of_the_width_p_of_the_window_that_we_look_at_the_world_through_p_versus_its_height_")+"</font></html>" ); 
+		aspectRatioLabel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("The_Aspect_Ratio_is_a_measure_of_the_width_p_of_the_window_that_we_look_at_the_world_through_p_versus_its_height_")+"</font></html>" ); 
+		lensAngleSlider.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Change_the_Lens_Angle_of_the_Camera__p__p_A_wider_lens_angle_will_let_p_you_see_more_of_the_world_")+"</font></html>" ); 
+		lensAngleLabel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("A_wider_lens_angle_will_let_p_you_see_more_of_the_world_")+"</font></html>" ); 
+		cameraDummyButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Dummy_Object_p_at_the_Current_Position_of_the_Camera_")+"</font></html>" ); 
+		objectDummyButton.setToolTipText("<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Dummy_Object_p_at_the_Current_Position_of_the_Selected_Object_")+"</font></html>" ); 
+		moveCameraCombo.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Move_the_Camera_to_a_Dummy_p_Object_s_Point_of_View_")+"</font></html>" ); 
 		moveCameraLabel.setToolTipText( moveCameraCombo.getToolTipText() );
 
 		setVisibleControls( FEWER_CONTROLS );
@@ -875,7 +871,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		this.authoringTool = authoringTool;
 		renderTarget = authoringTool.getRenderTargetFactory().createOnscreenRenderTarget();
 		if( renderTarget != null ) {
-			renderTarget.setName( Messages.getString("CameraViewPanel.43") ); 
+			renderTarget.setName( Messages.getString("perspective") ); 
 			rtmm = new edu.cmu.cs.stage3.alice.authoringtool.util.RenderTargetMultiManipulator( renderTarget );
 			rtmm.addRenderTargetPickManipulatorListener( this );
 			rtmm.setMode( defaultMoveMode );
@@ -894,9 +890,9 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 			renderTargetFromTheTop = authoringTool.getRenderTargetFactory().createOnscreenRenderTarget();
 			renderTargetFromTheFront = authoringTool.getRenderTargetFactory().createOnscreenRenderTarget();
 
-			renderTargetFromTheRight.setName( Messages.getString("CameraViewPanel.44") ); 
-			renderTargetFromTheTop.setName( Messages.getString("CameraViewPanel.45") ); 
-			renderTargetFromTheFront.setName( Messages.getString("CameraViewPanel.46") ); 
+			renderTargetFromTheRight.setName( Messages.getString("right") ); 
+			renderTargetFromTheTop.setName( Messages.getString("top") ); 
+			renderTargetFromTheFront.setName( Messages.getString("front") ); 
 
 			renderTargetFromTheRight.addRenderTargetListener( this );
 			renderTargetFromTheTop.addRenderTargetListener( this );
@@ -957,7 +953,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 			setViewMode( SINGLE_VIEW_MODE );	
 			
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CameraViewPanel.47"), null ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CameraViewPanel_unable_to_create_renderTarget"), null ); 
 		}
 	}
 
@@ -979,15 +975,15 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		orthoZoomInMode = new edu.cmu.cs.stage3.alice.authoringtool.util.OrthographicZoomMode( authoringTool, authoringTool.getUndoRedoStack(), authoringTool.getOneShotScheduler() );
 //		orthoZoomOutMode = new edu.cmu.cs.stage3.alice.authoringtool.util.OrthographicZoomMode( edu.cmu.cs.stage3.alice.authoringtool.util.OrthographicZoomMode.ZOOM_OUT, authoringTool, authoringTool.getUndoRedoStack(), authoringTool.getOneShotScheduler() );
 
-		defaultMoveModeButton = new ManipulatorModeButton( defaultMoveMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/defaultMoveMode" ), Messages.getString("CameraViewPanel.49"), Messages.getString("CameraViewPanel.50") );   
-		moveUpDownModeButton = new ManipulatorModeButton( moveUpDownMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/moveUpDownMode" ), Messages.getString("CameraViewPanel.52"), Messages.getString("CameraViewPanel.53") );   
-		turnLeftRightModeButton = new ManipulatorModeButton( turnLeftRightMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/turnLeftRightMode" ), Messages.getString("CameraViewPanel.55"), Messages.getString("CameraViewPanel.56") );   
-		turnForwardBackwardModeButton = new ManipulatorModeButton( turnForwardBackwardMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/turnForwardBackwardMode" ), Messages.getString("CameraViewPanel.58"), Messages.getString("CameraViewPanel.59") );   
-		tumbleModeButton = new ManipulatorModeButton( tumbleMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/tumbleMode" ), Messages.getString("CameraViewPanel.61"), Messages.getString("CameraViewPanel.62") );   
-		resizeModeButton = new ManipulatorModeButton( resizeMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/resizeMode" ), Messages.getString("CameraViewPanel.64"), Messages.getString("CameraViewPanel.65") );   
-		copyModeButton = new ManipulatorModeButton( copyMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/copyMode" ), Messages.getString("CameraViewPanel.67"), Messages.getString("CameraViewPanel.68") );   
-		orthoScrollModeButton = new ManipulatorModeButton( orthoScrollMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/orthoScrollMode" ), Messages.getString("CameraViewPanel.70"), Messages.getString("CameraViewPanel.71") );   
-		orthoZoomInModeButton = new ManipulatorModeButton( orthoZoomInMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/zoomInMode" ), Messages.getString("CameraViewPanel.73"), Messages.getString("CameraViewPanel.74") );   
+		defaultMoveModeButton = new ManipulatorModeButton( defaultMoveMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/defaultMoveMode" ), Messages.getString("Move_Objects_Freely"), Messages.getString("Move_Objects_Freely_with_the_Mouse__p__nbsp__p__b_shift__b___move_up_down_p__b_control__b___turn_left_right_p__b_shift_control__b___tumble") );   
+		moveUpDownModeButton = new ManipulatorModeButton( moveUpDownMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/moveUpDownMode" ), Messages.getString("Move_Objects_Up_and_Down"), Messages.getString("Move_Objects_Up_and_Down_with_the_Mouse_") );   
+		turnLeftRightModeButton = new ManipulatorModeButton( turnLeftRightMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/turnLeftRightMode" ), Messages.getString("Turn_Objects_Left_and_Right"), Messages.getString("Turn_Objects_Left_and_Right_with_the_Mouse_") );   
+		turnForwardBackwardModeButton = new ManipulatorModeButton( turnForwardBackwardMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/turnForwardBackwardMode" ), Messages.getString("Turn_Objects_Forwards_and_Backwards"), Messages.getString("Turn_Objects_Forwards_and_Backwards_with_the_Mouse_") );   
+		tumbleModeButton = new ManipulatorModeButton( tumbleMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/tumbleMode" ), Messages.getString("Tumble_Objects"), Messages.getString("Tumble_Objects_with_the_Mouse_") );   
+		resizeModeButton = new ManipulatorModeButton( resizeMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/resizeMode" ), Messages.getString("Resize_Objects"), Messages.getString("Resize_Objects_with_the_Mouse_p__nbsp__p__b_shift__b___resize_more_slowly") );   
+		copyModeButton = new ManipulatorModeButton( copyMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/copyMode" ), Messages.getString("Copy_Objects"), Messages.getString("Copy_Objects_with_the_Mouse_") );   
+		orthoScrollModeButton = new ManipulatorModeButton( orthoScrollMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/orthoScrollMode" ), Messages.getString("Scroll_View"), Messages.getString("Scroll_View_with_the_Mouse__p__nbsp__p__b_shift__b___scroll_more_slowly_p__b_control__b___scroll_more_quickly_p__b_shift_control__b___scroll_much_more_quickly") );   
+		orthoZoomInModeButton = new ManipulatorModeButton( orthoZoomInMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/zoomInMode" ), Messages.getString("Zoom_View_In_and_Out"), Messages.getString("Zoom_View_In_and_Out_with_the_Mouse__p__nbsp__p__b_shift__b___zoom_more_slowly") );   
 //		orthoZoomOutModeButton = new ManipulatorModeButton( orthoZoomOutMode, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "manipulatorModes/zoomOutMode" ), "zoom out" );
 
 
@@ -1264,13 +1260,13 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 				,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 			controlPanel.add(jSeparator3,  new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0
 				,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-			moreFewerControlsButton.setText( Messages.getString("CameraViewPanel.83") ); 
+			moreFewerControlsButton.setText( Messages.getString("fewer_controls____") ); 
 		} else if( howMuch == FEWER_CONTROLS ) {
 			controlPanel.remove( aspectPanel );	// Aik Min - need work ?
 			controlPanel.remove( jSeparator2 );	// Aik Min - need work
 			controlPanel.remove( markerPanel );	// Aik Min - need work
 			controlPanel.remove( jSeparator3 );	// Aik Min - need work
-			moreFewerControlsButton.setText( Messages.getString("CameraViewPanel.84") ); 
+			moreFewerControlsButton.setText( Messages.getString("more_controls____") ); 
 		}
 	}
 
@@ -1501,7 +1497,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		public ManipulatorModeButton( edu.cmu.cs.stage3.alice.authoringtool.util.RenderTargetManipulatorMode mode, javax.swing.Icon icon, String titleText, String toolTip ) {
 			super( icon );
 			this.mode = mode;
-			setToolTipText( toolTip );
+			setToolTipText( "<html><font face=arial size=-1>"+toolTip+"</font></html>" );
 			this.titleText = titleText;
 
 			if( icon != null ) {
@@ -1510,7 +1506,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 				setMaximumSize( d );
 				setPreferredSize( d );
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CameraViewPanel.86") + mode.getClass().getName(), null ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("no_icon_found_for_mode__") + mode.getClass().getName(), null ); 
 			}
 
 			setBorder( unselectedBorder );
@@ -1798,7 +1794,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	BorderLayout borderLayout3 = new BorderLayout();
 	BorderLayout borderLayout4 = new BorderLayout();
 	Border border6;
-	javax.swing.border.TitledBorder mouseInfoBorder = new javax.swing.border.TitledBorder(Messages.getString("CameraViewPanel.89")); 
+	javax.swing.border.TitledBorder mouseInfoBorder = new javax.swing.border.TitledBorder(Messages.getString("Mouse_Controls")); 
 	JScrollPane controlScrollPane = new JScrollPane();
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	JSlider lensAngleSlider = new JSlider();
@@ -1829,7 +1825,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		border1 = BorderFactory.createEtchedBorder(Color.white,new Color(165, 164, 164));
 		titledBorder2 = new TitledBorder(BorderFactory.createEmptyBorder(),""); 
 		border2 = BorderFactory.createEtchedBorder(Color.white,new Color(165, 164, 164));
-		titledBorder3 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,new Color(165, 164, 164)),Messages.getString("CameraViewPanel.92")); 
+		titledBorder3 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,new Color(165, 164, 164)),Messages.getString("Point_Of_View")); 
 		border3 = BorderFactory.createEmptyBorder(8,8,8,8);
 		border4 = BorderFactory.createEmptyBorder(8,8,8,8);
 		border5 = BorderFactory.createEmptyBorder(8,8,8,8);
@@ -1840,7 +1836,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		flowLayout4.setVgap(0);
 		placeHolderLabel.setFont(new java.awt.Font("Dialog", 0, (int)(24*fontSize/12.0))); 
 		placeHolderLabel.setForeground(Color.gray);
-		placeHolderLabel.setText(Messages.getString("CameraViewPanel.94")); 
+		placeHolderLabel.setText(Messages.getString("The_Gallery_will_go_here_")); 
 		galleryPanel.setLayout(borderLayout2);
 		navPanel.setLayout(gridBagLayout);
 		navPanel.setBackground(Color.white);
@@ -1856,12 +1852,12 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		aspectPanel.setLayout(gridBagLayout);
 		aspectPanel.setBorder(border4);
 		aspectPanel.setOpaque(false);
-		moveCameraLabel.setText(Messages.getString("CameraViewPanel.95")); 
+		moveCameraLabel.setText(Messages.getString("move_camera_to_dummy_")); 
 		jSeparator3.setForeground(Color.gray);
 		jSeparator2.setForeground(Color.gray);
 		jSeparator1.setForeground(Color.gray);
 		quadViewButton.setOpaque(false);
-		quadViewButton.setText(Messages.getString("CameraViewPanel.96")); 
+		quadViewButton.setText(Messages.getString("quad_view")); 
 		quadViewButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				quadViewButton_actionPerformed(e);
@@ -1881,27 +1877,27 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		markerPanel.setOpaque(false);
 		objectDummyButton.setHorizontalAlignment(SwingConstants.LEFT);
 		objectDummyButton.setMargin(new Insets(2, 8, 2, 8));
-		objectDummyButton.setText(Messages.getString("CameraViewPanel.97")); 
+		objectDummyButton.setText(Messages.getString("drop_dummy_at_selected_object")); 
 		objectDummyButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				objectDummyButton_actionPerformed(e);
 			}
 		});
 		affectSubpartsCheckBox.setOpaque(false);
-		affectSubpartsCheckBox.setText(Messages.getString("CameraViewPanel.98")); 
+		affectSubpartsCheckBox.setText(Messages.getString("affect_subparts")); 
 		affectSubpartsCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				affectSubpartsCheckBox_actionPerformed(e);
 			}
 		});
 		singleViewButton.setOpaque(false);
-		singleViewButton.setText(Messages.getString("CameraViewPanel.99")); 
+		singleViewButton.setText(Messages.getString("single_view")); 
 		singleViewButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				singleViewButton_actionPerformed(e);
 			}
 		});
-		aspectRatioLabel.setText(Messages.getString("CameraViewPanel.100")); 
+		aspectRatioLabel.setText(Messages.getString("aspect_ratio_")); 
 		moveCameraCombo.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				moveCameraCombo_actionPerformed(e);
@@ -1911,15 +1907,15 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		controlPanel.setBackground(new Color(236, 235, 235));
 		cameraDummyButton.setHorizontalAlignment(SwingConstants.LEFT);
 		cameraDummyButton.setMargin(new Insets(2, 8, 2, 8));
-		cameraDummyButton.setText(Messages.getString("CameraViewPanel.101")); 
+		cameraDummyButton.setText(Messages.getString("drop_dummy_at_camera")); 
 		cameraDummyButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cameraDummyButton_actionPerformed(e);
 			}
 		});
-		lensAngleLabel.setText(Messages.getString("CameraViewPanel.102")); 
+		lensAngleLabel.setText(Messages.getString("lens_angle_")); 
 		controlScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		moreFewerControlsButton.setText(Messages.getString("CameraViewPanel.103")); 
+		moreFewerControlsButton.setText(Messages.getString("more_controls____")); 
 		moreFewerControlsButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				moreFewerControlsButton_actionPerformed(e);

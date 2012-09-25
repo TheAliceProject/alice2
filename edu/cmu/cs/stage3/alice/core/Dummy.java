@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core;
 
 import edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Jason Pratt, Dennis Cosgrove
@@ -44,14 +45,14 @@ public class Dummy extends Model {
 				s_sgITA.setIndices( edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray.loadIndices( is ) );
 				is.close();
 			} catch( java.io.IOException ioe ) {
-				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.1") ); 
+				throw new ExceptionWrapper( ioe, Messages.getString("failed_to_load_axesIndices_bin_resource") ); 
 			}
 			try {
 				java.io.InputStream is = Dummy.class.getResourceAsStream( "axesVertices.bin" ); 
 				s_sgITA.setVertices( VertexGeometry.loadVertices( is ) );
 				is.close();
 			} catch( java.io.IOException ioe ) {
-				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.3") ); 
+				throw new ExceptionWrapper( ioe, Messages.getString("failed_to_load_axesVertices_bin_resource") ); 
 			}
 		}
 		if( s_sgTexture == null ) {
@@ -62,7 +63,7 @@ public class Dummy extends Model {
 				is.close();
 				s_sgTexture.setImage( image );
 			} catch( java.io.IOException ioe ) {
-				throw new ExceptionWrapper( ioe, Messages.getString("Dummy.6") ); 
+				throw new ExceptionWrapper( ioe, Messages.getString("failed_to_load_axesImage_png_resource") ); 
 			}
 		}
 		getSceneGraphVisual().setGeometry( s_sgITA );

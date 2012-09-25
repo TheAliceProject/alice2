@@ -45,4 +45,3 @@ public class ResponsePrototype extends ElementPrototype {
 		return new ResponsePrototype( elementClass, knownPropertyValues, desiredProperties );
 	}
 }
-

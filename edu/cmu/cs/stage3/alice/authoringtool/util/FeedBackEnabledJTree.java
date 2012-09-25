@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -253,7 +254,7 @@ public class FeedBackEnabledJTree extends javax.swing.JTree {
 		try {
 			super.paintComponent( g );
 		} catch( NullPointerException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("FeedBackEnabledJTree.0"), e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_painting_tree_"), e ); 
 		}
 		if( dropLinesActive && showDropLines ) {
 			paintLines( g, getBounds(), insets, fromPath, toPath );
@@ -305,4 +306,3 @@ public class FeedBackEnabledJTree extends javax.swing.JTree {
 	}
 	*/
 }
-

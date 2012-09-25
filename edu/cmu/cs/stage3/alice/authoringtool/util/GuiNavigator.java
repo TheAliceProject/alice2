@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -90,9 +92,9 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 		drivePanel.addMouseListener( navMouseListener );
 		tiltPanel.addMouseListener( navMouseListener );
 
-		slidePanel.setToolTipText( Messages.getString("GuiNavigator.24") ); 
-		drivePanel.setToolTipText( Messages.getString("GuiNavigator.25") ); //Aik Min 
-		tiltPanel.setToolTipText( Messages.getString("GuiNavigator.26") ); 
+		slidePanel.setToolTipText( Messages.getString("Move_the_Camera_Up__Down__Left__and_Right_") ); 
+		drivePanel.setToolTipText( Messages.getString("Move_the_Camera_Forward__Backward__Turn_the_Camera_Left__Right_") ); //Aik Min 
+		tiltPanel.setToolTipText( Messages.getString("Tilt_the_Camera_Forward_and_Backward_") ); 
 	}
 
 	public void setAuthoringTool( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool ) {
@@ -174,7 +176,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltHighlight" ); 
 			tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltUp" ); 
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GuiNavigator.75") + imageSize, null ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Invalid_image_size_constant_in_setImageSize__") + imageSize, null ); 
 		}
 		updateImages();
 	}
@@ -395,7 +397,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 					pressedy = 20;
 				}
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GuiNavigator.76") + imageSize, null ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Invalid_image_size_constant_in_NavMouseListener__") + imageSize, null ); 
 			}
 
 			super.mouseDragged( ev );

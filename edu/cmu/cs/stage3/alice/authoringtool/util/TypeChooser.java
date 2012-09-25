@@ -23,8 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import java.awt.*;
-import javax.swing.*;
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 /**
  * @author Jason Pratt
@@ -34,10 +38,10 @@ public class TypeChooser extends javax.swing.JPanel {
 	private javax.swing.ButtonGroup buttonGroup;
 	private java.util.HashMap typeMap = new java.util.HashMap();
 	private java.util.HashSet changeListeners = new java.util.HashSet();
-	private JRadioButton numberButton = new JRadioButton( Messages.getString("TypeChooser.0") ); 
-	private JRadioButton booleanButton = new JRadioButton( Messages.getString("TypeChooser.1") ); 
-	private JRadioButton objectButton = new JRadioButton( Messages.getString("TypeChooser.2") ); 
-	private JRadioButton otherButton = new JRadioButton( Messages.getString("TypeChooser.3") ); 
+	private JRadioButton numberButton = new JRadioButton( Messages.getString("Number") ); 
+	private JRadioButton booleanButton = new JRadioButton( Messages.getString("Boolean") ); 
+	private JRadioButton objectButton = new JRadioButton( Messages.getString("Object") ); 
+	private JRadioButton otherButton = new JRadioButton( Messages.getString("Other___") ); 
 	private JComboBox otherCombo = new JComboBox();
 	private edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback okButtonCallback;
 
@@ -98,7 +102,7 @@ public class TypeChooser extends javax.swing.JPanel {
 		edu.cmu.cs.stage3.util.StringTypePair[] defaultVariableTypes = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getDefaultVariableTypes();
 		for( int i = 0; i < defaultVariableTypes.length; i++ ) {
 			typeMap.put( defaultVariableTypes[i].getString().trim(), defaultVariableTypes[i].getType() );
-			otherCombo.addItem( defaultVariableTypes[i].getString() );
+			otherCombo.addItem( new makeObj(defaultVariableTypes[i].getString()) );
 		}
 
 		((javax.swing.JTextField)otherCombo.getEditor().getEditorComponent()).getDocument().addDocumentListener(
@@ -114,12 +118,14 @@ public class TypeChooser extends javax.swing.JPanel {
 		otherCombo.setEnabled( false );
 	}
 
+
+
 	protected void parseOtherType() {
-		String typeString = ((javax.swing.JTextField)otherCombo.getEditor().getEditorComponent()).getText().trim();
-		Class newType = (Class)typeMap.get( typeString );
+		makeObj typeString = (makeObj)otherCombo.getSelectedItem();//((javax.swing.JTextField)otherCombo.getSelectedItem().toString();//.getEditor().getEditorComponent().).getText().trim();
+		Class newType = (Class)typeMap.get( typeString.getItem() );
 		if( newType == null ) {
 			try {
-				newType = Class.forName( typeString );
+				newType = Class.forName( typeString.getItem() );
 			} catch( ClassNotFoundException e ) {
 				newType = null;
 			}
@@ -148,10 +154,11 @@ public class TypeChooser extends javax.swing.JPanel {
 
 	public void addCurrentTypeToList() {
 		if( otherButton.isSelected() && (type != null) ) {
-			String typeString = ((javax.swing.JTextField)otherCombo.getEditor().getEditorComponent()).getText().trim();
-			if( ! typeMap.containsKey( typeString ) ) {
-				otherCombo.addItem( typeString );
-				typeMap.put( typeString, type );
+			//String typeString = ((javax.swing.JTextField)otherCombo.getEditor().getEditorComponent()).getText().trim();
+			makeObj typeString = (makeObj)otherCombo.getSelectedItem();
+			if( ! typeMap.containsKey( typeString.getItem() ) ) {
+				otherCombo.addItem( typeString.getItem() );
+				typeMap.put( typeString.getItem(), type );
 			}
 		}
 	}
@@ -169,5 +176,17 @@ public class TypeChooser extends javax.swing.JPanel {
 		for( java.util.Iterator iter = changeListeners.iterator(); iter.hasNext(); ) {
 			((javax.swing.event.ChangeListener)iter.next()).stateChanged( ev );
 		}
+	}
+
+	private class makeObj {
+	    
+	   	 public String s;
+	   	 public makeObj(String item){
+	   		 s = item;
+	   	 }
+	   	 public String getItem() { return s; }
+	   	 public String toString() { return AikMin.getName(s); }
+	   	 
+	   	
 	}
 }

@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.property.Vector3Property;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class MoveVectorAnimation extends TransformAnimation {
 	public final Vector3Property vector = new Vector3Property( this, "vector", null ); 
@@ -36,7 +37,7 @@ public class MoveVectorAnimation extends TransformAnimation {
 			m_vectorPrev = new javax.vecmath.Vector3d();
 			m_vector = vector.getVector3dValue();
 			if( m_vector == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("MoveVectorAnimation.1"), null, MoveVectorAnimation.this.vector ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("vector_value_must_not_be_null_"), null, MoveVectorAnimation.this.vector ); 
 			}
 		}
 		

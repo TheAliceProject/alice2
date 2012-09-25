@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -46,20 +48,20 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 			root = (java.io.File)pathname;
 		}
 		else {
-			throw new IllegalArgumentException( Messages.getString("FileSystemTreeStorer.0") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_must_be_an_instance_of_String_or_java_io_File") ); 
 		}
 
 		if( root.exists() ) {
 			if( ! root.canWrite() ) {
-				throw new java.io.IOException( Messages.getString("FileSystemTreeStorer.1") + root ); 
+				throw new java.io.IOException( Messages.getString("cannot_write_to_") + root ); 
 			}
 		}
 		else {
 			if( ! root.mkdir() ) {
-				throw new java.io.IOException( Messages.getString("FileSystemTreeStorer.2") + root ); 
+				throw new java.io.IOException( Messages.getString("cannot_create_") + root ); 
 			}
 			if( ! root.canWrite() ) {
-				throw new java.io.IOException( Messages.getString("FileSystemTreeStorer.3") + root ); 
+				throw new java.io.IOException( Messages.getString("cannot_write_to_") + root ); 
 			}
 		}
 
@@ -76,15 +78,15 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 
 	public void createDirectory( String pathname ) throws IllegalArgumentException, java.io.IOException {
 		if( pathname.indexOf( '/' ) != -1 ) {
-			throw new IllegalArgumentException( Messages.getString("FileSystemTreeStorer.4") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_cannot_contain_path_separators") ); 
 		}
 		if( pathname.length() <= 0 ) {
-			throw new IllegalArgumentException( Messages.getString("FileSystemTreeStorer.5") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_has_no_length") ); 
 		}
 		java.io.File newDir = new java.io.File( currentDirectory, pathname );
 		if( ! newDir.exists() ) {
 			if( ! newDir.mkdir() ) {
-				throw new java.io.IOException( Messages.getString("FileSystemTreeStorer.6") + newDir ); 
+				throw new java.io.IOException( Messages.getString("cannot_create_") + newDir ); 
 			}
 		}
 	}
@@ -99,10 +101,10 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 		}
 
 		if( ! newCurrentDirectory.exists() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeStorer.8") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_doesn_t_exist") ); 
 		}
 		if( ! newCurrentDirectory.isDirectory() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("FileSystemTreeStorer.9") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_isn_t_a_directory") ); 
 		}
 
 		currentDirectory = newCurrentDirectory;
@@ -118,11 +120,11 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 		java.io.File newFile = new java.io.File( currentDirectory, filename );
 		if( ! newFile.exists() ) {
 			if( ! newFile.createNewFile() ) {
-				throw new java.io.IOException( Messages.getString("FileSystemTreeStorer.10") + newFile ); 
+				throw new java.io.IOException( Messages.getString("cannot_create_") + newFile ); 
 			}
 		}
 		if( ! newFile.canWrite() ) {
-			throw new java.io.IOException( Messages.getString("FileSystemTreeStorer.11") + newFile ); 
+			throw new java.io.IOException( Messages.getString("cannot_write_to_") + newFile ); 
 		}
 
 		currentlyOpenStream = new java.io.FileOutputStream( newFile );

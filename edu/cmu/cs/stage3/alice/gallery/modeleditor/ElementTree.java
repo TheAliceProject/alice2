@@ -14,4 +14,3 @@ class ElementTree extends javax.swing.JTree {
 		}
 	}
 }
-

@@ -38,4 +38,3 @@ public class NotCriterion implements edu.cmu.cs.stage3.util.Criterion {
 		}
 	}
 }
-

@@ -30,15 +30,39 @@ package movieMaker;
  * redistribute the Software for such purposes.
  */
 
-import java.io.*;
-import java.util.*;
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Dimension;
-
-import javax.media.*;
-import javax.media.control.*;
-import javax.media.protocol.*;
-import javax.media.datasink.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
+import javax.media.Buffer;
+import javax.media.ConfigureCompleteEvent;
+import javax.media.Controller;
+import javax.media.ControllerEvent;
+import javax.media.ControllerListener;
+import javax.media.DataSink;
+import javax.media.EndOfMediaEvent;
+import javax.media.Format;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.PrefetchCompleteEvent;
+import javax.media.Processor;
+import javax.media.RealizeCompleteEvent;
+import javax.media.ResourceUnavailableEvent;
+import javax.media.Time;
+import javax.media.control.TrackControl;
+import javax.media.datasink.DataSinkErrorEvent;
+import javax.media.datasink.DataSinkEvent;
+import javax.media.datasink.DataSinkListener;
+import javax.media.datasink.EndOfStreamEvent;
 import javax.media.format.VideoFormat;
+import javax.media.protocol.ContentDescriptor;
+import javax.media.protocol.DataSource;
+import javax.media.protocol.FileTypeDescriptor;
+import javax.media.protocol.PullBufferDataSource;
+import javax.media.protocol.PullBufferStream;
 
 
 /**
@@ -216,7 +240,7 @@ public class JpegImagesToMovie implements ControllerListener,
     	dsink.stop();
     	dsink.close();
     } catch (Exception e) {
-    	System.err.println(Messages.getString("JpegImagesToMovie.0")); 
+    	System.err.println(Messages.getString("DataSink_did_not_close")); 
     	
     }
     p.removeControllerListener(this);
@@ -247,10 +271,10 @@ public class JpegImagesToMovie implements ControllerListener,
     Processor p;
     
     try {
-      System.err.println(Messages.getString("JpegImagesToMovie.1")); 
+      System.err.println(Messages.getString("__create_processor_for_the_image_datasource____")); 
       p = Manager.createProcessor(ids);
     } catch (Exception e) {
-      System.err.println(Messages.getString("JpegImagesToMovie.2")); 
+      System.err.println(Messages.getString("Yikes____Cannot_create_a_processor_from_the_data_source_")); 
       return false;
     }
     
@@ -260,7 +284,7 @@ public class JpegImagesToMovie implements ControllerListener,
     // some processing options on the processor.
     p.configure();
     if (!waitForState(p, Processor.Configured)) {
-      System.err.println(Messages.getString("JpegImagesToMovie.3")); 
+      System.err.println(Messages.getString("Failed_to_configure_the_processor_")); 
       return false;
     }
     
@@ -286,28 +310,28 @@ public class JpegImagesToMovie implements ControllerListener,
     // realize it.
     p.realize();
     if (!waitForState(p, Controller.Realized)) {
-      System.err.println(Messages.getString("JpegImagesToMovie.4")); 
+      System.err.println(Messages.getString("Failed_to_realize_the_processor_")); 
       return false;
     }
     
     // Now, we'll need to create a DataSink.
     DataSink dsink;
     if ((dsink = createDataSink(p, outML)) == null) {
-      System.err.println(Messages.getString("JpegImagesToMovie.5") + outML); 
+      System.err.println(Messages.getString("Failed_to_create_a_DataSink_for_the_given_output_MediaLocator__") + outML); 
       return false;
     }
     
     dsink.addDataSinkListener(this);
     fileDone = false;
     
-    System.err.println(Messages.getString("JpegImagesToMovie.6")); 
+    System.err.println(Messages.getString("start_processing___")); 
     
     // OK, we can now start the actual transcoding.
     try {
       p.start();
       dsink.start();
     } catch (IOException e) {
-      System.err.println(Messages.getString("JpegImagesToMovie.7")); 
+      System.err.println(Messages.getString("IO_error_during_processing")); 
       return false;
     }
     
@@ -499,12 +523,12 @@ public class JpegImagesToMovie implements ControllerListener,
     
     // Check for output file extension.
     if (!outputURL.endsWith(".mov") && !outputURL.endsWith(".MOV")) {  
-      System.err.println(Messages.getString("JpegImagesToMovie.14")); 
+      System.err.println(Messages.getString("The_output_file_extension_should_end_with_a__mov_extension")); 
       prUsage();
     }
     
     if (width < 0 || height < 0) {
-      System.err.println(Messages.getString("JpegImagesToMovie.15")); 
+      System.err.println(Messages.getString("Please_specify_the_correct_image_size_")); 
       prUsage();
     }
     
@@ -516,7 +540,7 @@ public class JpegImagesToMovie implements ControllerListener,
     MediaLocator oml;
     
     if ((oml = createMediaLocator(outputURL)) == null) {
-      System.err.println(Messages.getString("JpegImagesToMovie.16") + outputURL); 
+      System.err.println(Messages.getString("Cannot_build_media_locator_from__") + outputURL); 
       System.exit(0);
     }
     
@@ -527,7 +551,7 @@ public class JpegImagesToMovie implements ControllerListener,
   }
   
   static void prUsage() {
-    System.err.println(Messages.getString("JpegImagesToMovie.17")); 
+    System.err.println(Messages.getString("Usage__java_JpegImagesToMovie__w__width___h__height___f__frame_rate___o__output_URL___input_JPEG_file_1___input_JPEG_file_2_____")); 
     System.exit(-1);
   }
   

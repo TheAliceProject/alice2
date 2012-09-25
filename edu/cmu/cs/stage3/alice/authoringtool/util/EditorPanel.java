@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 //TODO: handle null edits better in the stack
 
 /**
@@ -93,14 +95,14 @@ public class EditorPanel extends javax.swing.JPanel implements edu.cmu.cs.stage3
 				try {
 					editor = EditorUtilities.getEditorFromClass( editorClass );
 					if( editor == null ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorPanel.6") + editorClass.getName(), null ); 
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Can_t_create_editor_of_type_") + editorClass.getName(), null ); 
 					} else {
 						cachedEditors.put( editorClass, editor );
 						authoringTool.addAuthoringToolStateListener( editor );
 						editor.setAuthoringTool( authoringTool );
 					}
 				} catch( Throwable t ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorPanel.7") + editorClass.getName(), t ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_editor_for_type_") + editorClass.getName(), t ); 
 				}
 			}
 		}
@@ -122,7 +124,7 @@ public class EditorPanel extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		} else {
 			Class bestEditorClass = EditorUtilities.getBestEditor( element.getClass() );
 			if( bestEditorClass == null ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorPanel.8") + element.getClass(), null ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("No_editor_found_for_") + element.getClass(), null ); 
 			}
 			editElement( element, bestEditorClass, performPush );
 		}
@@ -142,9 +144,9 @@ public class EditorPanel extends javax.swing.JPanel implements edu.cmu.cs.stage3
 				try {
 					activeEditorSetMethod.invoke( activeEditor, new Object[] { null } );
 				} catch( java.lang.reflect.InvocationTargetException ite ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorPanel.9"), ite ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_cleaning_editor_"), ite ); 
 				} catch( IllegalAccessException iae ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorPanel.10"), iae ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_cleaning_editor_"), iae ); 
 				}
 			}
 
@@ -181,9 +183,9 @@ public class EditorPanel extends javax.swing.JPanel implements edu.cmu.cs.stage3
 					element.getParent().addChildrenListener( deletionListener );
 				}
 			} catch( java.lang.reflect.InvocationTargetException ite ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorPanel.11"), ite ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_intializing_editor_"), ite ); 
 			} catch( IllegalAccessException iae ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("EditorPanel.12"), iae ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_intializing_editor_"), iae ); 
 			}
 		}
 	}

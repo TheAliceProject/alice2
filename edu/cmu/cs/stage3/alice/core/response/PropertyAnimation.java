@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Expression;
 import edu.cmu.cs.stage3.alice.core.Property;
@@ -31,6 +30,7 @@ import edu.cmu.cs.stage3.alice.core.property.ObjectProperty;
 import edu.cmu.cs.stage3.alice.core.property.OverridableElementProperty;
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class PropertyAnimation extends Animation {
 	public final OverridableElementProperty element = new OverridableElementProperty( this, "element", null ); 
@@ -114,13 +114,13 @@ public class PropertyAnimation extends Animation {
                             m_howMuch = edu.cmu.cs.stage3.util.HowMuch.INSTANCE;
                         }
                     } else {
-                        throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, m_propertyName, m_element + Messages.getString("PropertyAnimation.4") + m_propertyName ); 
+                        throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, m_propertyName, m_element + Messages.getString("_does_not_have_property_named_") + m_propertyName ); 
                     }
                 } else {
-                    throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, null, Messages.getString("PropertyAnimation.5") ); 
+                    throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, null, Messages.getString("propertyName_must_not_be_null_") ); 
                 }
 			} else {
-				throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.element, null, Messages.getString("PropertyAnimation.6") ); 
+				throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.element, null, Messages.getString("element_must_not_be_null_") ); 
 			}
 		}
 		

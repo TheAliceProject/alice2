@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.pratt.maxkeyframing;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class QuaternionKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse {
 	public class RuntimeQuaternionKeyframeResponse extends RuntimeKeyframeResponse {
 		
@@ -36,7 +38,7 @@ public class QuaternionKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyfr
 					m_transformable.setOrientationRightNow( q );
 				}
 			} catch( ClassCastException e ) {
-				System.err.println( Messages.getString("QuaternionKeyframeResponse.0") + runtimeSpline + Messages.getString("QuaternionKeyframeResponse.1") + runtimeSpline.getSample( splineTimeElapsed ) );  
+				System.err.println( Messages.getString("Incorrect_sample_type_from_spline_") + runtimeSpline + Messages.getString("___Quaternion_expected___Found_") + runtimeSpline.getSample( splineTimeElapsed ) );  
 			}
 		}
 	}

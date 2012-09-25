@@ -265,7 +265,7 @@ public abstract class ImageCodec {
      */
     public static String[] getDecoderNames(SeekableStream src) {
         if (!src.canSeekBackwards() && !src.markSupported()) {
-            throw new IllegalArgumentException(JaiI18N.getString("ImageCodec2"));
+            throw new IllegalArgumentException(JaiI18N.getString("src_must_support_seeking_backwards_or_marking_"));
         }
 
         Enumeration enum0 = codecs.elements();
@@ -373,7 +373,7 @@ public abstract class ImageCodec {
      * @return <code>true</code> if the format is recognized.
      */
     public boolean isFormatRecognized(byte[] header) {
-        throw new RuntimeException(JaiI18N.getString("ImageCodec0"));
+        throw new RuntimeException(JaiI18N.getString("Method_unimplemented__should_be_implemented_by_subclass_"));
     }
 
     /**
@@ -393,7 +393,7 @@ public abstract class ImageCodec {
      * @return <code>true</code> if the format is recognized.
      */
     public boolean isFormatRecognized(SeekableStream src) throws IOException {
-        throw new RuntimeException(JaiI18N.getString("ImageCodec1"));
+        throw new RuntimeException(JaiI18N.getString("Method_unimplemented__should_be_implemented_by_subclass_"));
     }
 
     /**

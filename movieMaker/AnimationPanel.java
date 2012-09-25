@@ -1,11 +1,16 @@
 package movieMaker;
 
-import javax.swing.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
-import java.util.*;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
  * Class to show a frame-based animation
@@ -240,7 +245,7 @@ public class AnimationPanel extends JComponent
       f = new File((String)nameList.get(i));
       result = f.delete();
       if (result != true)
-        System.out.println(Messages.getString("AnimationPanel.1") + 
+        System.out.println(Messages.getString("trouble_deleting_") + 
                            nameList.get(i));
       imageList.remove(0);
     }
@@ -260,7 +265,7 @@ public class AnimationPanel extends JComponent
       f = new File((String)nameList.get(index++));
       result = f.delete();
       if (result != true)
-        System.out.println(Messages.getString("AnimationPanel.2") + 
+        System.out.println(Messages.getString("trouble_deleting_") + 
                            nameList.get(index-1));
       imageList.remove(i);
     }
@@ -283,7 +288,7 @@ public class AnimationPanel extends JComponent
 public void paintComponent(Graphics g)
   {
     if (imageList.size() == 0)
-      g.drawString(Messages.getString("AnimationPanel.3"),20,20); 
+      g.drawString(Messages.getString("No_images_yet__"),20,20); 
     else
       draw(g);
   }

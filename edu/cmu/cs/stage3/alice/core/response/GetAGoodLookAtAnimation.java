@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class GetAGoodLookAtAnimation extends OrientationAnimation {
 	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); 
@@ -38,10 +38,10 @@ public class GetAGoodLookAtAnimation extends OrientationAnimation {
             m_target = GetAGoodLookAtAnimation.this.target.getReferenceFrameValue();
 
 			if( m_target == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("GetAGoodLookAtAnimation.1"), null, GetAGoodLookAtAnimation.this.target ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_value_must_not_be_null_"), null, GetAGoodLookAtAnimation.this.target ); 
 			}
 			if( m_target == m_subject ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("GetAGoodLookAtAnimation.2"), getCurrentStack(), GetAGoodLookAtAnimation.this.target );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_value_must_not_be_equal_to_the_subject_value_"), getCurrentStack(), GetAGoodLookAtAnimation.this.target );             
 			}
 
             m_transformationBegin = m_subject.getTransformation( m_asSeenBy );

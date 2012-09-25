@@ -1,17 +1,17 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
-import java.util.Vector;
-import java.awt.Rectangle;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.Polygon;
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.font.TextLayout;
+import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.RoundRectangle2D;
+import java.util.Vector;
 
 public class NavigationBar implements StencilObject, MouseEventListener, StencilStackChangeListener,
   LayoutChangeListener {

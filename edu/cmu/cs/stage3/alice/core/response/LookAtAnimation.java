@@ -14,6 +14,7 @@ package edu.cmu.cs.stage3.alice.core.response;
  */
 
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class LookAtAnimation extends AbstractPointAtAnimation {
 	
@@ -39,13 +40,13 @@ public class LookAtAnimation extends AbstractPointAtAnimation {
 		public void prologue( double t ) {
 			m_target = LookAtAnimation.this.target.getReferenceFrameValue();
 			if (m_target == null) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.2"), getCurrentStack(), LookAtAnimation.this.target );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("character_value_must_not_be_null_"), getCurrentStack(), LookAtAnimation.this.target );             
 			}
 			super.prologue(t);
 			
 			m_turnAmountPrev = 0;							
 			if (m_subject == m_target) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("LookAtAnimation.3"), getCurrentStack(), LookAtAnimation.this.subject );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("subject_and_character_values_must_not_be_the_same_"), getCurrentStack(), LookAtAnimation.this.subject );             
 			}		
 			
 			if (m_subject.equals(LookAtAnimation.this.subject.getTransformableValue())) {

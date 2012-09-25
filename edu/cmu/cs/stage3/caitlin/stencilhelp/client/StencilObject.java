@@ -11,8 +11,8 @@ package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
  * @version 1.0
  */
 
-import java.util.Vector;
 import java.awt.Rectangle;
+import java.util.Vector;
 
 public interface StencilObject {
   public Vector getShapes();

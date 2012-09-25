@@ -1,15 +1,15 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
+import java.awt.font.LineBreakMeasurer;
+import java.awt.font.TextHitInfo;
+import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.text.AttributedCharacterIterator;
-import java.awt.font.LineBreakMeasurer;
-import java.awt.font.TextLayout;
 import java.util.Vector;
-import java.awt.font.TextHitInfo;
-import java.awt.Color;
 
 public class Paragraph {
   protected int textWidth = 100;

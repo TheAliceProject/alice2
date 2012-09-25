@@ -1,5 +1,6 @@
 package movieMaker;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Color;
 
 /**
@@ -349,8 +350,8 @@ public class Pixel
   
 public String toString()
   {
-    return Messages.getString("Pixel.0") + getRed() + Messages.getString("Pixel.1") + getGreen() +   
-      Messages.getString("Pixel.2") + getBlue(); 
+    return Messages.getString("Pixel_red_") + getRed() + Messages.getString("_green_") + getGreen() +   
+      Messages.getString("_blue_") + getBlue(); 
   }
 
 }

@@ -1,9 +1,16 @@
 package movieMaker;
 
-import javax.sound.sampled.*;
-import java.io.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Vector;
-import javazoom.jl.converter.*;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javazoom.jl.converter.Converter;
 
 /**
  * The <code>SimpleSound</code> class is an implementation of the 
@@ -277,7 +284,7 @@ public class SimpleSound{
       // load the sound from the file
       loadFromFile(fileName);
     } catch (Exception ex) {
-      printError(Messages.getString("SimpleSound.0") + fileName); 
+      printError(Messages.getString("Exception_during_load_of_file_") + fileName); 
     }
   } 
   
@@ -503,7 +510,7 @@ public class SimpleSound{
       writeToFile(fileName);
     }
     catch (SoundException ex) {
-      printError(Messages.getString("SimpleSound.1") + fileName); 
+      printError(Messages.getString("Couldn_t_write_file_to_") + fileName); 
     }
   }
   
@@ -534,8 +541,8 @@ public class SimpleSound{
     }//try reset audioInputStream
     catch(Exception e)
     {
-      printError(Messages.getString("SimpleSound.2")+ 
-                 Messages.getString("SimpleSound.3"), e); 
+      printError(Messages.getString("Unable_to_reset_the_Audio_stream___Please_")+ 
+                 Messages.getString("try_again_"), e); 
     }//catch
     
     
@@ -550,10 +557,10 @@ public class SimpleSound{
       }//try
       catch(IOException e)
       {
-        printError(Messages.getString("SimpleSound.4")+ 
-                   Messages.getString("SimpleSound.5") + 
-                   Messages.getString("SimpleSound.6") + 
-                   Messages.getString("SimpleSound.7") + outFileName + Messages.getString("SimpleSound.8"), e);  
+        printError(Messages.getString("That_file_does_not_already_exist__and")+ 
+                   Messages.getString("there_were_problems_creating_a_new_file") + 
+                   Messages.getString("of_that_name___Are_you_sure_the_path") + 
+                   Messages.getString("to__") + outFileName + Messages.getString("exists_"), e);  
       }//catch
     }//if
     
@@ -563,8 +570,8 @@ public class SimpleSound{
     {
       if(AudioSystem.write(audioInputStream, type, file) == -1)
       { 
-        printError(Messages.getString("SimpleSound.9") + 
-                   Messages.getString("SimpleSound.10")); 
+        printError(Messages.getString("Problems_writing_to_file___Please_") + 
+                   Messages.getString("try_again_")); 
       }
       
       // if the write was successful then set the file name to the
@@ -576,14 +583,14 @@ public class SimpleSound{
     }//try
     catch(FileNotFoundException e)
     {
-      printError(Messages.getString("SimpleSound.11") + 
-                 Messages.getString("SimpleSound.12")+ 
-                 Messages.getString("SimpleSound.13")+ 
-                 Messages.getString("SimpleSound.14"), e); 
+      printError(Messages.getString("The_file_you_specified_did_not_already_exist_") + 
+                 Messages.getString("so_we_tried_to_create_a_new_one__but_were_unable")+ 
+                 Messages.getString("to_do_so___Please_try_again___If_problems_")+ 
+                 Messages.getString("persit_see_your_TA_"), e); 
     }
     catch(Exception e)
     { 
-      printError(Messages.getString("SimpleSound.15") + outFileName, e); 
+      printError(Messages.getString("Problems_writing_to_file__") + outFileName, e); 
     }//catch
     
     
@@ -594,7 +601,7 @@ public class SimpleSound{
     }//try
     catch(Exception e)
     {
-      printError(Messages.getString("SimpleSound.16")); 
+      printError(Messages.getString("Unable_to_close_the_Audio_stream_")); 
     }//catch
     
   }//writeToFile(String outFileName)
@@ -617,8 +624,8 @@ public class SimpleSound{
     // try to prevent a null pointer exception
     if(inFileName == null)
     {
-      printError(Messages.getString("SimpleSound.17") + 
-                 Messages.getString("SimpleSound.18"));   
+      printError(Messages.getString("You_must_pass_in_a_valid_file_name___Please_try") + 
+                 Messages.getString("again_"));   
     }
     
     /* get the File object representing the file named inFileName 
@@ -626,7 +633,7 @@ public class SimpleSound{
     File file = new File(inFileName);
     if(!file.exists())
     {
-      printError(Messages.getString("SimpleSound.19") + inFileName + Messages.getString("SimpleSound.20"));  
+      printError(Messages.getString("The_file__") + inFileName + Messages.getString("_doesn_t_exist"));  
     }
     
     // create an audioInputStream from this file
@@ -635,11 +642,11 @@ public class SimpleSound{
     try {
     	audioInputStream = AudioSystem.getAudioInputStream(file);
     } catch(Exception e) {
-      printError(Messages.getString("SimpleSound.21") +  
-                 inFileName + Messages.getString("SimpleSound.22") +  
-                 Messages.getString("SimpleSound.23") + 
-                 Messages.getString("SimpleSound.24") + 
-                 Messages.getString("SimpleSound.25") ,e); 
+      printError(Messages.getString("Unable_to_read_from_file_") +  
+                 inFileName + Messages.getString("___The_file_type_is_unsupported___") +  
+                 Messages.getString("Are_you_sure_you_re_using_a_WAV__AU__or_") + 
+                 Messages.getString("AIFF_file__some__wav_files_are_encoded_") + 
+                 Messages.getString("using_gsm__sbc__mp3__celp__ulaw__or_adpcm__") ,e); 
       return;
     }//catch
 
@@ -655,9 +662,9 @@ public class SimpleSound{
         audioInputStream.getFormat().getFrameSize()) > 
        Integer.MAX_VALUE)
     {
-      printError(Messages.getString("SimpleSound.26") + inFileName +  
-                 Messages.getString("SimpleSound.27")+ 
-                 Messages.getString("SimpleSound.28")); 
+      printError(Messages.getString("The_sound_in_file__") + inFileName +  
+                 Messages.getString("_is_too_long_")+ 
+                 Messages.getString("__Try_using_a_shorter_sound_")); 
     }
     
     int bufferSize = (int)audioInputStream.getFrameLength() *
@@ -679,10 +686,10 @@ public class SimpleSound{
         else
           offset += numBytesRead;
       } catch(Exception e) {
-        printError(Messages.getString("SimpleSound.29")+ 
-                   Messages.getString("SimpleSound.30")+ 
-                   Messages.getString("SimpleSound.31") + inFileName + Messages.getString("SimpleSound.32")+   
-                   Messages.getString("SimpleSound.33") 
+        printError(Messages.getString("Problems_reading_the_input_stream___")+ 
+                   Messages.getString("You_might_want_to_try_again_using_this_")+ 
+                   Messages.getString("_file__") + inFileName + Messages.getString("or_a_different")+   
+                   Messages.getString("_file___If_problems_persist__ask_your_TA_") 
                      , e);
       }//catch
     }//while
@@ -714,13 +721,13 @@ public class SimpleSound{
     }
     else
     {
-      printError(Messages.getString("SimpleSound.38")+ 
-                 Messages.getString("SimpleSound.39")); 
+      printError(Messages.getString("Unsupported_file_type___Please_try_again_with_a_")+ 
+                 Messages.getString("file_that_ends_in__wav___au___aif__or__aiff")); 
     }
     
     if(DEBUG)
     {
-      System.out.println(Messages.getString("SimpleSound.40") + fileName); 
+      System.out.println(Messages.getString("New_sound_created_from_file__") + fileName); 
       System.out.println("\tendianness: " +  
                          audioInputStream.getFormat().isBigEndian());
       System.out.println("\tencoding: " +  
@@ -796,7 +803,7 @@ public class SimpleSound{
         (this.getLength()/this.getSamplingRate());
       Thread.sleep((int) timeToSleep);
     } catch (Exception ex) {
-      System.out.println(Messages.getString("SimpleSound.43")+ex); 
+      System.out.println(Messages.getString("Exception_occurred__")+ex); 
     }
   }
   
@@ -821,15 +828,15 @@ public class SimpleSound{
   {
     if(durInFrames > getLengthInFrames())
     {
-      printError(Messages.getString("SimpleSound.44") + durInFrames +  
-                 Messages.getString("SimpleSound.45") + 
-                 Messages.getString("SimpleSound.46") + getLengthInFrames()); 
+      printError(Messages.getString("The_given_duration_in_frames__") + durInFrames +  
+                 Messages.getString("_is_out_of_the_playable_range___Try_something_") + 
+                 Messages.getString("between_1_and_") + getLengthInFrames()); 
     }
     if(rate > Float.MAX_VALUE)
     {
-      printError(Messages.getString("SimpleSound.47") + rate + Messages.getString("SimpleSound.48") +  
-                 Messages.getString("SimpleSound.49") + 
-                 Messages.getString("SimpleSound.50") + Float.MAX_VALUE); 
+      printError(Messages.getString("The_new_sample_rate__") + rate + Messages.getString("is_out_of_the_") +  
+                 Messages.getString("playable_range___Try_something_between_") + 
+                 Messages.getString("0_and_") + Float.MAX_VALUE); 
     }
     playAtRateInRange((float)rate, 0, (int)durInFrames-1, false);
   }
@@ -855,15 +862,15 @@ public class SimpleSound{
   {
     if(durInFrames > getLengthInFrames())
     {
-      printError(Messages.getString("SimpleSound.51") + durInFrames +  
-                 Messages.getString("SimpleSound.52") + 
-                 Messages.getString("SimpleSound.53") + getLengthInFrames()); 
+      printError(Messages.getString("The_given_duration_in_frames__") + durInFrames +  
+                 Messages.getString("_is_out_of_the_playable_range___Try_something_") + 
+                 Messages.getString("between_1_and_") + getLengthInFrames()); 
     }
     if(rate > Float.MAX_VALUE)
     {
-      printError(Messages.getString("SimpleSound.54") + rate + Messages.getString("SimpleSound.55") +  
-                 Messages.getString("SimpleSound.56") + 
-                 Messages.getString("SimpleSound.57") + Float.MAX_VALUE); 
+      printError(Messages.getString("The_new_sample_rate__") + rate + Messages.getString("is_out_of_the_") +  
+                 Messages.getString("playable_range___Try_something_between_") + 
+                 Messages.getString("0_and_") + Float.MAX_VALUE); 
     }
     
     playAtRateInRange((float)rate, 0, (int)durInFrames-1, true);
@@ -950,23 +957,23 @@ public class SimpleSound{
      */
     if(endFrame >= getAudioFileFormat().getFrameLength())
     {
-      printError(Messages.getString("SimpleSound.58") + (endFrame+1) + 
-                 Messages.getString("SimpleSound.59") +  
+      printError(Messages.getString("You_are_trying_to_play_to_index__") + (endFrame+1) + 
+                 Messages.getString("___The_sound_only_has_") +  
                  getAudioFileFormat().getFrameLength() +
-                 Messages.getString("SimpleSound.60")); 
+                 Messages.getString("_samples_total_")); 
     }
     if(startFrame < 0)
     {
-      printError(Messages.getString("SimpleSound.61") +  
+      printError(Messages.getString("You_cannot_start_playing_at_index_") +  
                  (startFrame+1) + 
-                 Messages.getString("SimpleSound.62")); 
+                 Messages.getString("___Choose_1_to_start_at_the_begining_")); 
     }
     if(endFrame < startFrame)
     {
-      printError(Messages.getString("SimpleSound.63") +  
-                 (startFrame+1) + Messages.getString("SimpleSound.64") +  
-                 (endFrame+1) + Messages.getString("SimpleSound.65") + 
-                 Messages.getString("SimpleSound.66")); 
+      printError(Messages.getString("You_cannot_start_playing_at_index_") +  
+                 (startFrame+1) + Messages.getString("_and_stop_playing_at_index_") +  
+                 (endFrame+1) + Messages.getString("___The_start_index_must_be_before") + 
+                 Messages.getString("the_stop_index_")); 
     }
     
     
@@ -981,7 +988,7 @@ public class SimpleSound{
     int frameSize = getAudioFileFormat().getFormat().getFrameSize();
     int durInFrames = (endFrame - startFrame) + 1;
     if(DEBUG)
-      System.out.println(Messages.getString("SimpleSound.34") + durInFrames); 
+      System.out.println(Messages.getString("_tnew_durInFrames___") + durInFrames); 
     
     //we want to make a new buffer, only as long as we need
     int newBufferSize = durInFrames * frameSize;
@@ -1019,7 +1026,7 @@ public class SimpleSound{
       System.out.println("playAtRateInRange(" + rate + ", " +   
                          startFrame + ", " + endFrame + ", " +  
                          isBlocking + ")"); 
-      System.out.println(Messages.getString("SimpleSound.73") +  
+      System.out.println(Messages.getString("_t_length_of_sound___") +  
                          getAudioFileFormat().getFrameLength() + ")"); 
     }
     
@@ -1079,8 +1086,8 @@ public class SimpleSound{
   {
     if(frameNum >= getAudioFileFormat().getFrameLength())
     {
-      printError(Messages.getString("SimpleSound.75")+ (frameNum) +Messages.getString("SimpleSound.76")+   
-                 Messages.getString("SimpleSound.77")+  
+      printError(Messages.getString("That_index_")+ (frameNum) +Messages.getString("__does_not_exist__")+   
+                 Messages.getString("The_last_valid_index_is_")+  
                  (getAudioFileFormat().getFrameLength() -1));
     }
     
@@ -1142,8 +1149,8 @@ public class SimpleSound{
    */
   private void reportIndexException(int index, Exception ex)
   {
-    System.out.println(Messages.getString("SimpleSound.78") + index +  
-                       Messages.getString("SimpleSound.79")); 
+    System.out.println(Messages.getString("The_index_") + index +  
+                       Messages.getString("_isn_t_valid_for_this_sound")); 
   }
   
   /**
@@ -1179,15 +1186,15 @@ public class SimpleSound{
     //Before we get started, lets make sure that frame exists
     if(frameNum >= getAudioFileFormat().getFrameLength())
     {
-      printError(Messages.getString("SimpleSound.80")  
-                 + (frameNum) + Messages.getString("SimpleSound.81") +  
+      printError(Messages.getString("You_are_trying_to_access_the_sample_at_index__")  
+                 + (frameNum) + Messages.getString("__but_the_last_valid_index_is_at_") +  
                  (getAudioFileFormat().getFrameLength() - 1));
     }
     else if(frameNum < 0)
     {
-      printError(Messages.getString("SimpleSound.82") + (frameNum) + 
-                 Messages.getString("SimpleSound.83") + 
-                 Messages.getString("SimpleSound.84") +  
+      printError(Messages.getString("You_asked_for_the_sample_at_index__") + (frameNum) + 
+                 Messages.getString("___This_number_is_less_than_zero___Please_try") + 
+                 Messages.getString("again_using_an_index_in_the_range__0_") +  
                  (getAudioFileFormat().getFrameLength() - 1) +"]"); 
     }
    
@@ -1215,9 +1222,9 @@ public class SimpleSound{
                                             isBigEndian);
       else
       {
-        printError(Messages.getString("SimpleSound.86")+ 
-                   Messages.getString("SimpleSound.87")+  
-                   Messages.getString("SimpleSound.88")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample_")+ 
+                   Messages.getString("size_is_not_recognized_as_a_standard_")+  
+                   Messages.getString("format_")); 
         return -1;
       }
     }
@@ -1240,9 +1247,9 @@ public class SimpleSound{
         (int)Math.pow(2, 31);
       else
       {
-        printError(Messages.getString("SimpleSound.89")+ 
-                   Messages.getString("SimpleSound.90")+ 
-                   Messages.getString("SimpleSound.91")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample_")+ 
+                   Messages.getString("size_is_not_recognized_as_a_standard_")+ 
+                   Messages.getString("format_")); 
         return -1;
       }
     }
@@ -1256,10 +1263,10 @@ public class SimpleSound{
     }
     else
     {
-      printError(Messages.getString("SimpleSound.92") +  
-                 format.getEncoding() + Messages.getString("SimpleSound.93") + 
-                 Messages.getString("SimpleSound.94") + 
-                 Messages.getString("SimpleSound.95")); 
+      printError(Messages.getString("unsupported_audio_encoding__") +  
+                 format.getEncoding() + Messages.getString("___Currently_only_PCM__") + 
+                 Messages.getString("ALAW_and_ULAW_are_supported___Please_try_again") + 
+                 Messages.getString("with_a_different_file_")); 
       return -1;
     }
   }//getSample(int)
@@ -1297,15 +1304,15 @@ public class SimpleSound{
     //Before we get started, lets make sure that frame exists
     if(frameNum >= getAudioFileFormat().getFrameLength())
     {
-      printError(Messages.getString("SimpleSound.96")  
-                   + (frameNum) + Messages.getString("SimpleSound.97") +  
+      printError(Messages.getString("You_are_trying_to_access_the_sample_at_index__")  
+                   + (frameNum) + Messages.getString("__but_the_last_valid_index_is_at_") +  
                  (getAudioFileFormat().getFrameLength() - 1));
     }
     else if(frameNum < 0)
     {
-      printError(Messages.getString("SimpleSound.98")+(frameNum+1) + 
-                 Messages.getString("SimpleSound.99") + 
-                 Messages.getString("SimpleSound.100") +  
+      printError(Messages.getString("You_asked_for_the_sample_at_index__")+(frameNum+1) + 
+                 Messages.getString("___This_number_is_less_than_zero___Please_try") + 
+                 Messages.getString("_again_using_an_index_in_the_range__0_") +  
                  (getAudioFileFormat().getFrameLength()-1) + "]."); 
     }
     
@@ -1313,9 +1320,9 @@ public class SimpleSound{
     int channels;
     if((channels = format.getChannels())==1)
     {
-      printError(Messages.getString("SimpleSound.102") + 
-                 Messages.getString("SimpleSound.103") + 
-                 "getSample("+(frameNum)+Messages.getString("SimpleSound.105"));  
+      printError(Messages.getString("Only_stereo_sounds_have_different_right_and_left") + 
+                 Messages.getString("_samples___You_are_using_a_mono_sound__try_") + 
+                 "getSample("+(frameNum)+Messages.getString("__instead"));  
       return -1;
     }
     int sampleSizeInBits = format.getSampleSizeInBits();
@@ -1335,9 +1342,9 @@ public class SimpleSound{
         return TConversionTool.bytesToInt32(theFrame, 4, isBigEndian);
       else
       {
-        printError(Messages.getString("SimpleSound.106")+ 
-                   Messages.getString("SimpleSound.107")+ 
-                   Messages.getString("SimpleSound.108")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample")+ 
+                   Messages.getString("_size_is_not_recognized_as_a_standard")+ 
+                   Messages.getString("_format_")); 
         return -1;
       }
     }
@@ -1353,9 +1360,9 @@ public class SimpleSound{
         return TConversionTool.unsignedByteToInt32(theFrame, 4, isBigEndian);
       else
       {
-        printError(Messages.getString("SimpleSound.109")+ 
-                   Messages.getString("SimpleSound.110") + 
-                   Messages.getString("SimpleSound.111")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample")+ 
+                   Messages.getString("_size_is_not_recognized_as_a_standard") + 
+                   Messages.getString("_format_")); 
         return -1;
       }  
     }
@@ -1369,10 +1376,10 @@ public class SimpleSound{
     }
     else
     {
-      printError(Messages.getString("SimpleSound.112") +  
-                 format.getEncoding() + Messages.getString("SimpleSound.113") + 
-                 Messages.getString("SimpleSound.114") + 
-                 Messages.getString("SimpleSound.115")); 
+      printError(Messages.getString("unsupported_audio_encoding__") +  
+                 format.getEncoding() + Messages.getString("___Currently_only_PCM__") + 
+                 Messages.getString("ALAW_and_ULAW_are_supported___Please_try_again") + 
+                 Messages.getString("with_a_different_file_")); 
       return -1;
     }
   }
@@ -1428,14 +1435,14 @@ public class SimpleSound{
   {
     if(frameNum >= getAudioFileFormat().getFrameLength())
     {
-      printError(Messages.getString("SimpleSound.116")+frameNum+Messages.getString("SimpleSound.117")+  
-                 Messages.getString("SimpleSound.118") +  
+      printError(Messages.getString("That_frame__number_")+frameNum+Messages.getString("__does_not_exist__")+  
+                 Messages.getString("The_last_valid_frame_number_is_") +  
                  (getAudioFileFormat().getFrameLength() - 1));
     }
     int frameSize = getAudioFileFormat().getFormat().getFrameSize();
     if(frameSize != theFrame.length)
-      printError(Messages.getString("SimpleSound.119") + 
-                 Messages.getString("SimpleSound.120")); 
+      printError(Messages.getString("Frame_size_doesn_t_match__line_383___This_should") + 
+                 Messages.getString("_never_happen___Please_report_the_problem_to_a_TA_")); 
     for(int i = 0; i < frameSize; i++)
     {
       buffer[frameNum*frameSize+i] = theFrame[i];
@@ -1499,8 +1506,8 @@ public class SimpleSound{
       }
       else
       {
-        printError(Messages.getString("SimpleSound.121")+ 
-                   Messages.getString("SimpleSound.122")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample")+ 
+                   Messages.getString("size_is_not_recognized_as_a_standard_format")); 
       }
     }//if format == PCM_SIGNED
     else if(format.getEncoding().equals(AudioFormat.Encoding.PCM_UNSIGNED))
@@ -1528,19 +1535,19 @@ public class SimpleSound{
       
       else
       {
-        printError(Messages.getString("SimpleSound.123")+ 
-                   Messages.getString("SimpleSound.124")+ 
-                   Messages.getString("SimpleSound.125")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample")+ 
+                   Messages.getString("_size_is_not_recognized_as_a_standard_")+ 
+                   Messages.getString("format_")); 
       }
     }
     else if(format.getEncoding().equals(AudioFormat.Encoding.ALAW))
     {
       if((sample>Short.MAX_VALUE)||(sample<Short.MIN_VALUE))
-        printError(Messages.getString("SimpleSound.126")+ 
-                   sample + Messages.getString("SimpleSound.127")+ 
-                   Messages.getString("SimpleSound.128")+Short.MAX_VALUE+ 
-                   Messages.getString("SimpleSound.129")+Short.MIN_VALUE+ 
-                   Messages.getString("SimpleSound.130")); 
+        printError(Messages.getString("You_are_trying_to_set_the_sample_value_to__")+ 
+                   sample + Messages.getString("__but_the_maximum_value_for_a_sample")+ 
+                   Messages.getString("_in_this_format_is__")+Short.MAX_VALUE+ 
+                   Messages.getString("__and_the_minimum_value_is__")+Short.MIN_VALUE+ 
+                   Messages.getString("___Please_choose_a_value_in_that_range_")); 
       theFrame[0] = TConversionTool.linear2alaw((short)sample);
       setFrame(frameNum, theFrame);
     }
@@ -1548,20 +1555,20 @@ public class SimpleSound{
     {
       
       if((sample>Short.MAX_VALUE)||(sample<Short.MIN_VALUE))
-        printError(Messages.getString("SimpleSound.131")+ 
-                   sample + Messages.getString("SimpleSound.132")+ 
-                   Messages.getString("SimpleSound.133")+Short.MAX_VALUE+ 
-                   Messages.getString("SimpleSound.134")+Short.MIN_VALUE+ 
-                   Messages.getString("SimpleSound.135")); 
+        printError(Messages.getString("You_are_trying_to_set_the_sample_value_to__")+ 
+                   sample + Messages.getString("__but_the_maximum_value_for_a_sample")+ 
+                   Messages.getString("_in_this_format_is__")+Short.MAX_VALUE+ 
+                   Messages.getString("__and_the_minimum_value_is__")+Short.MIN_VALUE+ 
+                   Messages.getString("___Please_choose_a_value_in_that_range_")); 
       theFrame[0] = TConversionTool.linear2ulaw((short)sample);
       setFrame(frameNum, theFrame);
     }
     else
     {
-      printError(Messages.getString("SimpleSound.136") +  
-                 format.getEncoding() + Messages.getString("SimpleSound.137") + 
-                 Messages.getString("SimpleSound.138") + 
-                 Messages.getString("SimpleSound.139")); 
+      printError(Messages.getString("unsupported_audio_encoding__") +  
+                 format.getEncoding() + Messages.getString("___Currently_only_PCM__") + 
+                 Messages.getString("ALAW_and_ULAW_are_supported___Please_try_again") + 
+                 Messages.getString("with_a_different_file_")); 
     }
   }//setSample(int, int)
   
@@ -1578,8 +1585,8 @@ public class SimpleSound{
     boolean isBigEndian = format.isBigEndian();
     
     if(format.getChannels() == 1)
-      printError(Messages.getString("SimpleSound.140") + 
-                 Messages.getString("SimpleSound.141")); 
+      printError(Messages.getString("this_is_a_mono_sound___only_stereo_sounds_have") + 
+                 Messages.getString("_different_left_and_right_samples_")); 
     
     byte[] theFrame = getFrame(frameNum);
     
@@ -1608,8 +1615,8 @@ public class SimpleSound{
       }
       else
       {
-        printError(Messages.getString("SimpleSound.142")+ 
-                   Messages.getString("SimpleSound.143")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample")+ 
+                   Messages.getString("size_is_not_recognized_as_a_standard_format")); 
       }
     }//if format == PCM_SIGNED
     else if(format.getEncoding().equals(AudioFormat.Encoding.PCM_UNSIGNED))
@@ -1636,39 +1643,39 @@ public class SimpleSound{
       }
       else
       {
-        printError(Messages.getString("SimpleSound.144")+ 
-                   Messages.getString("SimpleSound.145")+ 
-                   Messages.getString("SimpleSound.146")); 
+        printError(Messages.getString("Unsupported_audio_encoding___The_sample")+ 
+                   Messages.getString("_size_is_not_recognized_as_a_standard")+ 
+                   Messages.getString("_format")); 
       }
     }
     else if(format.getEncoding().equals(AudioFormat.Encoding.ALAW))
     {
       if((sample>Short.MAX_VALUE)||(sample<Short.MIN_VALUE))
-        printError(Messages.getString("SimpleSound.147")+ 
-                   sample + Messages.getString("SimpleSound.148")+ 
-                   Messages.getString("SimpleSound.149")+Short.MAX_VALUE+ 
-                   Messages.getString("SimpleSound.150")+Short.MIN_VALUE+ 
-                   Messages.getString("SimpleSound.151")); 
+        printError(Messages.getString("You_are_trying_to_set_the_sample_value_to__")+ 
+                   sample + Messages.getString("__but_the_maximum_value_for_a_sample")+ 
+                   Messages.getString("_in_this_format_is__")+Short.MAX_VALUE+ 
+                   Messages.getString("__and_the_minimum_value_is__")+Short.MIN_VALUE+ 
+                   Messages.getString("___Please_choose_a_value_in_that_range_")); 
       theFrame[1] = TConversionTool.linear2alaw((short)sample);
       setFrame(frameNum, theFrame);
     }
     else if(format.getEncoding().equals(AudioFormat.Encoding.ULAW))
     {
       if((sample>Short.MAX_VALUE)||(sample<Short.MIN_VALUE))
-        printError(Messages.getString("SimpleSound.152")+ 
-                   sample + Messages.getString("SimpleSound.153")+ 
-                   Messages.getString("SimpleSound.154")+Short.MAX_VALUE+ 
-                   Messages.getString("SimpleSound.155")+Short.MIN_VALUE+ 
-                   Messages.getString("SimpleSound.156")); 
+        printError(Messages.getString("You_are_trying_to_set_the_sample_value_to__")+ 
+                   sample + Messages.getString("__but_the_maximum_value_for_a_sample")+ 
+                   Messages.getString("_in_this_format_is__")+Short.MAX_VALUE+ 
+                   Messages.getString("__and_the_minimum_value_is__")+Short.MIN_VALUE+ 
+                   Messages.getString("___Please_choose_a_value_in_that_range_")); 
       theFrame[1] = TConversionTool.linear2ulaw((short)sample);
       setFrame(frameNum, theFrame);
     }
     else
     {
-      printError(Messages.getString("SimpleSound.157") +  
-                 format.getEncoding() + Messages.getString("SimpleSound.158") + 
-                 Messages.getString("SimpleSound.159") + 
-                 Messages.getString("SimpleSound.160")); 
+      printError(Messages.getString("unsupported_audio_encoding__") +  
+                 format.getEncoding() + Messages.getString("___Currently_only_PCM__") + 
+                 Messages.getString("ALAW_and_ULAW_are_supported___Please_try_again") + 
+                 Messages.getString("with_a_different_file_")); 
     }
   }//setRightSample(int, int) 
   
@@ -1702,7 +1709,7 @@ public class SimpleSound{
       Converter converter = new Converter();
       converter.convert(mp3File,wavFile);
     } catch (Exception ex) {
-      SimpleOutput.showError(Messages.getString("SimpleSound.161") + mp3File); 
+      SimpleOutput.showError(Messages.getString("Couldn_t_covert_the_file_") + mp3File); 
     }
   }
 
@@ -1714,14 +1721,14 @@ public class SimpleSound{
    */
   public String toString()
   {
-    String output = Messages.getString("SimpleSound.162"); 
+    String output = Messages.getString("SimpleSound"); 
     
     // if there is a file name then add that to the output
     if (fileName != null)
-      output = output + Messages.getString("SimpleSound.163") + fileName; 
+      output = output + Messages.getString("_file__") + fileName; 
     
     // add the length
-    output = output + Messages.getString("SimpleSound.164") + getLengthInBytes(); 
+    output = output + Messages.getString("_length__") + getLengthInBytes(); 
     
     return output;
   }

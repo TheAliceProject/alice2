@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.ReferenceFrameProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class AbstractMoveInDirectionOfAnimation extends TransformAnimation {
 	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); 
@@ -56,7 +56,7 @@ public abstract class AbstractMoveInDirectionOfAnimation extends TransformAnimat
 			super.prologue( t );
             m_target = AbstractMoveInDirectionOfAnimation.this.target.getReferenceFrameValue();
 			if( m_target == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("AbstractMoveInDirectionOfAnimation.2"), getCurrentStack(), AbstractMoveInDirectionOfAnimation.this.target ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_must_not_be_null_"), getCurrentStack(), AbstractMoveInDirectionOfAnimation.this.target ); 
 			}
 
 			m_vectorPrev = new javax.vecmath.Vector3d();

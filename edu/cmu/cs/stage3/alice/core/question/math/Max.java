@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core.question.math;
 
-import edu.cmu.cs.stage3.alice.core.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class Max extends edu.cmu.cs.stage3.alice.core.question.BinaryNumberResultingInNumberQuestion {
 	private static Class[] s_supportedCoercionClasses = { Min.class };
@@ -33,7 +33,7 @@ public class Max extends edu.cmu.cs.stage3.alice.core.question.BinaryNumberResul
 	}
 	
 	protected double getValue( double aValue, double bValue ) {
-		edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("Max.0")+aValue+ Messages.getString("Max.1")+bValue+Messages.getString("Max.2");   
+		edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("maximum_of_")+aValue+ Messages.getString("_and_")+bValue+Messages.getString("_is_");   
 		return Math.max( aValue, bValue );
 	}
 }

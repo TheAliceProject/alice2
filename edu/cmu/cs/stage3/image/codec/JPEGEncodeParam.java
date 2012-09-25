@@ -219,7 +219,7 @@ public class JPEGEncodeParam implements ImageEncodeParam {
     public int[] getQTable(int component) {
         if (!qTabSet[component]) {
             throw new IllegalStateException(
-               JaiI18N.getString("JPEGEncodeParam0"));
+               JaiI18N.getString("A_quantization_table_has_not_been_set_for_this_component_"));
         }
         return qTab[component];
     }
@@ -233,7 +233,7 @@ public class JPEGEncodeParam implements ImageEncodeParam {
     public int getQTableSlot(int component) {
         if (!qTabSet[component]) {
             throw new IllegalStateException(
-               JaiI18N.getString("JPEGEncodeParam0"));
+               JaiI18N.getString("A_quantization_table_has_not_been_set_for_this_component_"));
         }
         return qTabSlot[component];
     }

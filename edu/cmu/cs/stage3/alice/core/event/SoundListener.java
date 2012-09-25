@@ -27,4 +27,3 @@ package edu.cmu.cs.stage3.alice.core.event;
 public interface SoundListener {
 	public void SoundStarted( SoundEvent soundEvent );
 }
-

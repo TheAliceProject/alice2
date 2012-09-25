@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -49,7 +51,7 @@ public class ImagePanel extends javax.swing.JPanel {
 			try {
 				tracker.waitForAll();
 			} catch( InterruptedException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ImagePanel.0"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Interrupted_while_waiting_for_image_to_load_"), e ); 
 			}
 			revalidate();
 			repaint();

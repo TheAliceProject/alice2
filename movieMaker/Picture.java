@@ -1,5 +1,6 @@
 package movieMaker;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.image.BufferedImage;
 
 /**
@@ -75,12 +76,11 @@ public class Picture extends SimplePicture
   
 public String toString()
   {
-    String output = Messages.getString("Picture.0") + getFileName() +  
-      Messages.getString("Picture.1") + getHeight()  
-      + Messages.getString("Picture.2") + getWidth(); 
+    String output = Messages.getString("Picture__filename_") + getFileName() +  
+      Messages.getString("_height_") + getHeight()  
+      + Messages.getString("_width_") + getWidth(); 
     return output;
     
   }
   
 } // this } is the end of class Picture, put all new methods before this
- 

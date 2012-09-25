@@ -23,8 +23,11 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Cursor;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
+import javax.swing.ImageIcon;
 
 /**
  * @author culyba, dennisc

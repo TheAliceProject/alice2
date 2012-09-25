@@ -24,7 +24,8 @@
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 public class FontPanel extends AbstractFontPanel {
-	public FontPanel( java.awt.Font initialValue, boolean sizeVisible, boolean previewVisible, String sampleText ) {
-		super( sampleText, false );
+	public FontPanel(java.awt.Font initialValue, boolean sizeVisible,
+			boolean previewVisible, String sampleText) {
+		super(sampleText, false);
 	}
 }

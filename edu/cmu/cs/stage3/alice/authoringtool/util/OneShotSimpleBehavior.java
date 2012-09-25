@@ -46,4 +46,3 @@ public class OneShotSimpleBehavior extends edu.cmu.cs.stage3.alice.core.util.One
 //		this.affectedProperties = affectedProperties;
 //	}
 //}
-

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -123,7 +125,7 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 
 	public int getChildCount( Object parent ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.0") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 
 		int childCount = 0;
@@ -153,7 +155,7 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 
 	public Object getChild( Object parent, int index ) {
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.1") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 
 		int childCount = 0;
@@ -186,10 +188,10 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 			return -1;
 		}
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.2") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 		if( ! (child instanceof edu.cmu.cs.stage3.alice.core.Element) ) {
-			throw new IllegalArgumentException( Messages.getString("WorldTreeModel.3") ); 
+			throw new IllegalArgumentException( Messages.getString("nodes_must_be_edu_cmu_cs_stage3_alice_core_Elements") ); 
 		}
 
 		int childCount = 0;
@@ -228,7 +230,7 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 				element.name.set( previousName );
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("WorldTreeModel.4") ); 
+			throw new RuntimeException( Messages.getString("only_allows_name_changes_through_the_model") ); 
 		}
 	}
 

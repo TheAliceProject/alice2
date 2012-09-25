@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -234,7 +236,7 @@ public class GUIFactory {
 			try {
 				return (javax.swing.JComponent)guiClass.newInstance();
 			} catch( Throwable t ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.0") + guiClass, t ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_GUI__") + guiClass, t ); 
 			}
 		}
 		return null;
@@ -271,9 +273,9 @@ public class GUIFactory {
 			if (((javax.swing.JLabel)c).getIcon() != null){
 				javax.swing.Icon icon = ((javax.swing.JLabel)c).getIcon();
 				if (icon.equals(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue("mouse"))){ 
-					toReturn = Messages.getString("GUIFactory.18"); 
+					toReturn = Messages.getString("_b_the_mouse__b_"); 
 				} else if (icon.equals(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue("arrowKeys"))){ 
-					toReturn = Messages.getString("GUIFactory.20"); 
+					toReturn = Messages.getString("_b_the_arrow_keys__b_"); 
 				} 
 			}
 			String labelText = cleanHTMLString(((javax.swing.JLabel)c).getText());
@@ -576,14 +578,14 @@ public class GUIFactory {
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, number );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Style.class.isAssignableFrom( valueClass ) ) {
-			System.out.println( Messages.getString("GUIFactory.39") ); 
+			System.out.println( Messages.getString("Not_supported_yet") ); 
 		} else if( edu.cmu.cs.stage3.alice.scenegraph.Color.class.isAssignableFrom( valueClass ) ) {
 			java.awt.Color currentColor = java.awt.Color.white;
 			if( property.getValue() instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
 				currentColor = ((edu.cmu.cs.stage3.alice.scenegraph.Color)property.getValue()).createAWTColor();
 			}
 			javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("GUIFactory.40"), currentColor ); 
+			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("Custom_Color"), currentColor ); 
 			if( color != null ) {
 				((Runnable)factory.createItem( new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) );
@@ -594,19 +596,19 @@ public class GUIFactory {
 			if (currentValue != null){
 				currentString = currentValue.toString();
 			}
-			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.42"), Messages.getString("GUIFactory.43"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString );  
+			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Enter_a_string_"), Messages.getString("Enter_a_string"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString );  
 			if( string != null ) {
 				((Runnable)factory.createItem( string )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, string );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( valueClass ) ) {
-			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.44"), Messages.getString("GUIFactory.45"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
+			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Please_enter_a_jython_script_that_will_evaluate_to_a_response_"), Messages.getString("Custom_Response_Script"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
 			edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse();
 			scriptResponse.script.set( script );
 			property.getOwner().addChild( scriptResponse );
 			((Runnable)factory.createItem( scriptResponse )).run();
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.46") + valueClass.getName(), null ); // should not see this 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Other____is_not_supported_for_") + valueClass.getName(), null ); // should not see this 
 		}
 	}
 
@@ -640,7 +642,7 @@ public class GUIFactory {
 				currentColor = ((edu.cmu.cs.stage3.alice.scenegraph.Color)initialValue).createAWTColor();
 			}
 			javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("GUIFactory.48"), currentColor ); 
+			java.awt.Color color = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("Custom_Color"), currentColor ); 
 			if (color != null){
 				((Runnable)factory.createItem( new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, new edu.cmu.cs.stage3.alice.scenegraph.Color( color ) );
@@ -650,13 +652,13 @@ public class GUIFactory {
 			if( initialValue != null ) {
 				currentString = (String)initialValue;
 			}
-			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.50"), Messages.getString("GUIFactory.51"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString );  
+			String string = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Enter_a_string_"), Messages.getString("Enter_a_string"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, currentString );  
 			if( string != null ) {
 				((Runnable)factory.createItem( string )).run();
 				PopupMenuUtilities.addRecentlyUsedValue( valueClass, string );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( valueClass ) ) {
-			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.52"), Messages.getString("GUIFactory.53"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
+			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Please_enter_a_jython_script_that_will_evaluate_to_a_response_"), Messages.getString("Custom_Response_Script"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
 			edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse();
 			scriptResponse.script.set( script );
 			if( anchorForAnonymousItems != null ) {
@@ -664,7 +666,7 @@ public class GUIFactory {
 			}
 			((Runnable)factory.createItem( scriptResponse )).run();
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("GUIFactory.54") + valueClass.getName(), null ); // should not see this 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Other____is_not_supported_for_") + valueClass.getName(), null ); // should not see this 
 		}
 	}
 
@@ -674,7 +676,7 @@ public class GUIFactory {
 		if( property.get() instanceof edu.cmu.cs.stage3.alice.core.question.AbstractScriptDefinedObject ) {
 			initialValue = ((edu.cmu.cs.stage3.alice.core.question.AbstractScriptDefinedObject)property.get()).evalScript.getStringValue();
 		}
-		String script = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("GUIFactory.56"), Messages.getString("GUIFactory.57"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, initialValue );  
+		String script = (String)edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Please_enter_a_jython_script_that_will_evaluate_to_the_appropriate_type_"), Messages.getString("Script_Expression"), javax.swing.JOptionPane.PLAIN_MESSAGE, null, null, initialValue );  
 		if( script != null ) {
 			edu.cmu.cs.stage3.alice.core.question.ScriptDefinedObject scriptDefinedObject = new edu.cmu.cs.stage3.alice.core.question.ScriptDefinedObject();
 			scriptDefinedObject.valueClass.set( valueClass );

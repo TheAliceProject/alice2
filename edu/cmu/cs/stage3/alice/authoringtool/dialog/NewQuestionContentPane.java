@@ -23,17 +23,22 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt, Dennis Cosgrove
  */
 
 public class NewQuestionContentPane extends NewNamedTypedElementContentPane {
 	public String getTitle() {
-		String cappedQuestionString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(0,1).toUpperCase()+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(1);
-		return Messages.getString("NewQuestionContentPane.0")+cappedQuestionString; 
+		String cappedQuestionString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING
+				.substring(0, 1).toUpperCase()
+				+ edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING
+						.substring(1);
+		return Messages.getString("New_") + cappedQuestionString;
 	}
-	
-	protected void initVariables(){
+
+	protected void initVariables() {
 		listsOnly = false;
 		showValue = false;
 	}

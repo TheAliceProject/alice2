@@ -28,11 +28,16 @@ import edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CopyFactoryTransferabl
 import edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable;
 import edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel;
 import edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory;
-import edu.cmu.cs.stage3.alice.core.*;
+import edu.cmu.cs.stage3.alice.core.Behavior;
+import edu.cmu.cs.stage3.alice.core.CopyFactory;
+import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Component;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.*;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetListener;
 import javax.swing.JComponent;
 
 // Referenced classes of package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor:
@@ -97,7 +102,7 @@ public class CompositeComponentBehaviorPanel extends CompositeComponentElementPa
         }
         catch(Exception e)
         {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("CompositeComponentBehaviorPanel.0"), e); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("The_drop_failed_"), e); 
             dropSuccess = false;
         }
         dtde.dropComplete(dropSuccess);

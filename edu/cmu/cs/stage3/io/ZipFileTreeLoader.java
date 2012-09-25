@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Dennis Cosgrove
  */
@@ -59,9 +61,9 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		} else if( pathname instanceof java.io.File ) {
             m_rootFile = (java.io.File)pathname;
 		} else if( pathname == null ) {
-			throw new IllegalArgumentException( Messages.getString("ZipFileTreeLoader.1") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_is_null") ); 
 		} else {
-			throw new IllegalArgumentException( Messages.getString("ZipFileTreeLoader.2") ); 
+			throw new IllegalArgumentException( Messages.getString("pathname_must_be_an_instance_of_String_or_java_io_File") ); 
 		}
         m_zipFile = new java.util.zip.ZipFile( m_rootFile );
 		m_currentDirectory = ""; 
@@ -70,7 +72,8 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		java.util.Enumeration enum0 = m_zipFile.entries();
 		while( enum0.hasMoreElements() ) {
 			java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)enum0.nextElement();
-			m_pathnameToZipEntryMap.put( getCanonicalPathname( zipEntry.getName() ), zipEntry );
+			String path = new String (getCanonicalPathname( zipEntry.getName() ).getBytes(), "UTF-8");	//AikMin new
+			m_pathnameToZipEntryMap.put( path , zipEntry );
 		}
 	}
 
@@ -100,8 +103,10 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 				pathname = "/" + pathname; 
 			}
 		}
-
-		m_currentDirectory = pathname;
+		try {
+			String utf8 = new String (pathname.getBytes(), "UTF-8");		// AikMin new
+			m_currentDirectory = utf8;
+		} catch (Exception e){}
 	}
 
 	public String getCurrentDirectory() {
@@ -111,12 +116,13 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 	public java.io.InputStream readFile( String filename ) throws IllegalArgumentException, java.io.IOException {
 		closeCurrentFile();
 		String pathname = getCanonicalPathname( m_currentDirectory + filename );
-		java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( pathname );
+		String utf8 = new String (pathname.getBytes(), "UTF-8");	// AikMin new
+		java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( utf8 );
 		if( zipEntry != null ) {
 			m_currentlyOpenStream = m_zipFile.getInputStream( zipEntry );
 			return m_currentlyOpenStream;
 		} else {
-			throw new java.io.FileNotFoundException( Messages.getString("ZipFileTreeLoader.9") + pathname ); 
+			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__") + pathname ); 
 		}
 	}
 
@@ -128,11 +134,11 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 	}
 
 	public String [] getFilesInCurrentDirectory() {
-		throw new RuntimeException( Messages.getString("ZipFileTreeLoader.10") ); 
+		throw new RuntimeException( Messages.getString("not_implemented") ); 
 	}
 
 	public String[] getDirectoriesInCurrentDirectory() {
-		throw new RuntimeException( Messages.getString("ZipFileTreeLoader.11") ); 
+		throw new RuntimeException( Messages.getString("not_implemented") ); 
 	}
 
     public boolean isKeepFileSupported() {

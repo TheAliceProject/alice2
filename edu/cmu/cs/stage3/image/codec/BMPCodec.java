@@ -144,7 +144,3 @@ public final class BMPCodec extends ImageCodec {
                 (header[1] == 0x4d));
     }
 }
-
-
-
-

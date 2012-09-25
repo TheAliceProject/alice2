@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -53,15 +54,15 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	protected javax.swing.JPanel simplePanel;
 	protected javax.swing.JLabel complicatedEndBrace;
 	protected javax.swing.JButton switchButton;
-	protected String toComplicatedString = Messages.getString("LoopNElementPanel.0"); 
-	protected String toSimpleString = Messages.getString("LoopNElementPanel.1"); 
+	protected String toComplicatedString = Messages.getString("show_complicated_version"); 
+	protected String toSimpleString = Messages.getString("show_simple_version"); 
 	protected boolean isComplicated = false;
 	
 	protected static String IS_COMPLICATED_LOOP_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_COMPLICATED_LOOP_KEY"; 
 
     public LoopNElementPanel(){
         super();
-        headerText = Messages.getString("LoopNElementPanel.3"); 
+        headerText = Messages.getString("Loop"); 
         backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"); 
     }
 
@@ -76,7 +77,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	}
 
 	protected String getIndexName(){
-		String toReturn = Messages.getString("LoopNElementPanel.5"); 
+		String toReturn = Messages.getString("index"); 
 		int count = countPreviousInstances(this.getParent(), this);
 		if (count > 0){
 			toReturn += String.valueOf(count);
@@ -205,10 +206,10 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
         if (timesLabel != null){
         	Number number = m_end.getNumberValue();
         	if (number != null && number.intValue() <= 1){
-            	timesLabel.setText(Messages.getString("LoopNElementPanel.11")); 
+            	timesLabel.setText(Messages.getString("time")); 
         	}
         	else{
-				timesLabel.setText(Messages.getString("LoopNElementPanel.12")); 
+				timesLabel.setText(Messages.getString("times")); 
         	}
             if (CompositeElementEditor.IS_JAVA){
 				int increment = 1;
@@ -236,7 +237,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				fromLabel.setText("="); 
 			}
 			else{
-        		fromLabel.setText(Messages.getString("LoopNElementPanel.26")); 
+        		fromLabel.setText(Messages.getString("from")); 
 			}
         }
 		if (upToLabel != null){
@@ -244,14 +245,14 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				upToLabel.setText("; "+getIndexName()+"<");  
 			}
 			else{
-        		upToLabel.setText(Messages.getString("LoopNElementPanel.29")); 
+        		upToLabel.setText(Messages.getString("up_to__but_not_including_")); 
 			}
 		}
 		if (incrementLabel != null){
 			if (CompositeElementEditor.IS_JAVA){
 				incrementLabel.setText("; "+getIndexName()+" +=");  
 			} else{
-        		incrementLabel.setText(Messages.getString("LoopNElementPanel.32")); 
+        		incrementLabel.setText(Messages.getString("incrementing_by")); 
 			}
 		}
 		if (complicatedEndBrace != null){
@@ -340,7 +341,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	}
 	
 	protected void setAllNames(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentContainer, int currentLevel){
-		String baseName = Messages.getString("LoopNElementPanel.35"); 
+		String baseName = Messages.getString("index"); 
 		for (int i=0; i<currentContainer.size(); i++){
 			edu.cmu.cs.stage3.alice.core.Element var = null;
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder){
@@ -366,7 +367,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		startListening();
 		if (isTopOccurrance(m_element.getParent())){
 			edu.cmu.cs.stage3.alice.core.Variable v = ((edu.cmu.cs.stage3.alice.core.Variable)m_index.getValue());
-			v.name.set(Messages.getString("LoopNElementPanel.37")); 
+			v.name.set(Messages.getString("index")); 
 			setAllNames(m_components, 2);
 		}
 	}

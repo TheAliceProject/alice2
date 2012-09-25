@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.pratt.maxkeyframing;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class PositionKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse {
 	public class RuntimePositionKeyframeResponse extends RuntimeKeyframeResponse {
 		
@@ -45,7 +47,7 @@ public class PositionKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyfram
 				}
 				//System.out.println( "getPosition: " + m_transformable.getPosition() );
 			} catch( ClassCastException e ) {
-				System.err.println( Messages.getString("PositionKeyframeResponse.0") + runtimeSpline + Messages.getString("PositionKeyframeResponse.1") + runtimeSpline.getSample( splineTimeElapsed ) );  
+				System.err.println( Messages.getString("Incorrect_sample_type_from_spline_") + runtimeSpline + Messages.getString("___Vector3_expected___Instead__got__") + runtimeSpline.getSample( splineTimeElapsed ) );  
 			} catch( Exception e ) {
 				e.printStackTrace();
 			}

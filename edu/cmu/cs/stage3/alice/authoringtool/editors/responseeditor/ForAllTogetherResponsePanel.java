@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -38,9 +39,9 @@ public class ForAllTogetherResponsePanel extends ForEachInListSequentialLoopPane
 
     public ForAllTogetherResponsePanel(){
         super();
-        headerText = Messages.getString("ForAllTogetherResponsePanel.0"); 
-        endHeaderText = Messages.getString("ForAllTogetherResponsePanel.1"); 
-        middleHeaderText = Messages.getString("ForAllTogetherResponsePanel.2"); 
+        headerText = Messages.getString("For_all"); 
+        endHeaderText = Messages.getString("together"); 
+        middleHeaderText = Messages.getString("__every"); 
     }
 
     public void set(edu.cmu.cs.stage3.alice.core.response.ForEachTogether r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn) {

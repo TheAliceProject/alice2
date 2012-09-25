@@ -166,7 +166,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
 
         if (transferType != DataBuffer.TYPE_FLOAT &&
             transferType != DataBuffer.TYPE_DOUBLE) {
-            throw new IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel0"));
+            throw new IllegalArgumentException(JaiI18N.getString("transferType_must_be_DataBuffer_TYPE_FLOAT_or_DataBuffer_TYPE_DOUBLE_"));
         }
 
         this.colorSpace = colorSpace;
@@ -188,7 +188,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
      */
     
 	public int getRed(int pixel) {
-        throw new IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel1"));
+        throw new IllegalArgumentException(JaiI18N.getString("getRed_int__not_supported_by_this_ColorModel_"));
     }
 
     /**
@@ -198,7 +198,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
      */
     
 	public int getGreen(int pixel) {
-        throw new IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel2"));
+        throw new IllegalArgumentException(JaiI18N.getString("getGreen_int__not_supported_by_this_ColorModel_"));
     }
 
     /**
@@ -208,7 +208,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
      */
     
 	public int getBlue(int pixel) {
-        throw new IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel3"));
+        throw new IllegalArgumentException(JaiI18N.getString("getBlue_int__not_supported_by_this_ColorModel_"));
     }
 
     /**
@@ -218,7 +218,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
      */
     
 	public int getAlpha(int pixel) {
-        throw new IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel4"));
+        throw new IllegalArgumentException(JaiI18N.getString("getAlpha_int__not_supported_by_this_ColorModel_"));
     }
 
     /**
@@ -228,7 +228,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
      */
     
 	public int getRGB(int pixel) {
-        throw new IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel5"));
+        throw new IllegalArgumentException(JaiI18N.getString("getRGB_int__not_supported_by_this_ColorModel_"));
     }
 
     private int clamp(float value) {
@@ -588,11 +588,11 @@ public class FloatDoubleColorModel extends ComponentColorModel {
                 floatPixel = new float[numComponents];
             } else {
                 if (!(pixel instanceof float[])) {
-                    throw new ClassCastException(JaiI18N.getString("FloatDoubleColorModel7"));
+                    throw new ClassCastException(JaiI18N.getString("Type_of_pixel_does_not_match_transfer_type_"));
                 }
                 floatPixel = (float[])pixel;
                 if (floatPixel.length < numComponents) {
-                    throw new ArrayIndexOutOfBoundsException(JaiI18N.getString("FloatDoubleColorModel8"));
+                    throw new ArrayIndexOutOfBoundsException(JaiI18N.getString("pixel_array_is_not_large_enough_to_hold_all_color_alpha_components_"));
                 }
             }
 
@@ -648,11 +648,11 @@ public class FloatDoubleColorModel extends ComponentColorModel {
                 doublePixel = new double[numComponents];
             } else {
                 if (!(pixel instanceof double[])) {
-                    throw new ClassCastException(JaiI18N.getString("FloatDoubleColorModel7"));
+                    throw new ClassCastException(JaiI18N.getString("Type_of_pixel_does_not_match_transfer_type_"));
                 }
                 doublePixel = (double[])pixel;
                 if (doublePixel.length < numComponents) {
-                    throw new ArrayIndexOutOfBoundsException(JaiI18N.getString("FloatDoubleColorModel8"));
+                    throw new ArrayIndexOutOfBoundsException(JaiI18N.getString("pixel_array_is_not_large_enough_to_hold_all_color_alpha_components_"));
                 }
             }
 
@@ -714,7 +714,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
     
 	public int[] getComponents(int pixel, int[] components, int offset) {
         throw new
-	   IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel9"));
+	   IllegalArgumentException(JaiI18N.getString("Pixel_values_for_FloatDoubleColorModel_cannot_be_represented_as_a_single_integer_"));
     }
 
     /**
@@ -724,7 +724,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
     
 	public int[] getComponents(Object pixel, int[] components, int offset) {
         throw new
-	   IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel9"));
+	   IllegalArgumentException(JaiI18N.getString("Pixel_values_for_FloatDoubleColorModel_cannot_be_represented_as_a_single_integer_"));
     }
 
     /**
@@ -735,7 +735,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
     
 	public int getDataElement(int[] components, int offset) {
         throw new
-	   IllegalArgumentException(JaiI18N.getString("FloatDoubleColorModel9"));
+	   IllegalArgumentException(JaiI18N.getString("Pixel_values_for_FloatDoubleColorModel_cannot_be_represented_as_a_single_integer_"));
     }
 
     /**
@@ -774,7 +774,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
 	public Object getDataElements(int[] components, int offset, Object obj) {
         if ((components.length-offset) < numComponents) {
             throw new IllegalArgumentException(numComponents + " " +
-				   JaiI18N.getString("FloatDoubleColorModel10"));
+				   JaiI18N.getString("elements_required_in_the_components_array_"));
         }
         if (transferType == DataBuffer.TYPE_FLOAT) {
             float[] pixel;
@@ -836,7 +836,7 @@ public class FloatDoubleColorModel extends ComponentColorModel {
 
         if (raster.getTransferType() != transferType) {
             throw new IllegalArgumentException(
-				    JaiI18N.getString("FloatDoubleColorModel6"));
+				    JaiI18N.getString("raster_transfer_type_must_match_that_of_this_ColorModel_"));
         }
 
         if (isAlphaPremultiplied) {

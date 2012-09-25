@@ -78,7 +78,7 @@ public class PNGImageDecoder extends ImageDecoderImpl {
     
 	public RenderedImage decodeAsRenderedImage(int page) throws IOException {
         if (page != 0) {
-            throw new IOException(JaiI18N.getString("PNGImageDecoder19"));
+            throw new IOException(JaiI18N.getString("Illegal_page_requested_from_a_PNG_file_"));
         }
         return new PNGImage(input, (PNGDecodeParam)param);
     }
@@ -413,12 +413,12 @@ class PNGImage extends SimpleRenderedImage {
         try {
             long magic = distream.readLong();
             if (magic != 0x89504e470d0a1a0aL) {
-                String msg = JaiI18N.getString("PNGImageDecoder0");
+                String msg = JaiI18N.getString("PNG_magic_number_not_found_");
                 throw new RuntimeException(msg);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            String msg = JaiI18N.getString("PNGImageDecoder1");
+            String msg = JaiI18N.getString("Error_reading_PNG_header_");
             throw new RuntimeException(msg);
         }
 
@@ -492,7 +492,7 @@ class PNGImage extends SimpleRenderedImage {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                String msg = JaiI18N.getString("PNGImageDecoder2");
+                String msg = JaiI18N.getString("I_O_error_reading_PNG_file_");
                 throw new RuntimeException(msg);
             }
         } while (true);
@@ -554,7 +554,7 @@ class PNGImage extends SimpleRenderedImage {
         if ((bitDepth != 1) && (bitDepth != 2) && (bitDepth != 4) &&
             (bitDepth != 8) && (bitDepth != 16)) {
             // Error -- bad bit depth
-            String msg = JaiI18N.getString("PNGImageDecoder3");
+            String msg = JaiI18N.getString("Illegal_bit_depth_for_a_PNG_image_");
             throw new RuntimeException(msg);
         }
         maxOpacity = (1 << bitDepth) - 1;
@@ -565,30 +565,30 @@ class PNGImage extends SimpleRenderedImage {
             (colorType != PNG_COLOR_PALETTE) &&
             (colorType != PNG_COLOR_GRAY_ALPHA) &&
             (colorType != PNG_COLOR_RGB_ALPHA)) {
-            System.out.println(JaiI18N.getString("PNGImageDecoder4"));
+            System.out.println(JaiI18N.getString("Bad_color_type_for_a_PNG_image_"));
         }
 
         if ((colorType == PNG_COLOR_RGB) && (bitDepth < 8)) {
             // Error -- RGB images must have 8 or 16 bits
-            String msg = JaiI18N.getString("PNGImageDecoder5");
+            String msg = JaiI18N.getString("An_RGB_PNG_image_can_t_have_a_bit_depth_less_than_8_");
             throw new RuntimeException(msg);
         }
 
         if ((colorType == PNG_COLOR_PALETTE) && (bitDepth == 16)) {
             // Error -- palette images must have < 16 bits
-            String msg = JaiI18N.getString("PNGImageDecoder6");
+            String msg = JaiI18N.getString("A_palette_color_PNG_image_can_t_have_a_bit_depth_of_16_");
             throw new RuntimeException(msg);
         }
 
         if ((colorType == PNG_COLOR_GRAY_ALPHA) && (bitDepth < 8)) {
             // Error -- gray/alpha images must have >= 8 bits
-            String msg = JaiI18N.getString("PNGImageDecoder7");
+            String msg = JaiI18N.getString("A_PNG_Gray_Alpha_image_can_t_have_a_bit_depth_less_than_8_");
             throw new RuntimeException(msg);
         }
 
         if ((colorType == PNG_COLOR_RGB_ALPHA) && (bitDepth < 8)) {
             // Error -- RGB/alpha images must have >= 8 bits
-            String msg = JaiI18N.getString("PNGImageDecoder8");
+            String msg = JaiI18N.getString("A_PNG_RGB_Alpha_image_can_t_have_a_bit_depth_less_than_8_");
             throw new RuntimeException(msg);
         }
 
@@ -629,14 +629,14 @@ class PNGImage extends SimpleRenderedImage {
         compressionMethod = chunk.getInt1(10);
         if (compressionMethod != 0) {
             // Error -- only know about compression method 0
-            String msg = JaiI18N.getString("PNGImageDecoder9");
+            String msg = JaiI18N.getString("Unsupported_PNG_compression_method__not_0__");
             throw new RuntimeException(msg);
         }
 
         filterMethod = chunk.getInt1(11);
         if (filterMethod != 0) {
             // Error -- only know about filter method 0
-            String msg = JaiI18N.getString("PNGImageDecoder10");
+            String msg = JaiI18N.getString("Unsupported_PNG_filter_method__not_0__");
             throw new RuntimeException(msg);
         }
 
@@ -657,7 +657,7 @@ class PNGImage extends SimpleRenderedImage {
             }
         } else {
             // Error -- only know about Adam7 interlacing
-            String msg = JaiI18N.getString("PNGImageDecoder11");
+            String msg = JaiI18N.getString("Unsupported_PNG_interlace_method__not_0_or_1__");
             throw new RuntimeException(msg);
         }
 
@@ -982,7 +982,7 @@ class PNGImage extends SimpleRenderedImage {
 
     private void parse_hIST_chunk(PNGChunk chunk) {
         if (redPalette == null) {
-            String msg = JaiI18N.getString("PNGImageDecoder18");
+            String msg = JaiI18N.getString("PNG_can_t_have_hIST_chunk_without_a_PLTE_chunk_");
             throw new RuntimeException(msg);
         }
 
@@ -1026,7 +1026,7 @@ class PNGImage extends SimpleRenderedImage {
                 properties.put("pixel_units", "Meters");
             } else if (unitSpecifier != 0) {
                 // Error -- unit specifier must be 0 or 1
-                String msg = JaiI18N.getString("PNGImageDecoder12");
+                String msg = JaiI18N.getString("Unknown_PNG_pHYs_unit_specifier__not_0_or_1__");
                 throw new RuntimeException(msg);
             }
         }
@@ -1044,7 +1044,7 @@ class PNGImage extends SimpleRenderedImage {
             if (bits <= 0 || bits > depth) {
                 // Error -- significant bits must be between 0 and
                 // image bit depth.
-                String msg = JaiI18N.getString("PNGImageDecoder13");
+                String msg = JaiI18N.getString("Illegal_PNG_sBit_value____0_or___bit_depth__");
                 throw new RuntimeException(msg);
             }
             significantBits[i] = bits;
@@ -1142,7 +1142,7 @@ class PNGImage extends SimpleRenderedImage {
             int entries = chunk.getLength();
             if (entries > paletteEntries) {
                 // Error -- mustn't have more alpha than RGB palette entries
-                String msg = JaiI18N.getString("PNGImageDecoder14");
+                String msg = JaiI18N.getString("Too_many_PNG_alpha_palette_entries_");
                 throw new RuntimeException(msg);
             }
 
@@ -1210,7 +1210,7 @@ class PNGImage extends SimpleRenderedImage {
         } else if (colorType == PNG_COLOR_GRAY_ALPHA ||
                    colorType == PNG_COLOR_RGB_ALPHA) {
             // Error -- GA or RGBA image can't have a tRNS chunk.
-            String msg = JaiI18N.getString("PNGImageDecoder15");
+            String msg = JaiI18N.getString("PNG_image_already_has_alpha__can_t_have_tRNS_chunk_");
             throw new RuntimeException(msg);
         }
     }
@@ -1677,7 +1677,7 @@ class PNGImage extends SimpleRenderedImage {
                 break;
             default:
                 // Error -- uknown filter type
-                String msg = JaiI18N.getString("PNGImageDecoder16");
+                String msg = JaiI18N.getString("Unknown_PNG_filter_type__not_0_4__");
                 throw new RuntimeException(msg);
             }
 
@@ -1722,7 +1722,7 @@ class PNGImage extends SimpleRenderedImage {
     public Raster getTile(int tileX, int tileY) {
         if (tileX != 0 || tileY != 0) {
             // Error -- bad tile requested
-            String msg = JaiI18N.getString("PNGImageDecoder17");
+            String msg = JaiI18N.getString("Illegal_tile_requested_from_a_PNG_image_");
             throw new IllegalArgumentException(msg);
         }
         return theTile;

@@ -56,4 +56,3 @@ public class PropertyReference {
 		return "PropertyReference[property="+getProperty()+",criterion="+getCriterion()+"]";
 	}
 }
-

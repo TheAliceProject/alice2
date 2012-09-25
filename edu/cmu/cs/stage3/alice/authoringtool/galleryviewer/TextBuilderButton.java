@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
+import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.ImageIcon;
 
 /**
@@ -41,7 +42,7 @@ public class TextBuilderButton extends GenericBuilderButton {
 
 protected String getToolTipString()
    {
-	   return Messages.getString("TextBuilderButton.0"); 
+	   return Messages.getString("Click_to_create_3D_text"); 
    }
 
    public void set(GalleryViewer.ObjectXmlData dataIn, ImageIcon icon, AuthoringTool authoringTool)

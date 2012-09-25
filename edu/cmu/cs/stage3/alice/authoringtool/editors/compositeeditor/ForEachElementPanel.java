@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -48,9 +49,9 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
     public ForEachElementPanel(){
         super();
         backgroundColor = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("ForEachInOrder"); 
-        headerText = Messages.getString("ForEachElementPanel.1"); 
-        endHeaderText = Messages.getString("ForEachElementPanel.2"); 
-        middleHeaderText = Messages.getString("ForEachElementPanel.3"); 
+        headerText = Messages.getString("For_all"); 
+        endHeaderText = Messages.getString("at_a_time"); 
+        middleHeaderText = Messages.getString("__one"); 
     }
 
     
@@ -172,7 +173,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         if (numPrevious > 0){
             toAdd = "_#"+(numPrevious+1); 
         }
-        return (Messages.getString("ForEachElementPanel.6")+inputList.name.getStringValue()+toAdd); 
+        return (Messages.getString("item_from_")+inputList.name.getStringValue()+toAdd); 
     }
 
 	public void setHeaderLabel(){
@@ -295,7 +296,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 	}
 	
 	protected void setAllNames(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentContainer, int currentLevel){
-		String baseName = Messages.getString("ForEachElementPanel.10")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue(); 
+		String baseName = Messages.getString("item_from_")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue(); 
 		for (int i=0; i<currentContainer.size(); i++){
 			Object list = null;
 			edu.cmu.cs.stage3.alice.core.Element var = null;
@@ -324,7 +325,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		stopListening();
 		startListening();
 		if (isTopOccurrance(m_element.getParent(), m_list.get())){
-			m_each.getElementValue().name.set(Messages.getString("ForEachElementPanel.12")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue()); 
+			m_each.getElementValue().name.set(Messages.getString("item_from_")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue()); 
 			setAllNames(m_components, 2);
 		}
 	}

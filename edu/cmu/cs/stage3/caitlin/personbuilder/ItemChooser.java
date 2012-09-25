@@ -23,14 +23,23 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
-import java.awt.*;
-import javax.swing.*;
-import java.util.Vector;
-import java.awt.event.*;
-import org.w3c.dom.*;
-
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Model;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Title:
@@ -316,9 +325,9 @@ public class ItemChooser extends JPanel {
 
 		Vector xmlFiles = XMLDirectoryUtilities.getXMLURLs(itemsNode);
 		if (xmlFiles.size() == 0) {
-			System.out.println(Messages.getString("ItemChooser.44")); 
+			System.out.println(Messages.getString("No_xml_file_found__")); 
 		} else if (xmlFiles.size() > 1) {
-			System.out.println(Messages.getString("ItemChooser.45")); 
+			System.out.println(Messages.getString("Multiple_xml_files_found__")); 
 		} else {
 			fileURL = (java.net.URL) xmlFiles.elementAt(0);
 		}

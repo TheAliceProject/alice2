@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * <p>Title: </p>
@@ -205,13 +206,13 @@ public class CompositeComponentQuestionPanel extends edu.cmu.cs.stage3.alice.aut
                     dtde.rejectDrop();
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.0"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.1"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.2"), t ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                 successful = false;
             }
         }else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, QuestionEditor.componentReferenceFlavor ) ) {
@@ -233,13 +234,13 @@ public class CompositeComponentQuestionPanel extends edu.cmu.cs.stage3.alice.aut
                     performDrop(question, dtde);
                 }
             } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.3"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                 successful = false;
             } catch( java.io.IOException e ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.4"), e ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                 successful = false;
             } catch( Throwable t ) {
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.5"), t ); 
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                 successful = false;
             }
         }
@@ -301,13 +302,13 @@ public class CompositeComponentQuestionPanel extends edu.cmu.cs.stage3.alice.aut
                         }
                     }
                 } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.7"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                     successful = false;
                 } catch( java.io.IOException e ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.8"), e ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                     successful = false;
                 } catch( Throwable t ) {
-                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.9"), t ); 
+                    edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                     successful = false;
                 }
             }
@@ -352,13 +353,13 @@ public class CompositeComponentQuestionPanel extends edu.cmu.cs.stage3.alice.aut
                         popup.show(dtde.getDropTargetContext().getComponent(), (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
                         edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
                     } catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-                        edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.10"), e ); 
+                        edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_a_bad_flavor_"), e ); 
                         successful = false;
                     } catch( java.io.IOException e ) {
-                        edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.11"), e ); 
+                        edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_because_of_an_IO_error_"), e ); 
                         successful = false;
                     } catch( Throwable t ) {
-                        edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CompositeComponentQuestionPanel.12"), t ); 
+                        edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("The_drop_failed_"), t ); 
                         successful = false;
                     }
                 }

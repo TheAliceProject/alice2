@@ -156,7 +156,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
 		public void setBitDepth(int bitDepth) {
             if (bitDepth != 1 && bitDepth != 2 && bitDepth != 4 &&
                 bitDepth != 8) {
-                throw new IllegalArgumentException(JaiI18N.getString("PNGEncodeParam2"));
+                throw new IllegalArgumentException(JaiI18N.getString("Bit_depth_not_equal_to_1__2__4__or_8_"));
             }
             this.bitDepth = bitDepth;
             bitDepthSet = true;
@@ -181,11 +181,11 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
         public void setPalette(int[] rgb) {
             if (rgb.length < 1*3 || rgb.length > 256*3) {
 		throw new
-		  IllegalArgumentException(JaiI18N.getString("PNGEncodeParam0"));
+		  IllegalArgumentException(JaiI18N.getString("Bad_palette_length_"));
             }
             if ((rgb.length % 3) != 0) {
                 throw new
-         	  IllegalArgumentException(JaiI18N.getString("PNGEncodeParam1"));
+         	  IllegalArgumentException(JaiI18N.getString("Not_divisible_by_3_"));
             }
 
             palette = (rgb.clone());
@@ -204,7 +204,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public int[] getPalette() {
             if (!paletteSet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam3"));
+                throw new IllegalStateException(JaiI18N.getString("RGB_palette_has_not_been_set_"));
             }
             return (palette.clone());
         }
@@ -249,7 +249,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public int getBackgroundPaletteIndex() {
             if (!backgroundSet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam4"));
+                throw new IllegalStateException(JaiI18N.getString("background_palette_index_has_not_been_set_"));
             }
             return backgroundPaletteIndex;
         }
@@ -285,7 +285,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public byte[] getPaletteTransparency() {
             if (!transparencySet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam5"));
+                throw new IllegalStateException(JaiI18N.getString("Palette_transparency_has_not_been_set_"));
             }
             byte[] alpha = new byte[transparency.length];
             for (int i = 0; i < alpha.length; i++) {
@@ -366,7 +366,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public int getBackgroundGray() {
             if (!backgroundSet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam6"));
+                throw new IllegalStateException(JaiI18N.getString("Background_gray_level_has_not_been_set_"));
             }
             return backgroundPaletteGray;
         }
@@ -401,7 +401,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public int getTransparentGray() {
             if (!transparencySet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam7"));
+                throw new IllegalStateException(JaiI18N.getString("Transparent_gray_value_has_not_been_set_"));
             }
             int gray = transparency[0];
             return gray;
@@ -434,7 +434,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public int getBitShift() {
             if (!bitShiftSet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam8"));
+                throw new IllegalStateException(JaiI18N.getString("Bit_shift_has_not_been_set_"));
             }
             return bitShift;
         }
@@ -528,7 +528,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public int[] getBackgroundRGB() {
             if (!backgroundSet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam9"));
+                throw new IllegalStateException(JaiI18N.getString("RGB_background_color_has_not_been_set_"));
             }
             return backgroundRGB;
         }
@@ -561,7 +561,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
          */
         public int[] getTransparentRGB() {
             if (!transparencySet) {
-                throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam10"));
+                throw new IllegalStateException(JaiI18N.getString("Transparent_RGB_value_has_not_been_set_"));
             }
             return (transparency.clone());
         }
@@ -585,7 +585,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public int getBitDepth() {
         if (!bitDepthSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam11"));
+            throw new IllegalStateException(JaiI18N.getString("Grayscale_bit_depth_has_not_been_set_"));
         }
         return bitDepth;
     }
@@ -636,7 +636,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      * accordingly, subclasses must provide their own implementations.
      */
     public void unsetBackground() {
-        throw new RuntimeException(JaiI18N.getString("PNGEncodeParam23"));
+        throw new RuntimeException(JaiI18N.getString("unsetBackground__not_implemented_by_the_superclass__PNGEncodeParam__"));
     }
 
     /**
@@ -646,7 +646,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      * accordingly, subclasses must provide their own implementations.
      */
     public boolean isBackgroundSet() {
-        throw new RuntimeException(JaiI18N.getString("PNGEncodeParam24"));
+        throw new RuntimeException(JaiI18N.getString("isBackgroundSet__not_implemented_by_the_superclass__PNGEncodeParam__"));
     }
 
     // cHRM chunk
@@ -706,7 +706,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public float[] getChromaticity() {
         if (!chromaticitySet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam12"));
+            throw new IllegalStateException(JaiI18N.getString("Chromaticity_has_not_been_set_"));
         }
         return (chromaticity.clone());
     }
@@ -751,7 +751,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public float getGamma() {
         if (!gammaSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam13"));
+            throw new IllegalStateException(JaiI18N.getString("Gamma_has_not_been_set_"));
         }
         return gamma;
     }
@@ -797,7 +797,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public int[] getPaletteHistogram() {
         if (!paletteHistogramSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam14"));
+            throw new IllegalStateException(JaiI18N.getString("Palette_histogram_has_not_been_set_"));
         }
         return paletteHistogram;
     }
@@ -843,7 +843,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public byte[] getICCProfileData() {
         if (!ICCProfileDataSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam15"));
+            throw new IllegalStateException(JaiI18N.getString("ICC_profile_has_not_been_set_"));
         }
         return (ICCProfileData.clone());
     }
@@ -909,7 +909,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public int[] getPhysicalDimension() {
         if (!physicalDimensionSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam16"));
+            throw new IllegalStateException(JaiI18N.getString("Physical_dimension_information_has_not_been_set_"));
         }
         return (physicalDimension.clone());
     }
@@ -959,7 +959,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public PNGSuggestedPaletteEntry[] getSuggestedPalette() {
         if (!suggestedPaletteSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam17"));
+            throw new IllegalStateException(JaiI18N.getString("Suggested_palette_information_has_not_been_set_"));
         }
         return (suggestedPalette.clone());
     }
@@ -1011,7 +1011,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public int[] getSignificantBits() {
         if (!significantBitsSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam18"));
+            throw new IllegalStateException(JaiI18N.getString("Significant_bits_values_have_not_been_set_"));
         }
         return significantBits.clone();
     }
@@ -1059,7 +1059,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public int getSRGBIntent() {
         if (!SRGBIntentSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam19"));
+            throw new IllegalStateException(JaiI18N.getString("sRGB_rendereding_intent_has_not_been_set_"));
         }
         return SRGBIntent;
     }
@@ -1106,7 +1106,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public String[] getText() {
         if (!textSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam20"));
+            throw new IllegalStateException(JaiI18N.getString("Uncompressed_text_strings_have_not_been_set_"));
         }
         return text;
     }
@@ -1154,7 +1154,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public Date getModificationTime() {
         if (!modificationTimeSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam21"));
+            throw new IllegalStateException(JaiI18N.getString("Modification_time_has_not_been_set_"));
         }
         return modificationTime;
     }
@@ -1222,7 +1222,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
      */
     public String[] getCompressedText() {
         if (!zTextSet) {
-            throw new IllegalStateException(JaiI18N.getString("PNGEncodeParam22"));
+            throw new IllegalStateException(JaiI18N.getString("Compressed_text_strings_have_not_been_set_"));
         }
         return zText;
     }

@@ -25,10 +25,11 @@ package edu.cmu.cs.stage3.alice.core;
 
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class Behavior extends Element {
-	public final BooleanProperty isEnabled = new BooleanProperty( this, Messages.getString("Behavior.0"), Boolean.TRUE ); 
-	public final ElementArrayProperty details = new ElementArrayProperty( this, Messages.getString("Behavior.1"), null, Expression[].class ); 
+	public final BooleanProperty isEnabled = new BooleanProperty( this, Messages.getString("isEnabled"), Boolean.TRUE ); 
+	public final ElementArrayProperty details = new ElementArrayProperty( this, Messages.getString("details"), null, Expression[].class ); 
 
 	private double m_prevT;
 	//private boolean m_exceptionHasBeenPreviouslyThrown = false;
@@ -46,7 +47,8 @@ public abstract class Behavior extends Element {
         }
         public void pop() {
             Item t = top();
-            t.getPrev().setNext( null );
+            if (t.getPrev() != null)
+            	t.getPrev().setNext( null );
             t.setPrev( null );
         }
         public Item top() {
@@ -350,7 +352,7 @@ public abstract class Behavior extends Element {
                     context.m_variableMap.put( formal, runtime );
                     break;
                 } else if( j==actualRequired.length-1 ) {
-                    throw new RuntimeException( Messages.getString("Behavior.2") + nameValue ); 
+                    throw new RuntimeException( Messages.getString("missing_required_parameter__") + nameValue ); 
                 }
             }
         }
@@ -368,7 +370,7 @@ public abstract class Behavior extends Element {
             Object context = m_stack.top(); 
 			//System.err.println( "popStack: " + context.hashCode() );
 			//Thread.dumpStack();
-            m_stack.pop();
+           	m_stack.pop();
         }
     }
 

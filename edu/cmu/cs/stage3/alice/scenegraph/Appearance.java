@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Dennis Cosgrove
  */
@@ -60,27 +62,27 @@ public class Appearance extends Element {
 	
 	protected void releasePass1() {
 		if( m_diffuseColorMap != null ) {
-			warnln( Messages.getString("Appearance.0") + this + Messages.getString("Appearance.15") + m_diffuseColorMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_") + this + Messages.getString("_still_has_diffuse_color_map_") + m_diffuseColorMap + "." );   
 			setDiffuseColorMap( null );
 		}
 		if( m_opacityMap != null ) {
-			warnln( Messages.getString("Appearance.17") + this + Messages.getString("Appearance.18") + m_opacityMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_") + this + Messages.getString("_still_has_opacity_map_") + m_opacityMap + "." );   
 			setOpacityMap( null );
 		}
 		if( m_emissiveColorMap != null ) {
-			warnln( Messages.getString("Appearance.20") + this + Messages.getString("Appearance.21") + m_emissiveColorMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_") + this + Messages.getString("_still_has_emissive_color_map_") + m_emissiveColorMap + "." );   
 			setEmissiveColorMap( null );
 		}
 		if( m_specularHighlightColorMap != null ) {
-			warnln( Messages.getString("Appearance.23") + this + Messages.getString("Appearance.24") + m_specularHighlightColorMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_") + this + Messages.getString("_still_has_specular_highlight_color_map_") + m_specularHighlightColorMap + "." );   
 			setSpecularHighlightColorMap( null );
 		}
 		if( m_bumpMap != null ) {
-			warnln( Messages.getString("Appearance.26") + this + Messages.getString("Appearance.27") + m_bumpMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_") + this + Messages.getString("_still_has_bump_map_") + m_bumpMap + "." );   
 			setBumpMap( null );
 		}
 		if( m_detailMap != null ) {
-			warnln( Messages.getString("Appearance.29") + this + Messages.getString("Appearance.30") + m_detailMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_") + this + Messages.getString("_still_has_detail_map_") + m_detailMap + "." );   
 			setDetailMap( null );
 		}
 		super.releasePass1();

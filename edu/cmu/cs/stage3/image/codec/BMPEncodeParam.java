@@ -125,7 +125,7 @@ public class BMPEncodeParam implements ImageEncodeParam {
 	if ( !(versionNumber == VERSION_2 ||
 	       versionNumber == VERSION_3 ||
 	       versionNumber == VERSION_4) ) {
-	    throw new RuntimeException(JaiI18N.getString("BMPEncodeParam0"));
+	    throw new RuntimeException(JaiI18N.getString("Unsupported_version_number_specified_for_BMP_file_"));
 	}
     }
 

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -44,7 +46,7 @@ public class DnDClipboard extends javax.swing.JPanel {
 		setDropTarget( new java.awt.dnd.DropTarget( this, new ClipboardDropTargetListener() ) );
 		edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.addListener( dropPotentialFeedbackListener );
 
-		setToolTipText( Messages.getString("DnDClipboard.2") ); 
+		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Copy_Paste_Clipboard_p__p_Drag_and_drop_tiles__b_to__b__the_clipboard_to_copy_them__p_Drag_and_drop_tiles__b_from__b__the_clipboard_to_paste_them_")+"</font></html>" ); 
 
 		addMouseListener( new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
 			public void singleClickResponse( java.awt.event.MouseEvent ev ) {
@@ -167,9 +169,9 @@ public void clear (){
 						transferable = edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( element.createCopyFactory() );
 					}
 				} catch( java.io.IOException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DnDClipboard.4"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_dropping_on_clipboard_"), e ); 
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("DnDClipboard.5"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_dropping_on_clipboard_"), e ); 
 				}
 			}
 

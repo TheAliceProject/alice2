@@ -1,11 +1,11 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
-import java.util.Vector;
-import java.awt.Rectangle;
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.Point;
+import java.util.Vector;
 
 public class Frame implements StencilObject, LayoutChangeListener {
   protected Vector stencilObjectPositionListeners = new Vector();

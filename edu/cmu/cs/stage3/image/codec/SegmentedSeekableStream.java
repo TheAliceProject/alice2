@@ -231,7 +231,7 @@ public class SegmentedSeekableStream extends SeekableStream {
         this.canSeekBackwards = canSeekBackwards;
 
         if (canSeekBackwards && !stream.canSeekBackwards()) {
-            throw new IllegalArgumentException(JaiI18N.getString("SegmentedSeekableStream0"));
+            throw new IllegalArgumentException(JaiI18N.getString("Source_stream_does_not_support_seeking_backwards_"));
         }
     }
 

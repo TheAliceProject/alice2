@@ -23,10 +23,12 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
-import javax.swing.JPanel;
 import java.util.Vector;
+
 import javax.swing.ImageIcon;
-import org.w3c.dom.*;
+import javax.swing.JPanel;
+
+import org.w3c.dom.Node;
 
 public class StepPanel extends JPanel {
 	ImageIcon backImage = null;

@@ -23,8 +23,14 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import java.awt.*;
-import javax.swing.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * @author Jason Pratt
@@ -71,10 +77,10 @@ public class ScriptScratchPad extends javax.swing.JPanel {
 	private void jbInit() {
 		this.setLayout(gridBagLayout1);
 		scriptPanel.setLayout(borderLayout1);
-		performAllButton.setText(Messages.getString("ScriptScratchPad.0")); 
-		performSelectedButton.setText(Messages.getString("ScriptScratchPad.1")); 
+		performAllButton.setText(Messages.getString("perform_all__Ctrl_F4_")); 
+		performSelectedButton.setText(Messages.getString("perform_selected__F4_")); 
 		scratchPadLabel.setFont(new java.awt.Font("Dialog", 1, 16)); 
-		scratchPadLabel.setText(Messages.getString("ScriptScratchPad.3")); 
+		scratchPadLabel.setText(Messages.getString("Scratch_Pad")); 
 		this.add(scriptPanel, new GridBagConstraints(0, 1, 3, 1, 1.0, 1.0
 			,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 		this.add(performSelectedButton, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0

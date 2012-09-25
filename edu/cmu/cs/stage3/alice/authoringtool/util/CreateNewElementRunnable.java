@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -46,9 +48,9 @@ public class CreateNewElementRunnable implements Runnable {
 			}
 		} catch( Throwable t ) {
 			if( elementClass != null ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CreateNewElementRunnable.0") + elementClass.getName(), t ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_instance_of_") + elementClass.getName(), t ); 
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("CreateNewElementRunnable.1"), t ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_intance_of_null_"), t ); 
 			}
 		}
 	}

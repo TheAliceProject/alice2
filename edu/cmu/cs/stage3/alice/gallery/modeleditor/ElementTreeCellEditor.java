@@ -40,4 +40,3 @@ class ElementTreeCellEditor extends javax.swing.tree.DefaultTreeCellEditor {
 		return editor;
 	}
 }
-

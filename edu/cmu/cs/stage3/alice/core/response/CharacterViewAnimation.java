@@ -7,6 +7,7 @@
 package edu.cmu.cs.stage3.alice.core.response;
 
 import edu.cmu.cs.stage3.alice.core.Model;
+import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.math.Matrix33;
 
 /**
@@ -74,11 +75,11 @@ public class CharacterViewAnimation extends AbstractPositionAnimation {
 		public void prologue( double t ) {
 			m_asSeenBy = CharacterViewAnimation.this.asSeenBy.getReferenceFrameValue();
 			if (m_asSeenBy == null) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CharacterViewAnimation.1"), getCurrentStack(), CharacterViewAnimation.this.asSeenBy );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("character_value_must_not_be_null_"), getCurrentStack(), CharacterViewAnimation.this.asSeenBy );             
 			}	
 			super.prologue( t );		
 			if (m_subject == m_asSeenBy) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("CharacterViewAnimation.2"), getCurrentStack(), CharacterViewAnimation.this.subject );             
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("subject_and_character_values_must_not_be_the_same_"), getCurrentStack(), CharacterViewAnimation.this.subject );             
 			}
 			m_orientationBegin = getOrientationBegin();
 			m_orientationEnd = null;
@@ -94,4 +95,3 @@ public class CharacterViewAnimation extends AbstractPositionAnimation {
 		}
 	}
 }
-

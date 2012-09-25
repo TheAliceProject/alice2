@@ -24,7 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * Title:
@@ -37,7 +37,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messag
 
 public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor{
 
-    public final String editorName = Messages.getString("ResponseEditor.0"); 
+    public final String editorName = Messages.getString("Response_Editor"); 
 
     protected edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel doInOrderPrototype;
     protected edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel doTogetherPrototype;
@@ -141,14 +141,14 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         doIfTruePrototype.setBackground(DO_IF_COLOR);
         javax.swing.JLabel DITLabel = new javax.swing.JLabel(doIfTrueString);
         doIfTruePrototype.add(DITLabel, java.awt.BorderLayout.CENTER);
-        String DITdesired[] = {AikMin.getProperty("condition")}; 
+        String DITdesired[] = {"condition"}; 
         doIfTruePrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
                 edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class, null, DITdesired)));
         doIfTruePrototype.addDragSourceComponent(DITLabel);
 
-        String CLdesired[] = {AikMin.getProperty("end")}; 
+        String CLdesired[] = {"end"}; 
         loopPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopPrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("LoopNInOrder"));
         loopPrototype.setBackground(COUNT_LOOP_COLOR);
@@ -160,7 +160,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class, null, CLdesired)));
         loopPrototype.addDragSourceComponent(LLabel);
 
-        String LITdesired[] = {AikMin.getProperty("condition")}; 
+        String LITdesired[] = {"condition"}; 
         loopIfTruePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         //loopIfTruePrototype.setBackground(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("WhileLoopInOrder"));
         loopIfTruePrototype.setBackground(DO_WHILE_COLOR);
@@ -196,7 +196,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class, null, FATdesired)));
         forAllTogetherPrototype.addDragSourceComponent(FATLabel);
 
-        String Wdesired[] = {AikMin.getProperty("duration")}; 
+        String Wdesired[] = {"duration"}; 
         waitPrototype = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
                 edu.cmu.cs.stage3.alice.core.response.Wait.class, null, Wdesired));
@@ -224,7 +224,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.ScriptResponse.class, null, null)));
         scriptPrototype.addDragSourceComponent(scriptLabel);
 
-        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", "No comment")};  
+        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", AikMin.getName("No comment"))};  
         commentPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         commentPrototype.setBackground(COMMENT_COLOR);
         javax.swing.JLabel commentLabel = new javax.swing.JLabel(commentString);

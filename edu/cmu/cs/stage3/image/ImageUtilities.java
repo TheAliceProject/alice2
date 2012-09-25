@@ -82,4 +82,3 @@ public class ImageUtilities {
 //		}
 //		return widthTracker.getWidth();
 }
-

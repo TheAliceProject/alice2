@@ -23,11 +23,13 @@
 
 package edu.cmu.cs.stage3.caitlin.personbuilder;
 
-import edu.cmu.cs.stage3.alice.core.Model;
-import edu.cmu.cs.stage3.alice.core.Element;
 import java.util.Hashtable;
 import java.util.Vector;
-import org.w3c.dom.*;
+
+import org.w3c.dom.Node;
+
+import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.alice.core.Model;
 
 public class ModelWrapper {
 	protected edu.cmu.cs.stage3.alice.core.World miniWorld;

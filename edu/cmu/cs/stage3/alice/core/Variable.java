@@ -23,8 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
 import edu.cmu.cs.stage3.alice.core.property.ClassProperty;
+import edu.cmu.cs.stage3.alice.core.property.ValueProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class Variable extends Expression {
 	public final ValueProperty value = new ValueProperty( this, "value", null ); 
@@ -50,7 +51,7 @@ public class Variable extends Expression {
 					if( Element.s_isLoading ) {
 						//pass
 					} else {
-						throw new RuntimeException( Messages.getString("Variable.2") + clsToBe + Messages.getString("Variable.3") + o );  
+						throw new RuntimeException( Messages.getString("cannot_change_valueClass_to_") + clsToBe + Messages.getString("_when_value_is_") + o );  
 					}
 				}
 			} else {
@@ -60,7 +61,7 @@ public class Variable extends Expression {
 					if( Element.s_isLoading ) {
 						//pass
 					} else {
-						throw new RuntimeException( Messages.getString("Variable.4") + clsToBe + Messages.getString("Variable.5") + o );  
+						throw new RuntimeException( Messages.getString("cannot_change_valueClass_to_") + clsToBe + Messages.getString("_when_value_is_") + o );  
 					}
 				}
 			}
@@ -86,7 +87,7 @@ public class Variable extends Expression {
 						if( valueCls.isAssignableFrom( cls ) ) {
 							//pass
 						} else {
-							throw new RuntimeException( o + Messages.getString("Variable.6") + valueClass + Messages.getString("Variable.7") + cls );  
+							throw new RuntimeException( o + Messages.getString("_is_not_an_instance_of_") + valueClass + Messages.getString("___it_is_an_instance_of_") + cls );  
 						}
 					}
 	
@@ -99,7 +100,7 @@ public class Variable extends Expression {
 						if( valueCls.isAssignableFrom( cls ) ) {
 							//pass
 						} else {
-							throw new RuntimeException( o + Messages.getString("Variable.8") + valueClass + Messages.getString("Variable.9") + cls );  
+							throw new RuntimeException( o + Messages.getString("_is_not_an_instance_of_") + valueClass + Messages.getString("___it_is_an_instance_of_") + cls );  
 						}
 					}
 				}

@@ -1,8 +1,10 @@
 package movieMaker;
 
-import java.util.*;
-import java.text.*;
-import java.io.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.io.File;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Class used to save frames in a movie to a directory and
@@ -190,7 +192,7 @@ public class FrameSequencer
       numberFormat.format(frameNumber) + ".jpg"); 
     boolean result = f.delete();
     if (result != true)
-      System.out.println(Messages.getString("FrameSequencer.2")); 
+      System.out.println(Messages.getString("trouble_removing_last_frame")); 
     pictureList.remove(pictureList.size() - 1);
   }
   
@@ -213,8 +215,8 @@ public class FrameSequencer
         moviePlayer.setVisible(true);
       }
       else
-        System.out.println(Messages.getString("FrameSequencer.3") + 
-                           Messages.getString("FrameSequencer.4")); 
+        System.out.println(Messages.getString("There_are_no_frames_to_show_yet___") + 
+                           Messages.getString("When_you_add_a_frame_it_will_be_shown")); 
     }  
   }
   

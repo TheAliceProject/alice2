@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class DefaultScheduler implements Runnable {
 	private static final long minDelay = 20;
 
@@ -98,7 +100,7 @@ public class DefaultScheduler implements Runnable {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				}
 			} catch( Throwable t ) {
-				System.err.println( Messages.getString("DefaultScheduler.0") ); 
+				System.err.println( Messages.getString("Error_during_simulation_") ); 
 				t.printStackTrace();
 			}
 			iter.remove();			
@@ -121,7 +123,7 @@ public class DefaultScheduler implements Runnable {
 					org.python.core.Py.printException( e, null, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getPyStdErr() );
 				}
 			} catch( Throwable t ) {
-				System.err.println( Messages.getString("DefaultScheduler.1") ); 
+				System.err.println( Messages.getString("Error_during_simulation_") ); 
 				t.printStackTrace();
 			}
 		}

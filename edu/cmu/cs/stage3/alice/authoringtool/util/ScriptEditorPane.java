@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -80,7 +82,7 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 					}
 					//DEBUG System.out.println( "performedSelected:\n" + script );
 				} catch( javax.swing.text.BadLocationException ble ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ScriptEditorPane.4"), ble ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_getting_selected_code_"), ble ); 
 				}
 			}
 		}
@@ -100,26 +102,26 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 		performAllAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F4, java.awt.Event.CTRL_MASK ) );
 		performAllAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "performAll" ); 
 		performAllAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'A' ) );
-		performAllAction.putValue( javax.swing.Action.NAME, Messages.getString("ScriptEditorPane.7") ); 
-		performAllAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("ScriptEditorPane.8") ); 
+		performAllAction.putValue( javax.swing.Action.NAME, Messages.getString("Perform_All__Ctrl_F4_") ); 
+		performAllAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Performs_the_entire_script_") ); 
 
 		performSelectedAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F4, 0 ) );
 		performSelectedAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "performSelected" ); 
 		performSelectedAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'S' ) );
-		performSelectedAction.putValue( javax.swing.Action.NAME, Messages.getString("ScriptEditorPane.10") ); 
-		performSelectedAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("ScriptEditorPane.11") ); 
+		performSelectedAction.putValue( javax.swing.Action.NAME, Messages.getString("Perform_Selected__F4_") ); 
+		performSelectedAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Performs_the_selected_lines_of_the_script__or_the_line_the_cursor_is_on_if_there_is_no_selection_") ); 
 
 		undoAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_Z, java.awt.Event.CTRL_MASK ) );
 		undoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "undoEdit" ); 
 		undoAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'U' ) );
-		undoAction.putValue( javax.swing.Action.NAME, Messages.getString("ScriptEditorPane.13") ); 
-		undoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("ScriptEditorPane.14") ); 
+		undoAction.putValue( javax.swing.Action.NAME, Messages.getString("Undo__Ctrl_Z_") ); 
+		undoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Undo_last_edit") ); 
 
 		redoAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_Y, java.awt.Event.CTRL_MASK ) );
 		redoAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "redoEdit" ); 
 		redoAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'R' ) );
-		redoAction.putValue( javax.swing.Action.NAME, Messages.getString("ScriptEditorPane.16") ); 
-		redoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("ScriptEditorPane.17") ); 
+		redoAction.putValue( javax.swing.Action.NAME, Messages.getString("Redo__Ctrl_Y_") ); 
+		redoAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Redo_last_undo") ); 
 
 		actions = new javax.swing.Action[] { performAllAction, performSelectedAction, undoAction, redoAction };
 	}
@@ -175,7 +177,7 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 				replaceCurrent( stringToReplaceWith );
 			}
 		} else {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("ScriptEditorPane.19") + findString + Messages.getString("ScriptEditorPane.20"), Messages.getString("ScriptEditorPane.21"), javax.swing.JOptionPane.INFORMATION_MESSAGE );   
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("String__") + findString + Messages.getString("_not_found_"), Messages.getString("String_not_found"), javax.swing.JOptionPane.INFORMATION_MESSAGE );   
 		}
 		setCaretPosition( currentPosition );
 	}
@@ -228,15 +230,15 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 		javax.swing.text.Document doc = getDocument();
 		if( doc instanceof javax.swing.text.PlainDocument ) {
 			if( offset < 0 ) {
-				throw new javax.swing.text.BadLocationException(Messages.getString("ScriptEditorPane.22"), -1); 
+				throw new javax.swing.text.BadLocationException(Messages.getString("Can_t_translate_offset_to_line"), -1); 
 			} else if( offset > doc.getLength() ) {
-				throw new javax.swing.text.BadLocationException(Messages.getString("ScriptEditorPane.23"), doc.getLength()+1); 
+				throw new javax.swing.text.BadLocationException(Messages.getString("Can_t_translate_offset_to_line"), doc.getLength()+1); 
 			} else {
 				javax.swing.text.Element map = getDocument().getDefaultRootElement();
 				return map.getElementIndex( offset );
 			}
 		} else {
-			throw new java.lang.UnsupportedOperationException( Messages.getString("ScriptEditorPane.24") ); 
+			throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_number__only_PlainDocuments_supported_at_this_time_") ); 
 		}
 	}
 
@@ -245,15 +247,15 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 		if( doc instanceof javax.swing.text.PlainDocument ) {
 			javax.swing.text.Element map = doc.getDefaultRootElement();
 			if( line < 0 ) {
-				throw new javax.swing.text.BadLocationException( Messages.getString("ScriptEditorPane.25"), -1 ); 
+				throw new javax.swing.text.BadLocationException( Messages.getString("Negative_line"), -1 ); 
 			} else if (line >= map.getElementCount()) {
-				throw new javax.swing.text.BadLocationException( Messages.getString("ScriptEditorPane.26"), getDocument().getLength() + 1 ); 
+				throw new javax.swing.text.BadLocationException( Messages.getString("No_such_line"), getDocument().getLength() + 1 ); 
 			} else {
 				javax.swing.text.Element lineElem = map.getElement( line );
 				return lineElem.getStartOffset();
 			}
 		} else {
-			throw new java.lang.UnsupportedOperationException( Messages.getString("ScriptEditorPane.27") ); 
+			throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_start_offset__only_PlainDocuments_supported_at_this_time_") ); 
 		}
 	}
 
@@ -262,15 +264,15 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 		if( doc instanceof javax.swing.text.PlainDocument ) {
 			javax.swing.text.Element map = doc.getDefaultRootElement();
 			if( line < 0 ) {
-				throw new javax.swing.text.BadLocationException(Messages.getString("ScriptEditorPane.28"), -1); 
+				throw new javax.swing.text.BadLocationException(Messages.getString("Negative_line"), -1); 
 			} else if( line >= map.getElementCount() ) {
-				throw new javax.swing.text.BadLocationException(Messages.getString("ScriptEditorPane.29"), getDocument().getLength()+1); 
+				throw new javax.swing.text.BadLocationException(Messages.getString("No_such_line"), getDocument().getLength()+1); 
 			} else {
 				javax.swing.text.Element lineElem = map.getElement(line);
 				return lineElem.getEndOffset();
 			}
 		} else {
-			throw new java.lang.UnsupportedOperationException( Messages.getString("ScriptEditorPane.30") ); 
+			throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_end_offset__only_PlainDocuments_supported_at_this_time_") ); 
 		}
 	}
 
@@ -311,7 +313,7 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 
 	class UndoAction extends javax.swing.AbstractAction {
 		public UndoAction() {
-			super( Messages.getString("ScriptEditorPane.31") ); 
+			super( Messages.getString("Undo") ); 
 			setEnabled( false );
 		}
 
@@ -319,7 +321,7 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 			try {
 				undoManager.undo();
 			} catch( javax.swing.undo.CannotUndoException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ScriptEditorPane.32"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error__unable_to_undo_"), e ); 
 			}
 			update();
 			redoAction.update();
@@ -331,14 +333,14 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 				putValue( javax.swing.Action.NAME, undoManager.getUndoPresentationName() );
 			} else {
 				setEnabled( false );
-				putValue( javax.swing.Action.NAME, Messages.getString("ScriptEditorPane.33") ); 
+				putValue( javax.swing.Action.NAME, Messages.getString("Undo") ); 
 			}
 		}
 	}
 
 	class RedoAction extends javax.swing.AbstractAction {
 		public RedoAction() {
-			super( Messages.getString("ScriptEditorPane.34") ); 
+			super( Messages.getString("Redo") ); 
 			setEnabled( false );
 		}
 
@@ -346,7 +348,7 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 			try {
 				undoManager.redo();
 			} catch( javax.swing.undo.CannotRedoException e ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ScriptEditorPane.35"), e ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error__unable_to_redo_"), e ); 
 			}
 			update();
 			undoAction.update();
@@ -358,7 +360,7 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 				putValue( javax.swing.Action.NAME, undoManager.getRedoPresentationName() );
 			} else {
 				setEnabled( false );
-				putValue( javax.swing.Action.NAME, Messages.getString("ScriptEditorPane.36") ); 
+				putValue( javax.swing.Action.NAME, Messages.getString("Redo") ); 
 			}
 		}
 	}

@@ -24,6 +24,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -147,7 +149,7 @@ public final class Configuration {
 			try {
 				storeConfig();
 			} catch( java.io.IOException e2 ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Configuration.15"), e2 ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_new_preferences_file_"), e2 ); 
 			}
 		}
 		else{
@@ -222,11 +224,11 @@ public final class Configuration {
 
 		public String toString() {
 			StringBuffer s = new StringBuffer();
-			s.append( Messages.getString("Configuration.16") + name + "\n" );  
-			s.append( Messages.getString("Configuration.18") + visibility + "\n" );  
-			s.append( Messages.getString("Configuration.20") + value + "\n" );  
-			s.append( Messages.getString("Configuration.22") + valueList + "\n" );  
-			s.append( Messages.getString("Configuration.24") + subKeys + "\n" );  
+			s.append( Messages.getString("_nname__") + name + "\n" );  
+			s.append( Messages.getString("visibility__") + visibility + "\n" );  
+			s.append( Messages.getString("value__") + value + "\n" );  
+			s.append( Messages.getString("valueList__") + valueList + "\n" );  
+			s.append( Messages.getString("subKeys__") + subKeys + "\n" );  
 			return s.toString();
 		}
 	}
@@ -444,8 +446,8 @@ public final class Configuration {
 //		}
 		}catch (Exception e){
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-				Messages.getString("Configuration.27"), 
-				Messages.getString("Configuration.28"),javax.swing.JOptionPane.WARNING_MESSAGE); 
+				Messages.getString("Alice_had_trouble_reading_your_preferences_but_will_continue_to_run_normally"), 
+				Messages.getString("Unable_to_load_preferences"),javax.swing.JOptionPane.WARNING_MESSAGE); 
 		}
 	}
 
@@ -628,7 +630,7 @@ public final class Configuration {
 //			((org.apache.crimson.tree.XmlDocument)document).write( os );
 //			((com.sun.xml.tree.XmlDocument)document).write( os );
 		} catch( javax.xml.parsers.ParserConfigurationException pce ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Configuration.55"), pce ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_parsing_preferences_file_"), pce ); 
 		}
 	}
 

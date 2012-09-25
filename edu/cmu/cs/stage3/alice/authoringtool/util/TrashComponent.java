@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
 import edu.cmu.cs.stage3.alice.core.Variable;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Jason Pratt
@@ -46,7 +47,7 @@ public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.D
 		trashLabel.setDropTarget( new java.awt.dnd.DropTarget( trashLabel, this ) );
 		edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.addListener( dropPotentialFeedbackListener );
 
-		setToolTipText( Messages.getString("TrashComponent.2") ); 
+		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Trash_p__p_Drag_and_drop_tiles_here_to_delete_them_")+"</font></html>" ); 
 
 		addMouseListener( new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
 			public void singleClickResponse( java.awt.event.MouseEvent ev ) {
@@ -186,13 +187,13 @@ public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.D
 				dtde.dropComplete( false );
 			}
 		} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.5"), e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
 			dtde.dropComplete( false );
 		} catch( java.io.IOException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.6"), e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
 			dtde.dropComplete( false );
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TrashComponent.7"), t ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work_"), t ); 
 			dtde.dropComplete( false );
 		}
 		trashLabel.setIcon( trashClosedIcon );

@@ -23,7 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * Title:
@@ -37,7 +38,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messag
 public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.DropTargetListener{
 
     protected javax.swing.JLabel m_label = new javax.swing.JLabel();
-    protected String m_doNothingLabel = Messages.getString("InsertPanel.0"); 
+    protected String m_doNothingLabel = Messages.getString("_Do_Nothing"); 
     private boolean highlight = false;
 
     public InsertPanel() {
@@ -51,7 +52,7 @@ public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.Drop
         this.setMaximumSize(new java.awt.Dimension(2400, 30));
         this.setMinimumSize(new java.awt.Dimension(0,0));
         this.setBorder(null);
-        m_label.setText(m_doNothingLabel);
+        m_label.setText(" "+m_doNothingLabel);
     }
 
     public void setHighlight(boolean toSet){

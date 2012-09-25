@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.io;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class TokenBlock {
 	public String tokenName = null;
 	public String tokenArgs = null;
@@ -51,7 +53,7 @@ public class TokenBlock {
 		}
 		int openTokenStop = content.indexOf( '>', openTokenStart );
 		if( openTokenStop == -1 ) {
-			System.out.println( Messages.getString("TokenBlock.0") ); 
+			System.out.println( Messages.getString("___found_with_no_closing_____") ); 
 			return null;
 		}
 
@@ -65,7 +67,7 @@ public class TokenBlock {
 		}
 		int closeTokenStart = content.indexOf( "</" + tokenName + ">", openTokenStop );  
 		if( closeTokenStart == -1 ) {
-			System.out.println( Messages.getString("TokenBlock.4") + tokenName + Messages.getString("TokenBlock.5") );  
+			System.out.println( Messages.getString("No_closing_token____") + tokenName + Messages.getString("___found_") );  
 			return null;
 		}
 

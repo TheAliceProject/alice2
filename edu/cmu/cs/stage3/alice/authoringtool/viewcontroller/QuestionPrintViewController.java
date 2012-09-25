@@ -23,13 +23,15 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author pratt
  */
 public class QuestionPrintViewController extends edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel implements edu.cmu.cs.stage3.alice.authoringtool.util.GUIElement {
 	protected edu.cmu.cs.stage3.alice.core.question.userdefined.Print printStatement;
 	protected javax.swing.JPanel subPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel();
-	protected javax.swing.JLabel printPrefixLabel = new javax.swing.JLabel( Messages.getString("QuestionPrintViewController.0") ); 
+	protected javax.swing.JLabel printPrefixLabel = new javax.swing.JLabel( Messages.getString("Print__") ); 
 	protected javax.swing.JLabel printSuffixLabel = new javax.swing.JLabel( "" ); 
 	protected java.util.HashMap guiMap = new java.util.HashMap();
 	protected MouseListener mouseListener = new MouseListener();

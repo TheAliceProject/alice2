@@ -5,9 +5,10 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.core.Element;
 import java.awt.Component;
 import java.awt.Container;
+
+import edu.cmu.cs.stage3.alice.core.Element;
 
 public interface CompositeComponentOwner
 {

@@ -23,11 +23,13 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt, Dennis Cosgrove
  */
 public class NewResponseContentPane extends NewNamedElementContentPane {
 	public String getTitle() {
-		return Messages.getString("NewResponseContentPane.0"); 
+		return Messages.getString("New_Method");
 	}
 }

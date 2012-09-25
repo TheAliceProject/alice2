@@ -23,10 +23,11 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.importers;
 
-import java.util.Map;
-import edu.cmu.cs.stage3.alice.authoringtool.*;
-import edu.cmu.cs.stage3.alice.core.Element;
 import java.io.InputStream;
+import java.util.Map;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AbstractImporter;
+import edu.cmu.cs.stage3.alice.core.Element;
 
 /**
  * <p>Title: </p>

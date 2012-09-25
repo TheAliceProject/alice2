@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.JTable;
 
 public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
@@ -105,7 +106,7 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 		} else if( value instanceof edu.cmu.cs.stage3.util.Enumerable ) {
 			setText( ((edu.cmu.cs.stage3.util.Enumerable)value).getRepr() );
 		} else if( value instanceof java.util.Enumeration ) {
-			setText( Messages.getString("PropertyCellRenderer.16") ); 
+			setText( Messages.getString("_enumeration_") ); 
 		}
 
 		return this;
@@ -145,23 +146,23 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 
 		public String getTextFromColor( java.awt.Color color ) {
 			String text = ""; 
-			if( color.equals( java.awt.Color.black ) ) { text = Messages.getString("PropertyCellRenderer.18"); } 
-			else if( color.equals( java.awt.Color.blue ) ) { text = Messages.getString("PropertyCellRenderer.19"); } 
-			else if( color.equals( java.awt.Color.cyan ) ) { text = Messages.getString("PropertyCellRenderer.20"); } 
-			else if( color.equals( java.awt.Color.darkGray ) ) { text = Messages.getString("PropertyCellRenderer.21"); } 
-			else if( color.equals( java.awt.Color.gray ) ) { text = Messages.getString("PropertyCellRenderer.22"); } 
-			else if( color.equals( java.awt.Color.green ) ) { text = Messages.getString("PropertyCellRenderer.23"); } 
-			else if( color.equals( java.awt.Color.lightGray ) ) { text = Messages.getString("PropertyCellRenderer.24"); } 
-			else if( color.equals( java.awt.Color.magenta ) ) { text = Messages.getString("PropertyCellRenderer.25"); } 
-			else if( color.equals( java.awt.Color.orange ) ) { text = Messages.getString("PropertyCellRenderer.26"); } 
-			else if( color.equals( java.awt.Color.pink ) ) { text = Messages.getString("PropertyCellRenderer.27"); } 
-			else if( color.equals( java.awt.Color.red ) ) { text = Messages.getString("PropertyCellRenderer.28"); } 
-			else if( color.equals( java.awt.Color.white ) ) { text = Messages.getString("PropertyCellRenderer.29"); } 
-			else if( color.equals( java.awt.Color.yellow ) ) { text = Messages.getString("PropertyCellRenderer.30"); } 
+			if( color.equals( java.awt.Color.black ) ) { text = Messages.getString("black"); } 
+			else if( color.equals( java.awt.Color.blue ) ) { text = Messages.getString("blue"); } 
+			else if( color.equals( java.awt.Color.cyan ) ) { text = Messages.getString("cyan"); } 
+			else if( color.equals( java.awt.Color.darkGray ) ) { text = Messages.getString("darkGray"); } 
+			else if( color.equals( java.awt.Color.gray ) ) { text = Messages.getString("gray"); } 
+			else if( color.equals( java.awt.Color.green ) ) { text = Messages.getString("green"); } 
+			else if( color.equals( java.awt.Color.lightGray ) ) { text = Messages.getString("lightGray"); } 
+			else if( color.equals( java.awt.Color.magenta ) ) { text = Messages.getString("magenta"); } 
+			else if( color.equals( java.awt.Color.orange ) ) { text = Messages.getString("orange"); } 
+			else if( color.equals( java.awt.Color.pink ) ) { text = Messages.getString("pink"); } 
+			else if( color.equals( java.awt.Color.red ) ) { text = Messages.getString("red"); } 
+			else if( color.equals( java.awt.Color.white ) ) { text = Messages.getString("white"); } 
+			else if( color.equals( java.awt.Color.yellow ) ) { text = Messages.getString("yellow"); } 
 			else {
 				float[] rgba = new float[4];
 				color.getComponents( rgba );
-				text = Messages.getString("PropertyCellRenderer.31") + rgba[0] + Messages.getString("PropertyCellRenderer.32") + rgba[1] + Messages.getString("PropertyCellRenderer.33") + rgba[2] + Messages.getString("PropertyCellRenderer.34") + rgba[3] + ">";    //$NON-NLS-4$ //$NON-NLS-5$
+				text = Messages.getString("_red___") + rgba[0] + Messages.getString("__green___") + rgba[1] + Messages.getString("__blue___") + rgba[2] + Messages.getString("__alpha___") + rgba[3] + ">";    //$NON-NLS-4$ //$NON-NLS-5$
 			}
 
 			return text;

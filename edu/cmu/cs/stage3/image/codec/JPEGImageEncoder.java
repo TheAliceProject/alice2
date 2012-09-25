@@ -159,14 +159,14 @@ public class JPEGImageEncoder extends ImageEncoderImpl {
         int transType = sampleModel.getTransferType();
         if ((transType != DataBuffer.TYPE_BYTE) ||
             ((numBands != 1) && (numBands != 3) )) {
-            throw new RuntimeException(JaiI18N.getString("JPEGImageEncoder0"));
+            throw new RuntimeException(JaiI18N.getString("Only_1__or_3_band_byte_data_may_be_written_"));
         }
 
         // Must be GRAY or RGB
         int cspaceType = colorModel.getColorSpace().getType();
         if (cspaceType != ColorSpace.TYPE_GRAY &&
             cspaceType != ColorSpace.TYPE_RGB) {
-            throw new Error(JaiI18N.getString("JPEGImageEncoder1"));
+            throw new Error(JaiI18N.getString("ColorSpace_must_be_TYPE_RGB_for_numBands___1"));
         }
 
         //

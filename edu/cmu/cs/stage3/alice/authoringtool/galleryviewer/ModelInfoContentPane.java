@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author culyba, dennisc
  *
@@ -74,7 +76,7 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private void buildDetails() {
 		int count = 0;
 		detailsPanel.removeAll();
-		javax.swing.JLabel size = new javax.swing.JLabel(Messages.getString("ModelInfoContentPane.0")); 
+		javax.swing.JLabel size = new javax.swing.JLabel(Messages.getString("size_")); 
 		size.setForeground(GalleryViewer.textColor);
 		javax.swing.JLabel sizeDetail = new javax.swing.JLabel(String.valueOf(String.valueOf(String.valueOf(data.size))).concat(" kb")); 
 		sizeDetail.setForeground(GalleryViewer.textColor);
@@ -84,12 +86,12 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		for (int i = 0; i < data.details.size(); i++) {
 			edu.cmu.cs.stage3.util.StringObjectPair current = (edu.cmu.cs.stage3.util.StringObjectPair) data.details.get(i);
 			String currentString = current.getString();
-			if (currentString.equalsIgnoreCase(Messages.getString("ModelInfoContentPane.2"))) 
-				currentString = Messages.getString("ModelInfoContentPane.3"); 
-			else if (currentString.equalsIgnoreCase(Messages.getString("ModelInfoContentPane.4"))) 
-				currentString = Messages.getString("ModelInfoContentPane.5"); 
-			else if (currentString.equalsIgnoreCase(Messages.getString("ModelInfoContentPane.6"))) 
-				currentString = Messages.getString("ModelInfoContentPane.7"); 
+			if (currentString.equalsIgnoreCase(Messages.getString("modeledby"))) 
+				currentString = Messages.getString("modeled_by"); 
+			else if (currentString.equalsIgnoreCase(Messages.getString("paintedby"))) 
+				currentString = Messages.getString("painted_by"); 
+			else if (currentString.equalsIgnoreCase(Messages.getString("physicalsize"))) 
+				currentString = Messages.getString("physical_size"); 
 			javax.swing.JLabel title = new javax.swing.JLabel(String.valueOf(String.valueOf(currentString)).concat(":")); 
 			javax.swing.JLabel detail = new javax.swing.JLabel();
 			title.setForeground(GalleryViewer.textColor);
@@ -137,8 +139,8 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		detailsPanel = new javax.swing.JPanel();
 		detailsPanel.setOpaque(false);
 		detailsPanel.setLayout(new java.awt.GridBagLayout());
-		addObjectButton = new javax.swing.JButton(Messages.getString("ModelInfoContentPane.11")); 
-		cancelButton = new javax.swing.JButton(Messages.getString("ModelInfoContentPane.12")); 
+		addObjectButton = new javax.swing.JButton(Messages.getString("Add_instance_to_world")); 
+		cancelButton = new javax.swing.JButton(Messages.getString("Cancel")); 
 		setLayout(new java.awt.GridBagLayout());
 		add(nameLabel, new java.awt.GridBagConstraints(0, 0, 1, 1, 0.0D, 0.0D, 10, 0, new java.awt.Insets(2, 0, 0, 0), 0, 0));
 		add(imageLabel, new java.awt.GridBagConstraints(0, 1, 1, 1, 0.0D, 0.0D, 10, 0, new java.awt.Insets(0, 20, 20, 20), 0, 0));

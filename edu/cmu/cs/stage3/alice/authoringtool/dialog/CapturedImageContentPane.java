@@ -23,20 +23,26 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt, Dennis Cosgrove
  */
-public class CapturedImageContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
+public class CapturedImageContentPane extends
+		edu.cmu.cs.stage3.swing.ContentPane {
 	private edu.cmu.cs.stage3.alice.authoringtool.util.ImagePanel m_capturedImagePanel = new edu.cmu.cs.stage3.alice.authoringtool.util.ImagePanel();
-	private javax.swing.JCheckBox m_dontShowCheckBox = new javax.swing.JCheckBox( Messages.getString("CapturedImageContentPane.0") ); 
-	private javax.swing.JLabel m_storeLocationLabel = new javax.swing.JLabel( Messages.getString("CapturedImageContentPane.1") ); 
-	private javax.swing.JButton m_okButton = new javax.swing.JButton( Messages.getString("CapturedImageContentPane.2") ); 
+	private javax.swing.JCheckBox m_dontShowCheckBox = new javax.swing.JCheckBox(
+			Messages.getString("don_t_show_this_anymore"));
+	private javax.swing.JLabel m_storeLocationLabel = new javax.swing.JLabel(
+			Messages.getString("storeLocation"));
+	private javax.swing.JButton m_okButton = new javax.swing.JButton(
+			Messages.getString("OK"));
 
 	public CapturedImageContentPane() {
 		setLayout(new java.awt.GridBagLayout());
 
-		m_okButton.addActionListener( new java.awt.event.ActionListener() {
-			public void actionPerformed( java.awt.event.ActionEvent e ) {
+		m_okButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
 				CapturedImageContentPane.this.syncConfigWithCheckBox();
 			}
 		});
@@ -48,30 +54,31 @@ public class CapturedImageContentPane extends edu.cmu.cs.stage3.swing.ContentPan
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.insets.left = 8;
 		gbc.insets.top = 8;
-		add( m_capturedImagePanel, gbc );
+		add(m_capturedImagePanel, gbc);
 		gbc.insets.right = 8;
 
 		gbc.gridheight = 1;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-		add( new javax.swing.JLabel(Messages.getString("CapturedImageContentPane.3")), gbc ); 
-		add( m_storeLocationLabel, gbc );
+		add(new javax.swing.JLabel(Messages.getString("Image_captured_to_")),
+				gbc);
+		add(m_storeLocationLabel, gbc);
 		gbc.weighty = 1.0;
-		add( new javax.swing.JLabel(), gbc );
+		add(new javax.swing.JLabel(), gbc);
 		gbc.weighty = 0.0;
-		
+
 		gbc.anchor = java.awt.GridBagConstraints.CENTER;
-		add( m_okButton, gbc );
+		add(m_okButton, gbc);
 		gbc.anchor = java.awt.GridBagConstraints.SOUTHWEST;
 		gbc.insets.bottom = 8;
-		add( m_dontShowCheckBox, gbc );
+		add(m_dontShowCheckBox, gbc);
 	}
 
 	public String getTitle() {
-		return Messages.getString("CapturedImageContentPane.4"); 
+		return Messages.getString("Image_captured_and_stored");
 	}
-	
-	public void preDialogShow( javax.swing.JDialog dialog ) {
-		super.preDialogShow( dialog );
+
+	public void preDialogShow(javax.swing.JDialog dialog) {
+		super.preDialogShow(dialog);
 		syncCheckBoxWithConfig();
 	}
 
@@ -83,29 +90,33 @@ public class CapturedImageContentPane extends edu.cmu.cs.stage3.swing.ContentPan
 		m_capturedImagePanel.setImage(image);
 	}
 
-	public void addOKActionListener( java.awt.event.ActionListener l ) {
-		m_okButton.addActionListener( l );
+	public void addOKActionListener(java.awt.event.ActionListener l) {
+		m_okButton.addActionListener(l);
 	}
-	
-	public void removeOKActionListener( java.awt.event.ActionListener l ) {
-		m_okButton.removeActionListener( l );
+
+	public void removeOKActionListener(java.awt.event.ActionListener l) {
+		m_okButton.removeActionListener(l);
 	}
 
 	private void syncCheckBoxWithConfig() {
-		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig =
-			edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
-		m_dontShowCheckBox.setSelected(!authoringToolConfig.getValue("screenCapture.informUser").equalsIgnoreCase("true"));  
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
+				.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+						.getPackage());
+		m_dontShowCheckBox.setSelected(!authoringToolConfig.getValue(
+				"screenCapture.informUser").equalsIgnoreCase("true"));
 	}
+
 	private void syncConfigWithCheckBox() {
-		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig =
-			edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
+				.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+						.getPackage());
 		String s;
-		if( m_dontShowCheckBox.isSelected() ) {
-			s = "false"; 
+		if (m_dontShowCheckBox.isSelected()) {
+			s = "false";
 		} else {
-			s = "true"; 
+			s = "true";
 		}
-		authoringToolConfig.setValue( "screenCapture.informUser", s ); 
-		
+		authoringToolConfig.setValue("screenCapture.informUser", s);
+
 	}
 }

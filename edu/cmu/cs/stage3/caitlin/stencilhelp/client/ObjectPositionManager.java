@@ -11,8 +11,9 @@ package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
  */
 
 import java.awt.Rectangle;
-import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StencilApplication;
+
 import edu.cmu.cs.stage3.caitlin.stencilhelp.application.IDDoesNotExistException;
+import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StencilApplication;
 
 public class ObjectPositionManager {
   StencilApplication stencilApp = null;

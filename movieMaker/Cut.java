@@ -30,17 +30,41 @@ package movieMaker;
  * redistribute the Software for such purposes.
  */
 
-import java.util.Vector;
+import edu.cmu.cs.stage3.lang.Messages;
 import java.io.File;
-import javax.media.*;
-import javax.media.control.TrackControl;
-import javax.media.control.QualityControl;
-import javax.media.control.FramePositioningControl;
-import javax.media.Format;
-import javax.media.format.*;
-import javax.media.datasink.*;
-import javax.media.protocol.*;
 import java.io.IOException;
+import java.util.Vector;
+import javax.media.Buffer;
+import javax.media.Codec;
+import javax.media.Control;
+import javax.media.Controller;
+import javax.media.ControllerErrorEvent;
+import javax.media.ControllerEvent;
+import javax.media.ControllerListener;
+import javax.media.DataSink;
+import javax.media.EndOfMediaEvent;
+import javax.media.Format;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.Owned;
+import javax.media.Player;
+import javax.media.Processor;
+import javax.media.Time;
+import javax.media.control.FramePositioningControl;
+import javax.media.control.QualityControl;
+import javax.media.control.TrackControl;
+import javax.media.datasink.DataSinkErrorEvent;
+import javax.media.datasink.DataSinkEvent;
+import javax.media.datasink.DataSinkListener;
+import javax.media.datasink.EndOfStreamEvent;
+import javax.media.format.AudioFormat;
+import javax.media.format.VideoFormat;
+import javax.media.protocol.BufferTransferHandler;
+import javax.media.protocol.ContentDescriptor;
+import javax.media.protocol.DataSource;
+import javax.media.protocol.FileTypeDescriptor;
+import javax.media.protocol.PushBufferDataSource;
+import javax.media.protocol.PushBufferStream;
 
 
 /**
@@ -102,17 +126,17 @@ public class Cut implements ControllerListener, DataSinkListener {
 	}
 
 	if (inputURL == null) {
-	    System.err.println(Messages.getString("Cut.4")); 
+	    System.err.println(Messages.getString("No_input_url_specified_")); 
 	    prUsage();
 	}
 
 	if (outputURL == null) {
-	    System.err.println(Messages.getString("Cut.5")); 
+	    System.err.println(Messages.getString("No_output_url_specified_")); 
 	    prUsage();
 	}
 
 	if (startV.size() == 0 && endV.size() == 0) {
-	    System.err.println(Messages.getString("Cut.6")); 
+	    System.err.println(Messages.getString("No_start_and_end_point_specified_")); 
 	    prUsage();
 	}
 
@@ -135,10 +159,10 @@ public class Cut implements ControllerListener, DataSinkListener {
 	    end[j] = ((Long)endV.elementAt(j)).longValue();
 
 	    if (prevEnd > start[j]) {
-		System.err.println(Messages.getString("Cut.7")); 
+		System.err.println(Messages.getString("Previous_end_point_cannot_be___the_next_start_point_")); 
 		prUsage();
 	    } else if (start[j] >= end[j]) {
-		System.err.println(Messages.getString("Cut.8")); 
+		System.err.println(Messages.getString("Start_point_cannot_be____end_point_")); 
 		prUsage();
 	    }
 
@@ -146,14 +170,14 @@ public class Cut implements ControllerListener, DataSinkListener {
 	}
 
 	if (frameMode) {
-	    System.err.println(Messages.getString("Cut.9")); 
+	    System.err.println(Messages.getString("Start_and_end_points_are_specified_in_frames_")); 
 	} else {
 	    // Times are in millseconds.  We'll turn them into nanoseconds.
 	    for (int j = 0; j < start.length; j++) {
 		start[j] *= 1000000;
 		if (end[j] != Long.MAX_VALUE)
 		    end[j] *= 1000000;
-	    System.err.println(Messages.getString("Cut.10") + start[j] + Messages.getString("Cut.11") +end[j]);  
+	    System.err.println(Messages.getString("Start__") + start[j] + Messages.getString("_End__") +end[j]);  
 	    }
 	}
 
@@ -162,12 +186,12 @@ public class Cut implements ControllerListener, DataSinkListener {
 	MediaLocator oml;
 
 	if ((iml = createMediaLocator(inputURL)) == null) {
-	    System.err.println(Messages.getString("Cut.12") + inputURL); 
+	    System.err.println(Messages.getString("Cannot_build_media_locator_from__") + inputURL); 
 	    System.exit(0);
 	}
 
 	if ((oml = createMediaLocator(outputURL)) == null) {
-	    System.err.println(Messages.getString("Cut.13") + outputURL); 
+	    System.err.println(Messages.getString("Cannot_build_media_locator_from__") + outputURL); 
 	    System.exit(0);
 	}
 
@@ -175,7 +199,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	Cut cut  = new Cut();
 
 	if (!cut.doIt(iml, oml, start, end, frameMode)) {
-	    System.err.println(Messages.getString("Cut.14")); 
+	    System.err.println(Messages.getString("Failed_to_cut_the_input")); 
 	}
 	
 	System.exit(0);
@@ -247,7 +271,7 @@ public class Cut implements ControllerListener, DataSinkListener {
  	ContentDescriptor cd;
 
 	if ((cd = fileExtToCD(outML.getRemainder())) == null) {
-	    System.err.println(Messages.getString("Cut.15")); 
+	    System.err.println(Messages.getString("Couldn_t_figure_out_from_the_file_extension_the_type_of_output_needed")); 
 	    return false;
 	}
 
@@ -257,13 +281,13 @@ public class Cut implements ControllerListener, DataSinkListener {
 	 //   System.err.println("- Create processor for: " + inML);
 	    p = Manager.createProcessor(inML);
 	} catch (Exception e) {
-	    System.err.println(Messages.getString("Cut.16") + e); 
+	    System.err.println(Messages.getString("Cannot_create_a_processor_from_the_given_url__") + e); 
 	    return false;
 	}
 
 	//System.err.println("- Configure the processor for: " + inML);
 	if (!waitForState(p, Processor.Configured)) {
-	    System.err.println(Messages.getString("Cut.17")); 
+	    System.err.println(Messages.getString("Failed_to_configure_the_processor_")); 
 	    return false;
 	}
 
@@ -271,7 +295,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 //	System.err.println("- Realize the processor for: " + inML);
 	if (!waitForState(p, Controller.Realized)) {
-	    System.err.println(Messages.getString("Cut.18")); 
+	    System.err.println(Messages.getString("Failed_to_realize_the_processor_")); 
 	    return false;
 	}
 
@@ -322,21 +346,21 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 	// Put the Processor into configured state.
 	if (!waitForState(p, Processor.Configured)) {
-	    System.err.println(Messages.getString("Cut.20")); 
+	    System.err.println(Messages.getString("Failed_to_configure_the_processor_")); 
 	    return false;
 	}
 
 	// Set the output content descriptor on the final processor.
 //	System.err.println("- Set output content descriptor to: " + cd);
 	if ((p.setContentDescriptor(cd)) == null) {
-	    System.err.println(Messages.getString("Cut.21")); 
+	    System.err.println(Messages.getString("Failed_to_set_the_output_content_descriptor_on_the_processor_")); 
 	    return false;
 	}
 
 	// We are done with programming the processor.  Let's just
 	// realize and prefetch it.
 	if (!waitForState(p, Controller.Prefetched)) {
-	    System.err.println(Messages.getString("Cut.22")); 
+	    System.err.println(Messages.getString("Failed_to_realize_the_processor_")); 
 	    return false;
 	}
 
@@ -357,7 +381,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	    p.start();
 	    dsink.start();
 	} catch (IOException e) {
-	    System.err.println(Messages.getString("Cut.23")); 
+	    System.err.println(Messages.getString("IO_error_during_concatenation")); 
 	    return false;
 	}
 
@@ -413,9 +437,9 @@ public class Cut implements ControllerListener, DataSinkListener {
 		}
 
 		if (selected != null) {
-		    System.err.println(Messages.getString("Cut.24")); 
-		    System.err.println(Messages.getString("Cut.25") + tc[i].getFormat()); 
-		    System.err.println(Messages.getString("Cut.26") + selected); 
+		    System.err.println(Messages.getString("__Transcode_")); 
+		    System.err.println(Messages.getString("_____from__") + tc[i].getFormat()); 
+		    System.err.println(Messages.getString("_____to__") + selected); 
 		    tc[i].setFormat(selected);
 		}
 	    }
@@ -449,8 +473,8 @@ public class Cut implements ControllerListener, DataSinkListener {
 			if (fmts[j].matches(jpegFmt)) {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
-			    System.err.println(Messages.getString("Cut.27") +  
-					val + Messages.getString("Cut.28") + qc); 
+			    System.err.println(Messages.getString("__Set_quality_to_") +  
+					val + Messages.getString("_on_") + qc); 
 			    break;
 			}
 		    }
@@ -526,7 +550,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	DataSource ds;
 
 	if ((ds = p.getDataOutput()) == null) {
-	    System.err.println(Messages.getString("Cut.29")); 
+	    System.err.println(Messages.getString("Something_is_really_wrong__the_processor_does_not_have_an_output_DataSource")); 
 	    return null;
 	}
 
@@ -560,7 +584,7 @@ public class Cut implements ControllerListener, DataSinkListener {
     public void controllerUpdate(ControllerEvent evt) {
 
 	if (evt instanceof ControllerErrorEvent) {
-	    System.err.println(Messages.getString("Cut.30")); 
+	    System.err.println(Messages.getString("Failed_to_cut_the_file_")); 
 	    //System.exit(-1);
 	} else if (evt instanceof EndOfMediaEvent) {
 	    evt.getSourceController().close();
@@ -760,7 +784,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 	
 	public void setLocator(MediaLocator ml) {
-	    System.err.println(Messages.getString("Cut.37")); 
+	    System.err.println(Messages.getString("Not_interested_in_a_media_locator")); 
 	}
     }
 
@@ -1052,4 +1076,3 @@ public class Cut implements ControllerListener, DataSinkListener {
 
     } // class SuperCutStream
 }
-

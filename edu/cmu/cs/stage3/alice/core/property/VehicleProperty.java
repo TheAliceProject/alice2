@@ -41,4 +41,3 @@ public class VehicleProperty extends ReferenceFrameProperty {
 		}
 	}
 }
-

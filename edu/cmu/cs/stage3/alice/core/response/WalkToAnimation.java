@@ -6,7 +6,7 @@
  */
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.math.Matrix33;
 
 /**
@@ -140,14 +140,14 @@ public class WalkToAnimation extends AbstractWalkAnimation {
 			m_transformationBegin = subject.getTransformation( m_asSeenBy );
 			
 			if( m_asSeenBy == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("WalkToAnimation.3"), null, WalkToAnimation.this.asSeenBy ); 
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("_needs_something_or_someone_to_walk_to_"), null, WalkToAnimation.this.asSeenBy ); 
             }
             if( subject == m_asSeenBy ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("WalkToAnimation.4") + subject.name.getStringValue() + ".", getCurrentStack(), WalkToAnimation.this.asSeenBy );              
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("_can_t_walk_to_") + subject.name.getStringValue() + ".", getCurrentStack(), WalkToAnimation.this.asSeenBy );              
             }
             
             if (subject.isAncestorOf(m_asSeenBy)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("WalkToAnimation.6"), getCurrentStack(), WalkToAnimation.this.asSeenBy );             
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( subject.name.getStringValue() + Messages.getString("_can_t_walk_to_a_part_of_itself"), getCurrentStack(), WalkToAnimation.this.asSeenBy );             
             }
 			
 			// find end transformation

@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import java.awt.Color;
 
 /**
  * @author Jason Pratt

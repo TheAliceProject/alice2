@@ -330,4 +330,3 @@ public class KeepTouchingAnimation extends AbstractBodyPositionAnimation {
 		}
 	}
 }
-

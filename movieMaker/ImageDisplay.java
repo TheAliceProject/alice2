@@ -1,7 +1,12 @@
 package movieMaker;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import javax.swing.JPanel;
+import javax.swing.Scrollable;
 
 /**
  * Class to display an image and the current location with a + sign

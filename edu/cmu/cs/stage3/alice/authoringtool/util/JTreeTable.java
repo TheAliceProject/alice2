@@ -37,13 +37,17 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  * you entered into with Sun.
  */
 
-import javax.swing.*;
-import javax.swing.tree.*;
-import javax.swing.table.*;
-
-import java.awt.Dimension;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
+
+import javax.swing.AbstractCellEditor;
+import javax.swing.JTable;
+import javax.swing.JTree;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.tree.DefaultTreeSelectionModel;
+import javax.swing.tree.TreeModel;
 
 /**
  * This example shows how to create a simple JTreeTable component,

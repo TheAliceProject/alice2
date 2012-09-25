@@ -23,13 +23,20 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.keymappingeditor;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
-
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
-
-import java.awt.event.*;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 /**
  * Title:
@@ -41,7 +48,7 @@ import java.awt.event.*;
  */
 
 public class KeyMappingEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.authoringtool.Editor {
-	public static String viewerName = Messages.getString("KeyMappingEditor.0"); 
+	public static String viewerName = Messages.getString("KeyMapping_Editor"); 
 
 	private edu.cmu.cs.stage3.alice.core.navigation.KeyMapping keyMap;
     private int[] reverseKeyMap;
@@ -101,59 +108,59 @@ public class KeyMappingEditor extends javax.swing.JPanel implements edu.cmu.cs.s
 
     private void updateFields() {
         if (reverseKeyMap[0]==0)
-            MF_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            MF_key.setText(Messages.getString("_NONE_")); 
         else
             MF_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[0]));
         if (reverseKeyMap[1]==0)
-            MB_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            MB_key.setText(Messages.getString("_NONE_")); 
         else
             MB_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[1]));
         if (reverseKeyMap[2]==0)
-            ML_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            ML_key.setText(Messages.getString("_NONE_")); 
         else
             ML_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[2]));
         if (reverseKeyMap[3]==0)
-            MR_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            MR_key.setText(Messages.getString("_NONE_")); 
         else
             MR_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[3]));
         if (reverseKeyMap[4]==0)
-            MU_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            MU_key.setText(Messages.getString("_NONE_")); 
         else
             MU_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[4]));
         if (reverseKeyMap[5]==0)
-            MD_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            MD_key.setText(Messages.getString("_NONE_")); 
         else
             MD_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[5]));
         if (reverseKeyMap[6]==0)
-            TL_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            TL_key.setText(Messages.getString("_NONE_")); 
         else
             TL_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[6]));
         if (reverseKeyMap[7]==0)
-            TR_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            TR_key.setText(Messages.getString("_NONE_")); 
         else
             TR_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[7]));
         if (reverseKeyMap[8]==0)
-            TU_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            TU_key.setText(Messages.getString("_NONE_")); 
         else
             TU_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[8]));
         if (reverseKeyMap[9]==0)
-            TD_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            TD_key.setText(Messages.getString("_NONE_")); 
         else
             TD_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[9]));
         if (reverseKeyMap[10]==0)
-            RL_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            RL_key.setText(Messages.getString("_NONE_")); 
         else
             RL_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[10]));
         if (reverseKeyMap[11]==0)
-            RR_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            RR_key.setText(Messages.getString("_NONE_")); 
         else
             RR_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[11]));
         if (reverseKeyMap[16]==0)
-            HU_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            HU_key.setText(Messages.getString("_NONE_")); 
         else
             HU_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[16]));
         if (reverseKeyMap[17]==0)
-            SM_key.setText(Messages.getString("KeyMappingEditor.1")); 
+            SM_key.setText(Messages.getString("_NONE_")); 
         else
             SM_key.setText(java.awt.event.KeyEvent.getKeyText(reverseKeyMap[17]));
 
@@ -228,30 +235,30 @@ public class KeyMappingEditor extends javax.swing.JPanel implements edu.cmu.cs.s
         titledBorder1 = new TitledBorder(""); 
         jLabel1.setBorder(BorderFactory.createEtchedBorder());
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel1.setText(Messages.getString("KeyMappingEditor.16")); 
+        jLabel1.setText(Messages.getString("Action")); 
         jLabel2.setBorder(BorderFactory.createEtchedBorder());
         jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel2.setText(Messages.getString("KeyMappingEditor.17")); 
+        jLabel2.setText(Messages.getString("Key")); 
         MF_label.setForeground(Color.blue);
         MF_label.setHorizontalAlignment(SwingConstants.CENTER);
-        MF_label.setText(Messages.getString("KeyMappingEditor.18")); 
+        MF_label.setText(Messages.getString("Move_Forward")); 
         jPanel1.setLayout(gridLayout2);
         gridLayout2.setRows(19);
         gridLayout2.setColumns(2);
         this.setLayout(borderLayout1);
         borderLayout1.setHgap(10);
         borderLayout1.setVgap(10);
-        MF_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        MF_key.setText(Messages.getString("_NONE_")); 
         MF_key.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
                 key_mouseClicked(e,0);
             }
         });
-        MB_label.setText(Messages.getString("KeyMappingEditor.20")); 
+        MB_label.setText(Messages.getString("Move_Backward")); 
         MB_label.setHorizontalAlignment(SwingConstants.CENTER);
         MB_label.setForeground(Color.blue);
         MB_label.setToolTipText(""); 
-        MB_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        MB_key.setText(Messages.getString("_NONE_")); 
         MB_key.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
                 key_mouseClicked(e,1);
@@ -313,75 +320,75 @@ public class KeyMappingEditor extends javax.swing.JPanel implements edu.cmu.cs.s
             }
         });
 
-        TL_label.setText(Messages.getString("KeyMappingEditor.23")); 
+        TL_label.setText(Messages.getString("Turn_Left")); 
         TL_label.setHorizontalAlignment(SwingConstants.CENTER);
         TL_label.setForeground(Color.blue);
         TL_label.setToolTipText(""); 
-        TL_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        TL_key.setText(Messages.getString("_NONE_")); 
 
-        TR_label.setText(Messages.getString("KeyMappingEditor.26")); 
+        TR_label.setText(Messages.getString("Turn_Right")); 
         TR_label.setHorizontalAlignment(SwingConstants.CENTER);
         TR_label.setForeground(Color.blue);
         TR_label.setToolTipText(""); 
-        TR_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        TR_key.setText(Messages.getString("_NONE_")); 
 
-        TD_label.setText(Messages.getString("KeyMappingEditor.29")); 
+        TD_label.setText(Messages.getString("Turn_Forward")); 
         TD_label.setHorizontalAlignment(SwingConstants.CENTER);
         TD_label.setForeground(Color.blue);
         TD_label.setToolTipText(""); 
-        TD_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        TD_key.setText(Messages.getString("_NONE_")); 
 
-        TU_label.setText(Messages.getString("KeyMappingEditor.32")); 
+        TU_label.setText(Messages.getString("Turn_Backward")); 
         TU_label.setHorizontalAlignment(SwingConstants.CENTER);
         TU_label.setForeground(Color.blue);
         TU_label.setToolTipText(""); 
-        TU_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        TU_key.setText(Messages.getString("_NONE_")); 
 
-        ML_label.setText(Messages.getString("KeyMappingEditor.35")); 
+        ML_label.setText(Messages.getString("Move_Left")); 
         ML_label.setHorizontalAlignment(SwingConstants.CENTER);
         ML_label.setForeground(Color.blue);
         ML_label.setToolTipText(""); 
-        ML_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        ML_key.setText(Messages.getString("_NONE_")); 
 
-        MR_label.setText(Messages.getString("KeyMappingEditor.38")); 
+        MR_label.setText(Messages.getString("Move_Right")); 
         MR_label.setHorizontalAlignment(SwingConstants.CENTER);
         MR_label.setForeground(Color.blue);
         MR_label.setToolTipText(""); 
-        MR_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        MR_key.setText(Messages.getString("_NONE_")); 
 
-        MU_label.setText(Messages.getString("KeyMappingEditor.41")); 
+        MU_label.setText(Messages.getString("Move_Up")); 
         MU_label.setHorizontalAlignment(SwingConstants.CENTER);
         MU_label.setForeground(Color.blue);
         MU_label.setToolTipText(""); 
-        MU_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        MU_key.setText(Messages.getString("_NONE_")); 
 
-        MD_label.setText(Messages.getString("KeyMappingEditor.44")); 
+        MD_label.setText(Messages.getString("Move_Down")); 
         MD_label.setHorizontalAlignment(SwingConstants.CENTER);
         MD_label.setForeground(Color.blue);
         MD_label.setToolTipText(""); 
-        MD_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        MD_key.setText(Messages.getString("_NONE_")); 
 
 
 
 
 
-        HU_label.setText(Messages.getString("KeyMappingEditor.47")); 
+        HU_label.setText(Messages.getString("Stand_Up")); 
         HU_label.setHorizontalAlignment(SwingConstants.CENTER);
         HU_label.setForeground(Color.blue);
         HU_label.setToolTipText(""); 
-        HU_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        HU_key.setText(Messages.getString("_NONE_")); 
 
-        RL_label.setText(Messages.getString("KeyMappingEditor.50")); 
+        RL_label.setText(Messages.getString("Roll_Left")); 
         RL_label.setHorizontalAlignment(SwingConstants.CENTER);
         RL_label.setForeground(Color.blue);
         RL_label.setToolTipText(""); 
-        RL_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        RL_key.setText(Messages.getString("_NONE_")); 
 
-        RR_label.setText(Messages.getString("KeyMappingEditor.53")); 
+        RR_label.setText(Messages.getString("Roll_Right")); 
         RR_label.setHorizontalAlignment(SwingConstants.CENTER);
         RR_label.setForeground(Color.blue);
         RR_label.setToolTipText(""); 
-        RR_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        RR_key.setText(Messages.getString("_NONE_")); 
 
         jPanel1.setPreferredSize(new Dimension(294, 430));
         this.setMinimumSize(new Dimension(294, 500));
@@ -389,8 +396,8 @@ public class KeyMappingEditor extends javax.swing.JPanel implements edu.cmu.cs.s
         SM_label.setToolTipText(""); 
         SM_label.setForeground(Color.blue);
         SM_label.setHorizontalAlignment(SwingConstants.CENTER);
-        SM_label.setText(Messages.getString("KeyMappingEditor.57")); 
-        SM_key.setText(Messages.getString("KeyMappingEditor.1")); 
+        SM_label.setText(Messages.getString("Strafe_Modifier")); 
+        SM_key.setText(Messages.getString("_NONE_")); 
         SM_key.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
                 key_mouseClicked(e,17);
@@ -430,7 +437,7 @@ public class KeyMappingEditor extends javax.swing.JPanel implements edu.cmu.cs.s
     }
 
     void key_mouseClicked(final MouseEvent e, final int action) {
-        ((JButton)e.getSource()).setText(Messages.getString("KeyMappingEditor.59")); 
+        ((JButton)e.getSource()).setText(Messages.getString("Press_a_key___")); 
         ((JButton)e.getSource()).addKeyListener(new java.awt.event.KeyAdapter() {
 			public void keyPressed(KeyEvent ke) {
                 if (ke.getKeyCode() == KeyEvent.VK_ESCAPE)

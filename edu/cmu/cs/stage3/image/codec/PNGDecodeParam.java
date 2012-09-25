@@ -252,7 +252,7 @@ public class PNGDecodeParam implements ImageDecodeParam {
      */
     public void setUserExponent(float userExponent) {
         if (userExponent <= 0.0F) {
-            throw new IllegalArgumentException(JaiI18N.getString("PNGDecodeParam0"));
+            throw new IllegalArgumentException(JaiI18N.getString("User_exponent_must_not_be_negative_"));
         }
         this.userExponent = userExponent;
     }
@@ -301,7 +301,7 @@ public class PNGDecodeParam implements ImageDecodeParam {
      */
     public void setDisplayExponent(float displayExponent) {
         if (displayExponent <= 0.0F) {
-            throw new IllegalArgumentException(JaiI18N.getString("PNGDecodeParam1"));
+            throw new IllegalArgumentException(JaiI18N.getString("Display_exponent_must_not_be_negative_"));
         }
         this.displayExponent = displayExponent;
     }

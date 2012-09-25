@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -92,7 +94,7 @@ public class ElementTreeCellRenderer extends javax.swing.JPanel implements javax
 				}
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("ElementTreeCellRenderer.6") + value, null ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error__not_an_Element__") + value, null ); 
 		}
 		this.doLayout();
 		return this;

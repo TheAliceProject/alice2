@@ -1,12 +1,12 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
-import java.util.Vector;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.Rectangle;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.geom.RoundRectangle2D;
+import java.util.Vector;
 
 import edu.cmu.cs.stage3.caitlin.stencilhelp.application.StencilApplication;
 

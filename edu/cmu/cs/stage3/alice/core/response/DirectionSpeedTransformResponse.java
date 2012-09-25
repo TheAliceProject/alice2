@@ -23,13 +23,13 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Direction;
 import edu.cmu.cs.stage3.alice.core.Expression;
 import edu.cmu.cs.stage3.alice.core.event.ExpressionEvent;
 import edu.cmu.cs.stage3.alice.core.event.ExpressionListener;
 import edu.cmu.cs.stage3.alice.core.property.DirectionProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
+import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class DirectionSpeedTransformResponse extends TransformResponse {
 	public final DirectionProperty direction = new DirectionProperty( this, "direction", getDefaultDirection() ); 
@@ -43,7 +43,7 @@ public abstract class DirectionSpeedTransformResponse extends TransformResponse 
 				if( acceptsDirection( (Direction)value ) ) {
 					//pass
 				} else {
-					throw new RuntimeException( this + Messages.getString("DirectionSpeedTransformResponse.2") + value ); 
+					throw new RuntimeException( this + Messages.getString("_does_not_accept_direction_") + value ); 
 				}
 			}
 		} else {
@@ -68,10 +68,10 @@ public abstract class DirectionSpeedTransformResponse extends TransformResponse 
 		public void prologue( double t ) {
 			super.prologue( t );
 			if( DirectionSpeedTransformResponse.this.direction.getDirectionValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("DirectionSpeedTransformResponse.3"), null, DirectionSpeedTransformResponse.this.direction ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("direction_value_must_not_be_null_"), null, DirectionSpeedTransformResponse.this.direction ); 
 			}
 			if( DirectionSpeedTransformResponse.this.speed.getValue() == null ) {
-				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("DirectionSpeedTransformResponse.4"), null, DirectionSpeedTransformResponse.this.speed ); 
+				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("speed_value_must_not_be_null_"), null, DirectionSpeedTransformResponse.this.speed ); 
 			}
             Object o = DirectionSpeedTransformResponse.this.speed.get();
             if( o instanceof Expression ) {

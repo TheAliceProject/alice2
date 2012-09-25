@@ -32,21 +32,22 @@ package edu.cmu.cs.stage3.alice.authoringtool.importers.mocap;
  * @version 1.0
  */
 
-import java.util.Map;
-import edu.cmu.cs.stage3.alice.authoringtool.AbstractImporter;
-import edu.cmu.cs.stage3.alice.core.Element;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.StreamTokenizer;
-import java.io.FileInputStream;
-import java.io.File;
-import edu.cmu.cs.stage3.math.Vector3;
-import edu.cmu.cs.stage3.math.Matrix33;
-import edu.cmu.cs.stage3.alice.core.Response;
 import java.util.ListIterator;
-import edu.cmu.cs.stage3.alice.core.Model;
-import edu.cmu.cs.stage3.io.EStreamTokenizer;
+import java.util.Map;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AbstractImporter;
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources;
+import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.Pose;
+import edu.cmu.cs.stage3.alice.core.Response;
+import edu.cmu.cs.stage3.io.EStreamTokenizer;
+import edu.cmu.cs.stage3.math.Matrix33;
+import edu.cmu.cs.stage3.math.Vector3;
 
 
 

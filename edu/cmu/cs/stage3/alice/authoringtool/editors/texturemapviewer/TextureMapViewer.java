@@ -23,16 +23,18 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.texturemapviewer;
 
-import java.awt.*;
-import javax.swing.*;
-
-import edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.Messages;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * @author Jason Pratt
  */
 public class TextureMapViewer extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.authoringtool.Editor {
-	public String editorName = Messages.getString("TextureMapViewer.0"); 
+	public String editorName = Messages.getString("TextureMap_Viewer"); 
 
 	protected edu.cmu.cs.stage3.alice.core.TextureMap textureMap;
 	protected ImagePanel texturePanel = new ImagePanel();
@@ -86,7 +88,7 @@ public class TextureMapViewer extends javax.swing.JPanel implements edu.cmu.cs.s
 					setMinimumSize( size );
 					setPreferredSize( size );
 				} catch( java.lang.InterruptedException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TextureMapViewer.1"), e ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Interrupted_while_loading_image_"), e ); 
 				}
 			} else {
 				java.awt.Dimension size = new java.awt.Dimension( buffer*2, buffer*2 );

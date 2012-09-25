@@ -77,7 +77,7 @@ public final class FPXCodec extends ImageCodec {
     
 	protected ImageEncoder createImageEncoder(OutputStream dst,
                                               ImageEncodeParam param) {
-        throw new RuntimeException(JaiI18N.getString("FPXCodec0"));
+        throw new RuntimeException(JaiI18N.getString("FPX_encoding_not_supported_yet_"));
     }
 
     

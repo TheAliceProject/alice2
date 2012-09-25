@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -30,7 +32,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty textureMaps;
 	protected javax.swing.JPanel contentPanel = new javax.swing.JPanel();
 	protected java.util.HashMap textureMapGuiCache = new java.util.HashMap();
-	protected javax.swing.JButton importTextureMapButton = new javax.swing.JButton( Messages.getString("TextureMapsPanel.0") ); 
+	protected javax.swing.JButton importTextureMapButton = new javax.swing.JButton( Messages.getString("import_texture_map") ); 
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected RefreshListener refreshListener = new RefreshListener();
 
@@ -40,7 +42,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 	}
 
 	private void guiInit() {
-		setTitle( Messages.getString("TextureMapsPanel.1") ); 
+		setTitle( Messages.getString("Texture_Maps") ); 
 		contentPanel.setLayout( new java.awt.GridBagLayout() );
 		setContent( contentPanel );
 		importTextureMapButton.setBackground( new java.awt.Color( 240, 240, 255 ) );
@@ -56,7 +58,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		setOpaque( false );
 		contentPanel.setOpaque( false );
 
-		importTextureMapButton.setToolTipText( Messages.getString("TextureMapsPanel.3") ); 
+		importTextureMapButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Load_an_Image_File_into_this_World__p__p_Objects_use_image_files_as_textures__p_You_can_change_an_object_s_texture_by_setting_its__b_skin__b__property_")+"</font></html>" ); 
 	}
 
 	public void setTextureMaps( edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty textureMaps ) {
@@ -88,7 +90,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 				if( gui != null ) {
 					contentPanel.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 2, 0, 2 ), 0, 0 ) );
 				} else {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("TextureMapsPanel.4") + textureMap, null ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_textureMap__") + textureMap, null ); 
 				}
 			}
 

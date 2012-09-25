@@ -32,12 +32,13 @@ package edu.cmu.cs.stage3.alice.authoringtool.importers.mocap;
  * @version 1.0
  */
 
-import edu.cmu.cs.stage3.alice.core.Model;
-import java.util.Vector;
 import java.util.Hashtable;
-import edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse;
-import edu.cmu.cs.stage3.alice.core.response.DoTogether;
+import java.util.Vector;
+
+import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.Pose;
+import edu.cmu.cs.stage3.alice.core.response.DoTogether;
+import edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse;
 
 public class ASFSkeleton {
     public Vector bones;
@@ -88,4 +89,3 @@ public class ASFSkeleton {
         return poseList;
     }
 }
-

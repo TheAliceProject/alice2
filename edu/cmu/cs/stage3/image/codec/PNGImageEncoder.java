@@ -1017,4 +1017,3 @@ public class PNGImageEncoder extends ImageEncoderImpl {
         //dataOutput.close();
     }
 }
-

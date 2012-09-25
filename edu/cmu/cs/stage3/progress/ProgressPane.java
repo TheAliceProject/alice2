@@ -1,5 +1,7 @@
 package edu.cmu.cs.stage3.progress;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public abstract class ProgressPane extends edu.cmu.cs.stage3.swing.ContentPane implements edu.cmu.cs.stage3.progress.ProgressObserver {
 	private javax.swing.JLabel m_descriptionLabel;
 	private javax.swing.JProgressBar m_progressBar;
@@ -26,7 +28,7 @@ public abstract class ProgressPane extends edu.cmu.cs.stage3.swing.ContentPane i
 		m_progressBar = new javax.swing.JProgressBar();
 		m_progressBar.setPreferredSize( new java.awt.Dimension( 240, 16 ) );
 		
-		m_cancelButton = new javax.swing.JButton( Messages.getString("ProgressPane.0") ); 
+		m_cancelButton = new javax.swing.JButton( Messages.getString("Cancel") ); 
 		m_cancelButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				onCancel();
@@ -192,9 +194,9 @@ public abstract class ProgressPane extends edu.cmu.cs.stage3.swing.ContentPane i
 		} );
 	}
 	protected void fireOKActionListeners() {
-		fireActionListeners( m_okActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("ProgressPane.1") ) ); 
+		fireActionListeners( m_okActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("OK") ) ); 
 	}
 	protected void fireCancelActionListeners() {
-		fireActionListeners( m_cancelActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("ProgressPane.2") ) ); 
+		fireActionListeners( m_cancelActionListeners, new java.awt.event.ActionEvent( this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("Cancel") ) ); 
 	}
 }

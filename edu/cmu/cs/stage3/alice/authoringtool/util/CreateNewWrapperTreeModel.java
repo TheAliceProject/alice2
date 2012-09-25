@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * @author Jason Pratt
  */
@@ -35,7 +37,7 @@ public class CreateNewWrapperTreeModel implements javax.swing.tree.TreeModel {
 			wrappedTreeModel = treeModelToWrap;
 			this.createNewObject = createNewObject;
 		} else {
-			throw new IllegalArgumentException( Messages.getString("CreateNewWrapperTreeModel.0") ); 
+			throw new IllegalArgumentException( Messages.getString("treeModelToWrap_and_createNewObject_cannot_be_null") ); 
 		}
 	}
 

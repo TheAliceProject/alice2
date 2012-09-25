@@ -23,15 +23,27 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.importers.mocap;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import edu.cmu.cs.stage3.alice.core.Element;
-import javax.swing.filechooser.FileFilter;
-import java.io.File;
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
-import edu.cmu.cs.stage3.alice.authoringtool.importers.Messages;
+import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Sandbox;
+import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.filechooser.FileFilter;
 
 
 /**
@@ -103,7 +115,7 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
         DefaultListModel listOfStuff = new DefaultListModel();
         partsList.setModel(listOfStuff);
 
-        listOfStuff.addElement(new ElementOrNullWrapper(null,Messages.getString("MocapImporterOptionsDialog.2"))); 
+        listOfStuff.addElement(new ElementOrNullWrapper(null,Messages.getString("Build_Model_from_skeleton_file"))); 
 
         Sandbox[] possibilities = (Sandbox[])AuthoringTool.getHack().getWorld().sandboxes.getArrayValue();
 
@@ -124,18 +136,18 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
     private void jbInit() throws Exception {
         this.getContentPane().setLayout(gridBagLayout1);
         partsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        promptLabel.setText(Messages.getString("MocapImporterOptionsDialog.7")); 
+        promptLabel.setText(Messages.getString("Which_character_shall_I_animate_")); 
         this.setModal(true);
-        this.setTitle(Messages.getString("MocapImporterOptionsDialog.8")); 
-        jLabel1.setText(Messages.getString("MocapImporterOptionsDialog.9")); 
-        jLabel2.setText(Messages.getString("MocapImporterOptionsDialog.10")); 
+        this.setTitle(Messages.getString("Mocap_Importer_Options")); 
+        jLabel1.setText(Messages.getString("Motion_Captured_FPS_")); 
+        jLabel2.setText(Messages.getString("Alice_KeyFrames_sec_")); 
         okButton.setText("OK"); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 okButton_actionPerformed(e);
             }
         });
-        jLabel3.setText(Messages.getString("MocapImporterOptionsDialog.12")); 
+        jLabel3.setText(Messages.getString("Skeleton_File_")); 
         jSkelFile.setPreferredSize(new Dimension(100, 21));
         jSkelFile.setText("etc/Skeleton.asf"); 
         jFileBoxButton.setText("..."); 
@@ -146,7 +158,7 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
         });
         nativeFPSCombo.setEditable(true);
         aliceFPSCombo.setEditable(true);
-        cancelButton.setText(Messages.getString("MocapImporterOptionsDialog.15")); 
+        cancelButton.setText(Messages.getString("Cancel")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cancelButton_actionPerformed(e);
