@@ -1438,19 +1438,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				java.io.BufferedInputStream bis = null;
 				java.io.BufferedOutputStream bos = null;
 				java.io.File aliceJAR;
-				if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").startsWith("Windows"))  ) {
-					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\aliceupdate.jar"); 
-				} else {
-					aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/aliceupdate.jar"); 
-				}
+				aliceJAR = new java.io.File(JAlice.getAliceHomeDirectory().toString() + File.separator + "lib" + File.separator + "aliceupdate.jar"); 
 				if (aliceJAR.exists()) {
 		            try {      
 						bis = new java.io.BufferedInputStream( new java.io.FileInputStream( aliceJAR ) );
-						if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").startsWith("Windows"))  ) {
-							bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "\\lib\\alice.jar") ) ); 
-						} else {
-							bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + "/lib/alice.jar") ) ); 
-						}					
+						bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( new java.io.File(JAlice.getAliceHomeDirectory().toString() + File.separator + "lib" + File.separator + "alice.jar") ) ); 
 			            int i;
 			            while ((i = bis.read()) != -1) {
 			            	bos.write( i );
