@@ -41,6 +41,7 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
             record(  ((edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)ur).getLogString()  );
           } else if (ur instanceof edu.cmu.cs.stage3.alice.authoringtool.util.PropertyUndoableRedoable) {
             record(  ((edu.cmu.cs.stage3.alice.authoringtool.util.PropertyUndoableRedoable)ur).getLogString()  );
+            authoringTool.showPrintDialog();
           } else if (ur instanceof edu.cmu.cs.stage3.alice.authoringtool.util.OneShotUndoableRedoable) {
             record(  ((edu.cmu.cs.stage3.alice.authoringtool.util.OneShotUndoableRedoable)ur).getLogString()  );
           }
@@ -52,6 +53,7 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
         }
 
         protected void record(String toRecord) {
+        	
           if (toRecord != null && authoringTool.instructorInControl) {
             if (printWriter != null) {printWriter.println(toRecord); printWriter.flush();}
           }

@@ -47,7 +47,7 @@ public class JAlice {
 		}
 	}
 	// version information
-	private static String version = "2.3"; 
+	private static String version = "2.3.1"; 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString();
 	private static String directory = null;
 	static {

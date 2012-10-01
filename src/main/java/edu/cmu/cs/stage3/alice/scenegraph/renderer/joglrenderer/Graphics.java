@@ -276,15 +276,19 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawString( String str, int x, int y ) {
-	    float scale = m_font.getSize() / 170.0f;
-	    m_renderContext.gl.glPushMatrix();
-	    m_renderContext.gl.glTranslatef( x, y, 0 );
-	    m_renderContext.gl.glScalef( scale, -scale, 1.0f );
-	    m_renderContext.glut.glutStrokeString( com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str);//com.sun.opengl.util.GLUT.STROKE_ROMAN, str );
-	    //for (int i = 0;i < str.length(); i++){
-	    //	m_renderContext.glut.glutBitmapCharacter(com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str.charAt(i));
-	    //}
-	    m_renderContext.gl.glPopMatrix();
+//	    float scale = m_font.getSize() / 170.0f;
+//	    m_renderContext.gl.glPushMatrix();
+	    //m_renderContext.gl.glTranslatef( x, y, 0 );
+	    m_renderContext.gl.glRasterPos2f(x, y);
+//	    m_renderContext.gl.glScalef( scale, -scale, 1.0f );
+	    m_renderContext.glut.glutBitmapString( com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str);
+//	    //m_renderContext.glut.glutStrokeString( com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str);//com.sun.opengl.util.GLUT.STROKE_ROMAN, str );
+//	    for (int i = 0;i < str.length(); i++){
+//	    	m_renderContext.glut.glutStrokeCharacter(com.sun.opengl.util.GLUT.STROKE_MONO_ROMAN , str.charAt(i));
+//	    }
+//	    m_renderContext.gl.glPopMatrix();
+   
+	    
 	}
 	
 	public void drawString( java.text.AttributedCharacterIterator iterator, int x, int y ) {

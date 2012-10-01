@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
@@ -455,6 +454,7 @@ public abstract class Property {
             checkForBadReferences( value );
         }
 		onSet( value );
+		
 	}
 	private static void setHowMuch( Element owner, String propertyName, Object value, edu.cmu.cs.stage3.util.HowMuch howMuch ) {
 		Property property = owner.getPropertyNamed( propertyName );
