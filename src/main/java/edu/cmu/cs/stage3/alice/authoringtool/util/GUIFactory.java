@@ -294,13 +294,17 @@ public class GUIFactory {
 			StringBuffer htmlStringBuf = new StringBuffer();
 			viewControllerC.getHTML(htmlStringBuf);
 			toReturn = " "+htmlStringBuf.toString()+" ";  
+		} else if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.CollectionPropertyViewController){
+			edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.CollectionPropertyViewController viewControllerC = (edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.CollectionPropertyViewController)c;
+			StringBuffer htmlStringBuf = new StringBuffer();
+			viewControllerC.getHTML(htmlStringBuf);
+			toReturn = " "+htmlStringBuf.toString()+" ";  
 		} else if (c instanceof java.awt.Container){
 			java.awt.Container containerC = (java.awt.Container)c;
 			for (int i=0; i<containerC.getComponentCount(); i++){
 				toReturn += getHTMLStringForComponent(containerC.getComponent(i))+" "; 
 			}
-		} else {
-		}
+		} 
 		toReturn = toReturn.trim();
 		while ( toReturn.indexOf("  ") > -1){ 
 			int index = toReturn.indexOf("  "); 

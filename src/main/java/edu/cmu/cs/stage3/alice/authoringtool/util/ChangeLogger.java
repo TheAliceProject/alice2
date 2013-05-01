@@ -41,7 +41,6 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
             record(  ((edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)ur).getLogString()  );
           } else if (ur instanceof edu.cmu.cs.stage3.alice.authoringtool.util.PropertyUndoableRedoable) {
             record(  ((edu.cmu.cs.stage3.alice.authoringtool.util.PropertyUndoableRedoable)ur).getLogString()  );
-            authoringTool.showPrintDialog();
           } else if (ur instanceof edu.cmu.cs.stage3.alice.authoringtool.util.OneShotUndoableRedoable) {
             record(  ((edu.cmu.cs.stage3.alice.authoringtool.util.OneShotUndoableRedoable)ur).getLogString()  );
           }

@@ -177,6 +177,7 @@ public class Color implements Cloneable, java.io.Serializable, edu.cmu.cs.stage3
 		return "edu.cmu.cs.stage3.alice.scenegraph.Color[r="+red+",g="+green+",b="+blue+",a="+alpha+"]";
 	}
 	public static Color valueOf( String s ) {
+		if (s == null){ s="edu.cmu.cs.stage3.alice.scenegraph.Color[r=0.0,g=0.30588236,b=0.59607846,a=1.0]"; }
 		String[] markers = { "edu.cmu.cs.stage3.alice.scenegraph.Color[r=", ",g=", ",b=", ",a=", "]" };
 		float[] values = new float[markers.length-1];
 		for( int i=0; i<values.length; i++ ) {

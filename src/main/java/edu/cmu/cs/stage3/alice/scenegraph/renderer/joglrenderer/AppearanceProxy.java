@@ -123,6 +123,7 @@ class AppearanceProxy extends ElementProxy {
 	}
 	//todo
     public double Showing() {
+    	//if (m_opacity == 1.0f) return 0.9f; else  
         return m_opacity;
     }
 }

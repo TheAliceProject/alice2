@@ -67,6 +67,7 @@ public class Actions {
 	public javax.swing.AbstractAction takePictureAction;
 	public javax.swing.AbstractAction restartStopWorldAction;
 	public javax.swing.AbstractAction logInstructorIntervention;	// Logging
+	public javax.swing.AbstractAction licenseAction;
 	
 	protected AuthoringTool authoringTool;
 	protected JAliceFrame jAliceFrame;
@@ -307,17 +308,21 @@ public class Actions {
 				authoringTool.takePicture();
 				takePictureAction.setEnabled(true);
 			}
-		};
-		
+		};	
 		
 		//logging instructor intervention
 		logInstructorIntervention = new javax.swing.AbstractAction() {
 			 public void actionPerformed( java.awt.event.ActionEvent e ) {
 				 authoringTool.logInstructorIntervention();
 			 }		
+		};	
+
+		licenseAction = new javax.swing.AbstractAction() {
+			 public void actionPerformed( java.awt.event.ActionEvent e ) {
+				 authoringTool.showLicense();
+			 }		
 		};
 		
-
 		newWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.Event.CTRL_MASK) );
 		newWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "newWorld" ); 
 		newWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'N' ) );
@@ -612,13 +617,18 @@ public class Actions {
 		renderActions.add( takePictureAction );
 		
 //		logging instructor intervention...
-		  logInstructorIntervention.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "logInstructor" ); 
-		  logInstructorIntervention.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'L' ) );
-		  logInstructorIntervention.putValue( javax.swing.Action.NAME, Messages.getString("Log_Instructor_Actions") ); 
-		  logInstructorIntervention.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Add_record_of_instructor_actions_to_log") ); 
-		  logInstructorIntervention.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "log" )); 
-		  applicationActions.add( logInstructorIntervention );
+		logInstructorIntervention.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "logInstructor" ); 
+		logInstructorIntervention.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'L' ) );
+		logInstructorIntervention.putValue( javax.swing.Action.NAME, Messages.getString("Log_Instructor_Actions") ); 
+		logInstructorIntervention.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Add_record_of_instructor_actions_to_log") ); 
+		logInstructorIntervention.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "log" )); 
+		applicationActions.add( logInstructorIntervention );
 		
+		//LicenseAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_G, java.awt.event.KeyEvent.CTRL_MASK ) );
+		licenseAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "license" );
+		licenseAction.putValue( javax.swing.Action.NAME, Messages.getString("View_License") ); 
+		licenseAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("View_License") ); 
+		applicationActions.add( licenseAction );
 	}
 
 	private void keyInit() {

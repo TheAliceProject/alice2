@@ -70,7 +70,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 
 	protected edu.cmu.cs.stage3.alice.core.World world;
 	protected SceneEditor sceneEditor;
-	protected edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget renderTarget = null;
+	public static edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget renderTarget = null;
 	protected edu.cmu.cs.stage3.alice.core.Camera renderCamera = null;
 	protected edu.cmu.cs.stage3.math.Matrix44 originalCameraPOV;
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.RenderTargetMultiManipulator rtmm;

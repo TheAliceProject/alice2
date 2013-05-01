@@ -54,7 +54,7 @@ class TextureMapProxy extends ElementProxy {
 	    return (edu.cmu.cs.stage3.alice.scenegraph.TextureMap)getSceneGraphElement();
 	}
 	public boolean isPotentiallyAlphaBlended() {
-		return false;//getSGTexture().getIsPotentiallyAlphaBlended() ;
+		return true; //getSGTexture().getIsPotentiallyAlphaBlended() ; Aik Min - Changed this to true
 	}
 	public boolean isImageSet() {
 		return getSGTexture().getImage() != null;

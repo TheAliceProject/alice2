@@ -46,13 +46,34 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 	ImageIcon thumbnail = null;
 	File file = null;
 	int width = 0, height = 0;
+	boolean needUpdating = false;
 
 	public ImagePreview(JFileChooser fc) {
 		setPreferredSize(new Dimension(300, 300));
 		setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
 		fc.addPropertyChangeListener(this);
+		needUpdating = true;
 	}
-
+	
+	public ImagePreview(JFileChooser fc, Image Icon) {
+		setPreferredSize(new Dimension(300, 300));
+		setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
+		fc.addPropertyChangeListener(this);
+		needUpdating = false;
+		ImageIcon tmpIcon = new ImageIcon(Icon);
+		height = tmpIcon.getIconHeight();
+		width = tmpIcon.getIconWidth();
+		if (tmpIcon != null) {
+			if (tmpIcon.getIconWidth() > 200) {
+				thumbnail = new ImageIcon(tmpIcon.getImage().getScaledInstance(
+						200, -1, Image.SCALE_DEFAULT));
+			} else { // no need to miniaturize
+				thumbnail = tmpIcon;
+			}
+		}
+		repaint();
+	}
+	
 	public void loadImage() {
 		if (file == null) {
 			thumbnail = null;
@@ -88,7 +109,7 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 		}
 
 		// Update the preview accordingly.
-		if (update) {
+		if (update && needUpdating) {
 			thumbnail = null;
 			loadImage();
 			repaint();

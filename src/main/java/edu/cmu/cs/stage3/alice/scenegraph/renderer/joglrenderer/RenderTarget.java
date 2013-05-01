@@ -23,11 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import java.awt.AWTException;
-import java.awt.Rectangle;
-import java.awt.Robot;
-
+import com.sun.opengl.util.GLUT;
 import javax.media.opengl.GL;
+import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCapabilities;
+import javax.media.opengl.GLDrawableFactory;
+import javax.media.opengl.GLEventListener;
 
 public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.renderer.AbstractProxyRenderTarget {
 	protected RenderTarget( Renderer renderer ) {
@@ -44,13 +45,13 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	    edu.cmu.cs.stage3.alice.scenegraph.Camera[] cameras = getCameras();
 	    for( int i=0; i<cameras.length; i++ ) {
 	        CameraProxy cameraProxyI = (CameraProxy)getProxyFor( cameras[ i ] );
-	        cameraProxyI.performClearAndRenderOffscreen( context );
+	        cameraProxyI.performClearAndRenderOffscreen( context ); 
 	    }
 	    try {
 	        m_renderContextForGetOffscreenGraphics = context;
 	        onRender();
 	    } finally {
-	        //m_renderContextForGetOffscreenGraphics = null;
+	        m_renderContextForGetOffscreenGraphics = null;
 	    }
 	    context.gl.glFlush();
 	}
@@ -156,8 +157,27 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	    CameraProxy cameraProxy = (CameraProxy)getProxyFor( sgCamera );
 	    cameraProxy.setIsLetterboxedAsOpposedToDistorted( isLetterboxedAsOpposedToDistorted );
     }
-
+	javax.media.opengl.GLPbuffer m_glPBuffer = null;
+	public void createGLBuffer(int width, int height){
+		GLDrawableFactory fac = GLDrawableFactory.getFactory();
+		if ( fac.canCreateGLPbuffer() ) {
+			GLCapabilities glCap = new GLCapabilities();
+			glCap.setDoubleBuffered(false);
+			m_glPBuffer = fac.createGLPbuffer(glCap, null, width, height, null);
+		}
+	}
 	public void clearAndRenderOffscreen() {
+		RenderContext m_renderContext = new RenderContext( this );
+		if (m_glPBuffer != null){
+			javax.media.opengl.GLContext context =  m_glPBuffer.createContext(null); 
+			context.makeCurrent();
+			context.getGL().glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  
+			context.getGL().glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+			m_renderContext.m_height =  m_glPBuffer.getHeight();
+			m_renderContext.m_width = m_glPBuffer.getWidth();
+			m_glPBuffer.addGLEventListener( m_renderContext );	
+			m_glPBuffer.display();
+		}
 	}
 	public boolean rendersOnEdgeTrianglesAsLines( edu.cmu.cs.stage3.alice.scenegraph.OrthographicCamera orthographicCamera ) {
         //todo
@@ -170,19 +190,17 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         //}
     }
 	public java.awt.Image getOffscreenImage() {
-		edu.cmu.cs.stage3.alice.scenegraph.Camera sgCamera[] = getCameras();
-		Rectangle r = getViewport(sgCamera[0]);
-		
-		if (r != null) {
-			try {	
-				java.awt.image.BufferedImage  screencapture = new Robot().createScreenCapture(
-						new Rectangle(r.x, r.y, r.width, r.height));
-				return screencapture;
-			} catch (AWTException e) {
-				e.printStackTrace();
-			}
+		if ( m_glPBuffer == null ){
+			createGLBuffer(getSize().width, getSize().height);
+			clearAndRenderOffscreen();
 		}
-		return null;
+		javax.media.opengl.GLContext context =  m_glPBuffer.createContext(null);
+		context.makeCurrent();
+		java.awt.image.BufferedImage image = com.sun.opengl.util.Screenshot.readToBufferedImage(getSize().width, getSize().height, true);
+		context.release();
+		context.destroy();
+		return image;
+		
 	}	
 	public java.awt.Graphics getOffscreenGraphics() {
 		return new Graphics( m_renderContextForGetOffscreenGraphics );
@@ -261,4 +279,75 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 //	        return null;
 //	    }
 //	}
+	private GLUT glut_ = new GLUT();
+
+	private int displayList;
+	
+	public class GLEListener implements GLEventListener {
+		/**
+		 * Executes the drawing.
+		 * @param drawable GLAutoDrawable object.
+		 */
+		public void display ( GLAutoDrawable drawable ) {
+
+			GL gl = drawable.getGL();
+			gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+			gl.glMatrixMode(GL.GL_MODELVIEW);
+			gl.glLoadIdentity();
+			gl.glTranslatef( (float)(Math.random() - 0.5), (float)(Math.random() - 0.5), 0);
+			double d = 0.9+0.2*Math.random();
+			gl.glScaled(d, d, d);
+			float[] c = new float[] { (float)Math.random(),  (float)Math.random(),  (float)Math.random(), 1 };
+			gl.glMaterialfv(GL.GL_FRONT_AND_BACK,GL.GL_DIFFUSE,c,0);
+			gl.glCallList(displayList);//use the display list to do the drawing
+		}
+
+		public void displayChanged ( GLAutoDrawable drawable, 
+				boolean modeChanged, boolean deviceChanged ) {
+		}
+
+		/**
+		 * Initializes the GLJPanel for drawing.
+		 * @param drawable GLAutoDrawable object.
+		 */
+		public void init ( GLAutoDrawable drawable ) {
+
+			GL gl = drawable.getGL();
+
+			/* set up depth-buffering */
+			gl.glEnable(GL.GL_DEPTH_TEST);
+
+			/* set up lights */
+			gl.glMatrixMode(GL.GL_MODELVIEW);
+			gl.glLoadIdentity();
+
+			float light_pos[] = { 0.0f, 10.0f, -15.0f,0 };
+			float light_color[] = {1, 1,1,1 };
+
+			gl.glEnable(GL.GL_LIGHTING);
+
+
+			gl.glEnable(GL.GL_LIGHT0);
+			gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,light_pos,0);
+			gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,light_color,0);
+			gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,light_color,0);
+			gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,light_color,0);
+
+			/*make a new display list and put a sphere in it*/
+			displayList = gl.glGenLists(1);
+			gl.glNewList(displayList, GL.GL_COMPILE);
+			glut_.glutSolidSphere(0.3,16,8);
+			gl.glEndList();
+		}
+
+		public void reshape ( GLAutoDrawable drawable, 
+				int x, int y, int width, int height ) {
+
+			GL gl = drawable.getGL();
+			/* define the viewport transformation */
+			gl.glViewport(x,y,width,height);
+		}
+	}
+	
+	
 }

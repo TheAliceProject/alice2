@@ -172,7 +172,9 @@ public class ExportCodeForPrintingContentPane extends
 							m_pathFileChooser.setCurrentDirectory(dir);
 						}
 					};
-					SwingUtilities.invokeAndWait(testRun);
+					if (!SwingUtilities.isEventDispatchThread()) {
+						SwingUtilities.invokeAndWait(testRun);
+					}
 				} catch (ArrayIndexOutOfBoundsException aioobe) {
 					// for some reason this can potentially fail in jdk1.4.2_04
 				} catch (InterruptedException e) {

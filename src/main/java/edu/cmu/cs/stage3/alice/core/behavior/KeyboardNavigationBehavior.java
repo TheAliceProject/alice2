@@ -182,17 +182,29 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
         ((Transformable)subject.get()).moveRightNow(Direction.RIGHT,dt*speed.x);
         ((Transformable)subject.get()).moveRightNow(Direction.UP,dt*speed.y);
         */
-        ((Transformable)subject.get()).turnRightNow(Direction.FORWARD,dt*turning.x);
-
+        subjectTransformable.turnRightNow(Direction.FORWARD,dt*turning.x);
         if (((Boolean)stayOnGround.get()).booleanValue()) {
             Transformable t = new Transformable();
-            t.setPositionRightNow(((Transformable)subject.get()).getPosition(((Transformable)subject.get()).getWorld()));
+            t.setPositionRightNow(subjectTransformable.getPosition(subjectTransformable.getWorld()));
             //t.setOrientationRightNow(((Transformable)subject.get()).getWorld().getOrientationAsQuaternion());
-            ((Transformable)subject.get()).turnRightNow(Direction.RIGHT,dt*turning.y,t);
+            subjectTransformable.turnRightNow(Direction.RIGHT,dt*turning.y,t);
         } else {
-            ((Transformable)subject.get()).turnRightNow(Direction.RIGHT,dt*turning.y);
+        	subjectTransformable.turnRightNow(Direction.RIGHT,dt*turning.y);
         }
 
-        ((Transformable)subject.get()).rollRightNow(Direction.LEFT,dt*turning.z);
+        subjectTransformable.rollRightNow(Direction.LEFT,dt*turning.z);
+//        Aik Min - Replaced subject.get() with subjectTransformable because Alice was throwing a cast error when subject.get() is a variable
+//       	((Transformable)subject.get()).turnRightNow(Direction.FORWARD,dt*turning.x);
+//        if (((Boolean)stayOnGround.get()).booleanValue()) {
+//            Transformable t = new Transformable();
+//            t.setPositionRightNow(((Transformable)subject.get()).getPosition(((Transformable)subject.get()).getWorld()));
+//            //t.setOrientationRightNow(((Transformable)subject.get()).getWorld().getOrientationAsQuaternion());
+//            ((Transformable)subject.get()).turnRightNow(Direction.RIGHT,dt*turning.y,t);
+//        } else {
+//            ((Transformable)subject.get()).turnRightNow(Direction.RIGHT,dt*turning.y);
+//        }
+//
+//        ((Transformable)subject.get()).rollRightNow(Direction.LEFT,dt*turning.z);
+//        
     }
 }
