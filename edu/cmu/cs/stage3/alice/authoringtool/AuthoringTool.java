@@ -23,6 +23,10 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
+import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener;
+import edu.cmu.cs.stage3.lang.Messages;
+import edu.cmu.cs.stage3.swing.ContentPane;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.BufferedOutputStream;
@@ -30,11 +34,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -43,11 +47,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
-
-import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
-import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener;
-import edu.cmu.cs.stage3.lang.Messages;
-import edu.cmu.cs.stage3.swing.ContentPane;
 
 /**
  * @author Jason Pratt
@@ -96,6 +95,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.PreferencesContentPane preferencesContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.AboutContentPane aboutContentPane;
+	private edu.cmu.cs.stage3.alice.authoringtool.dialog.LicenseContentPane licenseContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.WorldInfoContentPane worldInfoContentPane;
 	public edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane stdErrOutContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.ExportCodeForPrintingContentPane exportCodeForPrintingContentPane;
@@ -511,13 +511,17 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		String charactersDirPath = authoringToolConfig.getValue("directories.charactersDirectory"); 
 		if (charactersDirPath != null) {
 			java.io.File charactersDir = new java.io.File(charactersDirPath);
-			if (charactersDir != null && charactersDir.exists() && charactersDir.isDirectory()) {
+			if (charactersDir != null) {
+				if (!charactersDir.exists()) {
+//				&& charactersDir.isDirectory()) {
+					charactersDir.mkdir();
+				} 
 				try {
 					addCharacterFileChooser.setCurrentDirectory(charactersDir);
 					saveCharacterFileDialog.setCurrentDirectory(charactersDir);//.getAbsolutePath());
 				} catch( IndexOutOfBoundsException aioobe ) {
 					// for some reason this can potentially fail in jdk1.4.2_04
-				}
+				}		
 			} else {
 				//TODO -Ignore : ?
 			}
@@ -619,6 +623,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		renderPanel = new javax.swing.JPanel();
 
 		aboutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.AboutContentPane();
+		licenseContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LicenseContentPane();
 
 		renderPanel.setLayout(new java.awt.BorderLayout());
 
@@ -652,7 +657,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		
 		exportCodeForPrintingContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.ExportCodeForPrintingContentPane(this);
 		
-		saveForWebContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.SaveForWebContentPane(this);
+		//saveForWebContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.SaveForWebContentPane(this);
 
 		newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
 		
@@ -1433,6 +1438,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			int retVal = leaveWorld(true);
 			if (retVal == Constants.SUCCEEDED) {
 				finalCleanUp();
+				java.io.File temp = new java.io.File(authoringToolConfig.getValue("directories.charactersDirectory"));
+				if (temp.exists() && !(temp.list().length>0)){
+					temp.delete();
+				}
 				java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt"); 
 				aliceHasNotExitedFile.delete();
 				java.io.BufferedInputStream bis = null;
@@ -1823,7 +1832,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 							edu.cmu.cs.stage3.image.ImageIO.store("png", baos, image); 
 							map.put("thumbnail.png", baos.toByteArray()); 
-						}
+						} 
 						rt.release();
 					}
 				} catch (Throwable t) {
@@ -2356,9 +2365,107 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
 
-	public void saveCharacter(edu.cmu.cs.stage3.alice.core.Element element) {
+	private int[] makePixmap(java.awt.Image img) {
+		int w = img.getWidth(null);
+		int h = img.getHeight(null);
+		int[] pixels = new int[w * h];
+		java.awt.image.PixelGrabber pg = new java.awt.image.PixelGrabber(img, 0, 0, w, h, pixels, 0, w);
+		try {
+			pg.grabPixels();
+		} catch (InterruptedException e) {
+			return null;
+		}
+		if ((pg.getStatus() & java.awt.image.ImageObserver.ABORT) != 0) {
+			return null;
+		}
+
+		return pixels;
+	}
+	
+	private org.w3c.dom.Document createCharacterXML( edu.cmu.cs.stage3.alice.core.Transformable model ) {
+		java.text.DecimalFormat numberFormatter = new java.text.DecimalFormat( "#0.##" );
+		javax.xml.parsers.DocumentBuilderFactory factory = null;
+		javax.xml.parsers.DocumentBuilder builder = null;
+		org.w3c.dom.Document xmlDocument = null;
+		try {
+			factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+			builder = factory.newDocumentBuilder();
+			xmlDocument = builder.newDocument();
+		} catch (javax.xml.parsers.ParserConfigurationException pce) {
+			pce.printStackTrace();
+			return null;
+		}
+		org.w3c.dom.Element xmlModel = null;
+
+		edu.cmu.cs.stage3.alice.core.util.IndexedTriangleArrayCounter itaCounter = new edu.cmu.cs.stage3.alice.core.util.IndexedTriangleArrayCounter();
+		edu.cmu.cs.stage3.alice.core.util.TextureMapCounter textureMapCounter = new edu.cmu.cs.stage3.alice.core.util.TextureMapCounter();
+
+		model.visit( itaCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
+		model.visit( textureMapCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
+
+		xmlModel = xmlDocument.createElement("model");
+		org.w3c.dom.Element xmlElement = xmlDocument.createElement("name");
+		xmlElement.appendChild( xmlDocument.createTextNode( model.name.getStringValue() ) );
+		xmlModel.appendChild(xmlElement);
+		if (model.data.get( "modeled by" )!=null && !model.data.get( "modeled by" ).equals("")) {
+			xmlElement = xmlDocument.createElement("modeledby");
+			xmlElement.appendChild( xmlDocument.createTextNode( model.data.get( "modeled by" ).toString()) );
+			xmlModel.appendChild(xmlElement);
+		}
+		if (model.data.get( "painted by" )!=null && !model.data.get( "painted by" ).equals("")) {
+			xmlElement = xmlDocument.createElement("paintedby");
+			xmlElement.appendChild( xmlDocument.createTextNode( model.data.get( "painted by" ).toString()) );
+			xmlModel.appendChild(xmlElement);
+		}
+		if (model.data.get( "programmed by" )!=null && !model.data.get( "programmed by" ).equals("")) {
+			xmlElement = xmlDocument.createElement("programmedby");
+			xmlElement.appendChild( xmlDocument.createTextNode( model.data.get( "programmed by" ).toString()) );
+			xmlModel.appendChild(xmlElement);
+		}
+		xmlElement = xmlDocument.createElement("parts");
+		xmlElement.appendChild( xmlDocument.createTextNode(String.valueOf(itaCounter.getIndexedTriangleArrayCount())) );
+		xmlModel.appendChild(xmlElement);
+		xmlElement = xmlDocument.createElement("physicalsize");
+		xmlElement.appendChild( xmlDocument.createTextNode( numberFormatter.format( model.getSize().x ) + "m x " + numberFormatter.format( model.getSize().y ) + "m x " + numberFormatter.format( model.getSize().z ) + "m" ) );
+		xmlModel.appendChild(xmlElement);
+
+		org.w3c.dom.Element xmlGroup = xmlDocument.createElement("methods");
+		edu.cmu.cs.stage3.alice.core.Element[] listElements = model.responses.getElementArrayValue();
+		for (int i=0; i<listElements.length; i++) {
+			xmlElement = xmlDocument.createElement("method");
+			xmlElement.appendChild(xmlDocument.createTextNode(listElements[i].name.getStringValue()));
+			xmlGroup.appendChild(xmlElement);
+		}
+		xmlModel.appendChild(xmlGroup);
+
+		xmlGroup = xmlDocument.createElement("questions");
+		listElements = model.questions.getElementArrayValue();
+		for (int i=0; i<listElements.length; i++) {
+			xmlElement = xmlDocument.createElement("question");
+			xmlElement.appendChild(xmlDocument.createTextNode(listElements[i].name.getStringValue()));
+			xmlGroup.appendChild(xmlElement);
+		}
+		xmlModel.appendChild(xmlGroup);
+
+		xmlGroup = xmlDocument.createElement("sounds");
+		listElements = model.sounds.getElementArrayValue();
+		for (int i=0; i<listElements.length; i++) {
+			xmlElement = xmlDocument.createElement("sound");
+			xmlElement.appendChild(xmlDocument.createTextNode(listElements[i].name.getStringValue()));
+			xmlGroup.appendChild(xmlElement);
+		}
+		xmlModel.appendChild(xmlGroup);
+
+		xmlDocument.appendChild( xmlModel );
+		xmlDocument.getDocumentElement().normalize();
+
+		return xmlDocument;
+	}
+	
+   	public void saveCharacter(edu.cmu.cs.stage3.alice.core.Element element) {
 		String characterFilename = element.name.getStringValue() + "." + CHARACTER_EXTENSION; 
 		characterFilename = characterFilename.substring(0, 1).toUpperCase() + characterFilename.substring(1);
+		
 		saveCharacterFileDialog.setSelectedFile(new java.io.File(characterFilename));
 		saveCharacterFileDialog.setVisible(true);
 		AuthoringToolResources.centerComponentOnScreen(saveCharacterFileDialog);
@@ -2371,12 +2478,118 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	public void saveCharacter(edu.cmu.cs.stage3.alice.core.Element element, java.io.File file) {
-		characterStoreProgressPane.setElement( element );
-		characterStoreProgressPane.setFile( file );
-		characterStoreProgressPane.setFilnameToByteArrayMap( null );
-		edu.cmu.cs.stage3.swing.DialogManager.showDialog( characterStoreProgressPane );
-	}
+		
+		edu.cmu.cs.stage3.alice.gallery.batch.BatchSaveWithThumbnails batch = new edu.cmu.cs.stage3.alice.gallery.batch.BatchSaveWithThumbnails();
+		edu.cmu.cs.stage3.alice.core.Transformable trans = (edu.cmu.cs.stage3.alice.core.Transformable) element;
+		
+		//String elementName = trans.name.getStringValue();
+		//String fileName = Character.toUpperCase( elementName.charAt( 0 ) ) + elementName.substring( 1 ) + ".a2c"; 
+		java.io.File dst = file; //new java.io.File( dstParent, fileName );
+		Object def = trans.vehicle.get();
+		trans.vehicle.set( batch.getWorld() );
 
+		java.util.Dictionary map = new java.util.Hashtable();
+		batch.m_camera.getAGoodLookAtRightNow( trans );
+
+		edu.cmu.cs.stage3.math.Sphere bs = trans.getBoundingSphere();
+		if( (bs != null) && (bs.getCenter() != null) && (bs.getRadius() > 0.0) ) {
+			double radius = bs.getRadius();
+			double theta = Math.min( batch.m_camera.horizontalViewingAngle.doubleValue(), batch.m_camera.verticalViewingAngle.doubleValue() );
+			double farDist = radius/Math.sin( theta/2.0 ) + radius;
+			batch.m_camera.farClippingPlaneDistance.set( new Double( farDist ) );
+		}
+
+		batch.m_rt.clearAndRenderOffscreen();
+		java.awt.Image image = batch.m_rt.getOffscreenImage();
+
+		// Crappy drop shadowing
+
+		java.awt.Image zBufferImage = batch.m_rt.getZBufferImage();
+
+		int clear = 0xFFFFFF00;
+		if (zBufferImage != null){
+			int width = zBufferImage.getWidth(null);
+			int height = zBufferImage.getHeight(null);
+			int[] zBuffer = makePixmap(zBufferImage);
+			int[] imageBuffer = makePixmap(image);
+			double[] shadow = new double[zBuffer.length];
+	
+			for (int x=0; x<width; x++) {
+				for (int y=0; y<height; y++) {
+					if (zBuffer[x+y*width]!=clear) {
+						for (int i=1; i<=6; i++) {
+							double shade = ((double)(6-i+1))/10.0;
+							if ((x+i+(y+i)*width<zBuffer.length) && zBuffer[x+i+(y+i)*width]==clear && shadow[x+i+(y+i)*width]<shade) {
+								shadow[x+i+(y+i)*width]=shade;
+							}
+						}
+					}
+				}
+			}
+	
+			for (int x=0; x<width; x++) {
+				for (int y=0; y<height; y++) {
+					int r = (imageBuffer[x+y*width]>>16)&0xFF;
+					int g = (imageBuffer[x+y*width]>>8)&0xFF;
+					int b = (imageBuffer[x+y*width])&0xFF;
+					r=(int)(((double)r)*(1.0-shadow[x+y*width]));
+					g=(int)(((double)g)*(1.0-shadow[x+y*width]));
+					b=(int)(((double)b)*(1.0-shadow[x+y*width]));
+					imageBuffer[x+y*width] = (0xFF<<24)+(r<<16)+(g<<8)+b;
+				}
+			}
+			image = new java.awt.image.BufferedImage(width,height,java.awt.image.BufferedImage.TYPE_INT_ARGB);
+			((java.awt.image.BufferedImage)image).setRGB(0,0,width,height,imageBuffer,0,width);
+	
+			// end of crappy drop shadow
+		}
+
+		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+		try {
+			edu.cmu.cs.stage3.image.ImageIO.store( "png", baos, image );
+			map.put( "thumbnail.png", baos.toByteArray() );
+		} catch( java.io.IOException ioe ) {
+			ioe.printStackTrace();
+		} catch( InterruptedException ie ) {
+			ie.printStackTrace();
+		}
+
+		org.w3c.dom.Document xmlDocument = createCharacterXML( trans );
+		
+		baos = new java.io.ByteArrayOutputStream();
+		try {
+			edu.cmu.cs.stage3.xml.Encoder.write( xmlDocument, baos );
+			map.put( "galleryData.xml", baos.toByteArray() );
+		} catch( java.io.IOException ioe ) {
+			ioe.printStackTrace();
+		}
+
+		trans.vehicle.set( def );
+
+		try {
+			Thread.sleep( 100 );
+		} catch( InterruptedException ie ) {
+			ie.printStackTrace();
+		}
+
+		if( batch.m_rt instanceof edu.cmu.cs.stage3.alice.scenegraph.renderer.nativerenderer.RenderTarget ) {
+			((edu.cmu.cs.stage3.alice.scenegraph.renderer.nativerenderer.RenderTarget)batch.m_rt).commitAnyPendingChanges();
+		}
+
+		try {
+			trans.store( dst, null, map );
+		} catch( java.io.IOException ioe ) {
+			ioe.printStackTrace();
+		} catch( Throwable t ) {
+			t.printStackTrace();
+		}
+		
+		//characterStoreProgressPane.setElement( element );
+		//characterStoreProgressPane.setFile( file );
+		//characterStoreProgressPane.setFilnameToByteArrayMap( null );
+		//edu.cmu.cs.stage3.swing.DialogManager.showDialog( characterStoreProgressPane );
+	}
+	
 	public edu.cmu.cs.stage3.alice.core.Element importElement() {
 		return importElement(null);
 	}
@@ -3039,6 +3252,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		edu.cmu.cs.stage3.swing.DialogManager.showDialog(aboutContentPane);
 	}
 
+	public void showLicense() {
+		edu.cmu.cs.stage3.swing.DialogManager.showDialog(licenseContentPane);
+	}
+	
 	public void showPreferences() {
 		int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog(preferencesContentPane);
 		if (result == edu.cmu.cs.stage3.swing.ContentPane.OK_OPTION) {
@@ -5421,8 +5638,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		final Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		
 		final javax.swing.JDialog dlg = new javax.swing.JDialog(new JFrame(),Messages.getString("Updating_Alice_2_3___Checking_for_update"));
-   		dlg.setPreferredSize(new Dimension(330,180));
-   		dlg.setSize(new Dimension(330,180));
+   		dlg.setPreferredSize(new Dimension(330,250));
+   		dlg.setSize(new Dimension(330,250));
    		dlg.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
         dlg.setAlwaysOnTop(true);
         dlg.setResizable(false);
@@ -5450,8 +5667,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         final JCheckBox EnglishGallery = new JCheckBox(Messages.getString("Download_English_Gallery"));
         left.add(EnglishGallery);
 
+        final JCheckBox EnglishUpdate = new JCheckBox(Messages.getString("Update_English_Gallery"));
+        left.add(EnglishUpdate);
+
         final JCheckBox SpanishGallery = new JCheckBox(Messages.getString("Download_Spanish_Gallery"));
         left.add(SpanishGallery);
+
+        final JCheckBox SpanishUpdate = new JCheckBox(Messages.getString("Update_Spanish_Gallery"));
+        left.add(SpanishUpdate);
+
         updateDialog.add(left, BorderLayout.LINE_START);
         
         Box bottom = Box.createVerticalBox();
@@ -5461,7 +5685,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         ConfirmUpdate.addActionListener(new java.awt.event.ActionListener(){
         	public void actionPerformed(java.awt.event.ActionEvent e) {
         		dlg.dispose();
-        		if (UpdateJAR.isSelected() || EnglishGallery.isSelected() || SpanishGallery.isSelected()) {
+        		if (UpdateJAR.isSelected() || EnglishGallery.isSelected() || EnglishUpdate.isSelected() || SpanishGallery.isSelected() || SpanishUpdate.isSelected()) {
         			if ( UpdateJAR.isSelected() ) {
         				new Thread(new StartUpdating( "alice.jar", 
         						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar",
@@ -5472,8 +5696,18 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "English" ,
         						true )).start();
         			}
+        			if ( EnglishUpdate.isSelected() ) {
+        				new Thread(new StartUpdating( "EnglishUpdate.zip", 
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "English" ,
+        						true )).start();
+        			}
         			if ( SpanishGallery.isSelected() ) {
         				new Thread(new StartUpdating( "SpanishGallery.zip",
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "Spanish" ,
+        						true )).start();
+        			}
+        			if ( SpanishUpdate.isSelected() ) {
+        				new Thread(new StartUpdating( "SpanishUpdate.zip",
         						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "Spanish" ,
         						true )).start();
         			}
@@ -5505,6 +5739,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 		
 		public void run() {
+			int ii=0;
 			java.io.BufferedInputStream bis = null;
 			java.io.BufferedOutputStream bos = null;
 			java.net.URLConnection urlc = null;
@@ -5539,7 +5774,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 				bis.close();
 				bos.close();
-				
+
 				if ( isGallery && !monitor.isCanceled()) {
 					Enumeration entries;
 					ZipFile zipFile;
@@ -5549,8 +5784,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					
 					monitor.setNote("Copying models to Alice gallery");
 					monitor.setMaximum(zipFile.size());
-					progress = 0;
-					
+
 					while (entries.hasMoreElements()) {
 						ZipEntry entry = (ZipEntry) entries.nextElement();
 						if (entry.isDirectory()) {
@@ -5564,6 +5798,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						while ((len = in.read(buffer)) >= 0)
 							out.write(buffer, 0, len);
 						in.close();
+						out.flush();
 						out.close();				
 						monitor.setProgress(progress++);
 					}

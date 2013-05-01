@@ -136,4 +136,39 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 		revalidate();
 		repaint();
 	}
+	
+	protected String getHTMLColorString(java.awt.Color color){
+		String r = Integer.toHexString(color.getRed());
+		String g = Integer.toHexString(color.getGreen());
+		String b = Integer.toHexString(color.getBlue());
+	
+		if (r.length() == 1){
+			r = "0"+r;
+		}
+		if (g.length() == 1){
+			g = "0"+g;
+		}
+		if (b.length() == 1){
+			b = "0"+b;
+		}
+		return new String("#"+r+g+b);
+	}
+	
+	public void getHTML(StringBuffer toWriteTo){
+		String tempString = "";
+	
+		tempString += "<span style=\"background-color: "+getHTMLColorString(this.getBackground())+"\">";
+		
+		String labelText = getText();
+		if (getFont().isBold()){
+			tempString += "<b>"+labelText+"</b>";  
+		}
+		if (getFont().isItalic()){
+			tempString += "<i>"+labelText+"</i>";  
+		}
+		tempString += "</span>";
+		tempString = " "+tempString+" ";  
+		
+		toWriteTo.append(tempString);
+	}
 }

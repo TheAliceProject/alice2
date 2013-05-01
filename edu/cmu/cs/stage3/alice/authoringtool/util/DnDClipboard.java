@@ -123,7 +123,7 @@ public void clear (){
 					}
 				}
 			} catch (Exception e) {
-				
+	
 			}
 			if (edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(dtde, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor)){
 				dtde.acceptDrag( dtde.getDropAction() );

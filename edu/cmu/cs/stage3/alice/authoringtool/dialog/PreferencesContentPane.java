@@ -828,13 +828,13 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		// "directories.galleryDirectory", galleryDirectoryTextField.getText()
 		// );
 		// }
-		// if( ! Configuration.getValue( authoringToolPackage,
-		// "directories.charactersDirectory" ).equals(
-		// characterDirectoryTextField.getText() ) ) {
-		// Configuration.setValue( authoringToolPackage,
-		// "directories.charactersDirectory",
-		// characterDirectoryTextField.getText() );
-		// }
+		if( ! Configuration.getValue( authoringToolPackage,
+					"directories.charactersDirectory" ).equals(
+					worldDirectoryTextField.getText() + System.getProperty( "file.separator" ) + "CustomGallery") ) {
+			Configuration.setValue( authoringToolPackage,
+					"directories.charactersDirectory",
+					worldDirectoryTextField.getText() + System.getProperty( "file.separator" ) + "CustomGallery");
+		}
 		if (!Configuration.getValue(authoringToolPackage,
 				"screenCapture.directory").equals(
 				captureDirectoryTextField.getText())) {
@@ -1416,12 +1416,10 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		configTabbedPane.add(generalPanel, Messages.getString("General"));
 		configTabbedPane.add(renderingPanel, Messages.getString("Rendering"));
 		// configTabbedPane.add(directoriesPanel, "Directories");
-		configTabbedPane
-				.add(screenGrabPanel, Messages.getString("Screen_Grab"));
+		configTabbedPane.add(screenGrabPanel, Messages.getString("Screen_Grab"));
 		// TODO: config for bvw
 		// configTabbedPane.add(aseImporterPanel, "ASE Importer");
-		configTabbedPane
-				.add(seldomUsedPanel, Messages.getString("Seldom_Used"));
+		configTabbedPane.add(seldomUsedPanel, Messages.getString("Seldom_Used"));
 
 		Box buttonBox;
 		buttonBox = Box.createHorizontalBox();

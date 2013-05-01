@@ -45,8 +45,8 @@ public class DefaultRenderTargetFactory implements RenderTargetFactory {
 			} catch( Throwable t ) {
 				//pass
 			}
-		} else {
-			try {
+		} else {	// Need to use this when compiling applet for web
+			try { 
 				vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
 			} catch( Throwable t ) {
 				//pass

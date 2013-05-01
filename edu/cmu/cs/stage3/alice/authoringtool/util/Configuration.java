@@ -144,21 +144,22 @@ public final class Configuration {
 		root = new Key();
 		root.name = "<root>"; 
 		root.subKeys = new java.util.HashMap();
-		java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt"); 
-		if (aliceHasNotExitedFile.canRead()){
+		java.io.File aliceHasNotExitedFile = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), "aliceHasNotExited.txt");
+/*		if (aliceHasNotExitedFile.canRead()){
 			try {
 				storeConfig();
 			} catch( java.io.IOException e2 ) {
 				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_new_preferences_file_"), e2 ); 
 			}
 		}
-		else{
+		else{*/
 			try {
 				loadConfig( configLocation );
 			} catch( Exception e ) {
 				
 			}
-		}
+		//}
+		
 	}
 
 	private static class Key {

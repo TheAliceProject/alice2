@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
 import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Font;
 
 /**
  * @author Jason Pratt
@@ -52,9 +53,10 @@ public class SplashScreen extends java.awt.Frame {
 				g.drawImage( SplashScreen.this.image, 0, 0, this );
 //				g.setColor( java.awt.Color.yellow );
 				g.setColor( java.awt.Color.white );
+				//Font font = g.getFont();			
+				g.setFont(new Font("Dialog", Font.BOLD, 12));
 				String versionString = Messages.getString("version__") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion(); 
 				int stringWidth = g.getFontMetrics().stringWidth( versionString );
-//				g.drawString( versionString, 6, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.
 				g.drawString( versionString, size.width - 10 - stringWidth, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.			
 				g.drawString(Messages.getString("Loading___"), 10, size.height - 6 ); 
 			}

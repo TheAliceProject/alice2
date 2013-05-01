@@ -266,12 +266,12 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			if (currentDir.exists()) {
 				rootDirectoryPath = currentDir.getAbsolutePath()
 						+ java.io.File.separator;
-				Runnable testRun = new Runnable() {
-					public void run() {
+				//Runnable testRun = new Runnable() {
+				//	public void run() {
 						htmlFileChooser.setCurrentDirectory(currentDir);
-					}
-				};
-				SwingUtilities.invokeAndWait(testRun);
+				//	}
+				//};
+				//SwingUtilities.invokeAndWait(testRun);
 			} else {
 				rootDirectoryPath = edu.cmu.cs.stage3.alice.authoringtool.JAlice
 						.getAliceUserDirectory().getAbsolutePath()
@@ -285,10 +285,10 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			// If an error occurs, it defaults to My Document as the current
 			// directory.
 			// System.err.println("Error in SaveForWebContentPane");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} catch (InvocationTargetException e) {
+//			e.printStackTrace();
 		}
 		updateDirectory();
 

@@ -34,6 +34,7 @@ import edu.cmu.cs.stage3.io.DirectoryTreeStorer;
 import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.util.Criterion;
 import edu.cmu.cs.stage3.util.HowMuch;
+import java.nio.charset.Charset;
 
 public abstract class Element {
 	private static java.util.Hashtable s_classnameMap = new java.util.Hashtable();
@@ -1433,7 +1434,7 @@ public abstract class Element {
 		String currentDirectory = loader.getCurrentDirectory();
         try {
             java.io.InputStream inputStream = loader.readFile( XML_FILENAME );
-            java.io.Reader reader = new java.io.InputStreamReader(inputStream,"UTF-8");
+            java.io.Reader reader = new java.io.InputStreamReader(inputStream, "UTF-8");
             
             org.xml.sax.InputSource is = new org.xml.sax.InputSource(reader);
             is.setEncoding("UTF-8");
@@ -1516,7 +1517,7 @@ public abstract class Element {
 			int elementCount = edu.cmu.cs.stage3.progress.ProgressObserver.UNKNOWN_TOTAL;
 			try {
 				java.io.BufferedReader br = new java.io.BufferedReader( new java.io.InputStreamReader ( new java.io.BufferedInputStream( loader.readFile( "elementCountHint.txt" ) ) ) ); 
-				elementCount = Integer.parseInt( br.readLine() );
+				elementCount = Integer.parseInt( br.readLine().replaceAll("\\D", "") );
 				loader.closeCurrentFile();
 			} catch( java.io.FileNotFoundException fnfe ) {
 				//pass
@@ -1722,15 +1723,15 @@ public abstract class Element {
 		}
 
 		String thisDirectory = storer.getCurrentDirectory();
-		String thisDirectory2 = new String (thisDirectory.getBytes(),"UTF-8");
+		//String thisDirectory2 = new String (thisDirectory.getBytes("UTF-8"), "UTF-8");
 		for( int i=0; i<getChildCount(); i++ ) {
 			Element child = (Element)getChildAt( i );
-			String name = child.getRepr( i );
-			String name2 = new String(name.getBytes(), "UTF-8");		//AikMin new
+			String name = child.getRepr( i );	
+			String name2 = new String(name.getBytes("UTF-8"));
 			storer.createDirectory( name2 );
 			storer.setCurrentDirectory( name2 );
 			count = child.internalStore( builder, storer, progressObserver, howMuch, referenceGenerator, count );
-			storer.setCurrentDirectory( thisDirectory2 );
+			storer.setCurrentDirectory( thisDirectory );
 		}
 		return count;
 	}

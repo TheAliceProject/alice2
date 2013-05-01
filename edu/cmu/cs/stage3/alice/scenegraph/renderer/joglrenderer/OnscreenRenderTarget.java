@@ -23,13 +23,15 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget {
     private javax.media.opengl.GLCanvas m_glCanvas;
     //private javax.media.opengl.GLPbuffer m_glPBuffer;
     private RenderContext m_renderContext;
     private PickContext m_pickContext;
 	public OnscreenRenderTarget( Renderer renderer ) {
-		super( renderer );
+		super( renderer );		
 	}
 	
 	public void markDirty() {
@@ -56,8 +58,8 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	        glCaps.setAlphaBits( 8 );
 	        //m_glCanvas = javax.media.opengl.GLDrawableFactory.getFactory().createGLCanvas( glCaps );
 	        m_glCanvas = new javax.media.opengl.GLCanvas();
-	        m_renderContext = new RenderContext( this );
-	        m_glCanvas.addGLEventListener( m_renderContext );
+	       	m_renderContext = new RenderContext( this );
+	        m_glCanvas.addGLEventListener( m_renderContext );        
             m_pickContext = new PickContext( this );
 	        m_glCanvas.addGLEventListener( m_pickContext );
 	    }
@@ -90,5 +92,5 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 //	        return null;
 //	    }
 	    
-	}
+	}	
 }

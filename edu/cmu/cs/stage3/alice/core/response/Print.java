@@ -69,7 +69,7 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 			outputtext = null;
 			String s = Print.this.text.getStringValue();
 			Object o = Print.this.object.get();	
-			// Time
+/*			// Time
 			if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart)
 				outputtext = Messages.getString("time_elapsed_is_"); 
 			else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.Year)
@@ -110,7 +110,7 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 				outputtext = Messages.getString("ask_user_for_a_string_is_"); 
 			//Random
 			else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.RandomNumber)
-				outputtext = Messages.getString("random_number_is_"); 
+				outputtext = Messages.getString("random_number_is_"); */
 			
 			Object value = Print.this.object.getValue();
 			if (value instanceof Double){
@@ -163,7 +163,7 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 				valueText = value.toString();
 			}
 
-			String output;
+			String output = "";
 			if( s != null ) {
 				if( o != null ) {
 					output = s + valueText;
@@ -172,10 +172,10 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 				}
 			} else {
 				if( o != null ) {
-					output = Print.this.getPrefix();
-					if (outputtext != null)
-						output = output.substring(0,(output.indexOf("__")-1))+" "+outputtext+valueText;  
-					else
+					//output = Print.this.getPrefix();
+					//if (outputtext != null && output.length()>1)
+					//	output = output.substring(0,(output.indexOf("__")-1))+" "+outputtext+valueText;  
+					//else
 						output = output + valueText;
 				} else {
 					output = valueText;

@@ -48,6 +48,7 @@ public class ModelVisualization extends edu.cmu.cs.stage3.alice.core.Visualizati
 	protected void loadCompleted() {
         super.loadCompleted();
         Variable item = getItemVariable();
+        if (item != null) {
         item.value.addPropertyListener( new edu.cmu.cs.stage3.alice.core.event.PropertyListener() {
             public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ) {
             }
@@ -56,6 +57,7 @@ public class ModelVisualization extends edu.cmu.cs.stage3.alice.core.Visualizati
             }
         } );
         synchronize( getItem() );
+        }
     }
     public javax.vecmath.Matrix4d getTransformationFor( edu.cmu.cs.stage3.alice.core.Model model ) {
         javax.vecmath.Matrix4d m = new javax.vecmath.Matrix4d();

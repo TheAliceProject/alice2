@@ -31,24 +31,9 @@ import edu.cmu.cs.stage3.lang.Messages;
  * @author Jason Pratt
  */
 public class JAlice {
-	static{
-		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
-		if( authoringtoolConfig.getValue( "language" ) == null ) { 
-			authoringtoolConfig.setValue( "language", "English" );  
-		} 
-		//Locale mexico = new Locale("es","MX");
-		//Locale spain = new Locale("es","ES");
-		if (authoringtoolConfig.getValue( "language" ).compareToIgnoreCase("spanish")==0){
-			AikMin.locale = "es";
-			Locale.setDefault(new Locale("es","MX"));
-		} else {
-			AikMin.locale = "en";
-			Locale.setDefault(new Locale("en","US"));
-		}
-	}
 	// version information
-	private static String version = "2.3.1"; 
-	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString();
+	private static String version = "2.3.4"; 
+	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	static {
 		try {
@@ -77,14 +62,14 @@ public class JAlice {
 						} 
 					}
 				} else {
-					version = Messages.getString("cannot_read_version_txt"); 
+					version = Messages.getString("cannot_read_config_txt"); 
 				}
 			} else {
-				version = Messages.getString("version_txt_does_not_exist"); 
+				version = Messages.getString("config_txt_does_not_exist"); 
 			}
 		} catch( Throwable t ) {
 			t.printStackTrace();
-			version = Messages.getString("error_while_reading_version_txt"); 
+			version = Messages.getString("error_while_reading_config_txt"); 
 		}
 	}
 
@@ -130,11 +115,6 @@ public class JAlice {
 				splashScreen = initSplashScreen();
 				splashScreen.showSplash();
 			}
-			if (AikMin.locale.equals("en")){
-				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default.a2w" ).getAbsoluteFile();
-			} else {
-				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale+".a2w" ).getAbsoluteFile();
-			}
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 			configInit();
 			try{
@@ -144,12 +124,17 @@ public class JAlice {
 				}
 				aliceHasNotExitedFile.createNewFile();
 				java.io.OutputStreamWriter writer = new java.io.OutputStreamWriter(new java.io.FileOutputStream(aliceHasNotExitedFile));
-				writer.write(Messages.getString("Alice_has_not_exited_propertly_yet_")); 
+				writer.write("Alice_has_not_exited_propertly_yet_"); 
 				writer.flush();
 				writer.close();
 			}catch (Exception e){}
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources" ); 
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities" ); 
+			if (AikMin.locale.equals("en")){
+				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default.a2w" ).getAbsoluteFile();
+			} else {
+				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale+".a2w" ).getAbsoluteFile();
+			}
 			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
 				splashScreen.hideSplash();
@@ -164,7 +149,8 @@ public class JAlice {
 
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen initSplashScreen() {
 		java.awt.Image splashImage;
-		if (AikMin.locale.equals("en")){
+		if (AikMin.locale.equals("")){
+			AikMin.locale = "en";
 			splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
 					.getResource("images/AliceSplash.png") ); 
 		} else {
@@ -397,16 +383,18 @@ public class JAlice {
 			authoringtoolConfig.setValue( "directories.examplesDirectory", "exampleWorlds" );  
 		}
 
-		if( authoringtoolConfig.getValue( "directories.charactersDirectory" ) == null ) { 
-			String dir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop";   
-			java.io.File captureDir = new java.io.File(dir);
-			if (captureDir.canWrite()){
-				authoringtoolConfig.setValue( "directories.charactersDirectory", dir ); 
-			}
-			else{
-				authoringtoolConfig.setValue( "directories.charactersDirectory", null ); 
+		String charDir = authoringtoolConfig.getValue( "directories.charactersDirectory" );	
+		if( charDir == null ) { 
+			charDir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop" + System.getProperty( "file.separator" ) + "CustomGallery";   
+		} 
+		java.io.File captureDir = new java.io.File(charDir);
+		if (!captureDir.exists()){
+			if (!captureDir.mkdir()){
+				charDir = System.getProperty( "user.home" ) + System.getProperty( "file.separator" ) + "Desktop";
+				captureDir = new java.io.File(charDir);
 			}
 		}
+		authoringtoolConfig.setValue( "directories.charactersDirectory", charDir ); 
 		
 		if( authoringtoolConfig.getValue( "directories.templatesDirectory" ) == null ) { 
 			authoringtoolConfig.setValue( "directories.templatesDirectory", "templateWorlds" );  
@@ -497,8 +485,8 @@ public class JAlice {
 				case 'r': //default Renderer Class...
 					defaultRendererClassname = g.getOptarg();
 					break;
-				/*
-				case 'c': //custom Startup class
+				
+/*				case 'c': //custom Startup class
 					arg = g.getOptarg();
 					try	{
 						Class cls = Class.forName( arg );
@@ -512,8 +500,8 @@ public class JAlice {
 					} catch( Exception e ) {
 						e.printStackTrace();
 					}
-					break;
-				*/
+					break;*/
+				
 				case 'h': //help
 				case '?':
 					System.err.println( helpMessage );

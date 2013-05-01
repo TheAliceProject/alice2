@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import javax.swing.UIManager;
 	
 public class AikMin {
-	public static String locale = "en";
+	public static String locale = "";
 	public static int target = 0;	// Compile with 1 for alice applet
 	//public static String version ="06/01/2012";
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));

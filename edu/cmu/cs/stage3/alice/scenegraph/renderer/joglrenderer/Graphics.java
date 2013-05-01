@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
 import javax.media.opengl.GL;
+import sun.java2d.pipe.CompositePipe;
 
 public class Graphics extends java.awt.Graphics {
 	private RenderContext m_renderContext;
@@ -276,19 +277,11 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawString( String str, int x, int y ) {
-//	    float scale = m_font.getSize() / 170.0f;
-//	    m_renderContext.gl.glPushMatrix();
-	    //m_renderContext.gl.glTranslatef( x, y, 0 );
-	    m_renderContext.gl.glRasterPos2f(x, y);
-//	    m_renderContext.gl.glScalef( scale, -scale, 1.0f );
-	    m_renderContext.glut.glutBitmapString( com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str);
-//	    //m_renderContext.glut.glutStrokeString( com.sun.opengl.util.GLUT.BITMAP_HELVETICA_18 , str);//com.sun.opengl.util.GLUT.STROKE_ROMAN, str );
-//	    for (int i = 0;i < str.length(); i++){
-//	    	m_renderContext.glut.glutStrokeCharacter(com.sun.opengl.util.GLUT.STROKE_MONO_ROMAN , str.charAt(i));
-//	    }
-//	    m_renderContext.gl.glPopMatrix();
-   
-	    
+		com.sun.opengl.util.j2d.TextRenderer renderer = new com.sun.opengl.util.j2d.TextRenderer( m_font );
+	    renderer.beginRendering(m_renderContext.getWidth(), m_renderContext.getHeight());
+	    renderer.setColor(m_color);
+	    renderer.draw(str, x, m_renderContext.getHeight() - y);
+	    renderer.endRendering();
 	}
 	
 	public void drawString( java.text.AttributedCharacterIterator iterator, int x, int y ) {

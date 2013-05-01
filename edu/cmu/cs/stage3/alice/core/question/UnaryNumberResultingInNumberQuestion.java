@@ -64,7 +64,7 @@ public abstract class UnaryNumberResultingInNumberQuestion extends NumberQuestio
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= aValue+ Messages.getString("_converted_from_degrees_to_radians_is_");		 
 		} 
 		if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Int)
-			return String.valueOf( (int) getValue ( aValue ) );
+			return (int) aValue;
 			
 		return new Double( getValue( aValue ) );
 	}

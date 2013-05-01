@@ -72,7 +72,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		java.util.Enumeration enum0 = m_zipFile.entries();
 		while( enum0.hasMoreElements() ) {
 			java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)enum0.nextElement();
-			String path = new String (getCanonicalPathname( zipEntry.getName() ).getBytes(), "UTF-8");	//AikMin new
+			String path = new String (getCanonicalPathname( zipEntry.getName() ).getBytes("UTF-8"), "UTF-8");	//AikMin new
 			m_pathnameToZipEntryMap.put( path , zipEntry );
 		}
 	}
@@ -104,7 +104,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 			}
 		}
 		try {
-			String utf8 = new String (pathname.getBytes(), "UTF-8");		// AikMin new
+			String utf8 = new String (pathname.getBytes("UTF-8"), "UTF-8");		// AikMin new
 			m_currentDirectory = utf8;
 		} catch (Exception e){}
 	}
@@ -116,12 +116,16 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 	public java.io.InputStream readFile( String filename ) throws IllegalArgumentException, java.io.IOException {
 		closeCurrentFile();
 		String pathname = getCanonicalPathname( m_currentDirectory + filename );
-		String utf8 = new String (pathname.getBytes(), "UTF-8");	// AikMin new
+		String utf8 = new String (pathname.getBytes("UTF-8"), "UTF-8");	// AikMin new
 		java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( utf8 );
+		if  (zipEntry == null ) {
+			utf8 = new String (pathname.getBytes("ASCII"), "UTF-8");	// AikMin new
+			zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( utf8 );
+		}
 		if( zipEntry != null ) {
 			m_currentlyOpenStream = m_zipFile.getInputStream( zipEntry );
 			return m_currentlyOpenStream;
-		} else {
+		} else {		
 			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__") + pathname ); 
 		}
 	}

@@ -96,7 +96,7 @@ class VisualProxy extends ComponentProxy {
                 }
             }
             	
-        	
+
             if( m_frontFacingAppearanceProxy == m_backFacingAppearanceProxy ) {
                 if( m_frontFacingAppearanceProxy != null ) {
                     m_frontFacingAppearanceProxy.setPipelineState( context, GL.GL_FRONT_AND_BACK );

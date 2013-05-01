@@ -141,8 +141,12 @@ public class JAliceFrame extends javax.swing.JFrame {
 		if( authoringToolConfig.getValue( "useSingleFileLoadStore" ).equalsIgnoreCase( "true" ) ) {  
 			fileMenu.remove( JAliceFrame.this.openZippedWorldItem );
 		}
-
+String t = authoringToolConfig.getValue( "backgroundColor" );
+if (t == null){
+	getContentPane().setBackground( new java.awt.Color( 0, 78, 152 ) );
+} else {
 		getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() ); 
+}
 		Configuration.addConfigurationListener(
 			new edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationListener() {
 				public void changing( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {}
@@ -361,6 +365,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		teachMeButton.setAction( actions.launchTutorialAction );
 		selectTutorialMenuItem.setAction( actions.launchTutorialFileAction );
 		softwareUpdate.setAction( actions.launchSoftwareUpdate );
+		license.setAction( actions.licenseAction );
 		showStdOutItem.setAction( actions.showStdOutDialogAction );
 		showStdErrItem.setAction( actions.showStdErrDialogAction );
 		printItem.setAction( actions.showPrintDialogAction );
@@ -586,6 +591,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 	JButton teachMeButton = new JButton();
 	JMenuItem selectTutorialMenuItem = new JMenuItem();
 	JMenuItem softwareUpdate = new JMenuItem();
+	JMenuItem license = new JMenuItem();
 	JMenuItem showStdOutItem = new JMenuItem();
 	JMenuItem showStdErrItem = new JMenuItem();
 	JMenuItem printItem = new JMenuItem();
@@ -683,7 +689,8 @@ public class JAliceFrame extends javax.swing.JFrame {
 		exportMovieItem.setText(Messages.getString("Export_Video")); 
 		teachMeButton.setText(Messages.getString("Teach_Me")); 
 		selectTutorialMenuItem.setText(Messages.getString("Select_a_Tutorial")); 
-		softwareUpdate.setText("Software Updates");
+		softwareUpdate.setText(Messages.getString("Update_Software"));
+		license.setText(Messages.getString("View_License")); 
 		showStdOutItem.setText(Messages.getString("Text_Output___")); 
 		showStdErrItem.setText(Messages.getString("Standard_Error___")); 
 		printItem.setText(Messages.getString("Print___")); 
@@ -696,7 +703,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		fileMenu.add(openZippedWorldItem);
 		fileMenu.add(saveWorldItem);
 		fileMenu.add(saveWorldAsItem);
-		fileMenu.add(saveForWebItem);
+		//fileMenu.add(saveForWebItem);
 		fileMenu.add(exportMovieItem);
 		fileMenu.add(printItem);
 //		fileMenu.add(addCharacterItem);
@@ -719,6 +726,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		helpMenu.add(exampleWorldsItem);
 		helpMenu.add(selectTutorialMenuItem);
 		helpMenu.add(softwareUpdate);
+		helpMenu.add(license);
 		helpMenu.add(aboutItem);
 		this.getContentPane().add(toolBarPanel, BorderLayout.NORTH);
 		toolBarPanel.add(buttonPanel,   new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0
