@@ -94,7 +94,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 			m_increment = proxy.increment;
 			m_index = proxy.index;
 			edu.cmu.cs.stage3.alice.core.Variable v = ((edu.cmu.cs.stage3.alice.core.Variable)m_index.getValue());
-			v.name.set(getIndexName());
+			//v.name.set(getIndexName());
         }
         else if (m_element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN){
             edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN proxy = (edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN)m_element;
@@ -375,7 +375,6 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 
 	protected void updateGUI(){
         super.updateGUI();
-  
 		
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory pifCount = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(m_end);
         countInput = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(m_end, true, true, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(m_end), pifCount);

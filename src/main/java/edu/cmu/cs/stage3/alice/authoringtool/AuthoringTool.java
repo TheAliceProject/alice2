@@ -411,7 +411,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		this.stdOutToConsole = stdOutToConsole;
 		this.stdErrToConsole = stdErrToConsole;
 		initializeOutput(stdOutToConsole, stdErrToConsole);
-		pyInit();
+		//pyInit();
 		//AikMin.setFontSize(12);		
 		dialogInit();
 		//AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		
@@ -468,7 +468,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	private void pyInit() {
-		scriptingFactory = new edu.cmu.cs.stage3.alice.scripting.jython.ScriptingFactory();
+		//scriptingFactory = new edu.cmu.cs.stage3.alice.scripting.jython.ScriptingFactory();
 		scriptingFactory.setStdOut(System.out);
 		scriptingFactory.setStdErr(System.err);
 	}
