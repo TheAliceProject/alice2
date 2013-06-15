@@ -190,13 +190,14 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         //}
     }
 	public java.awt.Image getOffscreenImage() {
+		int width = getSize().width, height = getSize().height;
 		if ( m_glPBuffer == null ){
-			createGLBuffer(getSize().width, getSize().height);
+			createGLBuffer(width, height);
 			clearAndRenderOffscreen();
 		}
 		javax.media.opengl.GLContext context =  m_glPBuffer.createContext(null);
 		context.makeCurrent();
-		java.awt.image.BufferedImage image = com.sun.opengl.util.Screenshot.readToBufferedImage(getSize().width, getSize().height, true);
+		java.awt.image.BufferedImage image = com.sun.opengl.util.Screenshot.readToBufferedImage(width, height, true);
 		context.release();
 		context.destroy();
 		return image;
