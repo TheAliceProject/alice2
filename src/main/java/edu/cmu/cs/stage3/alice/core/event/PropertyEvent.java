@@ -25,6 +25,7 @@ package edu.cmu.cs.stage3.alice.core.event;
 
 public class PropertyEvent extends java.util.EventObject {
 	private Object m_value;
+	private Object o_value;
 	public PropertyEvent( edu.cmu.cs.stage3.alice.core.Property source, Object value ) {
 		super( source );
 		m_value = value;
@@ -34,6 +35,12 @@ public class PropertyEvent extends java.util.EventObject {
 	}
 	public Object getValue() {
 		return m_value;
+	}
+	public Object getOldValue() {
+		return o_value;
+	}
+	public void setOldValue( Object o ){
+		o_value = o;
 	}
 	//todo deprecate?
 	public boolean isSourceAlsoKnownAs( Class cls, String name ) {

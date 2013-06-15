@@ -857,7 +857,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// System.err.println(sbox.name.get());
 
 		for (int x = 0; x < objs.length; x++)
-			findSoundsfromResponse((edu.cmu.cs.stage3.alice.core.Response) objs[x]);
+			if (objs[x] != null)
+				findSoundsfromResponse((edu.cmu.cs.stage3.alice.core.Response) objs[x]);
 
 		Element[] t = sbox
 				.getChildren(edu.cmu.cs.stage3.alice.core.Sandbox.class);

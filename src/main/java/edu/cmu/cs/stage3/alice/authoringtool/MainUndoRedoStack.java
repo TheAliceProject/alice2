@@ -115,6 +115,16 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 		isListening = false;
 		edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable ur = super.undo();
 		loadContext( ur.getContext() );
+		Object o = ur.getAffectedObject();		// Aik Min - For undoing Visualization objects
+		if ( o instanceof edu.cmu.cs.stage3.alice.core.Variable){
+			edu.cmu.cs.stage3.alice.core.Variable v = (edu.cmu.cs.stage3.alice.core.Variable) o;
+			if ( v.getParent() instanceof edu.cmu.cs.stage3.alice.core.visualization.ModelVisualization){
+				for (int i=0; i<5; i++)
+					super.undo();
+			}
+		}
+		// Todo: undo set vehicle
+		
 		isListening = temp;
 		fireChange();
 		return ur;
@@ -179,7 +189,8 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 	synchronized public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ) {
 		if( isListening ) {
 			//TODO: I need to be getting a clone here...?
-			preChangeValue = propertyEvent.getProperty().get();
+			//preChangeValue = propertyEvent.getProperty().get();
+			propertyEvent.setOldValue( propertyEvent.getProperty().get() );
 		}
 	}
 
@@ -201,8 +212,7 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 				fireChange();
 				return;
 			}
-
-			push( new edu.cmu.cs.stage3.alice.authoringtool.util.PropertyUndoableRedoable( propertyEvent.getProperty(), preChangeValue, propertyEvent.getProperty().get() ) );
+			push( new edu.cmu.cs.stage3.alice.authoringtool.util.PropertyUndoableRedoable( propertyEvent.getProperty(), propertyEvent.getOldValue(), propertyEvent.getProperty().get() ) );
 			//DEBUG System.out.println( "context: " + context );
 			//DEBUG System.out.println( "undoRedoStack.propertyChanged pushed: " + propertyEvent.getProperty() + ", " + preChangeValue + ", " + propertyEvent.getProperty().get() );
 		}

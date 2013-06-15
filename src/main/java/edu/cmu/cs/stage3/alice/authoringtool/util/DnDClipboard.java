@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.core.visualization.CollectionOfModelsVisualization;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -113,7 +114,9 @@ public void clear (){
 			try {
 				java.awt.datatransfer.Transferable transferable = dtde.getTransferable();
 				edu.cmu.cs.stage3.alice.core.Element element = (edu.cmu.cs.stage3.alice.core.Element)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor );
-				if ( element instanceof edu.cmu.cs.stage3.alice.core.Sound ) {
+				if ( element instanceof edu.cmu.cs.stage3.alice.core.Sound || 
+						element instanceof edu.cmu.cs.stage3.alice.core.Model || 
+						element instanceof edu.cmu.cs.stage3.alice.core.World ) {
 					dtde.rejectDrag();
 					return false;
 				} else if ( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse){
