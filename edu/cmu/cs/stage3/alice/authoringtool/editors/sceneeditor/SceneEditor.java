@@ -107,7 +107,7 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 			makeSceneEditorSmallButton = new javax.swing.JButton( Messages.getString("Done")); 
 			makeSceneEditorSmallButton.setMargin( new java.awt.Insets( 5, 10, 5, 10 ) );
 			makeSceneEditorSmallButton.setForeground(Color.white);
-			//makeSceneEditorSmallButton.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,20));
+			makeSceneEditorSmallButton.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,20));
 		}
 		makeSceneEditorBigButton.addActionListener( new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent ev ) {

@@ -121,8 +121,8 @@ public void clear (){
 					return false;
 				} else if ( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse){
 					if (element.getChildCount() > 0) {
-						dtde.rejectDrag();
-						return false;
+						//dtde.rejectDrag();
+						//return false;
 					}
 				}
 			} catch (Exception e) {

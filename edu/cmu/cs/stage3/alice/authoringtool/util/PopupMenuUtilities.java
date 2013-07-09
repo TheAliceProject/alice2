@@ -1461,6 +1461,7 @@ public class PopupMenuUtilities {
 					java.util.Vector unlabeledDefaultValueStructure = getUnlabeledDefaultValueStructureForProperty( property.getOwner().getClass(), property.getName(), property ); // very hackish
 					if( ! (unlabeledDefaultValueStructure.contains( currentValue ) || recentlyUsedStructure.contains( currentValue )) ) {
 						if( ! (currentValue instanceof edu.cmu.cs.stage3.alice.core.Expression) ) {
+							addRecentlyUsedValue( currentValue.getClass(), currentValue );
 							recentlyUsedStructure.add( 0, currentValue );
 							if( recentlyUsedStructure.size() > Integer.parseInt( authoringToolConfig.getValue( "maxRecentlyUsedValues" ) ) ) {
 								recentlyUsedStructure.remove( recentlyUsedStructure.size() - 1 );

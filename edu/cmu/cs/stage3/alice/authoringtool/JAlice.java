@@ -32,7 +32,7 @@ import edu.cmu.cs.stage3.lang.Messages;
  */
 public class JAlice {
 	// version information
-	private static String version = "2.3.4b"; 
+	private static String version = "2.3.5"; 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	static {

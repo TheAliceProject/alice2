@@ -247,9 +247,18 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 				while( tokenizer.hasMoreTokens() ) {
 					String token = tokenizer.nextToken();
 
-					edu.cmu.cs.stage3.alice.core.Property property = element.getPropertyNamed( token );
-					if( (property != null) && (! visibleProperties.contains( property )) ) {
-						visibleProperties.add( property );
+/*					if ( token.compareToIgnoreCase("requiredActualParameters") == 0 ){
+						edu.cmu.cs.stage3.alice.core.Property [] property = element.getArrayPropertyNamed();
+						for (int i=0; i<property.length; i++) {
+							if( (property != null) && (! visibleProperties.contains( property )) ) {
+								visibleProperties.add( property );
+							}
+						}
+					} else {*/
+						edu.cmu.cs.stage3.alice.core.Property property = element.getPropertyNamed( token );
+						if( (property != null) && (! visibleProperties.contains( property )) ) {
+							visibleProperties.add( property );
+						//}
 					}
 				}
 			}

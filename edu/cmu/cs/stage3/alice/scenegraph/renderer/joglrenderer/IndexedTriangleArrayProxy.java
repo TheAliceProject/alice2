@@ -38,6 +38,7 @@ class IndexedTriangleArrayProxy extends VertexGeometryProxy {
         if( isGeometryChanged() ) {
             context.gl.glNewList( id.intValue(), GL.GL_COMPILE_AND_EXECUTE );
             context.gl.glBegin( GL.GL_TRIANGLES );
+            if ( m_indices != null)
             for( int i=0; i<m_indices.length; i+=3 ) {
                 context.renderVertex( getVertexAt( m_indices[ i+2 ] ) );
                 context.renderVertex( getVertexAt( m_indices[ i+1 ] ) );
@@ -63,6 +64,7 @@ class IndexedTriangleArrayProxy extends VertexGeometryProxy {
             context.gl.glEnd();
 	    } else {
 	        int id = 0;
+	        if ( m_indices != null)
 	        for( int i=0; i<m_indices.length; i+=3 ) {
 				context.gl.glLoadName( id++ );
 	            context.gl.glBegin( GL.GL_TRIANGLES );

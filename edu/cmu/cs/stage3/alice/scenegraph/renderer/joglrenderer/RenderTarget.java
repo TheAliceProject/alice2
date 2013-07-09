@@ -190,8 +190,9 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         //}
     }
 	public java.awt.Image getOffscreenImage() {
-		int width = getSize().width, height = getSize().height;
-		if ( m_glPBuffer == null ){
+		java.awt.Dimension d = getSize();
+		int width = d.width, height = d.height;
+		if ( m_glPBuffer == null || m_glPBuffer.getWidth() != width || m_glPBuffer.getHeight() != height){
 			createGLBuffer(width, height);
 			clearAndRenderOffscreen();
 		}
@@ -201,7 +202,6 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		context.release();
 		context.destroy();
 		return image;
-		
 	}	
 	public java.awt.Graphics getOffscreenGraphics() {
 		return new Graphics( m_renderContextForGetOffscreenGraphics );
@@ -215,11 +215,9 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	public java.awt.Image getImage( edu.cmu.cs.stage3.alice.scenegraph.TextureMap textureMap ) {
 		return null;
 	}
-
 	public void copyOffscreenImageToTextureMap( edu.cmu.cs.stage3.alice.scenegraph.TextureMap textureMap ) {
 	    //todo
 	}
-
 	public void setSilhouetteThickness( double silhouetteThickness ) {
         //todo
     }
@@ -227,7 +225,6 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         //todo
         return 0;
     }
-
 	private double[] getActualNearPlane( edu.cmu.cs.stage3.alice.scenegraph.Camera sgCamera, int width, int height ) {
 	    CameraProxy cameraProxy = (CameraProxy)getProxyFor( sgCamera );
 	    double[] ret = new double[ 4 ];
