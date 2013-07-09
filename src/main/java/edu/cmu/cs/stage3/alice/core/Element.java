@@ -603,7 +603,16 @@ public abstract class Element {
 		}
 		return m_propertyArray;
 	}
-
+	/*public Property [] getArrayPropertyNamed() {
+		Property[] properties = getProperties();
+		java.util.ArrayList <Property> temp = new java.util.ArrayList <Property>();
+		for( int i=0; i<properties.length; i++ ) {
+			if( properties[i].getName().equals( name ) ) {//AikMin.getName(name) ) ) {
+				temp.add(properties[i]);
+			}
+		}
+		return temp.toArray(new Property[temp.size()]);
+	}*/
 	public Property getPropertyNamed( String name ) {
 		Property[] properties = getProperties();
 		for( int i=0; i<properties.length; i++ ) {

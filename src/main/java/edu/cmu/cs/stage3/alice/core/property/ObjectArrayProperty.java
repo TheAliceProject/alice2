@@ -79,9 +79,14 @@ public class ObjectArrayProperty extends ObjectProperty {
         }
     }
 	public Object[] getArrayValue() {
-		Object[] value = (Object[])getValue();
+		Object value = getValue();
 		if( value != null ) {
-			return value;
+			if (value instanceof Object[] ){
+				return (Object[]) value;
+			} else {
+				Object[] obj = {value};
+				return  obj;
+			}	
 		} else {
             if( m_arrayValueIfNull == null ) {
     			m_arrayValueIfNull = (Object[])java.lang.reflect.Array.newInstance( getComponentType(), 0 );

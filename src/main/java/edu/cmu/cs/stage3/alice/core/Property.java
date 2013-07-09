@@ -267,7 +267,7 @@ public abstract class Property {
 						//pass
 					} else {
 						//Element.debugln( this + " " + value );
-						throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_") + getName() + Messages.getString("_on_") + getOwner() + ".  " + valueClass + Messages.getString("_is_not_assignable_from_") + expression.getValueClass() );    //$NON-NLS-4$
+						//throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_") + getName() + Messages.getString("_on_") + getOwner() + ".  " + valueClass + Messages.getString("_is_not_assignable_from_") + expression.getValueClass() );    //$NON-NLS-4$
 					}
 				}
 			} else {
@@ -377,8 +377,8 @@ public abstract class Property {
 				}
 			}
 			Object value;
-			if( getValueOfExpression() ) {
-				value = expression.getValue();
+			if( getValueOfExpression() ) {	
+				value = expression;//.getValue();
 			} else {
 				value = expression;
 			}
@@ -435,7 +435,18 @@ public abstract class Property {
 		Class valueClass = getValueClass();
 		PropertyEvent propertyEvent = new PropertyEvent( this, value );
 		onChanging( propertyEvent );
-		m_value = value;
+		if ( m_value instanceof Variable[] && value instanceof Variable){
+			Variable [] temp = (Variable[]) m_value;
+			for (int i=0; i<temp.length; i++){
+				if (temp[i] == null){
+					temp[i] = (Variable) value;
+					break;
+				}
+			}
+			m_value = temp;
+		} else {
+			m_value = value;
+		}
 		onChanged( propertyEvent );
         m_associatedFileKey = null;
 	}

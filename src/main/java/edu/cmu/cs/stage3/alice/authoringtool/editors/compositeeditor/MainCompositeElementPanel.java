@@ -479,7 +479,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 						if( requiredParameters != null ) {
 							authoringTool.getUndoRedoStack().startCompound();
 							try {
-//								variable.value.set( null ); //How dow we deal with parameters? They need a value to work as drops, but it shows up in the behavior
+//								variable.value.set( null ); //How do we deal with parameters? They need a value to work as drops, but it shows up in the behavior
 								requiredParameters.getOwner().addChild( variable );
 								requiredParameters.add( variable );
 							} finally {

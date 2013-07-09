@@ -85,7 +85,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                 boolean isValid = checkLoop(response);
                 if (isValid){
                     if (isMove){
-                        dtde.acceptDrag( java.awt.dnd.DnDConstants.ACTION_MOVE);
+                        dtde.acceptDrag( java.awt.dnd.DnDConstants.ACTION_MOVE );
                     }
                     else if (isCopy){
                         dtde.acceptDrag( java.awt.dnd.DnDConstants.ACTION_COPY );
@@ -109,7 +109,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                 edu.cmu.cs.stage3.alice.core.CopyFactory copyFactory = (edu.cmu.cs.stage3.alice.core.CopyFactory)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CopyFactoryTransferable.copyFactoryFlavor );
                 Class valueClass = copyFactory.getValueClass();
                 if (edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom(valueClass)){
-                    dtde.acceptDrag( java.awt.dnd.DnDConstants.ACTION_MOVE);  //looks nicer
+                    dtde.acceptDrag( java.awt.dnd.DnDConstants.ACTION_MOVE );  //looks nicer
                     insertDropPanel(dtde);
                 }
                 else{
@@ -185,9 +185,9 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                 edu.cmu.cs.stage3.alice.core.CopyFactory copyFactory = (edu.cmu.cs.stage3.alice.core.CopyFactory)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CopyFactoryTransferable.copyFactoryFlavor );
                 Class valueClass = copyFactory.getValueClass();
                 if (edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom(valueClass)){
-                    dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_COPY);
+                    dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_COPY );
                     successful = true;
-					edu.cmu.cs.stage3.alice.core.Response response = (edu.cmu.cs.stage3.alice.core.Response)copyFactory.manufactureCopy(m_owner.getElement().getRoot(), null, null, m_owner.getElement() );
+					edu.cmu.cs.stage3.alice.core.Response response = ( edu.cmu.cs.stage3.alice.core.Response)copyFactory.manufactureCopy(m_owner.getElement().getRoot(), null, null, m_owner.getElement() );
                     if (response != null){
                     	performDrop(response, dtde);
                     }
@@ -278,7 +278,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                             structure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeResponsePrintStructure(factory, componentElements.getOwner());
                         }
                         else{
-                            structure= edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePrototypeStructure( responsePrototype, factory, componentElements.getOwner() );
+                            structure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePrototypeStructure( responsePrototype, factory, componentElements.getOwner() );
                         }
                         javax.swing.JPopupMenu popup = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePopupMenu( structure );
                         popup.addPopupMenuListener(this);

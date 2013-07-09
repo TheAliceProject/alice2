@@ -537,7 +537,8 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
 
     protected int getInsertLocation(java.awt.Point panelSpacePoint){
         int position = -1;
-        for (int i=0; i<componentElements.size(); i++){ //calculate
+        int size = componentElements.size();
+        for (int i=0; i<size; i++){ //calculate
             java.awt.Component c = this.getComponent(i);
             int point = c.getY() + (int)(c.getHeight()/2.0);
             if (panelSpacePoint.getY() < point){
