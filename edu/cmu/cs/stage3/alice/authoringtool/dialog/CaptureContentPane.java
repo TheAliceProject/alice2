@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Response;
 import edu.cmu.cs.stage3.alice.core.Sandbox;
@@ -34,6 +35,8 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import movieMaker.FrameSequencer;
 import movieMaker.MovieCapturer;
 import movieMaker.MovieWriter;
@@ -373,7 +376,19 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		okActionListener = null;
 		stopButton.removeActionListener(l);
 	}
+	
+	protected void checkFileName() {
+		String nameValue = fileName.getText();
+		if( AikMin.isValidName(nameValue) ) {
+			fileName.setForeground(java.awt.Color.black);
+			startCaptureButton.setEnabled(true);
+		} else {
+			fileName.setForeground(java.awt.Color.red);
+			startCaptureButton.setEnabled(false);
 
+		}
+	}
+	
 	private void guiInit() {
 		title = Messages.getString("Alice_World");
 		// on renderPanel resize, constrain to aspectRatio
@@ -446,7 +461,18 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		fileName.setPreferredSize(new java.awt.Dimension(124, 24));
 		fileName.setMinimumSize(new java.awt.Dimension(60, 24));
 		fileName.setMaximumSize(new java.awt.Dimension(124, 24));
-
+		fileName.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				checkFileName();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				checkFileName();
+			}
+			public void insertUpdate(DocumentEvent e) {
+				checkFileName();
+			}
+		});
+	
 		statusLabel = new javax.swing.JLabel(Messages.getString("Ready"));
 		timeLabel = new javax.swing.JLabel("0:00  ");
 

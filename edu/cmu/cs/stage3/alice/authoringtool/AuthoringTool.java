@@ -25,10 +25,15 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
 import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener;
+import edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior;
 import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.swing.ContentPane;
+import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -831,7 +836,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				lastSaveTime = System.currentTimeMillis();
 			}
 		});
-
+		
 		// global mouse listening
 		if (edu.cmu.cs.stage3.awt.AWTUtilities.mouseListenersAreSupported() || edu.cmu.cs.stage3.awt.AWTUtilities.mouseMotionListenersAreSupported()) {
 			scheduler.addEachFrameRunnable(new Runnable() {
@@ -841,6 +846,32 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			});
 		}
 
+	  	java.awt.Toolkit.getDefaultToolkit().addAWTEventListener(new java.awt.event.AWTEventListener(){
+	   		public void eventDispatched(AWTEvent event) {
+	   			if (event instanceof java.awt.event.KeyEvent){
+	   				edu.cmu.cs.stage3.awt.AWTUtilities.key = ((java.awt.event.KeyEvent) event).getID();
+	   				if (edu.cmu.cs.stage3.awt.AWTUtilities.key == 401) {
+	   					temp = 0;
+	   				} else if (edu.cmu.cs.stage3.awt.AWTUtilities.key == 402) {
+	   					temp = -1;
+	   				} 
+	   			}
+	   			int mod = ((java.awt.event.InputEvent) event).getModifiers();
+	   			switch( mod ) {
+	   			case 1: 
+	   			case 2: 
+	   			case 4: 
+	   			case 8:
+	   			case 16:
+	   				edu.cmu.cs.stage3.awt.AWTUtilities.modifier = mod;	
+	   				break;
+	   			default:
+	   				edu.cmu.cs.stage3.awt.AWTUtilities.modifier = 0;	
+	   				break;
+	   			}   			
+	   		}
+	  	}, AWTEvent.KEY_EVENT_MASK + AWTEvent.MOUSE_EVENT_MASK + AWTEvent.MOUSE_MOTION_EVENT_MASK);
+
 		// for animating ui changes
 		rectangleAnimator = new edu.cmu.cs.stage3.alice.authoringtool.util.RectangleAnimator(this);
 
@@ -849,16 +880,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		//tooltips
 		javax.swing.ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
 		javax.swing.ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
-
-		//sound format TEST
-		//		System.out.println( AuthoringToolResources.formatTime( .123 ) );
-		//		System.out.println( AuthoringToolResources.formatTime( 45.123 ) );
-		//		System.out.println( AuthoringToolResources.formatTime( 54.0 ) );
-		//		System.out.println( AuthoringToolResources.formatTime( 63.123 ) );
-		//		System.out.println( AuthoringToolResources.formatTime( 927.123 ) );
-		//		System.out.println( AuthoringToolResources.formatTime( 32729.123 ) );
 	}
-
+	public static int id = 0;
+	public static int temp = -1;
 	private void importInit() {
 		java.util.List importers = importing.getImporters();
 		edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter imageFiles = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(Messages.getString("Image_Files")); 
@@ -903,17 +927,22 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	private void worldInit(java.io.File worldToLoad) {
 		if (worldToLoad != null) {
-			if (worldToLoad.exists()) {
-				if (worldToLoad.canRead()) {
-					int retVal = loadWorld(worldToLoad, false);
+			
+			String oldWorld = worldToLoad.getAbsolutePath();
+			oldWorld = oldWorld.substring(0, oldWorld.lastIndexOf(".")) + ".a2w";
+			java.io.File world = new java.io.File ( oldWorld );
+			
+			if (world.exists()) {
+				if (world.canRead()) {
+					int retVal = loadWorld(world, false);
 					if (retVal == Constants.SUCCEEDED) {
 						return;
 					}
 				} else {
-					AuthoringTool.showErrorDialog(Messages.getString("cannot_read_world__") + worldToLoad, null, false); 
+					AuthoringTool.showErrorDialog(Messages.getString("cannot_read_world__") + world, null, false); 
 				}
 			} else {
-				AuthoringTool.showErrorDialog(Messages.getString("world_doesn_t_exist__") + worldToLoad, null, false); 
+				AuthoringTool.showErrorDialog(Messages.getString("world_doesn_t_exist__") + world, null, false); 
 			}
 		}
 
@@ -1474,22 +1503,35 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			             }             
 					}
 				}
+				// Try to auto-restart if Alice require a restart
 				if (condition) {
 					try {
 						if (System.getProperty("os.name") != null){				
+							// Restart for Windows
 							if (System.getProperty("os.name").startsWith("Windows") ){
 								String file = JAlice.getAliceHomeDirectory().getParent().toString()+"\\Alice.exe";
 								if (new java.io.File(file).exists()) {
-									Runtime.getRuntime().exec(JAlice.getAliceHomeDirectory().getParent().toString()+"\\Alice.exe");
+									Runtime.getRuntime().exec( file );
 								} else {
 									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice.exe in Alice directory. Please restart Alice manually.");
 								}
-							} else {
+							} 
+							// Restart for Mac
+							else if (System.getProperty("os.name").startsWith("Mac") ){
 								String decodedPath = java.net.URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
 								decodedPath=decodedPath.substring(0, decodedPath.lastIndexOf(".app")+4);
 								String params[] = {"open", "-n", decodedPath };
 								Runtime.getRuntime().exec(params);
-							}		
+							} 
+							// Restart for Linux - Ubuntu
+							else {
+								String file = JAlice.getAliceHomeDirectory().getParent().toString()+"/Required/run-alice";
+								if (new java.io.File(file).exists()) {
+									Runtime.getRuntime().exec( file );
+								} else {
+									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice executable in Alice directory. Please restart Alice manually.");
+								}
+							}							
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -5844,5 +5886,4 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	        }
 		}
 	}
-  
 }

@@ -1,5 +1,6 @@
 package edu.cmu.cs.stage3.alice.core.behavior;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.Camera;
 import edu.cmu.cs.stage3.alice.core.Direction;
 import edu.cmu.cs.stage3.alice.core.RenderTarget;
@@ -78,7 +79,7 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
 	public void internalSchedule( double time, double dt ) {
 		KeyMapping keyMapping = (KeyMapping)keyMap.getElementValue();
 		int actions;
-		if( keyMapping != null ) {
+		if( keyMapping != null && AuthoringTool.temp != -1 ) {
 			actions = keyMapping.getActions();
 		} else {
 			actions = 0;

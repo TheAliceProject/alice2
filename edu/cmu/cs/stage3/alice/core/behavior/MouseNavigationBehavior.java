@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core.behavior;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.Camera;
 import edu.cmu.cs.stage3.alice.core.Direction;
 import edu.cmu.cs.stage3.alice.core.RenderTarget;
@@ -180,12 +181,9 @@ public class MouseNavigationBehavior extends InternalResponseBehavior implements
     }
 
     public void mouseMoved(java.awt.event.MouseEvent e) {
-        int x=e.getX()-lastX;
+    	mouseActive = false;
+/*        int x=e.getX()-lastX;
         int y=e.getY()-lastY;
-        if (!positionRelative.getBooleanValue().booleanValue()) {
-            lastX = e.getX();
-            lastY = e.getY();
-        }
         if (!positionRelative.getBooleanValue().booleanValue()) {
             lastX = e.getX();
             lastY = e.getY();
@@ -197,7 +195,7 @@ public class MouseNavigationBehavior extends InternalResponseBehavior implements
             } else {
                 movement = ((positionRelative.getBooleanValue().booleanValue())?0:movement)-y*speed.getNumberValue().doubleValue();
             }
-        }
+        }*/
     }
 
 }

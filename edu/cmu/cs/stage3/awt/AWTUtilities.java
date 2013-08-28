@@ -42,7 +42,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isGetCursorLocationSupportedNative();
 		} else {
-			return false;
+			return true; //false;
 		}
 	}
 
@@ -51,7 +51,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isSetCursorLocationSupportedNative();
 		} else {
-			return false;
+			return true; //false;
 		}
 	}
 
@@ -60,7 +60,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isIsKeyPressedSupportedNative();
 		} else {
-			return false;
+			return true; //false;
 		}
 	}
 
@@ -69,7 +69,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isGetModifiersSupportedNative();
 		} else {
-			return false;
+			return true; //false;
 		}
 	}
 
@@ -78,7 +78,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isPumpMessageQueueSupportedNative();
 		} else {
-			return false;
+			return true; //false;
 		}
 	}
 
@@ -91,7 +91,6 @@ public class AWTUtilities {
 		}
 	}
 
-
 	private static native void getCursorLocationNative( java.awt.Point p );
 	public static java.awt.Point getCursorLocation() {
 		if( s_successfullyLoadedLibrary ) {
@@ -99,7 +98,9 @@ public class AWTUtilities {
 			getCursorLocationNative( p );
 			return p;
 		} else {
-			return null;
+			java.awt.Point p  = java.awt.MouseInfo.getPointerInfo().getLocation();
+			return p;
+			//return null;
 		}
 	}
 
@@ -108,9 +109,10 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			setCursorLocationNative( x, y );
 		} else {
-			//pass
+			java.awt.MouseInfo.getPointerInfo().getLocation().setLocation(x, y); //pass
 		}
 	}
+	
 	public static void setCursorLocation( java.awt.Point p ) {
 		setCursorLocation( p.x, p.y );
 	}
@@ -123,6 +125,7 @@ public class AWTUtilities {
 			return true;
 		}
 	}
+	
 	private static native void setIsCursorShowingNative( boolean isCursorShowing );
 	public static void setIsCursorShowing( boolean isCursorShowing ) {
 		if( s_successfullyLoadedLibrary ) {
@@ -140,6 +143,7 @@ public class AWTUtilities {
 			return false;
 		}
 	}
+	
 	private static native boolean isSetIsCursorShowingSupportedNative();
 	public static boolean isSetIsCursorShowingSupported() {
 		if( s_successfullyLoadedLibrary ) {
@@ -148,7 +152,8 @@ public class AWTUtilities {
 			return false;
 		}
 	}
-
+	
+    public static int key;
 	private static native boolean isKeyPressedNative( int keyCode );
 	public static boolean isKeyPressed( int keyCode ) {
 		if( s_successfullyLoadedLibrary ) {
@@ -157,14 +162,15 @@ public class AWTUtilities {
 			return false;
 		}
 	}
-
+	
+    public static int modifier;
 	private static native int getModifiersNative();
 	public static int getModifiers() {
 		if( s_successfullyLoadedLibrary ) {
 			return getModifiersNative();
-		} else {
-			return 0;
-		}
+		} else {   	
+			return modifier;
+		}	
 	}
 
 	public static boolean mouseListenersAreSupported() {
@@ -189,12 +195,9 @@ public class AWTUtilities {
 		s_mouseMotionListeners.removeElement( mouseMotionListener );
 	}
 
-
-
 	private static java.awt.Component s_source = new java.awt.Label( "edu.cmu.cs.stage3.io.toolkit.Toolkit" );
 
     private static int s_prevModifiers = 0;
-    //todo
     private static int s_clickCount = 0;
     private static boolean isButton1Pressed( int modifiers ) {
         return (modifiers & InputEvent.BUTTON1_MASK)==InputEvent.BUTTON1_MASK;
@@ -208,7 +211,7 @@ public class AWTUtilities {
 
     private static java.awt.Point s_prevCursorPos = new java.awt.Point();
     private static java.awt.Point s_currCursorPos = new java.awt.Point();
-
+   
     public static void fireMouseAndMouseMotionListenersIfNecessary() {
     	if( mouseListenersAreSupported() ) {
 			int id = 0;
@@ -256,7 +259,7 @@ public class AWTUtilities {
 			long when = System.currentTimeMillis();
 			boolean isPopupTrigger = false;
 
-			getCursorLocationNative( s_currCursorPos );
+			s_currCursorPos = getCursorLocation();
 
 			if( id!=0 ) {
 				if( s_mouseListeners.size()>0 ) {
@@ -310,6 +313,6 @@ public class AWTUtilities {
 			s_prevCursorPos.x = s_currCursorPos.x;
 			s_prevCursorPos.y = s_currCursorPos.y;
 			s_prevModifiers = currModifiers;
-    	}
+    	} 
     }
 }

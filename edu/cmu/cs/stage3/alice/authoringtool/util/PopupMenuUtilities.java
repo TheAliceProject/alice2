@@ -1459,6 +1459,7 @@ public class PopupMenuUtilities {
 					// make sure current value is represented
 					Object currentValue = property.get();
 					java.util.Vector unlabeledDefaultValueStructure = getUnlabeledDefaultValueStructureForProperty( property.getOwner().getClass(), property.getName(), property ); // very hackish
+					if (currentValue != null)
 					if( ! (unlabeledDefaultValueStructure.contains( currentValue ) || recentlyUsedStructure.contains( currentValue )) ) {
 						if( ! (currentValue instanceof edu.cmu.cs.stage3.alice.core.Expression) ) {
 							addRecentlyUsedValue( currentValue.getClass(), currentValue );

@@ -337,7 +337,9 @@ public abstract class Property {
     //todo: this should not be necessary
 	protected boolean getValueOfExpression() {
 		Class valueClass = getValueClass();
-		if( valueClass.isAssignableFrom( Expression.class ) ) {
+		if ( valueClass.equals(edu.cmu.cs.stage3.alice.core.List.class) || valueClass.equals(java.lang.Object.class)) {
+			return true;
+		} else if( valueClass.isAssignableFrom( Expression.class ) ) {
 			return false;
 		} else if( valueClass.isAssignableFrom( Variable.class ) ) {
 			return false;
@@ -378,7 +380,7 @@ public abstract class Property {
 			}
 			Object value;
 			if( getValueOfExpression() ) {	
-				value = expression;//.getValue();
+				value = expression.getValue();
 			} else {
 				value = expression;
 			}

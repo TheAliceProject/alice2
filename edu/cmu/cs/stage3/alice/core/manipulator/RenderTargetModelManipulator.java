@@ -101,7 +101,8 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 
 			if( mouseIsDown ) {
 				if( sgPickedTransformable != null ) {
-					double deltaFactor;
+					double deltaFactor = 0;
+					if (renderTarget != null){
 					if( sgCamera instanceof edu.cmu.cs.stage3.alice.scenegraph.OrthographicCamera ) {
 						edu.cmu.cs.stage3.alice.scenegraph.OrthographicCamera orthoCamera = (edu.cmu.cs.stage3.alice.scenegraph.OrthographicCamera)sgCamera;
 						double nearClipHeightInScreen = renderTarget.getAWTComponent().getHeight();  //TODO: should be viewport, but not working right now
@@ -115,7 +116,7 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 						double pixelHeight = nearClipHeightInWorld/nearClipHeightInScreen;
 						double objectDist = sgPickedTransformable.getPosition( sgCameraTransformable ).getLength();
 						deltaFactor = (objectDist*pixelHeight)/nearClipDist;
-					}
+					}}
 
 					boolean controlDown = ev.isControlDown();
 					boolean shiftDown = ev.isShiftDown();
