@@ -75,7 +75,7 @@ public class AikMin {
 //				"\u00E8", 	"\u00E9", 	"\\u00EA", 	"\u00EB", 	"\u00EC", 	"\\u00ED", 	"\u00EE", 	"\u00EF",
 //				"\u00F0", 	"\u00F1", 	"\\u00F2", 	"\u00F3", 	"\u00F4", 	"\u00F5", 	"\u00F6", 	"\u00F7", 
 //				"\u00F8", 	"\u00F9", 	"\\u00FA", 	"\u00FB", 	"\u00FC", 	"\\u00FD", 	"\u00FE", 	"\u00FF"
-				"\t", "\n", "\\", "/", ":", "*", "?", "\"", "<", ">", "|"
+				"\t", "\n", "\\", "/", ":", "*", "?", "\"", "<", ">", "|", "."
 		};	
 		for (int i=0; i<invalidCharacters.length; i++){
 			if (name.contains(invalidCharacters[i])) {

@@ -151,7 +151,7 @@ public class MouseLookingBehavior extends InternalResponseBehavior implements ja
     }
 
     public void mouseMoved(java.awt.event.MouseEvent e) {
-        int x=e.getX()-lastX;
+/*        int x=e.getX()-lastX;
         int y=e.getY()-lastY;
         if (lastX==-1) x=0;
         if (lastY==-1) y=0;
@@ -164,7 +164,7 @@ public class MouseLookingBehavior extends InternalResponseBehavior implements ja
                 turning.y += x*turningRate.getNumberValue().doubleValue();
                 turning.x += y*turningRate.getNumberValue().doubleValue();
             }
-        }
+        }*/
     }
 
 }

@@ -4,7 +4,7 @@ import edu.cmu.cs.stage3.alice.core.Expression;
 
 public abstract class AbstractIsEqualTo extends BinaryObjectResultingInBooleanQuestion {
 	protected boolean isEqualTo( Object aValue, Object bValue ) {
-		if( aValue != null ) {
+		if( aValue != null ) {				
 			if( aValue.equals( bValue ) ) {
                 return true;
             } else {
@@ -44,7 +44,10 @@ public abstract class AbstractIsEqualTo extends BinaryObjectResultingInBooleanQu
                             return aValue.equals( bValue2 );
                         }
                     } else {
-                        return false;
+               			double a = Double.valueOf(aValue.toString());
+               			double b = Double.valueOf(bValue.toString());			
+                		if ( a == b ) return true;
+                		else return false;
                     }
                 }
             }

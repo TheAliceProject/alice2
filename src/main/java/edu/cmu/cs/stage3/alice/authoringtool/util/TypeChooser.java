@@ -46,7 +46,7 @@ public class TypeChooser extends javax.swing.JPanel {
 	private edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback okButtonCallback;
 
 	public TypeChooser(edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback okButtonCallback) {
-		otherCombo.setEditable( true );
+		otherCombo.setEditable( false );
 		this.okButtonCallback = okButtonCallback;
 		setLayout( new GridBagLayout() );
 

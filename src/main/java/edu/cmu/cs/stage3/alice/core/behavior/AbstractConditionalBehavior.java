@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core.behavior;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.Behavior;
 import edu.cmu.cs.stage3.alice.core.Response;
 import edu.cmu.cs.stage3.alice.core.property.ResponseProperty;
@@ -71,10 +72,20 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 	}
 
 	protected void set( boolean booleanValue ) {
+		if (booleanValue){
+			AuthoringTool.temp = 0;
+		} else {
+			AuthoringTool.temp = -1;
+		}
 		m_booleanValue = booleanValue;
 	}
 
 	protected void internalSchedule( double t, double dt ) {
+		if (AuthoringTool.temp == 0){
+			m_booleanValue = true;
+		} else {
+			m_booleanValue = false;
+		}
 		double timeRemaining = 0;
 		if( m_runtimeState==RUNTIME_STATE_CHECKING_FOR_TRUE ) {
 			if( m_booleanValue ) {
