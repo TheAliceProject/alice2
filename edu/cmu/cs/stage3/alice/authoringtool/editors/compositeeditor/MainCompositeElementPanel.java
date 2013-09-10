@@ -678,11 +678,9 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             this.add(closeBrace, java.awt.BorderLayout.SOUTH);
         }
 
-
-
         this.setBackground(getCustomBackgroundColor());
-        this.repaint();
         this.revalidate();
+        this.repaint();
     }
 
     protected boolean isInGroup(Object toCheck, edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty group){

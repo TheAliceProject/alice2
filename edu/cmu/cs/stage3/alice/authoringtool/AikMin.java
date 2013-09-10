@@ -1,5 +1,6 @@
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import edu.cmu.cs.stage3.alice.scenegraph.Color;
 import java.awt.Font;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;

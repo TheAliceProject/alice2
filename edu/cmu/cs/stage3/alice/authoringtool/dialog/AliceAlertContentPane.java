@@ -125,7 +125,7 @@ public abstract class AliceAlertContentPane extends
 		this.remove(detailScrollPane); // Aik Min - need work !
 		this.add(detailPanel, BorderLayout.CENTER);
 
-		buttonPanel.removeAll();
+		buttonPanel.removeAll();	// Aik Min - need work
 		buttonConstraints.gridx = 0;
 		// buttonPanel.add(submitBugButton, buttonConstraints);
 		buttonConstraints.gridx++;
@@ -142,7 +142,7 @@ public abstract class AliceAlertContentPane extends
 		this.remove(detailPanel); // Aik Min - need work !
 		this.add(detailScrollPane, BorderLayout.CENTER);
 
-		buttonPanel.removeAll();
+		buttonPanel.removeAll();	// Aik Min - need work
 		buttonConstraints.gridx = 0;
 		// buttonPanel.add(submitBugButton, buttonConstraints);
 		buttonConstraints.gridx++;
