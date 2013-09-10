@@ -38,7 +38,7 @@ public class ComponentResponsePanel extends edu.cmu.cs.stage3.alice.authoringtoo
 
     public ComponentResponsePanel(){
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
-        this.remove(grip);
+        this.remove(grip);	// Aik Min - need work
     }
 
 	public void set(edu.cmu.cs.stage3.alice.core.Element element) {

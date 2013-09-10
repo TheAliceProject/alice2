@@ -89,10 +89,10 @@ class AppearanceProxy extends ElementProxy {
 			if( value==null || value.equals( edu.cmu.cs.stage3.alice.scenegraph.ShadingStyle.NONE ) ) {
                 m_isShaded = false;
 			} else if( value.equals( edu.cmu.cs.stage3.alice.scenegraph.ShadingStyle.FLAT ) ) {
-                m_isShaded = true;
+                m_isShaded = false;
                 //todo
 			} else if( value.equals( edu.cmu.cs.stage3.alice.scenegraph.ShadingStyle.SMOOTH ) ) {
-                m_isShaded = true;
+                m_isShaded = false;
                 //todo
 			} else {
 				throw new RuntimeException();

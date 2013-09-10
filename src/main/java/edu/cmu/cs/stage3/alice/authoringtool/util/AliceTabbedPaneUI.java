@@ -64,9 +64,11 @@ public class AliceTabbedPaneUI extends javax.swing.plaf.metal.MetalTabbedPaneUI 
 		if( selectedComponent != null ) {
 			this.selectColor = this.tabAreaBackground = selectedComponent.getBackground();
 		}
-
-		g.setColor( tabAreaBackground );
 		int tabAreaHeight = calculateTabAreaHeight( tabPlacement, runCount, maxTabHeight );
+		if (tabAreaBackground.equals(new java.awt.Color(255, 255, 210)) && tabPane.getTabCount() > 0 && tabAreaHeight == 0) {
+			tabAreaHeight = 50;
+		}  
+		g.setColor( tabAreaBackground );
 		g.fillRect( insets.left, insets.top + tabAreaHeight, size.width - insets.right - insets.left, size.height - tabAreaHeight );
 
 		paint( g, c );

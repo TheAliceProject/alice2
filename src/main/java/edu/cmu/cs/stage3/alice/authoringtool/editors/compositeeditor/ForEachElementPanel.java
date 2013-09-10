@@ -209,7 +209,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 	protected void updateName(){
 		edu.cmu.cs.stage3.alice.core.Variable v = ((edu.cmu.cs.stage3.alice.core.Variable)m_each.getValue());
 		v.name.set(makeVariableName( ((edu.cmu.cs.stage3.alice.core.Element)m_list.get()) ));
-		headerPanel.remove(variable);
+		headerPanel.remove(variable);	// Aik Min - need work
 		variable = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getVariableDnDPanel((edu.cmu.cs.stage3.alice.core.Variable)m_each.get());
 		headerPanel.add(variable, new java.awt.GridBagConstraints(5,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 	}
@@ -238,7 +238,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         }
         variable = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getVariableDnDPanel((edu.cmu.cs.stage3.alice.core.Variable)m_each.get());
         listInput = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(m_list, false, true, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(m_list), pif);
-        headerPanel.remove(glue);
+        headerPanel.remove(glue);	// Aik Min - need work
         headerPanel.add(listInput, new java.awt.GridBagConstraints(3,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         headerPanel.add(new javax.swing.JLabel(middleHeaderText), new java.awt.GridBagConstraints(4,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         headerPanel.add(variable, new java.awt.GridBagConstraints(5,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));

@@ -64,6 +64,8 @@ public class StdErrOutContentPane extends
 							+ Messages
 									.getString("Right_click_to_clear_the_messages_here__n_n")
 							+ lastError;
+				} else if (lastError.startsWith("Exception in thread \"AWT-EventQueue-0\"")==true){
+					lastError = "OOPS!! Looks like we have a slight layout problem. Not a big deal, press OK to continue. \n\n" + lastError ;					
 				}
 				detailTextPane.getDocument().insertString(
 						detailTextPane.getDocument().getLength(), lastError,

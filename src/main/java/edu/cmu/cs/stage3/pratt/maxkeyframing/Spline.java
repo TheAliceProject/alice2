@@ -58,7 +58,7 @@ public abstract class Spline {
 	}
 
 	protected boolean removeKey( Key key ) {
-		return keys.remove( key );	// Aik Min - need work
+		return keys.remove( key );
 	}
 
 	public void clearKeys() {

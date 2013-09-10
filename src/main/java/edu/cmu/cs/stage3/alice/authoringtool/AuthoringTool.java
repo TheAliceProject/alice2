@@ -1384,7 +1384,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public void resetClipboards() {
 		try {
 			final int numClipboards = Integer.parseInt( authoringToolConfig.getValue( "numberOfClipboards" ) ); 
-			jAliceFrame.clipboardPanel.removeAll();//.remove(0);
+			jAliceFrame.clipboardPanel.removeAll();//.remove(0);	// Aik Min - need work
 			for( int i = 0; i < numClipboards; i++ ) {
 				jAliceFrame.clipboardPanel.add( new edu.cmu.cs.stage3.alice.authoringtool.util.DnDClipboard() );
 			}
@@ -2263,7 +2263,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		String directory = currentWorldLocation.getParent();
     	directory = directory.replace('\\', '/');
     	java.io.File dir = new java.io.File(directory +"/frames"); 
-    	dir.mkdir();
+    	if (dir.canWrite()){
+    		dir.mkdir();
+    	} else {
+    		showErrorDialog("Error_creating_temporary_folder_", 
+					"Cannot_create_the_frames_folder. You don't have permission. Please save your world in a different location.");
+    		return Constants.CANCELED;
+    	}
     	
     	soundStorage = new movieMaker.SoundStorage();
     	playWhileEncoding(directory);

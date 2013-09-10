@@ -440,7 +440,7 @@ public class ExportCodeForPrintingContentPane extends
 	}
 
 	protected void buildWhatToPrintPanel(java.util.Vector objectsToPrint) {
-		m_elementsToBeExportedPanel.removeAll();
+		m_elementsToBeExportedPanel.removeAll();	// Aik Min - need work
 		CustomListButton currentButton = null;
 		int count = 0;
 		boolean isWorld = false;

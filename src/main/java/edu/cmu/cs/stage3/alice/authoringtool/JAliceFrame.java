@@ -85,9 +85,9 @@ public class JAliceFrame extends javax.swing.JFrame {
 		javax.swing.JPopupMenu.setDefaultLightWeightPopupEnabled( false );
 		jbInit();
 		guiInit();
+		setGuiMode( SCENE_EDITOR_SMALL_MODE );
 		recentWorldsInit();
 		//helpInit();
-		setGuiMode( SCENE_EDITOR_SMALL_MODE );
 		setIconImage( AuthoringToolResources.getAliceSystemIconImage() );
 	}
 
@@ -102,7 +102,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 				//pass
 			} else {
 				if( parent != null ) {
-					parent.remove( component );
+					parent.remove( component );	// Aik Min - need work
 				}
 				add( component );
 			}
@@ -139,14 +139,14 @@ public class JAliceFrame extends javax.swing.JFrame {
 		setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
 
 		if( authoringToolConfig.getValue( "useSingleFileLoadStore" ).equalsIgnoreCase( "true" ) ) {  
-			fileMenu.remove( JAliceFrame.this.openZippedWorldItem );
+			fileMenu.remove( JAliceFrame.this.openZippedWorldItem );	// Aik Min - need work
 		}
-String t = authoringToolConfig.getValue( "backgroundColor" );
-if (t == null){
-	getContentPane().setBackground( new java.awt.Color( 0, 78, 152 ) );
-} else {
-		getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() ); 
-}
+		String t = authoringToolConfig.getValue( "backgroundColor" );
+		if (t == null){
+			getContentPane().setBackground( new java.awt.Color( 0, 78, 152 ) );
+		} else {
+			getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() ); 
+		}
 		Configuration.addConfigurationListener(
 			new edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationListener() {
 				public void changing( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {}
@@ -155,7 +155,7 @@ if (t == null){
 						JAliceFrame.this.getContentPane().setBackground( edu.cmu.cs.stage3.alice.scenegraph.Color.valueOf( authoringToolConfig.getValue( "backgroundColor" ) ).createAWTColor() ); 
 					} else if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.useSingleFileLoadStore" ) ) { 
 						if( ev.getNewValue().equalsIgnoreCase( "true" ) ) { 
-							fileMenu.remove( JAliceFrame.this.openZippedWorldItem );
+							fileMenu.remove( JAliceFrame.this.openZippedWorldItem );	// Aik Min - need work
 						} else {
 							if( ! fileMenu.isMenuComponent( JAliceFrame.this.openZippedWorldItem ) ) {
 								fileMenu.add( JAliceFrame.this.openZippedWorldItem, 2 );
@@ -426,7 +426,7 @@ if (t == null){
 		if( b ) {
 			getContentPane().add( statusBar, BorderLayout.SOUTH );
 		} else {
-			getContentPane().remove( statusBar );
+			getContentPane().remove( statusBar );	// Aik Min - need work
 		}
 		getContentPane().validate();
 		getContentPane().repaint();
@@ -494,7 +494,7 @@ if (t == null){
 				}
 			} else if( (numClipboards < current) && (numClipboards >= 0) ) {
 				for( int i = numClipboards; i < current; i++ ) {
-					clipboardPanel.remove( 0 );
+					clipboardPanel.remove( 0 );		// Aik Min - need work
 				}
 			}
 			clipboardPanel.revalidate();
@@ -748,26 +748,34 @@ if (t == null){
 		toolBarPanel.add(glue,   new GridBagConstraints(2, 0, 1, 1, 1.0, 0.0
 			,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
-		mainPanel.add(authoringPanel, BorderLayout.CENTER);
-//		mainPanel.add(authoringOutputSplitPane, BorderLayout.CENTER);
-//		authoringOutputSplitPane.add(authoringPanel, JSplitPane.TOP);
-		authoringPanel.add(leftRightSplitPane, BorderLayout.CENTER);
-		leftRightSplitPane.add(leftPanel, JSplitPane.LEFT);
-		leftPanel.add(worldTreeDragFromSplitPane, BorderLayout.CENTER);
+		
 		worldTreeDragFromSplitPane.add(worldTreePanel, JSplitPane.TOP);
 		worldTreeDragFromSplitPane.add(dragFromPanel, JSplitPane.BOTTOM);
-		leftRightSplitPane.add(rightPanel, JSplitPane.RIGHT);
-		rightPanel.add(editorBehaviorSplitPane, BorderLayout.CENTER);
-		editorBehaviorSplitPane.add(smallSceneBehaviorPanel, JSplitPane.TOP);
-		editorBehaviorSplitPane.add(editorPanel, JSplitPane.BOTTOM);
-		smallSceneBehaviorPanel.add( smallSceneBehaviorSplitPane, BorderLayout.CENTER );
+		leftPanel.add(worldTreeDragFromSplitPane, BorderLayout.CENTER);
+
 		smallSceneBehaviorSplitPane.add( scenePanel, JSplitPane.LEFT );
 		smallSceneBehaviorSplitPane.add( behaviorPanel, JSplitPane.RIGHT );
+		smallSceneBehaviorPanel.add(smallSceneBehaviorSplitPane, BorderLayout.CENTER );
+		editorBehaviorSplitPane.add(smallSceneBehaviorPanel, JSplitPane.TOP);
+		editorBehaviorSplitPane.add(editorPanel, JSplitPane.BOTTOM);
+		rightPanel.add(editorBehaviorSplitPane, BorderLayout.CENTER);		
+		
+		leftRightSplitPane.add(leftPanel, JSplitPane.LEFT);
+		leftRightSplitPane.add(rightPanel, JSplitPane.RIGHT);
+
+		authoringPanel.add(leftRightSplitPane, BorderLayout.CENTER);
+
+		mainPanel.add(authoringPanel, BorderLayout.CENTER);
+
+
+//		mainPanel.add(authoringOutputSplitPane, BorderLayout.CENTER);
+//		authoringOutputSplitPane.add(authoringPanel, JSplitPane.TOP);
+
 //		authoringOutputSplitPane.add(outputPanel, JSplitPane.BOTTOM);
 //		authoringOutputSplitPane.setDividerLocation(450);
-		worldTreeDragFromSplitPane.setDividerLocation(120);
-		editorBehaviorSplitPane.setDividerLocation(150);
-		leftRightSplitPane.setDividerLocation(100);
-		smallSceneBehaviorSplitPane.setDividerLocation(100);
+		//worldTreeDragFromSplitPane.setDividerLocation(120);
+		//editorBehaviorSplitPane.setDividerLocation(150);
+		//leftRightSplitPane.setDividerLocation(100);
+		//smallSceneBehaviorSplitPane.setDividerLocation(100);
 	}
 }
