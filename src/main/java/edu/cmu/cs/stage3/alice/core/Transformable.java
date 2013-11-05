@@ -410,7 +410,7 @@ public class Transformable extends ReferenceFrame {
         edu.cmu.cs.stage3.math.Sphere bs = target.getBoundingSphere();
         javax.vecmath.Vector3d center = bs.getCenter();
         double radius = bs.getRadius();
-        if( center == null ) { // this should not be necessary
+        if( center == null || Double.isNaN(center.x) || Double.isNaN(center.y) || Double.isNaN(center.z)) { // this should not be necessary
             center = target.getPosition();
         }
         if( (radius == 0.0) || Double.isNaN( radius ) ) {

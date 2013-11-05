@@ -170,42 +170,4 @@ public class StatusBar extends javax.swing.JPanel implements edu.cmu.cs.stage3.a
 	private void jbInit() {
 		border1 = BorderFactory.createEmptyBorder(1,1,1,1);
 		filler1 = Box.createGlue();
-		border2 = BorderFactory.createBevelBorder(BevelBorder.LOWERED,Color.white,Color.white,new Color(142, 142, 142),new Color(99, 99, 99));
-		this.setBackground(new Color(204, 204, 204));
-		this.setBorder(border1);
-		this.setLayout(gridBagLayout1);
-		worldStatsLabel.setText("World Statistics:");
-		worldStatsPanel.setLayout(gridBagLayout2);
-		objectCountLabel.setBackground(new Color(0, 204, 0));
-		objectCountLabel.setForeground(Color.black);
-		objectCountLabel.setOpaque(true);
-		objectCountLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		objectCountLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		objectCountLabel.setText("object count:");
-		faceCountLabel.setBackground(new Color(0, 204, 0));
-		faceCountLabel.setForeground(Color.black);
-		faceCountLabel.setOpaque(true);
-		faceCountLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		faceCountLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		faceCountLabel.setText("face count:");
-		textureMemoryLabel.setBackground(new Color(0, 204, 0));
-		textureMemoryLabel.setForeground(Color.black);
-		textureMemoryLabel.setOpaque(true);
-		textureMemoryLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		textureMemoryLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		textureMemoryLabel.setText("texture memory:");
-		worldStatsPanel.setBorder(border2);
-		this.add(worldStatsPanel, new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 4));
-		worldStatsPanel.add(worldStatsLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 2, 0, 6), 0, 0));
-		worldStatsPanel.add(objectCountLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 6), 10, 0));
-		worldStatsPanel.add(faceCountLabel, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 6), 10, 0));
-		worldStatsPanel.add(textureMemoryLabel, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 6), 10, 0));
-		worldStatsPanel.add(filler1, new GridBagConstraints(4, 0, 1, 1, 1.0, 0.0
-			,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-	}
-}
+		border2 = BorderFactory.createBevelBorder(BevelBorder.LOWERED,Color.white,Color.white,new Color(142, 142, 142),new

@@ -369,39 +369,4 @@ public abstract class Behavior extends Element {
         if( m_isActive ) {
             Object context = m_stack.top(); 
 			//System.err.println( "popStack: " + context.hashCode() );
-			//Thread.dumpStack();
-           	m_stack.pop();
-        }
-    }
-
-	
-	protected void internalFindAccessibleExpressions( Class cls, java.util.Vector v ) {
-		for( int i=0; i<details.size(); i++ ) {
-			internalAddExpressionIfAssignableTo( (Expression)details.get( i ), cls, v );
-		}
-		super.internalFindAccessibleExpressions( cls, v );
-	}
-	
-	protected void started( World world, double time ) {
-		super.started( world, time );
-		m_prevT = time;
-        m_stack.clear();
-		m_detailNameMap.clear();
-		m_forkMap.clear();
-		for( int i=0; i<details.size(); i++ ) {
-			Expression detail = (Expression)details.get( i );
-			m_detailNameMap.put( detail.name.getStringValue(), detail );
-		}
-		m_isActive = true;
-		//m_exceptionHasBeenPreviouslyThrown = false;
-	}
-	
-	protected void stopped( World world, double time ) {
-		super.stopped( world, time );
-		m_isActive = false;
-		stopAllRuntimeResponses( time );
-        m_stack.clear();
-		m_detailNameMap.clear();
-		m_forkMap.clear();
-	}
-}
+			//Thread.dumpStack

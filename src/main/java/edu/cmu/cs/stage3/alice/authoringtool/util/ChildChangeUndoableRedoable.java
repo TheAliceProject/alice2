@@ -153,16 +153,4 @@ public class ChildChangeUndoableRedoable implements ContextAssignableUndoableRed
 			}
 
 		  } else {
-			if( changeType == edu.cmu.cs.stage3.alice.core.event.ChildrenEvent.CHILD_INSERTED ) {
-			  logString += "EVENT=<insertChild> " + "CHILDTYPE=<" + child.getClass().getName() + "> " + "CHILDKEY=<" + child.getKey() + "> " + "PARENTKEY=<" +  parent.getKey() + "> " + "NEWINDEX=<" + newIndex + ">";
-			} else if( changeType == edu.cmu.cs.stage3.alice.core.event.ChildrenEvent.CHILD_REMOVED ) {
-			  logString += "EVENT=<deleteChild> " + "CHILDTYPE=<" + child.getClass().getName() + "> " + "CHILDKEY=<" + child.getKey() + "> " + "PARENTKEY=<" + parent.getKey() + "> " + "OLDINDEX=<" + oldIndex + ">";
-			} else if( changeType == edu.cmu.cs.stage3.alice.core.event.ChildrenEvent.CHILD_SHIFTED ) {
-			  logString += "EVENT=<shiftChild> " + "CHILDTYPE=<" + child.getClass().getName() + "> " + "CHILDKEY=<" + child.getKey() + "> " + "PARENTKEY=<" + parent.getKey() + "> " + "OLDINDEX=<" + oldIndex + "> " + "NEWINDEX=<" + newIndex + ">";
-			}
-		  }
-
-		  return logString;
-		}
-
-}
+			if( changeType == edu.cmu.cs.stage3.alic

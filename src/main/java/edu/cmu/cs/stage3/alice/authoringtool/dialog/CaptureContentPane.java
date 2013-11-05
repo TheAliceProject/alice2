@@ -1034,7 +1034,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			e.printStackTrace();
 		}
 	}
-
+	
 	// happens when clear button is hit. Removes all files and sets up for
 	// capturing again
 	public void clearAction() {
@@ -1064,10 +1064,10 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		traverseTree();
 	}
 
-	// start capturing the momvie
+	// start capturing the movie
 	public void startCaptureAction() {
 		setClear(false);
-		removeFiles(exportDirectory + "/frames/");
+		//removeFiles(exportDirectory + "/frames/");
 		// captureBar.setBackground(java.awt.Color.RED);
 		timeLabel.setBackground(java.awt.Color.RED);
 		// If a new capture sequence
@@ -1181,6 +1181,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 
+		
 	}
 
 	// used to find which area should be captured on screen
@@ -1221,13 +1222,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				result = writer.writeQuicktime();
 			} else
 				result = writer.writeAVI();
+			writer = new MovieWriter();
 
 			pulsing = false;
 			try {
 				pulse.join();
 			} catch (InterruptedException e) {
 			}
-			writer = null;
 
 			if (result == false) {
 				statusLabel.setText(Messages
@@ -1298,7 +1299,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			if (sources.size() > 0)
 				m.doMerge(sources);
 
-			m = null;
+			m = new movieMaker.Merge("");
 			sources.clear();
 			sources = null;
 			pulsing = false;

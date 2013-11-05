@@ -25,9 +25,6 @@ package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.lang.Messages;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * @author David Culyba
@@ -47,7 +44,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     public static final String localGalleryName = Messages.getString("Local_Gallery"); 
     public static final String cdGalleryName = Messages.getString("CD_Gallery"); 
     public static final String customGalleryName = Messages.getString("Custom_Gallery"); 
-    
+    public static boolean showBuilder = false; 
 
     public static String webGalleryRoot;
     public static String localGalleryRoot;
@@ -64,7 +61,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     protected static final String noModelsYet = Messages.getString("No_models_found_yet_"); 
     public static String cacheDir;
 
-    protected static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.class.getPackage() );
+    //protected static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.class.getPackage() );
 
     protected RootDirectoryStructure webGallery = null;
     protected RootDirectoryStructure localGallery = null;
@@ -815,7 +812,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 }
             }
             //Add people here too...
-			if (this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){ 
+			if (showBuilder && this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){ 
 				for (int p=0; p< builderButtonsVector.size(); p++){
 					final GenericBuilderButton builderButton = (GenericBuilderButton)builderButtonsVector.get(p);
 					javax.swing.SwingUtilities.invokeLater( new Runnable(){
@@ -900,7 +897,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     }
                 }
             }
-			if (this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){ 
+			if (showBuilder && this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){ 
 				for (int p=0; p< builderButtonsVector.size(); p++){
 					count++;
 					final GenericBuilderButton builderButton = (GenericBuilderButton)builderButtonsVector.get(p);
@@ -1065,10 +1062,11 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
 	public boolean shouldShowWebWarning(){
-		return authoringToolConfig.getValue("showWebWarningDialog").equalsIgnoreCase("true");  
+		return Configuration.getValue( authoringToolPackage, "showWebWarningDialog").equalsIgnoreCase("true");  
 	}
 
     public GalleryViewer(){
+    	showBuilder = Configuration.getValue( authoringToolPackage, "showBuilderMode").equalsIgnoreCase("true");
         java.net.URL mainWebGalleryURL = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainWebGalleryURL();
         if (mainWebGalleryURL != null){
         	webGalleryHostName = mainWebGalleryURL.getHost();
@@ -1076,7 +1074,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
         java.io.File mainLocalGalleryFile = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainDiskGalleryDirectory();
         java.io.File mainCDGalleryFile = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainCDGalleryDirectory();
-        java.io.File mainCustomGalleryFile = new java.io.File(authoringToolConfig.getValue("directories.charactersDirectory"));
+        java.io.File mainCustomGalleryFile = new java.io.File(Configuration.getValue( authoringToolPackage, "directories.charactersDirectory"));
         
         cacheDir = java.io.File.separator + "webGalleryCache" + java.io.File.separator;  //TODO: set from pref 
         java.io.File testDir = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), cacheDir);
@@ -1978,7 +1976,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,0,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,1,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     //    this.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.SOUTH,java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0 ));
-        int fontSize = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ); 
+        int fontSize = Integer.parseInt( Configuration.getValue( authoringToolPackage, "fontSize" ) ); 
         this.setPreferredSize(new java.awt.Dimension(Integer.MAX_VALUE, 250 + (fontSize-12) * 6 )); //Aik Min
         this.setMinimumSize(new java.awt.Dimension(100, 250));
     }
@@ -2728,7 +2726,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 }
             }
 //			Add personBuilders:
-			if (isPeople){
+			if (isPeople && showBuilder){
 				  for (int p=0; p< builderButtonsVector.size(); p++){
 					count++;
 					GenericBuilderButton builderButton = (GenericBuilderButton)builderButtonsVector.get(p);

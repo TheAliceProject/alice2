@@ -247,20 +247,4 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		m_adapter.getPixels( textureMapProxy, 0, 0, width, height, pitch, bitCount, redBitMask, greenBitMask, blueBitMask, alphaBitMask, pixels );
 
 		java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage( width, height, java.awt.image.BufferedImage.TYPE_INT_RGB );
-		bufferedImage.setRGB( 0, 0, width, height, pixels, 0, width );
-		return bufferedImage;
-	}
-
-	public void copyOffscreenImageToTextureMap( edu.cmu.cs.stage3.alice.scenegraph.TextureMap textureMap ) {
-		TextureMapProxy textureMapProxy = (TextureMapProxy)getProxyFor( textureMap );
-		m_adapter.blt( textureMapProxy );
-		markDirty();
-	}
-
-    public void setSilhouetteThickness( double silhouetteThickness ) {
-        m_adapter.setSilhouetteThickness( silhouetteThickness );
-    }
-    public double getSilhouetteThickness() {
-        return m_adapter.getSilhouetteThickness();
-    }
-}
+		bufferedImage.setRGB( 0, 0, width, heig

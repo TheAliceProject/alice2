@@ -219,18 +219,4 @@ public class ByteArraySeekableStream extends SeekableStream {
      */
     
 	public int skipBytes(int n) {
-        int oldPointer = pointer;
-        pointer = Math.min(pointer + n, length + offset);
-        return pointer - oldPointer;
-    }
-
-    /** Does nothing. */
-    
-	public void close() {
-    }
-
-    /** Returns the number of valid bytes in the input array. */
-    public long length() {
-        return length;
-    }
-}
+       

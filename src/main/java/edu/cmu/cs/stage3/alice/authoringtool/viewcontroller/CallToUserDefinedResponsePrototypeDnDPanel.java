@@ -184,32 +184,4 @@ public class CallToUserDefinedResponsePrototypeDnDPanel extends edu.cmu.cs.stage
 		javax.swing.JLabel tileLabel = new javax.swing.JLabel( text );
 		tileLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 2, 0, 2 ) );
 		tilePanel.add( tileLabel, java.awt.BorderLayout.CENTER );
-		subPanel.add( tilePanel, constraints );
-//		tilePanel.addMouseListener( mouseListener );
-		this.addDragSourceComponent( tilePanel );
-	}
-
-	class MouseListener extends edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter {
-		public void singleClickResponse( java.awt.event.MouseEvent ev ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().editObject( callToUserDefinedResponsePrototype.getActualResponse(), CallToUserDefinedResponsePrototypeDnDPanel.this );
-		}
-	}
-
-	class RefreshListener implements edu.cmu.cs.stage3.alice.core.event.PropertyListener, edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyListener {
-		public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {}
-		public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
-			CallToUserDefinedResponsePrototypeDnDPanel.this.refreshGUI();
-		}
-		public void objectArrayPropertyChanging( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent ev ) {}
-		public void objectArrayPropertyChanged( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent ev ) {
-			if( ev.getChangeType() == edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent.ITEM_INSERTED ) {
-				edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)ev.getItem();
-				variable.name.addPropertyListener( this );
-			} else if( ev.getChangeType() == edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent.ITEM_REMOVED ) {
-				edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)ev.getItem();
-				variable.name.removePropertyListener( this );
-			}
-			CallToUserDefinedResponsePrototypeDnDPanel.this.refreshGUI();
-		}
-	};
-}
+		subPanel.add( tilePanel, constrai

@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources;
 import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
@@ -565,15 +566,37 @@ public abstract class Property {
             return text;
         } else {
             try {
-                Class[] parameterTypes = { String.class };
-                java.lang.reflect.Method valueOfMethod = type.getMethod( "valueOf", parameterTypes ); 
-                int modifiers = valueOfMethod.getModifiers();
-                if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
-                    Object[] parameters = { text };
-                    return valueOfMethod.invoke( null, parameters );
-                } else {
-                    throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") ); 
-                }
+            	if (type.equals(javax.vecmath.Matrix4d.class)){
+            		String [] t = text.split(",|\n");      		
+        			edu.cmu.cs.stage3.math.Matrix44 m = new edu.cmu.cs.stage3.math.Matrix44();
+        			m.m00 = Double.valueOf( t[0] );
+        			m.m01 = Double.valueOf( t[1] );
+        			m.m02 = Double.valueOf( t[2] );
+        			m.m03 = Double.valueOf( t[3] );
+        			m.m10 = Double.valueOf( t[4] );
+        			m.m11 = Double.valueOf( t[5] );
+        			m.m12 = Double.valueOf( t[6] );
+        			m.m13 = Double.valueOf( t[7] );
+        			m.m20 = Double.valueOf( t[8] );
+        			m.m21 = Double.valueOf( t[9] );
+        			m.m22 = Double.valueOf( t[10] );
+        			m.m23 = Double.valueOf( t[11] );
+        			m.m30 = Double.valueOf( t[12] );
+        			m.m31 = Double.valueOf( t[13] );
+        			m.m32 = Double.valueOf( t[14] );
+        			m.m33 = Double.valueOf( t[15] );
+        			return m;
+            	} else {
+	                Class[] parameterTypes = { String.class };
+	                java.lang.reflect.Method valueOfMethod = type.getMethod( "valueOf", parameterTypes ); 
+	                int modifiers = valueOfMethod.getModifiers();
+	                if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
+	                    Object[] parameters = { text };
+	                    return valueOfMethod.invoke( null, parameters );
+	                } else {
+	                    throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") ); 
+	                }
+            	}
             } catch( NoSuchMethodException nsme ) {
                 throw new RuntimeException( "NoSuchMethodException:" + type ); 
             } catch( IllegalAccessException iae ) {
@@ -638,7 +661,8 @@ public abstract class Property {
             String text = getNodeText( node );
             try {
                 Class type = Class.forName( typeName );
-                set( getValueOf( type, text ) );
+                Object t = getValueOf( type, text );
+                set( t );
             } catch( ClassNotFoundException cnfe ) {
                 throw new RuntimeException( typeName );
             }

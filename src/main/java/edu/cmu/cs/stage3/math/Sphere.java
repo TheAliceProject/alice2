@@ -104,8 +104,11 @@ public class Sphere implements Cloneable {
 						}
 					}
 				}
-				m_center = MathUtilities.divide( MathUtilities.add( points[maxDistanceI], points[maxDistanceJ] ), 2 );
-				m_radius = Math.sqrt( maxDistanceSquared )/2.0;
+				javax.vecmath.Vector3d temp = MathUtilities.divide( MathUtilities.add( points[maxDistanceI], points[maxDistanceJ] ), 2 );
+				if ( !Double.isNaN(temp.x) && !Double.isNaN(temp.y) && !Double.isNaN(temp.z) ){
+					m_center = temp;
+					m_radius = Math.sqrt( maxDistanceSquared )/2.0;
+				}
 			} else {
 				m_center = s.getCenter();
 				m_radius = s.getRadius();

@@ -178,37 +178,4 @@ public class WatcherPanel extends javax.swing.JPanel /*implements edu.cmu.cs.sta
 //					if( properties[j] instanceof edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty ) {
 //						((edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)properties[j]).addObjectArrayPropertyListener( this );
 //					} else {
-//						properties[j].addPropertyListener( this );
-//					}
-//				}
-//				boolean alreadyChildrenListening = false;
-//				edu.cmu.cs.stage3.alice.core.event.ChildrenListener[] childrenListeners = elements[i].getChildrenListeners();
-//				for( int j = 0; j < childrenListeners.length; j++ ) {
-//					if( childrenListeners[j] == this ) {
-//						alreadyChildrenListening = true;
-//					}
-//				}
-//				if( ! alreadyChildrenListening ) {
-//					elements[i].addChildrenListener( this );
-//				}
-//			}
-//		}
-//	}
-//
-//	synchronized protected void stopListeningTo( edu.cmu.cs.stage3.alice.core.Element element ) {
-//		if( element != null ) {
-//			edu.cmu.cs.stage3.alice.core.Element[] elements = element.search( new edu.cmu.cs.stage3.util.InstanceOfCriterion( edu.cmu.cs.stage3.alice.core.Element.class ) );
-//			for( int i = 0; i < elements.length; i++ ) {
-//				edu.cmu.cs.stage3.alice.core.Property[] properties = elements[i].getProperties();
-//				for( int j = 0; j < properties.length; j++ ) {
-//					if( properties[j] instanceof edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty ) {
-//						((edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty)properties[j]).removeObjectArrayPropertyListener( this );
-//					} else {
-//						properties[j].removePropertyListener( this );
-//					}
-//				}
-//				elements[i].removeChildrenListener( this );
-//			}
-//		}
-//	}
-}
+//						propertie

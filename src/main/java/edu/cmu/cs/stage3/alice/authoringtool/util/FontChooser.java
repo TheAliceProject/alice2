@@ -218,7 +218,4 @@ public class FontChooser extends javax.swing.JPanel {
 		this.add(component1,  new GridBagConstraints(4, 0, 1, 1, 1.0, 0.0
 			,GridBagConstraints.SOUTHWEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		this.add(previewScrollPane,   new GridBagConstraints(0, 1, 5, 1, 1.0, 1.0
-			,GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(8, 0, 0, 0), 0, 0));
-		previewScrollPane.getViewport().add(previewTextArea, null);
-	}
-}
+			,GridBagConstrai

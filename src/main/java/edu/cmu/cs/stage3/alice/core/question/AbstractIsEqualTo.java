@@ -44,10 +44,14 @@ public abstract class AbstractIsEqualTo extends BinaryObjectResultingInBooleanQu
                             return aValue.equals( bValue2 );
                         }
                     } else {
-               			double a = Double.valueOf(aValue.toString());
-               			double b = Double.valueOf(bValue.toString());			
-                		if ( a == b ) return true;
-                		else return false;
+                    	try {
+	               			double a = Double.valueOf(aValue.toString());
+	               			double b = Double.valueOf(bValue.toString());			
+	                		if ( a == b ) return true;
+	                		else return false;
+	                    } catch (Exception e) {
+                    		return false;
+                    	}
                     }
                 }
             }

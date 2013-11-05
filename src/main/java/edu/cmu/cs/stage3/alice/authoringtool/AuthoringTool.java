@@ -2241,7 +2241,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 
 	}
-
+	
 	public int exportMovie() {
 		
 		// Get Dimensions and Location of Movie
@@ -2263,9 +2263,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		String directory = currentWorldLocation.getParent();
     	directory = directory.replace('\\', '/');
     	java.io.File dir = new java.io.File(directory +"/frames"); 
-    	if (dir.canWrite()){
-    		dir.mkdir();
-    	} else {
+    	if (!dir.exists() && !dir.mkdir()){
     		showErrorDialog("Error_creating_temporary_folder_", 
 					"Cannot_create_the_frames_folder. You don't have permission. Please save your world in a different location.");
     		return Constants.CANCELED;
