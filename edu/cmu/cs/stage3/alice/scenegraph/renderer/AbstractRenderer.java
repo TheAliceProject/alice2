@@ -269,21 +269,4 @@ public abstract class AbstractRenderer implements edu.cmu.cs.stage3.alice.sceneg
 		}
 		return m_onscreenRenderTargetArray;
 	}
-	public OffscreenRenderTarget[] getOffscreenRenderTargets() {
-		if( m_offscreenRenderTargetArray==null ) {
-            m_offscreenRenderTargetArray = new OffscreenRenderTarget[m_offscreenRenderTargets.size()];
-            m_offscreenRenderTargets.copyInto( m_offscreenRenderTargetArray );
-		}
-		return m_offscreenRenderTargetArray;
-	}
-
-	public synchronized void release() {
-	}
-
-	public boolean isSoftwareEmulationForced() {
-		return m_isSoftwareEmulationForced;
-	}
-	public void setIsSoftwareEmulationForced( boolean isSoftwareEmulationForced ) {
-		m_isSoftwareEmulationForced = isSoftwareEmulationForced;
-	}
-}
+	public OffscreenRenderTarget[] getOffscr

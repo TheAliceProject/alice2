@@ -23,16 +23,19 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
-import java.util.Locale;
-
+import com.apple.eawt.AppEvent.OpenFilesEvent;
+import com.apple.eawt.OpenFilesHandler;
 import edu.cmu.cs.stage3.lang.Messages;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Jason Pratt
  */
 public class JAlice {
 	// version information
-	private static String version = "2.3.6"; 
+	private static String version = "2.4"; 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	static {
@@ -89,12 +92,12 @@ public class JAlice {
 	static AuthoringTool authoringTool;
 
 	static boolean mainHasFinished = false;
+	private static boolean listenerRegistered = false;
 
 	//////////////////////
 	// main
 	//////////////////////
-
-	public static void main( String[] args ) {		
+	public static void main( String[] args ) {
 		try {
 		    String[] mp3args = new String[ 0 ];
 		    //System.out.println( "attempting to register mp3 capability... " );
@@ -110,11 +113,13 @@ public class JAlice {
 			if( (useSplashScreenString != null) && (! useSplashScreenString.equalsIgnoreCase( "true" )) ) { 
 				useJavaBasedSplashScreen = false;
 			}
-			parseCommandLineArgs( args );
 			if( useJavaBasedSplashScreen ) {
 				splashScreen = initSplashScreen();
 				splashScreen.showSplash();
 			}
+
+			parseCommandLineArgs( args );
+
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 			configInit();
 			try{
@@ -143,10 +148,9 @@ public class JAlice {
 			t.printStackTrace();
 			//System.exit( 1 );
 		}
-
 		mainHasFinished = true;
 	}
-
+	
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen initSplashScreen() {
 		java.awt.Image splashImage;
 		if (AikMin.locale.equals("")){
@@ -182,6 +186,10 @@ public class JAlice {
 		
 		if( authoringtoolConfig.getValue( "disableTooltipMode" ) == null ) { 
 			authoringtoolConfig.setValue( "disableTooltipMode", "false" );  
+		}
+		
+		if( authoringtoolConfig.getValue( "showBuilderMode" ) == null ) { 
+			authoringtoolConfig.setValue( "showBuilderMode", "false" );  
 		}
 		
 		if( authoringtoolConfig.getValue( "fontSize" ) == null ) { 
@@ -449,24 +457,24 @@ public class JAlice {
 		};
 
 		String helpMessage = "" + 
-"\nUsage: JAlice <options> <world>\n" + 
-"\n" + 
-"options:\n" + 
-"    --stdOutToConsole|-o:\n" + 
-"        directs System.stdOut to the console instead of the output text area.\n" + 
-"    --stdErrToConsole|-e:\n" + 
-"        directs System.stdOut to the console instead of the output text area.\n" + 
-"    --defaultRenderer|-r <classname>:\n" + 
-"        the Renderer specified by <classname> will be used as the default Renderer\n" + 
-//"    --customStartupClass|-c <classname>:\n" +
-//"        calls <classname>.customSetup( String [] args, <JAlice instance>,\n" +
-//"                  <world instance> )\n" +
-//"        during system initialization\n" +
-"    --help|-h:\n" + 
-"        prints this help message\n" + 
-"\n" + 
-"world:\n" + 
-"    a pathname to a world on disk to be loaded at startup.\n"; 
+		"\nUsage: JAlice <options> <world>\n" + 
+		"\n" + 
+		"options:\n" + 
+		"    --stdOutToConsole|-o:\n" + 
+		"        directs System.stdOut to the console instead of the output text area.\n" + 
+		"    --stdErrToConsole|-e:\n" + 
+		"        directs System.stdOut to the console instead of the output text area.\n" + 
+		"    --defaultRenderer|-r <classname>:\n" + 
+		"        the Renderer specified by <classname> will be used as the default Renderer\n" + 
+		//"    --customStartupClass|-c <classname>:\n" +
+		//"        calls <classname>.customSetup( String [] args, <JAlice instance>,\n" +
+		//"                  <world instance> )\n" +
+		//"        during system initialization\n" +
+		"    --help|-h:\n" + 
+		"        prints this help message\n" + 
+		"\n" + 
+		"world:\n" + 
+		"    a pathname to a world on disk to be loaded at startup.\n"; 
 
 		// for the options string:
 		// --a lone character has no options
@@ -484,8 +492,7 @@ public class JAlice {
 					break;
 				case 'r': //default Renderer Class...
 					defaultRendererClassname = g.getOptarg();
-					break;
-				
+					break;			
 /*				case 'c': //custom Startup class
 					arg = g.getOptarg();
 					try	{
@@ -500,8 +507,7 @@ public class JAlice {
 					} catch( Exception e ) {
 						e.printStackTrace();
 					}
-					break;*/
-				
+					break;*/			
 				case 'h': //help
 				case '?':
 					System.err.println( helpMessage );
@@ -515,13 +521,30 @@ public class JAlice {
 
 		int i = g.getOptind();
 		if( (i >= 0) && (i < args.length) ) {
-			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")) {   
+			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").toLowerCase().startsWith("windows")) {   
 				char ch = ':';
 				String file = args[i].toString(); 
 				file = file.substring(file.lastIndexOf(ch)-1, file.length()-1);
 				worldToLoad = new java.io.File( file ).getAbsoluteFile();
-			} else 
+			} else if ((System.getProperty("os.name") != null) && System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+				com.apple.eawt.Application app =  com.apple.eawt.Application.getApplication();
+	            app.setOpenFileHandler( new OpenFilesHandler() {
+					public void openFiles(OpenFilesEvent event) {
+						List<String> filenames = new ArrayList<String>();
+				        for(File f : event.getFiles()) {
+				            filenames.add(f.getAbsolutePath());
+				        }
+			        	worldToLoad = new java.io.File( filenames.toArray(new String[filenames.size()] )[0] ).getAbsoluteFile();
+				        if (!listenerRegistered){
+				        	listenerRegistered = true;
+				        } else {
+				        	authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
+				        }
+					}
+		        });
+			} else {
 				worldToLoad = new java.io.File( args[i] ).getAbsoluteFile();
+			}
 		}
 	}
 
@@ -549,7 +572,7 @@ public class JAlice {
 		if (file != null) {
 			if( file.exists() ) {
 				aliceUserDirectory = file;
-			} else if( file.mkdir() ) {
+			} else if( file.mkdirs() ) {
 				aliceUserDirectory = file;
 			} 
 		}
@@ -565,16 +588,15 @@ public class JAlice {
 			java.io.File aliceHome = getAliceHomeDirectory();
 			java.io.File aliceUser = null;
 			if( directory != null) {
-				aliceUser = new java.io.File( directory, ".alice2" ); 
+				aliceUser = new java.io.File( directory, ".alice2" ); 	// directory from config file
 			} else if (dirFromProperties != null ) {
-				aliceUser = dirFromProperties;
+				aliceUser = dirFromProperties;							// alice.userDir
 			} else if( userHome.exists() && userHome.canRead() && userHome.canWrite() ) {
-				aliceUser = new java.io.File( userHome, ".alice2" ); 
+				aliceUser = new java.io.File( userHome, ".alice2" ); 	// user.home
 			} else if( (aliceHome != null) && aliceHome.exists() && aliceHome.canRead() && aliceHome.canWrite() ) {
-				aliceUser = new java.io.File( aliceHome, ".alice2" ); 
+				aliceUser = new java.io.File( aliceHome, ".alice2" ); 	// alice.home or user.dir
 			}
 			setAliceUserDirectory( aliceUser );
-
 		} 
 		return aliceUserDirectory;
 	}

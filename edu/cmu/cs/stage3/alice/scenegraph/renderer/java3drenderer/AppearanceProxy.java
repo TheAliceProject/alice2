@@ -131,27 +131,4 @@ class AppearanceProxy extends ElementProxy {
 			m_j3dMaterial.setEmissiveColor( color.createVecmathColor3f() );
 		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.DIFFUSE_COLOR_MAP_PROPERTY ) {
             if( m_diffuseColorMap != null ) {
-                m_diffuseColorMap.removeAppearance( this );
-            }
-            m_diffuseColorMap = (TextureMapProxy)getProxyFor( (edu.cmu.cs.stage3.alice.scenegraph.TextureMap)value );
-            if( m_diffuseColorMap != null ) {
-                m_diffuseColorMap.addAppearance( this );
-                updateJ3DTexture( m_diffuseColorMap.getJ3DTexture() );
-            } else {
-                updateJ3DTexture( null );
-            }
-		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.OPACITY_MAP_PROPERTY ) {
-            //todo
-		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.EMISSIVE_COLOR_MAP_PROPERTY ) {
-            //todo
-		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.SPECULAR_HIGHLIGHT_COLOR_MAP_PROPERTY ) {
-            //todo
-		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.BUMP_MAP_PROPERTY ) {
-            //todo
-		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.DETAIL_MAP_PROPERTY ) {
-            //todo
-		} else {
-			super.changed( property, value );
-		}
-	}
-}
+                m_di

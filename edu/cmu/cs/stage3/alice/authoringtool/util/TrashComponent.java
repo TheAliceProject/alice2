@@ -203,44 +203,4 @@ public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.D
 		checkDrag( dtde );
 	}
 
-	protected class DropPotentialFeedbackListener implements edu.cmu.cs.stage3.alice.authoringtool.util.event.DnDManagerListener {
-		private void doCheck() {
-			java.awt.datatransfer.Transferable transferable = edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.getCurrentTransferable();
-			boolean transferableHasPotential = checkTransferable( transferable );
-			if( TrashComponent.this.paintDropPotential != transferableHasPotential ) {
-				TrashComponent.this.paintDropPotential = transferableHasPotential;
-				TrashComponent.this.repaint();
-			}
-		}
-
-		public void dragGestureRecognized( java.awt.dnd.DragGestureEvent dge ) {
-			// do nothing for the gesture, wait until dragStarted
-		}
-
-		public void dragStarted() {
-			beingDroppedOn = false;
-			doCheck();
-		}
-
-		public void dragEnter( java.awt.dnd.DragSourceDragEvent dsde ) {
-			doCheck();
-		}
-
-		public void dragExit( java.awt.dnd.DragSourceEvent dse ) {
-			doCheck();
-		}
-
-		public void dragOver( java.awt.dnd.DragSourceDragEvent dsde ) {
-			//don't check here
-		}
-
-		public void dropActionChanged( java.awt.dnd.DragSourceDragEvent dsde ) {
-			doCheck();
-		}
-
-		public void dragDropEnd( java.awt.dnd.DragSourceDropEvent dsde ) {
-			TrashComponent.this.paintDropPotential = false;
-			TrashComponent.this.repaint();
-		}
-	}
-}
+	protected class DropPotentialFeedbackListener implements edu.cmu.cs.stage3.alice.authoringtool.util.event.DnDManagerListe

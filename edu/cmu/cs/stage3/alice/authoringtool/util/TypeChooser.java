@@ -27,6 +27,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.ButtonModel;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 
@@ -68,7 +69,7 @@ public class TypeChooser extends javax.swing.JPanel {
 		buttonGroup.add( booleanButton );
 		buttonGroup.add( objectButton );
 		buttonGroup.add( otherButton );
-
+		
 		java.awt.event.ActionListener radioListener = new java.awt.event.ActionListener() {
 			public void actionPerformed( java.awt.event.ActionEvent ev ) {
 				if( ev.getSource() == numberButton ) {
@@ -89,9 +90,7 @@ public class TypeChooser extends javax.swing.JPanel {
 				} else if( ev.getSource() == otherButton ) {
 					otherCombo.setEnabled( true );
 					TypeChooser.this.parseOtherType();
-				}
-				
-				
+				}		
 			}
 		};
 		numberButton.addActionListener( radioListener );
@@ -149,6 +148,9 @@ public class TypeChooser extends javax.swing.JPanel {
 	}
 
 	public Class getType() {
+		if (otherButton.isSelected()){
+			parseOtherType();
+		}
 		return type;
 	}
 

@@ -246,34 +246,4 @@ public class PlayerApplet extends java.applet.Applet {
 					}
 					public void progressEnd() {
 					}
-				} );
-
-				m_startButton.setEnabled( true );
-				startWorld();
-			} catch( java.net.MalformedURLException murle ) {
-				murle.printStackTrace();
-			} catch( java.io.IOException ioe ) {
-				ioe.printStackTrace();
-			}
-		}
-	};
-	
-	public void start() {
-		super.start();
-		new Thread( m_loadRunnable ).start();
-	}
-	
-	public void stop() {
-		m_player.stopWorldIfNecessary();
-		m_player.unloadWorld();
-		super.stop();
-	}
-
-	protected void handleRenderTarget( edu.cmu.cs.stage3.alice.core.RenderTarget renderTarget ) {
-		remove( m_progressPanel );
-		add( renderTarget.getInternal().getAWTComponent(), java.awt.BorderLayout.CENTER );
-		doLayout();
-		invalidate();
-		repaint();
-	}
-}
+		

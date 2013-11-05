@@ -183,7 +183,4 @@ public class PropertyPanel extends javax.swing.JPanel {
 		propertyManipulationPanel.setBackground(Color.white);
 		this.add(propertySubPanel, BorderLayout.CENTER);
 		propertySubPanel.add(propertyGroupCombo, BorderLayout.NORTH);
-		propertySubPanel.add(propertyScrollPane, BorderLayout.CENTER);
-		propertyScrollPane.getViewport().add(propertyManipulationPanel, null);
-	}
-}
+		propertySubPanel.add(propertyScrollPane, BorderLayout.

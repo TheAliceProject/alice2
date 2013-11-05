@@ -200,36 +200,4 @@ public class SoundResponse extends edu.cmu.cs.stage3.alice.core.Response {
 					if( Double.isNaN( endMediaTime ) ) {
 						endMediaTime = m_player.getDuration();
 					}
-				} else {
-					endMediaTime = duration;
-				}
-				double mediaTimeRemaining = endMediaTime - currMediaTime;
-				double elapsedTime = getTimeElapsed( t );
-				if( m_prevMediaTime != currMediaTime ) {
-					m_timeout = elapsedTime + mediaTimeRemaining;
-					m_prevMediaTime = currMediaTime;
-				}
-				if( Double.isNaN( m_timeout ) ) {
-					//pass
-				} else {
-					if( elapsedTime > m_timeout ) {
-						mediaTimeRemaining = 0;
-					}
-				}
-				return mediaTimeRemaining;
-			} else {
-				return 0;
-			}
-		}
-		//todo: remove?
-		
-		public double getDuration() {
-			double dur = super.getDuration();
-			if( dur==0 ) {
-				return Double.NaN;
-			} else {
-				return dur;
-			}
-		}
-	}
-}
+				} e

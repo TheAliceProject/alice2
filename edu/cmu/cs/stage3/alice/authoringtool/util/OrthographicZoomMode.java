@@ -266,14 +266,4 @@ public class OrthographicZoomMode extends RenderTargetManipulatorMode {
 	}
 
 	class RectDrawer implements edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetListener {
-		public void cleared( edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetEvent ev ) {}
-		public void rendered( edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetEvent ev ) {
-			java.awt.Graphics g = ev.getRenderTarget().getOffscreenGraphics();
-			g.setColor( java.awt.Color.white );
-			g.setXORMode( java.awt.Color.black );
-			g.drawRect( zoomRect.x, zoomRect.y, zoomRect.width, zoomRect.height );
-			g.dispose();
-		}
-	}
-	*/
-}
+		public void cleared( edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetEven

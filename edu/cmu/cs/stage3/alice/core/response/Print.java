@@ -172,20 +172,3 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 				}
 			} else {
 				if( o != null ) {
-					//output = Print.this.getPrefix();
-					//if (outputtext != null && output.length()>1)
-					//	output = output.substring(0,(output.indexOf("__")-1))+" "+outputtext+valueText;  
-					//else
-						output = output + valueText;
-				} else {
-					output = valueText;
-				}
-			}
-			if( Print.this.addNewLine.booleanValue() ) {
-				System.out.println( output );
-			} else {
-				System.out.print( output );
-			}
-		}
-	}
-}

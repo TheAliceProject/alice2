@@ -218,8 +218,4 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
      *   public Object getChild(Object parent, int index)
      *   public int getChildCount(Object parent)
      *   public int getColumnCount()
-     *   public String getColumnName(Object node, int column)
-     *   public Object getValueAt(Object node, int column)
-     */
-
-}
+     *   public Stri

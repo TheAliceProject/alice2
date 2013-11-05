@@ -298,7 +298,7 @@ public class Actions {
 		
 		stopWorldAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( final java.awt.event.ActionEvent e ) {
-				//authoringTool.stopWorld();
+				authoringTool.stopWorld();
 			}
 		};
 

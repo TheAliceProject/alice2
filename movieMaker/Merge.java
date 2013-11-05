@@ -475,41 +475,4 @@ public class Merge implements ControllerListener, DataSinkListener {
 	public void dataSinkUpdate(DataSinkEvent evt) {
 
 		if (evt instanceof EndOfStreamEvent) {
-			synchronized (waitFileSync) {
-				fileDone = true;
-				waitFileSync.notifyAll();
-			}
-		} else if (evt instanceof DataSinkErrorEvent) {
-			synchronized (waitFileSync) {
-				fileDone = true;
-				fileSuccess = false;
-				waitFileSync.notifyAll();
-			}
-		}
-	}
-
-	DataSink createDataSink(Processor p, MediaLocator outML) {
-
-		DataSource ds;
-
-		if ((ds = p.getDataOutput()) == null) {
-			System.err
-					.println(Messages.getString("Something_is_really_wrong__the_processor_does_not_have_an_output_DataSource")); 
-			return null;
-		}
-
-		DataSink dsink;
-
-		try {
-			// System.err.println("- create DataSink for: " + outML);
-			dsink = Manager.createDataSink(ds, outML);
-			dsink.open();
-		} catch (Exception e) {
-			//System.err.println("Cannot create the DataSink: " + e);
-			return null;
-		}
-
-		return dsink;
-	}
-
-}
+			synchronized (

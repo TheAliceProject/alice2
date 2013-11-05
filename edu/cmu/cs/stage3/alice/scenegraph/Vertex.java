@@ -324,39 +324,4 @@ public class Vertex extends Vertex3d {
 		}
 	}
 	public void setA( double a ) {
-		if( (getFormat()&DIFFUSE_RGBA)!=0 ) {
-			diffuseColor.alpha = (float)a;
-		} else {
-			if( !Double.isNaN( a ) ) {
-				throw new RuntimeException();
-			}
-		}
-	}
-	
-	public String toString() {
-		return "edu.cmu.cs.stage3.alice.scenegraph.Vertex[format="+getFormat()+",x="+getX()+",y="+getY()+",z="+getZ()+",i="+getI()+",j="+getJ()+",k="+getK()+",u="+getU()+",v="+getV()+",r="+getR()+",g="+getG()+",b="+getB()+",a="+getA()+"]";
-	}
-	public static Vertex valueOf( String s ) {
-		String[] markers = { "edu.cmu.cs.stage3.alice.scenegraph.Vertex[format=", ",x=", ",y=", ",z=", ",z=", ",i=", ",j=", ",k=", ",u=", ",v=", ",r=", ",g=", ",b=", ",a=", "]" };
-		double[] values = new double[markers.length-1];
-		for( int i=0; i<values.length; i++ ) {
-			int begin = s.indexOf( markers[i] ) + markers[i].length();
-			int end = s.indexOf( markers[i+1] );
-			values[i] = Double.valueOf( s.substring( begin, end ) ).doubleValue();
-		}
-		Vertex v = new Vertex( (int)values[0] );
-		v.setX( values[1] );
-		v.setY( values[2] );
-		v.setZ( values[3] );
-		v.setI( values[4] );
-		v.setJ( values[5] );
-		v.setK( values[6] );
-		v.setU( values[7] );
-		v.setV( values[8] );
-		v.setR( values[9] );
-		v.setG( values[10] );
-		v.setB( values[11] );
-		v.setA( values[12] );
-		return v;
-	}
-}
+		if( (getFormat()&DIFFUSE_R

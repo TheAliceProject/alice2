@@ -170,43 +170,4 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 						
 						endPos = new javax.vecmath.Vector3d(centerTopFace.x - xOffset, centerTopFace.y - yOffset, zStart - depthSeat );
 						endPos = m_target.getPosition(endPos, m_target.getWorld());
-					} else if ((side.getDirectionValue().equals(edu.cmu.cs.stage3.alice.core.Direction.LEFT)) || (side.getDirectionValue().equals(edu.cmu.cs.stage3.alice.core.Direction.RIGHT)) ) {
-						
-						if (depthSeat > m_target.getBoundingBox(m_target).getWidth())
-							depthSeat = m_target.getBoundingBox(m_target).getWidth();
-												
-						if (side.getDirectionValue().equals(edu.cmu.cs.stage3.alice.core.Direction.RIGHT)) {
-							zStart = m_target.getBoundingBox(m_target).getCenterOfRightFace().x;
-						} else {
-							zStart = m_target.getBoundingBox(m_target).getCenterOfLeftFace().x;
-							depthSeat *= -1.0;
-						}
-						
-						endPos = new javax.vecmath.Vector3d(zStart - depthSeat, centerTopFace.y - yOffset, centerTopFace.z - xOffset );
-						endPos = m_target.getPosition(endPos, m_target.getWorld());
-					}
-					
-					return endPos;
-					
-				} 
-				return endPos;
-			} else {
-				return m_positionBegin;
-			}
-		}
-		
-		public void setFinalOrientations() {
-			rightUpperFinalOrient = new edu.cmu.cs.stage3.math.Matrix33();
-			leftUpperFinalOrient = new edu.cmu.cs.stage3.math.Matrix33();
-			rightLowerFinalOrient = new edu.cmu.cs.stage3.math.Matrix33();
-			leftLowerFinalOrient = new edu.cmu.cs.stage3.math.Matrix33();
-			
-			rightUpperFinalOrient.rotateX(-0.5 * java.lang.Math.PI);
-			leftUpperFinalOrient.rotateX(-0.5 * java.lang.Math.PI);
-			
-			rightLowerFinalOrient.rotateX(0.5 * java.lang.Math.PI);
-			leftLowerFinalOrient.rotateX(0.5 * java.lang.Math.PI);
-		}
-	}
-
-}
+					} else if ((side.getDirectionValue(

@@ -192,13 +192,4 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 			}
 		}
 
-		public void releaseTile( String text, Tile tile ) {
-			java.util.LinkedList tileList = (java.util.LinkedList)tileListMap.get( text );
-			if( tileList == null ) {
-				tileList = new java.util.LinkedList();
-				tileListMap.put( text, tileList );
-			}
-			tileList.addFirst( tile );
-		}
-	}
-}
+		public void releaseT

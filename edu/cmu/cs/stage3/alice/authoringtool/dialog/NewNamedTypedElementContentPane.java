@@ -174,6 +174,7 @@ public abstract class NewNamedTypedElementContentPane extends
 
 	public boolean isReadyToDispose(int option) {
 		if (option == edu.cmu.cs.stage3.swing.ContentPane.OK_OPTION) {
+			refreshValuePanel();
 			m_typeChooser.addCurrentTypeToList();
 		} else if (option == edu.cmu.cs.stage3.swing.ContentPane.CANCEL_OPTION) {
 			m_variable = null;

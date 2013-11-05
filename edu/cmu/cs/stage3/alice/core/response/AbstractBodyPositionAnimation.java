@@ -160,13 +160,4 @@ public class AbstractBodyPositionAnimation extends OrientationAnimation {
 						 rightLower = null;
 					 }
 					 if (rightLower != null) {
-						 rightFoot = getTransformableChild(rightLower); 		
-					 } else {
-						 rightFoot = getTransformableChild(rightUpper);
-					 } 
-				 }
-			 }
-		 }
-	}
-
-}
+						 rightFoot = get

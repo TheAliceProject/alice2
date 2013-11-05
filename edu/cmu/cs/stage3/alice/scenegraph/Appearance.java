@@ -186,37 +186,4 @@ public class Appearance extends Element {
 	public TextureMap getEmissiveColorMap() {
 		return m_emissiveColorMap;
 	}
-	public void setEmissiveColorMap( TextureMap emissiveColorMap ) {
-		if( notequal( m_emissiveColorMap, emissiveColorMap ) ) {
-			m_emissiveColorMap = emissiveColorMap;
-			onPropertyChange( EMISSIVE_COLOR_MAP_PROPERTY );
-		}
-	}
-	public TextureMap getSpecularHighlightColorMap() {
-		return m_emissiveColorMap;
-	}
-	public void setSpecularHighlightColorMap( TextureMap specularHighlightColorMap ) {
-		if( notequal( m_specularHighlightColorMap, specularHighlightColorMap ) ) {
-			m_specularHighlightColorMap = specularHighlightColorMap;
-			onPropertyChange( SPECULAR_HIGHLIGHT_COLOR_MAP_PROPERTY );
-		}
-	}
-	public TextureMap getBumpMap() {
-		return m_bumpMap;
-	}
-	public void setBumpMap( TextureMap bumpMap ) {
-		if( notequal( m_bumpMap, bumpMap ) ) {
-			m_bumpMap = bumpMap;
-			onPropertyChange( BUMP_MAP_PROPERTY );
-		}
-	}
-	public TextureMap getDetailMap() {
-		return m_detailMap;
-	}
-	public void setDetailMap( TextureMap detailMap ) {
-		if( notequal( m_detailMap, detailMap ) ) {
-			m_detailMap = detailMap;
-			onPropertyChange( DETAIL_MAP_PROPERTY );
-		}
-	}
-}
+	public void setEmissiveColorMap( TextureMap emissiveColorM
