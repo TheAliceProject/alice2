@@ -458,4 +458,14 @@ public class Matrix33 extends javax.vecmath.Matrix3d implements Interpolable {
 	public String toString() {
 		return "edu.cmu.cs.stage3.math.Matrix33[rc00="+m00+",rc01="+m01+",rc02="+m02+",rc10="+m10+",rc11="+m11+",rc12="+m12+",rc20="+m20+",rc21="+m21+",rc22="+m22+"]";
 	}
-	public sta
+	public static Matrix33 valueOf( String s ) {
+		String[] markers = { "edu.cmu.cs.stage3.math.Matrix33[rc00=", ",rc01=", ",rc02=", ",rc10=", ",rc11=", ",rc12=", ",rc20=", ",rc21=", ",rc22=", "]" };
+		double[] values = new double[markers.length-1];
+		for( int i=0; i<values.length; i++ ) {
+			int begin = s.indexOf( markers[i] ) + markers[i].length();
+			int end = s.indexOf( markers[i+1] );
+			values[i] = Double.valueOf( s.substring( begin, end ) ).doubleValue();
+		}
+		return new Matrix33( values );
+	}
+}

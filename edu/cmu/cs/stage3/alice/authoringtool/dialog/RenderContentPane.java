@@ -175,8 +175,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			renderCanvas.addFocusListener(renderCanvasFocusListener);
 			javax.swing.Timer focusTimer = new javax.swing.Timer(100,
 					new java.awt.event.ActionListener() {
-						public void actionPerformed(
-								java.awt.event.ActionEvent ev) {
+						public void actionPerformed(java.awt.event.ActionEvent ev) {
 							renderCanvas.requestFocus();
 						}
 					});

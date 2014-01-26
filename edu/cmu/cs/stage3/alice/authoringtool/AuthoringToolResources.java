@@ -810,7 +810,23 @@ public class AuthoringToolResources {
 						reprString = sb.toString();
 					}
 					while( (reprString.indexOf( "<keyCodeValue>" ) > -1) && (value instanceof Integer) ) { 
-						String valueString = java.awt.event.KeyEvent.getKeyText( ((Integer)value).intValue() );
+						String valueString="";
+						switch ((Integer)value){
+						case 192: valueString = "`"; break;
+						case 45: valueString = "-"; break;
+						case 61: valueString = "="; break;
+						case 91: valueString = "["; break;
+						case 93: valueString = "]"; break;
+						case 92: valueString = "\\"; break;
+						case 59: valueString = ";"; break;
+						case 222: valueString = "'"; break;
+						case 44: valueString = ","; break;
+						case 46: valueString = "."; break;
+						case 47: valueString = "/"; break;
+						
+						default: valueString = java.awt.event.KeyEvent.getKeyText( ((Integer)value).intValue() ); break;
+						}
+						
 						StringBuffer sb = new StringBuffer( reprString );
 						sb.replace( reprString.indexOf( "<keyCodeValue>" ), reprString.indexOf( "<keyCodeValue>" ) + "<keyCodeValue>".length(), valueString );   
 						reprString = sb.toString();
@@ -2415,7 +2431,38 @@ public class AuthoringToolResources {
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DOWN ), "downArrow" ); 
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_LEFT ), "leftArrow" ); 
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_RIGHT ), "rightArrow" ); 
+		// Aik Min = Possible addition
+		//AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PRINTSCREEN ), "printscreen" );
+		//AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PRINTSCREEN ), "scrolllock" );
+		//AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PAUSE ), "pause" );
+		
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_BACK_SPACE ), "backspace" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_INSERT ), "insert" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DELETE ), "delete" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_HOME ), "home" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_END ), "end" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PAGE_UP ), "pageup" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PAGE_DOWN ), "pagedown" );
+		
 		//Aik Min - New
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ALT ), "alt" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_CONTROL ), "ctrl" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SHIFT ), "shift" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD0 ), "num0" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD1 ), "num1" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD2 ), "num2" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD3 ), "num3" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD4 ), "num4" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD5 ), "num5" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD6 ), "num6" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD7 ), "num7" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD8 ), "num8" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD9 ), "num9" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DIVIDE ), "divide" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_MULTIPLY ), "multiply" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SUBTRACT ), "subtract" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ADD ), "add" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_BACK_QUOTE ), "`" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_MINUS ), "-" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_EQUALS ), "=" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_OPEN_BRACKET ), "[" );
@@ -2424,7 +2471,7 @@ public class AuthoringToolResources {
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SEMICOLON ), ";" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_QUOTE ), "'" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_COMMA ), "," );
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PERIOD ), "." );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PERIOD ), "period" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SLASH ), "slash" );
 	}
 

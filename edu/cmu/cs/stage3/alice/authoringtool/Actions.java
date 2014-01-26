@@ -538,7 +538,7 @@ public class Actions {
 		launchSoftwareUpdate.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchSoftwareUpdate" );
 		//launchSoftwareUpdate.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'U' ) );
 		launchSoftwareUpdate.putValue( javax.swing.Action.NAME, Messages.getString("Update_Software") );
-		launchSoftwareUpdate.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Update_Alice_2_3") );
+		launchSoftwareUpdate.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Update_Software") );
 		//launchSoftwareUpdate.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( launchSoftwareUpdate );	
     

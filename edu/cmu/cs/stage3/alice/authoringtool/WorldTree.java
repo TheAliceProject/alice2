@@ -236,4 +236,32 @@ public class WorldTree extends javax.swing.JTree {
 		return getPathBetweenRows( getRowForPath( fromPath ), getRowForPath( toPath ) );
 	}
 
-	public void paintC
+	public void paintComponent( java.awt.Graphics g ) {
+		try {
+			super.paintComponent( g );
+		} catch( NullPointerException e ) {
+			AuthoringTool.showErrorDialog( Messages.getString("Error_painting_tree_"), e ); 
+		}
+		if( dropLinesActive && showDropLines ) {
+			paintLines( g, getBounds(), insets, fromPath, toPath );
+		}
+	}
+
+	synchronized public void autoscrollIfNecessary() {
+		java.awt.Container parent = getParent();
+		if( parent instanceof javax.swing.JViewport ) {
+			java.awt.Rectangle viewRect = ((javax.swing.JViewport)parent).getViewRect();
+			int desiredRow = -1;
+			if( cursorLocation.y < (viewRect.y + 10) ) {
+				desiredRow = getClosestRowForLocation( cursorLocation.x, cursorLocation.y ) - 1;
+			} else if( cursorLocation.y > (viewRect.y + viewRect.height - 10) ) {
+				desiredRow = getClosestRowForLocation( cursorLocation.x, cursorLocation.y ) + 1;
+			}
+
+			int lastRow = getRowCount() - 1 - (isRootVisible() ? 0 : 1);
+			if( (desiredRow > -1) && (desiredRow <= lastRow) ) {
+				scrollRowToVisible( desiredRow );
+			}
+		}
+	}
+}

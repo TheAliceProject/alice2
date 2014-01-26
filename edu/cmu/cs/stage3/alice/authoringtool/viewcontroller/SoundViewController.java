@@ -98,4 +98,107 @@ public class SoundViewController extends javax.swing.JPanel implements edu.cmu.c
 
 	public void wakeUp() {
 		startListening();
-		if( m_soun
+		if( m_soundDnDPanel != null ) {
+			m_soundDnDPanel.wakeUp();
+		}
+	}
+
+	public void clean() {
+		stopSound();
+		stopListening();
+		if( m_soundDnDPanel != null ) {
+			remove( m_soundDnDPanel );
+			m_soundDnDPanel = null;
+		}
+	}
+
+	public void die() {
+		clean();
+	}
+
+	public void release() {
+		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
+		if( m_player != null ) {
+			m_player.setIsAvailable( true );
+			m_player = null;
+		}
+	}
+
+	public double getSoundDuration() {
+		double t = Double.NaN;
+		edu.cmu.cs.stage3.media.DataSource dataSourceValue = m_sound.dataSource.getDataSourceValue();
+		if( dataSourceValue != null ) {
+			t = dataSourceValue.getDuration( edu.cmu.cs.stage3.media.DataSource.USE_HINT_IF_NECESSARY );
+		}
+		return t;
+	}
+	public void playSound() {
+		if( m_player == null ) {
+			if( m_sound != null ) {
+				edu.cmu.cs.stage3.media.DataSource dataSourceValue = m_sound.dataSource.getDataSourceValue();
+				if( dataSourceValue != null ) {
+					m_player = dataSourceValue.acquirePlayer();
+					m_player.addPlayerListener( m_playerListener );
+				}
+			}
+		}
+		if( m_player != null ) {
+			m_player.startFromBeginning();
+		}
+	}
+
+	public void stopSound() {
+		if( m_player != null ) {
+			m_player.stop();
+		}
+	}
+
+	public int getSoundState() {
+		if( m_player != null ) {
+			return m_player.getState();
+		} else {
+			return 0;
+		}
+	}
+
+	protected class SoundPlayStopToggleButton extends javax.swing.JButton {
+		protected javax.swing.ImageIcon playIcon;
+		protected javax.swing.ImageIcon stopIcon;
+		protected java.awt.event.ActionListener buttonListener = new java.awt.event.ActionListener() {
+			public void actionPerformed( java.awt.event.ActionEvent ev ) {
+				if( SoundViewController.this.m_sound != null ) {
+					if( SoundViewController.this.getSoundState() == edu.cmu.cs.stage3.media.Player.STATE_STARTED ) {
+						SoundViewController.this.stopSound();
+					} else {
+						SoundViewController.this.playSound();
+					}
+				}
+			}
+		};
+
+		public SoundPlayStopToggleButton() {
+			playIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "playSound" );
+			stopIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "stopSound" );
+			addActionListener( buttonListener );
+			setOpaque( false );
+			setBorder( null );
+			setContentAreaFilled( false );
+			setFocusPainted( false );
+			setIcon( playIcon );
+		}
+
+		public void updateComponent() {
+			if( SoundViewController.this.getSoundState() == edu.cmu.cs.stage3.media.Player.STATE_STARTED ) {
+				this.setIcon( stopIcon );
+			} else {
+				this.setIcon( playIcon );
+			}
+		}
+	}
+
+	protected class SoundDurationLabel extends javax.swing.JLabel {
+		public void updateComponent() {
+			setText( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.formatTime( SoundViewController.this.getSoundDuration() ) );
+		}
+	}
+}

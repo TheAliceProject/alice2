@@ -231,3 +231,60 @@ class TextureMapProxy extends ElementProxy {
 ////                        false,
 ////                        ComponentColorModel.TRANSLUCENT,
 ////                        DataBuffer.TYPE_BYTE);
+//                        
+//	            ColorModel glColorModel = new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB),
+//                        new int[] {8,8,8,0},
+//                        false,
+//                        false,
+//                        ComponentColorModel.OPAQUE,
+//                        DataBuffer.TYPE_BYTE);
+//
+//		        WritableRaster raster;
+//		        BufferedImage texImage;
+//		        
+//		        m_width = bufferedImage.getWidth();
+//		        m_height = bufferedImage.getHeight();
+//		        m_width2 = get2Fold( m_width );
+//		        m_height2 = get2Fold( m_height );
+//
+//		        m_uFactor = m_width/(double)m_width2;
+//		        m_vFactor = m_height/(double)m_height2;
+//		        
+////		        if (bufferedImage.getColorModel().hasAlpha()) {
+////		            raster = Raster.createInterleavedRaster(DataBuffer.TYPE_BYTE,m_width2,m_height2,4,null);
+////		            texImage = new BufferedImage(glAlphaColorModel,raster,false,new Hashtable());
+////		        } else {
+//		            raster = Raster.createInterleavedRaster(DataBuffer.TYPE_BYTE,m_width2,m_height2,3,null);
+//		            texImage = new BufferedImage(glColorModel,raster,false,new Hashtable());
+////		        }
+//		        
+//		        Graphics g = texImage.getGraphics();
+//		        g.drawImage(bufferedImage,0,0,null);
+//		        
+//		        byte[] data = ((DataBufferByte) texImage.getRaster().getDataBuffer()).getData(); 
+//
+//		        m_byteBuffer = ByteBuffer.allocateDirect(data.length); 
+//		        m_byteBuffer.order(ByteOrder.nativeOrder()); 
+//		        m_byteBuffer.put(data, 0, data.length); 
+//
+////		        m_width = image.getWidth();
+////		        m_height = image.getHeight();
+////		        m_pixels = new int[ m_width * m_height ];
+////		        for( int y=0; y<m_height; y++ ) {
+////		            for( int x=0; x<m_width; x++ ) {
+////		                m_pixels[ y*m_width + x ] = image.getRGB( x, m_height-y-1 ); 
+////		            }
+////		        }
+//	        } else {
+//	            m_byteBuffer = null;
+//	            m_width = 0;
+//	            m_height = 0;
+//	        }
+//	        m_isChanged = true;
+//		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.TextureMap.FORMAT_PROPERTY ) {
+//            //todo
+//		} else {
+//			super.changed( property, value );
+//		}
+//	}
+}

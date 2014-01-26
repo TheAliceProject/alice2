@@ -24,6 +24,8 @@
 package edu.cmu.cs.stage3.alice.core.question.ask;
 
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 /**
  * @author Ben Buchwald, Dennis Cosgrove

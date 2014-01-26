@@ -219,4 +219,20 @@ public class OBJ {
 		}
 		if( groupNames.length()>0 ) {
 			//groups heirarchy should be space delimitted, but for uniqueness in 3dsmax we use underscores
-			groupNames =
+			groupNames = name + "_" + groupNames; 
+		} else {
+			groupNames = name;
+		}
+		for( int i=0; i<transformable.getChildCount(); i++ ) {
+			edu.cmu.cs.stage3.alice.scenegraph.Component child = transformable.getChildAt( i );
+			if( child instanceof edu.cmu.cs.stage3.alice.scenegraph.Transformable ) {
+				store( os, (edu.cmu.cs.stage3.alice.scenegraph.Transformable)child, root, groupNames );
+			} else if( child instanceof edu.cmu.cs.stage3.alice.scenegraph.Visual ) {
+				store( os, (edu.cmu.cs.stage3.alice.scenegraph.Visual)child, transformable.getTransformation( root ), groupNames );
+			}
+		}
+	}
+	public static void store( java.io.OutputStream os, edu.cmu.cs.stage3.alice.scenegraph.Transformable transformable ) throws java.io.IOException {
+		store( os, transformable, transformable, "" ); 
+	}
+}

@@ -303,4 +303,8 @@ public class MovieCapturer implements VideoCapturer
 //  {
 //    MovieCapturer capturer = new MovieCapturer(
 //                 "c:/intro-prog-java/mediasources/aliceTest1/",
-//                             
+//                                               "alice1");
+//    capturer.captureMovie(0,0,810,674,1);
+//    capturer.playMovie();
+//  }
+}

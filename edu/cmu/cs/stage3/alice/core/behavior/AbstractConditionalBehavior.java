@@ -44,6 +44,8 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 	private Response.RuntimeResponse m_runtimeDuringResponse;
 	private Response.RuntimeResponse m_runtimeEndResponse;
 
+	public boolean listeningToKeypress = false;
+	
 	protected boolean invokeEndOnStop() {
 		return false;
 	}
@@ -72,22 +74,13 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 	}
 
 	protected void set( boolean booleanValue ) {
-		if (booleanValue){
-			AuthoringTool.temp = 0;
-		} else {
-			AuthoringTool.temp = -1;
-		}
 		m_booleanValue = booleanValue;
 	}
 
 	protected void internalSchedule( double t, double dt ) {
-		if (AuthoringTool.temp == 0){
-			m_booleanValue = true;
-		} else {
-			m_booleanValue = false;
-		}
 		double timeRemaining = 0;
 		if( m_runtimeState==RUNTIME_STATE_CHECKING_FOR_TRUE ) {
+			//if ( (listeningToKeypress && AuthoringTool.temp == 0) || !listeningToKeypress )
 			if( m_booleanValue ) {
 				if( m_runtimeBeginResponse!=null ) {
 					m_runtimeState = RUNTIME_STATE_BEGINNING;
@@ -106,6 +99,7 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 			}
 		}
 		if( m_runtimeState==RUNTIME_STATE_CHECKING_FOR_FALSE ) {
+			//if ( (listeningToKeypress && AuthoringTool.temp == 0) || !listeningToKeypress )
 			if( m_booleanValue ) {
 				if( m_runtimeDuringResponse!=null ) {
 					if( !m_runtimeDuringResponse.isActive() ) {

@@ -64,11 +64,11 @@ public class LicenseContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 		    
 		setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-		int width = 500;
-		if ( System.getProperty("os.name") != null && !System.getProperty("os.name").startsWith("Windows") ) {
+		int width = 700;
+		/*if ( System.getProperty("os.name") != null && !System.getProperty("os.name").startsWith("Windows") ) {
 			width = 650;
-		} 
-		setPreferredSize(new Dimension (width,350));   
+		} */
+		setPreferredSize(new Dimension (width,500));   
 	    JTextArea headerTextArea = new JTextArea();
 	    headerTextArea.setText("Please read the following license agreement carefully.");
 	    headerTextArea.setEditable(false);
@@ -81,9 +81,10 @@ public class LicenseContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	    textArea.setEditable(false);
 	    textArea.setLineWrap(true);
 	    textArea.setWrapStyleWord(true);
+	    textArea.setMargin( new java.awt.Insets(10,10,10,10) );
 	    	    
 	    JScrollPane scrollPane = new JScrollPane(textArea);
-	    scrollPane.setPreferredSize(new Dimension(width, 320));
+	    //scrollPane.setPreferredSize(new Dimension(width, 320));
 
 	    JPanel buttonPane = new JPanel();
 	    buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));

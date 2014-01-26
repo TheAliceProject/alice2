@@ -23,29 +23,108 @@
 
 package edu.cmu.cs.stage3.alice.player;
 
+import java.net.URISyntaxException;
+
 public class DefaultPlayer extends AbstractPlayer {
+	public static Class rendererClass = null;
+	public static DefaultPlayer player = new DefaultPlayer(rendererClass);
+	
 	public DefaultPlayer(Class rendererClass) {
 		super( rendererClass );
 	}
 	private java.util.Vector m_frames = new java.util.Vector();
 	
 	protected boolean isPreserveAndRestoreRequired() {
-		return false;
+		return true;
 	}
 	
 	protected int getDesiredFrameWidth() {
-		return 320;
+		return 800;
 	}
 	protected int getDesiredFrameHeight() {
-		return 240;
+		return 600;
 	}
 	
+	private javax.swing.JButton m_pauseButton = new javax.swing.JButton( "pause" );
+	private javax.swing.JButton m_resumeButton = new javax.swing.JButton( "resume" );
+	private javax.swing.JButton m_startButton = new javax.swing.JButton( "restart" );
+	private javax.swing.JButton m_stopButton = new javax.swing.JButton( "stop" );
+	private javax.swing.JSlider speedSlider;
+	private javax.swing.JLabel speedLabel;
 	
+	public void updateSpeed(double newSpeed) {
+		player.setSpeed(newSpeed);
+		String speedText = java.text.NumberFormat.getInstance()
+				.format(newSpeed);
+		if (newSpeed < 1) {
+			if (newSpeed == .5) {
+				speedText = "1/2";
+			} else if (newSpeed == .25) {
+				speedText = "1/4";
+			} else if (newSpeed == .2) {
+				speedText = "1/5";
+			} else if (newSpeed > .3 && newSpeed < .34) {
+				speedText = "1/3";
+			} else if (newSpeed > .16 && newSpeed < .168) {
+				speedText = "1/6";
+			} else if (newSpeed > .14 && newSpeed < .143) {
+				speedText = "1/7";
+			}
+		}
+		speedLabel.setText(" Speed: " + speedText + "x");
+		speedLabel.repaint();
+	}
 	protected void handleRenderTarget(edu.cmu.cs.stage3.alice.core.RenderTarget renderTarget) {
-		java.awt.Frame frame = new java.awt.Frame();
+		javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
+		buttonPanel.setLayout( new java.awt.FlowLayout() );
+		
+		m_pauseButton.setEnabled( true );
+		m_resumeButton.setEnabled( false );
+		m_startButton.setEnabled( true );
+		m_stopButton.setEnabled( true );
+	
+		speedLabel = new javax.swing.JLabel("  Speed: 1x    ");
+		speedLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
+		speedLabel.setSize(new java.awt.Dimension(100, 12));
+/*		speedLabel.setPreferredSize(new java.awt.Dimension(80, 12));
+		speedLabel.setMinimumSize(new java.awt.Dimension(20, 12));
+		speedLabel.setMaximumSize(new java.awt.Dimension(80, 12));*/
+		speedSlider = new javax.swing.JSlider(0, 9, 0);
+
+		speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
+			public void paintTrack(java.awt.Graphics g) {
+				super.paintTrack(g);
+			}
+		});
+/*		speedSlider.setPreferredSize(new java.awt.Dimension(100, 16));
+		speedSlider.setMinimumSize(new java.awt.Dimension(40, 16));
+		speedSlider.setMaximumSize(new java.awt.Dimension(100, 16));*/
+		speedSlider.setSnapToTicks(true);
+		speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent ce) {
+				javax.swing.JSlider s = (javax.swing.JSlider) ce.getSource();
+					int value = s.getValue();
+					if (value >= 0) {
+						updateSpeed(value + 1.0);
+					} else if (value < 0) {
+						updateSpeed(1.0 / (1 + (value * (-1))));
+					}
+			}
+		});
+		
+		buttonPanel.add( speedLabel );
+		buttonPanel.add( speedSlider );
+		buttonPanel.add( m_pauseButton );
+		buttonPanel.add( m_resumeButton );
+		buttonPanel.add( m_startButton );
+		buttonPanel.add( m_stopButton );
+		
+		java.awt.Frame frame = new java.awt.Frame("Alice .a2w player");
+		
 		frame.setSize(getDesiredFrameWidth(), getDesiredFrameHeight());
 		frame.setLayout(new java.awt.BorderLayout());
-		frame.add(renderTarget.getAWTComponent(), java.awt.BorderLayout.CENTER);
+		frame.add( buttonPanel, java.awt.BorderLayout.NORTH );
+		frame.add( renderTarget.getAWTComponent(), java.awt.BorderLayout.CENTER );
 		frame.setVisible( true );
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			
@@ -56,10 +135,48 @@ public class DefaultPlayer extends AbstractPlayer {
 				}
 			}
 		});
+		
+		m_pauseButton.addActionListener( new java.awt.event.ActionListener() {
+			public void actionPerformed( java.awt.event.ActionEvent e ) {
+				m_pauseButton.setEnabled( false );
+				m_resumeButton.setEnabled( true );
+				player.pauseWorld();
+			}
+		} );
+
+		m_resumeButton.addActionListener( new java.awt.event.ActionListener() {
+			public void actionPerformed( java.awt.event.ActionEvent e ) {
+				m_pauseButton.setEnabled( true );
+				m_resumeButton.setEnabled( false );
+				player.resumeWorld();
+			}
+		} );
+
+		m_stopButton.addActionListener( new java.awt.event.ActionListener() {
+			public void actionPerformed( java.awt.event.ActionEvent e ) {
+				m_startButton.setText( "start" );
+				m_pauseButton.setEnabled( false );
+				m_stopButton.setEnabled( false );
+				m_resumeButton.setEnabled( false );
+				player.stopWorld();
+			}
+		} );
+
+		m_startButton.addActionListener( new java.awt.event.ActionListener() {
+			public void actionPerformed( java.awt.event.ActionEvent e ) {
+				player.stopWorldIfNecessary();
+				m_startButton.setText( "restart" );
+				m_pauseButton.setEnabled( true );
+				m_stopButton.setEnabled( true );
+				m_resumeButton.setEnabled( false );
+				player.startWorld();
+			}
+		} );
+		
 		m_frames.add(frame);
 		edu.cmu.cs.stage3.swing.DialogManager.initialize( frame );
 	}
-	/*
+	
 	private static java.io.File getFileFromArgs(String[] args, int startFrom) {
 		java.io.File file = null;
 		String path = "";
@@ -78,8 +195,8 @@ public class DefaultPlayer extends AbstractPlayer {
 		return file;
 	}
 
-	public static void main(String[] args) {
-		Class rendererClass = null;
+	public static void main(String[] args) throws URISyntaxException {
+
 		java.io.File file = null;
 		if( args.length > 0 ) {
 			int startFrom = 1;
@@ -100,16 +217,21 @@ public class DefaultPlayer extends AbstractPlayer {
 			file = getFileFromArgs(args, startFrom);
 		}
 		if( file == null ) {
-			java.awt.Frame frame = new java.awt.Frame();
-			java.awt.FileDialog fd = new java.awt.FileDialog(frame);
-			fd.setVisible( true );
-			String filename = fd.getFile();
-			if (fd.getDirectory() != null && fd.getFile() != null) {
-				file = new java.io.File(fd.getDirectory() + fd.getFile());
+			String temp = player.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().toString();
+			temp = temp.substring(5, temp.lastIndexOf("."))+".a2w";
+			file = new java.io.File(temp);
+			if (!file.exists()) { 
+				java.awt.Frame frame = new java.awt.Frame();
+				java.awt.FileDialog fd = new java.awt.FileDialog(frame);
+				fd.setVisible( true );
+				//String filename = fd.getFile();
+				if (fd.getDirectory() != null && fd.getFile() != null) {
+					file = new java.io.File(fd.getDirectory() + fd.getFile());
+				}
+				frame.dispose();
 			}
-			frame.dispose();
 		}
-		DefaultPlayer player = new DefaultPlayer(rendererClass);
+
 		try {
 			player.loadWorld( file, new edu.cmu.cs.stage3.progress.ProgressObserver() {
 				private int i = 0;
@@ -135,8 +257,9 @@ public class DefaultPlayer extends AbstractPlayer {
 				}
 			} );
 			player.startWorld();
+			
 		} catch( java.io.IOException ioe ) {
 			ioe.printStackTrace();
 		}
-	}*/
+	}
 }

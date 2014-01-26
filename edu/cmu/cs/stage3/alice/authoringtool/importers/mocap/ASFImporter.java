@@ -199,4 +199,92 @@ public class ASFImporter extends AbstractImporter {
                     tokenizer.nextToken();
                     bone.base_axis.rotateX(-tokenizer.nval*skel.anglescale);
                     tokenizer.nextToken();
-             
+                    bone.base_axis.rotateY(-tokenizer.nval*skel.anglescale);
+                    tokenizer.nextToken();
+                    bone.base_axis.rotateZ(tokenizer.nval*skel.anglescale);
+                } else if (tokenizer.sval.equals("direction")) {
+                    tokenizer.nextToken();
+                    bone.direction.x = tokenizer.nval;
+                    tokenizer.nextToken();
+                    bone.direction.y = tokenizer.nval;
+                    tokenizer.nextToken();
+                    bone.direction.z = -tokenizer.nval;
+                } else if (tokenizer.sval.equals("length")) {
+                    tokenizer.nextToken();
+                    bone.length = tokenizer.nval*skel.lengthscale;
+                } else if (tokenizer.sval.equals("name")) {
+                    tokenizer.nextToken();
+                    bone.name = tokenizer.sval;
+                    //System.out.println(bone.name);
+                } else if (tokenizer.sval.equals("dof")) {
+                    while (tokenizer.nextToken()!=StreamTokenizer.TT_EOL) {
+                        if(tokenizer.sval.equals("tx")) {
+                            bone.dof.addElement(ASFBone.DOF_TX);
+                        } else if (tokenizer.sval.equals("ty")) {
+                            bone.dof.addElement(ASFBone.DOF_TY);
+                        } else if (tokenizer.sval.equals("tz")) {
+                            bone.dof.addElement(ASFBone.DOF_TZ);
+                        } else if (tokenizer.sval.equals("rx")) {
+                            bone.dof.addElement(ASFBone.DOF_RX);
+                        } else if (tokenizer.sval.equals("ry")) {
+                            bone.dof.addElement(ASFBone.DOF_RY);
+                        } else if (tokenizer.sval.equals("rz")) {
+                            bone.dof.addElement(ASFBone.DOF_RZ);
+                        } else if (tokenizer.sval.equals("l")) {
+                            bone.dof.addElement(ASFBone.DOF_L);
+                        }
+                    }
+                }
+                tokenizer.nextToken();
+
+            }
+            tokenizer.nextToken();
+
+            skel.bones.addElement(bone);
+            skel.bones_dict.put(bone.name,bone);
+        }
+
+        // find the :hierarchy section
+        while (tokenizer.ttype!=StreamTokenizer.TT_WORD || !tokenizer.sval.equals(":hierarchy")) {
+            tokenizer.nextToken();
+        }
+        tokenizer.nextToken();
+
+        while (tokenizer.ttype!=StreamTokenizer.TT_WORD || !tokenizer.sval.equals("begin")) {
+            tokenizer.nextToken();
+        }
+        tokenizer.nextToken();
+
+        // **************************************
+        // **  Parse the :hierarchy section    **
+        // **************************************
+
+        while (tokenizer.ttype!=StreamTokenizer.TT_WORD || !tokenizer.sval.equals("end")) {
+            if (tokenizer.ttype!=StreamTokenizer.TT_WORD) {
+                tokenizer.nextToken();
+                continue;
+            }
+            bone = (ASFBone)skel.bones_dict.get(tokenizer.sval);
+
+            while (tokenizer.nextToken()!=StreamTokenizer.TT_EOL) {
+                bone.children.addElement(skel.bones_dict.get(tokenizer.sval));
+            }
+        }
+
+        return skel.buildBones();
+
+    }
+
+	protected Element load(InputStream is, String ext) throws java.io.IOException {
+	    return parseASF(is);
+    }
+
+    public ASFSkeleton loadSkeleton(InputStream is) throws java.io.IOException {
+        parseASF(is);
+        return skel;
+    }
+
+    public ASFSkeleton getSkeleton() {
+        return skel;
+	}
+}

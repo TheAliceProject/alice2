@@ -66,7 +66,7 @@ public class KeyIsPressedBehavior extends AbstractConditionalBehavior implements
                 m_keyCode = keyCode;
                 updateDetails( keyEvent );
                 set( true );
-            }
+            } 
         }
 	}
 	public void keyReleased( java.awt.event.KeyEvent keyEvent ) {
@@ -76,7 +76,7 @@ public class KeyIsPressedBehavior extends AbstractConditionalBehavior implements
                 updateDetails( keyEvent );
                 set( false );
                 m_keyCode = -1;
-            }
+            } 
         }
 	}
 	public void keyTyped( java.awt.event.KeyEvent keyEvent ) {
@@ -91,6 +91,7 @@ public class KeyIsPressedBehavior extends AbstractConditionalBehavior implements
 		for( int i=0; i<m_renderTargets.length; i++ ) {
 			m_renderTargets[i].addKeyListener( this );
 		}
+		listeningToKeypress = true;
         m_keyCode = -1;
 	}
 	
@@ -100,5 +101,6 @@ public class KeyIsPressedBehavior extends AbstractConditionalBehavior implements
 			m_renderTargets[i].removeKeyListener( this );
 		}
 		m_renderTargets = null;
+		listeningToKeypress = false;
 	}
 }

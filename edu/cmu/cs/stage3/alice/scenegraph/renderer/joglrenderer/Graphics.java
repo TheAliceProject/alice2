@@ -249,4 +249,74 @@ public class Graphics extends java.awt.Graphics {
 		throw new RuntimeException( "not implemented" );
 	}
 	
-	public vo
+	public void fillArc( int x, int y, int width, int height, int startAngle, int arcAngle ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	private void glPoly( int xPoints[], int yPoints[], int nPoints ) {
+		for( int i=0; i<nPoints; i++ ) {
+		    m_renderContext.gl.glVertex2i( xPoints[ i ], yPoints[ i ] );
+		}
+	}
+	
+	public void drawPolyline( int xPoints[], int yPoints[], int nPoints ) {
+	    m_renderContext.gl.glBegin( GL.GL_LINE_STRIP );
+	    glPoly( xPoints, yPoints, nPoints );
+		m_renderContext.gl.glEnd();
+	}
+	
+	public void drawPolygon( int xPoints[], int yPoints[], int nPoints ) {
+	    m_renderContext.gl.glBegin( GL.GL_LINE_LOOP );
+	    glPoly( xPoints, yPoints, nPoints );
+		m_renderContext.gl.glEnd();
+	}
+	
+	public void fillPolygon( int xPoints[], int yPoints[], int nPoints ) {
+	    m_renderContext.gl.glBegin( GL.GL_POLYGON );
+	    glPoly( xPoints, yPoints, nPoints );
+		m_renderContext.gl.glEnd();
+	}
+	
+	public void drawString( String str, int x, int y ) {
+		com.sun.opengl.util.j2d.TextRenderer renderer = new com.sun.opengl.util.j2d.TextRenderer( m_font );
+	    renderer.beginRendering(m_renderContext.getWidth(), m_renderContext.getHeight());
+	    renderer.setColor(m_color);
+	    renderer.draw(str, x, m_renderContext.getHeight() - y);
+	    renderer.endRendering();
+	}
+	
+	public void drawString( java.text.AttributedCharacterIterator iterator, int x, int y ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public void drawChars( char[] data, int offset, int length, int x, int y ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public void drawBytes( byte[] data, int offset, int length, int x, int y ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public boolean drawImage( java.awt.Image img, int x, int y, java.awt.image.ImageObserver observer ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public boolean drawImage( java.awt.Image img, int x, int y, int width, int height, java.awt.image.ImageObserver observer ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public boolean drawImage( java.awt.Image img, int x, int y, java.awt.Color bgcolor, java.awt.image.ImageObserver observer ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public boolean drawImage( java.awt.Image img, int x, int y, int width, int height, java.awt.Color bgcolor, java.awt.image.ImageObserver observer ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public boolean drawImage( java.awt.Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, java.awt.image.ImageObserver observer ) {
+		throw new RuntimeException( "not implemented" );
+	}
+	
+	public boolean drawImage( java.awt.Image img, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2, java.awt.Color bgcolor, java.awt.image.ImageObserver observer ) {
+		throw new RuntimeException( "not implemented" );
+	}
+}

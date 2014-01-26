@@ -57,7 +57,7 @@ public class DialogManager {
 		return dialog;
 	}
 	private static void showModalDialog( javax.swing.JDialog dialog, boolean requiresSetLocationRelativeToOwner ) {
-		if( dialog.isModal() ) {
+		//if( dialog.isModal() ) {
 			if( requiresSetLocationRelativeToOwner ) {
 				dialog.setLocationRelativeTo( dialog.getOwner() );
 			}
@@ -67,9 +67,9 @@ public class DialogManager {
 			} finally {
 				s_stack.pop();
 			}
-		} else {
-			throw new RuntimeException( Messages.getString("DialogManager_only_handles__modal__dialogs") ); 
-		}
+		//} else {
+		//	throw new RuntimeException( Messages.getString("DialogManager_only_handles__modal__dialogs") ); 
+		//}
 	}
 	private static void showModalDialog( javax.swing.JDialog dialog ) {
 		showModalDialog( dialog, true );
@@ -274,7 +274,8 @@ public class DialogManager {
 		pane.setComponentOrientation( parent.getComponentOrientation() );
 
 		javax.swing.JDialog dialog = pane.createDialog( parent, title );
-
+		dialog.setModal(false);
+		
 		pane.selectInitialValue();
 		
 		showModalDialog( dialog );
@@ -316,4 +317,30 @@ public class DialogManager {
 		return showOptionDialog( message, title, optionType, messageType, icon, null, null );
 	}
 
-	public static i
+	public static int showOptionDialog( Object message, String title, int optionType, int messageType, javax.swing.Icon icon, Object[] options, Object initialValue ) {
+		javax.swing.JOptionPane pane = new javax.swing.JOptionPane( message, messageType, optionType, icon, options, initialValue );
+
+		pane.setInitialValue(initialValue);
+		java.awt.Component parent = (java.awt.Component)s_stack.peek();
+		pane.setComponentOrientation( parent.getComponentOrientation() );
+		
+		javax.swing.JDialog dialog = pane.createDialog( parent, title );
+		pane.selectInitialValue();
+		showModalDialog( dialog );
+
+		Object selectedValue = pane.getValue();
+
+		if(selectedValue == null)
+			return javax.swing.JOptionPane.CLOSED_OPTION;
+		if(options == null) {
+			if(selectedValue instanceof Integer)
+				return ((Integer)selectedValue).intValue();
+			return javax.swing.JOptionPane.CLOSED_OPTION;
+		}
+		for(int counter = 0, maxCounter = options.length; counter < maxCounter; counter++) {
+			if(options[counter].equals(selectedValue))
+				return counter;
+		}
+		return javax.swing.JOptionPane.CLOSED_OPTION;
+	}
+}

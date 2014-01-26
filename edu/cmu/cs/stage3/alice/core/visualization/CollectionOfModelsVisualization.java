@@ -106,3 +106,82 @@ public abstract class CollectionOfModelsVisualization extends edu.cmu.cs.stage3.
                 }
                 setBinAt( i, binI );
             }
+            binCount = getBinCount();
+            for( int i=0; i<binCount; i++ ) {
+                Model binI = getBinAt( i );
+                binI.vehicle.set( this );
+                binI.setPositionRightNow( -(prototype.getWidth()*i), 0, 0 );
+                if( curr[ i ] != null ) {
+                    curr[ i ].vehicle.set( binI );
+                    curr[ i ].visualization.set( this );
+                    curr[ i ].setTransformationRightNow( getTransformationFor( curr[ i ], i ), this );
+                    binI.diffuseColorMap.set( getFilledTextureMap( binI ) );
+                } else {
+                    binI.diffuseColorMap.set( getEmptyTextureMap( binI ) );
+                }
+            }
+            Model rightBracket = (Model)getChildNamed( "RightBracket" );
+            if( rightBracket != null ) {
+                rightBracket.setPositionRightNow( -(prototype.getWidth()*(binCount-0.5)), 0, 0 );
+            }
+        }
+    }
+
+    public Model get( int i ) {
+        return (Model)getItemsCollection().values.get( i );
+    }
+    public void set( int i, Model model ) {
+        getItemsCollection().values.set( i, model );
+    }
+    public int indexOf( Model model, int from ) {
+        return getItemsCollection().values.indexOf( model, from );
+    }
+    public int lastIndexOf( Model model, int from ) {
+        return getItemsCollection().values.lastIndexOf( model, from );
+    }
+    public boolean contains( Model model ) {
+        return getItemsCollection().values.contains( model );
+    }
+    public int size() {
+        return getItemsCollection().values.size();
+    }
+    public boolean isEmpty() {
+        return getItemsCollection().values.isEmpty();
+    }
+
+    
+	protected void loadCompleted() {
+        super.loadCompleted();
+        Collection collection = getItemsCollection();
+        if( collection != null ) {
+            collection.values.addPropertyListener( new edu.cmu.cs.stage3.alice.core.event.PropertyListener() {
+                public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ) {
+                }
+                public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ) {
+                    CollectionOfModelsVisualization.this.synchronize( (Model[])propertyEvent.getValue() );
+                }
+            } );
+            synchronize( getItems() );
+        } else {
+            System.err.println( "WARNING: collection is null " + this );
+        }
+    }
+    public javax.vecmath.Matrix4d getTransformationFor( edu.cmu.cs.stage3.alice.core.Model model, int i ) {
+        Model prototype = getPrototype();
+
+        javax.vecmath.Matrix4d m = new javax.vecmath.Matrix4d();
+        m.setIdentity();
+        if( model != null ) {
+            edu.cmu.cs.stage3.math.Box box = model.getBoundingBox();
+            javax.vecmath.Vector3d v = box.getCenterOfBottomFace();
+            if( v!=null ) {
+                v.negate();
+                m.m30 = v.x;
+                m.m31 = v.y;
+                m.m32 = v.z;
+            }
+        }
+        m.m30 -= prototype.getWidth()*i;
+        return m;
+    }
+}

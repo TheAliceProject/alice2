@@ -332,4 +332,31 @@ public class JPEGEncodeParam implements ImageEncodeParam {
      * @param imageOnly If true, only the compressed image will be written.
      */
     public void setWriteImageOnly(boolean imageOnly) {
-        writeImageOnl
+        writeImageOnly = imageOnly;
+    }
+
+    /**
+     * Retrieve the setting of the writeImageOnly flag.
+     * @return The setting of the writeImageOnly flag (false if not set).
+     */
+    public boolean getWriteImageOnly() {
+        return writeImageOnly;
+    }
+
+    /**
+     * Controls whether the encoder writes a JFIF header using the APP0 marker.
+     * By default an APP0 marker is written to create a JFIF file.
+     * @param writeJFIF If true, writes a JFIF header.
+     */
+    public void setWriteJFIFHeader(boolean writeJFIF) {
+        writeJFIFHeader = writeJFIF;
+    }
+
+    /**
+     * Retrieve the setting of the writeJFIF flag.
+     * @return The setting of the writeJFIF flag (true if not set).
+     */
+    public boolean getWriteJFIFHeader() {
+        return writeJFIFHeader;
+    }
+}

@@ -102,4 +102,88 @@ public abstract class ImageDecoderImpl implements ImageDecoder {
      * implementations of this interface will return corresponding
      * concrete implementations of the <code>ImageDecodeParam</code>
      * interface.  For example, a <code>JPEGImageDecoder</code> will
-     * return an instance of <code>JPEGDecodeP
+     * return an instance of <code>JPEGDecodeParam</code>.
+     */
+    public ImageDecodeParam getParam() {
+        return param;
+    }
+
+    /**
+     * Sets the current parameters to an instance of the
+     * <code>ImageDecodeParam</code> interface.  Concrete
+     * implementations of <code>ImageDecoder</code> may throw a
+     * <code>RuntimeException</code> if the <code>param</code>
+     * argument is not an instance of the appropriate subclass or
+     * subinterface.  For example, a <code>JPEGImageDecoder</code>
+     * will expect <code>param</code> to be an instance of
+     * <code>JPEGDecodeParam</code>.
+     */
+    public void setParam(ImageDecodeParam param) {
+        this.param = param;
+    }
+
+    /**
+     * Returns the <code>SeekableStream</code> associated with
+     * this <code>ImageDecoder</code>.
+     */
+    public SeekableStream getInputStream() {
+        return input;
+    }
+
+    /**
+     * Returns the number of pages present in the current stream.
+     * By default, the return value is 1.  Subclasses that deal with
+     * multi-page formats should override this method.
+     */
+    public int getNumPages() throws IOException {
+        return 1;
+    }
+
+    /**
+     * Returns a <code>Raster</code> that contains the decoded
+     * contents of the <code>SeekableStream</code> associated
+     * with this <code>ImageDecoder</code>.  Only
+     * the first page of a multi-page image is decoded.
+     */
+    public Raster decodeAsRaster() throws IOException {
+        return decodeAsRaster(0);
+    }
+
+    /**
+     * Returns a <code>Raster</code> that contains the decoded
+     * contents of the <code>SeekableStream</code> associated
+     * with this <code>ImageDecoder</code>.
+     * The given page of a multi-page image is decoded.  If
+     * the page does not exist, an IOException will be thrown.
+     * Page numbering begins at zero.
+     *
+     * @param page The page to be decoded.
+     */
+    public Raster decodeAsRaster(int page) throws IOException {
+        RenderedImage im = decodeAsRenderedImage(page);
+        return im.getData();
+    }
+
+    /**
+     * Returns a <code>RenderedImage</code> that contains the decoded
+     * contents of the <code>SeekableStream</code> associated
+     * with this <code>ImageDecoder</code>.  Only
+     * the first page of a multi-page image is decoded.
+     */
+    public RenderedImage decodeAsRenderedImage() throws IOException {
+        return decodeAsRenderedImage(0);
+    }
+
+    /**
+     * Returns a <code>RenderedImage</code> that contains the decoded
+     * contents of the <code>SeekableStream</code> associated
+     * with this <code>ImageDecoder</code>.
+     * The given page of a multi-page image is decoded.  If
+     * the page does not exist, an IOException will be thrown.
+     * Page numbering begins at zero.
+     *
+     * @param page The page to be decoded.
+     */
+    public abstract RenderedImage decodeAsRenderedImage(int page)
+        throws IOException;
+}

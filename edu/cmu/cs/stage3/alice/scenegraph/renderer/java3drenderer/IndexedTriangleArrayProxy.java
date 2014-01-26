@@ -84,4 +84,64 @@ class IndexedTriangleArrayProxy extends VertexGeometryProxy {
             int coordIndex = 0;
             int normalIndex = 0;
             int texturecoordIndex = 0;
-            int colorIn
+            int colorIndex = 0;
+            for( int i = 0; i < vertexCount; i++ ) {
+                edu.cmu.cs.stage3.alice.scenegraph.Vertex3d vertex = vertices[i];
+                if( (j3dVertexFormat & javax.media.j3d.GeometryArray.COORDINATES) != 0 ) {
+                	coords[coordIndex++] = vertex.position.x;
+                	coords[coordIndex++] = vertex.position.y;
+                	coords[coordIndex++] = -vertex.position.z;
+                }
+                if( (j3dVertexFormat & javax.media.j3d.GeometryArray.NORMALS) != 0 ) {
+                    normals[normalIndex++] = (float)vertex.normal.x;
+                    normals[normalIndex++] = (float)vertex.normal.y;
+                    normals[normalIndex++] = -(float)vertex.normal.z;
+                }
+                if( (j3dVertexFormat & javax.media.j3d.GeometryArray.TEXTURE_COORDINATE_2) != 0 ) {
+                    texturecoords[texturecoordIndex++] = vertex.textureCoordinate0;
+                }
+                if( (j3dVertexFormat & javax.media.j3d.GeometryArray.COLOR_4) != 0 ) {
+                    colors[colorIndex++] = (float)vertex.diffuseColor.red;
+                    colors[colorIndex++] = (float)vertex.diffuseColor.green;
+                    colors[colorIndex++] = (float)vertex.diffuseColor.blue;
+                    colors[colorIndex++] = (float)vertex.diffuseColor.alpha;
+                }
+            }
+
+	        m_j3dIndexedTriangleArray = new javax.media.j3d.IndexedTriangleArray( vertexCount, j3dVertexFormat, indexCount );
+			m_j3dIndexedTriangleArray.setCapability( javax.media.j3d.IndexedTriangleArray.ALLOW_COUNT_READ );
+			m_j3dIndexedTriangleArray.setCapability( javax.media.j3d.IndexedTriangleArray.ALLOW_FORMAT_READ );
+			m_j3dIndexedTriangleArray.setCapability( javax.media.j3d.IndexedTriangleArray.ALLOW_COORDINATE_READ );
+			m_j3dIndexedTriangleArray.setCapability( javax.media.j3d.IndexedTriangleArray.ALLOW_COORDINATE_INDEX_READ );
+            if( (j3dVertexFormat & javax.media.j3d.GeometryArray.COORDINATES) != 0 ) {
+            	m_j3dIndexedTriangleArray.setCoordinates( 0, coords );
+            	m_j3dIndexedTriangleArray.setCoordinateIndices( 0, reversedIndices );
+            }
+            if( (j3dVertexFormat & javax.media.j3d.GeometryArray.NORMALS) != 0 ) {
+                m_j3dIndexedTriangleArray.setNormals( 0, normals );
+                m_j3dIndexedTriangleArray.setNormalIndices( 0, reversedIndices );
+            }
+            if( (j3dVertexFormat & javax.media.j3d.GeometryArray.TEXTURE_COORDINATE_2) != 0 ) {
+                m_j3dIndexedTriangleArray.setTextureCoordinates( 0, 0, texturecoords );
+                m_j3dIndexedTriangleArray.setTextureCoordinateIndices( 0, 0, reversedIndices );
+            }
+            if( (j3dVertexFormat & javax.media.j3d.GeometryArray.COLOR_4) != 0 ) {
+                m_j3dIndexedTriangleArray.setColors( 0, colors );
+                m_j3dIndexedTriangleArray.setColorIndices( 0, reversedIndices );
+            }
+	    }
+        updateVisuals();
+    }
+	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {
+		if( property == edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray.INDICES_PROPERTY ) {
+            //todo
+            updateGeometry();
+		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray.INDEX_LOWER_BOUND_PROPERTY ) {
+            //todo
+		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray.INDEX_UPPER_BOUND_PROPERTY ) {
+            //todo
+		} else {
+			super.changed( property, value );
+		}
+	}
+}

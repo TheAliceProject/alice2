@@ -252,4 +252,49 @@ public class ModelFixer {
 //		MacroProgressObserver macroProgressObserver = new MacroProgressObserver( progressObserver );
 //		ProgressObserver internalProgressObserver;
 //		if( observeMicro ) {
-//			inte
+//			internalProgressObserver = macroProgressObserver;
+//		} else {
+//			internalProgressObserver = null;
+//		}
+//		macroProgressObserver.progressUpdateTotal( total );
+//
+//		javax.vecmath.Vector3d[][] normalsArray = new javax.vecmath.Vector3d[ itas.length ][];
+//		for( int i=0; i<itas.length; i++ ) {
+//			macroProgressObserver.setElement( itas[ i ] );
+//			normalsArray[ i ] = edu.cmu.cs.stage3.alice.scenegraph.util.IndexedTriangleArrayUtil.calculateNormals( itas[ i ].getSceneGraphIndexedTriangleArray(), internalProgressObserver );
+//			macroProgressObserver.incrementMacro( totals[ i ] );
+//		}
+//
+//		for( int i=0; i<itas.length; i++ ) {
+//			itas[ i ].setNormals( normalsArray[ i ] );
+//		}
+//	}
+//	public static void smoothNormals( Element element, double threshold, HowMuch howMuch, ProgressObserver progressObserver, boolean observeMicro ) {
+//		IndexedTriangleArray[] itas = (IndexedTriangleArray[])element.getDescendants( IndexedTriangleArray.class, howMuch );
+//		int[] totals = new int[ itas.length ];
+//		int total = 0;
+//		for( int i=0; i<itas.length; i++ ) {
+//			totals[ i ] = edu.cmu.cs.stage3.alice.scenegraph.util.IndexedTriangleArrayUtil.getProgressTotalForCalculateSmoothedNormals( itas[ i ].getSceneGraphIndexedTriangleArray() );
+//			total += totals[ i ];
+//		}
+//		MacroProgressObserver macroProgressObserver = new MacroProgressObserver( progressObserver );
+//		ProgressObserver internalProgressObserver;
+//		if( observeMicro ) {
+//			internalProgressObserver = macroProgressObserver;
+//		} else {
+//			internalProgressObserver = null;
+//		}
+//		macroProgressObserver.progressUpdateTotal( total );
+//
+//		javax.vecmath.Vector3d[][] normalsArray = new javax.vecmath.Vector3d[ itas.length ][];
+//		for( int i=0; i<itas.length; i++ ) {
+//			macroProgressObserver.setElement( itas[ i ] );
+//			normalsArray[ i ] = edu.cmu.cs.stage3.alice.scenegraph.util.IndexedTriangleArrayUtil.calculateSmoothedNormals( itas[ i ].getSceneGraphIndexedTriangleArray(), threshold, internalProgressObserver );
+//			macroProgressObserver.incrementMacro( totals[ i ] );
+//		}
+//
+//		for( int i=0; i<itas.length; i++ ) {
+//			itas[ i ].setNormals( normalsArray[ i ] );
+//		}
+//	}
+}

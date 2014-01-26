@@ -62,7 +62,8 @@ class VariableCriterion implements edu.cmu.cs.stage3.util.Criterion {
 		if( o instanceof Variable  ) {
 			Variable variable = (Variable)o;
 			if( m_name != null ) {
-				return m_name.equalsIgnoreCase( variable.name.getStringValue() );
+				return m_name==variable.name.getStringValue();
+				//return m_name.equalsIgnoreCase( variable.name.getStringValue() );
 			} else {
 				return false;
 			}
@@ -308,4 +309,70 @@ public class CopyFactory {
 			if( referencesLeftUnresolved.size() > 0 ) {
 				PropertyReference[] propertyReferences = new PropertyReference[ referencesLeftUnresolved.size() ];
 				referencesLeftUnresolved.copyInto( propertyReferences );
-				StringBuffer sb = new 
+				StringBuffer sb = new StringBuffer();
+				sb.append( "PropertyReferences: \n" );
+				for( int i=0; i<propertyReferences.length; i++ ) {
+					sb.append( propertyReferences[ i ] );
+					sb.append( "\n" );
+				}
+				throw new UnresolvablePropertyReferencesException( propertyReferences, element, sb.toString() );
+			}
+			return element;
+		}
+	}
+	
+	private ElementCapsule m_capsule;
+	private Class m_valueClass;
+	private Class HACK_m_hackValueClass;
+	public CopyFactory( Element element, Element internalReferenceRoot, Class[] classesToShare, HowMuch howMuch ) {
+		ReferenceGenerator referenceGenerator;
+		if( element instanceof Response || element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Component ) {
+			referenceGenerator = new CodeCopyReferenceGenerator( internalReferenceRoot, classesToShare );
+		} else {
+			referenceGenerator = new CopyReferenceGenerator( internalReferenceRoot, classesToShare );
+		}
+		m_capsule = new ElementCapsule( element, referenceGenerator, classesToShare, howMuch );
+		m_valueClass = element.getClass();
+		HACK_m_hackValueClass = null;
+		try {
+			if( element instanceof Expression ) {
+				HACK_m_hackValueClass = ((Expression)element).getValueClass();
+			}
+		} catch( Throwable t ) {
+			//pass
+		}
+	}
+	public Class getValueClass() {
+		return m_valueClass;
+	}
+	public Class HACK_getExpressionValueClass() {
+		return HACK_m_hackValueClass;
+	}
+	
+	public Element manufactureCopy( ReferenceResolver referenceResolver, ProgressObserver progressObserver, Element parentToBe ) throws UnresolvablePropertyReferencesException {
+		return m_capsule.manufacture( referenceResolver, progressObserver, parentToBe );
+	}
+	public Element manufactureCopy( Element externalRoot, Element internalRoot, ProgressObserver progressObserver, Element parentToBe ) throws UnresolvablePropertyReferencesException {
+//		ReferenceResolver referenceResolver;
+//		if( Response.class.isAssignableFrom( m_valueClass ) || edu.cmu.cs.stage3.alice.core.question.userdefined.Component.class.isAssignableFrom( m_valueClass ) ) {
+//			referenceResolver = new CodeCopyReferenceResolver( internalRoot, externalRoot, parentToBe );
+//		} else {
+//			referenceResolver = ;
+//		}
+//		return manufactureCopy( referenceResolver, progressObserver, parentToBe );
+		return manufactureCopy( new edu.cmu.cs.stage3.alice.core.reference.DefaultReferenceResolver( internalRoot, externalRoot ), progressObserver, parentToBe );
+	}
+	public Element manufactureCopy( Element externalRoot, Element internalRoot, ProgressObserver progressObserver ) throws UnresolvablePropertyReferencesException {
+		return manufactureCopy( externalRoot, internalRoot, progressObserver, null );
+	}
+	public Element manufactureCopy( Element externalRoot, Element internalRoot ) throws UnresolvablePropertyReferencesException {
+		return manufactureCopy( externalRoot, internalRoot, null );
+	}
+	public Element manufactureCopy( Element externalRoot ) throws UnresolvablePropertyReferencesException {
+		return manufactureCopy( externalRoot, (Element)null );
+	}
+	
+	public String toString() {
+		return "edu.cmu.cs.stage3.alice.core.CopyFactory[" + m_valueClass + "]";
+	}
+}

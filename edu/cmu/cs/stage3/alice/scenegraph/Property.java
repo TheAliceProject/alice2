@@ -245,4 +245,58 @@ public class Property {
         return null;
     }
     public static Property getPropertyCapsAndUnderscoresNamed( Class cls, String capsAndUnderscoresName ) {
-        java.util.Enumeration enum0 = getProperties( cls ).ele
+        java.util.Enumeration enum0 = getProperties( cls ).elements();
+        while( enum0.hasMoreElements() ) {
+            Property property = (Property)enum0.nextElement();
+            if( property.getCapsAndUnderscoresName().equals( capsAndUnderscoresName ) ) {
+                return property;
+            }
+        }
+        return null;
+    }
+
+	public static java.util.Vector getPropertyValuePairs( Object o, boolean persistentOnly, boolean declaredOnly ) {
+		java.util.Vector v = new java.util.Vector();
+		java.util.Enumeration enum0 = getProperties( o.getClass(), persistentOnly, declaredOnly ).elements();
+		while( enum0.hasMoreElements() ) {
+			Property property = (Property)enum0.nextElement();
+			v.addElement( new PropertyValuePair( property, property.get( o ) ) );
+		}
+		return v;
+	}
+	public static java.util.Vector getPropertyValuePairs( Object o ) {
+		return getPropertyValuePairs( o, false, false );
+	}
+	public static StringBuffer convertAllCapsAndUnderscoresToMixedCase( String allCapsAndUnderscores ) {
+		StringBuffer mixedCase = new StringBuffer();
+		mixedCase.append( allCapsAndUnderscores.charAt( 0 ) );
+		boolean lowerCase = true;
+		for( int lcv=1; lcv<allCapsAndUnderscores.length(); lcv++ ) {
+			char c = allCapsAndUnderscores.charAt( lcv );
+			if( c=='_' ) {
+				lowerCase = false;
+			} else {
+				if( lowerCase ) {
+					mixedCase.append( Character.toLowerCase( c ) );
+				} else {
+					mixedCase.append( c );
+				}
+				lowerCase = true;
+			}
+		}
+		return mixedCase;
+	}
+	public static StringBuffer convertMixedCaseToAllCapsAndUnderscores( String mixedCase ) {
+		StringBuffer allCapsAndUnderscores = new StringBuffer();
+		allCapsAndUnderscores.append( mixedCase.charAt( 0 ) );
+		for( int lcv=1; lcv<mixedCase.length(); lcv++ ) {
+			char c = mixedCase.charAt( lcv );
+			if( Character.isUpperCase( c ) ) {
+				allCapsAndUnderscores.append( "_" + c );
+			} else {
+				allCapsAndUnderscores.append( Character.toUpperCase( c ) );
+			}
+		}
+		return allCapsAndUnderscores;
+	}
+}

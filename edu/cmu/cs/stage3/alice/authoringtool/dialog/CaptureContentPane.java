@@ -1222,13 +1222,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				result = writer.writeQuicktime();
 			} else
 				result = writer.writeAVI();
-			writer = new MovieWriter();
 
 			pulsing = false;
 			try {
 				pulse.join();
 			} catch (InterruptedException e) {
 			}
+			writer = null;
 
 			if (result == false) {
 				statusLabel.setText(Messages
@@ -1299,7 +1299,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			if (sources.size() > 0)
 				m.doMerge(sources);
 
-			m = new movieMaker.Merge("");
+			m = null;
 			sources.clear();
 			sources = null;
 			pulsing = false;

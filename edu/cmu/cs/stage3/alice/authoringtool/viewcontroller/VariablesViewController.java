@@ -231,4 +231,58 @@ public class VariablesViewController extends edu.cmu.cs.stage3.alice.authoringto
 					variable.name.removePropertyListener( this );
 				}
 			}
-			VariablesViewController
+			VariablesViewController.this.refreshGUI();
+		}
+		public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {}
+		public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
+			VariablesViewController.this.refreshGUI();
+		}
+	}
+
+//	class SyncListener implements edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyListener, edu.cmu.cs.stage3.alice.core.event.PropertyListener {
+//		private Object oldName;
+//		public void objectArrayPropertyChanging( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent ev ) {}
+//		public void objectArrayPropertyChanged( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent ev ) {
+//			try {
+//				if( ev.getChangeType() == edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent.ITEM_INSERTED ) {
+//					edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)ev.getItem();
+//					if( variables.getOwner().getChildNamed( variable.name.getStringValue() ) == null ) {
+//						variable.name.addPropertyListener( this );
+//						edu.cmu.cs.stage3.alice.core.Variable newVariable = new edu.cmu.cs.stage3.alice.core.Variable();
+//						newVariable.name.set( variable.name.get() );
+//						newVariable.valueClass.set( variable.valueClass.get() );
+//						newVariable.value.set( variable.value.get() );
+//						variables.getOwner().addChild( newVariable );
+//						variables.add( ev.getNewIndex(), newVariable );
+//					}
+//				} else if( ev.getChangeType() == edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent.ITEM_REMOVED ) {
+//					edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)ev.getItem();
+//					variable.name.removePropertyListener( this );
+//					edu.cmu.cs.stage3.alice.core.Variable variableToRemove = (edu.cmu.cs.stage3.alice.core.Variable)variables.get( ev.getOldIndex() );
+//					variables.remove( variableToRemove );
+//					variables.getOwner().removeChild( variableToRemove );
+//				}
+//			} catch( Throwable t ) {
+//				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( "Error synchronizing parameters.", t );
+//			}
+//		}
+//		public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
+//			oldName = ev.getProperty().getValue();
+//		}
+//		public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
+//			try {
+//				Object[] vars = variables.getArrayValue();
+//				for( int i = 0; i < vars.length; i++ ) {
+//					if( vars[i] != null ) {
+//						if( ((edu.cmu.cs.stage3.alice.core.Variable)vars[i]).name.get().equals( oldName ) ) {
+//							((edu.cmu.cs.stage3.alice.core.Variable)vars[i]).name.set( ev.getValue() );
+//							break;
+//						}
+//					}
+//				}
+//			} catch( Throwable t ) {
+//				//HACK
+//			}
+//		}
+//	}
+}

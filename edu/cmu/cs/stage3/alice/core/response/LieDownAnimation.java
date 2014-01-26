@@ -86,4 +86,75 @@ public class LieDownAnimation extends BetterStandUpAnimation {
 				if (m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.BACKWARD)) {
 					endPos = new javax.vecmath.Vector3d(endPos.x - (forwardAndUp[0].x * subjectHeight/2.0), endPos.y + zOffset + (forwardAndUp[0].y * subjectHeight/2.0), endPos.z - (forwardAndUp[0].z * subjectHeight/2.0));
 				} else if (m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.FORWARD)) {
-					endPos = new javax.vecmath.Vector3d(endPos.x + (forwardAndUp[0].x * subjectHeight/2.0), endPos.y + zOffset + (forwardAndUp[
+					endPos = new javax.vecmath.Vector3d(endPos.x + (forwardAndUp[0].x * subjectHeight/2.0), endPos.y + zOffset + (forwardAndUp[0].y * subjectHeight/2.0), endPos.z + (forwardAndUp[0].z * subjectHeight/2.0));
+				} else if (m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.LEFT)) {
+					endPos = new javax.vecmath.Vector3d(endPos.x - (left.x * subjectHeight/2.0), endPos.y + zOffset + (left.y * subjectHeight/2.0), endPos.z - (left.z * subjectHeight/2.0));
+				} else if (m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.RIGHT)) {
+					endPos = new javax.vecmath.Vector3d(endPos.x + (left.x * subjectHeight/2.0), endPos.y + zOffset + (left.y * subjectHeight/2.0), endPos.z + (left.z * subjectHeight/2.0));
+				}
+				return endPos;
+			} else {
+				return m_positionBegin;
+			}
+		}
+		
+		protected edu.cmu.cs.stage3.math.Matrix33 getGoalOrientation(edu.cmu.cs.stage3.math.Matrix33 targetsOrient, edu.cmu.cs.stage3.math.Vector3 goalForward) {
+			edu.cmu.cs.stage3.math.Matrix33 orient = new edu.cmu.cs.stage3.math.Matrix33();
+			//edu.cmu.cs.stage3.math.Vector3 goalForward = orient.getRow(1);
+			edu.cmu.cs.stage3.math.Vector3 goalUp = null;
+			// this is going to change based on how we want to align to target model
+			if ( (m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.FORWARD)) || (m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.BACKWARD)) ) {
+				goalUp = targetsOrient.getRow(2);
+				if (m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.FORWARD)) {
+					goalUp.negate();
+				}
+			} else {
+				goalUp = targetsOrient.getRow(0);
+				if ( m_direction.equals(edu.cmu.cs.stage3.alice.core.Direction.LEFT )) {
+					goalUp.negate();
+				}
+			}
+			
+			orient.setForwardUpGuide(goalForward, goalUp);		
+			return orient;
+		}
+	
+		
+		protected edu.cmu.cs.stage3.math.Quaternion getTargetQuaternion() {		
+			
+			edu.cmu.cs.stage3.math.Quaternion quat = m_subject.calculateStandUp( m_subject.getWorld() ).getQuaternion();
+			
+		
+			if ( (target == null) || (target.name.getStringValue().equals("ground")) ){ 
+				edu.cmu.cs.stage3.math.Matrix33 orient = quat.getMatrix33();		
+				quat.setMatrix33(getGoalOrientation(orient, quat.getMatrix33().getRow(1)));
+			} else {
+				edu.cmu.cs.stage3.math.Matrix33 orientSubject = quat.getMatrix33();
+				edu.cmu.cs.stage3.math.Matrix33 orientTarget = target.getOrientationAsAxes(target.getWorld());
+
+				quat.setMatrix33(getGoalOrientation(orientTarget, quat.getMatrix33().getRow(1)));	
+			}
+			
+
+			return quat;		
+		}
+		
+		
+		protected void adjustHeight() {
+			if (target == null) {
+				super.adjustHeight();
+			} else {
+				double distanceAboveTarget = 0.0;
+				if (m_subject != null) {
+					distanceAboveTarget = m_subject.getBoundingBox(m_subject.getWorld()).getCenterOfBottomFace().y;
+					distanceAboveTarget -= target.getBoundingBox(m_subject.getWorld()).getCenterOfTopFace().y;				
+
+					m_subject.moveRightNow(edu.cmu.cs.stage3.alice.core.Direction.DOWN, distanceAboveTarget , m_subject.getWorld() );
+				}
+			}
+		}
+	}
+	
+	
+
+}

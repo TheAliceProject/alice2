@@ -327,4 +327,16 @@ public class Media extends Element {
 //	}
 //
 //    public double getLength() {
-//     
+//        if (length.isNaN()) {
+//            MediaLock ml = getUninitializedMediaLock();
+//            ml.lock(null);
+//            if (ml.getPlayer().getDuration()==javax.media.Duration.DURATION_UNKNOWN)
+//                length = new Double(Double.NaN);
+//            else if (ml.getPlayer().getDuration()==javax.media.Duration.DURATION_UNBOUNDED)
+//                length = new Double(Double.POSITIVE_INFINITY);
+//            else
+//                length = new Double(ml.getPlayer().getDuration().getSeconds());
+//        }
+//        return length.doubleValue();
+//    }
+//}

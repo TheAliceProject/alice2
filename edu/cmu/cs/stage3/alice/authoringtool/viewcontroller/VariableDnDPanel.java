@@ -210,3 +210,26 @@ public class VariableDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 			} ) );
 		}
 	}
+
+	public void goToSleep() {}
+	public void wakeUp() {}
+
+	public void clean() {
+		setTransferable( null );
+	}
+
+	public void die() {
+		clean();
+	}
+
+	public void release() {
+		edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.releaseGUI( this );
+	}
+
+	class NamePropertyListener implements edu.cmu.cs.stage3.alice.core.event.PropertyListener {
+		public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {}
+		public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
+			nameLabel.setText( VariableDnDPanel.this.variable.name.getStringValue() );
+		}
+	}
+}

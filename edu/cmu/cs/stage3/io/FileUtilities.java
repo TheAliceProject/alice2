@@ -124,4 +124,99 @@ public class FileUtilities {
 			}
 			public void progressUpdate( int current, String description ) throws edu.cmu.cs.stage3.progress.ProgressCancelException {
 				if( current > 1000000 ) {
-					throw new edu.cmu.cs.stage3.progress.P
+					throw new edu.cmu.cs.stage3.progress.ProgressCancelException();
+				}
+				System.err.println( "progressUpdate: " + current + " " + description );
+			}
+			public void progressEnd() {
+				System.err.println( "progressEnd" );
+			}
+		};
+		try {
+			copy( src, dst, true, progressObserver );
+		} catch( edu.cmu.cs.stage3.progress.ProgressCancelException pce ) {
+			pce.printStackTrace();
+		}
+
+		final java.io.File src = new java.io.File( "E:\\estrian\\Desktop\\wizard1.mp2" );
+		StringBuffer sb = new StringBuffer( new java.util.Date().toLocaleString() );
+		for( int i=0; i<sb.length(); i++ ) {
+			if( Character.isLetterOrDigit( sb.charAt( i ) ) ) {
+				//pass
+			} else {
+				sb.setCharAt( i, '_' );
+			}
+		}
+		final java.io.File dst = new java.io.File( "E:\\estrian\\Desktop\\Backup\\" + sb.toString() + "_wizard1.mp2" );
+
+		java.awt.Frame frame = new java.awt.Frame();
+		edu.cmu.cs.stage3.swing.DialogManager.initialize( frame );
+		edu.cmu.cs.stage3.progress.ProgressPane progressPane = new edu.cmu.cs.stage3.progress.ProgressPane( "Backing up: " + src.getPath(), dst.getPath() ) {
+			protected void construct() throws edu.cmu.cs.stage3.progress.ProgressCancelException {
+				copy( src, dst, true, this );
+			}
+		};
+		edu.cmu.cs.stage3.swing.DialogManager.showDialog( progressPane );
+		frame.dispose();
+
+		StringBuffer sb = new StringBuffer();
+		java.util.Calendar calendar = java.util.Calendar.getInstance();
+		sb.append( " on " );
+		switch( calendar.get( java.util.Calendar.MONTH ) ) {
+		case java.util.Calendar.JANUARY:
+			sb.append( "Jan " );
+			break;
+		case java.util.Calendar.FEBRUARY:
+			sb.append( "Feb " );
+			break;
+		case java.util.Calendar.MARCH:
+			sb.append( "Mar " );
+			break;
+		case java.util.Calendar.APRIL:
+			sb.append( "Apr " );
+			break;
+		case java.util.Calendar.MAY:
+			sb.append( "May " );
+			break;
+		case java.util.Calendar.JUNE:
+			sb.append( "Jun " );
+			break;
+		case java.util.Calendar.JULY:
+			sb.append( "Jul " );
+			break;
+		case java.util.Calendar.AUGUST:
+			sb.append( "Aug " );
+			break;
+		case java.util.Calendar.SEPTEMBER:
+			sb.append( "Sep " );
+			break;
+		case java.util.Calendar.OCTOBER:
+			sb.append( "Oct " );
+			break;
+		case java.util.Calendar.NOVEMBER:
+			sb.append( "Noc " );
+			break;
+		case java.util.Calendar.DECEMBER:
+			sb.append( "Dec " );
+			break;
+		}
+		sb.append( calendar.get( java.util.Calendar.DAY_OF_MONTH ) );
+		sb.append( " " );
+		sb.append( calendar.get( java.util.Calendar.YEAR ) );
+		sb.append( " at " );
+		sb.append( calendar.get( java.util.Calendar.HOUR ) );
+		sb.append( " " );
+		sb.append( calendar.get( java.util.Calendar.MINUTE ) );
+		sb.append( " " );
+		sb.append( calendar.get( java.util.Calendar.SECOND ) );
+		switch( calendar.get( java.util.Calendar.AM_PM ) ) {
+		case java.util.Calendar.AM:
+			sb.append( " AM" );
+			break;
+		case java.util.Calendar.PM:
+			sb.append( " PM" );
+			break;
+		}
+		System.out.println( sb.toString() );
+	}*/
+}

@@ -31,6 +31,7 @@ import edu.cmu.cs.stage3.swing.ContentPane;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -852,7 +853,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	   				edu.cmu.cs.stage3.awt.AWTUtilities.key = ((java.awt.event.KeyEvent) event).getID();
 	   				if (edu.cmu.cs.stage3.awt.AWTUtilities.key == 401) {
 	   					temp = 0;
-	   				} else if (edu.cmu.cs.stage3.awt.AWTUtilities.key == 402) {
+	   				} else if (edu.cmu.cs.stage3.awt.AWTUtilities.key == 402 ) {
 	   					temp = -1;
 	   				} 
 	   			}
@@ -3475,7 +3476,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			modifiedStatus = Messages.getString("____Modified_"); 
 		}
 
-		jAliceFrame.setTitle("Alice (" + JAlice.getVersion() + ") " + path + modifiedStatus);  
+		jAliceFrame.setTitle(AikMin.programName + " (" + JAlice.getVersion() + ") " + path + modifiedStatus);  
 	}
 
 	public java.awt.Component getEditorForElement(edu.cmu.cs.stage3.alice.core.Element elementToEdit) {
@@ -5683,7 +5684,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		javax.swing.JPanel updateDialog;
 		final Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		
-		final javax.swing.JDialog dlg = new javax.swing.JDialog(new JFrame(),Messages.getString("Updating_Alice_2_3___Checking_for_update"));
+		final javax.swing.JDialog dlg = new javax.swing.JDialog(new JFrame(),Messages.getString("Checking_for_update"));
    		dlg.setPreferredSize(new Dimension(330,250));
    		dlg.setSize(new Dimension(330,250));
    		dlg.setLocation( dim.getSize().width/2-150, dim.getSize().height/2-50 );
@@ -5699,12 +5700,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
                
         final JCheckBox UpdateJAR = new JCheckBox("");
         boolean updateAvailable = checkForUpdate();
-        dlg.setTitle(Messages.getString("Updating_Alice_2_3"));
+        dlg.setTitle(Messages.getString("Updating"));
         if (updateAvailable) {
-        	UpdateJAR.setText(Messages.getString("Update_Alice_2_3__New_update_available_"));
+        	UpdateJAR.setText(Messages.getString("Update_Software__New_update_available_"));
         	UpdateJAR.setSelected(true);
         } else {
-        	UpdateJAR.setText(Messages.getString("Update_Alice_2_3__No_new_updates_"));
+        	UpdateJAR.setText(Messages.getString("Update_Software__No_new_updates_"));
         	UpdateJAR.setSelected(false);
         	UpdateJAR.setEnabled(false);
         }
@@ -5775,7 +5776,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		private boolean isGallery;
 		private String file;
 		private String dest;
-    	private ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Updating_Alice"), Messages.getString("Getting_Started___"), 0, 0);
+    	private ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Updating"), Messages.getString("Getting_Started___"), 0, 0);
     	
 		public StartUpdating(String filename, String location, boolean dir) {
 	        file = filename;
