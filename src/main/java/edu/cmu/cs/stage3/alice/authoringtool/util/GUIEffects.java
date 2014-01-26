@@ -212,4 +212,26 @@ public class GUIEffects {
 				g.drawRect( bounds.x, bounds.y, bounds.width - 1, bounds.height - 1 );
 
 				g.setClip( oldClip );
-				((java.awt.Graphics2D)g).clip( s
+				((java.awt.Graphics2D)g).clip( shadowClip );
+//				g.setClip( shadowClip );
+				g.setColor( troughShadowColor );
+				g.drawRect( bounds.x, bounds.y, bounds.width - 1, bounds.height - 1 );
+			} else {
+				((java.awt.Graphics2D)g).clip( highlightClip );
+//				g.setClip( highlightClip );
+				g.setColor( troughHighlightColor );
+				g.drawRoundRect( bounds.x, bounds.y, bounds.width - 1, bounds.height - 1, arcWidth, arcHeight );
+
+				g.setClip( oldClip );
+				((java.awt.Graphics2D)g).clip( shadowClip );
+//				g.setClip( shadowClip );
+				g.setColor( troughShadowColor );
+				g.drawRoundRect( bounds.x, bounds.y, bounds.width - 1, bounds.height - 1, arcWidth, arcHeight );
+			}
+
+			g.setClip( oldClip );
+
+			((java.awt.Graphics2D)g).addRenderingHints( new java.awt.RenderingHints( java.awt.RenderingHints.KEY_ANTIALIASING, oldAntialiasing ) );
+		}
+	}
+}

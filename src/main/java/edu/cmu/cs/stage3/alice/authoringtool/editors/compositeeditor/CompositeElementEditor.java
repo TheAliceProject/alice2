@@ -359,4 +359,17 @@ public abstract class CompositeElementEditor extends GroupingPanel
 
 
     public final String editorName = Messages.getString("Composite_Editor"); 
-    protected Element elementBeingEdited
+    protected Element elementBeingEdited;
+    protected MainCompositeElementPanel compositeElementPanel;
+    protected JPanel mainElementContainer;
+    protected JPanel buttonPanel;
+    protected Color mainColor;
+    protected static Configuration authoringToolConfig;
+    protected AuthoringTool authoringTool;
+    public static boolean IS_JAVA = false;
+
+    static 
+    {
+        authoringToolConfig = Configuration.getLocalConfiguration((edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.class).getPackage());
+    }
+}

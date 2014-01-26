@@ -192,4 +192,66 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					dtde.getDropTargetContext().dropComplete( true );
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
+				} catch( java.io.IOException e ) {
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
+				}
+			}
+
+			if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, java.awt.datatransfer.DataFlavor.stringFlavor ) ) {
+				try {
+					dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_COPY );
+					Object transferredObject = transferable.getTransferData( java.awt.datatransfer.DataFlavor.stringFlavor );
+					StyledStreamTextPane.this.defaultStream.println( transferredObject );
+					dtde.getDropTargetContext().dropComplete( true );
+					return;
+				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
+				} catch( java.io.IOException e ) {
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
+				}
+			} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, java.awt.datatransfer.DataFlavor.getTextPlainUnicodeFlavor() ) ) {
+				try {
+					dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_COPY );
+					java.io.Reader transferredObject = java.awt.datatransfer.DataFlavor.getTextPlainUnicodeFlavor().getReaderForText( transferable );
+					StyledStreamTextPane.this.defaultStream.println( transferredObject );
+
+					final java.io.BufferedReader fileReader = new java.io.BufferedReader( transferredObject );
+					Thread fileReaderThread = new Thread() {
+						
+						public void run() {
+							String line;
+							try {
+								while( true ) {
+									line = fileReader.readLine();
+									if( line == null ) {
+										break;
+									} else {
+										StyledStreamTextPane.this.defaultStream.println( line );
+									}
+								}
+								fileReader.close();
+							} catch( java.io.IOException e ) {
+								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_reading_file_"), e ); 
+							}
+						}
+					};
+					fileReaderThread.start();
+
+					dtde.getDropTargetContext().dropComplete( true );
+					return;
+				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 
+				} catch( java.io.IOException e ) {
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__IOException"), e ); 
+				}
+			}
+			dtde.rejectDrop();
+			dtde.getDropTargetContext().dropComplete( true );
+		}
+
+		public void dropActionChanged( java.awt.dnd.DropTargetDragEvent dtde ) {}
+
+		public void dragExit( java.awt.dnd.DropTargetEvent dte ) {}
+	}
+}

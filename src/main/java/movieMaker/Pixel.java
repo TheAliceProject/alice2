@@ -288,4 +288,70 @@ public class Pixel
   } 
   
    /**
-   * Method to 
+   * Method to set the alpha (transparency) to a new alpha value
+   * @param value the new value to use
+   */
+  public void setAlpha(int value)
+  {
+    // make sure that the alpha is from 0 to 255 
+    int alpha = correctValue(value);
+    
+    // update the associated picture
+    updatePicture(alpha, getRed(), getGreen(), getBlue());
+  } 
+  
+  /**
+  * Method to get the distance between this pixel's color and the passed color
+  * @param testColor the color to compare to
+  * @return the distance between this pixel's color and the passed color
+  */
+ public double colorDistance(Color testColor)
+ {
+   double redDistance = this.getRed() - testColor.getRed();
+   double greenDistance = this.getGreen() - testColor.getGreen();
+   double blueDistance = this.getBlue() - testColor.getBlue();
+   double distance = Math.sqrt(redDistance * redDistance + 
+                               greenDistance * greenDistance +
+                               blueDistance * blueDistance);
+   return distance;
+ }
+ 
+ /**
+  * Method to compute the color distances between two color objects
+  * @param color1 a color object
+  * @param color2 a color object
+  * @return the distance between the two colors
+  */
+ public static double colorDistance(Color color1,Color color2)
+ {
+   double redDistance = color1.getRed() - color2.getRed();
+   double greenDistance = color1.getGreen() - color2.getGreen();
+   double blueDistance = color1.getBlue() - color2.getBlue();
+   double distance = Math.sqrt(redDistance * redDistance + 
+                               greenDistance * greenDistance +
+                               blueDistance * blueDistance);
+   return distance;
+ }
+ 
+ /**
+  * Method to get the average of the colors of this pixel
+  * @return the average of the red, green, and blue values
+  */
+ public double getAverage()
+ {
+   double average = (getRed() + getGreen() + getBlue()) / 3.0;
+   return average;
+ }
+  
+  /**
+   * Method to return a string with information about this pixel
+   * @return a string with information about this pixel
+   */
+  
+public String toString()
+  {
+    return Messages.getString("Pixel_red_") + getRed() + Messages.getString("_green_") + getGreen() +   
+      Messages.getString("_blue_") + getBlue(); 
+  }
+
+}

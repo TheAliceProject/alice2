@@ -288,4 +288,35 @@ public class TouchAnimation extends AbstractBodyPositionAnimation {
 				if (targetVector.z < .3) { turnAmt += 1 * (.3 - targetVector.z);}
 				if (turnAmt > 0) upperLimb.rotateRightNow(targetVector, turnAmt, (edu.cmu.cs.stage3.alice.core.ReferenceFrame)upperLimb.getParent());
 			} else if (limb.getLimbValue().equals(Limb.leftArm )) {
-				if ((targetVector.x > 0) ) { tu
+				if ((targetVector.x > 0) ) { turnAmt = .25 + (-.1 * targetVector.x);}	
+				if (targetVector.z < .5) { turnAmt += 1 * (.3 - targetVector.z);}
+				if (Math.abs(turnAmt) > 0) upperLimb.rotateRightNow(targetVector, -1.0 * turnAmt, (edu.cmu.cs.stage3.alice.core.ReferenceFrame)upperLimb.getParent());
+			}
+			
+			// save target quaternions
+			lowerTargetQuat = null;
+			if (lowerLimb != null) lowerTargetQuat = lowerLimb.getOrientationAsQuaternion((edu.cmu.cs.stage3.alice.core.ReferenceFrame)lowerLimb.getParent());	
+			upperTargetQuat = upperLimb.getOrientationAsQuaternion((edu.cmu.cs.stage3.alice.core.ReferenceFrame)upperLimb.getParent());
+			
+			// set limbs back to initial transformations
+			if (lowerLimb != null) lowerLimb.setTransformationRightNow(initialTrans, (edu.cmu.cs.stage3.alice.core.ReferenceFrame)lowerLimb.getParent());
+			upperLimb.setTransformationRightNow(initialUpperTrans, (edu.cmu.cs.stage3.alice.core.ReferenceFrame)upperLimb.getParent());
+			
+		}
+		
+		public Quaternion getLowerTargetQuaternion() {
+			if  ((lowerLimb != null) && (lowerTargetQuat == null)) {
+				setTargetQuaternions();
+			}
+			return lowerTargetQuat;
+		}
+		
+		
+		public edu.cmu.cs.stage3.math.Quaternion getTargetQuaternion() {		
+			if (upperTargetQuat == null) {
+				setTargetQuaternions();
+			}
+			return upperTargetQuat;
+		}
+	}
+}

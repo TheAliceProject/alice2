@@ -227,4 +227,114 @@ public class DataBufferFloat extends DataBuffer {
      *
      * @param bank The bank number.
      * @param i The desired data array element.
-  
+     * @param val The value to be set.
+     */
+    
+	public void setElem(int bank, int i, int val) {
+        bankdata[bank][i+offsets[bank]] = val;
+    }
+
+    /**
+     * Returns the requested data array element from the first
+     * (default) bank as a <code>float</code>.
+     *
+     * @param i The desired data array element.
+     *
+     * @return The data entry as a <code>float</code>.
+     */
+    
+	public float getElemFloat(int i) {
+        return data[i+offset];
+    }
+
+    /**
+     * Returns the requested data array element from the specified
+     * bank as a <code>float</code>.
+     *
+     * @param bank The bank number.
+     * @param i The desired data array element.
+     *
+     * @return The data entry as a <code>float</code>.
+     */
+    
+	public float getElemFloat(int bank, int i) {
+        return bankdata[bank][i+offsets[bank]];
+    }
+
+    /**
+     * Sets the requested data array element in the first (default)
+     * bank to the given <code>float</code>.
+     *
+     * @param i The desired data array element.
+     * @param val The value to be set.
+     */
+    
+	public void setElemFloat(int i, float val) {
+        data[i+offset] = val;
+    }
+
+    /**
+     * Sets the requested data array element in the specified bank to
+     * the given <code>float</code>.
+     *
+     * @param bank The bank number.
+     * @param i The desired data array element.
+     * @param val The value to be set.
+     */
+    
+	public void setElemFloat(int bank, int i, float val) {
+        bankdata[bank][i+offsets[bank]] = val;
+    }
+
+    /**
+     * Returns the requested data array element from the first
+     * (default) bank as a <code>double</code>.
+     *
+     * @param i The desired data array element.
+     *
+     * @return The data entry as a <code>double</code>.
+     */
+    
+	public double getElemDouble(int i) {
+        return data[i+offset];
+    }
+
+    /**
+     * Returns the requested data array element from the specified
+     * bank as a <code>double</code>.
+     *
+     * @param bank The bank number.
+     * @param i The desired data array element.
+     *
+     * @return The data entry as a <code>double</code>.
+     */
+    
+	public double getElemDouble(int bank, int i) {
+        return bankdata[bank][i+offsets[bank]];
+    }
+
+    /**
+     * Sets the requested data array element in the first (default)
+     * bank to the given <code>double</code>.
+     *
+     * @param i The desired data array element.
+     * @param val The value to be set.
+     */
+    
+	public void setElemDouble(int i, double val) {
+        data[i+offset] = (float)val;
+    }
+
+    /**
+     * Sets the requested data array element in the specified bank to
+     * the given <code>double</code>.
+     *
+     * @param bank The bank number.
+     * @param i The desired data array element.
+     * @param val The value to be set.
+     */
+    
+	public void setElemDouble(int bank, int i, double val) {
+        bankdata[bank][i+offsets[bank]] = (float)val;
+    }
+}

@@ -94,4 +94,91 @@ public abstract class Camera extends Model /*Transformable*/ {
 			renderTargetValue.removeCamera( this );
 		}
 	}
-	private void renderTargetValueChanged( RenderTarget renderTargetValue 
+	private void renderTargetValueChanged( RenderTarget renderTargetValue ) {
+		if( renderTargetValue!=null ) {
+			renderTargetValue.addCamera( this );
+		}
+	}
+	private void isViewVolumeShowingValueChanged( Boolean value ) {
+		if( m_viewVolumeDecorator != null ) {
+			m_viewVolumeDecorator.setIsShowing( value );
+		}
+	}
+	
+	protected void propertyChanging( Property property, Object value ) {
+		if( property == nearClippingPlaneDistance ) {
+			//pass
+		} else if( property == farClippingPlaneDistance ) {
+			//pass
+		} else if( property == renderTarget ) {
+			renderTargetValueChanging( (RenderTarget)value );
+		} else if( property == isViewVolumeShowing ) {
+			//pass
+		} else {
+			super.propertyChanging( property, value );
+		}
+	}
+	
+	protected void propertyChanged( Property property, Object value ) {
+		if( property == nearClippingPlaneDistance ) {
+			nearClippingPlaneDistanceValueChanged( (Number)value );
+		} else if( property == farClippingPlaneDistance ) {
+			farClippingPlaneDistanceValueChanged( (Number)value );
+		} else if( property == renderTarget ) {
+			renderTargetValueChanged( (RenderTarget)value );
+		} else if( property == isViewVolumeShowing ) {
+			isViewVolumeShowingValueChanged( (Boolean)value );
+		} else {
+			super.propertyChanged( property, value );
+		}
+	}
+
+	public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( int x, int y ) {
+		RenderTarget renderTargetValue = (RenderTarget)renderTarget.getValue();
+		if( renderTargetValue!=null ) {
+			return renderTargetValue.getInternal().pick( x, y, edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget.SUB_ELEMENT_IS_NOT_REQUIRED, edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget.ONLY_FRONT_MOST_VISUAL_IS_REQUIRED );
+		} else {
+			return null;
+		}
+	}
+	public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( java.awt.Point p ) {
+		return pick( p.x, p.y );
+	}
+
+    public java.awt.Image takePicture( int width, int height ) {
+        java.awt.Image image = null;
+        World world = getWorld();
+        if( world != null ) {
+            edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTargetFactory renderTargetFactory = world.getRenderTargetFactory();
+            if( renderTargetFactory != null ) {
+                edu.cmu.cs.stage3.alice.scenegraph.renderer.OffscreenRenderTarget offscreenRenderTarget = renderTargetFactory.createOffscreenRenderTarget();
+                offscreenRenderTarget.setSize( width, height );
+                offscreenRenderTarget.addCamera( getSceneGraphCamera() );
+                offscreenRenderTarget.clearAndRenderOffscreen();
+                image = offscreenRenderTarget.getOffscreenImage();
+                offscreenRenderTarget.removeCamera( getSceneGraphCamera() );
+                offscreenRenderTarget.release();
+            }
+        }
+        return image;
+    }
+
+    public boolean canSee( Model model, boolean checkForOcclusion ) {
+        //if( checkForOcclusion ) {
+            //todo
+        //} else {
+            if( model.getSceneGraphVisual().isInProjectionVolumeOf( getSceneGraphCamera() ) ) {
+                return true;
+            }
+        //}
+        for( int i=0; i<model.parts.size(); i++ ) {
+            Object v = model.parts.get( i );
+            if( v instanceof Model ) {
+                if( canSee( (Model)v, checkForOcclusion ) ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}

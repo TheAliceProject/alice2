@@ -154,4 +154,156 @@ public class AnimationPanel extends JComponent
   {
     Image image = picture.getImage();
     imageList.add(image);
-    nameList.add(picture.getFil
+    nameList.add(picture.getFileName());
+  }
+  
+  /**
+   * Method to show just the next frame
+   */
+  public void showNext()
+  {
+    this.currIndex++;
+    if (this.currIndex == imageList.size())
+      this.currIndex = 0;
+    draw(this.getGraphics());
+  }
+  
+  /**
+   * Method to show the previous frame
+   */
+  public void showPrev()
+  {
+    this.currIndex--;
+    if (this.currIndex < 0)
+      this.currIndex = imageList.size() - 1;
+    draw(this.getGraphics());
+  }
+  
+  /**
+   * show all frames starting at 0
+   */
+  public void showAll()
+  {
+    Graphics g = null;
+    long startTime = 0;
+    long endTime = 0;
+    int timeToSleep =  1000 / framesPerSec;
+    for (int i = 0; i < imageList.size(); i++)
+    {
+      startTime = System.currentTimeMillis();
+      this.currIndex = i;
+      g = this.getGraphics();
+      draw(g);
+      g.dispose();
+      endTime = System.currentTimeMillis();
+      
+      // sleep 
+      try {
+         if (endTime - startTime < timeToSleep)
+            Thread.sleep(timeToSleep-(endTime-startTime));
+      } catch (InterruptedException ex) {
+      }
+      // reset curr index 
+      currIndex = imageList.size() - 1;
+    }
+  }
+  
+   /**
+   * show animation from current index
+   */
+  public void showAllFromCurrent()
+  {
+    Graphics g = null;
+    int timeToSleep = (1000 / framesPerSec);
+    for (; currIndex < imageList.size(); currIndex++)
+    {
+      // draw current image
+      g = this.getGraphics();
+      draw(g);
+      g.dispose();
+      
+      // sleep 
+      try {
+        Thread.sleep(timeToSleep);
+      } catch (InterruptedException ex) {
+      }
+    }
+    // reset curr index 
+    currIndex = imageList.size() - 1;
+  }
+  
+  /**
+   * Method to remove all before current from
+   * list
+   */
+  public void removeAllBefore()
+  {
+    File f = null;
+    boolean result = false;
+    for (int i = 0; i <= currIndex; i++)
+    {
+      f = new File((String)nameList.get(i));
+      result = f.delete();
+      if (result != true)
+        System.out.println(Messages.getString("trouble_deleting_") + 
+                           nameList.get(i));
+      imageList.remove(0);
+    }
+  }
+  
+  /**
+   * Method to remove all after the current index
+   */
+  public void removeAllAfter()
+  {
+    int i = currIndex + 1;
+    int index = i;
+    File f = null;
+    boolean result = false;
+    while (i < imageList.size())
+    {
+      f = new File((String)nameList.get(index++));
+      result = f.delete();
+      if (result != true)
+        System.out.println(Messages.getString("trouble_deleting_") + 
+                           nameList.get(index-1));
+      imageList.remove(i);
+    }
+  }
+  
+  /**
+   * Method to paint the frames
+   * @param g the graphics context to draw to
+   */
+  public void draw(Graphics g)
+  {
+      Image image = (Image) imageList.get(this.currIndex);
+      g.drawImage(image,0,0,this); 
+  }
+  
+  /**
+   * Method to paint the component
+   */
+  
+public void paintComponent(Graphics g)
+  {
+    if (imageList.size() == 0)
+      g.drawString(Messages.getString("No_images_yet__"),20,20); 
+    else
+      draw(g);
+  }
+  
+  /**
+   * Method to test 
+   */
+  public static void main(String[] args)
+  {
+    JFrame frame = new JFrame();
+    AnimationPanel panel = new AnimationPanel("c:/intro-prog-java/mediasources/fish/"); 
+    frame.getContentPane().add(panel);
+    frame.pack();
+    frame.setVisible(true);
+    panel.showAll();
+  }
+    
+}

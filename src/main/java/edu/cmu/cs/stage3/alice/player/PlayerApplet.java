@@ -23,6 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.player;
 
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 
 public class PlayerApplet extends java.applet.Applet {
 	private AbstractPlayer m_player = new AbstractPlayer() {
@@ -201,11 +207,12 @@ public class PlayerApplet extends java.applet.Applet {
 				return;
 			}
 			try {
-				java.net.URL url = new java.net.URL( getCodeBase(), getParameter( "world" ) );
+				java.net.URL url = this.getClass().getResource("My_Alice_World.a2w");//new java.net.URL( getCodeBase(), getParameter( "world" ) );
 				java.net.URLConnection urlConnection = url.openConnection();
-				java.io.InputStream is = urlConnection.getInputStream();
+				java.io.InputStream is = urlConnection.getInputStream();		
 				int contentLength = urlConnection.getContentLength();
 				m_progressPanel.setDownloadTotal( contentLength );
+				
 				final int bufferLength = 2048;
 				byte[] content;
 				if( contentLength != -1 ) {
@@ -246,4 +253,34 @@ public class PlayerApplet extends java.applet.Applet {
 					}
 					public void progressEnd() {
 					}
-		
+				} );
+
+				m_startButton.setEnabled( true );
+				startWorld();
+			} catch( java.net.MalformedURLException murle ) {
+				murle.printStackTrace();
+			} catch( java.io.IOException ioe ) {
+				ioe.printStackTrace();
+			}
+		}
+	};
+	
+	public void start() {
+		super.start();
+		new Thread( m_loadRunnable ).start();
+	}
+	
+	public void stop() {
+		m_player.stopWorldIfNecessary();
+		m_player.unloadWorld();
+		super.stop();
+	}
+
+	protected void handleRenderTarget( edu.cmu.cs.stage3.alice.core.RenderTarget renderTarget ) {
+		remove( m_progressPanel );
+		add( renderTarget.getInternal().getAWTComponent(), java.awt.BorderLayout.CENTER );
+		doLayout();
+		invalidate();
+		repaint();
+	}
+}

@@ -224,4 +224,70 @@ public final class FileCacheSeekableStream extends SeekableStream {
      * <p> If <code>len</code> is zero, then no bytes are read and
      * <code>0</code> is returned; otherwise, there is an attempt to read at
      * least one byte. If no byte is available because the stream is at end of
-     * file, t
+     * file, the value <code>-1</code> is returned; otherwise, at least one
+     * byte is read and stored into <code>b</code>.
+     *
+     * <p> The first byte read is stored into element <code>b[off]</code>, the
+     * next one into <code>b[off+1]</code>, and so on. The number of bytes read
+     * is, at most, equal to <code>len</code>. Let <i>k</i> be the number of
+     * bytes actually read; these bytes will be stored in elements
+     * <code>b[off]</code> through <code>b[off+</code><i>k</i><code>-1]</code>,
+     * leaving elements <code>b[off+</code><i>k</i><code>]</code> through
+     * <code>b[off+len-1]</code> unaffected.
+     *
+     * <p> In every case, elements <code>b[0]</code> through
+     * <code>b[off]</code> and elements <code>b[off+len]</code> through
+     * <code>b[b.length-1]</code> are unaffected.
+     *
+     * <p> If the first byte cannot be read for any reason other than end of
+     * file, then an <code>IOException</code> is thrown. In particular, an
+     * <code>IOException</code> is thrown if the input stream has been closed.
+     *
+     * @param      b     the buffer into which the data is read.
+     * @param      off   the start offset in array <code>b</code>
+     *                   at which the data is written.
+     * @param      len   the maximum number of bytes to read.
+     * @return     the total number of bytes read into the buffer, or
+     *             <code>-1</code> if there is no more data because the end of
+     *             the stream has been reached.
+     * @exception  IOException  if an I/O error occurs.
+     */
+    
+	public int read(byte[] b, int off, int len) throws IOException {
+        if (b == null) {
+            throw new NullPointerException();
+        }
+        if ((off < 0) || (len < 0) || (off + len > b.length)) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (len == 0) {
+            return 0;
+        }
+
+        long pos = readUntil(pointer + len);
+
+        // len will always fit into an int so this is safe
+        len = (int)Math.min(len, pos - pointer);
+        if (len > 0) {
+            cache.seek(pointer);
+            cache.readFully(b, off, len);
+            pointer += len;
+            return len;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Closes this stream and releases any system resources
+     * associated with the stream.
+     *
+     * @throws IOException if an I/O error occurs.
+     */
+    
+	public void close() throws IOException {
+        super.close();
+        cache.close();
+        cacheFile.delete();
+    }
+}

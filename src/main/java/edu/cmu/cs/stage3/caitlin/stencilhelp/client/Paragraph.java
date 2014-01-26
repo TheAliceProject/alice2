@@ -246,4 +246,43 @@ public class Paragraph {
       LineBreakMeasurer measurer = (LineBreakMeasurer) measurers.elementAt(i);
 
       int paragraphStart = iterator.getBeginIndex();
-      int paragraphEn
+      int paragraphEnd = iterator.getEndIndex();
+
+      if (measurer != null) measurer.setPosition(paragraphStart);
+      //float bottomBoundary = 0;
+      //float topBoundary = 0;
+
+      cursorIndex = 0;
+      currentText = null;
+
+      // Get lines from lineMeasurer until the entire
+      // paragraph has been displayed.
+      if (measurer != null) {
+        while (measurer.getPosition() < paragraphEnd) {
+
+          // Retrieve next layout.
+          TextLayout layout = measurer.nextLayout(textWidth);
+          bottomBoundary = topBoundary + lineHeight;
+
+          if ((clickY > topBoundary) && (clickY < bottomBoundary)) {
+            // Get the character position of the mouse click.
+            TextHitInfo currentHit = layout.hitTestChar(clickX, clickY);
+            if (currentHit != null) {
+              this.currentText = (StringBuffer)buffers.elementAt(i);
+              cursorIndex += currentHit.getInsertionIndex();
+              return;
+            }
+          } else {
+            cursorIndex = measurer.getPosition();
+          }
+          topBoundary = bottomBoundary;
+        }
+        topBoundary = topBoundary + lineHeight/2;
+      }
+    }
+    if (currentText == null) {
+      currentText = (StringBuffer) buffers.elementAt(0);
+      cursorIndex = 0;
+    }
+  }
+}

@@ -206,4 +206,40 @@ public class PolygonSegment {
                 indices[i*6+3]=2*i;
                 indices[i*6+4]=2*i+3+points.size()*2;
                 indices[i*6+5]=2*i+points.size()*2;
-            /*} els
+            /*} else {
+                indices[i*6]=2*i;
+                indices[i*6+1]=2*i+3+points.length*2;
+                indices[i*6+2]=2*i+3;
+                indices[i*6+3]=2*i;
+                indices[i*6+4]=2*i+points.length*2;
+                indices[i*6+5]=2*i+3+points.length*2;
+            }*/
+        }
+        //if (outside) {
+            indices[(points.size()-1)*6]=2*(points.size()-1);
+            indices[(points.size()-1)*6+1]=1;
+            indices[(points.size()-1)*6+2]=1+points.size()*2;
+            indices[(points.size()-1)*6+3]=2*(points.size()-1);
+            indices[(points.size()-1)*6+4]=1+points.size()*2;
+            indices[(points.size()-1)*6+5]=2*(points.size()-1)+points.size()*2;
+        /*
+        } else {
+            indices[(points.length-1)*6]=2*(points.length-1);
+            indices[(points.length-1)*6+1]=1+points.length*2;
+            indices[(points.length-1)*6+2]=1;
+            indices[(points.length-1)*6+3]=2*(points.length-1);
+            indices[(points.length-1)*6+4]=2*(points.length-1)+points.length*2;
+            indices[(points.length-1)*6+5]=1+points.length*2;
+        }
+        */
+
+    }
+
+    public Vertex3d[] getSideVertices() {
+        return sideVertices;
+    }
+
+    public int[] getIndices() {
+        return indices;
+    }
+}

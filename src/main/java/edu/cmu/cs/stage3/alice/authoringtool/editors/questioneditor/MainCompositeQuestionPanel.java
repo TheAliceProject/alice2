@@ -177,4 +177,60 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
             questionArea = new javax.swing.JPanel();
             questionArea.setOpaque(true);
             questionArea.setBorder(null);
-            questionArea.setLayout(
+            questionArea.setLayout(new java.awt.GridBagLayout());
+            questionArea.setDropTarget(new java.awt.dnd.DropTarget(questionArea, componentElementPanel));
+            questionArea.setBackground(this.getBackground());
+        }
+    }
+
+	protected void updateGUI(){
+            this.removeAll();
+            buildParameterPanel();
+            buildVariablePanel();
+            headerPanel.add(mainParameterPanel, new java.awt.GridBagConstraints(0,0,1,1,1,1,java.awt.GridBagConstraints.NORTH, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+            headerPanel.add(mainVariablePanel, new java.awt.GridBagConstraints(0,1,1,1,1,1,java.awt.GridBagConstraints.NORTH, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+            questionArea.removeAll();
+            questionArea.add(componentElementPanel, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
+            questionArea.add(returnPanel, new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel.LEFT_INDENT+1,0,edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel.RIGHT_INDENT+1), 0,0));
+            questionArea.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+            scrollPane.setViewportView(questionArea);
+            this.add(scrollPane, java.awt.BorderLayout.CENTER);
+            this.add(headerPanel, java.awt.BorderLayout.NORTH);
+            if (CompositeElementEditor.IS_JAVA){
+                closeBrace.setText(" }");
+                this.add(closeBrace, java.awt.BorderLayout.SOUTH);
+            }
+            this.setBackground(getCustomBackgroundColor());
+            questionArea.setBackground(this.getBackground());
+            this.repaint();
+            this.revalidate();
+        }
+
+		protected void variableInit(){
+            super.variableInit();
+            if (m_element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion){
+                edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion proxy = (edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion)m_element;
+                m_components = proxy.components;
+                m_isCommentedOut = null;
+                componentElementPanel = new MainCompositeComponentQuestionPanel();
+                componentElementPanel.set(m_components, this, authoringTool);
+                componentElementPanel.setBackground(backgroundColor);
+                this.addDragSourceComponent(componentElementPanel);
+                componentElementPanel.addMouseListener(elementMouseListener);
+            }
+        }
+
+        protected void disableDrag(java.awt.Container c){
+            if (c instanceof edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel){
+                ((edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel)c).setDragEnabled(false);
+            }
+            for (int i=0; i<c.getComponentCount(); i++){
+                if (c.getComponent(i) instanceof edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel){
+                    ((edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel)c.getComponent(i)).setDragEnabled(false);
+                }
+                else if (c instanceof java.awt.Container){
+                    disableDrag(c);
+                }
+            }
+        }
+    }

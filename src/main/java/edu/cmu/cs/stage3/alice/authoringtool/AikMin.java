@@ -1,6 +1,5 @@
 package edu.cmu.cs.stage3.alice.authoringtool;
 
-import edu.cmu.cs.stage3.alice.scenegraph.Color;
 import java.awt.Font;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -9,6 +8,7 @@ import javax.swing.UIManager;
 	
 public class AikMin {
 	public static String locale = "";
+	public static String programName = "Alice";
 	public static int target = 0;	// Compile with 1 for alice applet
 	//public static String version ="06/01/2012";
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));

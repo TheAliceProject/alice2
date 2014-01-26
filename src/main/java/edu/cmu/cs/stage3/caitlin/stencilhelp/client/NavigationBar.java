@@ -312,4 +312,31 @@ public class NavigationBar implements StencilObject, MouseEventListener, Stencil
       ScreenShape s = (ScreenShape)shapes.elementAt(5);
       s.setColor(Color.blue);
     } else {
-      ScreenShape 
+      ScreenShape s = (ScreenShape)shapes.elementAt(5);
+      s.setColor(Color.lightGray);
+    }
+    if (stencilManager.hasPrevious()){
+      ScreenShape s = (ScreenShape)shapes.elementAt(4);
+      s.setColor(Color.blue);
+    } else {
+      ScreenShape s = (ScreenShape)shapes.elementAt(4);
+      s.setColor(Color.lightGray);
+    }
+    Point topCenter = new Point((int)positionManager.getScreenWidth() / 2, 0);
+    createShape(topCenter);*/
+    shapes = new Vector();
+    generateShapes();
+  }
+  public void numberOfStencilsChanged(int newNumberOfStencils){
+    updateNavBar();
+  }
+  public void currentStencilChanged(int selectedStencil){
+    updateNavBar();
+  }
+
+  /* layout change listener stuff */
+  public boolean layoutChanged(){
+    //COME BACK TO ME
+    return true;
+  }
+}

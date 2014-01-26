@@ -259,4 +259,44 @@ class PropertySet {
     }
 
     public Date getFiletime(int id) {
-        throw new RuntimeException(J
+        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+    }
+
+    public byte[] getBlob(int id) {
+        Property p = (Property)properties.get(new Integer(id));
+        try {
+            int offset = p.getOffset();
+            stream.seek(offset);
+            int length = stream.readIntLE();
+
+            byte[] buf = new byte[length];
+            stream.seek(offset + 4);
+            stream.readFully(buf);
+
+            return buf;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public int[] getUI1Vector(int id) {
+        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+    }
+
+    public int[] getUI2Vector(int id) {
+        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+    }
+
+    public long[] getUI4Vector(int id) {
+        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+    }
+
+    public float[] getR4Vector(int id) {
+        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+    }
+
+    public String[] getLPWSTRVector(int id) {
+        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+    }
+}

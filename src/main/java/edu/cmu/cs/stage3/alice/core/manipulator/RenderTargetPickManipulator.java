@@ -200,4 +200,99 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 							sgPickedTransformable = ePickedTransformable.getSceneGraphTransformable();
 						}
 						if( ascendTreeEnabled ) {
-							while( (ePickedTransformable != null) && (ePickedTransformable.getParent() instanceof edu.cmu.cs.stage3.alice.core.Transformable) && (! ePickedTransformable.doEventsStopAscending()) && (! object
+							while( (ePickedTransformable != null) && (ePickedTransformable.getParent() instanceof edu.cmu.cs.stage3.alice.core.Transformable) && (! ePickedTransformable.doEventsStopAscending()) && (! objectsOfInterest.contains( ePickedTransformable )) ) {
+								sgPickedTransformable = ((edu.cmu.cs.stage3.alice.core.Transformable)ePickedTransformable.getParent()).getSceneGraphTransformable();
+								ePickedTransformable = (edu.cmu.cs.stage3.alice.core.Transformable)sgPickedTransformable.getBonus();
+							}
+						}
+
+						if( (! objectsOfInterest.isEmpty()) && (! objectsOfInterest.contains( ePickedTransformable )) ) {
+							abortAction();
+						}
+					} else {
+						sgPickedTransformable = null;
+						ePickedTransformable = null;
+					}
+				} else {
+					sgPickedTransformable = null;
+					ePickedTransformable = null;
+				}
+			}
+			firePostPick( pickInfo );
+
+			originalMousePoint = ev.getPoint();
+			if( (! isActionAborted()) && hideCursorOnDrag && doWrap && (! ev.getComponent().getCursor().equals( invisibleCursor )) ) {
+				savedCursor = ev.getComponent().getCursor();
+				ev.getComponent().setCursor( invisibleCursor );
+			}
+		}
+	}
+
+	public void mouseReleased( java.awt.event.MouseEvent ev ) {
+		if( (! isActionAborted()) && hideCursorOnDrag && doWrap ) {
+			ev.getComponent().setCursor( savedCursor );
+			//TODO: position mouse based on object of interest's position in the picture plane;  for now, it does a rough approximation
+			java.awt.Point tempPoint = ev.getPoint();
+			javax.swing.SwingUtilities.convertPointToScreen( tempPoint, ev.getComponent() );
+			javax.swing.SwingUtilities.convertPointToScreen( originalMousePoint, ev.getComponent() );
+			edu.cmu.cs.stage3.awt.AWTUtilities.setCursorLocation( tempPoint.x, originalMousePoint.y );
+			//robot.mouseMove( tempPoint.x, originalMousePoint.y );
+		}
+
+		lastEPickedTransformable = ePickedTransformable;
+
+		ePickedTransformable = null;
+		sgPickedTransformable = null;
+		pickInfo = null;
+		// commented out by dennisc
+		//if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack() != null ) {
+		//	if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack() != null ) {
+		//		edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack().setIsListening( true );
+		//	}
+		//}
+
+		super.mouseReleased( ev );
+	}
+
+	public void abortAction() {
+		component.setCursor( savedCursor );
+		super.abortAction();
+	}
+
+	protected void firePrePick() {
+		edu.cmu.cs.stage3.alice.core.event.RenderTargetPickManipulatorEvent ev = new edu.cmu.cs.stage3.alice.core.event.RenderTargetPickManipulatorEvent( renderTarget, null );
+		for( java.util.Iterator iter = listeners.iterator(); iter.hasNext(); ) {
+			((edu.cmu.cs.stage3.alice.core.event.RenderTargetPickManipulatorListener)iter.next()).prePick( ev );
+		}
+	}
+
+	protected void firePostPick( edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo ) {
+		edu.cmu.cs.stage3.alice.core.event.RenderTargetPickManipulatorEvent ev = new edu.cmu.cs.stage3.alice.core.event.RenderTargetPickManipulatorEvent( renderTarget, pickInfo );
+		for( java.util.Iterator iter = listeners.iterator(); iter.hasNext(); ) {
+			((edu.cmu.cs.stage3.alice.core.event.RenderTargetPickManipulatorListener)iter.next()).postPick( ev );
+		}
+	}
+
+	//commented out by dennisc
+	/*
+	//TODO: this should be handled elsewhere
+	protected final java.awt.event.MouseListener popupMouseListener = new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
+		Runnable emptyRunnable = new Runnable() {
+			public void run() {}
+		};
+
+		protected void popupResponse( java.awt.event.MouseEvent e ) {
+			if( lastEPickedTransformable != null ) {
+				javax.swing.JPopupMenu popup = createPopup( lastEPickedTransformable );
+				popup.show( e.getComponent(), e.getX(), e.getY() );
+				PopupMenuUtilities.ensurePopupIsOnScreen( popup );
+			}
+		}
+
+		private javax.swing.JPopupMenu createPopup( edu.cmu.cs.stage3.alice.core.Element element ) {
+			java.util.Vector popupStructure = ElementPopupUtilities.getDefaultStructure( element );
+			return edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.makeElementPopupMenu( element, popupStructure );
+		}
+	};
+	*/
+}

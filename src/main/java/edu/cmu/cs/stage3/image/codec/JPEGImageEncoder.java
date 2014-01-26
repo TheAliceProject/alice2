@@ -218,4 +218,10 @@ public class JPEGImageEncoder extends ImageEncoderImpl {
         try {
           // Write the image data.
             encoder.encode(bi);
-        } catch(IOExc
+        } catch(IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+
+}

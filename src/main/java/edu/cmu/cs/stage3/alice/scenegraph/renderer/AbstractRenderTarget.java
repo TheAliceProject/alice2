@@ -183,4 +183,20 @@ public abstract class AbstractRenderTarget implements edu.cmu.cs.stage3.alice.sc
 			m_abstractRenderer.leaveIgnore();
 		}
 	}
-	protected void on
+	protected void onRender() {
+		m_abstractRenderer.enterIgnore();
+		try {
+			edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetEvent renderTargetEvent = new edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetEvent( this );
+			edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetListener[] rtls = getRenderTargetListeners();
+			for( int i = 0; i < rtls.length; i++ ) {
+				rtls[ i ].rendered( renderTargetEvent );
+			}
+		} finally {
+			m_abstractRenderer.leaveIgnore();
+		}
+	}
+	
+	public String toString() {
+		return getClass().getName() + "[" + getName() + "]";
+	}
+}

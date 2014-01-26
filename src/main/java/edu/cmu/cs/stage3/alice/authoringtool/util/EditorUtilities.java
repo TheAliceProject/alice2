@@ -253,4 +253,24 @@ public final class EditorUtilities {
 		int bDist = getObjectClassDepth( getObjectParameter( b ), objectClass );
 		if( aDist < bDist )
 			return -1;
-		else if( bDist < aDis
+		else if( bDist < aDist )
+			return 1;
+		else
+			return 0;
+	}
+
+	/**
+	 * Sorts a Vector of Editor Classes based on how fit they are to view
+	 * the given objectClass
+	 *
+	 * This is going to be used on small vectors,
+	 * so I'm just using Insertion sort.
+	 */
+	private static void sort( Vector v, Class objectClass ) {
+		for( int i=0; i<v.size(); i++ ) {
+			for( int j=i; j>0 && compare( (Class)v.elementAt(j-1), (Class)v.elementAt(j), objectClass )>0; j-- ) {
+				swap( v, j, j-1 );
+			}
+		}
+	}
+}

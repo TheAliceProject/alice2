@@ -236,4 +236,17 @@ public class ElementPrototype {
 		} else {
 			sb.append( "<null>" ); 
 		}
-		sb.append( " ],
+		sb.append( " ], " ); 
+		sb.append( "desiredProperties = [ " ); 
+		if( desiredProperties != null ) {
+			for( int i = 0; i < desiredProperties.length; i++ ) {
+				sb.append( desiredProperties[i] + ", " ); 
+			}
+		} else {
+			sb.append( "<null>" ); 
+		}
+		sb.append( " ], ]" ); 
+
+		return sb.toString();
+	}
+}

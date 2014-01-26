@@ -844,7 +844,7 @@ public class PopupMenuUtilities {
 	// this method is overly complex, mostly following the "Big Ball Of Mud" Pattern
 	// http://www.laputan.org/mud/mud.html
 	/**
-	 * the PopupItemFactory should accept a completed ElementPrototype and rerfturn a Runnable
+	 * the PopupItemFactory should accept a completed ElementPrototype and return a Runnable
 	 */
 	public static java.util.Vector makePrototypeStructure( final ElementPrototype elementPrototype, final PopupItemFactory factory, final edu.cmu.cs.stage3.alice.core.Element context){
 		java.util.Vector structure = new java.util.Vector();
@@ -1423,7 +1423,7 @@ public class PopupMenuUtilities {
 					
 					java.util.Vector defaultStructure = getDefaultValueStructureForProperty( property );
 					
-					if ( property.getName().equalsIgnoreCase("keyCode") ){	//AikMin - testing
+					/*if ( property.getName().equalsIgnoreCase("keyCode") ){	//AikMin - testing
 						java.util.Vector symbols = new java.util.Vector();
 						symbols.add( new edu.cmu.cs.stage3.util.StringObjectPair( "-   (Minus)", java.awt.event.KeyEvent.VK_MINUS  ) );	
 						symbols.add( new edu.cmu.cs.stage3.util.StringObjectPair( "=   (Equals)", java.awt.event.KeyEvent.VK_EQUALS  ) );	
@@ -1438,7 +1438,7 @@ public class PopupMenuUtilities {
 
 						defaultStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "symbols", symbols ) );
 						
-					}
+					}*/
 					
 					java.util.Vector recentlyUsedStructure = new java.util.Vector();
 					if( recentlyUsedValues.containsKey( targetValueClass ) ) {

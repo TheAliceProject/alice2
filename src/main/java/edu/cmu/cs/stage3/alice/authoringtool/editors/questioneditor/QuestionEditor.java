@@ -192,4 +192,11 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         prototypeContainer.add(whilePrototype);
         prototypeContainer.add(forEachPrototype);
         prototypeContainer.add(printPrototype);
-       
+        prototypeContainer.add(commentPrototype);
+        prototypeContainer.add(returnPrototype);
+
+        java.awt.Component buttonGlue = javax.swing.Box.createHorizontalGlue();
+        prototypeContainer.add(buttonGlue);
+    }
+
+}

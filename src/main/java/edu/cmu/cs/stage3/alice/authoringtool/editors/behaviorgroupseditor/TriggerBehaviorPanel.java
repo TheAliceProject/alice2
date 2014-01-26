@@ -173,4 +173,32 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
 		}
         
         if (isSecondLine){
-        
+            if (calculatedWidth < topParent.getWidth()){
+                isSecondLine = false;
+                guiInit();
+            }
+        }
+        else{
+            if (calculatedWidth > topParent.getWidth()){
+                isSecondLine = true;
+                guiInit();
+            }
+        }
+
+    }
+
+    public void componentHidden(java.awt.event.ComponentEvent e){}
+
+    public void componentMoved(java.awt.event.ComponentEvent e){
+    }
+
+    public void componentResized(java.awt.event.ComponentEvent e){
+        if (shouldCheckSize){
+            recheckLength();
+        }
+    }
+
+    public void componentShown(java.awt.event.ComponentEvent e) {
+    }
+
+}

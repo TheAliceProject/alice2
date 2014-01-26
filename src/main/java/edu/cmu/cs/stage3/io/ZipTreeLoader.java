@@ -268,4 +268,48 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 					byte [] entryContents = new byte[size];
 					while( ZipTreeLoader.this.zipIn.available() == 1 ) {
 						if( off == size ) {
-							
+							size += 1024;
+							byte [] temp = entryContents;
+							entryContents = new byte[size];
+							System.arraycopy( temp, 0, entryContents, 0, size - 1024 );
+						}
+						int theByte = ZipTreeLoader.this.zipIn.read();
+						if( theByte == -1 ) {
+							break;
+						}
+						entryContents[off++] = (byte)theByte;
+					}
+					if( off < size ) {
+						byte [] temp = entryContents;
+						entryContents = new byte[off];
+						System.arraycopy( temp, 0, entryContents, 0, off );
+					}
+
+					ZipTreeLoader.this.zipIn.closeEntry();
+
+					ZipTreeLoader.this.pathnamesToByteArrays.put( pathname, entryContents );
+					ZipTreeLoader.this.finishedLoading( pathname );
+				}
+				catch( java.io.IOException e ) {
+					e.printStackTrace();
+				}
+			}
+
+			stoppedEarly = false;
+			ZipTreeLoader.this.isLoading = false;
+			ZipTreeLoader.this.finishedLoading( ZipTreeLoader.WHOLE_FILE );
+		}
+
+		public void stopEarly() {
+			stoppedEarly = true;
+		}
+	}
+
+	public boolean isKeepFileSupported() {
+		return false;
+	}
+
+	public Object getKeepKey( String filename ) throws KeepFileNotSupportedException {
+		throw new KeepFileNotSupportedException();
+	}
+}

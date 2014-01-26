@@ -114,4 +114,105 @@ public class StencilStateCapsule implements edu.cmu.cs.stage3.caitlin.stencilhel
         }
 
 	/**
-	 * propertyKey should be of the form (element key relative to world).
+	 * propertyKey should be of the form (element key relative to world).(property name).
+	 * i.e. "Bunny.Head.color"
+	 */
+	public String getPropertyValue( String propertyKey ) {
+		return (String)propertyValues.get( propertyKey );
+	}
+
+	public java.util.Set getPropertyValueKeySet() {
+		return propertyValues.keySet();
+	}
+
+        public java.util.Set getElementPositionKeySet() {
+                return elementPositions.keySet();
+        }
+
+	public void parse( String storableRepr ) {
+		java.util.StringTokenizer st = new java.util.StringTokenizer( storableRepr, "|", false );
+		String token = st.nextToken();
+		if( ! "existantElements".equals( token ) ) {
+			throw new IllegalArgumentException( "expected \"existantElements\"; got " + token );
+		}
+
+		java.util.StringTokenizer st2 = new java.util.StringTokenizer( st.nextToken(), "?", false );
+		while( st2.hasMoreTokens() ) {
+			addExistantElement( st2.nextToken() );
+		}
+
+		token = st.nextToken();
+		if( ! "nonExistantElements".equals( token ) ) {
+			throw new IllegalArgumentException( "expected \"nonExistantElements\"; got " + token );
+		}
+		st2 = new java.util.StringTokenizer( st.nextToken(), "?", false );
+		while( st2.hasMoreTokens() ) {
+			addNonExistantElement( st2.nextToken() );
+		}
+
+		token = st.nextToken();
+		if( ! "propertyValues".equals( token ) ) {
+			throw new IllegalArgumentException( "expected \"propertyValues\"; got " + token );
+		}
+		st2 = new java.util.StringTokenizer( st.nextToken(), "?", false );
+		while( st2.hasMoreTokens() ) {
+			token = st2.nextToken();
+			int colonIndex = token.indexOf( ":" );
+			String propertyKey = token.substring( 0, colonIndex );
+			String valueRepr = token.substring( colonIndex + 1 );
+			putPropertyValue( propertyKey, valueRepr );
+		}
+
+                if (st.hasMoreTokens()) {
+                  token = st.nextToken();
+                  if( ! "elementPositions".equals( token ) ) {
+                          throw new IllegalArgumentException( "expected \"elementPositions\"; got " + token );
+                  }
+                  st2 = new java.util.StringTokenizer( st.nextToken(), "?", false );
+                  while( st2.hasMoreTokens() ) {
+                          token = st2.nextToken();
+                          int colonIndex = token.indexOf( ":" );
+                          String elementKey = token.substring( 0, colonIndex );
+                          String valueRepr = token.substring( colonIndex + 1 );
+                          putElementPosition( elementKey, Integer.parseInt(valueRepr) );
+                  }
+                }
+
+	}
+
+	public String getStorableRepr() {
+          // MAKE THIS INSERT A ? when there aren't any values to put in
+		String storableRepr = "";
+
+		storableRepr += "existantElements|?";
+
+		for( java.util.Iterator iter = existantElements.iterator(); iter.hasNext(); ) {
+			storableRepr += ((String)iter.next()) + "?";
+		}
+		storableRepr += "|";
+
+		storableRepr += "nonExistantElements|?";
+		for( java.util.Iterator iter = nonExistantElements.iterator(); iter.hasNext(); ) {
+			storableRepr += ((String)iter.next()) + "?";
+		}
+		storableRepr += "|";
+
+		storableRepr += "propertyValues|?";
+		for( java.util.Iterator iter = propertyValues.keySet().iterator(); iter.hasNext(); ) {
+			String propertyKey = (String)iter.next();
+			String valueRepr = (String)propertyValues.get( propertyKey );
+			storableRepr += propertyKey + ":" + valueRepr + "?";
+		}
+		storableRepr += "|";
+
+                storableRepr += "elementPositions|?";
+		for( java.util.Iterator iter = elementPositions.keySet().iterator(); iter.hasNext(); ) {
+			String elementKey = (String)iter.next();
+			Integer valueRepr = (Integer)elementPositions.get( elementKey );
+			storableRepr += elementKey + ":" + valueRepr + "?";
+		}
+		storableRepr += "|";
+
+		return storableRepr;
+	}
+}

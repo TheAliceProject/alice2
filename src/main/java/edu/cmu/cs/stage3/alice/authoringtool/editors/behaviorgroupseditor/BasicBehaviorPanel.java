@@ -255,4 +255,53 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                 boolean shouldAllowExpressions = true;
                 Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(prop);
                 //Aik Min - When mouse is clicked on object under mouse cursor bug in create new event
-                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase("onWhat"
+                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase("onWhat")){//Messages.getString("onWhat"))){  
+                	shouldAllowExpressions = false;
+                }
+                toAdd = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(prop, true, shouldAllowExpressions ,edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(prop), propPIF);
+            }
+            else{
+                toAdd = new javax.swing.JLabel(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue(key));
+                if (toAdd == null){
+                    toAdd = new javax.swing.JLabel(Messages.getString("_no_image_")); 
+                }
+            }
+            container.add(new javax.swing.JLabel(currentSubstring), new java.awt.GridBagConstraints(insertX,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
+            insertX++;
+            container.add(toAdd, new java.awt.GridBagConstraints(insertX,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0) , 0,0));
+            insertX++;
+            oldLocation = locationRight+1;
+            locationLeft = typeString.indexOf('<',oldLocation);
+            locationRight = typeString.indexOf('>',locationLeft);
+        }
+        if (oldLocation < typeString.length()){
+            currentSubstring = typeString.substring(oldLocation, typeString.length());
+            container.add(new javax.swing.JLabel(currentSubstring), new java.awt.GridBagConstraints(insertX,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
+            insertX++;
+        }
+    }
+
+    public void prePropertyChange( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ){
+    }
+
+    public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent){
+    }
+
+	public void paintForeground( java.awt.Graphics g ) {
+        super.paintForeground( g );
+        if( !m_behavior.isEnabled.booleanValue() ) {
+            java.awt.Rectangle bounds = new java.awt.Rectangle(0,0,this.getWidth(), this.getHeight());
+            edu.cmu.cs.stage3.alice.authoringtool.util.GUIEffects.paintDisabledEffect( g, bounds );
+        }
+    }
+
+    public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ){
+        //stopListening();
+        popUpMenu = createPopup();
+        guiInit();
+    }
+
+    protected void guiInit(){
+    }
+
+}

@@ -133,4 +133,66 @@
 	<image path="images/hebuilder/Step4/1tops/Shirt_suit_green.gif" />
 	<image path="images/hebuilder/Step4/1tops/Shirt_suit_lightblue_small.gif" />
 	<image path="images/hebuilder/Step4/1tops/Shirt_suit_lightblue.gif" />
-	<image path="images/hebuilder/Step4/1tops/Shirt_suit_pinstripe_
+	<image path="images/hebuilder/Step4/1tops/Shirt_suit_pinstripe_small.gif" />
+	<image path="images/hebuilder/Step4/1tops/Shirt_suit_pinstripe.gif" />
+	<image path="images/hebuilder/Step4/1tops/Shirt_suit_warmgrey_small.gif" />
+	<image path="images/hebuilder/Step4/1tops/Shirt_suit_warmgrey.gif" />
+	<image path="images/hebuilder/Step4/1tops/Shirt_thug_small.gif" />
+	<image path="images/hebuilder/Step4/1tops/Shirt_thug.gif" />
+      <xml path="images/hebuilder/Step4/1tops/tops.xml" />
+      <image path="images/hebuilder/Step4/1tops/trans0.gif" />
+    </directory>
+    <directory path="images/hebuilder/Step4/2bottoms">
+      <image path="images/hebuilder/Step4/2bottoms/blackpants.gif" />
+      <image path="images/hebuilder/Step4/2bottoms/blackpants_small.gif" />
+      <image path="images/hebuilder/Step4/2bottoms/bluepants.gif" />
+      <image path="images/hebuilder/Step4/2bottoms/bluepants_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_crunchy.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_crunchy_img.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_casual.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_casual_img.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_club.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_club_img.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic_img.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_formal.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_formal_img.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_hip.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_hip_img.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic_black.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic_black_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic_blue.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic_blue_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic_red.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_athletic_red_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_coolgrey.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_coolgrey_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_darkblue.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_darkblue_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_green.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_green_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_lightblue.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_lightblue_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_pinstripe.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_pinstripe_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_warmgrey.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_suit_warmgrey_small.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_lowrider.gif" />
+	<image path="images/hebuilder/Step4/2bottoms/Pants_lowrider_small.gif" />
+      <xml path="images/hebuilder/Step4/2bottoms/bottoms.xml" />
+      <image path="images/hebuilder/Step4/2bottoms/nopants.gif" />
+      <image path="images/hebuilder/Step4/2bottoms/trans0.gif" />
+    </directory>
+    <directory path="images/hebuilder/Step4/3shoes">
+      <image path="images/hebuilder/Step4/3shoes/shoes.gif" />
+      <xml path="images/hebuilder/Step4/3shoes/shoes.xml" />
+      <image path="images/hebuilder/Step4/3shoes/trans0.gif" />
+	<image path="images/hebuilder/Step4/3shoes/noshoes.gif" />
+    </directory>
+    <image path="images/hebuilder/Step4/step4.jpg" />
+    <image path="images/hebuilder/Step4/step4_sel.jpg" />
+  </directory>
+  <image path="images/hebuilder/stepBack.jpg" />
+  <image path="images/hebuilder/stepNext.jpg" />
+  <xml path="images/hebuilder/structure.xml" />
+</directory>

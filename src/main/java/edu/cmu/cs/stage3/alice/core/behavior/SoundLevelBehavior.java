@@ -245,4 +245,19 @@ public class SoundLevelBehavior extends TriggerBehavior implements ControllerLis
 
             // Right Channel
             int rsample;
-          
+            if (((AudioFormat)input.getFormat()).getChannels()==2) {
+                tempL = inData[inOffset++];
+                tempH = inData[inOffset++];
+                rsample = (tempH << 8) | (tempL & 255);
+            } else
+                rsample = lsample;
+
+            if ((lsample)/65535.0>=level.doubleValue() || (rsample)/65535.0>=level.doubleValue())
+                trigger(System.currentTimeMillis()*0.001);
+        }
+
+        return BUFFER_PROCESSED_OK;
+    }
+
+
+}

@@ -106,4 +106,66 @@ public class PropertyCellRenderer extends javax.swing.table.DefaultTableCellRend
 		} else if( value instanceof edu.cmu.cs.stage3.util.Enumerable ) {
 			setText( ((edu.cmu.cs.stage3.util.Enumerable)value).getRepr() );
 		} else if( value instanceof java.util.Enumeration ) {
-			setText( Messages.getString("_enumeration_") 
+			setText( Messages.getString("_enumeration_") ); 
+		}
+
+		return this;
+	}
+
+	class ColorRenderer extends javax.swing.table.DefaultTableCellRenderer {
+		java.util.Hashtable colorsToIcons = new java.util.Hashtable();
+
+		public ColorRenderer() {}
+
+		public java.awt.Component getTableCellRendererComponent( JTable table, Object color, boolean isSelected, boolean hasFocus, int row, int column ) {
+			if( color instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
+				edu.cmu.cs.stage3.alice.scenegraph.Color c = (edu.cmu.cs.stage3.alice.scenegraph.Color)color;
+				color = new java.awt.Color( c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha() );
+			}
+
+			setBackground( isSelected ? table.getSelectionBackground() : table.getBackground() );
+
+			javax.swing.Icon icon = (javax.swing.Icon)colorsToIcons.get( color );
+			if( icon == null ) {
+				int height = table.getRowHeight() - 4;
+				int width = height * 2;
+				java.awt.image.BufferedImage colorImage = new java.awt.image.BufferedImage( width, height, java.awt.image.BufferedImage.TYPE_INT_RGB );
+				java.awt.Graphics2D g = colorImage.createGraphics();
+				g.setColor( (java.awt.Color)color );
+				g.fill3DRect( 0, 0, width, height, true );
+				icon = new javax.swing.ImageIcon( colorImage );
+				colorsToIcons.put( color, icon );
+			}
+
+			setIcon( icon );
+			setFont( table.getFont() );
+			setText( getTextFromColor( (java.awt.Color)color ) );
+
+			return this;
+		}
+
+		public String getTextFromColor( java.awt.Color color ) {
+			String text = ""; 
+			if( color.equals( java.awt.Color.black ) ) { text = Messages.getString("black"); } 
+			else if( color.equals( java.awt.Color.blue ) ) { text = Messages.getString("blue"); } 
+			else if( color.equals( java.awt.Color.cyan ) ) { text = Messages.getString("cyan"); } 
+			else if( color.equals( java.awt.Color.darkGray ) ) { text = Messages.getString("darkGray"); } 
+			else if( color.equals( java.awt.Color.gray ) ) { text = Messages.getString("gray"); } 
+			else if( color.equals( java.awt.Color.green ) ) { text = Messages.getString("green"); } 
+			else if( color.equals( java.awt.Color.lightGray ) ) { text = Messages.getString("lightGray"); } 
+			else if( color.equals( java.awt.Color.magenta ) ) { text = Messages.getString("magenta"); } 
+			else if( color.equals( java.awt.Color.orange ) ) { text = Messages.getString("orange"); } 
+			else if( color.equals( java.awt.Color.pink ) ) { text = Messages.getString("pink"); } 
+			else if( color.equals( java.awt.Color.red ) ) { text = Messages.getString("red"); } 
+			else if( color.equals( java.awt.Color.white ) ) { text = Messages.getString("white"); } 
+			else if( color.equals( java.awt.Color.yellow ) ) { text = Messages.getString("yellow"); } 
+			else {
+				float[] rgba = new float[4];
+				color.getComponents( rgba );
+				text = Messages.getString("_red___") + rgba[0] + Messages.getString("__green___") + rgba[1] + Messages.getString("__blue___") + rgba[2] + Messages.getString("__alpha___") + rgba[3] + ">";    //$NON-NLS-4$ //$NON-NLS-5$
+			}
+
+			return text;
+		}
+	}
+}

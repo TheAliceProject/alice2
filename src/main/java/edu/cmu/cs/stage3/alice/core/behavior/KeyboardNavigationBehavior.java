@@ -79,11 +79,11 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
 	public void internalSchedule( double time, double dt ) {
 		KeyMapping keyMapping = (KeyMapping)keyMap.getElementValue();
 		int actions;
-		if( keyMapping != null && AuthoringTool.temp != -1 ) {
+		//if( keyMapping != null && AuthoringTool.temp != -1 ) {
 			actions = keyMapping.getActions();
-		} else {
-			actions = 0;
-		}
+		//} else {
+			//actions = 0;
+		//}
         // accelerate if keys are pressed
         // decelerate otherwise
         if ((actions & KeyMapping.NAV_MOVEFORWARD) != 0)

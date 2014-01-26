@@ -321,4 +321,55 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
             sizeLabel.setForeground(sizeColor);
             containingPanel.add(sizeLabel, new java.awt.GridBagConstraints(1,3,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
         }
-        containingPanel.add(locationLabel, new java.awt.GridBagConstraints(2
+        containingPanel.add(locationLabel, new java.awt.GridBagConstraints(2,3,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
+        containingPanel.revalidate();
+        containingPanel.repaint();
+    }
+
+    public void respondToMouse(){
+        if (mainViewer != null){
+            mainViewer.displayModelDialog(data, image);
+        }
+    }
+
+    public void galleryMouseExited(){
+        if (mouseOver){
+            mouseOver = false;
+            if (hasAttribution){
+                mainViewer.removeAttribution();
+            }
+            GalleryObject.this.repaint();
+        }
+    }
+
+    public void galleryMouseEntered(){
+        if (!mouseOver){
+            mouseOver = true;
+            if (hasAttribution){
+                mainViewer.diplayAttribution(data);
+            }
+            GalleryObject.this.repaint();
+        }
+    }
+
+
+	public void paintForeground( java.awt.Graphics g ) {
+        super.paintForeground( g );
+        if (mouseOver){
+            Object oldAntialiasing = null;
+            if( g instanceof java.awt.Graphics2D ) {
+                oldAntialiasing = ((java.awt.Graphics2D)g).getRenderingHint( java.awt.RenderingHints.KEY_ANTIALIASING );
+                ((java.awt.Graphics2D)g).addRenderingHints( new java.awt.RenderingHints( java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON ) );
+            }
+            java.awt.Rectangle bounds = getBounds();
+            for (int i=1; i<=2; i++){
+                g.setColor( new java.awt.Color(HIGHLITE.getRed(), HIGHLITE.getGreen(), HIGHLITE.getBlue(), (255 - (i-1)*60)));
+                g.drawRoundRect( i, i, bounds.width - 2*i, bounds.height - 2*i, arcWidth, arcHeight );
+            }
+            if( g instanceof java.awt.Graphics2D ) {
+                ((java.awt.Graphics2D)g).addRenderingHints( new java.awt.RenderingHints( java.awt.RenderingHints.KEY_ANTIALIASING, oldAntialiasing ) );
+            }
+        }
+    }
+
+}

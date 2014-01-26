@@ -367,4 +367,32 @@ public class Triangulator {
             ear.next.inCone(ear.prev.data) && ear.prev.inCone(ear.next.data) );
     }
 
-    priva
+    private java.util.Vector determineEars() {
+        java.util.Vector ears = new java.util.Vector();
+        PointNode head = (PointNode)contours.firstElement();
+        PointNode cur = head;
+
+        do {
+            if (isEar(cur)) {
+                ears.add(cur);
+            }
+
+            cur = cur.next;
+        } while (cur!=head && cur!=null);
+
+        return ears;
+    }
+
+    private boolean clipEar(PointNode ear) {
+        if (!isEar(ear))
+            return false;
+        triangles.add(ear.triangle());
+
+        ear.prev.next = ear.next;
+        ear.next.prev = ear.prev;
+        if (contours.firstElement()==ear)
+            contours.setElementAt(ear.next,0);
+
+        return true;
+    }
+}

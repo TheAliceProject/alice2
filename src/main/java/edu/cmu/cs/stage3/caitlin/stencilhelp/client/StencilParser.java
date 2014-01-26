@@ -192,4 +192,83 @@ public class StencilParser { //extends org.xml.sax.helpers.DefaultHandler{
   public Vector parseFile(java.io.File fileToLoad) {
     Document document;
     try {
-      Documen
+      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder builder = factory.newDocumentBuilder();
+      document = builder.parse(fileToLoad);
+    } catch( IOException ioe ) {
+      document = null;
+      ioe.printStackTrace();
+    } catch( ParserConfigurationException pce ) {
+      document = null;
+      pce.printStackTrace();
+    } catch( org.xml.sax.SAXException se) {
+      document = null;
+      se.printStackTrace();
+    }
+
+    if (document != null) {
+      Vector stencilList = new Vector();
+      NamedNodeMap attr = document.getDocumentElement().getAttributes();
+      Node readPermission = attr.getNamedItem("access"); 
+      if (readPermission.getNodeValue().equals("read")) { 
+        stencilManager.setWriteEnabled(false);
+      } else {
+        stencilManager.setWriteEnabled(true);
+      }
+      Node worldToLoad = attr.getNamedItem("world"); 
+      if (worldToLoad != null) {
+        stencilManager.setWorld(worldToLoad.getNodeValue());
+      }
+      //load next and previous stacks
+      String nextStack = null;
+      String previousStack = null;
+      Node nextStackNode = attr.getNamedItem("nextStack"); 
+      if (nextStackNode != null) {
+        nextStack = nextStackNode.getNodeValue();
+      }
+      Node previousStackNode = attr.getNamedItem("previousStack"); 
+      if (previousStackNode != null) {
+        previousStack = previousStackNode.getNodeValue();
+      }
+      if ( (nextStack != null) || (previousStack != null) ) {
+        stencilManager.setNextAndPreviousStacks(previousStack, nextStack);
+      }
+      NodeList stencils = document.getElementsByTagName( "stencil" ); 
+      ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Loading_Tutorial"), "", 0, stencils.getLength());  
+      monitor.setProgress(0);
+      monitor.setMillisToDecideToPopup(1000);
+      for (int i = 0; i < stencils.getLength(); i++) {
+        Node stencilNode = stencils.item(i);
+        StencilManager.Stencil newStencil = loadStencil(stencilNode);
+        stencilList.addElement(newStencil);
+        monitor.setProgress(i);
+      }
+      monitor.close();
+      return stencilList;
+    } else {
+      System.out.println(Messages.getString("Could_not_parse_stencil_file")); 
+      System.out.flush();
+      return null;
+    }
+  }
+
+  public StencilManager.Stencil getErrorStencil() {
+    NavigationBar navBar = new NavigationBar(stencilManager, positionManager, true);
+    navBar.setTitleString("Ooops!"); 
+
+    StencilManager.Stencil newStencil = stencilManager.newStencil();
+    newStencil.addObject(navBar );
+
+    // create note
+    Point p = new Point( (int)( (float)stencilApp.getScreenSize().getWidth() * 0.292), (int)( (float)stencilApp.getScreenSize().getHeight() * 0.448) );
+    Note note = new Note( p, new Point(0,0), null, positionManager, stencilManager, false );
+    note.addText(Messages.getString("The_Alice_tutorial_thinks_maybe_you_didn_t_follow_the_instructions_carefully_"), null); 
+    note.addText(Messages.getString("Please_back_up_to_your_mistake_or_restart_"), null); 
+    note.initializeNote();
+
+    newStencil.addObject(note);
+
+
+    return newStencil;
+  }
+}

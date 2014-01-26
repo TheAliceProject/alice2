@@ -93,4 +93,71 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			else if (currentString.equalsIgnoreCase(Messages.getString("physicalsize"))) 
 				currentString = Messages.getString("physical_size"); 
 			javax.swing.JLabel title = new javax.swing.JLabel(String.valueOf(String.valueOf(currentString)).concat(":")); 
-			javax.swing.JLabel detail = n
+			javax.swing.JLabel detail = new javax.swing.JLabel();
+			title.setForeground(GalleryViewer.textColor);
+			detail.setForeground(GalleryViewer.textColor);
+			if (current.getObject() == null || current.getObject().equals("")) 
+				continue;
+			if (current.getObject() instanceof String) {
+				detail.setText(current.getObject().toString());
+				detailsPanel.add(title, new java.awt.GridBagConstraints(0, count, 1, 1, 0.0D, 0.0D, 18, 0, new java.awt.Insets(2, 0, 0, 0), 0, 0));
+				detailsPanel.add(detail, new java.awt.GridBagConstraints(1, count, 1, 1, 0.0D, 0.0D, 18, 0, new java.awt.Insets(2, 4, 0, 0), 0, 0));
+				count++;
+				continue;
+			}
+			if (!(current.getObject() instanceof java.util.Vector))
+				continue;
+			java.util.Vector detailVector = (java.util.Vector) current.getObject();
+			javax.swing.JPanel detailContainer = new javax.swing.JPanel();
+			detailContainer.setOpaque(false);
+			detailContainer.setBorder(null);
+			detailContainer.setLayout(new javax.swing.BoxLayout(detailContainer, 1));
+			for (int index = 0; index < detailVector.size(); index++) {
+				if (detailVector.get(index) == null || !(detailVector.get(index) instanceof String))
+					continue;
+				String currentDetail = (String) detailVector.get(index);
+				if (!currentDetail.equalsIgnoreCase("")) { 
+					javax.swing.JLabel detailLabel = new javax.swing.JLabel(currentDetail);
+					detailLabel.setForeground(GalleryViewer.textColor);
+					detailContainer.add(detailLabel);
+				}
+			}
+
+			detailsPanel.add(title, new java.awt.GridBagConstraints(0, count, 1, 1, 0.0D, 0.0D, 18, 0, new java.awt.Insets(2, 0, 0, 0), 0, 0));
+			detailsPanel.add(detailContainer, new java.awt.GridBagConstraints(1, count, 1, 1, 0.0D, 0.0D, 18, 0, new java.awt.Insets(2, 4, 0, 0), 0, 0));
+			count++;
+		}
+
+		detailsPanel.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0, count, 1, 1, 1.0D, 1.0D, 18, 1, new java.awt.Insets(0, 0, 0, 0), 0, 0));
+	}
+
+	private void guiInit() {
+		setBackground(GalleryObject.BACKGROUND);
+		imageLabel = new javax.swing.JLabel();
+		nameLabel = new javax.swing.JLabel();
+		nameLabel.setForeground(GalleryViewer.textColor);
+		detailsPanel = new javax.swing.JPanel();
+		detailsPanel.setOpaque(false);
+		detailsPanel.setLayout(new java.awt.GridBagLayout());
+		addObjectButton = new javax.swing.JButton(Messages.getString("Add_instance_to_world")); 
+		cancelButton = new javax.swing.JButton(Messages.getString("Cancel")); 
+		setLayout(new java.awt.GridBagLayout());
+		add(nameLabel, new java.awt.GridBagConstraints(0, 0, 1, 1, 0.0D, 0.0D, 10, 0, new java.awt.Insets(2, 0, 0, 0), 0, 0));
+		add(imageLabel, new java.awt.GridBagConstraints(0, 1, 1, 1, 0.0D, 0.0D, 10, 0, new java.awt.Insets(0, 20, 20, 20), 0, 0));
+		add(addObjectButton, new java.awt.GridBagConstraints(0, 2, 1, 1, 0.0D, 0.0D, 18, 0, new java.awt.Insets(2, 6, 6, 2), 0, 0));
+		add(cancelButton, new java.awt.GridBagConstraints(1, 2, 1, 1, 0.0D, 0.0D, 12, 0, new java.awt.Insets(2, 2, 6, 6), 0, 0));
+		add(detailsPanel, new java.awt.GridBagConstraints(1, 1, 1, 1, 0.0D, 0.0D, 12, 0, new java.awt.Insets(2, 2, 2, 6), 0, 0));
+	}
+	GalleryViewer.ObjectXmlData data;
+	javax.swing.ImageIcon image;
+	javax.swing.JLabel imageLabel;
+	javax.swing.JLabel nameLabel;
+	javax.swing.JButton addObjectButton;
+	javax.swing.JButton cancelButton;
+	javax.swing.JPanel detailsPanel;
+	String filename;
+	
+	public String getFilename() {
+		return filename;
+	}
+}

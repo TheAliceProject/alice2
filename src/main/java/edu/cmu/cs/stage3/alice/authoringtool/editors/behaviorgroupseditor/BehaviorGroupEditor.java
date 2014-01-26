@@ -309,4 +309,36 @@ public class BehaviorGroupEditor extends edu.cmu.cs.stage3.alice.authoringtool.u
     }
 
     public void setHeaderLabel(){
-        if (headerLabel != n
+        if (headerLabel != null){
+            headerLabel.setText(headerText);
+        }
+    }
+
+    public void reduceComponentElementPanel(){
+        if (isExpanded){
+            m_element.data.put( IS_EXPANDED_KEY, Boolean.FALSE );
+            isExpanded = false;
+            setHeaderLabel();
+            expandButton.setIcon(plus);
+            containingPanel.remove(componentElementPanel);	// Aik Min - need work
+            this.revalidate();
+            //   this.repaint();
+        }
+    }
+
+    public edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel getComponentPanel(){
+        return componentElementPanel;
+    }
+
+    public void addResponsePanel(javax.swing.JComponent toAdd, int position){
+        componentElementPanel.addElementPanel(toAdd, position);
+    }
+
+    public edu.cmu.cs.stage3.alice.core.Element getElement(){
+        return m_element;
+    }
+
+
+
+
+}

@@ -253,4 +253,151 @@ public class SoundStorage {
 	}
 
 	public String tryToCut(double length, SoundData sd, String file3,
-			String file4, double cropFromBeginning, double cropFromEn
+			String file4, double cropFromBeginning, double cropFromEnding, double blankLength) {
+			Vector start = new Vector();
+			Vector stop = new Vector();
+
+			if (cropFromBeginning != 0.0 || cropFromEnding != 0.0
+				|| sd.clippedDuration+sd.worldTime>length) { //possiblility
+	
+			if((sd.duration -sd.clippedDuration) >cropFromEnding)
+					cropFromEnding = sd.duration-sd.clippedDuration;
+			
+			sd.startTime += cropFromBeginning;
+			sd.stopTime -= cropFromEnding;
+			
+			//print("TRYING TO CUT");
+			//print("WorldTime " + sd.worldTime);
+			//print("Start Time " + sd.startTime + " End Time " + sd.stopTime);
+
+			//print("Duration " + sd.duration + "Length " + length);
+
+			
+			 if ((blankLength + (sd.stopTime-sd.startTime)) > length)
+				 sd.stopTime = (length - blankLength) + sd.startTime -.02;
+			
+			 if(sd.stopTime<sd.startTime)
+				 return file3;
+			
+			 //print(" Going to cut ");
+			 //print("Start Time " + sd.startTime + " End Time " + sd.stopTime);
+			 /*print(" World Time" + sd.worldTime + "Clipped Duration " + sd.clippedDuration
+					+ " Duration " + sd.duration + " Length " + length);
+			  */
+			start.add(new Long((int) (sd.startTime * 1000.0)));
+			stop.add(new Long((int) (sd.stopTime * 1000.0)));
+
+			//print("Start of cropped area "  + start.get(0) + " Stop of cropped area" + stop.get(0));
+			
+			movieMaker.Cut cut = new Cut();
+			if(((Long)start.get(0)).longValue()!=0.0 || ((Long)stop.get(0)).longValue()!=sd.clippedDuration)
+				 cut.doCut(createURL(file3), createURL(file4), start, stop);
+			cut=null;
+			//print("Done Cutting");
+			return file4;
+
+		}
+		return file3;
+
+	}
+
+	public String createURL(String s) {
+		String url;
+		try {
+			url=new java.io.File(s).toURL().toString();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return ""; 
+		}
+		//need to fix??
+		String mod = url.replaceFirst("file:/", "file:///");  
+		return mod;
+
+	}
+
+	public void writeToFile(javax.media.protocol.DataSource ds, String fileName) {
+		Merge m;
+
+		m = new Merge(fileName);
+		if(m!=null)
+			m.doSingle(ds);
+		m = null;
+	}
+
+	public boolean concat(java.util.Vector inputURL, String outputURL) {
+
+		MediaLocator iml[] = new MediaLocator[2];
+		MediaLocator oml;
+		int i = 0;
+		for (i = 0; i < inputURL.size(); i++) {
+			if ((iml[i] = Concat.createMediaLocator((String) inputURL
+					.elementAt(i))) == null) {
+				//print("Cannot build media locator from: " + inputURL);
+				// System.exit(0);
+				return false;
+			}
+		}
+
+		if ((oml = Concat.createMediaLocator(outputURL)) == null) {
+			//print("Cannot build media locator from: " + outputURL);
+			return false;
+		}
+
+		Concat concat = new Concat();
+
+		if (!concat.doIt(iml, oml)) {
+			//print("Failed to concatenate the inputs");
+			return false;
+		}
+	
+		return true;
+	}
+
+	class SoundData {
+
+		double startTime = 0.0;
+
+		double worldTime = 0.0;
+
+		double duration = 0.0;
+
+		double volume = 1.0;
+
+		double clippedDuration = 11000;
+
+		double stopTime = 0.0;
+
+		edu.cmu.cs.stage3.media.jmfmedia.DataSource data = null;
+
+		public SoundData(Long start, Double len,
+				edu.cmu.cs.stage3.media.jmfmedia.DataSource ds, Object to,
+				Object from, Object rate, Object vol) {
+			
+			//System.err.println("Set as " + start);
+			worldTime = start.longValue();
+			duration = len.doubleValue();
+			data = ds;
+			if (rate != null)
+				clippedDuration = ((Double)rate).doubleValue();
+			if (to != null)
+				startTime = ((Double) to).doubleValue();
+			if (from != null)
+				stopTime = ((Double) from).doubleValue();
+			if (vol != null)
+				volume = ((Double) vol).doubleValue();
+
+		}
+	}
+	    
+    class StateListener implements ControllerListener {
+
+        public void controllerUpdate ( ControllerEvent ce ) {
+            if (ce instanceof ControllerClosedEvent)
+                stateFailed = true;
+            if (ce instanceof ControllerEvent)
+                synchronized (stateLock) {
+                    stateLock.notifyAll();
+                }
+        }
+    }
+}

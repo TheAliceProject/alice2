@@ -158,4 +158,22 @@ public class DefaultMoveMode extends RenderTargetManipulatorMode {
 					cameraForward.z = cameraTransformation.m22;
 
 					helper.setPositionRightNow( zeroVec, pickedTransformable );
-					if( Math.abs( cameraForward
+					if( Math.abs( cameraForward.y ) < Math.abs( cameraUp.y ) ) { // if we're looking mostly level
+						cameraForward.y = 0.0;
+						helper.setOrientationRightNow( cameraForward, cameraUp, world );
+					} else { // if we're looking mostly up or down
+						cameraUp.y = 0.0;
+						cameraForward.negate();
+						helper.setOrientationRightNow( cameraUp, cameraForward, world );
+					}
+
+					tempVec.x = dx*deltaFactor;
+					tempVec.y = 0.0;
+					tempVec.z = -dy*deltaFactor;
+					pickedTransformable.moveRightNow( tempVec, helper );
+				}
+			}
+
+		}
+	}
+}

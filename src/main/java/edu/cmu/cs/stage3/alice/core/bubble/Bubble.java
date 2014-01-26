@@ -124,4 +124,106 @@ public abstract class Bubble {
 	}
 
 	protected static final int PAD_X = 10;
-	protected static fin
+	protected static final int PAD_Y = 10;
+
+	public java.awt.Point getPixelOffset() {
+		return m_pixelOffset;
+	}
+	public void setPixelOffset( java.awt.Point pixelOffset ) {
+		m_pixelOffset = pixelOffset;
+	}
+
+	protected java.awt.Point getOrigin() {
+		return m_origin;
+	}
+	public java.awt.geom.Rectangle2D getTotalBound() {
+		if( m_subTexts.size()>0 ) {
+			SubText subText0 = (SubText)m_subTexts.elementAt( 0 );
+			java.awt.geom.Rectangle2D totalBound = subText0.getSafeBound();
+			for( int i=1; i<m_subTexts.size(); i++ ) {
+				SubText subTextI = (SubText)m_subTexts.elementAt( i );
+				java.awt.geom.Rectangle2D.union( totalBound, subTextI.getBound(), totalBound );
+			}
+			return totalBound;
+		} else {
+			return null;
+		}
+	}
+
+	public void calculateBounds( edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget rt ) {
+		java.awt.geom.Rectangle2D totalBound = getTotalBound();
+		if( totalBound == null ) {
+			if( m_text != null ) {
+				if( m_font != null ) {
+					int n = m_charsPerLine;
+					m_subTexts.clear();
+					java.awt.font.FontRenderContext frc = new java.awt.font.FontRenderContext( null, false, false );
+					int offsetY = 0;
+					int i = 0;
+					while( i<m_text.length() ) {
+						int limit;
+						if( i+n > m_text.length() ) {
+							limit = m_text.length();
+						} else {
+							limit = m_text.indexOf( ' ', i+n );
+							if( limit == -1 ) {
+								limit = m_text.length();
+							}
+						}
+						String substring = m_text.substring( i, limit );
+						java.awt.geom.Rectangle2D boundI = m_font.getStringBounds( substring, frc );
+						m_subTexts.addElement( new SubText( substring, boundI, offsetY ) );
+						offsetY += boundI.getHeight();
+						i = limit + 1;
+					}
+				}
+			}
+		}
+	}
+	public void calculateOrigin( edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget rt ) {
+		m_origin.x = 300;
+		m_origin.y = 300;
+		if( m_referenceFrame != null ) {
+			edu.cmu.cs.stage3.alice.scenegraph.Camera[] sgCameras = rt.getCameras();
+			if( sgCameras.length > 0 ) {
+				edu.cmu.cs.stage3.alice.scenegraph.Camera sgCamera = sgCameras[ 0 ];
+				edu.cmu.cs.stage3.alice.core.Camera camera = (edu.cmu.cs.stage3.alice.core.Camera)sgCamera.getBonus();
+				if( camera != null && camera != m_referenceFrame ) {
+					javax.vecmath.Vector3d xyzInCamera = m_referenceFrame.transformTo( m_offsetFromReferenceFrame, camera );
+					javax.vecmath.Vector3d xyzInViewport = rt.transformFromCameraToViewport( xyzInCamera, sgCamera );
+					m_origin.x = (int)xyzInViewport.x;
+					m_origin.y = (int)xyzInViewport.y;
+				}
+			}
+		}
+	}
+
+	protected abstract void paintBackground( java.awt.Graphics g );
+	protected void paint( java.awt.Graphics g ) {
+		if( m_isShowing ) {
+			paintBackground( g );
+			if( m_text != null ) {
+				if( m_font != null ) {
+					g.setFont( m_font );
+				}
+				g.setColor( m_foregroundColor );
+				if( m_subTexts.size() > 0 ) {
+					SubText subText0 = (SubText)m_subTexts.elementAt( 0 );
+					int offsetX = m_pixelOffset.x;
+					int offsetY = m_pixelOffset.y - (int)subText0.getBound().getY();
+					for( int i=0; i<m_subTexts.size(); i++ ) {
+						SubText subTextI = (SubText)m_subTexts.elementAt( i );
+						java.awt.geom.Rectangle2D boundI = subTextI.getBound();
+						int x = (int)( offsetX + boundI.getX() );
+						int y = (int)( offsetY + boundI.getY() );
+						//g.setColor( java.awt.Color.red );
+						//g.drawRect( x, y, (int)boundI.getWidth(), (int)boundI.getHeight() );
+						//g.setColor( m_foregroundColor );
+						g.drawString( subTextI.getText(), x, y );
+					}
+				}
+				//g.drawString( m_text, m_rect.x + PAD, m_rect.y + PAD + 16 );
+			}
+		}
+	}
+}

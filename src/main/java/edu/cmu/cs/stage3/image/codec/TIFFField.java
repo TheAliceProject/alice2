@@ -376,4 +376,82 @@ public class TIFFField extends Object {
             return (float)((double[])data)[index];
         case TIFF_SRATIONAL:
             int[] ivalue = getAsSRational(index);
-            return 
+            return (float)((double)ivalue[0]/ivalue[1]);
+        case TIFF_RATIONAL:
+            long[] lvalue = getAsRational(index);
+            return (float)((double)lvalue[0]/lvalue[1]);
+        default:
+            throw new ClassCastException();
+        }
+    }
+
+    /**
+     * Returns data in any numerical format as a float.  Data in
+     * TIFF_SRATIONAL or TIFF_RATIONAL format are evaluated by
+     * dividing the numerator into the denominator using
+     * double-precision arithmetic.
+     *
+     * <p> A ClassCastException will be thrown if the field is of
+     * type TIFF_UNDEFINED or TIFF_ASCII.
+     */
+    public double getAsDouble(int index) {
+        switch (type) {
+        case TIFF_BYTE:
+            return ((byte[])data)[index] & 0xff;
+        case TIFF_SBYTE:
+            return ((byte[])data)[index];
+        case TIFF_SHORT:
+            return ((char[])data)[index] & 0xffff;
+        case TIFF_SSHORT:
+            return ((short[])data)[index];
+        case TIFF_SLONG:
+            return ((int[])data)[index];
+        case TIFF_LONG:
+            return ((long[])data)[index];
+        case TIFF_FLOAT:
+            return ((float[])data)[index];
+        case TIFF_DOUBLE:
+            return ((double[])data)[index];
+        case TIFF_SRATIONAL:
+            int[] ivalue = getAsSRational(index);
+            return (double)ivalue[0]/ivalue[1];
+        case TIFF_RATIONAL:
+            long[] lvalue = getAsRational(index);
+            return (double)lvalue[0]/lvalue[1];
+        default:
+            throw new ClassCastException();
+        }
+    }
+
+    /**
+     * Returns a TIFF_ASCII data item as a String.
+     *
+     * <p> A ClassCastException will be thrown if the field is not
+     * of type TIFF_ASCII.
+     */
+    public String getAsString(int index) {
+        return ((String[])data)[index];
+    }
+
+    /**
+     * Returns a TIFF_SRATIONAL data item as a two-element array
+     * of ints.
+     *
+     * <p> A ClassCastException will be thrown if the field is not
+     * of type TIFF_SRATIONAL.
+     */
+    public int[] getAsSRational(int index) {
+        return ((int[][])data)[index];
+    }
+
+    /**
+     * Returns a TIFF_RATIONAL data item as a two-element array
+     * of ints.
+     *
+     * <p> A ClassCastException will be thrown if the field is not
+     * of type TIFF_RATIONAL.
+     */
+    public long[] getAsRational(int index) {
+        return ((long[][])data)[index];
+    }
+}

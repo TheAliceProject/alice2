@@ -25,7 +25,7 @@ package edu.cmu.cs.stage3.alice.player;
 
 public abstract class AbstractPlayer {
 	private edu.cmu.cs.stage3.alice.scenegraph.renderer.DefaultRenderTargetFactory m_drtf;
-	private edu.cmu.cs.stage3.alice.core.Clock m_clock = newClock();
+	private edu.cmu.cs.stage3.alice.core.clock.DefaultClock m_clock = new edu.cmu.cs.stage3.alice.core.clock.DefaultClock();
 	private long m_when0 = System.currentTimeMillis();
 	private edu.cmu.cs.stage3.alice.core.World m_world = null;
 	private boolean m_isGoodToSchedule = false;
@@ -144,5 +144,9 @@ public abstract class AbstractPlayer {
 		if( m_isGoodToSchedule ) {
 			m_clock.schedule();
 		}
+	}
+	
+	public void setSpeed(double speed) {
+		m_clock.setSpeed(speed);
 	}
 }

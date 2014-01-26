@@ -204,4 +204,61 @@ public abstract class VertexGeometry extends Geometry {
 				if( (format&Vertex3d.FORMAT_DIFFUSE_COLOR)!=0 ) {
 					vertices[i].diffuseColor.red = dis.readFloat();
 					vertices[i].diffuseColor.green = dis.readFloat();
-					vertices[i].diffuseColor.blue = di
+					vertices[i].diffuseColor.blue = dis.readFloat();
+					vertices[i].diffuseColor.alpha = dis.readFloat();
+				}
+				if( (format&Vertex3d.FORMAT_SPECULAR_HIGHLIGHT_COLOR)!=0 ) {
+					vertices[i].specularHighlightColor.red = dis.readFloat();
+					vertices[i].specularHighlightColor.green = dis.readFloat();
+					vertices[i].specularHighlightColor.blue = dis.readFloat();
+					vertices[i].specularHighlightColor.alpha = dis.readFloat();
+				}
+				if( (format&Vertex3d.FORMAT_TEXTURE_COORDINATE_0)!=0 ) {
+					vertices[i].textureCoordinate0.x = dis.readFloat();
+					vertices[i].textureCoordinate0.y = dis.readFloat();
+				}
+			}
+		} else {
+			throw new RuntimeException( Messages.getString("invalid_file_version__") + version ); 
+		}
+		return vertices;
+	}
+	public static void storeVertices( Vertex3d[] vertices, java.io.OutputStream os ) throws java.io.IOException {
+		java.io.BufferedOutputStream bos = new java.io.BufferedOutputStream ( os );
+		java.io.DataOutputStream dos = new java.io.DataOutputStream ( bos );
+		dos.writeInt( 3 );
+		dos.writeInt( vertices.length );
+		for (int i=0; i<vertices.length; i++) {
+			int format = vertices[i].getFormat();
+			dos.writeInt( format );
+			if( (format&Vertex3d.FORMAT_POSITION)!=0 ) {
+				dos.writeDouble( vertices[i].position.x );
+				dos.writeDouble( vertices[i].position.y );
+				dos.writeDouble( vertices[i].position.z );
+			}
+			if( (format&Vertex3d.FORMAT_NORMAL)!=0 ) {
+				dos.writeDouble( vertices[i].normal.x );
+				dos.writeDouble( vertices[i].normal.y );
+				dos.writeDouble( vertices[i].normal.z );
+			}
+			if( (format&Vertex3d.FORMAT_DIFFUSE_COLOR)!=0 ) {
+				dos.writeFloat( vertices[i].diffuseColor.red );
+				dos.writeFloat( vertices[i].diffuseColor.green );
+				dos.writeFloat( vertices[i].diffuseColor.blue );
+				dos.writeFloat( vertices[i].diffuseColor.alpha );
+			}
+			if( (format&Vertex3d.FORMAT_SPECULAR_HIGHLIGHT_COLOR)!=0 ) {
+				dos.writeFloat( vertices[i].specularHighlightColor.red );
+				dos.writeFloat( vertices[i].specularHighlightColor.green );
+				dos.writeFloat( vertices[i].specularHighlightColor.blue );
+				dos.writeFloat( vertices[i].specularHighlightColor.alpha );
+			}
+			if( (format&Vertex3d.FORMAT_TEXTURE_COORDINATE_0)!=0 ) {
+				dos.writeFloat( vertices[i].textureCoordinate0.x );
+				dos.writeFloat( vertices[i].textureCoordinate0.y );
+			}
+		}
+		dos.flush();
+	}
+
+}
