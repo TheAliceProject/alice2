@@ -23,13 +23,17 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.lang.Messages;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ComponentEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
@@ -40,15 +44,15 @@ import javax.swing.border.Border;
  * @author Clifton Forlines
  */
 public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3.alice.authoringtool.Editor {
+	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" ); 
 	public String editorName = Messages.getString("Scene_Editor"); 
-
+	
 	public static int LARGE_MODE = 1;
 	public static int SMALL_MODE = 2;
 	protected int guiMode = LARGE_MODE;
 
 	protected edu.cmu.cs.stage3.alice.core.World world;
 	protected edu.cmu.cs.stage3.alice.core.Camera renderCamera = null;
-	protected edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.class.getPackage() );
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.ScriptComboWidget scriptComboWidget = new edu.cmu.cs.stage3.alice.authoringtool.util.ScriptComboWidget();
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 
@@ -73,7 +77,7 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 				public void changing( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {}
 				public void changed( edu.cmu.cs.stage3.alice.authoringtool.util.event.ConfigurationEvent ev ) {
 					if( ev.getKeyName().equals( "edu.cmu.cs.stage3.alice.authoringtool.enableScripting" ) ) { 
-						if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
+						if( Configuration.getValue( authoringToolPackage, "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
 							topPanel.add( scriptComboWidget, BorderLayout.CENTER );
 						} else {
 							topPanel.remove( scriptComboWidget );	// Aik Min - need work
@@ -91,11 +95,11 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		//int width = (int)(java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth() * .8);
 		mainPanel.setMinimumSize( new java.awt.Dimension( 0, 0 ) );
 
-		if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
+		if( Configuration.getValue( authoringToolPackage, "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
 			topPanel.add( scriptComboWidget, BorderLayout.CENTER );
 		}
 
-		if ( authoringToolConfig.getValue( "language" ).equalsIgnoreCase("english")) {
+		if ( AikMin.locale.equalsIgnoreCase("english")) {
 			makeSceneEditorBigButton = new javax.swing.JButton(new javax.swing.ImageIcon( makeSceneEditorBigImage ) );
 			makeSceneEditorSmallButton = new javax.swing.JButton( new javax.swing.ImageIcon( makeSceneEditorSmallImage ) );
 			makeSceneEditorBigButton.setMargin( new java.awt.Insets( 2, 2, 2, 2 ) );

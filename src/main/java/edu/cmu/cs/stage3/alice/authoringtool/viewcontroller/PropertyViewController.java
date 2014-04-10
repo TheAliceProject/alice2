@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
 
 
 /**
@@ -490,7 +490,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 				String unitString = null;
 				java.util.Collection unitMapValues = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getUnitMapValues();
 				for( java.util.Iterator iter = unitMapValues.iterator(); iter.hasNext(); ) {
-					String s = AikMin.getName( (String)iter.next() );
+					String s = Messages.getString( ((String)iter.next()).replace(" ", "_") );
 					if( mainString.endsWith( " " + s ) ) {
 						unitString = s;
 						break;
@@ -743,12 +743,13 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						&& edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom(elementClass)){
 						return false;
 					}
-					boolean hookItUp = false;
+					boolean hookItUp = true;
 					if( desiredValueClass.isAssignableFrom( elementClass ) ) {
 						hookItUp = true;
 					} else if( edu.cmu.cs.stage3.alice.core.Question.class.isAssignableFrom( elementClass ) && PropertyViewController.this.allowExpressions ) {
 						// slight hack;  i wish i didn't have to make a throwaway...
 						edu.cmu.cs.stage3.alice.core.Question testQuestion = (edu.cmu.cs.stage3.alice.core.Question)elementPrototype.createNewElement();
+						Class c = testQuestion.getValueClass();
 						if( desiredValueClass.isAssignableFrom( testQuestion.getValueClass() ) ) {
 							hookItUp = true;
 						} else if( (elementPrototype.getDesiredProperties().length == 0) && Number.class.isAssignableFrom( desiredValueClass ) && javax.vecmath.Vector3d.class.isAssignableFrom( testQuestion.getValueClass() ) ) {
@@ -1263,7 +1264,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 			} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(dtde, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor ) ) {
 				edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype elementPrototype = (edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor );
 				Class elementClass = elementPrototype.getElementClass();
-				boolean hookItUp = false;
+				boolean hookItUp = true;
 				if( desiredValueClass.isAssignableFrom( elementClass ) ) {
 					hookItUp = true;
 				} else if( edu.cmu.cs.stage3.alice.core.Question.class.isAssignableFrom( elementClass ) && PropertyViewController.this.allowExpressions ) {
@@ -1297,7 +1298,15 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						} else {
 							hookItUp = true;
 						}
-					} else if( (elementPrototype.getDesiredProperties().length == 0) && Number.class.isAssignableFrom( desiredValueClass ) && javax.vecmath.Vector3d.class.isAssignableFrom( testQuestion.getValueClass() ) ) {
+					} else if( Boolean.class.isAssignableFrom( desiredValueClass ) ) {
+						dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_LINK );
+						java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeComparatorStructure( testQuestion, factory, property.getOwner() );
+						javax.swing.JPopupMenu popup = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePopupMenu( structure );
+						popup.show( this, (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
+						edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
+						dtde.dropComplete( true );
+					}
+					else if( (elementPrototype.getDesiredProperties().length == 0) && Number.class.isAssignableFrom( desiredValueClass ) && javax.vecmath.Vector3d.class.isAssignableFrom( testQuestion.getValueClass() ) ) {
 						dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_LINK );
 						edu.cmu.cs.stage3.alice.core.Element element = elementPrototype.createNewElement();
 						property.getOwner().addChild( element );

@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * <p>Title: </p>
@@ -147,7 +148,7 @@ public class QuestionEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         forEachPrototype.addDragSourceComponent(SLLabel);
 
 
-        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", AikMin.getName("No comment"))};
+        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", Messages.getString("No_comment"))};
         commentPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         commentPrototype.setBackground(COMMENT_COLOR);
         javax.swing.JLabel commentLabel = new javax.swing.JLabel(commentString);

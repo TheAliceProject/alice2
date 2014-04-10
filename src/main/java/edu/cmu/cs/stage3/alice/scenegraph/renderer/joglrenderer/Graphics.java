@@ -24,7 +24,7 @@
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
 import javax.media.opengl.GL;
-import sun.java2d.pipe.CompositePipe;
+//import sun.java2d.pipe.CompositePipe;
 
 public class Graphics extends java.awt.Graphics {
 	private RenderContext m_renderContext;
@@ -56,16 +56,15 @@ public class Graphics extends java.awt.Graphics {
 		m_renderContext.gl.glLoadIdentity();
 		m_renderContext.gl.glOrtho( 0, width-1, height-1, 0, -1, 1 );
 		//m_renderContext.gl.glViewport( 0, 0, width, height );
-		m_renderContext.gl.glMatrixMode( GL.GL_MODELVIEW );
-		m_renderContext.gl.glLoadIdentity();
-
+       	m_renderContext.gl.glMatrixMode( GL.GL_MODELVIEW );
+ 		m_renderContext.gl.glLoadIdentity();
+		
 		m_renderContext.gl.glDisable( GL.GL_DEPTH_TEST );
 		m_renderContext.gl.glDisable( GL.GL_LIGHTING );
-		m_renderContext.gl.glDisable( GL.GL_CULL_FACE );
-
+		m_renderContext.gl.glDisable( GL.GL_CULL_FACE );   
 		m_renderContext.setTextureMapProxy( null );
 	}
-	
+    
 	public void dispose() {
 		m_renderContext.gl.glFlush();
 		m_renderContext = null;
@@ -281,7 +280,7 @@ public class Graphics extends java.awt.Graphics {
 	    renderer.beginRendering(m_renderContext.getWidth(), m_renderContext.getHeight());
 	    renderer.setColor(m_color);
 	    renderer.draw(str, x, m_renderContext.getHeight() - y);
-	    renderer.endRendering();
+	    renderer.endRendering(); 
 	}
 	
 	public void drawString( java.text.AttributedCharacterIterator iterator, int x, int y ) {

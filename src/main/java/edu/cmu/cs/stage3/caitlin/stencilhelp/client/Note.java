@@ -18,6 +18,8 @@ import org.w3c.dom.CDATASection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
+
 public class Note implements StencilObject, MouseEventListener, KeyEventListener, StencilObjectPositionListener,
   ReadWriteListener, LayoutChangeListener{
   protected Vector shapes = new Vector();
@@ -201,7 +203,51 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
     }
     if (isInitialized) generateShapes();
   }
-
+  
+  // Tutorial Maker
+  public static java.awt.geom.Point2D.Double translatePositionToVisiblePart(java.awt.geom.Rectangle2D.Double paramDouble)
+  {
+    double d1 = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    double d2 = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    java.awt.geom.Rectangle2D.Double localDouble1 = new java.awt.geom.Rectangle2D.Double(0.0D, 0.0D, d1, d2);
+    java.awt.geom.Rectangle2D.Double localDouble2 = new java.awt.geom.Rectangle2D.Double(0.0D, 0.0D, d1, d2);
+    
+    localDouble2 = new java.awt.geom.Rectangle2D.Double(localDouble2.getX() - 15.0D, localDouble2.getY(), localDouble2.getWidth() + 30.0D, localDouble2.getHeight());
+    double d3 = paramDouble.getX();
+    double d4 = paramDouble.getY();
+    if (localDouble2.intersects(paramDouble))
+    {
+      double d5 = Math.abs(paramDouble.getX() - localDouble2.getX());
+      double d6 = Math.abs(paramDouble.getX() - (localDouble2.x + localDouble2.width));
+      double d7 = Math.abs(paramDouble.getY() + paramDouble.getHeight() - localDouble2.y);
+      if (Math.min(d5, d6) < d7)
+      {
+        if (d5 < d6)
+          d3 = localDouble2.x - paramDouble.getWidth();
+        else
+          d3 = localDouble2.x + localDouble2.width;
+      }
+      else
+        d4 = localDouble2.y + localDouble2.height;
+    }
+    java.awt.geom.Rectangle2D.Double localDouble3 = new java.awt.geom.Rectangle2D.Double(d3, d4, paramDouble.getWidth(), paramDouble.getHeight());
+    if (!localDouble1.contains(localDouble3))
+    {
+      if (localDouble3.getX() < 0.0D)
+        d3 = 0.0D;
+      if (localDouble3.getX() + localDouble3.getWidth() > d1)
+        d3 = (int)d1 - localDouble3.getWidth();
+      if (localDouble3.getY() + localDouble3.getHeight() > d2)
+        d4 = (int)d2 - localDouble3.getHeight();
+    }
+    return new java.awt.geom.Point2D.Double(d3 - paramDouble.getX(), d4 - paramDouble.getY());
+  }
+  public String getFirstNote()
+  {
+    return this.paragraph != null ? (String)this.paragraph.getText().get(0) : "";
+  }
+  // End Tutorial Maker
+  
   protected Rectangle getBoundingRectangle() {
     double minX = 0;
     double minY = 0;

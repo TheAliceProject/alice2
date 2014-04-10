@@ -27,6 +27,7 @@ import javax.media.opengl.GL;
 
 class AppearanceProxy extends ElementProxy {
     private boolean m_isShaded;
+    private int style = 0;
     private boolean m_isAmbientLinkedToDiffuse;
     private float[] m_ambient = new float[ 4 ];
     private float[] m_diffuse = new float[ 4 ];
@@ -46,7 +47,12 @@ class AppearanceProxy extends ElementProxy {
         context.setIsShadingEnabled( m_isShaded );
         m_diffuse[3] = m_opacity;
         if( m_isShaded ) {
-            if( m_isAmbientLinkedToDiffuse ) {
+        	if (style == 0) {
+        		context.gl.glShadeModel(GL.GL_FLAT);
+        	} else {
+        		context.gl.glShadeModel(GL.GL_SMOOTH);
+        	}
+            if( m_isAmbientLinkedToDiffuse) {
                 context.gl.glMaterialfv( face, GL.GL_AMBIENT_AND_DIFFUSE, m_diffuseBuffer );
             } else {
                 context.gl.glMaterialfv( face, GL.GL_AMBIENT, m_ambientBuffer );
@@ -56,7 +62,6 @@ class AppearanceProxy extends ElementProxy {
             context.gl.glMaterialfv( face, GL.GL_EMISSION, m_emissiveBuffer );
             context.gl.glMaterialf( face, GL.GL_SHININESS, m_shininess );
         } else {
-        	context.gl.glDisable( GL.GL_LIGHTING );
             //todo: color?
         }
         context.gl.glColor4f(m_diffuse[0],m_diffuse[1],m_diffuse[2],m_diffuse[3]);
@@ -89,11 +94,13 @@ class AppearanceProxy extends ElementProxy {
 			if( value==null || value.equals( edu.cmu.cs.stage3.alice.scenegraph.ShadingStyle.NONE ) ) {
                 m_isShaded = false;
 			} else if( value.equals( edu.cmu.cs.stage3.alice.scenegraph.ShadingStyle.FLAT ) ) {
-                m_isShaded = false;
-                //todo
+                m_isShaded = true;
+                //todo            
+                style = 0;
 			} else if( value.equals( edu.cmu.cs.stage3.alice.scenegraph.ShadingStyle.SMOOTH ) ) {
-                m_isShaded = false;
+                m_isShaded = true;
                 //todo
+                style = 1;
 			} else {
 				throw new RuntimeException();
 			}

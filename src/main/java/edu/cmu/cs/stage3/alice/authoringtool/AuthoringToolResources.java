@@ -495,7 +495,7 @@ public class AuthoringToolResources {
 						java.util.Vector properties = (java.util.Vector)classChunk.getObject();
 						for( java.util.Iterator jter = properties.iterator(); jter.hasNext(); ) {
 							edu.cmu.cs.stage3.util.StringObjectPair propertyChunk = (edu.cmu.cs.stage3.util.StringObjectPair)jter.next();
-							//if( propertyName.equals( AikMin.getName( propertyChunk.getString() ) ) ){
+							//if( propertyName.equals( Messages.getString( propertyChunk.getString() ) ) ){
 							if( propertyName.equals( propertyChunk.getString() ) ){
 								return (java.util.Vector)propertyChunk.getObject();
 							}
@@ -654,7 +654,7 @@ public class AuthoringToolResources {
 			String propertyName = property.getName();
 			for( int i = 0; i < AuthoringToolResources.resources.propertyNamesToOmit.length; i++ ) {
 				if( AuthoringToolResources.resources.propertyNamesToOmit[i].getType().isAssignableFrom( elementClass ))
-					//if ( AikMin.getName(AuthoringToolResources.resources.propertyNamesToOmit[i].getString()).equals( propertyName ) ) {
+					//if ( Messages.getString(AuthoringToolResources.resources.propertyNamesToOmit[i].getString()).equals( propertyName ) ) {
 					if ( AuthoringToolResources.resources.propertyNamesToOmit[i].getString().equals( propertyName ) ){
 						return true;
 					}
@@ -692,7 +692,7 @@ public class AuthoringToolResources {
 	public static String getReprForValue( Object value, edu.cmu.cs.stage3.alice.core.Property property, Object extraContextInfo ) {
 		Class elementClass = property.getOwner().getClass();
 		String propertyName = property.getName();
-		//if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( AikMin.getName("value") ) ) {
+		//if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
 		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) { 
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
 			Object e = propertyAnimation.element.get();
@@ -707,7 +707,7 @@ public class AuthoringToolResources {
 				}
 			}
 			propertyName = propertyAnimation.propertyName.getStringValue();
-		//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( AikMin.getName("value") ) ) {
+		//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( Messages.getString("value") ) ) {
 		} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "value" ) ) { 
 			edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment propertyAssignment = (edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment)property.getOwner();
 			elementClass = propertyAssignment.element.getElementValue().getClass();
@@ -776,7 +776,7 @@ public class AuthoringToolResources {
 						reprString = (String)map.get( value );
 						String temp = reprString.replaceAll("<\\w*>","");
 						temp = temp.replaceAll("[^a-zA-Z ]", "").trim();
-						reprString = reprString.replace(temp, AikMin.getName(temp));//AikMin.getName(temp));
+						reprString = reprString.replace(temp, Messages.getString(temp.replace(" ", "_")));//Messages.getString(temp));
 					} else if( value == null ) { // is this right for all cases?
 						reprString = null;
 					} else if( map.containsKey( "default" ) ) { 
@@ -791,7 +791,7 @@ public class AuthoringToolResources {
 						String unitExpression = "<" + key + ">";  
 						while( reprString.indexOf( unitExpression ) > -1 ) {
 							StringBuffer sb = new StringBuffer( reprString );
-							sb.replace( reprString.indexOf( unitExpression ), reprString.indexOf( unitExpression ) + unitExpression.length(), AikMin.getName(unitString) );
+							sb.replace( reprString.indexOf( unitExpression ), reprString.indexOf( unitExpression ) + unitExpression.length(), Messages.getString(unitString) );
 							reprString = sb.toString();
 						}
 					}
@@ -1257,10 +1257,10 @@ public class AuthoringToolResources {
 				// skip this one
 				// should be in knownPropertyValues
 			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {  				
-				//desired.add(  AikMin.getName( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
+				//desired.add(  Messages.getString( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
 				desired.add(  token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
 			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
-				//desired.add(  AikMin.getName( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
+				//desired.add(  Messages.getString( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
 				desired.add(  token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
 			}
 		}
@@ -1279,7 +1279,7 @@ public class AuthoringToolResources {
 	public static void setParameterizedPropertiesToOmit( String[] parameterizedPropertiesToOmit ) {
 		String [] temp = new String [parameterizedPropertiesToOmit.length];
 		for (int i=0; i<parameterizedPropertiesToOmit.length; i++) {
-			//temp[i] =  AikMin.getName(parameterizedPropertiesToOmit[i]);
+			//temp[i] =  Messages.getString(parameterizedPropertiesToOmit[i]);
 			temp[i] =  parameterizedPropertiesToOmit[i];
 		}
 		AuthoringToolResources.resources.parameterizedPropertiesToOmit =temp;
@@ -2663,9 +2663,10 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.util.Criterion criterion = new edu.cmu.cs.stage3.util.Criterion() {
 			public boolean accept( Object o ) {
 				if( o instanceof javax.swing.JButton ) {
-					if( ((javax.swing.JButton)o).getText().equals( buttonText ) ) {
+					String text = ((javax.swing.JButton)o).getText();
+					if( text.equals( buttonText ) ) {
 						return true;
-					}
+					} 
 				}
 				return false;
 			}

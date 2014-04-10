@@ -274,7 +274,7 @@ public class DialogManager {
 		pane.setComponentOrientation( parent.getComponentOrientation() );
 
 		javax.swing.JDialog dialog = pane.createDialog( parent, title );
-		dialog.setModal(false);
+		//dialog.setModal(false);
 		
 		pane.selectInitialValue();
 		

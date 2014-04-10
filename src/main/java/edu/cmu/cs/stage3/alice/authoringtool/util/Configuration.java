@@ -24,6 +24,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import java.io.IOException;
+
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -156,7 +158,11 @@ public final class Configuration {
 			try {
 				loadConfig( configLocation );
 			} catch( Exception e ) {
-				
+				try {
+					storeConfig();
+				} catch (IOException e1) {
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_new_preferences_file_"), e1 ); 
+				}
 			}
 		//}
 		

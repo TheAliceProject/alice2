@@ -42,6 +42,11 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	    //note: clear hasn't really happened
 	    onClear();
 	    
+	    context.gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA); 
+		context.gl.glEnable(GL.GL_BLEND);
+		context.gl.glEnable(GL.GL_ALPHA_TEST);
+		context.gl.glAlphaFunc(GL.GL_GREATER, 0);
+		    
 	    edu.cmu.cs.stage3.alice.scenegraph.Camera[] cameras = getCameras();
 	    for( int i=0; i<cameras.length; i++ ) {
 	        CameraProxy cameraProxyI = (CameraProxy)getProxyFor( cameras[ i ] );
@@ -101,7 +106,6 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		    context.gl.glMatrixMode( GL.GL_PROJECTION );
 		    context.gl.glLoadIdentity();
 		    context.glu.gluPickMatrix( x, height-y, 1, 1, m_viewportBuffer );
-
 
 	        cameraProxy.performPick( context, pickParameters );
 		    
@@ -163,6 +167,10 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		if ( fac.canCreateGLPbuffer() ) {
 			GLCapabilities glCap = new GLCapabilities();
 			glCap.setDoubleBuffered(false);
+			glCap.setRedBits( 8 );
+			glCap.setBlueBits( 8 );
+			glCap.setGreenBits( 8 );
+			glCap.setAlphaBits( 8 );
 			m_glPBuffer = fac.createGLPbuffer(glCap, null, width, height, null);
 		}
 	}
@@ -171,14 +179,15 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		if (m_glPBuffer != null){
 			javax.media.opengl.GLContext context =  m_glPBuffer.createContext(null); 
 			context.makeCurrent();
-			context.getGL().glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  
-			context.getGL().glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+			context.getGL().glClearColor(1.0f, 0.0f, 0.0f, 0.0f);  
+
 			java.awt.Dimension d = getSize();
 			int width = d.width, height = d.height;
 			m_renderContext.m_height =  height; // m_glPBuffer.getHeight();
 			m_renderContext.m_width = width; // m_glPBuffer.getWidth();
 			m_glPBuffer.addGLEventListener( m_renderContext );	
-			m_glPBuffer.display();
+		    m_glPBuffer.display();
+		    
 		}
 	}
 	public boolean rendersOnEdgeTrianglesAsLines( edu.cmu.cs.stage3.alice.scenegraph.OrthographicCamera orthographicCamera ) {
@@ -192,6 +201,7 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         //}
     }
 	public java.awt.Image getOffscreenImage() {
+
 		java.awt.Dimension d = getSize();
 		int width = d.width, height = d.height;
 		if ( m_glPBuffer == null || m_glPBuffer.getWidth() != width || m_glPBuffer.getHeight() != height){
@@ -200,7 +210,9 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		}
 		javax.media.opengl.GLContext context =  m_glPBuffer.createContext(null);
 		context.makeCurrent();
-		java.awt.image.BufferedImage image = com.sun.opengl.util.Screenshot.readToBufferedImage(width, height, true);
+		java.awt.image.BufferedImage image =
+                new java.awt.image.BufferedImage(width, height, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+		image = com.sun.opengl.util.Screenshot.readToBufferedImage(width, height, true);
 		context.release();
 		context.destroy();
 		return image;
@@ -290,10 +302,11 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		 */
 		public void display ( GLAutoDrawable drawable ) {
 
-			GL gl = drawable.getGL();
-			gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+			GL gl = drawable.getGL();										// get the OpenGL 2 graphics context
+			gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);	// clear color and depth buffers
 			gl.glMatrixMode(GL.GL_MODELVIEW);
-			gl.glLoadIdentity();
+			gl.glLoadIdentity();											// reset the model-view matrix
+			
 			gl.glTranslatef( (float)(Math.random() - 0.5), (float)(Math.random() - 0.5), 0);
 			double d = 0.9+0.2*Math.random();
 			gl.glScaled(d, d, d);
@@ -316,23 +329,27 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 
 			/* set up depth-buffering */
 			gl.glEnable(GL.GL_DEPTH_TEST);
+			gl.glDepthFunc(GL.GL_LEQUAL);
 
 			/* set up lights */
 			gl.glMatrixMode(GL.GL_MODELVIEW);
 			gl.glLoadIdentity();
 
-			float light_pos[] = { 0.0f, 10.0f, -15.0f,0 };
-			float light_color[] = {1, 1,1,1 };
-
 			gl.glEnable(GL.GL_LIGHTING);
-
-
 			gl.glEnable(GL.GL_LIGHT0);
-			gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,light_pos,0);
-			gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,light_color,0);
-			gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,light_color,0);
-			gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,light_color,0);
 
+			float ambient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+			float diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+			float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+			float position[] = { 0.0f, 10.0f, -15.0f, 1.0f };
+
+			gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
+			gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambient, 0);
+			gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuse, 0);
+			gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0);
+			
+			gl.glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
+			
 			/*make a new display list and put a sphere in it*/
 			displayList = gl.glGenLists(1);
 			gl.glNewList(displayList, GL.GL_COMPILE);

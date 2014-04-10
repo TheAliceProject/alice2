@@ -47,7 +47,6 @@ class SpotLightProxy extends PointLightProxy {
         return m_outer*RADIANS_TO_DEGREES_FACTOR;
     }
 
-    
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {
 		if( property == edu.cmu.cs.stage3.alice.scenegraph.SpotLight.INNER_BEAM_ANGLE_PROPERTY ) {
 			m_inner = ((Number)value).floatValue();

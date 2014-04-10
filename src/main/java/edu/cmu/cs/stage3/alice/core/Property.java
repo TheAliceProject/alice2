@@ -63,7 +63,7 @@ public abstract class Property {
 
 	protected Property( Element owner, String name, Object defaultValue, Class valueClass ) {
 		m_owner = owner;
-		m_name = name;//AikMin.getName(name);
+		m_name = name;//Messages.getString(name);
 		m_defaultValue = defaultValue;
 		m_valueClass = valueClass;
 		m_isAcceptingOfHowMuch = false;

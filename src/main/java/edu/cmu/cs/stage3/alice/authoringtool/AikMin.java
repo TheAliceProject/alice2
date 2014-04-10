@@ -8,8 +8,8 @@ import javax.swing.UIManager;
 	
 public class AikMin {
 	public static String locale = "";
-	public static String programName = "Alice";
-	public static int target = 0;	// Compile with 1 for alice applet
+	public static String[] listOfLanguages = {"English","Portuguese","Spanish"}; 
+	public static int target = 1;	// Compile with 1 to delete preferences file
 	//public static String version ="06/01/2012";
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -17,17 +17,6 @@ public class AikMin {
 	//System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")  
 	//edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" )
 	//System.getProperty( "file.separator" )
-	public static String getName(String key) {
-		try {
-			if (locale.compareToIgnoreCase("en") == 0 ) {
-				return key;
-			} else {
-				return ResourceBundle.getBundle("edu.cmu.cs.stage3.alice.authoringtool.strings_" + locale).getString(key.replace(" ", ""));
-			}
-		} catch (MissingResourceException e) {
-			return key;
-		}
-	}
 
 	public static boolean isValidName(String name){
 		if( name == null ) {

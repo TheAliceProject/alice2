@@ -23,8 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import edu.cmu.cs.stage3.lang.Messages;
-
 public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget {
     private javax.media.opengl.GLCanvas m_glCanvas;
     //private javax.media.opengl.GLPbuffer m_glPBuffer;
@@ -37,6 +35,7 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	public void markDirty() {
 	    getAWTComponent().repaint();
 	}
+	
 	public java.awt.Dimension getSize( java.awt.Dimension rv ) {
         java.awt.Component awtComponent = getAWTComponent();
 		if( awtComponent != null ) {
@@ -51,20 +50,21 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	public java.awt.Component getAWTComponent() {
 	    if( m_glCanvas == null ) {
 			javax.media.opengl.GLCapabilities glCaps = new javax.media.opengl.GLCapabilities();
-			glCaps.setHardwareAccelerated( true );
+			/*glCaps.setHardwareAccelerated( true );
 	        glCaps.setRedBits( 8 );
 	        glCaps.setBlueBits( 8 );
 	        glCaps.setGreenBits( 8 );
-	        glCaps.setAlphaBits( 8 );
+	        glCaps.setAlphaBits( 8 );*/
 	        //m_glCanvas = javax.media.opengl.GLDrawableFactory.getFactory().createGLCanvas( glCaps );
-	        m_glCanvas = new javax.media.opengl.GLCanvas();
+	        m_glCanvas = new javax.media.opengl.GLCanvas( glCaps );
 	       	m_renderContext = new RenderContext( this );
-	        m_glCanvas.addGLEventListener( m_renderContext );        
+	        m_glCanvas.addGLEventListener( m_renderContext );   
             m_pickContext = new PickContext( this );
 	        m_glCanvas.addGLEventListener( m_pickContext );
 	    }
 		return m_glCanvas;
 	}    
+	
 	public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( int x, int y, boolean isSubElementRequired, boolean isOnlyFrontMostRequired ) {
 	    if( m_pickContext != null ) {
 	        return m_pickContext.pick( m_glCanvas, x, y, isSubElementRequired, isOnlyFrontMostRequired );

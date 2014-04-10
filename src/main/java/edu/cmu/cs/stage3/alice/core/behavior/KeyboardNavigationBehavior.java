@@ -61,7 +61,6 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
                 keyMap.set(new KeyMapping());
             ((KeyMapping)keyMap.get()).cleanState();
 
-
             enable();
 
 

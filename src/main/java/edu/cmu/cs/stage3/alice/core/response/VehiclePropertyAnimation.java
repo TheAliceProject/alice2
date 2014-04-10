@@ -28,13 +28,13 @@ import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 public class VehiclePropertyAnimation extends PropertyAnimation {
 	public VehiclePropertyAnimation() {
 		super();
-		//propertyName.set( AikMin.getName("vehicle") );
+		//propertyName.set( Messages.getString("vehicle") );
 		propertyName.set( "vehicle" );
 	}
 	
 	protected void propertyChanging( edu.cmu.cs.stage3.alice.core.Property property, Object value ) {
 		if( property == propertyName ) {
-			//if( ((String)value).equals( AikMin.getName("vehicle") ) ) {
+			//if( ((String)value).equals( Messages.getString("vehicle") ) ) {
 			if( ((String)value).equals( "vehicle" ) ) {
 				//pass
 			} else {

@@ -18,9 +18,11 @@ public class FixedJavaSoundRenderer extends com.sun.media.renderer.audio.JavaSou
         return new com.sun.media.renderer.audio.device.JavaSoundOutput() {
             @Override
             public void setGain( double g ) {
-                g = Math.max( g, this.gc.getMinimum() );
-                g = Math.min( g, this.gc.getMaximum() );
-                super.setGain( g );
+            	if (this.gc != null) {
+            		g = Math.max( g, this.gc.getMinimum() );
+            		g = Math.min( g, this.gc.getMaximum() );
+            	}
+        		super.setGain( g );
             }
         };
     }

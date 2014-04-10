@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.behavior;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.Behavior;
 import edu.cmu.cs.stage3.alice.core.Response;
 import edu.cmu.cs.stage3.alice.core.property.ResponseProperty;

@@ -224,7 +224,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
                 edu.cmu.cs.stage3.alice.core.response.ScriptResponse.class, null, null)));
         scriptPrototype.addDragSourceComponent(scriptLabel);
 
-        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", AikMin.getName("No comment"))};  
+        edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", Messages.getString("No_comment"))};  
         commentPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         commentPrototype.setBackground(COMMENT_COLOR);
         javax.swing.JLabel commentLabel = new javax.swing.JLabel(commentString);

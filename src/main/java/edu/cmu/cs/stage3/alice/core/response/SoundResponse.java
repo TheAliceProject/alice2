@@ -140,9 +140,7 @@ public class SoundResponse extends edu.cmu.cs.stage3.alice.core.Response {
 					//m_player.setBeginTime( )
 					//m_player.setStopTime( )
 					fireSoundListeners(t,m_player.getDuration(),dataSourceValue);
-					if (AikMin.target == 0){
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.pauseSound(m_player);
-					}
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.pauseSound(m_player);
 					//m_player.startFromBeginning();
 				}
 			}
