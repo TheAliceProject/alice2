@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -55,7 +54,7 @@ public class PropertyDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 	public void set( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool, edu.cmu.cs.stage3.alice.core.Property property ) {
 		this.authoringTool = authoringTool;
 		this.property = property;
-		nameLabel.setText( AikMin.getName(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property )) );
+		nameLabel.setText( Messages.getString(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property ).replace(" ", "_")) );
 		String iconName = "types/" + property.getValueClass().getName(); 
 		javax.swing.ImageIcon icon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( iconName );
 		if( icon == null ) {

@@ -187,7 +187,7 @@ public class TypeChooser extends javax.swing.JPanel {
 	   		 s = item;
 	   	 }
 	   	 public String getItem() { return s; }
-	   	 public String toString() { return AikMin.getName(s); }
+	   	 public String toString() { return Messages.getString(s.replace(" ", "_")); }
 	   	 
 	   	
 	}

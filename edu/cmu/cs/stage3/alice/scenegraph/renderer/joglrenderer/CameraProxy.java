@@ -78,28 +78,30 @@ abstract class CameraProxy extends ComponentProxy {
 	            backgroundProxy = sceneProxy.getBackgroundProxy();
 	        }
             context.clear( backgroundProxy, actualViewport );
-            sceneProxy.setup( context );
-		    context.gl.glMatrixMode( GL.GL_PROJECTION );
+
+            context.gl.glMatrixMode( GL.GL_PROJECTION );
 		    context.gl.glLoadIdentity();
 		    projection( context, actualViewport.width, actualViewport.height, m_near, m_far );
 		    context.gl.glMatrixMode( GL.GL_MODELVIEW );
 		    context.gl.glLoadIdentity();
 		    context.gl.glLoadMatrixd( getInverseAbsoluteTransformationAsBuffer() );
-		  		    
+
+		    sceneProxy.setup( context );
+		    
 		    //first color in opaque objects
 		    context.setRenderOpaque();
 		    sceneProxy.render( context );    
 	    
-		    context.gl.glBlendFunc (GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA); 
-		    context.gl.glEnable (GL.GL_BLEND);
+		    context.gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA); 
+		    context.gl.glEnable(GL.GL_BLEND);
 		    context.gl.glEnable(GL.GL_ALPHA_TEST);
-		    context.gl.glAlphaFunc(GL.GL_GREATER, 0.1f);
+		    context.gl.glAlphaFunc(GL.GL_GREATER, 0);
 		    //context.gl.glClearColor(0, 0, 0, 0);
 
 		    //next render transparent
 		    context.setRenderTransparent();
 			sceneProxy.render( context );
-			
+
 			context.gl.glDisable( GL.GL_BLEND );
 	    }
 	}

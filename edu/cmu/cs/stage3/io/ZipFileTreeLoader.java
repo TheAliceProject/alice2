@@ -72,7 +72,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		java.util.Enumeration enum0 = m_zipFile.entries();
 		while( enum0.hasMoreElements() ) {
 			java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)enum0.nextElement();
-			String path = new String (getCanonicalPathname( zipEntry.getName() ).getBytes("UTF-8"), "UTF-8");	//AikMin new
+			String path = new String (getCanonicalPathname( zipEntry.getName() ));//.getBytes("UTF-8"));	//AikMin new
 			m_pathnameToZipEntryMap.put( path , zipEntry );
 		}
 	}

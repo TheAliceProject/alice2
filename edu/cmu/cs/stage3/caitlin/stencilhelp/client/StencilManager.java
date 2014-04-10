@@ -52,17 +52,33 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 	boolean overrideMinResolution = false;
 
+	private NavigationBar navBar;
+	private boolean editorDirty = false;
+	private boolean captureMode = false;
+	private File captureFolder;
+	public static final boolean SHOW_TUTORIAL_MENUES = false;
+	private TutorialEditorMenus tutorialEditorMenus;
+	private TutorialEditor tutorialEditor;
+	private File tutorialFile;
+	  
 	public StencilManager(StencilApplication stencilApp) {
 		this.stencilApp = stencilApp;
 		stencilPanel = new StencilPanel(this);
+		
+		this.tutorialEditorMenus = new TutorialEditorMenus(this);
+		this.stencilPanel.addMessageListener(this.tutorialEditorMenus);
+		
 		this.addMouseEventListener(stencilPanel);
 		this.addReadWriteListener(stencilPanel);
 		positionManager = new ObjectPositionManager(stencilApp);
-		StencilManager.Stencil currentStencil = new StencilManager.Stencil();
-
-		stencilList.addElement(currentStencil);
+		
+		//StencilManager.Stencil currentStencil = new StencilManager.Stencil();
+		//stencilList.addElement(currentStencil);
 		//createDefaultStencilObjects();
+		insertNewStencil(false);
 		triggerRefresh();
+	    this.tutorialEditor = new TutorialEditor(this);
+
 	}
 
 	protected void createDefaultStencilObjects() {
@@ -73,11 +89,11 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		this.addStencilStackChangeListener(navBar);
 		currentStencil.addObject(navBar);
 
-		Menu menu = new Menu(this);
-		this.addMouseEventListener(menu);
-		this.addStencilFocusListener(menu);
-		stencilPanel.addMessageListener(menu);
-		currentStencil.addObject(menu);
+		//Menu menu = new Menu(this);
+		//this.addMouseEventListener(menu);
+		this.addStencilFocusListener(this.tutorialEditorMenus);//menu);
+		//stencilPanel.addMessageListener(menu);
+		currentStencil.addObject(this.tutorialEditorMenus);//menu);
 	}
 
 	protected void triggerRefresh() {
@@ -113,7 +129,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		}
 		int returnVal = chooser.showOpenDialog(stencilPanel);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			return chooser.getCurrentDirectory() + "\\" + chooser.getSelectedFile().getName(); 
+			return chooser.getCurrentDirectory() + File.separator + chooser.getSelectedFile().getName(); 
 		} else {
 			return null;
 		}
@@ -628,11 +644,19 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		stencilPanel.removeAllMessageListeners();
 
 		this.addMouseEventListener(stencilPanel);
-		stencilApp.deFocus();
+	    addReadWriteListener(this.stencilPanel);
+	    if ((this.stencilApp instanceof edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool))
+	    	((edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool)this.stencilApp).stencilManagerReFocus();
+	    else
+	    	stencilApp.deFocus();
 
 		// tell everyone to update their current values
 		stencilList = newStencilList;
 		addLinks();
+		
+		if (tutorialFile == null)
+		      insertNewStencil(true);
+		
 		StencilManager.Stencil currentStencil = (StencilManager.Stencil) stencilList.elementAt(currentStencilIndex);
 		currentStencil.setCurrentStencil(true);
 		this.broadcastCurrentStencilChange();
@@ -645,7 +669,10 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		//start saving waypoints.
 		stencilApp.clearWayPoints();
 		stencilApp.makeWayPoint();
-
+		
+		this.tutorialFile = tutorialFile;
+		this.tutorialEditor.update();
+		    
 	}
 
 	/* stencil stack change listener stuff */
@@ -731,7 +758,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		boolean error = false;
 		//System.out.println("LAYOUT CHANGE");
 		for (int i = 0; i < layoutChangeListeners.size(); i++) {
-			LayoutChangeListener lcListener = (LayoutChangeListener) layoutChangeListeners.elementAt(i);
+			LayoutChangeListener lcListener = (LayoutChangeListener) layoutChangeListeners.elementAt(i); 
 			if (!(lcListener instanceof Note))
 				error = (!(lcListener.layoutChanged()));
 			if (error) {
@@ -936,6 +963,167 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		}
 	}
 
+	// Tutorial Maker
+	public boolean newTutorial() {
+	    if ((this.editorDirty) && (!handleNonSaved()))
+	    	return false;
+	    loadStencilTutorial(null);
+	    this.tutorialEditor.update();
+	    return true;
+	}
+	public void insertNewStencil(boolean paramBoolean) {
+	    if ((this.stencilList != null) && (this.stencilList.size() > 0)) {
+	    	Stencil localStencil = (Stencil)this.stencilList.elementAt(this.currentStencilIndex);
+	    	boolean bool = checkState(localStencil);
+	    	if (!bool);
+	    	localStencil.setCurrentStencil(false);
+	    	this.currentStencilIndex += 1;
+	    }
+	    Stencil localStencil = new Stencil();
+	    this.stencilList.insertElementAt(localStencil, this.currentStencilIndex);
+	    createDefaultStencilObjects();
+	    localStencil.setCurrentStencil(true);
+	    broadcastStencilNumberChange();
+	    this.stencilChanged = true;
+	    this.stencilApp.makeWayPoint();
+	    this.editorDirty = paramBoolean;
+	    triggerRefresh();
+	}
+	public void addToCurrentStencil(StencilObject paramStencilObject) {
+		if (paramStencilObject != null) {
+			Stencil localStencil = (Stencil)this.stencilList.elementAt(this.currentStencilIndex);
+			localStencil.addObject(paramStencilObject);
+		}
+	}
+	public void addStencilObject(Note paramNote, StencilObject paramStencilObject) {
+	    if (paramStencilObject != null) {
+	    	if ((paramStencilObject instanceof MouseEventListener))
+	    		addMouseEventListener((MouseEventListener)paramStencilObject);
+	    	addLayoutChangeListener((LayoutChangeListener)paramStencilObject);
+	    }
+	    addMouseEventListener(paramNote);
+	    addKeyEventListener(paramNote);
+	    addToCurrentStencil(paramStencilObject);
+	    addToCurrentStencil(paramNote);
+	    setNewFocalObject(paramNote);
+	    announceLayoutChange();
+	    paramNote.initializeNote();
+	    this.editorDirty = true;
+	    triggerRefresh();
+	}
+	public Note createNewHole(Point paramPoint, boolean paramBoolean) {
+	    String str = this.stencilApp.getIDForPoint(paramPoint, false);
+	    Note localNote = null;
+	    if (str != null) {
+	    	Hole localHole = new Hole(str, this.positionManager, this.stencilApp, this);
+	    	localHole.setAutoAdvance(paramBoolean, 4);
+	    	localNote = new Note(paramPoint, new Point(30, 30), localHole, this.positionManager, this, false);
+	    	addStencilObject(localNote, localHole);
+	    }
+	    return localNote;
+	}
+	public Note createNewFrame(Point paramPoint, boolean paramBoolean) {
+	    String str = this.stencilApp.getIDForPoint(paramPoint, false);
+	    Note localNote = null;
+	    if (str != null) {
+	    	Frame localFrame = new Frame(str, this.positionManager);
+	    	localNote = new Note(paramPoint, new Point(30, 30), localFrame, this.positionManager, this, paramBoolean);
+	    	addStencilObject(localNote, localFrame);
+	    }
+	    return localNote;
+	}
+	public Note createNewNote(Point paramPoint, boolean paramBoolean) {
+	    Note localNote = new Note(paramPoint, new Point(0, 0), null, this.positionManager, this, paramBoolean);
+	    addStencilObject(localNote, null);
+	    return localNote;
+	}
+	public void removeLastStencilObject() {
+	    Stencil localStencil = (Stencil)this.stencilList.elementAt(this.currentStencilIndex);
+	    localStencil.removeLastObject();
+	    this.stencilChanged = true;
+	    this.editorDirty = true;
+	}
+	public void removeAllObjectsFromCurrentStencil() {
+	    setNewFocalObject(null);
+	    Stencil localStencil = (Stencil)this.stencilList.elementAt(this.currentStencilIndex);
+	    localStencil.removeAllObjects();
+	    this.stencilChanged = true;
+	    this.editorDirty = true;
+	}
+	public void gotoStencil(int paramInt) {
+	    Stencil localStencil = (Stencil)this.stencilList.elementAt(this.currentStencilIndex);
+	    if ((paramInt < this.stencilList.size()) && (paramInt != this.currentStencilIndex)) {
+	    	boolean bool = checkState(localStencil);
+	    	localStencil.setCurrentStencil(false);
+	    	this.currentStencilIndex = paramInt;
+	    	localStencil = (Stencil)this.stencilList.elementAt(this.currentStencilIndex);
+	    	localStencil.setCurrentStencil(true);
+	    	broadcastStencilNumberChange();
+	    	this.stencilChanged = true;
+	    	this.stencilApp.makeWayPoint();
+	    }
+	}
+	public void showStencilPanel(boolean paramBoolean) {
+	    this.stencilPanel.setIsDrawing(paramBoolean);
+	}
+	public void setTutorialWorld(String paramString) {
+	    this.worldToLoad = paramString;
+	}
+	public void regainFocus() {
+	    if ((this.stencilApp instanceof edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool))
+	    	((edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool)this.stencilApp).stencilManagerReFocus();
+	}
+	public void removeCurrStencil() {
+	    if (this.stencilList.size() > 1) {
+	    	setNewFocalObject(null);
+	    	((Stencil)this.stencilList.get(this.currentStencilIndex)).setCurrentStencil(false);
+	    	this.stencilList.remove(this.currentStencilIndex);
+	    	if (this.currentStencilIndex == this.stencilList.size())
+	    		this.currentStencilIndex -= 1;
+	    	((Stencil)this.stencilList.get(this.currentStencilIndex)).setCurrentStencil(true);
+	    	broadcastStencilNumberChange();
+	    	this.stencilChanged = true;
+	    	this.stencilApp.makeWayPoint();
+	    	this.editorDirty = true;
+	    	triggerRefresh();
+	    } else {
+	    	removeAllObjectsFromCurrentStencil();
+	    }
+	}
+	public boolean isWriteEnabled() {
+	    return this.writeEnabled;
+	}
+	public boolean handleNonSaved() {
+	    String str = "File not saved, save now?";
+	    int i = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(str, "File not saved", 1);
+	    if (i == 0) {
+	    	saveStencilsFile();
+	    	return true;
+	    }
+	    return i == 1;
+	}
+	public boolean setInstructorMode(boolean paramBoolean) {
+		if ((this.editorDirty) && (this.writeEnabled != paramBoolean) && (!paramBoolean))
+			if (handleNonSaved())
+				this.editorDirty = false;
+			else
+				return false;
+	    setWriteEnabled(paramBoolean);
+	    tutorialEditor.update();
+	    tutorialEditor.display(paramBoolean);
+	    return true;
+	}
+	public boolean isInstructorMode() {
+	    return this.writeEnabled;
+	}
+	public void setCaptureFolder(File paramFile) {
+	    this.captureFolder = paramFile;
+	}
+	public void setCaptureMode(boolean paramBoolean) {
+	    this.captureMode = paramBoolean;
+	}
+
+	
 	/* Stencil Class to keep track of the objects in each stencil */
 	// COME BACK - make this a stand alone class
 	public class Stencil {
@@ -1130,6 +1318,48 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 			}
 			return stencilObjects;
 		}
+		
+		// Tutorial Maker
+		public String getTitle() {
+			String str = "";
+			for (int i = 0; i < this.stencilObjects.size(); i++) {
+				StencilObject localStencilObject = (StencilObject)this.stencilObjects.elementAt(i);
+		        if ((localStencilObject instanceof NavigationBar)) {
+		        	str = ((NavigationBar)localStencilObject).getTitleString();
+		        	break;
+		        }
+			}
+			return str != null ? str : "";
+		}
+		public String getFirstNote() {
+			String str = "";
+			for (int i = 0; i < this.stencilObjects.size(); i++) {
+		        StencilObject localStencilObject = (StencilObject)this.stencilObjects.elementAt(i);
+		        if ((localStencilObject instanceof Note)) {
+		        	str = ((Note)localStencilObject).getFirstNote();
+		        	break;
+		        }
+			}
+			return str != null ? str : "";
+		}
+		public void removeLastObject() {
+			if (this.stencilObjects.size() > 0) {
+				if (this.stencilObjects.size() == 1) {
+					removeAllObjects();
+		        } else {
+		        	StencilObject localStencilObject = (StencilObject)this.stencilObjects.get(this.stencilObjects.size() - 1);
+		        	this.stencilObjects.removeElementAt(this.stencilObjects.size() - 1);
+		        	if ((localStencilObject instanceof ReadWriteListener))
+		        		StencilManager.this.removeReadWriteListener((ReadWriteListener)localStencilObject);
+		        	localStencilObject = (StencilObject)this.stencilObjects.get(this.stencilObjects.size() - 1);
+		        	if (((localStencilObject instanceof Frame)) || ((localStencilObject instanceof Hole))) {
+		        		this.stencilObjects.removeElementAt(this.stencilObjects.size() - 1);
+		        		if ((localStencilObject instanceof ReadWriteListener))
+		        			StencilManager.this.removeReadWriteListener((ReadWriteListener)localStencilObject);
+		        	}
+		        }
+			}
+		}
 	}
 
 	protected class StencilFileFilter extends javax.swing.filechooser.FileFilter {
@@ -1142,8 +1372,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 			} else
 				return false;
 		}
-
-		
+	
 		public String getDescription() {
 			return "Stencil Files"; 
 		}
@@ -1154,20 +1383,19 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		protected void singleClickResponse(java.awt.event.MouseEvent ev) {
 			StencilManager.this.mouseClicked(ev);
 		}
-
 		
 		protected void doubleClickResponse(java.awt.event.MouseEvent ev) {
 			StencilManager.this.mouseClicked(ev);
 		}
-
 		
 		protected void mouseUpResponse(java.awt.event.MouseEvent ev) {
 			StencilManager.this.mouseReleased(ev);
 		}
-
 		
 		protected void mouseDownResponse(java.awt.event.MouseEvent ev) {
 			StencilManager.this.mousePressed(ev);
 		}
 	}
+	
+
 }

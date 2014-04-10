@@ -70,31 +70,31 @@ abstract class LightProxy extends AffectorProxy {
 
     protected void setup( RenderContext context, int id ) {
         context.gl.glEnable( id );
-
         //there should never be a need to set GL_AMBIENT
-        //context.gl.glLightfv( id, GL.GL_AMBIENT, { 0, 0, 0, 1 } );
+        //context.gl.glLightfv( id, GL.GL_AMBIENT, { 0, 0, 0, 0.2 } );
         
         context.gl.glLightfv( id, GL.GL_DIFFUSE, m_colorTimesBrightnessBuffer );
         
         //todo: should lights' diffuse and specular colors be separated in the scenegraph?
         context.gl.glLightfv( id, GL.GL_SPECULAR, m_colorTimesBrightnessBuffer );
-        
+          
         getPosition( reuse_position );
         context.gl.glLightfv( id, GL.GL_POSITION, reuse_positionBuffer );
         
         getSpotDirection( reuse_spotDirection );
         context.gl.glLightfv( id, GL.GL_SPOT_DIRECTION, reuse_spotDirectionBuffer );
 
-        context.gl.glLightf( id, GL.GL_SPOT_EXPONENT, getSpotExponent() );
-        context.gl.glLightf( id, GL.GL_SPOT_CUTOFF, getSpotCutoff() );
-        context.gl.glLightf( id, GL.GL_CONSTANT_ATTENUATION, getConstantAttenuation() );
-        context.gl.glLightf( id, GL.GL_LINEAR_ATTENUATION, getLinearAttenuation() );
-        context.gl.glLightf( id, GL.GL_QUADRATIC_ATTENUATION, getQuadraticAttenuation() );
+        context.gl.glLightf( id, GL.GL_SPOT_EXPONENT, getSpotExponent() );	// 0
+        context.gl.glLightf( id, GL.GL_SPOT_CUTOFF, getSpotCutoff() );		// 180 
+        context.gl.glLightf( id, GL.GL_CONSTANT_ATTENUATION, getConstantAttenuation() );	// 1
+        context.gl.glLightf( id, GL.GL_LINEAR_ATTENUATION, getLinearAttenuation() );		// 0
+        context.gl.glLightf( id, GL.GL_QUADRATIC_ATTENUATION, getQuadraticAttenuation() );	// 0
+               
     }
     
 	public void setup( RenderContext context ) {
         if( this instanceof AmbientLightProxy ) {
-            context.addAmbient( m_colorTimesBrightness );
+            //context.addAmbient( m_colorTimesBrightness );
         } else {
             int id = context.getNextLightID();
             setup( context, id );

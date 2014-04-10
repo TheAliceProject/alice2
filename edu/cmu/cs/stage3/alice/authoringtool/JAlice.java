@@ -23,21 +23,25 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
-import com.apple.eawt.AppEvent.OpenFilesEvent;
-import com.apple.eawt.OpenFilesHandler;
-import edu.cmu.cs.stage3.lang.Messages;
 import java.io.File;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.apple.eawt.AppEvent.OpenFilesEvent;
+import com.apple.eawt.OpenFilesHandler;
+
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Jason Pratt
  */
 public class JAlice {
 	// version information
-	private static String version = "2.4.1a"; 
+	private static String version = "2.4.x2"; 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
+	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
 	static {
 		try {
 			java.io.File versionFile = new java.io.File( getAliceHomeDirectory(), "etc/config.txt" ).getAbsoluteFile(); 
@@ -114,12 +118,37 @@ public class JAlice {
 				useJavaBasedSplashScreen = false;
 			}
 			if( useJavaBasedSplashScreen ) {
+				Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 				splashScreen = initSplashScreen();
 				splashScreen.showSplash();
 			}
-
+			if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").toLowerCase().startsWith("mac"))) {
+				com.apple.eawt.Application app =  com.apple.eawt.Application.getApplication();
+	            app.setOpenFileHandler( new OpenFilesHandler() {
+					public void openFiles(OpenFilesEvent event) {
+						List<String> filenames = new ArrayList<String>();
+				        for(File f : event.getFiles()) {
+				            filenames.add(f.getAbsolutePath());
+				        }
+			        	if (!listenerRegistered){
+			        		worldToLoad = new java.io.File( filenames.toArray(new String[filenames.size()] )[0] ).getAbsoluteFile();
+					        listenerRegistered = true;
+				        } else {
+				        	//authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
+				        	try {
+				                String decodedPath = URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+				                decodedPath = decodedPath.substring(0, decodedPath.lastIndexOf(".app") + 4);
+				                String[] params = { "open", "-n", decodedPath, filenames.toArray(new String[filenames.size()] )[0] };
+				                Runtime.getRuntime().exec(params);
+				            }
+				            catch (Exception e) {
+				                e.printStackTrace();
+				            }
+				        }
+					}
+	            });           
+			}
 			parseCommandLineArgs( args );
-
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 			configInit();
 			try{
@@ -135,11 +164,10 @@ public class JAlice {
 			}catch (Exception e){}
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources" ); 
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities" ); 
-			if (AikMin.locale.equals("en")){
-				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default.a2w" ).getAbsoluteFile();
-			} else {
-				defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale+".a2w" ).getAbsoluteFile();
-			}
+			//if (args.length > 0){
+			//	worldToLoad = new java.io.File( args[args.length-1] ).getAbsoluteFile();
+			//}
+			defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale+".a2w" ).getAbsoluteFile();			
 			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
 				splashScreen.hideSplash();
@@ -153,19 +181,28 @@ public class JAlice {
 	
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen initSplashScreen() {
 		java.awt.Image splashImage;
-		if (AikMin.locale.equals("")){
-			AikMin.locale = "en";
-			splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-					.getResource("images/AliceSplash.png") ); 
-		} else {
-			splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-					.getResource("images/AliceSplash_"+AikMin.locale+".png") ); 
+
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
+		if( authoringtoolConfig.getValue( "language" ) == null ) { 
+			authoringtoolConfig.setValue( "language", "English" );
 		}
+		AikMin.locale = authoringtoolConfig.getValue( "language" );
+		splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+					.getResource("images/AliceSplash_"+AikMin.locale+".png") ); 
+		//Locale mexico = new Locale("es","MX");
+		//Locale spain = new Locale("es","ES");
+		
 		return new edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen( splashImage );
 	}
 
 	private static void configInit() {
 		final edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
+		if( authoringtoolConfig.getValue( "language" ) == null ) { 
+			authoringtoolConfig.setValue( "language", "English" );
+			AikMin.locale = "English";				
+		} else {
+			AikMin.locale = authoringtoolConfig.getValue( "language" );
+		}		
 //		System.out.println(backgroundColor);
 //		System.out.println(new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString());
 		authoringtoolConfig.setValue( "backgroundColor", backgroundColor ); 
@@ -285,8 +322,8 @@ public class JAlice {
 //		);
 
 		if( authoringtoolConfig.getValue( "mainWindowBounds" ) == null ) { 
-			int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-			int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+			int screenWidth = 1280;//(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+			int screenHeight = 1024;//(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 			int x = 0;
 			int y = 0;
 			int height = screenHeight - 30;
@@ -526,23 +563,9 @@ public class JAlice {
 				String file = args[i].toString(); 
 				file = file.substring(file.lastIndexOf(ch)-1, file.length()-1);
 				worldToLoad = new java.io.File( file ).getAbsoluteFile();
-			} else if ((System.getProperty("os.name") != null) && System.getProperty("os.name").toLowerCase().startsWith("mac")) {
-				com.apple.eawt.Application app =  com.apple.eawt.Application.getApplication();
-	            app.setOpenFileHandler( new OpenFilesHandler() {
-					public void openFiles(OpenFilesEvent event) {
-						List<String> filenames = new ArrayList<String>();
-				        for(File f : event.getFiles()) {
-				            filenames.add(f.getAbsolutePath());
-				        }
-			        	worldToLoad = new java.io.File( filenames.toArray(new String[filenames.size()] )[0] ).getAbsoluteFile();
-				        if (!listenerRegistered){
-				        	listenerRegistered = true;
-				        } else {
-				        	authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
-				        }
-					}
-		        });
-			} else {
+			} if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").toLowerCase().startsWith("mac"))) {
+			}
+			else {
 				worldToLoad = new java.io.File( args[i] ).getAbsoluteFile();
 			}
 		}
@@ -570,7 +593,13 @@ public class JAlice {
 
 	public static void setAliceUserDirectory( java.io.File file ) {
 		if (file != null) {
-			if( file.exists() ) {
+			java.io.File firstRun = new java.io.File( getAliceHomeDirectory(), "etc/firstRun.txt" ).getAbsoluteFile();
+			if (firstRun.exists() || AikMin.target == 1){
+				firstRun.delete();
+				if (file.exists())
+				new java.io.File( file, "AlicePreferences.xml" ).getAbsoluteFile().delete();
+			}
+			if ( file.exists() ){	
 				aliceUserDirectory = file;
 			} else if( file.mkdirs() ) {
 				aliceUserDirectory = file;

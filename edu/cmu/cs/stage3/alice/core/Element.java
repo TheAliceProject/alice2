@@ -607,7 +607,7 @@ public abstract class Element {
 		Property[] properties = getProperties();
 		java.util.ArrayList <Property> temp = new java.util.ArrayList <Property>();
 		for( int i=0; i<properties.length; i++ ) {
-			if( properties[i].getName().equals( name ) ) {//AikMin.getName(name) ) ) {
+			if( properties[i].getName().equals( name ) ) {//Messages.getString(name) ) ) {
 				temp.add(properties[i]);
 			}
 		}
@@ -617,7 +617,7 @@ public abstract class Element {
 		Property[] properties = getProperties();
 		for( int i=0; i<properties.length; i++ ) {
 			Property property = properties[i];
-			if( property.getName().equals( name ) ) {//AikMin.getName(name) ) ) {
+			if( property.getName().equals( name ) ) {//Messages.getString(name) ) ) {
 				return property;
 			}
 		}
@@ -628,7 +628,7 @@ public abstract class Element {
 		Property[] properties = getProperties();
 		for( int i=0; i<properties.length; i++ ) {
 			Property property = properties[i]; 
-			if( property.getName().equalsIgnoreCase( name ) ) {// AikMin.getName(name) ) ) {
+			if( property.getName().equalsIgnoreCase( name ) ) {// Messages.getString(name) ) ) {
 				return property;
 			}
 		}
@@ -1736,9 +1736,11 @@ public abstract class Element {
 		for( int i=0; i<getChildCount(); i++ ) {
 			Element child = (Element)getChildAt( i );
 			String name = child.getRepr( i );	
-			String name2 = new String(name.getBytes("UTF-8"));
-			storer.createDirectory( name2 );
-			storer.setCurrentDirectory( name2 );
+			if (storer instanceof edu.cmu.cs.stage3.io.ZipFileTreeStorer) {
+				name = new String(name.getBytes("UTF-8"));
+			}
+			storer.createDirectory( name );
+			storer.setCurrentDirectory( name );
 			count = child.internalStore( builder, storer, progressObserver, howMuch, referenceGenerator, count );
 			storer.setCurrentDirectory( thisDirectory );
 		}

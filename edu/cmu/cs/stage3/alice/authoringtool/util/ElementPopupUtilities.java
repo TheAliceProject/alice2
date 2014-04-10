@@ -171,7 +171,7 @@ public class ElementPopupUtilities {
 //		popupStructure.add( MakeCopyRunnable.class );
 //		popupStructure.add( MakeSharedCopyRunnable.class );
 		if( elementEnabled ) {	// to convert method text in one shot menu
-			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( AikMin.getName("methods"), edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDefaultOneShotStructure( element ) ) );
+			popupStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("methods"), edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeDefaultOneShotStructure( element ) ) );
 		}
 		if( (jtree != null) && (treePath != null) ) {
 			Runnable renameRunnable = new RenameRunnable( element, jtree, treePath );

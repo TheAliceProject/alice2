@@ -30,7 +30,7 @@ public class DefaultRenderTargetFactory implements RenderTargetFactory {
 	public static Class[] getPotentialRendererClasses() {
 		java.util.Vector vector = new java.util.Vector();
 
-		if (AikMin.target == 0){
+//		if (AikMin.target == 0){
 			if ( System.getProperty("os.name").startsWith("Win") ){
 				try {
 					if( edu.cmu.cs.stage3.alice.scenegraph.renderer.util.DirectXVersion.getVersion() >= 7.0 ) {
@@ -45,13 +45,13 @@ public class DefaultRenderTargetFactory implements RenderTargetFactory {
 			} catch( Throwable t ) {
 				//pass
 			}
-		} else {	// Need to use this when compiling applet for web
-			try { 
-				vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
-			} catch( Throwable t ) {
-				//pass
-			}
-		}
+//		} else {	// Need to use this when compiling applet for web
+//			try { 
+//				vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.java3drenderer.Renderer.class );
+//			} catch( Throwable t ) {
+//				//pass
+//			}
+//		}
 //		try {
 //			vector.addElement( edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer.class );
 //		} catch( Throwable t ) {

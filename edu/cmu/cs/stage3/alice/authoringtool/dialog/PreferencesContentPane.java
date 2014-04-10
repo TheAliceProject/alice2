@@ -1547,8 +1547,9 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				new Insets(5, 5, 5, 5), 0, 0));
 
 		languageLabel.setText(Messages.getString("display_language_"));
-		languageComboBox.addItem("English");
-		languageComboBox.addItem("Spanish");
+		for (int i=0; i<AikMin.listOfLanguages.length; i++) {
+			languageComboBox.addItem(AikMin.listOfLanguages[i]);	
+		}
 		languageComboBox.setSelectedItem(Configuration.getValue(
 				authoringToolPackage, "language"));
 

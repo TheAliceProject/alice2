@@ -400,7 +400,7 @@ public abstract class NewNamedTypedElementContentPane extends
 	   		 else
 	   			return edu.cmu.cs.stage3.alice.core.Array.class;
 	   	 }
-	   	 public String toString() { return AikMin.getName(s); }
+	   	 public String toString() { return Messages.getString(s); }
 	   	 
 	   	
 	}

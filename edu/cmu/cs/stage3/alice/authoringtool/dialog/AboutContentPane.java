@@ -32,15 +32,9 @@ public class AboutContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	public AboutContentPane() {
 		javax.swing.JLabel imageLabel = new javax.swing.JLabel();
-		if (AikMin.locale == "en"){
-			imageLabel.setIcon(new javax.swing.ImageIcon(
-					edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-							.getResource("images/aboutAlice.png")));
-		} else {
-			imageLabel.setIcon(new javax.swing.ImageIcon(
+		imageLabel.setIcon(new javax.swing.ImageIcon(
 					edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
 							.getResource("images/aboutAlice_"+AikMin.locale+".png")));
-		}
 		setBackground(new java.awt.Color(173, 202, 234));
 		setPreferredSize(new java.awt.Dimension(520, 410));
 

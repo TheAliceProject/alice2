@@ -889,7 +889,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					panelsToClean.add( subPanel );
 
 					edu.cmu.cs.stage3.alice.authoringtool.util.ExpandablePanel expandPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.ExpandablePanel();
-					expandPanel.setTitle( AikMin.getName(groupName) );
+					expandPanel.setTitle( Messages.getString(groupName.replace(" ", "_")) );
 					expandPanel.setContent( subPanel );
 
 					if( questionNames != null ) {

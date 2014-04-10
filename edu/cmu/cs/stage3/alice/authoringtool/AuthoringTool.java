@@ -3476,7 +3476,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			modifiedStatus = Messages.getString("____Modified_"); 
 		}
 
-		jAliceFrame.setTitle(AikMin.programName + " (" + JAlice.getVersion() + ") " + path + modifiedStatus);  
+		jAliceFrame.setTitle("Alice (" + JAlice.getVersion() + ") " + path + modifiedStatus);  
 	}
 
 	public java.awt.Component getEditorForElement(edu.cmu.cs.stage3.alice.core.Element elementToEdit) {
@@ -5526,7 +5526,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			stdErrOutContentPane.stopReactingToPrint();
 			renderContentPane.setAspectRatio(aspectRatio);
 			renderContentPane.getRenderPanel().add(renderPanel, java.awt.BorderLayout.CENTER);
-			
+
 			edu.cmu.cs.stage3.swing.DialogManager.showDialog(renderContentPane);
 			stdErrOutContentPane.startReactingToPrint();
 		}
@@ -5656,6 +5656,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	}
 	
+	// Tutorial Editor
+	public void openTutorialEditor() {
+	    if (currentWorldLocation != null)
+	    	stencilManager.setTutorialWorld(currentWorldLocation.getAbsolutePath());
+	    stencilManager.setInstructorMode(true);
+	    showStencils();
+	}
+	public void stencilManagerReFocus() {
+	    jAliceFrame.removeKeyListener(this.stencilManager);
+	    jAliceFrame.addKeyListener(this.stencilManager);
+	    jAliceFrame.requestFocus();
+	}
+
 	// Aik Min
     private static boolean pulsing = true;   
     private static JLabel statusLabel = new JLabel(Messages.getString("Ready")); 
@@ -5700,15 +5713,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
                
         final JCheckBox UpdateJAR = new JCheckBox("");
         boolean updateAvailable = checkForUpdate();
-        dlg.setTitle(Messages.getString("Updating"));
-        if (updateAvailable) {
-        	UpdateJAR.setText(Messages.getString("Update_Software__New_update_available_"));
+        //dlg.setTitle(Messages.getString("Updating"));
+        //if (updateAvailable) {
+         	UpdateJAR.setText(Messages.getString("Update_Software"));
         	UpdateJAR.setSelected(true);
-        } else {
-        	UpdateJAR.setText(Messages.getString("Update_Software__No_new_updates_"));
-        	UpdateJAR.setSelected(false);
-        	UpdateJAR.setEnabled(false);
-        }
+        // } else {
+        // 	UpdateJAR.setText(Messages.getString("Update_Software__No_new_updates_"));
+        // 	UpdateJAR.setSelected(false);
+        // 	UpdateJAR.setEnabled(false);
+        // }
         left.add(UpdateJAR);
 
         final JCheckBox EnglishGallery = new JCheckBox(Messages.getString("Download_English_Gallery"));
@@ -5734,8 +5747,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         		dlg.dispose();
         		if (UpdateJAR.isSelected() || EnglishGallery.isSelected() || EnglishUpdate.isSelected() || SpanishGallery.isSelected() || SpanishUpdate.isSelected()) {
         			if ( UpdateJAR.isSelected() ) {
-        				new Thread(new StartUpdating( "alice.jar", 
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "aliceupdate.jar",
+        				new Thread(new StartUpdating( "AliceUpdate.zip", 
+        						JAlice.getAliceHomeDirectory().getParent().toString(),
         						false )).start();
         			}
         			if ( EnglishGallery.isSelected() ) {
@@ -5797,16 +5810,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					
 				java.io.File aliceHome = new java.io.File( dest );
 				bis = new java.io.BufferedInputStream( urlc.getInputStream() );
+				bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome + System.getProperty( "file.separator" ) + file ) );	
 
 				if (isGallery){
 					if (!aliceHome.exists()){
 						aliceHome.mkdir();
 					}
-					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome + System.getProperty( "file.separator" ) + file ) );	
 					monitor.setNote(Messages.getString("Downloading_gallery"));
 				} else {
-					bos = new java.io.BufferedOutputStream( new java.io.FileOutputStream( aliceHome ) );
-					monitor.setNote(Messages.getString("Downloading_alice_jar_file"));
+					monitor.setNote(Messages.getString("Downloading_AliceUpdate_zip_file"));
 				}
 				
 				int i, progress = 0;
@@ -5822,7 +5834,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				bis.close();
 				bos.close();
 
-				if ( isGallery && !monitor.isCanceled()) {
+				if ( !monitor.isCanceled()) {
 					Enumeration entries;
 					ZipFile zipFile;
 
@@ -5835,7 +5847,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					while (entries.hasMoreElements()) {
 						ZipEntry entry = (ZipEntry) entries.nextElement();
 						if (entry.isDirectory()) {
-							(new File(aliceHome + System.getProperty( "file.separator" )+entry.getName())).mkdir();
+							String file = aliceHome.getAbsolutePath() + System.getProperty( "file.separator" ) + entry.getName();
+							new File( file ).mkdir();
 							continue;
 						}
 						InputStream in = zipFile.getInputStream(entry);

@@ -78,7 +78,7 @@ public class ElementPrototype {
 			}
 			if( desiredProperties != null ) {
 				for( int i = 0; i < desiredProperties.length; i++ ) {
-					//desiredProperties[i] = AikMin.getName( desiredProperties[i] );
+					//desiredProperties[i] = Messages.getString( desiredProperties[i] );
 					edu.cmu.cs.stage3.alice.core.Property property = testElement.getPropertyNamed( desiredProperties[i] );
 					if( property == null ) {
 						throw new IllegalArgumentException( Messages.getString("property_named_") + desiredProperties[i] + Messages.getString("_does_not_exist_in_") + elementClass.getName() );  

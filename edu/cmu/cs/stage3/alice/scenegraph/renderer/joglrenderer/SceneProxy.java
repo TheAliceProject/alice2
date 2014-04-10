@@ -33,8 +33,7 @@ class SceneProxy extends ReferenceFrameProxy {
         context.beginAffectorSetup();
 		super.setup( context );
 		context.endAffectorSetup();
-    }
-    
+    }  
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {
 		if( property == edu.cmu.cs.stage3.alice.scenegraph.Scene.BACKGROUND_PROPERTY ) {

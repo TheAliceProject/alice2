@@ -27,7 +27,6 @@ import javax.media.opengl.GL;
 
 class IndexedTriangleArrayProxy extends VertexGeometryProxy {
     private int[] m_indices;
-
     
 	public void render( RenderContext context ) {
         Integer id = context.getDisplayListID( this );

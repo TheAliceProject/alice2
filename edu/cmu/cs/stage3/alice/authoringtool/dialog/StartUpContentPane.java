@@ -479,7 +479,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 					name = makeNameFromFilename(files[i].getName());
 				}
 				edu.cmu.cs.stage3.util.StringObjectPair sop = new edu.cmu.cs.stage3.util.StringObjectPair(
-						AikMin.getName(name), files[i].getAbsolutePath()); // for converting template name
+						Messages.getString(name), files[i].getAbsolutePath()); // for converting template name
 				toReturn.add(sop);
 			}
 		}

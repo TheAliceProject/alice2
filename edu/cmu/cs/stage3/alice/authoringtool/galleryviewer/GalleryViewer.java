@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.lang.Messages;
 
@@ -1096,7 +1097,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 	            rootDirectories.add(localGallery);
 	            localGalleryRoot = localGallery.rootPath;
 	        }    
-	        if (Configuration.getValue( authoringToolPackage, "language" ).equalsIgnoreCase(file[i])) {
+	        if (AikMin.locale.equalsIgnoreCase(file[i])) {
 		        templocal = localGallery;	        	
 	        }
 	    }

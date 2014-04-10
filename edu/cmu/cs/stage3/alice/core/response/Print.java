@@ -38,7 +38,6 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 	};
 	public final BooleanProperty addNewLine = new BooleanProperty( this, "addNewLine", Boolean.TRUE ); 
 
-	
 	protected Number getDefaultDuration() {
 		return new Double( 0 );
 	}

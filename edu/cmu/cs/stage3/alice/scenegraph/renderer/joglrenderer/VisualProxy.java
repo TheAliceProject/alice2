@@ -37,7 +37,6 @@ class VisualProxy extends ComponentProxy {
 	    return (edu.cmu.cs.stage3.alice.scenegraph.Visual)getSceneGraphElement();
 	}
 
-    
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {
 		if( property == edu.cmu.cs.stage3.alice.scenegraph.Visual.FRONT_FACING_APPEARANCE_PROPERTY ) {
             m_frontFacingAppearanceProxy = (AppearanceProxy)getProxyFor( (edu.cmu.cs.stage3.alice.scenegraph.Appearance)value );
@@ -59,8 +58,6 @@ class VisualProxy extends ComponentProxy {
 	public void setup( RenderContext context ) {
         //pass
     }
-    
-   
     
     private double opacity() {
         if( m_isShowing && m_geometryProxy != null ) {
@@ -96,7 +93,6 @@ class VisualProxy extends ComponentProxy {
                 }
             }
             	
-
             if( m_frontFacingAppearanceProxy == m_backFacingAppearanceProxy ) {
                 if( m_frontFacingAppearanceProxy != null ) {
                     m_frontFacingAppearanceProxy.setPipelineState( context, GL.GL_FRONT_AND_BACK );
@@ -111,15 +107,13 @@ class VisualProxy extends ComponentProxy {
                     m_backFacingAppearanceProxy.setPipelineState( context, GL.GL_BACK );
                 }
             }
-            
-            
+                        
             context.gl.glPushMatrix();
             context.gl.glMultMatrixd( m_scaleBuffer );
             m_geometryProxy.render( context );
             context.gl.glPopMatrix();
           
             context.gl.glDepthMask(true);
-        	
        }
     }
 	

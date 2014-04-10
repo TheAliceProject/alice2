@@ -48,17 +48,16 @@ class RenderContext extends Context {
         m_renderTarget = renderTarget;
         m_renderOpaque = true;
     }
-
     
 	public void init( javax.media.opengl.GLAutoDrawable drawable ) {
     	super.init( drawable );
         forgetAllTextureMapProxies();
         forgetAllGeometryProxies();
     }
- 
     
 	public void display( javax.media.opengl.GLAutoDrawable drawable ) {
         super.display( drawable );
+        
         m_renderTarget.commitAnyPendingChanges();
         m_clearRect.setBounds( 0, 0, 0, 0 );
         m_renderTarget.performClearAndRenderOffscreen( this );
@@ -102,12 +101,13 @@ class RenderContext extends Context {
 
         m_currTextureMapProxy = null;
     }
+
     public void endAffectorSetup() {
         gl.glLightModelfv( javax.media.opengl.GL.GL_LIGHT_MODEL_AMBIENT, m_ambientBuffer );
         for( int id=m_nextLightID; id<m_lastTime_nextLightID; id++ ) {
             gl.glDisable( id );
         }
-        gl.glEnable( GL.GL_LIGHTING );
+        //gl.glDisable( GL.GL_LIGHT0 );
         if( m_isFogEnabled ) {
             //System.err.println( "fog on" );
             gl.glEnable( GL.GL_FOG );
@@ -117,16 +117,16 @@ class RenderContext extends Context {
         }
 
         //todo?
-	    //if( m_currMaxLightID == INIT_LIGHT_ID ) {
-	    //    gl.glDisable( GL.GL_LIGHTING );
-	    //} else {
-	    //    gl.glEnable( GL.GL_LIGHTING );
-	    //}
+/*	    if( m_currMaxLightID == INIT_LIGHT_ID ) {
+	        gl.glDisable( GL.GL_LIGHTING );
+	    } else {
+	        gl.glEnable( GL.GL_LIGHTING );
+	    } */
         m_lastTime_nextLightID = m_nextLightID;
 
         gl.glEnable( GL.GL_DEPTH_TEST );
         gl.glEnable( GL.GL_CULL_FACE );
-        gl.glCullFace( GL.GL_BACK );
+        gl.glCullFace( GL.GL_BACK ); 
     }
     
     public void clear( BackgroundProxy backgroundProxy, java.awt.Rectangle viewport ) {
@@ -156,17 +156,18 @@ class RenderContext extends Context {
 
     public boolean renderOpaque(){
     	return m_renderOpaque;
-    }
-    
+    }   
     
     public void setIsFogEnabled( boolean isFogEnabled ) {
         m_isFogEnabled = isFogEnabled;
     }
+    
     public void addAmbient( float[] color ) {
         m_ambient[ 0 ] += color[ 0 ];
         m_ambient[ 1 ] += color[ 1 ];
         m_ambient[ 2 ] += color[ 2 ];
     }
+    
     public int getNextLightID() {
         int id = m_nextLightID;
         //System.err.println( "getNextLightID: " + id + " " + GL.GL_LIGHT0 );
@@ -177,6 +178,7 @@ class RenderContext extends Context {
     public Integer getDisplayListID( GeometryProxy geometryProxy ) {
         return (Integer)m_displayListMap.get( geometryProxy );
     }
+    
     public Integer generateDisplayListID( GeometryProxy geometryProxy ) {
 		Integer id = new Integer( gl.glGenLists( 1 ) );
 		m_displayListMap.put( geometryProxy, id );
@@ -202,6 +204,7 @@ class RenderContext extends Context {
             //todo?
         }
     }
+    
     public void forgetGeometryProxy( GeometryProxy geometryProxy ) {
         forgetGeometryProxy( geometryProxy, true );
     }
@@ -239,6 +242,7 @@ class RenderContext extends Context {
 //            //todo?
 //        }
     }
+    
     public void forgetTextureMapProxy( TextureMapProxy textureMapProxy ) {
         forgetTextureMapProxy( textureMapProxy, true );
     }
@@ -319,24 +323,22 @@ class RenderContext extends Context {
     public boolean isShadingEnabled() {
         return m_isShadingEnabled;
     }
+    
     public void setIsShadingEnabled( boolean isShadingEnabled ) {
         m_isShadingEnabled = isShadingEnabled;
         if( m_isShadingEnabled ) {
             gl.glEnable( GL.GL_LIGHTING );
         } else {
-            gl.glDisable( GL.GL_LIGHTING );
+        	gl.glDisable( GL.GL_LIGHTING );
         }
     }
     
     protected void renderVertex( edu.cmu.cs.stage3.alice.scenegraph.Vertex3d vertex ) {
-
     	
-    	if( m_currTextureMapProxy != null  && vertex.textureCoordinate0!=null) {
-    		
+    	if( m_currTextureMapProxy != null  && vertex.textureCoordinate0!=null) {  		
 	        double u = m_currTextureMapProxy.mapU( vertex.textureCoordinate0.x );
 	        double v = m_currTextureMapProxy.mapV( vertex.textureCoordinate0.y );
-			gl.glTexCoord2d( u, v );
-			
+			gl.glTexCoord2d( u, v );			
 	    }
     	    
     	if (vertex.diffuseColor!=null ){    
