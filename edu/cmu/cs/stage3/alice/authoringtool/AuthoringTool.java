@@ -5712,7 +5712,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                
         final JCheckBox UpdateJAR = new JCheckBox("");
-        boolean updateAvailable = checkForUpdate();
+        //boolean updateAvailable = checkForUpdate();
         //dlg.setTitle(Messages.getString("Updating"));
         //if (updateAvailable) {
          	UpdateJAR.setText(Messages.getString("Update_Software"));
@@ -5736,6 +5736,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         final JCheckBox SpanishUpdate = new JCheckBox(Messages.getString("Update_Spanish_Gallery"));
         left.add(SpanishUpdate);
 
+        final JCheckBox MiddleEastUpdate = new JCheckBox(Messages.getString("Update_MiddleEast_Gallery"));
+        left.add(MiddleEastUpdate);
+        
         updateDialog.add(left, BorderLayout.LINE_START);
         
         Box bottom = Box.createVerticalBox();
@@ -5753,23 +5756,23 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         			}
         			if ( EnglishGallery.isSelected() ) {
         				new Thread(new StartUpdating( "EnglishGallery.zip", 
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "English" ,
-        						true )).start();
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
         			if ( EnglishUpdate.isSelected() ) {
         				new Thread(new StartUpdating( "EnglishUpdate.zip", 
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "English" ,
-        						true )).start();
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
         			if ( SpanishGallery.isSelected() ) {
         				new Thread(new StartUpdating( "SpanishGallery.zip",
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "Spanish" ,
-        						true )).start();
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
         			if ( SpanishUpdate.isSelected() ) {
         				new Thread(new StartUpdating( "SpanishUpdate.zip",
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery" + System.getProperty( "file.separator" ) + "Spanish" ,
-        						true )).start();
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
+        			}
+        			if ( MiddleEastUpdate.isSelected() ) {
+        				new Thread(new StartUpdating( "MiddleEastUpdate.zip",
+        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
         		} else {
         			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("No_update_selected_"));
@@ -5789,7 +5792,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		private boolean isGallery;
 		private String file;
 		private String dest;
-    	private ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Updating"), Messages.getString("Getting_Started___"), 0, 0);
+    	private ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Updating"), Messages.getString("Getting_Started___"), 0, 0); 
     	
 		public StartUpdating(String filename, String location, boolean dir) {
 	        file = filename;

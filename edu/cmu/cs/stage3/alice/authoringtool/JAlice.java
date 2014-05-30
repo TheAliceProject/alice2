@@ -38,7 +38,7 @@ import edu.cmu.cs.stage3.lang.Messages;
  */
 public class JAlice {
 	// version information
-	private static String version = "2.4.x2"; 
+	private static String version = "2.4.2"; 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
@@ -112,6 +112,12 @@ public class JAlice {
 		}
 
 		try {
+			java.io.File firstRun = new java.io.File( getAliceHomeDirectory(), "etc/firstRun.txt" ).getAbsoluteFile();
+			if (firstRun.exists() || AikMin.target == 1){
+				firstRun.delete();
+				if (getAliceUserDirectory().exists())
+					new java.io.File( getAliceUserDirectory(), "AlicePreferences.xml" ).getAbsoluteFile().delete();
+			}
 			boolean useJavaBasedSplashScreen = true;
 			String useSplashScreenString = System.getProperty( "alice.useJavaBasedSplashScreen" ); 
 			if( (useSplashScreenString != null) && (! useSplashScreenString.equalsIgnoreCase( "true" )) ) { 
@@ -561,9 +567,10 @@ public class JAlice {
 			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").toLowerCase().startsWith("windows")) {   
 				char ch = ':';
 				String file = args[i].toString(); 
-				file = file.substring(file.lastIndexOf(ch)-1, file.length()-1);
+				file = file.substring(file.lastIndexOf(ch)-1, file.length());
 				worldToLoad = new java.io.File( file ).getAbsoluteFile();
-			} if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").toLowerCase().startsWith("mac"))) {
+			} 
+			else if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").toLowerCase().startsWith("mac"))) {
 			}
 			else {
 				worldToLoad = new java.io.File( args[i] ).getAbsoluteFile();
@@ -593,12 +600,6 @@ public class JAlice {
 
 	public static void setAliceUserDirectory( java.io.File file ) {
 		if (file != null) {
-			java.io.File firstRun = new java.io.File( getAliceHomeDirectory(), "etc/firstRun.txt" ).getAbsoluteFile();
-			if (firstRun.exists() || AikMin.target == 1){
-				firstRun.delete();
-				if (file.exists())
-				new java.io.File( file, "AlicePreferences.xml" ).getAbsoluteFile().delete();
-			}
 			if ( file.exists() ){	
 				aliceUserDirectory = file;
 			} else if( file.mkdirs() ) {

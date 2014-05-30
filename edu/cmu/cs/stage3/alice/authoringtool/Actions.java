@@ -319,9 +319,8 @@ public class Actions {
 
 		licenseAction = new javax.swing.AbstractAction() {
 			 public void actionPerformed( java.awt.event.ActionEvent e ) {
-				 //authoringTool.showLicense();
-				 authoringTool.openTutorialEditor();
-				  
+				 authoringTool.showLicense();
+				 //authoringTool.openTutorialEditor(); 
 			 }		
 		};
 		

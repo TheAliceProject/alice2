@@ -591,7 +591,8 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						return true;
 					}
 					
-				} else */if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.variableReferenceFlavor ) && PropertyViewController.this.allowExpressions ) {
+				} else */
+				if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.variableReferenceFlavor ) && PropertyViewController.this.allowExpressions ) {
 					java.util.List accessibleExpressions = new java.util.ArrayList(java.util.Arrays.asList( property.getOwner().findAccessibleExpressions( Object.class ) ));
 //					System.out.println("owner: "+property.getOwner()+", root: "+property.getOwner().getRoot());
 //					for (int i=0; i<accessibleExpressions.size(); i++ ){
@@ -735,27 +736,30 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 					} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) ) {
 						return true;
 					}
-				} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor ) ) {
-					
+				} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor ) ) {				
 					final edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype elementPrototype = (edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor );
 					Class elementClass = elementPrototype.getElementClass();
 					if ((property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print) 
 						&& edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom(elementClass)){
 						return false;
 					}
-					boolean hookItUp = true;
+					boolean hookItUp = false;
 					if( desiredValueClass.isAssignableFrom( elementClass ) ) {
 						hookItUp = true;
 					} else if( edu.cmu.cs.stage3.alice.core.Question.class.isAssignableFrom( elementClass ) && PropertyViewController.this.allowExpressions ) {
 						// slight hack;  i wish i didn't have to make a throwaway...
 						edu.cmu.cs.stage3.alice.core.Question testQuestion = (edu.cmu.cs.stage3.alice.core.Question)elementPrototype.createNewElement();
-						Class c = testQuestion.getValueClass();
 						if( desiredValueClass.isAssignableFrom( testQuestion.getValueClass() ) ) {
 							hookItUp = true;
 						} else if( (elementPrototype.getDesiredProperties().length == 0) && Number.class.isAssignableFrom( desiredValueClass ) && javax.vecmath.Vector3d.class.isAssignableFrom( testQuestion.getValueClass() ) ) {
-							return true;
+							return true;							
 						}
-					}
+						// Aik Min - This is to allow function in "if" statement 
+						else if ( property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder ){ 
+							hookItUp = true;
+						}
+
+					} 
 					return hookItUp;
 				} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CommonMathQuestionsTransferable.commonMathQuestionsFlavor ) && PropertyViewController.this.allowExpressions ) {
 					if( Number.class.isAssignableFrom( desiredValueClass ) ) {
@@ -977,6 +981,27 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						}
 					} else {
 						if( (array != null) && desiredValueClass.isAssignableFrom( array.valueClass.getClassValue() ) ) {
+							dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_LINK );
+							edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory = new edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory() {
+								public Object createItem( final Object object ) {
+									return new Runnable() {
+										public void run() {
+											edu.cmu.cs.stage3.alice.core.Question q = (edu.cmu.cs.stage3.alice.core.Question)object;
+											
+//											property.getOwner().addChild( q );
+											q.setParent(property.getOwner());
+											property.set( q );
+//											q.data.put( "PropertyViewController_propertyOwner", PropertyViewController.this.property.getName() );
+										}
+									};
+								}
+							};
+							java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeArrayQuestionStructure( variable, factory, desiredValueClass, property.getOwner() );
+							javax.swing.JPopupMenu popup = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePopupMenu( structure );
+							popup.show( this, (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
+							edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
+							dtde.dropComplete( true );
+						} else if (desiredValueClass.isAssignableFrom( java.lang.Number.class )) { // This is to make sure non number array dropped at Loop condition prompts "size of array" 
 							dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_LINK );
 							edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory = new edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory() {
 								public Object createItem( final Object object ) {
@@ -1264,7 +1289,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 			} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(dtde, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor ) ) {
 				edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype elementPrototype = (edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor );
 				Class elementClass = elementPrototype.getElementClass();
-				boolean hookItUp = true;
+				boolean hookItUp = false;
 				if( desiredValueClass.isAssignableFrom( elementClass ) ) {
 					hookItUp = true;
 				} else if( edu.cmu.cs.stage3.alice.core.Question.class.isAssignableFrom( elementClass ) && PropertyViewController.this.allowExpressions ) {
@@ -1298,7 +1323,9 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						} else {
 							hookItUp = true;
 						}
-					} else if( Boolean.class.isAssignableFrom( desiredValueClass ) ) {
+					} 
+					// Aik Min - This is a problem, currently all boolean desiredValueClass will except everything
+					else if( Boolean.class.isAssignableFrom( desiredValueClass ) ) {
 						dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_LINK );
 						java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeComparatorStructure( testQuestion, factory, property.getOwner() );
 						javax.swing.JPopupMenu popup = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePopupMenu( structure );

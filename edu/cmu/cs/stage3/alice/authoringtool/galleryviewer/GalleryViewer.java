@@ -1089,17 +1089,17 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         guiInit();
         
         String file [] = Configuration.getValueList( authoringToolPackage, "directories.galleryDirectory" );
-        RootDirectoryStructure templocal = null;
+        RootDirectoryStructure templocal = createDirectory(new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + "Core"), localGalleryName + " (Core)", LOCAL);
         for (int i = 0; i < file.length; i++){  
         	java.io.File temp = new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + file[i]);
 	        localGallery = createDirectory(temp, localGalleryName + " (" + file[i] + ")", LOCAL);
 	        if (localGallery != null){
 	            rootDirectories.add(localGallery);
 	            localGalleryRoot = localGallery.rootPath;
+	            if ( AikMin.locale.equalsIgnoreCase(file[i]) ){
+	            	templocal = localGallery;
+	            }
 	        }    
-	        if (AikMin.locale.equalsIgnoreCase(file[i])) {
-		        templocal = localGallery;	        	
-	        }
 	    }
         if ( templocal !=null )
         	localGallery = templocal;

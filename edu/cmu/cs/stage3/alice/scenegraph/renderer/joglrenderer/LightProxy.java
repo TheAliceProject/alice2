@@ -71,7 +71,7 @@ abstract class LightProxy extends AffectorProxy {
     protected void setup( RenderContext context, int id ) {
         context.gl.glEnable( id );
         //there should never be a need to set GL_AMBIENT
-        //context.gl.glLightfv( id, GL.GL_AMBIENT, { 0, 0, 0, 0.2 } );
+        //context.gl.glLightfv( id, GL.GL_AMBIENT, m_colorTimesBrightnessBuffer ); //{ 0, 0, 0, 0.2 } );
         
         context.gl.glLightfv( id, GL.GL_DIFFUSE, m_colorTimesBrightnessBuffer );
         
@@ -94,7 +94,7 @@ abstract class LightProxy extends AffectorProxy {
     
 	public void setup( RenderContext context ) {
         if( this instanceof AmbientLightProxy ) {
-            //context.addAmbient( m_colorTimesBrightness );
+            context.addAmbient( m_colorTimesBrightness );
         } else {
             int id = context.getNextLightID();
             setup( context, id );
