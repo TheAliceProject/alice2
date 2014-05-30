@@ -2060,26 +2060,28 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		seldomUsedPanel.add(enableLoggingCheckBox, new GridBagConstraints(0, 9,
 				1, 1, 0.0, 0.0, GridBagConstraints.WEST,
 				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(enableScriptingCheckBox, new
+				GridBagConstraints(0, 10, 1, 1, 0.0, 0.0,
+				GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new
+				Insets(0, 0, 0, 0), 0, 0));
+		
 		seldomUsedPanel.add(disableTooltipCheckBox, new GridBagConstraints(0,
-				10, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(showBuilderCheckBox, new GridBagConstraints(0,
 				11, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
 				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(showBuilderCheckBox, new GridBagConstraints(0,
+				12, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
+				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		
-		seldomUsedPanel.add(numClipboardsPanel, new GridBagConstraints(0, 12,
+		seldomUsedPanel.add(numClipboardsPanel, new GridBagConstraints(0, 13,
 				1, 1, 0.0, 0.0, GridBagConstraints.WEST,
 				GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 0), 0, 0));
-		seldomUsedPanel.add(saveIntervalPanel, new GridBagConstraints(0, 13, 1,
+		seldomUsedPanel.add(saveIntervalPanel, new GridBagConstraints(0, 14, 1,
 				1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
 				new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 14, 1,
+		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 15, 1,
 				1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
 				new Insets(0, 0, 0, 0), 0, 0));
-		// seldomUsedPanel.add(enableScriptingCheckBox, new
-		// GridBagConstraints(0, 15, 1, 1, 0.0, 0.0
-		// ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new
-		// Insets(0, 0, 0, 0), 0, 0));
+		
 		// seldomUsedPanel.add(runtimeScratchPadEnabledCheckBox, new
 		// GridBagConstraints(0, 10, 1, 1, 0.0, 0.0
 		// ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new

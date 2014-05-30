@@ -23,10 +23,10 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import java.awt.GridBagConstraints;
+
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.lang.Messages;
-import java.awt.GridBagConstraints;
 
 /**
  * @author Jason Pratt, Dennis Cosgrove, Dave Culyba
@@ -69,8 +69,7 @@ public abstract class NewNamedTypedElementContentPane extends
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
 				.getLocalConfiguration(AuthoringTool.class.getPackage());
 
-		m_typeChooser = new edu.cmu.cs.stage3.alice.authoringtool.util.TypeChooser(
-				getValidityChecker());
+		m_typeChooser = new edu.cmu.cs.stage3.alice.authoringtool.util.TypeChooser(getValidityChecker());
 
 		valuePanel = new javax.swing.JPanel();
 		valuePanel.setLayout(new java.awt.GridBagLayout());
@@ -86,18 +85,14 @@ public abstract class NewNamedTypedElementContentPane extends
 		valueComponent.setLayout(new java.awt.BorderLayout());
 
 		m_variable = new edu.cmu.cs.stage3.alice.core.Variable();
-		factory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(
-				m_variable.value);
+		factory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(m_variable.value);
 
 		objectArrayPropertyEditor = new edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyEditor();
-		objectArrayScrollPane = new javax.swing.JScrollPane(
-				objectArrayPropertyEditor);
+		objectArrayScrollPane = new javax.swing.JScrollPane(objectArrayPropertyEditor);
 		objectArrayScrollPane.setPreferredSize(new java.awt.Dimension(1, 150));
-
-		makeCollectionCheckBox = new javax.swing.JCheckBox(
-				Messages.getString("make_a"));
-		int fontSize = Integer.parseInt(authoringToolConfig
-				.getValue("fontSize"));
+		
+		makeCollectionCheckBox = new javax.swing.JCheckBox(Messages.getString("make_a"));
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
 		makeCollectionCheckBox.setFont(new java.awt.Font("SansSerif",
 				java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
 		makeCollectionCheckBox
@@ -117,7 +112,6 @@ public abstract class NewNamedTypedElementContentPane extends
 		collectionTypeCombo.addItem( new makeObj("Array") );
 		collectionTypeCombo
 				.setRenderer(new javax.swing.DefaultListCellRenderer() {
-
 					public java.awt.Component getListCellRendererComponent(
 							javax.swing.JList list, Object value, int index,
 							boolean isSelected, boolean cellHasFocus) {

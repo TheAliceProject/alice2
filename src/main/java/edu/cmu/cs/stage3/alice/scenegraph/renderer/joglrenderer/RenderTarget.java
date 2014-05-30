@@ -179,8 +179,8 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		if (m_glPBuffer != null){
 			javax.media.opengl.GLContext context =  m_glPBuffer.createContext(null); 
 			context.makeCurrent();
-			context.getGL().glClearColor(1.0f, 0.0f, 0.0f, 0.0f);  
-
+			context.getGL().glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  
+			context.getGL().glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 			java.awt.Dimension d = getSize();
 			int width = d.width, height = d.height;
 			m_renderContext.m_height =  height; // m_glPBuffer.getHeight();

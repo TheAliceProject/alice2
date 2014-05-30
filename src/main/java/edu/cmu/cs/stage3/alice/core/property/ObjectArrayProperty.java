@@ -360,7 +360,7 @@ public class ObjectArrayProperty extends ObjectProperty {
 	public Object get( int index ) {
 		int n = size();
 		if( index == -1 ) {
-			index = n;
+			index = n-1;
 		}
 		if( index>=0 && index<n ) {
 			Object[] array = getArrayValue();

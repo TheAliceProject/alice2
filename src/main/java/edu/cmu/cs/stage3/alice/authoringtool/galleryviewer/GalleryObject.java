@@ -152,7 +152,12 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
             else{
             }
             displayName = GalleryViewer.cleanUpName(dataIn.name);
+//            this.setToolTipText(getToolTipString());
             updateGUI();
+            String t = dataIn.objectFilename;
+            if (t.endsWith(".a2c")){
+            	this.setToolTipText(getToolTipString().replace("</body>", "<p>"+t+"</p></body>"));//getToolTipString());
+            }
             wakeUp();
         }
         else{
@@ -292,7 +297,7 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
         locationLabel.setOpaque(false);
         image = new javax.swing.ImageIcon();
         this.add(containingPanel, java.awt.BorderLayout.CENTER);
-        this.setToolTipText(getToolTipString());
+        //this.setToolTipText(getToolTipString());
     }
     
     public static String getDisplayName(String toDisplay){
@@ -307,7 +312,7 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
         containingPanel.removeAll();
 		containingPanel.add(classLabel, new java.awt.GridBagConstraints(1,0,2,1,0,0,java.awt.GridBagConstraints.NORTH,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
         containingPanel.add(nameLabel, new java.awt.GridBagConstraints(1,1,2,1,0,0,java.awt.GridBagConstraints.NORTH,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
-        containingPanel.add(imageLabel, new java.awt.GridBagConstraints(1,2,2,1,0,0,java.awt.GridBagConstraints.NORTH,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
+        containingPanel.add(imageLabel, new java.awt.GridBagConstraints(1,2,2,1,0,0,java.awt.GridBagConstraints.NORTH,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));        
         //this.add(grip, new java.awt.GridBagConstraints(0,0,1,3,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
 		classLabel.setText(getClassName());
         nameLabel.setText(getDisplayName(displayName));

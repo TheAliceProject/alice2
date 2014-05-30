@@ -42,27 +42,27 @@ public class Menu implements StencilObject, StencilPanelMessageListener, MouseEv
           shapes.removeAllElements();
 
           Point upPosition = new Point( p.x -40, p.y - 50);
-          upOption = new RoundRectangle2D.Double(upPosition.x, upPosition.y, 65, 30, 10,10);
+          upOption = new RoundRectangle2D.Double(upPosition.x, upPosition.y, 80, 30, 10,10);
           shapes.addElement(new ScreenShape(Color.blue,upOption, true, 0));
-          Shape s = createWordShape("new", new Point(upPosition.x + 5, upPosition.y + 25));
+          Shape s = createWordShape("new", new Point(upPosition.x + 14, upPosition.y + 25));
           shapes.addElement(new ScreenShape(Color.white,s, true, 1));
 
           Point rightPosition = new Point( p.x -90, p.y - 15);
-          rightOption = new RoundRectangle2D.Double(rightPosition.x, rightPosition.y, 65, 30, 10,10);
+          rightOption = new RoundRectangle2D.Double(rightPosition.x, rightPosition.y, 80, 30, 10,10);
           shapes.addElement(new ScreenShape(Color.blue,rightOption, true, 2));
-          s = createWordShape("load", new Point(rightPosition.x + 5, rightPosition.y + 25));
+          s = createWordShape("load", new Point(rightPosition.x + 10, rightPosition.y + 25));
           shapes.addElement(new ScreenShape(Color.white,s, true, 3));
 
           Point leftPosition = new Point( p.x + 20, p.y - 15);
-          leftOption = new RoundRectangle2D.Double(leftPosition.x, leftPosition.y, 70, 30, 10,10);
+          leftOption = new RoundRectangle2D.Double(leftPosition.x, leftPosition.y, 80, 30, 10,10);
           shapes.addElement(new ScreenShape(Color.blue,leftOption, true, 4));
-          s = createWordShape("save", new Point(leftPosition.x + 5, leftPosition.y + 25));
+          s = createWordShape("save", new Point(leftPosition.x + 8, leftPosition.y + 25));
           shapes.addElement(new ScreenShape(Color.white,s, true, 5));
 
           Point downPosition = new Point( p.x -40, p.y + 20);
-          downOption = new RoundRectangle2D.Double(downPosition.x, downPosition.y, 65, 30, 10,10);
+          downOption = new RoundRectangle2D.Double(downPosition.x, downPosition.y, 80, 30, 10,10);
           shapes.addElement(new ScreenShape(Color.blue,downOption, true, 6));
-          s = createWordShape("lock", new Point(downPosition.x + 5, downPosition.y + 25));
+          s = createWordShape("lock", new Point(downPosition.x + 11, downPosition.y + 25));
           shapes.addElement(new ScreenShape(Color.white,s, true, 7));
 
           previousRect = rect;
@@ -74,27 +74,27 @@ public class Menu implements StencilObject, StencilPanelMessageListener, MouseEv
           if (writeEnabled) {
 
             Point upPosition = new Point( p.x -40, p.y - 50);
-            upOption = new RoundRectangle2D.Double(upPosition.x, upPosition.y, 75, 30, 10,10);
+            upOption = new RoundRectangle2D.Double(upPosition.x, upPosition.y, 90, 30, 10,10);
             shapes.addElement(new ScreenShape(Color.blue,upOption, true, 0));
-            Shape s = createWordShape("note", new Point(upPosition.x + 5, upPosition.y + 25));
+            Shape s = createWordShape("note", new Point(upPosition.x + 15, upPosition.y + 25));
             shapes.addElement(new ScreenShape(Color.white,s, true, 1));
 
             Point rightPosition = new Point( p.x -90, p.y - 15);
-            rightOption = new RoundRectangle2D.Double(rightPosition.x, rightPosition.y, 80, 30, 10,10);
+            rightOption = new RoundRectangle2D.Double(rightPosition.x, rightPosition.y, 90, 30, 10,10);
             shapes.addElement(new ScreenShape(Color.blue,rightOption, true, 2));
-            s = createWordShape("frame", new Point(rightPosition.x + 5, rightPosition.y + 25));
+            s = createWordShape("frame", new Point(rightPosition.x + 6, rightPosition.y + 25));
             shapes.addElement(new ScreenShape(Color.white,s, true, 3));
 
             Point leftPosition = new Point( p.x + 20, p.y - 15);
-            leftOption = new RoundRectangle2D.Double(leftPosition.x, leftPosition.y, 75, 30, 10,10);
+            leftOption = new RoundRectangle2D.Double(leftPosition.x, leftPosition.y, 90, 30, 10,10);
             shapes.addElement(new ScreenShape(Color.blue,leftOption, true, 4));
-            s = createWordShape("clear", new Point(leftPosition.x + 5, leftPosition.y + 25));
+            s = createWordShape("clear", new Point(leftPosition.x + 10, leftPosition.y + 25));
             shapes.addElement(new ScreenShape(Color.white,s, true, 5));
 
             Point downPosition = new Point( p.x -40, p.y + 20);
-            downOption = new RoundRectangle2D.Double(downPosition.x, downPosition.y, 75, 30, 10,10);
+            downOption = new RoundRectangle2D.Double(downPosition.x, downPosition.y, 90, 30, 10,10);
             shapes.addElement(new ScreenShape(Color.blue,downOption, true, 6));
-            s = createWordShape("other", new Point(downPosition.x + 5, downPosition.y + 25));
+            s = createWordShape("other", new Point(downPosition.x + 8, downPosition.y + 25));
             shapes.addElement(new ScreenShape(Color.white,s, true, 7));
 
             previousRect = rect;

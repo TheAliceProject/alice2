@@ -118,8 +118,12 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 			}
 			
 			String valueText = Messages.getString("None"); 
+
 			if( value instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 				valueText = ((edu.cmu.cs.stage3.alice.core.Element)value).getTrimmedKey();
+				if ( value instanceof edu.cmu.cs.stage3.alice.core.List ) {
+					valueText = valueText.substring(0, valueText.indexOf("__")-1);
+				}
 			} else if ( value instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
 				double blue = ((edu.cmu.cs.stage3.alice.scenegraph.Color) value).getBlue();
 				double green = ((edu.cmu.cs.stage3.alice.scenegraph.Color) value).getGreen();

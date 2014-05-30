@@ -62,6 +62,7 @@ public class PoseAnimation extends Animation {
 
 		
 		public void prologue( double t ) {
+			transformableKeys = new java.util.Vector();
 			super.prologue( t );
 			subject = PoseAnimation.this.subject.getTransformableValue();
 			pose = PoseAnimation.this.pose.getPoseValue();

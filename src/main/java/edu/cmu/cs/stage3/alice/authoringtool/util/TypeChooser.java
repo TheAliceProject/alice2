@@ -25,8 +25,12 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+
 import javax.swing.ButtonModel;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
@@ -97,7 +101,13 @@ public class TypeChooser extends javax.swing.JPanel {
 		booleanButton.addActionListener( radioListener );
 		objectButton.addActionListener( radioListener );
 		otherButton.addActionListener( radioListener );
-
+		otherCombo.addItemListener( new java.awt.event.ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				TypeChooser.this.parseOtherType();	
+			}
+			
+		});
+		
 		edu.cmu.cs.stage3.util.StringTypePair[] defaultVariableTypes = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getDefaultVariableTypes();
 		for( int i = 0; i < defaultVariableTypes.length; i++ ) {
 			typeMap.put( defaultVariableTypes[i].getString().trim(), defaultVariableTypes[i].getType() );

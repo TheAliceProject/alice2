@@ -9,7 +9,7 @@ import javax.swing.UIManager;
 public class AikMin {
 	public static String locale = "";
 	public static String[] listOfLanguages = {"English","Portuguese","Spanish"}; 
-	public static int target = 1;	// Compile with 1 to delete preferences file
+	public static int target = 0;	// Compile with 1 to delete preferences file or create etc/firstRun.txt
 	//public static String version ="06/01/2012";
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
