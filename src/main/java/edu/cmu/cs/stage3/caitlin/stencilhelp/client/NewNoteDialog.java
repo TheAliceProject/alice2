@@ -1,7 +1,6 @@
 package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
-import edu.cmu.cs.stage3.alice.authoringtool.JAliceFrame;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -27,7 +26,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JWindow;

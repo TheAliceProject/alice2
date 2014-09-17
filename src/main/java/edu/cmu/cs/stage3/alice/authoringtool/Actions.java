@@ -56,6 +56,7 @@ public class Actions {
 	public javax.swing.AbstractAction showWorldInfoAction;
 	public javax.swing.AbstractAction launchTutorialAction;
 	public javax.swing.AbstractAction launchTutorialFileAction;
+	public javax.swing.AbstractAction launchTutorialEditor;			// Aik Min
 	public javax.swing.AbstractAction launchSoftwareUpdate;			// Aik Min
 	public javax.swing.AbstractAction showStdOutDialogAction;
 	public javax.swing.AbstractAction showStdErrDialogAction;
@@ -243,6 +244,12 @@ public class Actions {
 		launchTutorialFileAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
 				authoringTool.openTutorialWorld();
+			}
+		};
+		
+		launchTutorialEditor = new javax.swing.AbstractAction() {
+			public void actionPerformed( java.awt.event.ActionEvent e ) {
+				authoringTool.openTutorialEditor();
 			}
 		};
 		
@@ -535,6 +542,14 @@ public class Actions {
 		//launchTutorialFileAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( launchTutorialFileAction );
 
+		//launchTutorialEditor.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
+		launchTutorialEditor.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchTutorialEditor" ); 
+		//launchTutorialEditor.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
+		launchTutorialEditor.putValue( javax.swing.Action.NAME, "Tutorial Editor" ); 
+		launchTutorialEditor.putValue( javax.swing.Action.SHORT_DESCRIPTION, "Create or edit a tutorial" ); 
+		//launchTutorialFileAction.putValue( javax.swing.Action.SMALL_ICON, );
+		applicationActions.add( launchTutorialEditor );
+		
     	//launchSoftwareUpdate.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
 		launchSoftwareUpdate.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchSoftwareUpdate" );
 		//launchSoftwareUpdate.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'U' ) );

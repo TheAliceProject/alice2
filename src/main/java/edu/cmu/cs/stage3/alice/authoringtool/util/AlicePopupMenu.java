@@ -23,14 +23,18 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import java.beans.PropertyChangeEvent;
+
 import javax.swing.JPopupMenu;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 
 /**
  * designed to improve on popup menu behavior.
  * @author Jason Pratt
  */
 public class AlicePopupMenu extends JPopupMenu {
-	protected int millisecondDelay = 400;
+	protected int millisecondDelay = 200;
 
 	protected javax.swing.Timer setPopupVisibleTrueTimer;
 	protected javax.swing.Timer setPopupVisibleFalseTimer;
@@ -111,9 +115,35 @@ public class AlicePopupMenu extends JPopupMenu {
 		return ( (getInvoker() != null) && ! (getInvoker() instanceof AliceMenu) );
 	}
 
+	public static AlicePopupMenu item = new AlicePopupMenu();
+	
+	public static void hidePopup(){
+		if ( item != null ) {
+			item.setFocusable( false );
+		}
+	}
+	
+	public static void showPopup(){
+		if ( item != null ) {
+			item.setFocusable( true );
+		}
+	}
+	
 	public void show( java.awt.Component invoker, int x, int y ) {
-		super.show( invoker, x, y );
-		PopupMenuUtilities.ensurePopupIsOnScreen( this );
+		final AlicePopupMenu menu = this;
+		if ( item.isFocusable() ) {
+			super.show( invoker, x, y );
+			PopupMenuUtilities.ensurePopupIsOnScreen( menu );
+			if ( AikMin.isMAC() ) 
+			item.addPropertyChangeListener( "focusable", new java.beans.PropertyChangeListener(){
+				public void propertyChange( PropertyChangeEvent arg0 ) {
+					item.removePropertyChangeListener(this);
+					if ( !item.hasFocus() && menu.isVisible() )
+						menu.setVisible( false );
+				}
+				
+			});
+		}
 	}
 
 	public void printPath( javax.swing.MenuElement[] path ) {

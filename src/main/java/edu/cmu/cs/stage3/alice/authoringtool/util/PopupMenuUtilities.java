@@ -23,21 +23,22 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import edu.cmu.cs.stage3.lang.Messages;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Vector;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.util.StringObjectPair;
 
 /**
  * @author Jason Pratt
  */
-public class PopupMenuUtilities {
+public class PopupMenuUtilities{
 	protected static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.class.getPackage() );
 
 	protected static java.util.HashMap recentlyUsedValues = new java.util.HashMap();
@@ -211,7 +212,7 @@ public class PopupMenuUtilities {
 		if( structure == null || structure.isEmpty() ) {
 			return null;
 		} else {
-			AliceMenuWithDelayedPopup menu = new AliceMenuWithDelayedPopup( title, structure );
+			AliceMenuWithDelayedPopup menu = new AliceMenuWithDelayedPopup( title, structure );	
 			menu.setUI( new AliceMenuUI() );
 			menu.setDelay( 0 );
 			return menu;
@@ -542,7 +543,7 @@ public class PopupMenuUtilities {
 
 		java.util.Vector expressionStructure = makeFlatExpressionStructure( valueClass, factory, context, currentValue );
 		if( (expressionStructure != null) && (expressionStructure.size() > 0) ) {
-			String className = valueClass.getName();
+			//String className = valueClass.getName();
 			if( structure.size() > 0 ) {
 				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "Separator", javax.swing.JSeparator.class ) );
 			}
@@ -932,7 +933,7 @@ public class PopupMenuUtilities {
 					 
 			PopupItemFactory recursiveFactory = new PopupItemFactory() {
 				public Object createItem( Object o ) {
-					if (!valueClass.isInstance(o)){ //Add the question here?
+					if (valueClass != null && !valueClass.isInstance(o)){ //Add the question here?
 						if (valueClass.isAssignableFrom(javax.vecmath.Vector3d.class) && o instanceof edu.cmu.cs.stage3.alice.core.Transformable){
 							edu.cmu.cs.stage3.alice.core.question.Position positionQuestion = new edu.cmu.cs.stage3.alice.core.question.Position();
 							positionQuestion.subject.set(o);
@@ -1034,7 +1035,7 @@ public class PopupMenuUtilities {
 				}
 			}
 			//   make structure
-			if( edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( valueClass ) || valueClass.isAssignableFrom( edu.cmu.cs.stage3.alice.core.Element.class ) ) {
+			if( valueClass != null && (edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( valueClass ) || valueClass.isAssignableFrom( edu.cmu.cs.stage3.alice.core.Element.class) ) ) {
 				edu.cmu.cs.stage3.alice.core.Element[] elements = context.getRoot().search( criterion );
 				if( elements.length > 0 ) {
 					if( elements.length < 10 ) {
@@ -1050,7 +1051,7 @@ public class PopupMenuUtilities {
 					}
 				}
 			}
-			if (!Object.class.isAssignableFrom(valueClass)){
+			if ( valueClass != null && !Object.class.isAssignableFrom(valueClass)){
 				//Okay, this needs to build a structure to find models, get their position and pass them to the vector3d property
 				if( javax.vecmath.Vector3d.class.isAssignableFrom( valueClass ) || valueClass.isAssignableFrom(javax.vecmath.Vector3d.class)) {
 					edu.cmu.cs.stage3.util.Criterion modelCriterion = new edu.cmu.cs.stage3.util.criterion.MatchesAllCriterion( new edu.cmu.cs.stage3.util.Criterion[] { new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( edu.cmu.cs.stage3.alice.core.Model.class ), elementIsNamed, inAppropriateOAPCriterion } );
@@ -1118,7 +1119,7 @@ public class PopupMenuUtilities {
 					};
 				}
 			};
-			if( valueClass.isAssignableFrom( edu.cmu.cs.stage3.alice.core.Sound.class ) && (valueClass != Object.class) ) {
+			if(  valueClass != null && valueClass.isAssignableFrom( edu.cmu.cs.stage3.alice.core.Sound.class ) && (valueClass != Object.class) ) {
 				java.io.File soundDir = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "sounds" ).getAbsoluteFile();
 				if( soundDir.exists() && soundDir.isDirectory() ) {
 					java.util.ArrayList sounds = new java.util.ArrayList();
@@ -1817,8 +1818,8 @@ public class PopupMenuUtilities {
 				((Runnable)factory.createItem( size )).run();
 			} };
 
-			edu.cmu.cs.stage3.util.StringObjectPair[] known = new edu.cmu.cs.stage3.util.StringObjectPair[] { new edu.cmu.cs.stage3.util.StringObjectPair( "array", arrayVariable ) };
-			String[] desired = new String[] { "item" };
+			//edu.cmu.cs.stage3.util.StringObjectPair[] known = new edu.cmu.cs.stage3.util.StringObjectPair[] { new edu.cmu.cs.stage3.util.StringObjectPair( "array", arrayVariable ) };
+			//String[] desired = new String[] { "item" };
 
 			if( structure.size() > 0 ) {
 				structure.add( new StringObjectPair( "Separator", javax.swing.JSeparator.class ) );
@@ -1879,7 +1880,7 @@ public class PopupMenuUtilities {
 	 */
 	public static java.util.Vector makeBooleanLogicStructure( final Object firstOperand, final PopupItemFactory factory, edu.cmu.cs.stage3.alice.core.Element context ) {
 		java.util.Vector structure = new java.util.Vector();
-		boolean isNone = false;
+		//boolean isNone = false;
 		if( firstOperand instanceof Boolean ) {
 			//accept
 		} else if( (firstOperand instanceof edu.cmu.cs.stage3.alice.core.Expression) && Boolean.class.isAssignableFrom( ((edu.cmu.cs.stage3.alice.core.Expression)firstOperand).getValueClass() ) ) {
@@ -2019,7 +2020,7 @@ public class PopupMenuUtilities {
 		Runnable textStringRunnable = new Runnable() {
 			public void run() {
 				ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.response.Print.class, known, new String[] { "text" } );
-				java.awt.Frame jAliceFrame = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getJAliceFrame();
+				//java.awt.Frame jAliceFrame = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getJAliceFrame();
 				String text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Enter_text_to_print"), Messages.getString("Enter_Text_String"), javax.swing.JOptionPane.PLAIN_MESSAGE );
 				if( text != null ) {
 					((Runnable)factory.createItem( elementPrototype.createCopy( new edu.cmu.cs.stage3.util.StringObjectPair( "text", text ) ) )).run();
@@ -2045,7 +2046,7 @@ public class PopupMenuUtilities {
 		Runnable textStringRunnable = new Runnable() {
 			public void run() {
 				ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.question.userdefined.Print.class, known, new String[] { "text" } );
-				java.awt.Frame jAliceFrame = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getJAliceFrame();
+				//java.awt.Frame jAliceFrame = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getJAliceFrame();
 				String text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Enter text to print"), Messages.getString("Enter Text String"), javax.swing.JOptionPane.PLAIN_MESSAGE );
 				if( text != null ) {
 					((Runnable)factory.createItem( elementPrototype.createCopy( new edu.cmu.cs.stage3.util.StringObjectPair( "text", text ) ) )).run();
@@ -2588,7 +2589,13 @@ public class PopupMenuUtilities {
 		return makeResponseStructure( element, oneShotFactory, element.getRoot() );
 	}
 
-	public static void ensurePopupIsOnScreen( JPopupMenu popup ) {
+	public static JPopupMenu item;
+	
+	public static void hidePopup (){
+		item.firePropertyChange("focusable", false, true);
+	}
+	
+	public static void ensurePopupIsOnScreen( final JPopupMenu popup ) {
 		java.awt.Point location = popup.getLocation( null );
 		java.awt.Dimension size = popup.getSize( null );
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -2608,6 +2615,41 @@ public class PopupMenuUtilities {
 		}
 
 		popup.setLocation( location );
+		
+		item = popup;
+		item.addPropertyChangeListener("focusable", new PropertyChangeListener(){
+
+			@Override
+			public void propertyChange(PropertyChangeEvent arg0) {
+				java.awt.Component temp;
+				/*popup.setVisible(false);
+				temp = popup.getInvoker(); 
+				if (temp != null) {
+					temp.setVisible(false);
+				}*/
+				
+				
+				int i = 0;
+				/*popup = popup.getParent();
+				if( popup != null ) { // content pane
+					popup = popup.getParent();
+				}
+				if( popup != null ) { // layered pane
+					popup = popup.getParent();
+				}
+				if( popup != null ) { // root pane
+					popup = popup.getParent();
+				}
+				if( popup instanceof java.awt.Window ) {
+					java.awt.Window[] windows = ((java.awt.Window)popup).getOwnedWindows();
+					for( int i = 0; i < windows.length; i++ ) {
+						windows[i].setVisible( false );
+					}
+				}*/
+			}
+			
+		});
+		
 	}
 
 	public static java.awt.event.ActionListener getPopupMenuItemActionListener( Runnable runnable ) {

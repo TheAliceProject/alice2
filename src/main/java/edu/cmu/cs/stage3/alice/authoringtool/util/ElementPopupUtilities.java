@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**

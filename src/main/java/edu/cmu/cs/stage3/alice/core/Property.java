@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources;
 import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;

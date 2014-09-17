@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.media.SoundMarker;
 import edu.cmu.cs.stage3.alice.core.property.ElementProperty;
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;

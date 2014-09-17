@@ -1,7 +1,7 @@
 package edu.cmu.cs.stage3.alice.gallery.modeleditor;
 
 public class ModelEditor extends javax.swing.JFrame {
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		ModelEditor modelEditor = new ModelEditor();
 		modelEditor.setLocation( 0, 0 ); 
 		modelEditor.setSize( 1280, 1000 );
@@ -15,7 +15,7 @@ public class ModelEditor extends javax.swing.JFrame {
 		modelEditor.setVisible( true );
 		
 		modelEditor.m_tree.requestFocus();
-	}*/
+	}
 
 	private edu.cmu.cs.stage3.alice.core.World m_world;
 	private edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera m_camera;

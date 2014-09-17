@@ -617,17 +617,12 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	private void initializeFileChooser() {
-		String font = "SansSerif";
 		try {
-			if ((System.getProperty("os.name") != null)
-					&& System.getProperty("os.name").startsWith("Windows"))
-				UIManager
-						.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");// "com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-			else
+			if ( AikMin.isMAC() )
 				UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel");
-			AikMin.setFontSize(12);
 		} catch (Exception e) {
 		}
+		AikMin.setFontSize(12);
 
 		// try {
 		// EventQueue.invokeAndWait(new Runnable() {
@@ -696,8 +691,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		authoringToolConfig.getValue("showStartUpDialog");
 		stopShowingCheckBox.setSelected(authoringToolConfig.getValue(
 				"showStartUpDialog").equalsIgnoreCase("true"));
-		mainTabPane
-				.setUI(new edu.cmu.cs.stage3.alice.authoringtool.util.AliceTabbedPaneUI());
+		mainTabPane.setUI(new edu.cmu.cs.stage3.alice.authoringtool.util.AliceTabbedPaneUI());
 		mainTabPane.setOpaque(false);
 		initializeFileChooser();
 		int selectedTab = Integer.parseInt(authoringToolConfig

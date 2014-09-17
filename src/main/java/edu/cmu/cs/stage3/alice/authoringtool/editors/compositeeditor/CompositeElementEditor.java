@@ -107,6 +107,7 @@ public abstract class CompositeElementEditor extends GroupingPanel
 
     private void configInit()
     {
+    	Object a = AuthoringToolResources.getMiscItem("javaLikeSyntax");
         if(AuthoringToolResources.getMiscItem("javaLikeSyntax") != null) 
             IS_JAVA = AuthoringToolResources.getMiscItem("javaLikeSyntax").equals("true");  
     }

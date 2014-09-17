@@ -395,6 +395,22 @@ public class GUIFactory {
 					((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.CollectionPropertyViewController)viewController).set( property, omitPropertyName );
 				}
 			}
+		} else if( edu.cmu.cs.stage3.alice.core.Sound.class.isAssignableFrom( desiredValueClass ) ) { 
+			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.SoundViewController.class );
+			// This additional step is a bad way to make Alice update and display the sound duration instead of (?:??)
+			if( viewController != null ) {
+				((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.SoundViewController)viewController).setSound( (edu.cmu.cs.stage3.alice.core.Sound)property.getValue() );
+			}
+			try {
+				Thread.sleep(200); 	
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ElementPropertyViewController.class );
+			if( viewController != null ) {
+				((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ElementPropertyViewController)viewController).set( property, allowExpressions, omitPropertyName, factory );
+			}
 		} else if( edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( desiredValueClass ) ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ElementPropertyViewController.class );
 			if( viewController != null ) {

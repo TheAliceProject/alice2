@@ -46,7 +46,7 @@ public class ScriptingFactory implements edu.cmu.cs.stage3.alice.scripting.Scrip
 		//todo: remove
 		org.python.core.PySystemState systemState = org.python.core.Py.getSystemState();
 		String pythonHome = preProperties.getProperty( "python.home" );
-		String pathname = pythonHome + "/lib/alice/__init__.py";
+		String pathname = pythonHome + "/Lib/alice/__init__.py";
 		try {
 			java.io.File f = new java.io.File( pathname );
 			java.io.InputStream is = new java.io.FileInputStream( f.getAbsoluteFile() );
@@ -63,7 +63,7 @@ public class ScriptingFactory implements edu.cmu.cs.stage3.alice.scripting.Scrip
 			}
 			if( sb.length()>0 ) {
 				String script = sb.substring( 0, sb.length()-1 );
-				org.python.core.PyCode code = org.python.core.__builtin__.compile( script, "<jython-2.1/lib/alice/__init__.py>", "exec" );
+				org.python.core.PyCode code = org.python.core.__builtin__.compile( script, "<jython-2.1/Lib/alice/__init__.py>", "exec" );
 				org.python.core.Py.exec( code, systemState.builtins, systemState.builtins );
 			}
 		} catch( java.io.IOException ioe ) {

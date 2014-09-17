@@ -23,17 +23,14 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-import edu.cmu.cs.stage3.lang.Messages;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 
-import javax.swing.ButtonModel;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Jason Pratt
@@ -51,6 +48,7 @@ public class TypeChooser extends javax.swing.JPanel {
 	private edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback okButtonCallback;
 
 	public TypeChooser(edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback okButtonCallback) {
+
 		otherCombo.setEditable( false );
 		this.okButtonCallback = okButtonCallback;
 		setLayout( new GridBagLayout() );

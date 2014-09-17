@@ -1140,7 +1140,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		for( int i = 0; i < sgCameras.length; i++ ) {
 			renderTarget.removeCamera( sgCameras[i] );
 		}
-
+		
+		moveCameraCombo.removeAllItems();
+		moveCameraCombo.addItem( NONE_DUMMY );
+		 
 		this.world = world;
 		if (world != null){
 			ground = world.getChildNamedIgnoreCase("ground"); 

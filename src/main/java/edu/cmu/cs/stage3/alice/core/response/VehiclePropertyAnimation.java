@@ -23,8 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.response;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-
 public class VehiclePropertyAnimation extends PropertyAnimation {
 	public VehiclePropertyAnimation() {
 		super();

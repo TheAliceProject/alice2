@@ -60,8 +60,7 @@ public class TutorialEditor extends JDialog {
         TutorialEditor.this.pagesPanel.setSize(400, 50);
       }
     });
-    //Lang.setRTL(this);
-    setMinimumSize(new Dimension(450, 450));
+    setMinimumSize(new Dimension(450, 350));
     this.pagesPanel.setSize(400, 50);
     setLocation(400, 400);
     setResizable(false);
@@ -309,8 +308,3 @@ public class TutorialEditor extends JDialog {
     localTutorialEditor.display(true);
   }*/
 }
-
-/* Location:           /Users/ace/Dropbox (Alice Project)/Temporary/Mama/Source/
- * Qualified Name:     edu.cmu.cs.stage3.caitlin.stencilhelp.client.TutorialEditor
- * JD-Core Version:    0.6.2
- */

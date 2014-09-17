@@ -1,6 +1,5 @@
 package edu.cmu.cs.stage3.alice.core.behavior;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.Camera;
 import edu.cmu.cs.stage3.alice.core.Direction;
 import edu.cmu.cs.stage3.alice.core.RenderTarget;

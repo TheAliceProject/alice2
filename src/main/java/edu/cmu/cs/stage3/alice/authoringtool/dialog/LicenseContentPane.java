@@ -65,9 +65,6 @@ public class LicenseContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		    
 		setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 		int width = 700;
-		/*if ( System.getProperty("os.name") != null && !System.getProperty("os.name").startsWith("Windows") ) {
-			width = 650;
-		} */
 		setPreferredSize(new Dimension (width,500));   
 	    JTextArea headerTextArea = new JTextArea();
 	    headerTextArea.setText("Please read the following license agreement carefully.");
