@@ -768,7 +768,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 			if( oneShotStructure != null ) {
 				for( java.util.Iterator iter = oneShotStructure.iterator(); iter.hasNext(); ) {
 					edu.cmu.cs.stage3.util.StringObjectPair sop = (edu.cmu.cs.stage3.util.StringObjectPair)iter.next();
-					String groupName = sop.getString();
+					//String groupName = sop.getString();
 					java.util.Vector responseNames = (java.util.Vector)sop.getObject();
 					javax.swing.JPanel subPanel = new javax.swing.JPanel();
 					javax.swing.JPanel toAdd = subPanel;

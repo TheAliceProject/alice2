@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
 import edu.cmu.cs.stage3.lang.Messages;
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 
 /**
  * @author David Culyba

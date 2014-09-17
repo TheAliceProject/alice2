@@ -2,7 +2,6 @@ package edu.cmu.cs.stage3.caitlin.stencilhelp.client;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -12,7 +11,6 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Iterator;

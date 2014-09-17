@@ -511,6 +511,13 @@ public class AuthoringToolResources {
 	}
 
 	public static void putName( Object key, String prettyName ) {
+		if (System.getProperty("os.name") != null){
+			if (System.getProperty("os.name").startsWith("Mac") ){
+				try {
+					prettyName = new String(prettyName.getBytes(), "CP1252");
+				} catch (Exception e){}
+			} 
+		}		
 		AuthoringToolResources.resources.nameMap.put( key, prettyName );
 	}
 
@@ -524,6 +531,13 @@ public class AuthoringToolResources {
 	}
 	
 	public static void putHTMLName( Object key, String prettyName ) {
+		if (System.getProperty("os.name") != null){
+			if (System.getProperty("os.name").startsWith("Mac") ){
+				try {
+					prettyName = new String(prettyName.getBytes(), "CP1252");
+				} catch (Exception e){}
+			} 
+		}		
 		AuthoringToolResources.resources.htmlNameMap.put( key, prettyName );
 	}
 
@@ -536,6 +550,13 @@ public class AuthoringToolResources {
 	}
 
 	public static void putFormat( Object key, String formatString ) {
+		if (System.getProperty("os.name") != null){
+			if (System.getProperty("os.name").startsWith("Mac") ){
+				try {
+					formatString = new String(formatString.getBytes(), "CP1252");
+				} catch (Exception e){}
+			} 
+		}		
 		AuthoringToolResources.resources.formatMap.put( key, formatString );
 	}
 
@@ -1197,17 +1218,14 @@ public class AuthoringToolResources {
 				}
 			}
 		} else if( (element instanceof edu.cmu.cs.stage3.alice.core.Sound) && (context instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) ) {
-			edu.cmu.cs.stage3.alice.core.Sound sound = (edu.cmu.cs.stage3.alice.core.Sound)element;
+			edu.cmu.cs.stage3.alice.core.Sound sound = (edu.cmu.cs.stage3.alice.core.Sound)element;		
+			String s = getReprForValue( element, true );
 			double t = Double.NaN;
 			edu.cmu.cs.stage3.media.DataSource dataSourceValue = sound.dataSource.getDataSourceValue();
 			if( dataSourceValue != null ) {
-				t = dataSourceValue.getDuration( edu.cmu.cs.stage3.media.DataSource.USE_HINT_IF_NECESSARY );
-//				t = dataSourceValue.waitForDuration( 100 );
-//				if( Double.isNaN( t ) ) {
-//					t = dataSourceValue.getDurationHint();
-//				}
+				t = dataSourceValue.getDuration( edu.cmu.cs.stage3.media.DataSource.USE_HINT_IF_NECESSARY );				
 			}
-			return getReprForValue( element, true ) + " (" + formatTime( t ) + ")";  
+			return  s + " (" + formatTime( t ) + ")";  
 		}
 
 		return getReprForValue( element, true );
@@ -1248,9 +1266,8 @@ public class AuthoringToolResources {
 	}
 
 	public static String[] getDesiredProperties( Class elementClass ) {
-		java.util.LinkedList desired = new java.util.LinkedList();
-		String format = AuthoringToolResources.getFormat( elementClass );
-		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
+		java.util.LinkedList desired = new java.util.LinkedList();	
+		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( AuthoringToolResources.getFormat( elementClass ) );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
 			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {  
@@ -1381,7 +1398,7 @@ public class AuthoringToolResources {
 	}
 	
 	private static java.awt.Color hslToRGB( float[] hsl ) {
-		java.awt.Color rgb = new java.awt.Color(0,0,0);
+		//java.awt.Color rgb = new java.awt.Color(0,0,0);
 		if (hsl[1] == 0){
 //			System.out.println("For HSL: "+hsl[0]+", "+hsl[1]+", "+hsl[2]+" RGB = "+hsl[2]+", "+hsl[2]+", "+hsl[2]);
 			return new java.awt.Color(hsl[2],hsl[2],hsl[2]);
@@ -1667,7 +1684,7 @@ public class AuthoringToolResources {
 				Runtime.getRuntime().exec( cmd );
 		    } catch( Throwable t ) {
 		        String lcOSName = System.getProperty( "os.name" ).toLowerCase(); 
-		        if( lcOSName.startsWith( "mac os x" ) ) { 
+		        if( lcOSName.startsWith( "Mac os x" ) ) { 
 		            Runtime.getRuntime().exec( "open " + urlString ); 
 		        }
 		    }
@@ -2666,7 +2683,7 @@ public class AuthoringToolResources {
 					String text = ((javax.swing.JButton)o).getText();
 					if( text.equals( buttonText ) ) {
 						return true;
-					} 
+					}
 				}
 				return false;
 			}

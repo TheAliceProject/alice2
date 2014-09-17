@@ -1365,6 +1365,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     }
                     else if (current.startsWith(localGalleryName)){ 	
                         currentDirToSet = getRootDirectoryNamed(localGalleryName + " (" + Configuration.getValue( authoringToolPackage, "language" ) + ")");
+                        if (currentDirToSet == null) currentDirToSet = getRootDirectoryNamed(localGalleryName + " (Core)");
                     }
                     else if (current.equalsIgnoreCase(cdGalleryName)){
                         currentDirToSet = getRootDirectoryNamed(cdGalleryName);

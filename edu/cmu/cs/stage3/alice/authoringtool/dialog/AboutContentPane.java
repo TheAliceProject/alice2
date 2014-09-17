@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import java.net.URL;
+
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
@@ -32,9 +34,14 @@ public class AboutContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	public AboutContentPane() {
 		javax.swing.JLabel imageLabel = new javax.swing.JLabel();
-		imageLabel.setIcon(new javax.swing.ImageIcon(
-					edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-							.getResource("images/aboutAlice_"+AikMin.locale+".png")));
+		URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+				.getResource("images/aboutAlice_"+AikMin.locale+".png");
+		if (url == null) {
+			url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+					.getResource("images/aboutAlice_English.png");
+		}
+	
+		imageLabel.setIcon(new javax.swing.ImageIcon(url));
 		setBackground(new java.awt.Color(173, 202, 234));
 		setPreferredSize(new java.awt.Dimension(520, 410));
 

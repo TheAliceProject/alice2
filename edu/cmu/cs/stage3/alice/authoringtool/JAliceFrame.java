@@ -31,6 +31,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -43,6 +45,7 @@ import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
+import edu.cmu.cs.stage3.alice.authoringtool.util.AlicePopupMenu;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.lang.Messages;
 
@@ -214,16 +217,12 @@ public class JAliceFrame extends javax.swing.JFrame {
 			AuthoringTool.showErrorDialog( Messages.getString("Incorrect_number_of_tokens_in_config_value__mainWindowBounds"), null ); 
 		}
 		this.setBounds( x, y, width, height );
-		setExtendedState(MAXIMIZED_BOTH);
+		//setExtendedState(MAXIMIZED_BOTH);
 
 		// set divider locations
 //		authoringOutputSplitPane.setDividerLocation( height );
 //		authoringOutputSplitPane.setResizeWeight( 1.0 );
-		if (AikMin.locale.compareToIgnoreCase("en")==0){
-			leftRightSplitPane.setDividerLocation( 250 );//230
-		} else {
-			leftRightSplitPane.setDividerLocation( 300 );
-		}
+		leftRightSplitPane.setDividerLocation( 300 );
 		leftRightSplitPane.setResizeWeight( 0.0 );
 		worldTreeDragFromSplitPane.setDividerLocation( (int)(.32 * height) );
 		worldTreeDragFromSplitPane.setResizeWeight( 0.0 );
@@ -293,9 +292,32 @@ public class JAliceFrame extends javax.swing.JFrame {
 		// on screen help
 		if( AuthoringToolResources.areExperimentalFeaturesEnabled() ) {
 			helpMenu.add( onScreenHelpItem, 1 );
-			buttonPanel.add( teachMeButton, new GridBagConstraints( 4, 0, 1, 1, 0.0, 0.0 ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 16, 0, 0), 0, 0 ) );
+			buttonPanel.add( teachMeButton, new GridBagConstraints( 4, 0, 1, 1, 0.0, 0.0 ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(1, 16, 0, 0), 0, 0 ) );
 		}
 		this.getContentPane().add(componentImageFactory, BorderLayout.WEST);
+		
+		// Remove tooltip and popup menu when window loses focus
+		if ( AikMin.isMAC() ){
+			addWindowFocusListener(new WindowFocusListener(){
+				Boolean flag = javax.swing.ToolTipManager.sharedInstance().isEnabled();
+				@Override
+				public void windowGainedFocus(WindowEvent arg0) {
+					if (flag)
+						javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
+					JAliceFrame.this.setEnabled( true );
+					AlicePopupMenu.showPopup();
+				}
+	
+				@Override
+				public void windowLostFocus(WindowEvent arg0) {
+					if (flag)
+						javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
+					AlicePopupMenu.hidePopup();
+					JAliceFrame.this.setEnabled( false );
+				}
+			
+			});
+		}
 	}
 
 	private void recentWorldsInit() {
@@ -364,6 +386,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		addObjectButton.setAction( actions.addCharacterAction );
 		teachMeButton.setAction( actions.launchTutorialAction );
 		selectTutorialMenuItem.setAction( actions.launchTutorialFileAction );
+		tutorialEditor.setAction( actions.launchTutorialEditor );
 		softwareUpdate.setAction( actions.launchSoftwareUpdate );
 		license.setAction( actions.licenseAction );
 		showStdOutItem.setAction( actions.showStdOutDialogAction );
@@ -590,6 +613,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 	JMenuItem exportMovieItem = new JMenuItem();
 	JButton teachMeButton = new JButton();
 	JMenuItem selectTutorialMenuItem = new JMenuItem();
+	JMenuItem tutorialEditor = new JMenuItem();
 	JMenuItem softwareUpdate = new JMenuItem();
 	JMenuItem license = new JMenuItem();
 	JMenuItem showStdOutItem = new JMenuItem();
@@ -689,6 +713,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		exportMovieItem.setText(Messages.getString("Export_Video")); 
 		teachMeButton.setText(Messages.getString("Teach_Me")); 
 		selectTutorialMenuItem.setText(Messages.getString("Select_a_Tutorial")); 
+		tutorialEditor.setText("Create or edit a tutorial"); 
 		softwareUpdate.setText(Messages.getString("Update_Software"));
 		license.setText(Messages.getString("View_License")); 
 		showStdOutItem.setText(Messages.getString("Text_Output___")); 
@@ -725,6 +750,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		
 		helpMenu.add(exampleWorldsItem);
 		helpMenu.add(selectTutorialMenuItem);
+		//helpMenu.add(tutorialEditor);		//Aik Min
 		helpMenu.add(softwareUpdate);
 		helpMenu.add(license);
 		helpMenu.add(aboutItem);

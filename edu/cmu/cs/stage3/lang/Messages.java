@@ -1,6 +1,5 @@
 package edu.cmu.cs.stage3.lang;
 
-import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -27,7 +26,7 @@ public class Messages {
 			return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getObject(key.replace(" ", "_"));
 		} catch (MissingResourceException e) {
 			try {
-				return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getObject(key.replace(" ", ""));
+				return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang.English").getObject(key);
 			} catch (MissingResourceException ee) {						
 				//e.printStackTrace();
 				return key;

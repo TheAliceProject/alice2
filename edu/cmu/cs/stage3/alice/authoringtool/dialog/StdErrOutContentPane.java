@@ -142,8 +142,7 @@ public class StdErrOutContentPane extends
 		}
 	}
 
-	public StdErrOutContentPane(
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+	public StdErrOutContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		super();
 		titleString = Messages.getString("Alice___Error_Console");
 		this.authoringTool = authoringTool;

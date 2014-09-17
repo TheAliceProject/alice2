@@ -28,6 +28,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryViewer;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.swing.ContentPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -37,6 +38,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -786,6 +788,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
 		}
 		
+		// Aik Min - Show/hide he/she builder
 		if (Configuration.getValue(authoringToolPackage, "showBuilderMode")
 				.equalsIgnoreCase("true")) {
 			GalleryViewer.showBuilder = true;
@@ -876,6 +879,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				(String) languageComboBox.getSelectedItem())) {
 			Configuration.setValue(authoringToolPackage, "language",
 					(String) languageComboBox.getSelectedItem());
+			Configuration.setValue( authoringToolPackage, "directories.templatesDirectory", "templateWorlds" + System.getProperty( "file.separator" ) + (String) languageComboBox.getSelectedItem() );  
 		}
 		// if( ! Configuration.getValue( authoringToolPackage,
 		// "printing.scaleFactor" ).equals(

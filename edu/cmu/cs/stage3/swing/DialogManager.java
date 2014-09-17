@@ -275,12 +275,12 @@ public class DialogManager {
 
 		javax.swing.JDialog dialog = pane.createDialog( parent, title );
 		//dialog.setModal(false);
-		
+
 		pane.selectInitialValue();
 		
 		showModalDialog( dialog );
 
-		Object value = pane.getInputValue();
+		Object value = pane.getInputValue();	
 
 		if (value == javax.swing.JOptionPane.UNINITIALIZED_VALUE) {
 			return null;

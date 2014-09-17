@@ -26,8 +26,6 @@ package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.lang.reflect.InvocationTargetException;
-import javax.swing.SwingUtilities;
 
 /**
  * @author Jason Pratt, Dennis Cosgrove
@@ -214,9 +212,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		browseDirectoryButton
 				.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
-						int returnVal = edu.cmu.cs.stage3.swing.DialogManager
-								.showDialog(htmlFileChooser,
-										Messages.getString("Set_directory"));
+						edu.cmu.cs.stage3.swing.DialogManager.showDialog(htmlFileChooser,Messages.getString("Set_directory"));
 					}
 				});
 

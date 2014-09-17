@@ -18,8 +18,6 @@ import org.w3c.dom.CDATASection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
-
 public class Note implements StencilObject, MouseEventListener, KeyEventListener, StencilObjectPositionListener,
   ReadWriteListener, LayoutChangeListener{
   protected Vector shapes = new Vector();

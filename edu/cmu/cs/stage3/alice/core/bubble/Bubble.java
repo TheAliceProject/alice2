@@ -23,8 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.bubble;
 
-import java.io.UnsupportedEncodingException;
-
 
 class SubText {
 	public SubText( String text, java.awt.geom.Rectangle2D bound, int yOffset ) {

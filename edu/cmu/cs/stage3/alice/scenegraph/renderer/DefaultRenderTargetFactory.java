@@ -23,8 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-
 public class DefaultRenderTargetFactory implements RenderTargetFactory {
 
 	public static Class[] getPotentialRendererClasses() {

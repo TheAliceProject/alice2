@@ -171,7 +171,10 @@ public class AliceMenuUI extends javax.swing.plaf.basic.BasicMenuUI {
 
 			MenuElement[] path = ((javax.swing.plaf.basic.BasicMenuUI)menu.getUI()).getPath(); //hack
 			MenuElement[] newPath = new MenuElement[path.length + 1];
-			path[path.length] = menu.getPopupMenu();
+			for( int i = 0; i < path.length; i++ ) {
+				newPath[i] = path[i];
+			}
+			newPath[path.length] = menu.getPopupMenu();
 			defaultManager.setSelectedPath( newPath );
 		}
 

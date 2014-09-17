@@ -93,10 +93,7 @@ public class AliceMenuItemUI extends javax.swing.plaf.basic.BasicMenuItemUI {
 
 				if( path.length > 1 ) {
 					MenuElement[] newPath = new MenuElement[path.length - 1];
-					int i;
-					int c;
-
-					for( i = 0, c = path.length - 1; i < c; i++ ) {
+					for( int i = 0; i < path.length - 1; i++ ) {
 						newPath[i] = path[i];
 					}
 

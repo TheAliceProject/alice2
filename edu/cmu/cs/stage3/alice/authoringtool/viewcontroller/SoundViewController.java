@@ -71,13 +71,15 @@ public class SoundViewController extends javax.swing.JPanel implements edu.cmu.c
 			m_soundDnDPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getElementDnDPanel( sound );
 			add( m_soundDnDPanel, new java.awt.GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 ) );
 			
-			m_soundDurationLabel.updateComponent();
 
 			edu.cmu.cs.stage3.media.DataSource dataSourceValue = sound.dataSource.getDataSourceValue();
 			if( dataSourceValue != null ) {
 				dataSourceValue.addDataSourceListener( m_dataSourceListener );
 				dataSourceValue.waitForRealizedPlayerCount( 1, 0 );
 			}
+			
+			m_soundDurationLabel.updateComponent();
+
 		}
 	}
 

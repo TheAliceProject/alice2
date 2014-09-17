@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import edu.cmu.cs.stage3.alice.core.visualization.CollectionOfModelsVisualization;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -72,7 +71,7 @@ public void clear (){
 			if( underDrag ) {
 				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight2" ) ); 
 			} else {
-				//g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight" ) );
+				g.setColor( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "dndHighlight" ) );
 			}
 			g.drawRect( 0, 0, size.width - 1, size.height - 1 );
 			g.drawRect( 1, 1, size.width - 3, size.height  - 3);
@@ -150,7 +149,7 @@ public void clear (){
 		}
 
 		public void dragOver( java.awt.dnd.DropTargetDragEvent dtde ) {
-			underDrag = checkDrag( dtde );;
+			underDrag = checkDrag( dtde );
 			DnDClipboard.this.repaint();
 		}
 
@@ -188,11 +187,31 @@ public void clear (){
 		}
 	}
 
+	protected boolean checkTransferable( java.awt.datatransfer.Transferable transferable ) {		
+		try {
+			edu.cmu.cs.stage3.alice.core.Element element = (edu.cmu.cs.stage3.alice.core.Element)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor );
+			if ( element instanceof edu.cmu.cs.stage3.alice.core.Sound || 
+					element instanceof edu.cmu.cs.stage3.alice.core.Model || 
+					element instanceof edu.cmu.cs.stage3.alice.core.World ) {
+				return false;
+			} else if ( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse){
+				if (element.getChildCount() > 0) {
+					//dtde.rejectDrag();
+					//return false;
+				}
+			}
+		} catch (Exception e) { }
+		if (edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.elementReferenceFlavor)){
+			return true;
+		}
+		return false;
+	}
+	
 	protected class DropPotentialFeedbackListener implements edu.cmu.cs.stage3.alice.authoringtool.util.event.DnDManagerListener {
 		private void doCheck() {
-			// always accept, for now
-			DnDClipboard.this.paintDropPotential = false;
-			DnDClipboard.this.repaint();
+			java.awt.datatransfer.Transferable transferable = edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.getCurrentTransferable();
+			DnDClipboard.this.paintDropPotential = checkTransferable( transferable );
+			DnDClipboard.this.repaint();		
 		}
 
 		public void dragGestureRecognized( java.awt.dnd.DragGestureEvent dge ) {
@@ -200,7 +219,7 @@ public void clear (){
 		}
 
 		public void dragStarted() {
-			//doCheck();
+			doCheck();
 		}
 
 		public void dragEnter( java.awt.dnd.DragSourceDragEvent dsde ) {

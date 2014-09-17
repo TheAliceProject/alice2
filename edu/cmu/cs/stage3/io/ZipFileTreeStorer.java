@@ -786,7 +786,7 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
 
 		// this seems a tad too risky a change.  dennisc
     	//return new String( buf, offset, size );
-
+		
 		// this seems just right.  dennisc
 		StringBuffer sb = new StringBuffer( size );
 		for (int  i=0; i<size; i++){
@@ -794,8 +794,6 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
 		}
 		return sb.toString();
     }
-
-
 
     private void printFileHeaders(){
         for (int i=0; i<centralDirectory.size(); i++){

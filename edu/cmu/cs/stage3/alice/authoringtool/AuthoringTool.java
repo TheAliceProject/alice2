@@ -23,28 +23,19 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
-import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
-import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener;
-import edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior;
-import edu.cmu.cs.stage3.lang.Messages;
-import edu.cmu.cs.stage3.swing.ContentPane;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -53,6 +44,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
+
+import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
+import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateListener;
+import edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities;
+import edu.cmu.cs.stage3.lang.Messages;
+import edu.cmu.cs.stage3.swing.ContentPane;
 
 /**
  * @author Jason Pratt
@@ -398,11 +395,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		AuthoringTool.hack = this;
 		this.defaultWorld = defaultWorld;
-		if (!(defaultWorld.exists() && defaultWorld.canRead())) {
+/*		if (!(defaultWorld.exists() && defaultWorld.canRead())) {
 			this.defaultWorld = null;
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(defaultWorld.getAbsolutePath() + " " + Messages.getString("does_not_exist_or_cannot_be_read__No_starting_world_will_be_available_"), Messages.getString("Warning"), javax.swing.JOptionPane.WARNING_MESSAGE);  
 		}
-
+*/
 		filterInit();
 		configInit();	
 		try{
@@ -417,7 +414,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		this.stdOutToConsole = stdOutToConsole;
 		this.stdErrToConsole = stdErrToConsole;
 		initializeOutput(stdOutToConsole, stdErrToConsole);
-		//pyInit();
+		pyInit();
 		//AikMin.setFontSize(12);		
 		dialogInit();
 		//AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		
@@ -474,7 +471,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	private void pyInit() {
-		//scriptingFactory = new edu.cmu.cs.stage3.alice.scripting.jython.ScriptingFactory();
+		scriptingFactory = new edu.cmu.cs.stage3.alice.scripting.jython.ScriptingFactory();
 		scriptingFactory.setStdOut(System.out);
 		scriptingFactory.setStdErr(System.err);
 	}
@@ -657,17 +654,18 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		importDirectoryChanged();
 		charactersDirectoryChanged();
 
-		worldInfoContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.WorldInfoContentPane();
+		startUpContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane(this);	
 
-		stdErrOutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this);
+		worldInfoContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.WorldInfoContentPane();		
 		
 		exportCodeForPrintingContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.ExportCodeForPrintingContentPane(this);
 		
 		//saveForWebContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.SaveForWebContentPane(this);
 
 		newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
+	
+		stdErrOutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this);
 		
-		startUpContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane(this);
 
 	}
 
@@ -880,6 +878,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		//tooltips
 		javax.swing.ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
+		javax.swing.ToolTipManager.sharedInstance().setInitialDelay(1000);	
 		javax.swing.ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
 	}
 	public static int id = 0;
@@ -1528,7 +1527,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							else {
 								String file = JAlice.getAliceHomeDirectory().getParent().toString()+"/Required/run-alice";
 								if (new java.io.File(file).exists()) {
-									Runtime.getRuntime().exec( file );
+									try {
+										Runtime.getRuntime().exec( file );
+									} catch (Exception e){
+										e.printStackTrace();
+									}
 								} else {
 									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice executable in Alice directory. Please restart Alice manually.");
 								}
@@ -1669,6 +1672,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			userDefinedParameterListener.setWorld( null );
 			setCurrentWorldLocation(null);
 			editObject(null);
+			PopupMenuUtilities.clearRecentlyUsedValues();
 			if (world != null) {
 				world.release();
 				fireWorldUnLoaded(world);
@@ -2361,7 +2365,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						AuthoringTool.this.getUndoRedoStack().setIsListening( false );
 						model.vehicle.set(world);
 						edu.cmu.cs.stage3.math.Box boundingBox = model.getBoundingBox();
-						javax.vecmath.Vector3d insertionPoint = boundingBox.getCenterOfBottomFace();
+						//javax.vecmath.Vector3d insertionPoint = boundingBox.getCenterOfBottomFace();
 						model.setAbsoluteTransformationRightNow(targetTransformation);
 						model.moveRightNow( edu.cmu.cs.stage3.math.MathUtilities.negate(boundingBox.getCenterOfBottomFace() ) );
 //						model.vehicle.set(null);
@@ -2657,7 +2661,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		edu.cmu.cs.stage3.alice.core.Element element = null;
 
 		if (path == null) {	
-			String s=importFileChooser.getFileFilter().getDescription();
+			//String s=importFileChooser.getFileFilter().getDescription();
 			if (importFileChooser.getFileFilter().getDescription().compareToIgnoreCase(Messages.getString("Image_Files__BMP_JPG_JPEG_PNG_GIF_TIF_TIFF_")) == 0) { 
 				importFileChooser.setAccessory(new edu.cmu.cs.stage3.alice.authoringtool.dialog.ImagePreview(importFileChooser));	//Aik Min - image preview for import texture map
 				importFileChooser.setCurrentDirectory( new java.io.File(JAlice.getAliceHomeDirectory(), "textureMap") ); 
@@ -2784,12 +2788,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	public void animateAddModel(edu.cmu.cs.stage3.alice.core.Transformable transformable, edu.cmu.cs.stage3.alice.core.ReferenceFrame vehicle, edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera camera) {
 		if (transformable instanceof edu.cmu.cs.stage3.alice.core.Model) {
-			boolean shouldAnimateCamera = (camera != null);
 			edu.cmu.cs.stage3.alice.core.Model model = (edu.cmu.cs.stage3.alice.core.Model) transformable;
 
 			java.util.HashMap opacityMap = new java.util.HashMap();
 			java.util.Vector properties = new java.util.Vector();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				properties.add(camera.localTransformation);
 				properties.add(camera.farClippingPlaneDistance);
 			}
@@ -2805,7 +2808,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			model.opacity.set(new Double(0.0), edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
 			//			javax.vecmath.Matrix4d goodLook = AuthoringToolResources.getAGoodLookAtMatrix( model, camera );
 			javax.vecmath.Matrix4d goodLook = null;
-			if (shouldAnimateCamera){
+			if (camera != null){
 				model.vehicle.set(vehicle);
 				goodLook = camera.calculateGoodLookAt(model);
 			}
@@ -2814,7 +2817,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 			double distanceToBackOfObject = 0.0;
 			boolean needToChangeFarClipping = false;
-			if (shouldAnimateCamera){
+			if (camera != null){
 				distanceToBackOfObject = AuthoringToolResources.distanceToBackAfterGetAGoodLookAt(model, camera);
 				needToChangeFarClipping = distanceToBackOfObject > camera.farClippingPlaneDistance.doubleValue();
 			}
@@ -2833,13 +2836,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			vehicleAnimation.duration.set(new Double(0.0));
 			vehicleAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
 			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation getAGoodLook = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				getAGoodLook.subject.set(camera);
 				getAGoodLook.pointOfView.set(goodLook);
 			}
 			
 			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation cameraGoBack = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				cameraGoBack.subject.set(camera);
 				cameraGoBack.pointOfView.set(camera.getLocalTransformation());
 				cameraGoBack.duration.set(new Double(.5));
@@ -2849,13 +2852,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			edu.cmu.cs.stage3.alice.core.response.Wait wait2 = new edu.cmu.cs.stage3.alice.core.response.Wait();
 			wait2.duration.set(new Double(.2));
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClipping = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				farClipping.element.set(camera);
 				farClipping.propertyName.set("farClippingPlaneDistance"); 
 				farClipping.value.set(new Double(distanceToBackOfObject));
 			}
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClipping2 = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				farClipping2.element.set(camera);
 				farClipping2.propertyName.set("farClippingPlaneDistance"); 
 				farClipping2.value.set(camera.farClippingPlaneDistance.get());
@@ -2884,7 +2887,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			edu.cmu.cs.stage3.alice.core.response.DoInOrder response = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
 			response.componentResponses.add(setupOpacity);
 			response.componentResponses.add(vehicleAnimation);
-			if (shouldAnimateCamera){
+			if (camera != null){
 				response.componentResponses.add(cameraOpacityDoTogether);
 				response.componentResponses.add(cameraGoBack);
 				response.componentResponses.add(farClipping2);
@@ -2899,13 +2902,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			undoVehicleAnimation.duration.set(new Double(0.0));
 			undoVehicleAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
 			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoGetAGoodLook = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
-			if (shouldAnimateCamera){	
+			if (camera != null){	
 				undoGetAGoodLook.subject.set(camera);
 				undoGetAGoodLook.pointOfView.set(goodLook);
 				undoGetAGoodLook.duration.set(new Double(.5));
 			}
 			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoCameraGoBack = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
-			if (shouldAnimateCamera){	
+			if (camera != null){	
 				undoCameraGoBack.subject.set(camera);
 				undoCameraGoBack.pointOfView.set(camera.getLocalTransformation());
 			}
@@ -2914,14 +2917,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			edu.cmu.cs.stage3.alice.core.response.Wait undoWait2 = new edu.cmu.cs.stage3.alice.core.response.Wait();
 			undoWait2.duration.set(new Double(.2));
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoFarClipping = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				undoFarClipping.element.set(camera);
 				undoFarClipping.propertyName.set("farClippingPlaneDistance"); 
 				undoFarClipping.value.set(new Double(distanceToBackOfObject));
 				undoFarClipping.duration.set(new Double(.2));
 			}
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoFarClipping2 = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				undoFarClipping2.element.set(camera);
 				undoFarClipping2.propertyName.set("farClippingPlaneDistance"); 
 				undoFarClipping2.value.set(camera.farClippingPlaneDistance.get());
@@ -2950,7 +2953,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				undoCameraOpacityDoTogether.componentResponses.add(undoFarClipping);
 			}
 			edu.cmu.cs.stage3.alice.core.response.DoInOrder undoResponse = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
-			if (shouldAnimateCamera){
+			if (camera != null){
 				undoResponse.componentResponses.add(undoGetAGoodLook);
 				undoResponse.componentResponses.add(undoCameraOpacityDoTogether);
 				if (needToChangeFarClipping) {
@@ -3687,7 +3690,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try{
 				Thread.sleep(100);
 			}catch (Exception e){}
+			jAliceFrame.setExtendedState(java.awt.Frame.NORMAL);
 			jAliceFrame.setSize(newWidth, newHeight);
+			jAliceFrame.setPreferredSize(new Dimension (newWidth, newHeight));
 			jAliceFrame.setLocation(newPosition);	
 		}
 
@@ -4273,7 +4278,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
 								if (prefix.equals("button")) { 
-									java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
+									java.awt.Component c = null;
+									if (spec.contains("(Core)") || spec.contains("("+AikMin.locale+")" )) {
+										c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);									
+									} else {
+										c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" (Core)");
+									}
+									if (c == null) c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" ("+AikMin.locale+")");
 									if (c != null) {
 										r = c.getBounds();
 										r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
@@ -4554,13 +4565,16 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
 						if (prefix.equals("galleryViewer")) { 
-							if (jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().equals(spec)) {
+							if (jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().equals(spec) ||
+								jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().replace(" (Core)","").equals(spec) ||
+								jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().replace(" ("+AikMin.locale+")","").equals(spec) 	) {
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
 									prefix = AuthoringToolResources.getPrefix(token);
 									spec = AuthoringToolResources.getSpecifier(token);
 									if (prefix.equals("button")) { 
-										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
+										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" (Core)");
+										if (c == null) c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" ("+AikMin.locale+")");
 										if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 											return true;
 										} else {
@@ -5506,7 +5520,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	private void checkForUnreferencedCurrentMethod() {
 		Object object = getObjectBeingEdited();
 		if (object instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
-			if (!AuthoringToolResources.isMethodHookedUp((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) object, world) && !authoringToolConfig.getValue(Messages.getString("doNotShowUnhookedMethodWarning")).equalsIgnoreCase("true")) {  
+			if (!AuthoringToolResources.isMethodHookedUp((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) object, world) && !authoringToolConfig.getValue("doNotShowUnhookedMethodWarning").equalsIgnoreCase("true")) {  
 				String objectRepr = AuthoringToolResources.getReprForValue(object, true);
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
 					Messages.getString("The_current_method__") + objectRepr + Messages.getString("__is_not_called_by_any_events_or_by_any_other_methods_which_might_be_called_by_any_events_"),  
@@ -5673,7 +5687,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
     private static boolean pulsing = true;   
     private static JLabel statusLabel = new JLabel(Messages.getString("Ready")); 
     private static javax.swing.JFrame statusFrame;
-    
+    private int numUpdate = 0;
     private boolean checkForUpdate(){
     	java.net.URL url;
     	java.net.URLConnection urlc = null;
@@ -5736,8 +5750,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         final JCheckBox SpanishUpdate = new JCheckBox(Messages.getString("Update_Spanish_Gallery"));
         left.add(SpanishUpdate);
 
-        final JCheckBox MiddleEastUpdate = new JCheckBox(Messages.getString("Update_MiddleEast_Gallery"));
-        left.add(MiddleEastUpdate);
+        //final JCheckBox MiddleEastUpdate = new JCheckBox(Messages.getString("Update_MiddleEast_Gallery"));
+        //left.add(MiddleEastUpdate);
         
         updateDialog.add(left, BorderLayout.LINE_START);
         
@@ -5750,30 +5764,36 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         		dlg.dispose();
         		if (UpdateJAR.isSelected() || EnglishGallery.isSelected() || EnglishUpdate.isSelected() || SpanishGallery.isSelected() || SpanishUpdate.isSelected()) {
         			if ( UpdateJAR.isSelected() ) {
+        				numUpdate++;
         				new Thread(new StartUpdating( "AliceUpdate.zip", 
         						JAlice.getAliceHomeDirectory().getParent().toString(),
         						false )).start();
         			}
         			if ( EnglishGallery.isSelected() ) {
+        				numUpdate++;
         				new Thread(new StartUpdating( "EnglishGallery.zip", 
         						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
         			if ( EnglishUpdate.isSelected() ) {
+        				numUpdate++;
         				new Thread(new StartUpdating( "EnglishUpdate.zip", 
         						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
         			if ( SpanishGallery.isSelected() ) {
+        				numUpdate++;
         				new Thread(new StartUpdating( "SpanishGallery.zip",
         						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
         			if ( SpanishUpdate.isSelected() ) {
+        				numUpdate++;
         				new Thread(new StartUpdating( "SpanishUpdate.zip",
         						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
         			}
-        			if ( MiddleEastUpdate.isSelected() ) {
-        				new Thread(new StartUpdating( "MiddleEastUpdate.zip",
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
-        			}
+ //       			if ( MiddleEastUpdate.isSelected() ) {
+ //       				numUpdate++;
+ //       				new Thread(new StartUpdating( "MiddleEastUpdate.zip",
+ //       						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
+ //       			}
         		} else {
         			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("No_update_selected_"));
         		}		        
@@ -5802,7 +5822,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 		
 		public void run() {
-			int ii=0;
 			java.io.BufferedInputStream bis = null;
 			java.io.BufferedOutputStream bos = null;
 			java.net.URLConnection urlc = null;
@@ -5826,6 +5845,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				
 				int i, progress = 0;
 				while ((i = bis.read()) != -1) {
+					
 					bos.write( i );
 					if (monitor.isCanceled()) {
 						break;
@@ -5849,10 +5869,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 					while (entries.hasMoreElements()) {
 						ZipEntry entry = (ZipEntry) entries.nextElement();
+						File file = new File (aliceHome + System.getProperty( "file.separator" ) + entry.getName());
 						if (entry.isDirectory()) {
-							String file = aliceHome.getAbsolutePath() + System.getProperty( "file.separator" ) + entry.getName();
-							new File( file ).mkdir();
+							file.mkdir();
 							continue;
+						} else {
+							file.getParentFile().mkdirs();
 						}
 						InputStream in = zipFile.getInputStream(entry);
 						OutputStream out = new BufferedOutputStream(new FileOutputStream(aliceHome + System.getProperty( "file.separator" ) + entry.getName()));
@@ -5884,7 +5906,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				    bos.close();
 				} catch (java.io.IOException ioe) {
 				    ioe.printStackTrace();
-				}             
+				}          
+				numUpdate--;
 	        	if (monitor.isCanceled()) {
 	        		java.io.File temp;
 	        		if ( isGallery ) {
@@ -5894,7 +5917,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	        		}
 	        		if ( temp.exists() )
 	        			temp.delete();        		
-	        	} else {
+	        	} else if (numUpdate == 0) {
 					Object[] options = {Messages.getString("Restart"), Messages.getString("Cancel")};
 					int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("_You_must_restart_Alice_for_the_updates_to_take_effect__"), Messages.getString("Update_completed"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] );  
 					if (result == ContentPane.OK_OPTION){

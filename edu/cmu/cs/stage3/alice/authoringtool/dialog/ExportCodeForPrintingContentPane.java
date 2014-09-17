@@ -44,10 +44,11 @@ class CustomCheckBox extends javax.swing.JCheckBox implements
 		this.index = index;
 	}
 
+	private int size = 30; //14
 	public void paint(java.awt.Graphics g) {
 		super.paint(g);
 		if (image != null) {
-			g.drawImage(image, 14, 0, java.awt.Color.white, this);
+			g.drawImage(image, size, 0, java.awt.Color.white, this);
 		}
 	}
 
@@ -57,7 +58,7 @@ class CustomCheckBox extends javax.swing.JCheckBox implements
 		} else {
 			int x = image.getWidth(this);
 			int y = image.getHeight(this);
-			return new java.awt.Dimension((x + 14), y);
+			return new java.awt.Dimension((x + size), y+1);
 		}
 	}
 
@@ -67,7 +68,7 @@ class CustomCheckBox extends javax.swing.JCheckBox implements
 		} else {
 			int x = image.getWidth(this);
 			int y = image.getHeight(this);
-			return new java.awt.Dimension((x + 14), y);
+			return new java.awt.Dimension((x + size), y);
 		}
 	}
 
@@ -77,7 +78,7 @@ class CustomCheckBox extends javax.swing.JCheckBox implements
 		} else {
 			int x = image.getWidth(this);
 			int y = image.getHeight(this);
-			return new java.awt.Dimension((x + 14), y);
+			return new java.awt.Dimension((x + size), y);
 		}
 	}
 
@@ -401,6 +402,14 @@ public class ExportCodeForPrintingContentPane extends
 								.get(i),
 						objectsToEdit);
 			}
+			for (int i = 0; i < world.groups.size(); i++) {
+				edu.cmu.cs.stage3.alice.core.Group o = (edu.cmu.cs.stage3.alice.core.Group) world.groups.get(i);
+				for (int j = 0; j < o.size(); j++) {
+					addObjectsToEdit(
+						(edu.cmu.cs.stage3.alice.core.Sandbox) o.getChildAt(j),
+						objectsToEdit);
+				}
+			}
 		}
 		buildWhatToPrintPanel(objectsToEdit);
 	}
@@ -459,7 +468,7 @@ public class ExportCodeForPrintingContentPane extends
 					isWorld = false;
 				}
 			} else {
-				String checkBoxText = "";
+				//String checkBoxText = "";
 				toAdd = new CustomCheckBox();
 				if (currentButton != null) {
 					currentButton.addCheckBox((CustomCheckBox) toAdd);

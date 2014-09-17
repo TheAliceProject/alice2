@@ -211,7 +211,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 						}
 					}
 				} else if (reference instanceof edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference) {
-					edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference oAPR = (edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference) reference;
+					//edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference oAPR = (edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference) reference;
 					edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] references = reference
 							.getProperty()
 							.getOwner()
@@ -576,7 +576,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 			if (source == world) {
 				highlightID = Messages.getString("The_World_s_")
 						+ reference.getProperty().getName()
-						+ Messages.getString("_is_set_to_") + ourName;
+						+ Messages.getString("") + ourName;
 			}
 
 			if (highlightID == null) {

@@ -24,9 +24,13 @@
 package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.io.File;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.apple.eawt.AppEvent.OpenFilesEvent;
 import com.apple.eawt.OpenFilesHandler;
@@ -38,7 +42,7 @@ import edu.cmu.cs.stage3.lang.Messages;
  */
 public class JAlice {
 	// version information
-	private static String version = "2.4.2"; 
+	private static String version = "2.4.3 (Sept 2014)"; 
 	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
@@ -118,6 +122,7 @@ public class JAlice {
 				if (getAliceUserDirectory().exists())
 					new java.io.File( getAliceUserDirectory(), "AlicePreferences.xml" ).getAbsoluteFile().delete();
 			}
+			localInit();
 			boolean useJavaBasedSplashScreen = true;
 			String useSplashScreenString = System.getProperty( "alice.useJavaBasedSplashScreen" ); 
 			if( (useSplashScreenString != null) && (! useSplashScreenString.equalsIgnoreCase( "true" )) ) { 
@@ -174,6 +179,14 @@ public class JAlice {
 			//	worldToLoad = new java.io.File( args[args.length-1] ).getAbsoluteFile();
 			//}
 			defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale+".a2w" ).getAbsoluteFile();			
+			if (!(defaultWorld.exists() && defaultWorld.canRead())) {
+				JOptionPane.showMessageDialog(new JFrame(),
+						defaultWorld.getAbsolutePath() + " " + Messages.getString("does_not_exist_or_cannot_be_read__No_starting_world_will_be_available_"), 
+						Messages.getString("Warning"),
+					    JOptionPane.ERROR_MESSAGE);
+				System.exit( 1 );
+			}
+			
 			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
 				splashScreen.hideSplash();
@@ -185,16 +198,25 @@ public class JAlice {
 		mainHasFinished = true;
 	}
 	
+	private static void localInit(){
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
+		if( authoringtoolConfig.getValue( "language" ) == null ) { 
+			authoringtoolConfig.setValue( "language", AikMin.defaultLanguage );
+		}
+		AikMin.locale = authoringtoolConfig.getValue( "language" );
+	}
+	
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.SplashScreen initSplashScreen() {
 		java.awt.Image splashImage;
 
-		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
-		if( authoringtoolConfig.getValue( "language" ) == null ) { 
-			authoringtoolConfig.setValue( "language", "English" );
+		URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+					.getResource("images/AliceSplash_"+AikMin.locale+".png");
+		if (url == null) {
+			url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
+					.getResource("images/AliceSplash_English.png");
 		}
-		AikMin.locale = authoringtoolConfig.getValue( "language" );
-		splashImage = java.awt.Toolkit.getDefaultToolkit().getImage( edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-					.getResource("images/AliceSplash_"+AikMin.locale+".png") ); 
+		splashImage = java.awt.Toolkit.getDefaultToolkit().getImage(url); 
+
 		//Locale mexico = new Locale("es","MX");
 		//Locale spain = new Locale("es","ES");
 		
@@ -203,12 +225,6 @@ public class JAlice {
 
 	private static void configInit() {
 		final edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
-		if( authoringtoolConfig.getValue( "language" ) == null ) { 
-			authoringtoolConfig.setValue( "language", "English" );
-			AikMin.locale = "English";				
-		} else {
-			AikMin.locale = authoringtoolConfig.getValue( "language" );
-		}		
 //		System.out.println(backgroundColor);
 //		System.out.println(new edu.cmu.cs.stage3.alice.scenegraph.Color( 127.0/255.0, 138.0/255.0, 209.0/255.0 ).toString());
 		authoringtoolConfig.setValue( "backgroundColor", backgroundColor ); 
@@ -448,8 +464,8 @@ public class JAlice {
 		authoringtoolConfig.setValue( "directories.charactersDirectory", charDir ); 
 		
 		if( authoringtoolConfig.getValue( "directories.templatesDirectory" ) == null ) { 
-			authoringtoolConfig.setValue( "directories.templatesDirectory", "templateWorlds" );  
-		}
+			authoringtoolConfig.setValue( "directories.templatesDirectory", "templateWorlds" + System.getProperty( "file.separator" ) + AikMin.locale );  
+		}  
 				
 		if( authoringtoolConfig.getValue( "directories.textbookExamplesDirectory" ) == null ) { 
 			authoringtoolConfig.setValue( "directories.textbookExamplesDirectory", "textbookExampleWorlds" );  

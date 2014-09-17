@@ -23,12 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.player;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Label;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 
 public class PlayerApplet extends java.applet.Applet {
 	private AbstractPlayer m_player = new AbstractPlayer() {

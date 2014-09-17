@@ -34,7 +34,6 @@ import edu.cmu.cs.stage3.io.DirectoryTreeStorer;
 import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.util.Criterion;
 import edu.cmu.cs.stage3.util.HowMuch;
-import java.nio.charset.Charset;
 
 public abstract class Element {
 	private static java.util.Hashtable s_classnameMap = new java.util.Hashtable();

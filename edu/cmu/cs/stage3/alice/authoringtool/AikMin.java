@@ -1,16 +1,15 @@
 package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.awt.Font;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 import javax.swing.UIManager;
 	
 public class AikMin {
 	public static String locale = "";
-	public static String[] listOfLanguages = {"English","Portuguese","Spanish"}; 
+	public static String defaultLanguage = "English";
+	public static String[] listOfLanguages = {"English","Portuguese","Spanish","German"}; 
 	public static int target = 0;	// Compile with 1 to delete preferences file or create etc/firstRun.txt
-	//public static String version ="06/01/2012";
+
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	//Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )
@@ -18,6 +17,19 @@ public class AikMin {
 	//edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" )
 	//System.getProperty( "file.separator" )
 
+	public static boolean isWindows() {
+		return System.getProperty("os.name") != null && System.getProperty("os.name").toLowerCase().startsWith("win"); 
+	}
+	public static boolean isMAC() {
+		return System.getProperty("os.name") != null && System.getProperty("os.name").toLowerCase().startsWith("mac"); 
+	}
+	public static boolean isUnix() {
+		return System.getProperty("os.name") != null && (
+				System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0 ||
+				System.getProperty("os.name").toLowerCase().indexOf("nux") >= 0 ||
+				System.getProperty("os.name").toLowerCase().indexOf("aix") >= 0 ); 
+	}
+	
 	public static boolean isValidName(String name){
 		if( name == null ) {
 			return false;

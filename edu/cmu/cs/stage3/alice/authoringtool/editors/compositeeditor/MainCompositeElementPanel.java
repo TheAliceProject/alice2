@@ -491,7 +491,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             });
             newParameterButton.setDropTarget(new java.awt.dnd.DropTarget(newParameterButton, parameterDropHandler));
             newParameterButton.setToolTipText("<html><body>"+ 
-                             Messages.getString("_p_Open_the_New_Parameter_Dialogue_Box__p_")+ "/n" +
+                             Messages.getString("_p_Open_the_New_Parameter_Dialogue_Box__p_")+ "<br>" +
                              Messages.getString("_p_Parameters_allow_you_to_send_information__p_")+ 
                              Messages.getString("_p_to_a_method_when_you_run_it__You_may_choose__p_")+ 
                              Messages.getString("_p_among_several_types_of_information_to_send__p_")+ 
@@ -531,7 +531,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             });
             newVariableButton.setDropTarget(new java.awt.dnd.DropTarget(newVariableButton, variableDropHandler));
             newVariableButton.setToolTipText("<html><body>"+ 
-                             Messages.getString("_p_Open_the_New_Variable_Dialogue_Box__p_")+ "/n" +
+                             Messages.getString("_p_Open_the_New_Variable_Dialogue_Box__p_")+ "<br>" +
                              Messages.getString("_p_Variables_allow_you_to_store_information__p_")+ 
                              Messages.getString("_p_in_a_method_when_it_runs__You_may_choose__p_")+ 
                              Messages.getString("_p_among_several_types_of_information__like__p_")+ 

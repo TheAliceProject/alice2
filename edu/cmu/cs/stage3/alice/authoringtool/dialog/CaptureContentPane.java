@@ -24,19 +24,23 @@
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.core.Behavior;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Response;
 import edu.cmu.cs.stage3.alice.core.Sandbox;
 import edu.cmu.cs.stage3.alice.core.World;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.lang.Messages;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import movieMaker.FrameSequencer;
 import movieMaker.MovieCapturer;
 import movieMaker.MovieWriter;
@@ -774,7 +778,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// getContentPane().add( buttonPanel, java.awt.BorderLayout.NORTH );
 
 		int renderWidth = renderPanel.getWidth();
-		int renderHeight = renderPanel.getHeight();
+		//int renderHeight = renderPanel.getHeight();
 
 		// this looks much more complicated than it really is, although some of
 		// the code is quite tempermental
@@ -875,23 +879,45 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 	}
 
+	// checks all behavior files for sounds to add listeners to
+	public void findSoundsfromBehavior(Behavior s) {
+	
+		if ((((Behavior) s).getChildCount()) > 0) {
+			Element[] children = ((Behavior) s)
+					.getChildren(edu.cmu.cs.stage3.alice.core.Response.class);
+			for (int y = 0; y < children.length; y++) {
+				if (children[y] instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) {
+					((edu.cmu.cs.stage3.alice.core.response.SoundResponse) children[y])
+					.addSoundListener(new movieMaker.SoundHandler(authoringTool
+							.getSoundStorage(), authoringTool));
+				}
+			}
+		}
+	}
+	
 	// traverses the scenegraph looking for sounds to add listeneres to
 	public void findSounds(Sandbox sbox) {
+		// Find Sounds from Response - Methods
 		ElementArrayProperty p = sbox.responses;
 		Object[] objs = p.getArrayValue();
-
-		// System.err.println(sbox.name.get());
 
 		for (int x = 0; x < objs.length; x++)
 			if (objs[x] != null)
 				findSoundsfromResponse((edu.cmu.cs.stage3.alice.core.Response) objs[x]);
+
+		// Find Sounds from Behavior - Events
+		p = sbox.behaviors;
+		objs = p.getArrayValue();
+
+		for (int x = 0; x < objs.length; x++)
+			if (objs[x] != null)
+				findSoundsfromBehavior((edu.cmu.cs.stage3.alice.core.Behavior) objs[x]);
 
 		Element[] t = sbox
 				.getChildren(edu.cmu.cs.stage3.alice.core.Sandbox.class);
 
 		for (int x = 0; x < t.length; x++)
 			findSounds((Sandbox) t[x]);
-
 	}
 
 	// setup where the frames folder will be
@@ -1000,7 +1026,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		statusFrame.setSize(200, 100);
 		statusFrame.setVisible(true);
 		try {
-			if (System.getProperty("os.name").startsWith("Window")) {
+			if ( AikMin.isWindows() ) {
 				statusFrame.setAlwaysOnTop(true);
 				java.awt.Point location = captureBar.getLocationOnScreen();
 				statusFrame.setLocation(new java.awt.Point((int) (location.x),
@@ -1089,14 +1115,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 			running = true;
 
-			timerThread = new Thread(new StartTimer(timeLabel));
 			capturing = new Thread(movieCapture);
 			writing = new Thread(new WriteFrames(exportDirectory + "/frames",
 					frameSequencer, frameSequencer.getFrameNumber()));
+			timerThread = new Thread(new StartTimer(timeLabel));
 
 			capturing.start();
 			writing.start();
-
 			timerThread.start();
 
 		} else {
@@ -1384,21 +1409,26 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		public void run() {
 			while (running == true || myFrameSeq.getNumFrames() > 0) {
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				movieMaker.Picture picture = myFrameSeq.removeFrame();
 
-				if (picture == null)
-					continue;
-				String fileName = fileLocation + "frame"
+				if (picture != null) {
+					String fileName = fileLocation + "frame"
 						+ numberFormat.format(frameNumber) + ".jpg";
 
-				// set the file name
-				picture.setFileName(fileName);
+					// set the file name
+					picture.setFileName(fileName);
 
-				// write out this frame
-				picture.write(fileName);
+					// write out this frame
+					picture.write(fileName);
 
-				// increment count
-				frameNumber++;
+					// increment count
+					frameNumber++;
+				}
 			}
 		}
 
