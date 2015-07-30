@@ -163,7 +163,7 @@ public abstract class AliceAlertContentPane extends
 			setMoreDetail();
 		} else {
 			throw new IllegalArgumentException(
-					Messages.getString("Illegal_mode__") + mode);
+					Messages.getString("Illegal_mode__", mode));
 		}
 	}
 
@@ -189,8 +189,7 @@ public abstract class AliceAlertContentPane extends
 		detailStream.println(messageLabel.getText() + "\n");
 		detailStream.println();
 
-		detailStream.println(Messages.getString("Alice_version__")
-				+ edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion());
+		detailStream.println(Messages.getString("Alice_version__", edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion()));
 		String[] systemProperties = { "os.name", "os.version", "os.arch",
 				"java.vm.name", "java.vm.version", "user.dir" };
 		for (int i = 0; i < systemProperties.length; i++) {

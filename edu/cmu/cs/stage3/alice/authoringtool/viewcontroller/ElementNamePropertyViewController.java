@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -71,7 +72,7 @@ public class ElementNamePropertyViewController extends StringPropertyViewControl
 	protected java.awt.event.MouseListener getMouseListener() {
 		return new java.awt.event.MouseAdapter() {
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {				
-				if (ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3 || ((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown()){   
+				if ( ev.isPopupTrigger() || (ev.getButton() == java.awt.event.MouseEvent.BUTTON3) || (AikMin.isMAC() && ev.isControlDown()) ){   
 					if( isEnabled() ) {
 						ElementNamePropertyViewController.this.popupButton.doClick();
 					}

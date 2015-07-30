@@ -821,8 +821,8 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
             Object[] options = {Messages.getString("Yes__I_understand_what_I_am_doing_"), 
                     Messages.getString("No__I_made_this_call_accidentally_"),}; 
             int recursionReturn = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(
-                     Messages.getString("The_code_you_have_just_dropped_in_creates_a__recursive_method_call___We_recommend_that_you_understand_n") 
-                    +Messages.getString("what_recursion_is_before_making_a_call_like_this___Are_you_sure_you_want_to_do_this_"), Messages.getString("Recursion_Warning"), javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE, null, options, options[1]);  
+                     Messages.getString("The_code_you_have_just_dropped_in_creates_a__recursive_method_call___We_recommend_that_you_understand_n"), 
+                     Messages.getString("Recursion_Warning"), javax.swing.JOptionPane.YES_NO_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE, null, options, options[1]);  
             if (recursionReturn != 0){
                 return;
             }

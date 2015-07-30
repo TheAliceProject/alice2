@@ -127,8 +127,7 @@ class CustomListButton extends javax.swing.JButton implements
 	}
 }
 
-public class ExportCodeForPrintingContentPane extends
-		edu.cmu.cs.stage3.swing.ContentPane {
+public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool m_authoringTool;
 
 	private javax.swing.JFileChooser m_pathFileChooser = new javax.swing.JFileChooser();
@@ -138,31 +137,20 @@ public class ExportCodeForPrintingContentPane extends
 	private javax.swing.JPanel m_elementsToBeExportedPanel = new javax.swing.JPanel();
 
 	private java.util.Vector m_okActionListeners = new java.util.Vector();
-	private javax.swing.JButton m_exportButton = new javax.swing.JButton(
-			Messages.getString("Export_Code"));
-	private javax.swing.JButton m_cancelButton = new javax.swing.JButton(
-			Messages.getString("Cancel"));
+	private javax.swing.JButton m_exportButton = new javax.swing.JButton(Messages.getString("Export_Code"));
+	private javax.swing.JButton m_cancelButton = new javax.swing.JButton(Messages.getString("Cancel"));
 
-	public ExportCodeForPrintingContentPane(
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+	public ExportCodeForPrintingContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		m_authoringTool = authoringTool;
 
 		java.util.ArrayList extensions = new java.util.ArrayList();
-		extensions
-				.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(
-						"htm", "*.htm"));
-		extensions
-				.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(
-						"html", "*.html"));
-		m_pathFileChooser
-				.setFileFilter(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(
-						extensions, Messages.getString("Web_pages")));
+		extensions.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter("htm", "*.htm"));
+		extensions.add(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter("html", "*.html"));
+		m_pathFileChooser.setFileFilter(new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(extensions, Messages.getString("Web_pages")));
 
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
-				.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-						.getPackage());
-		String path = authoringToolConfig
-				.getValue("directories.worldsDirectory");
+				.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
+		String path = authoringToolConfig.getValue("directories.worldsDirectory");
 		if (path != null) {
 			final java.io.File dir = new java.io.File(path);
 			if (dir != null && dir.exists() && dir.isDirectory()) {
@@ -187,20 +175,17 @@ public class ExportCodeForPrintingContentPane extends
 		}
 
 		m_pathFileChooser.setDialogType(javax.swing.JFileChooser.OPEN_DIALOG);
-		m_pathFileChooser
-				.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+		m_pathFileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
 		m_pathFileChooser.setApproveButtonText(Messages.getString("Set_File"));
 
-		javax.swing.JButton selectAllButton = new javax.swing.JButton(
-				Messages.getString("Select_All"));
+		javax.swing.JButton selectAllButton = new javax.swing.JButton(Messages.getString("Select_All"));
 		selectAllButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				ExportCodeForPrintingContentPane.this.setAllSelected(true);
 			}
 		});
 
-		javax.swing.JButton deselectAllButton = new javax.swing.JButton(
-				Messages.getString("Deselect_All"));
+		javax.swing.JButton deselectAllButton = new javax.swing.JButton(Messages.getString("Deselect_All"));
 		deselectAllButton
 				.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -209,13 +194,11 @@ public class ExportCodeForPrintingContentPane extends
 					}
 				});
 
-		m_authorNameTextField
-				.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent e) {
-						ExportCodeForPrintingContentPane.this.m_exportButton
-								.doClick();
-					}
-				});
+		m_authorNameTextField.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				ExportCodeForPrintingContentPane.this.m_exportButton.doClick();
+			}
+		});
 
 		m_pathTextField.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -223,8 +206,7 @@ public class ExportCodeForPrintingContentPane extends
 			}
 		});
 
-		javax.swing.JButton browseButton = new javax.swing.JButton(
-				Messages.getString("Browse___"));
+		javax.swing.JButton browseButton = new javax.swing.JButton(Messages.getString("Browse___"));
 		browseButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				ExportCodeForPrintingContentPane.this.handleBrowseButton();
@@ -264,8 +246,7 @@ public class ExportCodeForPrintingContentPane extends
 		gbcPath.anchor = GridBagConstraints.NORTHWEST;
 		gbcPath.fill = GridBagConstraints.BOTH;
 		gbcPath.gridwidth = GridBagConstraints.RELATIVE;
-		pathPanel.add(new javax.swing.JLabel(Messages.getString("Export_to_")),
-				gbcPath);
+		pathPanel.add(new javax.swing.JLabel(Messages.getString("Export_to_")),	gbcPath);
 		gbcPath.gridwidth = GridBagConstraints.REMAINDER;
 		gbcPath.weightx = 1.0;
 		pathPanel.add(m_pathTextField, gbcPath);
@@ -277,9 +258,7 @@ public class ExportCodeForPrintingContentPane extends
 		gbcAuthor.anchor = GridBagConstraints.NORTHWEST;
 		gbcAuthor.fill = GridBagConstraints.BOTH;
 		gbcAuthor.gridwidth = GridBagConstraints.RELATIVE;
-		authorPanel.add(
-				new javax.swing.JLabel(Messages.getString("Author_s_name_")),
-				gbcAuthor);
+		authorPanel.add(new javax.swing.JLabel(Messages.getString("Author_s_name_")), gbcAuthor);
 		gbcAuthor.gridwidth = GridBagConstraints.REMAINDER;
 		gbcAuthor.weightx = 1.0;
 		authorPanel.add(m_authorNameTextField, gbcAuthor);
@@ -558,8 +537,7 @@ public class ExportCodeForPrintingContentPane extends
 
 	private void handleWriteProblem(java.io.File file) {
 		edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-				Messages.getString("Cannot_write_to___")
-						+ file.getAbsolutePath() + "\"",
+				Messages.getString("Cannot_write_to___", file.getAbsolutePath()),
 				Messages.getString("Cannot_write"),
 				javax.swing.JOptionPane.ERROR_MESSAGE);
 	}

@@ -45,7 +45,7 @@ public class NumberPropertyViewController extends TextFieldEditablePropertyViewC
 			String propertyKey = "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + property.getName(); 
 			property.getOwner().data.put( propertyKey, valueString );
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("I_don_t_understand_this_number__") + valueString, null, false ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("I_don_t_understand_this_number__", valueString), null, false ); 
 		}
 	}
 

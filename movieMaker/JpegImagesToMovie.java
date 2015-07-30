@@ -30,13 +30,12 @@ package movieMaker;
  * redistribute the Software for such purposes.
  */
 
-import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
 import java.util.List;
+
 import javax.media.Buffer;
 import javax.media.ConfigureCompleteEvent;
 import javax.media.Controller;
@@ -63,6 +62,8 @@ import javax.media.protocol.DataSource;
 import javax.media.protocol.FileTypeDescriptor;
 import javax.media.protocol.PullBufferDataSource;
 import javax.media.protocol.PullBufferStream;
+
+import edu.cmu.cs.stage3.lang.Messages;
 
 
 /**
@@ -478,7 +479,7 @@ public class JpegImagesToMovie implements ControllerListener,
     }
   }
   
-  
+  /*
   public static void main(String args[]) {
     
     if (args.length == 0)
@@ -549,7 +550,7 @@ public class JpegImagesToMovie implements ControllerListener,
     
     System.exit(0);
   }
-  
+  */
   static void prUsage() {
     System.err.println(Messages.getString("Usage__java_JpegImagesToMovie__w__width___h__height___f__frame_rate___o__output_URL___input_JPEG_file_1___input_JPEG_file_2_____")); 
     System.exit(-1);

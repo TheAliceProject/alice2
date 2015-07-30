@@ -51,7 +51,7 @@ public class OffscreenRenderTarget extends RenderTarget implements edu.cmu.cs.st
 	public void setSize( int width, int height ) {
 		m_size.width = width;
 		m_size.height = height;
-		createGLBuffer(width, height);		
+		createDrawable(width, height);		
 	}
 	public void setSize( java.awt.Dimension size ) {
 		setSize( size.width, size.height );

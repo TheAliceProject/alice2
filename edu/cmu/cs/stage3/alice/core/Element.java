@@ -688,10 +688,10 @@ public abstract class Element {
 		if( parentValue != null ) {
 			checkForNameCollision( parentValue, name.getStringValue() );
 			if( parentValue == this ) {
-				throw new RuntimeException( this + Messages.getString("_cannot_be_its_own_parent_") ); 
+				throw new RuntimeException( this + " " + Messages.getString("cannot_be_its_own_parent_") ); 
 			}
 			if( parentValue.isDescendantOf( this ) ) {
-				throw new RuntimeException( this + Messages.getString("_cannot_have_descendant_") + parentValue + Messages.getString("_as_its_parent_") );  
+				throw new RuntimeException( this + " " + Messages.getString("cannot_have_descendant_") + parentValue + " " + Messages.getString("as_its_parent_") );  
 			}
 		}
 		Element prevParent = m_parent;
@@ -1054,7 +1054,7 @@ public abstract class Element {
 				index = m_children.size();
 			}
 			if( m_children.contains( child ) ) {
-				throw new RuntimeException( child + Messages.getString("_is_already_a_child_of_") + this ); 
+				throw new RuntimeException( child + " " + Messages.getString("is_already_a_child_of_") + this ); 
 			}
 			child.internalSetParent( this );
 			edu.cmu.cs.stage3.alice.core.event.ChildrenEvent childrenEvent = new edu.cmu.cs.stage3.alice.core.event.ChildrenEvent( this, child, edu.cmu.cs.stage3.alice.core.event.ChildrenEvent.CHILD_INSERTED, -1, index );
@@ -1445,7 +1445,7 @@ public abstract class Element {
             java.io.Reader reader = new java.io.InputStreamReader(inputStream, "UTF-8");
             
             org.xml.sax.InputSource is = new org.xml.sax.InputSource(reader);
-            is.setEncoding("UTF-8");
+            //is.setEncoding("UTF-8");
             
             org.w3c.dom.Document document = builder.parse( is );
             org.w3c.dom.Element elementNode = document.getDocumentElement();
@@ -1496,7 +1496,7 @@ public abstract class Element {
                     if( childName != null ) {
                         if( element.getChildNamed( childName ) != null ) {
                             child = null;
-                            System.err.println( element + Messages.getString("_already_has_child_named_") + childName + Messages.getString("___skipping_") );  
+                            System.err.println( element + " " + Messages.getString("already_has_child_named_") + childName + Messages.getString("___skipping_") );  
                         }
                     }
                     if( child != null ) {
@@ -1514,7 +1514,7 @@ public abstract class Element {
             }
         } catch( org.xml.sax.SAXException saxe ) {
 			throw new ExceptionWrapper( saxe, "org.xml.sax.SAXException" ); 
-        }
+        } 
 	}
 	public static Element load( edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, Element externalRoot, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws java.io.IOException, edu.cmu.cs.stage3.progress.ProgressCancelException, UnresolvablePropertyReferencesException {
         java.util.Vector referencesToBeResolved = new java.util.Vector();
@@ -1540,7 +1540,6 @@ public abstract class Element {
                 javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
                 javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
                 element = load( builder, loader, referencesToBeResolved, progressObserver );
-
                 ReferenceResolver referenceResolver = new edu.cmu.cs.stage3.alice.core.reference.DefaultReferenceResolver( element, externalRoot );
                 java.util.Enumeration enum0 = referencesToBeResolved.elements();
                 while( enum0.hasMoreElements() ) {
@@ -1583,7 +1582,7 @@ public abstract class Element {
 				loader = new edu.cmu.cs.stage3.io.ZipFileTreeLoader();
 			} else {
 				//too restrictive?
-				throw new IllegalArgumentException( file + Messages.getString("_must_be_a_directory_or_end_in___a2w_____a2c___or___zip__") ); 
+				throw new IllegalArgumentException( file + " " + Messages.getString("must_be_a_directory_or_end_in___a2w_____a2c___or___zip__") ); 
 			}
 		}
 		loader.open( file );
@@ -1730,14 +1729,10 @@ public abstract class Element {
             }
 		}
 
-		String thisDirectory = storer.getCurrentDirectory();
-		//String thisDirectory2 = new String (thisDirectory.getBytes("UTF-8"), "UTF-8");
+		String thisDirectory = storer.getCurrentDirectory(); // new String(storer.getCurrentDirectory().getBytes(), "ISO-8859-1");	// Aik Min - encoding
 		for( int i=0; i<getChildCount(); i++ ) {
 			Element child = (Element)getChildAt( i );
 			String name = child.getRepr( i );	
-			if (storer instanceof edu.cmu.cs.stage3.io.ZipFileTreeStorer) {
-				name = new String(name.getBytes("UTF-8"));
-			}
 			storer.createDirectory( name );
 			storer.setCurrentDirectory( name );
 			count = child.internalStore( builder, storer, progressObserver, howMuch, referenceGenerator, count );
@@ -1788,7 +1783,7 @@ public abstract class Element {
             javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
             int storeCount = internalStore( builder, storer, progressObserver, howMuch, referenceGenerator, 0 );
             if( elementCount != storeCount ) {
-                warnln( Messages.getString("WARNING__elementCount_") + elementCount + Messages.getString("_not_equal_storeCount_") + storeCount );  
+                warnln( Messages.getString("WARNING__elementCount_") + elementCount + " " + Messages.getString("not_equal_storeCount_") + storeCount );  
             }
         } catch( javax.xml.parsers.ParserConfigurationException pce ) {
             pce.printStackTrace();

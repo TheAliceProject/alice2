@@ -261,13 +261,13 @@ public class Actions {
 
 		showStdOutDialogAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
-				authoringTool.showStdErrOutDialog();
+				authoringTool.showStdOutDialog();
 			}
 		};
 
 		showStdErrDialogAction = new javax.swing.AbstractAction() {
 			public void actionPerformed( java.awt.event.ActionEvent e ) {
-				authoringTool.showStdErrOutDialog();
+				authoringTool.showStdErrDialog();
 			}
 		};
 

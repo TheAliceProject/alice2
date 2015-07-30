@@ -126,10 +126,10 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				}
 			}
 		} catch( java.io.IOException e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_parsing_ASE__IOException_caught_at_line_") + tokenizer.lineno(), e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_parsing_ASE__IOException_caught_at_line_", tokenizer.lineno()), e ); 
 			return null;
 		} catch( InvalidFormatError e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_parsing_ASE__Invalid_Format__") + e.getMessage() + Messages.getString("__at_line_") + tokenizer.lineno(), e, false );  
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_parsing_ASE__Invalid_Format__", e.getMessage(), tokenizer.lineno()), e, false );  
 			return null;
 		}
 
@@ -145,7 +145,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				} else {
 					edu.cmu.cs.stage3.alice.core.Transformable parent = (edu.cmu.cs.stage3.alice.core.Transformable)namesToModels.get( parentString );
 					if( parent == null ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( model.name.getValue() + Messages.getString("_s_parent__") + parentString + Messages.getString("__does_not_exist___putting_it_at_the_top_level___"), null );  
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("_s_parent__", model.name.getValue(), parentString ), null );  
 						rootModels.add( model );
 						model.isFirstClass.set( Boolean.TRUE );
 					} else {
@@ -257,7 +257,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 							model.bumpMap.set( material.bumpTexture );
 						}
 					} else if( materialIndex != -1 ) {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( model.name.getValue() + Messages.getString("_referenced_a_material_index_out_of_range___no_material_properties_assigned_"), null ); 
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("referenced_a_material_index_out_of_range___no_material_properties_assigned_", model.name.getValue()), null ); 
 					}
 				}
 			}
@@ -624,7 +624,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 					if( imageFile.canRead() ) {
 						bis = new java.io.BufferedInputStream( new java.io.FileInputStream( imageFile ) );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Cannot_read_from_file__") + filename + Messages.getString("_specified_on_line_") + tokenizer.lineno(), null, false );  
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Cannot_read_from_file__", filename, tokenizer.lineno()), null, false );  
 						continue;
 					}
 				} else {
@@ -638,11 +638,11 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 							if( imageFile.canRead() ) {
 								bis = new java.io.BufferedInputStream( new java.io.FileInputStream( imageFile ) );
 							} else {
-								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Cannot_read_from_file__") + filename + Messages.getString("_specified_on_line_") + tokenizer.lineno(), null, false );  
+								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Cannot_read_from_file__", filename, tokenizer.lineno()), null, false );  
 								continue;
 							}
 						} else {
-							edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_find_file__") + filename + Messages.getString("_specified_on_line_") + tokenizer.lineno(), null, false );  
+							edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_find_file__", filename, tokenizer.lineno()), null, false );  
 							continue;
 						}
 					} else if( location instanceof java.net.URL ) {

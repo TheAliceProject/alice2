@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author Jason Pratt
  */
@@ -41,11 +43,18 @@ public class PropertyGUI extends javax.swing.JPanel implements edu.cmu.cs.stage3
 
 		propertyDnDPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyDnDPanel( property );
 		propertyViewController = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController( property, includeDefaults, allowExpressions, true, factory );
+		if (!AikMin.isLTR()){
+			add( javax.swing.Box.createHorizontalGlue() );
+			add( propertyViewController );
+			add( equalsLabel );
+			add( propertyDnDPanel );
+		} else {
+			add( propertyDnDPanel );
+			add( equalsLabel );
+			add( propertyViewController );
+			add( javax.swing.Box.createHorizontalGlue() );
+		}
 
-		add( propertyDnDPanel );
-		add( equalsLabel );
-		add( propertyViewController );
-		add( javax.swing.Box.createHorizontalGlue() );
 	}
 
 	public void goToSleep() {}

@@ -455,8 +455,7 @@ public class SimplePicture implements DigitalPicture
      file = new File(FileChooser.getMediaPath(this.fileName));
      if (!file.canRead())
      {
-       throw new IOException(this.fileName +
-                             Messages.getString("_could_not_be_opened__Check_that_you_specified_the_path")); 
+       throw new IOException(this.fileName + " " + Messages.getString("could_not_be_opened__Check_that_you_specified_the_path")); 
      }
    }
    
@@ -622,8 +621,8 @@ public class SimplePicture implements DigitalPicture
    // canWrite is true only when the file exists already! (alexr)
    if (!fileLoc.canWrite()) {
        // System.err.println("can't write the file but trying anyway? ...");
-        throw new IOException(fileName +
-        Messages.getString("_could_not_be_opened__Check_to_see_if_you_can_write_to_the_directory_")); 
+        throw new IOException(fileName + " " +
+        Messages.getString("could_not_be_opened__Check_to_see_if_you_can_write_to_the_directory_")); 
    }
    
    // get the extension
@@ -725,8 +724,8 @@ public class SimplePicture implements DigitalPicture
  
 public String toString()
  {
-   String output = Messages.getString("Simple_Picture__filename_") + fileName +  
-     Messages.getString("_height_") + getHeight() + Messages.getString("_width_") + getWidth();  
+   String output = Messages.getString("Simple_Picture__filename_") + fileName + " " +  
+     Messages.getString("height_") + getHeight() + " " + Messages.getString("width_") + getWidth();  
    return output;
  }
 

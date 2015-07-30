@@ -58,14 +58,14 @@ public class BetterPlaceAnimation extends PointOfViewAnimation {
 			m_asSeenBy = BetterPlaceAnimation.this.asSeenBy.getReferenceFrameValue();
 			
 			if( m_asSeenBy == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_needs_something_or_someone_to_move_to_"), null, BetterPlaceAnimation.this.asSeenBy ); 
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("needs_something_or_someone_to_move_to_"), null, BetterPlaceAnimation.this.asSeenBy ); 
             }
             if( m_subject == m_asSeenBy ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_move_to_") + m_subject.name.getStringValue() + ".", getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );              
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("can_t_move_to_") + m_subject.name.getStringValue() + ".", getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );              
             }
             
             if (m_subject.isAncestorOf(m_asSeenBy)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_move_to_a_part_of_itself"), getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );             
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("can_t_move_to_a_part_of_itself"), getCurrentStack(), BetterPlaceAnimation.this.asSeenBy );             
             }
 				
 			javax.vecmath.Matrix4d pov = asSeenBy.getReferenceFrameValue().getPointOfView();

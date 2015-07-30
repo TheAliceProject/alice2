@@ -90,7 +90,7 @@ public class ToStringQuestion extends Question {
 		else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.RandomNumber)
 			Print.outputtext = Messages.getString("random_number_as_a_string_is_"); 
 		else if (Print.outputtext != null)
-			Print.outputtext = Print.outputtext.substring(0, Print.outputtext.length()-4)+Messages.getString("_as_a_string_is_"); 
+			Print.outputtext = Print.outputtext.substring(0, Print.outputtext.length()-4)+" "+Messages.getString("as_a_string_is_"); 
 
 		if( value instanceof Element ) {
 			return ((Element)value).getTrimmedKey();

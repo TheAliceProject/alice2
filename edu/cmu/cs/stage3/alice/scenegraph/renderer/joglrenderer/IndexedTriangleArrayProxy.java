@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 class IndexedTriangleArrayProxy extends VertexGeometryProxy {
     private int[] m_indices;
@@ -35,8 +35,8 @@ class IndexedTriangleArrayProxy extends VertexGeometryProxy {
 		    setIsGeometryChanged( true );
         }
         if( isGeometryChanged() ) {
-            context.gl.glNewList( id.intValue(), GL.GL_COMPILE_AND_EXECUTE );
-            context.gl.glBegin( GL.GL_TRIANGLES );
+            context.gl.glNewList( id.intValue(), GL2.GL_COMPILE_AND_EXECUTE );
+            context.gl.glBegin( GL2.GL_TRIANGLES );
             if ( m_indices != null)
             for( int i=0; i<m_indices.length; i+=3 ) {
                 context.renderVertex( getVertexAt( m_indices[ i+2 ] ) );
@@ -54,7 +54,7 @@ class IndexedTriangleArrayProxy extends VertexGeometryProxy {
 	public void pick( PickContext context, boolean isSubElementRequired ) {
 	    context.gl.glPushName( -1 );
 	    if( isSubElementRequired ) {
-            context.gl.glBegin( GL.GL_TRIANGLES );
+            context.gl.glBegin( GL2.GL_TRIANGLES );
             for( int i=0; i<m_indices.length; i+=3 ) {
                 context.renderPickVertex( getVertexAt( m_indices[ i+2 ] ) );
                 context.renderPickVertex( getVertexAt( m_indices[ i+1 ] ) );
@@ -66,7 +66,7 @@ class IndexedTriangleArrayProxy extends VertexGeometryProxy {
 	        if ( m_indices != null)
 	        for( int i=0; i<m_indices.length; i+=3 ) {
 				context.gl.glLoadName( id++ );
-	            context.gl.glBegin( GL.GL_TRIANGLES );
+	            context.gl.glBegin( GL2.GL_TRIANGLES );
                 context.renderPickVertex( getVertexAt( m_indices[ i+2 ] ) );
                 context.renderPickVertex( getVertexAt( m_indices[ i+1 ] ) );
                 context.renderPickVertex( getVertexAt( m_indices[ i+0 ] ) );

@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 public class PickInfo implements  edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo {
     private edu.cmu.cs.stage3.alice.scenegraph.Component m_source;
@@ -36,7 +36,7 @@ public class PickInfo implements  edu.cmu.cs.stage3.alice.scenegraph.renderer.Pi
 
 	public PickInfo( PickContext context, java.nio.IntBuffer pickBuffer, edu.cmu.cs.stage3.alice.scenegraph.Component source ) {
 	    m_source = source;
-	    int length = context.gl.glRenderMode( GL.GL_RENDER );
+	    int length = context.gl.glRenderMode( GL2.GL_RENDER );
 	    if( length < 0 ) {
 	        //todo: throw exception?
 	        length = 0;

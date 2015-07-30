@@ -42,7 +42,7 @@ public class ElementPrototype {
 		try {
 			testElement = (edu.cmu.cs.stage3.alice.core.Element)elementClass.newInstance();
 		} catch( Exception e ) {
-			throw new IllegalArgumentException( Messages.getString("Unable_to_create_a_new_element_of_type__") + elementClass.getName() ); 
+			throw new IllegalArgumentException( Messages.getString("Unable_to_create_a_new_element_of_type__", elementClass.getName()) ); 
 		}
 		if( ! (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) || edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass )) ) { // don't do checking for CallToUserDefinedResponse/Question, since they use known and desired properties for requiredParameters
 			if( knownPropertyValues != null ) {
@@ -51,7 +51,7 @@ public class ElementPrototype {
 					Object propertyValue = knownPropertyValues[i].getObject();
 					edu.cmu.cs.stage3.alice.core.Property property = testElement.getPropertyNamed( propertyName );
 					if( property == null ) {
-						throw new IllegalArgumentException( Messages.getString("property_named_") + propertyName + Messages.getString("_does_not_exist_in_") + elementClass.getName() );  
+						throw new IllegalArgumentException( Messages.getString("property_named_does_not_exist_in_", propertyName, elementClass.getName()) );  
 					}
 					if( propertyValue == null ) {
 //						if( ! property.isAcceptingOfNull() ) {
@@ -63,12 +63,12 @@ public class ElementPrototype {
 							// allow
 						} else {
 							if( ! property.getValueClass().isAssignableFrom( ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass() ) ) {
-								throw new IllegalArgumentException( Messages.getString("property_named_") + propertyName + Messages.getString("_in_class_") + elementClass.getName() + Messages.getString("_does_not_accept_expressions_of_type_") + ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass().getName() );   
+								throw new IllegalArgumentException( Messages.getString("property_named_in_class_does_not_accept_expressions_of_type_", propertyName, elementClass.getName(), ((edu.cmu.cs.stage3.alice.core.Expression)propertyValue).getValueClass().getName()) );   
 							}
 						}
 					} else {
 						if( ! property.getValueClass().isAssignableFrom( propertyValue.getClass() ) ) {
-							throw new IllegalArgumentException( Messages.getString("property_named_") + propertyName + Messages.getString("_in_class_") + elementClass.getName() + Messages.getString("_does_not_accept_values_of_type_") + propertyValue.getClass().getName() + Messages.getString("__bad_value__") + propertyValue );    //$NON-NLS-4$
+							throw new IllegalArgumentException( Messages.getString("property_named_in_class_does_not_accept_values_of_type___bad_value__", propertyName, elementClass.getName(), propertyValue.getClass().getName(), propertyValue ));
 						}
 					}
 				}
@@ -80,7 +80,7 @@ public class ElementPrototype {
 					//desiredProperties[i] = Messages.getString( desiredProperties[i] );
 					edu.cmu.cs.stage3.alice.core.Property property = testElement.getPropertyNamed( desiredProperties[i] );
 					if( property == null ) {
-						throw new IllegalArgumentException( Messages.getString("property_named_") + desiredProperties[i] + Messages.getString("_does_not_exist_in_") + elementClass.getName() );  
+						throw new IllegalArgumentException( Messages.getString("property_named_does_not_exist_in_", desiredProperties[i], elementClass.getName()) );  
 					}
 				}
 			} else {

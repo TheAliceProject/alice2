@@ -42,7 +42,7 @@ public class ForEachTogether extends ForEach {
             if( m_listIndex>=0 && m_listIndex < m_runtimeResponsesArray.length ) {
                 return m_runtimeResponsesArray[ m_listIndex ];
             } else {
-                throw new ArrayIndexOutOfBoundsException( m_listIndex + Messages.getString("_is_out_of_bounds")+" [0,"+m_runtimeResponsesArray.length+")." );   
+                throw new ArrayIndexOutOfBoundsException( m_listIndex + " " + Messages.getString("is_out_of_bounds")+" [0,"+m_runtimeResponsesArray.length+")." );   
             }
 		}
         

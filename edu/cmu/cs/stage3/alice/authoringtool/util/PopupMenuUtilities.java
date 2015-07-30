@@ -276,7 +276,7 @@ public class PopupMenuUtilities{
 				menu.add( (java.awt.Component)content );
 			} else if( content == null ) {
 				//javax.swing.JLabel label = new javax.swing.JLabel( name );
-				javax.swing.JLabel label = new javax.swing.JLabel( Messages.getString( name ) );
+				javax.swing.JLabel label = new javax.swing.JLabel( Messages.getString( name ) ); // Aik Min - One Shot Menu title labels
 				label.setBorder( javax.swing.BorderFactory.createEmptyBorder( 1, 4, 1, 4 ) );
 				menu.add( label );
 			}
@@ -407,7 +407,9 @@ public class PopupMenuUtilities{
 									}
 								}
 							};
-							structure.addElement( new StringObjectPair( (String)child.name.getValue(), delayedBindingPopupItem ) );
+							if (!(child instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion)){
+								structure.addElement( new StringObjectPair( (String)child.name.getValue(), delayedBindingPopupItem ) );
+							}
 						}
 					}
 				}
@@ -462,10 +464,12 @@ public class PopupMenuUtilities{
 			if( context != null ) {
 				text = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameInContext( elements[i], context );
 			}
-			if( elements[i].equals( currentValue ) ) {
-				structure.addElement( new StringObjectPair( text, new PopupItemWithIcon( factory.createItem( elements[i] ), currentValueIcon ) ) );
-			} else {
-				structure.addElement( new StringObjectPair( text, factory.createItem( elements[i] ) ) );
+			if (!(elements[i] instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion)){
+				if( elements[i].equals( currentValue ) ) {
+					structure.addElement( new StringObjectPair( text, new PopupItemWithIcon( factory.createItem( elements[i] ), currentValueIcon ) ) );
+				} else {
+					structure.addElement( new StringObjectPair( text, factory.createItem( elements[i] ) ) );
+				}
 			}
 		}
 

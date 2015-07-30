@@ -34,7 +34,6 @@ import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
 import javax.media.Buffer;
 import javax.media.Codec;
 import javax.media.Control;
@@ -89,7 +88,7 @@ public class Concat implements ControllerListener, DataSinkListener {
     /**
      * Main program
      */
-    public static void main(String [] args) {
+/*    public static void main(String [] args) {
 
 	Vector inputURL = new Vector();
 	String outputURL = null;
@@ -146,7 +145,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	System.exit(0);
     }
-
+*/
 
     /**
      * Given an array of input media locators and an output locator,
@@ -487,7 +486,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 			System.err.println(Messages.getString("__Transcoding__") + pInfo[j].ml); 
 			System.err.println("  " + oldFmt); 
-			System.err.println(Messages.getString("___________to_")); 
+			System.err.println(Messages.getString("to__")); 
 			System.err.println("  " + newFmt); 
 		    } 
 
@@ -504,9 +503,9 @@ public class Concat implements ControllerListener, DataSinkListener {
 				System.err.println(TRANSCODE_MSG);
 			    }
 			    System.err.println(Messages.getString("__Scaling__") + pInfo[j].ml); 
-			    System.err.println(Messages.getString("__from__") + oldSize.width +  
+			    System.err.println("  " + Messages.getString("from__") + oldSize.width +  
 						" x " + oldSize.height); 
-			    System.err.println(Messages.getString("__to__") + newSize.width +  
+			    System.err.println("  " + Messages.getString("to__") + newSize.width +  
 						" x " + newSize.height); 
 			    newFmt = (new VideoFormat(null, 
 					newSize, 
@@ -589,7 +588,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
 			    System.err.println(Messages.getString("__Set_quality_to_") +  
-					val + Messages.getString("_on_") + qc); 
+					val + " " + Messages.getString("on_") + qc); 
 			    break;
 			}
 		    }

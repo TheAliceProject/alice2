@@ -101,7 +101,7 @@ public class ScriptEditor extends javax.swing.JPanel implements edu.cmu.cs.stage
 
 	public void updateLineNumber() {
 		//TODO: better formatting
-		this.lineNumberLabel.setText( Messages.getString("__line_number__") + (scriptEditorPane.getCurrentLineNumber() + 1) + "     " );  
+		this.lineNumberLabel.setText( "  "+Messages.getString("line_number__", (scriptEditorPane.getCurrentLineNumber() + 1) ) + "     " );  
 	}
 
 	///////////////////////////////////////////////
@@ -146,7 +146,7 @@ public class ScriptEditor extends javax.swing.JPanel implements edu.cmu.cs.stage
 		border4 = BorderFactory.createBevelBorder(BevelBorder.LOWERED,Color.white,Color.lightGray,new Color(99, 99, 99),new Color(142, 142, 142));
 		this.setLayout(borderLayout1);
 		lineNumberLabel.setBorder(border1);
-		lineNumberLabel.setText(Messages.getString("__line_number______")); 
+		lineNumberLabel.setText("  "+Messages.getString("line_number__", "")+"    "); 
 		southPanel.setLayout(boxLayout1);
 		southPanel.setBorder(border3);
 		bogusPanel.setBorder(border4);

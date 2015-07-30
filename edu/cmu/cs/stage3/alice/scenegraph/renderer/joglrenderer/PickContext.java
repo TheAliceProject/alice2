@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
+import com.jogamp.opengl.GLAutoDrawable;
+
 class PickContext extends Context {
     private RenderTarget m_renderTarget;
 
@@ -35,7 +37,7 @@ class PickContext extends Context {
     }
 
     
-	public void display( javax.media.opengl.GLAutoDrawable drawable ) {
+	public void display( GLAutoDrawable drawable ) {
         super.display( drawable );
         if( m_pickParameters != null ) {
             m_renderTarget.commitAnyPendingChanges();
@@ -47,7 +49,7 @@ class PickContext extends Context {
     	    }
         }
     }
-    public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( javax.media.opengl.GLAutoDrawable drawable, int x, int y, boolean isSubElementRequired, boolean isOnlyFrontMostRequired ) {
+    public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( GLAutoDrawable drawable, int x, int y, boolean isSubElementRequired, boolean isOnlyFrontMostRequired ) {
         m_pickParameters = new PickParameters( x, y, isSubElementRequired, isOnlyFrontMostRequired );
         //System.err.println( m_pickParameters );
         /*
@@ -83,4 +85,6 @@ class PickContext extends Context {
 	protected void renderPickVertex( edu.cmu.cs.stage3.alice.scenegraph.Vertex3d vertex ) {
 		gl.glVertex3d( vertex.position.x, vertex.position.y, -vertex.position.z );
 	}
+
+	public void dispose(GLAutoDrawable arg0) {	}
 }

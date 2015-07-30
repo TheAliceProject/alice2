@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL2;
 //import sun.java2d.pipe.CompositePipe;
 
 public class Graphics extends java.awt.Graphics {
@@ -52,16 +52,16 @@ public class Graphics extends java.awt.Graphics {
 
 		int width = m_renderContext.getWidth();
 		int height = m_renderContext.getHeight();
-		m_renderContext.gl.glMatrixMode( GL.GL_PROJECTION );
+		m_renderContext.gl.glMatrixMode( GL2.GL_PROJECTION );
 		m_renderContext.gl.glLoadIdentity();
 		m_renderContext.gl.glOrtho( 0, width-1, height-1, 0, -1, 1 );
 		//m_renderContext.gl.glViewport( 0, 0, width, height );
-       	m_renderContext.gl.glMatrixMode( GL.GL_MODELVIEW );
+       	m_renderContext.gl.glMatrixMode( GL2.GL_MODELVIEW );
  		m_renderContext.gl.glLoadIdentity();
 		
-		m_renderContext.gl.glDisable( GL.GL_DEPTH_TEST );
-		m_renderContext.gl.glDisable( GL.GL_LIGHTING );
-		m_renderContext.gl.glDisable( GL.GL_CULL_FACE );   
+		m_renderContext.gl.glDisable( GL2.GL_DEPTH_TEST );
+		m_renderContext.gl.glDisable( GL2.GL_LIGHTING );
+		m_renderContext.gl.glDisable( GL2.GL_CULL_FACE );   
 		m_renderContext.setTextureMapProxy( null );
 	}
     
@@ -134,14 +134,14 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawLine(int x1, int y1, int x2, int y2) {
-	    m_renderContext.gl.glBegin( GL.GL_LINES );
+	    m_renderContext.gl.glBegin( GL2.GL_LINES );
 	    m_renderContext.gl.glVertex2i( x1, y1 );
 	    m_renderContext.gl.glVertex2i( x2, y2 );
 		m_renderContext.gl.glEnd();
 	}
 	
 	public void fillRect( int x, int y, int width, int height ) {
-	    m_renderContext.gl.glBegin( GL.GL_POLYGON );
+	    m_renderContext.gl.glBegin( GL2.GL_POLYGON );
 	    m_renderContext.gl.glVertex2i( x, y );
 	    m_renderContext.gl.glVertex2i( x+width, y );
 	    m_renderContext.gl.glVertex2i( x+width, y+height );
@@ -208,13 +208,13 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawRoundRect( int x, int y, int width, int height, int arcWidth, int arcHeight ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_LOOP );
+	    m_renderContext.gl.glBegin( GL2.GL_LINE_LOOP );
 	    glRoundRect( x, y, width, height, arcWidth, arcHeight );
 		m_renderContext.gl.glEnd();
 	}
 	
 	public void fillRoundRect( int x, int y, int width, int height, int arcWidth, int arcHeight ) {
-	    m_renderContext.gl.glBegin( GL.GL_TRIANGLE_FAN );
+	    m_renderContext.gl.glBegin( GL2.GL_TRIANGLE_FAN );
 	    glRoundRect( x, y, width, height, arcWidth, arcHeight );
 		m_renderContext.gl.glEnd();
 	}
@@ -233,13 +233,13 @@ public class Graphics extends java.awt.Graphics {
 
 	
 	public void drawOval( int x, int y, int width, int height ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_LOOP );
+	    m_renderContext.gl.glBegin( GL2.GL_LINE_LOOP );
 	    glOval( x, y, width, height );
 		m_renderContext.gl.glEnd();
 	}
 	
 	public void fillOval( int x, int y, int width, int height ) {
-	    m_renderContext.gl.glBegin( GL.GL_TRIANGLE_FAN );
+	    m_renderContext.gl.glBegin( GL2.GL_TRIANGLE_FAN );
 	    glOval( x, y, width, height );
 		m_renderContext.gl.glEnd();
 	}
@@ -258,25 +258,25 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawPolyline( int xPoints[], int yPoints[], int nPoints ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_STRIP );
+	    m_renderContext.gl.glBegin( GL2.GL_LINE_STRIP );
 	    glPoly( xPoints, yPoints, nPoints );
 		m_renderContext.gl.glEnd();
 	}
 	
 	public void drawPolygon( int xPoints[], int yPoints[], int nPoints ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_LOOP );
+	    m_renderContext.gl.glBegin( GL2.GL_LINE_LOOP );
 	    glPoly( xPoints, yPoints, nPoints );
 		m_renderContext.gl.glEnd();
 	}
 	
 	public void fillPolygon( int xPoints[], int yPoints[], int nPoints ) {
-	    m_renderContext.gl.glBegin( GL.GL_POLYGON );
+	    m_renderContext.gl.glBegin( GL2.GL_POLYGON );
 	    glPoly( xPoints, yPoints, nPoints );
 		m_renderContext.gl.glEnd();
 	}
 	
 	public void drawString( String str, int x, int y ) {
-		com.sun.opengl.util.j2d.TextRenderer renderer = new com.sun.opengl.util.j2d.TextRenderer( m_font );
+		com.jogamp.opengl.util.awt.TextRenderer renderer = new com.jogamp.opengl.util.awt.TextRenderer( m_font );
 	    renderer.beginRendering(m_renderContext.getWidth(), m_renderContext.getHeight());
 	    renderer.setColor(m_color);
 	    renderer.draw(str, x, m_renderContext.getHeight() - y);

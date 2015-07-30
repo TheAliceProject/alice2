@@ -33,7 +33,7 @@ public class Max extends edu.cmu.cs.stage3.alice.core.question.BinaryNumberResul
 	}
 	
 	protected double getValue( double aValue, double bValue ) {
-		edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("maximum_of_")+aValue+ Messages.getString("_and_")+bValue+Messages.getString("_is_");   
+		edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("maximum_of_")+aValue+" "+Messages.getString("and_")+ " " + bValue+Messages.getString("is_");   
 		return Math.max( aValue, bValue );
 	}
 }

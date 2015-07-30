@@ -182,11 +182,11 @@ public class Transformable extends ReferenceFrame {
 			ReferenceFrame vehicleToBe = (ReferenceFrame)value;
 			if( vehicleToBe != null ) {
 				if( vehicleToBe==this ) {
-					throw new RuntimeException( this + Messages.getString("_cannot_be_its_own_vehicle_") ); 
+					throw new RuntimeException( this + " " + Messages.getString("cannot_be_its_own_vehicle_") ); 
 				}
 				//if( vehicleToBe.isDescendantOf( this ) ) {
 				if( vehicleToBe.getSceneGraphContainer().isDescendantOf( getSceneGraphContainer() ) ) {
-					throw new RuntimeException( this + Messages.getString("_cannot_have_a_scenegraph_descendant__")+vehicleToBe+Messages.getString("__as_its_vehicle_") );  
+					throw new RuntimeException( this + " " + Messages.getString("cannot_have_a_scenegraph_descendant__") + vehicleToBe + Messages.getString("__as_its_vehicle_") );  
 				}
 			}
 		} else if( property == localTransformation ) {

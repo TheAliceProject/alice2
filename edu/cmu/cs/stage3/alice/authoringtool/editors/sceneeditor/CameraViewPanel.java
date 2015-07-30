@@ -23,7 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -34,6 +36,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -119,7 +122,6 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	protected edu.cmu.cs.stage3.math.Matrix44 oldTransformation;
 	protected java.awt.Cursor invisibleCursor = java.awt.Toolkit.getDefaultToolkit().createCustomCursor( java.awt.Toolkit.getDefaultToolkit().getImage(""), new java.awt.Point( 0, 0 ), "invisible cursor" );  
 	protected java.awt.Cursor savedCursor;
-		
 	
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.RenderTargetManipulatorMode defaultMoveMode;
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.RenderTargetManipulatorMode moveUpDownMode;
@@ -364,7 +366,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 				} else if( shiftDown ) {
 					helper.setTransformation( edu.cmu.cs.stage3.math.MathUtilities.createIdentityMatrix4d(), sgScene );
 					helper.setPosition( zeroVec, sgPickedTransformable );
-					tempVec.x = 0.0;
+					tempVec.x = 0.0; 
 					tempVec.y = -dy*deltaFactor;
 					tempVec.z = 0.0;
 					sgPickedTransformable.translate( tempVec, helper );
@@ -457,7 +459,6 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 							edu.cmu.cs.stage3.awt.AWTUtilities.setCursorLocation(originalMousePoint);
 							edu.cmu.cs.stage3.awt.AWTUtilities.setIsCursorShowing(false);
 //							System.out.println("hiding");
-							
 						}
 						else{
 							turnAndRaiseManipulator(keyMode, edu.cmu.cs.stage3.awt.AWTUtilities.getCursorLocation());
@@ -554,7 +555,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 										billboard.vehicle.set( world );
 										CameraViewPanel.this.renderTarget.markDirty();
 									} else {
-										edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( file.getAbsolutePath() + Messages.getString("_did_not_produce_a_TextureMap_when_loaded_"), null, false ); 
+										edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("did_not_produce_a_TextureMap_when_loaded_", file.getAbsolutePath()), null, false ); 
 										continue;
 									}
 								} else if( extension.equalsIgnoreCase( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.CHARACTER_EXTENSION ) ) {
@@ -573,11 +574,11 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 									authoringTool.importElement( file, world, null, false );
 								} else {
 									//TODO: make this a message dialog
-									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Alice_does_not_know_how_to_open_this_file___n")+file.getAbsolutePath() ); 
+									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("Alice_does_not_know_how_to_open_this_file___n", file.getAbsolutePath() )); 
 									continue;
 								}
 							} else {
-								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("This_file_does_not_exist__cannot_be_read__or_is_a_directory__n")+file.getAbsolutePath() ); 
+								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("This_file_does_not_exist__cannot_be_read__or_is_a_directory__n", file.getAbsolutePath() )); 
 								continue;
 							}
 						}
@@ -761,7 +762,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	}
 
 	private void guiInit() {
-		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) {   
+		if( AikMin.isWindows() ) {   
 			controlScrollPane.setPreferredSize( new java.awt.Dimension( 355 + ((fontSize-12)*14), 0 ) );	//Aik Min
 		} else {
 			controlScrollPane.setPreferredSize( new java.awt.Dimension( 405 + ((fontSize-12)*14), 0 ) );
@@ -1293,14 +1294,16 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		moveCameraCombo.addItem( NONE_DUMMY );
 
 		edu.cmu.cs.stage3.alice.core.World world = authoringTool.getWorld();
-		edu.cmu.cs.stage3.alice.core.Group dummyGroup = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getDummyObjectGroup( world );
-		Object[] dummies = dummyGroup.values.getArrayValue();
-		for( int i = 0; i < dummies.length; i++ ) {
-			moveCameraCombo.addItem( dummies[i] );
-			if( (renderCamera != null) && (dummies[i] instanceof edu.cmu.cs.stage3.alice.core.Dummy) ) {
-				javax.vecmath.Matrix4d m = renderCamera.getTransformation( (edu.cmu.cs.stage3.alice.core.Dummy)dummies[i] );
-				if( m.equals( edu.cmu.cs.stage3.math.MathUtilities.getIdentityMatrix4d() ) ) {
-					moveCameraCombo.setSelectedItem( dummies[i] );
+		if (edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.hasDummyObjectGroup(world) ){
+			edu.cmu.cs.stage3.alice.core.Group dummyGroup = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getDummyObjectGroup( world );
+			Object[] dummies = dummyGroup.values.getArrayValue();
+			for( int i = 0; i < dummies.length; i++ ) {
+				moveCameraCombo.addItem( dummies[i] );
+				if( (renderCamera != null) && (dummies[i] instanceof edu.cmu.cs.stage3.alice.core.Dummy) ) {
+					javax.vecmath.Matrix4d m = renderCamera.getTransformation( (edu.cmu.cs.stage3.alice.core.Dummy)dummies[i] );
+					if( m.equals( edu.cmu.cs.stage3.math.MathUtilities.getIdentityMatrix4d() ) ) {
+						moveCameraCombo.setSelectedItem( dummies[i] );
+					}
 				}
 			}
 		}
@@ -1509,7 +1512,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 				setMaximumSize( d );
 				setPreferredSize( d );
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("no_icon_found_for_mode__") + mode.getClass().getName(), null ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("no_icon_found_for_mode__", mode.getClass().getName()), null ); 
 			}
 
 			setBorder( unselectedBorder );
@@ -1978,4 +1981,5 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		this.add(galleryPanel,  BorderLayout.SOUTH);
 		this.add(superRenderPanel,  BorderLayout.CENTER);
 	}
+
 }

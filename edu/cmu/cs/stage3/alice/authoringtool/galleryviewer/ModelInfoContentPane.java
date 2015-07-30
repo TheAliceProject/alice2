@@ -85,13 +85,7 @@ public class ModelInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		count++;
 		for (int i = 0; i < data.details.size(); i++) {
 			edu.cmu.cs.stage3.util.StringObjectPair current = (edu.cmu.cs.stage3.util.StringObjectPair) data.details.get(i);
-			String currentString = current.getString();
-			if (currentString.equalsIgnoreCase(Messages.getString("modeledby"))) 
-				currentString = Messages.getString("modeled_by"); 
-			else if (currentString.equalsIgnoreCase(Messages.getString("paintedby"))) 
-				currentString = Messages.getString("painted_by"); 
-			else if (currentString.equalsIgnoreCase(Messages.getString("physicalsize"))) 
-				currentString = Messages.getString("physical_size"); 
+			String currentString = Messages.getString(current.getString());
 			javax.swing.JLabel title = new javax.swing.JLabel(String.valueOf(String.valueOf(currentString)).concat(":")); 
 			javax.swing.JLabel detail = new javax.swing.JLabel();
 			title.setForeground(GalleryViewer.textColor);

@@ -365,7 +365,7 @@ public class ElementPopupUtilities {
 //				list.setVisibleRowCount( 4 );
 //				Object[] message = new Object[] { text, scrollPane };
 //				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( message, "Cannot delete " + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element, true ), javax.swing.JOptionPane.ERROR_MESSAGE );
-			} else {
+			} else { 
 				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack().startCompound();
 
 				if ( element instanceof edu.cmu.cs.stage3.alice.core.Group ){
@@ -398,7 +398,7 @@ public class ElementPopupUtilities {
 					} else {
 						((edu.cmu.cs.stage3.alice.core.Transformable)element).vehicle.set( null );
 					}
-				}
+				} 
 				edu.cmu.cs.stage3.alice.core.Element parent = element.getParent();
 				if( parent != null ) {
 					//is this too liberal?
@@ -624,10 +624,10 @@ public class ElementPopupUtilities {
 			element.visit( textureMapCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
 
 			System.out.println( Messages.getString("Statistics_for_") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element ) + ":" );  
-			System.out.println( Messages.getString("__object_count__") + itaCounter.getShownIndexedTriangleArrayCount() ); 
-			System.out.println( Messages.getString("____face_count__") + itaCounter.getShownIndexCount() / 3 ); 
-			System.out.println( Messages.getString("__vertex_count__") + itaCounter.getShownVertexCount() ); 
-			System.out.println( Messages.getString("_texture_count__") + textureMapCounter.getTextureMapCount() ); 
+			System.out.println( "  "+Messages.getString("object_count__") + itaCounter.getShownIndexedTriangleArrayCount() ); 
+			System.out.println( "    "+Messages.getString("face_count__") + itaCounter.getShownIndexCount() / 3 ); 
+			System.out.println( "  "+Messages.getString("vertex_count__") + itaCounter.getShownVertexCount() ); 
+			System.out.println( " "+Messages.getString("texture_count__") + textureMapCounter.getTextureMapCount() ); 
 			System.out.println( Messages.getString("texture_memory__") + textureMapCounter.getTextureMapMemoryCount() + " bytes" );  
 		}
 	}
@@ -686,7 +686,7 @@ public class ElementPopupUtilities {
 		public ToggleCommentingRunnable( edu.cmu.cs.stage3.alice.core.Element element ) {
 			super( element );
 			if( ! (element instanceof edu.cmu.cs.stage3.alice.core.Code) ) {
-				throw new IllegalArgumentException( Messages.getString("ToggleCommentRunnable_only_accepts_Responses_or_User_Defined_Questions__found__") + element ); 
+				throw new IllegalArgumentException( Messages.getString("ToggleCommentRunnable_only_accepts_Responses_or_User_Defined_Questions__found__", element) ); 
 			}
 		}
 
@@ -885,7 +885,7 @@ public class ElementPopupUtilities {
 				group.values.clear(); //HACK; shouldn't have to do this
 				group.values.set( values );
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_sort_") + element + Messages.getString("_alphabetically_because_it_is_not_a_Group_"), null );  
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_sort_alphabetically_because_it_is_not_a_Group_", element), null );  
 			}
 		}
 	}

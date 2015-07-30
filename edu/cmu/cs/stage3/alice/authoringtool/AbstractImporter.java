@@ -91,15 +91,15 @@ public abstract class AbstractImporter implements edu.cmu.cs.stage3.alice.author
 		filename.trim();
 		int i = filename.lastIndexOf( "." ); 
 		if( i == -1 ) {
-			throw new IllegalArgumentException( Messages.getString("unable_to_determine_the_extension_of_") + filename ); 
+			throw new IllegalArgumentException( Messages.getString("unable_to_determine_the_extension_of_", filename) ); 
 		}
 		String ext = filename.substring( i + 1 );
 		if( ext.length() < 1 ) {
-			throw new IllegalArgumentException( Messages.getString("unable_to_determine_the_extension_of_") + filename ); 
+			throw new IllegalArgumentException( Messages.getString("unable_to_determine_the_extension_of_", filename) ); 
 		}
 		ext = ext.toUpperCase();
 		if( getExtensionMap().get( ext ) == null ) {
-			throw new IllegalArgumentException( ext + " " + Messages.getString("files_are_not_supported_by_this_Importer") ); 
+			throw new IllegalArgumentException( Messages.getString("files_are_not_supported_by_this_Importer", ext) ); 
 		}
 		return ext;
 	}

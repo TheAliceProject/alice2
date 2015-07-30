@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.io;
 
+
+
 /**
  * @author David Culyba
  */
@@ -519,7 +521,6 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
                 pathname = "/"+pathname;
             }
         }
-
         currentDirectory = pathname;
     }
 
@@ -1191,11 +1192,9 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
         if (newZip){
             throw new edu.cmu.cs.stage3.io.KeepFileNotSupportedException();
         }
-        String fullName = (currentDirectory+filename);
+        String fullName = (currentDirectory + filename);
         CentralDirectoryHeader toKeep = getHeader(fullName);
-//        System.out.print("trying to keep "+fullName+"...");
         if (toKeep != null){
-            //       System.out.println("kept");
             toKeep.setShouldDelete(false);
         }
         else{
@@ -1218,6 +1217,7 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
     }
 
     public void checkAndUpdateHeader(String filename, byte[] data) throws java.io.IOException {
+    	filename = new String (filename.getBytes("UTF-8"), "ISO-8859-1" );	// Aik Min - encoding
         CentralDirectoryHeader header = getHeader(filename);
         if (header != null){
             header.setShouldDelete(false);

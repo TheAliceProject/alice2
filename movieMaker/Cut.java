@@ -77,7 +77,7 @@ public class Cut implements ControllerListener, DataSinkListener {
      */
 	
 		
-    public static void main(String [] args) {
+/*   public static void main(String [] args) {
 
 	String inputURL = null;
 	String outputURL = null;
@@ -177,7 +177,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 		start[j] *= 1000000;
 		if (end[j] != Long.MAX_VALUE)
 		    end[j] *= 1000000;
-	    System.err.println(Messages.getString("Start__") + start[j] + Messages.getString("_End__") +end[j]);  
+	    System.err.println(Messages.getString("Start__") + start[j] + " " + Messages.getString("End__") +end[j]);  
 	    }
 	}
 
@@ -204,7 +204,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	
 	System.exit(0);
     }
-
+*/
     public boolean doCut(String input, String output, Vector startV, Vector endV)
 	{
 	String inputURL = input;
@@ -437,9 +437,9 @@ public class Cut implements ControllerListener, DataSinkListener {
 		}
 
 		if (selected != null) {
-		    System.err.println(Messages.getString("__Transcode_")); 
-		    System.err.println(Messages.getString("_____from__") + tc[i].getFormat()); 
-		    System.err.println(Messages.getString("_____to__") + selected); 
+		    System.err.println("  "+Messages.getString("Transcode_")); 
+		    System.err.println(Messages.getString("from__") + tc[i].getFormat()); 
+		    System.err.println(Messages.getString("to__") + selected); 
 		    tc[i].setFormat(selected);
 		}
 	    }
@@ -474,7 +474,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
 			    System.err.println(Messages.getString("__Set_quality_to_") +  
-					val + Messages.getString("_on_") + qc); 
+					val + " " + Messages.getString("on_") + qc); 
 			    break;
 			}
 		    }

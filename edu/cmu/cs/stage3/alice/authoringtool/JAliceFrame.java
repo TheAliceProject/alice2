@@ -27,12 +27,11 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -45,7 +44,6 @@ import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
-import edu.cmu.cs.stage3.alice.authoringtool.util.AlicePopupMenu;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.lang.Messages;
 
@@ -92,6 +90,8 @@ public class JAliceFrame extends javax.swing.JFrame {
 		recentWorldsInit();
 		//helpInit();
 		setIconImage( AuthoringToolResources.getAliceSystemIconImage() );
+		if (!AikMin.isLTR())
+			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);	
 	}
 
 	protected class ComponentImageFactory extends javax.swing.JPanel {
@@ -179,9 +179,8 @@ public class JAliceFrame extends javax.swing.JFrame {
 		sceneEditor.setAuthoringTool( authoringTool );
 		trashComponent = new edu.cmu.cs.stage3.alice.authoringtool.util.TrashComponent( authoringTool );
 		statusBar = new StatusBar( authoringTool );
-
-		// add custom components
-		worldTreePanel.add( worldTreeComponent, java.awt.BorderLayout.CENTER );
+		// add custom components.
+		worldTreePanel.add( worldTreeComponent, java.awt.BorderLayout.CENTER );	
 		dragFromPanel.add( dragFromComponent, java.awt.BorderLayout.CENTER );
 		//editorPanel.add( editorComponent, java.awt.BorderLayout.CENTER );
 		editorPanel.add( tabbedEditorComponent, java.awt.BorderLayout.CENTER );
@@ -192,7 +191,6 @@ public class JAliceFrame extends javax.swing.JFrame {
 		if( authoringToolConfig.getValue( "showWorldStats" ).equalsIgnoreCase( "true" ) ) {  
 			getContentPane().add( statusBar, java.awt.BorderLayout.SOUTH );
 		}
-
 		// resize the window
 		int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -203,7 +201,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		int x = 0;
 		int y = 0;
 		int width = screenWidth;
-		int height = screenHeight - 28;
+		int height = screenHeight;
 		if( st.countTokens() == 4 ) {
 			try {
 				x = Integer.parseInt( st.nextToken() );
@@ -216,8 +214,11 @@ public class JAliceFrame extends javax.swing.JFrame {
 		} else {
 			AuthoringTool.showErrorDialog( Messages.getString("Incorrect_number_of_tokens_in_config_value__mainWindowBounds"), null ); 
 		}
-		this.setBounds( x, y, width, height );
-		//setExtendedState(MAXIMIZED_BOTH);
+		if((width > screenWidth) || (height > screenHeight)){
+			setExtendedState(MAXIMIZED_BOTH);
+		} else {
+			setBounds( x, y, width, height );
+		}
 
 		// set divider locations
 //		authoringOutputSplitPane.setDividerLocation( height );
@@ -298,22 +299,22 @@ public class JAliceFrame extends javax.swing.JFrame {
 		
 		// Remove tooltip and popup menu when window loses focus
 		if ( AikMin.isMAC() ){
-			addWindowFocusListener(new WindowFocusListener(){
+			addWindowFocusListener(new java.awt.event.WindowFocusListener(){
 				Boolean flag = javax.swing.ToolTipManager.sharedInstance().isEnabled();
 				@Override
-				public void windowGainedFocus(WindowEvent arg0) {
+				public void windowGainedFocus(java.awt.event.WindowEvent arg0) {
 					if (flag)
 						javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
 					JAliceFrame.this.setEnabled( true );
-					AlicePopupMenu.showPopup();
+					edu.cmu.cs.stage3.alice.authoringtool.util.AlicePopupMenu.showPopup();
 				}
 	
 				@Override
-				public void windowLostFocus(WindowEvent arg0) {
+				public void windowLostFocus(java.awt.event.WindowEvent arg0) {
 					if (flag)
 						javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
-					AlicePopupMenu.hidePopup();
-					JAliceFrame.this.setEnabled( false );
+					//edu.cmu.cs.stage3.alice.authoringtool.util.AlicePopupMenu.hidePopup();
+					//JAliceFrame.this.setEnabled( false );
 				}
 			
 			});
@@ -728,7 +729,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		fileMenu.add(openZippedWorldItem);
 		fileMenu.add(saveWorldItem);
 		fileMenu.add(saveWorldAsItem);
-		//fileMenu.add(saveForWebItem);
+//		fileMenu.add(saveForWebItem);	//Aik Min
 		fileMenu.add(exportMovieItem);
 		fileMenu.add(printItem);
 //		fileMenu.add(addCharacterItem);
@@ -753,7 +754,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		//helpMenu.add(tutorialEditor);		//Aik Min
 		helpMenu.add(softwareUpdate);
 		helpMenu.add(license);
-		helpMenu.add(aboutItem);
+		helpMenu.add(aboutItem);	
 		this.getContentPane().add(toolBarPanel, BorderLayout.NORTH);
 		toolBarPanel.add(buttonPanel,   new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0
 			,GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));

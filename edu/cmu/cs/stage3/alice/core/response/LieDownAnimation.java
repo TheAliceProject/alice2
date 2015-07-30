@@ -32,14 +32,14 @@ public class LieDownAnimation extends BetterStandUpAnimation {
 			target = LieDownAnimation.this.target.getTransformableValue();
 			
 			if( target == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_needs_something_or_someone_to_lie_down_on_"), null, LieDownAnimation.this.target ); 
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("needs_something_or_someone_to_lie_down_on_"), null, LieDownAnimation.this.target ); 
             }
             if( m_subject == target ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_lie_down_on_") + target.name.getStringValue() + ".", getCurrentStack(), LieDownAnimation.this.target );              
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("can_t_lie_down_on_") + target.name.getStringValue() + ".", getCurrentStack(), LieDownAnimation.this.target );              
             }
             
             if (m_subject.isAncestorOf(target)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_lie_down_on_a_part_of_itself"), getCurrentStack(), LieDownAnimation.this.target );             
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("can_t_lie_down_on_a_part_of_itself"), getCurrentStack(), LieDownAnimation.this.target );             
             }
 			
 			m_positionBegin = m_subject.getPosition(m_subject.getWorld());

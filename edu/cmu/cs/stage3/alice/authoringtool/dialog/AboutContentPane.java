@@ -72,8 +72,7 @@ public class AboutContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	public String getTitle() {
-		return Messages.getString("About_Alice_version_")
-				+ edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion();
+		return Messages.getString("About_Alice_version_", edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion() );
 	}
 
 	// public void preDialogShow() {

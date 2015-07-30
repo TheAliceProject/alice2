@@ -40,7 +40,7 @@ public abstract class Component extends Element {
 	
 	protected void releasePass1() {
 		if( m_parent != null ) {
-			warnln( Messages.getString("WARNING__released_component_") + this + Messages.getString("_still_has_parent_") + m_parent + "." );   
+			warnln( Messages.getString("WARNING__released_component_") + this + " " + Messages.getString("still_has_parent_") + m_parent + "." );   
 			setParent( null );
 		}
 		super.releasePass1();
@@ -51,7 +51,7 @@ public abstract class Component extends Element {
 		enum0 = m_absoluteTransformationListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			AbsoluteTransformationListener absoluteTransformationListener = (AbsoluteTransformationListener)enum0.nextElement();
-			warnln( Messages.getString("WARNING__released_component_") + this + Messages.getString("_still_has_absoluteTransformationListener_") + absoluteTransformationListener + "." );   
+			warnln( Messages.getString("WARNING__released_component_") + this + " " + Messages.getString("still_has_absoluteTransformationListener_") + absoluteTransformationListener + "." );   
 		}
 		//todo
 		//m_absoluteTransformationListeners = null;
@@ -60,7 +60,7 @@ public abstract class Component extends Element {
 		enum0 = m_hierarchyListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			HierarchyListener hierarchyListener = (HierarchyListener)enum0.nextElement();
-			warnln( Messages.getString("WARNING__released_component_") + this + Messages.getString("_still_has_hierarchyListener_") + hierarchyListener + "." );   
+			warnln( Messages.getString("WARNING__released_component_") + this + " " + Messages.getString("still_has_hierarchyListener_") + hierarchyListener + "." );   
 		}
 		//todo
 		//m_hierarchyListeners = null;

@@ -35,7 +35,7 @@ public class WebGalleryDirectory extends WebGalleryObject {
     protected static java.awt.Color webDirColor = new java.awt.Color(189,184,139);
 
 	protected String getToolTipString(){
-        return "<html><body><p>"+Messages.getString("Group_of_Objects")+"</p><p>"+Messages.getString("Click_to_open_this_group_")+"</p></body></html>"; 
+        return "<html><body>" + Messages.getString("Group_of_Objects") + "</body></html>"; 
     }
 
 	public void set(GalleryViewer.ObjectXmlData dataIn) throws java.lang.IllegalArgumentException{
@@ -75,8 +75,8 @@ public class WebGalleryDirectory extends WebGalleryObject {
         if (mainViewer != null){
         	int dialogVal = -1;
         	if (!GalleryViewer.alreadyEnteredWebGallery && mainViewer.shouldShowWebWarning()){
-				dialogVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("You_are_about_to_enter_the_online_gallery__This_is_accessed_through_the_internet_n") 
-				+Messages.getString("_and_is_potentially_slow_depending_on_your_connection_"), Messages.getString("Web_gallery_may_be_slow"), javax.swing.JOptionPane.WARNING_MESSAGE);  
+				dialogVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("You_are_about_to_enter_the_online_gallery__This_is_accessed_through_the_internet_n"), 
+				Messages.getString("Web_gallery_may_be_slow"), javax.swing.JOptionPane.WARNING_MESSAGE);  
 				if (dialogVal == javax.swing.JOptionPane.YES_OPTION){
 					GalleryViewer.enteredWebGallery();
 					mainViewer.changeDirectory(directoryData);

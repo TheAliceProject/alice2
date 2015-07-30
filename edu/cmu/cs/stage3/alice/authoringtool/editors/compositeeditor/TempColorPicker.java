@@ -57,7 +57,7 @@ public class TempColorPicker extends javax.swing.JPanel {
 			openPicker.addActionListener(new java.awt.event.ActionListener(){
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("Pick_color_for_")+TileColorPicker.this.tile.getText(), TileColorPicker.this.toChange ); 
+					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("Pick_color_for_", TileColorPicker.this.tile.getText()), TileColorPicker.this.toChange ); 
 					TileColorPicker.this.tile.setBackground(newColor);
 					TileColorPicker.this.toChange = newColor;
 					edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.putColor(TileColorPicker.this.nameKey, newColor);
@@ -81,7 +81,7 @@ public class TempColorPicker extends javax.swing.JPanel {
 			openPicker2.addActionListener(new java.awt.event.ActionListener(){
 				public void actionPerformed( java.awt.event.ActionEvent ev ) {
 					javax.swing.JColorChooser colorChooser = new javax.swing.JColorChooser();
-					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("Pick_color_for_")+TileColorPicker.this.tile.getText(), TileColorPicker.this.foregroundToChange ); 
+					java.awt.Color newColor = edu.cmu.cs.stage3.swing.DialogManager.showDialog( colorChooser, Messages.getString("Pick_color_for_", TileColorPicker.this.tile.getText()), TileColorPicker.this.foregroundToChange ); 
 					TileColorPicker.this.tile.setForeground(newColor);
 					TileColorPicker.this.foregroundToChange = newColor;
 					edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.putColor(TileColorPicker.this.foregroundNameKey, newColor);

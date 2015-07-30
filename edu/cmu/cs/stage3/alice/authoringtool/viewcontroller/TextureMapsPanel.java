@@ -90,7 +90,7 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 				if( gui != null ) {
 					contentPanel.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 2, 0, 2 ), 0, 0 ) );
 				} else {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_textureMap__") + textureMap, null ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_textureMap__", textureMap), null ); 
 				}
 			}
 

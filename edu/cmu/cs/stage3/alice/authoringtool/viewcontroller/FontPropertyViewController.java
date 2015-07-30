@@ -126,7 +126,7 @@ public class FontPropertyViewController extends javax.swing.JButton implements e
 				repr.append( ", " + font.getSize() ); 
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("Bad_value__") + value ); 
+			throw new RuntimeException( Messages.getString("Bad_value__", value )); 
 		}
 
 		setText( repr.toString() );

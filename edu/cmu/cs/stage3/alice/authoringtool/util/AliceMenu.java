@@ -1028,14 +1028,12 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 		for( int i = listeners.length - 2; i >= 0; i -= 2 ) {
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
-					throw new Error( getText() + Messages.getString("_has_a_NULL_Listener_") + i ); 
+					throw new Error(Messages.getString("has_a_NULL_Listener_", getText(), i )); 
 				} else {
-
 					// Lazily create the event:
 					if( menuEvent == null ) {
 						menuEvent = new MenuEvent( this );
 					}
-
 					( (MenuListener)listeners[i + 1] ).menuSelected( menuEvent );
 				}
 			}
@@ -1064,7 +1062,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 		for( int i = listeners.length - 2; i >= 0; i -= 2 ) {
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
-					throw new Error( getText() + Messages.getString("_has_a_NULL_Listener_") + i ); 
+					throw new Error(Messages.getString("has_a_NULL_Listener_", getText(), i )); 
 				} else {
 
 					// Lazily create the event:
@@ -1100,7 +1098,7 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 		for( int i = listeners.length - 2; i >= 0; i -= 2 ) {
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
-					throw new Error( getText() + Messages.getString("_has_a_NULL_Listener_") + i ); 
+					throw new Error(Messages.getString("has_a_NULL_Listener_", getText(), i )); 
 				} else {
 
 					// Lazily create the event:
@@ -1272,8 +1270,8 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	
 	protected void processKeyEvent( KeyEvent e ) {
 		if( DEBUG ) {
-			System.out.println( Messages.getString("in_AliceMenu_processKeyEvent_for_") + getText() + "  " + KeyStroke.getKeyStrokeForEvent( e ) );  
-			System.out.println( Messages.getString("Event_consumption___") + e.isConsumed() ); 
+			System.out.println( "in_AliceMenu_processKeyEvent_for_" + getText() + "  " + KeyStroke.getKeyStrokeForEvent( e ) );  
+			System.out.println( "Event_consumption___" + e.isConsumed() ); 
 			Thread.dumpStack();
 		}
 

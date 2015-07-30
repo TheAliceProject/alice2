@@ -83,7 +83,7 @@ public class SoundMarkersPanel extends javax.swing.JPanel {
 				if( gui != null ) {
 					add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 				} else {
-					System.err.println( Messages.getString("Unable_to_create_gui_for_marker__") + marker ); 
+					System.err.println( Messages.getString("Unable_to_create_gui_for_marker__", marker )); 
 				}
 			}
 

@@ -72,8 +72,7 @@ public class ErrorContentPane extends AliceAlertContentPane {
 			if (message != null)
 				detailStream.println(message);
 			else
-				new Exception(
-						Messages.getString("No_throwable_given__Here_s_the_stack_trace_"))
+				new Exception(Messages.getString("No_throwable_given__Here_s_the_stack_trace_"))
 						.printStackTrace(detailStream);
 		}
 		detailStream.println();

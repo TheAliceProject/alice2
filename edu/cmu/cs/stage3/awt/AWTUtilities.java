@@ -25,63 +25,64 @@ package edu.cmu.cs.stage3.awt;
 
 import java.awt.event.InputEvent;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+// Redoing AWTUtilities so its cross platform compatible.
 public class AWTUtilities {
     private static boolean s_successfullyLoadedLibrary;
     static {
         try {
             System.loadLibrary( "jni_awtutilities" );
             s_successfullyLoadedLibrary = true;
-			//} catch( UnsatisfiedLinkError ule ) {
 		} catch( Throwable t ) {
             s_successfullyLoadedLibrary = false;
         }
     }
-
-	private static native boolean isGetCursorLocationSupportedNative();
-	public static boolean isGetCursorLocationSupported() {
+  
+ 	private static native boolean isGetCursorLocationSupportedNative();
+ 	public static boolean isGetCursorLocationSupported() {
 		if( s_successfullyLoadedLibrary ) {
-			return isGetCursorLocationSupportedNative();
+			return isGetCursorLocationSupportedNative(); //return 1;
 		} else {
-			return true; //false;
+			return false;
 		}
 	}
 
 	private static native boolean isSetCursorLocationSupportedNative();
 	public static boolean isSetCursorLocationSupported() {
 		if( s_successfullyLoadedLibrary ) {
-			return isSetCursorLocationSupportedNative();
+			return isSetCursorLocationSupportedNative(); //return 1;
 		} else {
-			return true; //false;
+			return false;
 		}
 	}
 
 	private static native boolean isIsKeyPressedSupportedNative();
 	public static boolean isIsKeyPressedSupported() {
 		if( s_successfullyLoadedLibrary ) {
-			return isIsKeyPressedSupportedNative();
-		} else {
-			return true; //false;
+			return isIsKeyPressedSupportedNative(); //return 1;
+		} else {        
+			return false;
 		}
 	}
 
 	private static native boolean isGetModifiersSupportedNative();
 	public static boolean isGetModifiersSupported() {
 		if( s_successfullyLoadedLibrary ) {
-			return isGetModifiersSupportedNative();
+			return isGetModifiersSupportedNative(); //return 1;
 		} else {
-			return true; //false;
+			return false;
 		}
 	}
-
+	
 	private static native boolean isPumpMessageQueueSupportedNative();
 	public static boolean isPumpMessageQueueSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isPumpMessageQueueSupportedNative();
 		} else {
-			return true; //false;
+			return false;
 		}
 	}
-
+		
 	private static native void pumpMessageQueueNative();
 	public static void pumpMessageQueue() {
 		if( s_successfullyLoadedLibrary ) {
@@ -90,7 +91,7 @@ public class AWTUtilities {
 			//pass
 		}
 	}
-
+    
 	private static native void getCursorLocationNative( java.awt.Point p );
 	public static java.awt.Point getCursorLocation() {
 		if( s_successfullyLoadedLibrary ) {
@@ -98,9 +99,8 @@ public class AWTUtilities {
 			getCursorLocationNative( p );
 			return p;
 		} else {
-			java.awt.Point p  = java.awt.MouseInfo.getPointerInfo().getLocation();
+			java.awt.Point p  = java.awt.MouseInfo.getPointerInfo().getLocation().getLocation();
 			return p;
-			//return null;
 		}
 	}
 
@@ -109,8 +109,38 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			setCursorLocationNative( x, y );
 		} else {
-			java.awt.MouseInfo.getPointerInfo().getLocation().setLocation(x, y); //pass
+			moveMouse(new java.awt.Point(x,y));
 		}
+	}
+	
+	private static void moveMouse(java.awt.Point p) {
+		java.awt.GraphicsEnvironment ge = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
+		java.awt.GraphicsDevice[] gs = ge.getScreenDevices();
+
+	    // Search the devices for the one that draws the specified point.
+	    for (java.awt.GraphicsDevice device: gs) { 
+	    	java.awt.GraphicsConfiguration[] configurations =
+	            device.getConfigurations();
+	        for (java.awt.GraphicsConfiguration config: configurations) {
+	        	java.awt.Rectangle bounds = config.getBounds();
+	            if(bounds.contains(p)) {
+	                // Set point to screen coordinates.
+	            	java.awt.Point b = bounds.getLocation(); 
+	            	java.awt.Point s = new java.awt.Point(p.x - b.x, p.y - b.y);
+
+	                try {
+	                	java.awt.Robot r = new java.awt.Robot(device);
+	                    r.mouseMove(s.x, s.y);
+	                } catch (java.awt.AWTException e) {
+	                    e.printStackTrace();
+	                }
+
+	                return;
+	            }
+	        }
+	    }
+	    // Couldn't move to the point, it may be off screen.
+	    return;
 	}
 	
 	public static void setCursorLocation( java.awt.Point p ) {
@@ -118,7 +148,7 @@ public class AWTUtilities {
 	}
 	
 	private static native boolean isCursorShowingNative();
-	public static boolean isCursorShowing() {
+	public static boolean isCursorShowing() { //not called anywhere
 		if( s_successfullyLoadedLibrary ) {
 			return isCursorShowingNative();
 		} else {
@@ -138,7 +168,7 @@ public class AWTUtilities {
 	private static native boolean isIsCursorShowingSupportedNative();
 	public static boolean isIsCursorShowingSupported() {
 		if( s_successfullyLoadedLibrary ) {
-			return isIsCursorShowingSupportedNative();
+			return isIsCursorShowingSupportedNative(); //return 1;
 		} else {
 			return false;
 		}
@@ -147,7 +177,7 @@ public class AWTUtilities {
 	private static native boolean isSetIsCursorShowingSupportedNative();
 	public static boolean isSetIsCursorShowingSupported() {
 		if( s_successfullyLoadedLibrary ) {
-			return isSetIsCursorShowingSupportedNative();
+			return isSetIsCursorShowingSupportedNative(); //return 1;
 		} else {
 			return false;
 		}
@@ -159,7 +189,21 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isKeyPressedNative( keyCode );
 		} else {
-			return false;
+			if (keyCode == java.awt.event.KeyEvent.VK_CONTROL)
+				return AikMin.control;
+			else if (keyCode == java.awt.event.KeyEvent.VK_SHIFT)
+				return AikMin.shift;
+			else
+				return false;
+		}
+	}
+	
+	private static native int isKeyNative( int keyCode );
+	public static int isKey( int keyCode ) {
+		if( s_successfullyLoadedLibrary ) {			
+			return isKeyNative( keyCode );
+		} else {
+			return 0;
 		}
 	}
 	
@@ -176,6 +220,7 @@ public class AWTUtilities {
 	public static boolean mouseListenersAreSupported() {
 		return isGetModifiersSupported() && isGetCursorLocationSupported();
 	}
+
 	public static boolean mouseMotionListenersAreSupported() {
 		return isGetModifiersSupported() && isGetCursorLocationSupported();
 	}
@@ -200,7 +245,7 @@ public class AWTUtilities {
     private static int s_prevModifiers = 0;
     private static int s_clickCount = 0;
     private static boolean isButton1Pressed( int modifiers ) {
-        return (modifiers & InputEvent.BUTTON1_MASK)==InputEvent.BUTTON1_MASK;
+    	return (modifiers & InputEvent.BUTTON1_MASK)==InputEvent.BUTTON1_MASK;
     }
     private static boolean isButton2Pressed( int modifiers ) {
         return (modifiers & InputEvent.BUTTON2_MASK)==InputEvent.BUTTON2_MASK;

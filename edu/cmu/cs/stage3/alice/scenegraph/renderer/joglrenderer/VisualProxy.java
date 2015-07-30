@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 class VisualProxy extends ComponentProxy {
     private AppearanceProxy m_frontFacingAppearanceProxy = null;
@@ -79,15 +79,15 @@ class VisualProxy extends ComponentProxy {
           		return;
             if( m_frontFacingAppearanceProxy != null ) {
                 if( m_backFacingAppearanceProxy != null ) {   	
-                    context.gl.glDisable( GL.GL_CULL_FACE );
+                    context.gl.glDisable( GL2.GL_CULL_FACE );
                 } else {
-                    context.gl.glEnable( GL.GL_CULL_FACE );
-    			    context.gl.glCullFace( GL.GL_BACK );
+                    context.gl.glEnable( GL2.GL_CULL_FACE );
+    			    context.gl.glCullFace( GL2.GL_BACK );
                 }
             } else {
                 if( m_backFacingAppearanceProxy != null ) {
-                    context.gl.glEnable( GL.GL_CULL_FACE );
-    			    context.gl.glCullFace( GL.GL_FRONT );
+                    context.gl.glEnable( GL2.GL_CULL_FACE );
+    			    context.gl.glCullFace( GL2.GL_FRONT );
                 } else {
                     //should never reach here
                 }
@@ -95,16 +95,16 @@ class VisualProxy extends ComponentProxy {
             	
             if( m_frontFacingAppearanceProxy == m_backFacingAppearanceProxy ) {
                 if( m_frontFacingAppearanceProxy != null ) {
-                    m_frontFacingAppearanceProxy.setPipelineState( context, GL.GL_FRONT_AND_BACK );
+                    m_frontFacingAppearanceProxy.setPipelineState( context, GL2.GL_FRONT_AND_BACK );
                 } else {
                     //should never reach here
                 }
             } else {
                 if( m_frontFacingAppearanceProxy != null ) {
-                    m_frontFacingAppearanceProxy.setPipelineState( context, GL.GL_FRONT );
+                    m_frontFacingAppearanceProxy.setPipelineState( context, GL2.GL_FRONT );
                 }
                 if( m_backFacingAppearanceProxy != null ) {
-                    m_backFacingAppearanceProxy.setPipelineState( context, GL.GL_BACK );
+                    m_backFacingAppearanceProxy.setPipelineState( context, GL2.GL_BACK );
                 }
             }
                         
@@ -123,15 +123,15 @@ class VisualProxy extends ComponentProxy {
 	        context.gl.glMultMatrixd( m_scaleBuffer );
 
 	        context.gl.glPushName( context.getPickNameForVisualProxy( this ) );
-		    context.gl.glEnable( GL.GL_CULL_FACE );
+		    context.gl.glEnable( GL2.GL_CULL_FACE );
 			if( m_backFacingAppearanceProxy != null ) {
-			    context.gl.glCullFace( GL.GL_FRONT );
+			    context.gl.glCullFace( GL2.GL_FRONT );
 			    context.gl.glPushName( 0 );
 		        m_geometryProxy.pick( context, pickParameters.isSubElementRequired() );
 			    context.gl.glPopName();
 			}
 			if( m_frontFacingAppearanceProxy != null ) {
-			    context.gl.glCullFace( GL.GL_BACK );
+			    context.gl.glCullFace( GL2.GL_BACK );
 			    context.gl.glPushName( 1 );
 		        m_geometryProxy.pick( context, pickParameters.isSubElementRequired() );
 			    context.gl.glPopName();

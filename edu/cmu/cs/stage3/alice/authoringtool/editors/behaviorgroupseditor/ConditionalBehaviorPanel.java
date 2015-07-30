@@ -86,17 +86,17 @@ public class ConditionalBehaviorPanel extends BasicBehaviorPanel {
 		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" colspan=\"2\" >"+strikeStart);  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(labelPanel));
 		toWriteTo.append(strikeEnd+"</td>\n</tr>\n"); 
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("_b_Begin___b_")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+"<b>"+Messages.getString("Begin_")+"</b>"+strikeEnd+"</td>\n"); 
 		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(beginPanel));
 		toWriteTo.append("</table>\n</td>\n</tr>\n"); 
 		
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("_b_During___b_")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+"<b>"+Messages.getString("During_")+"</b>"+strikeEnd+"</td>\n");
 		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(duringPanel));
 		toWriteTo.append("</table>\n</td>\n</tr>\n"); 
 
-		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+Messages.getString("_b_End___b_")+strikeEnd+"</td>\n");    //$NON-NLS-4$
+		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" align=\"right\">"+strikeStart+"<b>"+Messages.getString("End_")+"</b>"+strikeEnd+"</td>\n"); 
 		toWriteTo.append("<td bgcolor="+getHTMLColorString(bgColor)+" width=\"100%\"><table cellpadding=\"2\" cellspacing=\"0\" width=\"100%\">");  
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(endPanel));
 		toWriteTo.append("</table>\n</td>\n</tr>\n"); 

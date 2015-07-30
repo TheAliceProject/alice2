@@ -1,5 +1,9 @@
 package edu.cmu.cs.stage3.swing;
 
+import java.awt.ComponentOrientation;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 public abstract class ContentPane extends javax.swing.JPanel {
 	public final static int OK_OPTION = javax.swing.JOptionPane.OK_OPTION;
 	public final static int CANCEL_OPTION = javax.swing.JOptionPane.CANCEL_OPTION;
@@ -17,6 +21,8 @@ public abstract class ContentPane extends javax.swing.JPanel {
 	public void preDialogShow( javax.swing.JDialog dialog ) {
 		m_dialog = dialog;
 		m_dialog.setLocationRelativeTo( dialog.getOwner() );
+		if (!AikMin.isLTR())
+			dialog.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 	}
 	public void postDialogShow( javax.swing.JDialog dialog ) {
 		m_dialog = null;

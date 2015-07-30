@@ -177,7 +177,7 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 				replaceCurrent( stringToReplaceWith );
 			}
 		} else {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("String__") + findString + Messages.getString("_not_found_"), Messages.getString("String_not_found"), javax.swing.JOptionPane.INFORMATION_MESSAGE );   
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( Messages.getString("String____not_found_", findString), Messages.getString("String_not_found"), javax.swing.JOptionPane.INFORMATION_MESSAGE );   
 		}
 		setCaretPosition( currentPosition );
 	}

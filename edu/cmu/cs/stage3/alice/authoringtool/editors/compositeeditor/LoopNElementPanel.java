@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 
@@ -351,7 +352,10 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN)currentContainer.get(i)).index.get());
 			}
 			if (var != null){
-				var.name.set(baseName+"_#"+currentLevel); 
+				if (AikMin.isLTR())
+					var.name.set(baseName+"_#"+currentLevel);
+				else 
+					var.name.set(currentLevel+"#_"+baseName); 	// Aik Min - Language
 			}
 			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
 				setAllNames( ((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)currentContainer.get(i)).componentResponses , currentLevel+1);

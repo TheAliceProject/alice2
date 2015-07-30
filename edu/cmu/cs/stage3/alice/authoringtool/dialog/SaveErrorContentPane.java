@@ -35,8 +35,7 @@ public class SaveErrorContentPane extends ErrorContentPane {
 
 	protected void init() {
 		super.init();
-		messageLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD,
-				16));
+		messageLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD,	16));
 		messageLabel.setPreferredSize(null);
 		messageLabel.setLineWrap(false);
 	}

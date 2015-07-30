@@ -123,8 +123,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 	private javax.swing.JButton m_okButton;
 	private javax.swing.JButton m_cancelButton;
 
-	private javax.swing.Timer m_durationUpdateTimer = new javax.swing.Timer(
-			100, new java.awt.event.ActionListener() {
+	private javax.swing.Timer m_durationUpdateTimer = new javax.swing.Timer(100, new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					SoundRecorder.this.onDurationUpdate();
 				}
@@ -204,8 +203,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		gbc = new java.awt.GridBagConstraints();
 		gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-		namePanel
-				.add(new javax.swing.JLabel(Messages.getString("Name__")), gbc);
+		namePanel.add(new javax.swing.JLabel(Messages.getString("Name__")), gbc);
 		gbc.weightx = 1.0;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		namePanel.add(m_nameTextField, gbc);
@@ -301,69 +299,51 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		return m_parentToCheckForNameValidity;
 	}
 
-	public void setParentToCheckForNameValidity(
-			edu.cmu.cs.stage3.alice.core.Element parentToCheckForNameValidity) {
+	public void setParentToCheckForNameValidity(edu.cmu.cs.stage3.alice.core.Element parentToCheckForNameValidity) {
 		m_parentToCheckForNameValidity = parentToCheckForNameValidity;
-		m_nameTextField
-				.setText(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources
-						.getNameForNewChild(Messages.getString("unnamedSound"),
-								m_parentToCheckForNameValidity));
+		m_nameTextField.setText(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild(Messages.getString("unnamedSound"),	m_parentToCheckForNameValidity));
 	}
 
 	private void checkNameForValidity() {
 		java.awt.Color color = java.awt.Color.black;
-		if (edu.cmu.cs.stage3.alice.core.Element
-				.isPotentialNameValid(m_nameTextField.getText())) {
+		if (edu.cmu.cs.stage3.alice.core.Element.isPotentialNameValid(m_nameTextField.getText())) {
 			color = java.awt.Color.black;
 		} else {
 			color = java.awt.Color.red;
 		}
-
 		if (m_parentToCheckForNameValidity != null) {
-			if (m_parentToCheckForNameValidity
-					.getChildNamedIgnoreCase(m_nameTextField.getText()) != null) {
+			if (m_parentToCheckForNameValidity.getChildNamedIgnoreCase(m_nameTextField.getText()) != null) {
 				color = java.awt.Color.red;
 			}
 		}
-
 		m_nameTextField.setForeground(color);
 		updateOKButtonEnabled();
 	}
 
 	private void updateOKButtonEnabled() {
-		m_okButton
-				.setEnabled(audioInputStream != null
-						&& m_nameTextField.getForeground().equals(
-								java.awt.Color.black));
+		m_okButton.setEnabled(audioInputStream != null && m_nameTextField.getForeground().equals(java.awt.Color.black));
 	}
 
 	private String formatTime(double seconds) {
 		if (Double.isNaN(seconds)) {
 			return "?:??";
 		} else {
-			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat(
-					".000");
-			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat(
-					"00");
-			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat(
-					"#0");
+			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat(".000");
+			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat("00");
+			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat("#0");
 
 			double secondsFloored = (int) Math.floor(seconds);
 			double decimal = seconds - secondsFloored;
 			double secs = secondsFloored % 60.0;
 			double minutes = ((secondsFloored - secs) / 60.0) % 60.0;
-			double hours = (secondsFloored - 60.0 * minutes - secs)
-					/ (60.0 * 60.0);
+			double hours = (secondsFloored - 60.0 * minutes - secs)	/ (60.0 * 60.0);
 
-			String timeString = secMinFormatter1.format(secs)
-					+ decFormatter.format(decimal);
+			String timeString = secMinFormatter1.format(secs) + decFormatter.format(decimal);
 			if (hours > 0.0) {
-				timeString = secMinFormatter1.format(minutes) + ":"
-						+ timeString;
+				timeString = secMinFormatter1.format(minutes) + ":"	+ timeString;
 				timeString = secMinFormatter2.format(hours) + ":" + timeString;
 			} else {
-				timeString = secMinFormatter2.format(minutes) + ":"
-						+ timeString;
+				timeString = secMinFormatter2.format(minutes) + ":"	+ timeString;
 			}
 
 			return timeString;
@@ -395,8 +375,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 			break;
 		}
-		m_durationLabel.setText(Messages.getString("Duration__")
-				+ formatTime(t));
+		m_durationLabel.setText(Messages.getString("Duration__", formatTime(t)) );
 	}
 
 	private void onStop() {
@@ -523,18 +502,11 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 
 			// get an AudioInputStream of the desired format for playback
-			AudioFormat format = new AudioFormat(
-					AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100,
-					true);
-			AudioInputStream playbackInputStream = AudioSystem
-					.getAudioInputStream(format, audioInputStream);
+			AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, true);
+			AudioInputStream playbackInputStream = AudioSystem.getAudioInputStream(format, audioInputStream);
 
 			if (playbackInputStream == null) {
-				shutDown(Messages
-						.getString("Unable_to_convert_stream_of_format_")
-						+ audioInputStream
-						+ Messages.getString("_to_format_")
-						+ format);
+				shutDown(Messages.getString("Unable_to_convert_stream_of_format_to_format_", audioInputStream, format));
 				return;
 			}
 
@@ -542,8 +514,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 			// and make sure a compatible line is supported.
 			DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
 			if (!AudioSystem.isLineSupported(info)) {
-				shutDown(Messages.getString("Line_matching_") + info
-						+ Messages.getString("_not_supported_"));
+				shutDown(Messages.getString("Line_matching_not_supported_", info));
 				return;
 			}
 
@@ -552,7 +523,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 				line = (SourceDataLine) AudioSystem.getLine(info);
 				line.open(format, bufSize);
 			} catch (LineUnavailableException ex) {
-				shutDown(Messages.getString("Unable_to_open_the_line__") + ex);
+				shutDown(Messages.getString("Unable_to_open_the_line__", ex));
 				return;
 			}
 
@@ -573,11 +544,10 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 					}
 					int numBytesRemaining = numBytesRead;
 					while (numBytesRemaining > 0) {
-						numBytesRemaining -= line.write(data, 0,
-								numBytesRemaining);
+						numBytesRemaining -= line.write(data, 0, numBytesRemaining);
 					}
 				} catch (Exception e) {
-					shutDown(Messages.getString("Error_during_playback__") + e);
+					shutDown(Messages.getString("Error_during_playback__", e));
 					break;
 				}
 			}
@@ -622,19 +592,14 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 
 		public void run() {
-
 			audioInputStream = null;
-
 			// define the required attributes for our line,
 			// and make sure a compatible line is supported.
-			AudioFormat format = new AudioFormat(
-					AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100,
-					true);
+			AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, true);
 			DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
 
 			if (!AudioSystem.isLineSupported(info)) {
-				shutDown(Messages.getString("Line_matching_") + info
-						+ Messages.getString("_not_supported_"));
+				shutDown(Messages.getString("Unable_to_convert_stream_of_format_to_format_", audioInputStream, format));
 				return;
 			}
 
@@ -643,7 +608,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 				line = (TargetDataLine) AudioSystem.getLine(info);
 				line.open(format, line.getBufferSize());
 			} catch (LineUnavailableException ex) {
-				shutDown(Messages.getString("Unable_to_open_the_line__") + ex);
+				shutDown(Messages.getString("Unable_to_open_the_line__", ex));
 				return;
 			} catch (SecurityException ex) {
 				shutDown(ex.toString());
@@ -686,8 +651,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 			// load bytes into the audio input stream for playback
 			byte audioBytes[] = out.toByteArray();
 			ByteArrayInputStream bais = new ByteArrayInputStream(audioBytes);
-			audioInputStream = new AudioInputStream(bais, format,
-					audioBytes.length / frameSizeInBytes);
+			audioInputStream = new AudioInputStream(bais, format, audioBytes.length / frameSizeInBytes);
 
 			try {
 				audioInputStream.reset();
@@ -695,22 +659,17 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 				return;
 			}
 
-			File file = new File(soundDirectory + "/"
-					+ m_nameTextField.getText() + ".wav"); // TODO: make it work
-															// for MAC
+			File file = new File(soundDirectory + File.pathSeparator + m_nameTextField.getText() + ".wav");
 
 			try {
-				if (AudioSystem.write(audioInputStream,
-						AudioFileFormat.Type.WAVE, file) == -1) {
-					throw new IOException(
-							Messages.getString("Problems_writing_to_file"));
+				if (AudioSystem.write(audioInputStream,	AudioFileFormat.Type.WAVE, file) == -1) {
+					throw new IOException(Messages.getString("Problems_writing_to_file"));
 				}
 			} catch (Exception ex) {
 			}
 
 			try {
-				m_dataSource = edu.cmu.cs.stage3.media.Manager
-						.createDataSource(file);
+				m_dataSource = edu.cmu.cs.stage3.media.Manager.createDataSource(file);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

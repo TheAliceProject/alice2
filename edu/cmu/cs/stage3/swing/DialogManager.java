@@ -265,7 +265,6 @@ public class DialogManager {
 
 	public static Object showInputDialog( Object message, String title, int messageType, javax.swing.Icon icon, Object[] selectionValues, Object initialSelectionValue ) {
 		javax.swing.JOptionPane pane = new javax.swing.JOptionPane( message, messageType, javax.swing.JOptionPane.OK_CANCEL_OPTION, icon, null, null);
-
 		pane.setWantsInput( true );
 		pane.setSelectionValues( selectionValues );
 		pane.setInitialSelectionValue( initialSelectionValue );

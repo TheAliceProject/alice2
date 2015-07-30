@@ -76,7 +76,7 @@ public class BoneSelectDialog extends javax.swing.JDialog {
         for (int i=0; i<possibilities.length; i++) {
             listOfStuff.addElement(possibilities[i]);
         }
-        promptLabel.setText(Messages.getString("Which_Part_is_the_bone_")+matching+"?");  
+        promptLabel.setText(Messages.getString("Which_part_is_the_bone_", matching));  
     }
 
     private void jbInit() throws Exception {

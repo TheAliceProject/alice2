@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author Jason Pratt
  */
@@ -85,6 +87,9 @@ public class DefaultMoveMode extends RenderTargetManipulatorMode {
 	public void mouseDragged( java.awt.event.MouseEvent ev, int dx, int dy ) {
 		if( pickedTransformable != null ) {
 			boolean controlDown = ev.isControlDown();
+			if (AikMin.isMAC()){
+				controlDown = ev.isAltDown();
+			}
 			boolean shiftDown = ev.isShiftDown();
 
 			double deltaFactor;

@@ -23,15 +23,17 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
+import com.jogamp.opengl.GL2;
+
 class LinearFogProxy extends FogProxy {
     private float m_near;
     private float m_far;
     
 	public void setup( RenderContext context ) {
         super.setup( context );
-        context.gl.glFogi( javax.media.opengl.GL.GL_FOG_MODE, javax.media.opengl.GL.GL_LINEAR );
-        context.gl.glFogf( javax.media.opengl.GL.GL_FOG_START, m_near );
-        context.gl.glFogf( javax.media.opengl.GL.GL_FOG_END, m_far );
+        context.gl.glFogi( GL2.GL_FOG_MODE, GL2.GL_LINEAR );
+        context.gl.glFogf( GL2.GL_FOG_START, m_near );
+        context.gl.glFogf( GL2.GL_FOG_END, m_far );
     }
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {

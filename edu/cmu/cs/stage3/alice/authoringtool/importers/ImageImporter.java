@@ -57,7 +57,7 @@ public class ImageImporter extends edu.cmu.cs.stage3.alice.authoringtool.Abstrac
 	protected edu.cmu.cs.stage3.alice.core.Element load( java.io.InputStream istream, String ext ) throws java.io.IOException {
 		String codecName = edu.cmu.cs.stage3.image.ImageIO.mapExtensionToCodecName( ext );
 		if( codecName == null ) {
-			throw new IllegalArgumentException( Messages.getString("Unsupported_Extension__") + ext ); 
+			throw new IllegalArgumentException( Messages.getString("Unsupported_Extension__", ext) ); 
 		}
 
 		java.io.BufferedInputStream bis;

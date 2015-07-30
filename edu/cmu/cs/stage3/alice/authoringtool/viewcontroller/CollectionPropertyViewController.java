@@ -129,7 +129,7 @@ public class CollectionPropertyViewController extends javax.swing.JButton implem
 				repr.append( Messages.getString("_None_") ); 
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("Bad_value__") + value ); 
+			throw new RuntimeException( Messages.getString("Bad_value__", value )); 
 		}
 
 		setText( repr.toString() );

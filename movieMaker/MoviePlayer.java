@@ -209,12 +209,12 @@ public class MoviePlayer
     frame.setVisible(flag);
   }
   
-  public static void main(String[] args)
+/*  public static void main(String[] args)
   {
     MoviePlayer moviePlayer = 
      new MoviePlayer();
     //new MoviePlayer("c:/temp/movie4/");
     moviePlayer.playMovie(16);
   }
-  
+  */
 }

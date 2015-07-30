@@ -38,7 +38,7 @@ import edu.cmu.cs.stage3.lang.Messages;
 public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.DropTargetListener{
 
     protected javax.swing.JLabel m_label = new javax.swing.JLabel();
-    protected String m_doNothingLabel = Messages.getString("_Do_Nothing"); 
+    protected String m_doNothingLabel = " " + Messages.getString("Do_Nothing"); 
     private boolean highlight = false;
 
     public InsertPanel() {

@@ -7,22 +7,37 @@ import javax.swing.UIManager;
 public class AikMin {
 	public static String locale = "";
 	public static String defaultLanguage = "English";
-	public static String[] listOfLanguages = {"English","Portuguese","Spanish","German"}; 
+	public static String[] listOfLanguages = {"English","Portuguese","Spanish","German", "Arabic"}; 
 	public static int target = 0;	// Compile with 1 to delete preferences file or create etc/firstRun.txt
-
+	public static boolean control = false, shift = false;
+	
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	//Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )
 	//System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")  
 	//edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" )
 	//System.getProperty( "file.separator" )
-
+	//new String(item.getBytes("utf-8"), "utf-8");
+	/*javax.swing.Timer focusTimer = new javax.swing.Timer(100,
+			new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent ev) {
+					renderCanvas.requestFocus();
+				}
+			});
+	focusTimer.setRepeats(false);
+	focusTimer.start();*/
+	public static boolean isLTR(){
+		return true; //(locale != "Arabic"); 
+	}
+	
 	public static boolean isWindows() {
 		return System.getProperty("os.name") != null && System.getProperty("os.name").toLowerCase().startsWith("win"); 
 	}
+	
 	public static boolean isMAC() {
 		return System.getProperty("os.name") != null && System.getProperty("os.name").toLowerCase().startsWith("mac"); 
 	}
+	
 	public static boolean isUnix() {
 		return System.getProperty("os.name") != null && (
 				System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0 ||

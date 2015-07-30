@@ -25,6 +25,7 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -64,8 +65,8 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 	protected QuestionsListener questionsListener = new QuestionsListener();
 	protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty poses;
 	protected PosesListener posesListener = new PosesListener();
-	protected java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 );
-	protected java.awt.GridBagConstraints glueConstraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 );
+	protected java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 );
+	protected java.awt.GridBagConstraints glueConstraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 );
 	protected javax.swing.border.Border spacingBorder = javax.swing.BorderFactory.createEmptyBorder( 4, 0, 8, 0 );
 	protected edu.cmu.cs.stage3.alice.core.event.ChildrenListener parentListener = new edu.cmu.cs.stage3.alice.core.event.ChildrenListener() {
 		private edu.cmu.cs.stage3.alice.core.Element parent;
@@ -110,6 +111,8 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		miscPanel = new edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ObjectArrayPropertyPanel( Messages.getString("Misc"), authoringTool ); 
 		jbInit();
 		guiInit();
+		if (!AikMin.isLTR())
+			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);	
 	}
 
 	private void guiInit() {
@@ -201,12 +204,12 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		comboPanel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("This_area_displays_the_details_p_of_the_Selected_Object_")+"</font></html>" ); 
 		tabbedPane.setToolTipTextAt( PROPERTIES_TAB, "<html><font face=arial size=-1>"+Messages.getString("Open_the_Properties_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_Properties_of_the_Selected_Object_")+"</font></html>" ); 
 		tabbedPane.setToolTipTextAt( ANIMATIONS_TAB, "<html><font face=arial size=-1>"+Messages.getString("Open_the_Methods_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_Methods_of_the_Selected_Object_")+"</font></html>" ); 
-		tabbedPane.setToolTipTextAt( QUESTIONS_TAB, "<html><font face=arial size=-1>"+Messages.getString("Open_the_")+cappedQuestionString+"s"+Messages.getString("_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_")+cappedQuestionString+"s"+Messages.getString("_of_the_Selected_Object_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
+		tabbedPane.setToolTipTextAt( QUESTIONS_TAB, "<html><font face=arial size=-1>"+Messages.getString("Open_the_")+cappedQuestionString+"s"+" "+Messages.getString("Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_")+cappedQuestionString+"s "+Messages.getString("of_the_Selected_Object_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
 		newAnimationButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Blank_Method_p_and_Open_it_for_Editing_")+"</font></html>" ); 
 		newQuestionButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Blank_")+cappedQuestionString+Messages.getString("_p_and_Open_it_for_Editing_")+"</font></html>" );  
 		propertiesPanel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Properties_Tab_p__p_This_tab_allows_you_to_view_and_edit_p_the_Properties_of_the_Selected_Object_")+"</font></html>" ); 
 		animationsPanel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Methods_Tab_p__p_Methods_are_the_actions_that_an_object_knows_how_to_do__p_Most_objects_come_with_default_methods__and_you_can_p_create_your_own_methods_as_well_")+"</font></html>" ); 
-		questionsPanel.setToolTipText( "<html><font face=arial size=-1>"+cappedQuestionString+"s"+Messages.getString("_Tab_p__p_")+cappedQuestionString+"s"+Messages.getString("_are_the_things_that_an_object_can_p_answer_about_themselves_or_the_world_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
+		questionsPanel.setToolTipText( "<html><font face=arial size=-1>"+cappedQuestionString+"s"+" "+Messages.getString("Tab_p__p_")+cappedQuestionString+"s"+" "+Messages.getString("are_the_things_that_an_object_can_p_answer_about_themselves_or_the_world_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
 	}
 
 	public void paintComponent( java.awt.Graphics g ) {
@@ -561,7 +564,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 
 					javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( pose );
 					if( gui != null ) {
-						java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
+						java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
 						subPanel.add( gui, constraints );
 						count++;
 						if( (newlyCreatedPose == pose) && (gui instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ElementDnDPanel) ) {
@@ -573,7 +576,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					}
 				}
 
-				java.awt.GridBagConstraints c = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 4, 2, 2, 2 ), 0, 0 );
+				java.awt.GridBagConstraints c = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 4, 2, 2, 2 ), 0, 0 );
 				subPanel.add( capturePoseButton, c );
 
 				propertiesPanel.add( subPanel, constraints );
@@ -653,14 +656,14 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 								};
 								javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyGUI( property, true, false, oneShotFactory );
 								if( gui != null ) {
-									java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, i, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
+									java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, i, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
 									subPanel.add( gui, constraints );
 									i++;
 								} else {
 									AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_property__") + property, null ); 
 								}
 							} else {
-								AuthoringTool.showErrorDialog( Messages.getString("no_property_on_") + element + Messages.getString("_named_") + name, null );  
+								AuthoringTool.showErrorDialog( Messages.getString("no_property_on_") + element + " " + Messages.getString("named_") + name, null );  
 							}
 						}
 					}
@@ -738,9 +741,9 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 							panelsToClean.add( guiPanel );
 							guiPanel.setBackground( java.awt.Color.white );
 							guiPanel.setLayout( new java.awt.GridBagLayout() );
-							guiPanel.add( gui, new java.awt.GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHWEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 ) );
-							guiPanel.add( editButton, new java.awt.GridBagConstraints( 1, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.SOUTHWEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 4, 0, 0 ), 0, 0 ) );
-							java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
+							guiPanel.add( gui, new java.awt.GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 ) );
+							guiPanel.add( editButton, new java.awt.GridBagConstraints( 1, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 4, 0, 0 ), 0, 0 ) );
+							java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
 							subPanel.add( guiPanel, constraints );
 							count++;
 							if( (newlyCreatedAnimation == response) && (gui instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.CallToUserDefinedResponsePrototypeDnDPanel) ) {
@@ -756,7 +759,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					}
 				}
 
-				java.awt.GridBagConstraints c = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 4, 2, 2, 2 ), 0, 0 );
+				java.awt.GridBagConstraints c = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 4, 2, 2, 2 ), 0, 0 );
 				subPanel.add( newAnimationButton, c );
 
 				animationsPanel.add( subPanel, constraints );
@@ -804,7 +807,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 										edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( responseClass, knownPropertyValues, desiredProperties );
 										javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( responsePrototype );
 										if( gui != null ) {
-											java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, i, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
+											java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, i, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
 											subPanel.add( gui, constraints );
 											i++;
 										} else {
@@ -851,9 +854,9 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 							panelsToClean.add( guiPanel );
 							guiPanel.setBackground( java.awt.Color.white );
 							guiPanel.setLayout( new java.awt.GridBagLayout() );
-							guiPanel.add( gui, new java.awt.GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHWEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 ) );
-							guiPanel.add( editButton, new java.awt.GridBagConstraints( 1, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.SOUTHWEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 4, 0, 0 ), 0, 0 ) );
-							java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
+							guiPanel.add( gui, new java.awt.GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 ) );
+							guiPanel.add( editButton, new java.awt.GridBagConstraints( 1, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 4, 0, 0 ), 0, 0 ) );
+							java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
 							subPanel.add( guiPanel, constraints );
 							count++;
 							if( newlyCreatedQuestion == question ) {
@@ -868,7 +871,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					}
 				}
 
-				java.awt.GridBagConstraints c = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 4, 2, 2, 2 ), 0, 0 );
+				java.awt.GridBagConstraints c = new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 4, 2, 2, 2 ), 0, 0 );
 				subPanel.add( newQuestionButton, c );
 
 				questionsPanel.add( subPanel, constraints );
@@ -921,7 +924,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 								edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype elementPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype( questionClass, knownPropertyValues, desiredProperties );
 								javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( elementPrototype );
 								if( gui != null ) {
-									java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, i, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
+									java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints( 0, i, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 );
 									subPanel.add( gui, constraints );
 									i++;
 								} else {
@@ -961,6 +964,11 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 //			}
 //			glueConstraints.gridy = constraints.gridy;
 //			otherPanel.add( javax.swing.Box.createGlue(), glueConstraints );
+		}
+		if (!AikMin.isLTR()) {
+			propertiesPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+			animationsPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+			questionsPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		}
 		revalidate();
 		repaint();

@@ -164,28 +164,28 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
                 cancelButton_actionPerformed(e);
             }
         });
-        this.getContentPane().add(promptLabel,                      new GridBagConstraints(0, 0, 3, 1, 0.0, 0.0
+        this.getContentPane().add(promptLabel, new GridBagConstraints(0, 0, 3, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 0, 0), 0, 0));
-        this.getContentPane().add(jScrollPane1,                      new GridBagConstraints(0, 1, 3, 1, 1.0, 1.0
+        this.getContentPane().add(jScrollPane1, new GridBagConstraints(0, 1, 3, 1, 1.0, 1.0
             ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 60));
-        this.getContentPane().add(jLabel1,           new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0
+        this.getContentPane().add(jLabel1, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0
             ,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
-        this.getContentPane().add(jLabel2,          new GridBagConstraints(0, 4, 1, 2, 0.0, 0.0
+        this.getContentPane().add(jLabel2, new GridBagConstraints(0, 4, 1, 2, 0.0, 0.0
             ,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
-        this.getContentPane().add(nativeFPSCombo,           new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0
+        this.getContentPane().add(nativeFPSCombo, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 0, 0), 0, 0));
-        this.getContentPane().add(aliceFPSCombo,               new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0
+        this.getContentPane().add(aliceFPSCombo, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 0, 0), 0, 0));
-        this.getContentPane().add(jLabel3,   new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
+        this.getContentPane().add(jLabel3, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
             ,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
-        this.getContentPane().add(jSkelFile,    new GridBagConstraints(1, 2, 1, 1, 1.0, 0.0
+        this.getContentPane().add(jSkelFile, new GridBagConstraints(1, 2, 1, 1, 1.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 0, 0), 0, 0));
         jScrollPane1.getViewport().add(partsList, null);
-        this.getContentPane().add(jFileBoxButton,          new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0
+        this.getContentPane().add(jFileBoxButton, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 1, 0, 5), -19, -8));
         this.getContentPane().add(okButton, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0
             ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(5, 0, 5, 0), 0, 0));
-        this.getContentPane().add(cancelButton,  new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0
+        this.getContentPane().add(cancelButton, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0
             ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
     }
 

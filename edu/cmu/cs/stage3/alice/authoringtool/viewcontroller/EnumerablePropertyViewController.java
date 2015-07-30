@@ -48,7 +48,7 @@ public class EnumerablePropertyViewController extends PropertyViewController {
 		super.set( property, true, allowExpressions, false, omitPropertyName, factory );
 		this.valueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(property);
 		if( ! edu.cmu.cs.stage3.util.Enumerable.class.isAssignableFrom( this.valueClass ) ) {
-			throw new IllegalArgumentException( Messages.getString("valueClass_of_property_") + property + Messages.getString("_is_not_an_Enumerable__instead__") + valueClass );  
+			throw new IllegalArgumentException( Messages.getString("valueClass_of_property_is_not_an_Enumerable__instead__", property, valueClass ));  
 		}
 		setPopupEnabled( true );
 		refreshGUI();

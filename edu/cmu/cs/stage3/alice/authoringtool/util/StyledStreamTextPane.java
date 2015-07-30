@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import java.io.UnsupportedEncodingException;
+
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -53,7 +55,13 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 	}
 
 	public StyleStream getNewStyleStream( javax.swing.text.Style style ) {
-		return new StyleStream( this, style );
+		try {
+			return new StyleStream( this, style );
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// prevent word wrapping
@@ -239,6 +247,7 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 					fileReaderThread.start();
 
 					dtde.getDropTargetContext().dropComplete( true );
+					fileReader.close();
 					return;
 				} catch( java.awt.datatransfer.UnsupportedFlavorException e ) {
 					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Drop_didn_t_work__bad_flavor"), e ); 

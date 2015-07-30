@@ -54,7 +54,7 @@ public class TypeChooser extends javax.swing.JPanel {
 		setLayout( new GridBagLayout() );
 
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.NORTHWEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		//gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		add( numberButton, gbc );

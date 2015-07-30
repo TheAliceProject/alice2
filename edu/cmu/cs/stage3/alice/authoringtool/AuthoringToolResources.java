@@ -215,7 +215,7 @@ public class AuthoringToolResources {
 			oos.flush();
 			oos.close();
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_save_resources_cache_to_") + resourcesCacheFile.getAbsolutePath(), t ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_save_resources_cache_to_", resourcesCacheFile.getAbsolutePath()), t ); 
 		}
 	}
 
@@ -223,7 +223,7 @@ public class AuthoringToolResources {
 		try {
 			resourcesCacheFile.delete();
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_delete_resources_cache_") + resourcesCacheFile.getAbsolutePath(), t ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_delete_resources_cache_", resourcesCacheFile.getAbsolutePath()), t ); 
 		}
 	}
 
@@ -236,10 +236,10 @@ public class AuthoringToolResources {
 					try {
 						Class.forName( className );
 					} catch( java.lang.ClassNotFoundException e ) {
-						throw new IllegalArgumentException( Messages.getString("propertyStructure_error__") + className + Messages.getString("_is_not_a_Class") );  
+						throw new IllegalArgumentException( Messages.getString("propertyStructure_error__is_not_a_Class", className) );  
 					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_propertyStructure__") + o ); 
+					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_propertyStructure__", o )); 
 				}
 			}
 		}
@@ -259,10 +259,10 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_") + className, e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_propertyStructure__") + o, null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_propertyStructure__", o), null ); 
 				}
 			}
 		}
@@ -361,7 +361,7 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_") + className, e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
 					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_oneShotStructure__") + o, null ); 
@@ -394,7 +394,7 @@ public class AuthoringToolResources {
 												try {
 													Class.forName( (String)className2 );
 												} catch( ClassNotFoundException e ) {
-													throw new IllegalArgumentException( Messages.getString("questionStructure_error__") + className2 + Messages.getString("_is_not_a_Class") );  
+													throw new IllegalArgumentException( Messages.getString("questionStructure_error__") + className2 + " " + Messages.getString("is_not_a_Class") );  
 												}
 											} else {
 												throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_String__got__") + className ); 
@@ -432,7 +432,7 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_") + className, e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
 					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_questionStructure__") + o, null ); 
@@ -502,7 +502,7 @@ public class AuthoringToolResources {
 						}
 					}
 				} catch( java.lang.ClassNotFoundException e ) {
-					AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_") + className, e ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 				}
 			}
 		}
@@ -511,13 +511,6 @@ public class AuthoringToolResources {
 	}
 
 	public static void putName( Object key, String prettyName ) {
-		if (System.getProperty("os.name") != null){
-			if (System.getProperty("os.name").startsWith("Mac") ){
-				try {
-					prettyName = new String(prettyName.getBytes(), "CP1252");
-				} catch (Exception e){}
-			} 
-		}		
 		AuthoringToolResources.resources.nameMap.put( key, prettyName );
 	}
 
@@ -531,13 +524,6 @@ public class AuthoringToolResources {
 	}
 	
 	public static void putHTMLName( Object key, String prettyName ) {
-		if (System.getProperty("os.name") != null){
-			if (System.getProperty("os.name").startsWith("Mac") ){
-				try {
-					prettyName = new String(prettyName.getBytes(), "CP1252");
-				} catch (Exception e){}
-			} 
-		}		
 		AuthoringToolResources.resources.htmlNameMap.put( key, prettyName );
 	}
 
@@ -550,13 +536,6 @@ public class AuthoringToolResources {
 	}
 
 	public static void putFormat( Object key, String formatString ) {
-		if (System.getProperty("os.name") != null){
-			if (System.getProperty("os.name").startsWith("Mac") ){
-				try {
-					formatString = new String(formatString.getBytes(), "CP1252");
-				} catch (Exception e){}
-			} 
-		}		
 		AuthoringToolResources.resources.formatMap.put( key, formatString );
 	}
 
@@ -797,7 +776,9 @@ public class AuthoringToolResources {
 						reprString = (String)map.get( value );
 						String temp = reprString.replaceAll("<\\w*>","");
 						temp = temp.replaceAll("[^a-zA-Z ]", "").trim();
-						reprString = reprString.replace(temp, Messages.getString(temp.replace(" ", "_")));//Messages.getString(temp));
+						if (temp.length() > 0){
+							reprString = reprString.replace(temp, Messages.getString(temp.replace(" ", "_")));//Messages.getString(temp));
+						}
 					} else if( value == null ) { // is this right for all cases?
 						reprString = null;
 					} else if( map.containsKey( "default" ) ) { 
@@ -991,7 +972,7 @@ public class AuthoringToolResources {
 					}
 				}
 			} catch( NoSuchFieldException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_representing_PropertyValue__can_t_find_") + propertyName + Messages.getString("_on_") + valueClass, e );  
+				AuthoringTool.showErrorDialog( Messages.getString("Error_representing_PropertyValue__can_t_find_") + propertyName + " " + Messages.getString("on_") + valueClass, e );  
 			}
 
 			value = getReprForValue( element, false ) + "." + propertyName; 
@@ -1331,7 +1312,7 @@ public class AuthoringToolResources {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_") + className, e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
 					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_behaviorParameterPropertiesStructure__") + o, null ); 
@@ -1623,7 +1604,7 @@ public class AuthoringToolResources {
 	}
 
 	public static void openURL( String urlString ) throws java.io.IOException {
-		if( (System.getProperty( "os.name" ) != null) && System.getProperty( "os.name" ).startsWith( "Windows" ) ) {   
+		if( AikMin.isWindows() ) {   
 			String[] cmdarray = new String[3];
 			cmdarray[0] = "rundll32"; 
 			cmdarray[1] = "url.dll,FileProtocolHandler"; 
@@ -1733,7 +1714,7 @@ public class AuthoringToolResources {
 		Double number = null;
 		if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) { 
 			number = new Double( Double.POSITIVE_INFINITY );
-		} else if( doubleString.trim().equalsIgnoreCase( Messages.getString("_infinity") ) ) { 
+		} else if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) { 
 			number = new Double( Double.NEGATIVE_INFINITY );
 		} else if( doubleString.indexOf( '/' ) > -1 ) {
 			if( doubleString.lastIndexOf( '/' ) == doubleString.indexOf( '/' ) ) {
@@ -2116,7 +2097,7 @@ public class AuthoringToolResources {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_") + className, e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
 					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_worldTreeChildrenPropertiesStructure__") + o, null ); 
@@ -2232,7 +2213,7 @@ public class AuthoringToolResources {
 			try {
 				AuthoringToolResources.resources.flavorMap.put( c, new java.awt.datatransfer.DataFlavor( java.awt.datatransfer.DataFlavor.javaJVMLocalObjectMimeType + "; class=" + c.getName() ) ); 
 			} catch( ClassNotFoundException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_") + c.getName(), e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", c.getName()), e ); 
 			}
 		}
 		return (java.awt.datatransfer.DataFlavor)AuthoringToolResources.resources.flavorMap.get( c );
@@ -2348,7 +2329,7 @@ public class AuthoringToolResources {
 	public static String formatMemorySize( long bytes ) {
 		String sizeString = null;
 		if( bytes < 1024 ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + Messages.getString("_bytes"); 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + " " + Messages.getString("bytes"); 
 		} else if( bytes < 1024L*1024L ) {
 			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024) ) + " KB"; 
 		} else if( bytes < 1024L*1024L*1024L ) {
@@ -2524,7 +2505,7 @@ public class AuthoringToolResources {
 
 	public static String getSpecifier( String token ) {
 		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {   
-			if (!System.getProperty("os.name").startsWith("Window")) {  
+			if ( !AikMin.isWindows() ) {  
 				token = token.replaceAll("\\\\", java.io.File.separator); 
 			}
 			return token.substring( token.indexOf( "<" ) + 1, token.indexOf( ">" ) );  

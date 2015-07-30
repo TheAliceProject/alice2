@@ -42,12 +42,92 @@ import edu.cmu.cs.stage3.lang.Messages;
  */
 public class JAlice {
 	// version information
-	private static String version = "2.4.3 (Sept 2014)"; 
-	private static String backgroundColor =  new edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
+	private static String version = "2.4.3"; 
+	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
+	static AuthoringTool authoringTool;
 	static {
+/*		try {
+			// Clear previous logging configurations.
+			java.util.logging.LogManager.getLogManager().reset();
+
+			// Get the logger for "org.jnativehook" and set the level to off.
+			java.util.logging.Logger logger = java.util.logging.Logger.getLogger(org.jnativehook.GlobalScreen.class.getPackage().getName());
+			logger.setLevel(java.util.logging.Level.OFF);
+			
+			org.jnativehook.GlobalScreen.registerNativeHook();
+		}
+        catch (org.jnativehook.NativeHookException ex) {
+                System.err.println("There was a problem registering the native hook.");
+                System.err.println(ex.getMessage());
+
+                System.exit(1);
+        }*/
 		try {
+			java.io.File bakFile = new java.io.File(JAlice.getAliceHomeDirectory().getParent().toString() + File.separator + "Aliceold.exe");
+			if (bakFile.exists()){
+				bakFile.delete();
+			}
+			java.io.File newFile = new java.io.File(JAlice.getAliceHomeDirectory().getParent().toString() + File.separator + "Alicenew.exe"); 
+			if (newFile.exists()){
+		    	JOptionPane.showMessageDialog(new javax.swing.JFrame(),
+		    		    "You must restart Alice to complete the software update.",
+		    		    "Software Update",
+		    		    JOptionPane.INFORMATION_MESSAGE);
+				java.io.File oldFile = new java.io.File(JAlice.getAliceHomeDirectory().getParent().toString() + File.separator + "Alice.exe");
+				if (newFile.exists()) {
+					oldFile.renameTo(new java.io.File(JAlice.getAliceHomeDirectory().getParent().toString() + File.separator + "Aliceold.exe"));
+					newFile.renameTo(oldFile);
+				}
+				newFile = new java.io.File(JAlice.getAliceHomeDirectory().toString() + File.separator + "lib" + File.separator + "win32" + File.separator + "jni_directx7renderer.dll.new"); 
+				oldFile = new java.io.File(JAlice.getAliceHomeDirectory().toString() + File.separator + "lib" + File.separator + "win32" + File.separator + "jni_directx7renderer.dll"); 
+				if (newFile.exists()) {
+					oldFile.delete();
+					newFile.renameTo(oldFile);
+				}
+				newFile = new java.io.File(JAlice.getAliceHomeDirectory().toString() + File.separator + "lib" + File.separator + "win32" + File.separator + "jni_awtutilities.dll.new"); 
+				oldFile = new java.io.File(JAlice.getAliceHomeDirectory().toString() + File.separator + "lib" + File.separator + "win32" + File.separator + "jni_awtutilities.dll"); 
+				if (newFile.exists()) {
+					oldFile.delete();
+					newFile.renameTo(oldFile);
+				}
+		    	try {
+					// Restart for Windows
+					if (AikMin.isWindows()){
+						String file = JAlice.getAliceHomeDirectory().getParent().toString()+"\\Alice.exe";
+						if (new java.io.File(file).exists()) {
+							Runtime.getRuntime().exec( file );
+						} else {
+							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice.exe in Alice directory. Please restart Alice manually.");
+						}
+					} 
+					// Restart for Mac
+					else if (AikMin.isMAC()){
+						String decodedPath = java.net.URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+						decodedPath=decodedPath.substring(0, decodedPath.lastIndexOf(".app")+4);
+						String params[] = {"open", "-n", decodedPath };
+						Runtime.getRuntime().exec(params);
+					} 
+					// Restart for Linux - Ubuntu
+					else {
+						String file = JAlice.getAliceHomeDirectory().getParent().toString()+"/Required/run-alice";
+						if (new java.io.File(file).exists()) {
+							try {
+								Runtime.getRuntime().exec( file );
+							} catch (Exception e){
+								e.printStackTrace();
+							}
+						} else {
+							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice executable in Alice directory. Please restart Alice manually.");
+						}
+					}							
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.exit(0);
+			}
+
 			java.io.File versionFile = new java.io.File( getAliceHomeDirectory(), "etc/config.txt" ).getAbsoluteFile(); 
 			if( versionFile.exists() ) {
 				if( versionFile.canRead() ) {
@@ -97,7 +177,7 @@ public class JAlice {
 	static boolean stdOutToConsole = false;
 	static boolean stdErrToConsole = false;
 	static String defaultRendererClassname = null;
-	static AuthoringTool authoringTool;
+	
 
 	static boolean mainHasFinished = false;
 	private static boolean listenerRegistered = false;
@@ -122,6 +202,7 @@ public class JAlice {
 				if (getAliceUserDirectory().exists())
 					new java.io.File( getAliceUserDirectory(), "AlicePreferences.xml" ).getAbsoluteFile().delete();
 			}
+			firstRun = null;
 			localInit();
 			boolean useJavaBasedSplashScreen = true;
 			String useSplashScreenString = System.getProperty( "alice.useJavaBasedSplashScreen" ); 
@@ -133,7 +214,7 @@ public class JAlice {
 				splashScreen = initSplashScreen();
 				splashScreen.showSplash();
 			}
-			if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").toLowerCase().startsWith("mac"))) {
+			if (AikMin.isMAC()) {
 				com.apple.eawt.Application app =  com.apple.eawt.Application.getApplication();
 	            app.setOpenFileHandler( new OpenFilesHandler() {
 					public void openFiles(OpenFilesEvent event) {
@@ -169,7 +250,7 @@ public class JAlice {
 				}
 				aliceHasNotExitedFile.createNewFile();
 				java.io.OutputStreamWriter writer = new java.io.OutputStreamWriter(new java.io.FileOutputStream(aliceHasNotExitedFile));
-				writer.write("Alice_has_not_exited_propertly_yet_"); 
+				writer.write("Alice_has_not_exited_properly_yet_"); 
 				writer.flush();
 				writer.close();
 			}catch (Exception e){}
@@ -189,7 +270,7 @@ public class JAlice {
 			
 			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
-				splashScreen.hideSplash();
+				splashScreen.dispose();//.hideSplash();
 			}
 		} catch( Throwable t ) {
 			t.printStackTrace();
@@ -345,11 +426,10 @@ public class JAlice {
 
 		if( authoringtoolConfig.getValue( "mainWindowBounds" ) == null ) { 
 			int screenWidth = 1280;//(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-			int screenHeight = 1024;//(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+			int screenHeight = 720;//(int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 			int x = 0;
 			int y = 0;
-			int height = screenHeight - 30;
-			authoringtoolConfig.setValue( "mainWindowBounds", (x+80) + ", " + y + ", " + (screenWidth-80) + ", " + height );    //$NON-NLS-4$
+			authoringtoolConfig.setValue( "mainWindowBounds", x + ", " + y + ", " + screenWidth + ", " + screenHeight );    //$NON-NLS-4$
 		}
 
 		if( authoringtoolConfig.getValueList( "rendering.orderedRendererList" ) == null ) { 
@@ -580,13 +660,13 @@ public class JAlice {
 
 		int i = g.getOptind();
 		if( (i >= 0) && (i < args.length) ) {
-			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").toLowerCase().startsWith("windows")) {   
+			if (AikMin.isWindows()) {   
 				char ch = ':';
 				String file = args[i].toString(); 
 				file = file.substring(file.lastIndexOf(ch)-1, file.length());
 				worldToLoad = new java.io.File( file ).getAbsoluteFile();
 			} 
-			else if ((System.getProperty("os.name") != null) && (System.getProperty("os.name").toLowerCase().startsWith("mac"))) {
+			else if (AikMin.isMAC()) {
 			}
 			else {
 				worldToLoad = new java.io.File( args[i] ).getAbsoluteFile();

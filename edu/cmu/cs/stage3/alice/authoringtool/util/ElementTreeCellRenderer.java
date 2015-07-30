@@ -94,7 +94,7 @@ public class ElementTreeCellRenderer extends javax.swing.JPanel implements javax
 				}
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error__not_an_Element__") + value, null ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error__not_an_Element__", value), null ); 
 		}
 		this.doLayout();
 		return this;

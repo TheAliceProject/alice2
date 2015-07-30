@@ -36,16 +36,13 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private java.util.Vector m_okActionListeners = new java.util.Vector();
 
 	private static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
-			.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-					.getPackage());
+			.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
 
-	public SaveForWebContentPane(
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+	public SaveForWebContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		this.authoringTool = authoringTool;
 		jbInit();
 		guiInit();
-		authorNameTextField
-				.addActionListener(new java.awt.event.ActionListener() {
+		authorNameTextField.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
 						saveButton.doClick();
 					}
@@ -74,11 +71,9 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	private void fireOKActionListeners() {
 		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent(this,
-				java.awt.event.ActionEvent.ACTION_PERFORMED,
-				Messages.getString("OK"));
+				java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("OK"));
 		for (int i = 0; i < m_okActionListeners.size(); i++) {
-			java.awt.event.ActionListener l = (java.awt.event.ActionListener) m_okActionListeners
-					.elementAt(i);
+			java.awt.event.ActionListener l = (java.awt.event.ActionListener) m_okActionListeners.elementAt(i);
 			l.actionPerformed(e);
 		}
 	}
@@ -114,94 +109,79 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		constrainAspectRatioCheckBox.setSelected(true);
 
 		widthTextField.getDocument().addDocumentListener(
-				new javax.swing.event.DocumentListener() {
-					public void insertUpdate(javax.swing.event.DocumentEvent ev) {
-						updateHeightTextField();
-					}
+			new javax.swing.event.DocumentListener() {
+				public void insertUpdate(javax.swing.event.DocumentEvent ev) {
+					updateHeightTextField();
+				}
 
-					public void removeUpdate(javax.swing.event.DocumentEvent ev) {
-						updateHeightTextField();
-					}
+				public void removeUpdate(javax.swing.event.DocumentEvent ev) {
+					updateHeightTextField();
+				}
 
-					private void updateHeightTextField() {
-						if (constrainAspectRatioCheckBox.isSelected()
-								&& (!ignoreSizeChange)) {
-							ignoreSizeChange = true;
-							double aspectRatio = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources
-									.getAspectRatio(authoringTool.getWorld());
-							int width = -1;
-							try {
-								width = Integer.parseInt(widthTextField
-										.getText());
-							} catch (NumberFormatException e) {
-							}
-							if (width > 0) {
-								heightTextField.setText(Integer
-										.toString((int) (width / aspectRatio)));
-							}
-							ignoreSizeChange = false;
+				private void updateHeightTextField() {
+					if (constrainAspectRatioCheckBox.isSelected() && (!ignoreSizeChange)) {
+						ignoreSizeChange = true;
+						double aspectRatio = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getAspectRatio(authoringTool.getWorld());
+						int width = -1;
+						try {
+							width = Integer.parseInt(widthTextField.getText());
+						} catch (NumberFormatException e) {	}
+						if (width > 0) {
+							heightTextField.setText(Integer.toString((int) (width / aspectRatio)));
 						}
+						ignoreSizeChange = false;
 					}
+				}
 
-					public void changedUpdate(javax.swing.event.DocumentEvent ev) {
-					}
-				});
+				public void changedUpdate(javax.swing.event.DocumentEvent ev) {
+				}
+			});
 
 		heightTextField.getDocument().addDocumentListener(
-				new javax.swing.event.DocumentListener() {
-					public void insertUpdate(javax.swing.event.DocumentEvent ev) {
-						updateWidthTextField();
-					}
+			new javax.swing.event.DocumentListener() {
+				public void insertUpdate(javax.swing.event.DocumentEvent ev) {
+					updateWidthTextField();
+				}
 
-					public void removeUpdate(javax.swing.event.DocumentEvent ev) {
-						updateWidthTextField();
-					}
+				public void removeUpdate(javax.swing.event.DocumentEvent ev) {
+					updateWidthTextField();
+				}
 
-					private void updateWidthTextField() {
-						if (constrainAspectRatioCheckBox.isSelected()
-								&& (!ignoreSizeChange)) {
-							ignoreSizeChange = true;
-							double aspectRatio = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources
-									.getAspectRatio(authoringTool.getWorld());
-							int height = -1;
-							try {
-								height = Integer.parseInt(heightTextField
-										.getText());
-							} catch (NumberFormatException e) {
-							}
-							if (height > 0) {
-								widthTextField.setText(Integer
-										.toString((int) (aspectRatio * height)));
-							}
-							ignoreSizeChange = false;
+				private void updateWidthTextField() {
+					if (constrainAspectRatioCheckBox.isSelected() && (!ignoreSizeChange)) {
+						ignoreSizeChange = true;
+						double aspectRatio = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getAspectRatio(authoringTool.getWorld());
+						int height = -1;
+						try {
+							height = Integer.parseInt(heightTextField.getText());
+						} catch (NumberFormatException e) {	}
+						if (height > 0) {
+							widthTextField.setText(Integer.toString((int) (aspectRatio * height)));
 						}
+						ignoreSizeChange = false;
 					}
+				}
 
-					public void changedUpdate(javax.swing.event.DocumentEvent ev) {
-					}
-				});
+				public void changedUpdate(javax.swing.event.DocumentEvent ev) {	}
+			});
 
-		setTitleTextField.getDocument().addDocumentListener(
-				new javax.swing.event.DocumentListener() {
+		setTitleTextField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+				public void insertUpdate(javax.swing.event.DocumentEvent ev) {
+					updateTextFields();
+				}
 
-					public void insertUpdate(javax.swing.event.DocumentEvent ev) {
-						updateTextFields();
-					}
+				public void removeUpdate(javax.swing.event.DocumentEvent ev) {
+					updateTextFields();
+				}
 
-					public void removeUpdate(javax.swing.event.DocumentEvent ev) {
-						updateTextFields();
-					}
+				public void changedUpdate(javax.swing.event.DocumentEvent ev) {	}
+			});
 
-					public void changedUpdate(javax.swing.event.DocumentEvent ev) {
-					}
-				});
-
-		saveDirectoryCheckBox
-				.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent e) {
-						updateDirectory();
-					}
-				});
+		saveDirectoryCheckBox.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				updateDirectory();
+			}
+		});
 
 		saveCodeCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -209,12 +189,11 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 
-		browseDirectoryButton
-				.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent e) {
-						edu.cmu.cs.stage3.swing.DialogManager.showDialog(htmlFileChooser,Messages.getString("Set_directory"));
-					}
-				});
+		browseDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				edu.cmu.cs.stage3.swing.DialogManager.showDialog(htmlFileChooser,Messages.getString("Set_directory"));
+			}
+		});
 
 		saveButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -256,12 +235,10 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 
-		final java.io.File currentDir = new java.io.File(
-				authoringToolConfig.getValue("directories.worldsDirectory"));
+		final java.io.File currentDir = new java.io.File(authoringToolConfig.getValue("directories.worldsDirectory"));
 		try {
 			if (currentDir.exists()) {
-				rootDirectoryPath = currentDir.getAbsolutePath()
-						+ java.io.File.separator;
+				rootDirectoryPath = currentDir.getAbsolutePath() + java.io.File.separator;
 				//Runnable testRun = new Runnable() {
 				//	public void run() {
 						htmlFileChooser.setCurrentDirectory(currentDir);
@@ -269,12 +246,8 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				//};
 				//SwingUtilities.invokeAndWait(testRun);
 			} else {
-				rootDirectoryPath = edu.cmu.cs.stage3.alice.authoringtool.JAlice
-						.getAliceUserDirectory().getAbsolutePath()
-						+ java.io.File.separator;
-				htmlFileChooser
-						.setCurrentDirectory(edu.cmu.cs.stage3.alice.authoringtool.JAlice
-								.getAliceUserDirectory());
+				rootDirectoryPath = edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory().getAbsolutePath() + java.io.File.separator;
+				htmlFileChooser.setCurrentDirectory(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory());
 			}
 		} catch (ArrayIndexOutOfBoundsException aioobe) {
 			// For some reason this can potentially fail.
@@ -300,14 +273,11 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		htmlFileChooser.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
-				if (ev.getActionCommand().equals(
-						javax.swing.JFileChooser.APPROVE_SELECTION)) {
+				if (ev.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
 					java.io.File file = htmlFileChooser.getSelectedFile();
-					rootDirectoryPath = file.getAbsolutePath()
-							+ java.io.File.separator;
+					rootDirectoryPath = file.getAbsolutePath() + java.io.File.separator;
 					updateDirectory();
-				} else if (ev.getActionCommand().equals(
-						javax.swing.JFileChooser.CANCEL_SELECTION)) {
+				} else if (ev.getActionCommand().equals(javax.swing.JFileChooser.CANCEL_SELECTION)) {
 					// pass
 				}
 			}
@@ -318,8 +288,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		super.setVisible(visibility);
 		if (visibility) {
 			if (authoringTool != null) {
-				java.io.File currentName = authoringTool
-						.getCurrentWorldLocation();
+				java.io.File currentName = authoringTool.getCurrentWorldLocation();
 				if (currentName != null) {
 					String newTitle = currentName.getName();
 					newTitle = newTitle.substring(0, newTitle.lastIndexOf("."));
@@ -379,8 +348,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private void updateDirectory() {
 		if (saveDirectoryCheckBox.isSelected()) {
 			localDirectoryPath = getValidFilename(setTitleTextField.getText());
-			directoryPath.setText(rootDirectoryPath + localDirectoryPath
-					+ java.io.File.separator);
+			directoryPath.setText(rootDirectoryPath + localDirectoryPath + java.io.File.separator);
 		} else {
 			directoryPath.setText(rootDirectoryPath);
 		}
@@ -398,19 +366,16 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	private void updateRatio() {
 		if (constrainAspectRatioCheckBox.isSelected()) {
-			double aspectRatio = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources
-					.getAspectRatio(authoringTool.getWorld());
+			double aspectRatio = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getAspectRatio(authoringTool.getWorld());
 			int width = -1;
 			int height = -1;
 			try {
 				width = Integer.parseInt(widthTextField.getText());
-			} catch (NumberFormatException e) {
-			}
+			} catch (NumberFormatException e) {	}
 
 			try {
 				height = Integer.parseInt(heightTextField.getText());
-			} catch (NumberFormatException e) {
-			}
+			} catch (NumberFormatException e) {	}
 
 			if (width > 0) {
 				height = (int) (width / aspectRatio);
@@ -425,8 +390,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	// /////////////
 	// Callbacks
 	// /////////////
-	void constrainAspectRatioCheckBox_actionPerformed(
-			java.awt.event.ActionEvent ev) {
+	void constrainAspectRatioCheckBox_actionPerformed(java.awt.event.ActionEvent ev) {
 		updateRatio();
 	}
 
@@ -451,8 +415,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private javax.swing.JCheckBox constrainAspectRatioCheckBox = new javax.swing.JCheckBox();
 	private javax.swing.JPanel controlsPanel = new javax.swing.JPanel();
 	private javax.swing.JPanel setTitlePanel = new javax.swing.JPanel();
-	private javax.swing.JTextField setTitleTextField = new javax.swing.JTextField(
-			Messages.getString("My_Alice_World"));
+	private javax.swing.JTextField setTitleTextField = new javax.swing.JTextField(Messages.getString("My_Alice_World"));
 	private java.awt.GridBagLayout gridBagLayout2 = new java.awt.GridBagLayout();
 	private javax.swing.border.Border border4;
 	private javax.swing.border.TitledBorder titledBorder1;
@@ -460,19 +423,13 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private javax.swing.JPanel directoryPathPanel = new javax.swing.JPanel();
 	private String rootDirectoryPath = "c:\\";
 	private String localDirectoryPath = Messages.getString("My_Alice_World");
-	private javax.swing.JLabel directoryPath = new javax.swing.JLabel(
-			rootDirectoryPath + localDirectoryPath + java.io.File.separator);
-	private javax.swing.JButton browseDirectoryButton = new javax.swing.JButton(
-			Messages.getString("browse"));
-	private javax.swing.JLabel a2wFileName = new javax.swing.JLabel(
-			Messages.getString("My_Alice_World_a2w"));
-	private javax.swing.JLabel htmlFileName = new javax.swing.JLabel(
-			Messages.getString("My_Alice_World_html"));
-	private javax.swing.JLabel appletLabel = new javax.swing.JLabel(
-			"aliceapplet.jar");
+	private javax.swing.JLabel directoryPath = new javax.swing.JLabel(rootDirectoryPath + localDirectoryPath + java.io.File.separator);
+	private javax.swing.JButton browseDirectoryButton = new javax.swing.JButton(Messages.getString("browse"));
+	private javax.swing.JLabel a2wFileName = new javax.swing.JLabel(Messages.getString("My_Alice_World_a2w"));
+	private javax.swing.JLabel htmlFileName = new javax.swing.JLabel(Messages.getString("My_Alice_World_html"));
+	private javax.swing.JLabel appletLabel = new javax.swing.JLabel("aliceapplet.jar");
 	private javax.swing.JTextField authorNameTextField = new javax.swing.JTextField();
-	private javax.swing.JLabel authorLabel = new javax.swing.JLabel(
-			Messages.getString("Author_s_name"));
+	private javax.swing.JLabel authorLabel = new javax.swing.JLabel(Messages.getString("Author_s_name"));
 
 	private String a2wTitle = Messages.getString("Your_world");
 	private String htmlTitle = Messages.getString("The_web_page");
@@ -482,30 +439,19 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private javax.swing.JCheckBox saveCodeCheckBox = new javax.swing.JCheckBox();
 	// private JLabel makeDirectoryLabel = new
 	// JLabel("Use title to create new directory for the files below");
-	private javax.swing.JLabel filesToSaveLabel = new javax.swing.JLabel(
-			Messages.getString("These_files_will_be_saved_in_this_directory_"));
-	private javax.swing.JButton saveButton = new javax.swing.JButton(
-			Messages.getString("Save"));
-	private javax.swing.JButton cancelButton = new javax.swing.JButton(
-			Messages.getString("Cancel"));
+	private javax.swing.JLabel filesToSaveLabel = new javax.swing.JLabel(Messages.getString("These_files_will_be_saved_in_this_directory_"));
+	private javax.swing.JButton saveButton = new javax.swing.JButton(Messages.getString("Save"));
+	private javax.swing.JButton cancelButton = new javax.swing.JButton(Messages.getString("Cancel"));
 
 	private void jbInit() {
-		border1 = new javax.swing.border.TitledBorder(
-				javax.swing.BorderFactory
-						.createEtchedBorder(java.awt.Color.white,
-								new java.awt.Color(142, 142, 142)),
-				Messages.getString("Size_in_browser"));
-		setTitleBorder = new javax.swing.border.TitledBorder(
-				javax.swing.BorderFactory
-						.createEtchedBorder(java.awt.Color.white,
-								new java.awt.Color(142, 142, 142)),
-				Messages.getString("Title"));
+		border1 = new javax.swing.border.TitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white,
+				new java.awt.Color(142, 142, 142)),	Messages.getString("Size_in_browser"));
+		setTitleBorder = new javax.swing.border.TitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, 
+				new java.awt.Color(142, 142, 142)),	Messages.getString("Title"));
 		border2 = javax.swing.BorderFactory.createEmptyBorder(8, 8, 0, 8);
 		border3 = javax.swing.BorderFactory.createEmptyBorder(12, 12, 12, 12);
-		border4 = javax.swing.BorderFactory.createEtchedBorder(
-				java.awt.Color.white, new java.awt.Color(142, 142, 142));
-		titledBorder1 = new javax.swing.border.TitledBorder(border4,
-				Messages.getString("Save_Location"));
+		border4 = javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, new java.awt.Color(142, 142, 142));
+		titledBorder1 = new javax.swing.border.TitledBorder(border4, Messages.getString("Save_Location"));
 		fileChooserPanel.setLayout(gridBagLayout3);
 		setLayout(borderLayout1);
 		mainPanel.setLayout(gridBagLayout2);
@@ -516,10 +462,8 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		widthLabel.setText(Messages.getString("width_"));
 		setTitleTextField.setColumns(36);
 		authorNameTextField.setColumns(28);
-		constrainAspectRatioCheckBox.setText(Messages
-				.getString("constrain_aspect_ratio"));
-		constrainAspectRatioCheckBox
-				.addActionListener(new java.awt.event.ActionListener() {
+		constrainAspectRatioCheckBox.setText(Messages.getString("constrain_aspect_ratio"));
+		constrainAspectRatioCheckBox.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
 						constrainAspectRatioCheckBox_actionPerformed(e);
 					}
@@ -531,27 +475,20 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		setTitlePanel.setBorder(setTitleBorder);
 
 		fileChooserPanel.setBorder(titledBorder1);
-		htmlFileChooser
-				.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+		htmlFileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 		// browseDirectoryButton.setPreferredSize(new java.awt.Dimension(80,
 		// 21));
-		int fontSize = Integer.parseInt(authoringToolConfig
-				.getValue("fontSize"));
-		directoryPathPanel.setPreferredSize(new java.awt.Dimension(300,
-				fontSize * 2 - 5));
-		directoryPathPanel.setBorder(javax.swing.BorderFactory
-				.createLineBorder(java.awt.Color.black, 1));
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
+		directoryPathPanel.setPreferredSize(new java.awt.Dimension(300,	fontSize * 2 - 5));
+		directoryPathPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.black, 1));
 		directoryPathPanel.setLayout(new java.awt.BorderLayout());
 		directoryPathPanel.add(directoryPath, java.awt.BorderLayout.CENTER);
 		add(mainPanel, java.awt.BorderLayout.CENTER);
 		filesToSaveLabel.setForeground(java.awt.Color.black);
 		saveDirectoryCheckBox.setSelected(true);
-		saveDirectoryCheckBox
-				.setText(Messages
-						.getString("Use_title_to_create_new_directory_for_the_files_below"));
+		saveDirectoryCheckBox.setText(Messages.getString("Use_title_to_create_new_directory_for_the_files_below"));
 		saveCodeCheckBox.setSelected(false);
-		saveCodeCheckBox.setText(Messages
-				.getString("Add_the_code_for_this_world_to_this_page"));
+		saveCodeCheckBox.setText(Messages.getString("Add_the_code_for_this_world_to_this_page"));
 
 		a2wFileName.setToolTipText(a2wTitle);
 		a2wFileName.setBounds(2, 2, 2, 2);

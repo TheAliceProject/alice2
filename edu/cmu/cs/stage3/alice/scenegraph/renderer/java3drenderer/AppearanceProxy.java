@@ -57,13 +57,13 @@ class AppearanceProxy extends ElementProxy {
         ra.setDepthBufferWriteEnable( true );
         ra.setAlphaTestValue( 0.0f );
         ra.setAlphaTestFunction( ra.ALWAYS );
-*/
+
         javax.media.j3d.TransparencyAttributes ta = new javax.media.j3d.TransparencyAttributes();
-        //ta.setCapability( javax.media.j3d.TransparencyAttributes.ALLOW_VALUE_READ );
-        //ta.setCapability( javax.media.j3d.TransparencyAttributes.ALLOW_VALUE_WRITE );
+        ta.setCapability( javax.media.j3d.TransparencyAttributes.ALLOW_VALUE_READ );
+        ta.setCapability( javax.media.j3d.TransparencyAttributes.ALLOW_VALUE_WRITE );
         ta.setTransparencyMode( javax.media.j3d.TransparencyAttributes.NICEST );
-        ta.setTransparency( (float)(0.0) );
-        
+        ta.setTransparency( (float)(1.0 - diffuseColor.a) );
+        */
 
         m_j3dAppearance.setMaterial( m_j3dMaterial );
         m_j3dAppearance.setColoringAttributes( m_j3dColoringAttributes );
@@ -72,7 +72,7 @@ class AppearanceProxy extends ElementProxy {
         m_j3dAppearance.setPolygonAttributes( m_j3dPolygonAttributes );
         m_j3dAppearance.setTextureAttributes( m_j3dTextureAttributes );
         //m_j3dAppearance.setRenderingAttributes( ra );
-        m_j3dAppearance.setTransparencyAttributes( ta );
+        //m_j3dAppearance.setTransparencyAttributes( ta );
     }
 
     public void updateJ3DTexture( javax.media.j3d.Texture j3dTexture ) {
@@ -115,12 +115,7 @@ class AppearanceProxy extends ElementProxy {
 				throw new RuntimeException();
 			}
 		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.OPACITY_PROPERTY ) {
-            // Aik Min - code for opacity.
-	        javax.media.j3d.TransparencyAttributes ta = new javax.media.j3d.TransparencyAttributes();
-	        ta.setTransparencyMode( javax.media.j3d.TransparencyAttributes.BLEND_ONE_MINUS_SRC_ALPHA );
-	        ta.setTransparency( (float)1.0 - ((Double)value).floatValue());
-	        m_j3dAppearance.setTransparencyAttributes( ta );
-
+            //todo
 		} else if( property == edu.cmu.cs.stage3.alice.scenegraph.Appearance.SPECULAR_HIGHLIGHT_COLOR_PROPERTY ) {
 			edu.cmu.cs.stage3.alice.scenegraph.Color color = (edu.cmu.cs.stage3.alice.scenegraph.Color)value;
 			m_j3dMaterial.setSpecularColor( color.createVecmathColor3f() );

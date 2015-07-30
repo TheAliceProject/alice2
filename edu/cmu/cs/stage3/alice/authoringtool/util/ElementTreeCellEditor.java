@@ -85,7 +85,7 @@ public class ElementTreeCellEditor extends ElementTreeCellRenderer implements ja
 			iconLabel.setIcon( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( element ) );
 			textField.setText( element.name.getStringValue() );
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error__not_an_Element__") + value, null ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error__not_an_Element__", value), null ); 
 		}
 		return this;
 	}

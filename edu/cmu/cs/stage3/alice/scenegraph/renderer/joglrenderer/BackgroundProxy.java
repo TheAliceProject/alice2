@@ -23,13 +23,13 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL2;
 
 class BackgroundProxy extends ElementProxy {
     private float[] m_color = new float[ 4 ];
     public void clear( RenderContext context ) {
         context.gl.glClearColor( m_color[ 0 ], m_color[ 1 ], m_color[ 2 ], m_color[ 3 ] );
-        context.gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
+        context.gl.glClear( GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
     }
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {

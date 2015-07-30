@@ -57,11 +57,8 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private void guiInit() {
 		setSize(500, 600);
 		responseUsageGraph = new edu.cmu.cs.stage3.alice.authoringtool.util.ElementUsageGraph();
-		responseUsageGraph
-				.setElementCriterion(new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
-						edu.cmu.cs.stage3.alice.core.Response.class));
-		this.responseUsagePanel.add(responseUsageGraph,
-				java.awt.BorderLayout.CENTER);
+		responseUsageGraph.setElementCriterion(new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(edu.cmu.cs.stage3.alice.core.Response.class));
+		this.responseUsagePanel.add(responseUsageGraph,	java.awt.BorderLayout.CENTER);
 	}
 
 	public void setWorld(edu.cmu.cs.stage3.alice.core.World world) {
@@ -75,74 +72,35 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			edu.cmu.cs.stage3.alice.core.util.IndexedTriangleArrayCounter itaCounter = new edu.cmu.cs.stage3.alice.core.util.IndexedTriangleArrayCounter();
 			edu.cmu.cs.stage3.alice.core.util.TextureMapCounter textureMapCounter = new edu.cmu.cs.stage3.alice.core.util.TextureMapCounter();
 
-			world.visit(itaCounter,
-					edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
-			world.visit(textureMapCounter,
-					edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
+			world.visit(itaCounter,	edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
+			world.visit(textureMapCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
 
 			int playCount = 0;
 			int saveCount = 0;
 			long worldOpenTime = 0;
 
-			if (world.data
-					.get("edu.cmu.cs.stage3.alice.authoringtool.playCount") != null) {
-				playCount = Integer
-						.parseInt((String) world.data
-								.get("edu.cmu.cs.stage3.alice.authoringtool.playCount"));
+			if (world.data.get("edu.cmu.cs.stage3.alice.authoringtool.playCount") != null) {
+				playCount = Integer.parseInt((String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.playCount"));
 			}
-			if (world.data
-					.get("edu.cmu.cs.stage3.alice.authoringtool.saveCount") != null) {
-				saveCount = Integer
-						.parseInt((String) world.data
-								.get("edu.cmu.cs.stage3.alice.authoringtool.saveCount"));
+			if (world.data.get("edu.cmu.cs.stage3.alice.authoringtool.saveCount") != null) {
+				saveCount = Integer.parseInt((String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.saveCount"));
 			}
-			if (world.data
-					.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime") != null) {
-				worldOpenTime = Long
-						.parseLong((String) world.data
-								.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime"));
+			if (world.data.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime") != null) {
+				worldOpenTime = Long.parseLong((String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime"));
 			}
 			worldOpenTime /= 60000L;
 
-			objectCountLabel.setText(Messages
-					.getString("Number_of_3D_objects__")
-					+ itaCounter.getShownIndexedTriangleArrayCount());
-			polyCountLabel.setText(Messages.getString("Number_of_polygons__")
-					+ (itaCounter.getShownIndexCount() / 3));
-			textureCountLabel.setText(Messages
-					.getString("Number_of_textures__")
-					+ textureMapCounter.getTextureMapCount());
-			textureMemoryLabel
-					.setText(Messages.getString("Texture_memory_used__")
-							+ edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources
-									.formatMemorySize(textureMapCounter
-											.getTextureMapMemoryCount()));
-			userDefinedResponseCountLabel
-					.setText(Messages
-							.getString("Number_of_user_defined_animations__")
-							+ world.getDescendants(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class).length);
-			userDefinedQuestionCountLabel
-					.setText(Messages
-							.getString("Number_of_user_defined_questions__")
-							+ world.getDescendants(edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class).length);
-			behaviorCountLabel
-					.setText(Messages.getString("Number_of_behaviors__")
-							+ world.getDescendants(edu.cmu.cs.stage3.alice.core.Behavior.class).length);
-			playCountLabel.setText(Messages
-					.getString("Number_of_times_the_world_has_been_run__")
-					+ playCount);
-			saveCountLabel.setText(Messages
-					.getString("Number_of_times_the_world_has_been_saved__")
-					+ saveCount);
-			worldOpenTimeLabel.setText(Messages
-					.getString("Amount_of_time_the_world_has_been_open__")
-					+ worldOpenTime + " "
-					+ ((worldOpenTime == 1) ? Messages.getString("_minute")
-							: Messages.getString("_minutes")));
-			currentRendererLabel.setText(Messages
-					.getString("Current_renderer__")
-					+ edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool
-							.getHack().getCurrentRendererText());
+			objectCountLabel.setText(Messages.getString("Number_of_3D_objects__", itaCounter.getShownIndexedTriangleArrayCount()));
+			polyCountLabel.setText(Messages.getString("Number_of_polygons__", (itaCounter.getShownIndexCount() / 3)));
+			textureCountLabel.setText(Messages.getString("Number_of_textures__", textureMapCounter.getTextureMapCount()));
+			textureMemoryLabel.setText(Messages.getString("Texture_memory_used__", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.formatMemorySize(textureMapCounter.getTextureMapMemoryCount())));
+			userDefinedResponseCountLabel.setText(Messages.getString("Number_of_user_defined_animations__", world.getDescendants(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class).length));
+			userDefinedQuestionCountLabel.setText(Messages.getString("Number_of_user_defined_questions__", world.getDescendants(edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class).length));
+			behaviorCountLabel.setText(Messages.getString("Number_of_behaviors__", world.getDescendants(edu.cmu.cs.stage3.alice.core.Behavior.class).length));
+			playCountLabel.setText(Messages.getString("Number_of_times_the_world_has_been_run__", playCount));
+			saveCountLabel.setText(Messages.getString("Number_of_times_the_world_has_been_saved__", saveCount));
+			worldOpenTimeLabel.setText(Messages.getString("Amount_of_time_the_world_has_been_open__", worldOpenTime, ((worldOpenTime == 1) ? Messages.getString("minute") : Messages.getString("minutes"))));
+			currentRendererLabel.setText(Messages.getString("Current_renderer__", edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getCurrentRendererText()));
 
 			responseUsageGraph.refresh();
 		}
@@ -196,19 +154,14 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		responseUsagePanel.setOpaque(false);
 		responseUsagePanel.setLayout(borderLayout2);
 		behaviorCountLabel.setText(Messages.getString("Number_of_behaviors__"));
-		userDefinedResponseCountLabel.setText(Messages
-				.getString("Number_of_user_defined_animations_"));
+		userDefinedResponseCountLabel.setText(Messages.getString("Number_of_user_defined_animations__"));
 		mainScrollPane.getViewport().setBackground(new Color(232, 230, 255));
 		mainScrollPane.setOpaque(false);
 		textureCountLabel.setText(Messages.getString("Number_of_textures__"));
-		playCountLabel.setText(Messages
-				.getString("Number_of_times_the_world_has_been_run__"));
-		saveCountLabel.setText(Messages
-				.getString("Number_of_times_the_world_has_been_saved__"));
-		worldOpenTimeLabel.setText(Messages
-				.getString("Amount_of_time_the_world_has_been_open__"));
-		userDefinedQuestionCountLabel.setText(Messages
-				.getString("Number_of_user_defined_questions__"));
+		playCountLabel.setText(Messages.getString("Number_of_times_the_world_has_been_run__"));
+		saveCountLabel.setText(Messages.getString("Number_of_times_the_world_has_been_saved__"));
+		worldOpenTimeLabel.setText(Messages.getString("Amount_of_time_the_world_has_been_open__"));
+		userDefinedQuestionCountLabel.setText(Messages.getString("Number_of_user_defined_questions__"));
 		add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.add(doneButton, new GridBagConstraints(0, 0, 1, 1, 0.0,
 				0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
