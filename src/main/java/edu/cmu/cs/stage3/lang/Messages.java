@@ -22,15 +22,25 @@ public class Messages {
 	}
 	
 	public static String getString(String key) {
-		try {			
-			return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getObject(key.replace(" ", "_"));
-		} catch (MissingResourceException e) {
-			try {
-				return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang.English").getObject(key);
-			} catch (MissingResourceException ee) {						
-				//e.printStackTrace();
-				return key;
+		try {	
+			String t = (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getObject(key);
+			if (AikMin.locale == "Arabic"){
+				return t = new String ( t.getBytes("ISO-8859-1"), "UTF-8" );
 			}
+			return t;
+			//return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getObject(key);
+		} catch (MissingResourceException e) {
+			return key.replace("_", " ");
+		} catch (Exception ee){
+			return "";
 		}
 	}
+	
+	public static String getString (String key, Object... parameters) {
+		String value = getString(key);
+		value = java.text.MessageFormat.format(value, parameters);
+		return value;
+		//return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getString(key);
+	}
+	
 }

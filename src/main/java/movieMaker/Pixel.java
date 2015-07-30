@@ -350,8 +350,8 @@ public class Pixel
   
 public String toString()
   {
-    return Messages.getString("Pixel_red_") + getRed() + Messages.getString("_green_") + getGreen() +   
-      Messages.getString("_blue_") + getBlue(); 
+    return Messages.getString("Pixel_red_") + getRed() + " " + Messages.getString("green_") + getGreen() + " " +  
+      Messages.getString("blue_") + getBlue(); 
   }
 
 }

@@ -139,6 +139,7 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		if( this.guiMode != guiMode ) {
 			this.guiMode = guiMode;
 			cameraViewPanel.setTargetsDirty();
+			cameraViewPanel.updateMoveCameraCombo();
 			mainPanel.removeAll();
 			if( guiMode == SMALL_MODE ) {
 ////				System.out.println("making gui small");

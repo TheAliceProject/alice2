@@ -80,7 +80,7 @@ public class ImageProperty extends ObjectProperty {
                 try {
                     storer.keepFile( filename );
                 } catch( edu.cmu.cs.stage3.io.KeepFileNotSupportedException kfnse ) {
-                    throw new Error( storer + Messages.getString("_returns_true_for_isKeepFileSupported____but_then_throws_") + kfnse ); 
+                    throw new Error( storer + " " + Messages.getString("returns_true_for_isKeepFileSupported____but_then_throws_") + kfnse ); 
                 } catch( edu.cmu.cs.stage3.io.KeepFileDoesNotExistException kfdne ) {
                     throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( kfdne, filename );
                 }

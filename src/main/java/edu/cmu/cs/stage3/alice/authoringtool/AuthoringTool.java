@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
-import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.BufferedOutputStream;
@@ -100,7 +99,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.AboutContentPane aboutContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.LicenseContentPane licenseContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.WorldInfoContentPane worldInfoContentPane;
-	public edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane stdErrOutContentPane;
+	public edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane stdErrContentPane;
+	public edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane stdOutContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.ExportCodeForPrintingContentPane exportCodeForPrintingContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane startUpContentPane;
 	private edu.cmu.cs.stage3.alice.authoringtool.dialog.SaveForWebContentPane saveForWebContentPane;
@@ -344,7 +344,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		String font = "SansSerif"; // "Tahoma"; 
 		try {
 			javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); 
-
+			//javax.swing.UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel"); 
+			
 			//			javax.swing.UIManager.put( "Button.focus", new java.awt.Color( 255, 255, 255, 0 ) ); // don't show focus  // makes printing slow, unfortunately
 
 			class CustomButtonBorder extends javax.swing.border.AbstractBorder implements javax.swing.plaf.UIResource {
@@ -378,16 +379,16 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			}
 			javax.swing.UIManager.put("Button.border", new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource(new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder())); 
-
+			
 			//necessary for 1.4
-	
 			javax.swing.UIManager.put("Label.font", new java.awt.Font(font, java.awt.Font.BOLD, 12)); 
 			javax.swing.UIManager.put("Label.foreground", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("mainFontColor"));  
 			javax.swing.UIManager.put("TabbedPane.selected", new java.awt.Color(255, 255, 255, 0)); 
 			javax.swing.UIManager.put("TabbedPane.tabInsets", new java.awt.Insets(1, 4, 1, 3)); 
-
-			if ((System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")) {   
+			if ( AikMin.isWindows() ) {   
 				javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  
+			} else {
+				//javax.swing.UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel"); 
 			}
 		} catch (Exception e) {
 			showErrorDialog(Messages.getString("Error_configuring_Look_and_Feel_"), e); 
@@ -415,7 +416,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		this.stdErrToConsole = stdErrToConsole;
 		initializeOutput(stdOutToConsole, stdErrToConsole);
 		pyInit();
-		//AikMin.setFontSize(12);		
+		//AikMin.setFontSize(12);
 		dialogInit();
 		//AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		
 		undoRedoInit();
@@ -448,6 +449,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				showStartUpDialog(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TEMPLATE_TAB_ID);//.DO_NOT_CHANGE_TAB_ID);
 			}
 		}
+		
 	}
 
 	private void filterInit() {
@@ -558,6 +560,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	private void dialogInit() {
+		
+		preferencesContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.PreferencesContentPane();
+		preferencesContentPane.setAuthoringTool(this);
+		
+		captureContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.CaptureContentPane(this);
+		renderContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.RenderContentPane(this);
+		
+		try {
+			if ( AikMin.isMAC() ){
+				javax.swing.UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel");
+			}
+		} catch (Exception e) {
+		}
+		
 		importFileChooser = new javax.swing.JFileChooser();
 		saveWorldFileChooser = new javax.swing.JFileChooser() {
 			public void approveSelection() {
@@ -619,14 +635,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		characterLoadProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LoadElementProgressPane(Messages.getString("Loading_Object___"), Messages.getString("Loading__"));  
 		characterStoreProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StoreElementProgressPane(Messages.getString("Saving_Object___"), Messages.getString("Saving__"));  
 
-		preferencesContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.PreferencesContentPane();
-		preferencesContentPane.setAuthoringTool(this);
-		captureContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.CaptureContentPane(this);
-		renderContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.RenderContentPane(this);
+
 		renderPanel = new javax.swing.JPanel();
 
-		aboutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.AboutContentPane();
-		licenseContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LicenseContentPane();
+		//aboutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.AboutContentPane();
+		//licenseContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LicenseContentPane();
 
 		renderPanel.setLayout(new java.awt.BorderLayout());
 
@@ -649,7 +662,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		addCharacterFileChooser.setFileFilter(characterFileFilter);
 		addCharacterFileChooser.setPreferredSize(new java.awt.Dimension(x, y));
 
-
 		worldsDirectoryChanged();
 		importDirectoryChanged();
 		charactersDirectoryChanged();
@@ -664,9 +676,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
 	
-		stdErrOutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this);
-		
-
+		stdErrContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this, true);
+		stdOutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this, false);
 	}
 
 	private void undoRedoInit() {
@@ -766,7 +777,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		javax.swing.Timer fpsTimer = new javax.swing.Timer(500, new java.awt.event.ActionListener() {
 			java.text.DecimalFormat formater = new java.text.DecimalFormat("#0.00"); 
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
-				String fps = formater.format(AuthoringTool.this.scheduler.getSimulationFPS()) + Messages.getString("_fps"); 
+				String fps = formater.format(AuthoringTool.this.scheduler.getSimulationFPS()) + " " + Messages.getString("fps"); 
 				if (authoringToolConfig.getValue("rendering.showFPS").equalsIgnoreCase("true")) {  
 					AuthoringTool.this.renderContentPane.setTitle(Messages.getString("World_Running_____") + fps); 
 				}
@@ -811,7 +822,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						//							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "You have not saved in more than" + interval + " minutes.\nIt is recommended that you save early and often to avoid losing work." );
 						int result =
 							edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(
-								Messages.getString("You_have_not_saved_in_more_than_") + interval + " " + Messages.getString("_minutes__nIt_is_recommended_that_you_save_early_and_often_to_avoid_losing_work_"),  
+								Messages.getString("You_have_not_saved_in_more_than_minutes__nIt_is_recommended_that_you_save_early_and_often_to_avoid_losing_work_", interval),  
 								Messages.getString("Save_"), 
 								javax.swing.JOptionPane.YES_NO_OPTION,
 								javax.swing.JOptionPane.WARNING_MESSAGE,
@@ -844,33 +855,21 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			});
 		}
+/*
+		if (AikMin.isMAC()) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					new Test();
+				}
+			});	
+		}
+		*/
 
-	  	java.awt.Toolkit.getDefaultToolkit().addAWTEventListener(new java.awt.event.AWTEventListener(){
-	   		public void eventDispatched(AWTEvent event) {
-	   			if (event instanceof java.awt.event.KeyEvent){
-	   				edu.cmu.cs.stage3.awt.AWTUtilities.key = ((java.awt.event.KeyEvent) event).getID();
-	   				if (edu.cmu.cs.stage3.awt.AWTUtilities.key == 401) {
-	   					temp = 0;
-	   				} else if (edu.cmu.cs.stage3.awt.AWTUtilities.key == 402 ) {
-	   					temp = -1;
-	   				} 
-	   			}
-	   			int mod = ((java.awt.event.InputEvent) event).getModifiers();
-	   			switch( mod ) {
-	   			case 1: 
-	   			case 2: 
-	   			case 4: 
-	   			case 8:
-	   			case 16:
-	   				edu.cmu.cs.stage3.awt.AWTUtilities.modifier = mod;	
-	   				break;
-	   			default:
-	   				edu.cmu.cs.stage3.awt.AWTUtilities.modifier = 0;	
-	   				break;
-	   			}   			
-	   		}
-	  	}, AWTEvent.KEY_EVENT_MASK + AWTEvent.MOUSE_EVENT_MASK + AWTEvent.MOUSE_MOTION_EVENT_MASK);
-
+		// Global Key Listener
+		if (AikMin.isMAC()) {
+//			jnativeLisnener();
+		}
+		
 		// for animating ui changes
 		rectangleAnimator = new edu.cmu.cs.stage3.alice.authoringtool.util.RectangleAnimator(this);
 
@@ -881,6 +880,45 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		javax.swing.ToolTipManager.sharedInstance().setInitialDelay(1000);	
 		javax.swing.ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);
 	}
+/*	private void jnativeLisnener(){
+		org.jnativehook.GlobalScreen.addNativeKeyListener(new org.jnativehook.keyboard.NativeKeyListener(){
+			@Override
+			public void nativeKeyPressed(NativeKeyEvent ev) {
+				if ( (ev.getKeyCode() == NativeKeyEvent.VC_SHIFT_L) || (ev.getKeyCode() == NativeKeyEvent.VC_SHIFT_R) ){
+					AikMin.shift = true;
+				}
+				if (AikMin.isMAC()) {
+					if ( (ev.getKeyCode() == NativeKeyEvent.VC_ALT_L) || (ev.getKeyCode() == NativeKeyEvent.VC_ALT_L) ){
+						AikMin.control = true;
+					}
+				} else {
+					if ( (ev.getKeyCode() == NativeKeyEvent.VC_CONTROL_L) || (ev.getKeyCode() == NativeKeyEvent.VC_CONTROL_L) ){
+						AikMin.control = true;
+					}
+				}
+				
+			}
+
+			@Override
+			public void nativeKeyReleased(NativeKeyEvent ev) {
+				if ( (ev.getKeyCode() == NativeKeyEvent.VC_SHIFT_L) || (ev.getKeyCode() == NativeKeyEvent.VC_SHIFT_R) ){
+					AikMin.shift = false;
+				}
+				if (AikMin.isMAC()) {
+					if ( (ev.getKeyCode() == NativeKeyEvent.VC_ALT_L) || (ev.getKeyCode() == NativeKeyEvent.VC_ALT_L) ){
+						AikMin.control = false;
+					}
+				} else {
+					if ( (ev.getKeyCode() == NativeKeyEvent.VC_CONTROL_L) || (ev.getKeyCode() == NativeKeyEvent.VC_CONTROL_L) ){
+						AikMin.control = false;
+					}
+				}
+			}
+
+			public void nativeKeyTyped(NativeKeyEvent ev) {}
+	  	});
+		
+	}*/
 	public static int id = 0;
 	public static int temp = -1;
 	private void importInit() {
@@ -939,10 +977,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						return;
 					}
 				} else {
-					AuthoringTool.showErrorDialog(Messages.getString("cannot_read_world__") + world, null, false); 
+					AuthoringTool.showErrorDialog(Messages.getString("cannot_read_world__", world), null, false); 
 				}
 			} else {
-				AuthoringTool.showErrorDialog(Messages.getString("world_doesn_t_exist__") + world, null, false); 
+				AuthoringTool.showErrorDialog(Messages.getString("world_doesn_t_exist__", world), null, false); 
 			}
 		}
 
@@ -1374,6 +1412,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					loadWorld(file, false);
 				}
 				resetClipboards();
+				watcherPanel.clear();
 			}
 			return Constants.SUCCEEDED;
 		} else {
@@ -1391,24 +1430,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			jAliceFrame.clipboardPanel.revalidate();
 			jAliceFrame.clipboardPanel.repaint();
 		} catch( NumberFormatException e ) {
-			AuthoringTool.showErrorDialog( Messages.getString("illegal_number_of_clipboards__") + authoringToolConfig.getValue( "numberOfClipboards" ), null );  
+			AuthoringTool.showErrorDialog( Messages.getString("illegal_number_of_clipboards__", authoringToolConfig.getValue( "numberOfClipboards" )), null );  
 		}
 	}
 	
 	public int newWorld() {
-		watcherPanel.clear();
 		return showStartUpDialog( edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TEMPLATE_TAB_ID );
 	}
 	public int openWorld() {
-		watcherPanel.clear();
 		return showStartUpDialog( edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.OPEN_TAB_ID );
 	}
 	public int openExampleWorld() {
-		watcherPanel.clear();
 		return showStartUpDialog( edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.EXAMPLE_TAB_ID );
 	}
 	public int openTutorialWorld() {	
-		watcherPanel.clear();
 		return showStartUpDialog(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TUTORIAL_TAB_ID);
 	}
 
@@ -1417,7 +1452,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				return saveWorldToFile(currentWorldLocation, false);
 			} catch (java.io.IOException e) {
-				AuthoringTool.showErrorDialog(Messages.getString("Unable_to_save_world") + ": "+ currentWorldLocation.getAbsolutePath(), e); 
+				AuthoringTool.showErrorDialog(Messages.getString("Unable_to_save_world__", currentWorldLocation.getAbsolutePath()), e); 
 				return Constants.FAILED;
 			}
 		} else {
@@ -1440,7 +1475,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			try {
 				return saveWorldToFile(file, false);
 			} catch (java.io.IOException e) {
-				AuthoringTool.showErrorDialog(Messages.getString("Unable_to_save_world") + ": " + file, e); 
+				AuthoringTool.showErrorDialog(Messages.getString("Unable_to_save_world__", file), e); 
 				file.delete();
 				return Constants.FAILED;
 			}
@@ -1506,37 +1541,35 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				// Try to auto-restart if Alice require a restart
 				if (condition) {
 					try {
-						if (System.getProperty("os.name") != null){				
-							// Restart for Windows
-							if (System.getProperty("os.name").startsWith("Windows") ){
-								String file = JAlice.getAliceHomeDirectory().getParent().toString()+"\\Alice.exe";
-								if (new java.io.File(file).exists()) {
+						// Restart for Windows
+						if (AikMin.isWindows()){
+							String file = JAlice.getAliceHomeDirectory().getParent().toString()+"\\Alice.exe";
+							if (new java.io.File(file).exists()) {
+								Runtime.getRuntime().exec( file );
+							} else {
+								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice.exe in Alice directory. Please restart Alice manually.");
+							}
+						} 
+						// Restart for Mac
+						else if (AikMin.isMAC()){
+							String decodedPath = java.net.URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+							decodedPath=decodedPath.substring(0, decodedPath.lastIndexOf(".app")+4);
+							String params[] = {"open", "-n", decodedPath };
+							Runtime.getRuntime().exec(params);
+						} 
+						// Restart for Linux - Ubuntu
+						else {
+							String file = JAlice.getAliceHomeDirectory().getParent().toString()+"/Required/run-alice";
+							if (new java.io.File(file).exists()) {
+								try {
 									Runtime.getRuntime().exec( file );
-								} else {
-									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice.exe in Alice directory. Please restart Alice manually.");
+								} catch (Exception e){
+									e.printStackTrace();
 								}
-							} 
-							// Restart for Mac
-							else if (System.getProperty("os.name").startsWith("Mac") ){
-								String decodedPath = java.net.URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-								decodedPath=decodedPath.substring(0, decodedPath.lastIndexOf(".app")+4);
-								String params[] = {"open", "-n", decodedPath };
-								Runtime.getRuntime().exec(params);
-							} 
-							// Restart for Linux - Ubuntu
-							else {
-								String file = JAlice.getAliceHomeDirectory().getParent().toString()+"/Required/run-alice";
-								if (new java.io.File(file).exists()) {
-									try {
-										Runtime.getRuntime().exec( file );
-									} catch (Exception e){
-										e.printStackTrace();
-									}
-								} else {
-									edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice executable in Alice directory. Please restart Alice manually.");
-								}
-							}							
-						}
+							} else {
+								edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog("Missing Alice executable in Alice directory. Please restart Alice manually.");
+							}
+						}							
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -1836,7 +1869,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	public int saveWorldToFile(java.io.File file, boolean saveForWeb) throws java.io.IOException {
 		if (file.exists() && (!file.canWrite())) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("Cannot_save_world___") + file.getAbsolutePath() + " " + Messages.getString("is_read_only_"), Messages.getString("Cannot_Save_World"), javax.swing.JOptionPane.ERROR_MESSAGE);   
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("Cannot_save_world___is_read_only_", file.getAbsolutePath()), Messages.getString("Cannot_Save_World"), javax.swing.JOptionPane.ERROR_MESSAGE);   
 			return Constants.FAILED;
 		}
 		if (saveForWeb && file.exists()) {
@@ -1928,7 +1961,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				return Constants.CANCELED;
 			}
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_store_world_to_file__") + file, t ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_store_world_to_file__", file), t ); 
 			//file.delete();
 			return Constants.FAILED;
 		} finally {
@@ -1973,15 +2006,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		java.io.File worldFile = new java.io.File(htmlFile.getParentFile(), baseName + "." + WORLD_EXTENSION); 
 
 		if (htmlFile.exists() && (!htmlFile.canWrite())) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("Cannot_save_web_page___") + htmlFile.getAbsolutePath() + " " + Messages.getString("is_read_only_"), Messages.getString("Cannot_Save"), javax.swing.JOptionPane.ERROR_MESSAGE);   
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("Cannot_save_web_page___is_read_only_", htmlFile.getAbsolutePath()), Messages.getString("Cannot_Save"), javax.swing.JOptionPane.ERROR_MESSAGE);   
 			return Constants.FAILED;
 		}
 		if (worldFile.exists() && (!worldFile.canWrite())) {
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("Cannot_save_world___") + worldFile.getAbsolutePath() + " " + Messages.getString("is_read_only_"), Messages.getString("Cannot_Save"), javax.swing.JOptionPane.ERROR_MESSAGE);   
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("Cannot_save_world___is_read_only_", worldFile.getAbsolutePath()), Messages.getString("Cannot_Save"), javax.swing.JOptionPane.ERROR_MESSAGE);   
 			return Constants.FAILED;
 		}
 		if (authorName != null) {
-			authorName = "<h2>" + Messages.getString("Created_by_") + authorName + "</h2>\n";  
+			authorName = "<h2>" + Messages.getString("Created_by_", authorName) + "</h2>\n";  
 		} else {
 			authorName = " "; 
 		}
@@ -2046,7 +2079,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} else if (file.isDirectory()) {
 			result = loadWorld(new edu.cmu.cs.stage3.io.FileSystemTreeLoader(), file, askForSaveIfNecessary);
 		} else {
-			AuthoringTool.showErrorDialog(Messages.getString("The_file_or_directory_is_not_valid__") + file, null); 
+			AuthoringTool.showErrorDialog(Messages.getString("The_file_or_directory_is_not_valid__", file), null); 
 			result = Constants.FAILED;
 		}
 		return result;
@@ -2078,7 +2111,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			loader.open(path);
 			try {
 				if (path.equals(defaultWorld)) {
-					tempWorld = (edu.cmu.cs.stage3.alice.core.World)edu.cmu.cs.stage3.alice.core.Element.load( loader, null, null );
+					tempWorld = (edu.cmu.cs.stage3.alice.core.World)edu.cmu.cs.stage3.alice.core.Element.load( loader, null, null );				
 				} else {
 					worldLoadProgressPane.setLoader( loader );
 					worldLoadProgressPane.setExternalRoot( null );
@@ -2089,7 +2122,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				loader.close();
 			}
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog(Messages.getString("Unable_to_load_world__") + path, t); 
+			AuthoringTool.showErrorDialog(Messages.getString("Unable_to_load_world__", path), t); 
 		}
 //
 //		try {
@@ -2122,8 +2155,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		if (tempWorld != null) {
 			final java.awt.Cursor prevCursor = getJAliceFrame().getCursor();
 			getJAliceFrame().setCursor( java.awt.Cursor.getPredefinedCursor( java.awt.Cursor.WAIT_CURSOR )); // Aik Min
-			try {
-				leaveWorld(false);
+			try {		
+				if (world != null) {
+	                for( int i = 0; i < world.getChildCount(); i++ ) {
+	                	world.removeChild(world.getChildAt(0));
+	                }
+	                world.release();
+	                world = null;
+	                System.gc();
+				}
 				world = tempWorld;
 				worldClock.setWorld( world );
 				world.setClock( worldClock );
@@ -2283,7 +2323,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	    	if (dir.exists()){
     			showErrorDialog(Messages.getString("Error_removing_temporary_folder_"), 
     					Messages.getString("Cannot_delete_the_frames_folder___nOne_or_more_files_in_the_folder_is_being_used_") + "\n" +
-    					Messages.getString("Try_deleting_the_") + dir + " " + Messages.getString("folder_manually_"));  
+    					Messages.getString("Try_deleting_the_folder_manually_", dir));  
     		}
 		} 		
 		return Constants.SUCCEEDED;
@@ -2300,7 +2340,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} else if (file.isDirectory()) {
 			character = loadAndAddCharacter(new edu.cmu.cs.stage3.io.FileSystemTreeLoader(), file, null);
 		} else {
-			AuthoringTool.showErrorDialog(Messages.getString("The_file_or_directory_is_not_valid__") + file, null); 
+			AuthoringTool.showErrorDialog(Messages.getString("The_file_or_directory_is_not_valid__", file), null); 
 		}
 		return character;
 	}
@@ -2316,7 +2356,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} else if (file.isDirectory()) {
 			character = loadAndAddCharacter(new edu.cmu.cs.stage3.io.FileSystemTreeLoader(), file, targetTransformation);
 		} else {
-			AuthoringTool.showErrorDialog(Messages.getString("The_file_or_directory_is_not_valid__") + file, null); 
+			AuthoringTool.showErrorDialog(Messages.getString("The_file_or_directory_is_not_valid__", file), null); 
 		}
 		return character;
 	}
@@ -2340,9 +2380,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				addCharacter(character, targetTransformation);
 			}
 		} catch (java.util.zip.ZipException e) {
-			AuthoringTool.showErrorDialog(Messages.getString("File_is_not_a_valid_") + CHARACTER_EXTENSION + ": " + pathname, e, false);  
+			AuthoringTool.showErrorDialog(Messages.getString("File_is_not_a_valid_", CHARACTER_EXTENSION, pathname), e, false);  
 		} catch (Exception e) {
-			AuthoringTool.showErrorDialog(Messages.getString("Unable_to_load_object__") + pathname, e); 
+			AuthoringTool.showErrorDialog(Messages.getString("Unable_to_load_object__", pathname), e); 
 		} finally {
 			undoRedoStack.stopCompound();
 		}
@@ -2412,7 +2452,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 			edu.cmu.cs.stage3.alice.authoringtool.util.CollectionEditorPanel collectionEditorPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getCollectionEditorPanel();
 			collectionEditorPanel.setCollection(visualization.getItemsCollection());
-			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(collectionEditorPanel, Messages.getString("Initialize_") + typeString, javax.swing.JOptionPane.PLAIN_MESSAGE); 
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(collectionEditorPanel, Messages.getString("Initialize_", typeString), javax.swing.JOptionPane.PLAIN_MESSAGE); 
 		}
 	}
 
@@ -3299,10 +3339,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	public void showAbout() {
+		aboutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.AboutContentPane();
 		edu.cmu.cs.stage3.swing.DialogManager.showDialog(aboutContentPane);
 	}
 
 	public void showLicense() {
+		licenseContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LicenseContentPane();
 		edu.cmu.cs.stage3.swing.DialogManager.showDialog(licenseContentPane);
 	}
 	
@@ -3385,7 +3427,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		simulationExceptionPanel.setErrorHighlightingEnabled(false);
 	}
 
-
 	public javax.swing.JFileChooser getImportFileChooser() {
 		return importFileChooser;
 	}
@@ -3398,11 +3439,16 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		showStencils();
 	}
 
-	public void showStdErrOutDialog() {
-		stdErrOutContentPane.setMode(edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane.HISTORY_MODE);
-		stdErrOutContentPane.showStdErrOutDialog();
+	public void showStdErrDialog() {
+		stdErrContentPane.setMode(edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane.HISTORY_MODE);
+		stdErrContentPane.showStdErrDialog();
 	}
-
+	
+	public void showStdOutDialog() {
+		stdOutContentPane.setMode(edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane.HISTORY_MODE);
+		stdOutContentPane.showStdOutDialog();
+	}
+	
 	public void updateWorldOpenTime() {
 		if (world != null) {
 			String worldOpenTimeString = (String) world.data.get("edu.cmu.cs.stage3.alice.authoringtool.worldOpenTime"); 
@@ -3443,7 +3489,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						fileToExportTo.delete();
 						throw pce;
 					} catch( Throwable t ) {
-						AuthoringTool.showErrorDialog(Messages.getString("Unable_to_store_world_to_file__") + fileToExportTo, t); 
+						AuthoringTool.showErrorDialog(Messages.getString("Unable_to_store_world_to_file__", fileToExportTo), t); 
 						fileToExportTo.delete();
 					}
 				}
@@ -3460,9 +3506,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		currentWorldLocation = file;
 		updateTitle();
 	}
-
-
-
 
 	private void updateTitle() {
 		String path = ""; 
@@ -3776,7 +3819,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				//			} else if( (c instanceof javax.swing.JPanel) && (c.getParent() != null) && (c.getParent().getParent() instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel) && (c == ((edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel)c.getParent().getParent()).getDoNothingPanel()) ) {
 				//				return c;
 			}
-
 			// default cases
 			for (java.util.Iterator iter = classesToStopOn.iterator(); iter.hasNext();) {
 				Class stopClass = (Class) iter.next();
@@ -3784,11 +3826,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					return c;
 				}
 			}
-
 			// look up one level
 			c = c.getParent();
 		}
-
 		return null;
 	}
 
@@ -4197,7 +4237,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									} catch (Exception e) {
-										AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e); 
+										AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e); 
 									}
 								}
 							}
@@ -4464,7 +4504,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									} catch (Exception e) {
-										AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e); 
+										AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e); 
 									}
 								}
 							}
@@ -4793,7 +4833,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											}
 										}
 									} catch (Exception e) {
-										AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e); 
+										AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e); 
 									}
 								}
 							} else {
@@ -5041,7 +5081,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 										}
 									}
 								} catch (Exception e) {
-									AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e); 
+									AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e); 
 								}
 							}
 						} else {
@@ -5290,7 +5330,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public void launchTutorialFile(java.io.File tutorialFile) {
 		if (Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) ) > 12) { 
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-					Messages.getString("Alice_is_not_able_to_load_the_tutorial_") + Messages.getString("Your_font_size_is_too_large__You_can_go_to_Edit__Preferences_to_change_the_font_size_"),  
+					Messages.getString("Alice_is_not_able_to_load_the_tutorial_"),  
 					Messages.getString("Font_size_too_large"), 
 					javax.swing.JOptionPane.WARNING_MESSAGE);
 		} else {
@@ -5388,7 +5428,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 	
 	public String getCurrentRendererText() {
-		return renderTargetFactory.toString();
+		return renderTargetFactory.getClass().toString();
 	}
 
 	// Logging
@@ -5523,7 +5563,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			if (!AuthoringToolResources.isMethodHookedUp((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) object, world) && !authoringToolConfig.getValue("doNotShowUnhookedMethodWarning").equalsIgnoreCase("true")) {  
 				String objectRepr = AuthoringToolResources.getReprForValue(object, true);
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-					Messages.getString("The_current_method__") + objectRepr + Messages.getString("__is_not_called_by_any_events_or_by_any_other_methods_which_might_be_called_by_any_events_"),  
+					Messages.getString("The_current_method____is_not_called_by_any_events_or_by_any_other_methods_which_might_be_called_by_any_events_", objectRepr),  
 					Messages.getString("Warning__Current_method_will_not_be_called_"), 
 					javax.swing.JOptionPane.WARNING_MESSAGE);
 			}
@@ -5537,12 +5577,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		if (worldRun()) {
 			double aspectRatio = getAspectRatio();
-			stdErrOutContentPane.stopReactingToPrint();
+			stdErrContentPane.stopReactingToPrint();
+			stdOutContentPane.stopReactingToPrint();
 			renderContentPane.setAspectRatio(aspectRatio);
 			renderContentPane.getRenderPanel().add(renderPanel, java.awt.BorderLayout.CENTER);
 
 			edu.cmu.cs.stage3.swing.DialogManager.showDialog(renderContentPane);
-			stdErrOutContentPane.startReactingToPrint();
+			stdErrContentPane.startReactingToPrint();
+			stdOutContentPane.startReactingToPrint();
 		}
 		jAliceFrame.playButton.setEnabled(true);
 	}
@@ -5554,7 +5596,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		if (worldRun()) {
 			double aspectRatio = getAspectRatio();
-			stdErrOutContentPane.stopReactingToPrint();
+			stdErrContentPane.stopReactingToPrint();
+			stdOutContentPane.stopReactingToPrint();
 			captureContentPane.setExportDirectory(directory);
 			captureContentPane.captureInit();
 			captureContentPane.setAspectRatio(aspectRatio);
@@ -5562,7 +5605,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			jAliceFrame.sceneEditor.makeDirty();
 			edu.cmu.cs.stage3.swing.DialogManager.setResize(false);
 			edu.cmu.cs.stage3.swing.DialogManager.showDialog(captureContentPane);
-			stdErrOutContentPane.startReactingToPrint();
+			stdErrContentPane.startReactingToPrint();
+			stdOutContentPane.startReactingToPrint();
 		}
 		jAliceFrame.playButton.setEnabled(true);
 		edu.cmu.cs.stage3.swing.DialogManager.setResize(true);
@@ -5738,21 +5782,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         // }
         left.add(UpdateJAR);
 
+        final JCheckBox CoreGallery = new JCheckBox(Messages.getString("Download_Core_Gallery"));
+        left.add(CoreGallery);
+
         final JCheckBox EnglishGallery = new JCheckBox(Messages.getString("Download_English_Gallery"));
         left.add(EnglishGallery);
 
-        final JCheckBox EnglishUpdate = new JCheckBox(Messages.getString("Update_English_Gallery"));
-        left.add(EnglishUpdate);
-
         final JCheckBox SpanishGallery = new JCheckBox(Messages.getString("Download_Spanish_Gallery"));
         left.add(SpanishGallery);
-
-        final JCheckBox SpanishUpdate = new JCheckBox(Messages.getString("Update_Spanish_Gallery"));
-        left.add(SpanishUpdate);
-
-        //final JCheckBox MiddleEastUpdate = new JCheckBox(Messages.getString("Update_MiddleEast_Gallery"));
-        //left.add(MiddleEastUpdate);
-        
+       
         updateDialog.add(left, BorderLayout.LINE_START);
         
         Box bottom = Box.createVerticalBox();
@@ -5762,39 +5800,27 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         ConfirmUpdate.addActionListener(new java.awt.event.ActionListener(){
         	public void actionPerformed(java.awt.event.ActionEvent e) {
         		dlg.dispose();
-        		if (UpdateJAR.isSelected() || EnglishGallery.isSelected() || EnglishUpdate.isSelected() || SpanishGallery.isSelected() || SpanishUpdate.isSelected()) {
-        			if ( UpdateJAR.isSelected() ) {
-        				numUpdate++;
-        				new Thread(new StartUpdating( "AliceUpdate.zip", 
-        						JAlice.getAliceHomeDirectory().getParent().toString(),
-        						false )).start();
-        			}
-        			if ( EnglishGallery.isSelected() ) {
-        				numUpdate++;
-        				new Thread(new StartUpdating( "EnglishGallery.zip", 
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
-        			}
-        			if ( EnglishUpdate.isSelected() ) {
-        				numUpdate++;
-        				new Thread(new StartUpdating( "EnglishUpdate.zip", 
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
-        			}
-        			if ( SpanishGallery.isSelected() ) {
-        				numUpdate++;
-        				new Thread(new StartUpdating( "SpanishGallery.zip",
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
-        			}
-        			if ( SpanishUpdate.isSelected() ) {
-        				numUpdate++;
-        				new Thread(new StartUpdating( "SpanishUpdate.zip",
-        						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
-        			}
- //       			if ( MiddleEastUpdate.isSelected() ) {
- //       				numUpdate++;
- //       				new Thread(new StartUpdating( "MiddleEastUpdate.zip",
- //       						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
- //       			}
-        		} else {
+    			if ( UpdateJAR.isSelected() ) {
+    				numUpdate++;
+   					new Thread(new StartUpdating( "AliceUpdate.zip", 
+    						JAlice.getAliceHomeDirectory().getParent().toString(), false )).start();
+    			}
+       			if ( CoreGallery.isSelected() ) {
+    				numUpdate++;
+    				new Thread(new StartUpdating( "CoreGallery.zip", 
+    						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
+    			}
+    			if ( EnglishGallery.isSelected() ) {
+    				numUpdate++;
+    				new Thread(new StartUpdating( "EnglishGallery.zip", 
+    						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
+    			}
+    			if ( SpanishGallery.isSelected() ) {
+    				numUpdate++;
+    				new Thread(new StartUpdating( "SpanishGallery.zip",
+    						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
+    			}
+        		if (numUpdate == 0){
         			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("No_update_selected_"));
         		}		        
         	}
@@ -5854,6 +5880,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					}						
 				}
 
+				monitor.setProgress(monitor.getMaximum());
 				bis.close();
 				bos.close();
 
@@ -5865,6 +5892,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					entries = zipFile.entries();
 					
 					monitor.setNote("Copying models to Alice gallery");
+					monitor.setProgress(0); progress = 0;
 					monitor.setMaximum(zipFile.size());
 
 					while (entries.hasMoreElements()) {
@@ -5887,13 +5915,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						out.close();				
 						monitor.setProgress(progress++);
 					}
+					monitor.setProgress(monitor.getMaximum());
 					zipFile.close();
-					new File(aliceHome + System.getProperty( "file.separator" ) + file).delete();
 	        	}
 	        } catch ( java.io.FileNotFoundException e){
-	        	javax.swing.JOptionPane.showMessageDialog(null, "File not found", "File not found", javax.swing.JOptionPane.ERROR_MESSAGE );
+	        	AuthoringTool.showErrorDialog("Error encountered during update", e); 
 			} catch (Exception e1) {
-	        	javax.swing.JOptionPane.showMessageDialog(null, Messages.getString("_Update_failed__Please_check_your_internet_connection__"), Messages.getString("Update_failed"), javax.swing.JOptionPane.ERROR_MESSAGE );  
+	        	javax.swing.JOptionPane.showMessageDialog(null, " "+Messages.getString("Update_failed__Please_check_your_internet_connection__"), Messages.getString("Update_failed"), javax.swing.JOptionPane.ERROR_MESSAGE );  
 	        } finally {
 	        	if (bis != null)
 	            try {
@@ -5908,18 +5936,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				    ioe.printStackTrace();
 				}          
 				numUpdate--;
-	        	if (monitor.isCanceled()) {
-	        		java.io.File temp;
-	        		if ( isGallery ) {
-	        			temp = new java.io.File( dest + System.getProperty( "file.separator" ) + file);
-	        		} else {
-	        			temp = new java.io.File( dest );
-	        		}
-	        		if ( temp.exists() )
-	        			temp.delete();        		
-	        	} else if (numUpdate == 0) {
+	        	java.io.File temp;
+	        	temp = new java.io.File( dest + System.getProperty( "file.separator" ) + file);
+	        	if ( temp.exists() )
+	        		temp.delete();        		
+	        	if (numUpdate == 0) {
 					Object[] options = {Messages.getString("Restart"), Messages.getString("Cancel")};
-					int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(Messages.getString("_You_must_restart_Alice_for_the_updates_to_take_effect__"), Messages.getString("Update_completed"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] );  
+					int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(" "+Messages.getString("You_must_restart_Alice_for_the_updates_to_take_effect__"), Messages.getString("Update_completed"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] );  
 					if (result == ContentPane.OK_OPTION){
 						monitor.close();
 						quit(true);
@@ -5930,4 +5953,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	        }
 		}
 	}
+
+	
+
 }

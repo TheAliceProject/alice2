@@ -109,7 +109,7 @@ public final class EditorUtilities {
 		try {
 			return (edu.cmu.cs.stage3.alice.authoringtool.Editor)editorClass.newInstance();
 		} catch( Throwable t ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_editor_of_type_") + editorClass, t ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_editor_of_type_", editorClass), t ); 
 		}
 		return null;
 	}
@@ -177,7 +177,7 @@ public final class EditorUtilities {
 		try {
 			setObject.invoke( editor, new Object[] { object } );
 		} catch( Exception e ) {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_editing_object__") + object, e ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_editing_object__", object), e ); 
 		}
 	}
 

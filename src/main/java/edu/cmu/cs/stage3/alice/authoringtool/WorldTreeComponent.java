@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -121,9 +122,8 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 		} else {
 			worldTreeModel.setRoot( world );
 			setCurrentScope( world );
-			//worldTree.setSelectionRow( 0 ); Aik Min - removed due to a null pointer exception. Select the first item on the tree.
+			//worldTree.setSelectionRow( 0 ); //Aik Min - removed due to a null pointer exception. Select the first item on the tree.
 		}
-
 		revalidate();
 		repaint();
 	}
@@ -586,8 +586,9 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 		//	charactersTree.setFont(new java.awt.Font("Dialog", 0, 14));
 		//	charactersTree.setRootVisible(false);
 		this.add(treeScrollPane, BorderLayout.CENTER);
-		treeScrollPane.getViewport().add(treePanel, null);
 		treePanel.add(worldTree, BorderLayout.CENTER);
+		treeScrollPane.getViewport().add(treePanel, BorderLayout.CENTER);
+		treeScrollPane.getViewport().setBackground(Color.white);
 		//treePanel.add(charactersTree, BorderLayout.CENTER);
 	}
 

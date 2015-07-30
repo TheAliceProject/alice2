@@ -41,7 +41,7 @@ public abstract class DirectionAmountTransformAnimation extends TransformAnimati
 				if( acceptsDirection( (Direction)value ) ) {
 					//pass
 				} else {
-					throw new RuntimeException( this + Messages.getString("_does_not_accept_direction_") + value ); 
+					throw new RuntimeException( this + " " + Messages.getString("does_not_accept_direction_") + value ); 
 				}
 			}
 		} else {

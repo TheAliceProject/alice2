@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
+import com.jogamp.opengl.GL2;
+
 abstract class FogProxy extends AffectorProxy {
     private float[] m_color = new float[ 4 ];
     private java.nio.FloatBuffer m_colorBuffer = java.nio.FloatBuffer.wrap( m_color );
@@ -37,6 +39,6 @@ abstract class FogProxy extends AffectorProxy {
     
 	public void setup( RenderContext context ) {
         context.setIsFogEnabled( true );
-        context.gl.glFogfv( javax.media.opengl.GL.GL_FOG_COLOR, m_colorBuffer );
+        context.gl.glFogfv( GL2.GL_FOG_COLOR, m_colorBuffer );
     }
 }

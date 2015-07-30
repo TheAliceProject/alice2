@@ -118,7 +118,7 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 						constraints.gridx++;
 						keys.remove( propertyName );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("no_value_available_for_") + token, null ); 
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("no_value_available_for_", token), null ); 
 						addTile( token, true );
 						constraints.gridx++;
 					}

@@ -39,7 +39,6 @@ public class KeyboardNavigationBehavior extends InternalResponseBehavior {
         renderTarget.removeKeyListener( ((KeyMapping)keyMap.get()) );
 	}
 
-
    	protected void enable() {
         renderTarget.addKeyListener( ((KeyMapping)keyMap.get()) );
     }

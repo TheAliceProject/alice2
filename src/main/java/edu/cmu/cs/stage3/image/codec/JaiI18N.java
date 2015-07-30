@@ -35,7 +35,7 @@ class JaiI18N {
 		try {
 			return Messages.getString(key);
 		} catch (MissingResourceException e) {
-			return '!' + key + '!';
+			return key;
 		}
 	}
 }

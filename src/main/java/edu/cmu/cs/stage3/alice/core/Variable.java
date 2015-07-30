@@ -51,7 +51,7 @@ public class Variable extends Expression {
 					if( Element.s_isLoading ) {
 						//pass
 					} else {
-						throw new RuntimeException( Messages.getString("cannot_change_valueClass_to_") + clsToBe + Messages.getString("_when_value_is_") + o );  
+						throw new RuntimeException( Messages.getString("cannot_change_valueClass_to_") + clsToBe + " " + Messages.getString("when_value_is_") + o );  
 					}
 				}
 			} else {
@@ -61,7 +61,7 @@ public class Variable extends Expression {
 					if( Element.s_isLoading ) {
 						//pass
 					} else {
-						throw new RuntimeException( Messages.getString("cannot_change_valueClass_to_") + clsToBe + Messages.getString("_when_value_is_") + o );  
+						throw new RuntimeException( Messages.getString("cannot_change_valueClass_to_") + clsToBe + " " + Messages.getString("when_value_is_") + o );  
 					}
 				}
 			}
@@ -87,7 +87,7 @@ public class Variable extends Expression {
 						if( valueCls.isAssignableFrom( cls ) ) {
 							//pass
 						} else {
-							throw new RuntimeException( o + Messages.getString("_is_not_an_instance_of_") + valueClass + Messages.getString("___it_is_an_instance_of_") + cls );  
+							throw new RuntimeException( o + " " + Messages.getString("is_not_an_instance_of_") + valueClass + Messages.getString("___it_is_an_instance_of_") + cls );  
 						}
 					}
 	
@@ -100,7 +100,7 @@ public class Variable extends Expression {
 						if( valueCls.isAssignableFrom( cls ) ) {
 							//pass
 						} else {
-							throw new RuntimeException( o + Messages.getString("_is_not_an_instance_of_") + valueClass + Messages.getString("___it_is_an_instance_of_") + cls );  
+							throw new RuntimeException( o + " " + Messages.getString("is_not_an_instance_of_") + valueClass + Messages.getString("___it_is_an_instance_of_") + cls );  
 						}
 					}
 				}

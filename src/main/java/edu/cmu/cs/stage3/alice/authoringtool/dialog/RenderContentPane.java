@@ -24,18 +24,15 @@
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
 import edu.cmu.cs.stage3.lang.Messages;
+
 import javax.swing.ScrollPaneConstants;
 
 public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
-	protected javax.swing.JPanel renderPanel = new javax.swing.JPanel(
-			new java.awt.BorderLayout());
-	protected javax.swing.JPanel buttonPanel = new javax.swing.JPanel(
-			new java.awt.GridBagLayout());
-	protected javax.swing.JSplitPane stdOutSplitPane = new javax.swing.JSplitPane(
-			javax.swing.JSplitPane.VERTICAL_SPLIT);
+	protected javax.swing.JPanel renderPanel = new javax.swing.JPanel(new java.awt.BorderLayout());
+	protected javax.swing.JPanel buttonPanel = new javax.swing.JPanel(new java.awt.GridBagLayout());
+	protected javax.swing.JSplitPane stdOutSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.VERTICAL_SPLIT);
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
-			.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-					.getPackage());
+			.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
 	protected double aspectRatio;
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected boolean showStdOut = false;
@@ -44,8 +41,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	protected OutputComponent stdOutOutputComponent;
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.WatcherPanel watcherPanel;
 	protected javax.swing.JScrollPane watcherScrollPane;
-	protected javax.swing.JSplitPane watcherSplitPane = new javax.swing.JSplitPane(
-			javax.swing.JSplitPane.HORIZONTAL_SPLIT);
+	protected javax.swing.JSplitPane watcherSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.HORIZONTAL_SPLIT);
 	protected javax.swing.JButton pauseButton;
 	protected javax.swing.JButton resumeButton;
 	protected javax.swing.JButton restartButton;
@@ -66,14 +62,12 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	protected java.awt.event.ActionListener okActionListener;
 
-	protected class TextOutputDocumentListener implements
-			javax.swing.event.DocumentListener {
+	protected class TextOutputDocumentListener implements javax.swing.event.DocumentListener {
 		public void insertUpdate(final javax.swing.event.DocumentEvent ev) {
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						String textUpdate = ev.getDocument().getText(
-								ev.getOffset(), ev.getLength());
+						String textUpdate = ev.getDocument().getText(ev.getOffset(), ev.getLength());
 						detailTextPane.getDocument().insertString(
 								detailTextPane.getDocument().getLength(),
 								textUpdate, detailTextPane.stdOutStyle);
@@ -109,30 +103,22 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 	}
 
-	protected class RenderComponentListener extends
-			java.awt.event.ComponentAdapter {
+	protected class RenderComponentListener extends java.awt.event.ComponentAdapter {
 		public void componentResized(java.awt.event.ComponentEvent ev) {
-			if (RenderContentPane.this.shouldConstrainAspectOnResize()
-					&& !doNotListenToResize) {
+			if (RenderContentPane.this.shouldConstrainAspectOnResize() && !doNotListenToResize) {
 				doNotListenToResize = true;
 				java.awt.Rectangle oldBounds = getRenderBounds();
-				java.awt.Dimension newSize = RenderContentPane.this.renderPanel
-						.getSize();
-				java.awt.Rectangle newBounds = new java.awt.Rectangle(
-						oldBounds.getLocation(), newSize);
+				java.awt.Dimension newSize = RenderContentPane.this.renderPanel.getSize();
+				java.awt.Rectangle newBounds = new java.awt.Rectangle(oldBounds.getLocation(), newSize);
 
 				int deltaWidth = Math.abs(oldBounds.width - newSize.width);
 				int deltaHeight = Math.abs(oldBounds.height - newSize.height);
 
 				constrainToAspectRatio(newBounds, deltaWidth < deltaHeight);
 
-				RenderContentPane.this.config
-						.setValue(
-								"rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-4$
-				renderPanel.setPreferredSize(new java.awt.Dimension(
-						newBounds.width, newBounds.height));
-				buttonPanel.setPreferredSize(new java.awt.Dimension(
-						newBounds.width, buttonPanel.getHeight()));
+				RenderContentPane.this.config.setValue("rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-4$
+				renderPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, newBounds.height));
+				buttonPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, buttonPanel.getHeight()));
 				packDialog();
 				doNotListenToResize = false;
 			}
@@ -141,8 +127,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	protected TextOutputDocumentListener textListener = new TextOutputDocumentListener();
 
-	public RenderContentPane(
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+	public RenderContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		this.authoringTool = authoringTool;
 		this.stdOutOutputComponent = authoringTool.getStdOutOutputComponent();
 		this.watcherPanel = authoringTool.getWatcherPanel();
@@ -163,8 +148,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	protected void setRenderWindowSizeBasedOnSavedBounds() {
 		java.awt.Rectangle bounds = getRenderBounds();
-		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width,
-				bounds.height));
+		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width, bounds.height));
 	}
 
 	public void preDialogShow(javax.swing.JDialog parentDialog) {
@@ -181,29 +165,23 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 					});
 			focusTimer.setRepeats(false);
 			focusTimer.start();
+			//renderCanvas.addComponentListener(new RenderComponentListener());
 		}
-		stdOutOutputComponent.stdOutStream.println(Messages
-				.getString("Running_World"));
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("Running_World"));
 		stdOutOutputComponent.stdOutStream.flush();
-		this.stdOutOutputComponent.getTextPane().getDocument()
-				.addDocumentListener(textListener);
+		this.stdOutOutputComponent.getTextPane().getDocument().addDocumentListener(textListener);
 		java.awt.Rectangle bounds = getRenderBounds();
-		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width,
-				bounds.height));
+		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width, bounds.height));
 		parentDialog.setLocation(bounds.getLocation());
 		showStdOut = false;
 		keyMapInit();
 		updateGUI();
-		if (config.getValue("rendering.ensureRenderDialogIsOnScreen")
-				.equalsIgnoreCase("true")) {
-			java.awt.Dimension screenSize = java.awt.Toolkit
-					.getDefaultToolkit().getScreenSize();
+		if (config.getValue("rendering.ensureRenderDialogIsOnScreen").equalsIgnoreCase("true")) {
+			java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 			java.awt.Dimension dialogSize = parentDialog.getSize();
 			java.awt.Point dialogLocation = parentDialog.getLocation();
-			java.awt.Rectangle screenRect = new java.awt.Rectangle(0, 0,
-					screenSize.width, screenSize.height);
-			if (!javax.swing.SwingUtilities.isRectangleContainingRectangle(
-					screenRect, parentDialog.getBounds())) {
+			java.awt.Rectangle screenRect = new java.awt.Rectangle(0, 0, screenSize.width, screenSize.height);
+			if (!javax.swing.SwingUtilities.isRectangleContainingRectangle(screenRect, parentDialog.getBounds())) {
 				if ((dialogLocation.x + dialogSize.width) > screenSize.width) {
 					dialogLocation.x = screenSize.width - dialogSize.width;
 				}
@@ -216,39 +194,29 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if (dialogLocation.y < 0) {
 					dialogLocation.y = 0;
 				}
-				if (config.getValue(
-						"rendering.constrainRenderDialogAspectRatio")
-						.equalsIgnoreCase("false")) {
+				if (config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("false")) {
 					if (dialogSize.width > screenSize.width) {
-						java.awt.Dimension renderSize = renderPanel
-								.getPreferredSize();
+						java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 						renderSize.width = screenSize.width - 8;
 						renderPanel.setPreferredSize(renderSize);
 					}
 					if (dialogSize.height > screenSize.height) {
-						java.awt.Dimension renderSize = renderPanel
-								.getPreferredSize();
+						java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 						renderSize.height = screenSize.height - 27;
 						renderPanel.setPreferredSize(renderSize);
 					}
 				} else {
-					if (dialogSize.height > screenSize.height
-							|| dialogSize.width > screenSize.width) {
-						double windowAspect = (double) screenSize.width
-								/ (double) screenSize.height;
+					if (dialogSize.height > screenSize.height || dialogSize.width > screenSize.width) {
+						double windowAspect = (double) screenSize.width	/ (double) screenSize.height;
 						if (aspectRatio > windowAspect) { // constrain the width
-							java.awt.Dimension renderSize = renderPanel
-									.getPreferredSize();
+							java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 							renderSize.width = screenSize.width - 8;
-							renderSize.height = (int) Math
-									.round(renderSize.width / aspectRatio);
+							renderSize.height = (int) Math.round(renderSize.width / aspectRatio);
 							renderPanel.setPreferredSize(renderSize);
 						} else { // constrain the height
-							java.awt.Dimension renderSize = renderPanel
-									.getPreferredSize();
+							java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 							renderSize.height = screenSize.height - 27;
-							renderSize.width = (int) Math
-									.round(renderSize.height * aspectRatio);
+							renderSize.width = (int) Math.round(renderSize.height * aspectRatio);
 							renderPanel.setPreferredSize(renderSize);
 						}
 					}
@@ -275,10 +243,8 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (renderCanvas != null) {
 			renderCanvas.removeFocusListener(renderCanvasFocusListener);
 		}
-		this.stdOutOutputComponent.getTextPane().getDocument()
-				.removeDocumentListener(textListener);
-		stdOutOutputComponent.stdOutStream.println(Messages
-				.getString("Stopping_World"));
+		this.stdOutOutputComponent.getTextPane().getDocument().removeDocumentListener(textListener);
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("Stopping_World") + "\n");
 		stdOutOutputComponent.stdOutStream.flush();
 
 	}
@@ -308,25 +274,19 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		detailTextPane.setEditable(false);
 
 		// buttons
-		pauseButton = new javax.swing.JButton(
-				authoringTool.getActions().pauseWorldAction);
-		resumeButton = new javax.swing.JButton(
-				authoringTool.getActions().resumeWorldAction);
-		restartButton = new javax.swing.JButton(
-				authoringTool.getActions().restartWorldAction);
-		stopButton = new javax.swing.JButton(
-				authoringTool.getActions().stopWorldAction);
-		takePictureButton = new javax.swing.JButton(
-				authoringTool.getActions().takePictureAction);
+		pauseButton = new javax.swing.JButton(authoringTool.getActions().pauseWorldAction);
+		resumeButton = new javax.swing.JButton(authoringTool.getActions().resumeWorldAction);
+		restartButton = new javax.swing.JButton(authoringTool.getActions().restartWorldAction);
+		stopButton = new javax.swing.JButton(authoringTool.getActions().stopWorldAction);
+		takePictureButton = new javax.swing.JButton(authoringTool.getActions().takePictureAction);
 		takePictureButton.setEnabled(true);
 
 		speedLabel = new javax.swing.JLabel(Messages.getString("Speed__1x"));
 		int fontSize = Integer.parseInt(config.getValue("fontSize"));
-		speedLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD,
-				(int) (12 * fontSize / 12.0)));
-		speedLabel.setPreferredSize(new java.awt.Dimension(80, 12));
+		speedLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
+		speedLabel.setPreferredSize(new java.awt.Dimension(100, 12));
 		speedLabel.setMinimumSize(new java.awt.Dimension(20, 12));
-		speedLabel.setMaximumSize(new java.awt.Dimension(80, 12));
+		speedLabel.setMaximumSize(new java.awt.Dimension(100, 12));
 
 		pauseButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 		resumeButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
@@ -336,14 +296,14 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		speedSlider = new javax.swing.JSlider(0, 9, 0);
 
-		speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
+		/*speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
 			public void paintTrack(java.awt.Graphics g) {
 				super.paintTrack(g);
 			}
-		});
-		speedSlider.setPreferredSize(new java.awt.Dimension(100, 16));
+		});*/
+		speedSlider.setPreferredSize(new java.awt.Dimension(120, 16));
 		speedSlider.setMinimumSize(new java.awt.Dimension(40, 16));
-		speedSlider.setMaximumSize(new java.awt.Dimension(100, 16));
+		speedSlider.setMaximumSize(new java.awt.Dimension(120, 16));
 		speedSlider.setSnapToTicks(true);
 		speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent ce) {
@@ -365,43 +325,33 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		buttonPanel.add(speedSlider, new java.awt.GridBagConstraints(1, 1, 1,
 				1, 1.0, 1.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(2,
-						2, 2, 2), 0, 0));
+				java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		buttonPanel.add(pauseButton, new java.awt.GridBagConstraints(2, 0, 1,
 				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		buttonPanel.add(speedLabel, new java.awt.GridBagConstraints(1, 0, 1, 1,
 				0.0, 0.0, java.awt.GridBagConstraints.CENTER,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(0, 2, 0,
-						2), 0, 0));
-
+				java.awt.GridBagConstraints.NONE, new java.awt.Insets(0, 2, 0, 2), 0, 0));
 		buttonPanel.add(resumeButton, new java.awt.GridBagConstraints(5, 0, 1,
 				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		buttonPanel.add(restartButton, new java.awt.GridBagConstraints(6, 0, 1,
 				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		buttonPanel.add(stopButton, new java.awt.GridBagConstraints(7, 0, 1, 2,
 				0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 		buttonPanel.add(takePictureButton, new java.awt.GridBagConstraints(8,
 				0, 1, 2, 1.0, 0.0, java.awt.GridBagConstraints.EAST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 
-		watcherSplitPane = new javax.swing.JSplitPane(
-				javax.swing.JSplitPane.HORIZONTAL_SPLIT);
+		watcherSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.HORIZONTAL_SPLIT);
 		watcherSplitPane.setContinuousLayout(true);
 		watcherSplitPane.setDividerSize(0);
 		watcherSplitPane.setResizeWeight(1.0);
 		watcherSplitPane.setLeftComponent(renderPanel);
 
-		stdOutSplitPane = new javax.swing.JSplitPane(
-				javax.swing.JSplitPane.VERTICAL_SPLIT);
+		stdOutSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.VERTICAL_SPLIT);
 		stdOutSplitPane.setContinuousLayout(true);
 		stdOutSplitPane.setDividerSize(0);
 		stdOutSplitPane.setResizeWeight(1.0);
@@ -417,29 +367,20 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private void keyMapInit() {
 		javax.swing.KeyStroke keyStroke;
 		String commandKey;
-		for (java.util.Iterator iter = authoringTool.getActions().renderActions
-				.iterator(); iter.hasNext();) {
+		for (java.util.Iterator iter = authoringTool.getActions().renderActions.iterator(); iter.hasNext();) {
 			javax.swing.Action action = (javax.swing.Action) iter.next();
 
 			try {
-				keyStroke = (javax.swing.KeyStroke) action
-						.getValue(javax.swing.Action.ACCELERATOR_KEY);
-				commandKey = (String) action
-						.getValue(javax.swing.Action.ACTION_COMMAND_KEY);
+				keyStroke = (javax.swing.KeyStroke) action.getValue(javax.swing.Action.ACCELERATOR_KEY);
+				commandKey = (String) action.getValue(javax.swing.Action.ACTION_COMMAND_KEY);
 			} catch (ClassCastException e) {
 				continue;
 			}
 			if ((keyStroke != null) && (commandKey != null)) {
-				java.awt.Component root = javax.swing.SwingUtilities
-						.getRoot(this);
+				java.awt.Component root = javax.swing.SwingUtilities.getRoot(this);
 				if (root instanceof javax.swing.JDialog) {
-					((javax.swing.JDialog) root)
-							.getRootPane()
-							.registerKeyboardAction(
-									action,
-									commandKey,
-									keyStroke,
-									javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+					((javax.swing.JDialog) root).getRootPane().registerKeyboardAction(
+						action,	commandKey,	keyStroke, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 				}
 				// getRootPane().getInputMap().put( keyStroke, commandKey );
 				// getRootPane().getActionMap().put( commandKey, action );
@@ -456,21 +397,16 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} else {
 			javax.swing.SwingUtilities.convertPointToScreen(pos, renderPanel);
 		}
-		config.setValue(
-				"rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height); //$NON-NLS-4$
+		config.setValue("rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height);
 	}
 
 	public void saveRenderBounds(java.awt.Rectangle newBounds) {
-		config.setValue(
-				"rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-4$
+		config.setValue("rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height);
 	}
 
 	protected boolean shouldConstrainAspectOnResize() {
-		return !(showStdOut || authoringTool.getWatcherPanel()
-				.isThereSomethingToWatch())
-				&& config
-						.getValue("rendering.constrainRenderDialogAspectRatio")
-						.equalsIgnoreCase("true");
+		return !(showStdOut || authoringTool.getWatcherPanel().isThereSomethingToWatch())
+				&& config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true");
 	}
 
 	public javax.swing.JPanel getRenderPanel() {
@@ -479,39 +415,31 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	public java.awt.Rectangle getRenderBounds() {
 		String boundsString = config.getValue("rendering.renderWindowBounds");
-		java.util.StringTokenizer st = new java.util.StringTokenizer(
-				boundsString, " \t,");
+		java.util.StringTokenizer st = new java.util.StringTokenizer(boundsString, " \t,");
 		if (st.countTokens() == 4) {
 			try {
 				int x = Integer.parseInt(st.nextToken());
 				int y = Integer.parseInt(st.nextToken());
 				int width = Integer.parseInt(st.nextToken());
 				int height = Integer.parseInt(st.nextToken());
-				java.awt.Rectangle bounds = new java.awt.Rectangle(x, y, width,
-						height);
+				java.awt.Rectangle bounds = new java.awt.Rectangle(x, y, width, height);
 				double currentAspectRatio = (double) width / height;
 				if (RenderContentPane.this.shouldConstrainAspectOnResize()) {
 					constrainToAspectRatio(bounds, currentAspectRatio > 1.0);
 				}
 				return bounds;
 			} catch (NumberFormatException e) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool
-						.showErrorDialog(
-								Messages.getString("Parse_error_in_config_value__rendering_renderWindowBounds"),
-								e);
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(
+						Messages.getString("Parse_error_in_config_value__rendering_renderWindowBounds"), e);
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool
-					.showErrorDialog(
-							Messages.getString("Incorrect_number_of_tokens_in_config_value__rendering_renderWindowBounds"),
-							null);
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(
+					Messages.getString("Incorrect_number_of_tokens_in_config_value__rendering_renderWindowBounds"),	null);
 		}
-
 		return null;
 	}
 
-	public void constrainToAspectRatio(java.awt.Rectangle bounds,
-			boolean stretchHorizontally) {
+	public void constrainToAspectRatio(java.awt.Rectangle bounds, boolean stretchHorizontally) {
 		if (aspectRatio > 0.0) {
 			if (stretchHorizontally) {
 				bounds.width = (int) Math.round(bounds.height * aspectRatio);
@@ -523,8 +451,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	public void updateSpeed(double newSpeed) {
 		authoringTool.setWorldSpeed(newSpeed);
-		String speedText = java.text.NumberFormat.getInstance()
-				.format(newSpeed);
+		String speedText = java.text.NumberFormat.getInstance().format(newSpeed);
 		if (newSpeed < 1) {
 			if (newSpeed == .5) {
 				speedText = "1/2";
@@ -540,7 +467,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				speedText = "1/7";
 			}
 		}
-		speedLabel.setText(Messages.getString("Speed__") + speedText + "x");
+		speedLabel.setText(Messages.getString("Speed__", speedText));
 		speedLabel.repaint();
 	}
 
@@ -567,8 +494,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// this looks much more complicated than it really is, although some of
 		// the code is quite tempermental
 		if (showStdOut) {
-			textScrollPane.setPreferredSize(new java.awt.Dimension(renderWidth,
-					stdOutHeight));
+			textScrollPane.setPreferredSize(new java.awt.Dimension(renderWidth,	stdOutHeight));
 			stdOutSplitPane.setBottomComponent(textScrollPane);
 			stdOutSplitPane.setDividerSize(dividerSize);
 		} else {
@@ -577,8 +503,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			stdOutSplitPane.setDividerSize(0);
 		}
 		if (authoringTool.getWatcherPanel().isThereSomethingToWatch()) {
-			watcherScrollPane.setPreferredSize(new java.awt.Dimension(
-					watcherWidth, renderHeight));
+			watcherScrollPane.setPreferredSize(new java.awt.Dimension(watcherWidth, renderHeight));
 			watcherSplitPane.setRightComponent(watcherScrollPane);
 			watcherSplitPane.setDividerSize(dividerSize);
 		} else {
@@ -596,11 +521,9 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	public java.awt.Component getRenderCanvas() {
-		java.awt.Component authoringToolRenderPanel = renderPanel
-				.getComponent(0);
+		java.awt.Component authoringToolRenderPanel = renderPanel.getComponent(0);
 		if (authoringToolRenderPanel instanceof java.awt.Container) {
-			return ((java.awt.Container) authoringToolRenderPanel)
-					.getComponent(0);
+			return ((java.awt.Container) authoringToolRenderPanel).getComponent(0);
 		}
 		return null;
 	}

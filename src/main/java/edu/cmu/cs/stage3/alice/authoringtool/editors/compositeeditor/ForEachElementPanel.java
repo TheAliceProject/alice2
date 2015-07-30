@@ -173,7 +173,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         if (numPrevious > 0){
             toAdd = "_#"+(numPrevious+1); 
         }
-        return (Messages.getString("item_from_")+inputList.name.getStringValue()+toAdd); 
+        return (Messages.getString("item_from_", inputList.name.getStringValue()+toAdd)); 
     }
 
 	public void setHeaderLabel(){
@@ -296,7 +296,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 	}
 	
 	protected void setAllNames(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentContainer, int currentLevel){
-		String baseName = Messages.getString("item_from_")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue(); 
+		String baseName = Messages.getString("item_from_", ((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue()); 
 		for (int i=0; i<currentContainer.size(); i++){
 			Object list = null;
 			edu.cmu.cs.stage3.alice.core.Element var = null;
@@ -325,7 +325,7 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		stopListening();
 		startListening();
 		if (isTopOccurrance(m_element.getParent(), m_list.get())){
-			m_each.getElementValue().name.set(Messages.getString("item_from_")+((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue()); 
+			m_each.getElementValue().name.set(Messages.getString("item_from_", ((edu.cmu.cs.stage3.alice.core.Element)m_list.get()).name.getStringValue())); 
 			setAllNames(m_components, 2);
 		}
 	}

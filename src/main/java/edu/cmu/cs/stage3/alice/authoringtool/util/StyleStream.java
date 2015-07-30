@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import java.io.UnsupportedEncodingException;
+
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -32,8 +34,8 @@ public class StyleStream extends java.io.PrintStream {
 	protected javax.swing.text.Style style;
 	protected StyledStreamTextPane styledStreamTextPane;
 
-	public StyleStream( StyledStreamTextPane styledStreamTextPane, javax.swing.text.Style style ) {
-		super( System.out );
+	public StyleStream( StyledStreamTextPane styledStreamTextPane, javax.swing.text.Style style ) throws UnsupportedEncodingException {
+		super( System.out, true, "UTF-8" );
 		this.styledStreamTextPane = styledStreamTextPane;
 		this.style = style;
 	}
@@ -48,9 +50,24 @@ public class StyleStream extends java.io.PrintStream {
 
 	public void write( byte buf[], int off, int len ) {
 		try {
-			styledStreamTextPane.document.insertString( styledStreamTextPane.endPosition.getOffset() - 1, new String( buf, off, len ), style );
+			styledStreamTextPane.document.insertString( styledStreamTextPane.endPosition.getOffset() - 1, new String( buf, off, len, detectEncoding(buf) ), style );
 		} catch( javax.swing.text.BadLocationException e ) {
 			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_while_printing_"), e ); 
-		}
+		} catch(Exception e){}
 	}
+	
+	public static String detectEncoding(byte[] bytes) {
+	    String DEFAULT_ENCODING = "UTF-8";
+	    org.mozilla.universalchardet.UniversalDetector detector =
+	        new org.mozilla.universalchardet.UniversalDetector(null);
+	    detector.handleData(bytes, 0, bytes.length);
+	    detector.dataEnd();
+	    String encoding = detector.getDetectedCharset();
+	    detector.reset();
+	    if (encoding == null) {
+	        encoding = DEFAULT_ENCODING;
+	    } 
+	    return encoding;
+	}
+	
 }

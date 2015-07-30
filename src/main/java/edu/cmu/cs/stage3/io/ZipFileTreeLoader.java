@@ -72,7 +72,11 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		java.util.Enumeration enum0 = m_zipFile.entries();
 		while( enum0.hasMoreElements() ) {
 			java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)enum0.nextElement();
-			String path = new String (getCanonicalPathname( zipEntry.getName() ));//.getBytes("UTF-8"));	//AikMin new
+			String encoding = new String (zipEntry.getName().getBytes("UTF-8"), "ISO-8859-1" );
+			String encoding1 = new String (zipEntry.getName().getBytes(), "UTF-8" );
+			String encoding2 = new String (zipEntry.getName().getBytes("UTF-8"), "UTF-8" );
+			String name = new String (zipEntry.getName().getBytes("UTF-8"), "ISO-8859-1" );
+			String path = new String (getCanonicalPathname(name));	//AikMin new
 			m_pathnameToZipEntryMap.put( path , zipEntry );
 		}
 	}
@@ -105,6 +109,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		}
 		try {
 			String utf8 = new String (pathname.getBytes("UTF-8"), "UTF-8");		// AikMin new
+			//String utf8 = new String (pathname.getBytes(), "ISO-8859-1");		// AikMin - encoding
 			m_currentDirectory = utf8;
 		} catch (Exception e){}
 	}
@@ -113,17 +118,36 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 		return m_currentDirectory;
 	}
 
+	public static String detectEncoding(byte[] bytes) {
+	    String DEFAULT_ENCODING = "UTF-8";
+	    org.mozilla.universalchardet.UniversalDetector detector =
+	        new org.mozilla.universalchardet.UniversalDetector(null);
+	    detector.handleData(bytes, 0, bytes.length);
+	    detector.dataEnd();
+	    String encoding = detector.getDetectedCharset();
+	    detector.reset();
+	    if (encoding == null) {
+	        encoding = DEFAULT_ENCODING;
+	    } 
+	    return encoding;
+	}
+	
 	public java.io.InputStream readFile( String filename ) throws IllegalArgumentException, java.io.IOException {
 		closeCurrentFile();
 		String pathname = getCanonicalPathname( m_currentDirectory + filename );
-		String utf8 = new String (pathname.getBytes("UTF-8"), "UTF-8");	// AikMin new
-		java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( utf8 );
+		java.util.zip.ZipEntry zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( pathname );
+		String enc = detectEncoding( pathname.getBytes() );
+		
 		if  (zipEntry == null ) {
-			utf8 = new String (pathname.getBytes("ASCII"), "UTF-8");	// AikMin new
-			zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( utf8 );
+			String utf8 = new String (pathname.getBytes("UTF-8"), "ISO-8859-1");	// Aik Min - encoding
+			zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( utf8 );	// Aik Min - encoding
+		}
+		if  (zipEntry == null ) {
+			String utf8 = new String (pathname.getBytes("UTF-8"), "UTF-8");	// Aik Min - encoding
+			zipEntry = (java.util.zip.ZipEntry)m_pathnameToZipEntryMap.get( utf8 );	// Aik Min - encoding
 		}
 		if( zipEntry != null ) {
-			m_currentlyOpenStream = m_zipFile.getInputStream( zipEntry );
+			m_currentlyOpenStream = m_zipFile.getInputStream( zipEntry );	
 			return m_currentlyOpenStream;
 		} else {		
 			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__") + pathname ); 

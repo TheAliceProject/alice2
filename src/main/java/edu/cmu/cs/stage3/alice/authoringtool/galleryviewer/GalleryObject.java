@@ -319,7 +319,7 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
         sizeLabel.setForeground(sizeColor);
         imageLabel.setIcon(GalleryViewer.loadingImageIcon);
         sizeLabel.setText(String.valueOf(data.size)+" kb");
-        locationLabel.setText(Messages.getString("_on_")+location);
+        locationLabel.setText(" "+Messages.getString("on", location));
         if (data.size > 0 && data.type == GalleryViewer.WEB){
             sizeLabel.setText((String.valueOf(data.size)+"kb"));
             sizeLabel.setForeground(sizeColor);

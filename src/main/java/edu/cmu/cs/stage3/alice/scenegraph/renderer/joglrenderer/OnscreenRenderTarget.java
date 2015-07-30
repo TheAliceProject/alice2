@@ -23,8 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLCanvas;
+
 public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget {
-    private javax.media.opengl.GLCanvas m_glCanvas;
+    private GLCanvas m_glCanvas;
     //private javax.media.opengl.GLPbuffer m_glPBuffer;
     private RenderContext m_renderContext;
     private PickContext m_pickContext;
@@ -49,14 +53,15 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 
 	public java.awt.Component getAWTComponent() {
 	    if( m_glCanvas == null ) {
-			javax.media.opengl.GLCapabilities glCaps = new javax.media.opengl.GLCapabilities();
+	    	GLProfile profile = GLProfile.getDefault();
+			GLCapabilities glCaps = new GLCapabilities( profile );
 			/*glCaps.setHardwareAccelerated( true );
 	        glCaps.setRedBits( 8 );
 	        glCaps.setBlueBits( 8 );
 	        glCaps.setGreenBits( 8 );
 	        glCaps.setAlphaBits( 8 );*/
 	        //m_glCanvas = javax.media.opengl.GLDrawableFactory.getFactory().createGLCanvas( glCaps );
-	        m_glCanvas = new javax.media.opengl.GLCanvas( glCaps );
+	        m_glCanvas = new GLCanvas( glCaps );
 	       	m_renderContext = new RenderContext( this );
 	        m_glCanvas.addGLEventListener( m_renderContext );   
             m_pickContext = new PickContext( this );

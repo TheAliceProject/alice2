@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import java.awt.image.BufferedImage;
+
 
 /**
  * @author Jason Pratt
@@ -318,7 +320,8 @@ public class DnDGroupingPanel extends GroupingPanel {
 				DnDManager.fireDragGestureRecognized( dge );
 				try {
 					if( dragEnabled ) {
-						dge.startDrag( java.awt.dnd.DragSource.DefaultCopyDrop, DnDGroupingPanel.this.transferable, DnDManager.getInternalListener() );
+						BufferedImage empty = new BufferedImage (1, 1, BufferedImage.TYPE_INT_RGB);
+						dge.startDrag( java.awt.dnd.DragSource.DefaultCopyDrop, empty, new java.awt.Point(), DnDGroupingPanel.this.transferable, DnDManager.getInternalListener() );
 						DnDManager.fireDragStarted( DnDGroupingPanel.this.transferable, DnDGroupingPanel.this );
 	
 						if( authoringToolConfig.getValue( "gui.pickUpTiles" ).equalsIgnoreCase( "true" ) && edu.cmu.cs.stage3.awt.AWTUtilities.mouseListenersAreSupported() && edu.cmu.cs.stage3.awt.AWTUtilities.mouseMotionListenersAreSupported() ) {

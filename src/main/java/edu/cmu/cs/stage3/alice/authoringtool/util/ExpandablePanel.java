@@ -23,6 +23,10 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import java.awt.ComponentOrientation;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author Jason Pratt
  */
@@ -49,7 +53,7 @@ public class ExpandablePanel extends javax.swing.JPanel {
 		setOpaque( false );
 		
 		topPanel.setLayout( new java.awt.BorderLayout() );
-		topPanel.add( expandButton, java.awt.BorderLayout.WEST );
+		topPanel.add( expandButton, java.awt.BorderLayout.LINE_START );
 		topPanel.add( titleLabel, java.awt.BorderLayout.CENTER );
 		titleLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 10, 0, 0 ) );
 		topPanel.setOpaque( false );
@@ -72,6 +76,13 @@ public class ExpandablePanel extends javax.swing.JPanel {
 		expandButton.addChangeListener( expandButtonListener );
 		expandButton.setBorderPainted(false);
 		titleLabel.setOpaque( false );
+		
+		if (!AikMin.isLTR()) {
+			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);	
+			titleLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 0, 0, 10 ) );
+			mainPanel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 0, 0, 20 ) );
+			expandButton.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 0, 0, 3 ) ); 
+		}
 	}
 
 	public void setTitle( String title ) {

@@ -231,11 +231,7 @@ public final class Configuration {
 
 		public String toString() {
 			StringBuffer s = new StringBuffer();
-			s.append( Messages.getString("_nname__") + name + "\n" );  
-			s.append( Messages.getString("visibility__") + visibility + "\n" );  
-			s.append( Messages.getString("value__") + value + "\n" );  
-			s.append( Messages.getString("valueList__") + valueList + "\n" );  
-			s.append( Messages.getString("subKeys__") + subKeys + "\n" );  
+			s.append( Messages.getString("_nname__visibility__value__valueList__subKeys__", name, visibility, value, valueList, subKeys) );
 			return s.toString();
 		}
 	}

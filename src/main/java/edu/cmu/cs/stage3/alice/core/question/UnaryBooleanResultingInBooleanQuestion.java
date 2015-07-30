@@ -33,7 +33,7 @@ public abstract class UnaryBooleanResultingInBooleanQuestion extends BooleanQues
 	public Object getValue() {
 		boolean aValue = getValue( a.booleanValue() );
 		if (this instanceof edu.cmu.cs.stage3.alice.core.question.Not){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("not_")+!aValue+ Messages.getString("_is_");		  
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("not_") + !aValue + " " + Messages.getString("is_");		  
 		}
 		if( aValue ) {
 			return Boolean.TRUE;

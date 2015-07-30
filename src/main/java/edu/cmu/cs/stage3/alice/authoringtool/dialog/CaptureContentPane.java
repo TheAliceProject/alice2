@@ -366,7 +366,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		this.stdOutOutputComponent.getTextPane().getDocument()
 				.removeDocumentListener(textListener);
 		stdOutOutputComponent.stdOutStream.println(Messages
-				.getString("Stopping_World"));
+				.getString("Stopping_World")+"\n");
 		stdOutOutputComponent.stdOutStream.flush();
 
 	}
@@ -512,7 +512,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
 						2), 0, 0));
 
-		exportBar.add(new JLabel(Messages.getString("___File_name__")),
+		exportBar.add(new JLabel("   " + Messages.getString("File_name_") + " "),
 				new java.awt.GridBagConstraints(1, 0, 1, 2, 0.0, 0.0,
 						java.awt.GridBagConstraints.WEST,
 						java.awt.GridBagConstraints.NONE, new java.awt.Insets(
@@ -544,11 +544,11 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		speedSlider = new javax.swing.JSlider(0, 9, 0);
 
-		speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
+		/*speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
 			public void paintTrack(java.awt.Graphics g) {
 				super.paintTrack(g);
 			}
-		});
+		});*/
 		speedSlider.setPreferredSize(new java.awt.Dimension(100, 16));
 		speedSlider.setMinimumSize(new java.awt.Dimension(40, 16));
 		speedSlider.setMaximumSize(new java.awt.Dimension(100, 16));
@@ -756,7 +756,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				speedText = "1/7";
 			}
 		}
-		speedLabel.setText(Messages.getString("Speed__") + speedText + "x");
+		speedLabel.setText(Messages.getString("Speed__", speedText));
 		speedLabel.repaint();
 	}
 

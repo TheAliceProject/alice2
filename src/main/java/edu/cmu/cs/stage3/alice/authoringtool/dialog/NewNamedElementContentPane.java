@@ -28,12 +28,9 @@ import edu.cmu.cs.stage3.lang.Messages;
 /**
  * @author Jason Pratt, Dennis Cosgrove
  */
-public abstract class NewNamedElementContentPane extends
-		edu.cmu.cs.stage3.swing.ContentPane {
-	private javax.swing.JButton m_okButton = new javax.swing.JButton(
-			Messages.getString("OK"));
-	private javax.swing.JButton m_cancelButton = new javax.swing.JButton(
-			Messages.getString("Cancel"));
+public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
+	private javax.swing.JButton m_okButton = new javax.swing.JButton(Messages.getString("OK"));
+	private javax.swing.JButton m_cancelButton = new javax.swing.JButton(Messages.getString("Cancel"));
 	private java.util.HashMap validityHashmap = new java.util.HashMap();
 	private edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback validityChecker = new edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback() {
 		public void setValidity(Object source, boolean value) {
@@ -47,8 +44,7 @@ public abstract class NewNamedElementContentPane extends
 		}
 	};
 
-	private edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField m_nameTextField = new edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField(
-			validityChecker);
+	private edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField m_nameTextField = new edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField(validityChecker);
 
 	public NewNamedElementContentPane() {
 		m_nameTextField.setMinimumSize(new java.awt.Dimension(150, 26));
@@ -61,7 +57,7 @@ public abstract class NewNamedElementContentPane extends
 	}
 
 	protected void initTopComponents(java.awt.GridBagConstraints gbc) {
-		gbc.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		gbc.anchor = java.awt.GridBagConstraints.NORTH;
 		gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.insets.top = 8;

@@ -69,7 +69,7 @@ public abstract class AbstractPointAtAnimation extends OrientationAnimation {
                 throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_value_must_not_be_equal_to_the_subject_value_"), getCurrentStack(), AbstractPointAtAnimation.this.target );             
             }
             if ( (m_onlyAffectYaw) && (m_subject.isAncestorOf(m_target))) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + Messages.getString("_can_t_turn_to_face_or_turn_away_from_a_part_of_itself_"), getCurrentStack(), AbstractPointAtAnimation.this.target );             
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("can_t_turn_to_face_or_turn_away_from_a_part_of_itself_"), getCurrentStack(), AbstractPointAtAnimation.this.target );             
             }
 		}
 		protected edu.cmu.cs.stage3.math.Matrix33 getTargetMatrix33() {

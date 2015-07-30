@@ -23,7 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
@@ -52,7 +54,6 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 		if (edu.cmu.cs.stage3.swing.DialogManager.showDialog(dcp) == edu.cmu.cs.stage3.swing.ContentPane.OK_OPTION) {
 			deleteRunnable.run();
 		}
-
 		// todo?
 		// if( javax.swing.SwingUtilities.isEventDispatchThread() ) {
 		// final DeleteDialog finalDd = dd;
@@ -133,8 +134,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 					.getChildrenListeners();
 			for (int j = 0; j < childrenListeners.length; j++) {
 				if (childrenListeners[j] == this) {
-					System.out.println(Messages.getString("child_listener__")
-							+ elements[i]);
+					System.out.println("child listener: " + elements[i]);
 				}
 			}
 			edu.cmu.cs.stage3.alice.core.Property[] properties = elements[i]
@@ -144,9 +144,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 						.getPropertyListeners();
 				for (int k = 0; k < propertyListeners.length; k++) {
 					if (propertyListeners[k] == this) {
-						System.out.println(Messages
-								.getString("property_listener__")
-								+ properties[j]);
+						System.out.println("property listener: " + properties[j]);
 					}
 				}
 			}
@@ -354,22 +352,16 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 				removeReferenceButton.setEnabled(true);
 				removeAllReferenceButton.setEnabled(true);
 				messageArea
-						.setText(elementRepr
-								+ Messages
-										.getString("_cannot_be_deleted_because_other_parts_of_the_World_contain_references_to_it__You_will_need_to_remove_these_references_in_order_to_delete_")
-								+ elementRepr
+						.setText( Messages.getString("cannot_be_deleted_because_other_parts_of_the_World_contain_references_to_it__You_will_need_to_remove_these_references_in_order_to_delete_", elementRepr )
 								+ ".\n\n"
-								+ Messages
-										.getString("Select_each_reference_below__and_either_remove_the_reference_manually__or_click_the_Remove_Reference_button_to_have_the_reference_removed_by_the_system_"));
+								+ Messages.getString("Select_each_reference_below__and_either_remove_the_reference_manually__or_click_the_Remove_Reference_button_to_have_the_reference_removed_by_the_system_"));
 				referencesList.setSelectedIndex(0);
 			} else {
 				okayButton.setEnabled(true);
 				removeReferenceButton.setEnabled(false);
 				removeAllReferenceButton.setEnabled(false);
 				messageArea
-						.setText(Messages
-								.getString("All_references_have_now_been_deleted___Click_Okay_to_delete_")
-								+ elementRepr + ".");
+						.setText(Messages.getString("All_references_have_now_been_deleted___Click_Okay_to_delete_",  elementRepr ));
 				setDialogTitle(Messages.getString("Alice___Can_Delete"));
 			}
 		}
@@ -574,18 +566,12 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 			String ourName = reference.getReference().name.getStringValue();
 
 			if (source == world) {
-				highlightID = Messages.getString("The_World_s_")
-						+ reference.getProperty().getName()
-						+ Messages.getString("") + ourName;
+				highlightID = Messages.getString("The_World_s_is_set_to_", reference.getProperty().getName(), ourName);				
 			}
 
 			if (highlightID == null) {
 				if (source instanceof edu.cmu.cs.stage3.alice.core.Model) {
-					highlightID = Messages.getString("The_")
-							+ source.name.getStringValue()
-							+ Messages.getString("_s_")
-							+ reference.getProperty().getName()
-							+ Messages.getString("_is_set_to_") + ourName;
+					highlightID = Messages.getString("The_is_set_to_", source.name.getStringValue(), reference.getProperty().getName(), ourName );
 				}
 			}
 
@@ -594,18 +580,9 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 					edu.cmu.cs.stage3.alice.core.Element sourceParent = source
 							.getParent();
 					if (sourceParent == world) {
-						highlightID = Messages
-								.getString("The_World_s_variable__")
-								+ reference.getProperty().getOwner().name
-										.getStringValue()
-								+ Messages.getString("_is_set_to_") + ourName;
+						highlightID = Messages.getString("The_World_s_variable__is_set_to_", reference.getProperty().getOwner().name.getStringValue(), ourName);
 					} else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.Model) {
-						highlightID = Messages.getString("The_")
-								+ sourceParent.name.getStringValue()
-								+ Messages.getString("_s_variable__")
-								+ reference.getProperty().getOwner().name
-										.getStringValue()
-								+ Messages.getString("_is_set_to_") + ourName;
+						highlightID = Messages.getString("The__s_variable__is_set_to_", sourceParent.name.getStringValue(), reference.getProperty().getOwner().name.getStringValue(), ourName);
 					} else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse
 							|| sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
 						edu.cmu.cs.stage3.alice.core.Element[] userDefinedResponses = world
@@ -615,14 +592,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 							if (userDefinedResponses[i] == sourceParent
 									|| userDefinedResponses[i]
 											.isAncestorOf(sourceParent)) {
-								highlightID = Messages
-										.getString("The_method__")
-										+ userDefinedResponses[i].getKey()
-										+ Messages.getString("_contains_")
-										+ source.getRepr()
-										+ Messages
-												.getString("_which_is_set_to_")
-										+ ourName;
+								highlightID = Messages.getString("The_method__contains_which_is_set_to_", userDefinedResponses[i].getKey(), source.getRepr(), ourName);
 								break;
 							}
 						}
@@ -632,12 +602,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 							for (int i = 0; i < behaviors.length; i++) {
 								// System.out.println(behaviors[i]);
 								if (behaviors[i].isAncestorOf(sourceParent)) {
-									highlightID = Messages
-											.getString("The_behavior_")
-											+ source.getRepr()
-											+ Messages
-													.getString("__property__")
-											+ reference.getProperty().getName();
+									highlightID = Messages.getString("The_behavior___property__", source.getRepr(), reference.getProperty().getName());
 									break;
 								}
 							}
@@ -654,17 +619,16 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 						edu.cmu.cs.stage3.alice.core.Element variableParent = sourceParent
 								.getParent();
 						if (variableParent == world) {
-							highlightID = Messages
-									.getString("The_World_s_variable__")
-									+ sourceParent.name.getStringValue()
-									+ Messages.getString("_element_number_")
-									+ ((edu.cmu.cs.stage3.alice.core.Collection) source)
-											.getIndexOfChild(reference
-													.getReference())
-									+ Messages.getString("_is_set_to_")
-									+ ourName;
+							highlightID = Messages.getString("The_World_s_variable__element_number_is_set_to_", 
+									sourceParent.name.getStringValue(), 
+									((edu.cmu.cs.stage3.alice.core.Collection) source).getIndexOfChild(reference.getReference()), 
+									ourName);
 						} else if (variableParent instanceof edu.cmu.cs.stage3.alice.core.Model) {
-							highlightID = Messages.getString("The_") + variableParent.name.getStringValue() + Messages.getString("_s_variable__") + sourceParent.name.getStringValue() + Messages.getString("_element_number_") + ((edu.cmu.cs.stage3.alice.core.Collection) source).getIndexOfChild(reference.getReference()) + Messages.getString("_is_set_to_") + ourName; //$NON-NLS-4$
+							highlightID = Messages.getString("The__s_variable__element_number_is_set_to_", 
+									variableParent.name.getStringValue(),
+									sourceParent.name.getStringValue(), 
+									((edu.cmu.cs.stage3.alice.core.Collection) source).getIndexOfChild(reference.getReference()), 
+									ourName);
 						}
 					}
 
@@ -672,6 +636,8 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 			}
 
 			if (highlightID == null) {
+				String temp1 = "";
+				String temp2 = "";
 				edu.cmu.cs.stage3.util.Criterion userDefinedResponsesCriterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
 						edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class);
 				edu.cmu.cs.stage3.util.Criterion userDefinedQuestionsCriterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
@@ -687,9 +653,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 				for (int i = 0; i < userDefinedResponsesAndQuestions.length; i++) {
 					if (userDefinedResponsesAndQuestions[i]
 							.isAncestorOf(source)) {
-						highlightID = Messages.getString("The_method__")
-								+ userDefinedResponsesAndQuestions[i].getKey()
-								+ "\"";
+						temp1 = Messages.getString("The_method__", userDefinedResponsesAndQuestions[i].getKey());
 						break;
 					}
 				}
@@ -698,7 +662,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 							.getDescendants(edu.cmu.cs.stage3.alice.core.Behavior.class);
 					for (int i = 0; i < behaviors.length; i++) {
 						if (behaviors[i].isAncestorOf(source)) {
-							highlightID = Messages.getString("The_behavior");
+							temp1 = Messages.getString("The_behavior");
 							break;
 						}
 					}
@@ -713,25 +677,26 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 					boolean setIt = false;
 					for (int p = 0; p < properties.length; p++) {
 						if (properties[p].get() == source) {
-							highlightID += Messages
-									.getString("_has_a_line_of_code_")
-									+ edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources
-											.getReprForValue(source.getClass())
-									+ Messages.getString("_who_s_")
-									+ properties[p].getName()
-									+ Messages.getString("_is_set_to_")
-									+ ourName;
+							temp2 = Messages.getString("has_a_line_of_code_who_s_is_set_to_", temp1, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(source.getClass()), properties[p].getName(), ourName);
 							setIt = true;
 						}
 					}
+					
 					if (!setIt) {
-						highlightID += ":elementTile<" + source.getKey(world)
-								+ ">";
+						if (AikMin.isLTR()){
+							highlightID = temp1 + ":elementTile<" + source.getKey(world) + ">";
+						} else {
+							highlightID = "[elementTile<" + source.getKey(world) + ">]" + temp1;
+						}
 					}
 				} else {
-					highlightID += ":elementTile<" + source.getKey(world)
-							+ ">:property<" + reference.getProperty().getName()
-							+ ">";
+					if (AikMin.isLTR()){
+						highlightID = temp1 + ":elementTile<" + source.getKey(world)
+							+ ">:property<" + reference.getProperty().getName() + ">";
+					} else {
+						highlightID = "[elementTile<" + source.getKey(world)
+								+ ">:property<" + reference.getProperty().getName() + ">]" + temp1;
+					}
 				}
 				// System.out.println("made it: "+highlightID);
 

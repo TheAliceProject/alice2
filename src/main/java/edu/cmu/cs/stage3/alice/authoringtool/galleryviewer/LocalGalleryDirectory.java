@@ -32,7 +32,7 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
     protected static java.awt.Color localDirColor = new java.awt.Color(189,184,139);
 
 	protected String getToolTipString(){
-        return "<html><body><p>"+Messages.getString("Group_of_Objects")+"</p><p>"+Messages.getString("Click_to_open_this_group_")+"</p></body></html>"; 
+        return "<html><body>" + Messages.getString("Group_of_Objects") + "</body></html>"; 
     }
 
 	public void set(GalleryViewer.ObjectXmlData dataIn) throws java.lang.IllegalArgumentException{

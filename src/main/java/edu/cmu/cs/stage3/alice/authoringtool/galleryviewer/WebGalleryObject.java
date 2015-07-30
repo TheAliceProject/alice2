@@ -35,7 +35,7 @@ public class WebGalleryObject extends GalleryObject {
     protected boolean needToWriteThumbnail = false;
 
 	protected String getToolTipString(){
-        return "<html><body><p>"+Messages.getString("Object")+"</p><p>"+Messages.getString("Click_to_add_this_object_to_the_world")+"</p></body></html>"; 
+        return "<html><body>" + Messages.getString("ObjectClick_to_add_this_object_to_the_world") + "</body></html>"; 
     }
 
 	protected void guiInit(){

@@ -169,7 +169,7 @@ public abstract class Property {
 					if( field.get( m_owner ) == this ) {
 						return cls;
 					} else {
-						throw new RuntimeException( m_owner + Messages.getString("_has_field_named_") +  m_name + Messages.getString("_that_is_not_") + this );  
+						throw new RuntimeException( m_owner + " " + Messages.getString("has_field_named_") +  m_name + " " + Messages.getString("that_is_not_") + this );  
 					}
 				} catch( NoSuchFieldException nsfe ) {
 					cls = cls.getSuperclass();
@@ -274,7 +274,7 @@ public abstract class Property {
 				if( valueClass.isAssignableFrom( value.getClass() ) ) {
 					//pass
 				} else {
-					throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_") + getName() + Messages.getString("_on_") + getOwner() + ".  " + valueClass + Messages.getString("_is_not_assignable_from_") + value.getClass() );    //$NON-NLS-4$
+					throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_") + getName() + " " + Messages.getString("on_") + getOwner() + ".  " + valueClass + " " + Messages.getString("is_not_assignable_from_") + value.getClass() );    //$NON-NLS-4$
 				}
 			}
 		} else {

@@ -141,18 +141,18 @@ public class FileChooser
    // if the directory is null ask the user for it
    if (directory == null)
    {
-     SimpleOutput.showError(Messages.getString("The_media_path__directory_") + 
-       Messages.getString("_has_not_been_set_yet__") + 
+     SimpleOutput.showError(Messages.getString("The_media_path__directory_") + " " + 
+       Messages.getString("has_not_been_set_yet__") + 
        Messages.getString("Please_pick_the_directory_") + 
-       Messages.getString("that_contains_your_media_") + 
-       Messages.getString("_usually_called_mediasources__") + 
+       Messages.getString("that_contains_your_media_") + " " + 
+       Messages.getString("usually_called_mediasources__") + 
        Messages.getString("with_the_following_FileChooser___") + 
        Messages.getString("The_directory_name_will_be_stored_") + 
        Messages.getString("in_a_file_and_remain_unchanged_unless_you_use_") + 
        Messages.getString("FileChooser_pickMediaPath___or_") + 
-       Messages.getString("FileChooser_setMediaPath__full_path_name___") + 
-       Messages.getString("_ex__FileChooser_setMediaPath__c__intro_prog_java_mediasources_____") + 
-       Messages.getString("_to_change_it_")); 
+       Messages.getString("FileChooser_setMediaPath__full_path_name___") + " " + 
+       Messages.getString("ex__FileChooser_setMediaPath__c__intro_prog_java_mediasources_____") + " " + 
+       Messages.getString("to_change_it_")); 
      pickMediaPath();
      directory = getMediaDirectory();
    }
@@ -210,8 +210,8 @@ public class FileChooser
    File file = new File(directory);
    if (!file.exists())
    {
-     System.out.println(Messages.getString("Sorry_but_") + directory +  
-                 Messages.getString("_doesn_t_exist__try_a_different_directory_")); 
+     System.out.println(Messages.getString("Sorry_but_") + directory + " " + 
+                 Messages.getString("doesn_t_exist__try_a_different_directory_")); 
      FileChooser.pickMediaPath();
    }
    

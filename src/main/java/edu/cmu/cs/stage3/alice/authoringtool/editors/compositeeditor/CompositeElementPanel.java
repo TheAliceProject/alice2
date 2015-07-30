@@ -60,8 +60,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
     protected java.awt.event.MouseListener elementMouseListener = new java.awt.event.MouseAdapter() {
         
 		public void mouseReleased( java.awt.event.MouseEvent ev ) {		// Aik Min
-            if( ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3 ||
-            		((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown() ){   
+            if( ev.isPopupTrigger() || ev.getButton() == java.awt.event.MouseEvent.BUTTON3 || ((System.getProperty("os.name") != null) && !System.getProperty("os.name").startsWith("Windows")) && ev.isControlDown() ){   
                 if (CompositeElementPanel.this.getParent() != null){
                     java.util.Vector structure = edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.getDefaultStructure( CompositeElementPanel.this.m_element );
                     if ( !(ForEachElementPanel.class.isAssignableFrom(CompositeElementPanel.this.getClass())) && !(LoopNElementPanel.class.isAssignableFrom(CompositeElementPanel.this.getClass())) ){
@@ -83,9 +82,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
         }
     };
 
-
     protected static String IS_EXPANDED_KEY = "edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor IS_EXPANDED_KEY"; 
-
 
     public CompositeElementPanel(){
         headerText = Messages.getString("Element_Response"); 
@@ -633,7 +630,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 			} else{
 				styleString = " style=\"border-right: 1 solid "+borderColorString+"; border-bottom: 1 solid "+borderColorString+"\"";   
 			}
-			toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("_i__Do_Nothing___i_")+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
+			toWriteTo.append("<td width=\"100%\" colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+"<i> "+Messages.getString("Do_Nothing")+"</i>"+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
 		}
 		if (this instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel){
 			edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel mainQuestion = (edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.MainCompositeQuestionPanel)this;
@@ -693,7 +690,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 				} else{
 					styleString = " style=\"border-right: 1 solid "+borderColorString+"\"";  
 				}
-				toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+Messages.getString("_i__Do_Nothing___i_")+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
+				toWriteTo.append("<td colspan=\""+(colSpan-1)+"\""+colorString+styleString+">"+strikeStart+"<i> "+Messages.getString("Do_Nothing")+"</i>"+strikeEnd+"</td>\n</tr>\n");    //$NON-NLS-4$ //$NON-NLS-5$
 			}
 		}
 		if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){

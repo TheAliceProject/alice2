@@ -52,7 +52,7 @@ public class ScriptDefinedResponse extends Response {
 					//warnln( "no actual response prologue" );
 				}
 			} else {
-				throw new RuntimeException( script.getStringValue() + Messages.getString("_does_not_evaluate_to_a_response_") ); 
+				throw new RuntimeException( script.getStringValue() + " " + Messages.getString("does_not_evaluate_to_a_response_") ); 
 			}
 		}
 		

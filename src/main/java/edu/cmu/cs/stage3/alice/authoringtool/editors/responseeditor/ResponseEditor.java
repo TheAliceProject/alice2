@@ -266,9 +266,8 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         if( authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
             prototypeContainer.add(scriptPrototype);
             prototypeContainer.add(scriptDefinedPrototype);
-
-
         }
+        
         prototypeContainer.add(printPrototype);
         prototypeContainer.add(commentPrototype);
 

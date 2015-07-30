@@ -71,10 +71,10 @@ public String toString()
     
     // if there is a file name then add that to the output
     if (fileName != null)
-      output = output + Messages.getString("_file__") + fileName; 
+      output = output + " " + Messages.getString("file__") + fileName; 
     
     // add the length in frames
-    output = output + Messages.getString("_number_of_samples__") + getLengthInFrames(); 
+    output = output + " " + Messages.getString("number_of_samples__") + getLengthInFrames(); 
     
     return output;
   }

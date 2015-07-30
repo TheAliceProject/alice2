@@ -23,8 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
-import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Color;
 import javax.swing.ScrollPaneConstants;
+import edu.cmu.cs.stage3.lang.Messages;
 
 
 /**
@@ -539,6 +540,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         // this.setDropTarget(new java.awt.dnd.DropTarget( this, this));
         scrollPane = new javax.swing.JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBorder(null);
+        scrollPane.getViewport().setBackground(Color.white);
         this.add(scrollPane , java.awt.BorderLayout.CENTER);
 
         m_containingPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel(){
@@ -550,27 +552,20 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
 			public void dragExit( java.awt.dnd.DropTargetEvent dte ) {
                 BehaviorGroupsEditor.this.dragExit(dte);
             }
-
             
 			public void dragOver( java.awt.dnd.DropTargetDragEvent dtde ) {
                 BehaviorGroupsEditor.this.dragOver(dtde);
             }
-
             
 			public void drop( java.awt.dnd.DropTargetDropEvent dtde ) {
                 BehaviorGroupsEditor.this.drop(dtde);
             }
-
             
 			public void dropActionChanged( java.awt.dnd.DropTargetDragEvent dtde ) {
                 BehaviorGroupsEditor.this.dropActionChanged(dtde);
             }
         };
-        String toolTipText = "<html><body>"+ 
-                             Messages.getString("_p_Events__p_")+ 
-                             Messages.getString("_p_Events_run_Methods_when_certain_things_happen__p_")+ 
-                             Messages.getString("_p__like_when_the_mouse_is_clicked_on_an_Object_or__p_")+ 
-                             Messages.getString("_p_when_a_certain_key_is_pressed___p_") + "</body></html>"; 
+        String toolTipText = "<html><body>" + Messages.getString("_p_Events_run_Methods_when_certain_things_happen__p_") + "</body></html>"; 
         containingPanelLayout = new java.awt.GridBagLayout();
         m_containingPanel.setLayout(containingPanelLayout);
         m_containingPanel.setBorder(null);
@@ -586,7 +581,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         newBehaviorButton.setDropTarget(new java.awt.dnd.DropTarget( newBehaviorButton, this));
 
         m_header = new javax.swing.JPanel();
-        m_header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,2,2));
+        m_header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING,2,2));
         m_header.setBackground(BACKGROUND_COLOR);
         m_header.setBorder(javax.swing.BorderFactory.createMatteBorder(0,0,1,0,java.awt.Color.gray));
         m_header.setToolTipText(toolTipText);
@@ -614,7 +609,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             int count = 0;
             worldEditor = new BehaviorGroupEditor();
             worldEditor.set(world, authoringTool);
-            worldEditor.setEmptyString(Messages.getString("_No_events")); 
+            worldEditor.setEmptyString(" " + Messages.getString("No_events")); 
             m_containingPanel.add(worldEditor, new java.awt.GridBagConstraints(0,count,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,2), 0,0));
             BehaviorGroupEditor editor = null;
             for (int i=0; i<world.sandboxes.size(); i++){
@@ -822,7 +817,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             else if (type == OBJECT) {
                 dtde.acceptDrop(java.awt.dnd.DnDConstants.ACTION_MOVE);
                 edu.cmu.cs.stage3.alice.core.Transformable droppedElement = (edu.cmu.cs.stage3.alice.core.Transformable)dtde.getTransferable().getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.transformableReferenceFlavor );
-                setRunnables(droppedElement, Messages.getString("New_")+droppedElement.name.get()+Messages.getString("_event"));  
+                setRunnables(droppedElement, Messages.getString("New_event", droppedElement.name.get()));  
                 behaviorMenu.show( dtde.getDropTargetContext().getComponent(), (int)dtde.getLocation().getX(), (int)dtde.getLocation().getY() );
                 edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( behaviorMenu );
             }
@@ -869,26 +864,21 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
     public void stateChanging( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldLoading( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldUnLoading( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
-    public void worldStarting( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-    }
+    public void worldStarting( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldStopping( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldPausing( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
-    public void worldSaving( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-    }
+    public void worldSaving( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
 
-    public void stateChanged( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-    }
+    public void stateChanged( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldLoaded( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-        refreshGUI();
+    	refreshGUI();
     }
-    public void worldUnLoaded( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-    }
-    public void worldStarted( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-    }
+    public void worldUnLoaded( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
+    public void worldStarted( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldStopped( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldPaused( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {}
     public void worldSaved( edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent ev ) {
-        refreshGUI();
+    	refreshGUI();
     }
 
 

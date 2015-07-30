@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.core.bubble;
 
-
 class SubText {
 	public SubText( String text, java.awt.geom.Rectangle2D bound, int yOffset ) {
 		m_text = text;

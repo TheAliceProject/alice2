@@ -23,13 +23,15 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
+import com.jogamp.opengl.GL2;
+
 class ExponentialFogProxy extends FogProxy {
     private float m_density;
     
 	public void setup( RenderContext context ) {
         super.setup( context );
-        context.gl.glFogi( javax.media.opengl.GL.GL_FOG_MODE, javax.media.opengl.GL.GL_EXP );
-        context.gl.glFogf( javax.media.opengl.GL.GL_FOG_DENSITY, m_density );
+        context.gl.glFogi( GL2.GL_FOG_MODE, GL2.GL_EXP );
+        context.gl.glFogf( GL2.GL_FOG_DENSITY, m_density );
     }
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {

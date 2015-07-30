@@ -34,7 +34,7 @@ import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
  * @author Jason Pratt
  */
 public class AlicePopupMenu extends JPopupMenu {
-	protected int millisecondDelay = 200;
+	protected int millisecondDelay = 300;
 
 	protected javax.swing.Timer setPopupVisibleTrueTimer;
 	protected javax.swing.Timer setPopupVisibleFalseTimer;

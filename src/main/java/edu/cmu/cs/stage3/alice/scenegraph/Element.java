@@ -86,7 +86,7 @@ public abstract class Element {
 		enum0 = m_propertyListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			PropertyListener propertyListener = (PropertyListener)enum0.nextElement();
-			warnln( Messages.getString("WARNING__released_element_") + this + Messages.getString("_still_has_propertyListener_") + propertyListener + "." );   
+			warnln( Messages.getString("WARNING__released_element_") + this + " " + Messages.getString("still_has_propertyListener_") + propertyListener + "." );   
 		}
 		m_propertyListeners = null;
 		m_propertyListenerArray = null;
@@ -94,7 +94,7 @@ public abstract class Element {
 		enum0 = m_releaseListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			ReleaseListener releaseListener = (ReleaseListener)enum0.nextElement();
-			warnln( Messages.getString("WARNING__released_element_") + this + Messages.getString("_still_has_releaseListener_") + releaseListener + "." );   
+			warnln( Messages.getString("WARNING__released_element_") + this + " " + Messages.getString("still_has_releaseListener_") + releaseListener + "." );   
 		}
 		m_releaseListeners = null;
 		m_releaseListenerArray = null;
@@ -157,7 +157,7 @@ public abstract class Element {
 	}
 	protected void onPropertyChange( Property property ) {
 		if( isReleased() ) {
-			warnln( Messages.getString("WARNING__scenegraph_property_change_") + property + Messages.getString("_on_already_released_") + this + "." );   
+			warnln( Messages.getString("WARNING__scenegraph_property_change_") + property + " " + Messages.getString("on_already_released_") + this + "." );   
 		} else {
 			onPropertyChange( new PropertyEvent( this, property ) );
 		}

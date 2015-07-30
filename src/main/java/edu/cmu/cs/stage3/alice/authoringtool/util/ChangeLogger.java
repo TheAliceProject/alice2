@@ -20,7 +20,7 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected edu.cmu.cs.stage3.alice.core.World world;
 	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
-    String dataDirectory = "C:\\loggingData\\";
+    String dataDirectory;
 
     protected PrintWriter printWriter = null;
     
@@ -31,7 +31,7 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
           
           //dataDirectory = edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory() + "\\loggingData\\";
           //System.out.println(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory());
-          dataDirectory = Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ) + "\\loggingData\\";
+          dataDirectory = Configuration.getValue( authoringToolPackage, "directories.worldsDirectory" ) + System.getProperty( "file.separator" ) + "loggingData";
 	}
 
         public void pushUndoableRedoable( edu.cmu.cs.stage3.alice.authoringtool.util.UndoableRedoable ur ) {
@@ -90,7 +90,7 @@ public class ChangeLogger implements edu.cmu.cs.stage3.alice.authoringtool.event
 			if (!file.exists()){
 				file.mkdir();
 			}
-			file = new File(dataDirectory + System.currentTimeMillis() + ".txt");
+			file = new File(dataDirectory + System.getProperty( "file.separator" ) + System.currentTimeMillis() + ".txt");
 			
 			try {
 				printWriter = new PrintWriter(new FileOutputStream(file));

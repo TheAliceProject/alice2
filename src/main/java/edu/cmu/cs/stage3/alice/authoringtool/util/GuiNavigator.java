@@ -176,7 +176,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			tiltHighlight = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltHighlight" ); 
 			tiltUp = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getImageForString( "guiNavigator/tiltUp" ); 
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Invalid_image_size_constant_in_setImageSize__") + imageSize, null ); 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Invalid_image_size_constant_in_setImageSize__", imageSize), null ); 
 		}
 		updateImages();
 	}
@@ -397,7 +397,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 					pressedy = 20;
 				}
 			} else {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Invalid_image_size_constant_in_NavMouseListener__") + imageSize, null ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Invalid_image_size_constant_in_NavMouseListener__", imageSize), null ); 
 			}
 
 			super.mouseDragged( ev );

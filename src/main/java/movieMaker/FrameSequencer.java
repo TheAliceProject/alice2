@@ -237,7 +237,7 @@ public class FrameSequencer
   }
   
  
-  
+ /* 
   public static void main(String[] args)
   {
     String dir = "c:/intro-prog-java/movies/rectangle/"; 
@@ -246,5 +246,5 @@ public class FrameSequencer
     //frameSequencer.play(1000/30);
     //frameSequencer.play();
   }
-  
+  */
 } // end of class

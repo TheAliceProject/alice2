@@ -24,9 +24,11 @@
 package edu.cmu.cs.stage3.alice.player;
 
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
 
 public class DefaultPlayer extends AbstractPlayer {
-	public static Class rendererClass = null;
+	
+	public static Class rendererClass = edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer.class;
 	public static DefaultPlayer player = new DefaultPlayer(rendererClass);
 	
 	public DefaultPlayer(Class rendererClass) {
@@ -54,8 +56,7 @@ public class DefaultPlayer extends AbstractPlayer {
 	
 	public void updateSpeed(double newSpeed) {
 		player.setSpeed(newSpeed);
-		String speedText = java.text.NumberFormat.getInstance()
-				.format(newSpeed);
+		String speedText = java.text.NumberFormat.getInstance().format(newSpeed);
 		if (newSpeed < 1) {
 			if (newSpeed == .5) {
 				speedText = "1/2";
@@ -91,11 +92,11 @@ public class DefaultPlayer extends AbstractPlayer {
 		speedLabel.setMaximumSize(new java.awt.Dimension(80, 12));*/
 		speedSlider = new javax.swing.JSlider(0, 9, 0);
 
-		speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
+/*		speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
 			public void paintTrack(java.awt.Graphics g) {
 				super.paintTrack(g);
 			}
-		});
+		});*/
 /*		speedSlider.setPreferredSize(new java.awt.Dimension(100, 16));
 		speedSlider.setMinimumSize(new java.awt.Dimension(40, 16));
 		speedSlider.setMaximumSize(new java.awt.Dimension(100, 16));*/
@@ -196,10 +197,27 @@ public class DefaultPlayer extends AbstractPlayer {
 	}
 
 	public static void main(String[] args) throws URISyntaxException {
-
+/*		System.setProperty("java.library.path", "lib");
+		 
+		java.lang.reflect.Field fieldSysPath;
+		try {
+			fieldSysPath = ClassLoader.class.getDeclaredField( "sys_paths" );
+			fieldSysPath.setAccessible( true );
+			fieldSysPath.set( null, null );
+		} catch (SecurityException e1) {
+			e1.printStackTrace();
+		} catch (NoSuchFieldException e1) {
+			e1.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+*/
 		java.io.File file = null;
 		if( args.length > 0 ) {
-			int startFrom = 1;
+			int startFrom = 0; // 1;
+			/*
 			if (args[0].equals("-directx")) {
 				rendererClass = edu.cmu.cs.stage3.alice.scenegraph.renderer.directx7renderer.Renderer.class;
 			//} else if( args[ 0 ].equals("-opengl" ) ) {
@@ -213,22 +231,42 @@ public class DefaultPlayer extends AbstractPlayer {
 			} else {
 				System.err.println(args[0]);
 				startFrom = 0;
-			}
+			}*/
 			file = getFileFromArgs(args, startFrom);
 		}
+
 		if( file == null ) {
-			String temp = player.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().toString();
-			temp = temp.substring(5, temp.lastIndexOf("."))+".a2w";
-			file = new java.io.File(temp);
-			if (!file.exists()) { 
+			String path = player.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+			String decodePath = "";
+			try {
+				decodePath = URLDecoder.decode(path, "UTF-8");				
+			} catch (Exception e) {}	
+			file = new java.io.File( decodePath );
+			java.io.FilenameFilter a2wFilter = new java.io.FilenameFilter() {
+				public boolean accept(java.io.File dir, String name) {
+					String lowercaseName = name.toLowerCase();
+					if (lowercaseName.endsWith(".a2w")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			};
+			java.io.File[] files = file.listFiles(a2wFilter);
+	
+			if ( files.length != 1 ) {
 				java.awt.Frame frame = new java.awt.Frame();
 				java.awt.FileDialog fd = new java.awt.FileDialog(frame);
 				fd.setVisible( true );
 				//String filename = fd.getFile();
 				if (fd.getDirectory() != null && fd.getFile() != null) {
 					file = new java.io.File(fd.getDirectory() + fd.getFile());
+				} else {
+					frame.dispose();
+					System.exit(0);
 				}
-				frame.dispose();
+			} else {
+				file = files[0];
 			}
 		}
 

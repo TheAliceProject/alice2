@@ -97,7 +97,6 @@ public class SoundsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.Expa
 
 	public void refreshGUI() {
 		contentPanel.removeAll();
-
 		if( sounds != null ) {
 			int count = 0;
 			for( int i = 0; i < sounds.size(); i++ ) {
@@ -111,7 +110,7 @@ public class SoundsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util.Expa
 					if( gui != null ) {
 						contentPanel.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets( 0, 2, 0, 2 ), 0, 0 ) );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_sound__") + sound, null ); 
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_sound__", sound), null ); 
 					}
 				}
 			}

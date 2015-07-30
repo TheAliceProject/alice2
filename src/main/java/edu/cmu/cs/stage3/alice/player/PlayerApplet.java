@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.player;
 
+import java.net.URLDecoder;
+
 
 public class PlayerApplet extends java.applet.Applet {
 	private AbstractPlayer m_player = new AbstractPlayer() {
@@ -201,54 +203,74 @@ public class PlayerApplet extends java.applet.Applet {
 				return;
 			}
 			try {
-				java.net.URL url = this.getClass().getResource("My_Alice_World.a2w");//new java.net.URL( getCodeBase(), getParameter( "world" ) );
-				java.net.URLConnection urlConnection = url.openConnection();
-				java.io.InputStream is = urlConnection.getInputStream();		
-				int contentLength = urlConnection.getContentLength();
-				m_progressPanel.setDownloadTotal( contentLength );
-				
-				final int bufferLength = 2048;
-				byte[] content;
-				if( contentLength != -1 ) {
-					int offset = 0;
-					content = new byte[ contentLength ];
-					while( offset < contentLength ) {
-						int actual = is.read( content, offset, Math.min( bufferLength, contentLength-offset ) );
-						offset += actual;
-						m_progressPanel.setDownloadCurrent( offset );
-					}
-				} else {
-					byte[] buffer = new byte[ bufferLength ];
-					java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream( bufferLength );
-					while( true ) {
-						int actual = is.read( buffer, 0, bufferLength );
-						if( actual != -1 ) {
-							baos.write( buffer, 0, actual );
-						} else {
-							break;
+				java.net.URL url = null;
+				java.awt.Frame frame = new java.awt.Frame();
+				java.awt.FileDialog fd = new java.awt.FileDialog(frame);
+				fd.setVisible( true );
+				if (fd.getDirectory() != null && fd.getFile() != null) {				
+					m_player.loadWorld( new java.io.File( URLDecoder.decode((fd.getDirectory() + fd.getFile()), "UTF-8") ), new edu.cmu.cs.stage3.progress.ProgressObserver() {
+						public void progressBegin( int total ) {
+							progressUpdateTotal( total );
 						}
+						public void progressUpdateTotal( int total ) {
+							m_progressPanel.setExtractTotal( total );
+						}
+						public void progressUpdate( int current, String description ) throws edu.cmu.cs.stage3.progress.ProgressCancelException {
+							m_progressPanel.setExtractCurrent( current );
+						}
+						public void progressEnd() {
+						}
+					} );					
+				} else {
+					frame.dispose();
+					url = new java.net.URL( getCodeBase(), getParameter( "world" ) );
+					java.net.URLConnection urlConnection = url.openConnection();
+					java.io.InputStream is = urlConnection.getInputStream();		
+					int contentLength = urlConnection.getContentLength();
+					m_progressPanel.setDownloadTotal( contentLength );
+					
+					final int bufferLength = 2048;
+					byte[] content;
+					if( contentLength != -1 ) {
+						int offset = 0;
+						content = new byte[ contentLength ];
+						while( offset < contentLength ) {
+							int actual = is.read( content, offset, Math.min( bufferLength, contentLength-offset ) );
+							offset += actual;
+							m_progressPanel.setDownloadCurrent( offset );
+						}
+					} else {
+						byte[] buffer = new byte[ bufferLength ];
+						java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream( bufferLength );
+						while( true ) {
+							int actual = is.read( buffer, 0, bufferLength );
+							if( actual != -1 ) {
+								baos.write( buffer, 0, actual );
+							} else {
+								break;
+							}
+						}
+						content = baos.toByteArray();
 					}
-					content = baos.toByteArray();
-				}
-				is.close();
-				urlConnection = null;
-
-				java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream( content );
-
-				m_player.loadWorld( bais, new edu.cmu.cs.stage3.progress.ProgressObserver() {
-					public void progressBegin( int total ) {
-						progressUpdateTotal( total );
-					}
-					public void progressUpdateTotal( int total ) {
-						m_progressPanel.setExtractTotal( total );
-					}
-					public void progressUpdate( int current, String description ) throws edu.cmu.cs.stage3.progress.ProgressCancelException {
-						m_progressPanel.setExtractCurrent( current );
-					}
-					public void progressEnd() {
-					}
-				} );
-
+					is.close();
+					urlConnection = null;
+	
+					java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream( content );
+								
+					m_player.loadWorld( bais, new edu.cmu.cs.stage3.progress.ProgressObserver() {
+						public void progressBegin( int total ) {
+							progressUpdateTotal( total );
+						}
+						public void progressUpdateTotal( int total ) {
+							m_progressPanel.setExtractTotal( total );
+						}
+						public void progressUpdate( int current, String description ) throws edu.cmu.cs.stage3.progress.ProgressCancelException {
+							m_progressPanel.setExtractCurrent( current );
+						}
+						public void progressEnd() {
+						}
+					} );
+				}				
 				m_startButton.setEnabled( true );
 				startWorld();
 			} catch( java.net.MalformedURLException murle ) {

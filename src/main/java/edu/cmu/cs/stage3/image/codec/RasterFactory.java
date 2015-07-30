@@ -828,11 +828,11 @@ public class RasterFactory {
         }
         if (parentX + width > raster.getWidth() + raster.getMinX()) {
             throw new
-		RasterFormatException(JaiI18N.getString("_parentX___width__is_outside_raster_"));
+		RasterFormatException(JaiI18N.getString("parentX___width__is_outside_raster_"));
         }
         if (parentY + height > raster.getHeight() + raster.getMinY()) {
             throw new
-		RasterFormatException(JaiI18N.getString("_parentY___height__is_outside_raster_"));
+		RasterFormatException(JaiI18N.getString("parentY___height__is_outside_raster_"));
         }
 
         SampleModel sampleModel = raster.getSampleModel();

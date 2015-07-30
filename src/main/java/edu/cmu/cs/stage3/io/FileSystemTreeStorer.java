@@ -101,10 +101,10 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 		}
 
 		if( ! newCurrentDirectory.exists() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_doesn_t_exist") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + " " + Messages.getString("doesn_t_exist") ); 
 		}
 		if( ! newCurrentDirectory.isDirectory() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_isn_t_a_directory") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + " " + Messages.getString("isn_t_a_directory") ); 
 		}
 
 		currentDirectory = newCurrentDirectory;

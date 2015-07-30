@@ -55,10 +55,10 @@ public class SplashScreen extends java.awt.Frame {
 				g.setColor( java.awt.Color.white );
 				//Font font = g.getFont();			
 				g.setFont(new Font("Dialog", Font.BOLD, 12));
-				String versionString = Messages.getString("version__") + edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion(); 
+				String versionString = Messages.getString("version__", edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion()); 
 				int stringWidth = g.getFontMetrics().stringWidth( versionString );
 				g.drawString( versionString, size.width - 10 - stringWidth, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.			
-				g.drawString(Messages.getString("Loading___"), 10, size.height - 6 ); 
+				g.drawString(Messages.getString("Loading___", ""), 10, size.height - 6 ); 
 			}
 		};
 		splashWindow.setSize( size );

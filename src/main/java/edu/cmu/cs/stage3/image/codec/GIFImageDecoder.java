@@ -101,7 +101,7 @@ public class GIFImageDecoder extends ImageDecoderImpl {
             try {
                 tracker.waitForID(0);
             } catch (InterruptedException e) {
-                throw new RuntimeException(JaiI18N.getString("InterruptedException_occured_while_loading_the_image_using_MediaTracker_"));
+                throw new RuntimeException(JaiI18N.getString("InterruptedException_occurred_while_loading_the_image_using_MediaTracker_"));
             }
 	    if (tracker.isErrorID(0)) {	// not standard file format
                 throw new RuntimeException(JaiI18N.getString("MediaTracker_is_unable_to_load_the_image_"));

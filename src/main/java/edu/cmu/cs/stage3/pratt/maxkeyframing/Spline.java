@@ -43,7 +43,7 @@ public abstract class Spline {
 					return 0;
 				}
 			} else {
-				throw new ClassCastException( Key.class.getName() + Messages.getString("_required_") ); 
+				throw new ClassCastException( Key.class.getName() + " " + Messages.getString("required_") ); 
 			}
 		}
 	};

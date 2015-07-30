@@ -97,7 +97,7 @@ class ColorRenderer extends javax.swing.JLabel implements javax.swing.ListCellRe
 		else {
 			float[] rgba = new float[4];
 			color.getComponents( rgba );
-			text = Messages.getString("_red___") + rgba[0] + Messages.getString("__green___") + rgba[1] + Messages.getString("__blue___") + rgba[2] + Messages.getString("__alpha___") + rgba[3] + ">";    //$NON-NLS-4$ //$NON-NLS-5$
+			text = Messages.getString("_red_green_blue_alpha_", rgba[0], rgba[1], rgba[2], rgba[3]);
 		}
 
 		return text;

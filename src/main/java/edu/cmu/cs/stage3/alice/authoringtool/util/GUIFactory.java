@@ -236,7 +236,7 @@ public class GUIFactory {
 			try {
 				return (javax.swing.JComponent)guiClass.newInstance();
 			} catch( Throwable t ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_GUI__") + guiClass, t ); 
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_GUI__", guiClass), t ); 
 			}
 		}
 		return null;
@@ -628,7 +628,7 @@ public class GUIFactory {
 			property.getOwner().addChild( scriptResponse );
 			((Runnable)factory.createItem( scriptResponse )).run();
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Other____is_not_supported_for_") + valueClass.getName(), null ); // should not see this 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Other____is_not_supported_for_", valueClass.getName()), null ); // should not see this 
 		}
 	}
 
@@ -686,7 +686,7 @@ public class GUIFactory {
 			}
 			((Runnable)factory.createItem( scriptResponse )).run();
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Other____is_not_supported_for_") + valueClass.getName(), null ); // should not see this 
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Other____is_not_supported_for_", valueClass.getName()), null ); // should not see this 
 		}
 	}
 

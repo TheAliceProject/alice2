@@ -80,8 +80,7 @@ public class DataSourceProperty extends ObjectProperty {
 			throws java.io.IOException {
 		edu.cmu.cs.stage3.media.DataSource dataSourceValue = getDataSourceValue();
 		if (dataSourceValue != null) {
-			double duration = dataSourceValue
-					.getDuration(edu.cmu.cs.stage3.media.DataSource.USE_HINT_IF_NECESSARY);
+			double duration = dataSourceValue.getDuration(edu.cmu.cs.stage3.media.DataSource.USE_HINT_IF_NECESSARY);
 			if (Double.isNaN(duration)) {
 				// pass
 			} else {
@@ -98,10 +97,8 @@ public class DataSourceProperty extends ObjectProperty {
 			if (m_associatedFileKey == null
 					|| !m_associatedFileKey.equals(associatedFileAbsolutePath)) {
 				m_associatedFileKey = null;
-				java.io.OutputStream os = storer.createFile(filename,
-						dataSourceValue.isCompressionWorthwhile());
-				java.io.BufferedOutputStream bos = new java.io.BufferedOutputStream(
-						os);
+				java.io.OutputStream os = storer.createFile(filename,dataSourceValue.isCompressionWorthwhile());
+				java.io.BufferedOutputStream bos = new java.io.BufferedOutputStream(os);
 				bos.write(dataSourceValue.getData());
 				bos.flush();
 				storer.closeCurrentFile();
@@ -129,7 +126,8 @@ public class DataSourceProperty extends ObjectProperty {
 																					// handle
 																					// variable
 		if (dataSourceValue != null) {
-			storer.keepFile(getFilename());
+			String filename = getFilename();
+			storer.keepFile(filename);
 		}
 	}
 }

@@ -30,15 +30,17 @@ import java.awt.BorderLayout;
  * @author Jason Pratt, David Culyba
  */
 
-public class StdErrOutContentPane extends
-		edu.cmu.cs.stage3.alice.authoringtool.dialog.AliceAlertContentPane {
+public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.dialog.AliceAlertContentPane {
 	public final static int HISTORY_MODE = 2;
+	
+	protected boolean errorDialog = false;
 
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected OutputComponent errOutputComponent;
 	protected OutputComponent stdOutputComponent;
 
 	protected String lastError;
+	protected String lastOutput;
 	protected String titleString;
 
 	protected boolean isShowing = false;
@@ -47,29 +49,22 @@ public class StdErrOutContentPane extends
 	protected boolean shouldListenToErrors = true;
 	protected boolean shouldListenToPrint = true;
 
-	protected class ErrOutputDocumentListener implements
-			javax.swing.event.DocumentListener {
+	protected class ErrOutputDocumentListener implements javax.swing.event.DocumentListener {
 		public void insertUpdate(final javax.swing.event.DocumentEvent ev) {
 			try {
-				lastError = ev.getDocument().getText(ev.getOffset(),
-						ev.getLength());
-				if (lastError.startsWith(Messages
-						.getString("__Unable_to_handle_format")) == true) {
-					lastError = Messages
-							.getString("_n_nYour_sound_file_cannot_be_played_in_Alice__n")
-							+ Messages
-									.getString("Please_find_an_audio_editor_to_convert_the_file_to_one_with_a_PCM_encoding__n")
-							+ Messages
-									.getString("See_the_tutorial_on_converting_sound_files_at_our_Alice_website__n")
-							+ Messages
-									.getString("Right_click_to_clear_the_messages_here__n_n")
-							+ lastError;
+				lastError = ev.getDocument().getText(ev.getOffset(), ev.getLength());
+				if (lastError.trim().startsWith("Unable_to_handle_format") == true) {
+					lastError = Messages.getString("_n_nYour_sound_file_cannot_be_played_in_Alice__n")
+							+ Messages.getString("Please_find_an_audio_editor_to_convert_the_file_to_one_with_a_PCM_encoding__n")
+							+ Messages.getString("See_the_tutorial_on_converting_sound_files_at_our_Alice_website__n")
+							+ Messages.getString("Right_click_to_clear_the_messages_here__n_n")
+							+ lastError.trim();
 				} 
 				detailTextPane.getDocument().insertString(
 						detailTextPane.getDocument().getLength(), lastError,
 						detailTextPane.stdErrStyle);
 				
-				if (lastError.startsWith("java.lang.ClassCastException")==true){
+				if (lastError.startsWith("java.lang.ClassCastException") == true){
 					lastError = "OOPS!! Looks like we have a slight layout problem. Not a big deal, press OK to continue. \n\n";		
 					detailTextPane.getDocument().insertString( 0, lastError, detailTextPane.stdErrStyle);
 				} 
@@ -93,8 +88,7 @@ public class StdErrOutContentPane extends
 					public void run() {
 						if (!isShowing) {
 							isShowing = true;
-							int result = edu.cmu.cs.stage3.swing.DialogManager
-									.showDialog(StdErrOutContentPane.this);
+							int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog(StdErrOutContentPane.this);
 						}
 					}
 				});
@@ -103,15 +97,11 @@ public class StdErrOutContentPane extends
 		}
 	}
 
-	protected class StdOutputDocumentListener implements
-			javax.swing.event.DocumentListener {
+	protected class StdOutputDocumentListener implements javax.swing.event.DocumentListener {
 		public void insertUpdate(final javax.swing.event.DocumentEvent ev) {
 			try {
-				lastError = ev.getDocument().getText(ev.getOffset(),
-						ev.getLength());
-				detailTextPane.getDocument().insertString(
-						detailTextPane.getDocument().getLength(), lastError,
-						detailTextPane.stdOutStyle);
+				lastOutput = ev.getDocument().getText(ev.getOffset(), ev.getLength());
+				detailTextPane.getDocument().insertString(detailTextPane.getDocument().getLength(), lastOutput,	detailTextPane.stdOutStyle);
 			} catch (Exception e) {
 			}
 			textContentAdded = true;
@@ -132,8 +122,7 @@ public class StdErrOutContentPane extends
 					public void run() {
 						if (!isShowing) {
 							isShowing = true;
-							int result = edu.cmu.cs.stage3.swing.DialogManager
-									.showDialog(StdErrOutContentPane.this);
+							int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog(StdErrOutContentPane.this);
 						}
 					}
 				});
@@ -142,28 +131,31 @@ public class StdErrOutContentPane extends
 		}
 	}
 
-	public StdErrOutContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+	public StdErrOutContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool, boolean errorDialog) {
 		super();
-		titleString = Messages.getString("Alice___Error_Console");
-		this.authoringTool = authoringTool;
-		this.errOutputComponent = authoringTool.getStdErrOutputComponent();
-		this.stdOutputComponent = authoringTool.getStdOutOutputComponent();
-		writeGenericAliceHeaderToTextPane();
-		this.errOutputComponent.getTextPane().getDocument()
+		if (errorDialog){
+			titleString = Messages.getString("Alice___Error_Console");
+			this.authoringTool = authoringTool;
+			this.errOutputComponent = authoringTool.getStdErrOutputComponent();
+			writeGenericAliceHeaderToTextPane();
+			this.errOutputComponent.getTextPane().getDocument()
 				.addDocumentListener(new ErrOutputDocumentListener());
-		this.stdOutputComponent.getTextPane().getDocument()
+		} else {
+			titleString = Messages.getString("Alice___Text_Output");
+			this.authoringTool = authoringTool;
+			this.stdOutputComponent = authoringTool.getStdOutOutputComponent();
+			//writeGenericAliceHeaderToTextPane();
+			this.stdOutputComponent.getTextPane().getDocument()
 				.addDocumentListener(new StdOutputDocumentListener());
+		}
 	}
 
 	protected void writeGenericAliceHeaderToTextPane() {
 		detailTextPane.setText("");
-		detailStream.println(Messages.getString("Alice_version__")
-				+ edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion());
-		String[] systemProperties = { "os.name", "os.version", "os.arch",
-				"java.vm.name", "java.vm.version", "user.dir" };
+		detailStream.println(Messages.getString("Alice_version__", edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion()));
+		String[] systemProperties = { "os.name", "os.version", "os.arch", "java.vm.name", "java.vm.version", "user.dir" };
 		for (int i = 0; i < systemProperties.length; i++) {
-			detailStream.println(systemProperties[i] + ": "
-					+ System.getProperty(systemProperties[i]));
+			detailStream.println(systemProperties[i] + ": " + System.getProperty(systemProperties[i]));
 		}
 		detailStream.println();
 	}
@@ -177,8 +169,10 @@ public class StdErrOutContentPane extends
 	}
 
 	public void startReactingToPrint() {
-		stdOutputComponent.stdErrStream.flush();
-		stdOutputComponent.stdOutStream.flush();
+		//stdOutputComponent.stdErrStream.flush();
+		if (stdOutputComponent != null){ 
+			stdOutputComponent.stdOutStream.flush();
+		}
 		shouldListenToPrint = true;
 	}
 
@@ -187,8 +181,10 @@ public class StdErrOutContentPane extends
 	}
 
 	public void startReactingToError() {
-		errOutputComponent.stdErrStream.flush();
-		errOutputComponent.stdOutStream.flush();
+		if (errOutputComponent != null){ 
+			errOutputComponent.stdErrStream.flush();
+		}
+		//errOutputComponent.stdOutStream.flush();
 		shouldListenToErrors = true;
 	}
 
@@ -198,15 +194,26 @@ public class StdErrOutContentPane extends
 		super.postDialogShow(parentDialog);
 	}
 
-	public int showStdErrOutDialog() {
+	public int showStdErrDialog() {
 		if (!isShowing) {
 			isShowing = true;
+			errorDialog = true;
 			return edu.cmu.cs.stage3.swing.DialogManager.showDialog(this);
 		} else {
 			return -1;
 		}
 	}
-
+	
+	public int showStdOutDialog() {
+		if (!isShowing) {
+			isShowing = true;
+			errorDialog = false;
+			return edu.cmu.cs.stage3.swing.DialogManager.showDialog(this);
+		} else {
+			return -1;
+		}
+	}
+	
 	public String getTitle() {
 		return titleString;
 	}
@@ -228,27 +235,22 @@ public class StdErrOutContentPane extends
 		buttonPanel.add(buttonGlue, glueConstraints);
 
 		if (errorContentAdded) {
-			messageLabel.setText(Messages
-					.getString("Something_bad_has_occurred_"));
+			messageLabel.setText(Messages.getString("Something_bad_has_occurred_"));
 		} else if (textContentAdded) {
-			messageLabel.setText(Messages
-					.getString("Nothing_bad_has_occurred_"));
+			messageLabel.setText(Messages.getString("Nothing_bad_has_occurred_"));
 		} else {
-			messageLabel.setText(Messages
-					.getString("Nothing_bad_has_occurred_"));
+			messageLabel.setText(Messages.getString("Nothing_bad_has_occurred_"));
 		}
 	}
 
 	protected void setLessDetail() {
 		super.setLessDetail();
-		messageLabel.setText(Messages
-				.getString("An_unknown_error_has_occurred_"));
+		messageLabel.setText(Messages.getString("An_unknown_error_has_occurred_"));
 	}
 
 	protected void setMoreDetail() {
 		super.setMoreDetail();
-		messageLabel.setText(Messages
-				.getString("An_unknown_error_has_occurred_"));
+		messageLabel.setText(Messages.getString("An_unknown_error_has_occurred_"));
 	}
 
 	protected void handleModeSwitch(int mode) {
@@ -259,8 +261,7 @@ public class StdErrOutContentPane extends
 		} else if (mode == HISTORY_MODE) {
 			setHistoryDetail();
 		} else {
-			throw new IllegalArgumentException(
-					Messages.getString("Illegal_mode__") + mode);
+			throw new IllegalArgumentException(Messages.getString("Illegal_mode__", mode));
 		}
 		packDialog();
 	}

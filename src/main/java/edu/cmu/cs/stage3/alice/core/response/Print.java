@@ -50,9 +50,9 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 			Object o = object.get();
 			if( o != null ) {
 				if( o instanceof edu.cmu.cs.stage3.alice.core.Element ) {
-					return Messages.getString("the_value_of_") + ((edu.cmu.cs.stage3.alice.core.Element)o).getTrimmedKey() + Messages.getString("_is_");  
+					return Messages.getString("the_value_of_") + ((edu.cmu.cs.stage3.alice.core.Element)o).getTrimmedKey() + " " + Messages.getString("is_");  
 				} else {
-					return Messages.getString("the_value_of_") + o + Messages.getString("_is_");  
+					return Messages.getString("the_value_of_") + o + " " + Messages.getString("is_");  
 				}
 			} else {
 				return null;

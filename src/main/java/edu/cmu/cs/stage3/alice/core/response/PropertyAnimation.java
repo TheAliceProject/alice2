@@ -114,7 +114,7 @@ public class PropertyAnimation extends Animation {
                             m_howMuch = edu.cmu.cs.stage3.util.HowMuch.INSTANCE;
                         }
                     } else {
-                        throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, m_propertyName, m_element + Messages.getString("_does_not_have_property_named_") + m_propertyName ); 
+                        throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, m_propertyName, m_element + " " + Messages.getString("does_not_have_property_named_") + m_propertyName ); 
                     }
                 } else {
                     throw new edu.cmu.cs.stage3.alice.core.IllegalPropertyValueException( PropertyAnimation.this.propertyName, null, Messages.getString("propertyName_must_not_be_null_") ); 

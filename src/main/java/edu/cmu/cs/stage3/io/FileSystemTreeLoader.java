@@ -59,7 +59,7 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 		}
 		else {
 			//throw new IllegalArgumentException( root + " does not exist" );
-			throw new java.io.FileNotFoundException( root + Messages.getString("_does_not_exist") ); 
+			throw new java.io.FileNotFoundException( root + " " + Messages.getString("does_not_exist") ); 
 		}
 
 		currentDirectory = root;
@@ -81,10 +81,10 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 		}
 
 		if( ! newCurrentDirectory.exists() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_doesn_t_exist") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + " " + Messages.getString("doesn_t_exist") ); 
 		}
 		if( ! newCurrentDirectory.isDirectory() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + Messages.getString("_isn_t_a_directory") ); 
+			throw new IllegalArgumentException( newCurrentDirectory + " " + Messages.getString("isn_t_a_directory") ); 
 		}
 
 		currentDirectory = newCurrentDirectory;
@@ -101,7 +101,7 @@ public class FileSystemTreeLoader implements DirectoryTreeLoader {
 		java.io.File file = new java.io.File( currentDirectory, filename );
 		if( ! file.exists() ) {
 			//throw new IllegalArgumentException( file + " does not exist" );
-			throw new java.io.FileNotFoundException( file + Messages.getString("_does_not_exist") ); 
+			throw new java.io.FileNotFoundException( file + " " + Messages.getString("does_not_exist") ); 
 		}
 		if( ! file.canRead() ) {
 			throw new java.io.IOException( Messages.getString("cannot_read_") + file ); 

@@ -50,7 +50,7 @@ public class WorldFileChooser extends javax.swing.JFileChooser implements java.b
 			java.io.File worldDir = getSelectedFile();
 			java.io.File worldFile = new java.io.File( worldDir, "elementData.xml" ); 
 			if( worldFile.exists() ) {
-				int retVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( Messages.getString("A_World_already_exists_in_") + worldDir.getAbsolutePath() + Messages.getString("__nWould_you_like_to_replace_it_"), Messages.getString("Replace_World_"), javax.swing.JOptionPane.YES_NO_OPTION );   
+				int retVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog( Messages.getString("A_World_already_exists_in___nWould_you_like_to_replace_it_", worldDir.getAbsolutePath()), Messages.getString("Replace_World_"), javax.swing.JOptionPane.YES_NO_OPTION );   
 				if( retVal == javax.swing.JOptionPane.YES_OPTION ) {
 					super.approveSelection();
 				}

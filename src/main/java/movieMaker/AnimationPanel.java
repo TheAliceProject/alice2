@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 
 /**
  * Class to show a frame-based animation
@@ -296,7 +295,7 @@ public void paintComponent(Graphics g)
   /**
    * Method to test 
    */
-  public static void main(String[] args)
+/*  public static void main(String[] args)
   {
     JFrame frame = new JFrame();
     AnimationPanel panel = new AnimationPanel("c:/intro-prog-java/mediasources/fish/"); 
@@ -305,5 +304,5 @@ public void paintComponent(Graphics g)
     frame.setVisible(true);
     panel.showAll();
   }
-    
+  */  
 }
