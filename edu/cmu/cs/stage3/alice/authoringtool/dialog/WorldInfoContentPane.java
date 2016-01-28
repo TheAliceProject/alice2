@@ -23,13 +23,13 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -37,6 +37,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Jason Pratt, Dennis Cosgrove
@@ -163,54 +166,34 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		worldOpenTimeLabel.setText(Messages.getString("Amount_of_time_the_world_has_been_open__"));
 		userDefinedQuestionCountLabel.setText(Messages.getString("Number_of_user_defined_questions__"));
 		add(buttonPanel, BorderLayout.SOUTH);
-		buttonPanel.add(doneButton, new GridBagConstraints(0, 0, 1, 1, 0.0,
-				0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
-				new Insets(2, 0, 2, 0), 0, 0));
+		buttonPanel.add(doneButton, new GridBagConstraints(0, 0, 1, 1, 0.0,				0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,				new Insets(2, 0, 2, 0), 0, 0));
 		add(mainScrollPane, BorderLayout.CENTER);
 		mainScrollPane.getViewport().add(mainPanel, null);
-		mainPanel.add(objectCountLabel, new GridBagConstraints(0, 0, 2, 1, 1.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(polyCountLabel, new GridBagConstraints(0, 1, 2, 1, 1.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(textureMemoryLabel, new GridBagConstraints(0, 3, 2, 1,
-				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(userDefinedResponseCountLabel, new GridBagConstraints(0,
-				4, 2, 1, 0.0, 0.0, GridBagConstraints.WEST,
-				GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(behaviorCountLabel, new GridBagConstraints(0, 6, 2, 1,
-				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(responseUsageLabel, new GridBagConstraints(0, 11, 2, 1,
-				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(8, 0, 2, 0), 0, 0));
-		mainPanel.add(responseUsagePanel, new GridBagConstraints(0, 12, 2, 1,
-				1.0, 0.0, GridBagConstraints.WEST,
-				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 4, 0), 0, 0));
-		mainPanel.add(component1, new GridBagConstraints(0, 13, 2, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 0, 0), 0, 0));
-		mainPanel.add(textureCountLabel, new GridBagConstraints(0, 2, 2, 1,
-				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(playCountLabel, new GridBagConstraints(0, 7, 2, 1, 1.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(saveCountLabel, new GridBagConstraints(0, 8, 2, 1, 1.0,
-				0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(worldOpenTimeLabel, new GridBagConstraints(0, 9, 1, 1,
-				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-		mainPanel.add(currentRendererLabel, new GridBagConstraints(0, 10, 1, 1,
-				1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(0, 0, 2, 0), 0, 0));
-
-		mainPanel.add(userDefinedQuestionCountLabel, new GridBagConstraints(0,
-				5, 2, 1, 0.0, 0.0, GridBagConstraints.WEST,
-				GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(objectCountLabel, new GridBagConstraints(0, 0, 2, 1, 1.0,	0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(polyCountLabel, new GridBagConstraints(0, 1, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(textureMemoryLabel, new GridBagConstraints(0, 3, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(userDefinedResponseCountLabel, new GridBagConstraints(0, 4, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(behaviorCountLabel, new GridBagConstraints(0, 6, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(responseUsageLabel, new GridBagConstraints(0, 11, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(8, 0, 2, 0), 0, 0));
+		mainPanel.add(responseUsagePanel, new GridBagConstraints(0, 12, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 4, 0), 0, 0));
+		mainPanel.add(component1, new GridBagConstraints(0, 13, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(	 0, 0, 0, 0), 0, 0));
+		mainPanel.add(textureCountLabel, new GridBagConstraints(0, 2, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(playCountLabel, new GridBagConstraints(0, 7, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(saveCountLabel, new GridBagConstraints(0, 8, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(worldOpenTimeLabel, new GridBagConstraints(0, 9, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(currentRendererLabel, new GridBagConstraints(0, 10, 1, 1,	 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		mainPanel.add(userDefinedQuestionCountLabel, new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 2, 0), 0, 0));
+		if(!AikMin.isLTR()){	// ***** To fix the vertical scrollbar on the World Info panel *****
+			mainScrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+				@Override
+			   	public void layoutContainer(java.awt.Container parent) {
+			   		javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+			   		scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+			   	       super.layoutContainer(parent);
+			   	       scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+			   	}
+			});
+		}
 	}
 
 	public void addOKActionListener(java.awt.event.ActionListener l) {

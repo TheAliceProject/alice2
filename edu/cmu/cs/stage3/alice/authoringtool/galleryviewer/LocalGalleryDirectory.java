@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 public class LocalGalleryDirectory extends LocalGalleryObject {
@@ -32,7 +33,10 @@ public class LocalGalleryDirectory extends LocalGalleryObject {
     protected static java.awt.Color localDirColor = new java.awt.Color(189,184,139);
 
 	protected String getToolTipString(){
-        return "<html><body>" + Messages.getString("Group_of_Objects") + "</body></html>"; 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+        return "<html><body><div align="+justify+">" + Messages.getString("Group_of_Objects") + "</div></body></html>"; 
     }
 
 	public void set(GalleryViewer.ObjectXmlData dataIn) throws java.lang.IllegalArgumentException{

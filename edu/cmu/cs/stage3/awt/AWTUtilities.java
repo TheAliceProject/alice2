@@ -25,7 +25,6 @@ package edu.cmu.cs.stage3.awt;
 
 import java.awt.event.InputEvent;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 // Redoing AWTUtilities so its cross platform compatible.
 public class AWTUtilities {
     private static boolean s_successfullyLoadedLibrary;
@@ -43,7 +42,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isGetCursorLocationSupportedNative(); //return 1;
 		} else {
-			return false;
+			return true;
 		}
 	}
 
@@ -52,7 +51,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isSetCursorLocationSupportedNative(); //return 1;
 		} else {
-			return false;
+			return true;
 		}
 	}
 
@@ -61,7 +60,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isIsKeyPressedSupportedNative(); //return 1;
 		} else {        
-			return false;
+			return true;
 		}
 	}
 
@@ -70,7 +69,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isGetModifiersSupportedNative(); //return 1;
 		} else {
-			return false;
+			return true;
 		}
 	}
 	
@@ -183,18 +182,18 @@ public class AWTUtilities {
 		}
 	}
 	
-    public static int key;
 	private static native boolean isKeyPressedNative( int keyCode );
 	public static boolean isKeyPressed( int keyCode ) {
 		if( s_successfullyLoadedLibrary ) {
 			return isKeyPressedNative( keyCode );
 		} else {
-			if (keyCode == java.awt.event.KeyEvent.VK_CONTROL)
-				return AikMin.control;
-			else if (keyCode == java.awt.event.KeyEvent.VK_SHIFT)
-				return AikMin.shift;
-			else
-				return false;
+			if (keyCode == java.awt.event.KeyEvent.VK_CONTROL) {
+				return (modifier & 8) != 0;
+			}
+			if (keyCode == java.awt.event.KeyEvent.VK_SHIFT) {
+				return (modifier & 1) != 0;
+			}
+			return false;
 		}
 	}
 	

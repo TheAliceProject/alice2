@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author Jason Pratt
  */
@@ -31,6 +33,11 @@ public class FormatTokenizer {
 
 	public FormatTokenizer( String inputString ) {
 		if( inputString != null ) {
+			if (!AikMin.isLTR()){	// ***** To display the tiles string in the details panel (methods tab) *****
+				try {
+					inputString = new String ( inputString.toString().getBytes("ISO-8859-1"), "UTF-8" );
+				} catch (Exception e){ }
+			}
 			java.util.LinkedList tokens = new java.util.LinkedList();
 			while( inputString.length() > 0 ) {
 				if( inputString.startsWith( "<<<" ) ) {
@@ -69,6 +76,7 @@ public class FormatTokenizer {
 			}
 
 			tokenIterator = tokens.iterator();
+
 		}
 	}
 

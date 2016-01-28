@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent;
 import edu.cmu.cs.stage3.lang.Messages;
 
@@ -42,7 +43,7 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
     protected static java.util.Vector timers = new java.util.Vector();
     protected static boolean shouldReact = true;
 
-    public static final int LEFT_INDENT = 15;
+    public static final int LEFT_INDENT = 5;
     public static final int RIGHT_INDENT = 5;
     public static final int STRUT_SIZE = 8;
     public static final int SCROLL_SIZE = 8;
@@ -90,7 +91,7 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
     public CompositeComponentElementPanel(){
         insets = new java.awt.Insets(3,2,0,2);
         panelLayout = new java.awt.GridBagLayout();
-        panelConstraints = new java.awt.GridBagConstraints(0,0,1,1,1,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, insets, 0,0 );
+        panelConstraints = new java.awt.GridBagConstraints(0,0,1,1,1,0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, insets, 0,0 );
         this.setOpaque(true);
         this.setLayout(panelLayout);
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,LEFT_INDENT,0,RIGHT_INDENT));
@@ -218,13 +219,16 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
         }
         this.revalidate();
         this.repaint();
+        if (!AikMin.isLTR())	// ***** For Event tile & all the Do Nothing sections *****
+        	applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+        //}
     }
 
     protected void resetGUI(){
         if (this.getComponentCount() < 2){
             this.removeAll();
-            this.add(strut, new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
-            this.add(glue, new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
+            this.add(strut, new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
+            this.add(glue, new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
         }
     }
 
@@ -232,9 +236,9 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
         if (componentElements != null && componentsIsEmpty()){
             this.removeAll();
             panelConstraints.gridy = 0;
-            this.add(insertPanel,panelConstraints, 0);
-            this.add(strut, new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
-            this.add(glue, new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
+            this.add(insertPanel, panelConstraints, 0);
+            this.add(strut, new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
+            this.add(glue, new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));           
         }
     }
 

@@ -53,7 +53,7 @@ public class TokenBlock {
 		}
 		int openTokenStop = content.indexOf( '>', openTokenStart );
 		if( openTokenStop == -1 ) {
-			System.out.println( Messages.getString("___found_with_no_closing_____") ); 
+			System.out.println( Messages.getString("____found_with_no_closing_____") ); 
 			return null;
 		}
 
@@ -67,7 +67,7 @@ public class TokenBlock {
 		}
 		int closeTokenStart = content.indexOf( "</" + tokenName + ">", openTokenStop );  
 		if( closeTokenStart == -1 ) {
-			System.out.println( Messages.getString("No_closing_token____") + tokenName + Messages.getString("___found_") );  
+			System.out.println( Messages.getString("No_closing_token_______found_", tokenName) );  
 			return null;
 		}
 

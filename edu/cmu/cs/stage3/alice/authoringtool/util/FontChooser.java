@@ -37,6 +37,8 @@ import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 public class FontChooser extends javax.swing.JPanel {
 	protected java.util.HashSet changeListeners = new java.util.HashSet();
 
@@ -100,6 +102,16 @@ public class FontChooser extends javax.swing.JPanel {
 		fontSizeCombo.addActionListener( actionListener );
 		boldToggle.addActionListener( actionListener );
 		italicToggle.addActionListener( actionListener );
+		fontFaceCombo.setMaximumRowCount(9);
+		if (!AikMin.isLTR()) {		// ***** For making Combobox items right justify *****
+			fontFaceCombo.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
 	}
 
 	public java.awt.Font getChosenFont() {
@@ -207,18 +219,12 @@ public class FontChooser extends javax.swing.JPanel {
 		fontSizeCombo.setPreferredSize(new Dimension(60, 26));
 		fontSizeCombo.setEditable(true);
 		previewTextArea.setText("The quick brown fox jumped over the lazy dog\'s back.");
-		this.add(fontFaceCombo,    new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(fontSizeCombo,   new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-		this.add(boldToggle,   new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-		this.add(italicToggle,   new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
-			,GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(component1,  new GridBagConstraints(4, 0, 1, 1, 1.0, 0.0
-			,GridBagConstraints.SOUTHWEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(previewScrollPane,   new GridBagConstraints(0, 1, 5, 1, 1.0, 1.0
-			,GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(8, 0, 0, 0), 0, 0));
+		this.add(fontFaceCombo, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 2, 0, 2), 0, 0));
+		this.add(fontSizeCombo, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 2, 0, 2), 0, 0));
+		this.add(boldToggle,   	new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 2, 0, 2), 0, 0));
+		this.add(italicToggle,  new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(0, 2, 0, 2), 0, 0));
+		this.add(component1,  	new GridBagConstraints(4, 0, 1, 1, 1.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(previewScrollPane,   new GridBagConstraints(0, 1, 5, 1, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(8, 0, 0, 0), 0, 0));
 		previewScrollPane.getViewport().add(previewTextArea, null);
 	}
 }

@@ -342,7 +342,6 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 					x = 0 - pmSize.width;  // Otherwise place to the left
 				}
 			} else {
-
 				// First determine x:
 				if( position.x < pmSize.width ) {
 					x = s.width;  // Prefer placement to the right

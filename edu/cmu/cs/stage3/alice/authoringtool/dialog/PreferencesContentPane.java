@@ -23,12 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-import edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryViewer;
-import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
-import edu.cmu.cs.stage3.lang.Messages;
-import edu.cmu.cs.stage3.swing.ContentPane;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -53,6 +47,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryViewer;
+import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
+import edu.cmu.cs.stage3.lang.Messages;
+import edu.cmu.cs.stage3.swing.ContentPane;
 
 /**
  * @author Jason Pratt, Aik Min Choong
@@ -304,12 +304,9 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	}
 
 	private void fireOKActionListeners() {
-		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent(this,
-				java.awt.event.ActionEvent.ACTION_PERFORMED,
-				Messages.getString("OK"));
+		java.awt.event.ActionEvent e = new java.awt.event.ActionEvent(this, java.awt.event.ActionEvent.ACTION_PERFORMED, Messages.getString("OK"));
 		for (int i = 0; i < m_okActionListeners.size(); i++) {
-			java.awt.event.ActionListener l = (java.awt.event.ActionListener) m_okActionListeners
-					.elementAt(i);
+			java.awt.event.ActionListener l = (java.awt.event.ActionListener) m_okActionListeners.elementAt(i);
 			l.actionPerformed(e);
 		}
 	}
@@ -406,8 +403,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		} catch (java.lang.NumberFormatException e) {
 			isOK = false;
 		}
-		if (constrainRenderDialogAspectCheckBox.isSelected() && isOK
-				&& authoringTool != null) {
+		if (constrainRenderDialogAspectCheckBox.isSelected() && isOK && authoringTool != null) {
 			double currentAspectRatio = authoringTool.getAspectRatio();
 			w = (int) Math.round(h * currentAspectRatio);
 			if (w <= 0) {
@@ -620,9 +616,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 					message.append(" ");
 					message.append(badChars[j]);
 				}
-				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
-						message.toString(), Messages.getString("Bad_Filename"),
-						javax.swing.JOptionPane.INFORMATION_MESSAGE);
+				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(message.toString(), Messages.getString("Bad_Filename"), javax.swing.JOptionPane.INFORMATION_MESSAGE);
 				return false;
 			}
 		}
@@ -671,9 +665,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			javax.swing.JCheckBox checkBox = (javax.swing.JCheckBox) iter.next();
 			String currentValue = Configuration.getValue(authoringToolPackage,	(String) checkBoxToConfigKeyMap.get(checkBox));
 			if (currentValue == null) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool	.showErrorDialog(
-								Messages.getString("Warning__no_value_found_for_preference__", checkBoxToConfigKeyMap.get(checkBox)),
-								null);
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool	.showErrorDialog(Messages.getString("Warning__no_value_found_for_preference__", checkBoxToConfigKeyMap.get(checkBox)), null);
 				currentValue = "false";
 				Configuration.setValue(authoringToolPackage, (String) checkBoxToConfigKeyMap.get(checkBox),	currentValue);
 			}
@@ -701,10 +693,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		if (!Configuration.getValue(authoringToolPackage, "numberOfClipboards").equals(numClipboardsTextField.getText())) {
 			Configuration.setValue(authoringToolPackage, "numberOfClipboards", numClipboardsTextField.getText());
 		}
-		String boundsString = boundsXTextField.getText() + ", "
-				+ boundsYTextField.getText() + ", "
-				+ boundsWidthTextField.getText() + ", "
-				+ boundsHeightTextField.getText();
+		String boundsString = boundsXTextField.getText() + ", " + boundsYTextField.getText() + ", "	+ boundsWidthTextField.getText() + ", "	+ boundsHeightTextField.getText();
 		if (!Configuration.getValue(authoringToolPackage, "rendering.renderWindowBounds").equals(boundsString)) {
 			Configuration.setValue(authoringToolPackage, "rendering.renderWindowBounds", boundsString);
 		}
@@ -721,10 +710,8 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		// "directories.galleryDirectory", galleryDirectoryTextField.getText()
 		// );
 		// }
-		if( ! Configuration.getValue( authoringToolPackage, "directories.charactersDirectory" ).equals(
-					worldDirectoryTextField.getText() + System.getProperty( "file.separator" ) + "CustomGallery") ) {
-			Configuration.setValue( authoringToolPackage, "directories.charactersDirectory",
-					worldDirectoryTextField.getText() + System.getProperty( "file.separator" ) + "CustomGallery");
+		if( ! Configuration.getValue( authoringToolPackage, "directories.charactersDirectory" ).equals(worldDirectoryTextField.getText() + System.getProperty( "file.separator" ) + "CustomGallery") ) {
+			Configuration.setValue( authoringToolPackage, "directories.charactersDirectory", worldDirectoryTextField.getText() + System.getProperty( "file.separator" ) + "CustomGallery");
 		}
 		if (!Configuration.getValue(authoringToolPackage, "screenCapture.directory").equals(captureDirectoryTextField.getText())) {
 			Configuration.setValue(authoringToolPackage, "screenCapture.directory",	captureDirectoryTextField.getText());
@@ -1259,27 +1246,17 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		maxRecentWorldsLabel.setText(Messages.getString("maximum_number_of_worlds_kept_in_the_recent_worlds_menu"));
 
 		maxRecentWorldsPanel.setLayout(new GridBagLayout());
-		maxRecentWorldsPanel.add(maxRecentWorldsTextField,
-				new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-						GridBagConstraints.WEST, GridBagConstraints.NONE,
-						new Insets(5, 5, 5, 5), 0, 0));
-		maxRecentWorldsPanel.add(maxRecentWorldsLabel, new GridBagConstraints(
-				1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
-				GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		maxRecentWorldsPanel.add(maxRecentWorldsTextField, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		maxRecentWorldsPanel.add(maxRecentWorldsLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
 		JLabel resourcesLabel = new JLabel();
 		resourcesPanel.setLayout(new GridBagLayout());
-		resourcesPanel.add(resourcesLabel, new GridBagConstraints(0, 0, 1, 1,
-				0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		resourcesPanel.add(resourceFileComboBox, new GridBagConstraints(1, 0,
-				1, 1, 0.0, 0.0, GridBagConstraints.WEST,
-				GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		resourcesPanel.add(resourcesLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		resourcesPanel.add(resourceFileComboBox, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
 		resourcesLabel.setText(Messages.getString("display_my_program_"));
 
-		java.io.File resourceDirectory = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(),
-				"resources" + System.getProperty("file.separator") + AikMin.locale).getAbsoluteFile();
+		java.io.File resourceDirectory = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" + System.getProperty("file.separator") + AikMin.locale.getDisplayLanguage()).getAbsoluteFile();
 		java.io.File[] resourceFiles = resourceDirectory.listFiles(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.resourceFileFilter);
 		for (int i = 0; i < resourceFiles.length; i++) {
 			resourceFileComboBox.addItem(resourceFiles[i].getName());
@@ -1289,7 +1266,8 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			public java.awt.Component getListCellRendererComponent(javax.swing.JList list, Object value, int index,	boolean isSelected, boolean cellHasFocus) {
 				javax.swing.JLabel toReturn = new javax.swing.JLabel(Messages.getString("No_Name"));
 				toReturn.setOpaque(true);
-				// toReturn.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+				if (!AikMin.isLTR())	// ***** For making Combobox items right justify *****
+					toReturn.setHorizontalAlignment(javax.swing.JLabel.RIGHT);
 				// toReturn.setVerticalAlignment(javax.swing.JLabel.CENTER);
 
 				String name = value.toString();
@@ -1318,38 +1296,34 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			}
 		});
 		resourceFileComboBox.setSelectedItem(Configuration.getValue(authoringToolPackage, "resourceFile"));
-
+		
 		// Aik Min - Language
 		JLabel languageLabel = new JLabel();
 		languagePanel.setLayout(new GridBagLayout());
-		languagePanel.add(languageLabel, new GridBagConstraints(0, 0, 1, 1,
-				0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		languagePanel.add(languageComboBox, new GridBagConstraints(1, 0, 1, 1,
-				0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
+		languagePanel.add(languageLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,	new Insets(5, 5, 5, 5), 0, 0));
+		languagePanel.add(languageComboBox, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
 		languageLabel.setText(Messages.getString("display_language_"));
 		for (int i=0; i<AikMin.listOfLanguages.length; i++) {
 			languageComboBox.addItem(AikMin.listOfLanguages[i]);	
 		}
 		languageComboBox.setSelectedItem(Configuration.getValue(authoringToolPackage, "language"));
-
+		if (!AikMin.isLTR()) { 	// ***** For making Combobox items right justify *****
+			languageComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
 		JLabel worldDirectoryLabel = new JLabel();
 		JButton worldDirectoryBrowseButton = new JButton();
 		worldDirectoryTextField.setColumns(15);
 		inputDirectoriesPanel.setLayout(new GridBagLayout());
-		inputDirectoriesPanel.add(worldDirectoryLabel, new GridBagConstraints(
-				0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
-				GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
-		inputDirectoriesPanel.add(worldDirectoryTextField,
-				new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0,
-						GridBagConstraints.WEST, GridBagConstraints.BOTH,
-						new Insets(5, 5, 5, 5), 0, 0));
-		inputDirectoriesPanel.add(worldDirectoryBrowseButton,
-				new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
-						GridBagConstraints.WEST, GridBagConstraints.NONE,
-						new Insets(5, 5, 5, 5), 0, 0));
+		inputDirectoriesPanel.add(worldDirectoryLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		inputDirectoriesPanel.add(worldDirectoryTextField, new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+		inputDirectoriesPanel.add(worldDirectoryBrowseButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 		// inputDirectoriesPanel.add(importDirectoryLabel, new
 		// GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
 		// ,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(4, 4,
@@ -1377,8 +1351,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		worldDirectoryLabel.setText(Messages.getString("save_and_load_from_"));
 		worldDirectoryBrowseButton.setText(Messages.getString("Browse___"));
-		worldDirectoryBrowseButton
-				.addActionListener(new java.awt.event.ActionListener() {
+		worldDirectoryBrowseButton.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						worldDirectoryBrowseButton_actionPerformed(e);
 					}
@@ -1387,13 +1360,17 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		JLabel fontSizeLabel = new JLabel();
 
 		fontSizePanel.setLayout(new GridBagLayout());
-		fontSizePanel.add(fontSizeComboBox, new GridBagConstraints(0, 0, 1, 1,
-				0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		fontSizePanel.add(fontSizeLabel, new GridBagConstraints(1, 0, 1, 1,
-				0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-
+		fontSizePanel.add(fontSizeComboBox, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		fontSizePanel.add(fontSizeLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,	new Insets(5, 5, 5, 5), 0, 0));
+		if (!AikMin.isLTR()) {		// ***** For making Combobox items right justify *****
+			fontSizeComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
 		fontSizeComboBox.setEditable(true);
 		fontSizeComboBox.setPreferredSize(new java.awt.Dimension(55, 25));
 		fontSizeComboBox.setMaximumRowCount(9);
@@ -1403,28 +1380,16 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		Component component = Box.createGlue();
 		// generalPanel.setBorder(emptyBorder);
 		generalPanel.setLayout(new GridBagLayout());
-		generalPanel.add(maxRecentWorldsPanel, new GridBagConstraints(0, 2, 1,
-				1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(maxRecentWorldsPanel, new GridBagConstraints(0, 2, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,	new Insets(0, 0, 0, 0), 0, 0));
 		// generalPanel.add(backgroundColorPanel, new GridBagConstraints(0, 2,
 		// 1, 1, 1.0, 0.0
 		// ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new
 		// Insets(4, 0, 4, 0), 0, 0));
-		generalPanel.add(resourcesPanel, new GridBagConstraints(0, 3, 1, 1,
-				1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(languagePanel, new GridBagConstraints(0, 4, 1, 1, 1.0,
-				0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(inputDirectoriesPanel, new GridBagConstraints(0, 5, 1,
-				1, 1.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(fontSizePanel, new GridBagConstraints(0, 6, 1, 1, 1.0,
-				0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(component, new GridBagConstraints(0, 7, 1, 1, 1.0,
-				1.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(resourcesPanel, new GridBagConstraints(0, 3, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(languagePanel, new GridBagConstraints(0, 4, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(inputDirectoriesPanel, new GridBagConstraints(0, 5, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(fontSizePanel, new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(component, new GridBagConstraints(0, 7, 1, 1, 1.0, 1.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		// generalPanel.add(watcherPanelEnabledCheckBox, new
 		// GridBagConstraints(0, 7, 1, 1, 0.0, 0.0
 		// ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new
@@ -1433,7 +1398,6 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		// GridBagConstraints(0, 8, 1, 1, 0.0, 0.0
 		// ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new
 		// Insets(0, 0, 0, 0), 0, 0));
-
 	}
 
 	private JCheckBox forceSoftwareRenderingCheckBox = new JCheckBox();
@@ -1497,36 +1461,15 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		boundsHeightTextField.getDocument().addDocumentListener(renderDialogHeightChecker);
 
 		renderWindowBoundsPanel.setLayout(new GridBagLayout());
-		renderWindowBoundsPanel.add(renderWindowBoundsLabel,
-				new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-						GridBagConstraints.WEST, GridBagConstraints.NONE,
-						new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsXLabel, new GridBagConstraints(0, 1,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_END,
-				GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsXTextField, new GridBagConstraints(1,
-				1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsYLabel, new GridBagConstraints(0, 2,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_END,
-				GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsYTextField, new GridBagConstraints(1,
-				2, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsWidthLabel, new GridBagConstraints(0,
-				3, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END,
-				GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsWidthTextField,
-				new GridBagConstraints(1, 3, 1, 1, 1.0, 0.0,
-						GridBagConstraints.CENTER, GridBagConstraints.NONE,
-						new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsHeightLabel, new GridBagConstraints(
-				0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END,
-				GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
-		renderWindowBoundsPanel.add(boundsHeightTextField,
-				new GridBagConstraints(1, 4, 1, 1, 1.0, 0.0,
-						GridBagConstraints.CENTER, GridBagConstraints.NONE,
-						new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(renderWindowBoundsLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,	new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsXLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsXTextField, new GridBagConstraints(1, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsYLabel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsYTextField, new GridBagConstraints(1, 2, 2, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsWidthLabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsWidthTextField, new GridBagConstraints(1, 3, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsHeightLabel, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
+		renderWindowBoundsPanel.add(boundsHeightTextField, new GridBagConstraints(1, 4, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 5, 3, 0), 0, 0));
 
 		constrainRenderDialogAspectCheckBox.setText(" " + Messages.getString("constrain_render_window_s_aspect_ratio"));
 		constrainRenderDialogAspectCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -1565,44 +1508,18 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		renderingPanel.setLayout(new GridBagLayout());
 		// renderingPanel.setBorder(emptyBorder);
 
-		renderingPanel.add(forceSoftwareRenderingCheckBox,
-				new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
-						GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0), 0, 0));
-		renderingPanel.add(showFPSCheckBox, new GridBagConstraints(0, 1, 2, 1,
-				0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
+		renderingPanel.add(forceSoftwareRenderingCheckBox, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		renderingPanel.add(showFPSCheckBox, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		// Aik Min added this.
-		renderingPanel.add(deleteFiles, new GridBagConstraints(0, 2, 2, 1, 0.0,
-				0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		renderingPanel.add(renderWindowBoundsPanel, new GridBagConstraints(0,
-				3, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
-		renderingPanel.add(constrainRenderDialogAspectCheckBox,
-				new GridBagConstraints(0, 4, 2, 1, 0.0, 0.0,
-						GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-						new Insets(10, 0, 0, 0), 0, 0));
-		renderingPanel.add(ensureRenderDialogIsOnScreenCheckBox,
-				new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0,
-						GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0), 0, 0));
-		renderingPanel.add(rendererListLabel, new GridBagConstraints(0, 6, 2,
-				1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(10, 5, 0, 0), 0, 0));
-		renderingPanel.add(rendererList, new GridBagConstraints(0, 7, 2, 1,
-				1.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.HORIZONTAL, new Insets(5, 5, 0, 5), 0, 0));
-		renderingPanel.add(rendererMoveUpButton, new GridBagConstraints(0, 8,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
-		renderingPanel.add(rendererMoveDownButton, new GridBagConstraints(1, 8,
-				1, 1, 1.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
-		renderingPanel.add(component, new GridBagConstraints(0, 9, 2, 1, 1.0,
-				1.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-
+		renderingPanel.add(deleteFiles, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		renderingPanel.add(renderWindowBoundsPanel, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+		renderingPanel.add(constrainRenderDialogAspectCheckBox, new GridBagConstraints(0, 4, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(10, 0, 0, 0), 0, 0));
+		renderingPanel.add(ensureRenderDialogIsOnScreenCheckBox, new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		renderingPanel.add(rendererListLabel, new GridBagConstraints(0, 6, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(10, 5, 0, 0), 0, 0));
+		renderingPanel.add(rendererList, new GridBagConstraints(0, 7, 2, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 0, 5), 0, 0));
+		renderingPanel.add(rendererMoveUpButton, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		renderingPanel.add(rendererMoveDownButton, new GridBagConstraints(1, 8, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		renderingPanel.add(component, new GridBagConstraints(0, 9, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 	}
 
 	JTextField captureDirectoryTextField = new JTextField();
@@ -1634,20 +1551,37 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		JLabel numDigitsLabel = new JLabel();
 		numDigitsLabel.setText(Messages.getString("number_of_digits_to_append_"));
-		// this.setPreferredSize(new java.awt.Dimension( 600, 600 ));
+		numDigitsComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
 		numDigitsComboBox.addItem("1");
 		numDigitsComboBox.addItem("2");
 		numDigitsComboBox.addItem("3");
 		numDigitsComboBox.addItem("4");
 		numDigitsComboBox.addItem("5");
 		numDigitsComboBox.addItem("6");
-
+		if (!AikMin.isLTR()) {		// ***** For making Combobox items right justify *****
+			numDigitsComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
+		
 		JLabel codecLabel = new JLabel();
 		codecLabel.setText(Messages.getString("image_format_"));
 		codecComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
 		codecComboBox.addItem("jpeg");
 		codecComboBox.addItem("png");
-
+		if (!AikMin.isLTR()) {		// ***** For making Combobox items right justify *****
+			codecComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
 		screenCaptureInformUserCheckBox.setText(" " + Messages.getString("show_information_dialog_when_capture_is_made"));
 
 		JLabel usageLabel = new JLabel();
@@ -1656,43 +1590,18 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		screenGrabPanel.setLayout(new GridBagLayout());
 
 		Component component = Box.createGlue();
-		screenGrabPanel.add(captureDirectory, new GridBagConstraints(0, 0, 1,
-				1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(captureDirectoryTextField, new GridBagConstraints(
-				1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(browseButton, new GridBagConstraints(2, 0, 1, 1,
-				0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(baseNameLabel, new GridBagConstraints(0, 1, 1, 1,
-				0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(baseNameTextField, new GridBagConstraints(1, 1, 1,
-				1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(numDigitsLabel, new GridBagConstraints(0, 2, 1, 1,
-				0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(numDigitsComboBox, new GridBagConstraints(1, 2, 1,
-				1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(codecLabel, new GridBagConstraints(0, 3, 1, 1, 0.0,
-				0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(codecComboBox, new GridBagConstraints(1, 3, 1, 1,
-				0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		screenGrabPanel.add(screenCaptureInformUserCheckBox,
-				new GridBagConstraints(0, 4, 3, 1, 0.0, 0.0,
-						GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0), 0, 0));
-		screenGrabPanel.add(component, new GridBagConstraints(0, 5, 3, 1, 1.0,
-				1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
-		screenGrabPanel.add(usageLabel, new GridBagConstraints(0, 6, 3, 1, 0.0,
-				0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(captureDirectory, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(captureDirectoryTextField, new GridBagConstraints( 1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(browseButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(baseNameLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(baseNameTextField, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(numDigitsLabel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(numDigitsComboBox, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(codecLabel, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(codecComboBox, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		screenGrabPanel.add(screenCaptureInformUserCheckBox, new GridBagConstraints(0, 4, 3, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		screenGrabPanel.add(component, new GridBagConstraints(0, 5, 3, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		screenGrabPanel.add(usageLabel, new GridBagConstraints(0, 6, 3, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 	}
 
 	private JCheckBox showStartUpDialogCheckBox = new JCheckBox();
@@ -1729,21 +1638,28 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		
 		JLabel numClipboardsLabel = new JLabel();
 		numClipboardsTextField.setColumns(3);
+		numClipboardsTextField.setMinimumSize(new Dimension(50, 22));
 		numClipboardsTextField.setMargin(new Insets(1, 1, 1, 1));
 		numClipboardsLabel.setText(Messages.getString("number_of_clipboards"));
-		// numClipboardsLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 
 		JPanel numClipboardsPanel = new JPanel();
-		BorderLayout borderLayout = new BorderLayout();
-		borderLayout.setHgap(8);
-		numClipboardsPanel.setLayout(borderLayout);
-		numClipboardsPanel.add(numClipboardsTextField, BorderLayout.WEST);
-		numClipboardsPanel.add(numClipboardsLabel, BorderLayout.CENTER);
+		numClipboardsPanel.setLayout(new GridBagLayout());
+		numClipboardsPanel.add(numClipboardsTextField, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		numClipboardsPanel.add(numClipboardsLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 
 		JLabel saveIntervalLabelEnd = new JLabel();
 		saveIntervalComboBox.setEditable(true);
-		saveIntervalComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
+		saveIntervalComboBox.setPreferredSize(new java.awt.Dimension(80, 25));
 		saveIntervalLabelEnd.setText(" " + Messages.getString("number_of_minutes_to_wait_before_displaying_save_reminder"));
+		if (!AikMin.isLTR()) {		// ***** For making Combobox items right justify *****
+			saveIntervalComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
 
 		saveIntervalPanel.setOpaque(false);
 		saveIntervalPanel.setBorder(null);
@@ -1751,10 +1667,19 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		saveIntervalPanel.add(saveIntervalLabelEnd);
 
 		JLabel backupCountLabel = new JLabel();
-		backupCountLabel.setText(" " + Messages.getString("number_of_backups_of_each_world_to_save"));
 		backupCountComboBox.setEditable(true);
-		backupCountComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
+		backupCountComboBox.setPreferredSize(new java.awt.Dimension(80, 25));
+		backupCountLabel.setText(" " + Messages.getString("number_of_backups_of_each_world_to_save"));
 		backupCountComboBox.setMaximumRowCount(9);
+		if (!AikMin.isLTR()) {		// ***** For making Combobox items right justify *****
+			backupCountComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
 
 		backupCountPanel.setOpaque(false);
 		backupCountPanel.setBorder(null);
@@ -1764,62 +1689,27 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		// seldomUsedPanel.setBorder(emptyBorder);
 		seldomUsedPanel.setLayout(new GridBagLayout());
 
-		seldomUsedPanel.add(showStartUpDialogCheckBox, new GridBagConstraints(
-				0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(showWebWarningCheckBox, new GridBagConstraints(0,
-				1, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(loadSavedTabsCheckBox, new GridBagConstraints(0, 2,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(pickUpTilesCheckBox, new GridBagConstraints(0, 3,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(useAlphaTilesCheckBox, new GridBagConstraints(0, 4,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(saveThumbnailWithWorldCheckBox,
-				new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
-						GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-						new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(showWorldStatsCheckBox, new GridBagConstraints(0,
-				6, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(showStartUpDialogCheckBox, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(showWebWarningCheckBox, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(loadSavedTabsCheckBox, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(pickUpTilesCheckBox, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(useAlphaTilesCheckBox, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(saveThumbnailWithWorldCheckBox, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(showWorldStatsCheckBox, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		// seldomUsedPanel.add(saveAsSingleFileCheckBox, new
 		// GridBagConstraints(0, 6, 1, 1, 0.0, 0.0
 		// ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0,
 		// 0, 0), 0, 0));
-		seldomUsedPanel.add(clearStdOutOnRunCheckBox, new GridBagConstraints(0,
-				7, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(enableHighContrastCheckBox, new GridBagConstraints(
-				0, 8, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(enableLoggingCheckBox, new GridBagConstraints(0, 9,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(enableScriptingCheckBox, new
-				GridBagConstraints(0, 10, 1, 1, 0.0, 0.0,
-				GridBagConstraints.LINE_START, GridBagConstraints.NONE, new
-				Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(clearStdOutOnRunCheckBox, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(enableHighContrastCheckBox, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(enableLoggingCheckBox, new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(enableScriptingCheckBox, new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));	
+		seldomUsedPanel.add(disableTooltipCheckBox, new GridBagConstraints(0, 11, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(showBuilderCheckBox, new GridBagConstraints(0, 12, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		
-		seldomUsedPanel.add(disableTooltipCheckBox, new GridBagConstraints(0,
-				11, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(showBuilderCheckBox, new GridBagConstraints(0,
-				12, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		
-		seldomUsedPanel.add(numClipboardsPanel, new GridBagConstraints(0, 13,
-				1, 1, 0.0, 0.0, GridBagConstraints.LINE_START,
-				GridBagConstraints.NONE, new Insets(5, 5, 5, 0), 0, 0));
-		seldomUsedPanel.add(saveIntervalPanel, new GridBagConstraints(0, 14, 1,
-				1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 15, 1,
-				1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE,
-				new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(numClipboardsPanel, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(saveIntervalPanel, new GridBagConstraints(0, 14, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 15, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		
 		// seldomUsedPanel.add(runtimeScratchPadEnabledCheckBox, new
 		// GridBagConstraints(0, 10, 1, 1, 0.0, 0.0
@@ -1841,17 +1731,13 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		// 1, 1, 1.0, 0.0
 		// ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,
 		// 0, 0), 0, 0));
-		seldomUsedPanel.add(javax.swing.Box.createVerticalGlue(),
-				new GridBagConstraints(0, 16, 1, 1, 1.0, 1.0,
-						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-						new Insets(0, 0, 0, 0), 0, 0));
+		seldomUsedPanel.add(javax.swing.Box.createVerticalGlue(), new GridBagConstraints(0, 16, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 		if (Configuration.getValue(authoringToolPackage, "disableTooltipMode").equalsIgnoreCase("true")) {
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(false);
 		} else {
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
 		}
-
 	}
 
 	JCheckBox createNormalsCheckBox = new JCheckBox();

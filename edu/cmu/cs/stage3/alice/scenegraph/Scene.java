@@ -36,7 +36,7 @@ public class Scene extends ReferenceFrame {
 	
 	protected void releasePass1() {
 		if( m_background != null ) {
-			warnln( Messages.getString("WARNING__released_scene_") + this + " " + Messages.getString("still_has_background_") + m_background + "." );   
+			warnln( Messages.getString("WARNING__released_scene_still_has_background_", this, m_background) );   
 			setBackground( null );
 		}
 		super.releasePass1();

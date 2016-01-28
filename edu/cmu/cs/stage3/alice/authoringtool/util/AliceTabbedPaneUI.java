@@ -36,16 +36,18 @@ public class AliceTabbedPaneUI extends javax.swing.plaf.metal.MetalTabbedPaneUI 
 
 	protected void installDefaults() {
 		super.installDefaults();
-
+		this.darkShadow = java.awt.Color.darkGray;
+/*
+		this.lightHighlight;
+		this.shadow;
+		this.tabAreaBackground;
 		this.selectColor = java.awt.Color.white;
 		this.selectHighlight = java.awt.Color.black;
 		this.tabAreaBackground = java.awt.Color.white;
-		this.darkShadow = java.awt.Color.black;
-		this.focus = new java.awt.Color( 255, 255, 255, 0 ); // don't paint focus
-		this.highlight = java.awt.Color.darkGray;
+		this.focus = java.awt.Color.white; // don't paint focus
+		this.highlight = java.awt.Color.lightGray;
 
-		//new for 1.4
-		this.contentBorderInsets = new java.awt.Insets( 1, 1, 1, 1 );
+*/		//this.contentBorderInsets = new java.awt.Insets( 0, 0, 0, 0 );
 
 		defaultTabForeground = javax.swing.UIManager.getColor( "TabbedPane.foreground" );
 	}
@@ -143,6 +145,7 @@ public class AliceTabbedPaneUI extends javax.swing.plaf.metal.MetalTabbedPaneUI 
 		return (runCount > 0 ? runCount * (maxTabHeight-tabRunOverlay) + tabRunOverlay : 0);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected java.awt.FontMetrics getFontMetrics() {
 		java.awt.Font font = tabPane.getFont().deriveFont( java.awt.Font.BOLD );
 		return java.awt.Toolkit.getDefaultToolkit().getFontMetrics( font );

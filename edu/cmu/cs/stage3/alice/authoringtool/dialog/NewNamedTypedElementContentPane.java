@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import java.awt.ComponentOrientation;
 import java.awt.GridBagConstraints;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
@@ -75,6 +74,8 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		valuePanel = new javax.swing.JPanel();
 		valuePanel.setLayout(new java.awt.GridBagLayout());
 		valueLabel = new javax.swing.JLabel();
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
+		valueLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
 		valuesComponent = new javax.swing.JPanel();
 		valuesComponent.setBorder(null);
 		valuesComponent.setOpaque(false);
@@ -91,9 +92,20 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		objectArrayPropertyEditor = new edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyEditor();
 		objectArrayScrollPane = new javax.swing.JScrollPane(objectArrayPropertyEditor);
 		objectArrayScrollPane.setPreferredSize(new java.awt.Dimension(1, 150));
+
+		if(!AikMin.isLTR()){	// ***** To fix the scrollbar on the create new variable's values panel *****
+			objectArrayScrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+	            @Override
+	            public void layoutContainer(java.awt.Container parent) {
+	            	javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+	            	scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+	                super.layoutContainer(parent);
+	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+	            }
+	        });
+		}
 		
 		makeCollectionCheckBox = new javax.swing.JCheckBox(Messages.getString("make_a"));
-		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
 		makeCollectionCheckBox.setFont(new java.awt.Font("SansSerif",java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
 		makeCollectionCheckBox.addActionListener(new java.awt.event.ActionListener() {
 					public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -132,7 +144,9 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.insets.right = 0;
-		add(new javax.swing.JLabel(Messages.getString("Type_")), gbc);
+		javax.swing.JLabel typeLabel = new javax.swing.JLabel(Messages.getString("Type_"));
+		typeLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
+		add(typeLabel, gbc);
 		gbc.insets.right = 8;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;
@@ -141,9 +155,6 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		layoutValuePanel();
 		add(valuePanel, gbc);
-		if (!AikMin.isLTR()) {
-			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);	
-		}
 	}
 
 	public void reset(edu.cmu.cs.stage3.alice.core.Element context) {
@@ -200,7 +211,7 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 			try {
 				collection = (edu.cmu.cs.stage3.alice.core.Collection) collectionType.newInstance();
 			} catch (Exception e) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Could_not_create_a_collection_of_type_") + collectionType, e);
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Could_not_create_a_collection_of_type_", collectionType), e);
 				collection = new edu.cmu.cs.stage3.alice.core.List();
 			}
 			collection.valueClass.set(type);

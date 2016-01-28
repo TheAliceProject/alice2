@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question;
 
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
-import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class UnaryNumberResultingInNumberQuestion extends NumberQuestion {
 	public final NumberProperty a = new NumberProperty( this, "a", new Double( 0 ) ); 
@@ -32,7 +31,7 @@ public abstract class UnaryNumberResultingInNumberQuestion extends NumberQuestio
 	
 	public Object getValue() {
 		double aValue = a.doubleValue( 0.0 );
-		if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Abs){
+/*		if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Abs){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("absolute_value_of_")+aValue+" "+Messages.getString("is_");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Sqrt){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= Messages.getString("square_root_of_")+aValue+" "+Messages.getString("is_");		  
@@ -62,7 +61,7 @@ public abstract class UnaryNumberResultingInNumberQuestion extends NumberQuestio
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= aValue + " " + Messages.getString("converted_from_radians_to_degrees_is_");		 
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.ToDegrees){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= aValue + " " + Messages.getString("converted_from_degrees_to_radians_is_");		 
-		} 
+		} */
 		if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Int)
 			return (int) aValue;
 			

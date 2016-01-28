@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.image.codec;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /*
  * The contents of this file are subject to the  JAVA ADVANCED IMAGING
  * SAMPLE INPUT-OUTPUT CODECS AND WIDGET HANDLING SOURCE CODE  License
@@ -252,7 +254,7 @@ public class PNGDecodeParam implements ImageDecodeParam {
      */
     public void setUserExponent(float userExponent) {
         if (userExponent <= 0.0F) {
-            throw new IllegalArgumentException(JaiI18N.getString("User_exponent_must_not_be_negative_"));
+            throw new IllegalArgumentException(Messages.getString("User_exponent_must_not_be_negative_"));
         }
         this.userExponent = userExponent;
     }
@@ -301,7 +303,7 @@ public class PNGDecodeParam implements ImageDecodeParam {
      */
     public void setDisplayExponent(float displayExponent) {
         if (displayExponent <= 0.0F) {
-            throw new IllegalArgumentException(JaiI18N.getString("Display_exponent_must_not_be_negative_"));
+            throw new IllegalArgumentException(Messages.getString("Display_exponent_must_not_be_negative_"));
         }
         this.displayExponent = displayExponent;
     }

@@ -281,7 +281,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 	 //   System.err.println("- Create processor for: " + inML);
 	    p = Manager.createProcessor(inML);
 	} catch (Exception e) {
-	    System.err.println(Messages.getString("Cannot_create_a_processor_from_the_given_url__") + e); 
+	    System.err.println(Messages.getString("Cannot_create_a_processor_from_the_given_url__", e)); 
 	    return false;
 	}
 
@@ -437,9 +437,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 		}
 
 		if (selected != null) {
-		    System.err.println("  "+Messages.getString("Transcode_")); 
-		    System.err.println(Messages.getString("from__") + tc[i].getFormat()); 
-		    System.err.println(Messages.getString("to__") + selected); 
+		    System.err.println(Messages.getString("Transcode_from__to__", tc[i].getFormat(), selected)); 
 		    tc[i].setFormat(selected);
 		}
 	    }
@@ -473,8 +471,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 			if (fmts[j].matches(jpegFmt)) {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
-			    System.err.println(Messages.getString("__Set_quality_to_") +  
-					val + " " + Messages.getString("on_") + qc); 
+			    System.err.println(Messages.getString("__Set_quality_to_on_", val, qc)); 
 			    break;
 			}
 		    }

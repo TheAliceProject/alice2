@@ -47,6 +47,8 @@ package edu.cmu.cs.stage3.image.codec;
 import java.awt.image.RenderedImage;
 import java.io.OutputStream;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  */
 public final class FPXCodec extends ImageCodec {
@@ -77,7 +79,7 @@ public final class FPXCodec extends ImageCodec {
     
 	protected ImageEncoder createImageEncoder(OutputStream dst,
                                               ImageEncodeParam param) {
-        throw new RuntimeException(JaiI18N.getString("FPX_encoding_not_supported_yet_"));
+        throw new RuntimeException(Messages.getString("FPX_encoding_not_supported_yet_"));
     }
 
     

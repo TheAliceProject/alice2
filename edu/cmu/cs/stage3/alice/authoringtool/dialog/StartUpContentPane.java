@@ -23,9 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -93,15 +93,14 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private static final String TEMPLATES_STRING = Messages.getString("Templates");
 
 	private final int WIDTH = 550;
-	private final int HEIGHT = 500;
+	private final int HEIGHT = 510;
 	// private final int INSET = 14;
 
-	private static final java.awt.Color SELECTED_COLOR = new java.awt.Color(10,	10, 100);
+	private static final java.awt.Color SELECTED_COLOR = new java.awt.Color(10, 10, 100);
 	private static final java.awt.Color SELECTED_TEXT_COLOR = new java.awt.Color(255, 255, 255);
 	private static final java.awt.Color BACKGROUND_COLOR = new java.awt.Color(0, 0, 0);
 
-	private static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
-			.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
+	private static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
 
 	private AliceWorldFilter aliceFilter;
 	private javax.swing.filechooser.FileFilter worldFilter;
@@ -109,7 +108,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	private StartUpIcon currentlySelected;
 
-	private javax.swing.ImageIcon headerImage;
+	private javax.swing.ImageIcon headerImage = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/StartupScreen.png"));
 	private javax.swing.ImageIcon basicIcon;
 	private javax.swing.ImageIcon directoryIcon;
 	private javax.swing.ImageIcon upDirectoryIcon;
@@ -132,16 +131,11 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private JPanel textbookExampleWorldsContainer = new JPanel();
 	private JPanel templateWorldsContainer = new JPanel();
 	private JPanel tutorialWorldsContainer = new JPanel();
-	private edu.cmu.cs.stage3.awt.DynamicFlowLayout examplePanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(
-			java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
-	private edu.cmu.cs.stage3.awt.DynamicFlowLayout recentPanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(
-			java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
-	private edu.cmu.cs.stage3.awt.DynamicFlowLayout templatePanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(
-			java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
-	private edu.cmu.cs.stage3.awt.DynamicFlowLayout tutorialPanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(
-			java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
-	private edu.cmu.cs.stage3.awt.DynamicFlowLayout textbookPanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(
-			java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
+	private edu.cmu.cs.stage3.awt.DynamicFlowLayout examplePanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
+	private edu.cmu.cs.stage3.awt.DynamicFlowLayout recentPanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
+	private edu.cmu.cs.stage3.awt.DynamicFlowLayout templatePanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
+	private edu.cmu.cs.stage3.awt.DynamicFlowLayout tutorialPanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
+	private edu.cmu.cs.stage3.awt.DynamicFlowLayout textbookPanelLayout = new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEFT, null, javax.swing.JPanel.class, 20);
 
 	private JPanel exampleWorldsDirectoryContainer = new JPanel();
 	private JPanel textbookExampleWorldsDirectoryContainer = new JPanel();
@@ -149,22 +143,27 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private JPanel tutorialWorldsDirectoryContainer = new JPanel();
 	private JPanel recentWorldsDirectoryContainer = new JPanel();
 
-	private JLabel exampleWorldsDirLabel = new JLabel();
-	private JLabel textbookExampleWorldsDirLabel = new JLabel();
-	private JLabel templateWorldsDirLabel = new JLabel();
-	private JLabel tutorialWorldsDirLabel = new JLabel();
-	private JLabel recentWorldsDirLabel = new JLabel();
+	//private JLabel exampleWorldsDirLabel = new JLabel();
+	//private JLabel textbookExampleWorldsDirLabel = new JLabel();
+	//private JLabel templateWorldsDirLabel = new JLabel();
+	//private JLabel tutorialWorldsDirLabel = new JLabel();
+	//private JLabel recentWorldsDirLabel = new JLabel();
 
 	private JButton openButton = new JButton();
 	private JButton cancelButton = new JButton();
 	// private JButton refreshButton = new JButton();
 	private JCheckBox stopShowingCheckBox = new JCheckBox();
 
-	private JLabel headerLabel = new JLabel();
+	private JLabel headerLabel = new JLabel(headerImage) {
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(headerImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+		}
+	};
 
 	private JPanel tutorialButtonPanel = new JPanel();
 	private JButton startTutorialButton = new JButton();
-	private BorderLayout borderLayout1 = new BorderLayout();
+	//private BorderLayout borderLayout1 = new BorderLayout();
 
 	private JFileChooser fileChooser = new JFileChooser() {
 		public void setSelectedFile(java.io.File file) {
@@ -178,7 +177,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	protected int currentTab = TUTORIAL_TAB_ID;
 
 	public StartUpContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
-		headerImage = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/StartupScreen.png"));
+		//headerImage = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/StartupScreen.png"));
 		basicIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/aliceIcon.png"));
 		directoryIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/directoryIcon.png"));
 		upDirectoryIcon = new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/startUpDialog/upDirectoryIcon.png"));
@@ -216,19 +215,15 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		String font = "SansSerif";// "Dialog";
 
 		tutorialWorlds = authoringTool.getTutorialDirectory();
-		count = buildPanel(tutorialWorldsContainer,
-				buildVectorFromDirectory(tutorialWorlds, tutorialFilter),
-				false, null, StartUpIcon.TUTORIAL);
+		count = buildPanel(tutorialWorldsContainer, buildVectorFromDirectory(tutorialWorlds, tutorialFilter), false, null, StartUpIcon.TUTORIAL);
 		if (count <= 0) {
 			tutorialWorldsDirectoryContainer.removeAll();
 			javax.swing.JLabel noTutorialWorldsLabel = new javax.swing.JLabel();
 			noTutorialWorldsLabel.setText(Messages.getString("No_tutorial_found_"));
-			noTutorialWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int) (18 * fontSize / 12.0)));	
+			noTutorialWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int) (18 * fontSize / 12.0)));
 			tutorialWorldsDirectoryContainer.add(noTutorialWorldsLabel);
 		}
-		count = buildPanel(exampleWorldsContainer,
-				buildVectorFromDirectory(exampleWorlds, aliceFilter), false,
-				null, StartUpIcon.STANDARD);
+		count = buildPanel(exampleWorldsContainer, buildVectorFromDirectory(exampleWorlds, aliceFilter), false, null, StartUpIcon.STANDARD);
 		if (count <= 0) {
 			exampleWorldsDirectoryContainer.removeAll();
 			javax.swing.JLabel noExampleWorldsLabel = new javax.swing.JLabel();
@@ -236,9 +231,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			noExampleWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int) (18 * fontSize / 12.0)));
 			exampleWorldsDirectoryContainer.add(noExampleWorldsLabel);
 		}
-		count = buildPanel(templateWorldsContainer,
-				buildVectorFromDirectory(templateWorlds, aliceFilter), false,
-				null, StartUpIcon.STANDARD);
+		count = buildPanel(templateWorldsContainer, buildVectorFromDirectory(templateWorlds, aliceFilter), false, null, StartUpIcon.STANDARD);
 		if (count <= 0) {
 			templateWorldsDirectoryContainer.removeAll();
 			javax.swing.JLabel noTemplateWorldsLabel = new javax.swing.JLabel();
@@ -246,9 +239,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			noTemplateWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int) (18 * fontSize / 12.0)));
 			templateWorldsDirectoryContainer.add(noTemplateWorldsLabel);
 		}
-		count = buildPanel(recentWorldsContainer,
-				buildVectorFromString(recentWorldsStrings), true, null,
-				StartUpIcon.STANDARD);
+		count = buildPanel(recentWorldsContainer, buildVectorFromString(recentWorldsStrings), true, null, StartUpIcon.STANDARD);
 		if (count <= 0) {
 			recentWorldsDirectoryContainer.removeAll();
 			javax.swing.JLabel noRecentWorldsLabel = new javax.swing.JLabel();
@@ -256,9 +247,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			noRecentWorldsLabel.setFont(new java.awt.Font(font, java.awt.Font.BOLD, (int) (18 * fontSize / 12.0)));
 			recentWorldsDirectoryContainer.add(noRecentWorldsLabel);
 		}
-		count = buildPanel(textbookExampleWorldsContainer,
-				buildVectorFromDirectory(textbookExampleWorlds, aliceFilter),
-				false, null, StartUpIcon.STANDARD);
+		count = buildPanel(textbookExampleWorldsContainer, buildVectorFromDirectory(textbookExampleWorlds, aliceFilter), false, null, StartUpIcon.STANDARD);
 		if (count <= 0) {
 			textbookExampleWorldsDirectoryContainer.removeAll();
 			javax.swing.JLabel noRecentWorldsLabel = new javax.swing.JLabel();
@@ -269,6 +258,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		addComponentListener(new java.awt.event.ComponentAdapter() {
 			public void componentResized(java.awt.event.ComponentEvent e) {
 				matchSizes();
+				headerLabel.repaint();
 			}
 		});
 		tutorialPanelLayout.setHgap(35);
@@ -472,8 +462,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			java.util.zip.ZipFile zip = new java.util.zip.ZipFile(file);
 			java.util.zip.ZipEntry entry = zip.getEntry("thumbnail.png");
 			if (entry != null) {
-				java.io.InputStream stream = zip.getInputStream(entry);
-				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load("png", stream);
+				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load("png", zip.getInputStream(entry));
 				if (image != null) {
 					icon = new javax.swing.ImageIcon(image);
 				}
@@ -500,20 +489,6 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	}
 
-	protected String getBaseDirString(java.awt.Component topLevelOwner) {
-		if (topLevelOwner == tutorialWorldsDirectoryContainer) {
-			return TUTORIAL_STRING;
-		} else if (topLevelOwner == exampleScrollPane) {
-			return EXAMPLES_STRING;
-		} else if (topLevelOwner == templateScrollPane) {
-			return TEMPLATES_STRING;
-		} else if (topLevelOwner == textbookExampleScrollPane) {
-			return TEXTBOOK_EXAMPLES_STRING;
-		} else {
-			return "";
-		}
-	}
-
 	private int buildPanel(javax.swing.JPanel toBuild, java.util.Vector toAdd, boolean needToSave, java.io.File parentDir, int type) {
 		// int width = 0;
 		// int currentRow = 0;
@@ -525,9 +500,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 		if (parentDir != null && parentDir.getName().compareToIgnoreCase("Required") != 0) {
 			String parentDirName = Messages.getString("Back");
-			StartUpIcon parentDirIcon = new StartUpIcon(parentDirName,
-					upDirectoryIcon, parentDir.getAbsolutePath(), false,
-					StartUpIcon.DIRECTORY, getTopContainer(toBuild));
+			StartUpIcon parentDirIcon = new StartUpIcon(parentDirName, upDirectoryIcon, parentDir.getAbsolutePath(), false, StartUpIcon.DIRECTORY, getTopContainer(toBuild));
 			toBuild.add(parentDirIcon);
 			count++;
 		}
@@ -541,9 +514,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if (file.exists() && file.canRead()) {
 					filename = file.getAbsolutePath();
 					if (file.isDirectory()) {
-						StartUpIcon dirIcon = new StartUpIcon(name,
-								directoryIcon, filename, false,
-								StartUpIcon.DIRECTORY, getTopContainer(toBuild));
+						StartUpIcon dirIcon = new StartUpIcon(name, directoryIcon, filename, false, StartUpIcon.DIRECTORY, getTopContainer(toBuild));
 						toBuild.add(dirIcon);
 						count++;
 					} else {
@@ -557,9 +528,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 							worldIsThere = false;
 						}
 						if (worldIsThere) {
-							StartUpIcon sui = new StartUpIcon(name, icon,
-									filename, needToSave, type,
-									getTopContainer(toBuild));
+							StartUpIcon sui = new StartUpIcon(name, icon, filename, needToSave, type, getTopContainer(toBuild));
 							toBuild.add(sui);
 							count++;
 						}
@@ -624,14 +593,14 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			setPreferredSize(new java.awt.Dimension(WIDTH, HEIGHT + fontSize * 3));
 		else
 			setPreferredSize(new java.awt.Dimension(WIDTH, HEIGHT));
-		headerLabel.setIcon(headerImage);
+		//headerLabel.setIcon(headerImage);
 		startTutorialButton.setIcon(tutorialButtonIcon);
 		startTutorialButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		exampleWorldsContainer.setBorder(null);
-		tutorialWorldsContainer.setBorder(null);
-		recentWorldsContainer.setBorder(null);
-		templateWorldsContainer.setBorder(null);
-		textbookExampleWorldsContainer.setBorder(null);
+		exampleWorldsContainer.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		tutorialWorldsContainer.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		recentWorldsContainer.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		templateWorldsContainer.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		textbookExampleWorldsContainer.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 		authoringToolConfig.getValue("showStartUpDialog");
 		stopShowingCheckBox.setSelected(authoringToolConfig.getValue("showStartUpDialog").equalsIgnoreCase("true"));
 		mainTabPane.setUI(new edu.cmu.cs.stage3.alice.authoringtool.util.AliceTabbedPaneUI());
@@ -696,13 +665,11 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// openButton.setMaximumSize(new Dimension(95, 27));
 		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
 		openButton.setMinimumSize(new Dimension(fontSize * 8, fontSize * 2 + 5));
-		openButton.setPreferredSize(new Dimension(fontSize * 8,	fontSize * 2 + 5));
+		openButton.setPreferredSize(new Dimension(fontSize * 8, fontSize * 2 + 5));
 		openButton.setText(Messages.getString("Open"));
 		openButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				authoringToolConfig.setValue("showStartUpDialog_OpenTab",
-						Integer.toString(getIDForTab(mainTabPane
-								.getSelectedComponent())));
+				authoringToolConfig.setValue("showStartUpDialog_OpenTab", Integer.toString(getIDForTab(mainTabPane.getSelectedComponent())));
 			}
 		});
 
@@ -710,23 +677,15 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		cancelButton.setMinimumSize(new Dimension(fontSize * 8, fontSize * 2 + 5));
 		cancelButton.setPreferredSize(new Dimension(fontSize * 8, fontSize * 2 + 5));
 		cancelButton.setText(Messages.getString("Cancel"));
-		/*
-		 * refreshButton.setMaximumSize(new Dimension(90, 22));
-		 * refreshButton.setMinimumSize(new Dimension(90, 22));
-		 * refreshButton.setPreferredSize(new Dimension(90, 22));
-		 * refreshButton.setOpaque(false); refreshButton.setText("Refresh");
-		 * refreshButton.addActionListener(new java.awt.event.ActionListener() {
-		 * public void actionPerformed(ActionEvent e) {
-		 * refreshButton_actionPerformed(e); } });
-		 */
+
 		stopShowingCheckBox.setOpaque(false);
 		stopShowingCheckBox.setText(Messages.getString("Show_this_dialog_at_start"));
 		stopShowingCheckBox.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						stopShowingCheckBox_actionPerformed(e);
-					}
-				});
-		
+			public void actionPerformed(ActionEvent e) {
+				stopShowingCheckBox_actionPerformed(e);
+			}
+		});
+
 		// Example World Tab
 		exampleWorldsContainer.setLayout(examplePanelLayout);
 		exampleScrollPane.setBackground(Color.white);
@@ -737,19 +696,13 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		exampleWorldsContainer.setAlignmentX((float) 0.0);
 		exampleWorldsContainer.setAlignmentY((float) 0.0);
 
-		exampleWorldsDirLabel.setText(" ");//getBaseDirString(exampleScrollPane));
+		//exampleWorldsDirLabel.setText(" ");// getBaseDirString(exampleScrollPane));
 		exampleWorldsDirectoryContainer.setLayout(new GridBagLayout());
 		exampleWorldsDirectoryContainer.setOpaque(true);
 		exampleWorldsDirectoryContainer.setBackground(Color.white);
-		exampleWorldsDirectoryContainer.add(exampleWorldsDirLabel,
-				new GridBagConstraints(0, 0, 1, 1, 0, 0,
-				GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(2, 2, 2, 0), 0, 0));
-		exampleWorldsDirectoryContainer.add(exampleScrollPane,
-				new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
-		
+		//exampleWorldsDirectoryContainer.add(exampleWorldsDirLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(2, 2, 2, 0), 0, 0));
+		exampleWorldsDirectoryContainer.add(exampleScrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
 		// Recent World Tab
 		recentWorldsContainer.setLayout(recentPanelLayout);
 		recentScrollPane.setBackground(Color.white);
@@ -759,20 +712,14 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		recentWorldsContainer.setBackground(Color.white);
 		recentWorldsContainer.setAlignmentX((float) 0.0);
 		recentWorldsContainer.setAlignmentY((float) 0.0);
-		
-		recentWorldsDirLabel.setText(" ");
+
+		//recentWorldsDirLabel.setText(" ");
 		recentWorldsDirectoryContainer.setLayout(new GridBagLayout());
 		recentWorldsDirectoryContainer.setOpaque(true);
 		recentWorldsDirectoryContainer.setBackground(Color.white);
-		recentWorldsDirectoryContainer.add(recentWorldsDirLabel,
-				new GridBagConstraints(0, 0, 1, 1, 0, 0,
-				GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(2, 2, 2, 0), 0, 0));
-		recentWorldsDirectoryContainer.add(recentScrollPane,
-				new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
-		
+		//recentWorldsDirectoryContainer.add(recentWorldsDirLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(2, 2, 2, 0), 0, 0));
+		recentWorldsDirectoryContainer.add(recentScrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
 		// Template World Tab
 		templateWorldsContainer.setLayout(templatePanelLayout);
 		templateScrollPane.getViewport().setBackground(Color.white);
@@ -783,19 +730,13 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		templateWorldsContainer.setAlignmentX((float) 0.0);
 		templateWorldsContainer.setAlignmentY((float) 0.0);
 
-		templateWorldsDirLabel.setText(" ");//getBaseDirString(templateScrollPane));
+		//templateWorldsDirLabel.setText(getBaseDirString(templateScrollPane));
 		templateWorldsDirectoryContainer.setLayout(new GridBagLayout());
 		templateWorldsDirectoryContainer.setOpaque(true);
 		templateWorldsDirectoryContainer.setBackground(Color.white);
-		templateWorldsDirectoryContainer.add(templateWorldsDirLabel,
-				new GridBagConstraints(0, 0, 1, 1, 0, 0,
-				GridBagConstraints.WEST, GridBagConstraints.NONE,
-				new Insets(2, 2, 2, 0), 0, 0));
-		templateWorldsDirectoryContainer.add(templateScrollPane,
-				new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
-		
+		//templateWorldsDirectoryContainer.add(templateWorldsDirLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(2, 2, 2, 0), 0, 0));
+		templateWorldsDirectoryContainer.add(templateScrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
 		// Textbook Example World Tab
 		textbookExampleWorldsContainer.setLayout(textbookPanelLayout);
 		textbookExampleScrollPane.getViewport().setBackground(Color.white);
@@ -806,19 +747,13 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		textbookExampleWorldsContainer.setAlignmentX((float) 0.0);
 		textbookExampleWorldsContainer.setAlignmentY((float) 0.0);
 
-		textbookExampleWorldsDirLabel.setText(" ");//getBaseDirString(textbookExampleScrollPane));
+		//textbookExampleWorldsDirLabel.setText(" ");// getBaseDirString(textbookExampleScrollPane));
 		textbookExampleWorldsDirectoryContainer.setLayout(new GridBagLayout());
 		textbookExampleWorldsDirectoryContainer.setOpaque(true);
 		textbookExampleWorldsDirectoryContainer.setBackground(Color.white);
-		textbookExampleWorldsDirectoryContainer.add(
-				textbookExampleWorldsDirLabel, new GridBagConstraints(0, 0, 1,
-				1, 0, 0, GridBagConstraints.WEST,
-				GridBagConstraints.NONE, new Insets(2, 2, 2, 0), 0, 0));
-		textbookExampleWorldsDirectoryContainer.add(textbookExampleScrollPane,
-				new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
-					
+		//textbookExampleWorldsDirectoryContainer.add(textbookExampleWorldsDirLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(2, 2, 2, 0), 0, 0));
+		textbookExampleWorldsDirectoryContainer.add(textbookExampleScrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
 		// Tutorial World Tab
 		tutorialButtonPanel.setBackground(Color.white);
 		tutorialButtonPanel.setLayout(new GridBagLayout());
@@ -829,22 +764,16 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		startTutorialButton.setPreferredSize(new Dimension(120, 90));
 		startTutorialButton.setToolTipText(Messages.getString("Start_the_Alice_tutorial"));
 		startTutorialButton.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						startTutorialButton_actionPerformed(e);
-					}
-				});
-		
+			public void actionPerformed(ActionEvent e) {
+				startTutorialButton_actionPerformed(e);
+			}
+		});
+
 		jLabel1.setText(Messages.getString("or_continue_a_tutorial_"));
 
-		tutorialButtonPanel.add(startTutorialButton, new GridBagConstraints(0,
-				0, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.NONE, new Insets(2, 0, 2, 0), 0, 0));
-		tutorialButtonPanel.add(jLabel1, new GridBagConstraints(0, 1, 1, 1,
-				0.0, 0.0, GridBagConstraints.SOUTHWEST,
-				GridBagConstraints.NONE, new Insets(2, 3, 2, 0), 0, 0));
-		tutorialButtonPanel.add(component2, new GridBagConstraints(1, 1, 1, 1,
-				1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
+		tutorialButtonPanel.add(startTutorialButton, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 0, 2, 0), 0, 0));
+		tutorialButtonPanel.add(jLabel1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(2, 3, 2, 0), 0, 0));
+		tutorialButtonPanel.add(component2, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 		tutorialWorldsContainer.setLayout(tutorialPanelLayout);
 		tutorialScrollPane.getViewport().setBackground(Color.white);
@@ -858,82 +787,42 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		tutorialWorldsDirectoryContainer.setLayout(new GridBagLayout());
 		tutorialWorldsDirectoryContainer.setOpaque(true);
 		tutorialWorldsDirectoryContainer.setBackground(Color.white);
-		tutorialWorldsDirectoryContainer.add(
-				tutorialButtonPanel, new GridBagConstraints(0, 0, 1,
-				1, 0, 0, GridBagConstraints.WEST,
-				GridBagConstraints.BOTH, new Insets(2, 2, 2, 0), 0, 0));
-		tutorialWorldsDirectoryContainer.add(tutorialScrollPane, 
-				new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
+		tutorialWorldsDirectoryContainer.add(tutorialButtonPanel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(2, 2, 2, 0), 0, 0));
+		tutorialWorldsDirectoryContainer.add(tutorialScrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
-		add(buttonPanel, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-				new Insets(0, 0, 0, 0), 0, 0));
-		buttonPanel.add(openButton, new GridBagConstraints(1, 0, 1, 1, 0.0,
-				0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,
-				new Insets(4, 0, 0, 4), 0, 0));
-		buttonPanel.add(cancelButton, new GridBagConstraints(1, 1, 1, 1, 0.0,
-				0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE,
-				new Insets(4, 0, 0, 4), 0, 0));
-		buttonPanel.add(Box.createGlue(), new GridBagConstraints(0, 1, 1, 2,
-				1.0, 0.0, GridBagConstraints.CENTER,
-				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-		add(mainTabPane, new GridBagConstraints(0, 1, 2, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
-						0, 0, 0, 0), 0, 0));
-		mainTabPane.add(tutorialWorldsDirectoryContainer,
-				"<html><body leftmargin=5 marginwidth=5>" + TUTORIAL_STRING
-						+ "</body></html>");
-		mainTabPane.add(recentWorldsDirectoryContainer,
-				"<html><body leftmargin=5 marginwidth=5>" + RECENT_STRING
-						+ "</body></html>");
-		mainTabPane.add(templateWorldsDirectoryContainer,
-				"<html><body leftmargin=5 marginwidth=5>" + TEMPLATES_STRING
-						+ "</body></html>");
-		mainTabPane.add(exampleWorldsDirectoryContainer,
-				"<html><body leftmargin=5 marginwidth=5>" + EXAMPLES_STRING
-						+ "</body></html>");
-		mainTabPane.add(textbookExampleWorldsDirectoryContainer,
-				"<html><body leftmargin=5 marginwidth=5>"
-						+ TEXTBOOK_EXAMPLES_STRING + "</body></html>");
-
+		add(buttonPanel, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		buttonPanel.add(openButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
+		buttonPanel.add(cancelButton, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
+		buttonPanel.add(Box.createGlue(), new GridBagConstraints(0, 1, 1, 2, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		add(mainTabPane, new GridBagConstraints(0, 1, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		mainTabPane.add(tutorialWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + TUTORIAL_STRING + "</body></html>");
+		mainTabPane.add(recentWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + RECENT_STRING + "</body></html>");
+		mainTabPane.add(templateWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + TEMPLATES_STRING + "</body></html>");
+		mainTabPane.add(exampleWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + EXAMPLES_STRING + "</body></html>");
+		mainTabPane.add(textbookExampleWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + TEXTBOOK_EXAMPLES_STRING + "</body></html>");
+		 
 		// mainTabPane.add(fileChooser, OPEN_STRING);
-		add(stopShowingCheckBox, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0,
-				GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL,
-				new Insets(0, 2, 0, 0), 0, 0));
-		add(headerLabel, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(
-						0, 0, 0, 0), 0, 0));
-		
+		add(stopShowingCheckBox, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL, new Insets(0, 2, 0, 0), 0, 0));
+		add(headerLabel, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+
 		tutorialScrollPane.getViewport().add(tutorialWorldsContainer, null);
 		templateScrollPane.getViewport().add(templateWorldsContainer, null);
 		exampleScrollPane.getViewport().add(exampleWorldsContainer, null);
 		recentScrollPane.getViewport().add(recentWorldsContainer, null);
 		textbookExampleScrollPane.getViewport().add(textbookExampleWorldsContainer, null);
 
-		templateScrollPane.getVerticalScrollBar().setUnitIncrement(50); //Aik Min
-		exampleScrollPane.getVerticalScrollBar().setUnitIncrement(50); //Aik Min
+		templateScrollPane.getVerticalScrollBar().setUnitIncrement(50); // Aik Min
+		exampleScrollPane.getVerticalScrollBar().setUnitIncrement(50); // Aik Min
 		recentScrollPane.getVerticalScrollBar().setUnitIncrement(50); // Aik Min
-		textbookExampleScrollPane.getVerticalScrollBar().setUnitIncrement(50); //Aik Min
-		
+		textbookExampleScrollPane.getVerticalScrollBar().setUnitIncrement(50); // Aik Min
 	}
 
 	private void matchSizes() {
-		tutorialWorldsContainer.setSize(
-				recentScrollPane.getVisibleRect().width,
-				tutorialWorldsContainer.getHeight());
-		recentWorldsContainer.setSize(recentScrollPane.getVisibleRect().width,
-				recentWorldsContainer.getHeight());
-		templateWorldsContainer.setSize(
-				templateScrollPane.getVisibleRect().width,
-				templateWorldsContainer.getHeight());
-		exampleWorldsContainer.setSize(
-				exampleScrollPane.getVisibleRect().width,
-				exampleWorldsContainer.getHeight());
-		textbookExampleWorldsContainer.setSize(
-				textbookExampleScrollPane.getVisibleRect().width,
-				textbookExampleWorldsContainer.getHeight());
+		tutorialWorldsContainer.setSize(recentScrollPane.getVisibleRect().width, tutorialWorldsContainer.getHeight());
+		recentWorldsContainer.setSize(recentScrollPane.getVisibleRect().width, recentWorldsContainer.getHeight());
+		templateWorldsContainer.setSize(templateScrollPane.getVisibleRect().width, templateWorldsContainer.getHeight());
+		exampleWorldsContainer.setSize(exampleScrollPane.getVisibleRect().width, exampleWorldsContainer.getHeight());
+		textbookExampleWorldsContainer.setSize(textbookExampleScrollPane.getVisibleRect().width, textbookExampleWorldsContainer.getHeight());
 	}
 
 	private void setFileChooserButtons() {
@@ -966,9 +855,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
 		// new Insets(0, 0, 0, 0), 0, 0));
 		// remove(refreshButton);
-		add(buttonPanel, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0,
-				GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-				new Insets(0, 0, 0, 0), 0, 0));
+		add(buttonPanel, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 	}
 
 	private void mainTabPane_stateChanged(ChangeEvent e) {
@@ -1022,7 +909,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		protected int type;
 		protected java.awt.Component owner;
 
-		public StartUpIcon(String name, javax.swing.ImageIcon icon,	String file, boolean needToSave, int type, java.awt.Component owner) {
+		public StartUpIcon(String name, javax.swing.ImageIcon icon, String file, boolean needToSave, int type, java.awt.Component owner) {
 			super(name, icon, javax.swing.JLabel.CENTER);
 			this.file = file;
 			this.needToSave = needToSave;
@@ -1059,55 +946,47 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		}
 
-/*		protected javax.swing.JLabel getJLabel(java.awt.Component topLevelOwner) {
-			if (topLevelOwner == tutorialWorldsDirectoryContainer) {
-				return tutorialWorldsDirLabel;
-			} else if (topLevelOwner == exampleScrollPane) {
-				return exampleWorldsDirLabel;
-			} else if (topLevelOwner == templateScrollPane) {
-				return templateWorldsDirLabel;
-			} else if (topLevelOwner == textbookExampleScrollPane) {
-				return textbookExampleWorldsDirLabel;
-			} else {
-				return null;
-			}
-		}
-
-		protected String getRootPath(java.awt.Component topLevelOwner) {
-			if (topLevelOwner == tutorialWorldsDirectoryContainer) {
-				return tutorialWorlds.getAbsolutePath();
-			} else if (topLevelOwner == exampleScrollPane) {
-				return exampleWorlds.getAbsolutePath();
-			} else if (topLevelOwner == templateScrollPane) {
-				return templateWorlds.getAbsolutePath();
-				// }else if (topLevelOwner == textbookExampleScrollPane){
-				// return textbookExampleWorlds.getAbsolutePath();
-			} else {
-				return null;
-			}
-
-		}
-
-		protected String getRelativePath(String current, String root) {
-			if (root == null)
-				root = "";
-			return current.substring(root.length());
-		}*/
+		/*
+		 * protected javax.swing.JLabel getJLabel(java.awt.Component
+		 * topLevelOwner) { if (topLevelOwner ==
+		 * tutorialWorldsDirectoryContainer) { return tutorialWorldsDirLabel; }
+		 * else if (topLevelOwner == exampleScrollPane) { return
+		 * exampleWorldsDirLabel; } else if (topLevelOwner ==
+		 * templateScrollPane) { return templateWorldsDirLabel; } else if
+		 * (topLevelOwner == textbookExampleScrollPane) { return
+		 * textbookExampleWorldsDirLabel; } else { return null; } }
+		 * 
+		 * protected String getRootPath(java.awt.Component topLevelOwner) { if
+		 * (topLevelOwner == tutorialWorldsDirectoryContainer) { return
+		 * tutorialWorlds.getAbsolutePath(); } else if (topLevelOwner ==
+		 * exampleScrollPane) { return exampleWorlds.getAbsolutePath(); } else
+		 * if (topLevelOwner == templateScrollPane) { return
+		 * templateWorlds.getAbsolutePath(); // }else if (topLevelOwner ==
+		 * textbookExampleScrollPane){ // return
+		 * textbookExampleWorlds.getAbsolutePath(); } else { return null; }
+		 * 
+		 * }
+		 * 
+		 * protected String getRelativePath(String current, String root) { if
+		 * (root == null) root = ""; return current.substring(root.length()); }
+		 */
 
 		protected void changeDirectory(String newDirectory) {
 			java.io.File newDir = new java.io.File(newDirectory);
 			java.io.File parentDir = newDir.getParentFile();
-			//JLabel labelToSet = getJLabel(owner);
-			String baseDir = getBaseDirString(owner);
+			// JLabel labelToSet = getJLabel(owner);
+			//String baseDir = getBaseDirString(owner);
 			if (owner instanceof javax.swing.JScrollPane) {
 				((javax.swing.JScrollPane) owner).getVerticalScrollBar().setValue(0);
 			}
 			if (newDir.compareTo(exampleWorlds) == 0 || newDir.compareTo(templateWorlds) == 0 || newDir.compareTo(tutorialWorlds) == 0) {
-				buildPanel(getContainer(owner),	buildVectorFromDirectory(newDir, aliceFilter), needToSave, null, StartUpIcon.STANDARD);
-				//labelToSet.setText(baseDir);
+				buildPanel(getContainer(owner), buildVectorFromDirectory(newDir, aliceFilter), needToSave, null, StartUpIcon.STANDARD);
+				// labelToSet.setText(baseDir);
 			} else {
 				buildPanel(getContainer(owner), buildVectorFromDirectory(newDir, aliceFilter), needToSave, parentDir, StartUpIcon.STANDARD);
-				//labelToSet.setText(baseDir + getRelativePath(newDir.getAbsolutePath(), getRootPath(owner)));
+				// labelToSet.setText(baseDir +
+				// getRelativePath(newDir.getAbsolutePath(),
+				// getRootPath(owner)));
 			}
 		}
 

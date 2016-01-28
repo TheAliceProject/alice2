@@ -47,6 +47,8 @@ package edu.cmu.cs.stage3.image.codec;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * A baseline TIFF reader. The reader has some functionality in addition to
  * the baseline specifications for Bilevel images, for which the group 3 and
@@ -102,7 +104,7 @@ public class TIFFImageDecoder extends ImageDecoderImpl {
     
 	public RenderedImage decodeAsRenderedImage(int page) throws IOException {
         if  ((page < 0) || (page >= getNumPages())) {
-            throw new IOException(JaiI18N.getString("Illegal_page_requested_from_a_TIFF_file_"));
+            throw new IOException(Messages.getString("Illegal_page_requested_from_a_TIFF_file_"));
         }
         return new TIFFImage(input, (TIFFDecodeParam)param, page);
     }

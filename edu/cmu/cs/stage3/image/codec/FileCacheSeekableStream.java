@@ -49,6 +49,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * A subclass of <code>SeekableStream</code> that may be used to wrap
  * a regular <code>InputStream</code>.  Seeking backwards is supported
@@ -175,7 +177,7 @@ public final class FileCacheSeekableStream extends SeekableStream {
     
 	public void seek(long pos) throws IOException {
         if (pos < 0) {
-            throw new IOException(JaiI18N.getString("pos___0_"));
+            throw new IOException(Messages.getString("pos___0_"));
         }
         pointer = pos;
     }

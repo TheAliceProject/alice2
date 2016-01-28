@@ -50,19 +50,19 @@ public class Visual extends Component {
 	
 	protected void releasePass1() {
 		if( m_frontFacingAppearance != null ) {
-			warnln( Messages.getString("WARNING__released_visual_") + this + " " + Messages.getString("still_has_front_facing_appearance_") + m_frontFacingAppearance + "." );   
+			warnln( Messages.getString("WARNING__released_visual_still_has_front_facing_appearance_", this, m_frontFacingAppearance) );   
 			setFrontFacingAppearance( null );
 		}
 		if( m_backFacingAppearance != null ) {
-			warnln( Messages.getString("WARNING__released_visual_") + this + " " + Messages.getString("still_has_back_facing_appearance_") + m_frontFacingAppearance + "." );   
+			warnln( Messages.getString("WARNING__released_visual_still_has_back_facing_appearance_", this, m_frontFacingAppearance) );   
 			setBackFacingAppearance( null );
 		}
 		if( m_geometry != null ) {
-			warnln( Messages.getString("WARNING__released_visual_") + this + " " + Messages.getString("still_has_geometry_") + m_geometry + "." );   
+			warnln( Messages.getString("WARNING__released_visual_still_has_geometry_", this, m_geometry) );   
 			setGeometry( null );
 		}
 		if( m_disabledAffectors != null && m_disabledAffectors.length > 0 ) {
-			warnln( Messages.getString("WARNING__released_visual_") + this + " " + Messages.getString("still_has_disabled_affectors__") );  
+			warnln( Messages.getString("WARNING__released_visual_still_has_disabled_affectors__", this) + "/n" );  
 			for( int i=0; i<m_disabledAffectors.length; i++ ) {
 				warnln( "\t" + m_disabledAffectors[ i ] ); 
 			}

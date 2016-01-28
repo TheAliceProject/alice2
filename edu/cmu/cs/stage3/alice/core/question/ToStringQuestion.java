@@ -26,8 +26,6 @@ package edu.cmu.cs.stage3.alice.core.question;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.property.ObjectProperty;
-import edu.cmu.cs.stage3.alice.core.response.Print;
-import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Ben Buchwald, Dennis Cosgrove
@@ -48,7 +46,7 @@ public class ToStringQuestion extends Question {
 	public Object getValue() {
     	Object value = what.getValue();
     	Object o = what.get();
-		if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart)
+/*		if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart)
 			Print.outputtext = Messages.getString("time_elapsed_as_a_string_is_"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.Year)
 			Print.outputtext = Messages.getString("year_as_a_string_is_"); 
@@ -90,7 +88,7 @@ public class ToStringQuestion extends Question {
 		else if	(o instanceof edu.cmu.cs.stage3.alice.core.question.RandomNumber)
 			Print.outputtext = Messages.getString("random_number_as_a_string_is_"); 
 		else if (Print.outputtext != null)
-			Print.outputtext = Print.outputtext.substring(0, Print.outputtext.length()-4)+" "+Messages.getString("as_a_string_is_"); 
+			Print.outputtext = Print.outputtext.substring(0, Print.outputtext.length()-4)+" "+Messages.getString("as_a_string_is_"); */
 
 		if( value instanceof Element ) {
 			return ((Element)value).getTrimmedKey();

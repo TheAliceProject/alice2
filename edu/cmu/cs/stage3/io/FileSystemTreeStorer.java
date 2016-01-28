@@ -53,15 +53,15 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 
 		if( root.exists() ) {
 			if( ! root.canWrite() ) {
-				throw new java.io.IOException( Messages.getString("cannot_write_to_") + root ); 
+				throw new java.io.IOException( Messages.getString("cannot_write_to_", root) ); 
 			}
 		}
 		else {
 			if( ! root.mkdir() ) {
-				throw new java.io.IOException( Messages.getString("cannot_create_") + root ); 
+				throw new java.io.IOException( Messages.getString("cannot_create_", root) ); 
 			}
 			if( ! root.canWrite() ) {
-				throw new java.io.IOException( Messages.getString("cannot_write_to_") + root ); 
+				throw new java.io.IOException( Messages.getString("cannot_write_to_", root) ); 
 			}
 		}
 
@@ -86,7 +86,7 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 		java.io.File newDir = new java.io.File( currentDirectory, pathname );
 		if( ! newDir.exists() ) {
 			if( ! newDir.mkdir() ) {
-				throw new java.io.IOException( Messages.getString("cannot_create_") + newDir ); 
+				throw new java.io.IOException( Messages.getString("cannot_create_", newDir) ); 
 			}
 		}
 	}
@@ -101,10 +101,10 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 		}
 
 		if( ! newCurrentDirectory.exists() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + " " + Messages.getString("doesn_t_exist") ); 
+			throw new IllegalArgumentException( Messages.getString("doesn_t_exist", newCurrentDirectory) ); 
 		}
 		if( ! newCurrentDirectory.isDirectory() ) {
-			throw new IllegalArgumentException( newCurrentDirectory + " " + Messages.getString("isn_t_a_directory") ); 
+			throw new IllegalArgumentException(  Messages.getString("isn_t_a_directory", newCurrentDirectory) ); 
 		}
 
 		currentDirectory = newCurrentDirectory;
@@ -120,11 +120,11 @@ public class FileSystemTreeStorer implements DirectoryTreeStorer {
 		java.io.File newFile = new java.io.File( currentDirectory, filename );
 		if( ! newFile.exists() ) {
 			if( ! newFile.createNewFile() ) {
-				throw new java.io.IOException( Messages.getString("cannot_create_") + newFile ); 
+				throw new java.io.IOException( Messages.getString("cannot_create_", newFile) ); 
 			}
 		}
 		if( ! newFile.canWrite() ) {
-			throw new java.io.IOException( Messages.getString("cannot_write_to_") + newFile ); 
+			throw new java.io.IOException( Messages.getString("cannot_write_to_", newFile) ); 
 		}
 
 		currentlyOpenStream = new java.io.FileOutputStream( newFile );

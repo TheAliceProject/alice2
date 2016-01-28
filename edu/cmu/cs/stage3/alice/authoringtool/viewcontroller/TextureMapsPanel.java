@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -57,8 +58,10 @@ public class TextureMapsPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 		);
 		setOpaque( false );
 		contentPanel.setOpaque( false );
-
-		importTextureMapButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Load_an_Image_File_into_this_World__p__p_Objects_use_image_files_as_textures__p_You_can_change_an_object_s_texture_by_setting_its__b_skin__b__property_")+"</font></html>" ); 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		importTextureMapButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Load_an_Image_File_into_this_World__p__p_Objects_use_image_files_as_textures__p_You_can_change_an_object_s_texture_by_setting_its__b_skin__b__property_")+"</div></body></html>" ); 
 	}
 
 	public void setTextureMaps( edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty textureMaps ) {

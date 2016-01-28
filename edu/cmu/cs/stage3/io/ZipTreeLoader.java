@@ -121,7 +121,7 @@ public class ZipTreeLoader implements DirectoryTreeLoader {
 
 		byte [] fileContents = (byte[])pathnamesToByteArrays.get( pathname );
 		if( fileContents == null ) {
-			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__") + pathname ); 
+			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__", pathname) ); 
 		}
 
 		currentlyOpenStream = new java.io.ByteArrayInputStream( fileContents );

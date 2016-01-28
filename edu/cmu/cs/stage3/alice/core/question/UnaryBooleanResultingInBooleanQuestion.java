@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question;
 
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
-import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class UnaryBooleanResultingInBooleanQuestion extends BooleanQuestion {
 	public final BooleanProperty a = new BooleanProperty( this, "a", Boolean.TRUE ); 
@@ -32,9 +31,9 @@ public abstract class UnaryBooleanResultingInBooleanQuestion extends BooleanQues
 	
 	public Object getValue() {
 		boolean aValue = getValue( a.booleanValue() );
-		if (this instanceof edu.cmu.cs.stage3.alice.core.question.Not){
+/*		if (this instanceof edu.cmu.cs.stage3.alice.core.question.Not){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("not_") + !aValue + " " + Messages.getString("is_");		  
-		}
+		}*/
 		if( aValue ) {
 			return Boolean.TRUE;
 		} else {

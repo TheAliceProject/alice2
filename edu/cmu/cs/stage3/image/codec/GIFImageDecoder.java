@@ -55,6 +55,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import edu.cmu.cs.stage3.lang.Messages;
 import sun.awt.image.FileImageSource;
 import sun.awt.image.GifImageDecoder;
 import sun.awt.image.InputStreamImageSource;
@@ -101,10 +102,10 @@ public class GIFImageDecoder extends ImageDecoderImpl {
             try {
                 tracker.waitForID(0);
             } catch (InterruptedException e) {
-                throw new RuntimeException(JaiI18N.getString("InterruptedException_occurred_while_loading_the_image_using_MediaTracker_"));
+                throw new RuntimeException(Messages.getString("InterruptedException_occurred_while_loading_the_image_using_MediaTracker_"));
             }
 	    if (tracker.isErrorID(0)) {	// not standard file format
-                throw new RuntimeException(JaiI18N.getString("MediaTracker_is_unable_to_load_the_image_"));
+                throw new RuntimeException(Messages.getString("MediaTracker_is_unable_to_load_the_image_"));
             }
             tracker.removeImage(image);
 
@@ -124,7 +125,7 @@ public class GIFImageDecoder extends ImageDecoderImpl {
     
 	public RenderedImage decodeAsRenderedImage(int page) throws IOException {
         if (page != 0) {
-            throw new IOException(JaiI18N.getString("Illegal_page_requested_from_a_GIF_file_"));
+            throw new IOException(Messages.getString("Illegal_page_requested_from_a_GIF_file_"));
         }
         return decode();
     }

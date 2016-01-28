@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Variable;
 import edu.cmu.cs.stage3.lang.Messages;
 
@@ -47,7 +48,10 @@ public class TrashComponent extends javax.swing.JPanel implements java.awt.dnd.D
 		trashLabel.setDropTarget( new java.awt.dnd.DropTarget( trashLabel, this ) );
 		edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.addListener( dropPotentialFeedbackListener );
 
-		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Trash_p__p_Drag_and_drop_tiles_here_to_delete_them_")+"</font></html>" ); 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Trash_p__p_Drag_and_drop_tiles_here_to_delete_them_")+"</div></body></html>" ); 
 
 		addMouseListener( new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
 			public void singleClickResponse( java.awt.event.MouseEvent ev ) {

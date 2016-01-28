@@ -448,11 +448,15 @@ public class Actions {
 		//onScreenHelpAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "onScreenHelp" ) );
 		applicationActions.add( onScreenHelpAction );
 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		
 		playAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0) );// java.awt.Event.CTRL_MASK) );
 		playAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "play" ); 
 		//playAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'P' ) );
 		playAction.putValue( javax.swing.Action.NAME, Messages.getString("Play") ); 
-		playAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "<html><font face=arial size=-1>" + Messages.getString("Play_the_world_") + "<p><p>" + Messages.getString("Opens_the_play_window_and_p_starts_the_world_running_") + "</font></html>"); 
+		playAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "<html><body><div align="+justify+">" + Messages.getString("Play_the_world_") + "<p><p>" + Messages.getString("Opens_the_play_window_and_p_starts_the_world_running_") + "</div></body></html>"); 
 		playAction.putValue( javax.swing.Action.SMALL_ICON, AuthoringToolResources.getIconForString( "play" ) ); 
 		applicationActions.add( playAction );
 
@@ -482,7 +486,7 @@ public class Actions {
 		trashAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "trash" ); 
 		//trashAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
 		//trashAction.putValue( javax.swing.Action.NAME, "Trash" );
-		trashAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "<html><font face=arial size=-1>" + Messages.getString("Trash") + "<p><p>" + Messages.getString("Drag_and_drop_tiles_here_to_delete_them_") + "</font></html>"); 
+		trashAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, "<html><body><div align="+justify+">" + Messages.getString("Trash") + "<p><p>" + Messages.getString("Drag_and_drop_tiles_here_to_delete_them_") + "</div></body></html>"); 
 		//trashAction.putValue( javax.swing.Action.SMALL_ICON,   );
 		applicationActions.add( trashAction );
 
@@ -542,7 +546,7 @@ public class Actions {
 		//launchTutorialFileAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( launchTutorialFileAction );
 
-		//launchTutorialEditor.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_F1, 0 ) );
+//		launchTutorialEditor.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_T, java.awt.Event.CTRL_MASK ) );
 		launchTutorialEditor.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchTutorialEditor" ); 
 		//launchTutorialEditor.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
 		launchTutorialEditor.putValue( javax.swing.Action.NAME, "Tutorial Editor" ); 

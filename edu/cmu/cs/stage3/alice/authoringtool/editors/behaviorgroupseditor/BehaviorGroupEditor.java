@@ -276,9 +276,9 @@ public class BehaviorGroupEditor extends edu.cmu.cs.stage3.alice.authoringtool.u
             expandButton.setIcon(plus);
         }
         headerLabel.setText(headerText);
-        headerPanel.add(expandButton, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
-        headerPanel.add(headerLabel, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,4,0,2), 0,0));
-        headerPanel.add(glue, new java.awt.GridBagConstraints(2,0,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+        headerPanel.add(expandButton, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
+        headerPanel.add(headerLabel, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,4,0,2), 0,0));
+        headerPanel.add(glue, new java.awt.GridBagConstraints(2,0,1,1,1,1,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
         if (shouldShowLabel){
             containingPanel.add(headerPanel, java.awt.BorderLayout.NORTH);
         }

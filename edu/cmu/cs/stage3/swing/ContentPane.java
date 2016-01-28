@@ -21,8 +21,9 @@ public abstract class ContentPane extends javax.swing.JPanel {
 	public void preDialogShow( javax.swing.JDialog dialog ) {
 		m_dialog = dialog;
 		m_dialog.setLocationRelativeTo( dialog.getOwner() );
-		if (!AikMin.isLTR())
+		if (!AikMin.isLTR())	// ***** For all Alice dialog *****
 			dialog.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
 	}
 	public void postDialogShow( javax.swing.JDialog dialog ) {
 		m_dialog = null;

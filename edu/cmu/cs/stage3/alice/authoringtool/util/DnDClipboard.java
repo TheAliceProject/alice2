@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -46,7 +47,10 @@ public class DnDClipboard extends javax.swing.JPanel {
 		setDropTarget( new java.awt.dnd.DropTarget( this, new ClipboardDropTargetListener() ) );
 		edu.cmu.cs.stage3.alice.authoringtool.util.DnDManager.addListener( dropPotentialFeedbackListener );
 
-		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Copy_Paste_Clipboard_p__p_Drag_and_drop_tiles__b_to__b__the_clipboard_to_copy_them__p_Drag_and_drop_tiles__b_from__b__the_clipboard_to_paste_them_")+"</font></html>" ); 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Copy_Paste_Clipboard_p__p_Drag_and_drop_tiles__b_to__b__the_clipboard_to_copy_them__p_Drag_and_drop_tiles__b_from__b__the_clipboard_to_paste_them_")+"</div></body></html>" ); 
 
 		addMouseListener( new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
 			public void singleClickResponse( java.awt.event.MouseEvent ev ) {

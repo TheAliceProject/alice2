@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 1999-2003, Carnegie Mellon University. All rights reserved.
  *
+ * Copyright (c) 1999-2003, Carnegie Mellon University. All rights reserved.
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.BufferedOutputStream;
@@ -341,59 +342,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	// constructor
 	public AuthoringTool(java.io.File defaultWorld, java.io.File worldToLoad, boolean stdOutToConsole, boolean stdErrToConsole) {
-		String font = "SansSerif"; // "Tahoma"; 
-		try {
-			javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); 
-			//javax.swing.UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel"); 
-			
-			//			javax.swing.UIManager.put( "Button.focus", new java.awt.Color( 255, 255, 255, 0 ) ); // don't show focus  // makes printing slow, unfortunately
-
-			class CustomButtonBorder extends javax.swing.border.AbstractBorder implements javax.swing.plaf.UIResource {
-				protected java.awt.Insets insets = new java.awt.Insets(3, 3, 3, 3);
-				protected javax.swing.border.Border line = javax.swing.BorderFactory.createLineBorder(java.awt.Color.black, 1);
-				protected javax.swing.border.Border spacer = javax.swing.BorderFactory.createEmptyBorder(2, 4, 2, 4);
-				protected javax.swing.border.Border raisedBevel = javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED);
-				protected javax.swing.border.Border loweredBevel = javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED);
-				protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(line, raisedBevel), spacer);
-				protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(line, loweredBevel), spacer);
-				//				protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder( raisedBevel, spacer );
-				//				protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder( loweredBevel, spacer );
-
-				public void paintBorder(java.awt.Component c, java.awt.Graphics g, int x, int y, int w, int h) {
-					javax.swing.JButton button = (javax.swing.JButton) c;
-					javax.swing.ButtonModel model = button.getModel();
-
-					if (model.isEnabled()) {
-						if (model.isPressed() && model.isArmed()) {
-							loweredBorder.paintBorder(button, g, x, y, w, h);
-						} else {
-							raisedBorder.paintBorder(button, g, x, y, w, h);
-						}
-					} else {
-						raisedBorder.paintBorder(button, g, x, y, w, h);
-					}
-				}
-
-				public java.awt.Insets getBorderInsets(java.awt.Component c) {
-					return insets;
-				}
-			}
-			javax.swing.UIManager.put("Button.border", new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource(new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder())); 
-			
-			//necessary for 1.4
-			javax.swing.UIManager.put("Label.font", new java.awt.Font(font, java.awt.Font.BOLD, 12)); 
-			javax.swing.UIManager.put("Label.foreground", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("mainFontColor"));  
-			javax.swing.UIManager.put("TabbedPane.selected", new java.awt.Color(255, 255, 255, 0)); 
-			javax.swing.UIManager.put("TabbedPane.tabInsets", new java.awt.Insets(1, 4, 1, 3)); 
-			if ( AikMin.isWindows() ) {   
-				javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  
-			} else {
-				//javax.swing.UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel"); 
-			}
-		} catch (Exception e) {
-			showErrorDialog(Messages.getString("Error_configuring_Look_and_Feel_"), e); 
-		}
-
+		AikMin.setUI();
+		
 		AuthoringTool.hack = this;
 		this.defaultWorld = defaultWorld;
 /*		if (!(defaultWorld.exists() && defaultWorld.canRead())) {
@@ -403,14 +353,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 */
 		filterInit();
 		configInit();	
-		try{
-			AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		 
-			if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase("true")){  
-				javax.swing.UIManager.put("Label.foreground", java.awt.Color.black); 
-			}
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+
 		mainInit();
 		this.stdOutToConsole = stdOutToConsole;
 		this.stdErrToConsole = stdErrToConsole;
@@ -443,13 +386,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		schedulerThread.start();
 
 		jAliceFrame.setVisible(true);
-		worldInit(worldToLoad);
 		if( worldToLoad == null ) {
 			if (authoringToolConfig.getValue("showStartUpDialog").equalsIgnoreCase("true")) {  
 				showStartUpDialog(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TEMPLATE_TAB_ID);//.DO_NOT_CHANGE_TAB_ID);
 			}
+		} else {
+			worldInit(worldToLoad);
 		}
-		
 	}
 
 	private void filterInit() {
@@ -527,9 +470,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				} catch( IndexOutOfBoundsException aioobe ) {
 					// for some reason this can potentially fail in jdk1.4.2_04
 				}		
-			} else {
-				//TODO -Ignore : ?
-			}
+			} 
 		} else {
 			//TODO -Ignore : what to do when the directory is null?
 		}
@@ -560,21 +501,26 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	private void dialogInit() {
+		javax.swing.LookAndFeel laf = javax.swing.UIManager.getLookAndFeel();
 		
 		preferencesContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.PreferencesContentPane();
 		preferencesContentPane.setAuthoringTool(this);
+
+
 		
-		captureContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.CaptureContentPane(this);
-		renderContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.RenderContentPane(this);
-		
+		newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
+
 		try {
 			if ( AikMin.isMAC() ){
 				javax.swing.UIManager.setLookAndFeel("apple.laf.AquaLookAndFeel");
+				javax.swing.UIManager.getLookAndFeelDefaults().put("Menu.arrowIcon", laf.getDefaults().get("Menu.arrowIcon"));
 			}
 		} catch (Exception e) {
 		}
+		captureContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.CaptureContentPane(this);
+		renderContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.RenderContentPane(this);
 		
-		importFileChooser = new javax.swing.JFileChooser();
+		importFileChooser = new javax.swing.JFileChooser();		
 		saveWorldFileChooser = new javax.swing.JFileChooser() {
 			public void approveSelection() {
 				java.io.File desiredFile = getSelectedFile();
@@ -599,8 +545,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		};
 		addCharacterFileChooser = new javax.swing.JFileChooser();
 		saveCharacterFileDialog = new javax.swing.JFileChooser();
-		
-		browseFileChooser = new javax.swing.JFileChooser();
+			
+		//browseFileChooser = new javax.swing.JFileChooser();
 		//		browseFileChooser.setApproveButtonText( "Set Directory" );
 		//		browseFileChooser.setDialogTitle( "Choose Directory..." );
 		//		browseFileChooser.setDialogType( javax.swing.JFileChooser.OPEN_DIALOG );
@@ -634,7 +580,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		worldStoreProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StoreElementProgressPane(Messages.getString("Saving_World___"), Messages.getString("Saving__"));  
 		characterLoadProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LoadElementProgressPane(Messages.getString("Loading_Object___"), Messages.getString("Loading__"));  
 		characterStoreProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StoreElementProgressPane(Messages.getString("Saving_Object___"), Messages.getString("Saving__"));  
-
 
 		renderPanel = new javax.swing.JPanel();
 
@@ -674,7 +619,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		
 		//saveForWebContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.SaveForWebContentPane(this);
 
-		newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
+		//newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
 	
 		stdErrContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this, true);
 		stdOutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this, false);
@@ -777,9 +722,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		javax.swing.Timer fpsTimer = new javax.swing.Timer(500, new java.awt.event.ActionListener() {
 			java.text.DecimalFormat formater = new java.text.DecimalFormat("#0.00"); 
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
-				String fps = formater.format(AuthoringTool.this.scheduler.getSimulationFPS()) + " " + Messages.getString("fps"); 
 				if (authoringToolConfig.getValue("rendering.showFPS").equalsIgnoreCase("true")) {  
-					AuthoringTool.this.renderContentPane.setTitle(Messages.getString("World_Running_____") + fps); 
+					AuthoringTool.this.renderContentPane.setTitle(Messages.getString("World_Running_____", formater.format(AuthoringTool.this.scheduler.getSimulationFPS()))); 
 				}
 			}
 		});
@@ -855,6 +799,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			});
 		}
+		if (AikMin.isMAC()) {
+		  	java.awt.Toolkit.getDefaultToolkit().addAWTEventListener(new java.awt.event.AWTEventListener(){
+		   		public void eventDispatched(AWTEvent event) {
+	   				int mod = ((java.awt.event.InputEvent) event).getModifiers();
+	   				edu.cmu.cs.stage3.awt.AWTUtilities.modifier = mod;
+		   		}
+		  	}, AWTEvent.KEY_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK | AWTEvent.MOUSE_EVENT_MASK);
+		  	
+		}
 /*
 		if (AikMin.isMAC()) {
 			SwingUtilities.invokeLater(new Runnable() {
@@ -862,13 +815,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					new Test();
 				}
 			});	
-		}
-		*/
+		}	*/
 
 		// Global Key Listener
-		if (AikMin.isMAC()) {
+//		if (AikMin.isMAC()) {
 //			jnativeLisnener();
-		}
+//		}
 		
 		// for animating ui changes
 		rectangleAnimator = new edu.cmu.cs.stage3.alice.authoringtool.util.RectangleAnimator(this);
@@ -919,8 +871,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	  	});
 		
 	}*/
-	public static int id = 0;
-	public static int temp = -1;
+
 	private void importInit() {
 		java.util.List importers = importing.getImporters();
 		edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter imageFiles = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionGroupFileFilter(Messages.getString("Image_Files")); 
@@ -1732,7 +1683,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					if( name.endsWith( ".a2w" ) ) { 
 						name = name.substring( 0, name.length()-4 );
 					}
-					java.io.File dstDir = new java.io.File( parentDir, Messages.getString("Backups_of_") + name ); 
+					java.io.File dstDir = new java.io.File( parentDir, Messages.getString("Backups_of_", name )); 
 
 					StringBuffer sb = new StringBuffer();
 					java.util.Calendar calendar = java.util.Calendar.getInstance();
@@ -1789,12 +1740,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					sb.append( calendar.get( java.util.Calendar.SECOND ) );
 					switch( calendar.get( java.util.Calendar.AM_PM ) ) {
 					case java.util.Calendar.AM:
-						sb.append( "s AM.a2w" ); 
+						sb.append( "s AM" ); 
 						break;
 					case java.util.Calendar.PM:
-						sb.append( "s PM.a2w" ); 
+						sb.append( "s PM" ); 
 						break;
 					}
+					sb.append(".a2w");
 
 					java.io.File dst = new java.io.File( dstDir, sb.toString() );
 					//m_backupProgressObserver = new edu.cmu.cs.stage3.progress.ProgressObserver();
@@ -4311,6 +4263,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						token = st.nextToken();
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
+						String directory = jAliceFrame.sceneEditor.getGalleryViewer().getDirectory();
+						String gallery = directory.substring(directory.lastIndexOf("(")-1, directory.lastIndexOf(")")+1);
 						if (prefix.equals("galleryViewer")) { 
 							jAliceFrame.sceneEditor.getGalleryViewer().setDirectory(spec);
 							if (st.hasMoreTokens()) {
@@ -4318,13 +4272,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
 								if (prefix.equals("button")) { 
-									java.awt.Component c = null;
-									if (spec.contains("(Core)") || spec.contains("("+AikMin.locale+")" )) {
-										c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec);									
-									} else {
-										c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" (Core)");
-									}
-									if (c == null) c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" ("+AikMin.locale+")");
+									java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+gallery);
 									if (c != null) {
 										r = c.getBounds();
 										r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
@@ -4532,7 +4480,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		if (r == null) {
 			throw new edu.cmu.cs.stage3.caitlin.stencilhelp.application.IDDoesNotExistException(id);
 		}
-
 		return r;
 	}
 
@@ -4605,16 +4552,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
 						if (prefix.equals("galleryViewer")) { 
-							if (jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().equals(spec) ||
-								jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().replace(" (Core)","").equals(spec) ||
-								jAliceFrame.sceneEditor.getGalleryViewer().getDirectory().replace(" ("+AikMin.locale+")","").equals(spec) 	) {
+							String directory = jAliceFrame.sceneEditor.getGalleryViewer().getDirectory();
+							String gallery = directory.substring(directory.lastIndexOf("(")-1, directory.lastIndexOf(")")+1);
+							if (directory.replace(gallery, "").equals(spec)) {
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
 									prefix = AuthoringToolResources.getPrefix(token);
 									spec = AuthoringToolResources.getSpecifier(token);
 									if (prefix.equals("button")) { 
-										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" (Core)");
-										if (c == null) c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+" ("+AikMin.locale+")");
+										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+gallery);
 										if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 											return true;
 										} else {
@@ -5746,7 +5692,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
     		}
     	} catch ( Exception e){
 			javax.swing.JOptionPane.showMessageDialog(null, 
-					Messages.getString("Update_failed"), Messages.getString("Cannot access required file."), javax.swing.JOptionPane.ERROR_MESSAGE );  
+					Messages.getString("Update_failed"), Messages.getString("Cannot_access_required_file_"), javax.swing.JOptionPane.ERROR_MESSAGE );  
     	}	
     	return false;
     }
@@ -5766,7 +5712,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
    		updateDialog = new javax.swing.JPanel();
    		updateDialog.setLayout(new BorderLayout());
 
-		Box left = Box.createVerticalBox();
+		Box left = new Box(javax.swing.BoxLayout.PAGE_AXIS); // Box.createVerticalBox();
         left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                
         final JCheckBox UpdateJAR = new JCheckBox("");
@@ -5828,6 +5774,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         bottom.add(ConfirmUpdate);
 
         updateDialog.add(bottom, BorderLayout.PAGE_END);
+		if (!AikMin.isLTR()){	// ***** For property tiles in the properties tab of the details pane *****
+			updateDialog.applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+		}
+
         dlg.add(updateDialog);
 		dlg.pack();
         dlg.repaint();

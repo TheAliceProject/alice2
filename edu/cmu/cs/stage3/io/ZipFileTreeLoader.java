@@ -150,7 +150,7 @@ public class ZipFileTreeLoader implements DirectoryTreeLoader {
 			m_currentlyOpenStream = m_zipFile.getInputStream( zipEntry );	
 			return m_currentlyOpenStream;
 		} else {		
-			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__") + pathname ); 
+			throw new java.io.FileNotFoundException( Messages.getString("Not_Found__", pathname) ); 
 		}
 	}
 

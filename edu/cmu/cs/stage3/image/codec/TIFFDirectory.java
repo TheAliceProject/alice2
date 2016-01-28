@@ -49,6 +49,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * A class representing an Image File Directory (IFD) from a TIFF 6.0
  * stream.  The TIFF file format is described in more detail in the
@@ -117,14 +119,14 @@ public class TIFFDirectory extends Object {
         int endian = stream.readUnsignedShort();
         if (!isValidEndianTag(endian)) {
             throw new
-		IllegalArgumentException(JaiI18N.getString("Bad_endianness_tag__not_0x4949_or_0x4d4d__"));
+		IllegalArgumentException(Messages.getString("Bad_endianness_tag__not_0x4949_or_0x4d4d__"));
         }
         isBigEndian = (endian == 0x4d4d);
 
         int magic = readUnsignedShort(stream);
         if (magic != 42) {
             throw new
-		IllegalArgumentException(JaiI18N.getString("Bad_magic_number__should_be_42_"));
+		IllegalArgumentException(Messages.getString("Bad_magic_number__should_be_42_"));
         }
 
         // Get the initial ifd offset as an unsigned int (using a long)
@@ -133,7 +135,7 @@ public class TIFFDirectory extends Object {
         for (int i = 0; i < directory; i++) {
             if (ifd_offset == 0L) {
                 throw new
-		   IllegalArgumentException(JaiI18N.getString("Directory_number_too_large_"));
+		   IllegalArgumentException(Messages.getString("Directory_number_too_large_"));
             }
 
             stream.seek(ifd_offset);
@@ -167,7 +169,7 @@ public class TIFFDirectory extends Object {
         int endian = stream.readUnsignedShort();
         if (!isValidEndianTag(endian)) {
             throw new
-		IllegalArgumentException(JaiI18N.getString("Bad_endianness_tag__not_0x4949_or_0x4d4d__"));
+		IllegalArgumentException(Messages.getString("Bad_endianness_tag__not_0x4949_or_0x4d4d__"));
         }
         isBigEndian = (endian == 0x4d4d);
 
@@ -218,7 +220,7 @@ public class TIFFDirectory extends Object {
 	    } catch (ArrayIndexOutOfBoundsException ae) {
 
 		System.err.println(tag + " " +
-				   JaiI18N.getString("__Ignoring_this_tag_due_to_invalid_data_type_"));
+				   Messages.getString("__Ignoring_this_tag_due_to_invalid_data_type_"));
 		// if the data type is unknown we should skip this TIFF Field
 		stream.seek(nextTagOffset);
 		continue;
@@ -331,7 +333,7 @@ public class TIFFDirectory extends Object {
                 break;
 
             default:
-                System.err.println(JaiI18N.getString("Unsupported_TIFFField_tag_"));
+                System.err.println(Messages.getString("Unsupported_TIFFField_tag_"));
                 break;
             }
 
@@ -571,13 +573,13 @@ public class TIFFDirectory extends Object {
         int endian = stream.readUnsignedShort();
         if (!isValidEndianTag(endian)) {
             throw new
-		IllegalArgumentException(JaiI18N.getString("Bad_endianness_tag__not_0x4949_or_0x4d4d__"));
+		IllegalArgumentException(Messages.getString("Bad_endianness_tag__not_0x4949_or_0x4d4d__"));
         }
         boolean isBigEndian = (endian == 0x4d4d);
         int magic = readUnsignedShort(stream, isBigEndian);
         if (magic != 42) {
             throw new
-		IllegalArgumentException(JaiI18N.getString("Bad_magic_number__should_be_42_"));
+		IllegalArgumentException(Messages.getString("Bad_magic_number__should_be_42_"));
         }
 
         stream.seek(4L);

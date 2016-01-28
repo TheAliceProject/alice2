@@ -42,7 +42,7 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 		return new Double( 0 );
 	}
 
-	public String getPrefix() {
+/*	public String getPrefix() {
 		String t = text.getStringValue();
 		if( t != null ) {
 			return null;
@@ -58,14 +58,14 @@ public class Print extends edu.cmu.cs.stage3.alice.core.Response {
 				return null;
 			}
 		}
-	}
+	}*/
 
-	public static String outputtext = null;
+	//public static String outputtext = null;
 	public class RuntimePrint extends RuntimeResponse {
 		
 		public void update( double t ) {
 			super.update( t );
-			outputtext = null;
+			//outputtext = null;
 			String s = Print.this.text.getStringValue();
 			Object o = Print.this.object.get();	
 /*			// Time

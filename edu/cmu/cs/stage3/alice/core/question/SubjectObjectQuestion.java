@@ -25,7 +25,6 @@ package edu.cmu.cs.stage3.alice.core.question;
 
 import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
-import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class SubjectObjectQuestion extends SubjectQuestion {
 	public final TransformableProperty object = new TransformableProperty( this, "object", null ); 
@@ -37,7 +36,7 @@ public abstract class SubjectObjectQuestion extends SubjectQuestion {
 			objectValue = subjectValue;	//Aik Min
 		}
 		// Proximity
-		if ( objectValue == null || subjectValue == null)
+/*		if ( objectValue == null || subjectValue == null)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext=""; 
 		else if (this instanceof DistanceTo)
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
@@ -100,7 +99,7 @@ public abstract class SubjectObjectQuestion extends SubjectQuestion {
 				subjectValue.name.getStringValue() + " " + Messages.getString("is_behind_") + objectValue.name.getStringValue() + " " + Messages.getString("is_");  
 		else 
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				subjectValue.name.getStringValue()+" __Unknown__ " + objectValue.name.getStringValue() + " " + Messages.getString("is_");  
+				subjectValue.name.getStringValue()+" __Unknown__ " + objectValue.name.getStringValue() + " " + Messages.getString("is_");  */
 		return getValue( subjectValue, objectValue );
 	}
 }

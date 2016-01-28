@@ -37,7 +37,7 @@ public class ScaleKeyframeResponse extends edu.cmu.cs.stage3.pratt.maxkeyframing
 				//TODO
 				//m_transformable.setScaledSpaceRightNow( scale.x, scale.y, scale.z );
 			} catch( ClassCastException e ) {
-				System.err.println( Messages.getString("Incorrect_sample_type_from_spline_") + runtimeSpline + Messages.getString("___Vector3_expected_") );  
+				System.err.println( Messages.getString("Incorrect_sample_type_from_spline____Vector3_expected_", runtimeSpline) );  
 			}
 		}
 	}

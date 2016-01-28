@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.image.codec;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /*
  * The contents of this file are subject to the  JAVA ADVANCED IMAGING
  * SAMPLE INPUT-OUTPUT CODECS AND WIDGET HANDLING SOURCE CODE  License
@@ -219,7 +221,7 @@ public class JPEGEncodeParam implements ImageEncodeParam {
     public int[] getQTable(int component) {
         if (!qTabSet[component]) {
             throw new IllegalStateException(
-               JaiI18N.getString("A_quantization_table_has_not_been_set_for_this_component_"));
+               Messages.getString("A_quantization_table_has_not_been_set_for_this_component_"));
         }
         return qTab[component];
     }
@@ -233,7 +235,7 @@ public class JPEGEncodeParam implements ImageEncodeParam {
     public int getQTableSlot(int component) {
         if (!qTabSet[component]) {
             throw new IllegalStateException(
-               JaiI18N.getString("A_quantization_table_has_not_been_set_for_this_component_"));
+               Messages.getString("A_quantization_table_has_not_been_set_for_this_component_"));
         }
         return qTabSlot[component];
     }

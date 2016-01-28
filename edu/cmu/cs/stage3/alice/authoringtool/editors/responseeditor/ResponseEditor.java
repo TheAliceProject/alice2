@@ -273,6 +273,5 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
 
         java.awt.Component buttonGlue = javax.swing.Box.createHorizontalGlue();
         prototypeContainer.add(buttonGlue);
-
     }
 }

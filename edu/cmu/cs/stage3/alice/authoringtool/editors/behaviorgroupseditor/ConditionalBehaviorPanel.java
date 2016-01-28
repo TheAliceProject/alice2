@@ -126,24 +126,24 @@ public class ConditionalBehaviorPanel extends BasicBehaviorPanel {
         this.addDragSourceComponent(labelPanel);
         labelPanel.removeAll();
         buildLabel(labelPanel);
-        m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
+        m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
 
-        m_containingPanel.add(new javax.swing.JLabel(Messages.getString("Begin_")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
+        m_containingPanel.add(new javax.swing.JLabel(Messages.getString("Begin_")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
 
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory beginFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).beginResponse);
         beginPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).beginResponse, false, true, true, beginFactory);
-		m_containingPanel.add(beginPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
+		m_containingPanel.add(beginPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 
-		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("During_")), new java.awt.GridBagConstraints(0,2,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
+		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("During_")), new java.awt.GridBagConstraints(0,2,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
 		edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory duringFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).duringResponse);
         duringPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).duringResponse, false, true, true, duringFactory);
-        m_containingPanel.add(duringPanel, new java.awt.GridBagConstraints(1,2,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
+        m_containingPanel.add(duringPanel, new java.awt.GridBagConstraints(1,2,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
 
-		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("End_")), new java.awt.GridBagConstraints(0,3,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
+		m_containingPanel.add(new javax.swing.JLabel(Messages.getString("End_")), new java.awt.GridBagConstraints(0,3,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,INDENT,0,2), 0,0)); 
 		edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory endFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).endResponse);
         endPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)m_behavior).endResponse, false, true, true, endFactory);
 
-        m_containingPanel.add(endPanel, new java.awt.GridBagConstraints(1,3,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
+        m_containingPanel.add(endPanel, new java.awt.GridBagConstraints(1,3,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         this.add(m_containingPanel, java.awt.BorderLayout.CENTER);
         this.repaint();
         this.revalidate();

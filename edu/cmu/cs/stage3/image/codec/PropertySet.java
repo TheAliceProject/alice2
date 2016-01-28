@@ -48,6 +48,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Hashtable;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 class Property {
 
@@ -255,11 +257,11 @@ class PropertySet {
     }
 
     public Date getDate(int id) {
-        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+        throw new RuntimeException(Messages.getString("Not_implemented_"));
     }
 
     public Date getFiletime(int id) {
-        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+        throw new RuntimeException(Messages.getString("Not_implemented_"));
     }
 
     public byte[] getBlob(int id) {
@@ -281,22 +283,22 @@ class PropertySet {
     }
 
     public int[] getUI1Vector(int id) {
-        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+        throw new RuntimeException(Messages.getString("Not_implemented_"));
     }
 
     public int[] getUI2Vector(int id) {
-        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+        throw new RuntimeException(Messages.getString("Not_implemented_"));
     }
 
     public long[] getUI4Vector(int id) {
-        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+        throw new RuntimeException(Messages.getString("Not_implemented_"));
     }
 
     public float[] getR4Vector(int id) {
-        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+        throw new RuntimeException(Messages.getString("Not_implemented_"));
     }
 
     public String[] getLPWSTRVector(int id) {
-        throw new RuntimeException(JaiI18N.getString("Not_implemented_"));
+        throw new RuntimeException(Messages.getString("Not_implemented_"));
     }
 }

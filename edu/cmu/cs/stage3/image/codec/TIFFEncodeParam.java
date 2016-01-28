@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.image.codec;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /*
  * The contents of this file are subject to the  JAVA ADVANCED IMAGING
  * SAMPLE INPUT-OUTPUT CODECS AND WIDGET HANDLING SOURCE CODE  License
@@ -97,7 +99,7 @@ public class TIFFEncodeParam implements ImageEncodeParam {
 
 	// Writing out compressed TIFF images is not implemented yet, 04/02/99.
 	if (compression != COMPRESSION_NONE) {
-	    throw new Error(JaiI18N.getString("This_compression_scheme_is_not_implemented_yet_"));
+	    throw new Error(Messages.getString("This_compression_scheme_is_not_implemented_yet_"));
 	}
 
 	if (compression != COMPRESSION_NONE &&
@@ -107,7 +109,7 @@ public class TIFFEncodeParam implements ImageEncodeParam {
 	    compression != COMPRESSION_GROUP4 &&
 	    compression != COMPRESSION_LZW) {
 
-	    throw new Error(JaiI18N.getString("Unsupported_compression_scheme_specified_"));
+	    throw new Error(Messages.getString("Unsupported_compression_scheme_specified_"));
 	}
 
 	this.compression = compression;
@@ -131,7 +133,7 @@ public class TIFFEncodeParam implements ImageEncodeParam {
 
 	// Currently only writing out in strips is implemented
 	if (writeTiled == true) {
-	    throw new Error(JaiI18N.getString("Writing_out_Tiled_TIFF_images_is_not_implemented_yet_"));
+	    throw new Error(Messages.getString("Writing_out_Tiled_TIFF_images_is_not_implemented_yet_"));
 	}
 
 	this.writeTiled = writeTiled;

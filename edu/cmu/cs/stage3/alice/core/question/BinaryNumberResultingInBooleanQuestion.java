@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question;
 
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
-import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class BinaryNumberResultingInBooleanQuestion extends BooleanQuestion {
 	public final NumberProperty a = new NumberProperty( this, "a", new Double( 0 ) ); 
@@ -34,7 +33,7 @@ public abstract class BinaryNumberResultingInBooleanQuestion extends BooleanQues
 	public Object getValue() {
 		double aValue = a.doubleValue();
 		double bValue = b.doubleValue();
-		if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsEqualTo){
+/*		if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsEqualTo){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
 				aValue + " == " + bValue + " " + Messages.getString("is_");		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsNotEqualTo){
@@ -52,7 +51,7 @@ public abstract class BinaryNumberResultingInBooleanQuestion extends BooleanQues
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.NumberIsLessThanOrEqualTo){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
 				aValue + " <= " + bValue + " " + Messages.getString("is_");		  
-		}
+		}*/
 		if( getValue( aValue , bValue ) ) {
 			return Boolean.TRUE;
 		} else {

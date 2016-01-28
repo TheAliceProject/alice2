@@ -497,7 +497,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 			try {
 				audioInputStream.reset();
 			} catch (Exception e) {
-				shutDown(Messages.getString("Unable_to_reset_the_stream_n") + e);
+				shutDown(Messages.getString("Unable_to_reset_the_stream_n", e));
 				return;
 			}
 

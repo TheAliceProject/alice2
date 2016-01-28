@@ -23,16 +23,16 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
-import edu.cmu.cs.stage3.lang.Messages;
-
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
+import edu.cmu.cs.stage3.lang.Messages;
 
 public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	protected javax.swing.JPanel renderPanel = new javax.swing.JPanel(new java.awt.BorderLayout());
 	protected javax.swing.JPanel buttonPanel = new javax.swing.JPanel(new java.awt.GridBagLayout());
 	protected javax.swing.JSplitPane stdOutSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.VERTICAL_SPLIT);
-	protected edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
-			.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
+	protected edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
 	protected double aspectRatio;
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected boolean showStdOut = false;
@@ -68,9 +68,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				public void run() {
 					try {
 						String textUpdate = ev.getDocument().getText(ev.getOffset(), ev.getLength());
-						detailTextPane.getDocument().insertString(
-								detailTextPane.getDocument().getLength(),
-								textUpdate, detailTextPane.stdOutStyle);
+						detailTextPane.getDocument().insertString(detailTextPane.getDocument().getLength(), textUpdate, detailTextPane.stdOutStyle);
 					} catch (Exception e) {
 					}
 					update();
@@ -157,15 +155,14 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		if (renderCanvas != null) {
 			renderCanvas.addFocusListener(renderCanvasFocusListener);
-			javax.swing.Timer focusTimer = new javax.swing.Timer(100,
-					new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent ev) {
-							renderCanvas.requestFocus();
-						}
-					});
+			javax.swing.Timer focusTimer = new javax.swing.Timer(100, new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent ev) {
+					renderCanvas.requestFocus();
+				}
+			});
 			focusTimer.setRepeats(false);
 			focusTimer.start();
-			//renderCanvas.addComponentListener(new RenderComponentListener());
+			// renderCanvas.addComponentListener(new RenderComponentListener());
 		}
 		stdOutOutputComponent.stdOutStream.println(Messages.getString("Running_World"));
 		stdOutOutputComponent.stdOutStream.flush();
@@ -207,7 +204,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 					}
 				} else {
 					if (dialogSize.height > screenSize.height || dialogSize.width > screenSize.width) {
-						double windowAspect = (double) screenSize.width	/ (double) screenSize.height;
+						double windowAspect = (double) screenSize.width / (double) screenSize.height;
 						if (aspectRatio > windowAspect) { // constrain the width
 							java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 							renderSize.width = screenSize.width - 8;
@@ -265,12 +262,8 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		setRenderWindowSizeBasedOnSavedBounds();
 
 		// renderPanel.addComponentListener(renderResizeListener);
-		watcherScrollPane = new javax.swing.JScrollPane(watcherPanel,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		textScrollPane = new javax.swing.JScrollPane(detailTextPane,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		watcherScrollPane = new javax.swing.JScrollPane(watcherPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		textScrollPane = new javax.swing.JScrollPane(detailTextPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		detailTextPane.setEditable(false);
 
 		// buttons
@@ -284,9 +277,9 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		speedLabel = new javax.swing.JLabel(Messages.getString("Speed__1x"));
 		int fontSize = Integer.parseInt(config.getValue("fontSize"));
 		speedLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
-		speedLabel.setPreferredSize(new java.awt.Dimension(100, 12));
-		speedLabel.setMinimumSize(new java.awt.Dimension(20, 12));
-		speedLabel.setMaximumSize(new java.awt.Dimension(100, 12));
+		speedLabel.setPreferredSize(new java.awt.Dimension(fontSize*7, fontSize+5));
+		speedLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
 
 		pauseButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 		resumeButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
@@ -295,16 +288,19 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		takePictureButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 
 		speedSlider = new javax.swing.JSlider(0, 9, 0);
-
-		/*speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
-			public void paintTrack(java.awt.Graphics g) {
-				super.paintTrack(g);
-			}
-		});*/
-		speedSlider.setPreferredSize(new java.awt.Dimension(120, 16));
-		speedSlider.setMinimumSize(new java.awt.Dimension(40, 16));
-		speedSlider.setMaximumSize(new java.awt.Dimension(120, 16));
+		
+		/*
+		 * speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() { public
+		 * void paintTrack(java.awt.Graphics g) { super.paintTrack(g); } });
+		 */
+		speedSlider.setPreferredSize(new java.awt.Dimension(100, 22));
+		speedSlider.setMinimumSize(new java.awt.Dimension(40, 22));
+		speedSlider.setMaximumSize(new java.awt.Dimension(100, 22));
+		
 		speedSlider.setSnapToTicks(true);
+		speedSlider.setPaintTicks(true);
+		speedSlider.setMajorTickSpacing(0);
+
 		speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent ce) {
 				javax.swing.JSlider s = (javax.swing.JSlider) ce.getSource();
@@ -323,27 +319,13 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 
-		buttonPanel.add(speedSlider, new java.awt.GridBagConstraints(1, 1, 1,
-				1, 1.0, 1.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(2, 2, 2, 2), 0, 0));
-		buttonPanel.add(pauseButton, new java.awt.GridBagConstraints(2, 0, 1,
-				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
-		buttonPanel.add(speedLabel, new java.awt.GridBagConstraints(1, 0, 1, 1,
-				0.0, 0.0, java.awt.GridBagConstraints.CENTER,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(0, 2, 0, 2), 0, 0));
-		buttonPanel.add(resumeButton, new java.awt.GridBagConstraints(5, 0, 1,
-				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
-		buttonPanel.add(restartButton, new java.awt.GridBagConstraints(6, 0, 1,
-				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
-		buttonPanel.add(stopButton, new java.awt.GridBagConstraints(7, 0, 1, 2,
-				0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
-		buttonPanel.add(takePictureButton, new java.awt.GridBagConstraints(8,
-				0, 1, 2, 1.0, 0.0, java.awt.GridBagConstraints.EAST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(speedLabel, new java.awt.GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0, 2, 0, 2), 0, 0));
+		buttonPanel.add(speedSlider, new java.awt.GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0, 2, 0, 2), 0, 0));
+		buttonPanel.add(pauseButton, new java.awt.GridBagConstraints(2, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(resumeButton, new java.awt.GridBagConstraints(5, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(restartButton, new java.awt.GridBagConstraints(6, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(stopButton, new java.awt.GridBagConstraints(7, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(takePictureButton, new java.awt.GridBagConstraints(8, 0, 1, 2, 1.0, 0.0, java.awt.GridBagConstraints.LINE_END, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 
 		watcherSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.HORIZONTAL_SPLIT);
 		watcherSplitPane.setContinuousLayout(true);
@@ -379,8 +361,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			if ((keyStroke != null) && (commandKey != null)) {
 				java.awt.Component root = javax.swing.SwingUtilities.getRoot(this);
 				if (root instanceof javax.swing.JDialog) {
-					((javax.swing.JDialog) root).getRootPane().registerKeyboardAction(
-						action,	commandKey,	keyStroke, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+					((javax.swing.JDialog) root).getRootPane().registerKeyboardAction(action, commandKey, keyStroke, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 				}
 				// getRootPane().getInputMap().put( keyStroke, commandKey );
 				// getRootPane().getActionMap().put( commandKey, action );
@@ -405,8 +386,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	protected boolean shouldConstrainAspectOnResize() {
-		return !(showStdOut || authoringTool.getWatcherPanel().isThereSomethingToWatch())
-				&& config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true");
+		return !(showStdOut || authoringTool.getWatcherPanel().isThereSomethingToWatch()) && config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true");
 	}
 
 	public javax.swing.JPanel getRenderPanel() {
@@ -429,12 +409,10 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				}
 				return bounds;
 			} catch (NumberFormatException e) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(
-						Messages.getString("Parse_error_in_config_value__rendering_renderWindowBounds"), e);
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Parse_error_in_config_value__rendering_renderWindowBounds"), e);
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(
-					Messages.getString("Incorrect_number_of_tokens_in_config_value__rendering_renderWindowBounds"),	null);
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Incorrect_number_of_tokens_in_config_value__rendering_renderWindowBounds"), null);
 		}
 		return null;
 	}
@@ -494,7 +472,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// this looks much more complicated than it really is, although some of
 		// the code is quite tempermental
 		if (showStdOut) {
-			textScrollPane.setPreferredSize(new java.awt.Dimension(renderWidth,	stdOutHeight));
+			textScrollPane.setPreferredSize(new java.awt.Dimension(renderWidth, stdOutHeight));
 			stdOutSplitPane.setBottomComponent(textScrollPane);
 			stdOutSplitPane.setDividerSize(dividerSize);
 		} else {

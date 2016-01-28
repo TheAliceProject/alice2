@@ -318,7 +318,7 @@ public class JpegImagesToMovie implements ControllerListener,
     // Now, we'll need to create a DataSink.
     DataSink dsink;
     if ((dsink = createDataSink(p, outML)) == null) {
-      System.err.println(Messages.getString("Failed_to_create_a_DataSink_for_the_given_output_MediaLocator__") + outML); 
+      System.err.println(Messages.getString("Failed_to_create_a_DataSink_for_the_given_output_MediaLocator__", outML)); 
       return false;
     }
     

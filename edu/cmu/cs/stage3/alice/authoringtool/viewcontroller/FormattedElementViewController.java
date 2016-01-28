@@ -23,8 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
-import edu.cmu.cs.stage3.lang.Messages;
 import javax.swing.SwingConstants;
+
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Jason Pratt
@@ -83,7 +84,7 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 	protected boolean sleeping = false;
 
 	public FormattedElementViewController() {
-		setBorder( javax.swing.BorderFactory.createEmptyBorder( 1, 2, 3, 2 ) );
+		//setBorder( javax.swing.BorderFactory.createEmptyBorder( 2, 2, 2, 2 ) );
 
 		subPanel.setLayout( new java.awt.GridBagLayout() );
 		subPanel.setOpaque( false );

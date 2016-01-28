@@ -50,15 +50,11 @@ public class StoreElementProgressPane extends edu.cmu.cs.stage3.progress.Progres
 			StringBuffer sb = new StringBuffer();
 			sb.append(Messages.getString("An_error_has_occurred_while_attempting_to_save_your_world__n_n"));
 
-			String temp = Messages.getString("check_for_a_directory_co_located_with__nyour_world_named__Backups_of__YourWorldNameHere___which__nshould_contain_previously_saved_versions_of_your_world__n");
 			if (t instanceof java.io.IOException) {
 				sb.append(Messages.getString("This_may_be_the_result_of_not_having_enough_space_on_the_target_drive__n"));
 				sb.append(Messages.getString("If_possible__n____attempt_to_save_your_world_to_a_different_drive__or_n____free_up_some_space_and__Save_As__to_a_different_file__n_n"));
-				sb.append(Messages.getString("NOTE__If_unsuccessful__please", temp));
-			} else {
-				sb.append(Messages.getString("NOTE__Please", temp));
 			}
-
+			sb.append(Messages.getString("NOTE__Please"));
 			sb.append(Messages.getString("_nWe_at_the_Alice_Team_apologize_for_any_work_you_have_lost_n"));
 			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(sb.toString(), t);
 		}

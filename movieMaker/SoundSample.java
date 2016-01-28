@@ -69,6 +69,6 @@ public class SoundSample
   
 public String toString()
   {
-    return Messages.getString("Sample_at_index_") + frameNumber + " " + Messages.getString("has_value_") + getValue();  
+    return Messages.getString("Sample_at_index_has_value_", frameNumber, getValue());  
   }
 } // end of SoundSample class

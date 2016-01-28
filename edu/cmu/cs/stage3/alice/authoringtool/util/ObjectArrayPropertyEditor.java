@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import java.awt.ComponentOrientation;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -63,6 +66,8 @@ public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu
 				}
 			}
 		);
+//		if (!AikMin.isLTR())	// ***** For list and array items in create new variable *****
+//			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		setDropTarget( new java.awt.dnd.DropTarget( this, this ) );
 		refreshGUI();
 	}
@@ -99,20 +104,28 @@ public class ObjectArrayPropertyEditor extends javax.swing.JPanel implements edu
 					PopupItemFactory factory = new SetPropertyImmediatelyFactory( item );
 					javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyGUI( item, true, false, factory );
 					if( gui != null ) {
-						this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
+						this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 					} else {
 						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_item__", item), null ); 
 					}
 				}
 			}
 
-			this.add( newItemButton, new java.awt.GridBagConstraints( 0, count, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
+			javax.swing.JPanel okCancelPanel = new javax.swing.JPanel();
+			okCancelPanel.setBackground( java.awt.Color.white );
+			java.awt.GridBagConstraints gbcOKCancel = new java.awt.GridBagConstraints();
+			okCancelPanel.add( newItemButton, gbcOKCancel);
 			newItemButton.setDropTarget( new java.awt.dnd.DropTarget( newItemButton, this ) );
-			this.add( removeItemButton, new java.awt.GridBagConstraints( 1, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
+			okCancelPanel.add( removeItemButton, gbcOKCancel);
 			removeItemButton.setDropTarget( new java.awt.dnd.DropTarget( removeItemButton, this ) );
+			this.add(okCancelPanel, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
 			java.awt.Component glue = javax.swing.Box.createGlue();
-			this.add( glue, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
+			this.add( glue, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 			glue.setDropTarget( new java.awt.dnd.DropTarget( glue, this ) );
+			if (!AikMin.isLTR()) {	// ***** For list and array items in create new variable *****
+				applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+			}
+		
 		}
 		revalidate();
 		repaint();

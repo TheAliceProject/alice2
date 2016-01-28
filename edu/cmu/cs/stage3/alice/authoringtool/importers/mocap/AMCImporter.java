@@ -53,7 +53,7 @@ import edu.cmu.cs.stage3.math.Vector3;
 
 public class AMCImporter extends AbstractImporter {
     protected ASFSkeleton skel = null;
-    private static final edu.cmu.cs.stage3.alice.core.World scene = new edu.cmu.cs.stage3.alice.core.World();
+    //private static final edu.cmu.cs.stage3.alice.core.World scene = new edu.cmu.cs.stage3.alice.core.World();
 	protected Model applyTo = null;
 
     protected double fps = 30;

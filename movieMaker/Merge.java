@@ -119,7 +119,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 				dataOutputs[i] = processors[i].getDataOutput();
 				processors[i].start();
 			} catch (Exception e) {
-				System.err.println(Messages.getString("Failed_to_create_a_processor__") + e); 
+				System.err.println(Messages.getString("Failed_to_create_a_processor__", e)); 
 			}
 		}
 
@@ -129,11 +129,11 @@ public class Merge implements ControllerListener, DataSinkListener {
 			merger.connect();
 			merger.start();
 		} catch (Exception ex) {
-			System.err.println(Messages.getString("Failed_to_merge_data_sources_") + ex); 
+			System.err.println(Messages.getString("Failed_to_merge_data_sources_", ex)); 
 
 		}
 		if (merger == null) {
-			System.err.println(Messages.getString("Failed_to_merge_data_sources_")); 
+			System.err.println(Messages.getString("Failed_to_merge_data_sources_", "")); 
 
 		}
 		/*
@@ -149,7 +149,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 			outputProcessor = Manager.createRealizedProcessor(outputPM);
 			outputDataSource = outputProcessor.getDataOutput();
 		} catch (Exception exc) {
-			System.err.println(Messages.getString("Failed_to_create_output_processor__") + exc); 
+			System.err.println(Messages.getString("Failed_to_create_output_processor__", exc)); 
 
 		}
 
@@ -171,7 +171,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 			outputDataSink.start();
 			outputProcessor.start();
 		} catch (Exception excep) {
-			System.err.println(Messages.getString("Failed_to_start_file_writing__") + excep); 
+			System.err.println(Messages.getString("Failed_to_start_file_writing__", excep)); 
 
 		}
 
@@ -321,8 +321,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 	}
 
 	private void showUsage() {
-		System.err
-				.println(Messages.getString("Usage__Merge__url1___url2____url3__________o__out_URL_____v__video_encoding_____a__audio_encoding_____t__content_type__")); 
+		System.err.println(Messages.getString("Usage__Merge__url1___url2____url3__________o__out_URL_____v__video_encoding_____a__audio_encoding_____t__content_type__")); 
 	}
 
 	public void doSingle(DataSource ds) {
@@ -331,8 +330,6 @@ public class Merge implements ControllerListener, DataSinkListener {
 		MediaLocator outML = new MediaLocator(outputFile);
 
 		try {
-			// System.err.println("- create processor for the image datasource
-			// ...");
 			p = Manager.createProcessor(ds);
 		} catch (Exception e) {
 			System.err.println(Messages.getString("Cannot_create_a_processor_from_the_data_source_")); 
@@ -355,8 +352,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 		TrackControl tcs[] = p.getTrackControls();
 		Format f[] = tcs[0].getSupportedFormats();
 		if (f == null || f.length <= 0) {
-			System.err.println(Messages.getString("The_mux_does_not_support_the_input_format__") 
-					+ tcs[0].getFormat());
+			System.err.println(Messages.getString("The_mux_does_not_support_the_input_format__", tcs[0].getFormat()));
 		}
 
 		tcs[0].setFormat(f[0]);
@@ -493,8 +489,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 		DataSource ds;
 
 		if ((ds = p.getDataOutput()) == null) {
-			System.err
-					.println(Messages.getString("Something_is_really_wrong__the_processor_does_not_have_an_output_DataSource")); 
+			System.err.println(Messages.getString("Something_is_really_wrong__the_processor_does_not_have_an_output_DataSource")); 
 			return null;
 		}
 

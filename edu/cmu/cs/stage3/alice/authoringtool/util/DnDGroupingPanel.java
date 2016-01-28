@@ -25,6 +25,8 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
 
 import java.awt.image.BufferedImage;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 
 /**
  * @author Jason Pratt
@@ -55,10 +57,10 @@ public class DnDGroupingPanel extends GroupingPanel {
 		//outerBorder = new edu.cmu.cs.stage3.alice.authoringtool.border.PartialLineBorder( java.awt.Color.lightGray, 1, true, true, true, true );
 		//border = javax.swing.BorderFactory.createCompoundBorder( outerBorder, innerBorder );
 		//setBorder( border );
-		setBorder( javax.swing.BorderFactory.createEmptyBorder( 2, 2, 2, 2 ) );
+		setBorder( javax.swing.BorderFactory.createEmptyBorder( 2, 2, 2, 2 ) );	
 		setOpaque( false );
 
-		add( grip, java.awt.BorderLayout.WEST );
+		add( grip, java.awt.BorderLayout.LINE_START );
 		addDragSourceComponent( grip );
 		addDragSourceComponent( this );
 	}
@@ -124,7 +126,7 @@ public class DnDGroupingPanel extends GroupingPanel {
 	}
 
 	public void reset() {
-		add( grip, java.awt.BorderLayout.WEST );
+		add( grip, java.awt.BorderLayout.LINE_START );
 		addDragSourceComponent( grip );
 		addDragSourceComponent( this );
 	}
@@ -183,6 +185,7 @@ public class DnDGroupingPanel extends GroupingPanel {
 		java.awt.Rectangle bounds = getBounds();
 
 		g.setColor( getBackground() );
+		
 		g.fillRoundRect( 0, 0, bounds.width, bounds.height, arcWidth, arcHeight );
 		g.setColor( java.awt.Color.lightGray );
 		g.drawRoundRect( 0, 0, bounds.width - 1, bounds.height - 1, arcWidth, arcHeight );
@@ -255,7 +258,7 @@ public class DnDGroupingPanel extends GroupingPanel {
 	}
 
 	public class GroupingPanelDragGestureListener implements java.awt.dnd.DragGestureListener {
-		protected class DragListener extends java.awt.event.MouseAdapter implements java.awt.event.MouseMotionListener {
+		protected class DragListener extends java.awt.event.MouseAdapter implements java.awt.event.MouseMotionListener{
 			public void mouseReleased( java.awt.event.MouseEvent ev ) {	
 				drawFaded = false;
 				DnDGroupingPanel.this.repaint();
@@ -411,9 +414,10 @@ public class DnDGroupingPanel extends GroupingPanel {
 		protected java.awt.Color shadowColor = javax.swing.plaf.metal.MetalLookAndFeel.getControlDarkShadow();
 
 		public DnDGrip() {
-			setMinimumSize( new java.awt.Dimension( 6, 0 ) );
+			int gripHeight = Integer.parseInt( authoringToolConfig.getValue( "fontSize" ));
+			setMinimumSize( new java.awt.Dimension( 6, gripHeight + 8 ) );
 			setMaximumSize( new java.awt.Dimension( 6, Integer.MAX_VALUE ) );
-			setPreferredSize( new java.awt.Dimension( 6, 0 ) );
+			setPreferredSize( new java.awt.Dimension( 6, gripHeight + 8 ) );
 		}
 
 		protected void printComponent( java.awt.Graphics g ) {
@@ -422,20 +426,24 @@ public class DnDGroupingPanel extends GroupingPanel {
 
 		protected void paintComponent( java.awt.Graphics g ) {
 			java.awt.Dimension size = getSize();
-
+			int offset = 0;
+			if (AikMin.isMAC()) offset = 1;
 			g.setColor( highlightColor );
+			if (size.height > 20 && size.height < 27) {
+				int i = 0;
+			}
 			for( int x = 0; x < size.width; x += 4 ) {
 				for( int y = 0; y < size.height; y += 4 ) {
-					g.drawLine( x, y, x, y );
-					g.drawLine( x + 2, y + 2, x + 2, y + 2 );
+					g.drawLine( x, y, x + offset, y + offset );
+					g.drawLine( x + 2, y + 2, x + 2 + offset, y + 2 + offset );
 				}
 			}
 
 			g.setColor( shadowColor );
 			for( int x = 0; x < size.width; x += 4 ) {
 				for( int y = 0; y < size.height; y += 4 ) {
-					g.drawLine( x + 1, y + 1, x + 1, y + 1 );
-					g.drawLine( x + 3, y + 3, x + 3, y + 3 );
+					g.drawLine( x + 1, y + 1, x + 1 + offset , y + 1 + offset );
+					g.drawLine( x + 3, y + 3, x + 3 + offset , y + 3 + offset );
 				}
 			}
 		}

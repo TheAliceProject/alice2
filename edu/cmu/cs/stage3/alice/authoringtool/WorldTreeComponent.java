@@ -526,7 +526,7 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 				if( node instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 					javax.swing.JPopupMenu popup = createPopup( (edu.cmu.cs.stage3.alice.core.Element)node, path );
 					if( popup != null ) {
-						popup.show( ev.getComponent(), ev.getX(), ev.getY() );					
+						popup.show( ev.getComponent(), ev.getX(), ev.getY() );
 						//edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( popup );
 					}
 				}
@@ -582,13 +582,24 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 		}
 		this.setMinimumSize(new Dimension(5, 0));
 		treePanel.setLayout(borderLayout4);
-		worldTree.setBorder(new JScrollPane().getViewportBorder());
+		worldTree.setBorder(new javax.swing.border.CompoundBorder( new JScrollPane().getViewportBorder(), new javax.swing.border.EmptyBorder(1,2,1,1)) );
 		//	charactersTree.setFont(new java.awt.Font("Dialog", 0, 14));
 		//	charactersTree.setRootVisible(false);
 		this.add(treeScrollPane, BorderLayout.CENTER);
 		treePanel.add(worldTree, BorderLayout.CENTER);
 		treeScrollPane.getViewport().add(treePanel, BorderLayout.CENTER);
 		treeScrollPane.getViewport().setBackground(Color.white);
+        if(!AikMin.isLTR()){	// ***** To place the scroll bar to the left of the Editor panel *****
+        	treeScrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+   	            @Override
+   	            public void layoutContainer(java.awt.Container parent) {
+   	            	javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+   	            	scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+   	                super.layoutContainer(parent);
+   	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+   	            }
+   	        });
+        }
 		//treePanel.add(charactersTree, BorderLayout.CENTER);
 	}
 

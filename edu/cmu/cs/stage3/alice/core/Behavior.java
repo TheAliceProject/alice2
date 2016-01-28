@@ -352,7 +352,7 @@ public abstract class Behavior extends Element {
                     context.m_variableMap.put( formal, runtime );
                     break;
                 } else if( j==actualRequired.length-1 ) {
-                    throw new RuntimeException( Messages.getString("missing_required_parameter__") + nameValue ); 
+                    throw new RuntimeException( Messages.getString("missing_required_parameter__", nameValue )); 
                 }
             }
         }

@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -325,15 +326,11 @@ public abstract class AliceAlertContentPane extends
 		messageLabel.setOpaque(false);
 		messageLabel.setPreferredSize(new java.awt.Dimension(402, 1));
 		messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		messageLabel.setText(Messages
-				.getString("An_unknown_error_has_occurred_")); // An unknown
-																// error has
-																// occurred.
-
+		messageLabel.setText(Messages.getString("An_unknown_error_has_occurred_")); // An unknown error has occurred.
+		
 		cancelButton.setText(Messages.getString("OK")); // OK
 
-		detailButton.setText(Messages.getString("More_Detail___")); // More
-																	// Detail >>
+		detailButton.setText(Messages.getString("More_Detail___")); // More Detail >>
 		detailButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				detailButton_actionPerformed(e);
@@ -360,11 +357,10 @@ public abstract class AliceAlertContentPane extends
 		buttonPanel.setBorder(BorderFactory.createEmptyBorder(6, 0, 0, 0));
 		buttonPanel.setLayout(new GridBagLayout());
 
-		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-				.getResource("images/errorDialogueIcon.png");
+		java.net.URL errorImageResources = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/errorDialogueIcon.png");
 		errorIconPanel.setImage(java.awt.Toolkit.getDefaultToolkit()
 				.createImage(errorImageResources));
-		messagePanel.add(errorIconPanel, java.awt.BorderLayout.WEST);
+		messagePanel.add(errorIconPanel, java.awt.BorderLayout.LINE_START);
 		messagePanel.add(messageLabel, BorderLayout.CENTER);
 
 		detailTextPane.setEditable(false);
@@ -373,9 +369,24 @@ public abstract class AliceAlertContentPane extends
 		detailScrollPane.setViewportView(detailTextPane);
 		detailScrollPane.setPreferredSize(new java.awt.Dimension(492, 300));
 
+		if(!AikMin.isLTR()){	// ***** To fix the vertical scrollbar on the error & output console *****
+			detailScrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+				@Override
+			   	public void layoutContainer(java.awt.Container parent) {
+			   		javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+			   		scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+			   	       super.layoutContainer(parent);
+			   	       scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+			   	}
+			});
+			detailPanel.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+		}
+		
 		add(messagePanel, BorderLayout.NORTH);
 		add(detailPanel, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
-
+		if(!AikMin.isLTR()){
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+		}
 	}
 }

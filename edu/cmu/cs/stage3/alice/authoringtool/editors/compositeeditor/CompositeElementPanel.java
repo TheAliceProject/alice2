@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import java.awt.ComponentOrientation;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 
@@ -401,7 +404,9 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
             }
         }
         this.add(containingPanel,  java.awt.BorderLayout.CENTER);
-        this.setBackground(getCustomBackgroundColor());
+        this.setBackground(getCustomBackgroundColor());	
+        if (!AikMin.isLTR())	// ***** For the Do in order, Do together, Loop, and etc tiles. *****
+        	applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
     }
 
     public boolean isExpanded(){

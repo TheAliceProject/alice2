@@ -160,7 +160,7 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 				//check to see if the file already exists, if not we're fine
 				if (!(loadFile.exists())) {
-					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("Can_t_find_") + fileName + Messages.getString("__Please_choose_another"), Messages.getString("Can_t_find_file"), javax.swing.JOptionPane.OK_CANCEL_OPTION);   
+					int ans = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("Can_t_find___Please_choose_another", fileName), Messages.getString("Can_t_find_file"), javax.swing.JOptionPane.OK_CANCEL_OPTION);   
 
 					if (ans == javax.swing.JOptionPane.CANCEL_OPTION) {
 						return;

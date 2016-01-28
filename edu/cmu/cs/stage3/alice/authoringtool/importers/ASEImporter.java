@@ -694,23 +694,23 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 						url = new java.net.URL( url.toExternalForm() + name.toString() );
 						bis = new java.io.BufferedInputStream( url.openStream() );
 					} else {
-						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("location_is_not_a_File_or_URL__") + location, null, false ); 
+						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("location_is_not_a_File_or_URL__", location), null, false ); 
 					}
 				}
 				if( bis == null ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BufferedInputStream_is_null_for_") + filename, null ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("BufferedInputStream_is_null_for_", filename), null ); 
 					continue;
 				}
 
 				String codec = edu.cmu.cs.stage3.image.ImageIO.mapExtensionToCodecName( extension );
 				if( codec == null ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_appropriate_codec_for_") + filename, null ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_appropriate_codec_for_", filename), null ); 
 					continue;
 				}
 
 				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load( codec, bis );
 				if( image == null ) {
-					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Image_loaded_is_null_for_") + filename, null ); 
+					edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Image_loaded_is_null_for_", filename), null ); 
 					continue;
 				}
 
@@ -1321,8 +1321,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				double tension = parseDouble();
 				double continuity = parseDouble();
 				double bias = parseDouble();
-				double easeIn = parseDouble();  // NOT USED AT THE MOMENT
-				double easeOut = parseDouble(); // NOT USED AT THE MOMENT
+				//double easeIn = parseDouble();  // NOT USED AT THE MOMENT
+				//double easeOut = parseDouble(); // NOT USED AT THE MOMENT
 				spline.addKey( new edu.cmu.cs.stage3.pratt.maxkeyframing.Vector3TCBKey( time, new javax.vecmath.Vector3d( x, y, z ), tension, continuity, bias ) );
 			} else if( tokenizer.ttype == '}' ) {
 				return keyframeResponse;
@@ -1419,8 +1419,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				double tension = parseDouble();     // NOT USED IN QUATERNION ANIMATION
 				double continuity = parseDouble();  // NOT USED IN QUATERNION ANIMATION
 				double bias = parseDouble();        // NOT USED IN QUATERNION ANIMATION
-				double easeIn = parseDouble();  // NOT USED AT THE MOMENT
-				double easeOut = parseDouble(); // NOT USED AT THE MOMENT
+				//double easeIn = parseDouble();  // NOT USED AT THE MOMENT
+				//double easeOut = parseDouble(); // NOT USED AT THE MOMENT
 				spline.addKey( new edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionTCBKey( time, new edu.cmu.cs.stage3.math.Quaternion( new edu.cmu.cs.stage3.math.AxisAngle( axis_x, axis_y, axis_z, angle ) ), tension, continuity, bias ) );
 			} else if( tokenizer.ttype == '}' ) {
 				spline.correctForMAXRelativeKeys();
@@ -1602,9 +1602,9 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			timer = new javax.swing.Timer( 100,
 				new java.awt.event.ActionListener() {
 					public void actionPerformed( java.awt.event.ActionEvent ev ) {
-						linesLabel.setText( Messages.getString("Lines_read__") + ASEImporter.this.tokenizer.lineno() ); 
-						objectLabel.setText( Messages.getString("Object__") + ASEImporter.this.currentObject ); 
-						progressLabel.setText( Messages.getString("Loading_") + ASEImporter.this.currentlyLoading + ": " );  
+						linesLabel.setText( Messages.getString("Lines_read__", ASEImporter.this.tokenizer.lineno()) ); 
+						objectLabel.setText( Messages.getString("Object__", ASEImporter.this.currentObject) ); 
+						progressLabel.setText( Messages.getString("Loading_", ASEImporter.this.currentlyLoading) );  
 						progressBar.setValue( ASEImporter.this.currentProgress );
 					}
 				}

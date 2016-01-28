@@ -36,10 +36,8 @@ public class PropertyDnDPanel extends edu.cmu.cs.stage3.alice.authoringtool.util
 
 	public PropertyDnDPanel() {
 		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyDnDPanel" ) ); 
-
 		add( nameLabel, java.awt.BorderLayout.CENTER );
 		addDragSourceComponent( nameLabel );
-
 		java.awt.event.MouseListener mouseListener = new edu.cmu.cs.stage3.alice.authoringtool.util.CustomMouseAdapter() {
 			public void popupResponse( java.awt.event.MouseEvent ev ) {
 				PropertyDnDPanel.this.updatePopupStructure();

@@ -66,17 +66,13 @@ public class Sound extends SimpleSound
   
 public String toString()
   {
-    String output = "Sound"; 
     String fileName = getFileName();
     
     // if there is a file name then add that to the output
-    if (fileName != null)
-      output = output + " " + Messages.getString("file__") + fileName; 
+    if (fileName == null)
+      fileName="--"; 
     
-    // add the length in frames
-    output = output + " " + Messages.getString("number_of_samples__") + getLengthInFrames(); 
-    
-    return output;
+    return Messages.getString("Sound_file__number_of_samples__",fileName, getLengthInFrames());
   }
              
 } // this } is the end of class Sound, put all new methods before this
