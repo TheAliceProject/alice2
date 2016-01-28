@@ -62,27 +62,27 @@ public class Appearance extends Element {
 	
 	protected void releasePass1() {
 		if( m_diffuseColorMap != null ) {
-			warnln( Messages.getString("WARNING__released_appearence_") + this + " " + Messages.getString("still_has_diffuse_color_map_") + m_diffuseColorMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_still_has_diffuse_color_map_", this, m_diffuseColorMap) );   
 			setDiffuseColorMap( null );
 		}
 		if( m_opacityMap != null ) {
-			warnln( Messages.getString("WARNING__released_appearence_") + this + " " + Messages.getString("still_has_opacity_map_") + m_opacityMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_still_has_opacity_map_", this, m_opacityMap) );   
 			setOpacityMap( null );
 		}
 		if( m_emissiveColorMap != null ) {
-			warnln( Messages.getString("WARNING__released_appearence_") + this + " " + Messages.getString("still_has_emissive_color_map_") + m_emissiveColorMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_still_has_emissive_color_map_", this, m_emissiveColorMap) );   
 			setEmissiveColorMap( null );
 		}
 		if( m_specularHighlightColorMap != null ) {
-			warnln( Messages.getString("WARNING__released_appearence_") + this + " " + Messages.getString("still_has_specular_highlight_color_map_") + m_specularHighlightColorMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_still_has_specular_highlight_color_map_", this, m_specularHighlightColorMap) );   
 			setSpecularHighlightColorMap( null );
 		}
 		if( m_bumpMap != null ) {
-			warnln( Messages.getString("WARNING__released_appearence_") + this + " " + Messages.getString("still_has_bump_map_") + m_bumpMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_still_has_bump_map_", this, m_bumpMap) );   
 			setBumpMap( null );
 		}
 		if( m_detailMap != null ) {
-			warnln( Messages.getString("WARNING__released_appearence_") + this + " " + Messages.getString("still_has_detail_map_") + m_detailMap + "." );   
+			warnln( Messages.getString("WARNING__released_appearence_still_has_detail_map_", this, m_detailMap) );   
 			setDetailMap( null );
 		}
 		super.releasePass1();

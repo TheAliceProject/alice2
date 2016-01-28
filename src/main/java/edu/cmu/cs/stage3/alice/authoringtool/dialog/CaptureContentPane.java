@@ -38,6 +38,7 @@ import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -46,15 +47,10 @@ import movieMaker.MovieCapturer;
 import movieMaker.MovieWriter;
 
 public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
-	protected javax.swing.JPanel renderPanel = new javax.swing.JPanel(
-			new java.awt.BorderLayout());
-	protected javax.swing.JPanel buttonPanel = new javax.swing.JPanel(
-			new java.awt.GridBagLayout());
-	protected javax.swing.JSplitPane stdOutSplitPane = new javax.swing.JSplitPane(
-			javax.swing.JSplitPane.VERTICAL_SPLIT);
-	protected edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
-			.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-					.getPackage());
+	protected javax.swing.JPanel renderPanel = new javax.swing.JPanel(new java.awt.BorderLayout());
+	protected javax.swing.JPanel buttonPanel = new javax.swing.JPanel(new java.awt.GridBagLayout());
+	protected javax.swing.JSplitPane stdOutSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.VERTICAL_SPLIT);
+	protected edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
 	protected double aspectRatio;
 	protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 	protected boolean showStdOut = false;
@@ -63,8 +59,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	protected OutputComponent stdOutOutputComponent;
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.WatcherPanel watcherPanel;
 	protected javax.swing.JScrollPane watcherScrollPane;
-	protected javax.swing.JSplitPane watcherSplitPane = new javax.swing.JSplitPane(
-			javax.swing.JSplitPane.HORIZONTAL_SPLIT);
+	protected javax.swing.JSplitPane watcherSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.HORIZONTAL_SPLIT);
 	protected javax.swing.JButton pauseButton;
 	protected javax.swing.JButton resumeButton;
 	protected javax.swing.JButton restartButton;
@@ -86,10 +81,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	protected java.awt.event.ActionListener okActionListener;
 
 	// Part of the new toolbar capture buttons
-	protected javax.swing.JPanel captureBar = new javax.swing.JPanel(
-			new java.awt.GridBagLayout());
-	protected javax.swing.JPanel exportBar = new javax.swing.JPanel(
-			new java.awt.GridBagLayout());
+	protected javax.swing.JPanel captureBar = new javax.swing.JPanel(new java.awt.GridBagLayout());
+	protected javax.swing.JPanel exportBar = new javax.swing.JPanel(new java.awt.GridBagLayout());
 	protected javax.swing.JFrame statusFrame;
 	protected javax.swing.JLabel recordLabel;
 
@@ -120,17 +113,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private String exportDirectory;
 	private FrameSequencer frameSequencer;
 
-	protected class TextOutputDocumentListener implements
-			javax.swing.event.DocumentListener {
+	protected class TextOutputDocumentListener implements javax.swing.event.DocumentListener {
 		public void insertUpdate(final javax.swing.event.DocumentEvent ev) {
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						String textUpdate = ev.getDocument().getText(
-								ev.getOffset(), ev.getLength());
-						detailTextPane.getDocument().insertString(
-								detailTextPane.getDocument().getLength(),
-								textUpdate, detailTextPane.stdOutStyle);
+						String textUpdate = ev.getDocument().getText(ev.getOffset(), ev.getLength());
+						detailTextPane.getDocument().insertString(detailTextPane.getDocument().getLength(), textUpdate, detailTextPane.stdOutStyle);
 					} catch (Exception e) {
 					}
 					update();
@@ -163,37 +152,27 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 	}
 
-	protected class RenderComponentListener extends
-			java.awt.event.ComponentAdapter {
+	protected class RenderComponentListener extends java.awt.event.ComponentAdapter {
 
 		public void componentResized(java.awt.event.ComponentEvent ev) {
-			if (CaptureContentPane.this.shouldConstrainAspectOnResize()
-					&& !doNotListenToResize && !endCapturing) {
+			if (CaptureContentPane.this.shouldConstrainAspectOnResize() && !doNotListenToResize && !endCapturing) {
 				doNotListenToResize = true;
 				java.awt.Rectangle oldBounds = getRenderBounds();
-				java.awt.Dimension newSize = CaptureContentPane.this.renderPanel
-						.getSize();
-				java.awt.Rectangle newBounds = new java.awt.Rectangle(
-						oldBounds.getLocation(), newSize);
+				java.awt.Dimension newSize = CaptureContentPane.this.renderPanel.getSize();
+				java.awt.Rectangle newBounds = new java.awt.Rectangle(oldBounds.getLocation(), newSize);
 
 				int deltaWidth = Math.abs(oldBounds.width - newSize.width);
 				int deltaHeight = Math.abs(oldBounds.height - newSize.height);
 
 				constrainToAspectRatio(newBounds, deltaWidth < deltaHeight);
 
-				CaptureContentPane.this.config
-						.setValue(
-								"rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-4$
-				renderPanel.setPreferredSize(new java.awt.Dimension(
-						newBounds.width, newBounds.height));
-				buttonPanel.setPreferredSize(new java.awt.Dimension(
-						newBounds.width, buttonPanel.getHeight()));
+				CaptureContentPane.this.config.setValue("rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-4$
+				renderPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, newBounds.height));
+				buttonPanel.setPreferredSize(new java.awt.Dimension(newBounds.width, buttonPanel.getHeight()));
 
 				// Put in
-				captureBar.setPreferredSize(new java.awt.Dimension(
-						newBounds.width, captureBar.getHeight()));
-				exportBar.setPreferredSize(new java.awt.Dimension(
-						newBounds.width, exportBar.getHeight()));
+				captureBar.setPreferredSize(new java.awt.Dimension(newBounds.width, captureBar.getHeight()));
+				exportBar.setPreferredSize(new java.awt.Dimension(newBounds.width, exportBar.getHeight()));
 
 				packDialog();
 				doNotListenToResize = false;
@@ -205,8 +184,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	protected RenderComponentListener renderResizeListener = new RenderComponentListener();
 
-	public CaptureContentPane(
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+	public CaptureContentPane(edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		this.authoringTool = authoringTool;
 		this.stdOutOutputComponent = authoringTool.getStdOutOutputComponent();
 		this.watcherPanel = authoringTool.getWatcherPanel();
@@ -227,8 +205,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	protected void setRenderWindowSizeBasedOnSavedBounds() {
 		java.awt.Rectangle bounds = getRenderBounds();
-		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width,
-				bounds.height));
+		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width, bounds.height));
 	}
 
 	public void preDialogShow(javax.swing.JDialog parentDialog) {
@@ -237,38 +214,29 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		if (renderCanvas != null) {
 			renderCanvas.addFocusListener(renderCanvasFocusListener);
-			javax.swing.Timer focusTimer = new javax.swing.Timer(100,
-					new java.awt.event.ActionListener() {
-						public void actionPerformed(
-								java.awt.event.ActionEvent ev) {
-							renderCanvas.requestFocus();
-						}
-					});
+			javax.swing.Timer focusTimer = new javax.swing.Timer(100, new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent ev) {
+					renderCanvas.requestFocus();
+				}
+			});
 			focusTimer.setRepeats(false);
 			focusTimer.start();
 		}
-		stdOutOutputComponent.stdOutStream.println(Messages
-				.getString("Running_World"));
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("Running_World"));
 		stdOutOutputComponent.stdOutStream.flush();
-		this.stdOutOutputComponent.getTextPane().getDocument()
-				.addDocumentListener(textListener);
+		this.stdOutOutputComponent.getTextPane().getDocument().addDocumentListener(textListener);
 		java.awt.Rectangle bounds = getRenderBounds();
-		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width,
-				bounds.height));
+		renderPanel.setPreferredSize(new java.awt.Dimension(bounds.width, bounds.height));
 		parentDialog.setLocation(bounds.getLocation());
 		showStdOut = false;
 		keyMapInit();
 		updateGUI();
-		if (config.getValue("rendering.ensureRenderDialogIsOnScreen")
-				.equalsIgnoreCase("true")) {
-			java.awt.Dimension screenSize = java.awt.Toolkit
-					.getDefaultToolkit().getScreenSize();
+		if (config.getValue("rendering.ensureRenderDialogIsOnScreen").equalsIgnoreCase("true")) {
+			java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 			java.awt.Dimension dialogSize = parentDialog.getSize();
 			java.awt.Point dialogLocation = parentDialog.getLocation();
-			java.awt.Rectangle screenRect = new java.awt.Rectangle(0, 0,
-					screenSize.width, screenSize.height);
-			if (!javax.swing.SwingUtilities.isRectangleContainingRectangle(
-					screenRect, parentDialog.getBounds())) {
+			java.awt.Rectangle screenRect = new java.awt.Rectangle(0, 0, screenSize.width, screenSize.height);
+			if (!javax.swing.SwingUtilities.isRectangleContainingRectangle(screenRect, parentDialog.getBounds())) {
 				if ((dialogLocation.x + dialogSize.width) > screenSize.width) {
 					dialogLocation.x = screenSize.width - dialogSize.width;
 				}
@@ -281,39 +249,29 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if (dialogLocation.y < 0) {
 					dialogLocation.y = 0;
 				}
-				if (config.getValue(
-						"rendering.constrainRenderDialogAspectRatio")
-						.equalsIgnoreCase("false")) {
+				if (config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("false")) {
 					if (dialogSize.width > screenSize.width) {
-						java.awt.Dimension renderSize = renderPanel
-								.getPreferredSize();
+						java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 						renderSize.width = screenSize.width - 8;
 						renderPanel.setPreferredSize(renderSize);
 					}
 					if (dialogSize.height > screenSize.height) {
-						java.awt.Dimension renderSize = renderPanel
-								.getPreferredSize();
+						java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 						renderSize.height = screenSize.height - 27;
 						renderPanel.setPreferredSize(renderSize);
 					}
 				} else {
-					if (dialogSize.height > screenSize.height
-							|| dialogSize.width > screenSize.width) {
-						double windowAspect = (double) screenSize.width
-								/ (double) screenSize.height;
+					if (dialogSize.height > screenSize.height || dialogSize.width > screenSize.width) {
+						double windowAspect = (double) screenSize.width / (double) screenSize.height;
 						if (aspectRatio > windowAspect) { // constrain the width
-							java.awt.Dimension renderSize = renderPanel
-									.getPreferredSize();
+							java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 							renderSize.width = screenSize.width - 8;
-							renderSize.height = (int) Math
-									.round(renderSize.width / aspectRatio);
+							renderSize.height = (int) Math.round(renderSize.width / aspectRatio);
 							renderPanel.setPreferredSize(renderSize);
 						} else { // constrain the height
-							java.awt.Dimension renderSize = renderPanel
-									.getPreferredSize();
+							java.awt.Dimension renderSize = renderPanel.getPreferredSize();
 							renderSize.height = screenSize.height - 27;
-							renderSize.width = (int) Math
-									.round(renderSize.height * aspectRatio);
+							renderSize.width = (int) Math.round(renderSize.height * aspectRatio);
 							renderPanel.setPreferredSize(renderSize);
 						}
 					}
@@ -363,10 +321,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (renderCanvas != null) {
 			renderCanvas.removeFocusListener(renderCanvasFocusListener);
 		}
-		this.stdOutOutputComponent.getTextPane().getDocument()
-				.removeDocumentListener(textListener);
-		stdOutOutputComponent.stdOutStream.println(Messages
-				.getString("Stopping_World")+"\n");
+		this.stdOutOutputComponent.getTextPane().getDocument().removeDocumentListener(textListener);
+		stdOutOutputComponent.stdOutStream.println(Messages.getString("Stopping_World") + "\n");
 		stdOutOutputComponent.stdOutStream.flush();
 
 	}
@@ -380,10 +336,10 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		okActionListener = null;
 		stopButton.removeActionListener(l);
 	}
-	
+
 	protected void checkFileName() {
 		String nameValue = fileName.getText();
-		if( AikMin.isValidName(nameValue) ) {
+		if (AikMin.isValidName(nameValue)) {
 			fileName.setForeground(java.awt.Color.black);
 			startCaptureButton.setEnabled(true);
 		} else {
@@ -392,41 +348,30 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		}
 	}
-	
+
 	private void guiInit() {
 		title = Messages.getString("Alice_World");
 		// on renderPanel resize, constrain to aspectRatio
 		setRenderWindowSizeBasedOnSavedBounds();
 
 		// renderPanel.addComponentListener(renderResizeListener);
-		watcherScrollPane = new javax.swing.JScrollPane(watcherPanel,
-				javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		textScrollPane = new javax.swing.JScrollPane(detailTextPane,
-				javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		watcherScrollPane = new javax.swing.JScrollPane(watcherPanel, javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		textScrollPane = new javax.swing.JScrollPane(detailTextPane, javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		detailTextPane.setEditable(false);
 
 		// buttons
-		pauseButton = new javax.swing.JButton(
-				authoringTool.getActions().pauseWorldAction);
-		resumeButton = new javax.swing.JButton(
-				authoringTool.getActions().resumeWorldAction);
-		restartButton = new javax.swing.JButton(
-				authoringTool.getActions().restartStopWorldAction);
-		stopButton = new javax.swing.JButton(
-				authoringTool.getActions().stopWorldAction);
-		takePictureButton = new javax.swing.JButton(
-				authoringTool.getActions().takePictureAction);
+		pauseButton = new javax.swing.JButton(authoringTool.getActions().pauseWorldAction);
+		resumeButton = new javax.swing.JButton(authoringTool.getActions().resumeWorldAction);
+		restartButton = new javax.swing.JButton(authoringTool.getActions().restartStopWorldAction);
+		stopButton = new javax.swing.JButton(authoringTool.getActions().stopWorldAction);
+		takePictureButton = new javax.swing.JButton(authoringTool.getActions().takePictureAction);
 		takePictureButton.setEnabled(true);
 
 		speedLabel = new javax.swing.JLabel(Messages.getString("Speed__1x"));
 		int fontSize = Integer.parseInt(config.getValue("fontSize"));
-		speedLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD,
-				(int) (12 * fontSize / 12.0)));
-		speedLabel.setPreferredSize(new java.awt.Dimension(80, 12));
-		speedLabel.setMinimumSize(new java.awt.Dimension(20, 12));
-		speedLabel.setMaximumSize(new java.awt.Dimension(80, 12));
+		speedLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
+		speedLabel.setPreferredSize(new java.awt.Dimension(fontSize*7, fontSize+5));
+		speedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		pauseButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 		resumeButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
@@ -436,20 +381,16 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		// Capture GUI section
 		stopCaptureButton = new JButton(Messages.getString("Stop_Recording"));
-		stopCaptureButton.setToolTipText(Messages
-				.getString("Click_here_to_stop_the_video_capture"));
+		stopCaptureButton.setToolTipText(Messages.getString("Click_here_to_stop_the_video_capture"));
 
 		startCaptureButton = new JButton(Messages.getString("Record"));
-		startCaptureButton.setToolTipText(Messages
-				.getString("Click_here_to_start_the_video_capture"));
+		startCaptureButton.setToolTipText(Messages.getString("Click_here_to_start_the_video_capture"));
 
 		encodeButton = new JButton(Messages.getString("Export_Video"));
-		encodeButton.setToolTipText(Messages
-				.getString("Click_here_to_stop_filming_and_encode_the_video"));
+		encodeButton.setToolTipText(Messages.getString("Click_here_to_stop_filming_and_encode_the_video"));
 
 		clearButton = new JButton(Messages.getString("Clear"));
-		clearButton.setToolTipText(Messages
-				.getString("Click_here_to_clear_captured_video"));
+		clearButton.setToolTipText(Messages.getString("Click_here_to_clear_captured_video"));
 		clearButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
 
 		stopCaptureButton.setMargin(new java.awt.Insets(3, 2, 3, 2));
@@ -460,8 +401,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		fileType = new javax.swing.JComboBox(types);
 
 		fileName = new javax.swing.JTextField(Messages.getString("MyVideo"));
-		fileName.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD,
-				(int) (12 * fontSize / 12.0)));
+		fileName.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
 		fileName.setPreferredSize(new java.awt.Dimension(124, 24));
 		fileName.setMinimumSize(new java.awt.Dimension(60, 24));
 		fileName.setMaximumSize(new java.awt.Dimension(124, 24));
@@ -469,14 +409,16 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			public void changedUpdate(DocumentEvent e) {
 				checkFileName();
 			}
+
 			public void removeUpdate(DocumentEvent e) {
 				checkFileName();
 			}
+
 			public void insertUpdate(DocumentEvent e) {
 				checkFileName();
 			}
 		});
-	
+
 		statusLabel = new javax.swing.JLabel(Messages.getString("Ready"));
 		timeLabel = new javax.swing.JLabel("0:00  ");
 
@@ -487,52 +429,18 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		exportBar.setLayout(new java.awt.GridBagLayout());
 		recordLabel = new JLabel();
 
-		captureBar.add(startCaptureButton, new java.awt.GridBagConstraints(1,
-				0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		captureBar.add(stopCaptureButton, new java.awt.GridBagConstraints(2, 0,
-				1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		captureBar.add(clearButton, new java.awt.GridBagConstraints(3, 0, 1, 2,
-				0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		captureBar.add(new JLabel(), new java.awt.GridBagConstraints(4, 0, 1,
-				2, 0.5, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		captureBar.add(recordLabel, new java.awt.GridBagConstraints(5, 0, 1, 2,
-				0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		captureBar.add(timeLabel, new java.awt.GridBagConstraints(6, 0, 1, 2,
-				0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+		captureBar.add(startCaptureButton, new java.awt.GridBagConstraints(1, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		captureBar.add(stopCaptureButton, new java.awt.GridBagConstraints(2, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		captureBar.add(clearButton, new java.awt.GridBagConstraints(3, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		captureBar.add(new JLabel(), new java.awt.GridBagConstraints(4, 0, 1, 2, 0.5, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		captureBar.add(recordLabel, new java.awt.GridBagConstraints(5, 0, 1, 2, 0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		captureBar.add(timeLabel, new java.awt.GridBagConstraints(6, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 
-		exportBar.add(new JLabel("   " + Messages.getString("File_name_") + " "),
-				new java.awt.GridBagConstraints(1, 0, 1, 2, 0.0, 0.0,
-						java.awt.GridBagConstraints.WEST,
-						java.awt.GridBagConstraints.NONE, new java.awt.Insets(
-								2, 2, 2, 2), 0, 0));
-		exportBar.add(fileName, new java.awt.GridBagConstraints(2, 0, 1, 2,
-				0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		exportBar.add(fileType, new java.awt.GridBagConstraints(3, 0, 1, 2,
-				0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		exportBar.add(new JLabel(), new java.awt.GridBagConstraints(4, 0, 1, 2,
-				0.5, 0.0, java.awt.GridBagConstraints.EAST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		exportBar.add(encodeButton, new java.awt.GridBagConstraints(5, 0, 1, 2,
-				0.0, 0.0, java.awt.GridBagConstraints.EAST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+		exportBar.add(new JLabel("   " + Messages.getString("File_name_") + " "), new java.awt.GridBagConstraints(1, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		exportBar.add(fileName, new java.awt.GridBagConstraints(2, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		exportBar.add(fileType, new java.awt.GridBagConstraints(3, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		exportBar.add(new JLabel(), new java.awt.GridBagConstraints(4, 0, 1, 2, 0.5, 0.0, java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		exportBar.add(encodeButton, new java.awt.GridBagConstraints(5, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 
 		timeLabel.setBackground(java.awt.Color.GREEN);
 
@@ -544,15 +452,18 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		speedSlider = new javax.swing.JSlider(0, 9, 0);
 
-		/*speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() {
-			public void paintTrack(java.awt.Graphics g) {
-				super.paintTrack(g);
-			}
-		});*/
-		speedSlider.setPreferredSize(new java.awt.Dimension(100, 16));
-		speedSlider.setMinimumSize(new java.awt.Dimension(40, 16));
-		speedSlider.setMaximumSize(new java.awt.Dimension(100, 16));
+		/*
+		 * speedSlider.setUI(new javax.swing.plaf.metal.MetalSliderUI() { public
+		 * void paintTrack(java.awt.Graphics g) { super.paintTrack(g); } });
+		 */
+		speedSlider.setPreferredSize(new java.awt.Dimension(100, 22));
+		speedSlider.setMinimumSize(new java.awt.Dimension(40, 22));
+		speedSlider.setMaximumSize(new java.awt.Dimension(100, 22));
+		
 		speedSlider.setSnapToTicks(true);
+		speedSlider.setPaintTicks(true);
+		speedSlider.setMajorTickSpacing(0);
+		
 		speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent ce) {
 				javax.swing.JSlider s = (javax.swing.JSlider) ce.getSource();
@@ -571,45 +482,22 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 
-		buttonPanel.add(speedSlider, new java.awt.GridBagConstraints(1, 1, 1,
-				1, 1.0, 1.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(2,
-						2, 2, 2), 0, 0));
-		buttonPanel.add(pauseButton, new java.awt.GridBagConstraints(2, 0, 1,
-				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		buttonPanel.add(speedLabel, new java.awt.GridBagConstraints(1, 0, 1, 1,
-				0.0, 0.0, java.awt.GridBagConstraints.CENTER,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(0, 2, 0,
-						2), 0, 0));
+		buttonPanel.add(speedSlider, new java.awt.GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0, 2, 0, 2), 0, 0));
+		buttonPanel.add(pauseButton, new java.awt.GridBagConstraints(2, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(speedLabel, new java.awt.GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0, 2, 0, 2), 0, 0));
 
-		buttonPanel.add(resumeButton, new java.awt.GridBagConstraints(5, 0, 1,
-				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		buttonPanel.add(restartButton, new java.awt.GridBagConstraints(6, 0, 1,
-				2, 0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		buttonPanel.add(stopButton, new java.awt.GridBagConstraints(7, 0, 1, 2,
-				0.0, 0.0, java.awt.GridBagConstraints.WEST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
-		buttonPanel.add(takePictureButton, new java.awt.GridBagConstraints(8,
-				0, 1, 2, 1.0, 0.0, java.awt.GridBagConstraints.EAST,
-				java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2,
-						2), 0, 0));
+		buttonPanel.add(resumeButton, new java.awt.GridBagConstraints(5, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(restartButton, new java.awt.GridBagConstraints(6, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(stopButton, new java.awt.GridBagConstraints(7, 0, 1, 2, 0.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
+		buttonPanel.add(takePictureButton, new java.awt.GridBagConstraints(8, 0, 1, 2, 1.0, 0.0, java.awt.GridBagConstraints.LINE_END, java.awt.GridBagConstraints.NONE, new java.awt.Insets(2, 2, 2, 2), 0, 0));
 
-		watcherSplitPane = new javax.swing.JSplitPane(
-				javax.swing.JSplitPane.HORIZONTAL_SPLIT);
+		watcherSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.HORIZONTAL_SPLIT);
 		watcherSplitPane.setContinuousLayout(true);
 		watcherSplitPane.setDividerSize(0);
 		watcherSplitPane.setResizeWeight(1.0);
 		watcherSplitPane.setLeftComponent(renderPanel);
 
-		stdOutSplitPane = new javax.swing.JSplitPane(
-				javax.swing.JSplitPane.VERTICAL_SPLIT);
+		stdOutSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.VERTICAL_SPLIT);
 		stdOutSplitPane.setContinuousLayout(true);
 		stdOutSplitPane.setDividerSize(0);
 		stdOutSplitPane.setResizeWeight(1.0);
@@ -633,29 +521,19 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private void keyMapInit() {
 		javax.swing.KeyStroke keyStroke;
 		String commandKey;
-		for (java.util.Iterator iter = authoringTool.getActions().renderActions
-				.iterator(); iter.hasNext();) {
+		for (java.util.Iterator iter = authoringTool.getActions().renderActions.iterator(); iter.hasNext();) {
 			javax.swing.Action action = (javax.swing.Action) iter.next();
 
 			try {
-				keyStroke = (javax.swing.KeyStroke) action
-						.getValue(javax.swing.Action.ACCELERATOR_KEY);
-				commandKey = (String) action
-						.getValue(javax.swing.Action.ACTION_COMMAND_KEY);
+				keyStroke = (javax.swing.KeyStroke) action.getValue(javax.swing.Action.ACCELERATOR_KEY);
+				commandKey = (String) action.getValue(javax.swing.Action.ACTION_COMMAND_KEY);
 			} catch (ClassCastException e) {
 				continue;
 			}
 			if ((keyStroke != null) && (commandKey != null)) {
-				java.awt.Component root = javax.swing.SwingUtilities
-						.getRoot(this);
+				java.awt.Component root = javax.swing.SwingUtilities.getRoot(this);
 				if (root instanceof javax.swing.JDialog) {
-					((javax.swing.JDialog) root)
-							.getRootPane()
-							.registerKeyboardAction(
-									action,
-									commandKey,
-									keyStroke,
-									javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+					((javax.swing.JDialog) root).getRootPane().registerKeyboardAction(action, commandKey, keyStroke, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 				}
 				// getRootPane().getInputMap().put( keyStroke, commandKey );
 				// getRootPane().getActionMap().put( commandKey, action );
@@ -672,21 +550,17 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		} else {
 			javax.swing.SwingUtilities.convertPointToScreen(pos, renderPanel);
 		}
-		config.setValue(
-				"rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height); //$NON-NLS-4$
+		config.setValue("rendering.renderWindowBounds", pos.x + ", " + pos.y + ", " + size.width + ", " + size.height); //$NON-NLS-4$
 	}
 
 	public void saveRenderBounds(java.awt.Rectangle newBounds) {
-		config.setValue(
-				"rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-4$
+		config.setValue("rendering.renderWindowBounds", newBounds.x + ", " + newBounds.y + ", " + newBounds.width + ", " + newBounds.height); //$NON-NLS-4$
 	}
 
 	protected boolean shouldConstrainAspectOnResize() {
 		return !(showStdOut) // ||
 								// authoringTool.getWatcherPanel().isThereSomethingToWatch())
-				&& config
-						.getValue("rendering.constrainRenderDialogAspectRatio")
-						.equalsIgnoreCase("true");
+		&& config.getValue("rendering.constrainRenderDialogAspectRatio").equalsIgnoreCase("true");
 	}
 
 	public javax.swing.JPanel getRenderPanel() {
@@ -695,39 +569,30 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	public java.awt.Rectangle getRenderBounds() {
 		String boundsString = config.getValue("rendering.renderWindowBounds");
-		java.util.StringTokenizer st = new java.util.StringTokenizer(
-				boundsString, " \t,");
+		java.util.StringTokenizer st = new java.util.StringTokenizer(boundsString, " \t,");
 		if (st.countTokens() == 4) {
 			try {
 				int x = Integer.parseInt(st.nextToken());
 				int y = Integer.parseInt(st.nextToken());
 				int width = Integer.parseInt(st.nextToken());
 				int height = Integer.parseInt(st.nextToken());
-				java.awt.Rectangle bounds = new java.awt.Rectangle(x, y, width,
-						height);
+				java.awt.Rectangle bounds = new java.awt.Rectangle(x, y, width, height);
 				double currentAspectRatio = (double) width / height;
 				if (CaptureContentPane.this.shouldConstrainAspectOnResize()) {
 					constrainToAspectRatio(bounds, currentAspectRatio > 1.0);
 				}
 				return bounds;
 			} catch (NumberFormatException e) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool
-						.showErrorDialog(
-								Messages.getString("Parse_error_in_config_value__rendering_renderWindowBounds"),
-								e);
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Parse_error_in_config_value__rendering_renderWindowBounds"), e);
 			}
 		} else {
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool
-					.showErrorDialog(
-							Messages.getString("Incorrect_number_of_tokens_in_config_value__rendering_renderWindowBounds"),
-							null);
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Incorrect_number_of_tokens_in_config_value__rendering_renderWindowBounds"), null);
 		}
 
 		return null;
 	}
 
-	public void constrainToAspectRatio(java.awt.Rectangle bounds,
-			boolean stretchHorizontally) {
+	public void constrainToAspectRatio(java.awt.Rectangle bounds, boolean stretchHorizontally) {
 		if (aspectRatio > 0.0) {
 			if (stretchHorizontally) {
 				bounds.width = (int) Math.round(bounds.height * aspectRatio);
@@ -739,8 +604,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	public void updateSpeed(double newSpeed) {
 		authoringTool.setWorldSpeed(newSpeed);
-		String speedText = java.text.NumberFormat.getInstance()
-				.format(newSpeed);
+		String speedText = java.text.NumberFormat.getInstance().format(newSpeed);
 		if (newSpeed < 1) {
 			if (newSpeed == .5) {
 				speedText = "1/2";
@@ -778,13 +642,12 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// getContentPane().add( buttonPanel, java.awt.BorderLayout.NORTH );
 
 		int renderWidth = renderPanel.getWidth();
-		//int renderHeight = renderPanel.getHeight();
+		// int renderHeight = renderPanel.getHeight();
 
 		// this looks much more complicated than it really is, although some of
 		// the code is quite tempermental
 		if (showStdOut) {
-			textScrollPane.setPreferredSize(new java.awt.Dimension(renderWidth,
-					stdOutHeight));
+			textScrollPane.setPreferredSize(new java.awt.Dimension(renderWidth, stdOutHeight));
 			stdOutSplitPane.setBottomComponent(textScrollPane);
 			stdOutSplitPane.setDividerSize(dividerSize);
 		} else {
@@ -819,11 +682,9 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	public java.awt.Component getRenderCanvas() {
-		java.awt.Component authoringToolRenderPanel = renderPanel
-				.getComponent(0);
+		java.awt.Component authoringToolRenderPanel = renderPanel.getComponent(0);
 		if (authoringToolRenderPanel instanceof java.awt.Container) {
-			return ((java.awt.Container) authoringToolRenderPanel)
-					.getComponent(0);
+			return ((java.awt.Container) authoringToolRenderPanel).getComponent(0);
 		}
 		return null;
 	}
@@ -861,9 +722,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	public void findSoundsfromResponse(Response s) {
 
 		if (s instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) {
-			((edu.cmu.cs.stage3.alice.core.response.SoundResponse) s)
-					.addSoundListener(new movieMaker.SoundHandler(authoringTool
-							.getSoundStorage(), authoringTool));
+			((edu.cmu.cs.stage3.alice.core.response.SoundResponse) s).addSoundListener(new movieMaker.SoundHandler(authoringTool.getSoundStorage(), authoringTool));
 			// System.err.println(s.toString());
 		}
 		if ((((Response) s).getChildCount()) > 0) {
@@ -871,8 +730,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			for (int y = 0; y < children.length; y++)
 				findSounds((Sandbox) children[y]);
 
-			children = ((Response) s)
-					.getChildren(edu.cmu.cs.stage3.alice.core.Response.class);
+			children = ((Response) s).getChildren(edu.cmu.cs.stage3.alice.core.Response.class);
 			for (int y = 0; y < children.length; y++)
 				findSoundsfromResponse((edu.cmu.cs.stage3.alice.core.Response) children[y]);
 
@@ -881,20 +739,17 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	// checks all behavior files for sounds to add listeners to
 	public void findSoundsfromBehavior(Behavior s) {
-	
+
 		if ((((Behavior) s).getChildCount()) > 0) {
-			Element[] children = ((Behavior) s)
-					.getChildren(edu.cmu.cs.stage3.alice.core.Response.class);
+			Element[] children = ((Behavior) s).getChildren(edu.cmu.cs.stage3.alice.core.Response.class);
 			for (int y = 0; y < children.length; y++) {
 				if (children[y] instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) {
-					((edu.cmu.cs.stage3.alice.core.response.SoundResponse) children[y])
-					.addSoundListener(new movieMaker.SoundHandler(authoringTool
-							.getSoundStorage(), authoringTool));
+					((edu.cmu.cs.stage3.alice.core.response.SoundResponse) children[y]).addSoundListener(new movieMaker.SoundHandler(authoringTool.getSoundStorage(), authoringTool));
 				}
 			}
 		}
 	}
-	
+
 	// traverses the scenegraph looking for sounds to add listeneres to
 	public void findSounds(Sandbox sbox) {
 		// Find Sounds from Response - Methods
@@ -913,8 +768,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			if (objs[x] != null)
 				findSoundsfromBehavior((edu.cmu.cs.stage3.alice.core.Behavior) objs[x]);
 
-		Element[] t = sbox
-				.getChildren(edu.cmu.cs.stage3.alice.core.Sandbox.class);
+		Element[] t = sbox.getChildren(edu.cmu.cs.stage3.alice.core.Sandbox.class);
 
 		for (int x = 0; x < t.length; x++)
 			findSounds((Sandbox) t[x]);
@@ -1026,11 +880,10 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		statusFrame.setSize(200, 100);
 		statusFrame.setVisible(true);
 		try {
-			if ( AikMin.isWindows() ) {
+			if (AikMin.isWindows()) {
 				statusFrame.setAlwaysOnTop(true);
 				java.awt.Point location = captureBar.getLocationOnScreen();
-				statusFrame.setLocation(new java.awt.Point((int) (location.x),
-						(int) (location.y + renderPanel.getHeight() / 2.0)));
+				statusFrame.setLocation(new java.awt.Point((int) (location.x), (int) (location.y + renderPanel.getHeight() / 2.0)));
 			} else {
 				statusFrame.setLocation(0, 0);
 			}
@@ -1047,8 +900,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			authoringTool.pause();
 		}
 
-		authoringTool.getSoundStorage().setListening(false,
-				System.currentTimeMillis() / 1000.0);
+		authoringTool.getSoundStorage().setListening(false, System.currentTimeMillis() / 1000.0);
 
 		recordLabel.setIcon(null);
 		setButtonsCapturing(false);
@@ -1060,7 +912,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// happens when clear button is hit. Removes all files and sets up for
 	// capturing again
 	public void clearAction() {
@@ -1093,31 +945,27 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	// start capturing the movie
 	public void startCaptureAction() {
 		setClear(false);
-		//removeFiles(exportDirectory + "/frames/");
+		// removeFiles(exportDirectory + "/frames/");
 		// captureBar.setBackground(java.awt.Color.RED);
 		timeLabel.setBackground(java.awt.Color.RED);
 		// If a new capture sequence
 		setButtonsCapturing(true);
 		// restartButton.setEnabled(true);
 
-		recordLabel.setIcon(new javax.swing.ImageIcon(
-				edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-						.getResource("images/record.png"))); // Aik Min
+		recordLabel.setIcon(new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/record.png"))); // Aik
+																																				// Min
 
 		recordLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 		if (movieCapture == null || capturing == null || !capturing.isAlive()) {
 
 			endCapturing = true;
 
-			movieCapture = new movieMaker.StartMovieCapture(authoringTool,
-					CaptureContentPane.this, frameSequencer,
-					videoHandler.getFramesPerSecond());
+			movieCapture = new movieMaker.StartMovieCapture(authoringTool, CaptureContentPane.this, frameSequencer, videoHandler.getFramesPerSecond());
 
 			running = true;
 
 			capturing = new Thread(movieCapture);
-			writing = new Thread(new WriteFrames(exportDirectory + "/frames",
-					frameSequencer, frameSequencer.getFrameNumber()));
+			writing = new Thread(new WriteFrames(exportDirectory + "/frames", frameSequencer, frameSequencer.getFrameNumber()));
 			timerThread = new Thread(new StartTimer(timeLabel));
 
 			capturing.start();
@@ -1126,15 +974,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		} else {
 			running = true;
-			writing = new Thread(new WriteFrames(exportDirectory + "/frames",
-					frameSequencer, frameSequencer.getFrameNumber()));
+			writing = new Thread(new WriteFrames(exportDirectory + "/frames", frameSequencer, frameSequencer.getFrameNumber()));
 			writing.start();
 		}
 
 		if (!authoringTool.getWorldClock().isPaused())
 			authoringTool.resume();
-		authoringTool.getSoundStorage().setListening(true,
-				System.currentTimeMillis() / 1000.0);
+		authoringTool.getSoundStorage().setListening(true, System.currentTimeMillis() / 1000.0);
 
 	}
 
@@ -1165,8 +1011,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 
 		// Start Pulsing status
-		pulse = new Thread(new StartStatusPulsing(statusLabel,
-				Messages.getString("Encoding_Video")));
+		pulse = new Thread(new StartStatusPulsing(statusLabel, Messages.getString("Encoding_Video")));
 		pulse.start();
 
 		// Show Pulsing Status
@@ -1206,15 +1051,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		});
 
-		
 	}
 
 	// used to find which area should be captured on screen
 	public java.awt.Rectangle getRenderPanelLocation() {
 		java.awt.Rectangle area = new java.awt.Rectangle(0, 0, 0, 0);
 
-		if (stdOutSplitPane != null
-				&& stdOutSplitPane.getLocationOnScreen() != null) {
+		if (stdOutSplitPane != null && stdOutSplitPane.getLocationOnScreen() != null) {
 			area.x = stdOutSplitPane.getLocationOnScreen().x;
 			area.y = stdOutSplitPane.getLocationOnScreen().y;
 		}
@@ -1227,15 +1070,13 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	// Movie Compression Thread
 	private class StartMovieCompression implements Runnable {
 
+		@SuppressWarnings("unused")
 		public void run() {
 
 			// authoringTool.stdErrOutContentPane.stopReactingToError();
 
 			// create the movie with no sound
-			MovieWriter writer = new MovieWriter(
-					videoHandler.getFramesPerSecond(), exportDirectory
-							+ "/frames/", fileName.getText() + "_NoSound",
-					exportDirectory + "/frames/");
+			MovieWriter writer = new MovieWriter(videoHandler.getFramesPerSecond(), exportDirectory + "/frames/", fileName.getText() + "_NoSound", exportDirectory + "/frames/");
 			if (writer == null) {
 				afterEncoding(true);
 				return;
@@ -1256,8 +1097,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			writer = null;
 
 			if (result == false) {
-				statusLabel.setText(Messages
-						.getString("Video_failed_to_encrypt"));
+				statusLabel.setText(Messages.getString("Video_failed_to_encrypt"));
 				afterEncoding(true);
 				return;
 			}
@@ -1268,11 +1108,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				return;
 			}
 
-			movieMaker.Merge m = new movieMaker.Merge(
-					authoringTool.getSoundStorage()
-							.createURL(
-									exportDirectory + "/" + fileName.getText()
-											+ ".mov"));
+			movieMaker.Merge m = new movieMaker.Merge(authoringTool.getSoundStorage().createURL(exportDirectory + "/" + fileName.getText() + ".mov"));
 			if (m == null) {
 				afterEncoding(true);
 				return;
@@ -1281,18 +1117,12 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			java.util.Vector sources = new java.util.Vector();
 
 			pulsing = true;
-			pulse = new Thread(new StartStatusPulsing(statusLabel,
-					Messages.getString("Encoding_Sound")));
+			pulse = new Thread(new StartStatusPulsing(statusLabel, Messages.getString("Encoding_Sound")));
 			pulse.start();
 
 			// get all the sound files
 			if (frameSequencer != null)
-				sources = authoringTool
-						.getSoundStorage()
-						.encodeFiles(
-								((double) (frameSequencer.getFrameNumber() + 1)) / 16.0,
-								exportDirectory + "/frames/"
-										+ authoringTool.numEncoded);
+				sources = authoringTool.getSoundStorage().encodeFiles(((double) (frameSequencer.getFrameNumber() + 1)) / 16.0, exportDirectory + "/frames/" + authoringTool.numEncoded);
 			else {
 				System.err.print(Messages.getString("No_Sequencer"));
 				afterEncoding(true);
@@ -1307,8 +1137,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 			pulsing = true;
 
-			pulse = new Thread(new StartStatusPulsing(statusLabel,
-					Messages.getString("Merging_Sound_and_Audio")));
+			pulse = new Thread(new StartStatusPulsing(statusLabel, Messages.getString("Merging_Sound_and_Audio")));
 			pulse.start();
 
 			if (sources == null) {
@@ -1316,9 +1145,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				return;
 			}
 
-			sources.add(authoringTool.getSoundStorage().createURL(
-					exportDirectory + "/frames/" + fileName.getText()
-							+ "_NoSound.mov"));
+			sources.add(authoringTool.getSoundStorage().createURL(exportDirectory + "/frames/" + fileName.getText() + "_NoSound.mov"));
 
 			// merge the sounds and silent movie together if sounds exist
 			if (sources.size() > 0)
@@ -1417,8 +1244,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				movieMaker.Picture picture = myFrameSeq.removeFrame();
 
 				if (picture != null) {
-					String fileName = fileLocation + "frame"
-						+ numberFormat.format(frameNumber) + ".jpg";
+					String fileName = fileLocation + "frame" + numberFormat.format(frameNumber) + ".jpg";
 
 					// set the file name
 					picture.setFileName(fileName);

@@ -23,8 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.ComponentOrientation;
+
 import javax.swing.ScrollPaneConstants;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * <p>Title: </p>
@@ -71,7 +75,6 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         this.setDragEnabled(false);
         this.setBorder(null);
         elementMouseListener = null;
-
     }
 
 	public void set(edu.cmu.cs.stage3.alice.core.Element element, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
@@ -458,6 +461,10 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         int buttonWidth = fontSize * 13 + len;
         int buttonHeight = fontSize * 2 + 2;
         
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		
         if (newParameterButton == null){
             newParameterButton = new javax.swing.JButton(Messages.getString("create_new_parameter")); 
             newParameterButton.setBackground(new java.awt.Color( 240, 240, 255 ));
@@ -490,10 +497,10 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                 }
             });
             newParameterButton.setDropTarget(new java.awt.dnd.DropTarget(newParameterButton, parameterDropHandler));
-            newParameterButton.setToolTipText("<html><body>"+ 
+            newParameterButton.setToolTipText("<html><body><div align="+justify+">"+ 
                              Messages.getString("_p_Open_the_New_Parameter_Dialogue_Box__p_")+ "<br>" +
                              Messages.getString("_p_Parameters_allow_you_to_send_information__p_")+ 
-                             "</body></html>"); 
+                             "</div></body></html>"); 
         }
         if (newVariableButton == null){
             newVariableButton = new javax.swing.JButton(Messages.getString("create_new_variable")); 
@@ -527,24 +534,29 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
                 }
             });
             newVariableButton.setDropTarget(new java.awt.dnd.DropTarget(newVariableButton, variableDropHandler));
-            newVariableButton.setToolTipText("<html><body>"+ 
+            newVariableButton.setToolTipText("<html><body><div align="+justify+">"+ 
                              Messages.getString("_p_Open_the_New_Variable_Dialogue_Box__p_")+ "<br>" +
                              Messages.getString("_p_Variables_allow_you_to_store_information__p_")+ 
-                             "</body></html>"); 
+                             "</div></body></html>"); 
         }
         if (scrollPane == null){
-            scrollPane = new javax.swing.JScrollPane(
-                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED ) {
-                
-				public void printComponent( java.awt.Graphics g ) {
-                    // do nothing
-                }
-            };
+            scrollPane = new javax.swing.JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
             scrollPane.getViewport().setOpaque( false );
             //scrollPane.getViewport().putClientProperty("EnableWindowBlit", Boolean.TRUE);
             scrollPane.setOpaque(false);
             scrollPane.setBorder(null);
+            if(!AikMin.isLTR()){	// ***** To place the scroll bar to the left of the Editor panel *****
+       	        scrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+       	            @Override
+       	            public void layoutContainer(java.awt.Container parent) {
+       	            	javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+       	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+       	                super.layoutContainer(parent);
+       	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+       	            }
+       	        });
+            }
+            	
         }
         if (parameterDropHandler == null){
             parameterDropHandler = new DropTargetHandler(requiredParameters);
@@ -562,7 +574,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             };
             parameterPanel.setBackground(backgroundColor);
             parameterPanel.setBorder(null);
-            parameterPanel.setLayout(new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEFT, anchor, javax.swing.JTabbedPane.class, 152));
+            parameterPanel.setLayout(new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEADING, anchor, javax.swing.JTabbedPane.class, 152));
             parameterPanel.setDropTarget(new java.awt.dnd.DropTarget(parameterPanel, parameterDropHandler));
             parameterDropHandler.setPanel(parameterPanel);
         }
@@ -583,7 +595,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
             };
             variablePanel.setBackground(backgroundColor);
             variablePanel.setBorder(null);
-            variablePanel.setLayout(new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEFT, anchor, javax.swing.JTabbedPane.class, 152));
+            variablePanel.setLayout(new edu.cmu.cs.stage3.awt.DynamicFlowLayout(java.awt.FlowLayout.LEADING, anchor, javax.swing.JTabbedPane.class, 152));
             variablePanel.setDropTarget(new java.awt.dnd.DropTarget(variablePanel, variableDropHandler));
             variableDropHandler.setPanel(variablePanel);
         }
@@ -612,8 +624,8 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         mainParameterPanel.setOpaque(true);
         mainParameterPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0,0,1,0,java.awt.Color.lightGray));
         mainParameterPanel.setLayout(new java.awt.GridBagLayout());
-        mainParameterPanel.add(parameterPanel, new java.awt.GridBagConstraints(0,0,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
-        mainParameterPanel.add(newParameterButton, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.NORTHEAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(4,4,4,4), 0,0));
+        mainParameterPanel.add(parameterPanel, new java.awt.GridBagConstraints(0,0,1,1,1,1,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+        mainParameterPanel.add(newParameterButton, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.LINE_END, java.awt.GridBagConstraints.NONE, new java.awt.Insets(4,4,4,4), 0,0));
 //        mainParameterPanel.setLayout(new java.awt.BorderLayout());
 //        mainParameterPanel.add(parameterPanel, java.awt.BorderLayout.CENTER);
 //        mainParameterPanel.add(newParameterButton, java.awt.BorderLayout.EAST);
@@ -675,6 +687,11 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         this.setBackground(getCustomBackgroundColor());
         this.revalidate();
         this.repaint();
+        if (!AikMin.isLTR()){	// ***** For the parameter and variable panel in the Editor panel *****
+        	mainParameterPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        	mainVariablePanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+            //componentElementPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        }
     }
 
     protected boolean isInGroup(Object toCheck, edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty group){

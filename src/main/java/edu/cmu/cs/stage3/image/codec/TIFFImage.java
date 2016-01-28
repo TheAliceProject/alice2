@@ -60,6 +60,8 @@ import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.io.IOException;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 public class TIFFImage extends SimpleRenderedImage {
 
     private static final boolean DEBUG = true;
@@ -167,7 +169,7 @@ public class TIFFImage extends SimpleRenderedImage {
 	for (int i = 1; i < bitsPerSample.length; i++) {
 	    if (bitsPerSample[i] != bitsPerSample[1]) {
 		throw new RuntimeException(
-					JaiI18N.getString("All_samples_must_have_the_same_bit_depth_"));
+					Messages.getString("All_samples_must_have_the_same_bit_depth_"));
 	    }
 	}
 
@@ -199,7 +201,7 @@ public class TIFFImage extends SimpleRenderedImage {
 	    for (int l=1; l<sampleFormat.length; l++) {
 		if (sampleFormat[l] != sampleFormat[0]) {
 		    throw new RuntimeException(
-					JaiI18N.getString("All_samples_must_have_the_same_data_format_"));
+					Messages.getString("All_samples_must_have_the_same_data_format_"));
 		}
 	    }
 
@@ -225,7 +227,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		bitsPerSample[0] == 8) {
 
 		throw new
-		    RuntimeException(JaiI18N.getString("Only_16bit_samples_can_be_signed_"));
+		    RuntimeException(Messages.getString("Only_16bit_samples_can_be_signed_"));
 
 	    } else if (bitsPerSample[0] == 16) {
 		dataType = DataBuffer.TYPE_SHORT;
@@ -236,7 +238,7 @@ public class TIFFImage extends SimpleRenderedImage {
 	} else if (sampleFormat[0] == 3) {
 	    // Floating point
 	    //	    dataType = DataBuffer.TYPE_FLOAT;
-	    throw new RuntimeException(JaiI18N.getString("Only_integral_image_data_is_supported_"));
+	    throw new RuntimeException(Messages.getString("Only_integral_image_data_is_supported_"));
 	}
 
 	if (dir.getField(TIFFImageDecoder.TIFF_TILE_WIDTH) != null) {
@@ -275,7 +277,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		dir.getField(TIFFImageDecoder.TIFF_STRIP_OFFSETS);
 	    if (tileOffsetsField == null) {
 		throw new
-		    RuntimeException(JaiI18N.getString("TIFF_STRIP_OFFSETS_is_a_required_field_"));
+		    RuntimeException(Messages.getString("TIFF_STRIP_OFFSETS_is_a_required_field_"));
 	    } else {
 		tileOffsets = tileOffsetsField.getAsLongs();
 	    }
@@ -284,7 +286,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		dir.getField(TIFFImageDecoder.TIFF_STRIP_BYTE_COUNTS);
 	    if (tileByteCountsField == null) {
 		throw new
-		    RuntimeException(JaiI18N.getString("TIFF_STRIP_BYTE_COUNTS_is_a_required_field_"));
+		    RuntimeException(Messages.getString("TIFF_STRIP_BYTE_COUNTS_is_a_required_field_"));
 	    } else {
 		tileByteCounts = tileByteCountsField.getAsLongs();
 	    }
@@ -363,7 +365,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		} else {
 		    throw new IllegalArgumentException(
-					JaiI18N.getString("Only_4__8_and_16_bit_samples_are_supported_for_Greyscale_TIFFs_"));
+					Messages.getString("Only_4__8_and_16_bit_samples_are_supported_for_Greyscale_TIFFs_"));
 		}
 	    }
 
@@ -428,7 +430,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		} else {
 		    throw new IllegalArgumentException(
-					JaiI18N.getString("Only_4__8_and_16_bit_samples_are_supported_for_Greyscale_TIFFs_"));
+					Messages.getString("Only_4__8_and_16_bit_samples_are_supported_for_Greyscale_TIFFs_"));
 		}
 	    }
 
@@ -456,12 +458,12 @@ public class TIFFImage extends SimpleRenderedImage {
 								     bands);
 	    } else {
 		throw new
-		    RuntimeException(JaiI18N.getString("Only_8_and_16_bit_samples_are_supported_for_Full_color_images_"));
+		    RuntimeException(Messages.getString("Only_8_and_16_bit_samples_are_supported_for_Full_color_images_"));
 	    }
 
 	    if (samplesPerPixel < 3) {
 		throw new
-		    RuntimeException(JaiI18N.getString("Bad_TIFF_Image_File__SamplesPerPixel_tag_must_have_a_value___3_for_RGB_full_color_images"));
+		    RuntimeException(Messages.getString("Bad_TIFF_Image_File__SamplesPerPixel_tag_must_have_a_value___3_for_RGB_full_color_images"));
 
 	    } else if (samplesPerPixel == 3) {
 
@@ -550,7 +552,7 @@ public class TIFFImage extends SimpleRenderedImage {
 	    TIFFField cfield = dir.getField(TIFFImageDecoder.TIFF_COLORMAP);
 	    if (cfield == null) {
 		throw new
-		    RuntimeException(JaiI18N.getString("Colormap_must_be_present_for_a_Palette_Color_image_"));
+		    RuntimeException(Messages.getString("Colormap_must_be_present_for_a_Palette_Color_image_"));
 	    } else {
 		colormap = cfield.getAsChars();
 	    }
@@ -563,7 +565,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		if (bitsPerSample[0] != 4 && bitsPerSample[0] != 8 &&
 		    bitsPerSample[0] != 16) {
 		    throw new RuntimeException(
-					JaiI18N.getString("Only_4__8_or_16_bits_per_sample_are_supported_for_TIFF_Palette_color_images_"));
+					Messages.getString("Only_4__8_or_16_bits_per_sample_are_supported_for_TIFF_Palette_color_images_"));
 		}
 
 		// If no SampleFormat tag was specified and if the
@@ -617,7 +619,7 @@ public class TIFFImage extends SimpleRenderedImage {
 							bands);
 		} else {
 		    throw new RuntimeException(
-					JaiI18N.getString("Only_4__8_or_16_bits_per_sample_are_supported_for_TIFF_Palette_color_images_"));
+					Messages.getString("Only_4__8_or_16_bits_per_sample_are_supported_for_TIFF_Palette_color_images_"));
 		}
 
 		int bandLength = colormap.length/3;
@@ -661,11 +663,11 @@ public class TIFFImage extends SimpleRenderedImage {
 	    image_type = TYPE_TRANS;
 
 	    // Transparency Mask
-	    throw new RuntimeException(JaiI18N.getString("Reading_of_TIFF_files_with_a_value_of_4_for_the_PhotometricInterpretation_tag_is_not_implemented_yet_"));
+	    throw new RuntimeException(Messages.getString("Reading_of_TIFF_files_with_a_value_of_4_for_the_PhotometricInterpretation_tag_is_not_implemented_yet_"));
 	    //	    break;
 
 	default:
-	    throw new RuntimeException(JaiI18N.getString("Non_baseline_TIFF_not_implemented_yet___unexpected_value_for_PhotometricInterpretation_tag_"));
+	    throw new RuntimeException(Messages.getString("Non_baseline_TIFF_not_implemented_yet___unexpected_value_for_PhotometricInterpretation_tag_"));
 	}
 
 	// Calculate number of tiles and the tileSize in bytes
@@ -721,12 +723,11 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    if (predictor != 1 && predictor != 2) {
 			throw new RuntimeException(
-				JaiI18N.getString("Illegal_value_for_Predictor_in_TIFF_file_"));
+				Messages.getString("Illegal_value_for_Predictor_in_TIFF_file_"));
 		    }
 
 		    if (predictor == 2 && bitsPerSample[0] != 8) {
-			throw new RuntimeException(bitsPerSample[0] + " " + 
-					JaiI18N.getString("bit_samples_are_not_supported_for_Horizontal_differencing_Predictor_"));
+			throw new RuntimeException(Messages.getString("_bit_samples_are_not_supported_for_Horizontal_differencing_Predictor_", bitsPerSample[0]));
 		    }
 		}
 
@@ -741,7 +742,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		compression != COMP_FAX_G4_2D &&
 		compression != COMP_LZW) {
 		throw new
-		    RuntimeException(JaiI18N.getString("Reading_in_compressed_TIFF_images_is_not_implemented_yet_"));
+		    RuntimeException(Messages.getString("Reading_in_compressed_TIFF_images_is_not_implemented_yet_"));
 	    }
 
 	} else {
@@ -771,7 +772,7 @@ public class TIFFImage extends SimpleRenderedImage {
         if ((tileX < 0) || (tileX >= tilesX) ||
             (tileY < 0) || (tileY >= tilesY)) {
             throw new
-		IllegalArgumentException(JaiI18N.getString("Illegal_tile_requested_from_a_TIFFImage_"));
+		IllegalArgumentException(Messages.getString("Illegal_tile_requested_from_a_TIFFImage_"));
         }
 
 	// Get the data array out of the DataBuffer
@@ -805,7 +806,7 @@ public class TIFFImage extends SimpleRenderedImage {
 	    save_offset = stream.getFilePointer();
 	    stream.seek(tileOffsets[tileY*tilesX + tileX]);
 	} catch (IOException ioe) {
-	    throw new RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+	    throw new RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 	}
 
 	// Number of bytes in this tile (strip) after compression.
@@ -857,7 +858,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		stream.seek(save_offset);
 	    } catch (IOException ioe) {
 		throw new
-		    RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+		    RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 	    }
 
 	    break;
@@ -973,7 +974,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 	    } catch (IOException ioe) {
 		throw new
-		    RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+		    RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 	    }
 
 	    break;
@@ -1000,7 +1001,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } else {
 			throw new RuntimeException(
-					JaiI18N.getString("Unsupported_compression_"));
+					Messages.getString("Unsupported_compression_"));
 		    }
 
 		    // Change to BGR order, as Java2D displays that faster
@@ -1047,7 +1048,7 @@ public class TIFFImage extends SimpleRenderedImage {
 					       unitsInThisTile);
 		    } else {
 			throw new RuntimeException(
-					JaiI18N.getString("Unsupported_compression_"));
+					Messages.getString("Unsupported_compression_"));
 		    }
 
 		    // Change to BGR order, as Java2D displays that faster
@@ -1062,7 +1063,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 	    } catch (IOException ioe) {
 		throw new
-		    RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+		    RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 	    }
 
 	    break;
@@ -1090,7 +1091,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } else {
 			throw new RuntimeException(
-				   JaiI18N.getString("Unsupported_compression_"));
+				   Messages.getString("Unsupported_compression_"));
 		    }
 
 		    // Convert from RGBA to ABGR for Java2D
@@ -1143,7 +1144,7 @@ public class TIFFImage extends SimpleRenderedImage {
 					       unitsInThisTile);
 		    } else {
 			throw new RuntimeException(
-					JaiI18N.getString("Unsupported_compression_"));
+					Messages.getString("Unsupported_compression_"));
 		    }
 
 		    // Change from RGBA to ABGR for Java2D's faster special cases
@@ -1163,7 +1164,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		stream.seek(save_offset);
 	    } catch (IOException ioe) {
 		throw new
-		    RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+		    RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 	    }
 
 	    break;
@@ -1189,7 +1190,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } else {
 			throw new RuntimeException(
-				   JaiI18N.getString("Unsupported_compression_"));
+				   Messages.getString("Unsupported_compression_"));
 		    }
 
 		} else if (bitsPerSample[0] == 16) {
@@ -1229,7 +1230,7 @@ public class TIFFImage extends SimpleRenderedImage {
 					       unitsInThisTile);
 		    } else {
 			throw new RuntimeException(
-					JaiI18N.getString("Unsupported_compression_"));
+					Messages.getString("Unsupported_compression_"));
 		    }
 		}
 
@@ -1237,7 +1238,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 	    } catch (IOException ioe) {
 		throw new
-		    RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+		    RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 	    }
 
 	    break;
@@ -1300,7 +1301,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } catch (IOException ioe) {
 			throw new
-			RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+			RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 		    }
 
 		    if (dataType == DataBuffer.TYPE_USHORT) {
@@ -1392,7 +1393,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } catch (IOException ioe) {
 			throw new
-			RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+			RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 		    }
 		}
 
@@ -1433,7 +1434,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } catch (IOException ioe) {
 			throw new
-			RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+			RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 		    }
 
 		    // Expand the palette image into an rgb image with ushort
@@ -1480,7 +1481,7 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } catch (IOException ioe) {
 			throw new
-			RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+			RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 		    }
 		}
 
@@ -1500,7 +1501,7 @@ public class TIFFImage extends SimpleRenderedImage {
 			stream.seek(save_offset);
 		    } catch (IOException ioe) {
 			throw new
- 		        RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+ 		        RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 		    }
 
 		    // If compressed, decode the data.
@@ -1577,12 +1578,12 @@ public class TIFFImage extends SimpleRenderedImage {
 
 		    } catch (IOException ioe) {
 			throw new
-			RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+			RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 		    }
 		}
 	    } else {
 		throw new
-		    RuntimeException(JaiI18N.getString("Support_for_TIFF_Palette_images_with_a_value_of_BitsPerSample_tag_other_than_4_or_8_not_implemeneted_yet_"));
+		    RuntimeException(Messages.getString("Support_for_TIFF_Palette_images_with_a_value_of_BitsPerSample_tag_other_than_4_or_8_not_implemeneted_yet_"));
 	    }
 	    break;
 
@@ -1606,7 +1607,7 @@ public class TIFFImage extends SimpleRenderedImage {
 	try {
 	    stream.readFully(byteArray, 0, byteCount);
 	} catch (IOException ioe) {
-	   throw new RuntimeException(JaiI18N.getString("IOException_occurred_while_reading_TIFF_image_data_"));
+	   throw new RuntimeException(Messages.getString("IOException_occurred_while_reading_TIFF_image_data_"));
 	}
 
 	interpretBytesAsShorts(byteArray, shortArray, shortCount);
@@ -1678,7 +1679,7 @@ public class TIFFImage extends SimpleRenderedImage {
 		}
 	    }
 	} catch (java.lang.ArrayIndexOutOfBoundsException ae) {
-	    throw new RuntimeException(JaiI18N.getString("Unable_to_decode_Packbits_compressed_data___not_enough_data_"));
+	    throw new RuntimeException(Messages.getString("Unable_to_decode_Packbits_compressed_data___not_enough_data_"));
 	}
 
 	return dst;

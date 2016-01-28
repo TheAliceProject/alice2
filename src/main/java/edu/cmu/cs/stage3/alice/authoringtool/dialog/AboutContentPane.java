@@ -35,7 +35,7 @@ public class AboutContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	public AboutContentPane() {
 		javax.swing.JLabel imageLabel = new javax.swing.JLabel();
 		URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
-				.getResource("images/aboutAlice_"+AikMin.locale+".png");
+				.getResource("images/aboutAlice_"+AikMin.locale.getDisplayLanguage()+".png");
 		if (url == null) {
 			url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class
 					.getResource("images/aboutAlice_English.png");

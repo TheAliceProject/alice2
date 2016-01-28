@@ -255,7 +255,7 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                 boolean shouldAllowExpressions = true;
                 Class desiredValueClass = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.getDesiredValueClass(prop);
                 //Aik Min - When mouse is clicked on object under mouse cursor bug in create new event
-                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase("onWhat")){//Messages.getString("onWhat"))){  
+                if ( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) || prop.getName().equalsIgnoreCase("keyCode") || prop.getName().equalsIgnoreCase("onWhat")){ 
                 	shouldAllowExpressions = false;
                 }
                 toAdd = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(prop, true, shouldAllowExpressions ,edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(prop), propPIF);

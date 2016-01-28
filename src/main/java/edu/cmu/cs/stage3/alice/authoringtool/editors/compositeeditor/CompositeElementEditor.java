@@ -24,16 +24,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
-import edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources;
-import edu.cmu.cs.stage3.alice.authoringtool.Editor;
-import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
-import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
-import edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel;
-import edu.cmu.cs.stage3.alice.core.Element;
-import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
-import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
-import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -46,11 +36,24 @@ import java.awt.Insets;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources;
+import edu.cmu.cs.stage3.alice.authoringtool.Editor;
+import edu.cmu.cs.stage3.alice.authoringtool.event.AuthoringToolStateChangedEvent;
+import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
+import edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel;
+import edu.cmu.cs.stage3.alice.core.Element;
+import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
+import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
+import edu.cmu.cs.stage3.lang.Messages;
 
 // Referenced classes of package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor:
 //            TempColorPicker, MainCompositeElementPanel, CompositeElementPanel
@@ -144,7 +147,7 @@ public abstract class CompositeElementEditor extends GroupingPanel
         buttonPanel.setBackground(buttonPanelColor);
         buttonPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.gray));
         buttonPanel.setMinimumSize(new Dimension(0, 0));
-        buttonPanel.setLayout(new FlowLayout(0) {
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEADING) {
 
 			public Dimension preferredLayoutSize(Container target)
             {
@@ -202,7 +205,10 @@ public abstract class CompositeElementEditor extends GroupingPanel
         setBackground(getEditorColor());
         add(buttonPanel, "South"); 
         add(mainElementContainer, "Center"); 
-        updateGui();
+
+        updateGui();	
+        if (!AikMin.isLTR())	// ***** For tiles below the editor *****
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);	
     }
 
     public void updateGui()

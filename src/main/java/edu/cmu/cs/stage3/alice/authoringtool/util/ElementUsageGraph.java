@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author Jason Pratt
  */
@@ -38,8 +40,8 @@ public class ElementUsageGraph extends javax.swing.JPanel {
 	protected float saturation = .5f;
 	protected float brightness = .9f;
 	protected java.util.HashMap classCountMap = new java.util.HashMap();
-	protected java.awt.GridBagConstraints labelConstraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 );
-	protected java.awt.GridBagConstraints barConstraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 0, 0, 8, 0 ), 0, 12 );
+	protected java.awt.GridBagConstraints labelConstraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 );
+	protected java.awt.GridBagConstraints barConstraints = new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 0, 0, 8, 0 ), 0, 12 );
 	protected java.util.Random random = new java.util.Random();
 
 	public ElementUsageGraph() {
@@ -52,6 +54,8 @@ public class ElementUsageGraph extends javax.swing.JPanel {
 		this();
 		setRoot( root );
 		setElementCriterion( elementCriterion );
+		//if (!AikMin.isLTR())	// ***** For World Statistic *****
+			// applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 	}
 
 	public void setRoot( edu.cmu.cs.stage3.alice.core.Element root ) {
@@ -140,7 +144,10 @@ public class ElementUsageGraph extends javax.swing.JPanel {
 			if( width > 2 ) {
 				width = (int)Math.round( ((width) - 1.0)*portion );
 			}
-			g.fill3DRect( 0, 0, width, size.height - 1, true );
+			if (!AikMin.isLTR())	// ***** For World Statistic *****
+				g.fill3DRect( size.width-width-1 , 0, width, size.height - 1, true );
+			else
+				g.fill3DRect( 0, 0, width, size.height - 1, true );
 		}
 	}
 

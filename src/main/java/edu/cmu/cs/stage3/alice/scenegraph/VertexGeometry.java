@@ -59,7 +59,7 @@ public abstract class VertexGeometry extends Geometry {
                 javax.vecmath.Vector3d maximum = new javax.vecmath.Vector3d( max.x, max.y, max.z );
                 m_boundingBox = new edu.cmu.cs.stage3.math.Box( minimum, maximum );
             } else {
-                throw new RuntimeException( this + " " + Messages.getString("vertex__0___has_somehow_become_null_") ); 
+                throw new RuntimeException( Messages.getString("vertex__0___has_somehow_become_null_", this) ); 
                 //m_boundingBox = null;
             }
 		} else {
@@ -219,7 +219,7 @@ public abstract class VertexGeometry extends Geometry {
 				}
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("invalid_file_version__") + version ); 
+			throw new RuntimeException( Messages.getString("invalid_file_version__", version) ); 
 		}
 		return vertices;
 	}

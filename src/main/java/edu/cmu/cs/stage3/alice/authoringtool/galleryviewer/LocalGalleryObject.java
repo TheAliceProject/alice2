@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -35,7 +36,10 @@ public class LocalGalleryObject extends GalleryObject {
     public static final String tumbnailFilename = "thumbnail.png"; 
 
 	protected String getToolTipString(){
-        return "<html><body>" + Messages.getString("ObjectClick_to_add_this_object_to_the_world") + "</body></html>"; 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+        return "<html><body><div align="+justify+">" + Messages.getString("ObjectClick_to_add_this_object_to_the_world") + "</div></body></html>"; 
     }
 
 	protected void guiInit(){

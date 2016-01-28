@@ -56,6 +56,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Vector;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * A baseline TIFF writer. The writer outputs TIFF images in either Bilevel,
  * Greyscale, Palette color or Full Color modes.
@@ -113,7 +115,7 @@ public class TIFFImageEncoder extends ImageEncoderImpl {
             dataType != DataBuffer.TYPE_SHORT &&
             dataType != DataBuffer.TYPE_USHORT) {
             // Support only byte and (unsigned) short.
-	    throw new Error(JaiI18N.getString("TIFF_encoder_supports_byte_and__unsigned__short_data_only_"));
+	    throw new Error(Messages.getString("TIFF_encoder_supports_byte_and__unsigned__short_data_only_"));
 	}
 
         boolean dataTypeIsShort =
@@ -125,7 +127,7 @@ public class TIFFImageEncoder extends ImageEncoderImpl {
             colorModel instanceof IndexColorModel &&
             dataTypeIsShort) {
             // Don't support (unsigned) short palette-color images.
-	    throw new Error(JaiI18N.getString("TIFF_encoder_does_not_support__unsigned__short_palette_images_"));
+	    throw new Error(Messages.getString("TIFF_encoder_does_not_support__unsigned__short_palette_images_"));
         }
 	IndexColorModel icm = null;
 	int sizeOfColormap = 0;
@@ -188,7 +190,7 @@ public class TIFFImageEncoder extends ImageEncoderImpl {
 
 		if (mapSize != 2) {
 		    throw new IllegalArgumentException(
-					JaiI18N.getString("Invalid_image___An_image_with_sampleSize_of_1_bit_must_have_IndexColorModel_with_mapsize_of_2_"));
+					Messages.getString("Invalid_image___An_image_with_sampleSize_of_1_bit_must_have_IndexColorModel_with_mapsize_of_2_"));
 		}
 
 		byte r[] = new byte[mapSize];

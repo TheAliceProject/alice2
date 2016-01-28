@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.image.codec;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /*
  * The contents of this file are subject to the  JAVA ADVANCED IMAGING
  * SAMPLE INPUT-OUTPUT CODECS AND WIDGET HANDLING SOURCE CODE  License
@@ -125,7 +127,7 @@ public class BMPEncodeParam implements ImageEncodeParam {
 	if ( !(versionNumber == VERSION_2 ||
 	       versionNumber == VERSION_3 ||
 	       versionNumber == VERSION_4) ) {
-	    throw new RuntimeException(JaiI18N.getString("Unsupported_version_number_specified_for_BMP_file_"));
+	    throw new RuntimeException(Messages.getString("Unsupported_version_number_specified_for_BMP_file_"));
 	}
     }
 

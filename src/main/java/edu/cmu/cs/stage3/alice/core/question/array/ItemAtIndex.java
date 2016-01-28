@@ -35,7 +35,7 @@ public class ItemAtIndex extends ArrayObjectQuestion {
         if( i >= 0 && i < n ) {
     		return arrayValue.itemValueAtIndex( i );
         } else {
-            throw new edu.cmu.cs.stage3.alice.core.SimulationException( Messages.getString("index_out_of_bounds_exception___") + i + " " + Messages.getString("is_not_in_range__0_") + n + ")", null, this );   
+            throw new edu.cmu.cs.stage3.alice.core.SimulationException( Messages.getString("index_out_of_bounds_exception___is_not_in_range__0_is_not_in_range__0_", i, n ), null, this );   
         }
 	}
 }

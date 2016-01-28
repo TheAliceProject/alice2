@@ -244,8 +244,7 @@ public class AnimationPanel extends JComponent
       f = new File((String)nameList.get(i));
       result = f.delete();
       if (result != true)
-        System.out.println(Messages.getString("trouble_deleting_") + 
-                           nameList.get(i));
+        System.out.println(Messages.getString("trouble_deleting_", nameList.get(i)));
       imageList.remove(0);
     }
   }
@@ -264,8 +263,7 @@ public class AnimationPanel extends JComponent
       f = new File((String)nameList.get(index++));
       result = f.delete();
       if (result != true)
-        System.out.println(Messages.getString("trouble_deleting_") + 
-                           nameList.get(index-1));
+        System.out.println(Messages.getString("trouble_deleting_", nameList.get(index-1)));
       imageList.remove(i);
     }
   }

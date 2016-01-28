@@ -23,9 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.sceneeditor;
 
-import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
-import edu.cmu.cs.stage3.lang.Messages;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -52,6 +49,9 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.lang.Messages;
 
 
 /**
@@ -762,11 +762,6 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	}
 
 	private void guiInit() {
-		if( AikMin.isWindows() ) {   
-			controlScrollPane.setPreferredSize( new java.awt.Dimension( 355 + ((fontSize-12)*14), 0 ) );	//Aik Min
-		} else {
-			controlScrollPane.setPreferredSize( new java.awt.Dimension( 405 + ((fontSize-12)*14), 0 ) );
-		}
 		// build the navigator
 		guiNavigator = new edu.cmu.cs.stage3.alice.authoringtool.util.GuiNavigator();
 		guiNavigator.setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
@@ -809,19 +804,23 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		objectDummyButton.setIcon( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForString( "dummyAtObject" ) ); 
 
 		// tooltips
-		singleViewButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Switch_to_a_Single_View_of_the_World_")+"</font></html>" ); 
-		quadViewButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Switch_to_a_Quad_View_of_the_World__p__p_The_Quad_View_shows_the_world_from_p_the_Right__Top__Front__and_regular_view_")+"</font></html>" ); 
-		affectSubpartsCheckBox.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Affect_Subparts__p__p_When_selected__the_mouse_will_p_manipulate_the_part_of_an_Object_p_clicked_on_instead_of_the_whole_Object_")+"</font></html>" ); 
-		aspectRatioComboBox.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Change_the_Aspect_Ratio_of_the_World__p__p_The_Aspect_Ratio_is_a_measure_of_the_width_p_of_the_window_that_we_look_at_the_world_through_p_versus_its_height_")+"</font></html>" ); 
-		aspectRatioLabel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("The_Aspect_Ratio_is_a_measure_of_the_width_p_of_the_window_that_we_look_at_the_world_through_p_versus_its_height_")+"</font></html>" ); 
-		lensAngleSlider.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Change_the_Lens_Angle_of_the_Camera__p__p_A_wider_lens_angle_will_let_p_you_see_more_of_the_world_")+"</font></html>" ); 
-		lensAngleLabel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("A_wider_lens_angle_will_let_p_you_see_more_of_the_world_")+"</font></html>" ); 
-		cameraDummyButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Dummy_Object_p_at_the_Current_Position_of_the_Camera_")+"</font></html>" ); 
-		objectDummyButton.setToolTipText("<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Dummy_Object_p_at_the_Current_Position_of_the_Selected_Object_")+"</font></html>" ); 
-		moveCameraCombo.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Move_the_Camera_to_a_Dummy_p_Object_s_Point_of_View_")+"</font></html>" ); 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		singleViewButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Switch_to_a_Single_View_of_the_World_")+"</div></body></html>" ); 
+		quadViewButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Switch_to_a_Quad_View_of_the_World__p__p_The_Quad_View_shows_the_world_from_p_the_Right__Top__Front__and_regular_view_")+"</div></body></html>" ); 
+		affectSubpartsCheckBox.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Affect_Subparts__p__p_When_selected__the_mouse_will_p_manipulate_the_part_of_an_Object_p_clicked_on_instead_of_the_whole_Object_")+"</div></body></html>" ); 
+		aspectRatioComboBox.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Change_the_Aspect_Ratio_of_the_World__p__p_The_Aspect_Ratio_is_a_measure_of_the_width_p_of_the_window_that_we_look_at_the_world_through_p_versus_its_height_")+"</div></body></html>" ); 
+		aspectRatioLabel.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("The_Aspect_Ratio_is_a_measure_of_the_width_p_of_the_window_that_we_look_at_the_world_through_p_versus_its_height_")+"</div></body></html>" ); 
+		lensAngleSlider.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Change_the_Lens_Angle_of_the_Camera__p__p_A_wider_lens_angle_will_let_p_you_see_more_of_the_world_")+"</div></body></html>" ); 
+		lensAngleLabel.setToolTipText( "<html><body>"+Messages.getString("A_wider_lens_angle_will_let_p_you_see_more_of_the_world_")+"</div></body></html>" ); 
+		cameraDummyButton.setToolTipText( "<html><body>"+Messages.getString("Create_a_New_Dummy_Object_p_at_the_Current_Position_of_the_Camera_")+"</div></body></html>" ); 
+		objectDummyButton.setToolTipText("<html><body>"+Messages.getString("Create_a_New_Dummy_Object_p_at_the_Current_Position_of_the_Selected_Object_")+"</div></body></html>" ); 
+		moveCameraCombo.setToolTipText( "<html><body>"+Messages.getString("Move_the_Camera_to_a_Dummy_p_Object_s_Point_of_View_")+"</div></body></html>" ); 
 		moveCameraLabel.setToolTipText( moveCameraCombo.getToolTipText() );
 
 		setVisibleControls( FEWER_CONTROLS );
+		controlScrollPane.setPreferredSize( new Dimension (markerPanel.getPreferredSize().width + 20, markerPanel.getPreferredSize().height ));
 	}
 
 //	private void povInit() {
@@ -1503,7 +1502,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		public ManipulatorModeButton( edu.cmu.cs.stage3.alice.authoringtool.util.RenderTargetManipulatorMode mode, javax.swing.Icon icon, String titleText, String toolTip ) {
 			super( icon );
 			this.mode = mode;
-			setToolTipText( "<html><font face=arial size=-1>"+toolTip+"</font></html>" );
+			String justify = "left";
+			if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+				justify = "right";
+			setToolTipText( "<html><body><div align="+justify+">"+toolTip+"</div></body></html>" );
 			this.titleText = titleText;
 
 			if( icon != null ) {
@@ -1853,8 +1855,11 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		superRenderPanel.setLayout(borderLayout4);
 		superRenderPanel.setBackground(Color.black);	
 		lensAngleSlider.setOpaque(false);
-		lensAngleSlider.setPreferredSize(new Dimension(150, 16));
-		lensAngleSlider.setMinimumSize(new Dimension(10, 16));
+		lensAngleSlider.setPreferredSize(new Dimension(150, 20));
+		lensAngleSlider.setMinimumSize(new Dimension(10, 20));
+		lensAngleSlider.setPaintTicks(true);
+		lensAngleSlider.setMajorTickSpacing(0);
+		
 		aspectPanel.setLayout(gridBagLayout);
 		aspectPanel.setBorder(border4);
 		aspectPanel.setOpaque(false);
@@ -1881,7 +1886,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		markerPanel.setLayout(gridBagLayout);
 		markerPanel.setBorder(border5);
 		markerPanel.setOpaque(false);
-		objectDummyButton.setHorizontalAlignment(SwingConstants.LEFT);
+		if (!AikMin.isLTR())
+			objectDummyButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		else
+			objectDummyButton.setHorizontalAlignment(SwingConstants.LEFT);
 		objectDummyButton.setMargin(new Insets(2, 8, 2, 8));
 		objectDummyButton.setText(Messages.getString("drop_dummy_at_selected_object")); 
 		objectDummyButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1911,7 +1919,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		});
 		controlPanel.setLayout(gridBagLayout);
 		controlPanel.setBackground(new Color(236, 235, 235));
-		cameraDummyButton.setHorizontalAlignment(SwingConstants.LEFT);
+		if (!AikMin.isLTR())
+			cameraDummyButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		else
+			cameraDummyButton.setHorizontalAlignment(SwingConstants.LEFT);
 		cameraDummyButton.setMargin(new Insets(2, 8, 2, 8));
 		cameraDummyButton.setText(Messages.getString("drop_dummy_at_camera")); 
 		cameraDummyButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1973,13 +1984,19 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		controlPanel.add(jSeparator3,  new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0
 			,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		controlPanel.add(moreFewerControlsButton,    new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0
-			,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(4, 4, 0, 0), 0, 0));
+			,GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(4, 4, 0, 0), 0, 0));
 		superRenderPanel.add(renderAndNavPanel, BorderLayout.CENTER);
 
-		this.setLayout(borderLayout1);
-		this.add(controlScrollPane,  BorderLayout.EAST);
+		this.setLayout(borderLayout1);	
 		this.add(galleryPanel,  BorderLayout.SOUTH);
 		this.add(superRenderPanel,  BorderLayout.CENTER);
+		if (!AikMin.isLTR()){	// ***** For the render and camera control in Gallery panel *****
+			this.add(controlScrollPane,  BorderLayout.WEST);
+			controlPanel.applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);	
+		} else {
+			this.add(controlScrollPane,  BorderLayout.EAST);
+		}
+		
 	}
 
 }

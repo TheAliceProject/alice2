@@ -1,16 +1,19 @@
 package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.awt.Font;
+import java.util.Locale;
 
 import javax.swing.UIManager;
+
+import edu.cmu.cs.stage3.lang.Messages;
 	
 public class AikMin {
-	public static String locale = "";
-	public static String defaultLanguage = "English";
-	public static String[] listOfLanguages = {"English","Portuguese","Spanish","German", "Arabic"}; 
+	public static Locale locale = new Locale ("en");
+	public static String defaultLanguage = locale.getDisplayLanguage();
+	public static String[] listOfLanguages = {"Arabic", "English", "German", "Portuguese","Spanish"}; 
 	public static int target = 0;	// Compile with 1 to delete preferences file or create etc/firstRun.txt
-	public static boolean control = false, shift = false;
 	
+	//.applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
 	//.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
 	//javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	//Integer.parseInt( authoringToolConfig.getValue( "fontSize" ) )
@@ -26,8 +29,30 @@ public class AikMin {
 			});
 	focusTimer.setRepeats(false);
 	focusTimer.start();*/
+	
+	public static Locale getLocale(){
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
+		if( authoringtoolConfig.getValue( "language" ) == null ) { 
+			authoringtoolConfig.setValue( "language", AikMin.defaultLanguage );
+			return locale;
+		} else {
+			String aliceLanguage = authoringtoolConfig.getValue( "language" );
+			if (aliceLanguage.equalsIgnoreCase("Portuguese")) {
+				locale = new Locale ("pt");
+			} else if (aliceLanguage.equalsIgnoreCase("Spanish")) {
+				locale = new Locale ("es");
+			} else if (aliceLanguage.equalsIgnoreCase("German")) {
+				locale = new Locale ("de");
+			} else if (aliceLanguage.equalsIgnoreCase("Arabic")) {
+				locale = new Locale ("ar");
+			}
+			return locale;
+		}		
+	}
+	
 	public static boolean isLTR(){
-		return true; //(locale != "Arabic"); 
+		return !locale.getDisplayName().equalsIgnoreCase("Arabic"); 
+		//return false;
 	}
 	
 	public static boolean isWindows() {
@@ -149,5 +174,88 @@ public class AikMin {
 		UIManager.put("Tree.font",  font);
 		UIManager.put("Viewport.font", font);
 		UIManager.put("JTitledPanel.title.font", font);
+	}
+	
+	public static void setUI(){
+		String font = "SansSerif"; // "Tahoma"; 
+		try {
+			javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getCrossPlatformLookAndFeelClassName());//"javax.swing.plaf.metal.MetalLookAndFeel"); 
+			
+			//	javax.swing.UIManager.put( "Button.focus", new java.awt.Color( 255, 255, 255, 0 ) ); // don't show focus  // makes printing slow, unfortunately
+
+			class CustomButtonBorder extends javax.swing.border.AbstractBorder implements javax.swing.plaf.UIResource {
+				protected java.awt.Insets insets = new java.awt.Insets(3, 3, 3, 3);
+				protected javax.swing.border.Border line = javax.swing.BorderFactory.createLineBorder(java.awt.Color.black, 1);
+				protected javax.swing.border.Border spacer = javax.swing.BorderFactory.createEmptyBorder(2, 4, 2, 4);
+				protected javax.swing.border.Border raisedBevel = javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED);
+				protected javax.swing.border.Border loweredBevel = javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED);
+				protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(line, raisedBevel), spacer);
+				protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(line, loweredBevel), spacer);
+				//				protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder( raisedBevel, spacer );
+				//				protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder( loweredBevel, spacer );
+
+				public void paintBorder(java.awt.Component c, java.awt.Graphics g, int x, int y, int w, int h) {
+					javax.swing.JButton button = (javax.swing.JButton) c;
+					javax.swing.ButtonModel model = button.getModel();
+
+					if (model.isEnabled()) {
+						if (model.isPressed() && model.isArmed()) {
+							loweredBorder.paintBorder(button, g, x, y, w, h);
+						} else {
+							raisedBorder.paintBorder(button, g, x, y, w, h);
+						}
+					} else {
+						raisedBorder.paintBorder(button, g, x, y, w, h);
+					}
+				}
+
+				public java.awt.Insets getBorderInsets(java.awt.Component c) {
+					return insets;
+				}
+			}
+			javax.swing.UIManager.put("Button.border", new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource(new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder())); 
+			
+			edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
+			setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		 
+			if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase("true")){  
+				javax.swing.UIManager.put("Label.foreground", java.awt.Color.black); 
+			} else {
+				javax.swing.UIManager.put("Label.foreground", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("mainFontColor"));  				
+			}
+			javax.swing.UIManager.put("Label.font", new java.awt.Font(font, java.awt.Font.BOLD, 12)); 
+			
+			// Customize tab panel
+			javax.swing.UIManager.put("TabbedPane.tabInsets", new java.awt.Insets(1, 4, 1, 3)); 
+			javax.swing.UIManager.put("TabbedPane.contentBorderInsets", new java.awt.Insets(2, 1, 1, 1)); 
+			javax.swing.UIManager.put("TabbedPane.borderHightlightColor", java.awt.Color.black); 
+			javax.swing.UIManager.put("TabbedPane.focus", new java.awt.Color(255, 255, 255, 0)); 
+			javax.swing.UIManager.put("TabbedPane.contentAreaColor", new java.awt.Color(255, 255, 255, 0)); 
+			javax.swing.UIManager.put("TabbedPane.light", java.awt.Color.white); 
+			javax.swing.UIManager.put("TabbedPane.selected", java.awt.Color.white); 
+			javax.swing.UIManager.put("TabbedPane.darkShadow", java.awt.Color.black); 
+			javax.swing.UIManager.put("TabbedPane.tabsOverlapBorder", true); 
+			javax.swing.UIManager.put("TabbedPane.selectHighlight", javax.swing.UIManager.get("TabbedPane.selected")); 
+			
+			//Customize buttons
+			javax.swing.UIManager.put("Button.select", new java.awt.Color(255, 255, 255, 0)); 
+			javax.swing.UIManager.put("Button.focus", new java.awt.Color(255, 255, 255, 0)); 
+			
+			//Customize slider
+//			javax.swing.UIManager.put("SliderUI", "javax.swing.plaf.metal.MetalSliderUI"); 
+			
+			javax.swing.UIManager.put("ComboBoxUI", "javax.swing.plaf.metal.MetalComboBoxUI");  
+			if ( AikMin.isWindows() ) {   
+				javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  
+			} 
+			if ( AikMin.isMAC() ) {   			
+				//javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  				
+				javax.swing.UIManager.put("ScrollBarUI", "apple.laf.AquaScrollBarUI"); 
+				javax.swing.UIManager.put("SliderUI", "apple.laf.AquaSliderUI"); 
+			}
+			
+		} catch (Exception e) {
+			AuthoringTool.showErrorDialog(Messages.getString("Error_configuring_Look_and_Feel_"), e); 
+		}
+
 	}
 }

@@ -25,7 +25,6 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -50,7 +49,8 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 	public final static int ANIMATIONS_TAB = 1;
 	public final static int QUESTIONS_TAB = 2;
 	public final static int OTHER_TAB = 3;
-
+	private String justify = "left";
+	
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration
 	.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
 	
@@ -85,11 +85,11 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 	protected edu.cmu.cs.stage3.alice.core.event.PropertyListener nameListener = new edu.cmu.cs.stage3.alice.core.event.PropertyListener() {
 		public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {}
 		public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
-			DragFromComponent.this.ownerLabel.setText( ev.getValue().toString() + Messages.getString("_s_details") ); 
+			DragFromComponent.this.ownerLabel.setText( Messages.getString("_s_details", ev.getValue().toString()) ); 
 		}
 	};
 	protected javax.swing.JButton newAnimationButton = new javax.swing.JButton( Messages.getString("create_new_method") ); 
-	protected javax.swing.JButton newQuestionButton = new javax.swing.JButton( Messages.getString("create_new_")+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING ); 
+	protected javax.swing.JButton newQuestionButton = new javax.swing.JButton( Messages.getString("create_new_", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING) ); 
 	protected javax.swing.JButton capturePoseButton = new javax.swing.JButton( Messages.getString("capture_pose") ); 
 	protected edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse newlyCreatedAnimation;
 	protected edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion newlyCreatedQuestion;
@@ -111,8 +111,6 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		miscPanel = new edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ObjectArrayPropertyPanel( Messages.getString("Misc"), authoringTool ); 
 		jbInit();
 		guiInit();
-		if (!AikMin.isLTR())
-			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);	
 	}
 
 	private void guiInit() {
@@ -195,21 +193,53 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		questionsScrollPane.setBackground( java.awt.Color.white );
 		otherScrollPane.setBackground( java.awt.Color.white );
 
+        if(!AikMin.isLTR()){	// ***** To fix the vertical scrollbar on the details panel *****
+        	propertiesScrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+   	            @Override
+   	            public void layoutContainer(java.awt.Container parent) {
+   	            	javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+   	            	scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+   	                super.layoutContainer(parent);
+   	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+   	            }
+   	        });
+        	animationsScrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+   	            @Override
+   	            public void layoutContainer(java.awt.Container parent) {
+   	            	javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+   	            	scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+   	                super.layoutContainer(parent);
+   	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+   	            }
+   	        });
+        	questionsScrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+   	            @Override
+   	            public void layoutContainer(java.awt.Container parent) {
+   	            	javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+   	            	scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+   	                super.layoutContainer(parent);
+   	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+   	            }
+   	        });
+        }
+        
 		soundsPanel.setExpanded( false );
 		textureMapsPanel.setExpanded( false );
 		miscPanel.setExpanded( false );
 
 		// tooltips
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
 		String cappedQuestionString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(0,1).toUpperCase()+edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING.substring(1);
-		comboPanel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("This_area_displays_the_details_p_of_the_Selected_Object_")+"</font></html>" ); 
-		tabbedPane.setToolTipTextAt( PROPERTIES_TAB, "<html><font face=arial size=-1>"+Messages.getString("Open_the_Properties_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_Properties_of_the_Selected_Object_")+"</font></html>" ); 
-		tabbedPane.setToolTipTextAt( ANIMATIONS_TAB, "<html><font face=arial size=-1>"+Messages.getString("Open_the_Methods_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_Methods_of_the_Selected_Object_")+"</font></html>" ); 
-		tabbedPane.setToolTipTextAt( QUESTIONS_TAB, "<html><font face=arial size=-1>"+Messages.getString("Open_the_")+cappedQuestionString+"s"+" "+Messages.getString("Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_")+cappedQuestionString+"s "+Messages.getString("of_the_Selected_Object_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
-		newAnimationButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Blank_Method_p_and_Open_it_for_Editing_")+"</font></html>" ); 
-		newQuestionButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Create_a_New_Blank_")+cappedQuestionString+Messages.getString("_p_and_Open_it_for_Editing_")+"</font></html>" );  
-		propertiesPanel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Properties_Tab_p__p_This_tab_allows_you_to_view_and_edit_p_the_Properties_of_the_Selected_Object_")+"</font></html>" ); 
-		animationsPanel.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Methods_Tab_p__p_Methods_are_the_actions_that_an_object_knows_how_to_do__p_Most_objects_come_with_default_methods__and_you_can_p_create_your_own_methods_as_well_")+"</font></html>" ); 
-		questionsPanel.setToolTipText( "<html><font face=arial size=-1>"+cappedQuestionString+"s"+" "+Messages.getString("Tab_p__p_")+cappedQuestionString+"s"+" "+Messages.getString("are_the_things_that_an_object_can_p_answer_about_themselves_or_the_world_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
+		comboPanel.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("This_area_displays_the_details_p_of_the_Selected_Object_")+"</div></body></html>" ); 
+		tabbedPane.setToolTipTextAt( PROPERTIES_TAB, "<html><body><div align="+justify+">"+Messages.getString("Open_the_Properties_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_Properties_of_the_Selected_Object_")+"</div></body></html>" ); 
+		tabbedPane.setToolTipTextAt( ANIMATIONS_TAB, "<html><body><div align="+justify+">"+Messages.getString("Open_the_Methods_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_Methods_of_the_Selected_Object_")+"</div></body></html>" ); 
+		tabbedPane.setToolTipTextAt( QUESTIONS_TAB, "<html><body><div align="+justify+">"+Messages.getString("Open_the_Functions_Tab_p_of_the_Selected_Object__p__p_Use_this_tab_to_view_and_edit_p_the_Functions_of_the_Selected_Object_", cappedQuestionString)+"</div></body></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
+		newAnimationButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Create_a_New_Blank_Method_p_and_Open_it_for_Editing_")+"</div></body></html>" ); 
+		newQuestionButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Create_a_New_Blank__p_and_Open_it_for_Editing_", cappedQuestionString)+"</div></body></html>" );  
+		propertiesPanel.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Properties_Tab_p__p_This_tab_allows_you_to_view_and_edit_p_the_Properties_of_the_Selected_Object_")+"</div></body></html>" ); 
+		animationsPanel.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Methods_Tab_p__p_Methods_are_the_actions_that_an_object_knows_how_to_do__p_Most_objects_come_with_default_methods__and_you_can_p_create_your_own_methods_as_well_")+"</div></body></html>" ); 
+		questionsPanel.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Tab_p__p_are_the_things_that_an_object_can_p_answer_about_themselves_or_the_world_", cappedQuestionString)+"</div></body></html>" );
 	}
 
 	public void paintComponent( java.awt.Graphics g ) {
@@ -269,7 +299,8 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		this.element = element;
 
 		if( element != null ) {
-			ownerLabel.setText( AuthoringToolResources.getReprForValue( element ) + Messages.getString("_s_details") ); 
+			ownerLabel.setText(  Messages.getString("_s_details", AuthoringToolResources.getReprForValue( element )) ); 
+			
 			if( element.getParent() != null ) {
 				element.getParent().addChildrenListener( parentListener );
 			}
@@ -418,7 +449,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					return AuthoringToolResources.findPrototypeDnDPanel( animationsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e ); 
 			}
 		} else if( prefix.equals( "questionPrototype" ) && (spec != null) ) { 
 			try {
@@ -427,7 +458,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					return AuthoringToolResources.findPrototypeDnDPanel( questionsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e ); 
 			}
 		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) { 
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
@@ -494,7 +525,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					return AuthoringToolResources.findPrototypeDnDPanel( animationsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e ); 
 			}
 		} else if( prefix.equals( "questionPrototype" ) && (spec != null) ) { 
 			try {
@@ -503,7 +534,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 					return AuthoringToolResources.findPrototypeDnDPanel( questionsPanel, elementClass );
 				}
 			} catch( Exception e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_") + spec, e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e ); 
 			}
 		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) { 
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
@@ -572,7 +603,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 							newlyCreatedPose = null;
 						}
 					} else {
-						AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_pose__") + pose, null ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_pose__", pose), null ); 
 					}
 				}
 
@@ -660,10 +691,10 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 									subPanel.add( gui, constraints );
 									i++;
 								} else {
-									AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_property__") + property, null ); 
+									AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_property__", property), null ); 
 								}
 							} else {
-								AuthoringTool.showErrorDialog( Messages.getString("no_property_on_") + element + " " + Messages.getString("named_") + name, null );  
+								AuthoringTool.showErrorDialog( Messages.getString("no_property_on_named_", element, name), null );  
 							}
 						}
 					}
@@ -692,24 +723,24 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 			}
 
 			if( element.data.get( "modeled by" ) != null ) { 
-				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("modeled_by___") + element.data.get( "modeled by" ) ), constraints );  
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("modeled_by___", element.data.get( "modeled by" )) ), constraints );  
 				constraints.gridy++;
 			}
 			if( element.data.get( "painted by" ) != null ) { 
-				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("painted_by___") + element.data.get( "painted by" ) ), constraints );  
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("painted_by___", element.data.get( "painted by" )) ), constraints );  
 				constraints.gridy++;
 			}
 			if( element.data.get( "programmed by" ) != null ) { 
-				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("programmed_by___") + element.data.get( "programmed by" ) ), constraints );  
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("programmed_by___", element.data.get( "programmed by" )) ), constraints );  
 				constraints.gridy++;
 			}
 			if ( element.data.get( "modeled by" ) != null  ){ 
 				java.text.NumberFormat formatter = new java.text.DecimalFormat("#.####"); 
-				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("depth___") + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getDepth()) ), constraints ); 
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("depth___", formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getDepth())) ), constraints ); 
 				constraints.gridy++;
-				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("height___") + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getHeight()) ), constraints ); 
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("height___", formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getHeight())) ), constraints ); 
 				constraints.gridy++;
-				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("width___") + formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getWidth()) ), constraints ); 
+				propertiesPanel.add( new javax.swing.JLabel( Messages.getString("width___", formatter.format(((edu.cmu.cs.stage3.alice.core.Model) element).getWidth())) ), constraints ); 
 				constraints.gridy++;
 			}
 			glueConstraints.gridy = constraints.gridy;
@@ -736,7 +767,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 						javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( callToUserDefinedResponsePrototype );
 						if( gui != null ) {
 							edu.cmu.cs.stage3.alice.authoringtool.util.EditObjectButton editButton = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getEditObjectButton( response, gui );
-							editButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Open_this_method_for_editing_")+"</font></html>" ); 
+							editButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Open_this_method_for_editing_")+"</div></body></html>" ); 
 							javax.swing.JPanel guiPanel = new javax.swing.JPanel();
 							panelsToClean.add( guiPanel );
 							guiPanel.setBackground( java.awt.Color.white );
@@ -752,10 +783,10 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 								newlyCreatedAnimation = null;
 							}
 						} else {
-							AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_callToUserDefinedResponsePrototype__") + callToUserDefinedResponsePrototype, null ); 
+							AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_callToUserDefinedResponsePrototype__", callToUserDefinedResponsePrototype), null ); 
 						}
 					} else {
-						AuthoringTool.showErrorDialog( Messages.getString("Response_is_not_a_userDefinedResponse__") + response, null ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Response_is_not_a_userDefinedResponse__", response), null ); 
 					}
 				}
 
@@ -811,11 +842,11 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 											subPanel.add( gui, constraints );
 											i++;
 										} else {
-											AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_responsePrototype__") + responsePrototype, null ); 
+											AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_responsePrototype__", responsePrototype), null ); 
 										}
 									}
 								} catch( ClassNotFoundException e ) {
-									AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_class_") + className, e ); 
+									AuthoringTool.showErrorDialog( Messages.getString("Error_while_looking_for_class_", className), e ); 
 								}
 							}
 						}
@@ -849,7 +880,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 						javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( callToUserDefinedQuestionPrototype );
 						if( gui != null ) {
 							edu.cmu.cs.stage3.alice.authoringtool.util.EditObjectButton editButton = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getEditObjectButton( question, gui );
-							editButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Open_this_question_for_editing_")+"</font></html>" ); 
+							editButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Open_this_question_for_editing_")+"</div></body></html>" ); 
 							javax.swing.JPanel guiPanel = new javax.swing.JPanel();
 							panelsToClean.add( guiPanel );
 							guiPanel.setBackground( java.awt.Color.white );
@@ -864,7 +895,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 								newlyCreatedQuestion = null;
 							}
 						} else {
-							AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_callToUserDefinedQuestionPrototype__") + callToUserDefinedQuestionPrototype, null ); 
+							AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_callToUserDefinedQuestionPrototype__", callToUserDefinedQuestionPrototype), null ); 
 						}
 					} else {
 						throw new RuntimeException( Messages.getString("ERROR__question_is_not_a_userDefinedQuestion") ); 
@@ -928,25 +959,23 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 									subPanel.add( gui, constraints );
 									i++;
 								} else {
-									AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_elementPrototype__") + elementPrototype, null ); 
+									AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_elementPrototype__", elementPrototype), null ); 
 								}
 							} catch( ClassNotFoundException e ) {
-								AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_class__") + className, e ); 
+								AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_class__", className), e ); 
 							} catch( IllegalAccessException e ) {
-								AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_class__") + className, e ); 
+								AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_class__", className), e ); 
 							} catch( InstantiationException e ) {
-								AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_class__") + className, e ); 
+								AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_class__", className), e ); 
 							}
 						}
 					}
-
 					questionsPanel.add( expandPanel, constraints );
 					constraints.gridy++;
 				}
 			}
 			glueConstraints.gridy = constraints.gridy;
 			questionsPanel.add( javax.swing.Box.createGlue(), glueConstraints );
-
 
 			// other panels
 //			constraints.gridy = 0;
@@ -965,13 +994,10 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 //			glueConstraints.gridy = constraints.gridy;
 //			otherPanel.add( javax.swing.Box.createGlue(), glueConstraints );
 		}
-		if (!AikMin.isLTR()) {
-			propertiesPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-			animationsPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-			questionsPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		}
 		revalidate();
 		repaint();
+		if (!AikMin.isLTR()) 	// ***** For the tiles in the details panel *****
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
 	}
 
 	public class ResponsesListener implements edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyListener {

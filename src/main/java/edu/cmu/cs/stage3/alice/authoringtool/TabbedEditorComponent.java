@@ -128,7 +128,7 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 					}
 					authoringTool.saveTabs();
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("failed_to_create_editor_for_") + object + ", " + editorClass, null );  
+					AuthoringTool.showErrorDialog( Messages.getString("failed_to_create_editor_for_", object, editorClass), null );  
 				}
 			} else if( switchToNewTab ) {
 				for( int i = 0; i < tabbedPane.getTabCount(); i++ ) {
@@ -264,7 +264,7 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 				authoringTool.saveTabs();
 			}
 		} else {
-			AuthoringTool.showErrorDialog( Messages.getString("no_editor_to_close_at_") + index, null ); 
+			AuthoringTool.showErrorDialog( Messages.getString("no_editor_to_close_at_", index), null ); 
 		}
 	}
 
@@ -312,7 +312,7 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 					}
 				};
 				java.util.Vector structure = new java.util.Vector();
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("Close_") + TabbedEditorComponent.this.tabbedPane.getTitleAt( index ), closeTabRunnable ) ); 
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("Close_", TabbedEditorComponent.this.tabbedPane.getTitleAt( index )), closeTabRunnable ) ); 
 				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("Close_All"), closeAllTabsRunnable ) ); 
 				edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.createAndShowPopupMenu( structure, TabbedEditorComponent.this.tabbedPane, ev.getX(), ev.getY() );
 			}

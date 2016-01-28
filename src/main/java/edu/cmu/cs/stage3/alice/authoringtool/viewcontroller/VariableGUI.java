@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * @author Jason Pratt
  */
@@ -39,14 +41,20 @@ public class VariableGUI extends edu.cmu.cs.stage3.alice.authoringtool.util.Grou
 
 	public void set( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool, edu.cmu.cs.stage3.alice.core.Variable variable, boolean includeDefaults, edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory ) {
 		clean();
-
 		variableDnDPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getVariableDnDPanel( variable );
 		variableViewController = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController( variable.value, includeDefaults, false, true, factory );
-
-		add( variableDnDPanel );
-		add( equalsLabel );
-		add( variableViewController );
-		add( javax.swing.Box.createHorizontalGlue() );
+		if (!AikMin.isLTR()){	// ***** For variable tiles in the properties tab of the details pane *****
+			add( javax.swing.Box.createHorizontalGlue() );
+			add( variableViewController );
+			add( equalsLabel );
+			add( variableDnDPanel );
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+		} else {
+			add( variableDnDPanel );
+			add( equalsLabel );
+			add( variableViewController );
+			add( javax.swing.Box.createHorizontalGlue() );
+		}
 	}
 
 	public void goToSleep() {}

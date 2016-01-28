@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.dialog;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -32,6 +33,7 @@ public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing
 	private javax.swing.JButton m_okButton = new javax.swing.JButton(Messages.getString("OK"));
 	private javax.swing.JButton m_cancelButton = new javax.swing.JButton(Messages.getString("Cancel"));
 	private java.util.HashMap validityHashmap = new java.util.HashMap();
+	private edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(AuthoringTool.class.getPackage());
 	private edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback validityChecker = new edu.cmu.cs.stage3.alice.authoringtool.util.CheckForValidityCallback() {
 		public void setValidity(Object source, boolean value) {
 			okButtonEnabler(source, value);
@@ -47,8 +49,9 @@ public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing
 	private edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField m_nameTextField = new edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField(validityChecker);
 
 	public NewNamedElementContentPane() {
-		m_nameTextField.setMinimumSize(new java.awt.Dimension(150, 26));
-		m_nameTextField.setPreferredSize(new java.awt.Dimension(150, 26));
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
+		m_nameTextField.setMinimumSize(new java.awt.Dimension(150, (fontSize * 2) + 4));
+		m_nameTextField.setPreferredSize(new java.awt.Dimension(150, (fontSize * 2) + 4));
 
 		setLayout(new java.awt.GridBagLayout());
 		java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
@@ -62,7 +65,12 @@ public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
 		gbc.insets.top = 8;
 		gbc.insets.left = 8;
-		add(new javax.swing.JLabel(Messages.getString("Name_")), gbc);
+		
+		
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
+		javax.swing.JLabel nameLabel = new javax.swing.JLabel(Messages.getString("Name_"));
+		nameLabel.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
+		add(nameLabel, gbc);
 		gbc.insets.right = 8;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		gbc.weightx = 1.0;

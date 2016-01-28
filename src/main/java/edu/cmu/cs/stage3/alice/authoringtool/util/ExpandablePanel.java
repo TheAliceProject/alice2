@@ -23,8 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import java.awt.ComponentOrientation;
-
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 
 /**
@@ -55,17 +53,17 @@ public class ExpandablePanel extends javax.swing.JPanel {
 		topPanel.setLayout( new java.awt.BorderLayout() );
 		topPanel.add( expandButton, java.awt.BorderLayout.LINE_START );
 		topPanel.add( titleLabel, java.awt.BorderLayout.CENTER );
-		titleLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 10, 0, 0 ) );
+		titleLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 10, 0, 10 ) );
 		topPanel.setOpaque( false );
 
 		mainPanel.setLayout( new java.awt.BorderLayout() );
-		mainPanel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 20, 0, 0 ) );
+		mainPanel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 20, 0, 20 ) );
 		mainPanel.setOpaque( false );
 
 		plusIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "plus" );
 		minusIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "minus" );
 		squareIcon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue( "square" );
-		expandButton.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 3, 0, 0 ) );
+		expandButton.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 3, 0, 3 ) );
 		expandButton.setOpaque( false );
 		expandButton.setIcon( plusIcon );
 		expandButton.setSelectedIcon( minusIcon );
@@ -77,12 +75,9 @@ public class ExpandablePanel extends javax.swing.JPanel {
 		expandButton.setBorderPainted(false);
 		titleLabel.setOpaque( false );
 		
-		if (!AikMin.isLTR()) {
-			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);	
-			titleLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 0, 0, 10 ) );
-			mainPanel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 0, 0, 20 ) );
-			expandButton.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 0, 0, 3 ) ); 
-		}
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
+		int fontSize = Integer.parseInt(config.getValue("fontSize"));
+		titleLabel.setFont( new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
 	}
 
 	public void setTitle( String title ) {
@@ -126,6 +121,8 @@ public class ExpandablePanel extends javax.swing.JPanel {
 	protected class ExpandButtonListener implements javax.swing.event.ChangeListener {
 		public void stateChanged( javax.swing.event.ChangeEvent ev ) {
 			ExpandablePanel.this.setExpanded( ExpandablePanel.this.expandButton.isSelected() );
+			if (!AikMin.isLTR())	// ***** To align the tiles in the Seldom Used Properties section *****
+				applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);	
 		}
 	}
 }

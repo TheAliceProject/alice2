@@ -31,6 +31,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.util.StringObjectPair;
@@ -256,6 +257,8 @@ public class PopupMenuUtilities{
 				JMenu submenu = makeMenu( name, (java.util.Vector)content );
 				if( submenu != null ) {
 					menu.add( submenu );
+					if (!AikMin.isLTR())	// ***** For Alice pop up menu *****
+						submenu.applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
 				}
 			} else if( content instanceof java.awt.event.ActionListener ) {
 				JMenuItem menuItem = makeMenuItem( name, icon );
@@ -270,6 +273,8 @@ public class PopupMenuUtilities{
 				}
 				menuItem.addActionListener( listener );
 				menu.add( menuItem );
+				if (!AikMin.isLTR())	// ***** For Alice pop up menu *****
+					menuItem.applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
 			} else if( content == javax.swing.JSeparator.class ) {
 				menu.addSeparator();
 			} else if( content instanceof java.awt.Component ) {
@@ -279,6 +284,8 @@ public class PopupMenuUtilities{
 				javax.swing.JLabel label = new javax.swing.JLabel( Messages.getString( name ) ); // Aik Min - One Shot Menu title labels
 				label.setBorder( javax.swing.BorderFactory.createEmptyBorder( 1, 4, 1, 4 ) );
 				menu.add( label );
+				if (!AikMin.isLTR()) // ***** For Alice pop up menu *****
+					label.applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
 			}
 		}
 	}
@@ -1592,7 +1599,7 @@ public class PopupMenuUtilities{
 									edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().importElement( null, world, propertyPopupPostImportRunnable ); // should probably somehow hook the sound up to the object playing it
 								}
 							};
-							structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("import sound file..."), runnable ) );
+							structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("import_sound_file___"), runnable ) );
 						}
 					}
 				}
@@ -1620,7 +1627,7 @@ public class PopupMenuUtilities{
 				} else if( structure.size() == 0 ) {
 					javax.swing.JLabel label = new javax.swing.JLabel( "no expressions for this type" );
 					label.setForeground( java.awt.Color.gray );
-					label.setBorder( javax.swing.BorderFactory.createEmptyBorder( 2, 8, 2, 2 ) );
+					label.setBorder( javax.swing.BorderFactory.createEmptyBorder( 2, 8, 2, 8 ) );
 					structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "", label ) );
 				}
 			}
@@ -1679,7 +1686,6 @@ public class PopupMenuUtilities{
 			label.setBorder( javax.swing.BorderFactory.createEmptyBorder( 2, 2, 2, 2 ) );
 			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "", label ) );
 		}
-
 		return structure;
 	}
 
@@ -2051,13 +2057,13 @@ public class PopupMenuUtilities{
 			public void run() {
 				ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.question.userdefined.Print.class, known, new String[] { "text" } );
 				//java.awt.Frame jAliceFrame = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getJAliceFrame();
-				String text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Enter text to print"), Messages.getString("Enter Text String"), javax.swing.JOptionPane.PLAIN_MESSAGE );
+				String text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Enter_text_to_print"), Messages.getString("Enter_Text_String"), javax.swing.JOptionPane.PLAIN_MESSAGE );
 				if( text != null ) {
 					((Runnable)factory.createItem( elementPrototype.createCopy( new edu.cmu.cs.stage3.util.StringObjectPair( "text", text ) ) )).run();
 				}
 			}
 		};
-		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("text string..."), textStringRunnable ) );
+		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("text_string___"), textStringRunnable ) );
 
 		ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.question.userdefined.Print.class, known, new String[] { "object" } );
 		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("object"), PopupMenuUtilities.makePrototypeStructure( elementPrototype, factory, context ) ) );

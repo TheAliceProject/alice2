@@ -32,6 +32,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ComponentEvent;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -94,11 +95,11 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		//int width = (int)(java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth() * .8);
 		mainPanel.setMinimumSize( new java.awt.Dimension( 0, 0 ) );
 
-		if( Configuration.getValue( authoringToolPackage, "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
-			topPanel.add( scriptComboWidget, BorderLayout.CENTER );
-		}
+		//if( Configuration.getValue( authoringToolPackage, "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
+		//	topPanel.add( scriptComboWidget, BorderLayout.CENTER );
+		//}
 
-		if ( AikMin.locale.equalsIgnoreCase("english")) {
+		if ( AikMin.locale.equals(new Locale("en")) ) {
 			makeSceneEditorBigButton = new javax.swing.JButton(new javax.swing.ImageIcon( makeSceneEditorBigImage ) );
 			makeSceneEditorSmallButton = new javax.swing.JButton( new javax.swing.ImageIcon( makeSceneEditorSmallImage ) );
 			makeSceneEditorBigButton.setMargin( new java.awt.Insets( 2, 2, 2, 2 ) );
@@ -129,8 +130,11 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		cameraViewPanel.controlPanel.add( makeSceneEditorSmallButton, new java.awt.GridBagConstraints( 0, 9, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHEAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 8, 8 ), 0, 0 ) );
 
 		// tooltips
-		makeSceneEditorBigButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Open_the_Object_Gallery_and_Layout_Tool__p__p_Objects_are_added_to_the_world_from_the_Gallery__p_The_Layout_Tool_has_tools_that_will_help_you_position_objects_in_the_world__p_You_will_not_be_able_to_edit_Methods_or_Events_while_the_Gallery_is_open_")+"</font></html>" ); 
-		makeSceneEditorSmallButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Close_the_Gallery_and_Layout_Tool__p__p_Closes_the_gallery_and_returns_p_to_the_Method_and_Event_editors_")+"</font></html>" ); 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		makeSceneEditorBigButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Open_the_Object_Gallery_and_Layout_Tool__p__p_Objects_are_added_to_the_world_from_the_Gallery__p_The_Layout_Tool_has_tools_that_will_help_you_position_objects_in_the_world__p_You_will_not_be_able_to_edit_Methods_or_Events_while_the_Gallery_is_open_")+"</div></body></html>" ); 
+		makeSceneEditorSmallButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Close_the_Gallery_and_Layout_Tool__p__p_Closes_the_gallery_and_returns_p_to_the_Method_and_Event_editors_")+"</div></body></html>" ); 
 	}
 
 	// big hack for now.  need to consolidate CameraViewPanel and LayoutViewPanel

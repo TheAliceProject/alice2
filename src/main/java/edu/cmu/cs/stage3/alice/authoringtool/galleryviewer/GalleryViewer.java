@@ -1094,7 +1094,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 	        if (localGallery != null){
 	            rootDirectories.add(localGallery);
 	            localGalleryRoot = localGallery.rootPath;
-	            if ( AikMin.locale.equalsIgnoreCase(file[i]) ){
+	            if ( AikMin.locale.getDisplayLanguage().equalsIgnoreCase(file[i]) ){
 	            	templocal = localGallery;
 	            }
 	        }    
@@ -1364,6 +1364,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     else if (current.startsWith(localGalleryName)){ 	
                         currentDirToSet = getRootDirectoryNamed(localGalleryName + " (" + Configuration.getValue( authoringToolPackage, "language" ) + ")");
                         if (currentDirToSet == null) currentDirToSet = getRootDirectoryNamed(localGalleryName + " (Core)");
+                        if (currentDirToSet == null) {
+                        	RootDirectoryStructure temp = (RootDirectoryStructure)rootDirectories.get(0);
+                        	currentDirToSet = temp.directory;
+                        }
                     }
                     else if (current.equalsIgnoreCase(cdGalleryName)){
                         currentDirToSet = getRootDirectoryNamed(cdGalleryName);
@@ -1544,7 +1548,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 needToCache = false;
             }
             else{
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_accessing_the_local_gallery__") + Messages.getString("is_either_not_there_or_can_not_be_read", file.getAbsolutePath()), null);  
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_accessing_the_local_gallery__is_either_not_there_or_can_not_be_read", file.getAbsolutePath()), null);  
                 return null;
             }
         }
@@ -1866,12 +1870,12 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         searchPanel.setOpaque(false);
         searchPanel.setBorder(null);
         searchPanel.setLayout(new java.awt.GridBagLayout());
-        searchPanel.add(searchField, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,8), 0,0 ));
-        searchPanel.add(searchButton, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,0,0,0), 0,0 ));
-		searchPanel.add(searchWebButton, new java.awt.GridBagConstraints(2,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,0), 0,0 ));
-        searchPanel.add(searchingProgressLabel, new java.awt.GridBagConstraints(3,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,0), 0,0 ));
-        searchPanel.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(4,0,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0 ));
-
+        searchPanel.add(searchField, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,8), 0,0 ));
+        searchPanel.add(searchButton, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,0,0,0), 0,0 ));
+		searchPanel.add(searchWebButton, new java.awt.GridBagConstraints(2,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,0), 0,0 ));
+        searchPanel.add(searchingProgressLabel, new java.awt.GridBagConstraints(3,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,0), 0,0 ));
+        searchPanel.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(4,0,1,1,1,1,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0 ));
+		
         headerPanel = new javax.swing.JPanel();
         headerPanel.setMinimumSize(new java.awt.Dimension(1, 34));
         headerPanel.setOpaque(false);
@@ -1973,12 +1977,26 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         //Aik Min added this to make scroll bar scroll more
         scrollPane.getHorizontalScrollBar().setUnitIncrement(44);
         
+        
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,0,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,1,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     //    this.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.SOUTH,java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0 ));
         int fontSize = Integer.parseInt( Configuration.getValue( authoringToolPackage, "fontSize" ) ); 
         this.setPreferredSize(new java.awt.Dimension(Integer.MAX_VALUE, 250 + (fontSize-12) * 6 )); //Aik Min
         this.setMinimumSize(new java.awt.Dimension(100, 250));
+        
+		if (!AikMin.isLTR()){	// ***** For the Gallery panel *****
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);	
+			scrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+				@Override
+			   	public void layoutContainer(java.awt.Container parent) {
+			   		javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+			   		scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+			   	       super.layoutContainer(parent);
+			   	       scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+			   	}
+			});
+		}
     }
 
     private String getNodeText(org.w3c.dom.Node node){
@@ -2843,6 +2861,9 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 currentDir = (DirectoryStructure)dirs.pop();
                 if (count > 0){
                     javax.swing.JLabel arrow = new javax.swing.JLabel(">"); 
+                    if (!AikMin.isLTR()){	
+                    	 arrow = new javax.swing.JLabel("<"); 
+            		}
                     arrow.setForeground(textColor);
                     directoryPanel.add(arrow, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.WEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,3,0,3), 0,0 ));
                     count++;

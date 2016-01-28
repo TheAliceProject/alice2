@@ -169,7 +169,7 @@ public class FeedBackEnabledJTree extends javax.swing.JTree {
 					pathToDrawFrom = pathToDrawTo; // start at the current depth
 					java.awt.Rectangle bounds = getRowBounds( cursorLocationRow );
 					//DEBUG System.out.println( "boundsToDrawTo: " + bounds );
-					if( ((bounds.y + bounds.height) - cursorLocation.y) < legBuffer ) { // if we're near the bottom of the current row, calculate propert parent based on cursor's horizontal location
+					if( ((bounds.y + bounds.height) - cursorLocation.y) < legBuffer ) { // if we're near the bottom of the current row, calculate proper parent based on cursor's horizontal location
 						int cursorLevel = (int)((cursorLocation.x - insets.left - 8 + (totalChildIndent/2.0))/totalChildIndent);
 						int maxLevel = pathToDrawTo.getPathCount() - 1; // don't go deeper than we already are
 						int minLevel;

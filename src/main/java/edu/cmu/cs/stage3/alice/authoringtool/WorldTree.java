@@ -56,8 +56,10 @@ public class WorldTree extends javax.swing.JTree {
 		needChange();
 		dropLinesActive = false;
 		getSelectionModel().setSelectionMode( javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION );
-
-		setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Object_Tree")+"<p><p>"+Messages.getString("The_Object_Tree_shows_all_p_of_the_objects_in_the_world__p_Some_objects_have_parts_")+"</font></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Object_Tree_The_Object_Tree_shows_all_p_of_the_objects_in_the_world__p_Some_objects_have_parts_")+"</div></body></html>" );    //$NON-NLS-4$ //$NON-NLS-5$
 		javax.swing.ToolTipManager.sharedInstance().registerComponent( this );
 	}
 

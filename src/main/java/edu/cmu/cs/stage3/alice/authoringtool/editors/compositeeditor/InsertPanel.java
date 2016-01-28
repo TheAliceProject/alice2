@@ -38,7 +38,7 @@ import edu.cmu.cs.stage3.lang.Messages;
 public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.DropTargetListener{
 
     protected javax.swing.JLabel m_label = new javax.swing.JLabel();
-    protected String m_doNothingLabel = " " + Messages.getString("Do_Nothing"); 
+    protected String m_doNothingLabel = Messages.getString("Do_Nothing"); 
     private boolean highlight = false;
 
     public InsertPanel() {
@@ -47,12 +47,12 @@ public class InsertPanel extends javax.swing.JPanel implements java.awt.dnd.Drop
         m_label.setFont(m_label.getFont().deriveFont(java.awt.Font.ITALIC));
         this.setOpaque(false);
         this.setLayout(new java.awt.GridBagLayout());
-        this.add(m_label, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
-        this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,0,1,1,1,1,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
+        this.add(m_label, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,5,0,0), 0,0));
+        this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,0,1,1,1,1,java.awt.GridBagConstraints.LINE_END, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
         this.setMaximumSize(new java.awt.Dimension(2400, 30));
         this.setMinimumSize(new java.awt.Dimension(0,0));
         this.setBorder(null);
-        m_label.setText(" "+m_doNothingLabel);
+         m_label.setText(m_doNothingLabel);
     }
 
     public void setHighlight(boolean toSet){

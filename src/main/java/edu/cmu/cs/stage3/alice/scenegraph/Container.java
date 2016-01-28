@@ -48,7 +48,7 @@ public abstract class Container extends Component {
 	protected void releasePass1() {
 		Component[] children = getChildren();
 		for( int i=0; i<children.length; i++ ) {
-			warnln( Messages.getString("WARNING__released_container_") + this + " " + Messages.getString("still_has_child_") + children[ i ] + "." );   
+			warnln( Messages.getString("WARNING__released_container_still_has_child_", this, children[ i ]) );   
 			children[ i ].setParent( null );
 		}
 		super.releasePass1();
@@ -64,7 +64,7 @@ public abstract class Container extends Component {
 		java.util.Enumeration enum0 = m_childrenListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			ChildrenListener childrenListener = (ChildrenListener)enum0.nextElement();
-			warnln( Messages.getString("WARNING__released_container_") + this + " " + Messages.getString("still_has_childrenListener_") + childrenListener + "." );   
+			warnln( Messages.getString("WARNING__released_container_still_has_childrenListener_", this, childrenListener) );   
 		}
 		m_childrenListeners = null;
 		m_childrenListenerArray = null;
@@ -72,10 +72,10 @@ public abstract class Container extends Component {
 	}
 	protected void onAddChild( Component child ) {
 		if( isReleased() ) {
-			warnln( Messages.getString("WARNING__scenegraph_addChild_") + child + " " + Messages.getString("on_already_released_") + this + "." );   
+			warnln( Messages.getString("WARNING__scenegraph_addChild_on_already_released_", child, this) );   
 		} else {
 			if( child.isReleased() ) {
-				warnln( Messages.getString("WARNING__scenegraph_addChild_from_") + this + " " + Messages.getString("on_already_released_child_") + child + "." );   
+				warnln( Messages.getString("WARNING__scenegraph_addChild_from_on_already_released_child_", this, child) );   
 			} else {
 				m_children.addElement( child );
 				m_childArray = null;
@@ -89,10 +89,10 @@ public abstract class Container extends Component {
 	}
 	protected void onRemoveChild( Component child ) {
 		if( isReleased() ) {
-			warnln( Messages.getString("WARNING__scenegraph_removeChild_") + child + " " + Messages.getString("on_already_released_") + this + "." );   
+			warnln( Messages.getString("WARNING__scenegraph_removeChild_on_already_released_", child, this) );   
 		} else {
 			if( child.isReleased() ) {
-				warnln( Messages.getString("WARNING__scenegraph_removeChild_from_") + this + " " + Messages.getString("on_already_released_child_") + child + "." );   
+				warnln( Messages.getString("WARNING__scenegraph_removeChild_from_on_already_released_child_", this, child) );   
 			} else {
 				m_children.removeElement( child );
 				m_childArray = null;
@@ -105,7 +105,7 @@ public abstract class Container extends Component {
 		}
 	}
 	public Component[] getChildren() {
-		if( m_childArray == null ) {
+		if( m_childArray == null && m_children != null) {
 			m_childArray = new Component[ m_children.size() ];
 			m_children.copyInto( m_childArray );
 		}

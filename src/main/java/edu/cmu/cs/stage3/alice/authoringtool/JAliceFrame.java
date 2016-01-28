@@ -27,7 +27,6 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -90,8 +89,11 @@ public class JAliceFrame extends javax.swing.JFrame {
 		recentWorldsInit();
 		//helpInit();
 		setIconImage( AuthoringToolResources.getAliceSystemIconImage() );
-		if (!AikMin.isLTR())
-			applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);	
+		if (!AikMin.isLTR()){	// ***** For the main Alice layout *****
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);	
+			leftRightSplitPane.setResizeWeight(1);
+	    	smallSceneBehaviorSplitPane.setResizeWeight(1);
+		}
 	}
 
 	protected class ComponentImageFactory extends javax.swing.JPanel {
@@ -223,13 +225,22 @@ public class JAliceFrame extends javax.swing.JFrame {
 		// set divider locations
 //		authoringOutputSplitPane.setDividerLocation( height );
 //		authoringOutputSplitPane.setResizeWeight( 1.0 );
-		leftRightSplitPane.setDividerLocation( 300 );
+		
+		if (!AikMin.isLTR()){
+			leftRightSplitPane.setDividerLocation( width - 300 );
+		} else {
+			leftRightSplitPane.setDividerLocation( 300 );
+		}
 		leftRightSplitPane.setResizeWeight( 0.0 );
 		worldTreeDragFromSplitPane.setDividerLocation( (int)(.32 * height) );
 		worldTreeDragFromSplitPane.setResizeWeight( 0.0 );
 		editorBehaviorSplitPane.setDividerLocation( (int)(.275 * height) );
 		editorBehaviorSplitPane.setResizeWeight( 0.0 );
-		smallSceneBehaviorSplitPane.setDividerLocation( (int)((4.0/3.0)*(editorBehaviorSplitPane.getDividerLocation()-36)) );
+		if (!AikMin.isLTR()) {
+			smallSceneBehaviorSplitPane.setDividerLocation( leftRightSplitPane.getDividerLocation()-(int)((4.0/3.0)*(editorBehaviorSplitPane.getDividerLocation()-36)) );
+		} else {
+			smallSceneBehaviorSplitPane.setDividerLocation( (int)((4.0/3.0)*(editorBehaviorSplitPane.getDividerLocation()-36)) );
+		}
 		smallSceneBehaviorSplitPane.setResizeWeight( 0.0 );
 
 		// make dividers invisible
@@ -318,7 +329,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 				}
 			
 			});
-		}
+		}	 
 	}
 
 	private void recentWorldsInit() {
@@ -426,7 +437,6 @@ public class JAliceFrame extends javax.swing.JFrame {
 		}
 		leftRightSplitPane.setDividerLocation( dividerLocation1 ); // shouldn't have to do this??
 		smallSceneBehaviorSplitPane.setDividerLocation( dividerLocation2 ); // shouldn't have to do this??
-
 //		int dividerLocation1 = leftRightSplitPane.getDividerLocation();
 //		int dividerLocation2 = smallSceneBehaviorSplitPane.getDividerLocation();
 //		if( guiMode == SCENE_EDITOR_SMALL_MODE ) {
@@ -524,7 +534,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 			clipboardPanel.revalidate();
 			clipboardPanel.repaint();
 		} catch( NumberFormatException e ) {
-			AuthoringTool.showErrorDialog( Messages.getString("illegal_number_of_clipboards__") + authoringToolConfig.getValue( "numberOfClipboards" ), null );  
+			AuthoringTool.showErrorDialog( Messages.getString("illegal_number_of_clipboards__", authoringToolConfig.getValue( "numberOfClipboards" )), null );  
 		}
 	}
 
@@ -780,20 +790,26 @@ public class JAliceFrame extends javax.swing.JFrame {
 		worldTreeDragFromSplitPane.add(dragFromPanel, JSplitPane.BOTTOM);
 		leftPanel.add(worldTreeDragFromSplitPane, BorderLayout.CENTER);
 
-		smallSceneBehaviorSplitPane.add( scenePanel, JSplitPane.LEFT );
-		smallSceneBehaviorSplitPane.add( behaviorPanel, JSplitPane.RIGHT );
+		if (!AikMin.isLTR()) {
+			smallSceneBehaviorSplitPane.add( scenePanel, JSplitPane.RIGHT );
+			smallSceneBehaviorSplitPane.add( behaviorPanel, JSplitPane.LEFT );
+		} else {
+			smallSceneBehaviorSplitPane.add( scenePanel, JSplitPane.LEFT );
+			smallSceneBehaviorSplitPane.add( behaviorPanel, JSplitPane.RIGHT );
+		}
 		smallSceneBehaviorPanel.add(smallSceneBehaviorSplitPane, BorderLayout.CENTER );
 		editorBehaviorSplitPane.add(smallSceneBehaviorPanel, JSplitPane.TOP);
 		editorBehaviorSplitPane.add(editorPanel, JSplitPane.BOTTOM);
-		rightPanel.add(editorBehaviorSplitPane, BorderLayout.CENTER);		
-		
-		leftRightSplitPane.add(leftPanel, JSplitPane.LEFT);
-		leftRightSplitPane.add(rightPanel, JSplitPane.RIGHT);
-
+		rightPanel.add(editorBehaviorSplitPane, BorderLayout.CENTER);
+		if (!AikMin.isLTR()) {
+			leftRightSplitPane.add(leftPanel, JSplitPane.RIGHT);
+			leftRightSplitPane.add(rightPanel, JSplitPane.LEFT);
+		} else {
+			leftRightSplitPane.add(leftPanel, JSplitPane.LEFT);
+			leftRightSplitPane.add(rightPanel, JSplitPane.RIGHT);
+		}
 		authoringPanel.add(leftRightSplitPane, BorderLayout.CENTER);
-
 		mainPanel.add(authoringPanel, BorderLayout.CENTER);
-
 
 //		mainPanel.add(authoringOutputSplitPane, BorderLayout.CENTER);
 //		authoringOutputSplitPane.add(authoringPanel, JSplitPane.TOP);

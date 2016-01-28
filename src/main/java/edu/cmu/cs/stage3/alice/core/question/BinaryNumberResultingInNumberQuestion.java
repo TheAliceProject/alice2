@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question;
 
 import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
-import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class BinaryNumberResultingInNumberQuestion extends NumberQuestion {
 	public final NumberProperty a = new NumberProperty( this, "a", new Double( 0 ) ); 
@@ -34,17 +33,17 @@ public abstract class BinaryNumberResultingInNumberQuestion extends NumberQuesti
 	public Object getValue() {
 		double aValue= a.doubleValue();
 		double bValue= b.doubleValue();
-		if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Min){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("minimum_of_") + aValue + " " + Messages.getString("and_") + bValue + " " + Messages.getString("is_");			   
+/*		if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Min){
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("minimum_of_and_is_", aValue, bValue);			   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Max){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("maximum_of_") + aValue + " " + Messages.getString("and_") + bValue + " " + Messages.getString("is_");			   
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("maximum_of_and_is_", aValue, bValue);			   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.ATan2){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = "arctan2 " + aValue + " " + bValue + " " + Messages.getString("is_");		   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.Pow){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = aValue + Messages.getString("_raised_to_the_") + bValue + " " + Messages.getString("power_is_");		  
+			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("raised_to_the_power_is_", aValue, bValue);		  
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.math.IEEERemainder){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext = "IEEERemainder of " + aValue + "/" + bValue + " " + Messages.getString("is_");		   
-		} 
+		}*/ 
 		return new Double( getValue( aValue, bValue ) );
 	}
 }

@@ -143,7 +143,7 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 	}
 
 	public void addTile( String text, boolean opaque ) {
-		Tile tile = tilePool.getTile( text );
+		Tile tile = tilePool.getTile( text.trim() );
 		tile.setOpaque( opaque );
 		tile.setBorderEnabled( opaque );
 		subPanel.add( tile, constraints );

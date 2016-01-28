@@ -182,11 +182,11 @@ public class Transformable extends ReferenceFrame {
 			ReferenceFrame vehicleToBe = (ReferenceFrame)value;
 			if( vehicleToBe != null ) {
 				if( vehicleToBe==this ) {
-					throw new RuntimeException( this + " " + Messages.getString("cannot_be_its_own_vehicle_") ); 
+					throw new RuntimeException( Messages.getString("cannot_be_its_own_vehicle_", this) ); 
 				}
 				//if( vehicleToBe.isDescendantOf( this ) ) {
 				if( vehicleToBe.getSceneGraphContainer().isDescendantOf( getSceneGraphContainer() ) ) {
-					throw new RuntimeException( this + " " + Messages.getString("cannot_have_a_scenegraph_descendant__") + vehicleToBe + Messages.getString("__as_its_vehicle_") );  
+					throw new RuntimeException( Messages.getString("cannot_have_a_scenegraph_descendant____as_its_vehicle_", this, vehicleToBe) );  
 				}
 			}
 		} else if( property == localTransformation ) {
@@ -665,7 +665,7 @@ public class Transformable extends ReferenceFrame {
         if( edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.NaN ) ||
             edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.POSITIVE_INFINITY ) ||
             edu.cmu.cs.stage3.math.MathUtilities.contains( deltaSize, Double.NEGATIVE_INFINITY ) ) {
-            throw new IllegalArgumentException( Messages.getString("size__") + size + Messages.getString("__previous_size__") + prevSize );  
+            throw new IllegalArgumentException( Messages.getString("size____previous_size__", size, prevSize) );  
         }
 		resizeRightNow( deltaSize, asSeenBy );
 	}

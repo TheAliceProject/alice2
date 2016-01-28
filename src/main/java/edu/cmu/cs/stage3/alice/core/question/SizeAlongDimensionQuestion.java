@@ -27,7 +27,6 @@ import edu.cmu.cs.stage3.alice.core.Dimension;
 import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
-import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class SizeAlongDimensionQuestion extends Question {
 	public final TransformableProperty subject = new TransformableProperty( this, "subject", null ); 
@@ -36,13 +35,13 @@ public abstract class SizeAlongDimensionQuestion extends Question {
 	public Object getValue() {
 		Transformable subjectValue = subject.getTransformableValue();
 		if( subjectValue!=null ) {
-			if (this instanceof Width){
+/*			if (this instanceof Width){
 				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_width_is_");	 
 			} else if (this instanceof Height){
 				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_height_is_"); 
 			} else if (this instanceof Depth){
 				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_depth_is_"); 
-			} 
+			}*/ 
 			return new Double( subjectValue.getSizeAlongDimension( getDimension() ) );
 		} else {
 			return null;

@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+
 /**
  * <p>Title: </p>
  * <p>Description: </p>
@@ -226,7 +228,7 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         }
         if (elsePanel == null){
             elsePanel = new javax.swing.JPanel();
-            elsePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,CompositeComponentElementPanel.LEFT_INDENT-2, 0,0));
+            elsePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,CompositeComponentElementPanel.LEFT_INDENT-2, 0,CompositeComponentElementPanel.LEFT_INDENT-2));
             elsePanel.setLayout(new java.awt.GridBagLayout());
             elsePanel.add(elseLabel, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
             elsePanel.add(elseGlue, new java.awt.GridBagConstraints(1,0,1,1,1,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
@@ -262,9 +264,9 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         headerPanel.add(endHeader, new java.awt.GridBagConstraints(4,0,1,1,0,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         headerPanel.add(glue, new java.awt.GridBagConstraints(5,0,1,1,1,0,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
         ifElsePanel.removeAll();
-        ifElsePanel.add(componentElementPanel, new java.awt.GridBagConstraints(0,0,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
-        ifElsePanel.add(elsePanel, new java.awt.GridBagConstraints(0,1,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
-        ifElsePanel.add(elseComponentPanel, new java.awt.GridBagConstraints(0,2,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
+        ifElsePanel.add(componentElementPanel, new java.awt.GridBagConstraints(0,0,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
+        ifElsePanel.add(elsePanel, new java.awt.GridBagConstraints(0,1,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
+        ifElsePanel.add(elseComponentPanel, new java.awt.GridBagConstraints(0,2,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
         if (isExpanded){
             containingPanel.add(ifElsePanel, java.awt.BorderLayout.CENTER);
             if (CompositeElementEditor.IS_JAVA){
@@ -275,6 +277,8 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         this.add(containingPanel, java.awt.BorderLayout.CENTER);
         this.setOpaque(false);
         this.setBackground(backgroundColor);
+        if (!AikMin.isLTR())	// ***** For If/Else tile *****
+        	applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);        
     }
 
 

@@ -40,21 +40,20 @@ public class PropertyGUI extends javax.swing.JPanel implements edu.cmu.cs.stage3
 
 	public void set( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool, edu.cmu.cs.stage3.alice.core.Property property, boolean includeDefaults, boolean allowExpressions, edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory ) {
 		clean();
-
 		propertyDnDPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyDnDPanel( property );
 		propertyViewController = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController( property, includeDefaults, allowExpressions, true, factory );
-		if (!AikMin.isLTR()){
+		if (!AikMin.isLTR()){	// ***** For property tiles in the properties tab of the details pane *****
 			add( javax.swing.Box.createHorizontalGlue() );
 			add( propertyViewController );
 			add( equalsLabel );
 			add( propertyDnDPanel );
-		} else {
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);		
+		} else {		
 			add( propertyDnDPanel );
-			add( equalsLabel );
-			add( propertyViewController );
+			add( equalsLabel );			
+			add( propertyViewController );			
 			add( javax.swing.Box.createHorizontalGlue() );
 		}
-
 	}
 
 	public void goToSleep() {}

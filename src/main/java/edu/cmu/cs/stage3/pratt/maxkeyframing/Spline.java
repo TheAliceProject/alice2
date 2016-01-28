@@ -43,7 +43,7 @@ public abstract class Spline {
 					return 0;
 				}
 			} else {
-				throw new ClassCastException( Key.class.getName() + " " + Messages.getString("required_") ); 
+				throw new ClassCastException(  Messages.getString("required_", Key.class.getName()) ); 
 			}
 		}
 	};
@@ -221,7 +221,7 @@ public abstract class Spline {
 		}
 
 		if( addKeyMethod == null ) {
-			System.err.println( Messages.getString("Unable_to_find_addKey_method_for_") + spline ); 
+			System.err.println( Messages.getString("Unable_to_find_addKey_method_for_", spline) ); 
 			return null;
 		}
 

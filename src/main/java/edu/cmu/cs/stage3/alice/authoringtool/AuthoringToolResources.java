@@ -100,7 +100,7 @@ public class AuthoringToolResources {
 	};
 
 	static {
-		resourcesDirectory = new java.io.File( JAlice.getAliceHomeDirectory(), "resources" + System.getProperty( "file.separator" ) + AikMin.locale ).getAbsoluteFile(); 
+		resourcesDirectory = new java.io.File( JAlice.getAliceHomeDirectory(), "resources" + System.getProperty( "file.separator" ) + AikMin.locale.getDisplayLanguage() ).getAbsoluteFile(); 
 		resourcesCacheFile = new java.io.File( resourcesDirectory, "resourcesCache.bin" ).getAbsoluteFile(); 
 		resourcesPyFile = new java.io.File( resourcesDirectory, authoringToolConfig.getValue( "resourceFile" ) ).getAbsoluteFile(); 
 		if (!resourcesPyFile.canRead()){
@@ -326,22 +326,22 @@ public class AuthoringToolResources {
 											if( (className2 instanceof String) || (className2 instanceof edu.cmu.cs.stage3.util.StringObjectPair) ) {
 												// do nothing
 											} else {
-												throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_String_or_StringObjectPair__got__") + className ); 
+												throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_String_or_StringObjectPair__got__", className) ); 
 											}
 										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__") + groupChunk ); 
+									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__", groupChunk) ); 
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_Vector__got__") + groups ); 
+							throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_Vector__got__", groups) ); 
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "oneShotStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__") + classChunk ); 
+					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__", classChunk) ); 
 				}
 			}
 		}
@@ -364,7 +364,7 @@ public class AuthoringToolResources {
 						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_oneShotStructure__") + o, null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_oneShotStructure__", o), null ); 
 				}
 			}
 		}
@@ -394,25 +394,25 @@ public class AuthoringToolResources {
 												try {
 													Class.forName( (String)className2 );
 												} catch( ClassNotFoundException e ) {
-													throw new IllegalArgumentException( Messages.getString("questionStructure_error__") + className2 + " " + Messages.getString("is_not_a_Class") );  
+													throw new IllegalArgumentException( Messages.getString("questionStructure_error__is_not_a_Class", className2) );  
 												}
 											} else {
-												throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_String__got__") + className ); 
+												throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_String__got__", className) ); 
 											}
 										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__") + groupChunk ); 
+									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__", groupChunk) ); 
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_Vector__got__") + groups ); 
+							throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_Vector__got__", groups) ); 
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "questionStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__") + classChunk ); 
+					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__", classChunk) ); 
 				}
 			}
 		}
@@ -435,7 +435,7 @@ public class AuthoringToolResources {
 						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_questionStructure__") + o, null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_questionStructure__", o), null ); 
 				}
 			}
 		}
@@ -459,24 +459,24 @@ public class AuthoringToolResources {
 								if( propertyChunk instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 									Object values = ((edu.cmu.cs.stage3.util.StringObjectPair)propertyChunk).getObject();
 									if( ! (values instanceof java.util.Vector) ) {
-										throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__") + values ); 
+										throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__", values) ); 
 //									} else {
 //										for( java.util.Iterator kter = ((java.util.Vector)values).iterator(); kter.hasNext(); ) {
 //											System.out.println( kter.next() );
 //										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__") + propertyChunk ); 
+									throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__", propertyChunk) ); 
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__") + properties ); 
+							throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__", properties) ); 
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "defaultPropertyValuesStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__") + classChunk ); 
+					throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__", classChunk) ); 
 				}
 			}
 		}
@@ -516,6 +516,11 @@ public class AuthoringToolResources {
 
 	public static String getName( Object key ) {
 		String a = (String)AuthoringToolResources.resources.nameMap.get( key );
+		if (!AikMin.isLTR()){	// ***** To display the tiles string in the details panel (properties tab) *****
+			try {
+				a = new String ( a.toString().getBytes("ISO-8859-1"), "UTF-8" );
+			} catch (Exception e){ }
+		}
 		return a;
 	}
 
@@ -840,7 +845,7 @@ public class AuthoringToolResources {
 				elementClass = elementClass.getSuperclass();
 			}
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("Error_finding_repr_for_") + value, t ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Error_finding_repr_for_", value), t ); 
 		}
 		return getReprForValue( value, verbose );
 	}
@@ -941,6 +946,7 @@ public class AuthoringToolResources {
 	}
 
 	public static String getReprForValue( Object value, boolean verbose ) {
+
 		if( nameMapContainsKey( value ) ) {
 			value = getName( value );
 		}
@@ -972,7 +978,7 @@ public class AuthoringToolResources {
 					}
 				}
 			} catch( NoSuchFieldException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_representing_PropertyValue__can_t_find_") + propertyName + " " + Messages.getString("on_") + valueClass, e );  
+				AuthoringTool.showErrorDialog( Messages.getString("Error_representing_PropertyValue__can_t_find_on", propertyName, valueClass), e );  
 			}
 
 			value = getReprForValue( element, false ) + "." + propertyName; 
@@ -1076,18 +1082,25 @@ public class AuthoringToolResources {
 //		}
 		if( value instanceof javax.vecmath.Vector3d ) {
 			javax.vecmath.Vector3d vec = (javax.vecmath.Vector3d)value;
-			value = "Vector3( " + AuthoringToolResources.resources.decimalFormatter.format( vec.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( vec.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( vec.z ) + " )";    //$NON-NLS-4$
+			value = "Vector3( " + AuthoringToolResources.resources.decimalFormatter.format( vec.x ) + ", " + 
+					AuthoringToolResources.resources.decimalFormatter.format( vec.y ) + ", " + 
+					AuthoringToolResources.resources.decimalFormatter.format( vec.z ) + " )";    //$NON-NLS-4$
 		}
 		if( value instanceof javax.vecmath.Matrix4d ) {
 			edu.cmu.cs.stage3.math.Matrix44 m = new edu.cmu.cs.stage3.math.Matrix44( (javax.vecmath.Matrix4d)value );
 			edu.cmu.cs.stage3.math.Vector3 position = m.getPosition();
 			edu.cmu.cs.stage3.math.Quaternion quaternion = m.getAxes().getQuaternion();
-			value = Messages.getString("position__") + AuthoringToolResources.resources.decimalFormatter.format( position.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( position.z ) + ";  " +    //$NON-NLS-4$
-					Messages.getString("orientation___") + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );    //$NON-NLS-4$
+			value = Messages.getString("position__orientation___", AuthoringToolResources.resources.decimalFormatter.format( position.x ), 
+					AuthoringToolResources.resources.decimalFormatter.format( position.y ), AuthoringToolResources.resources.decimalFormatter.format( position.z ), 
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ), AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ), 
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ), AuthoringToolResources.resources.decimalFormatter.format( quaternion.w ));
 		}
 		if( value instanceof edu.cmu.cs.stage3.math.Quaternion ) {
 			edu.cmu.cs.stage3.math.Quaternion quaternion = (edu.cmu.cs.stage3.math.Quaternion)value;
-			value = "(" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );    //$NON-NLS-4$
+			value = "(" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + 
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + 
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + 
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );    //$NON-NLS-4$
 		}
 		if( value instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
 			edu.cmu.cs.stage3.alice.scenegraph.Color color = (edu.cmu.cs.stage3.alice.scenegraph.Color)value;
@@ -1122,7 +1135,10 @@ public class AuthoringToolResources {
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.YELLOW ) ) {
 				value = Messages.getString("yellow"); 
 			} else {
-				value = Messages.getString("Color_r_") + AuthoringToolResources.resources.decimalFormatter.format( color.getRed() ) + ", g:" + AuthoringToolResources.resources.decimalFormatter.format( color.getGreen() ) + ", b:" + AuthoringToolResources.resources.decimalFormatter.format( color.getBlue() ) + ", a:" + AuthoringToolResources.resources.decimalFormatter.format( color.getAlpha() ) + ")";    //$NON-NLS-4$ //$NON-NLS-5$
+				value = Messages.getString("Color_r_g_b_a", AuthoringToolResources.resources.decimalFormatter.format( color.getRed() ), 
+						AuthoringToolResources.resources.decimalFormatter.format( color.getGreen() ), 
+						AuthoringToolResources.resources.decimalFormatter.format( color.getBlue() ), 
+						AuthoringToolResources.resources.decimalFormatter.format( color.getAlpha() ) );
 			}
 		}
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Property ) {
@@ -1147,7 +1163,6 @@ public class AuthoringToolResources {
 		if( value == null ) {
 			value = Messages.getString("_None_"); 
 		}
-
 		return value.toString();
 	}
 
@@ -1315,7 +1330,7 @@ public class AuthoringToolResources {
 						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_behaviorParameterPropertiesStructure__") + o, null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_behaviorParameterPropertiesStructure__", o), null ); 
 				}
 			}
 		}
@@ -1712,7 +1727,7 @@ public class AuthoringToolResources {
 
 	public static Double parseDouble( String doubleString ) {
 		Double number = null;
-		if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) { 
+		if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) { 	//Aik Min - Not sure if translation is really needed here.
 			number = new Double( Double.POSITIVE_INFINITY );
 		} else if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) { 
 			number = new Double( Double.NEGATIVE_INFINITY );
@@ -1817,9 +1832,9 @@ public class AuthoringToolResources {
 				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).asSeenBy.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).asSeenBy.get() );
 				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).style.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).style.get() );
 			} catch( IllegalAccessException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__") + responseClass, e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e ); 
 			} catch( InstantiationException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__") + responseClass, e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e ); 
 			}
 		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.TransformAnimation ) {
 			undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
@@ -1857,7 +1872,7 @@ public class AuthoringToolResources {
 		} else {
 			undoResponse = new edu.cmu.cs.stage3.alice.core.response.Wait();
 			undoResponse.duration.set( new Double( 0.0 ) );
-			AuthoringTool.showErrorDialog( Messages.getString("Could_not_create_undoResponse_for_") + response, null ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Could_not_create_undoResponse_for_", response), null ); 
 		}
 
 		return undoResponse;
@@ -2068,7 +2083,7 @@ public class AuthoringToolResources {
 			}
 		}
 
-		throw new RuntimeException( Messages.getString("Unable_to_find_a_suitable_new_name__baseName___") + baseName + Messages.getString("__parent___") + parent );  
+		throw new RuntimeException( Messages.getString("Unable_to_find_a_suitable_new_name__baseName___", baseName, parent) );  
 	}
 
 	/*
@@ -2100,7 +2115,7 @@ public class AuthoringToolResources {
 						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_worldTreeChildrenPropertiesStructure__") + o, null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_worldTreeChildrenPropertiesStructure__", o), null ); 
 				}
 			}
 		}
@@ -2329,7 +2344,7 @@ public class AuthoringToolResources {
 	public static String formatMemorySize( long bytes ) {
 		String sizeString = null;
 		if( bytes < 1024 ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + " " + Messages.getString("bytes"); 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + " bytes"; 
 		} else if( bytes < 1024L*1024L ) {
 			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024) ) + " KB"; 
 		} else if( bytes < 1024L*1024L*1024L ) {

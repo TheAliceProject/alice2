@@ -48,6 +48,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * A subclass of <code>SeekableStream</code> that takes its input
  * from a <code>File</code> or <code>RandomAccessFile</code>.
@@ -141,7 +143,7 @@ public class FileSeekableStream extends SeekableStream {
     
 	public final void seek(long pos) throws IOException {
         if (pos < 0) {
-            throw new IOException(JaiI18N.getString("pos___0_"));
+            throw new IOException(Messages.getString("pos___0_"));
         }
         pointer = pos;
     }

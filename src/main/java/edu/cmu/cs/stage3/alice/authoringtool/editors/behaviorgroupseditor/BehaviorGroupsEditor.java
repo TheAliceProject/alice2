@@ -23,8 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor;
 
-import java.awt.Color;
 import javax.swing.ScrollPaneConstants;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 
@@ -148,7 +149,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             BasicBehaviorPanel.buildLabel(internalComponent, s);
             internalComponent.setOpaque(false);
             visibleComponent.setOpaque(true);
-            visibleComponent.add(internalComponent, new java.awt.GridBagConstraints(1,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
+            visibleComponent.add(internalComponent, new java.awt.GridBagConstraints(1,0,1,1,0,0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0));
             visibleComponent.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(2,0,1,1,1,1,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
             visibleComponent.setSize(visibleComponent.getPreferredSize());
 
@@ -380,6 +381,8 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
 
     protected void createNewBehavior(java.awt.event.ActionEvent e){
         behaviorMenu.show( newBehaviorButton, 0, newBehaviorButton.getHeight());
+        if (!AikMin.isLTR())
+        	behaviorMenu.show( newBehaviorButton, newBehaviorButton.getWidth() - behaviorMenu.getWidth(), newBehaviorButton.getHeight());
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.ensurePopupIsOnScreen( behaviorMenu );
     }
 
@@ -396,7 +399,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                 editor.set(currentGroup.getOwner(), authoringTool);
                 editor.setDropTarget( new java.awt.dnd.DropTarget( editor, editor ));
                 m_containingPanel.remove(glue);	// Aik Min - need work
-                m_containingPanel.add(editor, new java.awt.GridBagConstraints(0,m_containingPanel.getComponentCount(),1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,2), 0,0));
+                m_containingPanel.add(editor, new java.awt.GridBagConstraints(0,m_containingPanel.getComponentCount(),1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,4), 0,0));
                 m_containingPanel.add(glue, new java.awt.GridBagConstraints(0,m_containingPanel.getComponentCount(),1,1,1,1,java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
                 if (!checkGUI()){
                     refreshGUI();
@@ -424,7 +427,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         }
 
         public void run() {
-            try {
+        	try {
 				if (authoringTool != null){
 					authoringTool.getUndoRedoStack().startCompound();
 				}
@@ -540,9 +543,19 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         // this.setDropTarget(new java.awt.dnd.DropTarget( this, this));
         scrollPane = new javax.swing.JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBorder(null);
-        scrollPane.getViewport().setBackground(Color.white);
-        this.add(scrollPane , java.awt.BorderLayout.CENTER);
-
+        if(!AikMin.isLTR()){	// ***** To place the scroll bar to the left of the containing panel *****
+	        scrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+	            @Override
+	            public void layoutContainer(java.awt.Container parent) {
+	            	javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
+	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+	                super.layoutContainer(parent);
+	                scrollPane.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+	            }
+	        });
+        }
+        
+        //scrollPane.getViewport().setBackground(java.awt.Color.white);
         m_containingPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel(){
             
 			public void dragEnter( java.awt.dnd.DropTargetDragEvent dtde ) {
@@ -565,14 +578,17 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                 BehaviorGroupsEditor.this.dropActionChanged(dtde);
             }
         };
-        String toolTipText = "<html><body>" + Messages.getString("_p_Events_run_Methods_when_certain_things_happen__p_") + "</body></html>"; 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+        String toolTipText = "<html><body><div align="+justify+">" + Messages.getString("_p_Events_run_Methods_when_certain_things_happen__p_") + "</div></body></html>"; 
         containingPanelLayout = new java.awt.GridBagLayout();
         m_containingPanel.setLayout(containingPanelLayout);
         m_containingPanel.setBorder(null);
         m_containingPanel.setBackground(BACKGROUND_COLOR);
         m_containingPanel.setToolTipText(toolTipText);
         scrollPane.setViewportView(m_containingPanel);
-
+       
         newBehaviorButton = new javax.swing.JButton(Messages.getString("create_new_event")); 
         newBehaviorButton.setToolTipText(Messages.getString("Display_Menu_of_New_Event_Types")); 
         newBehaviorButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -584,7 +600,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         m_header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING,2,2));
         m_header.setBackground(BACKGROUND_COLOR);
         m_header.setBorder(javax.swing.BorderFactory.createMatteBorder(0,0,1,0,java.awt.Color.gray));
-        m_header.setToolTipText(toolTipText);
+        //m_header.setToolTipText(toolTipText);
         javax.swing.JLabel behaviorLabel = new javax.swing.JLabel(BEHAVIOR_NAME);
         int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize")); 
         java.awt.Font behaviorFont = new java.awt.Font("Helvetica", java.awt.Font.BOLD, (int)(16*fontSize/12.0)); 
@@ -605,12 +621,14 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             this.removeAll();
             this.add(m_header, java.awt.BorderLayout.NORTH);
             this.add(scrollPane , java.awt.BorderLayout.CENTER);
+
             removeAllElements(m_containingPanel);
             int count = 0;
             worldEditor = new BehaviorGroupEditor();
             worldEditor.set(world, authoringTool);
             worldEditor.setEmptyString(" " + Messages.getString("No_events")); 
-            m_containingPanel.add(worldEditor, new java.awt.GridBagConstraints(0,count,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,2), 0,0));
+            m_containingPanel.add(worldEditor, new java.awt.GridBagConstraints(0,count,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,4), 0,0));
+            
             BehaviorGroupEditor editor = null;
             for (int i=0; i<world.sandboxes.size(); i++){
                 edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty currentGroup = ((edu.cmu.cs.stage3.alice.core.Sandbox)world.sandboxes.get(i)).behaviors;
@@ -620,8 +638,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                         editor = new BehaviorGroupEditor();
                         editor.set(currentGroup.getOwner(), authoringTool);
              //           editor.setDropTarget( new java.awt.dnd.DropTarget( editor, editor ));
-                        m_containingPanel.add(editor, new java.awt.GridBagConstraints(0,count,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,2), 0,0));
-
+                        m_containingPanel.add(editor, new java.awt.GridBagConstraints(0,count,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(5,4,SPACE-5,4), 0,0));
                     }
                 }
             }
@@ -846,14 +863,21 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
 
 	public void paintForeground( java.awt.Graphics g ) {
         super.paintForeground( g );
-        java.awt.Point p = javax.swing.SwingUtilities.convertPoint(m_containingPanel, m_containingPanel.getLocation(), this);
+        // A fix to make sure the highlighted box is always visible        
+        java.awt.Point pp = m_containingPanel.getLocation();
+        if (pp.x < 0 )       	
+        	pp.setLocation(-pp.x, pp.y);
+        if (pp.y < 0 )       	
+        	pp.setLocation(pp.x, -pp.y);
+        
+        java.awt.Point p = javax.swing.SwingUtilities.convertPoint(m_containingPanel, pp.getLocation(), this);
         if( beingDroppedOn ) {
-            java.awt.Dimension size = m_containingPanel.getSize();
+            java.awt.Dimension size = scrollPane.getSize();
             g.setColor( dndHighlightColor2 );
             g.drawRect( p.x, p.y, size.width - 1, size.height - 1 );
             g.drawRect( p.x+1, p.y+1, size.width - 3, size.height - 3 );
         } else if( paintDropPotential ) {
-            java.awt.Dimension size = m_containingPanel.getSize();
+            java.awt.Dimension size = scrollPane.getSize();
             g.setColor( dndHighlightColor );
             g.drawRect( p.x, p.y, size.width - 1, size.height - 1 );
             g.drawRect( p.x+1, p.y+1, size.width - 3, size.height - 3 );

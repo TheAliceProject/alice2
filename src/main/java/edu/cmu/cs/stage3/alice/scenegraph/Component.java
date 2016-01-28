@@ -40,7 +40,7 @@ public abstract class Component extends Element {
 	
 	protected void releasePass1() {
 		if( m_parent != null ) {
-			warnln( Messages.getString("WARNING__released_component_") + this + " " + Messages.getString("still_has_parent_") + m_parent + "." );   
+			warnln( Messages.getString("WARNING__released_component_still_has_parent_", this, m_parent) );   
 			setParent( null );
 		}
 		super.releasePass1();
@@ -51,7 +51,7 @@ public abstract class Component extends Element {
 		enum0 = m_absoluteTransformationListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			AbsoluteTransformationListener absoluteTransformationListener = (AbsoluteTransformationListener)enum0.nextElement();
-			warnln( Messages.getString("WARNING__released_component_") + this + " " + Messages.getString("still_has_absoluteTransformationListener_") + absoluteTransformationListener + "." );   
+			warnln( Messages.getString("WARNING__released_component_still_has_absoluteTransformationListener_", this, absoluteTransformationListener ) );   
 		}
 		//todo
 		//m_absoluteTransformationListeners = null;
@@ -60,7 +60,7 @@ public abstract class Component extends Element {
 		enum0 = m_hierarchyListeners.elements();
 		while( enum0.hasMoreElements() ) {
 			HierarchyListener hierarchyListener = (HierarchyListener)enum0.nextElement();
-			warnln( Messages.getString("WARNING__released_component_") + this + " " + Messages.getString("still_has_hierarchyListener_") + hierarchyListener + "." );   
+			warnln( Messages.getString("WARNING__released_component_still_has_hierarchyListener_", this, hierarchyListener) );   
 		}
 		//todo
 		//m_hierarchyListeners = null;
@@ -143,7 +143,7 @@ public abstract class Component extends Element {
 	}
 	protected void onAbsoluteTransformationChange() {
 		if( isReleased() ) {
-			warnln( Messages.getString("WARNING__absolute_transformation_change_on_already_released_") + this + "." );  
+			warnln( Messages.getString("WARNING__absolute_transformation_change_on_already_released_", this) );  
 		} else {
 			onAbsoluteTransformationChange( new AbsoluteTransformationEvent( this ) );
 		}
@@ -169,7 +169,7 @@ public abstract class Component extends Element {
 	}
 	protected void onHierarchyChange() {
 		if( isReleased() ) {
-			warnln( Messages.getString("WARNING__scenegraph_heirarchy_change_on_already_released_") + this + "." );  
+			warnln( Messages.getString("WARNING__scenegraph_heirarchy_change_on_already_released_", this) );  
 		} else {
 			//if( this instanceof Camera ) {
 			//	Thread.dumpStack();

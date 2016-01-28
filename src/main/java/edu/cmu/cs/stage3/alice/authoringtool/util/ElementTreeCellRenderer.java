@@ -45,13 +45,16 @@ public class ElementTreeCellRenderer extends javax.swing.JPanel implements javax
 		setLayout( new java.awt.GridBagLayout() );
 		add( dndPanel, new java.awt.GridBagConstraints( 0, 0, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 1, 0, 0, 0 ), 0, 0 ) );
 
-		dndPanel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 1, 1, 1, 1 ) );
+		//dndPanel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 2, 2, 2, 2 ) );
 		dndPanel.setBackground( bgColor );
 		elementPanel.setLayout( new java.awt.GridBagLayout() );
 		elementPanel.setOpaque( false );
 		iconLabel.setOpaque( false );
+		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration config = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getPackage());
+		int fontSize = Integer.parseInt(config.getValue("fontSize"));
+		elementLabel.setFont( new java.awt.Font("SansSerif", java.awt.Font.BOLD, (int) (12 * fontSize / 12.0)));
 		elementLabel.setBackground( selectedColor );
-		elementLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 1, 0, 1 ) );
+		//elementLabel.setBorder( javax.swing.BorderFactory.createEmptyBorder( 0, 2, 0, 2 ) );
 		elementLabel.setOpaque( false );
 		elementPanel.add( iconLabel, new java.awt.GridBagConstraints( 0, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 0, 0 ), 0, 0 ) );
 		elementPanel.add( elementLabel, new java.awt.GridBagConstraints( 1, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 2, 0, 2 ), 0, 0 ) );

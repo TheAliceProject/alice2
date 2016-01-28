@@ -47,6 +47,8 @@ package edu.cmu.cs.stage3.image.codec;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  * A simple class that provides RenderedImage functionality
  * given a Raster and a ColorModel.
@@ -79,7 +81,7 @@ public class SingleTileRenderedImage extends SimpleRenderedImage {
      */
     public Raster getTile(int tileX, int tileY) {
         if (tileX != 0 || tileY != 0) {
-            throw new IllegalArgumentException(JaiI18N.getString("Illegal_tile_requested_from_a_SingleTileRenderedImage_"));
+            throw new IllegalArgumentException(Messages.getString("Illegal_tile_requested_from_a_SingleTileRenderedImage_"));
         }
         return ras;
     }

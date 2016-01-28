@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor;
 
+import java.awt.ComponentOrientation;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor;
 
 /**
@@ -60,6 +63,8 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
             }
             this.revalidate();
             this.repaint();
+            if (!AikMin.isLTR())	// ***** For the Do Nothing sections in Function editor *****
+            	applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
         }
 
 		protected boolean componentsIsEmpty(){
@@ -187,12 +192,21 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
             this.removeAll();
             buildParameterPanel();
             buildVariablePanel();
+            /*
             headerPanel.add(mainParameterPanel, new java.awt.GridBagConstraints(0,0,1,1,1,1,java.awt.GridBagConstraints.NORTH, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
             headerPanel.add(mainVariablePanel, new java.awt.GridBagConstraints(0,1,1,1,1,1,java.awt.GridBagConstraints.NORTH, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
             questionArea.removeAll();
             questionArea.add(componentElementPanel, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
             questionArea.add(returnPanel, new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel.LEFT_INDENT+1,0,edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel.RIGHT_INDENT+1), 0,0));
             questionArea.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+            scrollPane.setViewportView(questionArea);
+            */
+            headerPanel.add(mainParameterPanel, new java.awt.GridBagConstraints(0,0,1,1,1,1,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+            headerPanel.add(mainVariablePanel, new java.awt.GridBagConstraints(0,1,1,1,1,1,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
+            questionArea.removeAll();
+            questionArea.add(componentElementPanel, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0));
+            questionArea.add(returnPanel, new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel.LEFT_INDENT+1,0,edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeComponentElementPanel.RIGHT_INDENT+1), 0,0));
+            questionArea.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0));
             scrollPane.setViewportView(questionArea);
             this.add(scrollPane, java.awt.BorderLayout.CENTER);
             this.add(headerPanel, java.awt.BorderLayout.NORTH);
@@ -202,6 +216,11 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
             }
             this.setBackground(getCustomBackgroundColor());
             questionArea.setBackground(this.getBackground());
+            if (!AikMin.isLTR()){	// ***** For the parameter and variable panel in the Editor panel for Functions *****
+        		mainParameterPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        		mainVariablePanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+            }
+        	//componentElementPanel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
             this.repaint();
             this.revalidate();
         }

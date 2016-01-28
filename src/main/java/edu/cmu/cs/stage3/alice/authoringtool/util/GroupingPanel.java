@@ -102,7 +102,6 @@ public class GroupingPanel extends javax.swing.JPanel implements java.awt.dnd.Dr
 		border = javax.swing.BorderFactory.createCompoundBorder( outerBorder, innerBorder );
 		setBorder( border );
 		setDoubleBuffered( true );
-
 		//setOpaque( false );
 
 		setDropTarget( new java.awt.dnd.DropTarget( this, this ) );
@@ -122,7 +121,7 @@ public class GroupingPanel extends javax.swing.JPanel implements java.awt.dnd.Dr
 				}
 			}
 		);
-		addContainerListener( GUIElementContainerListener.getStaticListener() );
+		addContainerListener( GUIElementContainerListener.getStaticListener() ); 
 	}
 
 	public void release() {

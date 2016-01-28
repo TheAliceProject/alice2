@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 
+import java.awt.ComponentOrientation;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 
@@ -125,7 +128,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 
 		setLayout( new java.awt.BorderLayout( 0, 0 ) );
 		setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "propertyViewControllerBackground" ) );
-		setBorder( javax.swing.BorderFactory.createCompoundBorder( getBorder(), javax.swing.BorderFactory.createEmptyBorder( 0, 2, 0, 0 ) ) );
+		setBorder( javax.swing.BorderFactory.createCompoundBorder( getBorder(), javax.swing.BorderFactory.createEmptyBorder( 0, 2, 0, 2 ) ) );			popupButton.setPreferredSize(new java.awt.Dimension(20,20));
 		popupButton.setContentAreaFilled( false );
 		popupButton.setMargin( new java.awt.Insets( 0, 0, 0, 0 ) );
 		popupButton.setFocusPainted( false );
@@ -145,7 +148,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 //		refreshThread.setPriority( Thread.NORM_PRIORITY - 1 );
 
 		// unit stuff is a big hack right now
-		unitLabel.setFont( unitLabel.getFont().deriveFont( java.awt.Font.PLAIN ) );
+		unitLabel.setFont( unitLabel.getFont().deriveFont( java.awt.Font.PLAIN ));
 		rightPanel.setOpaque( false );
 		rightPanel.setLayout( new java.awt.BorderLayout() );
 		rightPanel.setBorder( null );
@@ -178,10 +181,13 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		this.omitPropertyName = omitPropertyName;
 		this.factory = factory;
 		if( ! omitPropertyName ) {
-			nameLabel = new javax.swing.JLabel( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property, false ) + " = " );
+			if (!AikMin.isLTR())
+				nameLabel = new javax.swing.JLabel( " = " + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property, false )  );
+			else
+				nameLabel = new javax.swing.JLabel( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( property, false ) + " = " );
 			int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
-			nameLabel.setFont( new java.awt.Font( "Dialog", java.awt.Font.ITALIC | java.awt.Font.BOLD, (int)(12*fontSize/12.0) ) );
-			add( nameLabel, java.awt.BorderLayout.WEST );
+			nameLabel.setFont( new java.awt.Font( "Dialog", java.awt.Font.ITALIC | java.awt.Font.BOLD, (int)fontSize ));
+			add( nameLabel, java.awt.BorderLayout.LINE_START );
 		}
 
 		setPopupEnabled( true );
@@ -192,6 +198,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 				((edu.cmu.cs.stage3.alice.core.Element)property.get()).name.addPropertyListener( propertyListener );
 			}
 		}
+
 	}
 
 	public edu.cmu.cs.stage3.alice.core.Property getProperty() {
@@ -261,7 +268,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 			tempString += edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(expressionLabel);
 		}
 		if (unitLabel.getParent() != null){
-			tempString += " "+unitLabel.getText();
+			tempString += unitLabel.getText();
 		}
 		tempString += "</span>";
 //		java.util.Vector labels = new java.util.Vector();
@@ -329,7 +336,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 			if( popupEnabled ) {
 				if( editingEnabled ) {
 //					this.add( popupButton, java.awt.BorderLayout.EAST );
-					rightPanel.add( popupButton, java.awt.BorderLayout.EAST ); // unit hack
+					rightPanel.add( popupButton, java.awt.BorderLayout.LINE_END ); // unit hack
 				}
 			} else {
 //				this.remove( popupButton );
@@ -349,7 +356,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 			} else {
 				if( popupEnabled ) {
 //					this.add( popupButton, java.awt.BorderLayout.EAST );
-					rightPanel.add( popupButton, java.awt.BorderLayout.EAST ); // unit hack
+					rightPanel.add( popupButton, java.awt.BorderLayout.LINE_END ); // unit hack
 				}
 			}
 		}
@@ -395,7 +402,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 	}
 
 	protected void refreshGUI() {
-		add( rightPanel, java.awt.BorderLayout.EAST ); // unit hack
+		add( rightPanel, java.awt.BorderLayout.LINE_END ); // unit hack
 		//expressionLabel.setForeground( new java.awt.Color( 99, 99, 156 ) ); // hack for red, unfinished look
 		expressionLabel.setForeground( new java.awt.Color( 0, 0, 0 ) ); // Aik Min changed this to black. (Item name in the drop down box)
 		Object value = property.get();
@@ -497,7 +504,12 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 					}
 				}
 				if( unitString != null ) {
-					mainLabel.setText( mainString.substring( 0, mainString.length() - unitString.length() ) );
+					String text = mainString.substring( 0, mainString.length() - unitString.length() - 1);
+					if (!AikMin.isLTR()) {	// For spacing between amount and unit
+						mainLabel.setText( " " + text );
+				 	} else {
+				 		mainLabel.setText( text + " " );
+				 	}
 					unitLabel.setText( unitString );
 					if( ! this.isAncestorOf( unitLabel ) ) {
 						rightPanel.add( unitLabel, java.awt.BorderLayout.CENTER );
@@ -513,14 +525,13 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 				rightPanel.remove( unitLabel );	// Aik Min - need work
 			}
 		}
-
-//		revalidate();
-//		repaint();
 		javax.swing.SwingUtilities.invokeLater(
 			new Runnable() {
 				public void run() {
 					revalidate();
 					repaint();
+					if (!AikMin.isLTR()) // ***** For the drop down menu in tile *****
+						applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 				}
 			}
 		);
@@ -538,6 +549,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 		if( popupStructure != null ) {
 			if( isEnabled() ) {
 				edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.createAndShowPopupMenu( popupStructure, this, 0, this.getHeight() );
+				
 			}
 		}
 	}

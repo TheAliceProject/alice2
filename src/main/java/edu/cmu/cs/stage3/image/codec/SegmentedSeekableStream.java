@@ -46,6 +46,8 @@ package edu.cmu.cs.stage3.image.codec;
 
 import java.io.IOException;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 
 /**
  * An implementation of the <code>StreamSegmentMapper</code> interface
@@ -231,7 +233,7 @@ public class SegmentedSeekableStream extends SeekableStream {
         this.canSeekBackwards = canSeekBackwards;
 
         if (canSeekBackwards && !stream.canSeekBackwards()) {
-            throw new IllegalArgumentException(JaiI18N.getString("Source_stream_does_not_support_seeking_backwards_"));
+            throw new IllegalArgumentException(Messages.getString("Source_stream_does_not_support_seeking_backwards_"));
         }
     }
 

@@ -173,7 +173,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 		//System.err.println("- Create processor for: " + inML[i]);
 		pInfo[i].p = Manager.createProcessor(inML[i]);
 	    } catch (Exception e) {
-		System.err.println(Messages.getString("Cannot_create_a_processor_from_the_given_url__") + e); 
+		System.err.println(Messages.getString("Cannot_create_a_processor_from_the_given_url__", e)); 
 		return false;
 	    }
 	}
@@ -479,15 +479,12 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 		    // Check if it requires transcoding.
 		    if (!oldFmt.matches(newFmt)) {
-			if (!transcodeMsg) {
-			    transcodeMsg = true;
-			    System.err.println(TRANSCODE_MSG);
-			}
-
-			System.err.println(Messages.getString("__Transcoding__") + pInfo[j].ml); 
-			System.err.println("  " + oldFmt); 
-			System.err.println(Messages.getString("to__")); 
-			System.err.println("  " + newFmt); 
+				if (!transcodeMsg) {
+				    transcodeMsg = true;
+				    System.err.println(TRANSCODE_MSG);
+				}
+	
+				System.err.println(Messages.getString("__Transcoding__to__", pInfo[j].ml, oldFmt, newFmt)); 
 		    } 
 
 		    // For video, check if it requires scaling.
@@ -502,11 +499,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 				transcodeMsg = true;
 				System.err.println(TRANSCODE_MSG);
 			    }
-			    System.err.println(Messages.getString("__Scaling__") + pInfo[j].ml); 
-			    System.err.println("  " + Messages.getString("from__") + oldSize.width +  
-						" x " + oldSize.height); 
-			    System.err.println("  " + Messages.getString("to__") + newSize.width +  
-						" x " + newSize.height); 
+			    System.err.println(Messages.getString("__Scaling__from__to__", pInfo[j].ml, oldSize.width, oldSize.height, newSize.width , newSize.height)); 
 			    newFmt = (new VideoFormat(null, 
 					newSize, 
 					Format.NOT_SPECIFIED,
@@ -587,8 +580,7 @@ public class Concat implements ControllerListener, DataSinkListener {
 			if (fmts[j].matches(jpegFmt)) {
 			    qc = (QualityControl)cs[i];
 	    		    qc.setQuality(val);
-			    System.err.println(Messages.getString("__Set_quality_to_") +  
-					val + " " + Messages.getString("on_") + qc); 
+			    System.err.println(Messages.getString("__Set_quality_to_on_", val, qc)); 
 			    break;
 			}
 		    }

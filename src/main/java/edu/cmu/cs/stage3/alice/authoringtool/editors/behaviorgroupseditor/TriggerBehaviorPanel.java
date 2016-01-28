@@ -126,19 +126,18 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         else{
 			lastLabel.setText(Messages.getString("___do")); 
         }
-		labelPanel.add(lastLabel, new java.awt.GridBagConstraints(x,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
+		labelPanel.add(lastLabel, new java.awt.GridBagConstraints(x,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
         edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory triggerFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse);
         triggerPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse, false, true, true, triggerFactory);
         triggerPanel.addComponentListener(this);
-        m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
+        m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         if (isSecondLine){
-            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("do_")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.EAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); 
-            m_containingPanel.add(triggerPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
+            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("do_")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); 
+            m_containingPanel.add(triggerPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         }
         else{
-            m_containingPanel.add(triggerPanel, new java.awt.GridBagConstraints(x+1,0,1,1,1,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
+            m_containingPanel.add(triggerPanel, new java.awt.GridBagConstraints(x+1,0,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         }
-
         this.add(m_containingPanel, java.awt.BorderLayout.CENTER);
         this.repaint();
         this.revalidate();

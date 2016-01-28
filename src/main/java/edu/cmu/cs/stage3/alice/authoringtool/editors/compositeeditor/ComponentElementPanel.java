@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor;
 
+import java.awt.ComponentOrientation;
+
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 
@@ -52,6 +55,8 @@ public class ComponentElementPanel extends edu.cmu.cs.stage3.alice.authoringtool
         catch (Exception e){
 			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("An_error_occurred_while_creating_the_graphics_component_for_this_object_"), e ); 
         }
+        if (!AikMin.isLTR())	// ***** For Wait, Print, and Comment tile *****
+        	applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
        // edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel added = (edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel)this.getComponent(0);
     }
     

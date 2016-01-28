@@ -24,7 +24,6 @@
 package edu.cmu.cs.stage3.alice.core.question;
 
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
-import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class BinaryBooleanResultingInBooleanQuestion extends BooleanQuestion {
 	public final BooleanProperty a = new BooleanProperty( this, "a", Boolean.TRUE ); 
@@ -35,13 +34,13 @@ public abstract class BinaryBooleanResultingInBooleanQuestion extends BooleanQue
 	public Object getValue() {
 		boolean aValue = a.booleanValue();
 		boolean returnValue;
-		if (this instanceof edu.cmu.cs.stage3.alice.core.question.And){
+/*		if (this instanceof edu.cmu.cs.stage3.alice.core.question.And){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				Messages.getString("both_") + aValue + " " + Messages.getString("and_") + b.booleanValue() + " " + Messages.getString("is_");		   
+				Messages.getString("both_and_is_", aValue, b.booleanValue());		   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.Or){
 			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
-				Messages.getString("either_") + aValue + " " + Messages.getString("or_") + b.booleanValue() + " " + Messages.getString("is_");		   
-		} 
+				Messages.getString("either_or_is_", aValue, b.booleanValue());		   
+		}*/ 
 		if( isShortCircuitable( aValue ) ) {
 			returnValue = aValue;
 		} else {

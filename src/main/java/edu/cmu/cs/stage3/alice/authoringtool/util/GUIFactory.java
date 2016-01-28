@@ -43,8 +43,7 @@ public class GUIFactory {
 
 	public static javax.swing.JComponent getGUI( Object o ) {
 		edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack();
-		javax.swing.JComponent viewController = null;
-
+		javax.swing.JComponent viewController = null;		
 		if( o instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ConditionalResponsePanel.class );
 			if( viewController != null ) {
@@ -192,7 +191,6 @@ public class GUIFactory {
 				((edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryObject)viewController).set( (edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryViewer.ObjectXmlData)o );
 			}
 		}
-
 		return viewController;
 	}
 

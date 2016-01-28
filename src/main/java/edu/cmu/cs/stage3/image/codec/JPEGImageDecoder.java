@@ -55,6 +55,8 @@ import java.io.InputStream;
 
 import com.sun.image.codec.jpeg.ImageFormatException;
 
+import edu.cmu.cs.stage3.lang.Messages;
+
 /**
  */
 public class JPEGImageDecoder extends ImageDecoderImpl {
@@ -67,7 +69,7 @@ public class JPEGImageDecoder extends ImageDecoderImpl {
     
 	public RenderedImage decodeAsRenderedImage(int page) throws IOException {
         if (page != 0) {
-            throw new IOException(JaiI18N.getString("Illegal_page_requested_from_a_JPEG_file_"));
+            throw new IOException(Messages.getString("Illegal_page_requested_from_a_JPEG_file_"));
         }
         return new JPEGImage(input);
     }
@@ -89,9 +91,9 @@ class JPEGImage extends SimpleRenderedImage {
             // decodeAsBufferedImage performs default color conversions
             image = decoder.decodeAsBufferedImage();
         } catch (ImageFormatException e) {
-            throw new RuntimeException(JaiI18N.getString("Unable_to_process_image_stream__incorrect_format_"));
+            throw new RuntimeException(Messages.getString("Unable_to_process_image_stream__incorrect_format_"));
         } catch (IOException e) {
-            throw new RuntimeException(JaiI18N.getString("Unable_to_process_image_stream__I_O_error_"));
+            throw new RuntimeException(Messages.getString("Unable_to_process_image_stream__I_O_error_"));
 	}
 
         minX = 0;
@@ -111,7 +113,7 @@ class JPEGImage extends SimpleRenderedImage {
             } else if (numBands == 4) {
                 type = BufferedImage.TYPE_4BYTE_ABGR;
             } else {
-                throw new RuntimeException(JaiI18N.getString("Cannot_decode_a_2_banded_image_with_a_PackedColorModel_"));
+                throw new RuntimeException(Messages.getString("Cannot_decode_a_2_banded_image_with_a_PackedColorModel_"));
             }
 
             BufferedImage bi = new BufferedImage(width, height, type);
@@ -126,7 +128,7 @@ class JPEGImage extends SimpleRenderedImage {
 
     public synchronized Raster getTile(int tileX, int tileY) {
         if (tileX != 0 || tileY != 0) {
-            throw new IllegalArgumentException(JaiI18N.getString("Illegal_tile_requested_from_a_JPEG_image_"));
+            throw new IllegalArgumentException(Messages.getString("Illegal_tile_requested_from_a_JPEG_image_"));
         }
 
         return image.getTile(0, 0);

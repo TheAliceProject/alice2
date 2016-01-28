@@ -169,7 +169,7 @@ public abstract class Property {
 					if( field.get( m_owner ) == this ) {
 						return cls;
 					} else {
-						throw new RuntimeException( m_owner + " " + Messages.getString("has_field_named_") +  m_name + " " + Messages.getString("that_is_not_") + this );  
+						throw new RuntimeException(  Messages.getString("has_field_named_that_is_not_",  m_owner, m_name, this) );  
 					}
 				} catch( NoSuchFieldException nsfe ) {
 					cls = cls.getSuperclass();
@@ -201,15 +201,15 @@ public abstract class Property {
 						return m_value;
 					}
 				} catch( NoSuchMethodException nsme ) {
-					Element.warnln( Messages.getString("property_get_failure_to_clone__") + this + " " + nsme );  
+					Element.warnln( Messages.getString("property_get_failure_to_clone__", this, nsme) );  
 					//nsme.printStackTrace();
 					return m_value;
 				} catch( IllegalAccessException iae ) {
-					Element.warnln( Messages.getString("property_get_failure_to_clone__") + this + " " + iae );  
+					Element.warnln( Messages.getString("property_get_failure_to_clone__", this, iae) );  
 					//iae.printStackTrace();
 					return m_value;
 				} catch( java.lang.reflect.InvocationTargetException ite ) {
-					Element.warnln( Messages.getString("property_get_failure_to_clone__") + this + " " + ite );  
+					Element.warnln( Messages.getString("property_get_failure_to_clone__", this, ite) );  
 					//ite.getTargetException().printStackTrace();
 					return m_value;
 				}
@@ -274,7 +274,7 @@ public abstract class Property {
 				if( valueClass.isAssignableFrom( value.getClass() ) ) {
 					//pass
 				} else {
-					throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_") + getName() + " " + Messages.getString("on_") + getOwner() + ".  " + valueClass + " " + Messages.getString("is_not_assignable_from_") + value.getClass() );    //$NON-NLS-4$
+					throw new IllegalPropertyValueException( this, value, Messages.getString("Cannot_set_property_on_is_not_assignable_from_", getName(), getOwner(), valueClass, value.getClass()) );
 				}
 			}
 		} else {

@@ -34,14 +34,14 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 			m_positionEnd = null;
 			
 			if( m_target == null ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("needs_something_or_someone_to_sit_on_"), null, SitAnimation.this.target ); 
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException(  Messages.getString("needs_something_or_someone_to_sit_on_", m_subject.name.getStringValue()), null, SitAnimation.this.target ); 
             }
             if( m_target == m_subject ) {
-                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("can_t_sit_on_") + m_target.name.getStringValue() + ".", getCurrentStack(), SitAnimation.this.target );              
+                throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException(  Messages.getString("can_t_sit_on_", m_subject.name.getStringValue(), m_target.name.getStringValue() ), getCurrentStack(), SitAnimation.this.target );              
             }
             
             if (m_subject.isAncestorOf(m_target)) {
-            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( m_subject.name.getStringValue() + " " + Messages.getString("can_t_sit_on_a_part_of_itself"), getCurrentStack(), SitAnimation.this.target );             
+            	throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException(  Messages.getString("can_t_sit_on_a_part_of_itself_", m_subject.name.getStringValue()), getCurrentStack(), SitAnimation.this.target );             
             }
 	
 			findLegs();

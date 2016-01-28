@@ -294,7 +294,7 @@ public abstract class ReferenceFrame extends Sandbox {
 			} else if( dimension==Dimension.FRONT_TO_BACK ) {
 				return box.getDepth();
 			} else {
-				throw new IllegalArgumentException( dimension + " " + Messages.getString("is_expected_to_be_in__LEFT_TO_RIGHT__TOP_TO_BOTTOM__FRONT_TO_BACK__") ); 
+				throw new IllegalArgumentException(  Messages.getString("is_expected_to_be_in__LEFT_TO_RIGHT__TOP_TO_BOTTOM__FRONT_TO_BACK__", dimension) ); 
 			}
 		} else {
 			//todo: Double.NaN?

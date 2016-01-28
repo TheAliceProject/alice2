@@ -73,7 +73,7 @@ public class DoInOrder extends CompositeResponse {
 		
 		public void update( double t ) {
 			super.update( t );
-            double timeRemaining;
+            double timeRemaining = 0;
             if( isCullable() ) {
 				m_timeRemaining = 0;
 			} else {
@@ -97,17 +97,19 @@ public class DoInOrder extends CompositeResponse {
                         }
                     }
 
-                    childPrologueIfNecessary( m_index, t );
-                    childUpdate( m_index, t );
-
-                    timeRemaining = getChildTimeRemaining( m_index, t );
-
-                    if( timeRemaining<=0 ) {
-                        childEpilogue( m_index, t );
-                        m_index++;
+                    if (m_index < getChildCount()){
+	                    childPrologueIfNecessary( m_index, t );
+	                    childUpdate( m_index, t );
+	
+	                    timeRemaining = getChildTimeRemaining( m_index, t );
+	
+	                    if( timeRemaining<=0 ) {
+	                        childEpilogue( m_index, t );
+	                        m_index++;
+	                    }
                     }
-
-                    if( m_index==getChildCount() ) {
+                    
+                    if( m_index>=getChildCount() ) {
                         if( postLoopTest( t ) ) {
                             m_index = -1;
                         } else {

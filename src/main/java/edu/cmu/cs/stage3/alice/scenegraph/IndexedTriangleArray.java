@@ -132,7 +132,7 @@ public class IndexedTriangleArray extends VertexGeometry {
 				indices[i] = dis.readInt();
 			}
 		} else {
-			throw new RuntimeException( Messages.getString("invalid_file_version__") + version ); 
+			throw new RuntimeException( Messages.getString("invalid_file_version__", version) ); 
 		}
 		return indices;
 	}

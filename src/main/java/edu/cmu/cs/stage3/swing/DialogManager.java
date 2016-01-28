@@ -1,7 +1,10 @@
 package edu.cmu.cs.stage3.swing;
 
-import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.ComponentOrientation;
+
 import javax.swing.WindowConstants;
+
+import edu.cmu.cs.stage3.lang.Messages;
 
 abstract class ReturnValueTracker {
 	private javax.swing.JDialog m_dialog;
@@ -133,9 +136,12 @@ public class DialogManager {
 			dialog.setResizable(false);
 		
 		contentPane.preDialogShow( dialog );
+		if (contentPane instanceof edu.cmu.cs.stage3.swing.numpad.NumPad || contentPane instanceof edu.cmu.cs.stage3.alice.authoringtool.dialog.LicenseContentPane)	// ***** Special Case for Numpad dialog *****
+			dialog.applyComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		showModalDialog( dialog, false );
 		contentPane.postDialogShow( dialog );
 
+		
 		returnValueTracker.removeListeners();
 		
 		return returnValueTracker.getReturnValue();

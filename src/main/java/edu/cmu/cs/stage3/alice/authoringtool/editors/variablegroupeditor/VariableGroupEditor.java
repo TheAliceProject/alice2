@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.editors.variablegroupeditor;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 
@@ -69,7 +70,10 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 		);
 		addContainerListener( edu.cmu.cs.stage3.alice.authoringtool.util.GUIElementContainerListener.getStaticListener() );
 		setDropTarget( new java.awt.dnd.DropTarget( this, this ) );
-		newVariableButton.setToolTipText( "<html><font face=arial size=-1>"+Messages.getString("Open_New_Variable_Dialog__p__p_Variables_allow_you_to_store_information__p_You_may_choose_among_several_types_p_of_information__like_Numbers__Booleans__and_Objects__")+"</font></html>" ); 
+		String justify = "left";
+		if (!AikMin.isLTR())	// ***** Right justify tooltip text for Arabic  *****
+			justify = "right";
+		newVariableButton.setToolTipText( "<html><body><div align="+justify+">"+Messages.getString("Open_New_Variable_Dialog__p__p_Variables_allow_you_to_store_information__p_You_may_choose_among_several_types_p_of_information__like_Numbers__Booleans__and_Objects__")+"</div></body></html>" ); 
 
 		refreshGUI();
 	}
@@ -117,17 +121,17 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 //					};
 					javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getVariableGUI( variable, true, factory );
 					if( gui != null ) {
-						this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
+						this.add( gui, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 					} else {
 						edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Unable_to_create_gui_for_variable__", variable), null ); 
 					}
 				}
 			}
 
-			this.add( newVariableButton, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
+			this.add( newVariableButton, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 0.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 8, 2, 8, 2 ), 0, 0 ) );
 			newVariableButton.setDropTarget( new java.awt.dnd.DropTarget( newVariableButton, this ) );
 			java.awt.Component glue = javax.swing.Box.createGlue();
-			this.add( glue, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
+			this.add( glue, new java.awt.GridBagConstraints( 0, count++, 1, 1, 1.0, 1.0, java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.BOTH, new java.awt.Insets( 2, 2, 2, 2 ), 0, 0 ) );
 			glue.setDropTarget( new java.awt.dnd.DropTarget( glue, this ) );
 		}
 		revalidate();

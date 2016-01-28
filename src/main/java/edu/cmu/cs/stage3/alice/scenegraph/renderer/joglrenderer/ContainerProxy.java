@@ -41,11 +41,12 @@ abstract class ContainerProxy extends ComponentProxy {
 	public ComponentProxy[] getChildrenProxies() {
 		if (m_childrenProxies == null) {
 			edu.cmu.cs.stage3.alice.scenegraph.Container sgContainer = getSceneGraphContainer();
-			edu.cmu.cs.stage3.alice.scenegraph.Component[] sgChildren = sgContainer
-					.getChildren();
-			m_childrenProxies = new ComponentProxy[sgChildren.length];
-			for (int i = 0; i < sgChildren.length; i++) {
-				m_childrenProxies[i] = (ComponentProxy) getProxyFor(sgChildren[i]);
+			edu.cmu.cs.stage3.alice.scenegraph.Component[] sgChildren = sgContainer.getChildren();
+			if (sgChildren != null) {
+				m_childrenProxies = new ComponentProxy[sgChildren.length];
+				for (int i = 0; i < sgChildren.length; i++) {
+					m_childrenProxies[i] = (ComponentProxy) getProxyFor(sgChildren[i]);
+				}
 			}
 		}
 		return m_childrenProxies;
