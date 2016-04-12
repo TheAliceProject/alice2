@@ -39,10 +39,10 @@ import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.lang.Messages;
 
 class CustomCheckBox extends javax.swing.JCheckBox implements java.awt.image.ImageObserver {
-	private int index = 0;
-	/* private */java.awt.Image image;
-	/* private */javax.swing.JComponent gui;
-	/* private */Object object;
+	int index = 0;
+	java.awt.Image image;
+	javax.swing.JComponent gui;
+	Object object;
 
 	public void setIndex(int index) {
 		this.index = index;
@@ -60,31 +60,28 @@ class CustomCheckBox extends javax.swing.JCheckBox implements java.awt.image.Ima
 	public java.awt.Dimension getPreferredSize() {
 		if (image == null) {
 			return super.getPreferredSize();
-		} else {
-			int x = image.getWidth(this);
-			int y = image.getHeight(this);
-			return new java.awt.Dimension((x + size), y + 1);
-		}
+		} 
+		int x = image.getWidth(this);
+		int y = image.getHeight(this);
+		return new java.awt.Dimension((x + size), y + 1);
 	}
 
 	public java.awt.Dimension getMinimumSize() {
 		if (image == null) {
 			return super.getMinimumSize();
-		} else {
-			int x = image.getWidth(this);
-			int y = image.getHeight(this);
-			return new java.awt.Dimension((x + size), y);
 		}
+		int x = image.getWidth(this);
+		int y = image.getHeight(this);
+		return new java.awt.Dimension((x + size), y);
 	}
 
 	public java.awt.Dimension getMaximumSize() {
 		if (image == null) {
 			return super.getMaximumSize();
-		} else {
-			int x = image.getWidth(this);
-			int y = image.getHeight(this);
-			return new java.awt.Dimension((x + size), y);
 		}
+		int x = image.getWidth(this);
+		int y = image.getHeight(this);
+		return new java.awt.Dimension((x + size), y);
 	}
 
 	public boolean imageUpdate(java.awt.Image img, int infoflags, int x, int y, int width, int height) {
@@ -555,9 +552,8 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 	private static String getWorldName(java.io.File worldFile) {
 		if (worldFile != null) {
 			return edu.cmu.cs.stage3.io.FileUtilities.getBaseName(worldFile);
-		} else {
-			return Messages.getString("Unnamed_World");
 		}
+		return Messages.getString("Unnamed_World");
 	}
 
 	private javax.swing.JComponent getComponentForObject(Object toFind) {

@@ -94,7 +94,7 @@ public class SimulationExceptionPanel extends javax.swing.JPanel {
 		}
 
 		String highlightID = null;
-		if (m_simulationException instanceof edu.cmu.cs.stage3.alice.core.SimulationPropertyException) {
+		if (m_simulationException instanceof edu.cmu.cs.stage3.alice.core.SimulationPropertyException  && (ancestor != null) ) {
 			edu.cmu.cs.stage3.alice.core.SimulationPropertyException spe = (edu.cmu.cs.stage3.alice.core.SimulationPropertyException) m_simulationException;
 			highlightID = "editors:element<" + ancestor.getKey(world) + ">:elementTile<" + element.getKey(world) + ">:property<" + spe.getProperty().getName() + ">"; //$NON-NLS-4$
 		}

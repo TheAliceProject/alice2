@@ -401,7 +401,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private java.awt.BorderLayout borderLayout1 = new java.awt.BorderLayout();
 	private javax.swing.border.Border border1;
 	private javax.swing.border.Border setTitleBorder;
-	private javax.swing.border.Border border2;
+	//private javax.swing.border.Border border2;
 	private javax.swing.JPanel mainPanel = new javax.swing.JPanel();
 	private javax.swing.JFileChooser htmlFileChooser = new javax.swing.JFileChooser();
 	private javax.swing.JPanel fileChooserPanel = new javax.swing.JPanel();
@@ -448,7 +448,7 @@ public class SaveForWebContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				new java.awt.Color(142, 142, 142)),	Messages.getString("Size_in_browser"));
 		setTitleBorder = new javax.swing.border.TitledBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, 
 				new java.awt.Color(142, 142, 142)),	Messages.getString("Title"));
-		border2 = javax.swing.BorderFactory.createEmptyBorder(8, 8, 0, 8);
+		//border2 = javax.swing.BorderFactory.createEmptyBorder(8, 8, 0, 8);
 		border3 = javax.swing.BorderFactory.createEmptyBorder(12, 12, 12, 12);
 		border4 = javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, new java.awt.Color(142, 142, 142));
 		titledBorder1 = new javax.swing.border.TitledBorder(border4, Messages.getString("Save_Location"));

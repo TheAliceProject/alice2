@@ -221,21 +221,18 @@ public abstract class AliceAlertContentPane extends
 	 * "Unable to open bug report web page.", t ); } }
 	 */
 
+	/*
 	protected String postStacktrace() {
 		try {
-			java.net.URL url = new java.net.URL(
-					"http://www.alice.org/bugreport/stacktrace.php");
+			java.net.URL url = new java.net.URL("http://www.alice.org/bugreport/stacktrace.php");
 			java.net.URLConnection connection = url.openConnection();
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
 			connection.setUseCaches(false);
-			connection.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
+			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-			String stacktrace = java.net.URLEncoder.encode(detailTextPane
-					.getText());
-			while (stacktrace.indexOf("%0D") > -1) { // delete the carriage
-														// returns
+			String stacktrace = java.net.URLEncoder.encode(detailTextPane.getText());
+			while (stacktrace.indexOf("%0D") > -1) { // delete the carriage returns
 				int i = stacktrace.indexOf("%0D");
 				stacktrace = stacktrace.substring(0, i)
 						+ stacktrace.substring(i + 3);
@@ -262,7 +259,7 @@ public abstract class AliceAlertContentPane extends
 							t);
 			return "0";
 		}
-	}
+	}*/
 
 	protected void copyDetailText() {
 		String detailText = detailTextPane.getText();

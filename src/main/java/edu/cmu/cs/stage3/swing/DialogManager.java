@@ -289,9 +289,8 @@ public class DialogManager {
 
 		if (value == javax.swing.JOptionPane.UNINITIALIZED_VALUE) {
 			return null;
-		} else {
-			return value;
-		}
+		} 
+		return value;
 	}
 
 	public static void showMessageDialog( Object message ) {
@@ -328,7 +327,6 @@ public class DialogManager {
 		pane.setInitialValue(initialValue);
 		java.awt.Component parent = (java.awt.Component)s_stack.peek();
 		pane.setComponentOrientation( parent.getComponentOrientation() );
-		
 		javax.swing.JDialog dialog = pane.createDialog( parent, title );
 		pane.selectInitialValue();
 		showModalDialog( dialog );

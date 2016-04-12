@@ -67,10 +67,8 @@ public class CompositeComponentBehaviorPanel extends CompositeComponentElementPa
         {
             toAdd = GUIFactory.getGUI(currentElement);
             return toAdd;
-        } else
-        {
-            return null;
-        }
+        } 
+        return null;
     }
 
 	public void drop(DropTargetDropEvent dtde)

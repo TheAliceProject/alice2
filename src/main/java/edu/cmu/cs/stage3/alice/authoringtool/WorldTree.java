@@ -67,9 +67,8 @@ public class WorldTree extends javax.swing.JTree {
 		String tip = super.getToolTipText( ev );
 		if( tip != null ) {
 			return tip;
-		} else {
-			return getToolTipText();
 		}
+		return getToolTipText();
 	}
 
 	protected void paintLines( java.awt.Graphics g, java.awt.Rectangle clipBounds, java.awt.Insets insets, javax.swing.tree.TreePath from, javax.swing.tree.TreePath to ) {

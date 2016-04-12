@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.scripting.jython;
 
-
 /**
  * @author Dennis Cosgrove
  */

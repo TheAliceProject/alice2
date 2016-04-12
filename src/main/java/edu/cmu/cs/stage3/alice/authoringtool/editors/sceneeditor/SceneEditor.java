@@ -127,7 +127,7 @@ public class SceneEditor extends javax.swing.JPanel implements edu.cmu.cs.stage3
 		makeSceneEditorSmallButton.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "makeSceneEditorSmallBackground" ) ); 
 
 		cameraViewPanel.navPanel.add( makeSceneEditorBigButton, new java.awt.GridBagConstraints( 1, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHEAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 2, 2 ), 0, 0 ) );
-		cameraViewPanel.controlPanel.add( makeSceneEditorSmallButton, new java.awt.GridBagConstraints( 0, 9, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.SOUTHEAST, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 8, 8 ), 0, 0 ) );
+		cameraViewPanel.controlPanel.add( makeSceneEditorSmallButton, new java.awt.GridBagConstraints( 0, 9, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.LINE_END, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 0, 8, 8 ), 0, 0 ) );
 
 		// tooltips
 		String justify = "left";

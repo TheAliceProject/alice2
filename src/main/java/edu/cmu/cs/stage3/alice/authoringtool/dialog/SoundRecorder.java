@@ -327,27 +327,26 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 	private String formatTime(double seconds) {
 		if (Double.isNaN(seconds)) {
 			return "?:??";
+		} 
+		java.text.DecimalFormat decFormatter = new java.text.DecimalFormat(".000");
+		java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat("00");
+		java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat("#0");
+
+		double secondsFloored = (int) Math.floor(seconds);
+		double decimal = seconds - secondsFloored;
+		double secs = secondsFloored % 60.0;
+		double minutes = ((secondsFloored - secs) / 60.0) % 60.0;
+		double hours = (secondsFloored - 60.0 * minutes - secs)	/ (60.0 * 60.0);
+
+		String timeString = secMinFormatter1.format(secs) + decFormatter.format(decimal);
+		if (hours > 0.0) {
+			timeString = secMinFormatter1.format(minutes) + ":"	+ timeString;
+			timeString = secMinFormatter2.format(hours) + ":" + timeString;
 		} else {
-			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat(".000");
-			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat("00");
-			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat("#0");
-
-			double secondsFloored = (int) Math.floor(seconds);
-			double decimal = seconds - secondsFloored;
-			double secs = secondsFloored % 60.0;
-			double minutes = ((secondsFloored - secs) / 60.0) % 60.0;
-			double hours = (secondsFloored - 60.0 * minutes - secs)	/ (60.0 * 60.0);
-
-			String timeString = secMinFormatter1.format(secs) + decFormatter.format(decimal);
-			if (hours > 0.0) {
-				timeString = secMinFormatter1.format(minutes) + ":"	+ timeString;
-				timeString = secMinFormatter2.format(hours) + ":" + timeString;
-			} else {
-				timeString = secMinFormatter2.format(minutes) + ":"	+ timeString;
-			}
-
-			return timeString;
+			timeString = secMinFormatter2.format(minutes) + ":"	+ timeString;
 		}
+
+		return timeString;
 	}
 
 	double pauseTime = 0;
@@ -487,6 +486,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 			onStop();
 		}
 
+		@SuppressWarnings("resource")
 		public void run() {
 			// make sure we have something to play
 			if (audioInputStream == null) {

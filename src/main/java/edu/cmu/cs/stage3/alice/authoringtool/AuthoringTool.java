@@ -41,7 +41,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
 
@@ -939,6 +938,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		loadWorld(defaultWorld, false);
 	}
 
+	@SuppressWarnings("resource")
 	private void initializeOutput(boolean stdOutToConsole, boolean stdErrToConsole) {
 		if (stdOutToConsole) {
 			AuthoringTool.pyStdOut = new org.python.core.PyFile(System.out);
@@ -1366,9 +1366,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				watcherPanel.clear();
 			}
 			return Constants.SUCCEEDED;
-		} else {
-			return retVal;
-		}
+		} 
+		return retVal;
 	}
 	
 	public void resetClipboards() {
@@ -1406,9 +1405,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				AuthoringTool.showErrorDialog(Messages.getString("Unable_to_save_world__", currentWorldLocation.getAbsolutePath()), e); 
 				return Constants.FAILED;
 			}
-		} else {
-			return saveWorldAs();
-		}
+		} 
+		return saveWorldAs();
 	}
 
 	public int saveWorldAs() {
@@ -1905,13 +1903,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					}
 					fireWorldSaved(world);
 					return Constants.SUCCEEDED;
-				} else {
-					return Constants.FAILED;
 				}
-			} else {
-				file.delete();
-				return Constants.CANCELED;
-			}
+				return Constants.FAILED;
+			} 
+			file.delete();
+			return Constants.CANCELED;
 		} catch( Throwable t ) {
 			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_store_world_to_file__", file), t ); 
 			//file.delete();
@@ -2058,6 +2054,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		worldDirectory = null;
 
+// ********************************************************************************************************************************************				    
+		Runtime runtime = Runtime.getRuntime();
+	    long usedMemory = runtime.totalMemory() - runtime.freeMemory();
+		//System.out.println("Initial Memory " + usedMemory/100000 + "MB");	
+		
 		edu.cmu.cs.stage3.alice.core.World tempWorld = null;
 		try {
 			loader.open(path);
@@ -2116,7 +2117,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	                world = null;
 	                System.gc();
 				}
+				
+// ********************************************************************************************************************************************				    
+				usedMemory = runtime.totalMemory() - runtime.freeMemory();
+				//System.out.println("Memory after loading File " + usedMemory/100000 + "MB");		    
 				world = tempWorld;
+				tempWorld = null;
+
+				
 				worldClock.setWorld( world );
 				world.setClock( worldClock );
 				world.setScriptingFactory(scriptingFactory);
@@ -2125,6 +2133,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				userDefinedParameterListener.setWorld( world );
 				world.setRenderTargetFactory(getRenderTargetFactory());
 	
+// ********************************************************************************************************************************************	
+				System.gc();
+				usedMemory = runtime.totalMemory() - runtime.freeMemory();
+			    //System.out.println("Used Memory " + usedMemory/100000 + "MB");
+			    
+			    
 				//edu.cmu.cs.stage3.alice.core.Element[] elements = world.search(new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(edu.cmu.cs.stage3.alice.core.RenderTarget.class));
 				edu.cmu.cs.stage3.alice.core.Element[] elements = world.getDescendants( edu.cmu.cs.stage3.alice.core.RenderTarget.class );
 				if (elements.length > 0) {
@@ -2163,9 +2177,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				} );
 			}
 			return Constants.SUCCEEDED;
-		} else {
-			return Constants.FAILED;
-		}
+		} 
+		return Constants.FAILED;
 	}
 
 	protected boolean shouldAllowOverwrite(java.io.File file) {
@@ -2215,32 +2228,22 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			edu.cmu.cs.stage3.alice.core.Text3D text3D = add3DTextPanel.createText3D();
 			if (text3D != null) {
 				undoRedoStack.startCompound();
-
 				text3D.name.set(AuthoringToolResources.getNameForNewChild(text3D.name.getStringValue(), world));
-
 				world.addChild(text3D);
 				world.sandboxes.add(text3D);
-
 				if (getCurrentCamera() instanceof edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera) {
 					animateAddModel(text3D, world, (edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera) getCurrentCamera());
 				} else {
 					text3D.vehicle.set(world);
 				}
-
 				undoRedoStack.stopCompound();
-
 				return Constants.SUCCEEDED;
-			} else {
-				return Constants.CANCELED;
-			}
-		} else {
-			return Constants.CANCELED;
-		}
-
+			} 
+		} 
+		return Constants.CANCELED;
 	}
 	
 	public int exportMovie() {
-		
 		// Get Dimensions and Location of Movie
 		/*int boundsX=0, boundsY=0, boundsWidth=0, boundsHeight = 0;
 		   
@@ -2561,7 +2564,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				for (int y=0; y<height; y++) {
 					if (zBuffer[x+y*width]!=clear) {
 						for (int i=1; i<=6; i++) {
-							double shade = ((double)(6-i+1))/10.0;
+							double shade = (7 - i) / 10.0;
 							if ((x+i+(y+i)*width<zBuffer.length) && zBuffer[x+i+(y+i)*width]==clear && shadow[x+i+(y+i)*width]<shade) {
 								shadow[x+i+(y+i)*width]=shade;
 							}
@@ -2575,9 +2578,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					int r = (imageBuffer[x+y*width]>>16)&0xFF;
 					int g = (imageBuffer[x+y*width]>>8)&0xFF;
 					int b = (imageBuffer[x+y*width])&0xFF;
-					r=(int)(((double)r)*(1.0-shadow[x+y*width]));
-					g=(int)(((double)g)*(1.0-shadow[x+y*width]));
-					b=(int)(((double)b)*(1.0-shadow[x+y*width]));
+					r=(int)(r*(1.0-shadow[x+y*width]));
+					g=(int)(g*(1.0-shadow[x+y*width]));
+					b=(int)(b*(1.0-shadow[x+y*width]));
 					imageBuffer[x+y*width] = (0xFF<<24)+(r<<16)+(g<<8)+b;
 				}
 			}
@@ -2674,9 +2677,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				final java.io.File file = importFileChooser.getSelectedFile();
 				if (file.getAbsolutePath().toLowerCase().endsWith(AuthoringTool.CHARACTER_EXTENSION)) { // special case Alice objects
 					return loadAndAddCharacter(file);
-				} else {
-					path = file;
-				}
+				} 
+				path = file;
 			}
 		}
 		importFileChooser.setSelectedFile( null ); 
@@ -2757,6 +2759,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		return element;
 	}
 
+	@SuppressWarnings("cast")
 	private void animateAddModelIfPossible(edu.cmu.cs.stage3.alice.core.Element element, edu.cmu.cs.stage3.alice.core.Element parent) {
 		if (element instanceof edu.cmu.cs.stage3.alice.core.Transformable) {
 			if (parent instanceof edu.cmu.cs.stage3.alice.core.ReferenceFrame) {
@@ -2962,7 +2965,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
 	
-	private void displayDurations(edu.cmu.cs.stage3.alice.core.Response r){
+/*	private void displayDurations(edu.cmu.cs.stage3.alice.core.Response r){
 		if (r instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
 			edu.cmu.cs.stage3.alice.core.response.CompositeResponse c = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)r;
 			System.out.println("COMPOSITE("); 
@@ -2974,7 +2977,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		else{
 			System.out.println(r.duration.doubleValue());
 		}
-	}
+	}*/
 
 	public void getAGoodLookAt(edu.cmu.cs.stage3.alice.core.Transformable transformable, final edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera camera) {
 		edu.cmu.cs.stage3.alice.core.Property[] affectedProperties = { camera.localTransformation };
@@ -3285,9 +3288,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		edu.cmu.cs.stage3.alice.core.Element[] e = world.getDescendants( edu.cmu.cs.stage3.alice.core.Camera.class );
 		if (e != null) {
 			return (edu.cmu.cs.stage3.alice.core.Camera) e[0];
-		} else {
-			return null;
-		}
+		} 
+		return null;
 	}
 
 	public void showAbout() {
@@ -3481,12 +3483,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		int index = jAliceFrame.tabbedEditorComponent.getIndexOfObject(elementToEdit);
 		if (index > -1) {
 			return jAliceFrame.tabbedEditorComponent.getEditorAt(index).getJComponent();
-		} else {
-			Class editorClass = edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities.getBestEditor(elementToEdit.getClass());
-			Editor editor = editorManager.getEditorInstance(editorClass);
-			edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities.editObject(editor, elementToEdit);
-			return editor.getJComponent();
-		}
+		} 
+		Class editorClass = edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities.getBestEditor(elementToEdit.getClass());
+		Editor editor = editorManager.getEditorInstance(editorClass);
+		edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities.editObject(editor, elementToEdit);
+		return editor.getJComponent();
 	}
 
 	///////////////
@@ -3724,7 +3725,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	//Caitlin's code
-
+	@SuppressWarnings("cast")
 	public edu.cmu.cs.stage3.caitlin.stencilhelp.application.StateCapsule getStateCapsuleFromString(String capsuleString) {
 		edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule sc = new edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule();
 		sc.parse(capsuleString);
@@ -4518,9 +4519,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						java.awt.Rectangle r = tree.getPathBounds(new javax.swing.tree.TreePath(worldTreeModel.getPath(element)));
 						if ((r != null) && tree.getVisibleRect().contains(r)) {
 							return true;
-						} else {
-							return false;
 						}
+						return false;
 					}
 				}
 			} else if (prefix.equals("clipboard")) { 
@@ -4531,19 +4531,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							java.awt.Component c = jAliceFrame.clipboardPanel.getComponent(index);
 							if (c != null && isComponentVisible((javax.swing.JComponent) c)) {
 								return true;
-							} else {
-								return false;
 							}
-						} else {
-							return false;
 						}
 					} catch (Exception e) {
 						return false;
 					}
-				} else {
-					return false;
-				}
-
+				} 
+				return false;
 			} else if (prefix.equals("sceneEditor")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken(); // pull off singleView/quadView
@@ -4563,23 +4557,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+gallery);
 										if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 											return true;
-										} else {
-											return false;
 										}
+										return false;
 									} else if (prefix.equals("galleryObject")) { 
 										java.awt.Component c = AuthoringToolResources.findGalleryObject(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 										if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 											return true;
-										} else {
-											return false;
 										}
+										return false;
 									}
 								} else {
 									if (jAliceFrame.sceneEditor.getGalleryViewer().isShowing()) {
 										return true;
-									} else {
-										return false;
 									}
+									return false;
 								}
 							} else {
 								return false;
@@ -4588,9 +4579,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							java.awt.Component c = jAliceFrame.sceneEditor.getComponentForId(token);
 							if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 								return true;
-							} else {
-								return false;
 							}
+							return false;
 						}
 					}
 				}
@@ -4606,35 +4596,30 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						spec = AuthoringToolResources.getSpecifier(token);
 						if (prefix.equals("tab")) { 
 							return true;
-						} else {
-							java.awt.Component c = jAliceFrame.dragFromComponent.getComponentForKey(token);
-							//System.out.println(c+", "+isComponentVisible((javax.swing.JComponent)c)+", "+c.isVisible());
-							if (c != null){
-								java.awt.Rectangle boundss = c.getBounds();
-								boundss = javax.swing.SwingUtilities.convertRectangle(c.getParent(), boundss, jAliceFrame);
-							}
-							//System.out.println(boundss);
-							//System.out.println(jAliceFrame.getBounds());
-							if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
-								java.awt.Rectangle bounds = c.getBounds();
-								javax.swing.SwingUtilities.convertRectangle(c.getParent(), bounds, jAliceFrame.dragFromComponent);
-								if (jAliceFrame.dragFromComponent.getVisibleRect().contains(bounds)) {
-									//System.out.println("returning true");
-									return true;
-								} else {
-									return false;
-								}
-							} else {
-								return false;
-							}
 						}
-					} else {
+						java.awt.Component c = jAliceFrame.dragFromComponent.getComponentForKey(token);
+						//System.out.println(c+", "+isComponentVisible((javax.swing.JComponent)c)+", "+c.isVisible());
+						if (c != null){
+							java.awt.Rectangle boundss = c.getBounds();
+							boundss = javax.swing.SwingUtilities.convertRectangle(c.getParent(), boundss, jAliceFrame);
+						}
+						//System.out.println(boundss);
+						//System.out.println(jAliceFrame.getBounds());
+						if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
+							java.awt.Rectangle bounds = c.getBounds();
+							javax.swing.SwingUtilities.convertRectangle(c.getParent(), bounds, jAliceFrame.dragFromComponent);
+							if (jAliceFrame.dragFromComponent.getVisibleRect().contains(bounds)) {
+								//System.out.println("returning true");
+								return true;
+							}
+							return false;
+						}
 						return false;
 					}
-				} else {
-					//TODO is this safe?
 					return false;
 				}
+				//TODO is this safe?
+				return false;
 			} else if (prefix.equals("behaviors")) { 
 				if (st.hasMoreTokens()) {
 					token = st.nextToken();
@@ -4644,9 +4629,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new behavior"); 
 						if ((c != null) && c.isShowing()) {
 							return true;
-						} else {
-							return false;
 						}
+						return false;
 					} else if (prefix.equals("elementTile") && (spec != null)) { 
 						edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 						if (element != null) {
@@ -4661,15 +4645,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 										bounds = javax.swing.SwingUtilities.convertRectangle(c.getParent(), bounds, jAliceFrame.behaviorGroupsEditor.getScrollPane());
 										if (jAliceFrame.behaviorGroupsEditor.getScrollPaneVisibleRect().contains(bounds)) {
 											return true;
-										} else {
-											return false;
 										}
-										//										return true;
-										//									} else {
-										//										return false;
-									} else {
 										return false;
 									}
+									return false;
 								} else if (prefix.equals("more")) { 
 									java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(jAliceFrame.behaviorGroupsEditor, element);
 									if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
@@ -4679,15 +4658,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											javax.swing.SwingUtilities.convertRectangle(moreTile.getParent(), bounds, jAliceFrame.behaviorGroupsEditor.getScrollPane());
 											if (jAliceFrame.behaviorGroupsEditor.getScrollPaneVisibleRect().contains(bounds)) {
 												return true;
-											} else {
-												return false;
 											}
-											//											return true;
-											//										} else {
-											//											return false;
-										} else {
 											return false;
 										}
+										return false;
 									}
 								}
 							} else {
@@ -4701,13 +4675,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									javax.swing.SwingUtilities.convertRectangle(c.getParent(), bounds, jAliceFrame.behaviorGroupsEditor.getScrollPane());
 									if (jAliceFrame.behaviorGroupsEditor.getScrollPaneVisibleRect().contains(bounds)) {
 										return true;
-									} else {
-										return false;
 									}
-									//									return true;
-								} else {
 									return false;
 								}
+								return false;
 							}
 						}
 					}
@@ -4730,9 +4701,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									java.awt.Component c = AuthoringToolResources.findButton(container, spec);
 									if ((c != null) && c.isShowing()) {
 										return true;
-									} else {
-										return false;
 									}
+									return false;
 								} else if (prefix.equals("elementTile") && (spec != null)) { 
 									edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(spec);
 									if (element != null) {
@@ -4744,27 +4714,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 												java.awt.Component c = AuthoringToolResources.findPropertyViewController(container, element, spec);
 												if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 													return true;
-												} else {
-													return false;
 												}
+												return false;
 											} else if (prefix.equals("more")) { 
 												java.awt.Component dndPanel = AuthoringToolResources.findElementDnDPanel(container, element);
 												if (dndPanel instanceof edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) {
 													java.awt.Component moreTile = ((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController) dndPanel).getMoreTile();
 													if ((moreTile != null) && moreTile.isShowing()) {
 														return true;
-													} else {
-														return false;
 													}
+													return false;
 												}
 											}
 										} else {
 											java.awt.Component c = AuthoringToolResources.findElementDnDPanel(container, element);
 											if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 												return true;
-											} else {
-												return false;
 											}
+											return false;
 										}
 									}
 								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
@@ -4774,9 +4741,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 											java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 											if ((c != null) && c.isShowing()) {
 												return true;
-											} else {
-												return false;
 											}
+											return false;
 										}
 									} catch (Exception e) {
 										AuthoringTool.showErrorDialog(Messages.getString("Error_while_looking_for_ProtoypeDnDPanel_using_class_", spec), e); 
@@ -4789,9 +4755,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 							int tabIndex = jAliceFrame.tabbedEditorComponent.getIndexOfObject(elementBeingEdited);
 							if ((tabIndex >= 0) && (tabIndex < jAliceFrame.tabbedEditorComponent.tabbedPane.getComponentCount())) {
 								return true;
-							} else {
-								return false;
 							}
+							return false;
 						}
 					}
 				}
@@ -4799,9 +4764,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				java.awt.Component c = (java.awt.Component) componentMap.get(prefix);
 				if ((c != null) && c.isShowing()) {
 					return true;
-				} else {
-					return false;
 				}
+				return false;
 			}
 		}
 
@@ -5674,11 +5638,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 
 	// Aik Min
-    private static boolean pulsing = true;   
-    private static JLabel statusLabel = new JLabel(Messages.getString("Ready")); 
-    private static javax.swing.JFrame statusFrame;
+//    private static boolean pulsing = true;   
+//    private static JLabel statusLabel = new JLabel(Messages.getString("Ready")); 
+//    private static javax.swing.JFrame statusFrame;
     private int numUpdate = 0;
-    private boolean checkForUpdate(){
+/*    private boolean checkForUpdate(){
     	java.net.URL url;
     	java.net.URLConnection urlc = null;
 		try {
@@ -5695,7 +5659,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					Messages.getString("Update_failed"), Messages.getString("Cannot_access_required_file_"), javax.swing.JOptionPane.ERROR_MESSAGE );  
     	}	
     	return false;
-    }
+    }*/
     
 	public void updateAlice() {
 		javax.swing.JPanel updateDialog;
@@ -5820,14 +5784,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 				
 				int i, progress = 0;
-				while ((i = bis.read()) != -1) {
-					
+				while ((i = bis.read()) != -1) {				
 					bos.write( i );
 					if (monitor.isCanceled()) {
 						break;
-					} else {
-						monitor.setProgress(progress++);
-					}						
+					} 
+					monitor.setProgress(progress++);						
 				}
 
 				monitor.setProgress(monitor.getMaximum());
@@ -5851,9 +5813,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						if (entry.isDirectory()) {
 							file.mkdir();
 							continue;
-						} else {
-							file.getParentFile().mkdirs();
-						}
+						} 
+						file.getParentFile().mkdirs();
 						InputStream in = zipFile.getInputStream(entry);
 						OutputStream out = new BufferedOutputStream(new FileOutputStream(aliceHome + System.getProperty( "file.separator" ) + entry.getName()));
 						byte[] buffer = new byte[1024];

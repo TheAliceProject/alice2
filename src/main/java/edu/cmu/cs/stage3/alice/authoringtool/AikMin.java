@@ -20,7 +20,7 @@ public class AikMin {
 	//System.getProperty("os.name") != null) && System.getProperty("os.name").startsWith("Windows")  
 	//edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource( "images/record.png" )
 	//System.getProperty( "file.separator" )
-	//new String(item.getBytes("utf-8"), "utf-8");
+	//new String(item.getBytes("utf-8"), "utf-8"); Windows-1256 ISO-8859-1 
 	/*javax.swing.Timer focusTimer = new javax.swing.Timer(100,
 			new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent ev) {
@@ -34,7 +34,6 @@ public class AikMin {
 		edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringtoolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( JAlice.class.getPackage() );
 		if( authoringtoolConfig.getValue( "language" ) == null ) { 
 			authoringtoolConfig.setValue( "language", AikMin.defaultLanguage );
-			return locale;
 		} else {
 			String aliceLanguage = authoringtoolConfig.getValue( "language" );
 			if (aliceLanguage.equalsIgnoreCase("Portuguese")) {
@@ -46,13 +45,13 @@ public class AikMin {
 			} else if (aliceLanguage.equalsIgnoreCase("Arabic")) {
 				locale = new Locale ("ar");
 			}
-			return locale;
 		}		
+		return locale;
 	}
 	
 	public static boolean isLTR(){
 		return !locale.getDisplayName().equalsIgnoreCase("Arabic"); 
-		//return false;
+		//return true;
 	}
 	
 	public static boolean isWindows() {
@@ -236,6 +235,12 @@ public class AikMin {
 			javax.swing.UIManager.put("TabbedPane.tabsOverlapBorder", true); 
 			javax.swing.UIManager.put("TabbedPane.selectHighlight", javax.swing.UIManager.get("TabbedPane.selected")); 
 			
+			//Customize OptionPane buttons
+			UIManager.put("OptionPane.cancelButtonText", Messages.getString("Cancel"));
+		    UIManager.put("OptionPane.okButtonText", Messages.getString("OK"));
+		    UIManager.put("OptionPane.yesButtonText", Messages.getString("Yes"));
+		    UIManager.put("OptionPane.noButtonText", Messages.getString("No"));
+		    
 			//Customize buttons
 			javax.swing.UIManager.put("Button.select", new java.awt.Color(255, 255, 255, 0)); 
 			javax.swing.UIManager.put("Button.focus", new java.awt.Color(255, 255, 255, 0)); 
@@ -247,10 +252,9 @@ public class AikMin {
 			if ( AikMin.isWindows() ) {   
 				javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  
 			} 
-			if ( AikMin.isMAC() ) {   			
-				//javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  				
-				javax.swing.UIManager.put("ScrollBarUI", "apple.laf.AquaScrollBarUI"); 
-				javax.swing.UIManager.put("SliderUI", "apple.laf.AquaSliderUI"); 
+			if ( AikMin.isMAC() ) { 
+				//javax.swing.UIManager.put("ScrollBarUI", "com.apple.laf.AquaScrollBarUI"); 
+				//javax.swing.UIManager.put("SliderUI", "apple.laf.AquaSliderUI"); 
 			}
 			
 		} catch (Exception e) {

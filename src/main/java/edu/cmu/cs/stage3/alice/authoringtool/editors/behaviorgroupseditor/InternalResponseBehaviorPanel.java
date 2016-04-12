@@ -73,7 +73,6 @@ public class InternalResponseBehaviorPanel extends BasicBehaviorPanel {
         this.addDragSourceComponent(labelPanel);
         labelPanel.removeAll();
         this.setBackground(COLOR);
-        int base = 0;
         buildLabel(labelPanel);
         java.awt.Component glue = javax.swing.Box.createHorizontalGlue();
         this.addDragSourceComponent(glue);

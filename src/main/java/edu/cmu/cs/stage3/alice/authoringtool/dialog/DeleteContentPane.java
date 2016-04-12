@@ -32,9 +32,7 @@ import java.awt.Insets;
 /**
  * @author Jason Pratt, Dennis Cosgrove
  */
-public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
-		implements edu.cmu.cs.stage3.alice.core.event.PropertyListener,
-		edu.cmu.cs.stage3.alice.core.event.ChildrenListener {
+public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane implements edu.cmu.cs.stage3.alice.core.event.PropertyListener, edu.cmu.cs.stage3.alice.core.event.ChildrenListener {
 	public final static int LESS_DETAIL_MODE = 0;
 	public final static int MORE_DETAIL_MODE = 1;
 
@@ -45,9 +43,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.HighlightingGlassPane glassPane;
 	protected edu.cmu.cs.stage3.alice.core.Element danglingElementToClear;
 
-	public static void showDeleteDialog(
-			edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable deleteRunnable,
-			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+	public static void showDeleteDialog(edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.DeleteRunnable deleteRunnable,	edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
 		DeleteContentPane dcp = new DeleteContentPane(authoringTool);
 		dcp.setDeleteRunnable(deleteRunnable);
 		dcp.refresh();
@@ -170,13 +166,8 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 					}
 				} else if (reference instanceof edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference) {
 					edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference oAPR = (edu.cmu.cs.stage3.alice.core.reference.ObjectArrayPropertyReference) reference;
-					edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] references = oAPR
-							.getReference()
-							.getPropertyReferencesTo(
-									deleteRunnable.getElement(),
-									edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS,
-									true, true);
-					if (references != null || references.length > 0) {
+					edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] references = oAPR.getReference().getPropertyReferencesTo(deleteRunnable.getElement(), edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS, true, true);
+					if (references != null && references.length > 0) {
 						reference.getProperty().addPropertyListener(this);
 					}
 
@@ -193,10 +184,8 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 		javax.swing.ListModel list = referencesList.getModel();
 		for (int i = 0; i < list.getSize(); i++) {
 			if (list.getElementAt(i) instanceof edu.cmu.cs.stage3.alice.core.reference.PropertyReference) {
-				edu.cmu.cs.stage3.alice.core.reference.PropertyReference reference = (edu.cmu.cs.stage3.alice.core.reference.PropertyReference) list
-						.getElementAt(i);
-				edu.cmu.cs.stage3.alice.core.Element source = reference
-						.getProperty().getOwner();
+				edu.cmu.cs.stage3.alice.core.reference.PropertyReference reference = (edu.cmu.cs.stage3.alice.core.reference.PropertyReference) list.getElementAt(i);
+				edu.cmu.cs.stage3.alice.core.Element source = reference.getProperty().getOwner();
 				stopListeningUpToRootElement(source);
 				if (source instanceof edu.cmu.cs.stage3.alice.core.question.PropertyValue) {
 					if (source.getParent() != null) {
@@ -217,7 +206,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 									deleteRunnable.getElement(),
 									edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS,
 									true, true);
-					if (references != null || references.length > 0) {
+					if (references != null && references.length > 0) {
 						reference.getProperty().removePropertyListener(this);
 					}
 
@@ -684,18 +673,18 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane
 					
 					if (!setIt) {
 						if (AikMin.isLTR()){
-							highlightID = temp1 + ":elementTile<" + source.getKey(world) + ">";
+							highlightID = temp2 + ":elementTile<" + source.getKey(world) + ">";
 						} else {
-							highlightID = "[elementTile<" + source.getKey(world) + ">]" + temp1;
+							highlightID = "[elementTile<" + source.getKey(world) + ">]" + temp2;
 						}
 					}
 				} else {
 					if (AikMin.isLTR()){
-						highlightID = temp1 + ":elementTile<" + source.getKey(world)
+						highlightID = temp2 + ":elementTile<" + source.getKey(world)
 							+ ">:property<" + reference.getProperty().getName() + ">";
 					} else {
 						highlightID = "[elementTile<" + source.getKey(world)
-								+ ">:property<" + reference.getProperty().getName() + ">]" + temp1;
+								+ ">:property<" + reference.getProperty().getName() + ">]" + temp2;
 					}
 				}
 				// System.out.println("made it: "+highlightID);

@@ -86,8 +86,7 @@ public class ElementReferenceTransferable implements java.awt.datatransfer.Trans
 		if( element != null ) {
 			edu.cmu.cs.stage3.alice.core.Element copy = element.createCopyNamed( element.name.getStringValue() );
 			return new ElementReferenceTransferable( copy );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }
