@@ -719,6 +719,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	// checks all response files for sounds to add listeners to
+	@SuppressWarnings("cast")
 	public void findSoundsfromResponse(Response s) {
 
 		if (s instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) {
@@ -738,6 +739,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	}
 
 	// checks all behavior files for sounds to add listeners to
+	@SuppressWarnings("cast")
 	public void findSoundsfromBehavior(Behavior s) {
 
 		if ((((Behavior) s).getChildCount()) > 0) {
@@ -883,7 +885,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			if (AikMin.isWindows()) {
 				statusFrame.setAlwaysOnTop(true);
 				java.awt.Point location = captureBar.getLocationOnScreen();
-				statusFrame.setLocation(new java.awt.Point((int) (location.x), (int) (location.y + renderPanel.getHeight() / 2.0)));
+				statusFrame.setLocation(new java.awt.Point(location.x, (int) (location.y + renderPanel.getHeight() / 2.0)));
 			} else {
 				statusFrame.setLocation(0, 0);
 			}
@@ -1122,7 +1124,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 			// get all the sound files
 			if (frameSequencer != null)
-				sources = authoringTool.getSoundStorage().encodeFiles(((double) (frameSequencer.getFrameNumber() + 1)) / 16.0, exportDirectory + "/frames/" + authoringTool.numEncoded);
+				sources = authoringTool.getSoundStorage().encodeFiles( (frameSequencer.getFrameNumber() + 1) / 16.0, exportDirectory + "/frames/" + authoringTool.numEncoded);
 			else {
 				System.err.print(Messages.getString("No_Sequencer"));
 				afterEncoding(true);

@@ -30,4 +30,5 @@ public class Messages {
 		//return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getString(key);
 	}
 	
+
 }

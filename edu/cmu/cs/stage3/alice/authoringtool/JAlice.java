@@ -41,11 +41,20 @@ import edu.cmu.cs.stage3.lang.Messages;
  * @author Jason Pratt
  */
 public class JAlice {
+	public static double JAVA_VERSION = getJavaVersion ();
+
+	static double getJavaVersion () {
+	    String version = System.getProperty("java.version");
+	    int pos = version.indexOf('.');
+	    pos = version.indexOf('.', pos+1);
+	    return Double.parseDouble (version.substring (0, pos));
+	}
+	
 	// version information
-	private static String version = "2.4.4 Pre Release"; 
+	private static String version = String.valueOf(JAVA_VERSION);//"2.4.4 Pre Release"; 
 	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
-	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
+	//private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
 	static AuthoringTool authoringTool;
 	static {
 /*		try {
@@ -187,6 +196,7 @@ public class JAlice {
 	//////////////////////
 	public static void main( String[] args ) {
 		try {
+			System.setProperty("python.home", System.getProperty("user.dir") + "/jython-2.1");
 		    String[] mp3args = new String[ 0 ];
 		    //System.out.println( "attempting to register mp3 capability... " );
 	    	com.sun.media.codec.audio.mp3.JavaDecoder.main( mp3args );

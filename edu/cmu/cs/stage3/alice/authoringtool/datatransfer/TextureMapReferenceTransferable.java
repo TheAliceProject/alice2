@@ -57,8 +57,7 @@ public class TextureMapReferenceTransferable extends ElementReferenceTransferabl
 		if( element != null ) {
 			edu.cmu.cs.stage3.alice.core.Element copy = element.createCopyNamed( element.name.getStringValue() );
 			return new TextureMapReferenceTransferable( (edu.cmu.cs.stage3.alice.core.TextureMap)copy );
-		} else {
-			return null;
-		}
+		} 
+		return null;
 	}
 }

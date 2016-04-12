@@ -515,13 +515,8 @@ public class AuthoringToolResources {
 	}
 
 	public static String getName( Object key ) {
-		String a = (String)AuthoringToolResources.resources.nameMap.get( key );
-		if (!AikMin.isLTR()){	// ***** To display the tiles string in the details panel (properties tab) *****
-			try {
-				a = new String ( a.toString().getBytes("ISO-8859-1"), "UTF-8" );
-			} catch (Exception e){ }
-		}
-		return a;
+		// ***** To display the nameMap section of the python style file *****
+		return (String)AuthoringToolResources.resources.nameMap.get( key );
 	}
 
 	public static boolean nameMapContainsKey( Object key ) {

@@ -30,6 +30,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.text.Normalizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -309,29 +310,25 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	public boolean isTutorial() {
 		if (currentlySelected != null) {
 			return currentlySelected.type == StartUpIcon.TUTORIAL;
-		} else {
-			return getTabID() == TUTORIAL_TAB_ID;
-		}
+		} 
+		return getTabID() == TUTORIAL_TAB_ID;
 	}
 
 	public boolean isSaveNeeded() {
 		if (currentlySelected != null) {
 			return currentlySelected.needToSave;
-		} else {
-			return true;
-		}
+		} 
+		return true;
 	}
 
 	public java.io.File getFile() {
 		if (getTabID() == OPEN_TAB_ID) {
 			return fileChooser.getSelectedFile();
-		} else {
-			if (currentlySelected != null) {
-				return new java.io.File(currentlySelected.file);
-			} else {
-				return null;
-			}
+		} 
+		if (currentlySelected != null) {
+			return new java.io.File(currentlySelected.file);
 		}
+		return null;		
 	}
 
 	private int getIDForTab(java.awt.Component tab) {
@@ -388,6 +385,20 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 	}
 
+	public static String detectEncoding(byte[] bytes) {
+	    String DEFAULT_ENCODING = "UTF-8";
+	    org.mozilla.universalchardet.UniversalDetector detector =
+	        new org.mozilla.universalchardet.UniversalDetector(null);
+	    detector.handleData(bytes, 0, bytes.length);
+	    detector.dataEnd();
+	    String encoding = detector.getDetectedCharset();
+	    detector.reset();
+	    if (encoding == null) {
+	        encoding = DEFAULT_ENCODING;
+	    } 
+	    return encoding;
+	}
+	
 	private String makeNameFromFilename(String filename) {
 		String name = filename.substring(0, (filename.length() - 4));
 		int last = name.lastIndexOf(java.io.File.separator);
@@ -420,7 +431,16 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 		return toReturn;
 	}
-
+	
+	// Normalize to "Normalization Form Canonical Decomposition" (NFD)
+	protected String normalizeUnicode(String str) {
+	    Normalizer.Form form = Normalizer.Form.NFD;
+	    if (!Normalizer.isNormalized(str, form)) {
+	        return Normalizer.normalize(str, form);
+	    }
+	    return str;
+	}
+	
 	private java.util.Vector buildVectorFromDirectory(java.io.File dir, java.io.FileFilter f) {
 		java.util.Vector toReturn = null;
 		if (dir != null && dir.isDirectory()) {
@@ -431,6 +451,10 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 				if (files[i].isDirectory()) {
 					name = makeDirectoryNameFromFilename(files[i].getName());
 				} else {
+					name = files[i].getName();
+					System.out.println(name);
+				      
+					
 					name = makeNameFromFilename(files[i].getName());
 				}
 				edu.cmu.cs.stage3.util.StringObjectPair sop = new edu.cmu.cs.stage3.util.StringObjectPair(name, files[i].getAbsolutePath());

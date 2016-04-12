@@ -659,6 +659,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		return true;
 	}
 
+	@SuppressWarnings("cast")
 	protected void setInput() {
 		boolean oldContrast = Configuration.getValue(authoringToolPackage, "enableHighContrastMode").equalsIgnoreCase("true");
 		for (java.util.Iterator iter = checkBoxToConfigKeyMap.keySet().iterator(); iter.hasNext();) {

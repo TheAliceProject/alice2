@@ -261,9 +261,11 @@ public abstract class BasicBehaviorPanel extends edu.cmu.cs.stage3.alice.authori
                 toAdd = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(prop, true, shouldAllowExpressions ,edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitPropertyName(prop), propPIF);
             }
             else{
-                toAdd = new javax.swing.JLabel(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue(key));
-                if (toAdd == null){
+            	javax.swing.Icon icon = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getIconForValue(key);         
+                if (icon == null){
                     toAdd = new javax.swing.JLabel(Messages.getString("_no_image_")); 
+                } else {
+                	 toAdd = new javax.swing.JLabel(icon);
                 }
             }
             container.add(new javax.swing.JLabel(currentSubstring), new java.awt.GridBagConstraints(insertX,0,1,1,0,0,java.awt.GridBagConstraints.WEST, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));

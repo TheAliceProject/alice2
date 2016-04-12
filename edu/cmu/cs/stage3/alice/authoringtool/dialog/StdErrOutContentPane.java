@@ -88,7 +88,7 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 					public void run() {
 						if (!isShowing) {
 							isShowing = true;
-							int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog(StdErrOutContentPane.this);
+							edu.cmu.cs.stage3.swing.DialogManager.showDialog(StdErrOutContentPane.this);
 						}
 					}
 				});
@@ -122,7 +122,7 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 					public void run() {
 						if (!isShowing) {
 							isShowing = true;
-							int result = edu.cmu.cs.stage3.swing.DialogManager.showDialog(StdErrOutContentPane.this);
+							edu.cmu.cs.stage3.swing.DialogManager.showDialog(StdErrOutContentPane.this);
 						}
 					}
 				});
@@ -199,9 +199,8 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 			isShowing = true;
 			errorDialog = true;
 			return edu.cmu.cs.stage3.swing.DialogManager.showDialog(this);
-		} else {
-			return -1;
 		}
+		return -1;
 	}
 	
 	public int showStdOutDialog() {
@@ -209,9 +208,8 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 			isShowing = true;
 			errorDialog = false;
 			return edu.cmu.cs.stage3.swing.DialogManager.showDialog(this);
-		} else {
-			return -1;
 		}
+		return -1;
 	}
 	
 	public String getTitle() {

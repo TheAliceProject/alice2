@@ -196,6 +196,7 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 		return listsOnly;
 	}
 
+	@SuppressWarnings("cast")
 	private void updateCollection() {
 		Class type = m_typeChooser.getType();
 		makeObj obj = (makeObj)collectionTypeCombo.getSelectedItem();
@@ -374,18 +375,17 @@ public abstract class NewNamedTypedElementContentPane extends NewNamedElementCon
 	
 	private class makeObj {
 	    
-	   	 public String s;
-	   	 public makeObj(String item){
-   			 s = item;
-	   	 }
-	   	 public Class <?> getItem() {
-	   		 if (s=="List")
-	   			 return edu.cmu.cs.stage3.alice.core.List.class;
-	   		 else
-	   			return edu.cmu.cs.stage3.alice.core.Array.class;
-	   	 }
-	   	 public String toString() { 
-	   		 return Messages.getString(s); 
-	   	 }	   	
+	   	public String s;
+	   	public makeObj(String item){
+	   		s = item;
+	   	}
+	   	public Class <?> getItem() {
+	   		if (s=="List")
+	   			return edu.cmu.cs.stage3.alice.core.List.class;
+			return edu.cmu.cs.stage3.alice.core.Array.class;
+	   	}
+	   	public String toString() { 
+	   		return Messages.getString(s); 
+	   	}	   	
 	}
 }
