@@ -78,9 +78,8 @@ public class Renderer extends edu.cmu.cs.stage3.alice.scenegraph.renderer.Abstra
 			String className = sgClass.getName();
 			if( className.startsWith( SCENEGRAPH_PACKAGE_NAME ) ) {
 				break;
-			} else {
-				sgClass = sgClass.getSuperclass();
 			}
+			sgClass = sgClass.getSuperclass();
 		}
 		try {
 			Class proxyClass = Class.forName( RENDERER_PACKAGE_NAME+sgClass.getName().substring( SCENEGRAPH_PACKAGE_NAME_COUNT )+"Proxy" );

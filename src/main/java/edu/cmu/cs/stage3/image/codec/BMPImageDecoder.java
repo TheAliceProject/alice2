@@ -1227,7 +1227,8 @@ class BMPImage extends SimpleRenderedImage {
 		throw new
 		    RuntimeException(Messages.getString("Invalid_compression_specified_for_BMP_file_"));
 	    }
-
+	    break;
+	    
 	case VERSION_4_8_BIT:
 	    switch((int)compression) {
 

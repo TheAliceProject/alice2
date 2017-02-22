@@ -9,8 +9,7 @@ public class Size extends edu.cmu.cs.stage3.alice.core.question.NumberQuestion {
 		edu.cmu.cs.stage3.alice.core.visualization.ArrayOfModelsVisualization arrayOfModelsVisualizationValue = subject.getArrayOfModelsVisualizationValue();
 		if( arrayOfModelsVisualizationValue!=null ) {
             return new Integer( arrayOfModelsVisualizationValue.size() );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

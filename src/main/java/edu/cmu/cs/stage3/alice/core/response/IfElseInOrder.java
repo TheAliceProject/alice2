@@ -45,9 +45,8 @@ public class IfElseInOrder extends DoInOrder {
 		protected RuntimeResponse[] getRuntimeResponses() {
 			if( m_condition ) {
 				return super.getRuntimeResponses();
-			} else {
-				return m_runtimeElseComponentResponses;
 			}
+			return m_runtimeElseComponentResponses;
 		}
 		
 		public void prologue( double t ) {

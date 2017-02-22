@@ -71,9 +71,8 @@ public class Matrix44 extends javax.vecmath.Matrix4d implements Interpolable {
 					m10==m.m10 && m11==m.m11 && m12==m.m12 && m13==m.m13 &&
 					m20==m.m20 && m21==m.m21 && m22==m.m22 && m23==m.m23 &&
 					m30==m.m30 && m31==m.m31 && m32==m.m32 && m33==m.m33;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public double getItem( int i, int j ) {
 		switch( i ) {
@@ -289,10 +288,9 @@ public class Matrix44 extends javax.vecmath.Matrix4d implements Interpolable {
 		if( rowMajor ) {
 			double[] a = { m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33 };
 			return a;
-		} else {
-			double[] a = { m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33 };
-			return a;
 		}
+		double[] a = { m00, m10, m20, m30, m01, m11, m21, m31, m02, m12, m22, m32, m03, m13, m23, m33 };
+		return a;
 	}
 	public void setArray( double[] a, boolean rowMajor ) {
 		if( rowMajor ) {

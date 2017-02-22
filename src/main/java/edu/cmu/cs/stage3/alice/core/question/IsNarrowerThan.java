@@ -39,8 +39,7 @@ public class IsNarrowerThan extends SubjectObjectQuestion {
 	protected Object getValue( Transformable subjectValue, Transformable objectValue ) {
 		if( subjectValue.getWidth() < objectValue.getWidth() ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

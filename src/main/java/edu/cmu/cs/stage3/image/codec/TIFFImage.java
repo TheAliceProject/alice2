@@ -278,18 +278,16 @@ public class TIFFImage extends SimpleRenderedImage {
 	    if (tileOffsetsField == null) {
 		throw new
 		    RuntimeException(Messages.getString("TIFF_STRIP_OFFSETS_is_a_required_field_"));
-	    } else {
-		tileOffsets = tileOffsetsField.getAsLongs();
 	    }
+		tileOffsets = tileOffsetsField.getAsLongs();
 
 	    TIFFField tileByteCountsField =
 		dir.getField(TIFFImageDecoder.TIFF_STRIP_BYTE_COUNTS);
 	    if (tileByteCountsField == null) {
 		throw new
 		    RuntimeException(Messages.getString("TIFF_STRIP_BYTE_COUNTS_is_a_required_field_"));
-	    } else {
-		tileByteCounts = tileByteCountsField.getAsLongs();
 	    }
+		tileByteCounts = tileByteCountsField.getAsLongs();
 	}
 
 	TIFFField fillOrderField =
@@ -553,9 +551,8 @@ public class TIFFImage extends SimpleRenderedImage {
 	    if (cfield == null) {
 		throw new
 		    RuntimeException(Messages.getString("Colormap_must_be_present_for_a_Palette_Color_image_"));
-	    } else {
-		colormap = cfield.getAsChars();
 	    }
+		colormap = cfield.getAsChars();
 
 	    // Could be either 1 or 3 bands depending on whether we use
 	    // IndexColorModel or not.

@@ -474,9 +474,7 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
         if (insertPanel.isShowing()){
             return javax.swing.SwingUtilities.convertPoint(this, p, insertPanel);
         }
-        else{
-            return null;
-        }
+		return null;
     }
 
     public InsertPanel getDropPanel(){
@@ -800,9 +798,7 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
         if (lookingFor == current){
             return true;
         }
-        else{
-            return canFindOwner(lookingFor, current.getParent());
-        }
+		return canFindOwner(lookingFor, current.getParent());
     }
 
     protected boolean checkLoop(edu.cmu.cs.stage3.alice.core.Element e){
@@ -812,9 +808,7 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
                 if (canFindOwner(v.getParent(),this.componentElements.getOwner())){
                     return true;
                 }
-                else{
-                    return false;
-                }
+				return false;
             }
         }
         return true;

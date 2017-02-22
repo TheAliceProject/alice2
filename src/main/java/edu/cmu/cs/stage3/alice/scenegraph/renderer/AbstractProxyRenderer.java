@@ -26,7 +26,6 @@ package edu.cmu.cs.stage3.alice.scenegraph.renderer;
 public abstract class AbstractProxyRenderer extends AbstractRenderer {
 	private java.util.Hashtable m_sgElementToProxyMap = new java.util.Hashtable();
 	private java.util.Vector m_queuedPropertyChanges = new java.util.Vector();
-
     
 	protected void dispatchPropertyChange( edu.cmu.cs.stage3.alice.scenegraph.event.PropertyEvent propertyEvent ) {
 		edu.cmu.cs.stage3.alice.scenegraph.Property property = propertyEvent.getProperty();
@@ -48,6 +47,9 @@ public abstract class AbstractProxyRenderer extends AbstractRenderer {
 
 	protected abstract AbstractProxy createProxyFor( edu.cmu.cs.stage3.alice.scenegraph.Element sgElement );
 	public AbstractProxy getProxyFor( edu.cmu.cs.stage3.alice.scenegraph.Element sgElement ) {
+		// Aik Min
+		if ( clearMap == true )
+			clearMap();
 		AbstractProxy proxy;
 		if( sgElement!=null ) {
 			proxy = (AbstractProxy)m_sgElementToProxyMap.get( sgElement );
@@ -78,9 +80,8 @@ public abstract class AbstractProxyRenderer extends AbstractRenderer {
                 proxies[i] = getProxyFor( sgElements[i] );
             }
             return proxies;
-        } else {
-            return null;
         }
+		return null;
     }
 
 	public void forgetProxyFor( edu.cmu.cs.stage3.alice.scenegraph.Element sgElement ) {
@@ -98,5 +99,11 @@ public abstract class AbstractProxyRenderer extends AbstractRenderer {
                 }
             }
         }
+	}
+	// Aik Min
+	public static boolean clearMap = false;
+	public void clearMap(){
+		m_sgElementToProxyMap.clear();
+		clearMap = false;
 	}
 }

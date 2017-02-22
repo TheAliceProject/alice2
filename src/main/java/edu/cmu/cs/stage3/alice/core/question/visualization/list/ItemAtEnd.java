@@ -9,8 +9,7 @@ public class ItemAtEnd extends edu.cmu.cs.stage3.alice.core.question.ModelQuesti
 		edu.cmu.cs.stage3.alice.core.visualization.ListOfModelsVisualization listOfModelsVisualizationValue = subject.getListOfModelsVisualizationValue();
 		if( listOfModelsVisualizationValue!=null ) {
             return listOfModelsVisualizationValue.get( -1 );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

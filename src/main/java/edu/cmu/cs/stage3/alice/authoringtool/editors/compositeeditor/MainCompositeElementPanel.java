@@ -449,9 +449,7 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
         if (current == null || current instanceof javax.swing.JTabbedPane){
             return current;
         }
-        else{
-            return getAnchor(current.getParent());
-        }
+		return getAnchor(current.getParent());
     }
 
 	protected void generateGUI(){

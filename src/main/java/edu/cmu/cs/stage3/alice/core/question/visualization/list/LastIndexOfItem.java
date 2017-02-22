@@ -13,8 +13,7 @@ public class LastIndexOfItem extends edu.cmu.cs.stage3.alice.core.question.Numbe
 		edu.cmu.cs.stage3.alice.core.visualization.ListOfModelsVisualization listOfModelsVisualizationValue = subject.getListOfModelsVisualizationValue();
 		if( listOfModelsVisualizationValue!=null ) {
             return new Integer( listOfModelsVisualizationValue.lastIndexOf( item.getModelValue(), startFromIndex.intValue( -1 ) ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

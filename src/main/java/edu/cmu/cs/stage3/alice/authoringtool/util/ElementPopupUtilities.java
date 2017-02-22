@@ -54,9 +54,8 @@ public class ElementPopupUtilities {
 			Object[] initArgs = new Object[] { element };
 			substituteRunnables( initArgs, structure );
 			return PopupMenuUtilities.makePopupMenu( structure );
-		} else {
-			return null;
-		}
+		} 
+		return null;		
 	}
 
 	public static void substituteRunnables( Object[] initArgs, java.util.Vector structure ) {
@@ -134,12 +133,8 @@ public class ElementPopupUtilities {
 					structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("change_to"), subStructure ) ); 
 					return structure;
 				}
-				else{
-					return null;
-				}
 			}
 		}
-
 		return null;
 	}
 
@@ -179,7 +174,7 @@ public class ElementPopupUtilities {
 		if( (element instanceof edu.cmu.cs.stage3.alice.core.Sandbox) && authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
 			popupStructure.add( edu.cmu.cs.stage3.alice.authoringtool.util.ElementPopupUtilities.EditScriptRunnable.class );
 		}
-//		popupStructure.add( PrintStatisticsRunnable.class );
+		//popupStructure.add( PrintStatisticsRunnable.class );
 		
 		if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.characterCriterion.accept( element ) ) {
 			if( element instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
@@ -580,7 +575,7 @@ public class ElementPopupUtilities {
 			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack().stopCompound();
 		}
 	}
-
+/*
 	public static class MakeSharedCopyRunnable extends ElementPopupRunnable {
 		protected Class[] classesToShare = {
 			edu.cmu.cs.stage3.alice.core.Geometry.class,
@@ -593,7 +588,7 @@ public class ElementPopupUtilities {
 		}
 
 		public String getDefaultLabel() {
-			return Messages.getString("make_shared_copy"); 
+			return "make shared copy"; 
 		}
 
 		public void run() {
@@ -613,7 +608,7 @@ public class ElementPopupUtilities {
 		}
 
 		public String getDefaultLabel() {
-			return Messages.getString("print_statistics"); 
+			return "print statistics"; 
 		}
 
 		public void run() {
@@ -623,15 +618,15 @@ public class ElementPopupUtilities {
 			element.visit( itaCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
 			element.visit( textureMapCounter, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
 
-			System.out.println( Messages.getString("Statistics_for_") + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element ) + ":" );  
-			System.out.println( "  "+Messages.getString("object_count__") + itaCounter.getShownIndexedTriangleArrayCount() ); 
-			System.out.println( "    "+Messages.getString("face_count__") + itaCounter.getShownIndexCount() / 3 ); 
-			System.out.println( "  "+Messages.getString("vertex_count__") + itaCounter.getShownVertexCount() ); 
-			System.out.println( " "+Messages.getString("texture_count__") + textureMapCounter.getTextureMapCount() ); 
-			System.out.println( Messages.getString("texture_memory__") + textureMapCounter.getTextureMapMemoryCount() + " bytes" );  
+			System.out.println( "Statistics for " + edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( element ) + ":" );  
+			System.out.println( "  object count: " + itaCounter.getShownIndexedTriangleArrayCount() ); 
+			System.out.println( "    face count: " + itaCounter.getShownIndexCount() / 3 ); 
+			System.out.println( "  vertex count: " + itaCounter.getShownVertexCount() ); 
+			System.out.println( " texture count: " + textureMapCounter.getTextureMapCount() ); 
+			System.out.println( "texture memory: " + textureMapCounter.getTextureMapMemoryCount() + " bytes" );  
 		}
 	}
-
+*/
 	public static class SaveCharacterRunnable extends ElementPopupRunnable {
 		protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
 
@@ -694,9 +689,8 @@ public class ElementPopupUtilities {
 			edu.cmu.cs.stage3.alice.core.Code code = (edu.cmu.cs.stage3.alice.core.Code)element;
 			if( code.isCommentedOut.booleanValue() ) {
 				return Messages.getString("enable"); 
-			} else {
-				return Messages.getString("disable"); 
-			}
+			} 
+			return Messages.getString("disable");			
 		}
 
 		public void run() {
@@ -714,7 +708,7 @@ public class ElementPopupUtilities {
 		}
 
 		public String getDefaultLabel() {
-			return Messages.getString("switch_to_this_element_s_scope"); 
+			return "switch to this element's scope"; 
 		}
 
 		public void run() {
@@ -863,9 +857,8 @@ public class ElementPopupUtilities {
 					String name1 = ((edu.cmu.cs.stage3.alice.core.Element)o1).name.getStringValue();
 					String name2 = ((edu.cmu.cs.stage3.alice.core.Element)o2).name.getStringValue();
 					return name1.compareTo( name2 );
-				} else {
-					return 0;
-				}
+				} 
+				return 0;				
 			}
 		};
 

@@ -121,7 +121,7 @@ public class MainCompositeQuestionPanel extends edu.cmu.cs.stage3.alice.authorin
                 super.addToElement(toAdd, toAddTo, location);
             }
         }
-    };
+    }
 
     public MainCompositeQuestionPanel(){
         super();

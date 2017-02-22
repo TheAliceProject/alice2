@@ -9,8 +9,7 @@ class ElementTree extends javax.swing.JTree {
 		edu.cmu.cs.stage3.alice.core.Element element = (edu.cmu.cs.stage3.alice.core.Element)value;
 		if( element != null ) {
 			return element.name.getStringValue();
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

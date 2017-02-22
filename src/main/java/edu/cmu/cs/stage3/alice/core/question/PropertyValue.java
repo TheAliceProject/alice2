@@ -88,9 +88,8 @@ public class PropertyValue extends edu.cmu.cs.stage3.alice.core.Question {
 //				}
 //			}
 //			return property;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	
@@ -98,34 +97,32 @@ public class PropertyValue extends edu.cmu.cs.stage3.alice.core.Question {
 		Property property = getPropertyValue();
 		if( property != null ) {
 			return property.getValue();
-		} else {
-			throw new RuntimeException();
-			//return null;
 		}
+		throw new RuntimeException();
+		//return null;
 	}
 	
 	public Class getValueClass() {
 		Property property = getPropertyValue();
 		if( property != null ) {
 			return property.getValueClass();
-		} else {
-            String propertyNameValue = propertyName.getStringValue();
-            if( propertyNameValue != null ) {
-                Class cls = element.getValueClass();
-                if( edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( cls ) ) {
-                    try {
-                        java.lang.reflect.Field field = cls.getField( propertyNameValue );
-                        if( field != null ) {
-                            return Element.getValueClassForPropertyNamed( field.getDeclaringClass(), propertyNameValue );
-                        }
-                    } catch( java.lang.NoSuchFieldException nsfe ) {
-                        //pass
-                    } catch( java.lang.SecurityException se ) {
-                        //pass
-                    }
-                }
-            }
-			return Object.class;
 		}
+		String propertyNameValue = propertyName.getStringValue();
+		if( propertyNameValue != null ) {
+		    Class cls = element.getValueClass();
+		    if( edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( cls ) ) {
+		        try {
+		            java.lang.reflect.Field field = cls.getField( propertyNameValue );
+		            if( field != null ) {
+		                return Element.getValueClassForPropertyNamed( field.getDeclaringClass(), propertyNameValue );
+		            }
+		        } catch( java.lang.NoSuchFieldException nsfe ) {
+		            //pass
+		        } catch( java.lang.SecurityException se ) {
+		            //pass
+		        }
+		    }
+		}
+		return Object.class;
 	}
 }

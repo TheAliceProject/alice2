@@ -82,9 +82,8 @@ public class Direction extends edu.cmu.cs.stage3.util.Enumerable {
 				}
 			}
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public static Direction valueOf( String s ) {
 		return (Direction)edu.cmu.cs.stage3.util.Enumerable.valueOf( s, Direction.class );

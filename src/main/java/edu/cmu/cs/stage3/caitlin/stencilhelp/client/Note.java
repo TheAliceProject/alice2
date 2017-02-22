@@ -462,11 +462,11 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
       if (rect != null) {
         if (offset.getY() > 0) {
           return new Point( (rect.x + rect.width/2), (rect.y + rect.height + 1));
-        } else {
-          return new Point( (rect.x + rect.width/2), rect.y + 1);
         }
-      } else return new Point(0,0);
-    } else return new Point(0,0);
+		return new Point( (rect.x + rect.width/2), rect.y + 1);
+      }
+    }
+	return new Point(0,0);
   }
 
   protected Point getHolesPoint() {
@@ -477,7 +477,8 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
       Rectangle holeRect = scrObject.getRectangle();
       if (holeRect != null) {
         return getClosestPoint( bgRect.getBounds(), new Point((int)holeRect.getCenterX(), (int)holeRect.getCenterY()) );
-      } else return null;
+      }
+	return null;
   }
 
   /* screen object stuff */
@@ -485,10 +486,9 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
     if ((scrObject != null) && (scrObject.getRectangle() == null)) {
       prevBlank = true;
       return null;
-    } else {
-      prevBlank = false;
-      return shapes;
     }
+	prevBlank = false;
+      return shapes;
   }
   public Rectangle getRectangle(){
     return rect;
@@ -501,12 +501,14 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
       isModified = false;
       //this.generateShapes();//maybe
       return true;
-    } else return false;
+    }
+	return false;
   }
   public boolean intersectsRectangle( Rectangle testRect ){
     if (rect != null) {
       return rect.intersects(testRect);
-    } else return false;
+    }
+	return false;
   }
   public void addStencilObjectPositionListener(StencilObjectPositionListener posListener){
     stencilObjectPositionListeners.addElement(posListener);
@@ -619,7 +621,8 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
       }
       this.setModified();
       return true;
-    } else return false;
+    }
+	return false;
   }
 
   /* key event listener stuff */
@@ -627,8 +630,8 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
     if ( Character.isISOControl(e.getKeyChar()) ){
       //ignore
       return false;
-    } else {
-      //processUpdate(new String() + e.getKeyChar());
+    }
+	//processUpdate(new String() + e.getKeyChar());
       if (writeEnabled) {
         if (paragraph == null) {
           paragraph = new Paragraph(rectWidth - 20, new Point(clickPos.x + 10, clickPos.y));
@@ -637,8 +640,8 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
         generateShapes();
         this.setModified();
         return true;
-      } else return false;
-    }
+      }
+	return false;
   }
   public boolean keyPressed(KeyEvent e){
     if ( Character.isISOControl(e.getKeyChar()) ){
@@ -660,11 +663,10 @@ public class Note implements StencilObject, MouseEventListener, KeyEventListener
           generateShapes();
           this.setModified();
           return true;
-        } else return false;
-      } else return false;
-    } else {
-       return false;
+        }
+      } 
     }
+	return false;
   }
   public boolean keyReleased(KeyEvent e){
     return false;

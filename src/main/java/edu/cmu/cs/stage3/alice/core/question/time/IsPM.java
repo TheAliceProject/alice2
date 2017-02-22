@@ -30,8 +30,7 @@ public class IsPM extends edu.cmu.cs.stage3.alice.core.question.BooleanQuestion 
 		calendar.setTime( date );
 		if( calendar.get( java.util.Calendar.AM_PM )==java.util.Calendar.PM ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

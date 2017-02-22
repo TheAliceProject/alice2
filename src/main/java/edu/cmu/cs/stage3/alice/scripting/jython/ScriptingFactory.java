@@ -60,6 +60,7 @@ public class ScriptingFactory implements edu.cmu.cs.stage3.alice.scripting.Scrip
 					break;
 				}
 			}
+			br.close(); // To fix resource leak
 			if( sb.length()>0 ) {
 				String script = sb.substring( 0, sb.length()-1 );
 				org.python.core.PyCode code = org.python.core.__builtin__.compile( script, pathname, "exec" );

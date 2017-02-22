@@ -35,8 +35,7 @@ public abstract class ListNumberQuestion extends edu.cmu.cs.stage3.alice.core.qu
 		List listValue = list.getListValue();
 		if( listValue!=null ) {
             return new Integer( getValue( listValue ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

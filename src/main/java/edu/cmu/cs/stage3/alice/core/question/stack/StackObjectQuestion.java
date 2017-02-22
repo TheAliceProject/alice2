@@ -36,8 +36,7 @@ public abstract class StackObjectQuestion extends edu.cmu.cs.stage3.alice.core.Q
 		Stack stackValue = stack.getStackValue();
 		if( stackValue!=null ) {
             return getValue( stackValue );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 
 abstract class LightProxy extends AffectorProxy {
     private float[] m_colorTimesBrightness = new float[ 4 ];
@@ -73,22 +73,22 @@ abstract class LightProxy extends AffectorProxy {
         //there should never be a need to set GL_AMBIENT
         //context.gl.glLightfv( id, GL2.GL_AMBIENT, m_colorTimesBrightnessBuffer ); //{ 0, 0, 0, 0.2 } );
         
-        context.gl.glLightfv( id, GL2.GL_DIFFUSE, m_colorTimesBrightnessBuffer );
+        context.gl.glLightfv( id, GLLightingFunc.GL_DIFFUSE, m_colorTimesBrightnessBuffer );
         
         //todo: should lights' diffuse and specular colors be separated in the scenegraph?
-        context.gl.glLightfv( id, GL2.GL_SPECULAR, m_colorTimesBrightnessBuffer );
+        context.gl.glLightfv( id, GLLightingFunc.GL_SPECULAR, m_colorTimesBrightnessBuffer );
           
         getPosition( reuse_position );
-        context.gl.glLightfv( id, GL2.GL_POSITION, reuse_positionBuffer );
+        context.gl.glLightfv( id, GLLightingFunc.GL_POSITION, reuse_positionBuffer );
         
         getSpotDirection( reuse_spotDirection );
-        context.gl.glLightfv( id, GL2.GL_SPOT_DIRECTION, reuse_spotDirectionBuffer );
+        context.gl.glLightfv( id, GLLightingFunc.GL_SPOT_DIRECTION, reuse_spotDirectionBuffer );
 
-        context.gl.glLightf( id, GL2.GL_SPOT_EXPONENT, getSpotExponent() );	// 0
-        context.gl.glLightf( id, GL2.GL_SPOT_CUTOFF, getSpotCutoff() );		// 180 
-        context.gl.glLightf( id, GL2.GL_CONSTANT_ATTENUATION, getConstantAttenuation() );	// 1
-        context.gl.glLightf( id, GL2.GL_LINEAR_ATTENUATION, getLinearAttenuation() );		// 0
-        context.gl.glLightf( id, GL2.GL_QUADRATIC_ATTENUATION, getQuadraticAttenuation() );	// 0
+        context.gl.glLightf( id, GLLightingFunc.GL_SPOT_EXPONENT, getSpotExponent() );	// 0
+        context.gl.glLightf( id, GLLightingFunc.GL_SPOT_CUTOFF, getSpotCutoff() );		// 180 
+        context.gl.glLightf( id, GLLightingFunc.GL_CONSTANT_ATTENUATION, getConstantAttenuation() );	// 1
+        context.gl.glLightf( id, GLLightingFunc.GL_LINEAR_ATTENUATION, getLinearAttenuation() );		// 0
+        context.gl.glLightf( id, GLLightingFunc.GL_QUADRATIC_ATTENUATION, getQuadraticAttenuation() );	// 0
                
     }
     

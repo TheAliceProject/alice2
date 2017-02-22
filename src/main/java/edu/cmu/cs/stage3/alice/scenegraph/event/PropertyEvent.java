@@ -50,8 +50,7 @@ public class PropertyEvent extends java.util.EventObject {
 	public Object getPreviousValue() {
 		if( m_isPreviousValueValid ) {
 			return m_previousValue;
-		} else {
-			throw new RuntimeException( Messages.getString("previous_value_in_not_valid") ); 
 		}
+		throw new RuntimeException( Messages.getString("previous_value_in_not_valid") );
 	}
 }

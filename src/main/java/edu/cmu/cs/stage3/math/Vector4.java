@@ -44,9 +44,8 @@ public class Vector4 extends javax.vecmath.Vector4d {
 		if( o!=null && o instanceof Vector4 ) {
 			Vector4 v = (Vector4)o;
 			return x==v.x && y==v.y && z==v.z && w==v.w;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public double[] getArray() {
 	double[] a = { x, y, z, w };

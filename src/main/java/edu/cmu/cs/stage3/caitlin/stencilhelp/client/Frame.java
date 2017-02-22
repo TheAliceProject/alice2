@@ -61,11 +61,10 @@ public class Frame implements StencilObject, LayoutChangeListener {
         // we updated successfully
         isModified = true;
         return true;
-    } else {
-        // we failed to find the box for this id
-        isModified = true;
-        return false;
     }
+	// we failed to find the box for this id
+	isModified = true;
+	return false;
 
   }
 
@@ -111,29 +110,30 @@ public class Frame implements StencilObject, LayoutChangeListener {
   public Rectangle getRectangle(){
     if (rect != null) {
       return rect.getBounds();
-    } else return null;
+    }
+	return null;
   }
   public Rectangle getPreviousRectangle(){
     if ((previousRect == null) && (rect != null)) return rect.getBounds();
-    else return previousRect;
+	return previousRect;
   }
   public boolean isModified(){
     if (isModified) {
       isModified = false;
       return true;
-    } else return false;
+    }
+	return false;
   }
   public boolean intersectsRectangle( Rectangle rect ){
     if (this.rect != null) {
       return (rect.intersects(this.getRectangle()));
-    } else {
-      return false;
     }
+	return false;
   }
   // COME BACK - should stencil app really get passed in?
   public Point getNotePoint() {
     if (rect != null) return new Point((int)rect.getX(), (int)rect.getY());
-    else return new Point(0,0);
+	return new Point(0,0);
   }
   public void addStencilObjectPositionListener(StencilObjectPositionListener posListener){
     stencilObjectPositionListeners.addElement(posListener);

@@ -315,7 +315,7 @@ public class ModelEditor extends javax.swing.JFrame {
 				m_camera.rotateRightNow( edu.cmu.cs.stage3.math.MathUtilities.getYAxis(), 0.001 * (x-m_prevX), getModel() );
 				m_prevX = x;
 			}
-		};
+		}
 		CameraOrbiter cameraOrbiter = new CameraOrbiter();
 		m_renderTarget.addMouseListener( cameraOrbiter );
 		m_renderTarget.addMouseMotionListener( cameraOrbiter );

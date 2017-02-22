@@ -49,25 +49,22 @@ public class Namespace extends org.python.core.PyStringMap {
 	/*package protected*/ org.python.core.PyObject java2py( Object o ) {
 		if( o instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 			return getPyElement( (edu.cmu.cs.stage3.alice.core.Element)o );
-		} else {
-			return org.python.core.Py.java2py( o );
 		}
+		return org.python.core.Py.java2py( o );
 	}
 	
 	public synchronized org.python.core.PyObject __finditem__( String key ) {
 		org.python.core.PyObject py = super.__finditem__( key );
 		if( py!=null ) {
 			return py;
-		} else {
-			if( key.equalsIgnoreCase( m_world.name.getStringValue() ) ) {
-				return m_pyWorld;
-			}
-			edu.cmu.cs.stage3.alice.core.Expression expression = m_world.lookup( key );
-			if( expression != null ) {
-				return java2py( expression.getValue() );
-			} else {
-				return m_pyWorld.__findattr__( key );
-			}
 		}
+		if( key.equalsIgnoreCase( m_world.name.getStringValue() ) ) {
+			return m_pyWorld;
+		}
+		edu.cmu.cs.stage3.alice.core.Expression expression = m_world.lookup( key );
+		if( expression != null ) {
+			return java2py( expression.getValue() );
+		}
+		return m_pyWorld.__findattr__( key );
 	}
 }

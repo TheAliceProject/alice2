@@ -137,9 +137,8 @@ public abstract class Camera extends Model /*Transformable*/ {
 		RenderTarget renderTargetValue = (RenderTarget)renderTarget.getValue();
 		if( renderTargetValue!=null ) {
 			return renderTargetValue.getInternal().pick( x, y, edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget.SUB_ELEMENT_IS_NOT_REQUIRED, edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget.ONLY_FRONT_MOST_VISUAL_IS_REQUIRED );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( java.awt.Point p ) {
 		return pick( p.x, p.y );

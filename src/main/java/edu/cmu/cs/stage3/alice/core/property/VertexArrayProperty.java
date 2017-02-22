@@ -42,9 +42,10 @@ public class VertexArrayProperty extends ObjectArrayProperty {
         if( extension.equalsIgnoreCase( "vfb" ) ) {
             verticesValue = edu.cmu.cs.stage3.alice.scenegraph.io.VFB.loadVertices( is );
         } else {
-            verticesValue = edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry.loadVertices( is );
+            verticesValue = edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry.loadVertices( is ); 
         }
         loader.closeCurrentFile();
+        is.close();       	  
         set( verticesValue );
         try {
             m_associatedFileKey = loader.getKeepKey( filename );
@@ -66,7 +67,8 @@ public class VertexArrayProperty extends ObjectArrayProperty {
             m_associatedFileKey = null;
             java.io.OutputStream os = storer.createFile( filename, true );
             edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry.storeVertices( verticesValue, os );
-            storer.closeCurrentFile();
+            //os.close();
+            storer.closeCurrentFile();           
             m_associatedFileKey = associatedFileKey;
         } else {
             if( storer.isKeepFileSupported() ) {

@@ -19,9 +19,8 @@ public class RenderTargetAdapter extends edu.cmu.cs.stage3.alice.scenegraph.rend
 	public java.awt.Graphics getGraphics( edu.cmu.cs.stage3.alice.scenegraph.renderer.nativerenderer.TextureMapProxy textureMapProxy ) {
         if( textureMapProxy!=null ) {
             return new Graphics( m_renderTarget, textureMapProxy );
-        } else {
-            return null;
         }
+		return null;
     }
 
     private int m_nativeInstance;

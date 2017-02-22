@@ -311,7 +311,7 @@ public class JAliceFrame extends javax.swing.JFrame {
 		// Remove tooltip and popup menu when window loses focus
 		if ( AikMin.isMAC() ){
 			addWindowFocusListener(new java.awt.event.WindowFocusListener(){
-				Boolean flag = javax.swing.ToolTipManager.sharedInstance().isEnabled();
+				boolean flag = javax.swing.ToolTipManager.sharedInstance().isEnabled();
 				@Override
 				public void windowGainedFocus(java.awt.event.WindowEvent arg0) {
 					if (flag)

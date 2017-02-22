@@ -356,8 +356,7 @@ public class ModelWrapper {
 	public String getModelName() {
 		if (person != null)
 			return person.name.getStringValue();
-		else
-			return "";
+		return "";
 	}
 
 	public void setModel(Model part, String parentName) {

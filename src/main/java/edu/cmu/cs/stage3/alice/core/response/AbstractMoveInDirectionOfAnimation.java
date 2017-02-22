@@ -47,9 +47,8 @@ public abstract class AbstractMoveInDirectionOfAnimation extends TransformAnimat
                     v.set( 0, 0, amountValue );
                 }
 				return v;
-			} else {
-				return new javax.vecmath.Vector3d();
 			}
+			return new javax.vecmath.Vector3d();
 		}
 		
 		public void prologue( double t ) {

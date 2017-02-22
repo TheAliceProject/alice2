@@ -34,8 +34,7 @@ public abstract class StackNumberQuestion extends edu.cmu.cs.stage3.alice.core.q
 		Stack stackValue = stack.getStackValue();
 		if( stackValue!=null ) {
             return new Integer( getValue( stackValue ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

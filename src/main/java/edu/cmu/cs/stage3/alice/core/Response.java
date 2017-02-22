@@ -135,9 +135,8 @@ public abstract class Response extends Code {
 			edu.cmu.cs.stage3.alice.core.Behavior behavior = getCurrentBehavior();
 			if( behavior != null ) {
 				return behavior.getCurrentStack();
-			} else {
-				return null;				
 			}
+			return null;
 		}
 
 	}

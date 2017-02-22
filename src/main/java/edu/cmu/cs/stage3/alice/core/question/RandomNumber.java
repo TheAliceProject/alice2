@@ -45,16 +45,14 @@ public class RandomNumber extends Question {
 		if( integerOnly.booleanValue() ) {
 			//todo: handle [min, max] as opposed to [ min, max )
 			return new Double( (int)value );//return new Integer( (int)value );
-		} else {
-			return new Double( value );
 		}
+		return new Double( value );
 	}
 	
 	public Class getValueClass() {
 		if( integerOnly.booleanValue() ) {
 			return Integer.class;
-		} else {
-			return Number.class;
 		}
+		return Number.class;
 	}
 }

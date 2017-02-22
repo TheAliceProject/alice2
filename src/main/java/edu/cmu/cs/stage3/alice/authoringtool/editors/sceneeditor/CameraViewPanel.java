@@ -46,6 +46,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -209,9 +210,8 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 					if (edu.cmu.cs.stage3.alice.core.response.CompositeResponse.class.isAssignableFrom(prototype.getElementClass()) || edu.cmu.cs.stage3.alice.core.response.Print.class.isAssignableFrom(prototype.getElementClass()) || edu.cmu.cs.stage3.alice.core.response.Comment.class.isAssignableFrom(prototype.getElementClass())) {
 						dtde.rejectDrag();
 						return false;
-					} else {
-						toReturn = true;
 					}
+					toReturn = true;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -317,9 +317,8 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 			}
 			if (sourceComponent instanceof edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryObject) {
 				return (edu.cmu.cs.stage3.alice.authoringtool.galleryviewer.GalleryObject) sourceComponent;
-			} else {
-				return null;
 			}
+			return null;
 		}
 
 		private void turnAndRaiseManipulator(int keyMode, java.awt.Point point) {
@@ -526,7 +525,8 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 										world.addChild(billboard);
 										edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.addElementToAppropriateProperty(billboard, world);
 										billboard.vehicle.set(world);
-										CameraViewPanel.this.renderTarget.markDirty();
+										//CameraViewPanel.this.renderTarget.markDirty();
+										renderTarget.markDirty();
 									} else {
 										edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("did_not_produce_a_TextureMap_when_loaded_", file.getAbsolutePath()), null, false);
 										continue;
@@ -956,14 +956,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 			cameraFromTheTop.vehicle.set(camTransformableFromTheTop);
 			cameraFromTheFront.vehicle.set(camTransformableFromTheFront);
 
-			cameraFromTheRight.minimumX.set(new Double(Double.NaN)); // Aik Min
-																		// -
-																		// move
-																		// camera
-																		// away
-																		// in
-																		// quad
-																		// view
+			cameraFromTheRight.minimumX.set(new Double(Double.NaN)); // Aik Min - move camera away in quad view
 			cameraFromTheRight.minimumY.set(new Double(-3.0));
 			cameraFromTheRight.maximumX.set(new Double(Double.NaN));
 			cameraFromTheRight.maximumY.set(new Double(3.0));
@@ -2050,7 +2043,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 			}
 		});
 		lensAngleLabel.setText(Messages.getString("lens_angle_"));
-		controlScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		controlScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		moreFewerControlsButton.setText(Messages.getString("more_controls____"));
 		moreFewerControlsButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -55,9 +55,8 @@ public class Sphere implements Cloneable {
 
 			//todo handle null
 			return m_center.equals( s.m_center ) && m_radius==s.m_radius;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public double getRadius() {
 		return m_radius;
@@ -68,9 +67,8 @@ public class Sphere implements Cloneable {
 	public javax.vecmath.Vector3d getCenter() {
 		if( m_center!=null ) {
 			return new javax.vecmath.Vector3d( m_center );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void setCenter( javax.vecmath.Vector3d center ) {
         if( center != null ) {

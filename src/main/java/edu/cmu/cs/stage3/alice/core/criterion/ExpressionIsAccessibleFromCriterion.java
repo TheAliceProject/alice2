@@ -50,8 +50,7 @@ public class ExpressionIsAccessibleFromCriterion extends edu.cmu.cs.stage3.util.
 			}
             */
             return false;
-		} else {
-			return false;
 		}
+		return false;
 	}
 }

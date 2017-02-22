@@ -326,9 +326,8 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 		}
 		if( unsetProperties.size() > 0 ) {
 			return (edu.cmu.cs.stage3.alice.core.Property[])unsetProperties.toArray( new edu.cmu.cs.stage3.alice.core.Property[0] );
-		} else {
-			return new edu.cmu.cs.stage3.alice.core.Property[0];
 		}
+		return new edu.cmu.cs.stage3.alice.core.Property[0];
 	}
 
 	public void paintForeground( java.awt.Graphics g ) {

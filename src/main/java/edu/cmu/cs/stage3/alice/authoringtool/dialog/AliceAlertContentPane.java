@@ -163,8 +163,7 @@ public abstract class AliceAlertContentPane extends
 		} else if (mode == MORE_DETAIL_MODE) {
 			setMoreDetail();
 		} else {
-			throw new IllegalArgumentException(
-					Messages.getString("Illegal_mode__", mode));
+			throw new IllegalArgumentException(Messages.getString("Illegal_mode__", String.valueOf(mode)));
 		}
 	}
 

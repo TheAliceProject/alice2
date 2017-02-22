@@ -72,9 +72,8 @@ public class RenderTarget extends Element {
 	public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( int x, int y, boolean isSubElementRequired, boolean isOnlyFrontMostRequired ) {
 		if( m_onscreenRenderTarget != null ) {
 			return m_onscreenRenderTarget.pick( x, y, isSubElementRequired, isOnlyFrontMostRequired );
-		} else {
-			throw new NullPointerException( "internal m_onscreenRenderTarget is null" );
 		}
+		throw new NullPointerException( "internal m_onscreenRenderTarget is null" );
 	}
 	public static edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( java.awt.event.MouseEvent mouseEvent ) {
 		edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo = (edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo)s_eventMap.get( mouseEvent );
@@ -133,53 +132,46 @@ public class RenderTarget extends Element {
 	public double[] getActualPlane( edu.cmu.cs.stage3.alice.core.camera.OrthographicCamera orthographicCamera ) {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getActualPlane( orthographicCamera.getSceneGraphOrthographicCamera() );
-		} else {
-			return null;
 		}
+		return null;
     }
 	public double[] getActualPlane( edu.cmu.cs.stage3.alice.core.camera.PerspectiveCamera perspectiveCamera ) {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getActualPlane( perspectiveCamera.getSceneGraphPerspectiveCamera() );
-		} else {
-			return null;
 		}
+		return null;
     }
 	public double getActualHorizontalViewingAngle( edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera symmetricPerspectiveCamera ) {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getActualVerticalViewingAngle( symmetricPerspectiveCamera.getSceneGraphSymmetricPerspectiveCamera() );
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
     }
 	public double getActualVerticalViewingAngle( edu.cmu.cs.stage3.alice.core.camera.SymmetricPerspectiveCamera symmetricPerspectiveCamera ) {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getActualVerticalViewingAngle( symmetricPerspectiveCamera.getSceneGraphSymmetricPerspectiveCamera() );
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
     }
 
 	public javax.vecmath.Matrix4d getProjectionMatrix( Camera camera ) {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getProjectionMatrix( camera.getSceneGraphCamera() );
-		} else {
-			return null;
 		}
+		return null;
     }
 
 	public java.awt.Rectangle getActualViewport( Camera camera ) {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getActualViewport( camera.getSceneGraphCamera() );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public java.awt.Rectangle getViewport( Camera camera ) {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getViewport( camera.getSceneGraphCamera() );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void setViewport( Camera camera, java.awt.Rectangle rectangle ) {
 		if( m_onscreenRenderTarget!=null ) {
@@ -191,9 +183,8 @@ public class RenderTarget extends Element {
 			javax.vecmath.Matrix4d projection = m_onscreenRenderTarget.getProjectionMatrix( camera.getSceneGraphCamera() );
 			edu.cmu.cs.stage3.math.Vector4 xyzw = new edu.cmu.cs.stage3.math.Vector4( point.x, point.y, point.z, 1 );
 			return edu.cmu.cs.stage3.math.Vector4.multiply( xyzw, projection );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public java.awt.Component getAWTComponent() {
 		return m_awtComponent;
@@ -201,16 +192,14 @@ public class RenderTarget extends Element {
 	public java.awt.Image getOffscreenImage() {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getOffscreenImage();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public java.awt.Graphics getOffscreenGraphics() {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getOffscreenGraphics();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void addRenderTargetListener( edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetListener renderTargetListener ) {
 		if( m_onscreenRenderTarget!=null ) {
@@ -229,9 +218,8 @@ public class RenderTarget extends Element {
 	public edu.cmu.cs.stage3.alice.scenegraph.renderer.event.RenderTargetListener[] getRenderTargetListeners() {
 		if( m_onscreenRenderTarget!=null ) {
 			return m_onscreenRenderTarget.getRenderTargetListeners();
-		} else {
-			throw new NullPointerException( "internal m_onscreenRenderTarget is null" );
 		}
+		throw new NullPointerException( "internal m_onscreenRenderTarget is null" );
 	}
 
 	public void addKeyListener( java.awt.event.KeyListener keyListener ) {

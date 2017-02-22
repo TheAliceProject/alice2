@@ -65,9 +65,8 @@ public class Matrix33 extends javax.vecmath.Matrix3d implements Interpolable {
 			return  m00==m.m00 && m01==m.m01 && m02==m.m02 &&
 					m10==m.m10 && m11==m.m11 && m12==m.m12 &&
 					m20==m.m20 && m21==m.m21 && m22==m.m22;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public double getItem( int i, int j ) {
 		switch( i ) {
@@ -221,10 +220,9 @@ public class Matrix33 extends javax.vecmath.Matrix3d implements Interpolable {
 		if( rowMajor ) {
 			double[] a = { m00, m01, m02, m10, m11, m12, m20, m21, m22 };
 			return a;
-		} else {
-			double[] a = { m00, m10, m20, m01, m11, m21, m02, m12, m22 };
-			return a;
 		}
+		double[] a = { m00, m10, m20, m01, m11, m21, m02, m12, m22 };
+		return a;
 	}
 	public void setArray( double[] a, boolean rowMajor ) {
 		if( rowMajor ) {
@@ -415,7 +413,7 @@ public class Matrix33 extends javax.vecmath.Matrix3d implements Interpolable {
 		shear.xz /= scale.z;
 		shear.yz /= scale.z;
 
-		double determinate = Vector3.dotProduct( row0, Vector3.crossProduct( row1, row2 ) );;
+		double determinate = Vector3.dotProduct( row0, Vector3.crossProduct( row1, row2 ) );
 		if( determinate < 0 ) {
 			row0.negate();
 			row1.negate();

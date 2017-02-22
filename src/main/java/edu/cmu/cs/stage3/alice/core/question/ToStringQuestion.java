@@ -45,7 +45,7 @@ public class ToStringQuestion extends Question {
     
 	public Object getValue() {
     	Object value = what.getValue();
-    	Object o = what.get();
+    	//Object o = what.get();
 /*		if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart)
 			Print.outputtext = Messages.getString("time_elapsed_as_a_string_is_"); 
 		else if (o instanceof edu.cmu.cs.stage3.alice.core.question.time.Year)

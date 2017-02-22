@@ -43,8 +43,7 @@ public class VariableNamed extends Question {
         Class cls = valueClass.getClassValue();
         if( cls != null ) {
             return cls;
-        } else {
-            return java.lang.Object.class;
         }
+		return java.lang.Object.class;
 	}
 }

@@ -47,13 +47,12 @@ public class AskUserForNumber extends edu.cmu.cs.stage3.alice.core.question.Numb
 			if (string != null) { 
 				if ( string.matches( "-?\\d+" ) || string.matches( "-?\\d*\\.\\d+" ) ) {
 					return new Double( string );
-				} else {
-					Pattern p = Pattern.compile("(-?\\d*\\.\\d+)|(-?\\d+)");
-					Matcher m = p.matcher(string);
-					if ( m.find() ){
-						String t = m.group();
-						return new Double (t);
-					}
+				}
+				Pattern p = Pattern.compile("(-?\\d*\\.\\d+)|(-?\\d+)");
+				Matcher m = p.matcher(string);
+				if ( m.find() ){
+					String t = m.group();
+					return new Double (t);
 				}
 			}
 			return new Double( 0 );

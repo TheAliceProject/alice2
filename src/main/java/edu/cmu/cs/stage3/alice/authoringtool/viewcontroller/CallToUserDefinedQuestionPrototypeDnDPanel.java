@@ -210,5 +210,5 @@ public class CallToUserDefinedQuestionPrototypeDnDPanel extends edu.cmu.cs.stage
 			}
 			CallToUserDefinedQuestionPrototypeDnDPanel.this.refreshGUI();
 		}
-	};
+	}
 }

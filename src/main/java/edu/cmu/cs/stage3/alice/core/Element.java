@@ -307,9 +307,8 @@ public abstract class Element {
             int index = propertyOwner.indexIn( originals );
             if( index != -1 ) {
                 return replacements[ index ].getPropertyNamed( m_property.getName() );
-            } else {
-                return m_property;
             }
+			return m_property;
         }
         public Element getValue( Element[] originals, Element[] replacements ) {
             if( m_value instanceof Element ) {
@@ -707,18 +706,16 @@ public abstract class Element {
 	public Element getRoot() {
 		if( m_parent==null ) {
 			return this;
-		} else {
-			return m_parent.getRoot();
 		}
+		return m_parent.getRoot();
 	}
 
 	public World getWorld() {
 		Element root = getRoot();
 		if( root instanceof World ) {
 			return (World)root;
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public Sandbox getSandbox() {
 		if( this instanceof Sandbox ) {
@@ -730,9 +727,8 @@ public abstract class Element {
 		}
 		if( m_parent == null ) {
 			return null;
-		} else {
-			return m_parent.getSandbox();
 		}
+		return m_parent.getSandbox();
 	}
 	public boolean isDescendantOf( Element element ) {
 		Element parentValue = getParent();
@@ -747,9 +743,8 @@ public abstract class Element {
 	public boolean isAncestorOf( Element element ) {
 		if( element != null ) {
 			return element.isDescendantOf( this );
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	private void buildDetailedPath( StringBuffer sb ) {
@@ -854,36 +849,32 @@ public abstract class Element {
                 if( child != null ) {
                     if( child.name.get() == null ) {
                         return child;
-                    } else {
-                        return null;
                     }
-                } else {
-                    return null;
+					return null;
                 }
-			} else {
-				for( int i=0; i<getChildCount(); i++ ) {
-					Element child = getChildAt( i );
-					if( nameValue!=null ) {
-						boolean found;
-						if( ignoreCase ) {
-							found = nameValue.equalsIgnoreCase( child.name.getStringValue() );
-						} else {
-							found = nameValue.equals( child.name.getStringValue() );
-						}
-						if( found ) {
-							return child;
-						}
-					} else {
-						if( child.name.getStringValue()==null ) {
-							return child;
-						}
-					}
-				}
 				return null;
 			}
-		} else {
+			for( int i=0; i<getChildCount(); i++ ) {
+				Element child = getChildAt( i );
+				if( nameValue!=null ) {
+					boolean found;
+					if( ignoreCase ) {
+						found = nameValue.equalsIgnoreCase( child.name.getStringValue() );
+					} else {
+						found = nameValue.equals( child.name.getStringValue() );
+					}
+					if( found ) {
+						return child;
+					}
+				} else {
+					if( child.name.getStringValue()==null ) {
+						return child;
+					}
+				}
+			}
 			return null;
 		}
+		return null;
 	}
 	public Element getChildNamed( String nameValue ) {
 		return internalGetChildNamed( nameValue, false );
@@ -894,21 +885,18 @@ public abstract class Element {
 	private Element internalGetDescendantKeyed( String key, int fromIndex, boolean ignoreCase ) {
 		if( key.equals( "" ) ) { 
 			return this;
-		} else {
-			int toIndex = key.indexOf( SEPARATOR, fromIndex );
-			if( toIndex == -1 ) {
-				String childName = key.substring( fromIndex );
-				return internalGetChildNamed( childName, ignoreCase );
-			} else {
-				String childName = key.substring( fromIndex, toIndex );
-				Element child = internalGetChildNamed( childName, ignoreCase );
-				if( child != null ) {
-					return child.internalGetDescendantKeyed( key, toIndex+1, ignoreCase );
-				} else {
-					return null;
-				}
-			}
 		}
+		int toIndex = key.indexOf( SEPARATOR, fromIndex );
+		if( toIndex == -1 ) {
+			String childName = key.substring( fromIndex );
+			return internalGetChildNamed( childName, ignoreCase );
+		}
+		String childName = key.substring( fromIndex, toIndex );
+		Element child = internalGetChildNamed( childName, ignoreCase );
+		if( child != null ) {
+			return child.internalGetDescendantKeyed( key, toIndex+1, ignoreCase );
+		}
+		return null;
 	}
 	public Element getDescendantKeyed( String key ) {
 		return internalGetDescendantKeyed( key, 0, false );
@@ -978,11 +966,10 @@ public abstract class Element {
 		Element[] elements = search( new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( cls ), howMuch );
 		if( cls == Element.class ) {
 			return elements;
-		} else {
-			Object array = java.lang.reflect.Array.newInstance( cls, elements.length );
-			System.arraycopy( elements, 0, array, 0, elements.length );
-			return (Element[])array;
 		}
+		Object array = java.lang.reflect.Array.newInstance( cls, elements.length );
+		System.arraycopy( elements, 0, array, 0, elements.length );
+		return (Element[])array;
 	}
 	public Element[] getDescendants( Class cls ) {
 		return getDescendants( cls, HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
@@ -1030,9 +1017,8 @@ public abstract class Element {
 			m_children.removeElementAt( oldIndex );
 			onChildrenChange( childrenEvent );
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public void insertChildAt( Element child, int index ) {
 		if( child.getParent()==this ) {
@@ -1453,9 +1439,10 @@ public abstract class Element {
 
             String classname = elementNode.getAttribute( "class" ); 
             double version = Double.parseDouble( elementNode.getAttribute( "version" ) ); 
-            String nameValue = elementNode.getAttribute( "name" ); 
+            String nameValue = elementNode.getAttribute( "name" );
 
             try {
+            	
                 Class cls = Class.forName( classname );
                 Element element = (Element)(cls.newInstance());
                 try {
@@ -1480,7 +1467,6 @@ public abstract class Element {
                     }
                 }
 
-
                 s_loadProgress++;
                 if( progressObserver!=null ) {
 					progressObserver.progressUpdate( s_loadProgress, element.name.getStringValue() );//todo: this should be key...
@@ -1491,6 +1477,7 @@ public abstract class Element {
                     org.w3c.dom.Element childNode = (org.w3c.dom.Element)childNodeList.item( i );
                     String filename = childNode.getAttribute( "filename" ).trim(); 
                     loader.setCurrentDirectory( filename );
+
                     Element child = load( builder, loader, referencesToBeResolved, progressObserver );
                     String childName = child.name.getStringValue();
                     if( childName != null ) {
@@ -1511,6 +1498,8 @@ public abstract class Element {
                 throw new ExceptionWrapper( ie, "InstantiationException: " + classname ); 
             } catch( IllegalAccessException iae ) {
                 throw new ExceptionWrapper( iae, "IllegalAccessException: " + classname ); 
+            } finally {
+            	reader.close();
             }
         } catch( org.xml.sax.SAXException saxe ) {
 			throw new ExceptionWrapper( saxe, "org.xml.sax.SAXException" ); 
@@ -1526,6 +1515,7 @@ public abstract class Element {
 			try {
 				java.io.BufferedReader br = new java.io.BufferedReader( new java.io.InputStreamReader ( new java.io.BufferedInputStream( loader.readFile( "elementCountHint.txt" ) ) ) ); 
 				elementCount = Integer.parseInt( br.readLine().replaceAll("\\D", "") );
+				br.close();
 				loader.closeCurrentFile();
 			} catch( java.io.FileNotFoundException fnfe ) {
 				//pass
@@ -1569,11 +1559,10 @@ public abstract class Element {
         if( referencesLeftUnresolved.size() == 0 ) {
             element.loadCompleted();
             return element;
-        } else {
-            PropertyReference[] propertyReferences = new PropertyReference[ referencesLeftUnresolved.size() ];
-            referencesLeftUnresolved.copyInto( propertyReferences );
-            throw new UnresolvablePropertyReferencesException( propertyReferences, element, "loader: " + loader + "; externalRoot: " + externalRoot );  
         }
+		PropertyReference[] propertyReferences = new PropertyReference[ referencesLeftUnresolved.size() ];
+		referencesLeftUnresolved.copyInto( propertyReferences );
+		throw new UnresolvablePropertyReferencesException( propertyReferences, element, "loader: " + loader + "; externalRoot: " + externalRoot );
 	}
 	public static Element load( java.io.File file, Element externalRoot, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws java.io.IOException, edu.cmu.cs.stage3.progress.ProgressCancelException, UnresolvablePropertyReferencesException {
 		edu.cmu.cs.stage3.io.DirectoryTreeLoader loader = null;
@@ -1786,7 +1775,7 @@ public abstract class Element {
             javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
             int storeCount = internalStore( builder, storer, progressObserver, howMuch, referenceGenerator, 0 );
             if( elementCount != storeCount ) {
-                warnln( Messages.getString("WARNING__elementCount_not_equal_storeCount_not_equal_storeCount_", elementCount, storeCount) );  
+                warnln( Messages.getString("WARNING__elementCount_not_equal_storeCount_", elementCount, storeCount) );  
             }
         } catch( javax.xml.parsers.ParserConfigurationException pce ) {
             pce.printStackTrace();
@@ -1913,6 +1902,11 @@ public abstract class Element {
 	}
 
     private static java.util.Hashtable s_classToElementCache = new java.util.Hashtable();
+   
+    public static void clearClassToElementCache(){
+    	 s_classToElementCache.clear();
+    }
+       
 	public static Class getValueClassForPropertyNamed( Class elementClass, String propertyName ) {
         Element element = (Element)s_classToElementCache.get( elementClass );
         if( element == null ) {
@@ -1923,6 +1917,8 @@ public abstract class Element {
                 return null;
             } catch( IllegalAccessException iae ) {
                 return null;
+            } catch (ClassCastException cce) {
+            	return null;
             }
         }
         Property property = element.getPropertyNamed( propertyName );

@@ -50,9 +50,8 @@ public class DefaultUndoRedoStack extends java.util.LinkedList implements UndoRe
 			ur.undo();
 			currentIndex--;
 			return ur;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	synchronized public UndoableRedoable redo() {
@@ -63,9 +62,8 @@ public class DefaultUndoRedoStack extends java.util.LinkedList implements UndoRe
 			//System.out.println( "DefaultUndoRedoStack.redo( " + ur + " )" );
 			ur.redo();
 			return ur;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	synchronized public UndoableRedoable removeUndoable( int index ) {

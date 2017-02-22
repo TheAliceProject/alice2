@@ -75,12 +75,10 @@ public class SpatialRelation extends edu.cmu.cs.stage3.util.Enumerable {
 			SpatialRelation spatialRelation = (SpatialRelation)o;
 			if( m_placeAxis == null ) {
 				return spatialRelation.m_placeAxis==null;
-			} else {
-				return m_placeAxis.equals( spatialRelation.m_placeAxis );
 			}
-		} else {
-			return false;
+			return m_placeAxis.equals( spatialRelation.m_placeAxis );
 		}
+		return false;
 	}
 	public static SpatialRelation valueOf( String s ) {
 		return (SpatialRelation)edu.cmu.cs.stage3.util.Enumerable.valueOf( s, SpatialRelation.class );

@@ -59,9 +59,7 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         if (doNothing.getParent() == componentElementPanel){
             return doNothing;
         }
-        else{
-            return null;
-        }
+		return null;
     }
 
     public java.awt.Component getElseDoNothingPanel(){
@@ -69,9 +67,7 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
         if (doNothing.getParent() == elseComponentPanel){
             return doNothing;
         }
-        else{
-            return null;
-        }
+		return null;
     }
 
 

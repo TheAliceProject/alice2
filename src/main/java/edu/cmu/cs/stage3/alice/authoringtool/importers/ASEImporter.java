@@ -366,9 +366,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 		edu.cmu.cs.stage3.alice.core.Element parent = trans.getParent();
 		if( ! (parent instanceof edu.cmu.cs.stage3.alice.core.Transformable) ) {
 			return trans;
-		} else {
-			return getRootModel( (edu.cmu.cs.stage3.alice.core.Transformable)parent );
 		}
+		return getRootModel( (edu.cmu.cs.stage3.alice.core.Transformable)parent );
 	}
 
 	// all coordinates in ASEs are in world space, so everything has to be fixed once we have the hierarchy...
@@ -424,9 +423,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		if( tokenizer.ttype == '"' ) {
 			return tokenizer.sval;
-		} else {
-			throw new InvalidFormatError( Messages.getString("String_value_expected") ); 
 		}
+		throw new InvalidFormatError( Messages.getString("String_value_expected") );
 	}
 
 	protected int parseInt() throws InvalidFormatError, java.io.IOException {
@@ -434,9 +432,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		if( tokenizer.ttype == java.io.StreamTokenizer.TT_NUMBER ) {
 			return (int)tokenizer.nval;
-		} else {
-			throw new InvalidFormatError( Messages.getString("int_value_expected") ); 
 		}
+		throw new InvalidFormatError( Messages.getString("int_value_expected") );
 	}
 
 	protected double parseDouble() throws InvalidFormatError, java.io.IOException {
@@ -444,9 +441,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		if( tokenizer.ttype == java.io.StreamTokenizer.TT_NUMBER ) {
 			return tokenizer.nval;
-		} else {
-			throw new InvalidFormatError( Messages.getString("double_value_expected") ); 
 		}
+		throw new InvalidFormatError( Messages.getString("double_value_expected") );
 	}
 
 	protected float parseFloat() throws InvalidFormatError, java.io.IOException {
@@ -454,9 +450,8 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 
 		if( tokenizer.ttype == java.io.StreamTokenizer.TT_NUMBER ) {
 			return (float)tokenizer.nval;
-		} else {
-			throw new InvalidFormatError( Messages.getString("double_value_expected") ); 
 		}
+		throw new InvalidFormatError( Messages.getString("double_value_expected") );
 	}
 
 	protected void parseUnknownBlock() throws InvalidFormatError, java.io.IOException {
@@ -498,7 +493,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 				ticksPerFrame = parseInt();
 			} else if( tokenizer.ttype == '}' ) {
 				try {
-					timeScaleFactor = (1.0/(double)ticksPerFrame) * (1.0/(double)frameSpeed);
+					timeScaleFactor = (1.0/ticksPerFrame) * (1.0/frameSpeed);
 				} catch( Exception e ) {
 					timeScaleFactor = 1.0;
 				}

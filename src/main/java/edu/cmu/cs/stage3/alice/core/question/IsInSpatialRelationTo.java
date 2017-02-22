@@ -40,8 +40,7 @@ public abstract class IsInSpatialRelationTo extends SubjectObjectQuestion {
 		ReferenceFrame asSeenByValue = asSeenBy.getReferenceFrameValue();
 		if( subjectValue.isInSpatialRelationTo( getSpatialRelation(), objectValue, asSeenByValue ) ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

@@ -152,16 +152,12 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
             if (parent.getParent() != null && !(parent.getParent() instanceof edu.cmu.cs.stage3.alice.core.Sandbox)){
                 return countPreviousInstances(parent.getParent(), toCheck) + 1;
             }
-            else{
-                return 1;
-            }
+			return 1;
         }
         if (parent.getParent() != null && !(parent.getParent() instanceof edu.cmu.cs.stage3.alice.core.Sandbox)){
             return countPreviousInstances(parent.getParent(), toCheck);
         }
-        else{
-            return 0;
-        }
+		return 0;
     }
 
     private String makeVariableName(edu.cmu.cs.stage3.alice.core.Element inputList){

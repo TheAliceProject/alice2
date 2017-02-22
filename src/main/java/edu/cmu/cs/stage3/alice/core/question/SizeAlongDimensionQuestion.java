@@ -43,9 +43,8 @@ public abstract class SizeAlongDimensionQuestion extends Question {
 				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_depth_is_"); 
 			}*/ 
 			return new Double( subjectValue.getSizeAlongDimension( getDimension() ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
 	public Class getValueClass() {

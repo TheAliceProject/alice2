@@ -47,9 +47,8 @@ public class PlayerApplet extends java.applet.Applet {
 		String value = getParameter( name );
 		if( value != null ) {
 			return java.awt.Color.decode( value );
-		} else {
-			return valueIfNull;
 		}
+		return valueIfNull;
 	}
 
 	private class ProgressPanel extends java.awt.Panel {

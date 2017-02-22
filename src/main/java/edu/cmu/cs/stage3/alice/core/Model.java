@@ -123,16 +123,14 @@ public class Model extends Transformable {
 	private static edu.cmu.cs.stage3.alice.scenegraph.TextureMap getSceneGraphTextureMap( TextureMap textureMap ) {
 		if( textureMap != null ) {
 			return textureMap.getSceneGraphTextureMap();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	private static edu.cmu.cs.stage3.alice.scenegraph.Geometry getSceneGraphGeometry( Geometry geometry ) {
 		if( geometry != null ) {
 			return geometry.getSceneGraphGeometry();
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	

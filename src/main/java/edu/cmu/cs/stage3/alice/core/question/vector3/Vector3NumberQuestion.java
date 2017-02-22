@@ -10,8 +10,7 @@ public abstract class Vector3NumberQuestion extends edu.cmu.cs.stage3.alice.core
 		javax.vecmath.Vector3d value = vector3.getVector3Value();
 		if( value!=null ) {
             return new Double( getValue( value ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

@@ -328,9 +328,8 @@ public class World extends ReferenceFrame {
 	public edu.cmu.cs.stage3.math.Matrix44 getTransformation( ReferenceFrame asSeenBy ) {
 		if( asSeenBy==null ) {
 			return edu.cmu.cs.stage3.math.Matrix44.IDENTITY;
-		} else {
-			return super.getTransformation( asSeenBy );
 		}
+		return super.getTransformation( asSeenBy );
 	}
 
 	

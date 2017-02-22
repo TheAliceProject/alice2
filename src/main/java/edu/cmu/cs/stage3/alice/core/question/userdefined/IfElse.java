@@ -33,8 +33,7 @@ public class IfElse extends Composite {
 	public Object[] execute() {
         if( condition.booleanValue() ) {
             return execute( components );
-        } else {
-            return execute( elseComponents );
         }
+		return execute( elseComponents );
     }
 }

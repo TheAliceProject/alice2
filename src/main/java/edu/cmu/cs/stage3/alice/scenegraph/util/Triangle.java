@@ -101,17 +101,14 @@ public class Triangle {
             int o = orientation(vertex0,vertex1,vertex2);
             if (o!=0)
                 return o;
-            else {
-                sides[0] = new Vector2d(vertex0);
-                sides[0].sub(vertex1);
-                sides[1] = new Vector2d(vertex2);
-                sides[1].sub(vertex1);
+			sides[0] = new Vector2d(vertex0);
+			sides[0].sub(vertex1);
+			sides[1] = new Vector2d(vertex2);
+			sides[1].sub(vertex1);
 
-                 if (sides[0].dot(sides[1]) < 0)
-                    return 0;
-                else
-                    return -2; // TODO: this really needs to expand out to other vertice
-            }
+			 if (sides[0].dot(sides[1]) < 0)
+			    return 0;
+			return -2; // TODO: this really needs to expand out to other vertice
         }
     }
 

@@ -334,6 +334,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
         cs.writeByte(interlace ? (byte)1 : (byte)0);
 
         cs.writeToStream(dataOutput);
+        cs.close(); // To fix resource leak
     }
 
     private byte[] prevRow = null;
@@ -498,6 +499,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
     private void writeIEND() throws IOException {
         ChunkStream cs = new ChunkStream("IEND");
         cs.writeToStream(dataOutput);
+        cs.close(); // To fix resource leak
     }
 
     private static final float[] srgbChroma = {
@@ -519,6 +521,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
                 cs.writeInt((int)(chroma[i]*100000));
             }
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -535,6 +538,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
 
             cs.writeInt((int)(gamma*100000));
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -544,6 +548,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             byte[] ICCProfileData = param.getICCProfileData();
             cs.write(ICCProfileData);
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -556,6 +561,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
                 cs.writeByte(significantBits[i]);
             }
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -566,6 +572,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             int intent = param.getSRGBIntent();
             cs.write(intent);
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -582,6 +589,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
         }
 
         cs.writeToStream(dataOutput);
+        cs.close(); // To fix resource leak
     }
 
     private void writeBKGD() throws IOException {
@@ -611,6 +619,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             }
 
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -624,6 +633,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             }
 
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -650,6 +660,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             }
 
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         } else if (colorType == PNG_COLOR_PALETTE) {
             int lastEntry = Math.min(255, alphaPalette.length - 1);
             int nonOpaque;
@@ -665,6 +676,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
                     cs.writeByte(alphaPalette[i]);
                 }
                 cs.writeToStream(dataOutput);
+                cs.close(); // To fix resource leak
             }
         }
     }
@@ -679,6 +691,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             cs.writeByte((byte)dims[2]);
 
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -689,6 +702,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             System.out.println("sPLT not supported yet.");
 
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -717,6 +731,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             cs.writeByte(second);
 
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 
@@ -735,6 +750,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
                 cs.write(value);
 
                 cs.writeToStream(dataOutput);
+                cs.close(); // To fix resource leak
             }
         }
     }
@@ -756,6 +772,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
                 DeflaterOutputStream dos = new DeflaterOutputStream(cs);
                 dos.write(value);
                 dos.finish();
+                dos.close(); // To fix resource leak
 
                 cs.writeToStream(dataOutput);
             }
@@ -773,6 +790,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
             ChunkStream cs = new ChunkStream(type);
             cs.write(data);
             cs.writeToStream(dataOutput);
+            cs.close(); // To fix resource leak
         }
     }
 

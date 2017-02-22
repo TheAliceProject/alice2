@@ -245,11 +245,10 @@ public class StencilParser { //extends org.xml.sax.helpers.DefaultHandler{
       }
       monitor.close();
       return stencilList;
-    } else {
-      System.out.println(Messages.getString("Could_not_parse_stencil_file")); 
+    }
+	System.out.println(Messages.getString("Could_not_parse_stencil_file")); 
       System.out.flush();
       return null;
-    }
   }
 
   public StencilManager.Stencil getErrorStencil() {

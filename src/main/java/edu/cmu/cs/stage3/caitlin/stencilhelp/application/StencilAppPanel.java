@@ -94,13 +94,11 @@ public class StencilAppPanel extends JPanel implements StencilApplication {
         if (c != null) {
           Object value = compToName.get(c);
           if (value != null) return (String) value;
-          else {
-            while (c != null) {
-              c = c.getParent();
-              if (c != null) value = compToName.get(c);
-              if (value != null) return (String) value;
-            }
-          }
+		while (c != null) {
+		  c = c.getParent();
+		  if (c != null) value = compToName.get(c);
+		  if (value != null) return (String) value;
+		}
           return null;
         }
         return null;
@@ -112,7 +110,8 @@ public class StencilAppPanel extends JPanel implements StencilApplication {
           javax.swing.SwingUtilities.convertPointFromScreen(corner, this.getRootPane());
           Rectangle rect = new Rectangle( corner, c.getSize() );
           return rect;
-        } else return null;
+        }
+		return null;
     }
 
     public boolean isIDVisible( String ID ){

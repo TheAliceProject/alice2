@@ -51,16 +51,14 @@ public class Ray implements Cloneable {
 		if( o!=null && o instanceof Ray ) {
 			Ray ray = (Ray)o;
 			return m_origin.equals( ray.m_origin ) &&  m_direction.equals( ray.m_direction );
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public javax.vecmath.Point3d getOrigin() {
 		if( m_origin!=null ) {
 			return new javax.vecmath.Point3d( m_origin );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void setOrigin( javax.vecmath.Point3d origin ) {
 		if( origin!=null ) {
@@ -72,9 +70,8 @@ public class Ray implements Cloneable {
 	public javax.vecmath.Vector3d getDirection() {
 		if( m_direction!=null ) {
 			return new javax.vecmath.Vector3d( m_direction );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void setDirection( javax.vecmath.Vector3d direction ) {
 		if( direction!=null ) {

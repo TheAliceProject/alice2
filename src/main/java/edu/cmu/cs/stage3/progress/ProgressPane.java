@@ -103,17 +103,14 @@ public abstract class ProgressPane extends edu.cmu.cs.stage3.swing.ContentPane i
 	public boolean isReadyToDispose( int option ) {
 		if( m_isFinished ) {
 			return true;
-		} else {
-			if( isCancelEnabled() ) {
-				return true;
-			} else {
-				if( option == edu.cmu.cs.stage3.swing.ContentPane.CANCEL_OPTION ) {
-					return false;
-				} else {
-					return true;				
-				}
-			}
 		}
+		if( isCancelEnabled() ) {
+			return true;
+		}
+		if( option == edu.cmu.cs.stage3.swing.ContentPane.CANCEL_OPTION ) {
+			return false;
+		}
+		return true;
 	}
 	
 	public String getTitle() {
@@ -161,7 +158,7 @@ public abstract class ProgressPane extends edu.cmu.cs.stage3.swing.ContentPane i
 			public void run() {
 				if( m_preDescription != null ) {
 					if( description != null ) {
-						m_descriptionLabel.setText( m_preDescription + description );
+						m_descriptionLabel.setText( m_preDescription + " " + description );
 					} else {
 						m_descriptionLabel.setText( m_preDescription );
 					}

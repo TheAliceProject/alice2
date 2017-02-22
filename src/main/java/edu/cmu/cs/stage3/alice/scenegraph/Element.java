@@ -182,16 +182,14 @@ public abstract class Element {
 	protected static boolean notequal( Object a, Object b ) {
 		if( a==null ) {
 			return b!=null;
-		} else {
-			return !a.equals(b);
 		}
+		return !a.equals(b);
 	}
 	
 	public String toString() {
 		if( m_name==null ) {
 			return super.toString();
-		} else {
-			return m_name;
 		}
+		return m_name;
 	}
 }

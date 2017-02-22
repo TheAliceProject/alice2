@@ -97,9 +97,8 @@ public class FilteringElementTreeModel extends TreeModelSupport implements edu.c
 
 		if( isElementInTree( element.getParent() ) && isAcceptedByFilter( element ) ) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**

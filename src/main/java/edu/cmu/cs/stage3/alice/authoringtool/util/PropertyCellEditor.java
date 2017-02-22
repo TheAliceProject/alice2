@@ -79,9 +79,8 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 	public Object getCellEditorValue() {
 		if( currentEditor != null ) {
 			return currentEditor.getCellEditorValue();
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public boolean isCellEditable( java.util.EventObject ev ) {
@@ -278,9 +277,8 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 			java.util.Vector structure = createPopupStructure();
 			if( structure != null ) {
 				return PopupMenuUtilities.makePopupMenu( structure );
-			} else {
-				return null;
 			}
+			return null;
 		}
 
 		protected java.util.Vector createPopupStructure() {
@@ -534,7 +532,7 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 					public void actionPerformed( java.awt.event.ActionEvent e ) {
 						java.util.Vector structure = null;
 						//structure = PopupMenuUtilities.makeFlatElementStructure( element.getRoot(), new edu.cmu.cs.stage3.alice.core.criterion.ExpressionIsAssignableToCriterion( PropertyCellEditor.this.currentValueClass ), numberExpressionRunnableFactory );
-						if( structure != null ) {
+						/*if( structure != null ) {
 							javax.swing.JMenu menu = PopupMenuUtilities.makeMenu( "", structure );
 							if( menu != null ) {
 								javax.swing.JPopupMenu popup = menu.getPopupMenu();
@@ -542,7 +540,7 @@ public class PropertyCellEditor implements javax.swing.table.TableCellEditor, ja
 								PopupMenuUtilities.ensurePopupIsOnScreen( popup );
 								popup.addPopupMenuListener( PropertyCellEditor.this );
 							}
-						}
+						}*/
 					}
 				}
 			);

@@ -392,12 +392,9 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 			if( o instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 				edu.cmu.cs.stage3.alice.core.Element e = (edu.cmu.cs.stage3.alice.core.Element)o;
 				return "editObjectButton<" + e.getKey( world ) + ">";  
-			} else {
-				return null;
 			}
-		} else {
-			return null;
-		}
+		} 
+		return null;
 	}
 
 	public java.awt.Component getComponentForKey( String key ) {

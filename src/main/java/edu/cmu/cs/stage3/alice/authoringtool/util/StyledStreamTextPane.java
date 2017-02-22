@@ -71,9 +71,8 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 			int parentWidth = parent.getSize().width;
 			int preferredWidth = getUI().getPreferredSize( this ).width;
 			return preferredWidth < parentWidth;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 //	public java.awt.Dimension getPreferredScrollableViewportSize() {
@@ -234,9 +233,8 @@ public class StyledStreamTextPane extends javax.swing.JTextPane {
 									line = fileReader.readLine();
 									if( line == null ) {
 										break;
-									} else {
-										StyledStreamTextPane.this.defaultStream.println( line );
 									}
+									StyledStreamTextPane.this.defaultStream.println( line );
 								}
 								fileReader.close();
 							} catch( java.io.IOException e ) {

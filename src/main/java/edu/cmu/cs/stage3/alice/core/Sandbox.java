@@ -44,12 +44,10 @@ public abstract class Sandbox extends Element {
             Expression expression = m_currentBehavior.stackLookup( key );
             if( expression != null ) {
                 return expression;
-            } else {
-    			return m_currentBehavior.detailLookup( key );
             }
-		} else {
-			return null;
+			return m_currentBehavior.detailLookup( key );
 		}
+		return null;
 	}
 
 	public Behavior getCurrentBehavior() {

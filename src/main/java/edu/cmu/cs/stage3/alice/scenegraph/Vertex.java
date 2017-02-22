@@ -143,86 +143,74 @@ public class Vertex extends Vertex3d {
 	public double getX() {
 		if( (getFormat()&POSITION_XYZ)!=0 ) {
 			return position.x;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getY() {
 		if( (getFormat()&POSITION_XYZ)!=0 ) {
 			return position.y;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getZ() {
 		if( (getFormat()&POSITION_XYZ)!=0 ) {
 			return position.z;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getI() {
 		if( (getFormat()&NORMAL_IJK)!=0 ) {
 			return normal.x;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getJ() {
 		if( (getFormat()&NORMAL_IJK)!=0 ) {
 			return normal.y;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getK() {
 		if( (getFormat()&NORMAL_IJK)!=0 ) {
 			return normal.z;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getU() {
 		if( (getFormat()&TEXTURE_COORDINATE_UV0)!=0 ) {
 			return textureCoordinate0.x;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getV() {
 		if( (getFormat()&TEXTURE_COORDINATE_UV0)!=0 ) {
 			return textureCoordinate0.y;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getR() {
 		if( (getFormat()&DIFFUSE_RGBA)!=0 ) {
 			return diffuseColor.red;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getG() {
 		if( (getFormat()&DIFFUSE_RGBA)!=0 ) {
 			return diffuseColor.green;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getB() {
 		if( (getFormat()&DIFFUSE_RGBA)!=0 ) {
 			return diffuseColor.blue;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getA() {
 		if( (getFormat()&DIFFUSE_RGBA)!=0 ) {
 			return diffuseColor.alpha;
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public void setX( double x ) {
 		if( (getFormat()&POSITION_XYZ)!=0 ) {

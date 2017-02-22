@@ -91,7 +91,7 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 	}
 
 	public void addRenderTargetPickManipulatorListener( edu.cmu.cs.stage3.alice.authoringtool.util.event.RenderTargetPickManipulatorListener listener ) {
-		if( listener != null ) {
+ 		if( listener != null ) {
 			listeners.add( listener );
 		}
 	}
@@ -157,7 +157,7 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		popupEnabled = b;
 	}
 
-	public void mousePressed( java.awt.event.MouseEvent ev ) {
+	public synchronized void mousePressed( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		if( enabled ) {
 			super.mousePressed( ev );
 
@@ -223,7 +223,7 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		}
 	}
 
-	public void mouseReleased( java.awt.event.MouseEvent ev ) {
+	public synchronized void mouseReleased( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		if( (! isActionAborted()) && hideCursorOnDrag && doWrap ) {
 			ev.getComponent().setCursor( savedCursor );
 			//TODO: position mouse based on object of interest's position in the picture plane;  for now, it does a rough approximation
@@ -248,7 +248,7 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 		super.mouseReleased( ev );
 	}
 
-	public void abortAction() {
+	public synchronized void abortAction() {	// synchronized necessary?
 		component.setCursor( savedCursor );
 		super.abortAction();
 	}

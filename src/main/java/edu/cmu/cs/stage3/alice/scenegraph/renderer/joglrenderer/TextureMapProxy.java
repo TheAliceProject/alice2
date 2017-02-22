@@ -72,69 +72,68 @@ class TextureMapProxy extends ElementProxy {
     public boolean prepareByteBufferIfNecessary() {
     	if( m_isPrepared ) {
     		return false;
-    	} else {
-            java.awt.Image image = getSGTexture().getImage();
-            if( image != null ) {
-            	boolean isPotentiallyAlphaBlended = isPotentiallyAlphaBlended();
-            	java.awt.image.ColorModel colorModel;
-            	if( isPotentiallyAlphaBlended ) {
-            		colorModel = new java.awt.image.ComponentColorModel(
-            				java.awt.color.ColorSpace.getInstance( java.awt.color.ColorSpace.CS_sRGB ),
-							new int[] {8,8,8,8},
-							true,
-							false,
-							Transparency.TRANSLUCENT,
-							java.awt.image.DataBuffer.TYPE_BYTE );
-            	} else {
-            		colorModel = new java.awt.image.ComponentColorModel(
-            				java.awt.color.ColorSpace.getInstance( java.awt.color.ColorSpace.CS_sRGB ),
-							new int[] {8,8,8,0},
-							false,
-							false,
-							Transparency.OPAQUE,
-							java.awt.image.DataBuffer.TYPE_BYTE );
-            	}
-
-            	try {
-	            	m_width = edu.cmu.cs.stage3.image.ImageUtilities.getWidth( image );
-	    	        m_height = edu.cmu.cs.stage3.image.ImageUtilities.getHeight( image );
-            	} catch( InterruptedException ie ) {
-            		throw new ExceptionWrapper( ie, "" );
-            	}
-                m_width2 = getPowerOf2( m_width );
-                m_height2 = getPowerOf2( m_height );
-
-                m_uFactor = m_width/(float)m_width2;
-                m_vFactor = m_height/(float)m_height2;
-                
-                int bands;
-                if( isPotentiallyAlphaBlended ) {
-                	bands = 4;
-                } else {
-                	bands = 3;
-                }
-            	//System.err.println( bands );
-            	java.awt.image.WritableRaster raster = java.awt.image.Raster.createInterleavedRaster( java.awt.image.DataBuffer.TYPE_BYTE, m_width2, m_height2, bands, null );
-            	java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage( colorModel, raster, false, new java.util.Hashtable() );
-                
-                java.awt.Graphics g = bufferedImage.getGraphics();
-                g.drawImage( image, 0, 0, null );
-                
-                byte[] data = ((java.awt.image.DataBufferByte)bufferedImage.getRaster().getDataBuffer()).getData(); 
-
-                m_byteBuffer = java.nio.ByteBuffer.allocateDirect(data.length); 
-                m_byteBuffer.order( java.nio.ByteOrder.nativeOrder() ); 
-                m_byteBuffer.put( data, 0, data.length ); 
-                
-                m_byteBuffer.rewind();
-            } else {
-                m_byteBuffer = null;
-                m_width = 0;
-                m_height = 0;
-            }
-    		m_isPrepared = true;
-    		return true;
     	}
+		java.awt.Image image = getSGTexture().getImage();
+		if( image != null ) {
+			boolean isPotentiallyAlphaBlended = isPotentiallyAlphaBlended();
+			java.awt.image.ColorModel colorModel;
+			if( isPotentiallyAlphaBlended ) {
+				colorModel = new java.awt.image.ComponentColorModel(
+						java.awt.color.ColorSpace.getInstance( java.awt.color.ColorSpace.CS_sRGB ),
+						new int[] {8,8,8,8},
+						true,
+						false,
+						Transparency.TRANSLUCENT,
+						java.awt.image.DataBuffer.TYPE_BYTE );
+			} else {
+				colorModel = new java.awt.image.ComponentColorModel(
+						java.awt.color.ColorSpace.getInstance( java.awt.color.ColorSpace.CS_sRGB ),
+						new int[] {8,8,8,0},
+						false,
+						false,
+						Transparency.OPAQUE,
+						java.awt.image.DataBuffer.TYPE_BYTE );
+			}
+
+			try {
+		    	m_width = edu.cmu.cs.stage3.image.ImageUtilities.getWidth( image );
+		        m_height = edu.cmu.cs.stage3.image.ImageUtilities.getHeight( image );
+			} catch( InterruptedException ie ) {
+				throw new ExceptionWrapper( ie, "" );
+			}
+		    m_width2 = getPowerOf2( m_width );
+		    m_height2 = getPowerOf2( m_height );
+
+		    m_uFactor = m_width/(float)m_width2;
+		    m_vFactor = m_height/(float)m_height2;
+		    
+		    int bands;
+		    if( isPotentiallyAlphaBlended ) {
+		    	bands = 4;
+		    } else {
+		    	bands = 3;
+		    }
+			//System.err.println( bands );
+			java.awt.image.WritableRaster raster = java.awt.image.Raster.createInterleavedRaster( java.awt.image.DataBuffer.TYPE_BYTE, m_width2, m_height2, bands, null );
+			java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage( colorModel, raster, false, new java.util.Hashtable() );
+		    
+		    java.awt.Graphics g = bufferedImage.getGraphics();
+		    g.drawImage( image, 0, 0, null );
+		    
+		    byte[] data = ((java.awt.image.DataBufferByte)bufferedImage.getRaster().getDataBuffer()).getData(); 
+
+		    m_byteBuffer = java.nio.ByteBuffer.allocateDirect(data.length); 
+		    m_byteBuffer.order( java.nio.ByteOrder.nativeOrder() ); 
+		    m_byteBuffer.put( data, 0, data.length ); 
+		    
+		    m_byteBuffer.rewind();
+		} else {
+		    m_byteBuffer = null;
+		    m_width = 0;
+		    m_height = 0;
+		}
+		m_isPrepared = true;
+		return true;
     }
     
     public java.nio.ByteBuffer getPixels() {

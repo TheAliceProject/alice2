@@ -26,14 +26,14 @@ package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 abstract class VertexGeometryProxy extends GeometryProxy {
     private edu.cmu.cs.stage3.alice.scenegraph.Vertex3d[] m_vertices;
     protected edu.cmu.cs.stage3.alice.scenegraph.Vertex3d getVertexAt( int index ) {
+    	if (m_vertices == null)
+    		return null;
         return m_vertices[ index ];
     }
     
     protected int getNumVertices(){
-    
     		return m_vertices.length;
-    }
-    
+    }   
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {
 		if( property == edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry.VERTICES_PROPERTY ) {

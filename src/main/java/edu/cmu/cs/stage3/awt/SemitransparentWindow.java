@@ -39,9 +39,8 @@ public class SemitransparentWindow {
 	public static boolean isSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isSupportedNative();
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	private int m_nativeData = 0;

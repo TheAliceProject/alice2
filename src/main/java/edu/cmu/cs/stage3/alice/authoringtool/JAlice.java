@@ -27,8 +27,10 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.List;
 
+import javax.media.Format;
+import javax.media.PlugInManager;
+import javax.media.format.AudioFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -51,7 +53,7 @@ public class JAlice {
 	}
 	
 	// version information
-	private static String version = String.valueOf(JAVA_VERSION);//"2.4.4 Pre Release"; 
+	private static String version = "2.4.4"; // String.valueOf(JAVA_VERSION); 
 	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	//private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
@@ -195,8 +197,7 @@ public class JAlice {
 	// main
 	//////////////////////
 	public static void main( String[] args ) {
-		try {
-			System.setProperty("python.home", System.getProperty("user.dir") + "/jython-2.1");
+/*		try {
 		    String[] mp3args = new String[ 0 ];
 		    //System.out.println( "attempting to register mp3 capability... " );
 	    	com.sun.media.codec.audio.mp3.JavaDecoder.main( mp3args );
@@ -204,7 +205,17 @@ public class JAlice {
 		    //System.out.println( "FAILED." );
 		    t.printStackTrace( System.out );
 		}
-
+*/
+		Format input1 = new AudioFormat(AudioFormat.MPEGLAYER3);
+		Format input2 = new AudioFormat(AudioFormat.MPEG);
+		Format output = new AudioFormat(AudioFormat.LINEAR);
+		PlugInManager.addPlugIn(
+			"com.sun.media.codec.audio.mp3.JavaDecoder",
+			new Format[]{input1, input2},
+			new Format[]{output},
+			PlugInManager.CODEC
+		);
+		
 		try {
 			java.io.File firstRun = new java.io.File( getAliceHomeDirectory(), "etc/firstRun.txt" ).getAbsoluteFile();
 			if (firstRun.exists() || AikMin.target == 1){
@@ -222,13 +233,13 @@ public class JAlice {
 			if( useJavaBasedSplashScreen ) {
 				Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 				splashScreen = initSplashScreen();
-				splashScreen.showSplash();
+				splashScreen.showSplash();			
 			}
 			if (AikMin.isMAC()) {
 				com.apple.eawt.Application app =  com.apple.eawt.Application.getApplication();
 	            app.setOpenFileHandler( new OpenFilesHandler() {
 					public void openFiles(OpenFilesEvent event) {
-						List<String> filenames = new ArrayList<String>();
+						java.util.List<String> filenames = new ArrayList<String>();
 				        for(File f : event.getFiles()) {
 				            filenames.add(f.getAbsolutePath());
 				        }
@@ -260,7 +271,7 @@ public class JAlice {
 				}
 				aliceHasNotExitedFile.createNewFile();
 				java.io.OutputStreamWriter writer = new java.io.OutputStreamWriter(new java.io.FileOutputStream(aliceHasNotExitedFile));
-				writer.write("Alice_has_not_exited_properly_yet_"); 
+				writer.write(Messages.getString("Alice_has_not_exited_properly_yet_")); 
 				writer.flush();
 				writer.close();
 			}catch (Exception e){}
@@ -270,6 +281,10 @@ public class JAlice {
 			//	worldToLoad = new java.io.File( args[args.length-1] ).getAbsoluteFile();
 			//}
 			defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale.getDisplayLanguage()+".a2w" ).getAbsoluteFile();			
+			
+			//DEBUG
+			//defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/Square.a2w" ).getAbsoluteFile();			
+			
 			if (!(defaultWorld.exists() && defaultWorld.canRead())) {
 				JOptionPane.showMessageDialog(new JFrame(),
 						defaultWorld.getAbsolutePath() + " " + Messages.getString("does_not_exist_or_cannot_be_read__No_starting_world_will_be_available_"), 
@@ -280,7 +295,8 @@ public class JAlice {
 			
 			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
-				splashScreen.dispose();//.hideSplash();
+				splashScreen.hideSplash();
+				splashScreen.dispose();
 			}
 		} catch( Throwable t ) {
 			t.printStackTrace();
@@ -334,6 +350,10 @@ public class JAlice {
 		
 		if( authoringtoolConfig.getValue( "fontSize" ) == null ) { 
 			authoringtoolConfig.setValue( "fontSize", Integer.toString( 12 ) ); 
+		}
+		
+		if( authoringtoolConfig.getValue( "decimalPlaces" ) == null ) { 
+			authoringtoolConfig.setValue( "decimalPlaces", Integer.toString( 2 ) ); 
 		}
 		
 		if( authoringtoolConfig.getValue( "showObjectLoadFeedback" ) == null ) { 

@@ -46,6 +46,7 @@ public class MainUndoRedoStack extends edu.cmu.cs.stage3.alice.authoringtool.uti
 	
 	// Logging
 	private void loggingInit(AuthoringTool authoringTool) {
+		//DEBUG
 		//if(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.resources.experimentalFeaturesEnabled) {
 		changeLogger = new edu.cmu.cs.stage3.alice.authoringtool.util.ChangeLogger(authoringTool);
 		//} 

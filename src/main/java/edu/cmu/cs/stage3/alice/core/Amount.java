@@ -39,9 +39,8 @@ public class Amount extends edu.cmu.cs.stage3.util.Enumerable {
 		if( o!=null && o instanceof Amount ) {
 			Amount amount = (Amount)o;
 			return (m_Amount_ID == amount.m_Amount_ID );
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public static Amount valueOf( String s ) {
 		return (Amount)edu.cmu.cs.stage3.util.Enumerable.valueOf( s, Amount.class );

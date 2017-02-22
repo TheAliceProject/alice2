@@ -55,7 +55,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
     protected static final int BAD = -1;
     protected int editorCount = 0;
     protected int counter = 0;
-    protected final java.awt.Color BACKGROUND_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behaviorBackground");; 
+    protected final java.awt.Color BACKGROUND_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("behaviorBackground");
     protected edu.cmu.cs.stage3.alice.core.World world;
     protected edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool;
     protected javax.swing.JButton newBehaviorButton;
@@ -264,9 +264,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                     if (((edu.cmu.cs.stage3.alice.core.Sandbox)bge.getElement()).behaviors.size() <= 0){
                         return false;
                     }
-                    else{
-                        count++;
-                    }
+					count++;
                 }
                 else{
                     boolean found = false;
@@ -276,10 +274,8 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                             if (((edu.cmu.cs.stage3.alice.core.Sandbox)bge.getElement()).behaviors.size() <= 0){
                                 return false;
                             }
-                            else{
-                                count++;
-                                found = true;
-                            }
+							count++;
+							found = true;
                         }
                     }
                     if (!found){
@@ -673,9 +669,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             if (edu.cmu.cs.stage3.alice.core.Behavior.class.isAssignableFrom(valueClass)){
                 return BEHAVIOR;
             }
-            else{
-                return BAD;
-            }
+			return BAD;
         }
         if (edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(dtde, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.transformableReferenceFlavor ) ){
             return OBJECT;
@@ -693,9 +687,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
             if (edu.cmu.cs.stage3.alice.core.Behavior.class.isAssignableFrom(valueClass)){
                 return BEHAVIOR;
             }
-            else{
-                return BAD;
-            }
+			return BAD;
         }
         if (edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.transformableReferenceFlavor ) ){
             return OBJECT;
@@ -710,9 +702,7 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
         if (c instanceof BehaviorGroupEditor || c == this || c == m_containingPanel || c == null){
             return c;
         }
-        else {
-            return getTopComponent(c.getParent());
-        }
+		return getTopComponent(c.getParent());
     }
 
     private java.awt.Component getPrimaryComponent(java.awt.Component c){

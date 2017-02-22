@@ -46,7 +46,8 @@ public class Hole implements StencilObject, MouseEventListener, KeyEventListener
   public Rectangle getRectangle(){
     if (rect != null) {
       return rect.getBounds();
-    } else return null;
+    }
+	return null;
   }
   public Rectangle getPreviousRectangle(){
     if (previousRect != null) {
@@ -70,11 +71,12 @@ public class Hole implements StencilObject, MouseEventListener, KeyEventListener
   public boolean intersectsRectangle( Rectangle rect ){
     if (this.rect != null) {
       return (rect.intersects(this.getRectangle()));
-    } else return false;
+    }
+	return false;
   }
   public Point getNotePoint() {
     if (rect != null) return new Point((int)rect.getX(), (int)rect.getY());
-    else return new Point(0,0);
+	return new Point(0,0);
   }
   public void addStencilObjectPositionListener(StencilObjectPositionListener posListener){
     stencilObjectPositionListeners.addElement(posListener);
@@ -105,7 +107,8 @@ public class Hole implements StencilObject, MouseEventListener, KeyEventListener
       Rectangle smallRect = rect.getBounds();
       smallRect.grow(-4,-4);
       return smallRect.contains(point.getX(),point.getY());
-    } else return false;
+    }
+	return false;
   }
   public boolean mousePressed(MouseEvent e){
     stencilApp.handleMouseEvent(e);
@@ -116,7 +119,8 @@ public class Hole implements StencilObject, MouseEventListener, KeyEventListener
       //} catch (Exception ex){}
       this.stencilManager.showNextStencil();
       return true;
-    } else return false;
+    }
+	return false;
   }
   public boolean mouseReleased(MouseEvent e){
     stencilApp.handleMouseEvent(e);
@@ -130,7 +134,8 @@ public class Hole implements StencilObject, MouseEventListener, KeyEventListener
       } catch (Exception ex){}
       this.stencilManager.showNextStencil();
       return true;
-    } else return false;
+    }
+	return false;
   }
   public boolean mouseEntered(MouseEvent e){
     stencilApp.handleMouseEvent(e);
@@ -187,12 +192,11 @@ public class Hole implements StencilObject, MouseEventListener, KeyEventListener
 
       // we updated successfully
       return true;
-    } else {
-      isModified = true;
+    }
+	isModified = true;
 
       // this id seems to be missing
       return false;
-    }
   }
   public boolean layoutChanged(){
     boolean success = true;
@@ -211,10 +215,9 @@ public class Hole implements StencilObject, MouseEventListener, KeyEventListener
     if (success) {
       // we've found this id and updated appropriately
       return true;
-    } else {
-      // this id is still missing, and probably isn't coming
-      return false;
     }
+	// this id is still missing, and probably isn't coming
+      return false;
 
    }
 }

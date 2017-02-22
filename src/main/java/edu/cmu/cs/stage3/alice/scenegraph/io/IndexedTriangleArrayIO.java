@@ -74,9 +74,8 @@ public class IndexedTriangleArrayIO {
 			ita.setVertices( (edu.cmu.cs.stage3.alice.scenegraph.Vertex3d[])array[0] );
 			ita.setIndices( (int[])array[1] );
 			return ita;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 

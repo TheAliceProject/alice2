@@ -120,9 +120,8 @@ public class PickInfo implements  edu.cmu.cs.stage3.alice.scenegraph.renderer.Pi
 	public int getCount() {
 		if( m_visuals!=null ) {
 			return m_visuals.length;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	public edu.cmu.cs.stage3.alice.scenegraph.Visual getVisualAt( int index ) {
 		return m_visuals[ index ];

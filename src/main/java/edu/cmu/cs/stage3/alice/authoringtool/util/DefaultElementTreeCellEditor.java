@@ -40,9 +40,8 @@ public class DefaultElementTreeCellEditor extends DefaultTreeCellEditor {
 	public java.awt.Component getTreeCellEditorComponent( javax.swing.JTree tree, Object value, boolean isSelected, boolean expanded, boolean leaf, int row ) {
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Element ) {
 			return super.getTreeCellEditorComponent( tree, ((edu.cmu.cs.stage3.alice.core.Element)value).name.getStringValue(), isSelected, expanded, leaf, row  );
-		} else {
-			return super.getTreeCellEditorComponent( tree, value, isSelected, expanded, leaf, row  );
 		}
+		return super.getTreeCellEditorComponent( tree, value, isSelected, expanded, leaf, row  );
 	}
 
 	protected void prepareForEditing() {

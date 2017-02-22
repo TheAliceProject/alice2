@@ -49,13 +49,11 @@ public class ElementNameContainsCriterion implements edu.cmu.cs.stage3.util.Crit
 			} else {
 				if( m_ignoreCase ) {
 					return name.toLowerCase().indexOf(m_contains.toLowerCase())!=-1;
-				} else {
-					return name.indexOf(m_contains)!=-1;
 				}
+				return name.indexOf(m_contains)!=-1;
 			}
-		} else {
-			return false;
 		}
+		return false;
 	}
 	
 	public String toString() {

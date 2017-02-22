@@ -292,12 +292,10 @@ public abstract class CompositeElementEditor extends GroupingPanel
 
     protected void startListeningToTree(Element element)
     {
-        if(element == null);
     }
 
     protected void stopListeningToTree(Element element)
     {
-        if(element == null);
     }
 
     protected void clearAllListening()

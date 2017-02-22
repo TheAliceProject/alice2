@@ -53,7 +53,7 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 		public void insertUpdate(final javax.swing.event.DocumentEvent ev) {
 			try {
 				lastError = ev.getDocument().getText(ev.getOffset(), ev.getLength());
-				if (lastError.trim().startsWith("Unable_to_handle_format") == true) {
+				if (lastError.trim().startsWith("Unable to handle format") == true) {
 					lastError = Messages.getString("_n_nYour_sound_file_cannot_be_played_in_Alice__n")
 							+ Messages.getString("Please_find_an_audio_editor_to_convert_the_file_to_one_with_a_PCM_encoding__n")
 							+ Messages.getString("See_the_tutorial_on_converting_sound_files_at_our_Alice_website__n")

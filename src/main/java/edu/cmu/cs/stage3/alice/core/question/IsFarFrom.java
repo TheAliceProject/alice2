@@ -42,8 +42,7 @@ public class IsFarFrom extends SubjectObjectQuestion {
 		double thresholdValue = threshold.doubleValue();
 		if( subjectValue.getDistanceSquaredTo( objectValue ) > thresholdValue*thresholdValue ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

@@ -134,9 +134,8 @@ public class Vertex3d implements Cloneable, java.io.Serializable {
 				}
 			}
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public int getFormat() {
 		int format = 0;

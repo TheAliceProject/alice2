@@ -34,18 +34,16 @@ public abstract class ListObjectQuestion extends edu.cmu.cs.stage3.alice.core.Qu
  		List listValue = list.getListValue();
 		if( listValue!=null ) {
             return listValue.valueClass.getClassValue();
-		} else {
-            //todo?
-			return Object.class;
 		}
+		//todo?
+		return Object.class;
     }
 	
 	public Object getValue() {
 		List listValue = list.getListValue();
 		if( listValue!=null ) {
             return getValue( listValue );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

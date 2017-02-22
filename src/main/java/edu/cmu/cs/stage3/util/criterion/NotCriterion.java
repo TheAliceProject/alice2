@@ -33,8 +33,7 @@ public class NotCriterion implements edu.cmu.cs.stage3.util.Criterion {
 	public boolean accept( Object o ) {
 		if( m_criterion != null ) {
 			return !m_criterion.accept( o );
-		} else {
-			return false;
 		}
+		return false;
 	}
 }

@@ -59,9 +59,8 @@ public abstract class Enumerable implements java.io.Serializable {
 				}
 			}
 			return "unknown";
-		} else {
-			return m_repr;
 		}
+		return m_repr;
 	}
 	
 	public String toString() {

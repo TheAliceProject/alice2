@@ -1028,13 +1028,12 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
 					throw new Error(Messages.getString("has_a_NULL_Listener_", getText(), i )); 
-				} else {
-					// Lazily create the event:
-					if( menuEvent == null ) {
-						menuEvent = new MenuEvent( this );
-					}
-					( (MenuListener)listeners[i + 1] ).menuSelected( menuEvent );
 				}
+				// Lazily create the event:
+				if( menuEvent == null ) {
+					menuEvent = new MenuEvent( this );
+				}
+				( (MenuListener)listeners[i + 1] ).menuSelected( menuEvent );
 			}
 		}
 	}
@@ -1062,15 +1061,13 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
 					throw new Error(Messages.getString("has_a_NULL_Listener_", getText(), i )); 
-				} else {
-
-					// Lazily create the event:
-					if( menuEvent == null ) {
-						menuEvent = new MenuEvent( this );
-					}
-
-					( (MenuListener)listeners[i + 1] ).menuDeselected( menuEvent );
 				}
+				// Lazily create the event:
+				if( menuEvent == null ) {
+					menuEvent = new MenuEvent( this );
+				}
+
+				( (MenuListener)listeners[i + 1] ).menuDeselected( menuEvent );
 			}
 		}
 	}
@@ -1098,15 +1095,13 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 			if( listeners[i] == MenuListener.class ) {
 				if( listeners[i + 1] == null ) {
 					throw new Error(Messages.getString("has_a_NULL_Listener_", getText(), i )); 
-				} else {
-
-					// Lazily create the event:
-					if( menuEvent == null ) {
-						menuEvent = new MenuEvent( this );
-					}
-
-					( (MenuListener)listeners[i + 1] ).menuCanceled( menuEvent );
 				}
+				// Lazily create the event:
+				if( menuEvent == null ) {
+					menuEvent = new MenuEvent( this );
+				}
+
+				( (MenuListener)listeners[i + 1] ).menuCanceled( menuEvent );
 			}
 		}
 	}
@@ -1204,12 +1199,11 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 	public MenuElement[] getSubElements() {
 		if( popupMenu == null ) {
 			return new MenuElement[0];
-		} else {
-			MenuElement[] result = new MenuElement[1];
-			result[0] = popupMenu;
-
-			return result;
 		}
+		MenuElement[] result = new MenuElement[1];
+		result[0] = popupMenu;
+
+		return result;
 	}
 	// implements javax.swing.MenuElement
 	/**
@@ -1327,9 +1321,8 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 				e.consume();
 
 				return;
-			} else {
-				MenuSelectionManager.defaultManager().clearSelectedPath();
 			}
+			MenuSelectionManager.defaultManager().clearSelectedPath();
 		}
 
 		super.processKeyEvent( e );
@@ -1491,9 +1484,8 @@ public class AliceMenu extends javax.swing.JMenu implements Accessible, MenuElem
 						}
 
 						return (Accessible)children[j];
-					} else {
-						count++;
 					}
+					count++;
 				}
 			}
 

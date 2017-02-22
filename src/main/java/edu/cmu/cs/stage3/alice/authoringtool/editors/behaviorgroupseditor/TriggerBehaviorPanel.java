@@ -132,7 +132,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         triggerPanel.addComponentListener(this);
         m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         if (isSecondLine){
-            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("do_")), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); 
+            m_containingPanel.add(new javax.swing.JLabel(Messages.getString("do_")+" "), new java.awt.GridBagConstraints(0,1,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,ConditionalBehaviorPanel.INDENT,0,2), 0,0)); 
             m_containingPanel.add(triggerPanel, new java.awt.GridBagConstraints(1,1,1,1,1,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         }
         else{

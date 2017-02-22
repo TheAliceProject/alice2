@@ -43,7 +43,7 @@ public abstract class RotateAnimation extends DirectionAmountTransformAnimation 
 			m_amount = RotateAnimation.this.amount.doubleValue();
 			m_axis = getAxis( directionValue );
 			if( m_axis == null ) {
-				StringBuffer sb = new StringBuffer( Messages.getString("direction_value_must_not_be_") ); 
+				StringBuffer sb = new StringBuffer( Messages.getString("direction_value_must_not_be_") + " " ); 
 				if( directionValue != null ) {
 					sb.append( directionValue.getRepr() );
 				} else {

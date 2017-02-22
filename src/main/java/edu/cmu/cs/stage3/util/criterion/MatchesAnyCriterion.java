@@ -38,8 +38,7 @@ public class MatchesAnyCriterion implements edu.cmu.cs.stage3.util.Criterion {
 				}
 			}
 			return false;
-		} else {
-			return false;
 		}
+		return false;
 	}
 }

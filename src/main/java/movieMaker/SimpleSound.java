@@ -474,8 +474,7 @@ public class SimpleSound{
 	{
 		if(audioFileFormat.getFormat().getChannels() == 1)
 			return false;
-		else
-			return true;
+		return true;
 	}
 
 	////////////////////////// File I/O ///////////////////////////////////
@@ -639,8 +638,7 @@ public class SimpleSound{
 				numBytesRead = audioInputStream.read(buffer, offset, bufferSize);
 				if(numBytesRead == -1)//no more data
 					break;
-				else
-					offset += numBytesRead;
+				offset += numBytesRead;
 			} catch(Exception e) {
 				printError(Messages.getString("Problems_reading_the_input_stream___You_might_want_to_try_again_using_this_file__or_a_different_file_", inFileName), e);
 			}//catch
@@ -733,7 +731,7 @@ public class SimpleSound{
 		playbacks.add(playback);
 		playback.start();
 		//wait until the sound is done playing
-		while(playback.isAlive()){;}
+		while(playback.isAlive()){}
 	}
 
 	/**
@@ -951,7 +949,7 @@ public class SimpleSound{
 		playback.start();
 
 		if(isBlocking)
-			while(playback.isAlive()){;}//wait until the thread exits
+			while(playback.isAlive()){}//wait until the thread exits
 
 		/*
      	we need to wait until the thread is done with the values 
@@ -959,7 +957,7 @@ public class SimpleSound{
      	until the loop begins in which data is actually written out.
      	see Playback#run()
 		 */
-		while(!playback.getPlaying()){;}
+		while(!playback.getPlaying()){}
 
 		setBuffer(oldBuffer);//restore the buffer
 		setAudioFileFormat(oldAFF);//restore the file format
@@ -1097,7 +1095,7 @@ public class SimpleSound{
 		}
 		else if(frameNum < 0)
 		{
-			printError(Messages.getString("You_asked_for_the_sample_at_index_____This_number_is_less_than_zero___Please_tryagain_using_an_index_in_the_range__0_", (frameNum), (getAudioFileFormat().getFrameLength() - 1) )); 
+			printError(Messages.getString("You_asked_for_the_sample_at_index_____This_number_is_less_than_zero___Please_try_again_using_an_index_in_the_range__0_", (frameNum), (getAudioFileFormat().getFrameLength() - 1) )); 
 		}
 
 		AudioFormat format = getAudioFileFormat().getFormat();

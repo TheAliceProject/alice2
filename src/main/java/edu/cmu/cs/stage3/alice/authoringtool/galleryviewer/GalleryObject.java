@@ -268,9 +268,7 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
         if (toScale <= middle){
             return interpolateColor(toScale, FASTEST_SIZE, middle, FASTEST_COLOR, MIDDLE_COLOR);
         }
-        else{
-            return interpolateColor(toScale, middle, SLOWEST_SIZE, MIDDLE_COLOR, SLOWEST_COLOR);
-        }
+		return interpolateColor(toScale, middle, SLOWEST_SIZE, MIDDLE_COLOR, SLOWEST_COLOR);
     }
 
     protected void guiInit(){

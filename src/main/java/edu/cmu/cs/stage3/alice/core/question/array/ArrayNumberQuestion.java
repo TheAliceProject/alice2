@@ -35,8 +35,7 @@ public abstract class ArrayNumberQuestion extends edu.cmu.cs.stage3.alice.core.q
 		Array arrayValue = array.getArrayValue();
 		if( arrayValue!=null ) {
             return new Integer( getValue( arrayValue ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

@@ -84,8 +84,7 @@ public class ExtensionGroupFileFilter extends javax.swing.filechooser.FileFilter
 		//account for change in java 1.5 VM
 		if( o instanceof String ) {
 			return description.compareTo( (String)o );
-		} else {
-			return -1;
 		}
+		return -1;
 	}
 }

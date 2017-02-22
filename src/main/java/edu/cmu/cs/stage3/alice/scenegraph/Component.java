@@ -69,27 +69,24 @@ public abstract class Component extends Element {
 	public Container getRoot() {
 		if( m_parent!=null ) {
 			return m_parent.getRoot();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public javax.vecmath.Matrix4d getAbsoluteTransformation() {
 		if( m_parent!=null ) {
 			return m_parent.getAbsoluteTransformation();
-		} else {
-			javax.vecmath.Matrix4d m = new javax.vecmath.Matrix4d();
-			m.setIdentity();
-			return m;
 		}
+		javax.vecmath.Matrix4d m = new javax.vecmath.Matrix4d();
+		m.setIdentity();
+		return m;
 	}
 	public javax.vecmath.Matrix4d getInverseAbsoluteTransformation() {
 		if( m_parent!=null ) {
 			return m_parent.getInverseAbsoluteTransformation();
-		} else {
-			javax.vecmath.Matrix4d m = new javax.vecmath.Matrix4d();
-			m.setIdentity();
-			return m;
 		}
+		javax.vecmath.Matrix4d m = new javax.vecmath.Matrix4d();
+		m.setIdentity();
+		return m;
 	}
 	public Container getParent() {
 		return m_parent;
@@ -115,13 +112,11 @@ public abstract class Component extends Element {
 		}
 		if( m_parent == container ) {
 			return true;
-		} else {
-			if( m_parent == null ) {
-				return false;
-			} else {
-				return m_parent.isDescendantOf( container );
-			}
 		}
+		if( m_parent == null ) {
+			return false;
+		}
+		return m_parent.isDescendantOf( container );
 	}
 
 	public void addAbsoluteTransformationListener( AbsoluteTransformationListener absoluteTransformationListener ) {

@@ -15,8 +15,7 @@ public class ItemOfCollectionProperty extends ObjectProperty {
 	public Class getValueClass() {
 		if( m_collection!=null ) {
 			return m_collection.valueClass.getClassValue();
-		} else {
-			return super.getValueClass();
 		}
+		return super.getValueClass();
 	}
 }

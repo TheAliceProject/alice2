@@ -159,9 +159,8 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
                 isFrontFacings[ 0 ] = atIsFrontFacing[ 0 ];
 			}
 			return new PickInfo( this, (edu.cmu.cs.stage3.alice.scenegraph.Camera)cameraProxy.getSceneGraphElement(), x, y, sgVisuals, isFrontFacings, sgGeometries, subElements );
-		} else {
-			return null;
 		}
+		return null;
 	}
     /*
     private int fixEndian( int i ) {

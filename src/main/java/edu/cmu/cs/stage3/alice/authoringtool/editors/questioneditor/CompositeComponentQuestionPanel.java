@@ -52,19 +52,12 @@ public class CompositeComponentQuestionPanel extends edu.cmu.cs.stage3.alice.aut
                 toAdd = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(currentElement);
             }
             else{
-                if (currentElement != null){
-                    toAdd = new ComponentQuestionPanel();
-                    ((ComponentQuestionPanel)toAdd).set(currentElement);
-                }
-                else{
-                    return null;
-                }
+                toAdd = new ComponentQuestionPanel();
+				((ComponentQuestionPanel)toAdd).set(currentElement);
             }
             return toAdd;
         }
-        else{
-            return null;
-        }
+		return null;
     }
 
 	public void dragOver( java.awt.dnd.DropTargetDragEvent dtde ) {

@@ -201,9 +201,8 @@ public final class FileCacheSeekableStream extends SeekableStream {
         if (pos >= next) {
             cache.seek(pointer++);
             return cache.read();
-        } else {
-            return -1;
         }
+		return -1;
     }
 
     /**
@@ -275,9 +274,8 @@ public final class FileCacheSeekableStream extends SeekableStream {
             cache.readFully(b, off, len);
             pointer += len;
             return len;
-        } else {
-            return -1;
         }
+		return -1;
     }
 
     /**

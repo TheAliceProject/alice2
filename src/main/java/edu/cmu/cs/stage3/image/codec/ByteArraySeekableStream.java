@@ -132,9 +132,8 @@ public class ByteArraySeekableStream extends SeekableStream {
 	public int read() {
         if (pointer < length + offset) {
             return (src[pointer++ + offset] & 0xff);
-        } else {
-            return -1;
         }
+		return -1;
     }
 
     /**
@@ -196,10 +195,9 @@ public class ByteArraySeekableStream extends SeekableStream {
 
         if (pointer == oldPointer) {
             return -1;
-        } else {
-            System.arraycopy(src, oldPointer, b, off, pointer - oldPointer);
-            return pointer - oldPointer;
         }
+		System.arraycopy(src, oldPointer, b, off, pointer - oldPointer);
+		return pointer - oldPointer;
     }
 
     /**

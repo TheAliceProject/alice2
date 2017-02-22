@@ -38,9 +38,8 @@ public class MatchesAllCriterion implements edu.cmu.cs.stage3.util.Criterion {
 				}
 			}
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	
 	public edu.cmu.cs.stage3.util.Criterion[] getCriteria() {

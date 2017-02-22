@@ -122,7 +122,7 @@ public class MovieCapturer implements VideoCapturer
       new Robot().createScreenCapture(region);
       return image;
     }
-    else return captureScreen();
+	return captureScreen();
   }
        
   /**

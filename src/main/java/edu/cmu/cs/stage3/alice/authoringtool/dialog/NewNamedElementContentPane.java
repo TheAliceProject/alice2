@@ -49,12 +49,12 @@ public abstract class NewNamedElementContentPane extends edu.cmu.cs.stage3.swing
 	private edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField m_nameTextField = new edu.cmu.cs.stage3.alice.authoringtool.util.NameTextField(validityChecker);
 
 	public NewNamedElementContentPane() {
-		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
-		m_nameTextField.setMinimumSize(new java.awt.Dimension(150, (fontSize * 2) + 4));
-		m_nameTextField.setPreferredSize(new java.awt.Dimension(150, (fontSize * 2) + 4));
 
 		setLayout(new java.awt.GridBagLayout());
 		java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
+		int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
+		m_nameTextField.setPreferredSize(new java.awt.Dimension(280, (fontSize * 2) + 4));
+		m_nameTextField.setMinimumSize(new java.awt.Dimension(280, (fontSize * 2) + 4));
 		initTopComponents(gbc);
 		initBottomComponents(gbc);
 	}

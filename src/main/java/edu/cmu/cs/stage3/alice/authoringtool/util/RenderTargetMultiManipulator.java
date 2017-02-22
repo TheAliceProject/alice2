@@ -53,7 +53,7 @@ public class RenderTargetMultiManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	public void mousePressed( java.awt.event.MouseEvent ev ) {
+	public synchronized void mousePressed( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		if( enabled ) {
 			super.mousePressed( ev );
 
@@ -72,7 +72,7 @@ public class RenderTargetMultiManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	public void mouseReleased( java.awt.event.MouseEvent ev ) {
+	public synchronized void mouseReleased( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		if( enabled && (! isActionAborted()) ) {
 			mode.setRenderTarget( renderTarget );
 			mode.mouseReleased( ev );
@@ -80,7 +80,7 @@ public class RenderTargetMultiManipulator extends RenderTargetPickManipulator {
 		super.mouseReleased( ev );
 	}
 
-	public void mouseDragged( java.awt.event.MouseEvent ev ) {
+	public synchronized void mouseDragged( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		if( enabled && (! isActionAborted()) ) {
 			super.mouseDragged( ev );
 			if( mouseIsDown ) {

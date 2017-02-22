@@ -36,9 +36,8 @@ public class Vector3Property extends ObjectProperty {
 		javax.vecmath.Vector3d v = getVector3dValue();
 		if( v == null || v instanceof edu.cmu.cs.stage3.math.Vector3 ) {
 			return (edu.cmu.cs.stage3.math.Vector3)v;
-		} else {
-			return new edu.cmu.cs.stage3.math.Vector3( v );
 		}
+		return new edu.cmu.cs.stage3.math.Vector3( v );
 	}
 
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {

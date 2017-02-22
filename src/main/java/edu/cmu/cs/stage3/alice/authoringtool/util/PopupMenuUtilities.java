@@ -212,12 +212,11 @@ public class PopupMenuUtilities{
 	public static AliceMenuWithDelayedPopup makeMenu( String title, Vector structure ) {
 		if( structure == null || structure.isEmpty() ) {
 			return null;
-		} else {
-			AliceMenuWithDelayedPopup menu = new AliceMenuWithDelayedPopup( title, structure );	
-			menu.setUI( new AliceMenuUI() );
-			menu.setDelay( 0 );
-			return menu;
 		}
+		AliceMenuWithDelayedPopup menu = new AliceMenuWithDelayedPopup( title, structure );	
+		menu.setUI( new AliceMenuUI() );
+		menu.setDelay( 0 );
+		return menu;
 	}
 
 	public static void populateDelayedMenu( AliceMenuWithDelayedPopup menu, Vector structure ) {
@@ -406,12 +405,10 @@ public class PopupMenuUtilities{
 									if( (subStructure.size() == 1) && criterion.accept( child ) ) {
 										if( child.equals( currentValue ) ) {
 											return new PopupItemWithIcon( factory.createItem( child ), currentValueIcon );
-										} else {
-											return factory.createItem( child );
 										}
-									} else {
-										return subStructure;
+										return factory.createItem( child );
 									}
+									return subStructure;
 								}
 							};
 							if (!(child instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion)){
@@ -445,12 +442,10 @@ public class PopupMenuUtilities{
 								if( (subStructure.size() == 1) && criterion.accept( child ) ) {
 									if( child.equals( currentValue ) ) {
 										return new PopupItemWithIcon( factory.createItem( child ), currentValueIcon );
-									} else {
-										return factory.createItem( child );
 									}
-								} else {
-									return subStructure;
+									return factory.createItem( child );
 								}
+								return subStructure;
 							}
 						};
 						structure.addElement( new StringObjectPair( (String)child.name.getValue(), delayedBindingPopupItem ) );
@@ -962,10 +957,9 @@ public class PopupMenuUtilities{
 					if( desiredProperties.length == 1 ) { // end of the line
 						//DEBUG System.out.println( "end of the line: " + desiredProperties[0] + ", " + o );
 						return factory.createItem( elementPrototype.createCopy( new edu.cmu.cs.stage3.util.StringObjectPair( desiredProperties[0], o ) ) );
-					} else { // recurse
-						//DEBUG System.out.println( "recursive: " + desiredProperties[0] + ", " + o );
-						return makePrototypeStructure( elementPrototype.createCopy( new edu.cmu.cs.stage3.util.StringObjectPair( desiredProperties[0], o ) ), factory, context );
 					}
+					//DEBUG System.out.println( "recursive: " + desiredProperties[0] + ", " + o );
+					return makePrototypeStructure( elementPrototype.createCopy( new edu.cmu.cs.stage3.util.StringObjectPair( desiredProperties[0], o ) ), factory, context );
 				}
 			};
 //			hack so we can use these in an inner class
@@ -1418,12 +1412,10 @@ public class PopupMenuUtilities{
 								if (referenceProperty.getOwner() instanceof edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior ||
 								referenceProperty.getOwner() instanceof edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior){
 									return makePrototypeStructure( callToUserDefinedResponsePrototype, prototypePopupFactory, referenceProperty.getOwner() );
-								}else{
-									return makePrototypeStructure( callToUserDefinedResponsePrototype, prototypePopupFactory, context );
 								}
-							} else {
-								return prototypePopupFactory.createItem( callToUserDefinedResponsePrototype );
+								return makePrototypeStructure( callToUserDefinedResponsePrototype, prototypePopupFactory, context );
 							}
+							return prototypePopupFactory.createItem( callToUserDefinedResponsePrototype );
 						}
 					};
 					edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion criterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class );

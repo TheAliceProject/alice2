@@ -10,11 +10,9 @@ public class IsEmpty extends edu.cmu.cs.stage3.alice.core.question.BooleanQuesti
 		if( listOfModelsVisualizationValue!=null ) {
             if( listOfModelsVisualizationValue.isEmpty() ) {
                 return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
             }
-		} else {
-			return null;
+			return Boolean.FALSE;
 		}
+		return null;
 	}
 }

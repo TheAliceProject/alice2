@@ -41,45 +41,40 @@ public class AWTUtilities {
  	public static boolean isGetCursorLocationSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isGetCursorLocationSupportedNative(); //return 1;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	private static native boolean isSetCursorLocationSupportedNative();
 	public static boolean isSetCursorLocationSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isSetCursorLocationSupportedNative(); //return 1;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	private static native boolean isIsKeyPressedSupportedNative();
 	public static boolean isIsKeyPressedSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isIsKeyPressedSupportedNative(); //return 1;
-		} else {        
-			return true;
 		}
+		return true;
 	}
 
 	private static native boolean isGetModifiersSupportedNative();
 	public static boolean isGetModifiersSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isGetModifiersSupportedNative(); //return 1;
-		} else {
-			return true;
 		}
+		return true;
 	}
 	
 	private static native boolean isPumpMessageQueueSupportedNative();
 	public static boolean isPumpMessageQueueSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isPumpMessageQueueSupportedNative();
-		} else {
-			return false;
 		}
+		return false;
 	}
 		
 	private static native void pumpMessageQueueNative();
@@ -97,10 +92,9 @@ public class AWTUtilities {
 			java.awt.Point p = new java.awt.Point();
 			getCursorLocationNative( p );
 			return p;
-		} else {
-			java.awt.Point p  = java.awt.MouseInfo.getPointerInfo().getLocation().getLocation();
-			return p;
 		}
+		java.awt.Point p  = java.awt.MouseInfo.getPointerInfo().getLocation().getLocation();
+		return p;
 	}
 
 	private static native void setCursorLocationNative( int x, int y );
@@ -150,9 +144,8 @@ public class AWTUtilities {
 	public static boolean isCursorShowing() { //not called anywhere
 		if( s_successfullyLoadedLibrary ) {
 			return isCursorShowingNative();
-		} else {
-			return true;
 		}
+		return true;
 	}
 	
 	private static native void setIsCursorShowingNative( boolean isCursorShowing );
@@ -168,42 +161,38 @@ public class AWTUtilities {
 	public static boolean isIsCursorShowingSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isIsCursorShowingSupportedNative(); //return 1;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	
 	private static native boolean isSetIsCursorShowingSupportedNative();
 	public static boolean isSetIsCursorShowingSupported() {
 		if( s_successfullyLoadedLibrary ) {
 			return isSetIsCursorShowingSupportedNative(); //return 1;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	
 	private static native boolean isKeyPressedNative( int keyCode );
 	public static boolean isKeyPressed( int keyCode ) {
 		if( s_successfullyLoadedLibrary ) {
 			return isKeyPressedNative( keyCode );
-		} else {
-			if (keyCode == java.awt.event.KeyEvent.VK_CONTROL) {
-				return (modifier & 8) != 0;
-			}
-			if (keyCode == java.awt.event.KeyEvent.VK_SHIFT) {
-				return (modifier & 1) != 0;
-			}
-			return false;
 		}
+		if (keyCode == java.awt.event.KeyEvent.VK_CONTROL) {
+			return (modifier & 8) != 0;
+		}
+		if (keyCode == java.awt.event.KeyEvent.VK_SHIFT) {
+			return (modifier & 1) != 0;
+		}
+		return false;
 	}
 	
 	private static native int isKeyNative( int keyCode );
 	public static int isKey( int keyCode ) {
 		if( s_successfullyLoadedLibrary ) {			
 			return isKeyNative( keyCode );
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	
     public static int modifier;
@@ -211,9 +200,8 @@ public class AWTUtilities {
 	public static int getModifiers() {
 		if( s_successfullyLoadedLibrary ) {
 			return getModifiersNative();
-		} else {   	
-			return modifier;
-		}	
+		}
+		return modifier;	
 	}
 
 	public static boolean mouseListenersAreSupported() {

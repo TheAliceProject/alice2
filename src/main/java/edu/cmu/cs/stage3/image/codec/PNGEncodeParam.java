@@ -119,9 +119,8 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
 
         if (numBands == 1 || numBands == 2) {
             return new PNGEncodeParam.Gray();
-        } else {
-            return new PNGEncodeParam.RGB();
         }
+		return new PNGEncodeParam.RGB();
     }
 
     public static class Palette extends PNGEncodeParam {
@@ -1465,7 +1464,7 @@ public abstract class PNGEncodeParam implements ImageEncodeParam {
                 int curr = currRow[i] & 0xff;
                 int left = currRow[i - bytesPerPixel] & 0xff;
                 int up = prevRow[i] & 0xff;
-                int difference = curr - (left + up)/2;;
+                int difference = curr - (left + up)/2;
                 averageFilteredRow[i] = (byte)difference;
 
                 badness += abs(difference);

@@ -63,9 +63,8 @@ public class Quaternion implements Cloneable, Interpolable {
 		if( o!=null && o instanceof Quaternion ) {
 			Quaternion q = (Quaternion)o;
 			return x==q.x && y==q.y && z==q.z && w==q.w;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public double[] getArray() {
 		double[] a = { x, y, z, w };

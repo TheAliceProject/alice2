@@ -25,9 +25,8 @@ public class LookAtAnimation extends AbstractPointAtAnimation {
 		edu.cmu.cs.stage3.alice.core.Element[] heads = subject.search(new edu.cmu.cs.stage3.alice.core.criterion.ElementNamedCriterion("head", true)); 
 		if ((heads.length > 0) && (heads[0] instanceof edu.cmu.cs.stage3.alice.core.Model)) {
 			return (edu.cmu.cs.stage3.alice.core.Model)heads[0];
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
 	public class RuntimeLookAtAnimation extends RuntimeAbstractPointAtAnimation {
@@ -109,7 +108,7 @@ public class LookAtAnimation extends AbstractPointAtAnimation {
 		protected boolean onlyAffectYaw() {
 			edu.cmu.cs.stage3.alice.core.Model head = getHead(LookAtAnimation.this.subject.getTransformableValue());
 			if (head != null) return false;
-			else return true;
+			return true;
 		}
 		
 		
@@ -118,15 +117,16 @@ public class LookAtAnimation extends AbstractPointAtAnimation {
 			if (targetRef instanceof edu.cmu.cs.stage3.alice.core.Transformable) {
 				edu.cmu.cs.stage3.alice.core.Model head = getHead((edu.cmu.cs.stage3.alice.core.Transformable)targetRef);
 				if (head != null) return head;
-				else return LookAtAnimation.this.target.getReferenceFrameValue();
-			} else return LookAtAnimation.this.target.getReferenceFrameValue();
+				return LookAtAnimation.this.target.getReferenceFrameValue();
+			}
+			return LookAtAnimation.this.target.getReferenceFrameValue();
 		}
 	
 		
 		protected edu.cmu.cs.stage3.alice.core.Transformable getSubject() {
 			edu.cmu.cs.stage3.alice.core.Model head = getHead(LookAtAnimation.this.subject.getTransformableValue());
 			if (head != null) return head;
-			else return LookAtAnimation.this.subject.getTransformableValue();
+			return LookAtAnimation.this.subject.getTransformableValue();
 		}
 		
 		
@@ -135,8 +135,9 @@ public class LookAtAnimation extends AbstractPointAtAnimation {
 			if (targetRef instanceof edu.cmu.cs.stage3.alice.core.Transformable) {
 				edu.cmu.cs.stage3.alice.core.Model head = getHead((edu.cmu.cs.stage3.alice.core.Transformable)targetRef);
 				if (head != null) return head.getBoundingBox().getCenter();
-				else return LookAtAnimation.this.target.getReferenceFrameValue().getBoundingBox().getCenter();
-			} else return LookAtAnimation.this.target.getReferenceFrameValue().getBoundingBox().getCenter();
+				return LookAtAnimation.this.target.getReferenceFrameValue().getBoundingBox().getCenter();
+			}
+			return LookAtAnimation.this.target.getReferenceFrameValue().getBoundingBox().getCenter();
 		}
 	}
 	

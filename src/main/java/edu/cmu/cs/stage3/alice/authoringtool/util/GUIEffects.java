@@ -31,9 +31,8 @@ public class GUIEffects {
 		public boolean imageUpdate( java.awt.Image image, int infoflags, int x, int y, int width, int height ) {
 			if( (infoflags & java.awt.image.ImageObserver.ALLBITS) > 0 ) {
 				return false;
-			} else {
-				return true;
 			}
+			return true;
 		}
 	};
 	public static java.awt.image.ImageObserver sizeObserver = new java.awt.image.ImageObserver() {

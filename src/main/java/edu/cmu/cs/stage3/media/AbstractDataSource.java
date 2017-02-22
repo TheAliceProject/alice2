@@ -90,12 +90,10 @@ public abstract class AbstractDataSource implements DataSource {
 		if( useHintIfNecessary ) {
 			if( Double.isNaN( m_duration ) ) {
 				return m_durationHint;			
-			} else {
-				return m_duration;			
 			}
-		} else {
 			return m_duration;
 		}
+		return m_duration;
 	}
 
 	public double getDurationHint() {

@@ -785,17 +785,13 @@ public class Concat implements ControllerListener, DataSinkListener {
 
 	if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null) 
 	    return ml;
-
-	if (url.startsWith(File.separator)) {
-	    if ((ml = new MediaLocator("file:" + url)) != null) 
+	else if (url.startsWith(File.separator) && (ml = new MediaLocator("file:" + url)) != null) 
 		return ml;
-	} else {
+	else {
 	    String file = "file:" + System.getProperty("user.dir") + File.separator + url;  
-	    if ((ml = new MediaLocator(file)) != null)
+	    ml = new MediaLocator(file);
 		return ml;
 	}
-
-	return null;
     }
 
 

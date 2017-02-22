@@ -85,6 +85,7 @@ public class CaitlinFixer {
 					} else {
 						System.err.println( "did not read entire thumbnail: " + thumbnailFile );
 					}
+					bis.close();	// To fix resource leak							
 				}
 				e.store( dstFile, null, map );
 				e.store(dstFile);

@@ -36,9 +36,8 @@ public class Matrix44Property extends ObjectProperty {
 		javax.vecmath.Matrix4d m = getMatrix4dValue();
 		if( m == null || m instanceof edu.cmu.cs.stage3.math.Matrix44 ) {
 			return (edu.cmu.cs.stage3.math.Matrix44)m;
-		} else {
-			return new edu.cmu.cs.stage3.math.Matrix44( m );
 		}
+		return new edu.cmu.cs.stage3.math.Matrix44( m );
 	}
     
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {

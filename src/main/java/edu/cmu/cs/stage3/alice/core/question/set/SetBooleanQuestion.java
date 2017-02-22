@@ -34,11 +34,9 @@ public abstract class SetBooleanQuestion extends edu.cmu.cs.stage3.alice.core.qu
 		if( setValue!=null ) {
             if( getValue( setValue ) ) {
                 return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
             }
-		} else {
 			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

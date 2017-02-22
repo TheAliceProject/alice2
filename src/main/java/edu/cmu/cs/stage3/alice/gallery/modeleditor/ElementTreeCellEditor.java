@@ -8,9 +8,8 @@ class ElementTreeCellEditor extends javax.swing.tree.DefaultTreeCellEditor {
 	public boolean isCellEditable( java.util.EventObject e ) {
 		if( e == null ) {
 			return true;
-		} else {
-			return super.isCellEditable( e );
 		}
+		return super.isCellEditable( e );
 	}
 	
 	protected boolean canEditImmediately( java.util.EventObject event ) {
@@ -18,12 +17,10 @@ class ElementTreeCellEditor extends javax.swing.tree.DefaultTreeCellEditor {
 			java.awt.event.MouseEvent me = (java.awt.event.MouseEvent)event;
 			if( ( me.getModifiers() & java.awt.event.InputEvent.BUTTON1_MASK ) != 0 ) {
 				return me.getClickCount()>0;
-			} else {
-				return false;
 			}
-		} else {
 			return false;
 		}
+		return false;
 	}
 	
 	

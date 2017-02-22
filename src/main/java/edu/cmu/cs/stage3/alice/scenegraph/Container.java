@@ -39,9 +39,8 @@ public abstract class Container extends Component {
 	public boolean isAncestorOf( Component component ) {
 		if( component == null ) {
 			return false;
-		} else {
-			return component.isDescendantOf( this );
 		}
+		return component.isDescendantOf( this );
 	}
 
 	

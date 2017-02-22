@@ -65,7 +65,7 @@ public class RenderTargetOrbitManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	public void mousePressed( java.awt.event.MouseEvent ev ) {
+	public synchronized void mousePressed( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		//DEBUG System.out.println( "mousePressed" );
 		if( enabled ) {
 			super.mousePressed( ev );
@@ -95,7 +95,7 @@ public class RenderTargetOrbitManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	public void mouseReleased( java.awt.event.MouseEvent ev ) {
+	public synchronized void mouseReleased( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		//DEBUG System.out.println( "mouseReleased" );
 		if( mouseIsDown ) {
 			if( eCameraTransformable != null ) {
@@ -106,7 +106,7 @@ public class RenderTargetOrbitManipulator extends RenderTargetPickManipulator {
 		super.mouseReleased( ev );
 	}
 
-	public void mouseDragged( java.awt.event.MouseEvent ev ) {
+	public synchronized void mouseDragged( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		//DEBUG System.out.println( "mouseDragged" );
 		if( enabled ) {
 			super.mouseDragged( ev );

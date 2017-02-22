@@ -119,9 +119,8 @@ public abstract class VertexGeometry extends Geometry {
 	public int getVertexCount() {
 		if( m_vertices!=null ) {
 			return m_vertices.length;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
 	
@@ -221,6 +220,7 @@ public abstract class VertexGeometry extends Geometry {
 		} else {
 			throw new RuntimeException( Messages.getString("invalid_file_version__", version) ); 
 		}
+		bis.close(); dis.close();
 		return vertices;
 	}
 	public static void storeVertices( Vertex3d[] vertices, java.io.OutputStream os ) throws java.io.IOException {
@@ -261,4 +261,8 @@ public abstract class VertexGeometry extends Geometry {
 		dos.flush();
 	}
 
+	// Aik Min
+	public void clearVertices(){
+		m_vertices = null;
+	}
 }

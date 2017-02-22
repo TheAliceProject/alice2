@@ -37,9 +37,8 @@ public class FileUtilities {
 					progressObserver.progressEnd();
 				}
 			}
-		} else {
-			throw new RuntimeException( Messages.getString("file_copy_not_supported") ); 
 		}
+		throw new RuntimeException( Messages.getString("file_copy_not_supported") );
 	}
 	public static void copy( java.io.File src, java.io.File dst, boolean overwriteIfNecessary ) {
 		try {
@@ -62,9 +61,8 @@ public class FileUtilities {
 	public static String getExtension( java.io.File file ) {
 		if( file != null ) {
 			return getExtension( file.getName() );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public static String getBaseName( String filename ) {
@@ -82,9 +80,8 @@ public class FileUtilities {
 	public static String getBaseName( java.io.File file ) {
 		if( file != null ) {
 			return getBaseName( file.getName() );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
 	public static int isWritableDirectory( java.io.File directory ){

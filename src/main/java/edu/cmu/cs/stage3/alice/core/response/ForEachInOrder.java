@@ -42,9 +42,8 @@ public class ForEachInOrder extends ForEach {
 					currentBehavior.setForkIndex( this, m_loopIndex );
 				}
                 return true;
-			} else {
-				return false;
 			}
+			return false;
         }
 		
 		protected boolean postLoopTest( double t ) {

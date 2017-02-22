@@ -54,9 +54,8 @@ public class Box implements Cloneable {
 		if( o!=null && o instanceof Box ) {
 			Box box = (Box)o;
 			return m_minimum.equals( box.m_minimum ) &&  m_maximum.equals( box.m_maximum ) ;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	public javax.vecmath.Vector3d[] getCorners() {
@@ -74,9 +73,8 @@ public class Box implements Cloneable {
 	public javax.vecmath.Vector3d getMinimum() {
 		if( m_minimum!=null ) {
 			return new javax.vecmath.Vector3d( m_minimum );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void setMinimum( javax.vecmath.Vector3d minimum ) {
 		if( minimum!=null ) {
@@ -88,9 +86,8 @@ public class Box implements Cloneable {
 	public javax.vecmath.Vector3d getMaximum() {
 		if( m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( m_maximum );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void setMaximum( javax.vecmath.Vector3d maximum ) {
 		if( maximum!=null ) {
@@ -103,79 +100,69 @@ public class Box implements Cloneable {
 	public javax.vecmath.Vector3d getCenter() {
 		if( m_minimum!=null && m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( (m_minimum.x+m_maximum.x)/2, (m_minimum.y+m_maximum.y)/2, (m_minimum.z+m_maximum.z)/2 );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public javax.vecmath.Vector3d getCenterOfFrontFace(){
 		if( m_minimum!=null && m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( (m_minimum.x+m_maximum.x)/2, (m_minimum.y+m_maximum.y)/2, (m_maximum.z) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public javax.vecmath.Vector3d getCenterOfBackFace(){
 		if( m_minimum!=null && m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( (m_minimum.x+m_maximum.x)/2, (m_minimum.y+m_maximum.y)/2, (m_minimum.z) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public javax.vecmath.Vector3d getCenterOfLeftFace(){
 		if( m_minimum!=null && m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( (m_minimum.x), (m_minimum.y+m_maximum.y)/2, (m_minimum.z+m_maximum.z)/2 );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public javax.vecmath.Vector3d getCenterOfRightFace(){
 		if( m_minimum!=null && m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( (m_maximum.x), (m_minimum.y+m_maximum.y)/2, (m_minimum.z+m_maximum.z)/2 );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public javax.vecmath.Vector3d getCenterOfTopFace(){
 		if( m_minimum!=null && m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( (m_minimum.x+m_maximum.x)/2, (m_maximum.y), (m_minimum.z+m_maximum.z)/2 );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public javax.vecmath.Vector3d getCenterOfBottomFace(){
 		if( m_minimum!=null && m_maximum!=null ) {
 			return new javax.vecmath.Vector3d( (m_minimum.x+m_maximum.x)/2, (m_minimum.y), (m_minimum.z+m_maximum.z)/2 );
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public double getWidth() {
 		if( m_minimum!=null && m_maximum!=null ) {
 			return m_maximum.x - m_minimum.x;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	public double getHeight() {
 		if( m_minimum!=null && m_maximum!=null ) {
 			return m_maximum.y - m_minimum.y;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	public double getDepth() {
 		if( m_minimum!=null && m_maximum!=null ) {
 			return m_maximum.z - m_minimum.z;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	public void union( Box b ) {
 		if( b!=null ) {

@@ -159,9 +159,8 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 		if( (startSelection >= 0) && (endSelection <= script.length()) ) {
 			select( startSelection, endSelection );
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	public void replaceCurrent( String stringToReplaceWith ) {
@@ -237,9 +236,8 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 				javax.swing.text.Element map = getDocument().getDefaultRootElement();
 				return map.getElementIndex( offset );
 			}
-		} else {
-			throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_number__only_PlainDocuments_supported_at_this_time_") ); 
 		}
+		throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_number__only_PlainDocuments_supported_at_this_time_") );
 	}
 
 	public int getLineStartOffset( int line ) throws javax.swing.text.BadLocationException {
@@ -254,9 +252,8 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 				javax.swing.text.Element lineElem = map.getElement( line );
 				return lineElem.getStartOffset();
 			}
-		} else {
-			throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_start_offset__only_PlainDocuments_supported_at_this_time_") ); 
 		}
+		throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_start_offset__only_PlainDocuments_supported_at_this_time_") );
 	}
 
 	public int getLineEndOffset(int line) throws javax.swing.text.BadLocationException {
@@ -271,9 +268,8 @@ public class ScriptEditorPane extends javax.swing.JEditorPane {
 				javax.swing.text.Element lineElem = map.getElement(line);
 				return lineElem.getEndOffset();
 			}
-		} else {
-			throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_end_offset__only_PlainDocuments_supported_at_this_time_") ); 
 		}
+		throw new java.lang.UnsupportedOperationException( Messages.getString("Cannot_find_line_end_offset__only_PlainDocuments_supported_at_this_time_") );
 	}
 
 	///////////////////////

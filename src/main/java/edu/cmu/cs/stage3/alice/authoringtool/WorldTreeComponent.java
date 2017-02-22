@@ -362,7 +362,12 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 				} else if( child.getParent() == null ) {
 					// 
 					return true;
+				} else if( child.getParent() instanceof edu.cmu.cs.stage3.alice.core.Model) {
+					// return false when moving subparts into group or world
+					return false;
 				}
+				// todo: return true when rearranging subparts in models 
+				
 				
 				// check if object exists when moving object
 				for (int i = 0; i < parent.getChildCount(); i++){
@@ -371,7 +376,6 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 				}
 				return true;
 			}
-
 			return false;
 		}
 
@@ -385,7 +389,7 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 				oap = ((edu.cmu.cs.stage3.alice.core.World)parent).sandboxes;
 			} else if( parent instanceof edu.cmu.cs.stage3.alice.core.Group ) {
 				oap = ((edu.cmu.cs.stage3.alice.core.Group)parent).values;
-			}
+			} 
 
 			if( predecessorPath == parentPath ) {
 				index = 0;

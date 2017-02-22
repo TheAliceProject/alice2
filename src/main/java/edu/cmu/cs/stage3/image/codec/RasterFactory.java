@@ -321,7 +321,7 @@ public class RasterFactory {
                                                     int bandOffsets[],
                                                     Point location) {
 	DataBuffer d;
-        int bands = bandOffsets.length;
+        
 
         if (bankIndices == null) {
             throw new IllegalArgumentException(Messages.getString("Bank_indices_array_is_null_"));
@@ -329,7 +329,7 @@ public class RasterFactory {
         if (bandOffsets == null) {
             throw new IllegalArgumentException(Messages.getString("Band_offsets_array_is_null_"));
         }
-
+        
         if (bandOffsets.length != bankIndices.length) {
             throw new IllegalArgumentException(Messages.getString("bankIndices_length____bandOffsets_length"));
         }
@@ -337,7 +337,7 @@ public class RasterFactory {
         // Figure out the #banks and the largest band offset
         int maxBank = bankIndices[0];
         int maxBandOff = bandOffsets[0];
-        for (int i = 1; i < bands; i++) {
+        for (int i = 1; i < bandOffsets.length; i++) {
             if (bankIndices[i] > maxBank) {
                 maxBank = bankIndices[i];
             }
@@ -1097,10 +1097,9 @@ public class RasterFactory {
                                                          int numBands) {
         if (sm instanceof BandedSampleModel) {
             return createBandedSampleModel(dataType, width, height, numBands);
-        } else {	// default SampleModel
-            return createPixelInterleavedSampleModel(
-                   dataType, width, height, numBands);
         }
+		return createPixelInterleavedSampleModel(
+		       dataType, width, height, numBands);
     }
 
     /**

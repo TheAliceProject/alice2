@@ -32,8 +32,7 @@ public abstract class UnaryNumberResultingInBooleanQuestion extends BooleanQuest
 	public Object getValue() {
 		if( getValue( a.doubleValue() ) ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

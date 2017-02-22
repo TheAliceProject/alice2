@@ -48,25 +48,22 @@ public class CreateNewWrapperTreeModel implements javax.swing.tree.TreeModel {
 	public Object getChild( Object parent, int index ) {
 		if( (parent == wrappedTreeModel.getRoot()) && (index == wrappedTreeModel.getChildCount( parent )) ) {
 			return createNewObject;
-		} else {
-			return wrappedTreeModel.getChild( parent, index );
 		}
+		return wrappedTreeModel.getChild( parent, index );
 	}
 
 	public int getChildCount( Object parent ) {
 		if( parent == wrappedTreeModel.getRoot() ) {
 			return wrappedTreeModel.getChildCount( parent ) + 1;
-		} else {
-			return wrappedTreeModel.getChildCount( parent );
 		}
+		return wrappedTreeModel.getChildCount( parent );
 	}
 
 	public boolean isLeaf( Object node ) {
 		if( node == createNewObject ) {
 			return true;
-		} else {
-			return wrappedTreeModel.isLeaf( node );
 		}
+		return wrappedTreeModel.isLeaf( node );
 	}
 
 	public void valueForPathChanged( javax.swing.tree.TreePath path, Object newValue ) {
@@ -78,9 +75,8 @@ public class CreateNewWrapperTreeModel implements javax.swing.tree.TreeModel {
 	public int getIndexOfChild( Object parent, Object child ) {
 		if( child == createNewObject ) {
 			return wrappedTreeModel.getChildCount( parent );
-		} else {
-			return wrappedTreeModel.getIndexOfChild( parent, child );
 		}
+		return wrappedTreeModel.getIndexOfChild( parent, child );
 	}
 
 	public void addTreeModelListener( javax.swing.event.TreeModelListener l ) {

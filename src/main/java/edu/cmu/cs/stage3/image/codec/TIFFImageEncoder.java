@@ -461,7 +461,7 @@ public class TIFFImageEncoder extends ImageEncoderImpl {
 
 	    int index, remainder;
 
-            int pixel = 0;;
+            int pixel = 0;
             int k = 0;
 	    switch(sampleSize[0]) {
 

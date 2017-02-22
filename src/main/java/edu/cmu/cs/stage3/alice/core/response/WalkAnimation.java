@@ -64,9 +64,8 @@ public class WalkAnimation extends AbstractWalkAnimation {
 			getActualStepLength();
 			if (Double.isNaN(duration.doubleValue())) {
 				return (numberOfSteps)/stepSpeed.doubleValue();
-			} else {
-				return duration.doubleValue();
 			}
+			return duration.doubleValue();
 		}
 		
 		

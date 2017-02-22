@@ -1300,11 +1300,10 @@ class TIFFFaxDecoder {
 	// If one dimensional encoding mode, then always return 1
 	if (oneD == 0) {
 	    return 1;
-	} else {
-	    // Otherwise for 2D encoding mode,
-	    // The next one bit signifies 1D/2D encoding of next line.
-	    return nextLesserThan8Bits(1);
 	}
+	// Otherwise for 2D encoding mode,
+	// The next one bit signifies 1D/2D encoding of next line.
+	return nextLesserThan8Bits(1);
     }
 
     private void getNextChangingElement(int a0, boolean isWhite, int[] ret) {
