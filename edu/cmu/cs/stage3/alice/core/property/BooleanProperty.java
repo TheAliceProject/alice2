@@ -49,9 +49,8 @@ public class BooleanProperty extends ObjectProperty {
 		Boolean b = getBooleanValue();
 		if( b != null ) {
 			return b.booleanValue();
-		} else {
-			return valueIfNull;
 		}
+		return valueIfNull;
 	}
 	public boolean booleanValue() {
 		return booleanValue( false );

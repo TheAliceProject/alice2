@@ -207,8 +207,6 @@ public class DynamicFlowLayout extends java.awt.FlowLayout{
 		if (current == null || anchorClass.isAssignableFrom(current.getClass())){
 			return current;
 		}
-		else{
-			return getAnchor(current.getParent());
-		}
+		return getAnchor(current.getParent());
 	}
 }

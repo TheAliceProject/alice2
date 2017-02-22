@@ -130,9 +130,8 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		int returnVal = chooser.showOpenDialog(stencilPanel);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			return chooser.getCurrentDirectory() + File.separator + chooser.getSelectedFile().getName(); 
-		} else {
-			return null;
 		}
+		return null;
 
 	}
 
@@ -164,9 +163,8 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 					if (ans == javax.swing.JOptionPane.CANCEL_OPTION) {
 						return;
-					} else {
-						loadFile = null; // make them choose again
 					}
+					loadFile = null; // make them choose again
 				} else {
 				} // no name conflict, we can proceed
 			} else { // no filename specified, interpret this is a cancel
@@ -422,18 +420,18 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 		}
 		if ((currentStencilIndex < stencilList.size() - 1) && (autoAdvancingHole == false)) {
 			return true;
-		} else
-			return false;
+		}
+		return false;
 	}
 	public boolean hasPrevious() {
 		if (currentStencilIndex > 0) {
 			Stencil currentStencil = (StencilManager.Stencil) stencilList.elementAt(currentStencilIndex);
 			if (currentStencil.getStepsToGoBack() > 0) {
 				return true;
-			} else
-				return false;
-		} else
+			}
 			return false;
+		}
+		return false;
 	}
 	public int getStencilNumber() {
 		return currentStencilIndex;
@@ -466,17 +464,16 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 			// if writing enabled - get the current state so we have the "right" answer
 			currentStencil.setEndState(this.stencilApp.getCurrentState());
 			return true;
-		} else {
-			// compare against saved "right" answer
-			if (currentStencil.getEndState() != null) {
-				boolean appInRightState = this.stencilApp.doesStateMatch(currentStencil.getEndState());
-				if (!appInRightState) {
-					return false;
-					// TODO: set error stencil instead
-				}
-			}
-			return true;
 		}
+		// compare against saved "right" answer
+		if (currentStencil.getEndState() != null) {
+			boolean appInRightState = this.stencilApp.doesStateMatch(currentStencil.getEndState());
+			if (!appInRightState) {
+				return false;
+				// TODO: set error stencil instead
+			}
+		}
+		return true;
 	}
 
 	public void showNextStencil() {
@@ -540,8 +537,8 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 
 		if (file.exists()) {
 			return file;
-		} else
-			return null;
+		}
+		return null;
 	}
 	public void showNextStack() {
 		java.io.File nextFile = getFile(this.nextStack);
@@ -974,8 +971,8 @@ public class StencilManager implements MouseListener, MouseMotionListener, KeyLi
 	public void insertNewStencil(boolean paramBoolean) {
 	    if ((this.stencilList != null) && (this.stencilList.size() > 0)) {
 	    	Stencil localStencil = (Stencil)this.stencilList.elementAt(this.currentStencilIndex);
-	    	boolean bool = checkState(localStencil);
-	    	if (!bool);
+/*	    	boolean bool = checkState(localStencil);
+	    	if (!bool);*/
 	    	localStencil.setCurrentStencil(false);
 	    	this.currentStencilIndex += 1;
 	    }

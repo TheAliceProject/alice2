@@ -33,19 +33,18 @@ class SymmetricPerspectiveCameraProxy extends CameraProxy {
 	protected java.awt.Rectangle getActualLetterboxedViewport( int width, int height ) {
 	    if( Double.isNaN( m_vertical ) || Double.isNaN( m_vertical ) ) {
 		    return new java.awt.Rectangle( 0, 0, width, height );
-	    } else {
-	        double aspect = m_horizontal/m_vertical;
-	        double pixelAspect = width/(double)height;
-	        if( aspect > pixelAspect ) {
-	            int letterBoxedHeight = (int)( ( width / aspect ) + 0.5 ); 
-			    return new java.awt.Rectangle( 0, (height-letterBoxedHeight)/2, width, letterBoxedHeight );
-	        } else if( aspect < pixelAspect ) {
-	            int letterBoxedWidth = (int)( ( height * aspect ) + 0.5 ); 
-			    return new java.awt.Rectangle( (width-letterBoxedWidth)/2, 0, letterBoxedWidth, height );
-	        } else {
-			    return new java.awt.Rectangle( 0, 0, width, height );
-	        }
 	    }
+		double aspect = m_horizontal/m_vertical;
+		double pixelAspect = width/(double)height;
+		if( aspect > pixelAspect ) {
+		    int letterBoxedHeight = (int)( ( width / aspect ) + 0.5 ); 
+		    return new java.awt.Rectangle( 0, (height-letterBoxedHeight)/2, width, letterBoxedHeight );
+		} else if( aspect < pixelAspect ) {
+		    int letterBoxedWidth = (int)( ( height * aspect ) + 0.5 ); 
+		    return new java.awt.Rectangle( (width-letterBoxedWidth)/2, 0, letterBoxedWidth, height );
+		} else {
+		    return new java.awt.Rectangle( 0, 0, width, height );
+		}
 	}
 
 	private static final double DEFAULT_ACTUAL_VERTICAL = 0.5;
@@ -54,24 +53,20 @@ class SymmetricPerspectiveCameraProxy extends CameraProxy {
 	        double aspect = width/(double)height;
 		    if( Double.isNaN( m_vertical ) ) {
 		        return DEFAULT_ACTUAL_VERTICAL * aspect;
-		    } else {
-		        return m_vertical * aspect;
 		    }
-	    } else {
-	        return m_horizontal;
+			return m_vertical * aspect;
 	    }
+		return m_horizontal;
 	}
 	public double getActualVerticalViewingAngle( int width, int height ) {
 	    if( Double.isNaN( m_vertical ) ) {
 	        double aspect = width/(double)height;
 		    if( Double.isNaN( m_horizontal ) ) {
 		        return DEFAULT_ACTUAL_VERTICAL;
-		    } else {
-		        return m_horizontal / aspect;
 		    }
-	    } else {
-	        return m_vertical;
+			return m_horizontal / aspect;
 	    }
+		return m_vertical;
 	}
 
 	

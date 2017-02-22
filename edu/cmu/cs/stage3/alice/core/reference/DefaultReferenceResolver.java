@@ -77,12 +77,10 @@ public class DefaultReferenceResolver implements edu.cmu.cs.stage3.alice.core.Re
 			}
 			if( resolved!=null ) {
 				return resolved;
-			} else {
-                throw new edu.cmu.cs.stage3.alice.core.UnresolvableReferenceException( criterion, "internal root: " + m_internalRoot + " external root: " + m_externalRoot );
 			}
-		} else {
-            //todo
-            throw new edu.cmu.cs.stage3.alice.core.UnresolvableReferenceException( criterion, "must be edu.cmu.cs.stage3.alice.core.criterion.ElementKeyedCriterion" );
+			throw new edu.cmu.cs.stage3.alice.core.UnresolvableReferenceException( criterion, "internal root: " + m_internalRoot + " external root: " + m_externalRoot );
 		}
+		//todo
+		throw new edu.cmu.cs.stage3.alice.core.UnresolvableReferenceException( criterion, "must be edu.cmu.cs.stage3.alice.core.criterion.ElementKeyedCriterion" );
 	}
 }

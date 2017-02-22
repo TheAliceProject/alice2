@@ -62,17 +62,15 @@ public class CallToUserDefinedQuestion extends Question {
 			Object returnValue = userDefinedQuestionValue.getValue();
 			currentBehavior.popStack();
 			return returnValue;
-		} else {
-			return null;
 		}
+		return null;
     }
     
 	public Class getValueClass() {
         UserDefinedQuestion userDefinedQuestionValue = userDefinedQuestion.getUserDefinedQuestionValue();
         if( userDefinedQuestionValue != null ) {
             return userDefinedQuestionValue.getValueClass();
-        } else {
-            return null;
         }
+		return null;
     }
 }

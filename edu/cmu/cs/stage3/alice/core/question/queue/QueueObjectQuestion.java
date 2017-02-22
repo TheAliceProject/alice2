@@ -36,8 +36,7 @@ public abstract class QueueObjectQuestion extends edu.cmu.cs.stage3.alice.core.Q
 		Queue queueValue = queue.getQueueValue();
 		if( queueValue!=null ) {
             return getValue( queueValue );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

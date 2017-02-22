@@ -49,13 +49,11 @@ public class CharacterViewAnimation extends AbstractPositionAnimation {
 					m_characterHead = (Model) heads[0];
 					v = m_characterHead.getBoundingBox().getCenterOfFrontFace();
 					return m_characterHead.getPosition(v, edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE);
-				} else {
-					v = character.getBoundingBox().getCenterOfFrontFace();
-					v.y *= 1.8;
-					return character.getPosition(v, edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE);
 				}
-			} else {
-			}
+				v = character.getBoundingBox().getCenterOfFrontFace();
+				v.y *= 1.8;
+				return character.getPosition(v, edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE);
+			} 
 			return m_asSeenBy.getPosition( v, edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE );
 		}
 		
@@ -66,9 +64,8 @@ public class CharacterViewAnimation extends AbstractPositionAnimation {
 		protected Matrix33 getOrientationEnd() {
 			if (m_characterHead != null) {
 				return m_characterHead.getOrientationAsAxes(edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE);
-			} else {
-				return m_asSeenBy.getOrientationAsAxes(edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE);
 			}
+			return m_asSeenBy.getOrientationAsAxes(edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE);
 		}
 		
 		

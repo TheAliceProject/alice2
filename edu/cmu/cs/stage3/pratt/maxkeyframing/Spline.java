@@ -42,9 +42,8 @@ public abstract class Spline {
 				} else {
 					return 0;
 				}
-			} else {
-				throw new ClassCastException(  Messages.getString("required_", Key.class.getName()) ); 
 			}
+			throw new ClassCastException(  Messages.getString("required_", Key.class.getName()) );
 		}
 	};
 	private Key recentKey;
@@ -133,17 +132,15 @@ public abstract class Spline {
 	public double getFirstTime() {
 		if( ! keys.isEmpty() ) {
 			return getFirstKey().getTime();
-		} else {
-			return 0.0;
 		}
+		return 0.0;
 	}
 
 	public double getLastTime() {
 		if( ! keys.isEmpty() ) {
 			return getLastKey().getTime();
-		} else {
-			return 0.0;
 		}
+		return 0.0;
 	}
 
 	public void scaleKeyValueComponents( double scaleFactor ) {

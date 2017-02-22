@@ -70,7 +70,7 @@ public class LocalGalleryObject extends GalleryObject {
         final String imageFilename = root + filename;
         javax.swing.ImageIcon  toReturn = null;
         if (imageFilename != null){
-            try{
+            try {
                 if (imageFilename.indexOf(".a2c") == (imageFilename.length()-4) || imageFilename.indexOf(".a2w") == (imageFilename.length()-4)){  
                     java.util.zip.ZipFile zip = new java.util.zip.ZipFile(imageFilename);
                     java.util.zip.ZipEntry entry = zip.getEntry(tumbnailFilename);
@@ -80,25 +80,19 @@ public class LocalGalleryObject extends GalleryObject {
                         if (thumbImage != null){
                             toReturn = new javax.swing.ImageIcon(thumbImage);
                         }
-                        else{
-                            return null;
-                        }
-                    }
-                    else{
-                        return null;
-                    }
+                       	stream.close();   
+                    } 
                     zip.close();
-                }
-                else{
+                } else {
                     toReturn = new javax.swing.ImageIcon(imageFilename);
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 return null;
-            }
-            if (toReturn.getIconHeight() < 10 || toReturn.getIconWidth() < 10){
-                return null;
-            }
+            } 
+            
+        }
+        if (toReturn == null || toReturn.getIconHeight() < 10 || toReturn.getIconWidth() < 10){
+        	return null;
         }
         return toReturn.getImage();
     }
@@ -125,6 +119,7 @@ public class LocalGalleryObject extends GalleryObject {
                                 else{
                                     image =  GalleryViewer.noImageIcon;
                                 }
+                                stream.close();
                             }
                             else{
                                 image =  GalleryViewer.noImageIcon;

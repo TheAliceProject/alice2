@@ -63,9 +63,8 @@ public class Scheduler implements Runnable {
 	public double getDT() {
 		if( Double.isNaN( m_time ) || Double.isNaN( m_prevTime ) ) {
 			return 0;
-		} else {
-			return m_time-m_prevTime;
 		}
+		return m_time-m_prevTime;
 	}
 
 	protected void schedule( ScheduleListener scheduleListener, ScheduleEvent scheduleEvent ) {

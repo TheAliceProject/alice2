@@ -44,15 +44,12 @@ public class ElementNamedCriterion implements edu.cmu.cs.stage3.util.Criterion {
 			String nameValue = ((edu.cmu.cs.stage3.alice.core.Element)o).name.getStringValue();
 			if( m_name==null ) {
 				return nameValue==null;
-			} else {
-				if( m_ignoreCase ) {
-					return m_name.equalsIgnoreCase( nameValue );
-				} else {
-					return m_name.equals( nameValue );
-				}
 			}
-		} else {
-			return false;
+			if( m_ignoreCase ) {
+				return m_name.equalsIgnoreCase( nameValue );
+			}
+			return m_name.equals( nameValue );
 		}
+		return false;
 	}
 }

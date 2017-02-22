@@ -136,9 +136,8 @@ public class Visual extends Component {
 				box.scale( m_scale );
 			}
 			return box;
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public edu.cmu.cs.stage3.math.Sphere getBoundingSphere() {
 		if( m_geometry!=null ) {
@@ -147,9 +146,8 @@ public class Visual extends Component {
 				sphere.scale( m_scale );
 			}
 			return sphere;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public void transform( javax.vecmath.Matrix4d trans ) {

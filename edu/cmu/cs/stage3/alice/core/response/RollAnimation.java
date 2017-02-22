@@ -40,9 +40,8 @@ public class RollAnimation extends RotateAnimation {
 		protected javax.vecmath.Vector3d getAxis( Direction direction ) {
 			if( direction!=null ) {
 				return direction.getRollAxis();
-			} else {
-				return null;
 			}
+			return null;
 		}
 	}
 }

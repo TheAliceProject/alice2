@@ -159,9 +159,8 @@ public class ElementUsageGraph extends javax.swing.JPanel {
 				String name2 = ((Class)o2).getName();
 				name2 = name2.substring( name2.lastIndexOf( '.' ) + 1 );
 				return name1.compareTo( name2 );
-			} else {
-				return 0;
 			}
+			return 0;
 		}
 	}
 }

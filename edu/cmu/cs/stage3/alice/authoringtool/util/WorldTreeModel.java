@@ -91,9 +91,8 @@ public class WorldTreeModel extends TreeModelSupport implements edu.cmu.cs.stage
 
 		if( list.isEmpty() ) {
 			return emptyPath;
-		} else {
-			return list.toArray();
 		}
+		return list.toArray();
 	}
 
 	public void setListeningEnabled( boolean enabled ) {

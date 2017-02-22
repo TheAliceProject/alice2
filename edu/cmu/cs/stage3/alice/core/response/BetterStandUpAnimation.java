@@ -69,9 +69,8 @@ public class BetterStandUpAnimation extends StandUpAnimation {
 				}
 				
 				return m_positionEnd;
-			} else {
-				return m_positionBegin;
 			}
+			return m_positionBegin;
 		}
 		
 		

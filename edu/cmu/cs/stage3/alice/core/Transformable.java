@@ -115,21 +115,18 @@ public class Transformable extends ReferenceFrame {
 	private Transformable internalGetPartKeyed( String key, int fromIndex, boolean ignoreCase ) {
 		if( key.equals( "" ) ) { 
 			return this;
-		} else {
-			int toIndex = key.indexOf( SEPARATOR, fromIndex );
-			if( toIndex == -1 ) {
-				String childName = key.substring( fromIndex );
-				return internalGetPartNamed( childName, ignoreCase );
-			} else {
-				String childName = key.substring( fromIndex, toIndex );
-				Transformable child = internalGetPartNamed( childName, ignoreCase );
-				if( child != null ) {
-					return child.internalGetPartKeyed( key, toIndex+1, ignoreCase );
-				} else {
-					return null;
-				}
-			}
 		}
+		int toIndex = key.indexOf( SEPARATOR, fromIndex );
+		if( toIndex == -1 ) {
+			String childName = key.substring( fromIndex );
+			return internalGetPartNamed( childName, ignoreCase );
+		}
+		String childName = key.substring( fromIndex, toIndex );
+		Transformable child = internalGetPartNamed( childName, ignoreCase );
+		if( child != null ) {
+			return child.internalGetPartKeyed( key, toIndex+1, ignoreCase );
+		}
+		return null;
 	}
 
 	public Element getPartKeyed( String key ) {
@@ -328,18 +325,16 @@ public class Transformable extends ReferenceFrame {
 		if( sphere != null ) {
 			double r = sphere.getRadius();
 			return r*r;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
 	public edu.cmu.cs.stage3.math.Matrix44 getLocalTransformation() {
 		javax.vecmath.Matrix4d localTransformation = m_sgTransformable.getLocalTransformation();
 		if( localTransformation!=null ) {
 			return new edu.cmu.cs.stage3.math.Matrix44( localTransformation );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
 	public edu.cmu.cs.stage3.math.Matrix44 getTransformation( javax.vecmath.Vector3d offset, ReferenceFrame asSeenBy ) {
@@ -349,9 +344,8 @@ public class Transformable extends ReferenceFrame {
 		}
 		if( asSeenBy==vehicleValue && offset==null ) {
 			return getLocalTransformation();
-		} else {
-			return super.getTransformation( offset, asSeenBy );
 		}
+		return super.getTransformation( offset, asSeenBy );
 	}
     private static edu.cmu.cs.stage3.alice.core.Transformable s_getAGoodLookDummy = null;
     protected double getViewingAngleForGetAGoodLookAt() {
@@ -451,11 +445,10 @@ public class Transformable extends ReferenceFrame {
 		}
 		if( asSeenBy==vehicleValue ) {
 			return new edu.cmu.cs.stage3.math.Matrix44( m );
-		} else {
-			javax.vecmath.Matrix4d asSeenByAbsolute = asSeenBy.getSceneGraphReferenceFrame().getAbsoluteTransformation();
-			javax.vecmath.Matrix4d vehicleInverseAbsolute = vehicleValue.getSceneGraphReferenceFrame().getInverseAbsoluteTransformation();
-			return edu.cmu.cs.stage3.math.Matrix44.multiply( m, edu.cmu.cs.stage3.math.Matrix44.multiply( asSeenByAbsolute, vehicleInverseAbsolute ) );
 		}
+		javax.vecmath.Matrix4d asSeenByAbsolute = asSeenBy.getSceneGraphReferenceFrame().getAbsoluteTransformation();
+		javax.vecmath.Matrix4d vehicleInverseAbsolute = vehicleValue.getSceneGraphReferenceFrame().getInverseAbsoluteTransformation();
+		return edu.cmu.cs.stage3.math.Matrix44.multiply( m, edu.cmu.cs.stage3.math.Matrix44.multiply( asSeenByAbsolute, vehicleInverseAbsolute ) );
 	}
 	public static edu.cmu.cs.stage3.math.Matrix33 calculateOrientation( javax.vecmath.Vector3d forward, javax.vecmath.Vector3d upGuide ) {
 		return edu.cmu.cs.stage3.alice.scenegraph.Transformable.calculateOrientation( forward, upGuide );

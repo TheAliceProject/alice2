@@ -44,12 +44,10 @@ public class Dimension extends edu.cmu.cs.stage3.util.Enumerable {
 			Dimension dimension = (Dimension)o;
 			if( m_scaleAxis == null ) {
 				return dimension.m_scaleAxis==null;
-			} else {
-				return m_scaleAxis.equals( dimension.m_scaleAxis );
 			}
-		} else {
-			return false;
+			return m_scaleAxis.equals( dimension.m_scaleAxis );
 		}
+		return false;
 	}
 	public static Dimension valueOf( String s ) {
 		return (Dimension)edu.cmu.cs.stage3.util.Enumerable.valueOf( s, Dimension.class );

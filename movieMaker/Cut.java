@@ -313,7 +313,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 		    if (t == FramePositioningControl.TIME_UNKNOWN) {
 			fpc = null;
 			break;
-		    } else
+		    }
 			start[i] = t.getNanoseconds();
 		    if (end[i] == Long.MAX_VALUE)
 			continue;
@@ -321,7 +321,7 @@ public class Cut implements ControllerListener, DataSinkListener {
 		    if (t == FramePositioningControl.TIME_UNKNOWN) {
 			fpc = null;
 			break;
-		    } else
+		    }
 			end[i] = t.getNanoseconds();
 		}
 	    }
@@ -674,17 +674,13 @@ public class Cut implements ControllerListener, DataSinkListener {
 
 	if (url.indexOf(":") > 0 && (ml = new MediaLocator(url)) != null) 
 	    return ml;
-
-	if (url.startsWith(File.separator)) {
-	    if ((ml = new MediaLocator("file:" + url)) != null) 
+	else if (url.startsWith(File.separator) && (ml = new MediaLocator("file:" + url)) != null) 
 		return ml;
-	} else {
+	else {
 	    String file = "file:" + System.getProperty("user.dir") + File.separator + url;  
-	    if ((ml = new MediaLocator(file)) != null)
+	    ml = new MediaLocator(file);
 		return ml;
 	}
-
-	return null;
     }
 
 
@@ -944,17 +940,17 @@ public class Cut implements ControllerListener, DataSinkListener {
 	    }
 
 	    if (!eos && !endReached[idx]) {
-		if (endReached[idx] = checkEndTime(buf, end[idx])) {
-		    idx++;	// move on to the next set of start & end pts.
-		    return true;
-		}
+	    	endReached[idx] = checkEndTime(buf, end[idx]);
+			if ( endReached[idx] ) {
+			    idx++;	// move on to the next set of start & end pts.
+			    return true;
+			}
 	    } else if (endReached[idx]) {
 		if (!eos) {
 		    return true;
-		} else {
-		    buf.setOffset(0);
-		    buf.setLength(0);
 		}
+		buf.setOffset(0);
+		buf.setLength(0);
 	    }
 
 	    return false;
@@ -998,14 +994,12 @@ public class Cut implements ControllerListener, DataSinkListener {
 	    if (isRawAudio(buf.getFormat())) {
 		if (computeDuration(audioLen, buf.getFormat()) >= endTS)
 		    return true;
-		else {
-		    long ts = computeDuration(audioLen+buf.getLength(), 
-					buf.getFormat());
-		    if (ts >= endTS) {
-			int len = computeLength(ts - endTS, buf.getFormat());
-			buf.setLength(buf.getLength() - len);
-			// We still need to process this last buffer.
-		    }
+		long ts = computeDuration(audioLen+buf.getLength(), 
+				buf.getFormat());
+		if (ts >= endTS) {
+		int len = computeLength(ts - endTS, buf.getFormat());
+		buf.setLength(buf.getLength() - len);
+		// We still need to process this last buffer.
 		}
 	    } else if (buf.getTimeStamp() > endTS) {
 		return true;

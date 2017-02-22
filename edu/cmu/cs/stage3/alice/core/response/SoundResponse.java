@@ -214,9 +214,8 @@ public class SoundResponse extends edu.cmu.cs.stage3.alice.core.Response {
 					}
 				}
 				return mediaTimeRemaining;
-			} else {
-				return 0;
 			}
+			return 0;
 		}
 		//todo: remove?
 		
@@ -224,9 +223,8 @@ public class SoundResponse extends edu.cmu.cs.stage3.alice.core.Response {
 			double dur = super.getDuration();
 			if( dur==0 ) {
 				return Double.NaN;
-			} else {
-				return dur;
 			}
+			return dur;
 		}
 	}
 }

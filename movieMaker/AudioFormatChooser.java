@@ -215,11 +215,9 @@ public class AudioFormatChooser extends Panel implements ItemListener {
             onEnableTrack ( true );
             return;
         }
-        else {
-            checkEnableTrack.setEnabled ( true );
-            checkEnableTrack.setState ( boolEnableTrackSaved );
-            onEnableTrack ( true );
-        }
+        checkEnableTrack.setEnabled ( true );
+        checkEnableTrack.setState ( boolEnableTrackSaved );
+        onEnableTrack ( true );
 
         if ( !isFormatSupported(this.formatOld) )
             this.formatOld = null;

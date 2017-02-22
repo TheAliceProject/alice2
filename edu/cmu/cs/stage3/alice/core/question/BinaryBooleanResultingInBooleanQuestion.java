@@ -48,8 +48,7 @@ public abstract class BinaryBooleanResultingInBooleanQuestion extends BooleanQue
 		}
 		if( returnValue ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

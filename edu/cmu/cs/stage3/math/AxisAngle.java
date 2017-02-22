@@ -59,9 +59,8 @@ public class AxisAngle implements Cloneable {
 	public javax.vecmath.Vector3d getAxis() {
 		if( m_axis!=null ) {
 			return (javax.vecmath.Vector3d)m_axis.clone();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public void setAxis( javax.vecmath.Vector3d axis ) {
 		m_axis = axis;
@@ -83,9 +82,8 @@ public class AxisAngle implements Cloneable {
 			AxisAngle aa = (AxisAngle)o;
 			//todo handle null
 			return m_axis.equals( aa.m_axis ) && m_angle==aa.m_angle;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public double[] getArray() {
 		double[] a = { m_axis.x, m_axis.y, m_axis.z, m_angle };

@@ -158,9 +158,8 @@ public class SoundViewController extends javax.swing.JPanel implements edu.cmu.c
 	public int getSoundState() {
 		if( m_player != null ) {
 			return m_player.getState();
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
 	protected class SoundPlayStopToggleButton extends javax.swing.JButton {

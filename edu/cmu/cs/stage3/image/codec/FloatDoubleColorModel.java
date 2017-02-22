@@ -261,19 +261,16 @@ public class FloatDoubleColorModel extends ComponentColorModel {
                 if (needAlpha) {
                     float falp = fdata[numColorComponents];
                     return clamp(fsample/falp);
-                } else {
-                    return clamp(fsample);
                 }
-            } else {
-                double[] ddata = (double[])inData;
-                double dsample = ddata[sample]*255.0;
-                if (needAlpha) {
-                    double dalp = ddata[numColorComponents];
-                    return clamp(dsample/dalp);
-                } else {
-                    return clamp(dsample);
-                }
+				return clamp(fsample);
             }
+			double[] ddata = (double[])inData;
+			double dsample = ddata[sample]*255.0;
+			if (needAlpha) {
+			    double dalp = ddata[numColorComponents];
+			    return clamp(dsample/dalp);
+			}
+			return clamp(dsample);
         }
 
         // Not TYPE_GRAY or TYPE_RGB ColorSpace
@@ -289,28 +286,25 @@ public class FloatDoubleColorModel extends ComponentColorModel {
                 }
                 rgb = colorSpace.toRGB(norm);
                 return (int)(rgb[sample]*falp*255); // Why multiply by falp?
-            } else {
-                rgb = colorSpace.toRGB(fdata);
-                return (int)(rgb[sample]*255);
             }
-        } else {
-            double[] ddata = (double[])inData;
-            norm = new float[numColorComponents];
-            if (needAlpha) {
-                double dalp = ddata[numColorComponents];
-                for (int i = 0; i < numColorComponents; i++) {
-                    norm[i] = (float)(ddata[i]/dalp);
-                }
-                rgb = colorSpace.toRGB(norm);
-                return (int)(rgb[sample]*dalp*255);
-            } else {
-                for (int i = 0; i < numColorComponents; i++) {
-                    norm[i] = (float)ddata[i];
-                }
-                rgb = colorSpace.toRGB(norm);
-                return (int)(rgb[sample]*255);
-            }
+			rgb = colorSpace.toRGB(fdata);
+			return (int)(rgb[sample]*255);
         }
+		double[] ddata = (double[])inData;
+		norm = new float[numColorComponents];
+		if (needAlpha) {
+		    double dalp = ddata[numColorComponents];
+		    for (int i = 0; i < numColorComponents; i++) {
+		        norm[i] = (float)(ddata[i]/dalp);
+		    }
+		    rgb = colorSpace.toRGB(norm);
+		    return (int)(rgb[sample]*dalp*255);
+		}
+		for (int i = 0; i < numColorComponents; i++) {
+		    norm[i] = (float)ddata[i];
+		}
+		rgb = colorSpace.toRGB(norm);
+		return (int)(rgb[sample]*255);
     }
 
     /**
@@ -429,10 +423,9 @@ public class FloatDoubleColorModel extends ComponentColorModel {
         if (transferType == DataBuffer.TYPE_FLOAT) {
             float[] fdata = (float[])inData;
             return (int)(fdata[numColorComponents]*255.0F);
-        } else {
-            double[] ddata = (double[])inData;
-            return (int)(ddata[numColorComponents]*255.0);
         }
+		double[] ddata = (double[])inData;
+		return (int)(ddata[numColorComponents]*255.0);
     }
 
     /**
@@ -643,69 +636,68 @@ public class FloatDoubleColorModel extends ComponentColorModel {
             }
 
             return floatPixel;
-        } else { // transferType == DataBuffer.TYPE_DOUBLE
-            double[] doublePixel;
-
-            if (pixel == null) {
-                doublePixel = new double[numComponents];
-            } else {
-                if (!(pixel instanceof double[])) {
-                    throw new ClassCastException(Messages.getString("Type_of_pixel_does_not_match_transfer_type_"));
-                }
-                doublePixel = (double[])pixel;
-                if (doublePixel.length < numComponents) {
-                    throw new ArrayIndexOutOfBoundsException(Messages.getString("pixel_array_is_not_large_enough_to_hold_all_color_alpha_components_"));
-                }
-            }
-
-            double inv255 = 1.0/255.0;
-            if (colorSpace.isCS_sRGB()) {
-                int alp = (rgb>>24) & 0xff;
-                int red = (rgb>>16) & 0xff;
-                int grn = (rgb>>8)  & 0xff;
-                int blu = (rgb)     & 0xff;
-                double norm = inv255;
-                if (isAlphaPremultiplied) {
-                    norm *= alp;
-                }
-                doublePixel[0] = red*norm;
-                doublePixel[1] = grn*norm;
-                doublePixel[2] = blu*norm;
-                if (hasAlpha) {
-                    doublePixel[3] = alp*inv255;
-                }
-            } else if (colorSpaceType == ColorSpace.TYPE_GRAY) {
-                double gray = ((((rgb>>16) & 0xff)*(.299*inv255)) +
-                               (((rgb>>8)  & 0xff)*(.587*inv255)) +
-                               (((rgb)     & 0xff)*(.114*inv255)));
-
-                doublePixel[0] = gray;
-
-                if (hasAlpha) {
-                    int alpha = (rgb>>24) & 0xff;
-                    doublePixel[1] = alpha*inv255;
-                }
-            } else {
-                float inv255F = 1.0F/255.0F;
-
-                // Need to convert the color, need data in float form
-                float[] norm = new float[3];
-                norm[0] = ((rgb>>16) & 0xff)*inv255F;
-                norm[1] = ((rgb>>8)  & 0xff)*inv255F;
-                norm[2] = ((rgb)     & 0xff)*inv255F;
-
-                norm = colorSpace.fromRGB(norm);
-                for (int i = 0; i < numColorComponents; i++) {
-                    doublePixel[i] = norm[i];
-                }
-                if (hasAlpha) {
-                    int alpha = (rgb>>24) & 0xff;
-                    doublePixel[numColorComponents] = alpha*inv255;
-                }
-            }
-
-            return doublePixel;
         }
+		double[] doublePixel;
+
+		if (pixel == null) {
+		    doublePixel = new double[numComponents];
+		} else {
+		    if (!(pixel instanceof double[])) {
+		        throw new ClassCastException(Messages.getString("Type_of_pixel_does_not_match_transfer_type_"));
+		    }
+		    doublePixel = (double[])pixel;
+		    if (doublePixel.length < numComponents) {
+		        throw new ArrayIndexOutOfBoundsException(Messages.getString("pixel_array_is_not_large_enough_to_hold_all_color_alpha_components_"));
+		    }
+		}
+
+		double inv255 = 1.0/255.0;
+		if (colorSpace.isCS_sRGB()) {
+		    int alp = (rgb>>24) & 0xff;
+		    int red = (rgb>>16) & 0xff;
+		    int grn = (rgb>>8)  & 0xff;
+		    int blu = (rgb)     & 0xff;
+		    double norm = inv255;
+		    if (isAlphaPremultiplied) {
+		        norm *= alp;
+		    }
+		    doublePixel[0] = red*norm;
+		    doublePixel[1] = grn*norm;
+		    doublePixel[2] = blu*norm;
+		    if (hasAlpha) {
+		        doublePixel[3] = alp*inv255;
+		    }
+		} else if (colorSpaceType == ColorSpace.TYPE_GRAY) {
+		    double gray = ((((rgb>>16) & 0xff)*(.299*inv255)) +
+		                   (((rgb>>8)  & 0xff)*(.587*inv255)) +
+		                   (((rgb)     & 0xff)*(.114*inv255)));
+
+		    doublePixel[0] = gray;
+
+		    if (hasAlpha) {
+		        int alpha = (rgb>>24) & 0xff;
+		        doublePixel[1] = alpha*inv255;
+		    }
+		} else {
+		    float inv255F = 1.0F/255.0F;
+
+		    // Need to convert the color, need data in float form
+		    float[] norm = new float[3];
+		    norm[0] = ((rgb>>16) & 0xff)*inv255F;
+		    norm[1] = ((rgb>>8)  & 0xff)*inv255F;
+		    norm[2] = ((rgb)     & 0xff)*inv255F;
+
+		    norm = colorSpace.fromRGB(norm);
+		    for (int i = 0; i < numColorComponents; i++) {
+		        doublePixel[i] = norm[i];
+		    }
+		    if (hasAlpha) {
+		        int alpha = (rgb>>24) & 0xff;
+		        doublePixel[numColorComponents] = alpha*inv255;
+		    }
+		}
+
+		return doublePixel;
     }
 
     /**
@@ -790,19 +782,18 @@ public class FloatDoubleColorModel extends ComponentColorModel {
             }
 
             return pixel;
-        } else {
-            double[] pixel;
-            if (obj == null) {
-                pixel = new double[components.length];
-            } else {
-                pixel = (double[])obj;
-            }
-            for (int i=0; i < numComponents; i++) {
-                pixel[i] = (components[offset + i]);
-            }
-
-            return pixel;
         }
+		double[] pixel;
+		if (obj == null) {
+		    pixel = new double[components.length];
+		} else {
+		    pixel = (double[])obj;
+		}
+		for (int i=0; i < numComponents; i++) {
+		    pixel[i] = (components[offset + i]);
+		}
+
+		return pixel;
     }
 
     /**
@@ -1025,9 +1016,8 @@ public class FloatDoubleColorModel extends ComponentColorModel {
                 return false;
             }
             return true;
-        } else {
-            return false;
         }
+		return false;
     }
 
     /** Returns a String containing the values of all valid fields. */

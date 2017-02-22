@@ -75,8 +75,8 @@ public class XMLDirectoryUtilities {
 		Node pathNode = nodeMap.getNamedItem("path");
 		if (pathNode != null) {
 			return pathNode.getNodeValue();
-		} else
-			return null;
+		}
+		return null;
 	}
 
 	public static Node loadFile(String fileName) {

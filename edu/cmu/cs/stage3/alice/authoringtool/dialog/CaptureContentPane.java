@@ -32,12 +32,14 @@ import edu.cmu.cs.stage3.alice.core.World;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.lang.Messages;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -355,8 +357,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		setRenderWindowSizeBasedOnSavedBounds();
 
 		// renderPanel.addComponentListener(renderResizeListener);
-		watcherScrollPane = new javax.swing.JScrollPane(watcherPanel, javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		textScrollPane = new javax.swing.JScrollPane(detailTextPane, javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		watcherScrollPane = new javax.swing.JScrollPane(watcherPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		textScrollPane = new javax.swing.JScrollPane(detailTextPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		detailTextPane.setEditable(false);
 
 		// buttons
@@ -423,7 +425,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		timeLabel = new javax.swing.JLabel("0:00  ");
 
 		captureBar = new javax.swing.JPanel();
-		statusLabel.setHorizontalAlignment(JLabel.CENTER);
+		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		captureBar.setLayout(new java.awt.GridBagLayout());
 		exportBar = new javax.swing.JPanel();
 		exportBar.setLayout(new java.awt.GridBagLayout());
@@ -891,7 +893,6 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 		} catch (Exception e) {
 		}
-		;
 	}
 
 	// happens when capturing stops
@@ -954,10 +955,9 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		setButtonsCapturing(true);
 		// restartButton.setEnabled(true);
 
-		recordLabel.setIcon(new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/record.png"))); // Aik
-																																				// Min
+		recordLabel.setIcon(new javax.swing.ImageIcon(edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/record.png"))); // Aik Min
 
-		recordLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
+		recordLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		if (movieCapture == null || capturing == null || !capturing.isAlive()) {
 
 			endCapturing = true;
@@ -1079,11 +1079,11 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 			// create the movie with no sound
 			MovieWriter writer = new MovieWriter(videoHandler.getFramesPerSecond(), exportDirectory + "/frames/", fileName.getText() + "_NoSound", exportDirectory + "/frames/");
-			if (writer == null) {
+/*			if (writer == null) {
 				afterEncoding(true);
 				return;
 			}
-
+*/
 			// both options go to quicktime (avi never really worked)
 			boolean result;
 			if (fileType.getSelectedIndex() == 0) {
@@ -1111,11 +1111,11 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			}
 
 			movieMaker.Merge m = new movieMaker.Merge(authoringTool.getSoundStorage().createURL(exportDirectory + "/" + fileName.getText() + ".mov"));
-			if (m == null) {
+/*			if (m == null) {
 				afterEncoding(true);
 				return;
 			}
-
+*/
 			java.util.Vector sources = new java.util.Vector();
 
 			pulsing = true;
@@ -1156,7 +1156,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			m = null;
 			sources.clear();
 			sources = null;
-			pulsing = false;
+//			pulsing = false;
 			try {
 				pulse.join();
 			} catch (InterruptedException e) {

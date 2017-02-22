@@ -33,9 +33,8 @@ public class RandomBoolean extends Question {
 		//edu.cmu.cs.stage3.alice.core.response.Print.outputtext = Messages.getString("choose_true_")+(int)(probabilityOfTrue.doubleValue()*100)+Messages.getString("__of_the_time_is_");  
 		if( Math.random() < probabilityOfTrue.doubleValue() ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 	
 	public Class getValueClass() {

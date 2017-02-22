@@ -30,7 +30,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.text.Normalizer;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -41,6 +44,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
@@ -121,11 +126,11 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	private java.io.File textbookExampleWorlds = null;
 
 	private JTabbedPane mainTabPane = new JTabbedPane();
-	private JScrollPane exampleScrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	private JScrollPane textbookExampleScrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	private JScrollPane recentScrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	private JScrollPane templateScrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	private JScrollPane tutorialScrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	private JScrollPane exampleScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	private JScrollPane textbookExampleScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	private JScrollPane recentScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	private JScrollPane templateScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	private JScrollPane tutorialScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 	private JPanel exampleWorldsContainer = new JPanel();
 	private JPanel recentWorldsContainer = new JPanel();
@@ -385,20 +390,6 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		}
 	}
 
-	public static String detectEncoding(byte[] bytes) {
-	    String DEFAULT_ENCODING = "UTF-8";
-	    org.mozilla.universalchardet.UniversalDetector detector =
-	        new org.mozilla.universalchardet.UniversalDetector(null);
-	    detector.handleData(bytes, 0, bytes.length);
-	    detector.dataEnd();
-	    String encoding = detector.getDetectedCharset();
-	    detector.reset();
-	    if (encoding == null) {
-	        encoding = DEFAULT_ENCODING;
-	    } 
-	    return encoding;
-	}
-	
 	private String makeNameFromFilename(String filename) {
 		String name = filename.substring(0, (filename.length() - 4));
 		int last = name.lastIndexOf(java.io.File.separator);
@@ -446,15 +437,32 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if (dir != null && dir.isDirectory()) {
 			toReturn = new java.util.Vector();
 			java.io.File[] files = dir.listFiles(f);
+
+			Comparator comp = new Comparator() {
+				  public int compare(Object o1, Object o2) {
+				    File f1 = (File) o1;
+				    File f2 = (File) o2;
+				    if (f1.isDirectory() && !f2.isDirectory()) {
+				      // Directory before non-directory
+				      return -1;
+				    } else if (!f1.isDirectory() && f2.isDirectory()) {
+				      // Non-directory after directory
+				      return 1;
+				    } else {
+				      // Alphabetic order otherwise
+				      return f1.compareTo(f2);
+				    }
+				  }
+				};
+			Arrays.sort(files, comp);
+				
 			for (int i = 0; i < files.length; i++) {
 				String name = "";
 				if (files[i].isDirectory()) {
 					name = makeDirectoryNameFromFilename(files[i].getName());
 				} else {
 					name = files[i].getName();
-					System.out.println(name);
-				      
-					
+					//System.out.println(name);					
 					name = makeNameFromFilename(files[i].getName());
 				}
 				edu.cmu.cs.stage3.util.StringObjectPair sop = new edu.cmu.cs.stage3.util.StringObjectPair(name, files[i].getAbsolutePath());
@@ -483,7 +491,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 					}
 				}
 			}
-			java.util.zip.ZipFile zip = new java.util.zip.ZipFile(file);
+			java.util.zip.ZipFile zip = new java.util.zip.ZipFile(file.getAbsoluteFile());
 			java.util.zip.ZipEntry entry = zip.getEntry("thumbnail.png");
 			if (entry != null) {
 				java.awt.Image image = edu.cmu.cs.stage3.image.ImageIO.load("png", zip.getInputStream(entry));
@@ -673,7 +681,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		setLayout(new GridBagLayout());
 
 		// java.awt.Component component1 = Box.createGlue();
-		java.awt.Component component2 = Box.createGlue();
+		//java.awt.Component component2 = Box.createGlue();
 		buttonPanel.setLayout(new GridBagLayout());
 		setBackground(Color.white);
 		// mainTabPane.setMinimumSize(new Dimension(480, 310));
@@ -797,7 +805,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 		tutorialButtonPanel.add(startTutorialButton, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 0, 2, 0), 0, 0));
 		tutorialButtonPanel.add(jLabel1, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(2, 3, 2, 0), 0, 0));
-		tutorialButtonPanel.add(component2, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		tutorialButtonPanel.add(Box.createGlue(), new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 		tutorialWorldsContainer.setLayout(tutorialPanelLayout);
 		tutorialScrollPane.getViewport().setBackground(Color.white);
@@ -814,20 +822,21 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		tutorialWorldsDirectoryContainer.add(tutorialButtonPanel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(2, 2, 2, 0), 0, 0));
 		tutorialWorldsDirectoryContainer.add(tutorialScrollPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
-		add(buttonPanel, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-		buttonPanel.add(openButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
-		buttonPanel.add(cancelButton, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
-		buttonPanel.add(Box.createGlue(), new GridBagConstraints(0, 1, 1, 2, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-		add(mainTabPane, new GridBagConstraints(0, 1, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		add(headerLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+
 		mainTabPane.add(tutorialWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + TUTORIAL_STRING + "</body></html>");
 		mainTabPane.add(recentWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + RECENT_STRING + "</body></html>");
 		mainTabPane.add(templateWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + TEMPLATES_STRING + "</body></html>");
 		mainTabPane.add(exampleWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + EXAMPLES_STRING + "</body></html>");
 		mainTabPane.add(textbookExampleWorldsDirectoryContainer, "<html><body leftmargin=5 marginwidth=5>" + TEXTBOOK_EXAMPLES_STRING + "</body></html>");
-		 
-		// mainTabPane.add(fileChooser, OPEN_STRING);
-		add(stopShowingCheckBox, new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL, new Insets(0, 2, 0, 0), 0, 0));
-		add(headerLabel, new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		add(mainTabPane, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		
+		buttonPanel.add(openButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
+		buttonPanel.add(cancelButton, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(4, 0, 0, 4), 0, 0));
+		buttonPanel.add(Box.createGlue(), new GridBagConstraints(0, 1, 1, 2, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		add(buttonPanel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		
+		add(stopShowingCheckBox, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 2, 0, 2), 0, 0));
 
 		tutorialScrollPane.getViewport().add(tutorialWorldsContainer, null);
 		templateScrollPane.getViewport().add(templateWorldsContainer, null);
@@ -879,7 +888,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		// 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
 		// new Insets(0, 0, 0, 0), 0, 0));
 		// remove(refreshButton);
-		add(buttonPanel, new GridBagConstraints(0, 2, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		add(buttonPanel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 	}
 
 	private void mainTabPane_stateChanged(ChangeEvent e) {
@@ -934,7 +943,7 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		protected java.awt.Component owner;
 
 		public StartUpIcon(String name, javax.swing.ImageIcon icon, String file, boolean needToSave, int type, java.awt.Component owner) {
-			super(name, icon, javax.swing.JLabel.CENTER);
+			super(name, icon, SwingConstants.CENTER);
 			this.file = file;
 			this.needToSave = needToSave;
 			this.type = type;
@@ -942,8 +951,8 @@ public class StartUpContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 			this.setBackground(BACKGROUND_COLOR);
 			this.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
-			this.setVerticalTextPosition(JLabel.BOTTOM);
-			this.setHorizontalTextPosition(JLabel.CENTER);
+			this.setVerticalTextPosition(SwingConstants.BOTTOM);
+			this.setHorizontalTextPosition(SwingConstants.CENTER);
 			java.awt.Dimension size = new java.awt.Dimension(icon.getIconWidth() + 4, (icon.getIconHeight() + 24));
 			this.setPreferredSize(size);
 			this.setMinimumSize(size);

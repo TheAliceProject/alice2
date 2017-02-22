@@ -14,8 +14,7 @@ public class IsObjectInView extends SubjectObjectQuestion {
 	protected Object getValue( Transformable subjectValue, Transformable objectValue ) {
         if( isObjectInView( subjectValue, objectValue ) ) {
             return Boolean.TRUE;
-        } else {
-            return Boolean.FALSE;
         }
+		return Boolean.FALSE;
     }
 }

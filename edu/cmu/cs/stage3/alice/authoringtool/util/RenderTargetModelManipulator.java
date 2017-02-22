@@ -59,7 +59,7 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	public void mousePressed( java.awt.event.MouseEvent ev ) {
+	public synchronized void mousePressed( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		//DEBUG System.out.println( "mousePressed" );
 		if( enabled ) {
 			super.mousePressed( ev );
@@ -88,7 +88,7 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 		}
 	}
 
-	public void mouseReleased( java.awt.event.MouseEvent ev ) {
+	public synchronized void mouseReleased( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		//DEBUG System.out.println( "mouseReleased" );
 		if( (ePickedTransformable != null) && (! isActionAborted()) ) {
 			if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack() != null ) {
@@ -101,7 +101,7 @@ public class RenderTargetModelManipulator extends RenderTargetPickManipulator {
 		super.mouseReleased( ev );
 	}
 
-	public void mouseDragged( java.awt.event.MouseEvent ev ) {
+	public synchronized void mouseDragged( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
 		//DEBUG System.out.println( "mouseDragged" );
 		if( enabled ) {
 			super.mouseDragged( ev );

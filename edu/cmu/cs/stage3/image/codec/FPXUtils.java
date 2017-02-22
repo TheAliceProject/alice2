@@ -112,9 +112,8 @@ public class FPXUtils {
     public static final String getString(byte[] data, int offset, int length) {
         if (length == 0) {
             return "<none>";
-        } else {
-            length = length/2 - 1; // workaround for Kodak bug
         }
+		length = length/2 - 1; // workaround for Kodak bug
         StringBuffer b = new StringBuffer(length);
         for (int i = 0; i < length; i++) {
             int c = getUnsignedShortLE(data, offset);

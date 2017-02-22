@@ -9,6 +9,7 @@ import edu.cmu.cs.stage3.lang.Messages;
 	
 public class AikMin {
 	public static Locale locale = new Locale ("en");
+	public static int decimal = 2;
 	public static String defaultLanguage = locale.getDisplayLanguage();
 	public static String[] listOfLanguages = {"Arabic", "English", "German", "Portuguese","Spanish"}; 
 	public static int target = 0;	// Compile with 1 to delete preferences file or create etc/firstRun.txt
@@ -188,8 +189,8 @@ public class AikMin {
 				protected javax.swing.border.Border spacer = javax.swing.BorderFactory.createEmptyBorder(2, 4, 2, 4);
 				protected javax.swing.border.Border raisedBevel = javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED);
 				protected javax.swing.border.Border loweredBevel = javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED);
-				protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(line, raisedBevel), spacer);
-				protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(line, loweredBevel), spacer);
+				protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(this.line, this.raisedBevel), this.spacer);
+				protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(this.line, this.loweredBevel), this.spacer);
 				//				protected javax.swing.border.Border raisedBorder = javax.swing.BorderFactory.createCompoundBorder( raisedBevel, spacer );
 				//				protected javax.swing.border.Border loweredBorder = javax.swing.BorderFactory.createCompoundBorder( loweredBevel, spacer );
 
@@ -199,17 +200,17 @@ public class AikMin {
 
 					if (model.isEnabled()) {
 						if (model.isPressed() && model.isArmed()) {
-							loweredBorder.paintBorder(button, g, x, y, w, h);
+							this.loweredBorder.paintBorder(button, g, x, y, w, h);
 						} else {
-							raisedBorder.paintBorder(button, g, x, y, w, h);
+							this.raisedBorder.paintBorder(button, g, x, y, w, h);
 						}
 					} else {
-						raisedBorder.paintBorder(button, g, x, y, w, h);
+						this.raisedBorder.paintBorder(button, g, x, y, w, h);
 					}
 				}
 
 				public java.awt.Insets getBorderInsets(java.awt.Component c) {
-					return insets;
+					return this.insets;
 				}
 			}
 			javax.swing.UIManager.put("Button.border", new javax.swing.plaf.BorderUIResource.CompoundBorderUIResource(new CustomButtonBorder(), new javax.swing.plaf.basic.BasicBorders.MarginBorder())); 
@@ -232,7 +233,7 @@ public class AikMin {
 			javax.swing.UIManager.put("TabbedPane.light", java.awt.Color.white); 
 			javax.swing.UIManager.put("TabbedPane.selected", java.awt.Color.white); 
 			javax.swing.UIManager.put("TabbedPane.darkShadow", java.awt.Color.black); 
-			javax.swing.UIManager.put("TabbedPane.tabsOverlapBorder", true); 
+			javax.swing.UIManager.put("TabbedPane.tabsOverlapBorder", Boolean.TRUE); 
 			javax.swing.UIManager.put("TabbedPane.selectHighlight", javax.swing.UIManager.get("TabbedPane.selected")); 
 			
 			//Customize OptionPane buttons
@@ -246,17 +247,16 @@ public class AikMin {
 			javax.swing.UIManager.put("Button.focus", new java.awt.Color(255, 255, 255, 0)); 
 			
 			//Customize slider
-//			javax.swing.UIManager.put("SliderUI", "javax.swing.plaf.metal.MetalSliderUI"); 
+			//javax.swing.UIManager.put("SliderUI", "javax.swing.plaf.metal.MetalSliderUI"); 
 			
 			javax.swing.UIManager.put("ComboBoxUI", "javax.swing.plaf.metal.MetalComboBoxUI");  
 			if ( AikMin.isWindows() ) {   
-				javax.swing.UIManager.put("FileChooserUI", "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  
+				javax.swing.UIManager.put("FileChooserUI", "javax.swing.plaf.metal.MetalFileChooserUI"); // "com.sun.java.swing.plaf.windows.WindowsFileChooserUI");  
 			} 
 			if ( AikMin.isMAC() ) { 
-				//javax.swing.UIManager.put("ScrollBarUI", "com.apple.laf.AquaScrollBarUI"); 
+				//javax.swing.UIManager.put("ScrollBarUI", "apple.laf.AquaScrollBarUI"); 
 				//javax.swing.UIManager.put("SliderUI", "apple.laf.AquaSliderUI"); 
 			}
-			
 		} catch (Exception e) {
 			AuthoringTool.showErrorDialog(Messages.getString("Error_configuring_Look_and_Feel_"), e); 
 		}

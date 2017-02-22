@@ -38,17 +38,15 @@ public class WhileLoopInOrder extends DoInOrder {
 		protected boolean preLoopTest( double t ) {
 			if( WhileLoopInOrder.this.testBeforeAsOpposedToAfter.booleanValue() ) {
 				return WhileLoopInOrder.this.condition.booleanValue();
-			} else {
-                return true;
-            }
+			}
+			return true;
         }
 		
 		protected boolean postLoopTest( double t ) {
 			if( WhileLoopInOrder.this.testBeforeAsOpposedToAfter.booleanValue() ) {
                 return true;
-			} else {
-				return WhileLoopInOrder.this.condition.booleanValue();
-            }
+			}
+			return WhileLoopInOrder.this.condition.booleanValue();
 		}
 		
 		protected boolean isCullable() {

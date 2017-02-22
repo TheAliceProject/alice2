@@ -128,7 +128,8 @@ public class PropertyUndoableRedoable implements ContextAssignableUndoableRedoab
 	  if ( ! (property.getName().equals("data")) ) {
 		logString += "EVENT=<propertyChange> " + "PROPERTYNAME=<" + property.getName() + "> " + "PROPERTYOWNER=<" + ownerKey + "> "  + "OLDVALUE=<" + oldValueString + "> " + "NEWVALUE=<" + newValueString + ">";
 		return logString;
-	  } else return null;
+	  }
+	return null;
 
 
 	}

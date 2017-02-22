@@ -12,9 +12,8 @@ public abstract class ElementSummary {
 	public int getElementCount() {
 		if( m_element != null ) {
 			return m_element.getElementCount();			
-		} else {
-			return m_elementCount;
 		}
+		return m_elementCount;
 	}
 	
 	public void encode( java.io.OutputStream os ) {

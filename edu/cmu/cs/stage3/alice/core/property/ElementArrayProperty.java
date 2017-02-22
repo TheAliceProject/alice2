@@ -46,19 +46,15 @@ public class ElementArrayProperty extends ObjectArrayProperty {
                     if( n2 != null ) {
                         if( ignoreCase ) {
                             return n1.compareTo( n2 );
-                        } else {
-                            return n1.compareToIgnoreCase( n2 );
                         }
-                    } else {
-                        return -1;
+						return n1.compareToIgnoreCase( n2 );
                     }
-                } else {
-                    if( n2 != null ) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
+					return -1;
                 }
+				if( n2 != null ) {
+				    return 1;
+				}
+				return 0;
             }
             
 			public boolean equals( Object obj ) {

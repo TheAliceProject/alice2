@@ -34,8 +34,7 @@ public abstract class QueueNumberQuestion extends edu.cmu.cs.stage3.alice.core.q
 		Queue queueValue = queue.getQueueValue();
 		if( queueValue!=null ) {
             return new Integer( getValue( queueValue ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

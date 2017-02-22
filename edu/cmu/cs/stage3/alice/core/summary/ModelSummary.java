@@ -28,23 +28,20 @@ public class ModelSummary extends ElementSummary {
 	public String getName() {
 		if( getModel() != null ) {
 			return getModel().name.getStringValue();
-		} else {
-			return m_name;
 		}
+		return m_name;
 	}
 	public String getModeledBy() {
 		if( getModel() != null ) {
 			return (String)getModel().data.get( "modeled by" );
-		} else {
-			return m_modeledBy;
 		}
+		return m_modeledBy;
 	}
 	public String getPaintedBy() {
 		if( getModel() != null ) {
 			return (String)getModel().data.get( "painted by" );
-		} else {
-			return m_paintedBy;
 		}
+		return m_paintedBy;
 	}
 	public int getPartCount() {
 		return m_partCount;
@@ -61,9 +58,8 @@ public class ModelSummary extends ElementSummary {
 				methodNames[ i ] = methodI.name.getStringValue(); 
 			}
 			return methodNames;
-		} else {
-			return m_methodNames;
 		}
+		return m_methodNames;
 	}
 	public String[] getQuestionNames() {
 		return m_questionNames;

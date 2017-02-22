@@ -93,9 +93,8 @@ public class LieDownAnimation extends BetterStandUpAnimation {
 					endPos = new javax.vecmath.Vector3d(endPos.x + (left.x * subjectHeight/2.0), endPos.y + zOffset + (left.y * subjectHeight/2.0), endPos.z + (left.z * subjectHeight/2.0));
 				}
 				return endPos;
-			} else {
-				return m_positionBegin;
 			}
+			return m_positionBegin;
 		}
 		
 		protected edu.cmu.cs.stage3.math.Matrix33 getGoalOrientation(edu.cmu.cs.stage3.math.Matrix33 targetsOrient, edu.cmu.cs.stage3.math.Vector3 goalForward) {

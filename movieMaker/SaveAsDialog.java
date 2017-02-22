@@ -420,7 +420,7 @@ public class SaveAsDialog extends JMDialog implements ControllerListener,
         }
         catch ( Exception exception ) {
             boolSaving = false;
-            AuthoringTool.showErrorDialog( Messages.getString("Alice_has_encountered_an_error__"), exception ); 
+            AuthoringTool.showErrorDialog( Messages.getString("Alice_has_encountered_an_error"), exception ); 
         }
 
         setCursor ( Cursor.getDefaultCursor() );

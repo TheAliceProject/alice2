@@ -38,11 +38,9 @@ public class ExpressionIsAssignableToCriterion extends edu.cmu.cs.stage3.util.cr
 			Class valueClass = ((edu.cmu.cs.stage3.alice.core.Expression)o).getValueClass();
 			if( valueClass != null ) {
 				return m_valueClass.isAssignableFrom( valueClass );
-			} else {
-				return false;
 			}
-		} else {
 			return false;
 		}
+		return false;
 	}
 }

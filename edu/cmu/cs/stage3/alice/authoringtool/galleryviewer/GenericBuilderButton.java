@@ -56,8 +56,7 @@ public abstract class GenericBuilderButton extends GalleryObject {
 	public String getUniqueIdentifier() {
 		if (super.data != null)
 			return super.data.name;
-		else
-			return "GenericBuilder";
+		return "GenericBuilder";
 	}
 	
 	public void loadImage() {

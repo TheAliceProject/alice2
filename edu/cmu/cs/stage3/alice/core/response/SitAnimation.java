@@ -190,9 +190,8 @@ public class SitAnimation extends AbstractBodyPositionAnimation {
 					
 				} 
 				return endPos;
-			} else {
-				return m_positionBegin;
 			}
+			return m_positionBegin;
 		}
 		
 		public void setFinalOrientations() {

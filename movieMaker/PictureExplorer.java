@@ -372,7 +372,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
 		bValue = new JLabel("B: " + pixel.getBlue()); 
 
 		// create the sample color panel and label
-		colorLabel = new JLabel(Messages.getString("Color_at_location__")); 
+		colorLabel = new JLabel(Messages.getString("Color_at_location__") + " "); 
 		colorPanel = new JPanel();
 		colorPanel.setBorder(new LineBorder(Color.black,1));
 
@@ -776,8 +776,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
 				Component aComponent) {
 			if (aComponent.equals(xValue))
 				return yValue;
-			else 
-				return xValue;
+			return xValue;
 		}
 
 		/**
@@ -788,8 +787,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
 				Component aComponent) {
 			if (aComponent.equals(xValue))
 				return yValue;
-			else 
-				return xValue;
+			return xValue;
 		}
 
 

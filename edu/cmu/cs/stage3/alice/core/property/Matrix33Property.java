@@ -36,9 +36,8 @@ public class Matrix33Property extends ObjectProperty {
 		javax.vecmath.Matrix3d m = getMatrix3dValue();
 		if( m == null || m instanceof edu.cmu.cs.stage3.math.Matrix33 ) {
 			return (edu.cmu.cs.stage3.math.Matrix33)m;
-		} else {
-			return new edu.cmu.cs.stage3.math.Matrix33( m );
 		}
+		return new edu.cmu.cs.stage3.math.Matrix33( m );
 	}
     
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {

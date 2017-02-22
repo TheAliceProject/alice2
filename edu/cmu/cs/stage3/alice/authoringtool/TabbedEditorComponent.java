@@ -264,7 +264,7 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 				authoringTool.saveTabs();
 			}
 		} else {
-			AuthoringTool.showErrorDialog( Messages.getString("no_editor_to_close_at_", index), null ); 
+			AuthoringTool.showErrorDialog( Messages.getString("no_editor_to_close_at_", String.valueOf(index)), null ); 
 		}
 	}
 

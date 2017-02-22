@@ -36,7 +36,7 @@ public class BubbleManager implements edu.cmu.cs.stage3.alice.scenegraph.rendere
 		boolean isPaintRequired = false;
 		java.util.Vector rects = new java.util.Vector();
 		for( int i=0; i<m_bubbles.length; i++ ) {
-			Bubble bubbleI = m_bubbles[ i ];;
+			Bubble bubbleI = m_bubbles[ i ];
 			if( bubbleI.isShowing() ) {
 				bubbleI.calculateBounds( rt );
 				bubbleI.calculateOrigin( rt );
@@ -56,7 +56,7 @@ public class BubbleManager implements edu.cmu.cs.stage3.alice.scenegraph.rendere
 				edu.cmu.cs.stage3.alice.scenegraph.Camera sgCamera = sgCameras[ 0 ];
 				java.awt.Rectangle actualViewport = rt.getActualViewport( sgCamera );
 				for( int i=0; i<m_bubbles.length; i++ ) {
-					Bubble bubbleI = m_bubbles[ i ];;
+					Bubble bubbleI = m_bubbles[ i ];
 					if( bubbleI.isShowing() ) {
 						java.awt.Point pixelOffset = bubbleI.getPixelOffset();
 						java.awt.Point origin = bubbleI.getOrigin();
@@ -94,7 +94,7 @@ public class BubbleManager implements edu.cmu.cs.stage3.alice.scenegraph.rendere
 			java.awt.Graphics g = m_renderTarget.getOffscreenGraphics();
 			try {
 				for( int i=0; i<m_bubbles.length; i++ ) {
-					Bubble bubbleI = m_bubbles[ i ];;
+					Bubble bubbleI = m_bubbles[ i ];
 					bubbleI.paint( g );
 				}
 			} finally {

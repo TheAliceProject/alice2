@@ -54,8 +54,7 @@ public abstract class BinaryNumberResultingInBooleanQuestion extends BooleanQues
 		}*/
 		if( getValue( aValue , bValue ) ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

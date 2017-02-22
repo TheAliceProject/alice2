@@ -39,9 +39,8 @@ public class ChildNamed extends Question {
 		String nameValue = name.getStringValue();
 		if( ignoreCase.booleanValue() ) {
 			return parentValue.getChildNamed( nameValue );
-		} else {
-			return parentValue.getChildNamedIgnoreCase( nameValue );
 		}
+		return parentValue.getChildNamedIgnoreCase( nameValue );
 	}
 	
 	public Class getValueClass() {

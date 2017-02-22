@@ -60,9 +60,8 @@ public class EulerAngles implements Interpolable, Cloneable {
 		if( o!=null && o instanceof EulerAngles ) {
 			EulerAngles ea = (EulerAngles)o;
 			return yaw==ea.yaw && pitch==ea.pitch && roll==ea.roll;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	public Matrix33 getMatrix33() {
 		return new Matrix33( this );
@@ -93,7 +92,7 @@ public class EulerAngles implements Interpolable, Cloneable {
 		shear.xz /= scale.z;
 		shear.yz /= scale.z;
 
-		double determinate = MathUtilities.dotProduct( row0, MathUtilities.crossProduct( row1, row2 ) );;
+		double determinate = MathUtilities.dotProduct( row0, MathUtilities.crossProduct( row1, row2 ) );
 		if( determinate < 0 ) {
 			row0.negate();
 			row1.negate();

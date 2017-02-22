@@ -29,9 +29,8 @@ public class TimeElapsedSinceWorldStart extends edu.cmu.cs.stage3.alice.core.que
 	public Object getValue() {
 		if( m_clock != null ) {
 			return new Double( m_clock.getTimeElapsed() );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {

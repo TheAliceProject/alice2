@@ -158,9 +158,8 @@ public class MathUtilities {
 		double lengthSquared = getLengthSquared( x, y, z );
 		if( lengthSquared==1 ) {
 			return 1;
-		} else {
-			return Math.sqrt( lengthSquared );
 		}
+		return Math.sqrt( lengthSquared );
 	}
 	public static double getLengthSquared( javax.vecmath.Vector3d v ) {
 		return getLengthSquared( v.x, v.y, v.z );
@@ -386,8 +385,7 @@ public class MathUtilities {
     public static boolean contains( javax.vecmath.Tuple3d t, double d ) {
         if( Double.isNaN( d ) ) {
             return Double.isNaN( t.x ) || Double.isNaN( t.y ) || Double.isNaN( t.z );
-        } else {
-            return t.x==d || t.y==d || t.z==d;
         }
+		return t.x==d || t.y==d || t.z==d;
     }
 }

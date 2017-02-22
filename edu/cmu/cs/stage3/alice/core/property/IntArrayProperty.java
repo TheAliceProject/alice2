@@ -37,9 +37,8 @@ public class IntArrayProperty extends ObjectProperty {
 		int[] value = getIntArrayValue();
 		if( value!=null ) {
 			return value.length;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
     
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {

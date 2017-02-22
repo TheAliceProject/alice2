@@ -34,11 +34,9 @@ public abstract class StackBooleanQuestion extends edu.cmu.cs.stage3.alice.core.
 		if( stackValue!=null ) {
             if( getValue( stackValue ) ) {
                 return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
             }
-		} else {
 			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

@@ -33,8 +33,7 @@ public class ScriptDefinedObject extends AbstractScriptDefinedObject {
 		Class cls = (Class)valueClass.get();
 		if( cls != null ) {
 			return cls;
-		} else {
-			return Object.class;
 		}
+		return Object.class;
 	}
 }

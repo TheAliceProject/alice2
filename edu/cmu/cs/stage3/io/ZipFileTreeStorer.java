@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.io;
 
-
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author David Culyba
@@ -181,10 +181,7 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
 //                System.out.println("has a descriptor");
                 return 30+fileNameLength+extraFieldLength+compressedSize+16;
             }
-            else{
-//                System.out.println("no descriptor");
-                return 30+fileNameLength+extraFieldLength+compressedSize;
-            }
+            return 30+fileNameLength+extraFieldLength+compressedSize;
         }
 
         public int getThisHeaderSpace(){
@@ -230,7 +227,13 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
 
         public void setFileName(String name){
             fileName = new String(name);
-            fileNameLength = fileName.length();
+            // Aik Min - Recompute file length for names with extended characters since those characters requires 2 byte to store them
+            try {
+				fileNameLength = new String (fileName.getBytes(), "ISO-8859-1").length();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             if (localHeaderReference != null){
                 localHeaderReference.fileName = new String(fileName);
                 localHeaderReference.fileNameLength = fileName.length();
@@ -254,7 +257,7 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
             toReturn += "file name length: "+String.valueOf(fileNameLength)+"\n";
             toReturn += "extra field length: "+String.valueOf(extraFieldLength)+"\n";
             toReturn += "comment length: "+String.valueOf(fileCommentLength)+"\n";
-            toReturn += "disk number start: "+String.valueOf(diskNumberStart)+"\n";;
+            toReturn += "disk number start: "+String.valueOf(diskNumberStart)+"\n";
             toReturn += "internal attrib: "+String.valueOf(internalFileAttributes)+"\n";
             toReturn += "external attrib: "+String.valueOf(externalFileAttributes)+"\n";
             toReturn += "relative offset for local header: "+String.valueOf(relativeOffset)+"\n";
@@ -392,8 +395,6 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
             else{
                 toReturn += "There ISN'T a data descriptor\n";
             }
-
-
             return toReturn;
         }
     }
@@ -883,18 +884,14 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
         if (centralDirectory != null && currentHeader < centralDirectory.size()){
             return ((CentralDirectoryHeader)centralDirectory.get(currentHeader)).localHeaderReference;
         }
-        else{
-            return null;
-        }
+		return null;
     }
 
     private CentralDirectoryHeader getCurrentCentralDirectoryHeader(){
         if (centralDirectory != null && currentHeader < centralDirectory.size()){
             return (CentralDirectoryHeader)centralDirectory.get(currentHeader);
         }
-        else{
-            return null;
-        }
+		return null;
     }
 
     private LocalHeader initLocalHeader(CentralDirectoryHeader headerReference) throws java.io.IOException{
@@ -944,7 +941,7 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
                     case 13 : System.out.print("d"); break;
                     case 14 : System.out.print("e"); break;
                     case 15 : System.out.print("f"); break;
-                };
+                }
             }
             System.out.print(" ");
         }
@@ -1217,7 +1214,6 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
     }
 
     public void checkAndUpdateHeader(String filename, byte[] data) throws java.io.IOException {
-    	filename = new String (filename.getBytes("UTF-8"), "ISO-8859-1" );	// Aik Min - encoding
         CentralDirectoryHeader header = getHeader(filename);
         if (header != null){
             header.setShouldDelete(false);

@@ -35,11 +35,9 @@ public abstract class ListBooleanQuestion extends edu.cmu.cs.stage3.alice.core.q
 		if( listValue!=null ) {
             if( getValue( listValue ) ) {
                 return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
             }
-		} else {
 			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

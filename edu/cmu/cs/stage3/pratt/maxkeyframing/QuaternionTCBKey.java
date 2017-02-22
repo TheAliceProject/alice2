@@ -42,15 +42,14 @@ public class QuaternionTCBKey extends TCBKey {
 			qSample.w = components[3];
 			return qSample;
 			//return new edu.cmu.cs.stage3.math.Quaternion( components[0], components[1], components[2], components[3] );
-		} else {
-			double length = Math.sqrt( lengthSquared );
-			qSample.x = components[0]/length;
-			qSample.y = components[1]/length;
-			qSample.z = components[2]/length;
-			qSample.w = components[3]/length;
-			return qSample;
-			//return new edu.cmu.cs.stage3.math.Quaternion( components[0]/length, components[1]/length, components[2]/length, components[3]/length );
 		}
+		double length = Math.sqrt( lengthSquared );
+		qSample.x = components[0]/length;
+		qSample.y = components[1]/length;
+		qSample.z = components[2]/length;
+		qSample.w = components[3]/length;
+		return qSample;
+		//return new edu.cmu.cs.stage3.math.Quaternion( components[0]/length, components[1]/length, components[2]/length, components[3]/length );
 	}
 
 	public static QuaternionTCBKey valueOf( String s ) {

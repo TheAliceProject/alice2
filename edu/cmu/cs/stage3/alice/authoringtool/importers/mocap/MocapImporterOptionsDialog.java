@@ -72,8 +72,7 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
 		public String toString() {
             if (text!=null)
                 return text;
-            else
-                return obj.name.getStringValue();
+			return obj.name.getStringValue();
         }
     }
 
@@ -243,8 +242,7 @@ public class MocapImporterOptionsDialog extends javax.swing.JDialog {
                     return true;
                 if (f.toString().toLowerCase().endsWith(".asf")) 
                     return true;
-                else
-                    return false;
+				return false;
             }
 
 			public String getDescription() {

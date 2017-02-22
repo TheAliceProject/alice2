@@ -95,9 +95,8 @@ public class StringPropertySetter extends JPanel implements javax.swing.event.Do
 			Document doc = (Document) XMLDirectoryUtilities.loadURL(xmlURL);
 			return doc.getDocumentElement();
 			//return node;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	protected void getPropertyInfo(Node propNode) {

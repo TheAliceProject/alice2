@@ -22,6 +22,7 @@ public abstract class LinkBatch {
 				java.io.BufferedReader r = new java.io.BufferedReader( new java.io.FileReader( files[ i ] ) );
 				String s = r.readLine();
 				linkHandler.handleLink( fileI, s );
+				r.close(); // To fix resource leak
 			} catch( java.io.IOException ioe ) {
 				ioe.printStackTrace();
 			}

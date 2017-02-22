@@ -210,17 +210,16 @@ public class FileSeekableStream extends SeekableStream {
             int nbytes = file.read(b, off, len);
             pointer += nbytes;
             return nbytes;
-        } else {
-            byte[] buf = readPage(pointer);
-
-            // Compute length to end of page
-            int remaining = PAGE_SIZE - (int)(pointer & PAGE_MASK);
-            int newLen = len < remaining ? len : remaining;
-            System.arraycopy(buf, (int)(pointer & PAGE_MASK), b, off, newLen);
-
-            pointer += newLen;
-            return newLen;
         }
+		byte[] buf = readPage(pointer);
+
+		// Compute length to end of page
+		int remaining = PAGE_SIZE - (int)(pointer & PAGE_MASK);
+		int newLen = len < remaining ? len : remaining;
+		System.arraycopy(buf, (int)(pointer & PAGE_MASK), b, off, newLen);
+
+		pointer += newLen;
+		return newLen;
     }
 
     /** Forwards the request to the real <code>File</code>. */

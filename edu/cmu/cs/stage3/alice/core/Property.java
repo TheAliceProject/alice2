@@ -168,9 +168,8 @@ public abstract class Property {
 					java.lang.reflect.Field field = cls.getDeclaredField( m_name );
 					if( field.get( m_owner ) == this ) {
 						return cls;
-					} else {
-						throw new RuntimeException(  Messages.getString("has_field_named_that_is_not_",  m_owner, m_name, this) );  
 					}
+					throw new RuntimeException(  Messages.getString("has_field_named_that_is_not_",  m_owner, m_name, this) );
 				} catch( NoSuchFieldException nsfe ) {
 					cls = cls.getSuperclass();
 				} catch( IllegalAccessException iae ) {
@@ -178,9 +177,8 @@ public abstract class Property {
 				}
 			}
 			return null;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 
@@ -190,33 +188,30 @@ public abstract class Property {
 			if( m_value.getClass().isArray() ) {
 				//todo
 				return m_value;
-			} else {
-				try {
-					Class[] parameterTypes = {};
-					Object[] parameterValues = {};
-					java.lang.reflect.Method method = m_value.getClass().getMethod( "clone", parameterTypes ); 
-					if( method.isAccessible() ) {
-						return method.invoke( m_value, parameterValues );
-					} else {
-						return m_value;
-					}
-				} catch( NoSuchMethodException nsme ) {
-					Element.warnln( Messages.getString("property_get_failure_to_clone__", this, nsme) );  
-					//nsme.printStackTrace();
-					return m_value;
-				} catch( IllegalAccessException iae ) {
-					Element.warnln( Messages.getString("property_get_failure_to_clone__", this, iae) );  
-					//iae.printStackTrace();
-					return m_value;
-				} catch( java.lang.reflect.InvocationTargetException ite ) {
-					Element.warnln( Messages.getString("property_get_failure_to_clone__", this, ite) );  
-					//ite.getTargetException().printStackTrace();
-					return m_value;
-				}
 			}
-		} else {
-			return m_value;
+			try {
+				Class[] parameterTypes = {};
+				Object[] parameterValues = {};
+				java.lang.reflect.Method method = m_value.getClass().getMethod( "clone", parameterTypes ); 
+				if( method.isAccessible() ) {
+					return method.invoke( m_value, parameterValues );
+				}
+				return m_value;
+			} catch( NoSuchMethodException nsme ) {
+				Element.warnln( Messages.getString("property_get_failure_to_clone__", this, nsme) );  
+				//nsme.printStackTrace();
+				return m_value;
+			} catch( IllegalAccessException iae ) {
+				Element.warnln( Messages.getString("property_get_failure_to_clone__", this, iae) );  
+				//iae.printStackTrace();
+				return m_value;
+			} catch( java.lang.reflect.InvocationTargetException ite ) {
+				Element.warnln( Messages.getString("property_get_failure_to_clone__", this, ite) );  
+				//ite.getTargetException().printStackTrace();
+				return m_value;
+			}
 		}
+		return m_value;
 	}
 
     private boolean isValueInADifferentWorld( Object value ) {
@@ -402,9 +397,8 @@ public abstract class Property {
 			m_currentBehavior = null;
             
 			return value;
-		} else {
-			return o;
 		}
+		return o;
     }
 	public Object getValue() {
 		return evaluateIfNecessary( m_value );
@@ -433,7 +427,7 @@ public abstract class Property {
 			//pass
 		}
 	}
-	protected void onSet( Object value ) {
+	protected void onSet( Object value ) {     
 		Class valueClass = getValueClass();
 		PropertyEvent propertyEvent = new PropertyEvent( this, value );
 		onChanging( propertyEvent );
@@ -467,7 +461,6 @@ public abstract class Property {
             checkForBadReferences( value );
         }
 		onSet( value );
-		
 	}
 	private static void setHowMuch( Element owner, String propertyName, Object value, edu.cmu.cs.stage3.util.HowMuch howMuch ) {
 		Property property = owner.getPropertyNamed( propertyName );
@@ -585,17 +578,15 @@ public abstract class Property {
         			m.m32 = Double.valueOf( t[14] );
         			m.m33 = Double.valueOf( t[15] );
         			return m;
-            	} else {
-	                Class[] parameterTypes = { String.class };
-	                java.lang.reflect.Method valueOfMethod = type.getMethod( "valueOf", parameterTypes ); 
-	                int modifiers = valueOfMethod.getModifiers();
-	                if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
-	                    Object[] parameters = { text };
-	                    return valueOfMethod.invoke( null, parameters );
-	                } else {
-	                    throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") ); 
-	                }
             	}
+				Class[] parameterTypes = { String.class };
+				java.lang.reflect.Method valueOfMethod = type.getMethod( "valueOf", parameterTypes ); 
+				int modifiers = valueOfMethod.getModifiers();
+				if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
+				    Object[] parameters = { text };
+				    return valueOfMethod.invoke( null, parameters );
+				}
+				throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") );
             } catch( NoSuchMethodException nsme ) {
                 throw new RuntimeException( "NoSuchMethodException:" + type ); 
             } catch( IllegalAccessException iae ) {
@@ -670,6 +661,7 @@ public abstract class Property {
             throw new RuntimeException();
         }
     }
+    
     public final void decode( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {
         if( node.hasChildNodes() ) {
             String criterionClassname = node.getAttribute( "criterionClass" ); 

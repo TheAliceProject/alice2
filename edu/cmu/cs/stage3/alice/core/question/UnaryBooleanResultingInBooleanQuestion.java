@@ -36,8 +36,7 @@ public abstract class UnaryBooleanResultingInBooleanQuestion extends BooleanQues
 		}*/
 		if( aValue ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

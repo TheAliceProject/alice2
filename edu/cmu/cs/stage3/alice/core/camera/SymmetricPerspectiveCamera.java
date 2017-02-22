@@ -72,15 +72,12 @@ public class SymmetricPerspectiveCamera extends edu.cmu.cs.stage3.alice.core.Cam
         if( Double.isNaN( vva ) ) {
             if( Double.isNaN( hva ) ) {
 				return super.getViewingAngleForGetAGoodLookAt();
-            } else {
-				return vva;
             }
-        } else {
-            if( Double.isNaN( hva ) ) {
-				return vva;
-            } else {
-				return Math.min( vva, hva );
-            }
+			return vva;
         }
+		if( Double.isNaN( hva ) ) {
+			return vva;
+		}
+		return Math.min( vva, hva );
     }
 }

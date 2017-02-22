@@ -598,7 +598,7 @@ public class Actions {
 		resumeWorldAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_PAGE_UP, 0 ) );
 		resumeWorldAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "resumeWorld" ); 
 //		resumeWorldAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'R' ) );
-		resumeWorldAction.putValue( javax.swing.Action.NAME, "  " + Messages.getString("Play__") ); 
+		resumeWorldAction.putValue( javax.swing.Action.NAME, Messages.getString("Play") ); 
 		resumeWorldAction.putValue( javax.swing.Action.SHORT_DESCRIPTION, Messages.getString("Resume_the_running_of_the_world__Page_Up_") ); 
 		//resumeWorldAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( resumeWorldAction );
@@ -628,7 +628,7 @@ public class Actions {
 		//stopWorldAction.putValue( javax.swing.Action.SMALL_ICON, );
 		renderActions.add( stopWorldAction );
 
-		takePictureAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_G, java.awt.event.KeyEvent.CTRL_MASK ) );
+		takePictureAction.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_G, java.awt.Event.CTRL_MASK ) );
 		takePictureAction.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "takePicture" ); 
 //		takePictureAction.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'c' ) );
 		takePictureAction.putValue( javax.swing.Action.NAME, Messages.getString("Take_Picture") ); 

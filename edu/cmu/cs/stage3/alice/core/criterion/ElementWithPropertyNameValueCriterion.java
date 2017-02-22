@@ -35,12 +35,13 @@ public class ElementWithPropertyNameValueCriterion implements edu.cmu.cs.stage3.
 			if (property != null) {
 				if (property.getValue().equals(propertyValue)) {
 					if (returnEqual) return true;
-					else return false;
-				} else {
-					if (returnEqual) return false;
-					else return true;
+					return false;
 				}
-			} else return false;
-		} else return false;
+				if (returnEqual) return false;
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 }

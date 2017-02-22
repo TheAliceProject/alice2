@@ -44,9 +44,8 @@ public class DistanceFromTopEdge extends edu.cmu.cs.stage3.alice.core.question.N
 				}
 			}
 			return new Double( y );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );

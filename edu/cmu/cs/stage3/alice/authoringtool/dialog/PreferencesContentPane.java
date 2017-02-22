@@ -46,6 +46,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
@@ -624,7 +625,10 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		String saveIntervalString = (String) saveIntervalComboBox.getSelectedItem();
 		if (!saveIntervalString.equalsIgnoreCase(FOREVER_INTERVAL_STRING)) {
 			try {
-				Integer.parseInt(saveIntervalString);
+				int i = Integer.parseInt(saveIntervalString);
+				if (i < 0) {
+					throw new java.lang.NumberFormatException();
+				}
 			} catch (Throwable t) {
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
 								Messages.getString("You_must_enter_a_valid_number_for_the_time_to_wait_before_prompting_to_save_"),
@@ -637,7 +641,10 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		String backupCountString = (String) backupCountComboBox.getSelectedItem();
 		if (!backupCountString.equalsIgnoreCase(INFINITE_BACKUPS_STRING)) {
 			try {
-				Integer.parseInt(backupCountString);
+				int i = Integer.parseInt(backupCountString);
+				if (i < 0) {
+					throw new java.lang.NumberFormatException();
+				}
 			} catch (Throwable t) {
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
 								Messages.getString("You_must_enter_a_valid_number_for_the_number_of_backups_you_want_Alice_to_save_"),
@@ -646,13 +653,31 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				return false;
 			}
 		}
+		
 		String fontSizeString = (String) fontSizeComboBox.getSelectedItem();
 		try {
-			Integer.parseInt(fontSizeString);
+			int i = Integer.parseInt(fontSizeString);
+			if (i < 0) {
+				throw new java.lang.NumberFormatException();
+			}
 		} catch (Throwable t) {
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
 							Messages.getString("You_must_enter_a_valid_number_for_the_font_size_"),
-							Messages.getString("Bad_Backup_Font_Size"),
+							Messages.getString("Invalid_Font_Size"),
+							javax.swing.JOptionPane.INFORMATION_MESSAGE);
+			return false;
+		}
+		
+		String decimalPlacesString = (String) decimalPlacesComboBox.getSelectedItem();
+		try {
+			int i = Integer.parseInt(decimalPlacesString);
+			if (i < 0) {
+				throw new java.lang.NumberFormatException();
+			}
+		} catch (Throwable t) {
+			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
+							Messages.getString("You_must_enter_a_valid_number_for_the_decimal_places_"),
+							Messages.getString("Invalid_Number"),
 							javax.swing.JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
@@ -686,6 +711,12 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			GalleryViewer.showBuilder = true;
 		} else {
 			GalleryViewer.showBuilder = false;
+		}
+		
+		// Aik Min - Decimal places
+		if (!Configuration.getValue(authoringToolPackage, "decimalPlaces").equals((String) decimalPlacesComboBox.getSelectedItem())) {
+			Configuration.setValue(authoringToolPackage, "decimalPlaces", (String) decimalPlacesComboBox.getSelectedItem());
+			AikMin.decimal = Integer.valueOf((String) decimalPlacesComboBox.getSelectedItem());		
 		}
 		
 		if (!Configuration.getValue(authoringToolPackage, "recentWorlds.maxWorlds").equals(maxRecentWorldsTextField.getText())) {
@@ -799,6 +830,8 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		initBackupCountComboBox();
 		setFontSizeValues();
 		initFontSizeComboBox();
+		setDecimalPlacesValues();
+		initDecimalPlacesComboBox();
 
 		maxRecentWorldsTextField.setText(Configuration.getValue(authoringToolPackage, "recentWorlds.maxWorlds"));
 		numClipboardsTextField.setText(Configuration.getValue(authoringToolPackage, "numberOfClipboards"));
@@ -1042,15 +1075,44 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 	private void initFontSizeComboBox() {
 		fontSizeComboBox.removeAllItems();
-		String intervalString = Configuration.getValue(authoringToolPackage, "fontSize");
+		String fontSizeString = Configuration.getValue(authoringToolPackage, "fontSize");
 		for (int i = 0; i < fontSizeOptions.size(); i++) {
 			fontSizeComboBox.addItem(fontSizeOptions.get(i));
-			if (intervalString.equalsIgnoreCase(fontSizeOptions.get(i).toString())) {
+			if (fontSizeString.equalsIgnoreCase(fontSizeOptions.get(i).toString())) {
 				fontSizeComboBox.setSelectedIndex(i);
 			}
 		}
 	}
 
+	private void setDecimalPlacesValues() {
+		decimalPlacesOptions.removeAllElements();
+		int decimalPlaces = Integer.parseInt(authoringToolConfig.getValue("decimalPlaces"));
+		java.util.List size = new java.util.ArrayList();
+		size.add(Integer.valueOf(1));
+		size.add(Integer.valueOf(2));
+		size.add(Integer.valueOf(3));
+		size.add(Integer.valueOf(4));
+		size.add(Integer.valueOf(5));
+		size.add(Integer.valueOf(6));
+		if (decimalPlaces < 1 && decimalPlaces > 6 ) {
+			size.add(Integer.valueOf(decimalPlaces));
+		}
+		java.util.Collections.sort(size);
+		for (int i = 0; i < size.size(); i++) {
+			decimalPlacesOptions.add(String.valueOf(size.get(i)));
+		}
+	}
+
+	private void initDecimalPlacesComboBox() {
+		decimalPlacesComboBox.removeAllItems();
+		String decimalPlacesString = Configuration.getValue(authoringToolPackage, "decimalPlaces");
+		for (int i = 0; i < decimalPlacesOptions.size(); i++) {
+			decimalPlacesComboBox.addItem(decimalPlacesOptions.get(i));
+			if (decimalPlacesString.equalsIgnoreCase(decimalPlacesOptions.get(i).toString())) {
+				decimalPlacesComboBox.setSelectedIndex(i);
+			}
+		}
+	}
 	// ///////////////
 	// Callbacks
 	// ///////////////
@@ -1164,6 +1226,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	java.util.Vector saveIntervalOptions = new java.util.Vector();
 	java.util.Vector backupCountOptions = new java.util.Vector();
 	java.util.Vector fontSizeOptions = new java.util.Vector();
+	java.util.Vector decimalPlacesOptions = new java.util.Vector();
 	JLabel importDirectoryLabel = new JLabel();
 	JButton importDirectoryBrowseButton = new JButton();
 	JCheckBox enableScriptingCheckBox = new JCheckBox();
@@ -1232,6 +1295,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	private JComboBox resourceFileComboBox = new JComboBox();
 	private JComboBox languageComboBox = new JComboBox();
 	private JComboBox fontSizeComboBox = new JComboBox();
+	private JComboBox decimalPlacesComboBox = new JComboBox();
 	private JTextField worldDirectoryTextField = new JTextField();
 
 	private void GeneralTabInit() {
@@ -1240,6 +1304,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		JPanel languagePanel = new JPanel();
 		JPanel inputDirectoriesPanel = new JPanel();
 		JPanel fontSizePanel = new JPanel();
+		JPanel decimalPlacesPanel = new JPanel();
 
 		maxRecentWorldsTextField.setColumns(3);
 		maxRecentWorldsTextField.setMinimumSize(new Dimension(50, 22));
@@ -1268,7 +1333,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				javax.swing.JLabel toReturn = new javax.swing.JLabel(Messages.getString("No_Name"));
 				toReturn.setOpaque(true);
 				if (!AikMin.isLTR())	// ***** For making Combobox items right justify *****
-					toReturn.setHorizontalAlignment(javax.swing.JLabel.RIGHT);
+					toReturn.setHorizontalAlignment(SwingConstants.RIGHT);
 				// toReturn.setVerticalAlignment(javax.swing.JLabel.CENTER);
 
 				String name = value.toString();
@@ -1313,7 +1378,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			languageComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
 	            @Override
 	            public void paint(java.awt.Graphics g) {
-	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                setHorizontalAlignment(SwingConstants.RIGHT);
 	                super.paint(g);
 	            }
 	        });
@@ -1367,7 +1432,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			fontSizeComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
 	            @Override
 	            public void paint(java.awt.Graphics g) {
-	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                setHorizontalAlignment(SwingConstants.RIGHT);
 	                super.paint(g);
 	            }
 	        });
@@ -1378,6 +1443,26 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		fontSizeLabel.setText(" " + Messages.getString("general_font_size__default_value_is_12_"));
 
+		JLabel decimalPlacesLabel = new JLabel();
+		
+		decimalPlacesPanel.setLayout(new GridBagLayout());
+		decimalPlacesPanel.add(decimalPlacesComboBox, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
+		decimalPlacesPanel.add(decimalPlacesLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,	new Insets(5, 5, 5, 5), 0, 0));
+		if (!AikMin.isLTR()) {		// ***** For making Combobox items right justify *****
+			decimalPlacesComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
+	            @Override
+	            public void paint(java.awt.Graphics g) {
+	                setHorizontalAlignment(SwingConstants.RIGHT);
+	                super.paint(g);
+	            }
+	        });
+		}
+		decimalPlacesComboBox.setEditable(true);
+		decimalPlacesComboBox.setPreferredSize(new java.awt.Dimension(55, 25));
+		decimalPlacesComboBox.setMaximumRowCount(9);
+
+		decimalPlacesLabel.setText(" " + Messages.getString("decimal_places__default_value_is_2_"));
+		
 		Component component = Box.createGlue();
 		// generalPanel.setBorder(emptyBorder);
 		generalPanel.setLayout(new GridBagLayout());
@@ -1390,7 +1475,9 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		generalPanel.add(languagePanel, new GridBagConstraints(0, 4, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		generalPanel.add(inputDirectoriesPanel, new GridBagConstraints(0, 5, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		generalPanel.add(fontSizePanel, new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		generalPanel.add(component, new GridBagConstraints(0, 7, 1, 1, 1.0, 1.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		generalPanel.add(decimalPlacesPanel, new GridBagConstraints(0, 7, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		
+		generalPanel.add(component, new GridBagConstraints(0, 8, 1, 1, 1.0, 1.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		// generalPanel.add(watcherPanelEnabledCheckBox, new
 		// GridBagConstraints(0, 7, 1, 1, 0.0, 0.0
 		// ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new
@@ -1563,7 +1650,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			numDigitsComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
 	            @Override
 	            public void paint(java.awt.Graphics g) {
-	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                setHorizontalAlignment(SwingConstants.RIGHT);
 	                super.paint(g);
 	            }
 	        });
@@ -1578,7 +1665,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			codecComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
 	            @Override
 	            public void paint(java.awt.Graphics g) {
-	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                setHorizontalAlignment(SwingConstants.RIGHT);
 	                super.paint(g);
 	            }
 	        });
@@ -1656,7 +1743,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			saveIntervalComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
 	            @Override
 	            public void paint(java.awt.Graphics g) {
-	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                setHorizontalAlignment(SwingConstants.RIGHT);
 	                super.paint(g);
 	            }
 	        });
@@ -1676,7 +1763,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			backupCountComboBox.setRenderer(new javax.swing.DefaultListCellRenderer() {
 	            @Override
 	            public void paint(java.awt.Graphics g) {
-	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                setHorizontalAlignment(SwingConstants.RIGHT);
 	                super.paint(g);
 	            }
 	        });

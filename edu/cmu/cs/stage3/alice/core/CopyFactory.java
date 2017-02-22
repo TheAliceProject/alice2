@@ -64,12 +64,10 @@ class VariableCriterion implements edu.cmu.cs.stage3.util.Criterion {
 			if( m_name != null ) {
 				return m_name==variable.name.getStringValue();
 				//return m_name.equalsIgnoreCase( variable.name.getStringValue() );
-			} else {
-				return false;
 			}
-		} else {
 			return false;
 		}
+		return false;
 	}
 	
 	public String toString() {
@@ -158,32 +156,28 @@ public class CopyFactory {
                     //return o.clone();
                     //check for constructor that takes object of this class, too
                     return o;
-                } else {
-                    return o;
                 }
+				return o;
             }
             private Object getValueToTuckAway( Object value, ReferenceGenerator referenceGenerator ) {
                 if( value instanceof Element ) {
                     return referenceGenerator.generateReference( (Element)value );
-                } else {
-                    return getCopyIfPossible( value );
                 }
+				return getCopyIfPossible( value );
             }
             private Object getValueForCopy( Property property, Object value, java.util.Vector referencesToBeResolved ) {
                 if( value instanceof Criterion ) {
                     referencesToBeResolved.addElement( new PropertyReference( property, (Criterion)value ) );
                     return null;
-                } else {
-                    return getCopyIfPossible( value );
                 }
+				return getCopyIfPossible( value );
             }
             private Object getValueForCopy( ObjectArrayProperty oap, Object value, int i, java.util.Vector referencesToBeResolved ) {
                 if( value instanceof Criterion ) {
                     referencesToBeResolved.addElement( new ObjectArrayPropertyReference( oap, (Criterion)value, i, 0 ) );
                     return null;
-                } else {
-                    return getCopyIfPossible( value );
                 }
+				return getCopyIfPossible( value );
             }
 
 			public void set( Element element, java.util.Vector referencesToBeResolved ) {
@@ -265,9 +259,8 @@ public class CopyFactory {
 					}
 				}
 				return lookup( element.getParent(), variableCriterion ); 			
-			} else {
-				return null;
 			}
+			return null;
 		}
 		//todo: update progressObserver
 		private Element manufacture( ReferenceResolver referenceResolver, ProgressObserver progressObserver, Element parentToBe ) throws UnresolvablePropertyReferencesException {

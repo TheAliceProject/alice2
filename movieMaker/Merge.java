@@ -267,8 +267,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 			}
 			if (format.matches(videoFormat) || format.matches(audioFormat))
 				return true;
-			else
-				return false;
+			return false;
 		}
 	}
 
@@ -315,8 +314,7 @@ public class Merge implements ControllerListener, DataSinkListener {
 			}
 			if (format.matches(videoFormat) || format.matches(audioFormat))
 				return true;
-			else
-				return false;
+			return false;
 		}
 	}
 

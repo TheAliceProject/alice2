@@ -429,9 +429,6 @@ public class DnDGroupingPanel extends GroupingPanel {
 			int offset = 0;
 			if (AikMin.isMAC()) offset = 1;
 			g.setColor( highlightColor );
-			if (size.height > 20 && size.height < 27) {
-				int i = 0;
-			}
 			for( int x = 0; x < size.width; x += 4 ) {
 				for( int y = 0; y < size.height; y += 4 ) {
 					g.drawLine( x, y, x + offset, y + offset );

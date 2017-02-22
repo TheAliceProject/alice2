@@ -60,9 +60,8 @@ public class Plane implements Cloneable {
 		if( o!=null && o instanceof Plane ) {
 			Plane plane = (Plane)o;
 			return m_a == plane.m_a && m_b == plane.m_b && m_c == plane.m_c && m_d == plane.m_d;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	public double intersect( Ray ray ) {
@@ -72,10 +71,9 @@ public class Plane implements Cloneable {
 		double denom = m_a*d.x + m_b*d.y + m_c*d.z;
 		if( denom==0 ) {
 			return Double.NaN;
-		} else {
-			double numer = m_a*p.x + m_b*p.y + m_c*p.z + m_d;
-			return -numer/denom;
 		}
+		double numer = m_a*p.x + m_b*p.y + m_c*p.z + m_d;
+		return -numer/denom;
 	}
 	
 	public String toString() {

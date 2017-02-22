@@ -66,6 +66,7 @@ public class Color implements Cloneable, java.io.Serializable, edu.cmu.cs.stage3
 		switch( array.length ) {
 		case 4:
 			alpha = array[ 3 ];
+			//$FALL-THROUGH$
 		case 3:
 			blue = array[ 2 ];
 			green = array[ 1 ];
@@ -86,6 +87,7 @@ public class Color implements Cloneable, java.io.Serializable, edu.cmu.cs.stage3
 		switch( array.length ) {
 		case 4:
 			alpha = (float)array[ 3 ];
+			//$FALL-THROUGH$
 		case 3:
 			blue = (float)array[ 2 ];
 			green = (float)array[ 1 ];
@@ -114,9 +116,8 @@ public class Color implements Cloneable, java.io.Serializable, edu.cmu.cs.stage3
         if( o!=null && o instanceof Color ) {
             Color c = (Color)o;
             return red==c.red && green==c.green && blue==c.blue && alpha==c.alpha;
-        } else {
-            return false;
         }
+		return false;
     }
 
 	public java.awt.Color createAWTColor() {

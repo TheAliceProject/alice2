@@ -179,7 +179,7 @@ public class FrameSequencer
 		// add this picture to the list 
 		if(pictureList.size()>0)	
 			return (Picture)pictureList.remove(0);
-		else return null;
+		return null;
 	}
 
 	/**

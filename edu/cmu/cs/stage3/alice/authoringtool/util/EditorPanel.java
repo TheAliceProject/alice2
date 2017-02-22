@@ -193,9 +193,8 @@ public class EditorPanel extends javax.swing.JPanel implements edu.cmu.cs.stage3
 	public edu.cmu.cs.stage3.alice.core.Element getElementBeingEdited() {
 		if( activeEditor != null ) {
 			return (edu.cmu.cs.stage3.alice.core.Element)activeEditor.getObject();
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public edu.cmu.cs.stage3.alice.authoringtool.Editor getActiveEditor() {
@@ -226,7 +225,7 @@ public class EditorPanel extends javax.swing.JPanel implements edu.cmu.cs.stage3
 	}
 
 	class EditStack extends DefaultUndoRedoStack {
-		public UndoableRedoable undo() {
+		public synchronized UndoableRedoable undo() {	// synchronized necessary?
 			UndoableRedoable ur = super.undo();
 			UndoableRedoable newItem = editStack.getCurrentUndoableRedoable();
 			if( ur != null ) {
@@ -235,7 +234,7 @@ public class EditorPanel extends javax.swing.JPanel implements edu.cmu.cs.stage3
 			return ur;
 		}
 
-		public UndoableRedoable redo() {
+		public synchronized UndoableRedoable redo() { 	// synchronized necessary?
 			UndoableRedoable ur = super.redo();
 			if( ur != null ) {
 				editElement( ((EditItem)ur).getElement(), ((EditItem)ur).getEditorClass(), false );

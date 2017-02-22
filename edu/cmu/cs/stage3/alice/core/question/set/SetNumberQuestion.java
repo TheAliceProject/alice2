@@ -34,8 +34,7 @@ public abstract class SetNumberQuestion extends edu.cmu.cs.stage3.alice.core.que
 		Set setValue = set.getSetValue();
 		if( setValue!=null ) {
             return new Integer( getValue( setValue ) );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

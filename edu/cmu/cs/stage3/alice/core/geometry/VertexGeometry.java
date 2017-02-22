@@ -26,10 +26,12 @@ package edu.cmu.cs.stage3.alice.core.geometry;
 import edu.cmu.cs.stage3.alice.core.property.VertexArrayProperty;
 
 public class VertexGeometry extends edu.cmu.cs.stage3.alice.core.Geometry {
-	public final VertexArrayProperty vertices = new VertexArrayProperty( this, "vertices", null );
+	public VertexArrayProperty vertices = new VertexArrayProperty( this, "vertices", null );
+	
 	public VertexGeometry( edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry sgVertexGeometry ) {
 		super( sgVertexGeometry );
 	}
+	
 	public edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry getSceneGraphVertexGeometry() {
 		return (edu.cmu.cs.stage3.alice.scenegraph.VertexGeometry)getSceneGraphGeometry();
 	}
@@ -46,6 +48,7 @@ public class VertexGeometry extends edu.cmu.cs.stage3.alice.core.Geometry {
 	public int getVertexCount() {
 		return getSceneGraphVertexGeometry().getVertexCount();
 	}
+	
 	public void setNormals( javax.vecmath.Vector3d[] normals ) {
 		edu.cmu.cs.stage3.alice.scenegraph.Vertex3d[] sgVertices = getSceneGraphVertexGeometry().getVertices();
 		if( sgVertices != null ) {
@@ -57,4 +60,5 @@ public class VertexGeometry extends edu.cmu.cs.stage3.alice.core.Geometry {
 		vertices.set( null );
 		vertices.set( sgVertices );
 	}
+	
 }

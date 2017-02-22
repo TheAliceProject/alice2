@@ -186,10 +186,9 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 			java.util.LinkedList tileList = (java.util.LinkedList)tileListMap.get( text );
 			if( (tileList != null) && (! tileList.isEmpty()) ) {
 				return (Tile)tileList.removeFirst();
-			} else {
-				Tile tilePanel = new Tile( text );
-				return tilePanel;
 			}
+			Tile tilePanel = new Tile( text );
+			return tilePanel;
 		}
 
 		public void releaseTile( String text, Tile tile ) {

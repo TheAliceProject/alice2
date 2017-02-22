@@ -23,6 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.galleryviewer;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import javax.swing.ScrollPaneConstants;
+
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
 import edu.cmu.cs.stage3.alice.authoringtool.util.Configuration;
 import edu.cmu.cs.stage3.lang.Messages;
@@ -175,15 +181,11 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 if (!fileToCheck.isDirectory()){
                     return (filter.accept(fileToCheck) || fileToCheck.getName().endsWith(".link")); 
                 }
-                else{
-                    return false;
-                }
+				return false;
             }
-            else{
-                if (!fileToCheck.isDirectory()){
-                    return (fileToCheck.getName().endsWith(".a2c") || fileToCheck.getName().endsWith(".link"));  
-                }
-            }
+			if (!fileToCheck.isDirectory()){
+			    return (fileToCheck.getName().endsWith(".a2c") || fileToCheck.getName().endsWith(".link"));  
+			}
             return false;
         }
     }
@@ -208,9 +210,9 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             if (name.indexOf((int)'.') == -1){
                 return true;
             }
-            else{
+//            else{
                // System.out.println("rejected "+directory.getAbsolutePath()+"   "+name);
-            }
+//            }
             return false;
         }
     }
@@ -346,20 +348,18 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     if (current.getObject() instanceof String){
                         return (String)current.getObject();
                     }
-                    else{
-                        String toReturn = ""; 
-                        if (current.getObject() instanceof java.util.Vector){
-                            java.util.Vector allDetails = (java.util.Vector)current.getObject();
-                            for (int j=0; j<allDetails.size(); j++){
-                                String currentDetail = allDetails.get(j).toString();
-                                if (j<allDetails.size()-1){
-                                    currentDetail += ", "; 
-                                }
-                                toReturn += currentDetail;
-                            }
-                            return toReturn;
-                        }
-                    }
+					String toReturn = ""; 
+					if (current.getObject() instanceof java.util.Vector){
+					    java.util.Vector allDetails = (java.util.Vector)current.getObject();
+					    for (int j=0; j<allDetails.size(); j++){
+					        String currentDetail = allDetails.get(j).toString();
+					        if (j<allDetails.size()-1){
+					            currentDetail += ", "; 
+					        }
+					        toReturn += currentDetail;
+					    }
+					    return toReturn;
+					}
                 }
             }
             return null;
@@ -725,8 +725,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                         content += newContent;
                     }
                 }
-
                 String toReturn = (this.rootNode.rootPath+makeRelativePathReady(content));
+                fileReader.close(); // To fix resource leak
                 return toReturn;
             }
             catch (Exception e){
@@ -844,7 +844,26 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             xmlData =  new DirectoryXmlData(this.name);
             java.io.File[] modelsInDir = dirFile.listFiles(characterFilter);
             java.io.File[] dirsInDir = dirFile.listFiles(directoryFilter);
-
+            
+            Comparator comp = new Comparator() {
+				  public int compare(Object o1, Object o2) {
+				    File f1 = (File) o1;
+				    File f2 = (File) o2;
+				    if (f1.isDirectory() && !f2.isDirectory()) {
+				      // Directory before non-directory
+				      return -1;
+				    } else if (!f1.isDirectory() && f2.isDirectory()) {
+				      // Non-directory after directory
+				      return 1;
+				    } else {
+				      // Alphabetic order otherwise
+				      return f1.compareTo(f2);
+				    }
+				  }
+				};
+			Arrays.sort(modelsInDir, comp);
+			Arrays.sort(dirsInDir, comp);
+			
             int total = modelsInDir.length + dirsInDir.length;
             glueConstraints.gridx = total;
             int count  = 0;
@@ -1298,9 +1317,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         if (directoryOnDisplay == null){
             return homeName;
         }
-        else{
-            return directoryOnDisplay.getGUIPath();
-        }
+		return directoryOnDisplay.getGUIPath();
     }
 
     protected void displayModelDialog(ObjectXmlData data, javax.swing.ImageIcon image){
@@ -1332,9 +1349,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 											options[1]);
 						if (returnVal != javax.swing.JOptionPane.YES_OPTION){
 							continue;
-						} else{
-							break;
 						}
+						break;
 					}
 				}
 			}
@@ -1724,9 +1740,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             list.add(fileToTransfer);
             return new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.FileListTransferable(list);
         }
-        else{
-            return null;
-        }
+		return null;
     }
     
     protected static void enteredWebGallery(){
@@ -1971,7 +1985,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 
         this.setLayout(new java.awt.BorderLayout());
         this.add(headerPanel, java.awt.BorderLayout.NORTH);
-        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(objectPanel, javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(objectPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, java.awt.BorderLayout.CENTER);
         
         //Aik Min added this to make scroll bar scroll more
@@ -2544,7 +2558,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 				}
 				else{
 					attributeLabel.setText(Messages.getString("Loading___", String.valueOf((int)(percentage*100))+"%"));  
-				};
+				}
 			}
 		});
         //attributeLabel.revalidate();
@@ -2892,14 +2906,14 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         directoryPanel.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(count,0,1,1,1,1,java.awt.GridBagConstraints.WEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     }
 
-    private void exploreXML(org.w3c.dom.Node current, int level){
+ /*   private void exploreXML(org.w3c.dom.Node current, int level){
         if (current != null){
-            System.out.println(level+": "+Messages.getString("Name__")+current.getNodeName()+Messages.getString("__Type__")+current.getNodeType()+Messages.getString("__Value__")+current.getNodeValue()+Messages.getString("__Children__"));    //$NON-NLS-4$ //$NON-NLS-5$
+            System.out.println(level+": Name: "+current.getNodeName()+"Type: "+current.getNodeType()+"Value: "+current.getNodeValue()+"Children{"));    //$NON-NLS-4$ //$NON-NLS-5$
             org.w3c.dom.NodeList children = current.getChildNodes();
             for (int i=0; i<children.getLength(); i++){
                 exploreXML(children.item(i), level+1);
             }
             System.out.println("}"); 
         }
-    }
+    }*/
 }

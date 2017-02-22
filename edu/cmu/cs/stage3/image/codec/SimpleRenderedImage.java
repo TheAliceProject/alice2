@@ -469,42 +469,41 @@ public abstract class SimpleRenderedImage implements RenderedImage {
 			return tile.createChild(bounds.x, bounds.y,
 									bounds.width, bounds.height,
 									bounds.x, bounds.y, null);
-		} else {
-			// Create a WritableRaster of the desired size
-			SampleModel sm =
-				sampleModel.createCompatibleSampleModel(bounds.width,
-													   bounds.height);
-
-			// Translate it
-			WritableRaster dest =
-				Raster.createWritableRaster(sm, bounds.getLocation());
-
-			for (int j = startY; j <= endY; j++) {
-				for (int i = startX; i <= endX; i++) {
-					tile = getTile(i, j);
-					Rectangle intersectRect = bounds.intersection( tile.getBounds() );
-					Raster liveRaster = tile.createChild(intersectRect.x,
-														 intersectRect.y,
-														 intersectRect.width,
-														 intersectRect.height,
-														 0,
-														 0,
-														 null);
-					dest.setDataElements( intersectRect.x, intersectRect.y, liveRaster );
-					/*
-					Raster liveRaster = tile.createChild(intersectRect.x,
-														 intersectRect.y,
-														 intersectRect.width,
-														 intersectRect.height,
-														 intersectRect.x,
-														 intersectRect.y,
-														 null);
-					dest.setDataElements(0, 0, liveRaster);
-					*/
-				}
-			}
-			return dest;
 		}
+		// Create a WritableRaster of the desired size
+		SampleModel sm =
+			sampleModel.createCompatibleSampleModel(bounds.width,
+												   bounds.height);
+
+		// Translate it
+		WritableRaster dest =
+			Raster.createWritableRaster(sm, bounds.getLocation());
+
+		for (int j = startY; j <= endY; j++) {
+			for (int i = startX; i <= endX; i++) {
+				tile = getTile(i, j);
+				Rectangle intersectRect = bounds.intersection( tile.getBounds() );
+				Raster liveRaster = tile.createChild(intersectRect.x,
+													 intersectRect.y,
+													 intersectRect.width,
+													 intersectRect.height,
+													 0,
+													 0,
+													 null);
+				dest.setDataElements( intersectRect.x, intersectRect.y, liveRaster );
+				/*
+				Raster liveRaster = tile.createChild(intersectRect.x,
+													 intersectRect.y,
+													 intersectRect.width,
+													 intersectRect.height,
+													 intersectRect.x,
+													 intersectRect.y,
+													 null);
+				dest.setDataElements(0, 0, liveRaster);
+				*/
+			}
+		}
+		return dest;
 	}
 
 	/**

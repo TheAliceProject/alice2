@@ -23,8 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
-import edu.cmu.cs.stage3.lang.Messages;
 import java.awt.Font;
+import edu.cmu.cs.stage3.lang.Messages;
 
 /**
  * @author Jason Pratt
@@ -32,9 +32,9 @@ import java.awt.Font;
 public class SplashScreen extends java.awt.Frame {
 	protected java.awt.Image image;
 	protected java.awt.Dimension size;
-	protected java.awt.Window splashWindow;
+	protected java.awt.Frame splashWindow;
 
-	public SplashScreen( java.awt.Image image ) {
+	public SplashScreen( java.awt.Image image ) {       
 		this.image = image;
 
 		java.awt.MediaTracker tracker = new java.awt.MediaTracker( this );
@@ -47,9 +47,10 @@ public class SplashScreen extends java.awt.Frame {
 		if( (size.width < 1) || (size.height < 1) ) {
 			size = new java.awt.Dimension( 256, 256 );
 		}
-
-		splashWindow = new java.awt.Window( this ) {
+		
+		splashWindow = new java.awt.Frame() {
 			public void paint( java.awt.Graphics g ) {
+				super.paint(g);
 				g.drawImage( SplashScreen.this.image, 0, 0, this );
 //				g.setColor( java.awt.Color.yellow );
 				g.setColor( java.awt.Color.white );
@@ -58,12 +59,11 @@ public class SplashScreen extends java.awt.Frame {
 				String versionString = Messages.getString("version__", edu.cmu.cs.stage3.alice.authoringtool.JAlice.getVersion()); 
 				int stringWidth = g.getFontMetrics().stringWidth( versionString );
 				g.drawString( versionString, size.width - 10 - stringWidth, size.height - 6 ); //TODO: this makes the Splash Screen unnecessarily specialized.  the functionality should be abstracted out.			
-				g.drawString(Messages.getString("Loading___", ""), 10, size.height - 6 ); 
+				g.drawString(Messages.getString("Loading___", ""), 10, size.height - 6 );
 			}
 		};
 		splashWindow.setSize( size );
-
-		this.setSize( size );
+		splashWindow.setUndecorated(true);
 	}
 
 	public void showSplash() {
@@ -71,7 +71,7 @@ public class SplashScreen extends java.awt.Frame {
 		int x = (screenSize.width - size.width)/2;
 		int y = (screenSize.height - size.height)/2;
 		splashWindow.setLocation( x, y );
-		this.setLocation( x, y  );
+		//this.setLocation( x, y  );
 		splashWindow.setVisible( true );
 	}
 

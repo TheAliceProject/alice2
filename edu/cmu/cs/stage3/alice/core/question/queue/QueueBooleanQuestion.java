@@ -34,11 +34,9 @@ public abstract class QueueBooleanQuestion extends edu.cmu.cs.stage3.alice.core.
 		if( queueValue!=null ) {
             if( getValue( queueValue ) ) {
                 return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
             }
-		} else {
 			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

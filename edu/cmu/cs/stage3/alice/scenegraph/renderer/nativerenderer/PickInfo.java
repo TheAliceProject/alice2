@@ -64,9 +64,8 @@ public class PickInfo implements  edu.cmu.cs.stage3.alice.scenegraph.renderer.Pi
 	public int getCount() {
 		if( m_visuals!=null ) {
 			return m_visuals.length;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	public edu.cmu.cs.stage3.alice.scenegraph.Visual getVisualAt( int index ) {
 		return m_visuals[index];
@@ -115,25 +114,25 @@ public class PickInfo implements  edu.cmu.cs.stage3.alice.scenegraph.renderer.Pi
 			componentInverseAbsolute.transform( xyzw );
 			visualAbsolute.transform( xyzw );
 			return new javax.vecmath.Vector3d( xyzw.x/xyzw.w, xyzw.y/xyzw.w, xyzw.z/xyzw.w );
-		} else {
-			edu.cmu.cs.stage3.alice.scenegraph.Visual visual = getVisualAt( index );
-			edu.cmu.cs.stage3.alice.scenegraph.Geometry geometry = getGeometryAt( index );
-			int subElement = getSubElementAt( index );
-			edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray ita = (edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray)geometry;
-			edu.cmu.cs.stage3.alice.scenegraph.Vertex3d[] vertices = ita.getVertices();
-			int[] indices = ita.getIndices();
-			int i0 = subElement*3;
-			javax.vecmath.Vector3d v0 = new javax.vecmath.Vector3d( vertices[indices[i0]].position );
-			javax.vecmath.Vector3d v1 = new javax.vecmath.Vector3d( vertices[indices[i0+1]].position );
-			javax.vecmath.Vector3d v2 = new javax.vecmath.Vector3d( vertices[indices[i0+2]].position );
+		}
+		edu.cmu.cs.stage3.alice.scenegraph.Visual visual = getVisualAt( index );
+		edu.cmu.cs.stage3.alice.scenegraph.Geometry geometry = getGeometryAt( index );
+		int subElement = getSubElementAt( index );
+		edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray ita = (edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray)geometry;
+		edu.cmu.cs.stage3.alice.scenegraph.Vertex3d[] vertices = ita.getVertices();
+		int[] indices = ita.getIndices();
+		int i0 = subElement*3;
+		javax.vecmath.Vector3d v0 = new javax.vecmath.Vector3d( vertices[indices[i0]].position );
+		javax.vecmath.Vector3d v1 = new javax.vecmath.Vector3d( vertices[indices[i0+1]].position );
+		javax.vecmath.Vector3d v2 = new javax.vecmath.Vector3d( vertices[indices[i0+2]].position );
 
-			javax.vecmath.Matrix3d scale = visual.getScale();
-			if( scale != null ) {
-				v0 = edu.cmu.cs.stage3.math.MathUtilities.multiply( scale, v0 );
-				v1 = edu.cmu.cs.stage3.math.MathUtilities.multiply( scale, v1 );
-				v2 = edu.cmu.cs.stage3.math.MathUtilities.multiply( scale, v2 );
-			}
-			edu.cmu.cs.stage3.math.Plane plane = new edu.cmu.cs.stage3.math.Plane( v0, v1, v2 );
+		javax.vecmath.Matrix3d scale = visual.getScale();
+		if( scale != null ) {
+			v0 = edu.cmu.cs.stage3.math.MathUtilities.multiply( scale, v0 );
+			v1 = edu.cmu.cs.stage3.math.MathUtilities.multiply( scale, v1 );
+			v2 = edu.cmu.cs.stage3.math.MathUtilities.multiply( scale, v2 );
+		}
+		edu.cmu.cs.stage3.math.Plane plane = new edu.cmu.cs.stage3.math.Plane( v0, v1, v2 );
 
 //			javax.vecmath.Matrix4d inverseProjection = m_renderTarget.getProjectionMatrix( m_camera );
 //			inverseProjection.invert();
@@ -153,15 +152,14 @@ public class PickInfo implements  edu.cmu.cs.stage3.alice.scenegraph.renderer.Pi
 //			direction.normalize();
 //
 //			edu.cmu.cs.stage3.math.Ray ray = new edu.cmu.cs.stage3.math.Ray( origin, direction );
-			edu.cmu.cs.stage3.math.Ray ray = m_renderTarget.getRayAtPixel( m_camera, m_x, m_y );
+		edu.cmu.cs.stage3.math.Ray ray = m_renderTarget.getRayAtPixel( m_camera, m_x, m_y );
 
-			edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame cameraFrame = (edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame)m_camera.getParent();
-			ray.transform( cameraFrame.getAbsoluteTransformation() );
-			edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame visualFrame = (edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame)visual.getParent();
-			javax.vecmath.Matrix4d inverseVisual = visualFrame.getInverseAbsoluteTransformation();
-			ray.transform( inverseVisual );
-			double t = plane.intersect( ray );
-			return ray.getPoint( t );
-		}
+		edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame cameraFrame = (edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame)m_camera.getParent();
+		ray.transform( cameraFrame.getAbsoluteTransformation() );
+		edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame visualFrame = (edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame)visual.getParent();
+		javax.vecmath.Matrix4d inverseVisual = visualFrame.getInverseAbsoluteTransformation();
+		ray.transform( inverseVisual );
+		double t = plane.intersect( ray );
+		return ray.getPoint( t );
 	}
 }

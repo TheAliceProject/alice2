@@ -13,9 +13,8 @@ public class Manager {
 	public static edu.cmu.cs.stage3.media.DataSource createDataSource( byte[] data, String extension ) {
 		if( s_isJMFAvailable ) {
 			return new edu.cmu.cs.stage3.media.jmfmedia.DataSource( data, extension );
-		} else {
-			return new edu.cmu.cs.stage3.media.nullmedia.DataSource( data, extension );
 		}
+		return new edu.cmu.cs.stage3.media.nullmedia.DataSource( data, extension );
 	}
 	public static edu.cmu.cs.stage3.media.DataSource createDataSource( java.io.InputStream is, String extension ) throws java.io.IOException {
 		java.io.BufferedInputStream bis;

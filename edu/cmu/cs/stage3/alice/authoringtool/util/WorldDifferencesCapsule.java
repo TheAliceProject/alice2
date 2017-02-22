@@ -33,17 +33,17 @@ public class WorldDifferencesCapsule implements edu.cmu.cs.stage3.alice.core.eve
 	protected java.util.ArrayList changedObjectArrayProperties = new java.util.ArrayList();
 	protected java.util.ArrayList changedElements = new java.util.ArrayList();
 
-        // need to keep track of where things are moving
-        protected java.util.HashMap changedElementPositions = new java.util.HashMap();
+    // need to keep track of where things are moving
+    protected java.util.HashMap changedElementPositions = new java.util.HashMap();
 
-        // need to keep track of the order of changes so restore happens in the right order
-        protected java.util.ArrayList changeOrder = new java.util.ArrayList();
+    // need to keep track of the order of changes so restore happens in the right order
+    protected java.util.ArrayList changeOrder = new java.util.ArrayList();
 
 	protected boolean isListening;
 
-        protected static final String elementChange = "elementChange";
-        protected static final String propertyChange = "propertyChange";
-        protected static final String objectArrayChange = "objectArrayChange";
+    protected static final String elementChange = "elementChange";
+    protected static final String propertyChange = "propertyChange";
+    protected static final String objectArrayChange = "objectArrayChange";
 
 	public WorldDifferencesCapsule( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool, edu.cmu.cs.stage3.alice.core.World world ) {
 		this.authoringTool = authoringTool;
@@ -52,195 +52,195 @@ public class WorldDifferencesCapsule implements edu.cmu.cs.stage3.alice.core.eve
 		startListening();
 	}
 
-        public edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule getStateCapsule() {
-//          System.out.println("\nCURRENT STATE: ");
+	public edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule getStateCapsule() {
+		// System.out.println("\nCURRENT STATE: ");
 
-          edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule capsule = new edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule();
+		edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule capsule = new edu.cmu.cs.stage3.alice.authoringtool.util.StencilStateCapsule();
 
-          java.util.Iterator iter = changedElements.iterator();
+		java.util.Iterator iter = changedElements.iterator();
 
-          iter = changedObjectArrayProperties.iterator();
-//          System.out.println("\tChanged Object Array Properties:");
-          while (iter.hasNext()) {
-            Object obj = iter.next();
+		iter = changedObjectArrayProperties.iterator();
+		// System.out.println("\tChanged Object Array Properties:");
+		while (iter.hasNext()) {
+			Object obj = iter.next();
 
-            if (obj instanceof edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable) {
-              int type = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).changeType;
-              int oldPos = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).oldIndex;
-              int newPos = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).newIndex;
-              Object o = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).value;
-//              System.out.println( ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).property.getName());
-              edu.cmu.cs.stage3.alice.core.Element value = null;
-              if (o instanceof edu.cmu.cs.stage3.alice.core.Element) { value = (edu.cmu.cs.stage3.alice.core.Element)o; }
+			if (obj instanceof edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable) {
+				int type = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).changeType;
+				int oldPos = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).oldIndex;
+				int newPos = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).newIndex;
+				Object o = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).value;
+				//              System.out.println( ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).property.getName());
+				edu.cmu.cs.stage3.alice.core.Element value = null;
+				if (o instanceof edu.cmu.cs.stage3.alice.core.Element) { value = (edu.cmu.cs.stage3.alice.core.Element)o; }
 
-              o = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).getAffectedObject();
-              edu.cmu.cs.stage3.alice.core.Element affected = null;
-              if (o instanceof edu.cmu.cs.stage3.alice.core.Element) { affected = (edu.cmu.cs.stage3.alice.core.Element)o; }
+				o = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).getAffectedObject();
+				edu.cmu.cs.stage3.alice.core.Element affected = null;
+				if (o instanceof edu.cmu.cs.stage3.alice.core.Element) { affected = (edu.cmu.cs.stage3.alice.core.Element)o; }
 
-              if (type == 1) {
-//                System.out.println("\t\t INSERT: " + value.getKey() + " in " + affected.getKey(this.world) + " POSITION: " + newPos);
-                capsule.addExistantElement(value.getKey(this.world));
+				if (type == 1) {
+					//                System.out.println("\t\t INSERT: " + value.getKey() + " in " + affected.getKey(this.world) + " POSITION: " + newPos);
+					capsule.addExistantElement(value.getKey(this.world));
 
-                capsule.putElementPosition(value.getKey(this.world), newPos);
+					capsule.putElementPosition(value.getKey(this.world), newPos);
 
-                // CALL to a user-defined response is handled a little differently to get the parameters
-                if (value instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
-                  edu.cmu.cs.stage3.alice.core.Property params = value.getPropertyNamed("requiredActualParameters");
-                  Object udobj = params.getValue();
-                  if (udobj instanceof edu.cmu.cs.stage3.alice.core.Variable[]) {
-                    edu.cmu.cs.stage3.alice.core.Variable vars[] = (edu.cmu.cs.stage3.alice.core.Variable[]) udobj;
-                    if (vars != null) {
-                      for (int i = 0; i < vars.length; i++) {
-//                        System.out.println("\t\t\tSet Property: " + vars[i].getKey(world) + " to " + vars[i].getValue());
-                        String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(vars[i].getValue(), true);
-                        capsule.putPropertyValue(vars[i].getKey(world), valueRepr);
-                      }
-                    }
-                  }
-                } else {
-                  // Properties
-                  String[] visProps = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getInitialVisibleProperties(value.getClass());
-                  if (visProps != null) {
-                    for (int i = 0; i < visProps.length; i++) {
-                      edu.cmu.cs.stage3.alice.core.Property visProp = ((edu.cmu.cs.stage3.alice.core.Response)value).getPropertyNamed(visProps[i]);
-                      String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(visProp.get(), true);
-                      capsule.putPropertyValue(value.getKey(world) + "." + visProp.getName(), valueRepr);
-                    }
-                  }
-                }
-              } else if (type == 2) {
-                  capsule.putElementPosition(value.getKey(this.world), newPos);
-              } else {
-                if (world.isAncestorOf(value)) {
-                } else {
-                  capsule.addNonExistantElement(value.getKey());
-                }
-              }
-            }
-          }
+					// CALL to a user-defined response is handled a little differently to get the parameters
+					if (value instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
+						edu.cmu.cs.stage3.alice.core.Property params = value.getPropertyNamed("requiredActualParameters");
+						Object udobj = params.getValue();
+						if (udobj instanceof edu.cmu.cs.stage3.alice.core.Variable[]) {
+							edu.cmu.cs.stage3.alice.core.Variable vars[] = (edu.cmu.cs.stage3.alice.core.Variable[]) udobj;
+							if (vars != null) {
+								for (int i = 0; i < vars.length; i++) {
+									//                        System.out.println("\t\t\tSet Property: " + vars[i].getKey(world) + " to " + vars[i].getValue());
+									String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(vars[i].getValue(), true);
+									capsule.putPropertyValue(vars[i].getKey(world), valueRepr);
+								}
+							}
+						}
+					} else {
+						// Properties
+						String[] visProps = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getInitialVisibleProperties(value.getClass());
+						if (visProps != null) {
+							for (int i = 0; i < visProps.length; i++) {
+								edu.cmu.cs.stage3.alice.core.Property visProp = ((edu.cmu.cs.stage3.alice.core.Response)value).getPropertyNamed(visProps[i]);
+								String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(visProp.get(), true);
+								capsule.putPropertyValue(value.getKey(world) + "." + visProp.getName(), valueRepr);
+							}
+						}
+					}
+				} else if (type == 2) {
+					capsule.putElementPosition(value.getKey(this.world), newPos);
+				} else {
+					if (world.isAncestorOf(value)) {
+					} else {
+						capsule.addNonExistantElement(value.getKey());
+					}
+				}
+			}
+		}
 
-          iter = changedProperties.keySet().iterator();
-          while (iter.hasNext()) {
-            Object o = iter.next();
-            String keyAndProp = (String)o;
+		iter = changedProperties.keySet().iterator();
+		while (iter.hasNext()) {
+			Object o = iter.next();
+			String keyAndProp = (String)o;
 
-            int lastPd = keyAndProp.lastIndexOf(".");
-            String key = keyAndProp.substring(0, lastPd);
-            String propName = keyAndProp.substring(lastPd + 1, keyAndProp.length());
+			int lastPd = keyAndProp.lastIndexOf(".");
+			String key = keyAndProp.substring(0, lastPd);
+			String propName = keyAndProp.substring(lastPd + 1, keyAndProp.length());
 
-            if (propName.indexOf("data") == -1) {
-              edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed(key);
-              edu.cmu.cs.stage3.alice.core.Property p = null;
-              if (e != null) p = e.getPropertyNamed(propName);
-              if (p != null) {
-                if (p.get() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
-                  edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
-                  String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(resp.get(), true);
-                  capsule.putPropertyValue(resp.getOwner().getKey(world)+".userDefinedResponse", valueRepr);
+			if (propName.indexOf("data") == -1) {
+				edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed(key);
+				edu.cmu.cs.stage3.alice.core.Property p = null;
+				if (e != null) p = e.getPropertyNamed(propName);
+				if (p != null) {
+					if (p.get() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
+						edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
+						String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(resp.get(), true);
+						capsule.putPropertyValue(resp.getOwner().getKey(world)+".userDefinedResponse", valueRepr);
 
-                  edu.cmu.cs.stage3.alice.core.Property pars = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("requiredActualParameters");
+						edu.cmu.cs.stage3.alice.core.Property pars = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("requiredActualParameters");
 
-                  Object udobj = pars.getValue();
-                  if (udobj instanceof edu.cmu.cs.stage3.alice.core.Variable[]) {
-                    edu.cmu.cs.stage3.alice.core.Variable vars[] = (edu.cmu.cs.stage3.alice.core.Variable[]) udobj;
-                    if (vars != null) {
-                      for (int i = 0; i < vars.length; i++) {
-//                        System.out.println("\t\t\tSet Property: " + vars[i].getKey(world) + " to " + vars[i].getValue());
-                        valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(vars[i].getValue(), true);
-                        capsule.putPropertyValue(vars[i].getKey(world), valueRepr);
-                      }
-                    }
-                  }
+						Object udobj = pars.getValue();
+						if (udobj instanceof edu.cmu.cs.stage3.alice.core.Variable[]) {
+							edu.cmu.cs.stage3.alice.core.Variable vars[] = (edu.cmu.cs.stage3.alice.core.Variable[]) udobj;
+							if (vars != null) {
+								for (int i = 0; i < vars.length; i++) {
+									//                        System.out.println("\t\t\tSet Property: " + vars[i].getKey(world) + " to " + vars[i].getValue());
+									valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(vars[i].getValue(), true);
+									capsule.putPropertyValue(vars[i].getKey(world), valueRepr);
+								}
+							}
+						}
 
-                } else {
-                  String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(p.get(), true);
-//                  System.out.println("\t\t PROPERTY: " + key + "." + propName + " SET TO: " + valueRepr);
-                  capsule.putPropertyValue(key+"."+propName, valueRepr);
-                }
-              }
-            }
+					} else {
+						String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(p.get(), true);
+						//                  System.out.println("\t\t PROPERTY: " + key + "." + propName + " SET TO: " + valueRepr);
+						capsule.putPropertyValue(key+"."+propName, valueRepr);
+					}
+				}
+			}
 
-          }
+		}
 
-          return capsule;
-        }
+		return capsule;
+	}
 
-        // START HERE.
+    // START HERE.
 
-        public java.util.Vector getChangedPropertiesNamed(String propertyName) {
-          java.util.Vector props = new java.util.Vector();
+    public java.util.Vector getChangedPropertiesNamed(String propertyName) {
+    	java.util.Vector props = new java.util.Vector();
 
-          java.util.Set changedProps = changedProperties.keySet();
-          java.util.Iterator iter = changedProps.iterator();
-          while ( iter.hasNext() ) {
-            String propAndKey = (String) iter.next();
-            int endName = propAndKey.lastIndexOf(".");
-            String elName = propAndKey.substring(0, endName);
-            String propName = propAndKey.substring(endName + 1, propAndKey.length());
-            if ( propAndKey.endsWith(propertyName) ) {
-              edu.cmu.cs.stage3.alice.core.Element el = world.getDescendantKeyed(elName);
-              props.addElement(el.getPropertyNamed(propName));
-            }
-          }
+    	java.util.Set changedProps = changedProperties.keySet();
+    	java.util.Iterator iter = changedProps.iterator();
+    	while ( iter.hasNext() ) {
+    		String propAndKey = (String) iter.next();
+    		int endName = propAndKey.lastIndexOf(".");
+    		String elName = propAndKey.substring(0, endName);
+    		String propName = propAndKey.substring(endName + 1, propAndKey.length());
+    		if ( propAndKey.endsWith(propertyName) ) {
+    			edu.cmu.cs.stage3.alice.core.Element el = world.getDescendantKeyed(elName);
+    			props.addElement(el.getPropertyNamed(propName));
+    		}
+    	}
 
-          return props;
-        }
+    	return props;
+    }
 
-        public boolean otherPropertyChangesMade(java.util.Set correctPropertyChangeSet) {
+    public boolean otherPropertyChangesMade(java.util.Set correctPropertyChangeSet) {
 
-          java.util.Set changedProps = changedProperties.keySet();
-          java.util.Iterator iter = changedProps.iterator();
-          while ( iter.hasNext() ) {
-            String propAndKey = (String) iter.next();
+    	java.util.Set changedProps = changedProperties.keySet();
+    	java.util.Iterator iter = changedProps.iterator();
+    	while ( iter.hasNext() ) {
+    		String propAndKey = (String) iter.next();
 
-//            System.out.println("propAndKey: " + propAndKey);
+    		//            System.out.println("propAndKey: " + propAndKey);
 
-            // to capture info, triggerResponses are saved differently
-            if (propAndKey.endsWith("triggerResponse") ) {
-              int lastPd = propAndKey.lastIndexOf(".");
-              String key = propAndKey.substring(0, lastPd);
-              String propName = propAndKey.substring(lastPd + 1, propAndKey.length());
+    		// to capture info, triggerResponses are saved differently
+    		if (propAndKey.endsWith("triggerResponse") ) {
+    			int lastPd = propAndKey.lastIndexOf(".");
+    			String key = propAndKey.substring(0, lastPd);
+    			String propName = propAndKey.substring(lastPd + 1, propAndKey.length());
 
-              edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed(key);
-              edu.cmu.cs.stage3.alice.core.Property p = null;
-              if (e != null) p = e.getPropertyNamed(propName);
+    			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed(key);
+    			edu.cmu.cs.stage3.alice.core.Property p = null;
+    			if (e != null) p = e.getPropertyNamed(propName);
 
-               if (p.get() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
-                  edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
+    			if (p.get() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
+    				edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
 
-                  propAndKey = resp.getOwner().getKey(world) + ".userDefinedResponse";
-               }
-            }
+    				propAndKey = resp.getOwner().getKey(world) + ".userDefinedResponse";
+    			}
+    		}
 
-//            System.out.println(correctPropertyChangeSet);
+    		//            System.out.println(correctPropertyChangeSet);
 
-            if ( (correctPropertyChangeSet != null) && !( correctPropertyChangeSet.contains(propAndKey) ) ) {
+    		if ( (correctPropertyChangeSet != null) && !( correctPropertyChangeSet.contains(propAndKey) ) ) {
 
-              // right now, changes to the world are illegal
-              if (propAndKey.endsWith("data") ) {
-              } if (propAndKey.endsWith("localTransformation") ) {
-                return true;
-              } else if (propAndKey.endsWith("name")) {
-                return true;
-              } else if (propAndKey.endsWith("isCommentedOut")){
-                return true;
-              } else {
-                String key = propAndKey.substring(0, propAndKey.lastIndexOf("."));
-                edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed(key);
-//                System.out.println(key + " " + e);
-                if (e instanceof edu.cmu.cs.stage3.alice.core.Behavior) {
-                  return true;
-                }
-              }
+    			// right now, changes to the world are illegal
+    			if (propAndKey.endsWith("data") ) {
+    			} if (propAndKey.endsWith("localTransformation") ) {
+    				return true;
+    			} else if (propAndKey.endsWith("name")) {
+    				return true;
+    			} else if (propAndKey.endsWith("isCommentedOut")){
+    				return true;
+    			} else {
+    				String key = propAndKey.substring(0, propAndKey.lastIndexOf("."));
+    				edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed(key);
+    				//                System.out.println(key + " " + e);
+    				if (e instanceof edu.cmu.cs.stage3.alice.core.Behavior) {
+    					return true;
+    				}
+    			}
 
-            }
-          }
+    		}
+    	}
 
-//          System.out.println("no illegal property changes");
-          return false;
-        }
+    	//          System.out.println("no illegal property changes");
+    	return false;
+    }
 
-        public boolean otherElementsShifted(java.util.Set correctElementsShifted) {
+    public boolean otherElementsShifted(java.util.Set correctElementsShifted) {
 //          java.util.Set actualElementsShifted = this.changedElementPositions.keySet();
 //
 //          for( java.util.Iterator iter = changedObjectArrayProperties.iterator(); iter.hasNext(); ) {
@@ -261,108 +261,106 @@ public class WorldDifferencesCapsule implements edu.cmu.cs.stage3.alice.core.eve
 //              }
 //            }
 //          }
-          return false;
-        }
+    	return false;
+    }
 
-        public boolean otherElementsInsertedOrDeleted(String[] insertedNames, String[] deletedNames) {
+    public boolean otherElementsInsertedOrDeleted(String[] insertedNames, String[] deletedNames) {
 
-          java.util.List insertedList = java.util.Arrays.asList(insertedNames);
-          java.util.List deletedList = java.util.Arrays.asList(deletedNames);
+    	java.util.List insertedList = java.util.Arrays.asList(insertedNames);
+    	java.util.List deletedList = java.util.Arrays.asList(deletedNames);
 
-          java.util.Vector illegalInserts = new java.util.Vector();
+    	java.util.Vector illegalInserts = new java.util.Vector();
 
-          for( java.util.Iterator iter = changedObjectArrayProperties.iterator(); iter.hasNext(); ) {
-            Object obj = iter.next();
-//            System.out.println(obj);
-            if (obj instanceof edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable) {
-              Object o = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).value;
-              int type = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).changeType;
-              edu.cmu.cs.stage3.alice.core.Element e = (edu.cmu.cs.stage3.alice.core.Element)o;
-              String name = "";
+    	for( java.util.Iterator iter = changedObjectArrayProperties.iterator(); iter.hasNext(); ) {
+    		Object obj = iter.next();
+    		//            System.out.println(obj);
+    		if (obj instanceof edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable) {
+    			Object o = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).value;
+    			int type = ( (edu.cmu.cs.stage3.alice.authoringtool.util.ObjectArrayPropertyUndoableRedoable)obj).changeType;
+    			edu.cmu.cs.stage3.alice.core.Element e = (edu.cmu.cs.stage3.alice.core.Element)o;
+    			String name = "";
 
-//              System.out.println("value " + o + " " + type);
-              if (e.isDescendantOf(world)) {
-                name = e.getKey(world);
-              } else name = e.getKey();
+    			//              System.out.println("value " + o + " " + type);
+    			if (e.isDescendantOf(world)) {
+    				name = e.getKey(world);
+    			} else name = e.getKey();
 
-              if ( (!insertedList.contains(name)) && (type == 1) ) {
-//                System.out.println("this was inserted and shouldn't have been: " + name);
-                illegalInserts.addElement(name);
-              }
-              if ( (!deletedList.contains(name)) && (type == 3) ) {
-                if ( illegalInserts.contains(name) ) {
-                  // an illegal insertion is being removed
-//                  System.out.println("removing an illegal delete: " + name);
-                  illegalInserts.remove(name);
-                } else {
-                  // this is an illegal delete
-//                  System.out.println("this was deleted and shouldn't have been: \n" + obj + "\n");
+    			if ( (!insertedList.contains(name)) && (type == 1) ) {
+    				//                System.out.println("this was inserted and shouldn't have been: " + name);
+    				illegalInserts.addElement(name);
+    			}
+    			if ( (!deletedList.contains(name)) && (type == 3) ) {
+    				if ( illegalInserts.contains(name) ) {
+    					// an illegal insertion is being removed
+    					//                  System.out.println("removing an illegal delete: " + name);
+    					illegalInserts.remove(name);
+    				} else {
+    					// this is an illegal delete
+    					//                  System.out.println("this was deleted and shouldn't have been: \n" + obj + "\n");
 
-//                  return true;
-                }
-              }
-            }
-          }
+    					//                  return true;
+    				}
+    			}
+    		}
+    	}
 
-          // check to make sure that everything that was supposed to be removed was.
-          boolean insertsStillPresent = false;
-          for (int i = 0; i < illegalInserts.size(); i++) {
-            edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed((String)illegalInserts.elementAt(i));
-            if (e != null) {
-              insertsStillPresent = true;
-            }
+    	// check to make sure that everything that was supposed to be removed was.
+    	boolean insertsStillPresent = false;
+    	for (int i = 0; i < illegalInserts.size(); i++) {
+    		edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed((String)illegalInserts.elementAt(i));
+    		if (e != null) {
+    			insertsStillPresent = true;
+    		}
+    	}
 
-          }
+    	if (insertsStillPresent) {
+    		//            System.out.println("something inserted or deleted that shouldn't have been");
+    		return true;
+    	}
+    	return false;
+    }
 
-          if (insertsStillPresent) {
-//            System.out.println("something inserted or deleted that shouldn't have been");
-            return true;
-          }
-          return false;
-        }
+    synchronized public void restoreWorld() {
+    	setIsListening( false );
 
+    	java.util.Iterator elementIterator = changedElements.iterator();
 
-	synchronized public void restoreWorld() {
-		setIsListening( false );
+    	java.util.Iterator objectArrayIterator = this.changedObjectArrayProperties.iterator();
 
-                java.util.Iterator elementIterator = changedElements.iterator();
+    	for (java.util.Iterator iter = changeOrder.iterator(); iter.hasNext(); ) {
+    		String changeType = (String) iter.next();
+    		if ( changeType.equals(WorldDifferencesCapsule.elementChange) ) {
+    			if (elementIterator.hasNext()) {
+    				((UndoableRedoable)elementIterator.next()).undo();
+    			}
+    		} else if ( changeType.equals(WorldDifferencesCapsule.objectArrayChange) ) {
+    			if (objectArrayIterator.hasNext()) {
+    				((UndoableRedoable)objectArrayIterator.next()).undo();
+    			}
+    		}
+    	}
 
-                java.util.Iterator objectArrayIterator = this.changedObjectArrayProperties.iterator();
+    	for( java.util.Iterator iter = changedProperties.keySet().iterator(); iter.hasNext(); ) {
+    		String propertyKey = (String)iter.next();
+    		Object oldValue = changedProperties.get( propertyKey );
 
-                for (java.util.Iterator iter = changeOrder.iterator(); iter.hasNext(); ) {
-                  String changeType = (String) iter.next();
-                  if ( changeType.equals(WorldDifferencesCapsule.elementChange) ) {
-                    if (elementIterator.hasNext()) {
-                      ((UndoableRedoable)elementIterator.next()).undo();
-                    }
-                  } else if ( changeType.equals(WorldDifferencesCapsule.objectArrayChange) ) {
-                    if (objectArrayIterator.hasNext()) {
-                      ((UndoableRedoable)objectArrayIterator.next()).undo();
-                    }
-                  }
-                }
+    		int dotIndex = propertyKey.lastIndexOf( "." );
+    		String elementKey = propertyKey.substring( 0, dotIndex );
+    		String propertyName = propertyKey.substring( dotIndex + 1 );
 
-		for( java.util.Iterator iter = changedProperties.keySet().iterator(); iter.hasNext(); ) {
-			String propertyKey = (String)iter.next();
-			Object oldValue = changedProperties.get( propertyKey );
+    		edu.cmu.cs.stage3.alice.core.Element propertyOwner = world.getDescendantKeyed( elementKey );
+    		if( propertyOwner != null ) {
+    			//propertyOwner.setPropertyNamed( propertyName, oldValue );
+    			edu.cmu.cs.stage3.alice.core.Property property = propertyOwner.getPropertyNamed(propertyName);
+    			//                                System.out.println("changing: " + property.getOwner().getKey( world ) + "." + property.getName());
+    			property.set(oldValue);
+    		}
+    	}
 
-			int dotIndex = propertyKey.lastIndexOf( "." );
-			String elementKey = propertyKey.substring( 0, dotIndex );
-			String propertyName = propertyKey.substring( dotIndex + 1 );
+    	clear();
 
-			edu.cmu.cs.stage3.alice.core.Element propertyOwner = world.getDescendantKeyed( elementKey );
-			if( propertyOwner != null ) {
-				//propertyOwner.setPropertyNamed( propertyName, oldValue );
-                                edu.cmu.cs.stage3.alice.core.Property property = propertyOwner.getPropertyNamed(propertyName);
-//                                System.out.println("changing: " + property.getOwner().getKey( world ) + "." + property.getName());
-                                property.set(oldValue);
-			}
-		}
-
-		clear();
-
-		setIsListening( true );
-	}
+    	setIsListening( true );
+    }
 
 	synchronized public void startListening() {
 		authoringTool.addAuthoringToolStateListener( this );
@@ -411,6 +409,7 @@ public class WorldDifferencesCapsule implements edu.cmu.cs.stage3.alice.core.eve
 			preChangeValue = propertyEvent.getProperty().get();
 		}
 	}
+	
 	synchronized public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent propertyEvent ) {
 		if( isListening ) {
 			edu.cmu.cs.stage3.alice.core.Property property = propertyEvent.getProperty();

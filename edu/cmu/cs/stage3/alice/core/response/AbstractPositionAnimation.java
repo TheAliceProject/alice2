@@ -50,6 +50,7 @@ public abstract class AbstractPositionAnimation extends TransformAnimation {
 			if( m_positionEnd==null ) {
 				m_positionEnd = getPositionEnd();
 			}
+			m_positionEnd = edu.cmu.cs.stage3.math.MathUtilities.multiply(m_positionEnd, 0.75);
 			m_subject.setPositionRightNow( edu.cmu.cs.stage3.math.MathUtilities.interpolate( m_positionBegin, m_positionEnd, getPortion( t ) ), edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE );
 		}
 		

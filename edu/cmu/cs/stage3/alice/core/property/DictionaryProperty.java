@@ -41,9 +41,8 @@ public class DictionaryProperty extends ObjectProperty {
 			if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
 				Object[] parameters = { text };
 				return valueOfMethod.invoke( null, parameters );
-			} else {
-				throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") ); 
 			}
+			throw new RuntimeException( Messages.getString("valueOf_method_not_public_static_") );
 		} catch( NoSuchMethodException nsme ) {
 			nsme.printStackTrace();
 		} catch( IllegalAccessException iae ) {
@@ -119,33 +118,29 @@ public class DictionaryProperty extends ObjectProperty {
 		java.util.Dictionary dict = getDictionaryValue();
 		if( dict!=null ) {
 			return dict.elements();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public Object get( Object key ) {
 		java.util.Dictionary dict = getDictionaryValue();
 		if( dict!=null ) {
 			return dict.get( key );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public boolean isEmpty() {
 		java.util.Dictionary dict = getDictionaryValue();
 		if( dict!=null ) {
 			return dict.isEmpty();
-		} else {
-			return true;
 		}
+		return true;
 	}
 	public java.util.Enumeration keys() {
 		java.util.Dictionary dict = getDictionaryValue();
 		if( dict!=null ) {
 			return dict.keys();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public Object put( Object key, Object value ) {
 		java.util.Dictionary dict = getDictionaryValue();
@@ -189,8 +184,7 @@ public class DictionaryProperty extends ObjectProperty {
 		java.util.Dictionary dict = getDictionaryValue();
 		if( dict!=null ) {
 			return dict.size();
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 }

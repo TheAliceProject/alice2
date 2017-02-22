@@ -178,7 +178,7 @@ public class SoundExplorer implements MouseMotionListener, ActionListener,
   private int selectionStop;
   
   ///CONSTANTS///
-  private static final String currentIndexText = Messages.getString("Current_Index__"); 
+  private static final String currentIndexText = Messages.getString("Current_Index__") + " "; 
   private static final String startIndexText = Messages.getString("Start_Index__"); 
   private static final String stopIndexText = Messages.getString("Stop_Index__"); 
   private static final Color selectionColor = Color.gray;

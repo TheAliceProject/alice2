@@ -35,6 +35,7 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
@@ -107,7 +108,7 @@ public class FontChooser extends javax.swing.JPanel {
 			fontFaceCombo.setRenderer(new javax.swing.DefaultListCellRenderer() {
 	            @Override
 	            public void paint(java.awt.Graphics g) {
-	                setHorizontalAlignment(javax.swing.DefaultListCellRenderer.RIGHT);
+	                setHorizontalAlignment(SwingConstants.RIGHT);
 	                super.paint(g);
 	            }
 	        });

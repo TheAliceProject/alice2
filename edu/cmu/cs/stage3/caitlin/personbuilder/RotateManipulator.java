@@ -70,7 +70,7 @@ public class RotateManipulator extends edu.cmu.cs.stage3.alice.authoringtool.uti
 	}
 
 	
-	public void mousePressed(java.awt.event.MouseEvent ev) {
+	public synchronized void mousePressed(java.awt.event.MouseEvent ev) {	// synchronized necessary?
 		//DEBUG System.out.println( "mousePressed" );
 		if (enabled) {
 			super.mousePressed(ev);
@@ -101,13 +101,13 @@ public class RotateManipulator extends edu.cmu.cs.stage3.alice.authoringtool.uti
 	}
 
 	
-	public void mouseReleased(java.awt.event.MouseEvent ev) {
+	public synchronized void mouseReleased(java.awt.event.MouseEvent ev) {	// synchronized necessary?
 		//DEBUG System.out.println( "mouseReleased" );
 
 		super.mouseReleased(ev);
 	}
 	
-	public void mouseDragged(java.awt.event.MouseEvent ev) {
+	public synchronized void mouseDragged(java.awt.event.MouseEvent ev) {
 		//DEBUG System.out.println( "mouseDragged" );
 		if (enabled) {
 			super.mouseDragged(ev);

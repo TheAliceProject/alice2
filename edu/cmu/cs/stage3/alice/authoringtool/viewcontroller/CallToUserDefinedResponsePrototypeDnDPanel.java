@@ -211,5 +211,5 @@ public class CallToUserDefinedResponsePrototypeDnDPanel extends edu.cmu.cs.stage
 			}
 			CallToUserDefinedResponsePrototypeDnDPanel.this.refreshGUI();
 		}
-	};
+	}
 }

@@ -235,7 +235,8 @@ public class NavigationBar implements StencilObject, MouseEventListener, Stencil
       return new Rectangle((int)bgBar.getBounds().getX(), (int)bgBar.getBounds().getY(),
         (int)bgBar.getBounds().getWidth() + (int)bgClose.getBounds().getWidth(),
         (int)bgBar.getBounds().getHeight() + (int)bgNext.getBounds().getHeight());
-    } else return null;
+    }
+	return null;
   }
   public Rectangle getPreviousRectangle(){
     return previousRect;
@@ -244,7 +245,8 @@ public class NavigationBar implements StencilObject, MouseEventListener, Stencil
     if (isModified) {
       isModified = false;
       return true;
-    } else return false;
+    }
+	return false;
   }
   public boolean intersectsRectangle( Rectangle rect ){
     return (rect.intersects(this.getRectangle()));
@@ -273,7 +275,8 @@ public class NavigationBar implements StencilObject, MouseEventListener, Stencil
      || (bgNext.contains(point.getX(), point.getY())) || (bgRestart.contains(point.getX(), point.getY())
      || (bgPrev.contains(point.getX(), point.getY())) ) ) {
       return true;
-    } else return false;
+    }
+	return false;
   }
   public boolean mousePressed(MouseEvent e){
     return false;

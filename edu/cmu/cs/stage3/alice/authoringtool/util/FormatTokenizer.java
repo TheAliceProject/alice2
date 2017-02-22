@@ -77,9 +77,8 @@ public class FormatTokenizer {
 	public boolean hasMoreTokens() {
 		if( tokenIterator != null ) {
 			return tokenIterator.hasNext();
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	public String nextToken() {
@@ -87,11 +86,8 @@ public class FormatTokenizer {
 			if (tokenIterator.hasNext()){
 				return (String)tokenIterator.next();
 			}
-			else{
-				return null;
-			}
-		} else {
 			return null;
 		}
+		return null;
 	}
 }

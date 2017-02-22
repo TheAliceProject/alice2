@@ -62,9 +62,8 @@ public class Player extends edu.cmu.cs.stage3.media.AbstractPlayer {
 			} else {
 				return nsec*1.0E-9;
 			}
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	public double getCurrentTime() {
 		javax.media.Time t;
@@ -82,9 +81,8 @@ public class Player extends edu.cmu.cs.stage3.media.AbstractPlayer {
 			} else {
 				return nsec*1.0E-9;
 			}
-		} else {
-			return Double.NaN;
 		}
+		return Double.NaN;
 	}
 	private boolean isAtLeastRealized() {
 		int state = getState();

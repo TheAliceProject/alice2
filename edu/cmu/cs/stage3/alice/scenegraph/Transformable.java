@@ -158,20 +158,19 @@ public class Transformable extends ReferenceFrame {
 		}
 		if( asSeenBy==vehicle ) {
 			return new Matrix44( m );
-		} else {
-			javax.vecmath.Matrix4d vehicleInverse;
-			if( vehicle != null ) {
-				vehicleInverse = vehicle.getInverseAbsoluteTransformation();
-			} else {
-				vehicleInverse = new javax.vecmath.Matrix4d();
-				vehicleInverse.setIdentity();
-			}
-			return Matrix44.multiply(
-				m,
-				Matrix44.multiply(
-					asSeenBy.getAbsoluteTransformation(),
-					vehicleInverse ) );
 		}
+		javax.vecmath.Matrix4d vehicleInverse;
+		if( vehicle != null ) {
+			vehicleInverse = vehicle.getInverseAbsoluteTransformation();
+		} else {
+			vehicleInverse = new javax.vecmath.Matrix4d();
+			vehicleInverse.setIdentity();
+		}
+		return Matrix44.multiply(
+			m,
+			Matrix44.multiply(
+				asSeenBy.getAbsoluteTransformation(),
+				vehicleInverse ) );
 	}
 	public void setAbsoluteTransformation( javax.vecmath.Matrix4d m ) {
 		ReferenceFrame vehicle = (ReferenceFrame)getParent();

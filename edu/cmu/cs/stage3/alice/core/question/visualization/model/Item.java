@@ -9,8 +9,7 @@ public class Item extends edu.cmu.cs.stage3.alice.core.question.ModelQuestion {
 		edu.cmu.cs.stage3.alice.core.visualization.ModelVisualization modelVisualizationValue = subject.getModelVisualizationValue();
 		if( modelVisualizationValue!=null ) {
             return modelVisualizationValue.getItem();
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

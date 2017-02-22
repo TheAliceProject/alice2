@@ -230,12 +230,11 @@ public class GUIFactory {
 //				System.out.println( "taken from pool: " + guiElement.hashCode() );
 //			}
 			return guiElement;
-		} else {
-			try {
-				return (javax.swing.JComponent)guiClass.newInstance();
-			} catch( Throwable t ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_GUI__", guiClass), t ); 
-			}
+		}
+		try {
+			return (javax.swing.JComponent)guiClass.newInstance();
+		} catch( Throwable t ) {
+			edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_GUI__", guiClass), t ); 
 		}
 		return null;
 	}

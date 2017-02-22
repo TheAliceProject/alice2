@@ -12,11 +12,9 @@ public class Contains extends edu.cmu.cs.stage3.alice.core.question.BooleanQuest
 		if( listOfModelsVisualizationValue!=null ) {
             if( listOfModelsVisualizationValue.contains( item.getModelValue() ) ) {
                 return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
             }
-		} else {
-			return null;
+			return Boolean.FALSE;
 		}
+		return null;
 	}
 }

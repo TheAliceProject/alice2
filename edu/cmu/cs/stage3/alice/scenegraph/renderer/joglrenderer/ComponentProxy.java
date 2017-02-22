@@ -52,9 +52,8 @@ abstract class ComponentProxy extends ElementProxy {
 	    edu.cmu.cs.stage3.alice.scenegraph.Container sgRoot = sgComponent.getRoot();
 	    if( sgRoot instanceof edu.cmu.cs.stage3.alice.scenegraph.Scene ) {
 	        return (SceneProxy)getProxyFor( sgRoot );
-	    } else {
-	        return null;
 	    }
+		return null;
 	}
 
 	public double[] getAbsoluteTransformation() { 

@@ -42,9 +42,8 @@ public class PickQuestion extends Question {
 		Element parent = part.getParent();
 		if( parent instanceof Model ) {
 			return ascend( (Model)parent );
-		} else {
-			return part;
 		}
+		return part;
 
 	}
 	
@@ -56,15 +55,12 @@ public class PickQuestion extends Question {
 				Model part = (Model)o;
 				if( ascend.booleanValue() ) {
 					return ascend( part );
-				} else {
-					return part;
 				}
-			} else {
-				return null;
+				return part;
 			}
-		} else {
 			return null;
 		}
+		return null;
 	}
 	
 	public Class getValueClass() {

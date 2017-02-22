@@ -153,9 +153,8 @@ public class Vector3 extends javax.vecmath.Vector3d implements Interpolable {
 		double lengthSquared = Vector3.getLengthSquared( x, y, z );
 		if( lengthSquared==1 ) {
 			return 1;
-		} else {
-			return Math.sqrt( lengthSquared );
 		}
+		return Math.sqrt( lengthSquared );
 	}
 	public double getLengthSquared() {
 		return Vector3.getLengthSquared( x, y, z );

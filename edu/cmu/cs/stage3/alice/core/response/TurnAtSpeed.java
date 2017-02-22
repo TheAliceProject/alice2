@@ -40,9 +40,8 @@ public class TurnAtSpeed extends RotateAtSpeed {
 		protected javax.vecmath.Vector3d getAxis( Direction direction ) {
 			if( direction!=null ) {
 				return direction.getTurnAxis();
-			} else {
-				return null;
 			}
+			return null;
 		}
 	}
 }

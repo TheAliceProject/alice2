@@ -142,9 +142,8 @@ public abstract class Bubble {
 				java.awt.geom.Rectangle2D.union( totalBound, subTextI.getBound(), totalBound );
 			}
 			return totalBound;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public void calculateBounds( edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget rt ) {

@@ -9,8 +9,8 @@ public class IsCollidingWith extends SubjectObjectQuestion {
 	
 	protected Object getValue( edu.cmu.cs.stage3.alice.core.Transformable subjectValue, edu.cmu.cs.stage3.alice.core.Transformable objectValue ) {
         edu.cmu.cs.stage3.alice.core.World world = subjectValue.getWorld();
-        edu.cmu.cs.stage3.alice.scenegraph.Visual[] subjectSGVisuals = subjectValue.getAllSceneGraphVisuals();
-        edu.cmu.cs.stage3.alice.scenegraph.Visual[] objectSGVisuals = subjectValue.getAllSceneGraphVisuals();
+        //edu.cmu.cs.stage3.alice.scenegraph.Visual[] subjectSGVisuals = subjectValue.getAllSceneGraphVisuals();
+        //edu.cmu.cs.stage3.alice.scenegraph.Visual[] objectSGVisuals = subjectValue.getAllSceneGraphVisuals();
         edu.cmu.cs.stage3.alice.scenegraph.Visual[][] collisions = world.getCollisions();
         for( int i=0; i<collisions.length; i++ ) {
             edu.cmu.cs.stage3.alice.scenegraph.Visual[] pair = collisions[ i ];

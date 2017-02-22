@@ -352,15 +352,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 */
 		filterInit();
 		configInit();	
-
 		mainInit();
 		this.stdOutToConsole = stdOutToConsole;
 		this.stdErrToConsole = stdErrToConsole;
 		initializeOutput(stdOutToConsole, stdErrToConsole);
 		pyInit();
-		//AikMin.setFontSize(12);
 		dialogInit();
-		//AikMin.setFontSize(Integer.parseInt( authoringToolConfig.getValue( "fontSize" )));		
 		undoRedoInit();
 		miscInit();
 		importInit();
@@ -389,7 +386,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			if (authoringToolConfig.getValue("showStartUpDialog").equalsIgnoreCase("true")) {  
 				showStartUpDialog(edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane.TEMPLATE_TAB_ID);//.DO_NOT_CHANGE_TAB_ID);
 			}
-		} else {
+		} else if (worldToLoad != defaultWorld){
 			worldInit(worldToLoad);
 		}
 	}
@@ -504,10 +501,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		
 		preferencesContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.PreferencesContentPane();
 		preferencesContentPane.setAuthoringTool(this);
-
-
-		
+	
 		newVariableContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.NewVariableContentPane();
+
 
 		try {
 			if ( AikMin.isMAC() ){
@@ -516,8 +512,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			}
 		} catch (Exception e) {
 		}
+
 		captureContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.CaptureContentPane(this);
 		renderContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.RenderContentPane(this);
+		
 		
 		importFileChooser = new javax.swing.JFileChooser();		
 		saveWorldFileChooser = new javax.swing.JFileChooser() {
@@ -762,10 +760,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					int interval = Integer.parseInt(authoringToolConfig.getValue("promptToSaveInterval")); 
 					long intervalMillis = ((long) interval) * ((long) 60000);
 					if (dt > intervalMillis) {
-						//							edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "You have not saved in more than" + interval + " minutes.\nIt is recommended that you save early and often to avoid losing work." );
+						// edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog( "You have not saved in more than" + interval + " minutes.\nIt is recommended that you save early and often to avoid losing work." );
 						int result =
 							edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(
-								Messages.getString("You_have_not_saved_in_more_than_minutes__nIt_is_recommended_that_you_save_early_and_often_to_avoid_losing_work_", interval),  
+								Messages.getString("You_have_not_saved_in_more_than_minutes__nIt_is_recommended_that_you_save_early_and_often_to_avoid_losing_work_", String.valueOf(interval)),  
 								Messages.getString("Save_"), 
 								javax.swing.JOptionPane.YES_NO_OPTION,
 								javax.swing.JOptionPane.WARNING_MESSAGE,
@@ -1687,50 +1685,50 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					java.util.Calendar calendar = java.util.Calendar.getInstance();
 					sb.append( name );
 					sb.append( " " );
-					sb.append( Messages.getString("backed_up_on_") ); 
+					sb.append( Messages.getString("backed_up_on_") + " "); 
 					switch( calendar.get( java.util.Calendar.MONTH ) ) {
 					case java.util.Calendar.JANUARY:
-						sb.append( Messages.getString("Jan_") ); 
+						sb.append( Messages.getString("Jan_")); sb.append( " " );   
 						break;
 					case java.util.Calendar.FEBRUARY:
-						sb.append( Messages.getString("Feb_") ); 
+						sb.append( Messages.getString("Feb_")); sb.append( " " );  
 						break;
 					case java.util.Calendar.MARCH:
-						sb.append( Messages.getString("Mar_") ); 
+						sb.append( Messages.getString("Mar_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.APRIL:
-						sb.append( Messages.getString("Apr_") ); 
+						sb.append( Messages.getString("Apr_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.MAY:
-						sb.append( Messages.getString("May_") ); 
+						sb.append( Messages.getString("May_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.JUNE:
-						sb.append( Messages.getString("Jun_") ); 
+						sb.append( Messages.getString("Jun_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.JULY:
-						sb.append( Messages.getString("Jul_") ); 
+						sb.append( Messages.getString("Jul_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.AUGUST:
-						sb.append( Messages.getString("Aug_") ); 
+						sb.append( Messages.getString("Aug_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.SEPTEMBER:
-						sb.append( Messages.getString("Sep_") ); 
+						sb.append( Messages.getString("Sep_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.OCTOBER:
-						sb.append( Messages.getString("Oct_") ); 
+						sb.append( Messages.getString("Oct_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.NOVEMBER:
-						sb.append( Messages.getString("Nov_") ); 
+						sb.append( Messages.getString("Nov_")); sb.append( " " ); 
 						break;
 					case java.util.Calendar.DECEMBER:
-						sb.append( Messages.getString("Dec_") ); 
+						sb.append( Messages.getString("Dec_")); sb.append( " " ); 
 						break;
 					}
 					sb.append( calendar.get( java.util.Calendar.DAY_OF_MONTH ) );
 					sb.append( " " ); 
 					sb.append( calendar.get( java.util.Calendar.YEAR ) );
 					sb.append( " " );
-					sb.append( Messages.getString("at_") ); 
+					sb.append( Messages.getString("at_")); sb.append( " " ); 
 					sb.append( calendar.get( java.util.Calendar.HOUR ) );
 					sb.append( "h" ); 
 					sb.append( calendar.get( java.util.Calendar.MINUTE ) );
@@ -1961,18 +1959,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("Cannot_save_world___is_read_only_", worldFile.getAbsolutePath()), Messages.getString("Cannot_Save"), javax.swing.JOptionPane.ERROR_MESSAGE);   
 			return Constants.FAILED;
 		}
-		if (authorName != null) {
-			authorName = "<h2>" + Messages.getString("Created_by_", authorName) + "</h2>\n";  
-		} else {
-			authorName = " "; 
-		}
-		if (code == null) {
-			code = " "; 
-		}
 		java.util.HashMap replacements = new java.util.HashMap();
 		replacements.put("__worldname__", baseName); 
-		replacements.put("__code__", code); 
-		replacements.put("__authorname__", authorName); 
+		replacements.put("__code__", code == null ? " " : code); 
+		replacements.put("__authorname__", authorName == null ? " " : "<h2>" + Messages.getString("Created_by_", authorName) + "</h2>\n"); 
 		replacements.put("__worldfile__", worldFile.getName()); 
 		replacements.put("__width__", Integer.toString(width)); 
 		replacements.put("__height__", Integer.toString(height)); 
@@ -2022,7 +2012,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	public int loadWorld(final java.io.File file, boolean askForSaveIfNecessary) {
 		int result;
-		if (file.isFile()) {
+		if (file.getAbsoluteFile().isFile()) {
 			result = loadWorld(new edu.cmu.cs.stage3.io.ZipFileTreeLoader(), file, askForSaveIfNecessary);
 		} else if (file.isDirectory()) {
 			result = loadWorld(new edu.cmu.cs.stage3.io.FileSystemTreeLoader(), file, askForSaveIfNecessary);
@@ -2037,7 +2027,73 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		return filename.startsWith(getTemplateWorldsDirectory().getAbsolutePath());
 	}
 
+	public void remove(edu.cmu.cs.stage3.alice.core.Element temp){
+		if (temp instanceof edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray) {						
+			((edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray) temp).removeVertices();
+		} else {
+			for (int ii=0; ii<temp.getChildCount(); ii++){
+				edu.cmu.cs.stage3.alice.core.Element element = temp.getChildAt(ii);
+				remove(element);
+			}		
+		} 			
+	}
+	
+	public void cleanup(){
+		// DEBUG - Unload world
+		//finalCleanUp();
+		if (world != null) {
+			edu.cmu.cs.stage3.alice.core.Element temp;
+			for (int i=0; i<world.getChildCount(); i++){
+				temp = world.getChildAt(i);
+				remove(temp);
+			}	
+		}
+		//leaveWorld(false);
+		//edu.cmu.cs.stage3.alice.scenegraph.renderer.AbstractProxyRenderer.clearMap = true;
+		
+/*		if (world != null){
+			edu.cmu.cs.stage3.alice.core.Element temp;
+			for (int i=0; i<world.getChildCount(); i++){
+				temp = world.getChildAt(i);
+				if (temp instanceof edu.cmu.cs.stage3.alice.core.Model) {
+					if ( temp.getChildAt(0) != null){
+						edu.cmu.cs.stage3.alice.core.Element element = temp.getChildAt(0);
+						if (element instanceof edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray) {						
+							((edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray) element).removeVertices();
+						} 
+					}						
+				} 			
+			}	
+			edu.cmu.cs.stage3.alice.scenegraph.renderer.AbstractProxyRenderer.clearMap = true;	// clear m_vertices from IndexedTriangleArrayProxy			
+			
+			fireWorldUnLoading(world);
+
+			saveTabsEnabled = false;
+			undoRedoStack.clear();
+			jAliceFrame.setWorld(null);
+			userDefinedParameterListener.setWorld( null );
+			setCurrentWorldLocation(null);
+			editObject(null);
+			PopupMenuUtilities.clearRecentlyUsedValues();
+			if (world != null) {
+				world.release();
+				fireWorldUnLoaded(world);
+			}
+
+			world = null;
+			renderTargetFactory.release();
+			
+			editorManager = new edu.cmu.cs.stage3.alice.authoringtool.EditorManager(this);
+			scheduler = new edu.cmu.cs.stage3.alice.authoringtool.util.DefaultScheduler();
+			undoRedoStack = new MainUndoRedoStack(this);
+			oneShotScheduler = new edu.cmu.cs.stage3.alice.authoringtool.util.OneShotScheduler();
+			miscInit();	
+		}
+		*/
+	}
+	
 	public int loadWorld(final edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, Object path, boolean askForSaveIfNecessary) {
+		worldLoadProgressPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.LoadElementProgressPane(Messages.getString("Loading_World___"), Messages.getString("Loading__"));  
 		if (askForSaveIfNecessary) {
 			int retVal = askForSaveIfNecessary();
 			if (retVal == Constants.CANCELED) {
@@ -2049,27 +2105,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			}
 		}
-
-		fireWorldLoading(null);
-
-		worldDirectory = null;
-
-// ********************************************************************************************************************************************				    
-		Runtime runtime = Runtime.getRuntime();
-	    long usedMemory = runtime.totalMemory() - runtime.freeMemory();
-		//System.out.println("Initial Memory " + usedMemory/100000 + "MB");	
 		
+		java.awt.Cursor prevCursor = getJAliceFrame().getCursor();
+		getJAliceFrame().setCursor( java.awt.Cursor.getPredefinedCursor( java.awt.Cursor.WAIT_CURSOR )); // Aik Min
+		
+		fireWorldLoading(null);
+		worldDirectory = null;
 		edu.cmu.cs.stage3.alice.core.World tempWorld = null;
 		try {
 			loader.open(path);
 			try {
 				if (path.equals(defaultWorld)) {
-					tempWorld = (edu.cmu.cs.stage3.alice.core.World)edu.cmu.cs.stage3.alice.core.Element.load( loader, null, null );				
+					tempWorld = (edu.cmu.cs.stage3.alice.core.World)edu.cmu.cs.stage3.alice.core.Element.load( loader, null, null );		
 				} else {
 					worldLoadProgressPane.setLoader( loader );
 					worldLoadProgressPane.setExternalRoot( null );
 					edu.cmu.cs.stage3.swing.DialogManager.showDialog( worldLoadProgressPane );
 					tempWorld = (edu.cmu.cs.stage3.alice.core.World)worldLoadProgressPane.getLoadedElement();
+					worldLoadProgressPane = null;
 				}
 			} finally {
 				loader.close();
@@ -2077,105 +2130,62 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} catch( Throwable t ) {
 			AuthoringTool.showErrorDialog(Messages.getString("Unable_to_load_world__", path), t); 
 		}
-//
-//		try {
-//			loader.open(path);
-//		} catch (java.io.IOException ioe) {
-//			AuthoringTool.showErrorDialog("Unable to open world: " + path, ioe);
-//		}
-//
-//		try {
-//			tempWorld = (edu.cmu.cs.stage3.alice.core.World) edu.cmu.cs.stage3.alice.core.Element.load(loader, null, progressPane);
-//		} catch (edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre) {
-//			edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] propertyReferences = upre.getPropertyReferences();
-//			System.err.println("Unable to load world: " + path + ".  Couldn't resolve the following references:");
-//			for (int i = 0; i < propertyReferences.length; i++) {
-//				System.err.println("\t" + propertyReferences[i]);
-//			}
-//			tempWorld = (edu.cmu.cs.stage3.alice.core.World) upre.getElement();
-//		} catch (edu.cmu.cs.stage3.progress.ProgressCancelException pce) {
-//			return Constants.CANCELED;
-//		} catch (Throwable t) {
-//			AuthoringTool.showErrorDialog("Unable to load world: " + path, t);
-//		} finally {
-//			try {
-//				loader.close();
-//			} catch (java.io.IOException ioe) {
-//				AuthoringTool.showErrorDialog("Unable to close world: " + path, ioe);
-//			}
-//		}
 
 		if (tempWorld != null) {
-			final java.awt.Cursor prevCursor = getJAliceFrame().getCursor();
-			getJAliceFrame().setCursor( java.awt.Cursor.getPredefinedCursor( java.awt.Cursor.WAIT_CURSOR )); // Aik Min
-			try {		
-				if (world != null) {
-	                for( int i = 0; i < world.getChildCount(); i++ ) {
-	                	world.removeChild(world.getChildAt(0));
-	                }
-	                world.release();
-	                world = null;
-	                System.gc();
-				}
-				
-// ********************************************************************************************************************************************				    
-				usedMemory = runtime.totalMemory() - runtime.freeMemory();
-				//System.out.println("Memory after loading File " + usedMemory/100000 + "MB");		    
-				world = tempWorld;
-				tempWorld = null;
+			cleanup();
+			world = tempWorld;
+			worldClock.setWorld( world );
+			world.setClock( worldClock );
+			world.setScriptingFactory(scriptingFactory);
+			worldLoadedTime = System.currentTimeMillis();
+			jAliceFrame.setWorld(world);
+			userDefinedParameterListener.setWorld( world );
+			world.setRenderTargetFactory(getRenderTargetFactory());
 
+			//edu.cmu.cs.stage3.alice.core.Element[] elements = world.search(new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(edu.cmu.cs.stage3.alice.core.RenderTarget.class));
+			edu.cmu.cs.stage3.alice.core.Element[] elements = world.getDescendants( edu.cmu.cs.stage3.alice.core.RenderTarget.class );
+			if (elements.length > 0) {
+				renderPanel.removeAll();
+				renderTarget = (edu.cmu.cs.stage3.alice.core.RenderTarget) elements[0];
+				renderPanel.add(renderTarget.getAWTComponent(), java.awt.BorderLayout.CENTER);
+				renderPanel.revalidate();
+				renderPanel.repaint();
+			}
+
+			setSelectedElement(world);
+
+			loadTabs();
+			if (!world.responses.isEmpty()) {
+				editObject(world.responses.get(0), true);
+			}
+
+			if ((!path.equals(defaultWorld)) && (path instanceof java.io.File) && !isTemplateWorld(((java.io.File) path).getAbsolutePath())) {
+				setCurrentWorldLocation(((java.io.File) path));
+
+				if (((java.io.File) path).isDirectory()) {
+					worldDirectory = (java.io.File) path;
+				}
+				jAliceFrame.updateRecentWorlds(((java.io.File) path).getAbsolutePath());
+			} else {
+				setCurrentWorldLocation(null);
+			}
+	
+//			undoRedoStack.setUnmodified();	// replaced with undoRedoStack.clear();
+			undoRedoStack.clear();
+			fireWorldLoaded(world);
+
+			getJAliceFrame().setCursor( prevCursor );
 				
-				worldClock.setWorld( world );
-				world.setClock( worldClock );
-				world.setScriptingFactory(scriptingFactory);
-				worldLoadedTime = System.currentTimeMillis();
-				jAliceFrame.setWorld(world);
-				userDefinedParameterListener.setWorld( world );
-				world.setRenderTargetFactory(getRenderTargetFactory());
-	
-// ********************************************************************************************************************************************	
-				System.gc();
-				usedMemory = runtime.totalMemory() - runtime.freeMemory();
-			    //System.out.println("Used Memory " + usedMemory/100000 + "MB");
-			    
-			    
-				//edu.cmu.cs.stage3.alice.core.Element[] elements = world.search(new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(edu.cmu.cs.stage3.alice.core.RenderTarget.class));
-				edu.cmu.cs.stage3.alice.core.Element[] elements = world.getDescendants( edu.cmu.cs.stage3.alice.core.RenderTarget.class );
-				if (elements.length > 0) {
-					renderPanel.removeAll();
-					renderTarget = (edu.cmu.cs.stage3.alice.core.RenderTarget) elements[0];
-					renderPanel.add(renderTarget.getAWTComponent(), java.awt.BorderLayout.CENTER);
-					renderPanel.revalidate();
-					renderPanel.repaint();
-				}
-	
-				setSelectedElement(world);
-	
-				loadTabs();
-				if (!world.responses.isEmpty()) {
-					editObject(world.responses.get(0), true);
-				}
-	
-				if ((!path.equals(defaultWorld)) && (path instanceof java.io.File) && !isTemplateWorld(((java.io.File) path).getAbsolutePath())) {
-					setCurrentWorldLocation(((java.io.File) path));
-	
-					if (((java.io.File) path).isDirectory()) {
-						worldDirectory = (java.io.File) path;
-					}
-					jAliceFrame.updateRecentWorlds(((java.io.File) path).getAbsolutePath());
-				} else {
-					setCurrentWorldLocation(null);
-				}
-	
-				undoRedoStack.setUnmodified();
-				fireWorldLoaded(world);
+/*			try{
+					
 			} finally {
+				tempWorld = null;
 				javax.swing.SwingUtilities.invokeLater( new Runnable() {
 					public void run() {
 						getJAliceFrame().setCursor( prevCursor );
 					}
 				} );
-			}
+			}*/
 			return Constants.SUCCEEDED;
 		} 
 		return Constants.FAILED;
@@ -2190,9 +2200,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			} else if (isTemplateWorld(file.getAbsolutePath())) {
 				return false;
 			}
-
 		}
-
 		return true;
 	}
 
@@ -3103,12 +3111,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		for (int i = 0; i < numDigits; i++) {
 			pattern.append("0"); 
 		}
-		pattern.append("."); 
-		pattern.append(codec);
+		//pattern.append("."); 
+		//pattern.append(codec);
 		captureFormatter.applyPattern(pattern.toString());
-
+				
 		int i = 0;
-		java.io.File file = new java.io.File(dir, captureFormatter.format(i));
+		java.io.File file = new java.io.File(dir, captureFormatter.format(i) + "." + codec);
 		boolean writable;
 		if (file.exists()) {
 			writable = file.canWrite();
@@ -3182,11 +3190,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					javax.swing.JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			file = new java.io.File(dir, captureFormatter.format(i));
+			file = new java.io.File(dir, captureFormatter.format(i) + "." + codec);
 		}
 		while (file.exists()) {
 			i++;
-			file = new java.io.File(dir, captureFormatter.format(i));
+			file = new java.io.File(dir, captureFormatter.format(i) + "." + codec);
 		}
 		try {
 			file.createNewFile();
@@ -3500,7 +3508,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	protected boolean stencilDragging = false;
 	protected java.awt.Component dragStartSource;
 	protected java.io.File tutorialOne;
-	protected java.io.File tutorialDirectory = new java.io.File(JAlice.getAliceHomeDirectory(), "tutorial").getAbsoluteFile(); 
+	protected java.io.File tutorialDirectory = new java.io.File("tutorial").getAbsoluteFile(); 
 	protected java.util.ArrayList wayPoints = new java.util.ArrayList();
 
 	private void stencilInit() {
@@ -4943,7 +4951,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								editObject(elementBeingEdited);
 							}
 
-							//							Editor editor = jAliceFrame.tabbedEditorComponent.getEditorAt( jAliceFrame.tabbedEditorComponent.getIndexOfObject( elementBeingEdited ) );
+							// Editor editor = jAliceFrame.tabbedEditorComponent.getEditorAt( jAliceFrame.tabbedEditorComponent.getIndexOfObject( elementBeingEdited ) );
 							java.awt.Container container = (java.awt.Container) jAliceFrame.tabbedEditorComponent.tabbedPane.getComponentAt(jAliceFrame.tabbedEditorComponent.getIndexOfObject(elementBeingEdited));
 							token = st.nextToken();
 							prefix = AuthoringToolResources.getPrefix(token);
@@ -5095,13 +5103,13 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("behaviors"); 
 						if (resp instanceof edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) {
 							actualPosition = ((edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) resp).indexOf(element);
-							//									System.out.println("index in responses: " + actualPosition);
+							// System.out.println("index in responses: " + actualPosition);
 						}
 					}
 
 					// element isn't in the right place wrt to its parent
 					if (position != actualPosition) {
-						//								  System.out.println("actual position: " + actualPosition + " correct position: " + position);
+						// System.out.println("actual position: " + actualPosition + " correct position: " + position);
 						return false;
 					}
 				} else {
@@ -5109,8 +5117,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					return false;
 				}
 			}
-
-			//						  System.out.println("elements in correct positions ok");
+			// System.out.println("elements in correct positions ok");
 
 			for (java.util.Iterator iter = propertyValueKeys.iterator(); iter.hasNext();) {
 				String propertyKey = (String) iter.next();
@@ -5155,20 +5162,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					return false;
 				}
 			}
-
-			//						  System.out.println("property value checks ok");
-
-			// if we've arrived here, it means that all the new conditions have been met. check to make sure user hasn't done
-			// anything else that's strange.
-
+			// System.out.println("property value checks ok");
+			// if we've arrived here, it means that all the new conditions have been met. check to make sure user hasn't done anything else that's strange.
 			edu.cmu.cs.stage3.alice.authoringtool.util.WorldDifferencesCapsule currentWayPoint = (edu.cmu.cs.stage3.alice.authoringtool.util.WorldDifferencesCapsule) wayPoints.get(0);
 
 			if ((currentWayPoint.otherPropertyChangesMade(propertyValueKeys)) || (currentWayPoint.otherElementsInsertedOrDeleted(existantElements, nonExistantElements)) || (currentWayPoint.otherElementsShifted(elementPositions))) {
 				return false;
 			}
-
 			return true;
-
 		}
 		return true;
 	}
@@ -5244,12 +5245,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					Messages.getString("Font_size_too_large"), 
 					javax.swing.JOptionPane.WARNING_MESSAGE);
 		} else {
-		if (tutorialFile == null) {
-			tutorialFile = tutorialOne;
-		}
-		tutorialFile = tutorialFile.getAbsoluteFile(); //BIG HACK
-		showStencils();
-		stencilManager.loadStencilTutorial(tutorialFile);
+			showStencils();
+			stencilManager.loadStencilTutorial(tutorialFile == null ? tutorialOne : tutorialFile.getAbsoluteFile());
 		}
 	}
 	public java.io.File getTutorialDirectory() {
@@ -5641,7 +5638,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 //    private static boolean pulsing = true;   
 //    private static JLabel statusLabel = new JLabel(Messages.getString("Ready")); 
 //    private static javax.swing.JFrame statusFrame;
-    private int numUpdate = 0;
+    int numUpdate = 0;
 /*    private boolean checkForUpdate(){
     	java.net.URL url;
     	java.net.URLConnection urlc = null;

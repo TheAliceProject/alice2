@@ -37,9 +37,8 @@ public class IntegerProperty extends ObjectProperty {
 		Integer integer = getIntegerValue();
 		if( integer != null ) {
 			return integer.intValue();
-		} else {
-			return valueIfNull;
 		}
+		return valueIfNull;
 	}
 	public int intValue() {
 		return intValue( 0 );

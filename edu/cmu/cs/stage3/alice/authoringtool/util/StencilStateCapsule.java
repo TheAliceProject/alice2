@@ -108,9 +108,8 @@ public class StencilStateCapsule implements edu.cmu.cs.stage3.caitlin.stencilhel
           Integer value = (Integer)elementPositions.get( elementKey );
           if (value != null) {
             return value.intValue();
-          } else {
-            return -1;
           }
+		return -1;
         }
 
 	/**

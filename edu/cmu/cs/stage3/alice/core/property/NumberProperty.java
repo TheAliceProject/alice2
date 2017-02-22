@@ -36,9 +36,8 @@ public class NumberProperty extends ObjectProperty {
 		Number number = getNumberValue();
 		if( number != null ) {
 			return number.doubleValue();
-		} else {
-			return valueIfNull;
 		}
+		return valueIfNull;
 	}
 	public double doubleValue() {
 		return doubleValue( Double.NaN );
@@ -47,9 +46,8 @@ public class NumberProperty extends ObjectProperty {
 		Number number = getNumberValue();
 		if( number != null ) {
 			return number.intValue();
-		} else {
-			return valueIfNull;
 		}
+		return valueIfNull;
 	}
 	public int intValue() {
 		return intValue( 0 );

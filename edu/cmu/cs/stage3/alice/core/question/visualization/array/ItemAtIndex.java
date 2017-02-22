@@ -11,8 +11,7 @@ public class ItemAtIndex extends edu.cmu.cs.stage3.alice.core.question.ModelQues
 		edu.cmu.cs.stage3.alice.core.visualization.ArrayOfModelsVisualization arrayOfModelsVisualizationValue = subject.getArrayOfModelsVisualizationValue();
 		if( arrayOfModelsVisualizationValue!=null ) {
             return arrayOfModelsVisualizationValue.get( index.intValue() );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

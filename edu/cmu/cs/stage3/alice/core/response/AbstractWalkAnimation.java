@@ -585,7 +585,8 @@ public class AbstractWalkAnimation extends Animation implements PropertyListener
 				if (boundingBoxHeight2 > boundingBoxHeight) boundingBoxHeight = boundingBoxHeight2; 
 				
 				return boundingBoxHeight;
-			} else return 0.0;
+			}
+			return 0.0;
 		}
 		
 		public void setContactData() {
@@ -674,7 +675,8 @@ public class AbstractWalkAnimation extends Animation implements PropertyListener
 //			if this leg has more than one part, we've got a problem
 			if (legBits.length == 1) {
 				return (edu.cmu.cs.stage3.alice.core.Transformable) legBits[0];
-			} else return null;
+			}
+			return null;
 		}
 		
 				

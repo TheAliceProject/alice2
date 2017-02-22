@@ -35,7 +35,6 @@ public class LoadElementProgressPane extends edu.cmu.cs.stage3.progress.Progress
 	}
 
 	protected void construct() throws edu.cmu.cs.stage3.progress.ProgressCancelException {
-		m_loadedElement = null;
 		try {
 			m_loadedElement = edu.cmu.cs.stage3.alice.core.Element.load(m_loader, m_externalRoot, this);
 		} catch (edu.cmu.cs.stage3.progress.ProgressCancelException pce) {

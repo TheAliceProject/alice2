@@ -407,19 +407,18 @@ public class StructuredStorage {
 
         if (name.equals(dirent.getName())) {
             return index;
-        } else {
-            long lindex =
-                searchDirectory(name, dirent.getSIDLeftSibling());
-            if (lindex != -1L) {
-                return lindex;
-            }
-
-            long rindex =
-                searchDirectory(name, dirent.getSIDRightSibling());
-            if (rindex != -1L) {
-                return rindex;
-            }
         }
+		long lindex =
+		    searchDirectory(name, dirent.getSIDLeftSibling());
+		if (lindex != -1L) {
+		    return lindex;
+		}
+
+		long rindex =
+		    searchDirectory(name, dirent.getSIDRightSibling());
+		if (rindex != -1L) {
+		    return rindex;
+		}
 
         return -1L;
     }
@@ -435,9 +434,8 @@ public class StructuredStorage {
         if (index != -1L) {
             cwdIndex = getDirectoryEntry(index).getSIDChild();
             return true;
-        } else {
-            return false;
         }
+		return false;
     }
 
     private long getStreamIndex(String name) {
@@ -534,24 +532,23 @@ public class StructuredStorage {
                                                sectorSize,
                                                length,
                                                true);
-        } else {
-            sectorSize = getMiniSectorSize();
-            sectors = ((length + sectorSize - 1)/sectorSize);
-            segmentPositions = new long[sectors];
-
-            long sector = getStartSector(index);
-            for (int i = 0; i < sectors - 1; i++) {
-                segmentPositions[i] = getOffsetOfMiniSector(sector);
-                sector = getMiniFATSector(sector);
-            }
-            segmentPositions[sectors - 1] = getOffsetOfMiniSector(sector);
-
-            return new SegmentedSeekableStream(miniStream,
-                                               segmentPositions,
-                                               sectorSize,
-                                               length,
-                                               true);
         }
+		sectorSize = getMiniSectorSize();
+		sectors = ((length + sectorSize - 1)/sectorSize);
+		segmentPositions = new long[sectors];
+
+		long sector = getStartSector(index);
+		for (int i = 0; i < sectors - 1; i++) {
+		    segmentPositions[i] = getOffsetOfMiniSector(sector);
+		    sector = getMiniFATSector(sector);
+		}
+		segmentPositions[sectors - 1] = getOffsetOfMiniSector(sector);
+
+		return new SegmentedSeekableStream(miniStream,
+		                                   segmentPositions,
+		                                   sectorSize,
+		                                   length,
+		                                   true);
     }
 /*
     public static void main(String[] args) {

@@ -88,9 +88,8 @@ public class DoInOrder extends CompositeResponse {
 									m_timeRemaining = 0;
 								}
                             	break;
-                            } else {
-								m_index = 0;
                             }
+							m_index = 0;
                         } else {
                             m_timeRemaining = 0;
                             break;

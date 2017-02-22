@@ -41,17 +41,15 @@ public class ForEachTogether extends ForEach {
 		protected RuntimeResponse[] getRuntimeResponses() {
             if( m_listIndex>=0 && m_listIndex < m_runtimeResponsesArray.length ) {
                 return m_runtimeResponsesArray[ m_listIndex ];
-            } else {
-                throw new ArrayIndexOutOfBoundsException( Messages.getString("is_out_of_bounds", m_listIndex, m_runtimeResponsesArray.length) );   
             }
+			throw new ArrayIndexOutOfBoundsException( Messages.getString("is_out_of_bounds", m_listIndex, m_runtimeResponsesArray.length) );
 		}
         
 		protected int getChildCount() {
             if( m_runtimeResponsesArray != null && m_runtimeResponsesArray.length > 0 ) {
                 return m_runtimeResponsesArray[ 0 ].length;
-            } else {
-                return 0;
             }
+			return 0;
         }
         
 		protected double getChildTimeRemaining( int index, double t ) {

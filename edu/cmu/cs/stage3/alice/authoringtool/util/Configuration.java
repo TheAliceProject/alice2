@@ -180,11 +180,10 @@ public final class Configuration {
 				int i = name.indexOf( '.' );
 				if( i == -1 ) {
 					return (Key)subKeys.get( name );
-				} else {
-					Key subKey = (Key)subKeys.get( name.substring( 0, i ) );
-					if( subKey != null ) {
-						return subKey.getSubKey( name.substring( i + 1 ) );
-					}
+				}
+				Key subKey = (Key)subKeys.get( name.substring( 0, i ) );
+				if( subKey != null ) {
+					return subKey.getSubKey( name.substring( i + 1 ) );
 				}
 			}
 			return null;
@@ -204,15 +203,14 @@ public final class Configuration {
 					subKeys.put( name, subKey );
 				}
 				return subKey;
-			} else {
-				Key subKey = (Key)subKeys.get( name.substring( 0, i ) );
-				if( subKey == null ) {
-					subKey = new Key();
-					subKey.name = name.substring( 0, i );
-					subKeys.put( subKey.name, subKey );
-				}
-				return subKey.createSubKey( name.substring( i + 1 ) );
 			}
+			Key subKey = (Key)subKeys.get( name.substring( 0, i ) );
+			if( subKey == null ) {
+				subKey = new Key();
+				subKey.name = name.substring( 0, i );
+				subKeys.put( subKey.name, subKey );
+			}
+			return subKey.createSubKey( name.substring( i + 1 ) );
 		}
 
 		public void deleteSubKey( String name ) {

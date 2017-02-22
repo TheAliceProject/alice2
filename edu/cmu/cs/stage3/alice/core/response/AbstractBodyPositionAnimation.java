@@ -86,7 +86,8 @@ public class AbstractBodyPositionAnimation extends OrientationAnimation {
 //					if this leg has more than one part, we've got a problem
 			if (legBits.length == 1) {
 				return (edu.cmu.cs.stage3.alice.core.Transformable) legBits[0];
-			} else return null;
+			}
+			return null;
 		}
 	
 		protected void setOrientation(edu.cmu.cs.stage3.alice.core.Transformable part, edu.cmu.cs.stage3.math.Matrix33 initialOrient, edu.cmu.cs.stage3.math.Matrix33 finalOrient, double portion){			

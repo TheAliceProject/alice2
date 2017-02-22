@@ -83,16 +83,14 @@ public class ObjectArrayProperty extends ObjectProperty {
 		if( value != null ) {
 			if (value instanceof Object[] ){
 				return (Object[]) value;
-			} else {
-				Object[] obj = {value};
-				return  obj;
-			}	
-		} else {
-            if( m_arrayValueIfNull == null ) {
-    			m_arrayValueIfNull = (Object[])java.lang.reflect.Array.newInstance( getComponentType(), 0 );
-            }
-            return m_arrayValueIfNull;
+			}
+			Object[] obj = {value};
+			return  obj;	
 		}
+		if( m_arrayValueIfNull == null ) {
+			m_arrayValueIfNull = (Object[])java.lang.reflect.Array.newInstance( getComponentType(), 0 );
+		}
+		return m_arrayValueIfNull;
 	}
     
 	protected void decodeObject( org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, java.util.Vector referencesToBeResolved, double version ) throws java.io.IOException {
@@ -365,9 +363,8 @@ public class ObjectArrayProperty extends ObjectProperty {
 		if( index>=0 && index<n ) {
 			Object[] array = getArrayValue();
 			return array[ index ];
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
 	public Object getValue( int index ) {
@@ -379,24 +376,21 @@ public class ObjectArrayProperty extends ObjectProperty {
 		if( evaluateExpressionIfNecessary ) {
 			if( a == null ) {
 				return b == null;
-			} else {
-				if( a.equals( b ) ) {
-					return true;
-				} else if( a instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
-					edu.cmu.cs.stage3.alice.core.Expression e = (edu.cmu.cs.stage3.alice.core.Expression)a;
-					Object v = e.getValue();
-					if( v == null ) {
-						return b == null;
-					} else {
-						return v.equals( b );
-					}
-				} else {
-					return false;
-				}
 			}
-		} else {
-			return a == b;
+			if( a.equals( b ) ) {
+				return true;
+			} else if( a instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
+				edu.cmu.cs.stage3.alice.core.Expression e = (edu.cmu.cs.stage3.alice.core.Expression)a;
+				Object v = e.getValue();
+				if( v == null ) {
+					return b == null;
+				}
+				return v.equals( b );
+			} else {
+				return false;
+			}
 		}
+		return a == b;
 	}
 	private int indexOf( Object o, int index, boolean evaluateExpressionIfNecessary ) {
 		Object[] array = getArrayValue();
@@ -459,9 +453,8 @@ public class ObjectArrayProperty extends ObjectProperty {
 		Object[] value = getArrayValue();
 		if( value!=null ) {
 			return value.length;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	public void ensureCapacity( int minCapacity ) {
 		Object[] prev = getArrayValue();
@@ -470,5 +463,13 @@ public class ObjectArrayProperty extends ObjectProperty {
 			System.arraycopy( prev, 0, curr, 0, prev.length );
 			set( curr );
 		}
+	}
+	
+	// Aik Min
+	public void clearValue(){
+		m_arrayValueIfNull = null;	
+		HACK_disableListening();
+		set(null);
+		HACK_enableListening();
 	}
 }

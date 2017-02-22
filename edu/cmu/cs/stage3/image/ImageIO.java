@@ -77,27 +77,26 @@ public class ImageIO {
 
 		if( renderedImage instanceof java.awt.Image ) {
 			return (java.awt.Image)renderedImage;
-		} else {
-			java.awt.image.Raster raster = renderedImage.getData();
-			java.awt.image.ColorModel colorModel = renderedImage.getColorModel();
-			java.util.Hashtable properties = null;
-			String[] propertyNames = renderedImage.getPropertyNames();
-			if( propertyNames!=null ) {
-				properties = new java.util.Hashtable();
-				for( int i=0; i<propertyNames.length; i++ ) {
-					String propertyName = propertyNames[i];
-					properties.put( propertyName, renderedImage.getProperty( propertyName ) );
-				}
-			}
-			java.awt.image.WritableRaster writableRaster;
-			if( raster instanceof java.awt.image.WritableRaster ) {
-				writableRaster = (java.awt.image.WritableRaster)raster;
-			} else {
-				writableRaster = raster.createCompatibleWritableRaster();
-			}
-			java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage( renderedImage.getColorModel(), writableRaster, colorModel.isAlphaPremultiplied(), properties );
-			return bufferedImage;
 		}
+		java.awt.image.Raster raster = renderedImage.getData();
+		java.awt.image.ColorModel colorModel = renderedImage.getColorModel();
+		java.util.Hashtable properties = null;
+		String[] propertyNames = renderedImage.getPropertyNames();
+		if( propertyNames!=null ) {
+			properties = new java.util.Hashtable();
+			for( int i=0; i<propertyNames.length; i++ ) {
+				String propertyName = propertyNames[i];
+				properties.put( propertyName, renderedImage.getProperty( propertyName ) );
+			}
+		}
+		java.awt.image.WritableRaster writableRaster;
+		if( raster instanceof java.awt.image.WritableRaster ) {
+			writableRaster = (java.awt.image.WritableRaster)raster;
+		} else {
+			writableRaster = raster.createCompatibleWritableRaster();
+		}
+		java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage( renderedImage.getColorModel(), writableRaster, colorModel.isAlphaPremultiplied(), properties );
+		return bufferedImage;
 	}
     public static void store( String codecName, java.io.OutputStream outputStream, java.awt.Image image ) throws InterruptedException, java.io.IOException {
         store( codecName, outputStream, image, null );

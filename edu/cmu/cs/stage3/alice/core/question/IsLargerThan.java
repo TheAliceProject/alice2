@@ -39,8 +39,7 @@ public class IsLargerThan extends SubjectObjectQuestion {
 	protected Object getValue( Transformable subjectValue, Transformable objectValue ) {
 		if( subjectValue.getVolume() > objectValue.getVolume() ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

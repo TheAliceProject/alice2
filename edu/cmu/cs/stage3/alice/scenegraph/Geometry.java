@@ -43,9 +43,8 @@ public abstract class Geometry extends Element {
 		}
 		if( m_boundingBox != null ) {
 			return (edu.cmu.cs.stage3.math.Box)m_boundingBox.clone();
-		} else {
-			return null;
 		}
+		return null;
 	}
 	public edu.cmu.cs.stage3.math.Sphere getBoundingSphere() {
 		if( m_boundingSphere == null ) {
@@ -53,9 +52,8 @@ public abstract class Geometry extends Element {
 		}
 		if( m_boundingSphere != null ) {
 			return (edu.cmu.cs.stage3.math.Sphere)m_boundingSphere.clone();
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	private java.util.Vector m_boundListeners = new java.util.Vector();

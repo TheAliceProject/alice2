@@ -89,9 +89,8 @@ public abstract class Decorator {
 	public boolean isShowing() {
 		if( m_sgVisual==null ) {
 			return false;
-		} else {
-			return m_sgVisual.getIsShowing();
 		}
+		return m_sgVisual.getIsShowing();
 	}
 	public void setIsShowing( boolean value ) {
 		if( value ) {

@@ -75,20 +75,15 @@ public class TraditionalAnimationStyle extends edu.cmu.cs.stage3.util.Enumerable
 			if( m_beginGently ) {
 				if( m_endGently ) {
 					return gently( portion, 0.3, 0.8 );
-				} else {
-					return gently( portion, 0.99, 0.999 );
 				}
-			} else {
-				if( m_endGently ) {
-					return gently( portion, 0.001, 0.01 );
-				} else {
-					return portion;
-				}
+				return gently( portion, 0.99, 0.999 );
 			}
+			if( m_endGently ) {
+				return gently( portion, 0.001, 0.01 );
+			}
+			return portion;
 		}
-		else {
-			return 1;
-		}
+		return 1;
 	}
 	public static TraditionalAnimationStyle valueOf( String s ) {
 		// todo: remove this hack

@@ -813,7 +813,7 @@ public class AuthoringToolResources {
 					}
 					while( (reprString.indexOf( "<keyCodeValue>" ) > -1) && (value instanceof Integer) ) { 
 						String valueString="";
-						switch ((Integer)value){
+						switch (((Integer)value).intValue()){
 						case 192: valueString = "`"; break;
 						case 45: valueString = "-"; break;
 						case 61: valueString = "="; break;
@@ -1061,6 +1061,7 @@ public class AuthoringToolResources {
 //			} else if( d == .9 ) {
 //				value = "9/10";
 //			} else {
+				AuthoringToolResources.resources.decimalFormatter.setMaximumFractionDigits(AikMin.decimal);
 				value = AuthoringToolResources.resources.decimalFormatter.format( d );
 //			}
 		}
@@ -1393,20 +1394,19 @@ public class AuthoringToolResources {
 		if (hsl[1] == 0){
 //			System.out.println("For HSL: "+hsl[0]+", "+hsl[1]+", "+hsl[2]+" RGB = "+hsl[2]+", "+hsl[2]+", "+hsl[2]);
 			return new java.awt.Color(hsl[2],hsl[2],hsl[2]);
+		} 
+		float var_2 = 0.0f;
+		if ( hsl[2] < 0.5 ){
+			var_2 = hsl[2] * ( 1 + hsl[1] );
 		} else{
-			float var_2 = 0.0f;
-			if ( hsl[2] < 0.5 ){
-				var_2 = hsl[2] * ( 1 + hsl[1] );
-			} else{
-				var_2 = ( hsl[2] + hsl[1] ) - ( hsl[1] * hsl[2] );
-			}
-			float var_1 = 2 * hsl[2] - var_2;
-			float R = Math.min(1.0f, hueToRGB( var_1, var_2, hsl[0] + ( 1.0f / 3 ) ));
-			float G = Math.min(1.0f, hueToRGB( var_1, var_2, hsl[0] ));
-			float B = Math.min(1.0f, hueToRGB( var_1, var_2, hsl[0] - ( 1.0f / 3 ) ));
-//			System.out.println("For HSL: "+hsl[0]+", "+hsl[1]+", "+hsl[2]+" RGB = "+R+", "+G+", "+B);
-			return new java.awt.Color(R,G,B);
+			var_2 = ( hsl[2] + hsl[1] ) - ( hsl[1] * hsl[2] );
 		}
+		float var_1 = 2 * hsl[2] - var_2;
+		float R = Math.min(1.0f, hueToRGB( var_1, var_2, hsl[0] + ( 1.0f / 3 ) ));
+		float G = Math.min(1.0f, hueToRGB( var_1, var_2, hsl[0] ));
+		float B = Math.min(1.0f, hueToRGB( var_1, var_2, hsl[0] - ( 1.0f / 3 ) ));
+//			System.out.println("For HSL: "+hsl[0]+", "+hsl[1]+", "+hsl[2]+" RGB = "+R+", "+G+", "+B);
+		return new java.awt.Color(R,G,B);
 	}
 //	static {
 //		float[] hsl = rgbToHSL(java.awt.Color.white);
@@ -1448,9 +1448,8 @@ public class AuthoringToolResources {
 				hsl[2] = Math.max(hsl[2], .95f);
 				java.awt.Color convertedColor = hslToRGB(hsl);
 				return new java.awt.Color(convertedColor.getRed(), convertedColor.getGreen(), convertedColor.getBlue(), toReturn.getAlpha());
-		} else{
-			return toReturn;
-		}
+		} 
+		return toReturn;
 	}
 
 	public static void setMainWebGalleryURL( java.net.URL url ) {
@@ -1571,9 +1570,8 @@ public class AuthoringToolResources {
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
 			if( ((edu.cmu.cs.stage3.alice.core.Transformable)value).getParent() instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
 				return subpartIcon;
-			} else {
-				return modelIcon;
-			}
+			} 
+			return modelIcon;			
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.World ) {
 			return sceneIcon;
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.Group ) {
@@ -1586,14 +1584,12 @@ public class AuthoringToolResources {
 			String s = (String)AuthoringToolResources.resources.keyCodesToStrings.get( value );
 			if( s != null ) {
 				return getIconForString( "keyboardKeys/" + s ); 
-			} else {
-				return null;
-			}
+			} 
+			return null;
 		} else {
 			return defaultIcon;
 		}
 	}
-
 
 	public static javax.swing.ImageIcon getDisabledIcon( javax.swing.ImageIcon inputIcon ) {
 		return getDisabledIcon( inputIcon, 70 );
@@ -1715,9 +1711,8 @@ public class AuthoringToolResources {
 	public static boolean equals( Object o1, Object o2 ) {
 		if( o1 == null ) {
 			return o2 == null;
-		} else {
-			return o1.equals( o2 );
 		}
+		return o1.equals( o2 );
 	}
 
 	public static Double parseDouble( String doubleString ) {
@@ -2252,9 +2247,8 @@ public class AuthoringToolResources {
 			edu.cmu.cs.stage3.util.Enumerable[] items = edu.cmu.cs.stage3.util.Enumerable.getItems( cls );
 			if( items.length > 0 ) {
 				return items[ 0 ];
-			} else {
-				return null;
 			}
+			return null;
 		} else if( cls == edu.cmu.cs.stage3.alice.core.ReferenceFrame.class ) {
 			return AuthoringTool.getHack().getWorld();
 		} else {
@@ -2341,13 +2335,13 @@ public class AuthoringToolResources {
 		if( bytes < 1024 ) {
 			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + " bytes"; 
 		} else if( bytes < 1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024) ) + " KB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/1024 ) + " KB"; 
 		} else if( bytes < 1024L*1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L) ) + " MB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L) ) + " MB"; 
 		} else if( bytes < 1024L*1024L*1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L*1024L) ) + " GB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L*1024L) ) + " GB"; 
 		} else {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( ((double)bytes)/((double)1024L*1024L*1024L*1024L) ) + " TB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L*1024L*1024L) ) + " TB"; 
 		}
 		return sizeString;
 	}
@@ -2355,27 +2349,26 @@ public class AuthoringToolResources {
 	public static String formatTime( double seconds ) {
 		if( Double.isNaN( seconds ) ) {
 			return "?:??"; 
-		} else {
-			java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" ); 
-			java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" ); 
-			java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" ); 
-
-			double secondsFloored = (int)Math.floor( seconds );
-			double decimal = seconds - secondsFloored;
-			double secs = secondsFloored % 60.0;
-			double minutes = ((secondsFloored - secs)/60.0) % 60.0;
-			double hours = (secondsFloored - 60.0*minutes - secs)/(60.0*60.0);
-
-			String timeString = secMinFormatter1.format( secs ) + decFormatter.format( decimal );
-			if( hours > 0.0 ) {
-				timeString = secMinFormatter1.format( minutes ) + ":" + timeString; 
-				timeString = secMinFormatter2.format( hours ) + ":" + timeString; 
-			} else {
-				timeString = secMinFormatter2.format( minutes ) + ":" + timeString; 
-			}
-
-			return timeString;
 		}
+		java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" ); 
+		java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" ); 
+		java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" ); 
+
+		double secondsFloored = (int)Math.floor( seconds );
+		double decimal = seconds - secondsFloored;
+		double secs = secondsFloored % 60.0;
+		double minutes = ((secondsFloored - secs)/60.0) % 60.0;
+		double hours = (secondsFloored - 60.0*minutes - secs)/(60.0*60.0);
+
+		String timeString = secMinFormatter1.format( secs ) + decFormatter.format( decimal );
+		if( hours > 0.0 ) {
+			timeString = secMinFormatter1.format( minutes ) + ":" + timeString; 
+			timeString = secMinFormatter2.format( hours ) + ":" + timeString; 
+		} else {
+			timeString = secMinFormatter2.format( minutes ) + ":" + timeString; 
+		}
+
+		return timeString;
 	}
 
 	public static void printHierarchy( java.awt.Component c ) {
@@ -2508,9 +2501,8 @@ public class AuthoringToolResources {
 	public static String getPrefix( String token ) {
 		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {   
 			return token.substring( 0, token.indexOf( "<" ) ); 
-		} else {
-			return token;
 		}
+		return token;
 	}
 
 	public static String getSpecifier( String token ) {
@@ -2519,9 +2511,8 @@ public class AuthoringToolResources {
 				token = token.replaceAll("\\\\", java.io.File.separator); 
 			}
 			return token.substring( token.indexOf( "<" ) + 1, token.indexOf( ">" ) );  
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public static java.awt.Component findElementDnDPanel( java.awt.Container root, final edu.cmu.cs.stage3.alice.core.Element element ) {
@@ -2547,9 +2538,7 @@ public class AuthoringToolResources {
 		if (toReturn instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel){
 			return ((edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel)toReturn).getWorkSpace();
 		}
-		else{
-			return toReturn;
-		}
+		return toReturn;
 	}
 
 	public static java.awt.Component findPropertyDnDPanel( java.awt.Container root, final edu.cmu.cs.stage3.alice.core.Element element, final String propertyName ) {

@@ -50,9 +50,8 @@ public abstract class CompositeResponse extends edu.cmu.cs.stage3.alice.core.Res
 				RuntimeResponse[] trimmedRuntimeResponses = new RuntimeResponse[ actualRuntimeResponseCount ];
 				System.arraycopy( runtimeResponses, 0, trimmedRuntimeResponses, 0, actualRuntimeResponseCount );
 				return trimmedRuntimeResponses;
-			} else {
-				return runtimeResponses;
 			}
+			return runtimeResponses;
 		}
 		protected RuntimeResponse[] getRuntimeResponses() {
             if( m_runtimeResponses == null ) {

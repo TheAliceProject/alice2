@@ -33,8 +33,7 @@ public class CubicStyle extends edu.cmu.cs.stage3.alice.core.Element implements 
 			edu.cmu.cs.stage3.math.Cubic cubic = new edu.cmu.cs.stage3.math.BezierCubic( controlsValue[0], controlsValue[1], controlsValue[2], controlsValue[3] );
 			double t = current/total;
 			return cubic.evaluate( t );
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 }

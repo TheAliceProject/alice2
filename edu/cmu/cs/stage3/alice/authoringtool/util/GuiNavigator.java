@@ -364,7 +364,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			//System.out.println( "setMode( " + ev + " ): " + mode );
 		}
 
-		public void mousePressed( java.awt.event.MouseEvent ev ) {
+		public synchronized void mousePressed( java.awt.event.MouseEvent ev ) {
 			super.mousePressed( ev );
 
 			//povTree.clearSelection();
@@ -414,7 +414,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			GuiNavigator.this.updateImages();
 		}
 
-		public void mouseReleased( java.awt.event.MouseEvent ev ) {
+		public synchronized void mouseReleased( java.awt.event.MouseEvent ev ) {
 			super.mouseReleased( ev );
 
 			authoringTool.getScheduler().removeEachFrameRunnable( GuiNavigator.this );
@@ -429,7 +429,7 @@ public class GuiNavigator extends javax.swing.JPanel implements Runnable {
 			GuiNavigator.this.updateImages();
 		}
 
-		public void mouseDragged( java.awt.event.MouseEvent ev ) {
+		public synchronized void mouseDragged( java.awt.event.MouseEvent ev ) {
 			super.mouseDragged( ev );
 
 			shiftIsDown = ev.isShiftDown();

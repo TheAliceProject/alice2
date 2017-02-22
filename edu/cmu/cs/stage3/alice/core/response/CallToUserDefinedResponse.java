@@ -40,9 +40,8 @@ public class CallToUserDefinedResponse extends Response {
 		public double getTimeRemaining( double t ) {
 			if( m_actual!=null ) {
 				return m_actual.getTimeRemaining( t );
-			} else {
-				return super.getTimeRemaining( t );
 			}
+			return super.getTimeRemaining( t );
 		}
 		
 		public void prologue( double t ) {

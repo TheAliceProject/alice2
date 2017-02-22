@@ -48,7 +48,7 @@ public class ButtonPanel extends JPanel
     this.add(nextButton);
     
     // set up the frame rate list
-    frameRateLabel = new JLabel(Messages.getString("Frames_per_Second__")); 
+    frameRateLabel = new JLabel(Messages.getString("Frames_per_Second__") + " "); 
     this.add(frameRateLabel);
     String[] rates = {"16","24","30"};   
     frameRateList = new JList(rates);

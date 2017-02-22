@@ -130,7 +130,7 @@ public class ImagePreview extends JComponent implements PropertyChangeListener {
 			}
 
 			thumbnail.paintIcon(this, g, x, y);
-			g.drawString(Messages.getString("Dimensions___", width, height), 50, 30);
+			g.drawString(Messages.getString("Dimensions___", String.valueOf(width), String.valueOf(height)), 50, 30);
 
 		}
 	}

@@ -245,11 +245,10 @@ public class TIFFDirectory extends Object {
 
 		    while (index < count) {
 
-                        while ((index < count) && (bvalues[index++] != 0));
+                        //while ((index < count) && (bvalues[index++] != 0))
 
 			// When we encountered zero, means one string has ended
-			v.add(new String(bvalues, prevIndex,
-					 (index - prevIndex)) );
+			v.add(new String(bvalues, prevIndex, (index - prevIndex)) );
 			prevIndex = index;
 		    }
 
@@ -355,9 +354,8 @@ public class TIFFDirectory extends Object {
         Integer i = (Integer)fieldIndex.get(new Integer(tag));
         if (i == null) {
             return null;
-        } else {
-            return fields[i.intValue()];
         }
+		return fields[i.intValue()];
     }
 
     /**
@@ -480,63 +478,56 @@ public class TIFFDirectory extends Object {
         throws IOException {
         if (isBigEndian) {
             return stream.readShort();
-        } else {
-            return stream.readShortLE();
         }
+		return stream.readShortLE();
     }
 
     private int readUnsignedShort(SeekableStream stream)
         throws IOException {
         if (isBigEndian) {
             return stream.readUnsignedShort();
-        } else {
-            return stream.readUnsignedShortLE();
         }
+		return stream.readUnsignedShortLE();
     }
 
     private int readInt(SeekableStream stream)
         throws IOException {
         if (isBigEndian) {
             return stream.readInt();
-        } else {
-            return stream.readIntLE();
         }
+		return stream.readIntLE();
     }
 
     private long readUnsignedInt(SeekableStream stream)
         throws IOException {
         if (isBigEndian) {
             return stream.readUnsignedInt();
-        } else {
-            return stream.readUnsignedIntLE();
         }
+		return stream.readUnsignedIntLE();
     }
 
     private long readLong(SeekableStream stream)
         throws IOException {
         if (isBigEndian) {
             return stream.readLong();
-        } else {
-            return stream.readLongLE();
         }
+		return stream.readLongLE();
     }
 
     private float readFloat(SeekableStream stream)
         throws IOException {
         if (isBigEndian) {
             return stream.readFloat();
-        } else {
-            return stream.readFloatLE();
         }
+		return stream.readFloatLE();
     }
 
     private double readDouble(SeekableStream stream)
         throws IOException {
         if (isBigEndian) {
             return stream.readDouble();
-        } else {
-            return stream.readDoubleLE();
         }
+		return stream.readDoubleLE();
     }
 
     private static int readUnsignedShort(SeekableStream stream,
@@ -544,9 +535,8 @@ public class TIFFDirectory extends Object {
         throws IOException {
         if (isBigEndian) {
             return stream.readUnsignedShort();
-        } else {
-            return stream.readUnsignedShortLE();
         }
+		return stream.readUnsignedShortLE();
     }
 
     private static long readUnsignedInt(SeekableStream stream,
@@ -554,9 +544,8 @@ public class TIFFDirectory extends Object {
         throws IOException {
         if (isBigEndian) {
             return stream.readUnsignedInt();
-        } else {
-            return stream.readUnsignedIntLE();
         }
+		return stream.readUnsignedIntLE();
     }
 
     // Utilities

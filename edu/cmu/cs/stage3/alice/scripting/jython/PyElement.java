@@ -56,26 +56,23 @@ public class PyElement extends org.python.core.PyJavaInstance {
 					descendant = m_element.getChildNamed( name.substring( 1 ) );
 					if( descendant != null ) {
 						return m_namespace.getPyElement( descendant );
-					} else {
-						property = m_element.getPropertyNamedIgnoreCase( name.substring( 1 ) );
-						if( property != null ) {
-							return org.python.core.Py.java2py( property );
-						}
+					}
+					property = m_element.getPropertyNamedIgnoreCase( name.substring( 1 ) );
+					if( property != null ) {
+						return org.python.core.Py.java2py( property );
 					}
 				}
 				return super.__findattr__( name );
-			} else {
-				return m_namespace.java2py( property.get() );
 			}
-		} else {
-			Object value;
-			if( descendant instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
-				value = ((edu.cmu.cs.stage3.alice.core.Expression)descendant).getValue();
-			} else {
-				value = descendant;
-			}
-			return m_namespace.java2py( value );
+			return m_namespace.java2py( property.get() );
 		}
+		Object value;
+		if( descendant instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
+			value = ((edu.cmu.cs.stage3.alice.core.Expression)descendant).getValue();
+		} else {
+			value = descendant;
+		}
+		return m_namespace.java2py( value );
 	}
 	
 	public void __setattr__( String name, org.python.core.PyObject attr ) {

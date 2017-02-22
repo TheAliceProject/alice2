@@ -188,10 +188,9 @@ public class DefaultPlayer extends AbstractPlayer {
 			file = new java.io.File(path);
 			if( file.exists() ) {
 				break;
-			} else {
-				path += " ";
-				file = null;
 			}
+			path += " ";
+			file = null;
 		}
 		return file;
 	}
@@ -247,9 +246,8 @@ public class DefaultPlayer extends AbstractPlayer {
 					String lowercaseName = name.toLowerCase();
 					if (lowercaseName.endsWith(".a2w")) {
 						return true;
-					} else {
-						return false;
 					}
+					return false;
 				}
 			};
 			java.io.File[] files = file.listFiles(a2wFilter);

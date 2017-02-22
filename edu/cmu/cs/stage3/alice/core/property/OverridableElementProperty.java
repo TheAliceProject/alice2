@@ -40,8 +40,7 @@ public class OverridableElementProperty extends ElementProperty {
 	public Class getValueClass() {
 		if( m_overrideValueClass!=null ) {
 			return m_overrideValueClass;
-		} else {
-			return super.getValueClass();
 		}
+		return super.getValueClass();
 	}
 }

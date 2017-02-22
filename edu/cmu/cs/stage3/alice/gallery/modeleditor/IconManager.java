@@ -35,9 +35,8 @@ class IconManager {
 				edu.cmu.cs.stage3.alice.core.Model model = (edu.cmu.cs.stage3.alice.core.Model)o;
 				if( model.isFirstClass.booleanValue() ) {
 					return m_modelIcon;
-				} else {
-					return m_partIcon;
 				}
+				return m_partIcon;
 			} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) { 
 				return m_methodIcon;
 			} else if( o instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion ) { 
@@ -47,8 +46,7 @@ class IconManager {
 			} else {
 				return m_defaultIcon;
 			}
-		} else {
-			return icon;
 		}
+		return icon;
 	}
 }

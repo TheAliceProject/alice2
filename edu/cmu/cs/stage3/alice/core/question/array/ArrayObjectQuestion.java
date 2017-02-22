@@ -38,8 +38,7 @@ public abstract class ArrayObjectQuestion extends edu.cmu.cs.stage3.alice.core.Q
 		Array arrayValue = array.getArrayValue();
 		if( arrayValue!=null ) {
             return getValue( arrayValue );
-		} else {
-			return null;
 		}
+		return null;
 	}
 }

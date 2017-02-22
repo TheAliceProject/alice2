@@ -60,9 +60,8 @@ public class ScriptProperty extends StringProperty {
 		}
 		if( sb.length()>0 ) {
 			return sb.substring( 0, sb.length()-1 );
-		} else {
-			return "";
 		}
+		return "";
 	}
 	private void storeScript( java.io.OutputStream os ) throws java.io.IOException {
 		java.io.BufferedOutputStream bos = new java.io.BufferedOutputStream ( os );

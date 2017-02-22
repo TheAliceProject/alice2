@@ -57,9 +57,8 @@ public abstract class Behavior extends Element {
                 Item curr = prev.getNext();
                 if( curr == null ) {
                     return prev;
-                } else {
-                    prev = curr;
                 }
+				prev = curr;
             }
         }
         public java.util.Stack getCurrentStack() {
@@ -69,10 +68,9 @@ public abstract class Behavior extends Element {
 				Item curr = prev.getNext();
 				if( curr == null ) {
 					break;
-				} else {
-					prev = curr;
-					stack.push( prev );
 				}
+				prev = curr;
+				stack.push( prev );
 			}
 			return stack;
         }
@@ -90,16 +88,14 @@ public abstract class Behavior extends Element {
         public Variable lookup( Variable variable ) {
             if( m_prev == null ) {
                 return variable;
-            } else {
-                return m_prev.lookup( variable );
             }
+			return m_prev.lookup( variable );
         }
         public Variable lookup( String name ) {
             if( m_prev == null ) {
                 return null;
-            } else {
-                return m_prev.lookup( name );
             }
+			return m_prev.lookup( name );
         }
     }
 
@@ -148,26 +144,22 @@ public abstract class Behavior extends Element {
             Variable runtimeVariable = (Variable)m_variableMap.get( variable );
             if( runtimeVariable != null ) {
                 return runtimeVariable;
-            } else {
-                if( m_isCeiling ) {
-                    return variable;
-                } else {
-                    return getPrev().lookup( variable );
-                }
             }
+			if( m_isCeiling ) {
+			    return variable;
+			}
+			return getPrev().lookup( variable );
         }
         
 		public Variable lookup( String name ) {
             Variable runtimeVariable = (Variable)m_nameMap.get( name );
             if( runtimeVariable != null ) {
                 return runtimeVariable;
-            } else {
-                if( m_isCeiling ) {
-                    return null;
-                } else {
-                    return getPrev().lookup( name );
-                }
             }
+			if( m_isCeiling ) {
+			    return null;
+			}
+			return getPrev().lookup( name );
         }
     }
 

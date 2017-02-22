@@ -383,9 +383,8 @@ public class XML {
             }
             if( atLeastOneElementHasBeenEncoded ) {
                 continue;
-            } else {
-                break;
             }
+			break;
         }
 
         document.appendChild( rootNode );
@@ -490,9 +489,8 @@ public class XML {
 				if( java.lang.reflect.Modifier.isPublic( modifiers ) && java.lang.reflect.Modifier.isStatic( modifiers ) ) {
 					Object[] parameters = { text };
 					return valueOfMethod.invoke( null, parameters );
-				} else {
-					throw new RuntimeException( "valueOf method not public static." );
 				}
+				throw new RuntimeException( "valueOf method not public static." );
 			} catch( NoSuchMethodException nsme ) {
 				throw new RuntimeException( "NoSuchMethodException:" + cls + " " + text );
 			} catch( IllegalAccessException iae ) {
@@ -714,9 +712,8 @@ public class XML {
 				int count = zis.read( buffer, 0, BUFFER_SIZE );
 				if( count == -1 ) {
 					break;
-				} else {
-					baos.write( buffer, 0, count );
 				}
+				baos.write( buffer, 0, count );
 			}
 			java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream( baos.toByteArray() );
 			return internalLoad( bais );

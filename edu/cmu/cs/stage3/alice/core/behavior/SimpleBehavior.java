@@ -38,9 +38,8 @@ public class SimpleBehavior extends edu.cmu.cs.stage3.alice.core.Behavior implem
 	public Response.RuntimeResponse[] getAllRunningResponses() {
 		if( m_runtimeResponse != null ) {
 			return new Response.RuntimeResponse[] { m_runtimeResponse };
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
 	public void stopAllRuntimeResponses( double time ) {

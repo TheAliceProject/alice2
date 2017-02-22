@@ -27,11 +27,14 @@ import java.awt.image.BufferedImage;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES1;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLDrawableFactory;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.util.awt.AWTGLReadBufferUtil;
 import com.jogamp.opengl.util.gl2.GLUT;
 
@@ -47,10 +50,10 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	    //note: clear hasn't really happened
 	    onClear();
 	    
-	    context.gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA); 
-		context.gl.glEnable(GL2.GL_BLEND);
-		context.gl.glEnable(GL2.GL_ALPHA_TEST);
-		context.gl.glAlphaFunc(GL2.GL_GREATER, 0);
+	    context.gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA); 
+		context.gl.glEnable(GL.GL_BLEND);
+		context.gl.glEnable(GL2ES1.GL_ALPHA_TEST);
+		context.gl.glAlphaFunc(GL.GL_GREATER, 0);
 		    
 	    edu.cmu.cs.stage3.alice.scenegraph.Camera[] cameras = getCameras();
 	    for( int i=0; i<cameras.length; i++ ) {
@@ -95,7 +98,7 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         	int[] vp = { viewport.x, viewport.y, viewport.width, viewport.height };
 		    context.gl.glViewport( viewport.x, viewport.y, viewport.width, viewport.height );
 
-		    context.gl.glMatrixMode( GL2.GL_PROJECTION );
+		    context.gl.glMatrixMode( GLMatrixFunc.GL_PROJECTION );
 		    context.gl.glLoadIdentity();
         	
 		    if( m_viewportBuffer == null ) {
@@ -108,7 +111,7 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         	m_viewportBuffer.put( viewport.width );
         	m_viewportBuffer.put( viewport.height );
     		m_viewportBuffer.rewind();
-		    context.gl.glMatrixMode( GL2.GL_PROJECTION );
+		    context.gl.glMatrixMode( GLMatrixFunc.GL_PROJECTION );
 		    context.gl.glLoadIdentity();
 		    context.glu.gluPickMatrix( x, height-y, 1, 1, m_viewportBuffer );
 
@@ -313,15 +316,15 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		public void display ( GLAutoDrawable drawable ) {
 
 			GL2 gl = drawable.getGL().getGL2();								// get the OpenGL 2 graphics context
-			gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);	// clear color and depth buffers
-			gl.glMatrixMode(GL2.GL_MODELVIEW);
+			gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);	// clear color and depth buffers
+			gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
 			gl.glLoadIdentity();											// reset the model-view matrix
 			
 			gl.glTranslatef( (float)(Math.random() - 0.5), (float)(Math.random() - 0.5), 0);
 			double d = 0.9+0.2*Math.random();
 			gl.glScaled(d, d, d);
 			float[] c = new float[] { (float)Math.random(),  (float)Math.random(),  (float)Math.random(), 1 };
-			gl.glMaterialfv(GL2.GL_FRONT_AND_BACK,GL2.GL_DIFFUSE,c,0);
+			gl.glMaterialfv(GL.GL_FRONT_AND_BACK,GLLightingFunc.GL_DIFFUSE,c,0);
 			gl.glCallList(displayList);//use the display list to do the drawing
 		}
 
@@ -338,25 +341,25 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 			GL2 gl = drawable.getGL().getGL2();
 
 			/* set up depth-buffering */
-			gl.glEnable(GL2.GL_DEPTH_TEST);
-			gl.glDepthFunc(GL2.GL_LEQUAL);
+			gl.glEnable(GL.GL_DEPTH_TEST);
+			gl.glDepthFunc(GL.GL_LEQUAL);
 
 			/* set up lights */
-			gl.glMatrixMode(GL2.GL_MODELVIEW);
+			gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
 			gl.glLoadIdentity();
 
-			gl.glEnable(GL2.GL_LIGHTING);
-			gl.glEnable(GL2.GL_LIGHT0);
+			gl.glEnable(GLLightingFunc.GL_LIGHTING);
+			gl.glEnable(GLLightingFunc.GL_LIGHT0);
 
 			float ambient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 			float diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 			float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 			float position[] = { 0.0f, 10.0f, -15.0f, 1.0f };
 
-			gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, position, 0);
-			gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambient, 0);
-			gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuse, 0);
-			gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, specular, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_POSITION, position, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_AMBIENT, ambient, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_DIFFUSE, diffuse, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_SPECULAR, specular, 0);
 			
 			gl.glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
 			

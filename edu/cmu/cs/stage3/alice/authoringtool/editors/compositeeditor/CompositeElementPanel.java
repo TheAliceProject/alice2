@@ -399,7 +399,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
         containingPanel.add(headerPanel, java.awt.BorderLayout.NORTH);
         if (isExpanded){
             containingPanel.add(componentElementPanel, java.awt.BorderLayout.CENTER);
-            if (edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor.IS_JAVA){
+            if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
                 containingPanel.add(closeBrace, java.awt.BorderLayout.SOUTH);
             }
         }
@@ -427,7 +427,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
                 componentElementPanel.set(m_components, this, authoringTool);
             }*/
             containingPanel.add(componentElementPanel, java.awt.BorderLayout.CENTER);
-            if (edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor.IS_JAVA){
+            if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
                 containingPanel.add(closeBrace, java.awt.BorderLayout.SOUTH);
             }
             this.revalidate();
@@ -438,7 +438,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
     public void setHeaderLabel(){
         if (headerLabel != null){
             headerLabel.setText(headerText);
-            if (edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor.IS_JAVA){
+            if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
                 if (!isExpanded){
                     headerLabel.setText(headerText+" { "+getDots()+" }");  
                 }
@@ -725,7 +725,7 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
             setHeaderLabel();
             expandButton.setIcon(plus);
             containingPanel.remove(componentElementPanel);	// Aik Min - need work
-            if (edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ResponseEditor.IS_JAVA){
+            if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
                 containingPanel.remove(closeBrace);	// Aik Min - need work
             }
             this.revalidate();

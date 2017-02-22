@@ -44,9 +44,8 @@ public class DistanceFromLeftEdge extends edu.cmu.cs.stage3.alice.core.question.
 				}
 			}
 			return new Double( x );
-		} else {
-			return null;
 		}
+		return null;
 	}
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );

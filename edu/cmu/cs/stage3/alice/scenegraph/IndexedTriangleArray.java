@@ -91,16 +91,14 @@ public class IndexedTriangleArray extends VertexGeometry {
 	public int getIndexCount() {
 		if( m_indices!=null ) {
 			return m_indices.length;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 	public int getTriangleCount() {
 		if( m_indices!=null ) {
 			return m_indices.length/3;
-		} else {
-			return 0;
 		}
+		return 0;
 	}
 
 	public static void storeIndices( int[] indices, java.io.OutputStream os ) throws java.io.IOException {

@@ -1,6 +1,5 @@
 package edu.cmu.cs.stage3.lang;
 
-import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -10,10 +9,11 @@ public class Messages {
 	public static String getString(String key) {
 		try {	
 			String t = (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang.messages", AikMin.locale).getObject(key);
-			if (AikMin.locale.equals(new Locale("ar"))){
+			t = t.replace("''", "'");
+			//if (AikMin.locale.equals(new Locale("ar"))){
 				return new String ( t.getBytes("ISO-8859-1"), "UTF-8" );
-			}
-			return t;
+			//}
+			//t.replace("''", "'");
 			//return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getObject(key);
 		} catch (MissingResourceException e) {
 			return key.replace("_", " ");

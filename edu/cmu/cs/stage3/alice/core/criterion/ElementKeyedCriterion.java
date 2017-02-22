@@ -44,16 +44,13 @@ public class ElementKeyedCriterion implements edu.cmu.cs.stage3.util.Criterion {
 			String key = ((edu.cmu.cs.stage3.alice.core.Element)o).getKey();
 			if( m_key==null ) {
 				return key==null;
-			} else {
-				if( m_ignoreCase ) {
-					return m_key.equalsIgnoreCase( key );
-				} else {
-					return m_key.equals( key );
-				}
 			}
-		} else {
-			return false;
+			if( m_ignoreCase ) {
+				return m_key.equalsIgnoreCase( key );
+			}
+			return m_key.equals( key );
 		}
+		return false;
 	}
 	
 	public String toString() {

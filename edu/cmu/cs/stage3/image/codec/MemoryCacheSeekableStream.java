@@ -206,9 +206,8 @@ public final class MemoryCacheSeekableStream extends SeekableStream {
             byte[] buf =
                 (byte[])data.elementAt((int)(pointer >> SECTOR_SHIFT));
             return buf[(int)(pointer++ & SECTOR_MASK)] & 0xff;
-        } else {
-            return -1;
         }
+		return -1;
     }
 
     /**

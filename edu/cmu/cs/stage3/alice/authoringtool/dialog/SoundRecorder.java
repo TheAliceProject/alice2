@@ -203,7 +203,7 @@ public class SoundRecorder extends edu.cmu.cs.stage3.swing.ContentPane {
 		gbc = new java.awt.GridBagConstraints();
 		gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		gbc.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-		namePanel.add(new javax.swing.JLabel(Messages.getString("Name__")), gbc);
+		namePanel.add(new javax.swing.JLabel(Messages.getString("Name_")), gbc);
 		gbc.weightx = 1.0;
 		gbc.gridwidth = java.awt.GridBagConstraints.REMAINDER;
 		namePanel.add(m_nameTextField, gbc);

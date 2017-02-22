@@ -45,8 +45,7 @@ public abstract class BinaryObjectResultingInBooleanQuestion extends BooleanQues
 	public Object getValue() {
 		if( getValue( a.getValue(), b.getValue() ) ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

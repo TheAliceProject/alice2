@@ -14,8 +14,7 @@ public class CanSee extends BooleanQuestion {
 		edu.cmu.cs.stage3.alice.core.Model objectValue = object.getModelValue();
         if( cameraValue.canSee( objectValue, checkForOcclusion.booleanValue() ) ) {
             return Boolean.TRUE;
-        } else {
-            return Boolean.FALSE;
         }
+		return Boolean.FALSE;
 	}
 }

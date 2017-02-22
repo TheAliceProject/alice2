@@ -411,9 +411,8 @@ public class ItemChooser extends JPanel {
 			} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
 				throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); 
 			}
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public edu.cmu.cs.stage3.alice.core.Model getOriginalModel() {
@@ -424,9 +423,8 @@ public class ItemChooser extends JPanel {
 			} catch( edu.cmu.cs.stage3.alice.core.UnresolvablePropertyReferencesException upre ) {
 				throw new edu.cmu.cs.stage3.alice.core.ExceptionWrapper( upre, "UnresolvablePropertyReferencesException" ); 
 			}
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	protected class CommandInfo {

@@ -97,15 +97,14 @@ public abstract class ReferenceFrame extends Sandbox {
 	public Matrix44 getTransformation( javax.vecmath.Vector3d offset, ReferenceFrame asSeenBy ) {
 		if( asSeenBy==this && offset==null ) {
 			return new Matrix44();
-		} else {
-			edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame sgAsSeenBy;
-			if( asSeenBy != null ) {
-				sgAsSeenBy = asSeenBy.getSceneGraphReferenceFrame();
-			} else {
-				sgAsSeenBy = null;
-			}
-			return getSceneGraphReferenceFrame().getTransformation( offset, sgAsSeenBy );
 		}
+		edu.cmu.cs.stage3.alice.scenegraph.ReferenceFrame sgAsSeenBy;
+		if( asSeenBy != null ) {
+			sgAsSeenBy = asSeenBy.getSceneGraphReferenceFrame();
+		} else {
+			sgAsSeenBy = null;
+		}
+		return getSceneGraphReferenceFrame().getTransformation( offset, sgAsSeenBy );
 	}
 	public Matrix44 getTransformation( ReferenceFrame asSeenBy ) {
 		return getTransformation( null, asSeenBy );
@@ -280,9 +279,8 @@ public abstract class ReferenceFrame extends Sandbox {
 		Box box = getBoundingBox( asSeenBy, howMuch, ignoreHidden );
 		if( box!=null ) {
 			return new Vector3( box.getWidth(), box.getHeight(), box.getDepth() );
-		} else {
-			return new Vector3( 0, 0, 0 );
 		}
+		return new Vector3( 0, 0, 0 );
 	}
 	public double getSizeAlongDimension( Dimension dimension, ReferenceFrame asSeenBy, HowMuch howMuch, boolean ignoreHidden ) {
 		Box box = getBoundingBox( asSeenBy, howMuch, ignoreHidden );
@@ -296,10 +294,9 @@ public abstract class ReferenceFrame extends Sandbox {
 			} else {
 				throw new IllegalArgumentException(  Messages.getString("is_expected_to_be_in__LEFT_TO_RIGHT__TOP_TO_BOTTOM__FRONT_TO_BACK__", dimension) ); 
 			}
-		} else {
-			//todo: Double.NaN?
-			return 0;
 		}
+		//todo: Double.NaN?
+		return 0;
 	}
 
 	public double getWidth( ReferenceFrame asSeenBy, HowMuch howMuch, boolean ignoreHidden ) {

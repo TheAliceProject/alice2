@@ -37,14 +37,11 @@ public class DefaultReferenceGenerator implements edu.cmu.cs.stage3.alice.core.R
             if( m_internalRoot != null ) {
                 if( isExternal( element ) ) {
                     return new edu.cmu.cs.stage3.alice.core.criterion.ExternalReferenceKeyedCriterion( element.getKey( m_internalRoot.getRoot() ) );
-                } else {
-                    return new edu.cmu.cs.stage3.alice.core.criterion.InternalReferenceKeyedCriterion( element.getKey( m_internalRoot ) );
                 }
-            } else {
-                return new edu.cmu.cs.stage3.alice.core.criterion.ExternalReferenceKeyedCriterion( element.getKey() );
+				return new edu.cmu.cs.stage3.alice.core.criterion.InternalReferenceKeyedCriterion( element.getKey( m_internalRoot ) );
             }
-		} else {
-			return null;
+			return new edu.cmu.cs.stage3.alice.core.criterion.ExternalReferenceKeyedCriterion( element.getKey() );
 		}
+		return null;
 	}
 }

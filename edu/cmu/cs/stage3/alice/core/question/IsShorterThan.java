@@ -39,8 +39,7 @@ public class IsShorterThan extends SubjectObjectQuestion {
 	protected Object getValue( Transformable subjectValue, Transformable objectValue ) {
 		if( subjectValue.getHeight() < objectValue.getHeight() ) {
 			return Boolean.TRUE;
-		} else {
-			return Boolean.FALSE;
 		}
+		return Boolean.FALSE;
 	}
 }

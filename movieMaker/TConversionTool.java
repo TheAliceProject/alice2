@@ -284,14 +284,12 @@ public class TConversionTool
     /* Combine the sign, segment, and quantization bits. */
     if (seg >= 8)  /* out of range, return maximum value. */
       return (byte) ((0x7F ^ mask) & 0xFF);
-    else {
-      aval = (byte) (seg << SEG_SHIFT);
+	aval = (byte) (seg << SEG_SHIFT);
       if (seg < 2)
         aval |= (pcm_val >> 4) & QUANT_MASK;
       else
         aval |= (pcm_val >> (seg + 3)) & QUANT_MASK;
       return (byte) ((aval ^ mask) & 0xFF);
-    }
   }
   
   
@@ -412,11 +410,8 @@ public class TConversionTool
       return ( (unsignedByteToInt(buffer[offset]) << 8) |
               unsignedByteToInt(buffer[offset+1]) );
     }
-    else
-    {
-      return( (unsignedByteToInt(buffer[offset+1]) << 8) |
+	return( (unsignedByteToInt(buffer[offset+1]) << 8) |
              unsignedByteToInt(buffer[offset]));
-    }
     
   }
   
@@ -429,12 +424,9 @@ public class TConversionTool
               (unsignedByteToInt(buffer[offset+1]) << 8) |
               unsignedByteToInt(buffer[offset+2]));
     }
-    else
-    {
-      return ( (unsignedByteToInt(buffer[offset+2]) << 16) |
+	return ( (unsignedByteToInt(buffer[offset+2]) << 16) |
               (unsignedByteToInt(buffer[offset+1]) << 8) |
               unsignedByteToInt(buffer[offset]));
-    }
   }
   
   public static int unsignedByteToInt32(byte[] buffer, int offset,
@@ -447,13 +439,10 @@ public class TConversionTool
              (unsignedByteToInt(buffer[offset+2]) << 8) |
              unsignedByteToInt(buffer[offset+3]) );
     }
-    else
-    {
-      return((unsignedByteToInt(buffer[offset+3]) << 24) |
+	return((unsignedByteToInt(buffer[offset+3]) << 24) |
              (unsignedByteToInt(buffer[offset+2]) << 16) |
              (unsignedByteToInt(buffer[offset+1]) << 8) |
              unsignedByteToInt(buffer[offset]) );
-    }
   }
   
   public static byte intToUnsignedByte(int sample)

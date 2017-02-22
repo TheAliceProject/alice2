@@ -133,7 +133,8 @@ public class Menu implements StencilObject, StencilPanelMessageListener, MouseEv
   public Vector getShapes(){
     if (isShowing) {
       return shapes;
-    } else return null;
+    }
+	return null;
   }
   public Rectangle getRectangle(){
     if (isShowing) {
@@ -150,13 +151,15 @@ public class Menu implements StencilObject, StencilPanelMessageListener, MouseEv
     if (isModified) {
       isModified = false;
       return true;
-    } else return false;
+    }
+	return false;
   }
   public boolean intersectsRectangle( Rectangle rect ){
     Rectangle currentRect = this.getRectangle();
     if (currentRect != null) {
       return rect.intersects(currentRect);
-    } else return false;
+    }
+	return false;
   }
   public void addStencilObjectPositionListener(StencilObjectPositionListener posListener){
     stencilObjectPositionListeners.addElement(posListener);
@@ -183,7 +186,8 @@ public class Menu implements StencilObject, StencilPanelMessageListener, MouseEv
     if (isShowing) {
       if (writeEnabled) {
         return true;
-      } else return false;
+      }
+	return false;
       /*  if (upOption.contains(point)) return true;
         else if (downOption.contains(point)) return true;
         else if (rightOption.contains(point)) return true;
@@ -194,7 +198,8 @@ public class Menu implements StencilObject, StencilPanelMessageListener, MouseEv
         else if (rightOption.contains(point)) return true;
         else return false;
       }*/
-    } else return false;
+    }
+	return false;
   }
   public boolean mousePressed(MouseEvent e){
     return false;
