@@ -70,6 +70,7 @@ public class LoopNInOrder extends DoInOrder {
 		private double getIndexValue() {
 			edu.cmu.cs.stage3.alice.core.Variable indexVariable = LoopNInOrder.this.index.getVariableValue();
 			Number number = (Number)indexVariable.value.getValue();
+			if (number == null) return 0;
 			return number.doubleValue();
 		}
 		private void setIndexValue( double value ) {

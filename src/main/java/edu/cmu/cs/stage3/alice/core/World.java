@@ -458,6 +458,13 @@ public class World extends ReferenceFrame {
 			m_currentSandbox = (Sandbox)sandboxes.get( i );
 			m_currentSandbox.scheduleBehaviors( t );
 		}
+		for( int i=0; i<groups.size(); i++ ) {
+			Group o = (Group)groups.get( i );
+			for( int j=0; j<o.getChildCount(); j++ ) {
+				m_currentSandbox = (Sandbox)o.getChildAt( j );
+				m_currentSandbox.scheduleBehaviors( t );
+			}
+		}
 	}
 
 	public Sandbox getCurrentSandbox() {
@@ -465,9 +472,8 @@ public class World extends ReferenceFrame {
 		// this hack is placed here for script to execute on when the world stops
 		//if( m_currentSandbox != null ) {
 			return m_currentSandbox;
-		//} else {
-		//	return this;
-		//}
+		//} 
+		//return this;
 	}
 	//public void setCurrentSandbox( Sandbox currentSandbox ) {
 	//	m_currentSandbox = currentSandbox;

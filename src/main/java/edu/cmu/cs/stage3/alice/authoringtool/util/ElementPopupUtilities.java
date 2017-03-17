@@ -119,15 +119,17 @@ public class ElementPopupUtilities {
 							}
 						}
 					}
-					String repr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( c );
-					Runnable runnable = new Runnable() {
-						public void run() {
-							edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack().startCompound();
-							element.coerceTo( c );
-							edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack().stopCompound();
-						}
-					};
-					subStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( repr, runnable ) );
+					if (!(edu.cmu.cs.stage3.alice.core.behavior.WorldIsRunningBehavior.class.isAssignableFrom(c))) {
+						String repr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( c );
+						Runnable runnable = new Runnable() {
+							public void run() {
+								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack().startCompound();
+								element.coerceTo( c );
+								edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getUndoRedoStack().stopCompound();
+							}
+						};
+						subStructure.add( new edu.cmu.cs.stage3.util.StringObjectPair( repr, runnable ) );
+					}
 				}
 				if (subStructure.size() > 0){
 					structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("change_to"), subStructure ) ); 

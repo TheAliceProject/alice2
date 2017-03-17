@@ -30,25 +30,33 @@ import edu.cmu.cs.stage3.lang.Messages;
 public abstract class AbstractMoveInDirectionOfAnimation extends TransformAnimation {
 	public final ReferenceFrameProperty target = new ReferenceFrameProperty( this, "target", null ); 
 	public final NumberProperty amount = new NumberProperty( this, "amount", new Double( 1 ) ); 
-
-	public abstract class RuntimeAbstractMoveInDirectionOfAnimationAnimation extends RuntimeTransformAnimation {
+	
+	public abstract class RuntimeAbstractMoveInDirectionOfAnimationAnimation extends RuntimeTransformAnimation implements edu.cmu.cs.stage3.alice.scenegraph.event.AbsoluteTransformationListener {
+			
 		private edu.cmu.cs.stage3.alice.core.ReferenceFrame m_target;
-		private javax.vecmath.Vector3d m_vector;
-		private javax.vecmath.Vector3d m_vectorPrev;
-        protected abstract double getActualAmountValue();
-		protected javax.vecmath.Vector3d getVector() {
+		private javax.vecmath.Vector3d m_positionBegin;
+		private javax.vecmath.Vector3d m_positionEnd;
+		
+		protected abstract double getActualAmountValue();
+
+		protected javax.vecmath.Vector3d getPositionEnd() {
 			double amountValue = getActualAmountValue();
 			if( !Double.isNaN( amountValue ) ) {
-				javax.vecmath.Vector3d v = m_target.getPosition( m_subject );
+				m_positionEnd = m_asSeenBy.getPosition( edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE );
+				javax.vecmath.Vector3d v = edu.cmu.cs.stage3.math.MathUtilities.subtract( m_positionEnd, m_positionBegin ) ;
                 double length = edu.cmu.cs.stage3.math.MathUtilities.getLength( v );
                 if( length>0 ) {
                     v.scale( amountValue/length );
                 } else {
                     v.set( 0, 0, amountValue );
-                }
+                }          
 				return v;
-			}
+			} 
 			return new javax.vecmath.Vector3d();
+		}
+		
+		public void absoluteTransformationChanged( edu.cmu.cs.stage3.alice.scenegraph.event.AbsoluteTransformationEvent absoluteTransformationEvent ) {
+			m_positionEnd = null;
 		}
 		
 		public void prologue( double t ) {
@@ -57,22 +65,25 @@ public abstract class AbstractMoveInDirectionOfAnimation extends TransformAnimat
 			if( m_target == null ) {
 				throw new edu.cmu.cs.stage3.alice.core.SimulationPropertyException( Messages.getString("target_must_not_be_null_"), getCurrentStack(), AbstractMoveInDirectionOfAnimation.this.target ); 
 			}
-
-			m_vectorPrev = new javax.vecmath.Vector3d();
-			m_vector = getVector();
+			if( m_asSeenBy == null ) {
+				m_asSeenBy = m_target;
+			}
+			m_positionBegin = m_subject.getPosition( edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE );
+			m_positionEnd = null;
+			m_asSeenBy.addAbsoluteTransformationListener( this );
 		}
 		
 		public void update( double t ) {
 			super.update( t );
-			javax.vecmath.Vector3d delta = edu.cmu.cs.stage3.math.MathUtilities.subtract( edu.cmu.cs.stage3.math.MathUtilities.multiply( m_vector, getPortion( t ) ), m_vectorPrev );
-			m_subject.moveRightNow( delta, m_asSeenBy );
-			m_vectorPrev.add( delta );
+			if( m_positionEnd==null ) {
+				m_positionEnd = edu.cmu.cs.stage3.math.MathUtilities.add (getPositionEnd(), m_positionBegin);
+			}
+			m_subject.setPositionRightNow( edu.cmu.cs.stage3.math.MathUtilities.interpolate( m_positionBegin, m_positionEnd, getPortion( t ) ), edu.cmu.cs.stage3.alice.core.ReferenceFrame.ABSOLUTE );
 		}
 
-		//public void epilogue( double t ) {
-		//	edu.cmu.cs.stage3.math.Vector3 delta = edu.cmu.cs.stage3.math.Vector3.subtract( m_vector, m_vectorPrev );
-		//	m_subject.moveRightNow( delta, m_asSeenBy );
-		//	m_vectorPrev.add( delta );
-		//}
+		public void epilogue( double t ) {
+			super.epilogue( t );
+			if (m_asSeenBy != null) m_asSeenBy.removeAbsoluteTransformationListener( this );
+		}
 	}
 }
