@@ -1786,6 +1786,8 @@ public class AuthoringToolResources {
 				if( isMethodHookedUp( (edu.cmu.cs.stage3.alice.core.Response)referrer, world, checkedMethods ) ) {
 					return true;
 				}
+			} else if( referrer instanceof edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior || referrer instanceof edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior ){
+				return true;
 			}
 		}
 

@@ -76,6 +76,10 @@ public class JAlice {
                 System.exit(1);
         }*/
 		try {
+			com.apple.eawt.Application app = com.apple.eawt.Application.getApplication();
+			URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/alice.png");	
+			app.setDockIconImage( java.awt.Toolkit.getDefaultToolkit().getImage(url) );
+			
 			java.io.File bakFile = new java.io.File(JAlice.getAliceHomeDirectory().getParent().toString() + File.separator + "Aliceold.exe");
 			if (bakFile.exists()){
 				bakFile.delete();
@@ -281,9 +285,6 @@ public class JAlice {
 			//	worldToLoad = new java.io.File( args[args.length-1] ).getAbsoluteFile();
 			//}
 			defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/default_"+AikMin.locale.getDisplayLanguage()+".a2w" ).getAbsoluteFile();			
-			
-			//DEBUG
-			//defaultWorld = new java.io.File( getAliceHomeDirectory(), "etc/Square.a2w" ).getAbsoluteFile();			
 			
 			if (!(defaultWorld.exists() && defaultWorld.canRead())) {
 				JOptionPane.showMessageDialog(new JFrame(),

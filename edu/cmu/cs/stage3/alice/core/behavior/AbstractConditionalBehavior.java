@@ -79,7 +79,6 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 	protected void internalSchedule( double t, double dt ) {
 		double timeRemaining = 0;
 		if( m_runtimeState==RUNTIME_STATE_CHECKING_FOR_TRUE ) {
-			//if ( (listeningToKeypress && AuthoringTool.temp == 0) || !listeningToKeypress )
 			if( m_booleanValue ) {
 				if( m_runtimeBeginResponse!=null ) {
 					m_runtimeState = RUNTIME_STATE_BEGINNING;
@@ -98,7 +97,6 @@ public abstract class AbstractConditionalBehavior extends Behavior {
 			}
 		}
 		if( m_runtimeState==RUNTIME_STATE_CHECKING_FOR_FALSE ) {
-			//if ( (listeningToKeypress && AuthoringTool.temp == 0) || !listeningToKeypress )
 			if( m_booleanValue ) {
 				if( m_runtimeDuringResponse!=null ) {
 					if( !m_runtimeDuringResponse.isActive() ) {

@@ -330,13 +330,13 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		watcherSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.HORIZONTAL_SPLIT);
 		watcherSplitPane.setContinuousLayout(true);
 		watcherSplitPane.setDividerSize(0);
-		watcherSplitPane.setResizeWeight(1.0);
+		watcherSplitPane.setResizeWeight(0);
 		watcherSplitPane.setLeftComponent(renderPanel);
 
 		stdOutSplitPane = new javax.swing.JSplitPane(javax.swing.JSplitPane.VERTICAL_SPLIT);
 		stdOutSplitPane.setContinuousLayout(true);
 		stdOutSplitPane.setDividerSize(0);
-		stdOutSplitPane.setResizeWeight(1.0);
+		stdOutSplitPane.setResizeWeight(0);
 		stdOutSplitPane.setTopComponent(watcherSplitPane);
 		setLayout(new java.awt.BorderLayout());
 

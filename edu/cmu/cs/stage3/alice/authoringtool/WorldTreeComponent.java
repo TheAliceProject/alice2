@@ -412,7 +412,9 @@ public class WorldTreeComponent extends javax.swing.JPanel {
 				authoringTool.getUndoRedoStack().startCompound();
 
 //				child.removeFromParent();
-				child.removeFromParentsProperties();				
+				//if( !(parent instanceof edu.cmu.cs.stage3.alice.core.Group) ) {
+					child.removeFromParentsProperties();	
+				//} 
 //				parent.addChild( child );
 				child.setParent( parent );
 				oap.add( index, child );

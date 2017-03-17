@@ -49,8 +49,12 @@ public class CallToUserDefinedResponse extends Response {
 			UserDefinedResponse userDefinedResponseValue = userDefinedResponse.getUserDefinedResponseValue();
 			if( userDefinedResponseValue!=null ) {
 				m_actual = (UserDefinedResponse.RuntimeUserDefinedResponse)userDefinedResponseValue.manufactureRuntimeResponse();
-                m_currentBehavior = CallToUserDefinedResponse.this.getWorld().getCurrentSandbox().getCurrentBehavior();
-                Variable[] rap = (Variable[])CallToUserDefinedResponse.this.requiredActualParameters.getArrayValue();
+				try {
+					m_currentBehavior = CallToUserDefinedResponse.this.getWorld().getCurrentSandbox().getCurrentBehavior();
+				} catch ( Exception e ){
+					return;
+				}
+				Variable[] rap = (Variable[])CallToUserDefinedResponse.this.requiredActualParameters.getArrayValue();
                 for( int i=0; i<rap.length; i++ ) {
                     Variable runtime = m_currentBehavior.stackLookup( rap[ i ] );
                     if( runtime != null ) {

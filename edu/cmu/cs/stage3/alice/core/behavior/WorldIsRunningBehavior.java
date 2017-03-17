@@ -31,7 +31,7 @@ public class WorldIsRunningBehavior extends AbstractConditionalBehavior {
 	}
 	
 	protected boolean invokeEndOnStop() {
-		return true;
+		return false;
 	}
 	
 	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {

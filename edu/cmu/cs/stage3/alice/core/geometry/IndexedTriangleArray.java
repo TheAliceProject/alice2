@@ -47,7 +47,7 @@ public class IndexedTriangleArray extends VertexGeometry {
 	}
 
 	public void removeVertices(){
-		vertices.clearValue();	// clear m_arrayValueIfNull & m_value from VertexArrayProperty
+		vertices.clearValue();									// clear m_arrayValueIfNull & m_value from VertexArrayProperty
 		//m_indices = null;
 		getSceneGraphIndexedTriangleArray().clearVertices();	// clear m_vertices from IndexedTriangleArray
 		getSceneGraphIndexedTriangleArray().setIndices( null );		

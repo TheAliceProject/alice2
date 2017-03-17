@@ -1879,8 +1879,17 @@ public abstract class Element {
 	}
 	protected void stopped( World world, double time ) {
 		Element[] children = getChildren();
+		int index = -1;
 		for( int i=0; i<children.length; i++ ) {
-			children[ i ].stopped( world, time );
+			if (children [i] instanceof edu.cmu.cs.stage3.alice.core.behavior.WorldIsRunningBehavior){
+				children[ i ].stopped( world, time );
+				index = i;
+			}			
+		}
+		for( int i=0; i<children.length; i++ ) {
+			if (index != i){
+				children[ i ].stopped( world, time );
+			}			
 		}
 	}
 	public static void warn( Object o ) {

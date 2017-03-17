@@ -53,10 +53,11 @@ public class DefaultClock implements edu.cmu.cs.stage3.alice.core.Clock {
 	}
 	public void stop() {
 		m_pauseCount = 0;
-		m_whenPrev = -1;
+		//m_whenPrev = -1;
 		if( m_world != null ) {
 			m_world.stop();
 		}
+		m_whenPrev = -1;
 	}
 	public void pause() {
 		m_pauseCount++;
