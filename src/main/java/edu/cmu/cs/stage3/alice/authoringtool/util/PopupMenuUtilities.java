@@ -667,7 +667,7 @@ public class PopupMenuUtilities{
 		// if it's a variable, allow user to set it
 		if( expression instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 			//edu.cmu.cs.stage3.util.StringObjectPair[] known = { new edu.cmu.cs.stage3.util.StringObjectPair( "element", expression ), new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", Messages.getString("value") ), new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Integer( 0 ) ) };
-			edu.cmu.cs.stage3.util.StringObjectPair[] known = { new edu.cmu.cs.stage3.util.StringObjectPair( "element", expression ), new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", "value" ), new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Integer( 0 ) ) };
+			edu.cmu.cs.stage3.util.StringObjectPair[] known = { new edu.cmu.cs.stage3.util.StringObjectPair( "element", expression ), new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", "value" ), new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 1.0 ) ) };
 			String[] desired = { "value" };
 			edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype rp = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, known, desired );
 			java.util.Vector setValueStructure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePrototypeStructure( rp, factory, context );
@@ -767,7 +767,7 @@ public class PopupMenuUtilities{
 								edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues = new edu.cmu.cs.stage3.util.StringObjectPair[] {
 									new edu.cmu.cs.stage3.util.StringObjectPair( "element", element ),
 									new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", propertyName ),
-									new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 0.0 ) ),
+									new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 1.0 ) ),
 								};
 								String[] desiredProperties = new String[] { "value" };
 								edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class, knownPropertyValues, desiredProperties );

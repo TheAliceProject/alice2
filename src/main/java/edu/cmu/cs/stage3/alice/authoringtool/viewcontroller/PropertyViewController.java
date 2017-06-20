@@ -1264,7 +1264,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues = new edu.cmu.cs.stage3.util.StringObjectPair[] {
 							new edu.cmu.cs.stage3.util.StringObjectPair( "element", p.getOwner() ),
 							new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", p.getName() ),
-							new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 0.0 ) ),
+							new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 1.0 ) ),
 						};
 						String[] desiredProperties = new String[] { "value" };
 						responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class, knownPropertyValues, desiredProperties );

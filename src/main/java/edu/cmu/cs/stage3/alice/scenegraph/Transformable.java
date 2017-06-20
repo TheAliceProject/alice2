@@ -105,7 +105,7 @@ public class Transformable extends ReferenceFrame {
                 } else {
                     m_absoluteTransformation = new javax.vecmath.Matrix4d( m_localTransformation );
                 }
-                if( Math.abs( m_absoluteTransformation.m33-1.0 ) > 0.01 ) {
+                if( Math.abs( m_absoluteTransformation.m33-1.0 ) > 0.01 ) {		// Aik Min - Shouldn't it be > 0?. Why > 0.01??
                     System.err.println( "JAVA SCENEGRAH LOCAL: holy corrupt matrix batman " + m_absoluteTransformation );
                 }
             }

@@ -77,7 +77,7 @@ public class Quaternion implements Cloneable, Interpolable {
 		w = a[3];
 	}
 	public boolean equals( Quaternion q ) {
-		return x==q.x && y==q.y && z==q.z && w==q.w;
+		return Math.abs(x-q.x) < 0.000001 && Math.abs(y-q.y) < 0.000001 && Math.abs(z-q.z) < 0.000001 && Math.abs(w-q.w) < 0.000001;
 	}
 	public AxisAngle getAxisAngle() {
 		return new AxisAngle( this );
@@ -205,6 +205,7 @@ public class Quaternion implements Cloneable, Interpolable {
 			b1 = b;
 		}
 
+		portion = 0.5;
 		double scale0;
 		double scale1;
 		// calculate coefficients

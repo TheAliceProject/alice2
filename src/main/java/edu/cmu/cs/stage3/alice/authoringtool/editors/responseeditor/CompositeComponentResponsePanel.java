@@ -307,7 +307,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                     if (property instanceof edu.cmu.cs.stage3.alice.core.property.VehicleProperty){
                         //System.out.println("new vehicle animation");
                         //edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("duration"), new Double(0))};
-                    	edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair("duration", new Double(0))};
+                    	edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair("duration", new Double(1))};
                         known = newKnown;
                         animationClass = edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class;
                     }
