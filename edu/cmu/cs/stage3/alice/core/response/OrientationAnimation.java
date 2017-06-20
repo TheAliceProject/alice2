@@ -63,8 +63,10 @@ public abstract class OrientationAnimation extends TransformAnimation {
 				if( m_quaternion1==null ) {
 					m_quaternion1 = getTargetQuaternion();
 				}
-				edu.cmu.cs.stage3.math.Quaternion q = edu.cmu.cs.stage3.math.Quaternion.interpolate( m_quaternion0, m_quaternion1, getPortion( t ) );
-				m_subject.setOrientationRightNow( q, m_asSeenBy );
+				if (!m_quaternion1.equals(m_quaternion0)){
+					edu.cmu.cs.stage3.math.Quaternion q = edu.cmu.cs.stage3.math.Quaternion.interpolate( m_quaternion0, m_quaternion1, getPortion( t ) );
+					m_subject.setOrientationRightNow( q, m_asSeenBy );
+				}
 			}
 		}
 		

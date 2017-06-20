@@ -30,7 +30,7 @@ public class Decrement extends Animation {
 	public final VariableProperty variable = new VariableProperty( this, "variable", null );
 	
 	protected Number getDefaultDuration() {
-		return new Double( 0 );
+		return new Double( 1 );
 	}
 	public class RuntimeDecrement extends RuntimeAnimation {
         private double m_amountAlreadyDecremented = 0;

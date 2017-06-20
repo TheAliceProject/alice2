@@ -96,10 +96,12 @@ public class PoseAnimation extends Animation {
 				edu.cmu.cs.stage3.math.Quaternion targetQuaternion = (edu.cmu.cs.stage3.math.Quaternion)targetQuaternionMap.get( key );
 
 				edu.cmu.cs.stage3.math.Vector3 currentPosition = edu.cmu.cs.stage3.math.Vector3.interpolate( sourcePosition, targetPosition, portion  );
-				edu.cmu.cs.stage3.math.Quaternion currentQuaternion = edu.cmu.cs.stage3.math.Quaternion.interpolate( sourceQuaternion, targetQuaternion, portion );
-
 				key.setPositionRightNow( currentPosition );
-				key.setOrientationRightNow( currentQuaternion );
+
+				if (!sourceQuaternion.equals(targetQuaternion)){
+					edu.cmu.cs.stage3.math.Quaternion currentQuaternion = edu.cmu.cs.stage3.math.Quaternion.interpolate( sourceQuaternion, targetQuaternion, portion );
+					key.setOrientationRightNow( currentQuaternion );
+				}
 			}
 		}
 

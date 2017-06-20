@@ -1,7 +1,7 @@
 End User License Agreement Copyright (c) 1999-20--, Carnegie Mellon University.
 All rights reserved. Redistribution and use in binary form, with or without modification, are permitted for non-commercial purposes or uses, provided that the following conditions are met:
 
-1. Redistribution i n bi nary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+1. Redistribution in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
 2. Products derived from the software may not be called "Alice", nor may "Alice" appear in their name, nor may any translated form of the word "Alice" appear in their name, without prior written permission of Carnegie Mellon University.
 
