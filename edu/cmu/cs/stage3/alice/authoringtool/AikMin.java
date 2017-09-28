@@ -37,7 +37,9 @@ public class AikMin {
 			authoringtoolConfig.setValue( "language", AikMin.defaultLanguage );
 		} else {
 			String aliceLanguage = authoringtoolConfig.getValue( "language" );
-			if (aliceLanguage.equalsIgnoreCase("Portuguese")) {
+			if (aliceLanguage.equalsIgnoreCase("English")) {
+				locale = new Locale ("en");
+			} else if (aliceLanguage.equalsIgnoreCase("Portuguese")) {
 				locale = new Locale ("pt");
 			} else if (aliceLanguage.equalsIgnoreCase("Spanish")) {
 				locale = new Locale ("es");

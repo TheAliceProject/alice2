@@ -4272,16 +4272,21 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						token = st.nextToken();
 						prefix = AuthoringToolResources.getPrefix(token);
 						spec = AuthoringToolResources.getSpecifier(token);
-						String directory = jAliceFrame.sceneEditor.getGalleryViewer().getDirectory();
-						String gallery = directory.substring(directory.lastIndexOf("(")-1, directory.lastIndexOf(")")+1);
 						if (prefix.equals("galleryViewer")) { 
+							String directory = jAliceFrame.sceneEditor.getGalleryViewer().getDirectory();
+							String gallery = directory;
+							if ( directory.indexOf("(") >= 0 )
+								gallery = directory.substring(directory.lastIndexOf("(")-1, directory.lastIndexOf(")")+1);
 							jAliceFrame.sceneEditor.getGalleryViewer().setDirectory(spec);
 							if (st.hasMoreTokens()) {
 								token = st.nextToken();
 								prefix = AuthoringToolResources.getPrefix(token);
 								spec = AuthoringToolResources.getSpecifier(token);
-								if (prefix.equals("button")) { 
-									java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+gallery);
+								if (prefix.equals("button")) {  
+									java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec + gallery);
+									if (c == null) {
+										c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), Messages.getString(spec.replaceAll(" ", "_")) + gallery);
+									}
 									if (c != null) {
 										r = c.getBounds();
 										r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
@@ -4510,7 +4515,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		//			return false;
 		//		}
 	}
-
+	
 	public boolean isIDVisible(String id) throws edu.cmu.cs.stage3.caitlin.stencilhelp.application.IDDoesNotExistException {
 		java.util.StringTokenizer st = new java.util.StringTokenizer(id, ":", false); 
 
@@ -4555,14 +4560,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						spec = AuthoringToolResources.getSpecifier(token);
 						if (prefix.equals("galleryViewer")) { 
 							String directory = jAliceFrame.sceneEditor.getGalleryViewer().getDirectory();
-							String gallery = directory.substring(directory.lastIndexOf("(")-1, directory.lastIndexOf(")")+1);
-							if (directory.replace(gallery, "").equals(spec)) {
+							String gallery = directory;
+							if ( directory.indexOf("(") >= 0 )
+								gallery = directory.substring(directory.lastIndexOf("(")-1, directory.lastIndexOf(")")+1);
+							if (directory.equals(spec)) {
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
 									prefix = AuthoringToolResources.getPrefix(token);
 									spec = AuthoringToolResources.getSpecifier(token);
 									if (prefix.equals("button")) { 
-										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec+gallery);
+										java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), spec + gallery);
+										if (c == null) {
+											c = AuthoringToolResources.findButton(jAliceFrame.sceneEditor.getGalleryViewer(), Messages.getString(spec.replaceAll(" ", "_")) + gallery);
+										}
 										if ((c != null) && isComponentVisible((javax.swing.JComponent) c)) {
 											return true;
 										}
