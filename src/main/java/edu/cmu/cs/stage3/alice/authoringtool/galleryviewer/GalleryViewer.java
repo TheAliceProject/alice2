@@ -47,10 +47,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     public static final int WEB = 2;
     public static final int CD = 3;
     protected final java.awt.Insets panelInset = new java.awt.Insets(1,2,0,0);
-    public static final String webGalleryName = Messages.getString("Web_Gallery"); 
-    public static final String localGalleryName = Messages.getString("Local_Gallery"); 
-    public static final String cdGalleryName = Messages.getString("CD_Gallery"); 
-    public static final String customGalleryName = Messages.getString("Custom_Gallery"); 
+    public static final String webGalleryName = "Web Gallery"; //redo Messages.getString("Web_Gallery"); 
+    public static final String localGalleryName = "Local Gallery"; //redo Messages.getString("Local_Gallery"); 
+    public static final String cdGalleryName = "CD Gallery"; //redoMessages.getString("CD_Gallery"); 
+    public static final String customGalleryName = "Custom Gallery"; //redo Messages.getString("Custom_Gallery"); 
     public static boolean showBuilder = false; 
 
     public static String webGalleryRoot;
@@ -61,7 +61,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     protected static boolean alreadyEnteredWebGallery = false;
     
 
-    public static final String homeName = Messages.getString("Home"); 
+    public static final String homeName = "Home"; //redo Messages.getString("Home"); 
     protected static final java.awt.Color backgroundColor = new java.awt.Color(118,128,128);
     protected static final java.awt.Color textColor = new java.awt.Color(255,255,255);
     protected static final java.awt.Color linkColor = new java.awt.Color(153,204,255);
@@ -1106,10 +1106,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         guiInit();
         
         String file [] = Configuration.getValueList( authoringToolPackage, "directories.galleryDirectory" );
-        RootDirectoryStructure templocal = createDirectory(new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + "Core"), localGalleryName + " (Core)", LOCAL);
+        RootDirectoryStructure templocal = createDirectory(new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + "Core"), localGalleryName, LOCAL);
         for (int i = 0; i < file.length; i++){  
         	java.io.File temp = new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + file[i]);
-	        localGallery = createDirectory(temp, localGalleryName + " (" + file[i] + ")", LOCAL);
+	        localGallery = createDirectory(temp, localGalleryName +" (" + file[i] + ")", LOCAL);
 	        if (localGallery != null){
 	            rootDirectories.add(localGallery);
 	            localGalleryRoot = localGallery.rootPath;
@@ -1120,6 +1120,19 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 	    }
         if ( templocal !=null )
         	localGallery = templocal;
+        
+        //    if ( AikMin.locale.getDisplayLanguage().equalsIgnoreCase(file[i])){
+        //    	localGallery = createDirectory(new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + file[i]), localGalleryName, LOCAL); //redo localGallery = createDirectory(temp, localGalleryName + " (" + file[i] + ")", LOCAL);
+        //    }
+        //}
+        //if (localGallery == null){
+        //	localGallery = templocal;
+        //}	
+        //rootDirectories.add(localGallery);
+        //localGalleryRoot = localGallery.rootPath;
+	    
+        //redo if ( templocal !=null )
+       	//redo localGallery = templocal;
 
         cdGallery = createDirectory(mainCDGalleryFile, cdGalleryName, CD);
         if (cdGallery != null){
@@ -1366,7 +1379,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         boolean isFirst = true;
         DirectoryStructure currentDirToSet = null;
         while (token.hasMoreTokens()){
-            String current = token.nextToken();
+        	String current = token.nextToken();//redo String current = Messages.getString( token.nextToken().replace(" ", "_") );
             if (current != null && !current.equalsIgnoreCase("") && !current.equalsIgnoreCase(" ")){  
                 if (isFirst){
                     isFirst = false;
@@ -1379,7 +1392,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     }
                     else if (current.startsWith(localGalleryName)){ 	
                         currentDirToSet = getRootDirectoryNamed(localGalleryName + " (" + Configuration.getValue( authoringToolPackage, "language" ) + ")");
-                        if (currentDirToSet == null) currentDirToSet = getRootDirectoryNamed(localGalleryName + " (Core)");
+                        //if (currentDirToSet == null) currentDirToSet = getRootDirectoryNamed(localGalleryName + " (Core)");
                         if (currentDirToSet == null) {
                         	RootDirectoryStructure temp = (RootDirectoryStructure)rootDirectories.get(0);
                         	currentDirToSet = temp.directory;
@@ -1434,7 +1447,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         data.mainViewer = this;
         data.transferable = new java.awt.datatransfer.StringSelection(data.name);
         RootDirectoryStructure toReturn = new RootDirectoryStructure(path, WEB, null, data);
-        DirectoryStructure dirStruct = new DirectoryStructure(toReturn, name,rootFilename);
+        DirectoryStructure dirStruct = new DirectoryStructure(toReturn, name, rootFilename);
         if (initXML){
             try{
                 String xml = getXML(path, rootFilename, WEB, getURLTimeStamp(path+rootFilename), cacheDir, false);
@@ -2823,7 +2836,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                         continue;
                     }
                     if (toAdd != null){
-//                        objectPanel.add(toAdd, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, panelInset, 0,0 ));
+//                      objectPanel.add(toAdd, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, panelInset, 0,0 ));
 						objectPanel.add(toAdd);
                         count++;
                     }
@@ -2883,7 +2896,12 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     count++;
                 }
                 if (currentDir == directoryOnDisplay){
-                    currentDirLabel.setText(currentDir.name);
+                	String translate = currentDir.name;
+                	if ( currentDir.name.indexOf("(") >= 0 )
+                		translate = currentDir.name.substring(0, currentDir.name.indexOf("(") ).trim();
+                	
+                	//currentDir.name.replaceFirst( translate, Messages.getString(translate.replaceAll(" ", "_")));
+                	currentDirLabel.setText( currentDir.name.replaceFirst( translate, Messages.getString(translate.replaceAll(" ", "_"))) ); //redo currentDirLabel.setText(currentDir.name);
                     directoryPanel.add(currentDirLabel, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.WEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
                 }
                 else{
@@ -2895,7 +2913,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
         else{
            // isInWebGallery = false;
-            currentDirLabel.setText(homeName);
+        	currentDirLabel.setText( Messages.getString(homeName) ); //redo currentDirLabel.setText(homeName);
             directoryPanel.add(currentDirLabel, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.WEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
             count++;
             upLevelButton.setEnabled(false);

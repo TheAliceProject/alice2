@@ -53,7 +53,7 @@ public class JAlice {
 	}
 	
 	// version information
-	private static String version = "2.4.4"; // String.valueOf(JAVA_VERSION); 
+	private static String version = "2.5"; // String.valueOf(JAVA_VERSION); 
 	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	//private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
@@ -76,9 +76,11 @@ public class JAlice {
                 System.exit(1);
         }*/
 		try {
-			com.apple.eawt.Application app = com.apple.eawt.Application.getApplication();
-			URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/alice.png");	
-			app.setDockIconImage( java.awt.Toolkit.getDefaultToolkit().getImage(url) );
+			if (AikMin.isMAC()){
+				com.apple.eawt.Application app = com.apple.eawt.Application.getApplication();
+				URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/alice.png");	
+				app.setDockIconImage( java.awt.Toolkit.getDefaultToolkit().getImage(url) );
+			}
 			
 			java.io.File bakFile = new java.io.File(JAlice.getAliceHomeDirectory().getParent().toString() + File.separator + "Aliceold.exe");
 			if (bakFile.exists()){

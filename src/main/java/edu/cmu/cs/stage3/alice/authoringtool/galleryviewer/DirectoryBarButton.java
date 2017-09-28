@@ -41,7 +41,11 @@ public class DirectoryBarButton extends javax.swing.JButton {
             super.setText(Messages.getString("Home")); 
         }
         else{
-            super.setText(dirData.name);
+        	String translate = dirData.name;
+        	if ( dirData.name.indexOf("(") >= 0 )
+        		translate = dirData.name.substring(0, dirData.name.indexOf("(") ).trim();
+        	
+            super.setText( dirData.name.replaceFirst( translate, Messages.getString(translate.replaceAll(" ", "_"))) );
         }
         this.setBorder(null);
         this.setOpaque(false);

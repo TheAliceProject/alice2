@@ -298,7 +298,10 @@ public abstract class GalleryObject extends edu.cmu.cs.stage3.alice.authoringtoo
     }
     
     public static String getDisplayName(String toDisplay){
-    	String displayNameToReturn = new String(toDisplay);
+    	String translate = toDisplay;
+    	if ( toDisplay.indexOf("(") >= 0 )
+    		translate = toDisplay.substring(0, toDisplay.indexOf("(") ).trim();
+    	String displayNameToReturn = new String( toDisplay.replaceFirst( translate, Messages.getString(translate.replaceAll(" ", "_"))) );
     	if (Character.isLowerCase(displayNameToReturn.charAt(0))){
 			displayNameToReturn = Character.toUpperCase(displayNameToReturn.charAt(0))+displayNameToReturn.substring(1);
     	}
