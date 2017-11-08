@@ -2001,9 +2001,9 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(objectPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, java.awt.BorderLayout.CENTER);
         
-        //Aik Min added this to make scroll bar scroll more
-        scrollPane.getHorizontalScrollBar().setUnitIncrement(44);
-        
+        //Aik Min added this to make scroll bar scroll better
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(133);
+        scrollPane.getHorizontalScrollBar().setBlockIncrement(133);
         
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,0,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,1,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
