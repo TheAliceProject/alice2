@@ -489,6 +489,7 @@ public class RenderContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			watcherSplitPane.setDividerLocation(0);
 			watcherSplitPane.setDividerSize(0);
 		}
+		renderPanel.revalidate();
 		packDialog();
 	}
 

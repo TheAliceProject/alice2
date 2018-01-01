@@ -805,14 +805,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		  	}, AWTEvent.KEY_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK | AWTEvent.MOUSE_EVENT_MASK);
 		  	
 		}
-/*
-		if (AikMin.isMAC()) {
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					new Test();
-				}
-			});	
-		}	*/
 
 		// Global Key Listener
 //		if (AikMin.isMAC()) {

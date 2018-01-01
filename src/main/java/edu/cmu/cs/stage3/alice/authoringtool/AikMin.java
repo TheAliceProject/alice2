@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 import edu.cmu.cs.stage3.lang.Messages;
 	
 public class AikMin {
-	public static Locale locale = new Locale ("en");
+	public static Locale locale = new Locale ("en"); //es
 	public static int decimal = 2;
 	public static String defaultLanguage = locale.getDisplayLanguage();
 	public static String[] listOfLanguages = {"Arabic", "English", "German", "Portuguese","Spanish"}; 
