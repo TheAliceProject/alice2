@@ -1,0 +1,13 @@
+<itemChoices>
+	<addTexture icon="noface.gif" texture="trans0.gif" layer="2"></addTexture>
+	<addTexture icon="lips1_small.gif" texture="lips1.gif" layer="2"></addTexture>
+	<addTexture icon="lips2_small.gif" texture="lips2.gif" layer="2"></addTexture>
+	<addTexture icon="lips3_small.gif" texture="lips3.gif" layer="2"></addTexture>
+	<addTexture icon="lips4_small.gif" texture="lips4.gif" layer="2"></addTexture>
+	<addTexture icon="lips5_small.gif" texture="lips5.gif" layer="2"></addTexture>
+	<addTexture icon="lips6_small.gif" texture="lips6.gif" layer="2"></addTexture>
+	<addTexture icon="brightpinklips_small.gif" texture="brightpinklips.gif" layer="2"></addTexture>
+	<addTexture icon="biglips_small.gif" texture="biglips.gif" layer="2"></addTexture>
+	<addTexture icon="darklips_small.gif" texture="darklips.gif" layer="2"></addTexture>
+	<addTexture icon="inwardsmile_small.gif" texture="inwardsmile.gif" layer="2"></addTexture>
+</itemChoices>
