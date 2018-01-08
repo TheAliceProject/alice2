@@ -546,7 +546,7 @@ public class Actions {
 		//launchTutorialFileAction.putValue( javax.swing.Action.SMALL_ICON, );
 		applicationActions.add( launchTutorialFileAction );
 
-		launchTutorialEditor.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_T, java.awt.Event.CTRL_MASK ) );
+		//launchTutorialEditor.putValue( javax.swing.Action.ACCELERATOR_KEY, javax.swing.KeyStroke.getKeyStroke( java.awt.event.KeyEvent.VK_T, java.awt.Event.CTRL_MASK ) );
 		launchTutorialEditor.putValue( javax.swing.Action.ACTION_COMMAND_KEY, "launchTutorialEditor" ); 
 		//launchTutorialEditor.putValue( javax.swing.Action.MNEMONIC_KEY, new Integer( 'T' ) );
 		launchTutorialEditor.putValue( javax.swing.Action.NAME, "Tutorial Editor" ); 

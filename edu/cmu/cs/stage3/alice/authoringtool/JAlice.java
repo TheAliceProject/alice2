@@ -43,17 +43,9 @@ import edu.cmu.cs.stage3.lang.Messages;
  * @author Jason Pratt
  */
 public class JAlice {
-	public static double JAVA_VERSION = getJavaVersion ();
-
-	static double getJavaVersion () {
-	    String version = System.getProperty("java.version");
-	    int pos = version.indexOf('.');
-	    pos = version.indexOf('.', pos+1);
-	    return Double.parseDouble (version.substring (0, pos));
-	}
 	
 	// version information
-	private static String version = "2.5.1"; // String.valueOf(JAVA_VERSION); 
+	private static String version = "2.5.3"; //System.getProperty("java.version");
 	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	//private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
