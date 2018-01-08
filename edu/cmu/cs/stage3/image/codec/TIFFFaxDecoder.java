@@ -1271,7 +1271,8 @@ class TIFFFaxDecoder {
 	    int bitsLeft = 8 - bitPointer;
 
 	    if (nextNBits(bitsLeft) != 0) {
-		    throw new Error(Messages.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
+		    throw new Error("All fill bits preceding EOL code must be 0.");
+		    //throw new Error(Messages.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
 	    }
 
 	    // If the number of bitsLeft is less than 8, then to have a 12
@@ -1280,7 +1281,8 @@ class TIFFFaxDecoder {
 	    // that.
 	    if (bitsLeft < 4) {
 		if (nextNBits(8) != 0) {
-		    throw new Error(Messages.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
+		    throw new Error("All fill bits preceding EOL code must be 0.");
+		    //throw new Error(Messages.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
 		}
 	    }
 
@@ -1292,7 +1294,8 @@ class TIFFFaxDecoder {
 
 		// If not all zeros
 		if (n != 0) {
-		    throw new Error(Messages.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
+		    throw new Error("All fill bits preceding EOL code must be 0.");
+		    //throw new Error(Messages.getString("All_fill_bits_preceding_EOL_code_must_be_0_"));
 		}
 	    }
 	}

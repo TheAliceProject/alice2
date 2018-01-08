@@ -3687,7 +3687,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 		}
 		if (shouldModifyStuff) {
-			jAliceFrame.smallSceneBehaviorSplitPane.setDividerLocation(224);
+			jAliceFrame.smallSceneBehaviorSplitPane.setDividerLocation(220);//(224);
 			jAliceFrame.leftRightSplitPane.setDividerLocation(300);//250);
 			jAliceFrame.worldTreeDragFromSplitPane.setDividerLocation(237);
 			jAliceFrame.editorBehaviorSplitPane.setDividerLocation(204);
@@ -4561,8 +4561,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						if (prefix.equals("galleryViewer")) { 
 							String directory = jAliceFrame.sceneEditor.getGalleryViewer().getDirectory();
 							String gallery = directory;
-							if ( directory.indexOf("(") >= 0 )
+							if ( directory.indexOf("(") >= 0 ) {
 								gallery = directory.substring(directory.lastIndexOf("(")-1, directory.lastIndexOf(")")+1);
+								spec += gallery;
+							}
 							if (directory.equals(spec)) {
 								if (st.hasMoreTokens()) {
 									token = st.nextToken();
@@ -4847,7 +4849,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								} else if (prefix.equals("galleryObject")) { 
 									java.awt.Component c = AuthoringToolResources.findGalleryObject(jAliceFrame.sceneEditor.getGalleryViewer(), spec);
 									if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {
-										((javax.swing.JComponent) c).scrollRectToVisible(c.getBounds());
+										((javax.swing.JComponent) c.getParent()).scrollRectToVisible(c.getBounds());
 									}
 								}
 							} else {
@@ -5773,7 +5775,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			java.io.BufferedOutputStream bos = null;
 			java.net.URLConnection urlc = null;
 			try {
-				java.net.URL url = new java.net.URL(AuthoringToolResources.getMainUpdateURL().toString()+file);
+				java.net.URL url = new File("/Volumes/DATA/Dropbox (Alice Project)/Distribution/Alice 2.5/WEB/AliceUpdate.zip").toURI().toURL();//new java.net.URL(AuthoringToolResources.getMainUpdateURL().toString()+file);
 				urlc = url.openConnection();
 				monitor.setMaximum(urlc.getContentLength());
 					
@@ -5838,8 +5840,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	        	}
 	        } catch ( java.io.FileNotFoundException e){
 	        	AuthoringTool.showErrorDialog("Error encountered during update", e); 
+			} catch ( java.util.zip.ZipException ze ){
+				AuthoringTool.showErrorDialog("Error encountered during update", ze); 
 			} catch (Exception e1) {
-	        	javax.swing.JOptionPane.showMessageDialog(null, " "+Messages.getString("Update_failed__Please_check_your_internet_connection__"), Messages.getString("Update_failed"), javax.swing.JOptionPane.ERROR_MESSAGE );  
+				javax.swing.JOptionPane.showMessageDialog(null, " "+Messages.getString("Update_failed__Please_check_your_internet_connection__"), Messages.getString("Update_failed"), javax.swing.JOptionPane.ERROR_MESSAGE );  
 	        } finally {
 	        	if (bis != null)
 	            try {

@@ -140,7 +140,7 @@ public class LocalGalleryObject extends GalleryObject {
                 if (image.getIconHeight() < 10 || image.getIconWidth() < 10){
                     image = GalleryViewer.noImageIcon;
                 }
-                setImage(image);
+               	setImage(image);
             }
         };
         Thread t = new Thread(doLoad);

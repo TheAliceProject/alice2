@@ -53,7 +53,7 @@ public class JAlice {
 	}
 	
 	// version information
-	private static String version = "2.5"; // String.valueOf(JAVA_VERSION); 
+	private static String version = "2.5.1"; // String.valueOf(JAVA_VERSION); 
 	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	//private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );

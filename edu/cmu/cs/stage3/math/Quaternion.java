@@ -205,7 +205,7 @@ public class Quaternion implements Cloneable, Interpolable {
 			b1 = b;
 		}
 
-		portion = 0.5;
+		//portion = 0.5;
 		double scale0;
 		double scale1;
 		// calculate coefficients
