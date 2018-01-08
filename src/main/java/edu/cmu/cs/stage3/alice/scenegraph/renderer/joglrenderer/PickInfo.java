@@ -36,7 +36,7 @@ public class PickInfo implements  edu.cmu.cs.stage3.alice.scenegraph.renderer.Pi
 
 	public PickInfo( PickContext context, java.nio.IntBuffer pickBuffer, edu.cmu.cs.stage3.alice.scenegraph.Component source ) {
 	    m_source = source;
-	    int length = context.gl.glRenderMode( GL2.GL_RENDER );
+	    int length = context.gl2.glRenderMode( GL2.GL_RENDER );
 	    if( length < 0 ) {
 	        //todo: throw exception?
 	        length = 0;

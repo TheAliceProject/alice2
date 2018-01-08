@@ -50,7 +50,7 @@ public class AWTUtilities {
 		if( s_successfullyLoadedLibrary ) {
 			return isSetCursorLocationSupportedNative(); //return 1;
 		}
-		return true;
+		return false;
 	}
 
 	private static native boolean isIsKeyPressedSupportedNative();
@@ -93,7 +93,11 @@ public class AWTUtilities {
 			getCursorLocationNative( p );
 			return p;
 		}
-		java.awt.Point p  = java.awt.MouseInfo.getPointerInfo().getLocation().getLocation();
+		java.awt.Point p = new java.awt.Point();
+		try {
+			p = java.awt.MouseInfo.getPointerInfo().getLocation().getLocation();
+		} catch (Exception e) {
+		}
 		return p;
 	}
 
@@ -119,8 +123,9 @@ public class AWTUtilities {
 	            if(bounds.contains(p)) {
 	                // Set point to screen coordinates.
 	            	java.awt.Point b = bounds.getLocation(); 
-	            	java.awt.Point s = new java.awt.Point(p.x - b.x, p.y - b.y);
-
+	            	//java.awt.Point s = new java.awt.Point(p.x - b.x, p.y - b.y);
+	            	java.awt.Point s = new java.awt.Point(p.x, p.y);
+	            	
 	                try {
 	                	java.awt.Robot r = new java.awt.Robot(device);
 	                    r.mouseMove(s.x, s.y);

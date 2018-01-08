@@ -25,10 +25,11 @@ package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLJPanel;
+import com.jogamp.nativewindow.ScalableSurface;
 
 public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget {
-    private GLCanvas m_glCanvas;
+    private GLJPanel m_glCanvas;
     //private javax.media.opengl.GLPbuffer m_glPBuffer;
     private RenderContext m_renderContext;
     private PickContext m_pickContext;
@@ -53,7 +54,7 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 
 	public java.awt.Component getAWTComponent() {
 	    if( m_glCanvas == null ) {
-	    	GLProfile profile = GLProfile.getDefault();
+	    	GLProfile profile = GLProfile.get(GLProfile.GL2);
 			GLCapabilities glCaps = new GLCapabilities( profile );
 			/*glCaps.setHardwareAccelerated( true );
 	        glCaps.setRedBits( 8 );
@@ -61,11 +62,16 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	        glCaps.setGreenBits( 8 );
 	        glCaps.setAlphaBits( 8 );*/
 	        //m_glCanvas = javax.media.opengl.GLDrawableFactory.getFactory().createGLCanvas( glCaps );
-	        m_glCanvas = new GLCanvas( glCaps );
+	        m_glCanvas = new GLJPanel( glCaps );
 	       	m_renderContext = new RenderContext( this );
 	        m_glCanvas.addGLEventListener( m_renderContext );   
             m_pickContext = new PickContext( this );
 	        m_glCanvas.addGLEventListener( m_pickContext );
+	        // disable HiDPI
+			m_glCanvas.setSurfaceScale (new float[] { ScalableSurface.IDENTITY_PIXELSCALE, ScalableSurface.IDENTITY_PIXELSCALE } );
+		
+			/*m_glCanvas.setIgnoreRepaint(true);
+			m_glCanvas.setAutoSwapBufferMode(false);*/			
 	    }
 		return m_glCanvas;
 	}    

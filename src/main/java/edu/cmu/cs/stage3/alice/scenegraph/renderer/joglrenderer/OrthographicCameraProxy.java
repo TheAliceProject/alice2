@@ -63,7 +63,7 @@ class OrthographicCameraProxy extends CameraProxy {
 	protected void projection( Context context, int width, int height, float near, float far ) {
         getActualNearPlane( reuse_actualNearPlane, width, height );
         //System.err.println( reuse_actualNearPlane[ 0 ] + " " + reuse_actualNearPlane[ 2 ] + " " + reuse_actualNearPlane[ 1 ] + " " + reuse_actualNearPlane[ 3 ] );
-        context.gl.glOrtho( reuse_actualNearPlane[ 0 ], reuse_actualNearPlane[ 2 ], reuse_actualNearPlane[ 1 ], reuse_actualNearPlane[ 3 ], near, far );
+        context.gl2.glOrtho( reuse_actualNearPlane[ 0 ], reuse_actualNearPlane[ 2 ], reuse_actualNearPlane[ 1 ], reuse_actualNearPlane[ 3 ], near, far );
     }
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {

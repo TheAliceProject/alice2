@@ -23,15 +23,13 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2ES1;
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 
 class RenderContext extends Context {
     private RenderTarget m_renderTarget;
 
-    private int m_lastTime_nextLightID = GLLightingFunc.GL_LIGHT0;
+    private int m_lastTime_nextLightID = GL2.GL_LIGHT0;
     private int m_nextLightID;
     private boolean m_isFogEnabled;
     private boolean m_renderOpaque;
@@ -68,27 +66,27 @@ class RenderContext extends Context {
 		if( m_clearRect.x == 0 && m_clearRect.y == 0 && m_clearRect.width == m_width && m_clearRect.height == m_height ) {
             //pass
         } else {
-            gl.glEnable( GL.GL_SCISSOR_TEST );
-            gl.glClearColor( 0, 0, 0, 1 );
+            gl2.glEnable( GL2.GL_SCISSOR_TEST );
+            gl2.glClearColor( 0, 0, 0, 1 );
             try {
                 if( m_clearRect.x > 0 ) {
-                    gl.glScissor( 0, 0, m_clearRect.x, m_height );
-                    gl.glClear( GL.GL_COLOR_BUFFER_BIT );
+                    gl2.glScissor( 0, 0, m_clearRect.x, m_height );
+                    gl2.glClear( GL2.GL_COLOR_BUFFER_BIT );
                 }
                 if( ( m_clearRect.x + m_clearRect.width ) < m_width ) {
-                    gl.glScissor( m_clearRect.x + m_clearRect.width, 0, m_width - m_clearRect.width, m_height );
-                    gl.glClear( GL.GL_COLOR_BUFFER_BIT );
+                    gl2.glScissor( m_clearRect.x + m_clearRect.width, 0, m_width - m_clearRect.width, m_height );
+                    gl2.glClear( GL2.GL_COLOR_BUFFER_BIT );
                 }
                 if( m_clearRect.y > 0 ) {
-                    gl.glScissor( 0, 0, m_width, m_clearRect.y );
-                    gl.glClear( GL.GL_COLOR_BUFFER_BIT );
+                    gl2.glScissor( 0, 0, m_width, m_clearRect.y );
+                    gl2.glClear( GL2.GL_COLOR_BUFFER_BIT );
                 }
                 if( ( m_clearRect.y + m_clearRect.height ) < m_height ) {
-                    gl.glScissor( 0, m_clearRect.y + m_clearRect.height, m_width, m_height - m_clearRect.height );
-                    gl.glClear( GL.GL_COLOR_BUFFER_BIT );
+                    gl2.glScissor( 0, m_clearRect.y + m_clearRect.height, m_width, m_height - m_clearRect.height );
+                    gl2.glClear( GL2.GL_COLOR_BUFFER_BIT );
                 }
             } finally { 
-                gl.glDisable( GL.GL_SCISSOR_TEST );
+                gl2.glDisable( GL2.GL_SCISSOR_TEST );
             }
         }
 	}
@@ -98,7 +96,7 @@ class RenderContext extends Context {
         m_ambient[ 1 ] = 0;
         m_ambient[ 2 ] = 0;
         m_ambient[ 3 ] = 1;
-        m_nextLightID = GLLightingFunc.GL_LIGHT0;
+        m_nextLightID = GL2.GL_LIGHT0;
         
         m_isFogEnabled = false;
 
@@ -106,17 +104,17 @@ class RenderContext extends Context {
     }
 
     public void endAffectorSetup() {
-        gl.glLightModelfv( GL2ES1.GL_LIGHT_MODEL_AMBIENT, m_ambientBuffer );
+        gl2.glLightModelfv( GL2.GL_LIGHT_MODEL_AMBIENT, m_ambientBuffer );
         for( int id=m_nextLightID; id<m_lastTime_nextLightID; id++ ) {
-            gl.glDisable( id );
+            gl2.glDisable( id );
         }
         //gl.glDisable( GL.GL_LIGHT0 );
         if( m_isFogEnabled ) {
             //System.err.println( "fog on" );
-            gl.glEnable( GL2ES1.GL_FOG );
+            gl2.glEnable( GL2.GL_FOG );
         } else {
             //System.err.println( "fog off" );
-            gl.glDisable( GL2ES1.GL_FOG );
+            gl2.glDisable( GL2.GL_FOG );
         }
 
         //todo?
@@ -127,13 +125,13 @@ class RenderContext extends Context {
 	    } */
         m_lastTime_nextLightID = m_nextLightID;
 
-        gl.glEnable( GL.GL_DEPTH_TEST );
-        gl.glEnable( GL.GL_CULL_FACE );
-        gl.glCullFace( GL.GL_BACK ); 
+        gl2.glEnable( GL2.GL_DEPTH_TEST );
+        gl2.glEnable( GL2.GL_CULL_FACE );
+        gl2.glCullFace( GL2.GL_BACK ); 
     }
     
     public void clear( BackgroundProxy backgroundProxy, java.awt.Rectangle viewport ) {
-        gl.glViewport( viewport.x, viewport.y, viewport.width, viewport.height );
+        gl2.glViewport( viewport.x, viewport.y, viewport.width, viewport.height );
         if( backgroundProxy != null ) {
             backgroundProxy.clear( this );
         }
@@ -183,7 +181,7 @@ class RenderContext extends Context {
     }
     
     public Integer generateDisplayListID( GeometryProxy geometryProxy ) {
-		Integer id = new Integer( gl.glGenLists( 1 ) );
+		Integer id = new Integer( gl2.glGenLists( 1 ) );
 		m_displayListMap.put( geometryProxy, id );
         return id;
     }
@@ -199,7 +197,7 @@ class RenderContext extends Context {
     public void forgetGeometryProxy( GeometryProxy geometryProxy, boolean removeFromMap ) {
         Integer value = (Integer)m_displayListMap.get( geometryProxy );
         if( value != null ) {
-	        gl.glDeleteLists( value.intValue(), 1 );
+	        gl2.glDeleteLists( value.intValue(), 1 );
 	        if( removeFromMap ) {
 	            m_displayListMap.remove( geometryProxy );
 	        }
@@ -227,7 +225,7 @@ class RenderContext extends Context {
 	        java.nio.IntBuffer atID = java.nio.IntBuffer.allocate( 1 );
 	        atID.put( id );
 	        atID.rewind();
-	        gl.glDeleteTextures( atID.limit(), atID );
+	        gl2.glDeleteTextures( atID.limit(), atID );
 	        if( removeFromMap ) {
 	            m_textureBindingMap.remove( textureMapProxy );
 	        }
@@ -252,45 +250,45 @@ class RenderContext extends Context {
     
     public void setTextureMapProxy( TextureMapProxy textureMapProxy ) {
         if( textureMapProxy != null && textureMapProxy.isImageSet() ) {
-            gl.glEnable( GL.GL_TEXTURE_2D );
+            gl2.glEnable( GL2.GL_TEXTURE_2D );
             if( m_currTextureMapProxy != textureMapProxy ) {
                 if( textureMapProxy != null ) {
                     Integer value = (Integer)m_textureBindingMap.get( textureMapProxy );
                     if( textureMapProxy.prepareByteBufferIfNecessary() || value == null ) {
                     	if( value == null ) {
     	        	        java.nio.IntBuffer atID = java.nio.IntBuffer.allocate( 1 );
-    	                    gl.glGenTextures( atID.limit(), atID );
+    	                    gl2.glGenTextures( atID.limit(), atID );
     	                    value = new Integer( atID.get() );
     	                    m_textureBindingMap.put( textureMapProxy, value );
                     	}
             			//System.err.println( "BIND: " + value.intValue() + " " + textureMapProxy );
-                        gl.glBindTexture( GL.GL_TEXTURE_2D, value.intValue() );
+                        gl2.glBindTexture( GL2.GL_TEXTURE_2D, value.intValue() );
                         int internalFormat;
                         int format;
                         if( textureMapProxy.isPotentiallyAlphaBlended() ) {
-                        	internalFormat = GL.GL_RGBA;
-                        	format = GL.GL_RGBA;
+                        	internalFormat = GL2.GL_RGBA;
+                        	format = GL2.GL_RGBA;
                         } else {
-                        	internalFormat = GL.GL_RGB;
-                        	format = GL.GL_RGB;
+                        	internalFormat = GL2.GL_RGB;
+                        	format = GL2.GL_RGB;
                         }
                         java.nio.ByteBuffer pixels = textureMapProxy.getPixels();
                         //PrintUtilities.print( System.err, pixels );
                         //System.err.println( pixels );
                        
-                        gl.glTexImage2D( GL.GL_TEXTURE_2D, 0, internalFormat, textureMapProxy.getWidthPowerOf2(), textureMapProxy.getHeightPowerOf2(), 0, format, GL.GL_UNSIGNED_BYTE, pixels );
-                        gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT );
-                        gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT );
-                        gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR );
-                        gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR );
+                        gl2.glTexImage2D( GL2.GL_TEXTURE_2D, 0, internalFormat, textureMapProxy.getWidthPowerOf2(), textureMapProxy.getHeightPowerOf2(), 0, format, GL2.GL_UNSIGNED_BYTE, pixels );
+                        gl2.glTexParameterf( GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_WRAP_S, GL2.GL_REPEAT );
+                        gl2.glTexParameterf( GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_WRAP_T, GL2.GL_REPEAT );
+                        gl2.glTexParameterf( GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_MAG_FILTER, GL2.GL_LINEAR );
+                        gl2.glTexParameterf( GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_MIN_FILTER, GL2.GL_LINEAR );
                     } else {
-                        gl.glBindTexture( GL.GL_TEXTURE_2D, value.intValue() );
+                        gl2.glBindTexture( GL2.GL_TEXTURE_2D, value.intValue() );
                     }
                 }
                 m_currTextureMapProxy = textureMapProxy;
             }
         } else {
-            gl.glDisable( GL.GL_TEXTURE_2D );
+            gl2.glDisable( GL2.GL_TEXTURE_2D );
         }
 //        if( textureMapProxy != null ) {
 //            gl.glEnable( GL.GL_TEXTURE_2D );
@@ -330,9 +328,9 @@ class RenderContext extends Context {
     public void setIsShadingEnabled( boolean isShadingEnabled ) {
         m_isShadingEnabled = isShadingEnabled;
         if( m_isShadingEnabled ) {
-            gl.glEnable( GLLightingFunc.GL_LIGHTING );
+            gl2.glEnable( GL2.GL_LIGHTING );
         } else {
-        	gl.glDisable( GLLightingFunc.GL_LIGHTING );
+        	gl2.glDisable( GL2.GL_LIGHTING );
         }
     }
     
@@ -341,17 +339,17 @@ class RenderContext extends Context {
     	if( m_currTextureMapProxy != null  && vertex.textureCoordinate0!=null) {  		
 	        double u = m_currTextureMapProxy.mapU( vertex.textureCoordinate0.x );
 	        double v = m_currTextureMapProxy.mapV( vertex.textureCoordinate0.y );
-			gl.glTexCoord2d( u, v );			
+			gl2.glTexCoord2d( u, v );			
 	    }
     	    
     	if (vertex.diffuseColor!=null ){    
-    		gl.glColor4f(vertex.diffuseColor.red, vertex.diffuseColor.green, vertex.diffuseColor.blue, vertex.diffuseColor.alpha);	
+    		gl2.glColor4f(vertex.diffuseColor.red, vertex.diffuseColor.green, vertex.diffuseColor.blue, vertex.diffuseColor.alpha);	
     	}	
             
  		if( m_isShadingEnabled ) {
- 			gl.glNormal3d( vertex.normal.x, vertex.normal.y, -vertex.normal.z );
+ 			gl2.glNormal3d( vertex.normal.x, vertex.normal.y, -vertex.normal.z );
         }	
-		gl.glVertex3d( vertex.position.x, vertex.position.y, -vertex.position.z );
+		gl2.glVertex3d( vertex.position.x, vertex.position.y, -vertex.position.z );
 	}
 
 	public void dispose(GLAutoDrawable drawable) { }

@@ -23,21 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-//import java.awt.Graphics;
-//import java.awt.color.ColorSpace;
-//import java.awt.image.BufferedImage;
-//import java.awt.image.ColorModel;
-//import java.awt.image.ComponentColorModel;
-//import java.awt.image.DataBuffer;
-//import java.awt.image.DataBufferByte;
-//import java.awt.image.Raster;
-//import java.awt.image.WritableRaster;
-//import java.nio.ByteBuffer;
-//import java.nio.ByteOrder;
-//import java.util.Hashtable;
-
 import java.awt.Transparency;
-
 import edu.cmu.cs.stage3.alice.core.ExceptionWrapper;
 
 class TextureMapProxy extends ElementProxy {

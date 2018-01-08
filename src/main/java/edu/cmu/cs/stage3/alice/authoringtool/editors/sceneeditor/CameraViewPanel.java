@@ -1221,7 +1221,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 
 		this.world = world;
 		if (world != null) {
-			ground = world.getChildNamedIgnoreCase("ground");
+			ground = world.getChildNamedIgnoreCase(Messages.getString("ground"));
 		}
 		if (this.world != null) {
 			edu.cmu.cs.stage3.alice.core.Camera[] cameras = (edu.cmu.cs.stage3.alice.core.Camera[]) world.getDescendants(edu.cmu.cs.stage3.alice.core.Camera.class);

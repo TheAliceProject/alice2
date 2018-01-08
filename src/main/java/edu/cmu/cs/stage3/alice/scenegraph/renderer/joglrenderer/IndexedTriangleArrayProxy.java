@@ -23,7 +23,6 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 
 class IndexedTriangleArrayProxy extends VertexGeometryProxy {
@@ -36,45 +35,45 @@ class IndexedTriangleArrayProxy extends VertexGeometryProxy {
 		    setIsGeometryChanged( true );
         }
         if( isGeometryChanged() ) {
-            context.gl.glNewList( id.intValue(), GL2.GL_COMPILE_AND_EXECUTE );
-            context.gl.glBegin( GL.GL_TRIANGLES );
+            context.gl2.glNewList( id.intValue(), GL2.GL_COMPILE_AND_EXECUTE );
+            context.gl2.glBegin( GL2.GL_TRIANGLES );
             if ( m_indices != null)
             for( int i=0; i<m_indices.length; i+=3 ) {
                 context.renderVertex( getVertexAt( m_indices[ i+2 ] ) );
                 context.renderVertex( getVertexAt( m_indices[ i+1 ] ) );
                 context.renderVertex( getVertexAt( m_indices[ i+0 ] ) );
             }
-            context.gl.glEnd();
-            context.gl.glEndList();
+            context.gl2.glEnd();
+            context.gl2.glEndList();
 		    setIsGeometryChanged( false );
         } else {
-            context.gl.glCallList( id.intValue() );
+            context.gl2.glCallList( id.intValue() );
         }
     }
 	
 	public void pick( PickContext context, boolean isSubElementRequired ) {
-	    context.gl.glPushName( -1 );
+	    context.gl2.glPushName( -1 );
 	    if( isSubElementRequired ) {
-            context.gl.glBegin( GL.GL_TRIANGLES );
+            context.gl2.glBegin( GL2.GL_TRIANGLES );
             for( int i=0; i<m_indices.length; i+=3 ) {
                 context.renderPickVertex( getVertexAt( m_indices[ i+2 ] ) );
                 context.renderPickVertex( getVertexAt( m_indices[ i+1 ] ) );
                 context.renderPickVertex( getVertexAt( m_indices[ i+0 ] ) );
             }
-            context.gl.glEnd();
+            context.gl2.glEnd();
 	    } else {
 	        int id = 0;
 	        if ( m_indices != null)
 	        for( int i=0; i<m_indices.length; i+=3 ) {
-				context.gl.glLoadName( id++ );
-	            context.gl.glBegin( GL.GL_TRIANGLES );
+				context.gl2.glLoadName( id++ );
+	            context.gl2.glBegin( GL2.GL_TRIANGLES );
                 context.renderPickVertex( getVertexAt( m_indices[ i+2 ] ) );
                 context.renderPickVertex( getVertexAt( m_indices[ i+1 ] ) );
                 context.renderPickVertex( getVertexAt( m_indices[ i+0 ] ) );
-	            context.gl.glEnd();
+	            context.gl2.glEnd();
 	        }
 	    }
-	    context.gl.glPopName();
+	    context.gl2.glPopName();
 	}
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {

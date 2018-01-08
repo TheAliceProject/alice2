@@ -30,7 +30,7 @@ import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.gl2.GLUT;
 
 abstract class Context implements GLEventListener {
-    public GL2 gl;
+    public GL2 gl2;
     public GLU glu;
 	public GLUT glut;
     
@@ -42,12 +42,11 @@ abstract class Context implements GLEventListener {
     }
  
     public void display( GLAutoDrawable drawable ) {
-        gl = drawable.getGL().getGL2();
+        gl2 = drawable.getGL().getGL2();
     	glu = new GLU();
         glut = new GLUT();
     }
     public void reshape( GLAutoDrawable drawable, int x, int y, int width, int height ) {
-        //System.err.println( "reshape: " + drawable );
         m_width = width;
         m_height = height;
     }

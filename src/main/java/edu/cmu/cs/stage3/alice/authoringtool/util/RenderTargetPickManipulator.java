@@ -216,7 +216,8 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 			firePostPick( pickInfo );
 
 			originalMousePoint = ev.getPoint();
-			if( (! isActionAborted()) && hideCursorOnDrag && doWrap && (! ev.getComponent().getCursor().equals( invisibleCursor )) ) {
+			if( (! isActionAborted()) && hideCursorOnDrag && (! ev.getComponent().getCursor().equals( invisibleCursor )) ) {
+			//if( (! isActionAborted()) && hideCursorOnDrag && doWrap && (! ev.getComponent().getCursor().equals( invisibleCursor )) ) {
 				savedCursor = ev.getComponent().getCursor();
 				ev.getComponent().setCursor( invisibleCursor );
 			}
@@ -224,14 +225,14 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 	}
 
 	public synchronized void mouseReleased( java.awt.event.MouseEvent ev ) {	// synchronized necessary?
-		if( (! isActionAborted()) && hideCursorOnDrag && doWrap ) {
+		//if( (! isActionAborted()) && hideCursorOnDrag && doWrap ) {
+		if( (! isActionAborted()) && hideCursorOnDrag ) {
 			ev.getComponent().setCursor( savedCursor );
 			//TODO: position mouse based on object of interest's position in the picture plane;  for now, it does a rough approximation
 			java.awt.Point tempPoint = ev.getPoint();
 			javax.swing.SwingUtilities.convertPointToScreen( tempPoint, ev.getComponent() );
 			javax.swing.SwingUtilities.convertPointToScreen( originalMousePoint, ev.getComponent() );
 			edu.cmu.cs.stage3.awt.AWTUtilities.setCursorLocation( tempPoint.x, originalMousePoint.y);
-			//robot.mouseMove( tempPoint.x, originalMousePoint.y );
 		}
 
 		lastEPickedTransformable = ePickedTransformable;

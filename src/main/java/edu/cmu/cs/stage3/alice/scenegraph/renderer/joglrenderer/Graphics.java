@@ -23,11 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
-import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
-//import sun.java2d.pipe.CompositePipe;
-import com.jogamp.opengl.fixedfunc.GLLightingFunc;
-import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 
 public class Graphics extends java.awt.Graphics {
 	private RenderContext m_renderContext;
@@ -55,21 +51,23 @@ public class Graphics extends java.awt.Graphics {
 
 		int width = m_renderContext.getWidth();
 		int height = m_renderContext.getHeight();
-		m_renderContext.gl.glMatrixMode( GLMatrixFunc.GL_PROJECTION );
-		m_renderContext.gl.glLoadIdentity();
-		m_renderContext.gl.glOrtho( 0, width-1, height-1, 0, -1, 1 );
-		//m_renderContext.gl.glViewport( 0, 0, width, height );
-       	m_renderContext.gl.glMatrixMode( GLMatrixFunc.GL_MODELVIEW );
- 		m_renderContext.gl.glLoadIdentity();
+		m_renderContext.gl2.glMatrixMode( GL2.GL_PROJECTION );
+		m_renderContext.gl2.glLoadIdentity();
+		m_renderContext.gl2.glOrtho( 0, width-1, height-1, 0, -1, 1 );
 		
-		m_renderContext.gl.glDisable( GL.GL_DEPTH_TEST );
-		m_renderContext.gl.glDisable( GLLightingFunc.GL_LIGHTING );
-		m_renderContext.gl.glDisable( GL.GL_CULL_FACE );   
+		m_renderContext.gl2.glViewport( 0, 0, width, height );
+		
+       	m_renderContext.gl2.glMatrixMode( GL2.GL_MODELVIEW );
+ 		m_renderContext.gl2.glLoadIdentity();
+		
+		m_renderContext.gl2.glDisable( GL2.GL_DEPTH_TEST );
+		m_renderContext.gl2.glDisable( GL2.GL_LIGHTING );
+		m_renderContext.gl2.glDisable( GL2.GL_CULL_FACE );   
 		m_renderContext.setTextureMapProxy( null );
 	}
     
 	public void dispose() {
-		m_renderContext.gl.glFlush();
+		m_renderContext.gl2.glFlush();
 		m_renderContext = null;
 	}
 	
@@ -78,7 +76,7 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void translate( int x, int y ) {
-	    m_renderContext.gl.glTranslatef( x, y, 0 );
+	    m_renderContext.gl2.glTranslatef( x, y, 0 );
 	}
 	
 	public java.awt.Color getColor() {
@@ -87,7 +85,7 @@ public class Graphics extends java.awt.Graphics {
 	
 	public void setColor( java.awt.Color c ) {
 	    m_color = c;
-	    m_renderContext.gl.glColor3ub( (byte)m_color.getRed(), (byte)m_color.getGreen(), (byte)m_color.getBlue() );
+	    m_renderContext.gl2.glColor3ub( (byte)m_color.getRed(), (byte)m_color.getGreen(), (byte)m_color.getBlue() );
 	}
 	
 	public void setPaintMode() {
@@ -137,19 +135,19 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawLine(int x1, int y1, int x2, int y2) {
-	    m_renderContext.gl.glBegin( GL.GL_LINES );
-	    m_renderContext.gl.glVertex2i( x1, y1 );
-	    m_renderContext.gl.glVertex2i( x2, y2 );
-		m_renderContext.gl.glEnd();
+	    m_renderContext.gl2.glBegin( GL2.GL_LINES );
+	    m_renderContext.gl2.glVertex2i( x1, y1 );
+	    m_renderContext.gl2.glVertex2i( x2, y2 );
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void fillRect( int x, int y, int width, int height ) {
-	    m_renderContext.gl.glBegin( GL2.GL_POLYGON );
-	    m_renderContext.gl.glVertex2i( x, y );
-	    m_renderContext.gl.glVertex2i( x+width, y );
-	    m_renderContext.gl.glVertex2i( x+width, y+height );
-	    m_renderContext.gl.glVertex2i( x, y+height );
-		m_renderContext.gl.glEnd();
+	    m_renderContext.gl2.glBegin( GL2.GL_POLYGON );
+	    m_renderContext.gl2.glVertex2i( x, y );
+	    m_renderContext.gl2.glVertex2i( x+width, y );
+	    m_renderContext.gl2.glVertex2i( x+width, y+height );
+	    m_renderContext.gl2.glVertex2i( x, y+height );
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void clearRect( int x, int y, int width, int height ) {
@@ -183,7 +181,7 @@ public class Graphics extends java.awt.Graphics {
 	        default:
 	            throw new IllegalArgumentException();
 	        }
-		    m_renderContext.gl.glVertex2d( centerX + cos * radiusX, centerY + sin * radiusY );
+		    m_renderContext.gl2.glVertex2d( centerX + cos * radiusX, centerY + sin * radiusY );
 	    }
 	}
 
@@ -211,15 +209,15 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawRoundRect( int x, int y, int width, int height, int arcWidth, int arcHeight ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_LOOP );
+	    m_renderContext.gl2.glBegin( GL2.GL_LINE_LOOP );
 	    glRoundRect( x, y, width, height, arcWidth, arcHeight );
-		m_renderContext.gl.glEnd();
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void fillRoundRect( int x, int y, int width, int height, int arcWidth, int arcHeight ) {
-	    m_renderContext.gl.glBegin( GL.GL_TRIANGLE_FAN );
+	    m_renderContext.gl2.glBegin( GL2.GL_TRIANGLE_FAN );
 	    glRoundRect( x, y, width, height, arcWidth, arcHeight );
-		m_renderContext.gl.glEnd();
+		m_renderContext.gl2.glEnd();
 	}
 
 	private void glOval( int x, int y, int width, int height ) {
@@ -236,15 +234,15 @@ public class Graphics extends java.awt.Graphics {
 
 	
 	public void drawOval( int x, int y, int width, int height ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_LOOP );
+	    m_renderContext.gl2.glBegin( GL2.GL_LINE_LOOP );
 	    glOval( x, y, width, height );
-		m_renderContext.gl.glEnd();
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void fillOval( int x, int y, int width, int height ) {
-	    m_renderContext.gl.glBegin( GL.GL_TRIANGLE_FAN );
+	    m_renderContext.gl2.glBegin( GL2.GL_TRIANGLE_FAN );
 	    glOval( x, y, width, height );
-		m_renderContext.gl.glEnd();
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void drawArc( int x, int y, int width, int height, int startAngle, int arcAngle ) {
@@ -256,26 +254,26 @@ public class Graphics extends java.awt.Graphics {
 	}
 	private void glPoly( int xPoints[], int yPoints[], int nPoints ) {
 		for( int i=0; i<nPoints; i++ ) {
-		    m_renderContext.gl.glVertex2i( xPoints[ i ], yPoints[ i ] );
+		    m_renderContext.gl2.glVertex2i( xPoints[ i ], yPoints[ i ] );
 		}
 	}
 	
 	public void drawPolyline( int xPoints[], int yPoints[], int nPoints ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_STRIP );
+	    m_renderContext.gl2.glBegin( GL2.GL_LINE_STRIP );
 	    glPoly( xPoints, yPoints, nPoints );
-		m_renderContext.gl.glEnd();
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void drawPolygon( int xPoints[], int yPoints[], int nPoints ) {
-	    m_renderContext.gl.glBegin( GL.GL_LINE_LOOP );
+	    m_renderContext.gl2.glBegin( GL2.GL_LINE_LOOP );
 	    glPoly( xPoints, yPoints, nPoints );
-		m_renderContext.gl.glEnd();
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void fillPolygon( int xPoints[], int yPoints[], int nPoints ) {
-	    m_renderContext.gl.glBegin( GL2.GL_POLYGON );
+	    m_renderContext.gl2.glBegin( GL2.GL_POLYGON );
 	    glPoly( xPoints, yPoints, nPoints );
-		m_renderContext.gl.glEnd();
+		m_renderContext.gl2.glEnd();
 	}
 	
 	public void drawString( String str, int x, int y ) {
