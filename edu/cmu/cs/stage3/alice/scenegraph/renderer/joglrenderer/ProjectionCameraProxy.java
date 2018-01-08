@@ -42,7 +42,7 @@ class ProjectionCameraProxy extends CameraProxy {
 	}
     
 	protected void projection( Context context, int width, int height, float near, float far ) {
-        context.gl.glLoadMatrixd( m_projectionBuffer );
+        context.gl2.glLoadMatrixd( m_projectionBuffer );
     }
 	
 	protected void changed( edu.cmu.cs.stage3.alice.scenegraph.Property property, Object value ) {

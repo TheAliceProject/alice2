@@ -60,7 +60,8 @@ class PickContext extends Context {
         try {
             //System.err.println( "about to display: " + m_pickParameters );
             drawable.display();
-        } finally {
+        } catch (Exception e) {
+        //finally {
             /*
             drawable.setRenderingThread( null );
             //drawable.setNoAutoRedrawMode( false );
@@ -83,7 +84,7 @@ class PickContext extends Context {
     }
 
 	protected void renderPickVertex( edu.cmu.cs.stage3.alice.scenegraph.Vertex3d vertex ) {
-		gl.glVertex3d( vertex.position.x, vertex.position.y, -vertex.position.z );
+		gl2.glVertex3d( vertex.position.x, vertex.position.y, -vertex.position.z );
 	}
 
 	public void dispose(GLAutoDrawable arg0) {	}

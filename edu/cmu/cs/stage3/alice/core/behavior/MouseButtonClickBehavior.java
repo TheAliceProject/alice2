@@ -50,8 +50,7 @@ public class MouseButtonClickBehavior extends TriggerBehavior implements java.aw
 
 	private edu.cmu.cs.stage3.alice.core.RenderTarget[] m_renderTargets = null;
 	private java.awt.event.MouseEvent m_pressedEvent = null;
-	public long m_clickTimeThreshold = 300;
-	public int m_clickDistanceThresholdSquared = 100;
+
 
 	public void manufactureAnyNecessaryDetails() {
 		if( details.size()==2 ) {
@@ -122,6 +121,9 @@ public class MouseButtonClickBehavior extends TriggerBehavior implements java.aw
 		m_pressedEvent = mouseEvent;
 	}
 
+	public long m_clickTimeThreshold = 300;
+	public int m_clickDistanceThresholdSquared = 100;
+	// Aik Min - Mouse events in Play (render) window
 	public void mouseReleased( java.awt.event.MouseEvent mouseEvent ) {
 		int dx = mouseEvent.getX() - m_pressedEvent.getX();
 		int dy = mouseEvent.getY() - m_pressedEvent.getY();
