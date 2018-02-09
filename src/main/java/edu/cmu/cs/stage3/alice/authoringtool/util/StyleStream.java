@@ -67,10 +67,6 @@ public class StyleStream extends java.io.PrintStream {
 	    if (encoding == null) {
 	        encoding = DEFAULT_ENCODING;
 	    } 
-	    // DEBUG
-	    if (encoding != "UTF-8"){
-	    	int i = 0; 
-	    }
 	    return encoding;
 	}
 	

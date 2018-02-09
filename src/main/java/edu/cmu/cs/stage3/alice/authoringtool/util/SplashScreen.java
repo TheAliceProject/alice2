@@ -76,7 +76,7 @@ public class SplashScreen extends java.awt.Frame {
 	}
 
 	public void hideSplash() {
-		//splashWindow.setVisible( false );
+		splashWindow.setVisible( false );
 		splashWindow.dispose();
 	}
 }

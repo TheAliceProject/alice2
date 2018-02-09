@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.authoringtool.util;
 
 import edu.cmu.cs.stage3.lang.Messages;
+import java.awt.Window;
 
 /**
  * @author Jason Pratt

@@ -42,9 +42,9 @@ abstract class Context implements GLEventListener {
     }
  
     public void display( GLAutoDrawable drawable ) {
-        gl2 = drawable.getGL().getGL2();
-    	glu = new GLU();
-        glut = new GLUT();
+        	gl2 = drawable.getGL().getGL2();
+    		glu = new GLU();
+    		glut = new GLUT();
     }
     public void reshape( GLAutoDrawable drawable, int x, int y, int width, int height ) {
         m_width = width;
