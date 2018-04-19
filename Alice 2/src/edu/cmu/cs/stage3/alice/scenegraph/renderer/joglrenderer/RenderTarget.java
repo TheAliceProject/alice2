@@ -25,12 +25,16 @@ package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
 import java.awt.image.BufferedImage;
 
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL2ES1;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLDrawableFactory;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.fixedfunc.GLLightingFunc;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.util.awt.AWTGLReadBufferUtil;
 import com.jogamp.opengl.util.gl2.GLUT;
 
@@ -46,10 +50,10 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	    //note: clear hasn't really happened
 	    onClear();
 	    
-	    context.gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA); 
-		context.gl2.glEnable(GL2.GL_BLEND);
-		context.gl2.glEnable(GL2.GL_ALPHA_TEST);
-		context.gl2.glAlphaFunc(GL2.GL_GREATER, 0);
+	    context.gl2.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA); 
+		context.gl2.glEnable(GL.GL_BLEND);
+		context.gl2.glEnable(GL2ES1.GL_ALPHA_TEST);
+		context.gl2.glAlphaFunc(GL.GL_GREATER, 0);
 		    
 	    edu.cmu.cs.stage3.alice.scenegraph.Camera[] cameras = getCameras();
 	    for( int i=0; i<cameras.length; i++ ) {
@@ -67,8 +71,6 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	
     private java.nio.IntBuffer m_pickBuffer;
     private java.nio.IntBuffer m_viewportBuffer;
-    
-    private float[] scale = new float[2];
     
     public PickInfo performPick( PickContext context, PickParameters pickParameters ) {
         int x = pickParameters.getX();
@@ -96,7 +98,7 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         	int[] vp = { viewport.x, viewport.y, viewport.width, viewport.height };
 		    context.gl2.glViewport( viewport.x, viewport.y, viewport.width, viewport.height );
 
-		    context.gl2.glMatrixMode( GL2.GL_PROJECTION );
+		    context.gl2.glMatrixMode( GLMatrixFunc.GL_PROJECTION );
 		    context.gl2.glLoadIdentity();
         	
 		    if( m_viewportBuffer == null ) {
@@ -109,7 +111,7 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
         	m_viewportBuffer.put( viewport.width );
         	m_viewportBuffer.put( viewport.height );
     		m_viewportBuffer.rewind();
-		    context.gl2.glMatrixMode( GL2.GL_PROJECTION );
+		    context.gl2.glMatrixMode( GLMatrixFunc.GL_PROJECTION );
 		    context.gl2.glLoadIdentity();
 		    context.glu.gluPickMatrix( x, height-y, 1, 1, m_viewportBuffer );
 
@@ -167,15 +169,15 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 	    CameraProxy cameraProxy = (CameraProxy)getProxyFor( sgCamera );
 	    cameraProxy.setIsLetterboxedAsOpposedToDistorted( isLetterboxedAsOpposedToDistorted );
     }
+	//GLAutoDrawable drawable = null;
 	GLAutoDrawable drawable = null;
 	public void createDrawable(int width, int height){
-		//DEBUG GLProfile glp = GLProfile.getDefault();
-		GLProfile glp = GLProfile.get(GLProfile.GL2);
+		GLProfile glp = GLProfile.getDefault();
         GLCapabilities caps = new GLCapabilities(glp);
-        //caps.setDoubleBuffered(true); 
-        //caps.setHardwareAccelerated(true);
-        //caps.setOnscreen(false);
-        //caps.setAlphaBits(1);
+        caps.setDoubleBuffered(false); 
+        caps.setHardwareAccelerated(true);
+        caps.setOnscreen(false);
+        caps.setAlphaBits(1);
         GLDrawableFactory factory = GLDrawableFactory.getFactory(glp);
 
         drawable = factory.createOffscreenAutoDrawable(null,caps,null,width,height);
@@ -196,7 +198,12 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		drawable.addGLEventListener( m_renderContext );	
 		drawable.display();
 
-	    drawable.getContext().makeCurrent(); 	
+	    drawable.getContext().makeCurrent(); 
+
+		//GL2 gl = drawable.getGL().getGL2();
+	
+		//gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		//gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);			
 	}
 
 	public boolean rendersOnEdgeTrianglesAsLines( edu.cmu.cs.stage3.alice.scenegraph.OrthographicCamera orthographicCamera ) {
@@ -219,7 +226,7 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 			clearAndRenderOffscreen();
 		}
 		
-		BufferedImage image = new AWTGLReadBufferUtil(drawable.getGLProfile(), true).readPixelsToBufferedImage(drawable.getGL().getGL2(), 0, 0, width, height, true); 
+		BufferedImage image = new AWTGLReadBufferUtil(drawable.getGLProfile(), true).readPixelsToBufferedImage(drawable.getGL(), 0, 0, width, height, true); 
 		
 		return image;
 	}	
@@ -308,20 +315,22 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		 */
 		public void display ( GLAutoDrawable drawable ) {
 
-			GL2 gl2 = drawable.getGL().getGL2();								// get the OpenGL 2 graphics context
-			gl2.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);		// clear color and depth buffers
-			gl2.glMatrixMode(GL2.GL_MODELVIEW);
-			gl2.glLoadIdentity();												// reset the model-view matrix
+			GL2 gl = drawable.getGL().getGL2();								// get the OpenGL 2 graphics context
+			gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);	// clear color and depth buffers
+			gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
+			gl.glLoadIdentity();											// reset the model-view matrix
 			
-			gl2.glTranslatef( (float)(Math.random() - 0.5), (float)(Math.random() - 0.5), 0);
+			gl.glTranslatef( (float)(Math.random() - 0.5), (float)(Math.random() - 0.5), 0);
 			double d = 0.9+0.2*Math.random();
-			gl2.glScaled(d, d, d);
+			gl.glScaled(d, d, d);
 			float[] c = new float[] { (float)Math.random(),  (float)Math.random(),  (float)Math.random(), 1 };
-			gl2.glMaterialfv(GL2.GL_FRONT_AND_BACK,GL2.GL_DIFFUSE,c,0);
-			gl2.glCallList(displayList);										//use the display list to do the drawing	
+			gl.glMaterialfv(GL.GL_FRONT_AND_BACK,GLLightingFunc.GL_DIFFUSE,c,0);
+			gl.glCallList(displayList);//use the display list to do the drawing
 		}
 
-		public void displayChanged ( GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged ) { }
+		public void displayChanged ( GLAutoDrawable drawable, 
+				boolean modeChanged, boolean deviceChanged ) {
+		}
 
 		/**
 		 * Initializes the GLJPanel for drawing.
@@ -329,46 +338,47 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 		 */
 		public void init ( GLAutoDrawable drawable ) {
 
-			GL2 gl2 = drawable.getGL().getGL2();
+			GL2 gl = drawable.getGL().getGL2();
 
 			/* set up depth-buffering */
-			gl2.glClearDepth(1.0);
-			gl2.glDepthFunc(GL2.GL_LEQUAL);
-			gl2.glEnable(GL2.GL_DEPTH_TEST);
-			
+			gl.glEnable(GL.GL_DEPTH_TEST);
+			gl.glDepthFunc(GL.GL_LEQUAL);
 
 			/* set up lights */
-			gl2.glMatrixMode(GL2.GL_MODELVIEW);
-			gl2.glLoadIdentity();
+			gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
+			gl.glLoadIdentity();
 
-			gl2.glEnable(GL2.GL_LIGHTING);
-			gl2.glEnable(GL2.GL_LIGHT0);
+			gl.glEnable(GLLightingFunc.GL_LIGHTING);
+			gl.glEnable(GLLightingFunc.GL_LIGHT0);
 
 			float ambient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 			float diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 			float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 			float position[] = { 0.0f, 10.0f, -15.0f, 1.0f };
 
-			gl2.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, position, 0);
-			gl2.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambient, 0);
-			gl2.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuse, 0);
-			gl2.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, specular, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_POSITION, position, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_AMBIENT, ambient, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_DIFFUSE, diffuse, 0);
+			gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_SPECULAR, specular, 0);
 			
-			gl2.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+			gl.glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
 			
 			/*make a new display list and put a sphere in it*/
-			displayList = gl2.glGenLists(1);
-			gl2.glNewList(displayList, GL2.GL_COMPILE);
+			displayList = gl.glGenLists(1);
+			gl.glNewList(displayList, GL2.GL_COMPILE);
 			glut_.glutSolidSphere(0.3,16,8);
-			gl2.glEndList();
+			gl.glEndList();
 		}
 
-		public void reshape ( GLAutoDrawable drawable, int x, int y, int width, int height ) {
-			GL2 gl2 = drawable.getGL().getGL2();
-			gl2.glViewport(x, y, width, height);
+		public void reshape ( GLAutoDrawable drawable, 
+				int x, int y, int width, int height ) {
+
+			GL gl = drawable.getGL();
+			/* define the viewport transformation */
+			gl.glViewport(x,y,width,height);
 		}
 
-		public void dispose ( GLAutoDrawable arg0 ) {	}
+		public void dispose(GLAutoDrawable arg0) {	}
 	}
 	
 	

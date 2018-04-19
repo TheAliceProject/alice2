@@ -60,14 +60,16 @@ public class StdErrOutContentPane extends edu.cmu.cs.stage3.alice.authoringtool.
 							+ Messages.getString("Right_click_to_clear_the_messages_here__n_n")
 							+ lastError.trim();
 				} 
-				detailTextPane.getDocument().insertString(
-						detailTextPane.getDocument().getLength(), lastError,
-						detailTextPane.stdErrStyle);
-				
 				if (lastError.startsWith("java.lang.ClassCastException") == true){
 					lastError = "OOPS!! Looks like we have a slight layout problem. Not a big deal, press OK to continue. \n\n";		
 					detailTextPane.getDocument().insertString( 0, lastError, detailTextPane.stdErrStyle);
-				} 
+				} else {
+				
+				detailTextPane.getDocument().insertString(
+						detailTextPane.getDocument().getLength(), lastError,
+						detailTextPane.stdErrStyle);
+				}
+				
 			} catch (Exception e) {
 			}
 			errorContentAdded = true;

@@ -607,7 +607,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		worldsDirectoryChanged();
 		importDirectoryChanged();
 		charactersDirectoryChanged();
-
+	
 		startUpContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StartUpContentPane(this);	
 
 		worldInfoContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.WorldInfoContentPane();		
@@ -796,7 +796,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				}
 			});
 		}
-		if (AikMin.isMAC()) {
+		if (AikMin.isMAC() || AikMin.isUnix()) {
 		  	java.awt.Toolkit.getDefaultToolkit().addAWTEventListener(new java.awt.event.AWTEventListener(){
 		   		public void eventDispatched(AWTEvent event) {
 	   				int mod = ((java.awt.event.InputEvent) event).getModifiers();
@@ -5638,29 +5638,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	    jAliceFrame.requestFocus();
 	}
 
-	// Aik Min
-//    private static boolean pulsing = true;   
-//    private static JLabel statusLabel = new JLabel(Messages.getString("Ready")); 
-//    private static javax.swing.JFrame statusFrame;
+	// Update Software 
     int numUpdate = 0;
-/*    private boolean checkForUpdate(){
-    	java.net.URL url;
-    	java.net.URLConnection urlc = null;
-		try {
-			url = new java.net.URL(AuthoringToolResources.getMainUpdateURL().toString()+"alice.jar");
-			urlc = url.openConnection();
-			java.io.File old = new java.io.File(JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "lib" + System.getProperty( "file.separator" ) + "alice.jar");
-    		long date = urlc.getLastModified();
-    		long oldDate = old.lastModified();
-    		if (date > oldDate){
-    			return true;
-    		}
-    	} catch ( Exception e){
-			javax.swing.JOptionPane.showMessageDialog(null, 
-					Messages.getString("Update_failed"), Messages.getString("Cannot_access_required_file_"), javax.swing.JOptionPane.ERROR_MESSAGE );  
-    	}	
-    	return false;
-    }*/
     
 	public void updateAlice() {
 		javax.swing.JPanel updateDialog;
@@ -5681,16 +5660,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         left.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                
         final JCheckBox UpdateJAR = new JCheckBox("");
-        //boolean updateAvailable = checkForUpdate();
-        //dlg.setTitle(Messages.getString("Updating"));
-        //if (updateAvailable) {
-         	UpdateJAR.setText(Messages.getString("Update_Software"));
+        UpdateJAR.setText(Messages.getString("Update_Software"));
         	UpdateJAR.setSelected(true);
-        // } else {
-        // 	UpdateJAR.setText(Messages.getString("Update_Software__No_new_updates_"));
-        // 	UpdateJAR.setSelected(false);
-        // 	UpdateJAR.setEnabled(false);
-        // }
         left.add(UpdateJAR);
 
         final JCheckBox CoreGallery = new JCheckBox(Messages.getString("Download_Core_Gallery"));
@@ -5713,10 +5684,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
         		dlg.dispose();
     			if ( UpdateJAR.isSelected() ) {
     				numUpdate++;
-   					new Thread(new StartUpdating( "AliceUpdate.zip", 
+   				new Thread(new StartUpdating( "AliceUpdate.zip", 
     						JAlice.getAliceHomeDirectory().getParent().toString(), false )).start();
     			}
-       			if ( CoreGallery.isSelected() ) {
+    			if ( CoreGallery.isSelected() ) {
     				numUpdate++;
     				new Thread(new StartUpdating( "CoreGallery.zip", 
     						JAlice.getAliceHomeDirectory().toString() + System.getProperty( "file.separator" ) + "gallery", true )).start();
@@ -5753,13 +5724,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		private boolean isGallery;
 		private String file;
 		private String dest;
-    	private ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Updating"), Messages.getString("Getting_Started___"), 0, 0); 
+		private ProgressMonitor monitor = new ProgressMonitor(null, Messages.getString("Updating"), Messages.getString("Getting_Started___"), 0, 0); 
     	
 		public StartUpdating(String filename, String location, boolean dir) {
 	        file = filename;
 	        dest = location;
-	        isGallery = dir;
-		
+	        isGallery = dir;		
 		}
 		
 		public void run() {
@@ -5767,7 +5737,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			java.io.BufferedOutputStream bos = null;
 			java.net.URLConnection urlc = null;
 			try {
-				java.net.URL url = new File("/Volumes/DATA/Dropbox (Alice Project)/Distribution/Alice 2.5/WEB/AliceUpdate.zip").toURI().toURL();//new java.net.URL(AuthoringToolResources.getMainUpdateURL().toString()+file);
+				java.net.URL url = new java.net.URL(AuthoringToolResources.getMainUpdateURL().toString() + file);
 				urlc = url.openConnection();
 				monitor.setMaximum(urlc.getContentLength());
 					
@@ -5790,14 +5760,15 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					if (monitor.isCanceled()) {
 						break;
 					} 
-					monitor.setProgress(progress++);						
+					if ( progress < monitor.getMaximum() )
+						monitor.setProgress(progress++);						
 				}
 
-				monitor.setProgress(monitor.getMaximum());
 				bis.close();
 				bos.close();
 
-				if ( !monitor.isCanceled()) {
+				if ( !monitor.isCanceled() ) {
+					monitor.setProgress(monitor.getMaximum());
 					Enumeration entries;
 					ZipFile zipFile;
 
@@ -5825,13 +5796,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 						in.close();
 						out.flush();
 						out.close();				
-						monitor.setProgress(progress++);
+						if ( progress < monitor.getMaximum() )
+							monitor.setProgress(progress++);
 					}
 					monitor.setProgress(monitor.getMaximum());
 					zipFile.close();
-	        	}
+	        		}
 	        } catch ( java.io.FileNotFoundException e){
-	        	AuthoringTool.showErrorDialog("Error encountered during update", e); 
+	        		AuthoringTool.showErrorDialog("Error encountered during update", e); 
 			} catch ( java.util.zip.ZipException ze ){
 				AuthoringTool.showErrorDialog("Error encountered during update", ze); 
 			} catch (Exception e1) {
@@ -5850,20 +5822,19 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				    ioe.printStackTrace();
 				}          
 				numUpdate--;
-	        	java.io.File temp;
-	        	temp = new java.io.File( dest + System.getProperty( "file.separator" ) + file);
-	        	if ( temp.exists() )
-	        		temp.delete();        		
-	        	if (numUpdate == 0) {
-					Object[] options = {Messages.getString("Restart"), Messages.getString("Cancel")};
-					int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(" "+Messages.getString("You_must_restart_Alice_for_the_updates_to_take_effect__"), Messages.getString("Update_completed"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] );  
-					if (result == ContentPane.OK_OPTION){
-						monitor.close();
-						quit(true);
-					}
-	        	}
-	        	monitor.close();
-				
+	        		java.io.File temp;
+	        		temp = new java.io.File( dest + System.getProperty( "file.separator" ) + file);
+		        	if ( temp.exists() )
+		        		temp.delete();        		
+		        	if (numUpdate == 0 && !monitor.isCanceled()) {
+						Object[] options = {Messages.getString("Restart"), Messages.getString("Cancel")};
+						int result = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(" "+Messages.getString("You_must_restart_Alice_for_the_updates_to_take_effect__"), Messages.getString("Update_completed"), JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null, options, options[0] );  
+						if (result == ContentPane.OK_OPTION){
+							monitor.close();
+							quit(true);
+						}
+		        	}
+		        	monitor.close();		
 	        }
 		}
 	}

@@ -30,6 +30,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.SystemColor;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -299,6 +300,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		this.element = element;
 
 		if( element != null ) {
+			
 			ownerLabel.setText(  Messages.getString("_s_details", AuthoringToolResources.getReprForValue( element )) ); 
 			
 			if( element.getParent() != null ) {
@@ -1114,7 +1116,11 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		tabbedPane.add(propertiesScrollPane, Messages.getString("properties")); 
 		propertiesScrollPane.getViewport().add(propertiesPanel, null);
 		tabbedPane.add(animationsScrollPane, Messages.getString("methods")); 
-		tabbedPane.add(questionsScrollPane, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING); 
+		if ( AikMin.locale.equals(new Locale("en")) ) {
+			tabbedPane.add(questionsScrollPane, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING + "s"); 
+		} else {
+			tabbedPane.add(questionsScrollPane, edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING); 
+		}
 //		tabbedPane.add(otherScrollPane, "other");
 		otherScrollPane.getViewport().add(otherPanel, null);
 		questionsScrollPane.getViewport().add(questionsPanel, null);

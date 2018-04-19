@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 
 class LineArrayProxy extends VertexGeometryProxy {
@@ -35,7 +36,7 @@ class LineArrayProxy extends VertexGeometryProxy {
         }
         if( isGeometryChanged() ) {
             context.gl2.glNewList( id.intValue(), GL2.GL_COMPILE_AND_EXECUTE );
-            context.gl2.glBegin( GL2.GL_LINES );
+            context.gl2.glBegin( GL.GL_LINES );
             for( int i=0; i<getNumVertices(); i+=2 ) {
                 context.renderVertex( getVertexAt( i ) );
                 context.renderVertex( getVertexAt(i+1 ) );
