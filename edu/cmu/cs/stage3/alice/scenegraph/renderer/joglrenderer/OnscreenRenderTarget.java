@@ -26,6 +26,7 @@ package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLJPanel;
+import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.nativewindow.ScalableSurface;
 
 public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget {
@@ -54,14 +55,16 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 
 	public java.awt.Component getAWTComponent() {
 	    if( m_glCanvas == null ) {
-	    	GLProfile profile = GLProfile.get(GLProfile.GL2);
+	    		GLProfile profile = GLProfile.getDefault();//(GLProfile.GL2);
 			GLCapabilities glCaps = new GLCapabilities( profile );
-			/*glCaps.setHardwareAccelerated( true );
-	        glCaps.setRedBits( 8 );
-	        glCaps.setBlueBits( 8 );
-	        glCaps.setGreenBits( 8 );
-	        glCaps.setAlphaBits( 8 );*/
-	        //m_glCanvas = javax.media.opengl.GLDrawableFactory.getFactory().createGLCanvas( glCaps );
+			glCaps.setDepthBits(24);
+			//glCaps.setDoubleBuffered(true);
+			glCaps.setHardwareAccelerated(false);
+			//glCaps.setRedBits( 8 );
+	        //glCaps.setBlueBits( 8 );
+	        //glCaps.setGreenBits( 8 );
+	        //glCaps.setAlphaBits( 8 );
+	        	
 	        m_glCanvas = new GLJPanel( glCaps );
 	       	m_renderContext = new RenderContext( this );
 	        m_glCanvas.addGLEventListener( m_renderContext );   
@@ -69,9 +72,8 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	        m_glCanvas.addGLEventListener( m_pickContext );
 	        // disable HiDPI
 			m_glCanvas.setSurfaceScale (new float[] { ScalableSurface.IDENTITY_PIXELSCALE, ScalableSurface.IDENTITY_PIXELSCALE } );
-		
-			/*m_glCanvas.setIgnoreRepaint(true);
-			m_glCanvas.setAutoSwapBufferMode(false);*/			
+			//m_glCanvas.setIgnoreRepaint(true);
+			//m_glCanvas.setAutoSwapBufferMode(false);			
 	    }
 		return m_glCanvas;
 	}    

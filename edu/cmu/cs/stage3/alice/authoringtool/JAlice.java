@@ -26,8 +26,6 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 import java.io.File;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-
 import javax.media.Format;
 import javax.media.PlugInManager;
 import javax.media.format.AudioFormat;
@@ -72,6 +70,27 @@ public class JAlice {
 				com.apple.eawt.Application app = com.apple.eawt.Application.getApplication();
 				URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/alice.png");	
 				app.setDockIconImage( java.awt.Toolkit.getDefaultToolkit().getImage(url) );
+				
+				app.setOpenFileHandler( new OpenFilesHandler() {
+					public void openFiles(OpenFilesEvent event) {
+						File file = event.getFiles().get(0);
+						worldToLoad = file.getAbsoluteFile();
+						
+				        if (!listenerRegistered){			        		
+					        listenerRegistered = true;
+				        } else {
+				        		try {
+				                String decodedPath = URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+				                decodedPath = decodedPath.substring(0, decodedPath.lastIndexOf(".app") + 4);
+				                String[] params = { "open", "-n", decodedPath, worldToLoad.toString() };
+				                Runtime.getRuntime().exec(params);
+				            }
+				            catch (Exception e) {
+				                e.printStackTrace();
+				            }
+				        }
+					}
+	            });           				
 			}
 			
 			java.io.File bakFile = new java.io.File(JAlice.getAliceHomeDirectory().getParent().toString() + File.separator + "Aliceold.exe");
@@ -233,32 +252,6 @@ public class JAlice {
 				splashScreen = initSplashScreen();
 				splashScreen.showSplash();			
 			}
-			if (AikMin.isMAC()) {
-				com.apple.eawt.Application app =  com.apple.eawt.Application.getApplication();
-	            app.setOpenFileHandler( new OpenFilesHandler() {
-					public void openFiles(OpenFilesEvent event) {
-						java.util.List<String> filenames = new ArrayList<String>();
-				        for(File f : event.getFiles()) {
-				            filenames.add(f.getAbsolutePath());
-				        }
-			        	if (!listenerRegistered){
-			        		worldToLoad = new java.io.File( filenames.toArray(new String[filenames.size()] )[0] ).getAbsoluteFile();
-					        listenerRegistered = true;
-				        } else {
-				        	//authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
-				        	try {
-				                String decodedPath = URLDecoder.decode(JAlice.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-				                decodedPath = decodedPath.substring(0, decodedPath.lastIndexOf(".app") + 4);
-				                String[] params = { "open", "-n", decodedPath, filenames.toArray(new String[filenames.size()] )[0] };
-				                Runtime.getRuntime().exec(params);
-				            }
-				            catch (Exception e) {
-				                e.printStackTrace();
-				            }
-				        }
-					}
-	            });           
-			}
 			parseCommandLineArgs( args );
 			Class.forName( "edu.cmu.cs.stage3.alice.authoringtool.util.Configuration" ); 
 			configInit();
@@ -288,10 +281,13 @@ public class JAlice {
 				System.exit( 1 );
 			}
 			
-			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
+			javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
+	            public void run() {
+	            		authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
+	            }
+			});
 			if( useJavaBasedSplashScreen ) {
 				splashScreen.hideSplash();
-				splashScreen.dispose();
 			}
 		} catch( Throwable t ) {
 			t.printStackTrace();
