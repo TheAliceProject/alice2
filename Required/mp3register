@@ -1,0 +1,1 @@
+java -classpath externalLib/jmf.jar:externalLib/mp3plugin.jar com.sun.media.codec.audio.mp3.JavaDecoder
