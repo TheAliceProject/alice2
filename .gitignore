@@ -1,0 +1,28 @@
+*~*
+.metadata
+*.DS_Store
+.*.swp
+hs_*.log
+*$py
+
+# m2eclipse
+/.classpath
+/.project
+/.settings
+target
+src_gen
+venv
+cachedir
+installerOutput
+
+*.class
+*.lst
+*.marker
+*.tokens
+bin/*
+
+# IntelliJ
+.idea/*
+*.iml
+out/*
+*.dae

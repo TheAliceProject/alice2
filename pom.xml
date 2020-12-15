@@ -1,0 +1,228 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.alice</groupId>
+  <artifactId>alice2</artifactId>
+  <version>2.5-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+
+    <jogl.version>2.3.2</jogl.version>
+    <!--  TODO Upgrade jogl  -->
+    <!--    <jogl.version>2.4.0-rc-20200307</jogl.version>-->
+
+    <!--  The first digit is from Alice 2, followed by SemVer identifier: major.minor.patch  -->
+    <alice.build.version>2.5.5.0</alice.build.version>
+    <alice.build.prerelease> </alice.build.prerelease>
+    <!--  TODO: Have the futur build system replace local with a build #  -->
+    <alice.build.metadata>+build.local</alice.build.metadata>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <!-- TODO Java3D latest is 1.5.1, but where is it on Maven?! -->
+      <groupId>java3d</groupId>
+      <artifactId>vecmath</artifactId>
+      <!-- j3d-core, j3d-core-utils -->
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jogamp.jogl</groupId>
+      <artifactId>jogl-all</artifactId>
+      <version>${jogl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jogamp.gluegen</groupId>
+      <artifactId>gluegen-rt</artifactId>
+      <version>${jogl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.media</groupId>
+      <artifactId>jmf</artifactId>
+      <version>2.1.1e</version>
+    </dependency>
+    <dependency>
+      <groupId>jython</groupId>
+      <artifactId>jython</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xerces</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>gnu.getopt</groupId>
+      <artifactId>java-getopt</artifactId>
+      <version>1.0.13</version>
+    </dependency>
+    <dependency>
+      <groupId>org.objectweb.joram</groupId>
+      <artifactId>jftp</artifactId>
+      <version>1.52</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mozilla/juniversalchardet -->
+    <dependency>
+      <groupId>org.mozilla</groupId>
+      <artifactId>juniversalchardet</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>distribution-platform</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <!-- linux-amd64 -->
+                <artifactItem>
+                  <groupId>org.jogamp.jogl</groupId>
+                  <artifactId>jogl-all</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-linux-amd64</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.jogamp.gluegen</groupId>
+                  <artifactId>gluegen-rt</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-linux-amd64</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+
+                <!-- linux-i586 -->
+                <artifactItem>
+                  <groupId>org.jogamp.jogl</groupId>
+                  <artifactId>jogl-all</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-linux-i586</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.jogamp.gluegen</groupId>
+                  <artifactId>gluegen-rt</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-linux-i586</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+
+                <!-- linux-armv6hf -->
+                <artifactItem>
+                  <groupId>org.jogamp.jogl</groupId>
+                  <artifactId>jogl-all</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-linux-armv6hf</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.jogamp.gluegen</groupId>
+                  <artifactId>gluegen-rt</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-linux-armv6hf</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+
+                <!-- macosx -->
+                <artifactItem>
+                  <groupId>org.jogamp.jogl</groupId>
+                  <artifactId>jogl-all</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-macosx-universal</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.jogamp.gluegen</groupId>
+                  <artifactId>gluegen-rt</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-macosx-universal</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+
+                <!-- win32 -->
+                <artifactItem>
+                  <groupId>org.jogamp.jogl</groupId>
+                  <artifactId>jogl-all</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-windows-i586</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.jogamp.gluegen</groupId>
+                  <artifactId>gluegen-rt</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-windows-i586</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+
+                <!-- win64 -->
+                <artifactItem>
+                  <groupId>org.jogamp.jogl</groupId>
+                  <artifactId>jogl-all</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-windows-amd64</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.jogamp.gluegen</groupId>
+                  <artifactId>gluegen-rt</artifactId>
+                  <version>${jogl.version}</version>
+                  <classifier>natives-windows-amd64</classifier>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <overWriteIfNewer>true</overWriteIfNewer>
+              <excludeGroupIds>
+                junit,org.hamcrest,org.mockito,org.powermock,${project.groupId}
+              </excludeGroupIds>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>mvnrepository.com</id>
+      <name>Maven Central Repository</name>
+      <url>https://mvnrepository.com/artifact</url>
+    </repository>
+    <repository>
+      <id>builds.archive.org</id>
+      <name>Maven Archive Repository</name>
+      <url>http://builds.archive.org/maven2</url>
+    </repository>
+  </repositories>
+</project>
