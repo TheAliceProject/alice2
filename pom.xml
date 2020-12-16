@@ -64,12 +64,40 @@
       <artifactId>jftp</artifactId>
       <version>1.52</version>
     </dependency>
+    <dependency>
+      <groupId>javax.media</groupId>
+      <artifactId>jmf-mp3plugin</artifactId>
+      <!-- TODO: determine the true version -->
+      <version>1.0.0</version>
+      <!-- TODO: find a public source, or store on alice maven server -->
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/mp3plugin.jar</systemPath>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.mozilla/juniversalchardet -->
     <dependency>
       <groupId>org.mozilla</groupId>
       <artifactId>juniversalchardet</artifactId>
       <version>1.0.3</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.apple/AppleJavaExtensions -->
+    <dependency>
+      <groupId>com.apple</groupId>
+      <artifactId>AppleJavaExtensions</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
+    <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.4.01</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/xml-resolver/xml-resolver -->
+    <dependency>
+      <groupId>xml-resolver</groupId>
+      <artifactId>xml-resolver</artifactId>
+      <version>1.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -208,6 +236,12 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
+          <!-- Ignore symbol file & fork allows maven to build using rt.jar which it requires. -->
+          <!-- TODO Replace or remove all use of classes in rt.jar -->
+          <compilerArgs>
+            <arg>-XDignore.symbol.file</arg>
+          </compilerArgs>
+          <fork>true</fork>
         </configuration>
       </plugin>
     </plugins>
