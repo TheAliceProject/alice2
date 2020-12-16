@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="7.0.12" transformSequenceNumber="7">
-  <directoryPresets config="../Required/gallery" />
+  <directoryPresets config="../target/alice2-2.5-SNAPSHOT.jar" />
   <application name="Alice 2.5" distributionSourceDir="" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.5.4" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="81236657ad4d4aae" javaMinVersion="1.8" javaMaxVersion="1.8" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -25,11 +25,13 @@
       <fileset name="EnglishGallery" id="60" customizedId="" />
       <fileset name="CoreGallery" id="194" customizedId="" />
       <fileset name="SpanishGallery" id="199" customizedId="" />
+      <fileset name="Windows" id="322" customizedId="" />
     </filesets>
     <roots>
       <root id="61" fileset="60" location="" />
       <root id="195" fileset="194" location="" />
       <root id="200" fileset="199" location="" />
+      <root id="323" fileset="322" location="" />
     </roots>
     <mountPoints>
       <mountPoint id="58" root="" location="Required" mode="755" />
@@ -43,17 +45,19 @@
       <mountPoint id="201" root="200" location="Required" mode="755" />
       <mountPoint id="202" root="200" location="Required/gallery" mode="755" />
       <mountPoint id="203" root="200" location="Required/gallery/Spanish" mode="755" />
+      <mountPoint id="324" root="323" location="Required" mode="755" />
     </mountPoints>
     <entries>
       <dirEntry mountPoint="72" file="../target/lib" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="lib" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
+      <fileEntry mountPoint="72" file="../lib/mp3plugin.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="58" file="../Required" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Required" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude>
           <entry location="gallery" fileType="regular" />
         </exclude>
       </dirEntry>
-      <fileEntry mountPoint="58" file="../target/alice-2.5-SNAPSHOT.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="58" file="../target/alice2-2.5-SNAPSHOT.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="../Alice2_LICENSE.pdf" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="../jythonLicense.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="../lgpl.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
@@ -64,6 +68,9 @@
         <exclude />
       </dirEntry>
       <dirEntry mountPoint="203" file="../Required/gallery/Spanish" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Spanish" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+        <exclude />
+      </dirEntry>
+      <dirEntry mountPoint="324" file="../lib/Windows" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Windows" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
     </entries>
@@ -102,6 +109,15 @@
         </include>
         <dependencies />
       </component>
+      <component name="Windows" id="325" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
+        <description />
+        <include all="false">
+          <entry location=".i4j_fileset_322" fileType="regular" />
+        </include>
+        <dependencies>
+          <component id="219" />
+        </dependencies>
+      </component>
     </components>
   </files>
   <launchers>
@@ -118,7 +134,7 @@
       <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" mainMode="1" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <scanDirectory location="Required/externalLib" failOnError="false" />
-          <archive location="Required/alice-2.5-SNAPSHOT.jar" failOnError="false" />
+          <archive location="Required/alice2-2.5-SNAPSHOT.jar" failOnError="false" />
         </classPath>
         <modulePath />
         <nativeLibraryDirectories />
@@ -1128,6 +1144,7 @@ return console.askYesNo(message, true);
       <excludedComponents>
         <component id="67" />
         <component id="66" />
+        <component id="325" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedBeans />
@@ -1157,8 +1174,11 @@ return console.askYesNo(message, true);
         <file name="AliceDisk.icns" file="./images/icon/AliceDisk.icns" />
       </topLevelFiles>
     </macosArchive>
-    <windowsArchive name="Windows Archive" id="186" customizedId="" mediaFileName="" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_152" manualJREEntry="false">
-      <excludedComponents />
+    <windowsArchive name="English Windows Archive" id="186" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_152" manualJREEntry="false">
+      <excludedComponents>
+        <component id="67" />
+        <component id="66" />
+      </excludedComponents>
       <includedDownloadableComponents />
       <excludedLaunchers />
       <excludedBeans />
@@ -1185,6 +1205,7 @@ return console.askYesNo(message, true);
       <excludedComponents>
         <component id="67" />
         <component id="59" />
+        <component id="325" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedBeans />
@@ -1218,6 +1239,7 @@ return console.askYesNo(message, true);
       <excludedComponents>
         <component id="66" />
         <component id="59" />
+        <component id="325" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedBeans />
@@ -1248,8 +1270,9 @@ return console.askYesNo(message, true);
       </topLevelFiles>
     </macosArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="71" />
+    <mediaSet refId="186" />
     <mediaSet refId="207" />
     <mediaSet refId="213" />
   </buildIds>
