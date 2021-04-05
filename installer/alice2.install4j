@@ -114,8 +114,8 @@
   </files>
   <launchers>
     <launcher name="Alice 2.5" id="70" customizedId="" external="false" excludeFromMenu="false" unixMode="755" unixAutoStart="true" menuName="" icnsFile="./images/icon/alice.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="" useCustomMacosExecutableName="false" customMacosExecutableName="" useJavaMinVersionOverride="false" javaMinVersionOverride="" useJavaMaxVersionOverride="false" javaMaxVersionOverride="" checkUpdater="false" updateExecutionMode="unattendedProgress" unattendedUpdateTitle="${i18n:updater.WindowTitle(&quot;${compiler:sys.fullName}&quot;)}">
-      <executable name="Alice 2.5e" type="1" iconSet="true" iconFile="" executableDir="Required" redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
-        <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
+      <executable name="Alice 2.5e" type="1" iconSet="true" iconFile="" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="Required" singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
+        <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="${compiler:sys.shortName}" productName="" />
       </executable>
       <splashScreen show="true" width="0" height="0" bitmapFile="./images/splashscreen/StartupScreen.png" textOverlay="false">
         <text>
@@ -129,12 +129,15 @@
           <archive location="Required/alice2-2.5-SNAPSHOT.jar" failOnError="false" />
         </classPath>
         <modulePath />
-        <nativeLibraryDirectories />
+        <nativeLibraryDirectories>
+          <directory name="Required/externalLib/win32" />
+          <directory name="Required/lib/win32" />
+        </nativeLibraryDirectories>
         <vmOptions />
       </java>
       <includedFiles />
       <unextractableFiles />
-      <vmOptionsFile mode="template" overwriteMode="0" fileMode="644">
+      <vmOptionsFile mode="none" overwriteMode="0" fileMode="644">
         <content />
       </vmOptionsFile>
       <customScript mode="1" file="">
@@ -1166,7 +1169,7 @@ return console.askYesNo(message, true);
         <file name="AliceDisk.icns" file="./images/icon/AliceDisk.icns" />
       </topLevelFiles>
     </macosArchive>
-    <windowsArchive name="English Windows Archive" id="186" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_152" manualJREEntry="false">
+    <windowsArchive name="English Windows Archive" id="186" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
       <excludedComponents>
         <component id="67" />
         <component id="66" />
