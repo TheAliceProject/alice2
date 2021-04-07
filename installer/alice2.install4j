@@ -76,15 +76,6 @@
           <component id="219" />
         </dependencies>
       </component>
-      <component name="English Core Gallery" id="66" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
-        <description />
-        <include all="false">
-          <entry location=".i4j_fileset_194" fileType="regular" />
-        </include>
-        <dependencies>
-          <component id="219" />
-        </dependencies>
-      </component>
       <component name="English Full Gallery" id="59" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
         <description />
         <include all="false">
@@ -1138,7 +1129,6 @@ return console.askYesNo(message, true);
     <macosArchive name="English macOS Single Bundle Archive" id="71" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
       <excludedComponents>
         <component id="67" />
-        <component id="66" />
         <component id="325" />
       </excludedComponents>
       <includedDownloadableComponents />
@@ -1172,7 +1162,6 @@ return console.askYesNo(message, true);
     <windowsArchive name="English Windows Archive" id="186" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
       <excludedComponents>
         <component id="67" />
-        <component id="66" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedLaunchers />
@@ -1198,7 +1187,6 @@ return console.askYesNo(message, true);
     </windowsArchive>
     <macosArchive name="Spanish macOS Single Bundle Archive" id="213" customizedId="" mediaFileName="${compiler:sys.fullName}s" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
       <excludedComponents>
-        <component id="66" />
         <component id="59" />
         <component id="325" />
       </excludedComponents>
@@ -1230,11 +1218,38 @@ return console.askYesNo(message, true);
         <file name="AliceDisk.icns" file="./images/icon/AliceDisk.icns" />
       </topLevelFiles>
     </macosArchive>
+    <windowsArchive name="Spanish Windows Archive" id="437" customizedId="" mediaFileName="${compiler:sys.fullName}s" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="true" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
+      <excludedComponents>
+        <component id="59" />
+      </excludedComponents>
+      <includedDownloadableComponents />
+      <excludedLaunchers />
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <exclude>
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-i586.jar" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+    </windowsArchive>
   </mediaSets>
   <buildIds buildAll="true">
     <mediaSet refId="71" />
     <mediaSet refId="186" />
     <mediaSet refId="213" />
+    <mediaSet refId="437" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" disableJreBundling="false" debug="false" />
 </install4j>
