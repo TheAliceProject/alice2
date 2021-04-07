@@ -117,13 +117,13 @@
       <executable name="Alice 2.5e" type="1" iconSet="true" iconFile="" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="Required" singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="${compiler:sys.shortName}" productName="" />
       </executable>
-      <splashScreen show="true" width="0" height="0" bitmapFile="./images/splashscreen/StartupScreen.png" textOverlay="false">
+      <splashScreen show="false" width="0" height="0" bitmapFile="" textOverlay="false">
         <text>
           <statusLine x="20" y="20" text="" fontSize="8" fontColor="0,0,0" bold="false" />
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
         </text>
       </splashScreen>
-      <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" mainMode="1" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" mainMode="1" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8" arguments="-l ${compiler:sys.languageId}" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <scanDirectory location="Required/externalLib" failOnError="false" />
           <archive location="Required/alice2-2.5-SNAPSHOT.jar" failOnError="false" />
@@ -1196,7 +1196,7 @@ return console.askYesNo(message, true);
         <customAttributes />
       </autoUpdate>
     </windowsArchive>
-    <macosArchive name="Spanish macOS Single Bundle Archive" id="213" customizedId="" mediaFileName="${compiler:sys.fullName}s" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
+    <macosArchive name="Spanish macOS Single Bundle Archive" id="213" customizedId="" mediaFileName="${compiler:sys.fullName}s" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
       <excludedComponents>
         <component id="66" />
         <component id="59" />
@@ -1204,7 +1204,7 @@ return console.askYesNo(message, true);
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedBeans />
-      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
+      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
       <exclude>
         <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
         <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" fileType="regular" />
