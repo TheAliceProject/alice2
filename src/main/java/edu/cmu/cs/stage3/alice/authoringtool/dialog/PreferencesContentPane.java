@@ -1,21 +1,21 @@
 /*
  * Copyright (c) 1999-2003, Carnegie Mellon University. All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 
+ *
  * 3. Products derived from the software may not be called "Alice",
  *    nor may "Alice" appear in their name, without prior written
  *    permission of Carnegie Mellon University.
- * 
+ *
  * 4. All advertising materials mentioning features or use of this software
  *    must display the following acknowledgement:
  *    "This product includes software developed by Carnegie Mellon University"
@@ -608,7 +608,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			return false;
 		}
 
-		char[] badChars = { '\\', '/', ':', '*', '?', '"', '<', '>', '|' }; 
+		char[] badChars = { '\\', '/', ':', '*', '?', '"', '<', '>', '|' };
 		String baseName = baseNameTextField.getText().trim();
 		for (int i = 0; i < badChars.length; i++) {
 			if (baseName.indexOf(badChars[i]) != -1) {
@@ -653,7 +653,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 				return false;
 			}
 		}
-		
+
 		String fontSizeString = (String) fontSizeComboBox.getSelectedItem();
 		try {
 			int i = Integer.parseInt(fontSizeString);
@@ -667,7 +667,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 							javax.swing.JOptionPane.INFORMATION_MESSAGE);
 			return false;
 		}
-		
+
 		String decimalPlacesString = (String) decimalPlacesComboBox.getSelectedItem();
 		try {
 			int i = Integer.parseInt(decimalPlacesString);
@@ -705,20 +705,20 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		} else {
 			javax.swing.ToolTipManager.sharedInstance().setEnabled(true);
 		}
-		
+
 		// Aik Min - Show/hide he/she builder
 		if (Configuration.getValue(authoringToolPackage, "showBuilderMode").equalsIgnoreCase("true")) {
 			GalleryViewer.showBuilder = true;
 		} else {
 			GalleryViewer.showBuilder = false;
 		}
-		
+
 		// Aik Min - Decimal places
 		if (!Configuration.getValue(authoringToolPackage, "decimalPlaces").equals((String) decimalPlacesComboBox.getSelectedItem())) {
 			Configuration.setValue(authoringToolPackage, "decimalPlaces", (String) decimalPlacesComboBox.getSelectedItem());
-			AikMin.decimal = Integer.valueOf((String) decimalPlacesComboBox.getSelectedItem());		
+			AikMin.decimal = Integer.valueOf((String) decimalPlacesComboBox.getSelectedItem());
 		}
-		
+
 		if (!Configuration.getValue(authoringToolPackage, "recentWorlds.maxWorlds").equals(maxRecentWorldsTextField.getText())) {
 			Configuration.setValue(authoringToolPackage, "recentWorlds.maxWorlds", maxRecentWorldsTextField.getText());
 		}
@@ -762,7 +762,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		}
 		if (!Configuration.getValue(authoringToolPackage, "language").equals((String) languageComboBox.getSelectedItem())) {
 			Configuration.setValue(authoringToolPackage, "language", (String) languageComboBox.getSelectedItem());
-			Configuration.setValue( authoringToolPackage, "directories.templatesDirectory", "templateWorlds" + System.getProperty( "file.separator" ) + (String) languageComboBox.getSelectedItem() );  
+			Configuration.setValue( authoringToolPackage, "directories.templatesDirectory", "templateWorlds" + System.getProperty( "file.separator" ) + (String) languageComboBox.getSelectedItem() );
 		}
 		// if( ! Configuration.getValue( authoringToolPackage,
 		// "printing.scaleFactor" ).equals(
@@ -1322,7 +1322,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		resourcesLabel.setText(Messages.getString("display_my_program_"));
 
-		java.io.File resourceDirectory = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" + System.getProperty("file.separator") + AikMin.locale.getDisplayLanguage()).getAbsoluteFile();
+		java.io.File resourceDirectory = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "resources" + System.getProperty("file.separator") + AikMin.getLanguage()).getAbsoluteFile();
 		java.io.File[] resourceFiles = resourceDirectory.listFiles(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.resourceFileFilter);
 		for (int i = 0; i < resourceFiles.length; i++) {
 			resourceFileComboBox.addItem(resourceFiles[i].getName());
@@ -1362,7 +1362,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 			}
 		});
 		resourceFileComboBox.setSelectedItem(Configuration.getValue(authoringToolPackage, "resourceFile"));
-		
+
 		// Aik Min - Language
 		JLabel languageLabel = new JLabel();
 		languagePanel.setLayout(new GridBagLayout());
@@ -1371,7 +1371,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 
 		languageLabel.setText(Messages.getString("display_language_"));
 		for (int i=0; i<AikMin.listOfLanguages.length; i++) {
-			languageComboBox.addItem(AikMin.listOfLanguages[i]);	
+			languageComboBox.addItem(AikMin.listOfLanguages[i]);
 		}
 		languageComboBox.setSelectedItem(Configuration.getValue(authoringToolPackage, "language"));
 		if (!AikMin.isLTR()) { 	// ***** For making Combobox items right justify *****
@@ -1444,7 +1444,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		fontSizeLabel.setText(" " + Messages.getString("general_font_size__default_value_is_12_"));
 
 		JLabel decimalPlacesLabel = new JLabel();
-		
+
 		decimalPlacesPanel.setLayout(new GridBagLayout());
 		decimalPlacesPanel.add(decimalPlacesComboBox, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 5, 5), 0, 0));
 		decimalPlacesPanel.add(decimalPlacesLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE,	new Insets(5, 5, 5, 5), 0, 0));
@@ -1462,7 +1462,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		decimalPlacesComboBox.setMaximumRowCount(9);
 
 		decimalPlacesLabel.setText(" " + Messages.getString("decimal_places__default_value_is_2_"));
-		
+
 		Component component = Box.createGlue();
 		// generalPanel.setBorder(emptyBorder);
 		generalPanel.setLayout(new GridBagLayout());
@@ -1476,7 +1476,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		generalPanel.add(inputDirectoriesPanel, new GridBagConstraints(0, 5, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		generalPanel.add(fontSizePanel, new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		generalPanel.add(decimalPlacesPanel, new GridBagConstraints(0, 7, 1, 1, 1.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		
+
 		generalPanel.add(component, new GridBagConstraints(0, 8, 1, 1, 1.0, 1.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		// generalPanel.add(watcherPanelEnabledCheckBox, new
 		// GridBagConstraints(0, 7, 1, 1, 0.0, 0.0
@@ -1655,7 +1655,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 	            }
 	        });
 		}
-		
+
 		JLabel codecLabel = new JLabel();
 		codecLabel.setText(Messages.getString("image_format_"));
 		codecComboBox.setPreferredSize(new java.awt.Dimension(60, 25));
@@ -1723,7 +1723,7 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		enableLoggingCheckBox.setText(" " + Messages.getString("enable_logging"));
 		disableTooltipCheckBox.setText(" " + Messages.getString("disable_tooltip"));
 		showBuilderCheckBox.setText(" " + Messages.getString("show_he_she_builder_in_gallery"));
-		
+
 		JLabel numClipboardsLabel = new JLabel();
 		numClipboardsTextField.setColumns(3);
 		numClipboardsTextField.setMinimumSize(new Dimension(50, 22));
@@ -1791,14 +1791,14 @@ public class PreferencesContentPane extends edu.cmu.cs.stage3.swing.ContentPane 
 		seldomUsedPanel.add(clearStdOutOnRunCheckBox, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(enableHighContrastCheckBox, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(enableLoggingCheckBox, new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		seldomUsedPanel.add(enableScriptingCheckBox, new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));	
+		seldomUsedPanel.add(enableScriptingCheckBox, new GridBagConstraints(0, 10, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(disableTooltipCheckBox, new GridBagConstraints(0, 11, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(showBuilderCheckBox, new GridBagConstraints(0, 12, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		
+
 		seldomUsedPanel.add(numClipboardsPanel, new GridBagConstraints(0, 13, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(saveIntervalPanel, new GridBagConstraints(0, 14, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		seldomUsedPanel.add(backupCountPanel, new GridBagConstraints(0, 15, 1, 1, 0.0, 0.0, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		
+
 		// seldomUsedPanel.add(runtimeScratchPadEnabledCheckBox, new
 		// GridBagConstraints(0, 10, 1, 1, 0.0, 0.0
 		// ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new

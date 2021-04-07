@@ -40,32 +40,32 @@ import edu.cmu.cs.stage3.lang.Messages;
 
 public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel{
 
-	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" ); 
-    protected static final String FILENAME = "directoryIndex.xml"; 
-    protected static final String FILENAME2 = "galleryIndex.xml"; 
+	private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
+    protected static final String FILENAME = "directoryIndex.xml";
+    protected static final String FILENAME2 = "galleryIndex.xml";
     public static final int LOCAL = 1;
     public static final int WEB = 2;
     public static final int CD = 3;
     protected final java.awt.Insets panelInset = new java.awt.Insets(1,2,0,0);
-    public static final String webGalleryName = "Web Gallery"; //redo Messages.getString("Web_Gallery"); 
-    public static final String localGalleryName = "Local Gallery"; //redo Messages.getString("Local_Gallery"); 
-    public static final String cdGalleryName = "CD Gallery"; //redoMessages.getString("CD_Gallery"); 
-    public static final String customGalleryName = "Custom Gallery"; //redo Messages.getString("Custom_Gallery"); 
-    public static boolean showBuilder = false; 
+    public static final String webGalleryName = "Web Gallery"; //redo Messages.getString("Web_Gallery");
+    public static final String localGalleryName = "Local Gallery"; //redo Messages.getString("Local_Gallery");
+    public static final String cdGalleryName = "CD Gallery"; //redoMessages.getString("CD_Gallery");
+    public static final String customGalleryName = "Custom Gallery"; //redo Messages.getString("Custom_Gallery");
+    public static boolean showBuilder = false;
 
     public static String webGalleryRoot;
     public static String localGalleryRoot;
     public static String cdGalleryRoot;
     public static String customGalleryRoot;
-    
-    protected static boolean alreadyEnteredWebGallery = false;
-    
 
-    public static final String homeName = "Home"; //redo Messages.getString("Home"); 
+    protected static boolean alreadyEnteredWebGallery = false;
+
+
+    public static final String homeName = "Home"; //redo Messages.getString("Home");
     protected static final java.awt.Color backgroundColor = new java.awt.Color(118,128,128);
     protected static final java.awt.Color textColor = new java.awt.Color(255,255,255);
     protected static final java.awt.Color linkColor = new java.awt.Color(153,204,255);
-    protected static final String noModelsYet = Messages.getString("No_models_found_yet_"); 
+    protected static final String noModelsYet = Messages.getString("No_models_found_yet_");
     public static String cacheDir;
 
     //protected static edu.cmu.cs.stage3.alice.authoringtool.util.Configuration authoringToolConfig = edu.cmu.cs.stage3.alice.authoringtool.util.Configuration.getLocalConfiguration( edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.class.getPackage() );
@@ -101,14 +101,14 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 
     protected class SearchingLabel extends javax.swing.JLabel{
 
-        protected String doneString = Messages.getString("Ready_to_search"); 
-        protected String searchingString = Messages.getString("Searching"); 
+        protected String doneString = Messages.getString("Ready_to_search");
+        protected String searchingString = Messages.getString("Searching");
         protected int state = 0;
 
         public SearchingLabel(){
             super();
             this.setText(doneString);
-            this.setFont(new java.awt.Font("Dialog", java.awt.Font.BOLD, 18)); 
+            this.setFont(new java.awt.Font("Dialog", java.awt.Font.BOLD, 18));
             this.setForeground(java.awt.Color.white);
         }
 
@@ -130,13 +130,13 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     protected SearchingLabel searchingProgressLabel = new SearchingLabel();
-    protected String lastSearchString = ""; 
-    protected String stopSearchString = Messages.getString("Stop_Search"); 
-    protected String startSearchString = Messages.getString("Search", ""); 
-	protected String startSearchWebString = Messages.getString("Search_www_alice_org"); 
-	protected String webGalleryHostName = Messages.getString("www_alice_org"); 
-    protected String searchString = Messages.getString("Browse_Gallery"); 
-    protected String browseString = Messages.getString("Search_Gallery"); 
+    protected String lastSearchString = "";
+    protected String stopSearchString = Messages.getString("Stop_Search");
+    protected String startSearchString = Messages.getString("Search", "");
+	protected String startSearchWebString = Messages.getString("Search_www_alice_org");
+	protected String webGalleryHostName = Messages.getString("www_alice_org");
+    protected String searchString = Messages.getString("Browse_Gallery");
+    protected String browseString = Messages.getString("Search_Gallery");
     protected javax.swing.JLabel attributeLabel;
     protected javax.swing.JPanel attributePanel;
     protected javax.swing.JTextField searchField;
@@ -179,12 +179,12 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         public boolean accept(java.io.File fileToCheck){
             if (filter != null){
                 if (!fileToCheck.isDirectory()){
-                    return (filter.accept(fileToCheck) || fileToCheck.getName().endsWith(".link")); 
+                    return (filter.accept(fileToCheck) || fileToCheck.getName().endsWith(".link"));
                 }
 				return false;
             }
 			if (!fileToCheck.isDirectory()){
-			    return (fileToCheck.getName().endsWith(".a2c") || fileToCheck.getName().endsWith(".link"));  
+			    return (fileToCheck.getName().endsWith(".a2c") || fileToCheck.getName().endsWith(".link"));
 			}
             return false;
         }
@@ -195,7 +195,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
 
         public boolean accept(java.io.File directory, String name){
-            if (name.equalsIgnoreCase("directoryThumbnail.png")){ 
+            if (name.equalsIgnoreCase("directoryThumbnail.png")){
                 return true;
             }
             return false;
@@ -246,7 +246,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
 
         public boolean matches(String toSearch){
-        	java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(toSearch.toUpperCase(), " "); 
+        	java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(toSearch.toUpperCase(), " ");
         	while (tokenizer.hasMoreTokens()){
         		String current = tokenizer.nextToken();
 				if (name.toUpperCase().indexOf(current) > -1){
@@ -257,23 +257,23 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
 
 		public void setDimensions(String dimensionString){
-			java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(dimensionString, "x"); 
-			String length = "", width = "", depth = "";   
+			java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(dimensionString, "x");
+			String length = "", width = "", depth = "";
 			if (tokenizer.hasMoreTokens()){
 				length = tokenizer.nextToken();
-				while (length.endsWith("m") || length.endsWith(" ") || length.endsWith("M")){   
+				while (length.endsWith("m") || length.endsWith(" ") || length.endsWith("M")){
 					length = length.substring(0, length.length()-1);
 				}
 			}
 			if (tokenizer.hasMoreTokens()){
 				width = tokenizer.nextToken();
-				while (width.endsWith("m") || width.endsWith(" ") || width.endsWith("M")){   
+				while (width.endsWith("m") || width.endsWith(" ") || width.endsWith("M")){
 					width = width.substring(0, width.length()-1);
 				}
 			}
 			if (tokenizer.hasMoreTokens()){
 				depth = tokenizer.nextToken();
-				while (depth.endsWith("m") || depth.endsWith(" ") || depth.endsWith("M")){   
+				while (depth.endsWith("m") || depth.endsWith(" ") || depth.endsWith("M")){
 					depth = depth.substring(0, depth.length()-1);
 				}
 			}
@@ -348,13 +348,13 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     if (current.getObject() instanceof String){
                         return (String)current.getObject();
                     }
-					String toReturn = ""; 
+					String toReturn = "";
 					if (current.getObject() instanceof java.util.Vector){
 					    java.util.Vector allDetails = (java.util.Vector)current.getObject();
 					    for (int j=0; j<allDetails.size(); j++){
 					        String currentDetail = allDetails.get(j).toString();
 					        if (j<allDetails.size()-1){
-					            currentDetail += ", "; 
+					            currentDetail += ", ";
 					        }
 					        toReturn += currentDetail;
 					    }
@@ -370,12 +370,12 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     protected class DirectoryXmlData{
         public java.util.Vector directories = new java.util.Vector();
         public java.util.Vector models = new java.util.Vector();
-        public String name = "directory"; 
+        public String name = "directory";
 
         public DirectoryXmlData(String name){
         	this.name = name;
         }
-		
+
         public void addDirectory(ObjectXmlData dir){
             for (int i=0; i<directories.size(); i++){
                 ObjectXmlData current = (ObjectXmlData)directories.get(i);
@@ -654,7 +654,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             }
             String xml = getXML(zipFile);
             ObjectXmlData currentModelData = null;
-            if (xml != null && xml != ""){ 
+            if (xml != null && xml != ""){
                 java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(xml.getBytes());
                 org.w3c.dom.Document document;
                 org.w3c.dom.Element xmlRoot;
@@ -672,7 +672,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 catch (org.xml.sax.SAXException e){
                     return null;
                 }
-                org.w3c.dom.NodeList xmlModels = xmlRoot.getElementsByTagName( "model" ); 
+                org.w3c.dom.NodeList xmlModels = xmlRoot.getElementsByTagName( "model" );
                 org.w3c.dom.Node currentModel = null;
                 if (xmlModels.getLength() < 1){
                     currentModel = xmlRoot;
@@ -780,7 +780,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 }
                 String absolutePath = modelsInDir[i].getAbsolutePath();
                 java.io.File toAdd = modelsInDir[i];
-                if (modelsInDir[i].getAbsolutePath().endsWith(".link")){ 
+                if (modelsInDir[i].getAbsolutePath().endsWith(".link")){
                     absolutePath = getLinkPath(modelsInDir[i]);
                     if (absolutePath != null){
                         toAdd = new java.io.File(absolutePath);
@@ -810,7 +810,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 }
             }
             //Add people here too...
-			if (showBuilder && this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){ 
+			if (showBuilder && this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){
 				for (int p=0; p< builderButtonsVector.size(); p++){
 					final GenericBuilderButton builderButton = (GenericBuilderButton)builderButtonsVector.get(p);
 					javax.swing.SwingUtilities.invokeLater( new Runnable(){
@@ -822,7 +822,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 					});
 				}
 			}
-			if (this.name.startsWith(localGalleryName)){ 
+			if (this.name.startsWith(localGalleryName)){
 				count++;
 				javax.swing.SwingUtilities.invokeLater( new Runnable(){
 					public void run(){
@@ -844,7 +844,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             xmlData =  new DirectoryXmlData(this.name);
             java.io.File[] modelsInDir = dirFile.listFiles(characterFilter);
             java.io.File[] dirsInDir = dirFile.listFiles(directoryFilter);
-            
+
             Comparator comp = new Comparator() {
 				  public int compare(Object o1, Object o2) {
 				    File f1 = (File) o1;
@@ -863,7 +863,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 				};
 			Arrays.sort(modelsInDir, comp);
 			Arrays.sort(dirsInDir, comp);
-			
+
             int total = modelsInDir.length + dirsInDir.length;
             glueConstraints.gridx = total;
             int count  = 0;
@@ -897,7 +897,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     return -1;
                 }
                 java.io.File toAdd = modelsInDir[i];
-                if (modelsInDir[i].getAbsolutePath().endsWith(".link")){ 
+                if (modelsInDir[i].getAbsolutePath().endsWith(".link")){
                     String absolutePath = getLinkPath(modelsInDir[i]);
                     if (absolutePath != null){
                         toAdd = new java.io.File(absolutePath);
@@ -914,7 +914,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     }
                 }
             }
-			if (showBuilder && this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){ 
+			if (showBuilder && this.name.equalsIgnoreCase("people") && updatePanelsWhileLoading && directoryOnDisplay != searchResults){
 				for (int p=0; p< builderButtonsVector.size(); p++){
 					count++;
 					final GenericBuilderButton builderButton = (GenericBuilderButton)builderButtonsVector.get(p);
@@ -927,7 +927,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 					});
 				}
 			}
-			if (this.name.startsWith(localGalleryName)){ 
+			if (this.name.startsWith(localGalleryName)){
 				count++;
 				javax.swing.SwingUtilities.invokeLater( new Runnable(){
 					public void run(){
@@ -984,8 +984,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             }
             // System.out.println("1: "+(System.currentTimeMillis()-oldTime));
             // oldTime = System.currentTimeMillis();
-            org.w3c.dom.NodeList xmlDirectories = xmlRoot.getElementsByTagName( "directory" ); 
-            org.w3c.dom.NodeList xmlModels = xmlRoot.getElementsByTagName( "model" ); 
+            org.w3c.dom.NodeList xmlDirectories = xmlRoot.getElementsByTagName( "directory" );
+            org.w3c.dom.NodeList xmlModels = xmlRoot.getElementsByTagName( "model" );
             // System.out.println("getting all models and dirs: "+(System.currentTimeMillis()-oldTime));
             // oldTime = System.currentTimeMillis();
             int total = xmlDirectories.getLength()+xmlModels.getLength();
@@ -1080,7 +1080,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
 	public boolean shouldShowWebWarning(){
-		return Configuration.getValue( authoringToolPackage, "showWebWarningDialog").equalsIgnoreCase("true");  
+		return Configuration.getValue( authoringToolPackage, "showWebWarningDialog").equalsIgnoreCase("true");
 	}
 
     public GalleryViewer(){
@@ -1088,49 +1088,49 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         java.net.URL mainWebGalleryURL = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainWebGalleryURL();
         if (mainWebGalleryURL != null){
         	webGalleryHostName = mainWebGalleryURL.getHost();
-        	startSearchWebString = Messages.getString("Search", webGalleryHostName); 
+        	startSearchWebString = Messages.getString("Search", webGalleryHostName);
         }
         java.io.File mainLocalGalleryFile = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainDiskGalleryDirectory();
         java.io.File mainCDGalleryFile = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getMainCDGalleryDirectory();
         java.io.File mainCustomGalleryFile = new java.io.File(Configuration.getValue( authoringToolPackage, "directories.charactersDirectory"));
-        
-        cacheDir = java.io.File.separator + "webGalleryCache" + java.io.File.separator;  //TODO: set from pref 
+
+        cacheDir = java.io.File.separator + "webGalleryCache" + java.io.File.separator;  //TODO: set from pref
         java.io.File testDir = new java.io.File(edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceUserDirectory(), cacheDir);
         if (!testDir.exists()){
             testDir.mkdirs();
         }
 
-        //String filename = "galleryIndex.xml"; 
+        //String filename = "galleryIndex.xml";
         rootDirectories = new java.util.Vector();
         inBrowseMode = true;
         guiInit();
-        
+
         String file [] = Configuration.getValueList( authoringToolPackage, "directories.galleryDirectory" );
         RootDirectoryStructure templocal = createDirectory(new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + "Core"), localGalleryName, LOCAL);
-        for (int i = 0; i < file.length; i++){  
+        for (int i = 0; i < file.length; i++){
         	java.io.File temp = new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + file[i]);
 	        localGallery = createDirectory(temp, localGalleryName +" (" + file[i] + ")", LOCAL);
 	        if (localGallery != null){
 	            rootDirectories.add(localGallery);
 	            localGalleryRoot = localGallery.rootPath;
-	            if ( AikMin.locale.getDisplayLanguage().equalsIgnoreCase(file[i]) ){
+	            if ( AikMin.getLanguage().equalsIgnoreCase(file[i]) ){
 	            	templocal = localGallery;
 	            }
-	        }    
+	        }
 	    }
         if ( templocal !=null )
         	localGallery = templocal;
-        
-        //    if ( AikMin.locale.getDisplayLanguage().equalsIgnoreCase(file[i])){
+
+        //    if ( AikMin.getLanguage().equalsIgnoreCase(file[i])){
         //    	localGallery = createDirectory(new java.io.File(mainLocalGalleryFile.getAbsolutePath() + System.getProperty( "file.separator" ) + file[i]), localGalleryName, LOCAL); //redo localGallery = createDirectory(temp, localGalleryName + " (" + file[i] + ")", LOCAL);
         //    }
         //}
         //if (localGallery == null){
         //	localGallery = templocal;
-        //}	
+        //}
         //rootDirectories.add(localGallery);
         //localGalleryRoot = localGallery.rootPath;
-	    
+
         //redo if ( templocal !=null )
        	//redo localGallery = templocal;
 
@@ -1174,8 +1174,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             directoryOnDisplay = searchResults;
         }
 
-        searchResults = new DirectoryStructure(null, Messages.getString("Search", ""), null); 
-        searchResults.xmlData = new DirectoryXmlData(Messages.getString("Search", "")); 
+        searchResults = new DirectoryStructure(null, Messages.getString("Search", ""), null);
+        searchResults.xmlData = new DirectoryXmlData(Messages.getString("Search", ""));
 
         refreshGUI();
     }
@@ -1200,7 +1200,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 toReturn = toReturn.substring(0, split) + separator;
             }
             else{
-                toReturn = ""; 
+                toReturn = "";
             }
         }
         return toReturn;
@@ -1223,7 +1223,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
         return toReturn;
     }
-    
+
     public void saveModel(edu.cmu.cs.stage3.alice.core.Element toSave, java.awt.datatransfer.Transferable transferable){
         /*  if (toSave == null){
 	        return;
@@ -1254,7 +1254,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 	            if (edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.URLTransferable.urlFlavor )){
 	                java.net.URL url = (java.net.URL)transferable.getTransferData(edu.cmu.cs.stage3.alice.authoringtool.datatransfer.URLTransferable.urlFlavor );
 	                if (url != null){
-	                    path = getRelativeDirectory(webGalleryRoot, url.toString(), "/"); 
+	                    path = getRelativeDirectory(webGalleryRoot, url.toString(), "/");
 	                    path = webGalleryName + java.io.File.separator + reverseWebReady(path);
 	                }
 	            }
@@ -1280,9 +1280,9 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 	    if (objectToAdd != null){
 	        String localFilename = reverseWebReady(objectToAdd.objectFilename);
 	        String baseFilename = localFilename.substring(0, localFilename.length()-3);
-	        String xmlFilename = objectToAdd.objectFilename.substring(0, objectToAdd.objectFilename.length()-3) + "xml"; 
-	        String pngFilename = baseFilename + "png"; 
-	        String a2cFilename = baseFilename + "a2c"; 
+	        String xmlFilename = objectToAdd.objectFilename.substring(0, objectToAdd.objectFilename.length()-3) + "xml";
+	        String pngFilename = baseFilename + "png";
+	        String a2cFilename = baseFilename + "a2c";
 	        GalleryObject.storeThumbnail(localGalleryRoot+pngFilename, image, objectToAdd.timeStamp);
 	        getXML(objectToAdd.parentDirectory.rootNode.rootPath,  xmlFilename, objectToAdd.type, (long)-1, localGalleryRoot, true);
 	        java.io.File objectFile = createFile(localGalleryRoot + a2cFilename);
@@ -1350,11 +1350,11 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 						addObject(url);
 						break;
 					} catch (Exception exception) {
-						Object[] options = {Messages.getString("Retry"), 
-										Messages.getString("Cancel")}; 
-						int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog( 
-											Messages.getString("Alice_can_t_reach_the_web_gallery__Your_computer_may_not_be_connected_to_the_internet_properly_"), 
-											Messages.getString("Internet_Connection_Error"), 
+						Object[] options = {Messages.getString("Retry"),
+										Messages.getString("Cancel")};
+						int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog(
+											Messages.getString("Alice_can_t_reach_the_web_gallery__Your_computer_may_not_be_connected_to_the_internet_properly_"),
+											Messages.getString("Internet_Connection_Error"),
 											javax.swing.JOptionPane.YES_NO_OPTION,
 											javax.swing.JOptionPane.WARNING_MESSAGE,
 											null,
@@ -1380,7 +1380,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         DirectoryStructure currentDirToSet = null;
         while (token.hasMoreTokens()){
         	String current = token.nextToken();//redo String current = Messages.getString( token.nextToken().replace(" ", "_") );
-            if (current != null && !current.equalsIgnoreCase("") && !current.equalsIgnoreCase(" ")){  
+            if (current != null && !current.equalsIgnoreCase("") && !current.equalsIgnoreCase(" ")){
                 if (isFirst){
                     isFirst = false;
                     if (current.equalsIgnoreCase(homeName)){
@@ -1390,7 +1390,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     else if (current.equalsIgnoreCase(webGalleryName)){
                         currentDirToSet = getRootDirectoryNamed(webGalleryName);
                     }
-                    else if (current.startsWith(localGalleryName)){ 	
+                    else if (current.startsWith(localGalleryName)){
                         currentDirToSet = getRootDirectoryNamed(localGalleryName + " (" + Configuration.getValue( authoringToolPackage, "language" ) + ")");
                         //if (currentDirToSet == null) currentDirToSet = getRootDirectoryNamed(localGalleryName + " (Core)");
                         if (currentDirToSet == null) {
@@ -1420,14 +1420,14 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 
     public void setDirectory(String pathToSet){
     	DirectoryStructure d = null;
-    	if (AikMin.isWindows()) {   
+    	if (AikMin.isWindows()) {
     		d = getDirectoryStructure(pathToSet);
     	} else {
-    		pathToSet = pathToSet.replace("\\", "/");  
+    		pathToSet = pathToSet.replace("\\", "/");
     		d = getDirectoryStructure(pathToSet);
     	}
         if (d == null){
-            edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Error_changing_gallery_viewer_to_", pathToSet), null); 
+            edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog(Messages.getString("Error_changing_gallery_viewer_to_", pathToSet), null);
             return;
         }
         changeDirectory(d);
@@ -1472,7 +1472,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         String path = getRootString(root);
         ObjectXmlData data = new ObjectXmlData();
         data.name = name;
-        data.objectFilename = ""; 
+        data.objectFilename = "";
         data.size = -1;
         data.type = type;
         data.mainViewer = this;
@@ -1480,7 +1480,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         RootDirectoryStructure toReturn = new RootDirectoryStructure(path, type, null, data);
         DirectoryStructure dirStruct = null;
         try{
-            dirStruct = new DirectoryStructure(toReturn, name, ""); 
+            dirStruct = new DirectoryStructure(toReturn, name, "");
             dirStruct.initSelf(root);
         }
         catch (Exception e){
@@ -1507,8 +1507,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             return null;
         }
         String toReturn = url.toString();
-        if (!toReturn.endsWith("/")){ 
-            toReturn += "/"; 
+        if (!toReturn.endsWith("/")){
+            toReturn += "/";
         }
         return toReturn;
     }
@@ -1525,14 +1525,14 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 
     public static java.io.File createFile(String filename){
         int nameSplit = filename.lastIndexOf(java.io.File.separator);
-        if (java.io.File.separator.equals("\\")){ 
-            int split2 = filename.lastIndexOf("/"); 
+        if (java.io.File.separator.equals("\\")){
+            int split2 = filename.lastIndexOf("/");
             if (split2 > nameSplit){
                 nameSplit = split2;
             }
         }
         else{
-            int split2 = filename.lastIndexOf("\\"); 
+            int split2 = filename.lastIndexOf("\\");
             if (split2 > nameSplit){
                 nameSplit = split2;
             }
@@ -1577,7 +1577,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 needToCache = false;
             }
             else{
-                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_accessing_the_local_gallery__is_either_not_there_or_can_not_be_read", file.getAbsolutePath()), null);  
+                edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.showErrorDialog( Messages.getString("Error_accessing_the_local_gallery__is_either_not_there_or_can_not_be_read", file.getAbsolutePath()), null);
                 return null;
             }
         }
@@ -1604,10 +1604,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 					xmlTemp = null;
 				}
 				if( xmlTemp == null ) {
-					Object[] options = {Messages.getString("Retry"), 
-										Messages.getString("Cancel")}; 
-					int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog( Messages.getString("Alice_can_t_reach_the_web_gallery__Your_computer_may_not_be_connected_to_the_internet_properly_"), 
-																			Messages.getString("Internet_Connection_Error"), 
+					Object[] options = {Messages.getString("Retry"),
+										Messages.getString("Cancel")};
+					int returnVal = edu.cmu.cs.stage3.swing.DialogManager.showOptionDialog( Messages.getString("Alice_can_t_reach_the_web_gallery__Your_computer_may_not_be_connected_to_the_internet_properly_"),
+																			Messages.getString("Internet_Connection_Error"),
 																			javax.swing.JOptionPane.YES_NO_OPTION,
 																			javax.swing.JOptionPane.WARNING_MESSAGE,
 																			null,
@@ -1649,9 +1649,9 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     private String getXML(java.util.zip.ZipFile zipFile){
-        String content = ""; 
+        String content = "";
         try{
-            java.util.zip.ZipEntry entry = zipFile.getEntry("galleryData.xml"); 
+            java.util.zip.ZipEntry entry = zipFile.getEntry("galleryData.xml");
             if (entry != null){
                 java.io.InputStream stream = zipFile.getInputStream(entry);
                 java.io.BufferedReader fileReader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
@@ -1675,7 +1675,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     private String getXML(java.io.File file){
-        String content = ""; 
+        String content = "";
         try{
             java.io.FileReader fileReader = new java.io.FileReader(file);
             char b[] = new char[1000];
@@ -1697,7 +1697,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     private String getXML(java.net.URL url){
-        String content = ""; 
+        String content = "";
         try{
             java.io.InputStream urlStream = url.openStream();
             java.io.BufferedInputStream bufis = new java.io.BufferedInputStream(urlStream);
@@ -1726,7 +1726,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         java.net.URL toReturn = null;
         try{
             java.net.URL url = new java.net.URL(filename);
-            if (!url.getProtocol().equalsIgnoreCase("http")){ 
+            if (!url.getProtocol().equalsIgnoreCase("http")){
                 return null;
             }
             java.net.HttpURLConnection connection = (java.net.HttpURLConnection)url.openConnection();
@@ -1755,7 +1755,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
 		return null;
     }
-    
+
     protected static void enteredWebGallery(){
 		alreadyEnteredWebGallery = true;
     }
@@ -1796,7 +1796,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         directoryPanel.setOpaque(false);
        // directoryPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(1));
 
-        attributeLabel = new  javax.swing.JLabel(" "); 
+        attributeLabel = new  javax.swing.JLabel(" ");
         attributeLabel.setForeground(textColor);
 
         attributePanel = new javax.swing.JPanel();
@@ -1826,11 +1826,11 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 
         searchField.addActionListener(new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent e){
-            	
+
                 searchGallery(null, searchField.getText(), false);
             }
         });
-        
+
 		searchField.getDocument().addDocumentListener( new javax.swing.event.DocumentListener() {
 			public void insertUpdate( javax.swing.event.DocumentEvent ev ) {
 				searchWebButton.setEnabled(false);
@@ -1846,7 +1846,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 				searchWebButton.setEnabled(false);
 			}
 		} );
-        
+
         searchButton = new javax.swing.JButton(startSearchString);
         searchButton.setBackground(new java.awt.Color( 240, 240, 255 ));
         searchButton.setMargin(new java.awt.Insets(2,2,2,2));
@@ -1880,8 +1880,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 				}
 				else{
 					if (!alreadyEnteredWebGallery && shouldShowWebWarning()){
-						int dialogVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("You_are_about_to_search_the_online_gallery__This_is_accessed_through_the_internet_n"), 
-						Messages.getString("Web_gallery_may_be_slow"), javax.swing.JOptionPane.WARNING_MESSAGE);  
+						int dialogVal = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("You_are_about_to_search_the_online_gallery__This_is_accessed_through_the_internet_n"),
+						Messages.getString("Web_gallery_may_be_slow"), javax.swing.JOptionPane.WARNING_MESSAGE);
 						if (dialogVal == javax.swing.JOptionPane.YES_OPTION){
 							enteredWebGallery();
 							searchGallery(webGallery.directory, searchField.getText(), true);
@@ -1902,7 +1902,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 		searchPanel.add(searchWebButton, new java.awt.GridBagConstraints(2,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,0), 0,0 ));
         searchPanel.add(searchingProgressLabel, new java.awt.GridBagConstraints(3,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.NONE, new java.awt.Insets(2,4,0,0), 0,0 ));
         searchPanel.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(4,0,1,1,1,1,java.awt.GridBagConstraints.LINE_START,java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0 ));
-		
+
         headerPanel = new javax.swing.JPanel();
         headerPanel.setMinimumSize(new java.awt.Dimension(1, 34));
         headerPanel.setOpaque(false);
@@ -1921,21 +1921,21 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         //  headerPanel.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,1,1,1,1,1,java.awt.GridBagConstraints.EAST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
       //  headerPanel.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.SOUTH,java.awt.GridBagConstraints.VERTICAL, new java.awt.Insets(0,0,0,0), 0,0 ));
       //  headerPanel.setMaximumSize(new java.awt.Dimension(Integer.MAX_VALUE, 40));
-        customGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/defaultFolderIcon.png" ) ); 
-        webGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/webGalleryIcon.png" ) ); 
-        loadingImageIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/loadingImageIcon.png" ) ); 
-        noImageIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/noImageIcon.png" ) ); 
-        noFolderImageIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/defaultFolderIcon.png" ) ); 
-        localGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/localGalleryIcon.png" ) ); 
-        cdGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/cdGalleryIcon.png" ) ); 
-        add3DTextIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/3DText.png" ) ); 
-        javax.swing.ImageIcon upLevelIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/upLevelIcon.png" ) ); 
-        javax.swing.ImageIcon upLevelIconPressed = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/upLevelIconPressed.png" ) ); 
+        customGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/defaultFolderIcon.png" ) );
+        webGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/webGalleryIcon.png" ) );
+        loadingImageIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/loadingImageIcon.png" ) );
+        noImageIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/noImageIcon.png" ) );
+        noFolderImageIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/defaultFolderIcon.png" ) );
+        localGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/localGalleryIcon.png" ) );
+        cdGalleryIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/cdGalleryIcon.png" ) );
+        add3DTextIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/3DText.png" ) );
+        javax.swing.ImageIcon upLevelIcon = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/upLevelIcon.png" ) );
+        javax.swing.ImageIcon upLevelIconPressed = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/upLevelIconPressed.png" ) );
         //javax.swing.ImageIcon upLevelIconDisabled = new javax.swing.ImageIcon( GalleryViewer.class.getResource( "images/upLevelIconDisabled.png" ) );
         javax.swing.ImageIcon upLevelIconDisabled = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getDisabledIcon(upLevelIcon, 45);
 
         upLevelButton = new javax.swing.JButton(upLevelIcon);
-        upLevelButton.setToolTipText(Messages.getString("Move_Up_a_Level")); 
+        upLevelButton.setToolTipText(Messages.getString("Move_Up_a_Level"));
         upLevelButton.setOpaque(false);
         upLevelButton.setDisabledIcon(upLevelIconDisabled);
         upLevelButton.setPressedIcon(upLevelIconPressed);
@@ -1951,7 +1951,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 );
 
         add3DTextData = new ObjectXmlData();
-        add3DTextData.name = Messages.getString("Create_3D_Text"); 
+        add3DTextData.name = Messages.getString("Create_3D_Text");
         add3DTextData.mainViewer = this;
         add3DTextData.transferable = new java.awt.datatransfer.StringSelection(add3DTextData.name);
 
@@ -1970,7 +1970,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 }
                 else{
                     continue;
-                }                
+                }
                 ObjectXmlData personBuilderData = new ObjectXmlData();
                 personBuilderData.name = sop.getString();
                 personBuilderData.mainViewer = this;
@@ -1982,17 +1982,17 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         }
 
         noObjectsLabel = new javax.swing.JLabel();
-        noObjectsLabel.setFont(new java.awt.Font("Dialog", 0, 24)); 
+        noObjectsLabel.setFont(new java.awt.Font("Dialog", 0, 24));
         noObjectsLabel.setForeground(java.awt.Color.white);
-        noObjectsLabel.setText(Messages.getString("No_folders_or_Alice_characters_found_in_this_directory_")); 
+        noObjectsLabel.setText(Messages.getString("No_folders_or_Alice_characters_found_in_this_directory_"));
 
         noSearchResults = new javax.swing.JLabel();
-        noSearchResults.setFont(new java.awt.Font("Dialog", 0, 24)); 
+        noSearchResults.setFont(new java.awt.Font("Dialog", 0, 24));
         noSearchResults.setForeground(java.awt.Color.white);
-        noSearchResults.setText(Messages.getString("No_models_were_found_")); 
+        noSearchResults.setText(Messages.getString("No_models_were_found_"));
 
         searching = new javax.swing.JLabel();
-        searching.setFont(new java.awt.Font("Dialog", 0, 24)); 
+        searching.setFont(new java.awt.Font("Dialog", 0, 24));
         searching.setForeground(java.awt.Color.white);
         searching.setText(noModelsYet);
 
@@ -2000,21 +2000,21 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         this.add(headerPanel, java.awt.BorderLayout.NORTH);
         javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(objectPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, java.awt.BorderLayout.CENTER);
-        
+
         //Aik Min added this to make scroll bar scroll better
         scrollPane.getHorizontalScrollBar().setUnitIncrement(133);
         scrollPane.getHorizontalScrollBar().setBlockIncrement(133);
-        
+
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,0,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     //    this.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,1,1,1,1,1,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
     //    this.add(javax.swing.Box.createVerticalGlue(), new java.awt.GridBagConstraints(0,2,1,1,1,1,java.awt.GridBagConstraints.SOUTH,java.awt.GridBagConstraints.BOTH, new java.awt.Insets(0,0,0,0), 0,0 ));
-        int fontSize = Integer.parseInt( Configuration.getValue( authoringToolPackage, "fontSize" ) ); 
+        int fontSize = Integer.parseInt( Configuration.getValue( authoringToolPackage, "fontSize" ) );
         this.setPreferredSize(new java.awt.Dimension(Integer.MAX_VALUE, 250 + (fontSize-12) * 6 )); //Aik Min
         this.setMinimumSize(new java.awt.Dimension(100, 250));
-        
+
 		if (!AikMin.isLTR()){	// ***** For the Gallery panel *****
-			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);	
-			scrollPane.setLayout(new javax.swing.ScrollPaneLayout() {	
+			applyComponentOrientation(java.awt.ComponentOrientation.RIGHT_TO_LEFT);
+			scrollPane.setLayout(new javax.swing.ScrollPaneLayout() {
 				@Override
 			   	public void layoutContainer(java.awt.Container parent) {
 			   		javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) parent;
@@ -2027,7 +2027,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     private String getNodeText(org.w3c.dom.Node node){
-        String toReturn = ""; 
+        String toReturn = "";
         org.w3c.dom.NodeList children = node.getChildNodes();
         for (int i=0; i<children.getLength(); i++){
             if (children.item(i).getNodeType() == org.w3c.dom.Node.TEXT_NODE){
@@ -2059,14 +2059,14 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     public static String reverseWebReady(String url){
-        String toReturn = ""; 
+        String toReturn = "";
         int beginning = 0;
-        int index = url.indexOf("%20"); 
+        int index = url.indexOf("%20");
         while (index != -1){
             toReturn += url.substring(beginning, index);
-            toReturn += " "; 
+            toReturn += " ";
             beginning = index + 3;
-            index = url.indexOf("%20", beginning); 
+            index = url.indexOf("%20", beginning);
         }
         toReturn += url.substring(beginning, url.length());
         toReturn = toReturn.replace('/', java.io.File.separatorChar);
@@ -2074,11 +2074,11 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     private String makeWebReady(String url){
-        String toReturn = ""; 
+        String toReturn = "";
         int beginning = 0;
         for (int i=0; i<url.length(); i++){
             if (url.charAt(i) == ' '){
-                toReturn += url.substring(beginning, i) + "%20"; 
+                toReturn += url.substring(beginning, i) + "%20";
                 beginning = i+1;
             }
         }
@@ -2200,15 +2200,15 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         for (int j=0; j<nodeDetails.getLength(); j++){
             org.w3c.dom.Node currentDetail = nodeDetails.item(j);
             if (currentDetail != null){
-                if (currentDetail.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE && !currentDetail.getNodeName().equals("#text")){ 
+                if (currentDetail.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE && !currentDetail.getNodeName().equals("#text")){
                     try{
-                        if (currentDetail.getNodeName().equalsIgnoreCase("name")){ 
+                        if (currentDetail.getNodeName().equalsIgnoreCase("name")){
                             currentObject.name = getNodeText(currentDetail);
                         }
-                        else if (currentDetail.getNodeName().equalsIgnoreCase("timestamp")){ 
+                        else if (currentDetail.getNodeName().equalsIgnoreCase("timestamp")){
                             currentObject.timeStamp = Long.parseLong(getNodeText(currentDetail));
                         }
-                        else if (currentDetail.getNodeName().equalsIgnoreCase("objectfilename")){ 
+                        else if (currentDetail.getNodeName().equalsIgnoreCase("objectfilename")){
                             String rawFilename = getNodeText(currentDetail);
                             if (type == WEB){
                                 currentObject.objectFilename = makeWebRelativePathReady(rawFilename);
@@ -2229,7 +2229,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                                 }
                             }
                         }
-                        else if (currentDetail.getNodeName().equalsIgnoreCase("imagefilename")){ 
+                        else if (currentDetail.getNodeName().equalsIgnoreCase("imagefilename")){
                             String rawFilename = getNodeText(currentDetail);
                             if (type == WEB){
                                 currentObject.imageFilename = makeWebRelativePathReady(rawFilename);
@@ -2238,10 +2238,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                                 currentObject.imageFilename = makeRelativePathReady(rawFilename);
                             }
                         }
-                        else if (currentDetail.getNodeName().equalsIgnoreCase("size")){ 
+                        else if (currentDetail.getNodeName().equalsIgnoreCase("size")){
                             currentObject.setSize(getNodeText(currentDetail));
                         }
-						else if (currentDetail.getNodeName().equalsIgnoreCase("physicalsize")){ 
+						else if (currentDetail.getNodeName().equalsIgnoreCase("physicalsize")){
 							currentObject.setDimensions(getNodeText(currentDetail));
 						}
                         else{
@@ -2265,7 +2265,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         if (setAsCurrent){
 //        	System.out.println("ok, we're building the current dir");
             directoryOnDisplay = newDir;
-            
+
             if (!stopBuildingGallery){
 //            	System.out.println("we haven't been cancelled");
 				javax.swing.SwingUtilities.invokeLater( new Runnable(){
@@ -2417,8 +2417,8 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
         else{
 			searchButton.setText(stopSearchString);
         }
-       
-        
+
+
 		Thread searchThread = new Thread() {
 			public void run() {
 				int total = 0;
@@ -2457,10 +2457,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 				            objectPanel.removeAll();
 				//            objectPanel.add(javax.swing.Box.createHorizontalGlue(), new java.awt.GridBagConstraints(1,0,1,1,1,1,java.awt.GridBagConstraints.WEST,java.awt.GridBagConstraints.HORIZONTAL, new java.awt.Insets(0,0,0,0), 0,0 ));
 				            if (isWeb){
-				            	noSearchResults.setText(Messages.getString("No_models_matching__were_found_on_", toSearchFor, webGalleryHostName));  
+				            	noSearchResults.setText(Messages.getString("No_models_matching__were_found_on_", toSearchFor, webGalleryHostName));
 				            }
 				            else{
-								noSearchResults.setText(Messages.getString("No_models_matching__were_found_on_your_machine_", toSearchFor));  
+								noSearchResults.setText(Messages.getString("No_models_matching__were_found_on_your_machine_", toSearchFor));
 				            }
 				//            objectPanel.add(noSearchResults, new java.awt.GridBagConstraints(0,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,4,0,0), 0,0 ));
 							objectPanel.add(noSearchResults);
@@ -2479,10 +2479,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 				});
 		        stopSearch = true;
 		        isInWebGallery = oldIsInWebGalleryValue;
-		        
+
 			}
 		};
-		searchThread.start();    
+		searchThread.start();
     }
 
     protected void changeDirectory(final DirectoryStructure toChangeTo){
@@ -2551,10 +2551,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             stopBuildingGallery = false;
         }
         if (isInWebGallery){
-        	attributeLabel.setText(Messages.getString("Loading_from_", webGalleryHostName, ""));  
+        	attributeLabel.setText(Messages.getString("Loading_from_", webGalleryHostName, ""));
         }
         else{
-			attributeLabel.setText(Messages.getString("Loading___", "")); 
+			attributeLabel.setText(Messages.getString("Loading___", ""));
         }
         objectPanel.removeAll();
 //        objectPanel.add(javax.swing.Box.createHorizontalGlue(), glueConstraints);
@@ -2567,10 +2567,10 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 		javax.swing.SwingUtilities.invokeLater( new Runnable(){
 			public void run(){
 				if (isInWebGallery){
-					attributeLabel.setText(Messages.getString("Loading_from_", webGalleryHostName, String.valueOf((int)(percentage*100))+"%"));   
+					attributeLabel.setText(Messages.getString("Loading_from_", webGalleryHostName, String.valueOf((int)(percentage*100))+"%"));
 				}
 				else{
-					attributeLabel.setText(Messages.getString("Loading___", String.valueOf((int)(percentage*100))+"%"));  
+					attributeLabel.setText(Messages.getString("Loading___", String.valueOf((int)(percentage*100))+"%"));
 				}
 			}
 		});
@@ -2586,37 +2586,37 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
     }
 
     public void diplayAttribution(ObjectXmlData o){
-        String modeledBy = o.getDetail("modeledby"); 
-        String programmedBy = o.getDetail("programmedby"); 
-        String paintedBy = o.getDetail("paintedby"); 
+        String modeledBy = o.getDetail("modeledby");
+        String programmedBy = o.getDetail("programmedby");
+        String paintedBy = o.getDetail("paintedby");
         String displayName = cleanUpName(o.name);
         String attributeString = displayName;
         if (modeledBy != null || programmedBy != null || paintedBy != null){
-            attributeString += ": "; 
+            attributeString += ": ";
         }
         boolean haveOne = false;
         if (modeledBy != null){
-            attributeString += Messages.getString("Modeled_by_", modeledBy); 
+            attributeString += Messages.getString("Modeled_by_", modeledBy);
             haveOne = true;
         }
         if (paintedBy != null){
             if (haveOne){
-                attributeString += ", "; 
+                attributeString += ", ";
             }
-            attributeString += Messages.getString("Painted_by_", paintedBy); 
+            attributeString += Messages.getString("Painted_by_", paintedBy);
             haveOne = true;
         }
         if (programmedBy != null){
             if (haveOne){
-                attributeString += ", ";           } 
-            attributeString += Messages.getString("Programmed_by_", programmedBy); 
+                attributeString += ", ";           }
+            attributeString += Messages.getString("Programmed_by_", programmedBy);
         }
         attributeLabel.setText(attributeString);
         attributePanel.repaint();
     }
 
     public void removeAttribution(){
-        attributeLabel.setText(" "); 
+        attributeLabel.setText(" ");
         attributePanel.repaint();
     }
 
@@ -2729,11 +2729,11 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             int size =  xmlData.directories.size()+xmlData.models.size();
             boolean isPeople = false;
             boolean isLocal = false;
-            if (xmlData.name.equalsIgnoreCase("people")){ 
+            if (xmlData.name.equalsIgnoreCase("people")){
             	size += builderButtonsVector.size();
             	isPeople = true;
             }
-			if (xmlData.name.startsWith(localGalleryName)){ 
+			if (xmlData.name.startsWith(localGalleryName)){
 				size ++;
 				isLocal = true;
 			}
@@ -2778,7 +2778,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
 //					objectPanel.add(builderButton, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.NORTHWEST,java.awt.GridBagConstraints.NONE, panelInset, 0,0 ));
 					objectPanel.add(builderButton);
 					builderButton.updateGUI();
-					  
+
 				}
 			}
 
@@ -2845,7 +2845,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                     return;
                 }
             }
-            
+
 
         }
     }
@@ -2887,9 +2887,9 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             while (!dirs.empty()){
                 currentDir = (DirectoryStructure)dirs.pop();
                 if (count > 0){
-                    javax.swing.JLabel arrow = new javax.swing.JLabel(">"); 
-                    if (!AikMin.isLTR()){	
-                    	 arrow = new javax.swing.JLabel("<"); 
+                    javax.swing.JLabel arrow = new javax.swing.JLabel(">");
+                    if (!AikMin.isLTR()){
+                    	 arrow = new javax.swing.JLabel("<");
             		}
                     arrow.setForeground(textColor);
                     directoryPanel.add(arrow, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.WEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,3,0,3), 0,0 ));
@@ -2899,7 +2899,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
                 	String translate = currentDir.name;
                 	if ( currentDir.name.indexOf("(") >= 0 )
                 		translate = currentDir.name.substring(0, currentDir.name.indexOf("(") ).trim();
-                	
+
                 	//currentDir.name.replaceFirst( translate, Messages.getString(translate.replaceAll(" ", "_")));
                 	currentDirLabel.setText( currentDir.name.replaceFirst( translate, Messages.getString(translate.replaceAll(" ", "_"))) ); //redo currentDirLabel.setText(currentDir.name);
                     directoryPanel.add(currentDirLabel, new java.awt.GridBagConstraints(count,0,1,1,0,0,java.awt.GridBagConstraints.WEST,java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,0,0,0), 0,0 ));
@@ -2931,7 +2931,7 @@ public class GalleryViewer extends edu.cmu.cs.stage3.alice.authoringtool.util.Gr
             for (int i=0; i<children.getLength(); i++){
                 exploreXML(children.item(i), level+1);
             }
-            System.out.println("}"); 
+            System.out.println("}");
         }
     }*/
 }

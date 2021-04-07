@@ -30,7 +30,7 @@ import edu.cmu.cs.stage3.lang.Messages;
  */
 public class AuthoringToolResources {
 	public final static long startTime = System.currentTimeMillis();
-	public final static String QUESTION_STRING = Messages.getString("function"); 
+	public final static String QUESTION_STRING = Messages.getString("function");
 	public static edu.cmu.cs.stage3.util.Criterion characterCriterion = new edu.cmu.cs.stage3.util.Criterion() {
 		public boolean accept( Object o ) {
 			return o instanceof edu.cmu.cs.stage3.alice.core.Sandbox;
@@ -38,10 +38,10 @@ public class AuthoringToolResources {
 	};
 	public static java.io.FileFilter resourceFileFilter = new java.io.FileFilter() {
 		public String getDescription() {
-			return Messages.getString("resource_files"); 
+			return Messages.getString("resource_files");
 		}
 		public boolean accept( java.io.File file ) {
-			return file.isFile() && file.canRead() && file.getName().toLowerCase().endsWith( ".py" ); 
+			return file.isFile() && file.canRead() && file.getName().toLowerCase().endsWith( ".py" );
 		}
 	};
 
@@ -73,7 +73,7 @@ public class AuthoringToolResources {
 		public String[] oneShotGroupsToInclude;
 		public String[] questionPropertiesToOmit;
 		public java.util.HashMap colorMap = new java.util.HashMap();
-		public java.text.DecimalFormat decimalFormatter = new java.text.DecimalFormat( "#0.##" ); 
+		public java.text.DecimalFormat decimalFormatter = new java.text.DecimalFormat( "#0.##" );
 		public java.util.HashMap stringImageMap = new java.util.HashMap();
 		public java.util.HashMap stringIconMap = new java.util.HashMap();
 		public java.util.HashMap disabledIconMap = new java.util.HashMap();
@@ -95,16 +95,16 @@ public class AuthoringToolResources {
 	protected static java.io.File resourcesPyFile;
 	protected static java.io.FilenameFilter pyFilenameFilter = new java.io.FilenameFilter() {
 		public boolean accept( java.io.File dir, String name ) {
-			return name.toLowerCase().endsWith( ".py" ); 
+			return name.toLowerCase().endsWith( ".py" );
 		}
 	};
 
 	static {
-		resourcesDirectory = new java.io.File( JAlice.getAliceHomeDirectory(), "resources" + System.getProperty( "file.separator" ) + AikMin.locale.getDisplayLanguage() ).getAbsoluteFile(); 
-		resourcesCacheFile = new java.io.File( resourcesDirectory, "resourcesCache.bin" ).getAbsoluteFile(); 
-		resourcesPyFile = new java.io.File( resourcesDirectory, authoringToolConfig.getValue( "resourceFile" ) ).getAbsoluteFile(); 
+		resourcesDirectory = new java.io.File( JAlice.getAliceHomeDirectory(), "resources" + System.getProperty( "file.separator" ) + AikMin.getLanguage() ).getAbsoluteFile();
+		resourcesCacheFile = new java.io.File( resourcesDirectory, "resourcesCache.bin" ).getAbsoluteFile();
+		resourcesPyFile = new java.io.File( resourcesDirectory, authoringToolConfig.getValue( "resourceFile" ) ).getAbsoluteFile();
 		if (!resourcesPyFile.canRead()){
-			resourcesPyFile = new java.io.File(resourcesDirectory, "Alice Style.py").getAbsoluteFile(); 
+			resourcesPyFile = new java.io.File(resourcesDirectory, "Alice Style.py").getAbsoluteFile();
 		}
 		loadResourcesPy();
 //
@@ -138,7 +138,7 @@ public class AuthoringToolResources {
 			return false;
 		}
 	}
-	
+
 	public static java.awt.datatransfer.DataFlavor[] safeGetCurrentDataFlavors(java.awt.dnd.DropTargetDropEvent dtde){
 		try{
 			return dtde.getCurrentDataFlavors();
@@ -146,7 +146,7 @@ public class AuthoringToolResources {
 			return null;
 		}
 	}
-	
+
 	public static java.awt.datatransfer.DataFlavor[] safeGetCurrentDataFlavors(java.awt.dnd.DropTargetDragEvent dtde){
 		try{
 			return dtde.getCurrentDataFlavors();
@@ -154,7 +154,7 @@ public class AuthoringToolResources {
 			return null;
 		}
 	}
-	
+
 	public static boolean safeIsDataFlavorSupported(java.awt.dnd.DropTargetDropEvent dtde, java.awt.datatransfer.DataFlavor flavor){
 		try{
 			boolean toReturn = dtde.isDataFlavorSupported(flavor);
@@ -163,7 +163,7 @@ public class AuthoringToolResources {
 			return false;
 		}
 	}
-	
+
 	public static boolean safeIsDataFlavorSupported(java.awt.datatransfer.Transferable transferable, java.awt.datatransfer.DataFlavor flavor){
 		try{
 			boolean toReturn = transferable.isDataFlavorSupported(flavor);
@@ -215,7 +215,7 @@ public class AuthoringToolResources {
 			oos.flush();
 			oos.close();
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_save_resources_cache_to_", resourcesCacheFile.getAbsolutePath()), t ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_save_resources_cache_to_", resourcesCacheFile.getAbsolutePath()), t );
 		}
 	}
 
@@ -223,7 +223,7 @@ public class AuthoringToolResources {
 		try {
 			resourcesCacheFile.delete();
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_delete_resources_cache_", resourcesCacheFile.getAbsolutePath()), t ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Unable_to_delete_resources_cache_", resourcesCacheFile.getAbsolutePath()), t );
 		}
 	}
 
@@ -236,10 +236,10 @@ public class AuthoringToolResources {
 					try {
 						Class.forName( className );
 					} catch( java.lang.ClassNotFoundException e ) {
-						throw new IllegalArgumentException( Messages.getString("propertyStructure_error__is_not_a_Class", className) );  
+						throw new IllegalArgumentException( Messages.getString("propertyStructure_error__is_not_a_Class", className) );
 					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_propertyStructure__", o )); 
+					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_propertyStructure__", o ));
 				}
 			}
 		}
@@ -259,10 +259,10 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e );
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_propertyStructure__", o), null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_propertyStructure__", o), null );
 				}
 			}
 		}
@@ -297,7 +297,7 @@ public class AuthoringToolResources {
 			}
 
 			if( leftovers.size() > 0 ) {
-				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "leftovers", leftovers ) ); 
+				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "leftovers", leftovers ) );
 			}
 		}
 
@@ -326,22 +326,22 @@ public class AuthoringToolResources {
 											if( (className2 instanceof String) || (className2 instanceof edu.cmu.cs.stage3.util.StringObjectPair) ) {
 												// do nothing
 											} else {
-												throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_String_or_StringObjectPair__got__", className) ); 
+												throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_String_or_StringObjectPair__got__", className) );
 											}
 										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__", groupChunk) ); 
+									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__", groupChunk) );
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_Vector__got__", groups) ); 
+							throw new IllegalArgumentException( Messages.getString("oneShotStructure_error__expected_Vector__got__", groups) );
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "oneShotStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__", classChunk) ); 
+					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_oneShotStructure__", classChunk) );
 				}
 			}
 		}
@@ -361,10 +361,10 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e );
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_oneShotStructure__", o), null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_oneShotStructure__", o), null );
 				}
 			}
 		}
@@ -394,25 +394,25 @@ public class AuthoringToolResources {
 												try {
 													Class.forName( (String)className2 );
 												} catch( ClassNotFoundException e ) {
-													throw new IllegalArgumentException( Messages.getString("questionStructure_error__is_not_a_Class", className2) );  
+													throw new IllegalArgumentException( Messages.getString("questionStructure_error__is_not_a_Class", className2) );
 												}
 											} else {
-												throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_String__got__", className) ); 
+												throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_String__got__", className) );
 											}
 										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__", groupChunk) ); 
+									throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__", groupChunk) );
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_Vector__got__", groups) ); 
+							throw new IllegalArgumentException( Messages.getString("questionStructure_error__expected_Vector__got__", groups) );
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "questionStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__", classChunk) ); 
+					throw new IllegalArgumentException( Messages.getString("Unexpected_object_found_in_questionStructure__", classChunk) );
 				}
 			}
 		}
@@ -432,10 +432,10 @@ public class AuthoringToolResources {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e );
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_questionStructure__", o), null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_questionStructure__", o), null );
 				}
 			}
 		}
@@ -459,24 +459,24 @@ public class AuthoringToolResources {
 								if( propertyChunk instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 									Object values = ((edu.cmu.cs.stage3.util.StringObjectPair)propertyChunk).getObject();
 									if( ! (values instanceof java.util.Vector) ) {
-										throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__", values) ); 
+										throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__", values) );
 //									} else {
 //										for( java.util.Iterator kter = ((java.util.Vector)values).iterator(); kter.hasNext(); ) {
 //											System.out.println( kter.next() );
 //										}
 									}
 								} else {
-									throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__", propertyChunk) ); 
+									throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__", propertyChunk) );
 								}
 							}
 						} else {
-							throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__", properties) ); 
+							throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_Vector__got__", properties) );
 						}
 //					} catch( java.lang.ClassNotFoundException e ) {
 //						throw new IllegalArgumentException( "defaultPropertyValuesStructure error: " + className + " is not a Class" );
 //					}
 				} else {
-					throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__", classChunk) ); 
+					throw new IllegalArgumentException( Messages.getString("defaultPropertyValuesStructure_error__expected_StringObjectPair__got__", classChunk) );
 				}
 			}
 		}
@@ -502,7 +502,7 @@ public class AuthoringToolResources {
 						}
 					}
 				} catch( java.lang.ClassNotFoundException e ) {
-					AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e );
 				}
 			}
 		}
@@ -522,7 +522,7 @@ public class AuthoringToolResources {
 	public static boolean nameMapContainsKey( Object key ) {
 		return AuthoringToolResources.resources.nameMap.containsKey( key );
 	}
-	
+
 	public static void putHTMLName( Object key, String prettyName ) {
 		AuthoringToolResources.resources.htmlNameMap.put( key, prettyName );
 	}
@@ -549,9 +549,9 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( (! token.startsWith( "<<" )) || token.startsWith( "<<<" ) ) {  
-				while( token.indexOf( "&lt;" ) > -1 ) { 
-					token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();   
+			if( (! token.startsWith( "<<" )) || token.startsWith( "<<<" ) ) {
+				while( token.indexOf( "&lt;" ) > -1 ) {
+					token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();
 				}
 				sb.append( token );
 			}
@@ -611,7 +611,7 @@ public class AuthoringToolResources {
 	public static void setPropertiesToOmitNoneFor( edu.cmu.cs.stage3.util.StringTypePair[] propertiesToOmitNoneFor ) {
 		AuthoringToolResources.resources.propertiesToOmitNoneFor = propertiesToOmitNoneFor;
 	}
-	
+
 	public static void setPropertiesToIncludeNoneFor( edu.cmu.cs.stage3.util.StringTypePair[] propertiesToIncludeNoneFor ) {
 			AuthoringToolResources.resources.propertiesToIncludeNoneFor = propertiesToIncludeNoneFor;
 		}
@@ -619,7 +619,7 @@ public class AuthoringToolResources {
 	public static boolean shouldGUIOmitNone( edu.cmu.cs.stage3.alice.core.Property property ) {
 		return !shouldGUIIncludeNone(property);
 	}
-	
+
 	public static boolean shouldGUIIncludeNone( edu.cmu.cs.stage3.alice.core.Property property ) {
 		if( AuthoringToolResources.resources.propertiesToIncludeNoneFor != null ) {
 			Class elementClass = property.getOwner().getClass();
@@ -632,7 +632,7 @@ public class AuthoringToolResources {
 		}
 		return false;
 	}
-	
+
 	public static boolean shouldGUIIncludeNone( Class elementClass, String propertyName ) {
 		if( AuthoringToolResources.resources.propertiesToIncludeNoneFor != null ) {
 			for( int i = 0; i < AuthoringToolResources.resources.propertiesToIncludeNoneFor.length; i++ ) {
@@ -668,7 +668,7 @@ public class AuthoringToolResources {
 	}
 
 	public static boolean shouldGUIOmitScriptDefined( edu.cmu.cs.stage3.alice.core.Property property ) {
-		if( ! authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {  
+		if( ! authoringToolConfig.getValue( "enableScripting" ).equalsIgnoreCase( "true" ) ) {
 			return true;
 		} else if( AuthoringToolResources.resources.propertiesToOmitScriptDefinedFor != null ) {
 			Class elementClass = property.getOwner().getClass();
@@ -693,7 +693,7 @@ public class AuthoringToolResources {
 		Class elementClass = property.getOwner().getClass();
 		String propertyName = property.getName();
 		//if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
-		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) { 
+		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) {
 			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
 			Object e = propertyAnimation.element.get();
 			if( e instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
@@ -708,7 +708,7 @@ public class AuthoringToolResources {
 			}
 			propertyName = propertyAnimation.propertyName.getStringValue();
 		//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( Messages.getString("value") ) ) {
-		} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "value" ) ) { 
+		} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "value" ) ) {
 			edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment propertyAssignment = (edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment)property.getOwner();
 			elementClass = propertyAssignment.element.getElementValue().getClass();
 			propertyName = propertyAssignment.propertyName.getStringValue();
@@ -730,8 +730,8 @@ public class AuthoringToolResources {
 			return getReprForValue( value );
 		}
 
-		if( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedResponse" )) || 
-			(edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedQuestion" )) ) 
+		if( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedResponse" )) ||
+			(edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedQuestion" )) )
 		{
 			verbose = true;
 		}
@@ -741,17 +741,17 @@ public class AuthoringToolResources {
 
 		try {
 			while( edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( elementClass ) ) {
-				String propertyKey = elementClass.getName() + "." + propertyName; 
+				String propertyKey = elementClass.getName() + "." + propertyName;
 
 				String userRepr = null;
-				if( (extraContextInfo != null) && extraContextInfo.equals( "menuContext" ) ) { // if the repr is going to be shown in a menu 
-					if( propertyValueFormatMapContainsKey( propertyKey + ".menuContext" ) ) { 
-						propertyKey = propertyKey + ".menuContext"; 
+				if( (extraContextInfo != null) && extraContextInfo.equals( "menuContext" ) ) { // if the repr is going to be shown in a menu
+					if( propertyValueFormatMapContainsKey( propertyKey + ".menuContext" ) ) {
+						propertyKey = propertyKey + ".menuContext";
 					}
 				} else if( extraContextInfo instanceof edu.cmu.cs.stage3.alice.core.property.DictionaryProperty ) { // if there is extra info stored in the element's data property
 					edu.cmu.cs.stage3.alice.core.property.DictionaryProperty data = (edu.cmu.cs.stage3.alice.core.property.DictionaryProperty)extraContextInfo;
-					if( data.getName().equals( "data" ) ) {  // sanity check 
-						Object repr = data.get( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName ); 
+					if( data.getName().equals( "data" ) ) {  // sanity check
+						Object repr = data.get( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName );
 						if( repr != null ) {
 							if( repr instanceof String ) {
 								if( Number.class.isAssignableFrom( valueClass ) && (value instanceof Double) ) { // if it's a number, check to make sure the string is still valid
@@ -759,7 +759,7 @@ public class AuthoringToolResources {
 									if( (d != null) && d.equals( value ) ) {
 										userRepr = (String)repr;
 									} else {
-										data.remove( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName ); 
+										data.remove( "edu.cmu.cs.stage3.alice.authoringtool.userRepr." + propertyName );
 									}
 								} else {
 									userRepr = (String)repr;
@@ -781,8 +781,8 @@ public class AuthoringToolResources {
 						}
 					} else if( value == null ) { // is this right for all cases?
 						reprString = null;
-					} else if( map.containsKey( "default" ) ) { 
-						reprString = (String)map.get( "default" ); 
+					} else if( map.containsKey( "default" ) ) {
+						reprString = (String)map.get( "default" );
 					}
 				}
 
@@ -790,7 +790,7 @@ public class AuthoringToolResources {
 					for( java.util.Iterator iter = AuthoringToolResources.resources.unitMap.keySet().iterator(); iter.hasNext(); ) {
 						String key = (String)iter.next();
 						String unitString = getUnitString( key );
-						String unitExpression = "<" + key + ">";  
+						String unitExpression = "<" + key + ">";
 						while( reprString.indexOf( unitExpression ) > -1 ) {
 							StringBuffer sb = new StringBuffer( reprString );
 							sb.replace( reprString.indexOf( unitExpression ), reprString.indexOf( unitExpression ) + unitExpression.length(), Messages.getString(unitString) );
@@ -798,20 +798,20 @@ public class AuthoringToolResources {
 						}
 					}
 
-					while( reprString.indexOf( "<value>" ) > -1 ) { 
+					while( reprString.indexOf( "<value>" ) > -1 ) {
 						String valueString = (userRepr != null) ? userRepr : getReprForValue( value );
 						StringBuffer sb = new StringBuffer( reprString );
-						sb.replace( reprString.indexOf( "<value>" ), reprString.indexOf( "<value>" ) + "<value>".length(), valueString );   
+						sb.replace( reprString.indexOf( "<value>" ), reprString.indexOf( "<value>" ) + "<value>".length(), valueString );
 						reprString = sb.toString();
 					}
-					while( (reprString.indexOf( "<percentValue>" ) > -1) && (value instanceof Double) ) { 
+					while( (reprString.indexOf( "<percentValue>" ) > -1) && (value instanceof Double) ) {
 						double v = ((Double)value).doubleValue() * 100.0;
-						String valueString = AuthoringToolResources.resources.decimalFormatter.format( v ) + "%"; 
+						String valueString = AuthoringToolResources.resources.decimalFormatter.format( v ) + "%";
 						StringBuffer sb = new StringBuffer( reprString );
-						sb.replace( reprString.indexOf( "<percentValue>" ), reprString.indexOf( "<percentValue>" ) + "<percentValue>".length(), valueString );   
+						sb.replace( reprString.indexOf( "<percentValue>" ), reprString.indexOf( "<percentValue>" ) + "<percentValue>".length(), valueString );
 						reprString = sb.toString();
 					}
-					while( (reprString.indexOf( "<keyCodeValue>" ) > -1) && (value instanceof Integer) ) { 
+					while( (reprString.indexOf( "<keyCodeValue>" ) > -1) && (value instanceof Integer) ) {
 						String valueString="";
 						switch (((Integer)value).intValue()){
 						case 192: valueString = "`"; break;
@@ -825,12 +825,12 @@ public class AuthoringToolResources {
 						case 44: valueString = ","; break;
 						case 46: valueString = "."; break;
 						case 47: valueString = "/"; break;
-						
+
 						default: valueString = java.awt.event.KeyEvent.getKeyText( ((Integer)value).intValue() ); break;
 						}
-						
+
 						StringBuffer sb = new StringBuffer( reprString );
-						sb.replace( reprString.indexOf( "<keyCodeValue>" ), reprString.indexOf( "<keyCodeValue>" ) + "<keyCodeValue>".length(), valueString );   
+						sb.replace( reprString.indexOf( "<keyCodeValue>" ), reprString.indexOf( "<keyCodeValue>" ) + "<keyCodeValue>".length(), valueString );
 						reprString = sb.toString();
 					}
 
@@ -840,21 +840,21 @@ public class AuthoringToolResources {
 				elementClass = elementClass.getSuperclass();
 			}
 		} catch( Throwable t ) {
-			AuthoringTool.showErrorDialog( Messages.getString("Error_finding_repr_for_", value), t ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Error_finding_repr_for_", value), t );
 		}
 		return getReprForValue( value, verbose );
 	}
-	
+
 
 	public static String getReprForValue( Object value ) {
 		return getReprForValue( value, false );
 	}
-	
+
 	protected static void initWebGalleryURL(){
 		java.net.URL galleryURL = null;
 		try {
-			galleryURL = new java.net.URL("http://www.alice.org/gallery/"); 
-			java.io.File urlFile = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "etc/AliceWebGalleryURL.txt" ).getAbsoluteFile(); 
+			galleryURL = new java.net.URL("http://www.alice.org/gallery/");
+			java.io.File urlFile = new java.io.File( edu.cmu.cs.stage3.alice.authoringtool.JAlice.getAliceHomeDirectory(), "etc/AliceWebGalleryURL.txt" ).getAbsoluteFile();
 			if( urlFile.exists() ) {
 				if( urlFile.canRead() ) {
 					java.io.BufferedReader br = new java.io.BufferedReader( new java.io.FileReader( urlFile ) );
@@ -868,26 +868,26 @@ public class AuthoringToolResources {
 						}
 					}
 					br.close();
-					
+
 					if( urlString != null ) {
 						urlString = urlString.trim();
 						if( urlString.length() > 0 ) {
 							try{
 								galleryURL = new java.net.URL( urlString );
 							} catch (java.net.MalformedURLException badURL){
-								if (urlString.startsWith("www")){ 
-									urlString = "http://"+urlString; 
+								if (urlString.startsWith("www")){
+									urlString = "http://"+urlString;
 									try{
 										galleryURL = new java.net.URL( urlString );
 									} catch (java.net.MalformedURLException badURLAgain){}
 								}
 							}
-								
-						} 
+
+						}
 					}
-					
-				} 
-			} 
+
+				}
+			}
 		} catch( Throwable t ) {}
 		finally{
 			if (galleryURL != null){
@@ -898,8 +898,8 @@ public class AuthoringToolResources {
 
 	protected static String stripUnnamedsFromName(Object value){
 		String toStrip = new String(value.toString());
-		String toReturn = ""; 
-		String toMatch = "__Unnamed"; 
+		String toReturn = "";
+		String toMatch = "__Unnamed";
 		boolean notDone = true;
 		while (notDone){
 			int nextIndex = toStrip.indexOf(toMatch);
@@ -916,7 +916,7 @@ public class AuthoringToolResources {
 					notDone = false;
 					break;
 				}
-				nextIndex = toStrip.indexOf("."); 
+				nextIndex = toStrip.indexOf(".");
 				if (nextIndex >= 0){
 					newToStrip = toStrip.substring(nextIndex+1, toStrip.length());
 					if (newToStrip != null){
@@ -967,32 +967,32 @@ public class AuthoringToolResources {
 			try {
 				Class declaringClass = valueClass.getField( propertyName ).getDeclaringClass();
 				if( declaringClass != null ) {
-					String key = declaringClass.getName() + "." + propertyName; 
+					String key = declaringClass.getName() + "." + propertyName;
 					if( nameMapContainsKey( key ) ) {
 						propertyName = getName( key );
 					}
 				}
 			} catch( NoSuchFieldException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_representing_PropertyValue__can_t_find_on", propertyName, valueClass), e );  
+				AuthoringTool.showErrorDialog( Messages.getString("Error_representing_PropertyValue__can_t_find_on", propertyName, valueClass), e );
 			}
 
-			value = getReprForValue( element, false ) + "." + propertyName; 
+			value = getReprForValue( element, false ) + "." + propertyName;
 		}
 		if( (value instanceof edu.cmu.cs.stage3.alice.core.Question) && formatMapContainsKey( value.getClass() ) ) {
-			String questionRepr = ""; 
+			String questionRepr = "";
 			edu.cmu.cs.stage3.alice.core.Question question = (edu.cmu.cs.stage3.alice.core.Question)value;
 			String format = getFormat( value.getClass() );
 			edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer formatTokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 			while( formatTokenizer.hasMoreTokens() ) {
 				String token = formatTokenizer.nextToken();
-				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
-					edu.cmu.cs.stage3.alice.core.Property property = question.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
+				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {
+					edu.cmu.cs.stage3.alice.core.Property property = question.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
 					if( property != null ) {
 						questionRepr += getReprForValue( property.get(), property );
 					}
 				} else {
-					while( token.indexOf( "&lt;" ) > -1 ) { 
-						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();   
+					while( token.indexOf( "&lt;" ) > -1 ) {
+						token = new StringBuffer( token ).replace( token.indexOf( "&lt;" ), token.indexOf( "&lt;" ) + 4, "<" ).toString();
 					}
 					questionRepr += token;
 				}
@@ -1078,69 +1078,69 @@ public class AuthoringToolResources {
 //		}
 		if( value instanceof javax.vecmath.Vector3d ) {
 			javax.vecmath.Vector3d vec = (javax.vecmath.Vector3d)value;
-			value = "Vector3( " + AuthoringToolResources.resources.decimalFormatter.format( vec.x ) + ", " + 
-					AuthoringToolResources.resources.decimalFormatter.format( vec.y ) + ", " + 
+			value = "Vector3( " + AuthoringToolResources.resources.decimalFormatter.format( vec.x ) + ", " +
+					AuthoringToolResources.resources.decimalFormatter.format( vec.y ) + ", " +
 					AuthoringToolResources.resources.decimalFormatter.format( vec.z ) + " )";    //$NON-NLS-4$
 		}
 		if( value instanceof javax.vecmath.Matrix4d ) {
 			edu.cmu.cs.stage3.math.Matrix44 m = new edu.cmu.cs.stage3.math.Matrix44( (javax.vecmath.Matrix4d)value );
 			edu.cmu.cs.stage3.math.Vector3 position = m.getPosition();
 			edu.cmu.cs.stage3.math.Quaternion quaternion = m.getAxes().getQuaternion();
-			value = Messages.getString("position__orientation___", AuthoringToolResources.resources.decimalFormatter.format( position.x ), 
-					AuthoringToolResources.resources.decimalFormatter.format( position.y ), AuthoringToolResources.resources.decimalFormatter.format( position.z ), 
-					AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ), AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ), 
+			value = Messages.getString("position__orientation___", AuthoringToolResources.resources.decimalFormatter.format( position.x ),
+					AuthoringToolResources.resources.decimalFormatter.format( position.y ), AuthoringToolResources.resources.decimalFormatter.format( position.z ),
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ), AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ),
 					AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ), AuthoringToolResources.resources.decimalFormatter.format( quaternion.w ));
 		}
 		if( value instanceof edu.cmu.cs.stage3.math.Quaternion ) {
 			edu.cmu.cs.stage3.math.Quaternion quaternion = (edu.cmu.cs.stage3.math.Quaternion)value;
-			value = "(" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " + 
-					AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " + 
-					AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " + 
+			value = "(" + AuthoringToolResources.resources.decimalFormatter.format( quaternion.x ) + ", " +
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.y ) + ", " +
+					AuthoringToolResources.resources.decimalFormatter.format( quaternion.z ) + ") " +
 					AuthoringToolResources.resources.decimalFormatter.format( quaternion.w );    //$NON-NLS-4$
 		}
 		if( value instanceof edu.cmu.cs.stage3.alice.scenegraph.Color ) {
 			edu.cmu.cs.stage3.alice.scenegraph.Color color = (edu.cmu.cs.stage3.alice.scenegraph.Color)value;
 			if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.BLACK ) ) {
-				value = Messages.getString("black"); 
+				value = Messages.getString("black");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.BLUE ) ) {
-				value = Messages.getString("blue"); 
+				value = Messages.getString("blue");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.BROWN ) ) {
-				value = Messages.getString("brown"); 
+				value = Messages.getString("brown");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.CYAN ) ) {
-				value = Messages.getString("cyan"); 
+				value = Messages.getString("cyan");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.DARK_GRAY ) ) {
-				value = Messages.getString("dark_gray"); 
+				value = Messages.getString("dark_gray");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.GRAY ) ) {
-				value = Messages.getString("gray"); 
+				value = Messages.getString("gray");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.GREEN ) ) {
-				value = Messages.getString("green"); 
+				value = Messages.getString("green");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.LIGHT_GRAY ) ) {
-				value = Messages.getString("light_gray"); 
+				value = Messages.getString("light_gray");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.MAGENTA ) ) {
-				value = Messages.getString("magenta"); 
+				value = Messages.getString("magenta");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.ORANGE ) ) {
-				value = Messages.getString("orange"); 
+				value = Messages.getString("orange");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.PINK ) ) {
-				value = Messages.getString("pink"); 
+				value = Messages.getString("pink");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.PURPLE ) ) {
-				value = Messages.getString("purple"); 
+				value = Messages.getString("purple");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.RED ) ) {
-				value = Messages.getString("red"); 
+				value = Messages.getString("red");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.WHITE ) ) {
-				value = Messages.getString("white"); 
+				value = Messages.getString("white");
 			} else if( color.equals( edu.cmu.cs.stage3.alice.scenegraph.Color.YELLOW ) ) {
-				value = Messages.getString("yellow"); 
+				value = Messages.getString("yellow");
 			} else {
-				value = Messages.getString("Color_r_g_b_a", AuthoringToolResources.resources.decimalFormatter.format( color.getRed() ), 
-						AuthoringToolResources.resources.decimalFormatter.format( color.getGreen() ), 
-						AuthoringToolResources.resources.decimalFormatter.format( color.getBlue() ), 
+				value = Messages.getString("Color_r_g_b_a", AuthoringToolResources.resources.decimalFormatter.format( color.getRed() ),
+						AuthoringToolResources.resources.decimalFormatter.format( color.getGreen() ),
+						AuthoringToolResources.resources.decimalFormatter.format( color.getBlue() ),
 						AuthoringToolResources.resources.decimalFormatter.format( color.getAlpha() ) );
 			}
 		}
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Property ) {
 			String simpleName = ((edu.cmu.cs.stage3.alice.core.Property)value).getName();
 			if( ((edu.cmu.cs.stage3.alice.core.Property)value).getDeclaredClass() != null ) {
-				String key = ((edu.cmu.cs.stage3.alice.core.Property)value).getDeclaredClass().getName() + "." + ((edu.cmu.cs.stage3.alice.core.Property)value).getName(); 
+				String key = ((edu.cmu.cs.stage3.alice.core.Property)value).getDeclaredClass().getName() + "." + ((edu.cmu.cs.stage3.alice.core.Property)value).getName();
 				if( nameMapContainsKey( key ) ) {
 					simpleName = getName( key );
 				} else {
@@ -1151,13 +1151,13 @@ public class AuthoringToolResources {
 			if( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 				value = getReprForValue( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner(), verbose );
 			} else if( verbose && (((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() != null) ) {
-				value = getReprForValue( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() ) + "." + simpleName; 
+				value = getReprForValue( ((edu.cmu.cs.stage3.alice.core.Property)value).getOwner() ) + "." + simpleName;
 			} else {
 				value = simpleName;
 			}
 		}
 		if( value == null ) {
-			value = Messages.getString("_None_"); 
+			value = Messages.getString("_None_");
 		}
 		return value.toString();
 	}
@@ -1168,18 +1168,18 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {  
-				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );  
+			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {
+				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
 					if( knownPropertyValues[i].getString().equals( propertyName ) ) {
 						sb.append( AuthoringToolResources.getReprForValue( knownPropertyValues[i].getObject(), true ) );
 						break;
 					}
 				}
-			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {  
+			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {
 				// leave blank
-			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
-				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );  
+			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {
+				String propertyName = token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) );
 				boolean appendedValue = false;
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
 					if( knownPropertyValues[i].getString().equals( propertyName ) ) {
@@ -1210,14 +1210,14 @@ public class AuthoringToolResources {
 				}
 			}
 		} else if( (element instanceof edu.cmu.cs.stage3.alice.core.Sound) && (context instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) ) {
-			edu.cmu.cs.stage3.alice.core.Sound sound = (edu.cmu.cs.stage3.alice.core.Sound)element;		
+			edu.cmu.cs.stage3.alice.core.Sound sound = (edu.cmu.cs.stage3.alice.core.Sound)element;
 			String s = getReprForValue( element, true );
 			double t = Double.NaN;
 			edu.cmu.cs.stage3.media.DataSource dataSourceValue = sound.dataSource.getDataSourceValue();
 			if( dataSourceValue != null ) {
-				t = dataSourceValue.getDuration( edu.cmu.cs.stage3.media.DataSource.USE_HINT_IF_NECESSARY );				
+				t = dataSourceValue.getDuration( edu.cmu.cs.stage3.media.DataSource.USE_HINT_IF_NECESSARY );
 			}
-			return  s + " (" + formatTime( t ) + ")";  
+			return  s + " (" + formatTime( t ) + ")";
 		}
 
 		return getReprForValue( element, true );
@@ -1245,12 +1245,12 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {  
-				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
-			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {  
-				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
-			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
-				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
+			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {
+				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
+			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {
+				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
+			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {
+				visible.add( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
 			}
 		}
 
@@ -1258,19 +1258,19 @@ public class AuthoringToolResources {
 	}
 
 	public static String[] getDesiredProperties( Class elementClass ) {
-		java.util.LinkedList desired = new java.util.LinkedList();	
+		java.util.LinkedList desired = new java.util.LinkedList();
 		edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( AuthoringToolResources.getFormat( elementClass ) );
 		while( tokenizer.hasMoreTokens() ) {
 			String token = tokenizer.nextToken();
-			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {  
+			if( token.startsWith( "<<<" ) && token.endsWith( ">>>" ) ) {
 				// skip this one
 				// should be in knownPropertyValues
-			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {  				
-				//desired.add(  Messages.getString( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
+			} else if( token.startsWith( "<<" ) && token.endsWith( ">>" ) ) {
+				//desired.add(  Messages.getString( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );
 				desired.add(  token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
-			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
-				//desired.add(  Messages.getString( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );  
-				desired.add(  token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
+			} else if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {
+				//desired.add(  Messages.getString( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) ) );
+				desired.add(  token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );
 			}
 		}
 
@@ -1297,11 +1297,11 @@ public class AuthoringToolResources {
 	public static String[] getParameterizedPropertiesToOmit() {
 		return AuthoringToolResources.resources.parameterizedPropertiesToOmit;
 	}
-	
+
 	public static void setOneShotGroupsToInclude(String[] oneShotGroupsToInclude){
 		AuthoringToolResources.resources.oneShotGroupsToInclude = oneShotGroupsToInclude;
 	}
-	
+
 	public static String[] getOneShotGroupsToInclude(){
 		return AuthoringToolResources.resources.oneShotGroupsToInclude;
 	}
@@ -1323,10 +1323,10 @@ public class AuthoringToolResources {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e );
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_behaviorParameterPropertiesStructure__", o), null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_behaviorParameterPropertiesStructure__", o), null );
 				}
 			}
 		}
@@ -1344,9 +1344,9 @@ public class AuthoringToolResources {
 		float min = Math.min(rgbF[0], Math.min(rgbF[1], rgbF[2]));
 		float max = Math.max(rgbF[0], Math.max(rgbF[1], rgbF[2]));
 		float delta = max - min;
-		
+
 		hsl[2] = (max + min) /2;
-		
+
 		if (delta == 0){
 			hsl[0] = 0.0f;
 			hsl[1] = 0.0f;
@@ -1368,7 +1368,7 @@ public class AuthoringToolResources {
 			} else if (rgbF[2] == max){
 				hsl[0] = (2.0f/3) + delG - delR;
 			}
-			
+
 			if (hsl[0] < 0){
 				hsl[0] += 1;
 			}
@@ -1379,22 +1379,22 @@ public class AuthoringToolResources {
 //		System.out.println("For RGB: "+rgb+" HSL = "+hsl[0]+", "+hsl[1]+", "+hsl[2]);
 		return hsl;
 	}
-		
+
 	private static float hueToRGB( float v1, float v2, float vH){
 		if ( vH < 0 ) vH += 1;
 		if ( vH > 1 ) vH -= 1;
 	 	if ( ( 6 * vH ) < 1 ) return ( v1 + ( v2 - v1 ) * 6 * vH );
 	 	if ( ( 2 * vH ) < 1 ) return ( v2 );
 	 	if ( ( 3 * vH ) < 2 ) return ( v1 + ( v2 - v1 ) * ( ( 2.0f / 3 ) - vH ) * 6 );
-	 	return v1; 
+	 	return v1;
 	}
-	
+
 	private static java.awt.Color hslToRGB( float[] hsl ) {
 		//java.awt.Color rgb = new java.awt.Color(0,0,0);
 		if (hsl[1] == 0){
 //			System.out.println("For HSL: "+hsl[0]+", "+hsl[1]+", "+hsl[2]+" RGB = "+hsl[2]+", "+hsl[2]+", "+hsl[2]);
 			return new java.awt.Color(hsl[2],hsl[2],hsl[2]);
-		} 
+		}
 		float var_2 = 0.0f;
 		if ( hsl[2] < 0.5 ){
 			var_2 = hsl[2] * ( 1 + hsl[1] );
@@ -1421,34 +1421,34 @@ public class AuthoringToolResources {
 //		hslToRGB(hsl);
 //		hsl = rgbToHSL(new java.awt.Color(.2f, .5f, .5f));
 //		hslToRGB(hsl);
-//		
+//
 //	}
 	public static java.awt.Color getColor( String key ) {
 		java.awt.Color toReturn = (java.awt.Color)AuthoringToolResources.resources.colorMap.get( key );
-		if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase( "true" ) &&   
-			!key.equalsIgnoreCase("mainFontColor") && 
-			!key.equalsIgnoreCase("objectTreeDisabledText") && 
-			!key.equalsIgnoreCase("objectTreeSelectedText") && 
-			!key.equalsIgnoreCase("disabledHTMLText") && 
-			!key.equalsIgnoreCase("disabledHTML") && 
-			!key.equalsIgnoreCase("stdErrTextColor") && 
-			!key.equalsIgnoreCase("commentForeground") && 
-			!key.equalsIgnoreCase("objectTreeSelected") && 
-			!key.equalsIgnoreCase("dndHighlight") && 
-			!key.equalsIgnoreCase("dndHighlight2") && 
-			!key.equalsIgnoreCase("dndHighlight3") && 
-			!key.equalsIgnoreCase("guiEffectsShadow") && 
-			!key.equalsIgnoreCase("guiEffectsEdge") && 
-			!key.equalsIgnoreCase("guiEffectsTroughShadow") && 
-			!key.equalsIgnoreCase("guiEffectsDisabledLine") && 
-			!key.equalsIgnoreCase("makeSceneEditorBigBackground") && 
-			!key.equalsIgnoreCase("makeSceneEditorSmallBackground") && 
-			!key.equalsIgnoreCase("objectTreeText")){ 
+		if (authoringToolConfig.getValue( "enableHighContrastMode" ).equalsIgnoreCase( "true" ) &&
+			!key.equalsIgnoreCase("mainFontColor") &&
+			!key.equalsIgnoreCase("objectTreeDisabledText") &&
+			!key.equalsIgnoreCase("objectTreeSelectedText") &&
+			!key.equalsIgnoreCase("disabledHTMLText") &&
+			!key.equalsIgnoreCase("disabledHTML") &&
+			!key.equalsIgnoreCase("stdErrTextColor") &&
+			!key.equalsIgnoreCase("commentForeground") &&
+			!key.equalsIgnoreCase("objectTreeSelected") &&
+			!key.equalsIgnoreCase("dndHighlight") &&
+			!key.equalsIgnoreCase("dndHighlight2") &&
+			!key.equalsIgnoreCase("dndHighlight3") &&
+			!key.equalsIgnoreCase("guiEffectsShadow") &&
+			!key.equalsIgnoreCase("guiEffectsEdge") &&
+			!key.equalsIgnoreCase("guiEffectsTroughShadow") &&
+			!key.equalsIgnoreCase("guiEffectsDisabledLine") &&
+			!key.equalsIgnoreCase("makeSceneEditorBigBackground") &&
+			!key.equalsIgnoreCase("makeSceneEditorSmallBackground") &&
+			!key.equalsIgnoreCase("objectTreeText")){
 				float[] hsl = rgbToHSL(toReturn);
 				hsl[2] = Math.max(hsl[2], .95f);
 				java.awt.Color convertedColor = hslToRGB(hsl);
 				return new java.awt.Color(convertedColor.getRed(), convertedColor.getGreen(), convertedColor.getBlue(), toReturn.getAlpha());
-		} 
+		}
 		return toReturn;
 	}
 
@@ -1467,7 +1467,7 @@ public class AuthoringToolResources {
 	public static java.io.File getMainDiskGalleryDirectory() {
 		return AuthoringToolResources.resources.mainDiskGalleryDirectory;
 	}
-	
+
 	public static void setMainCDGalleryDirectory( java.io.File file ) {
 		AuthoringToolResources.resources.mainCDGalleryDirectory = file;
 	}
@@ -1479,11 +1479,11 @@ public class AuthoringToolResources {
 	public static void setMainUpdateURL ( java.net.URL url) {
 		AuthoringToolResources.resources.mainUpdateURL = url;
 	}
-	
+
 	public static java.net.URL getMainUpdateURL() {
 		return AuthoringToolResources.resources.mainUpdateURL;
 	}
-	
+
 	public static void autodetectMainCDGalleryDirectory( String galleryName ) {
 		java.io.File[] cdRoots = edu.cmu.cs.stage3.alice.authoringtool.util.CDUtil.getCDRoots();
 
@@ -1499,21 +1499,21 @@ public class AuthoringToolResources {
 	}
 
 	public static java.awt.Image getAliceSystemIconImage() {
-		return getImageForString( "aliceHead" ); 
+		return getImageForString( "aliceHead" );
 	}
 	public static javax.swing.ImageIcon getAliceSystemIcon() {
-		return getIconForString( "aliceHead" ); 
+		return getIconForString( "aliceHead" );
 	}
-	
+
 
 	public static java.awt.Image getImageForString( String s ) {
 		if( ! AuthoringToolResources.resources.stringImageMap.containsKey( s ) ) {
-			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" );  
+			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" );
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" );  
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" );
 			}
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" );  
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" );
 			}
 			if( resource != null ) {
 				java.awt.Image image = java.awt.Toolkit.getDefaultToolkit().getImage( resource );
@@ -1528,12 +1528,12 @@ public class AuthoringToolResources {
 
 	public static javax.swing.ImageIcon getIconForString( String s ) {
 		if( ! AuthoringToolResources.resources.stringIconMap.containsKey( s ) ) {
-			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" );  
+			java.net.URL resource = AuthoringToolResources.class.getResource( "images/" + s + ".gif" );
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" );  
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".png" );
 			}
 			if( resource == null ) {
-				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" );  
+				resource = AuthoringToolResources.class.getResource( "images/" + s + ".jpg" );
 			}
 			if( resource != null ) {
 				AuthoringToolResources.resources.stringIconMap.put( s, new javax.swing.ImageIcon( resource ) );
@@ -1545,17 +1545,17 @@ public class AuthoringToolResources {
 		return (javax.swing.ImageIcon)AuthoringToolResources.resources.stringIconMap.get( s );
 	}
 
-	static final javax.swing.ImageIcon cameraIcon = getIconForString( "camera" ); 
-	static final javax.swing.ImageIcon ambientLightIcon = getIconForString( "ambientLight" ); 
-	static final javax.swing.ImageIcon directionalLightIcon = getIconForString( "directionalLight" ); 
-	static final javax.swing.ImageIcon pointLightIcon = getIconForString( "pointLight" ); 
-	static final javax.swing.ImageIcon defaultLightIcon = getIconForString( "pointLight" ); 
-	static final javax.swing.ImageIcon modelIcon = getIconForString( "model" ); 
-	static final javax.swing.ImageIcon subpartIcon = getIconForString( "subpart" ); 
-	static final javax.swing.ImageIcon sceneIcon = getIconForString( "scene" ); 
-	static final javax.swing.ImageIcon folderIcon = getIconForString( "folder" ); 
-	static final javax.swing.ImageIcon defaultIcon = getIconForString( "default" ); 
-	
+	static final javax.swing.ImageIcon cameraIcon = getIconForString( "camera" );
+	static final javax.swing.ImageIcon ambientLightIcon = getIconForString( "ambientLight" );
+	static final javax.swing.ImageIcon directionalLightIcon = getIconForString( "directionalLight" );
+	static final javax.swing.ImageIcon pointLightIcon = getIconForString( "pointLight" );
+	static final javax.swing.ImageIcon defaultLightIcon = getIconForString( "pointLight" );
+	static final javax.swing.ImageIcon modelIcon = getIconForString( "model" );
+	static final javax.swing.ImageIcon subpartIcon = getIconForString( "subpart" );
+	static final javax.swing.ImageIcon sceneIcon = getIconForString( "scene" );
+	static final javax.swing.ImageIcon folderIcon = getIconForString( "folder" );
+	static final javax.swing.ImageIcon defaultIcon = getIconForString( "default" );
+
 	public static javax.swing.ImageIcon getIconForValue( Object value ) {
 		if( value instanceof edu.cmu.cs.stage3.alice.core.Camera ) { //TODO: perspective and orthographic
 			return cameraIcon;
@@ -1570,8 +1570,8 @@ public class AuthoringToolResources {
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
 			if( ((edu.cmu.cs.stage3.alice.core.Transformable)value).getParent() instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
 				return subpartIcon;
-			} 
-			return modelIcon;			
+			}
+			return modelIcon;
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.World ) {
 			return sceneIcon;
 		} else if( value instanceof edu.cmu.cs.stage3.alice.core.Group ) {
@@ -1583,8 +1583,8 @@ public class AuthoringToolResources {
 		} else if( value instanceof Integer ) {
 			String s = (String)AuthoringToolResources.resources.keyCodesToStrings.get( value );
 			if( s != null ) {
-				return getIconForString( "keyboardKeys/" + s ); 
-			} 
+				return getIconForString( "keyboardKeys/" + s );
+			}
 			return null;
 		} else {
 			return defaultIcon;
@@ -1610,25 +1610,25 @@ public class AuthoringToolResources {
 	}
 
 	public static void openURL( String urlString ) throws java.io.IOException {
-		if( AikMin.isWindows() ) {   
+		if( AikMin.isWindows() ) {
 			String[] cmdarray = new String[3];
-			cmdarray[0] = "rundll32"; 
-			cmdarray[1] = "url.dll,FileProtocolHandler"; 
+			cmdarray[0] = "rundll32";
+			cmdarray[1] = "url.dll,FileProtocolHandler";
 			cmdarray[2] = urlString;
 
-			if( urlString.indexOf( "&stacktrace" ) > -1 ) { 
+			if( urlString.indexOf( "&stacktrace" ) > -1 ) {
 				try {
-					java.io.File tempURL = java.io.File.createTempFile( "tempURLHolder", ".url" );  
+					java.io.File tempURL = java.io.File.createTempFile( "tempURLHolder", ".url" );
 					tempURL = tempURL.getAbsoluteFile();
 					tempURL.deleteOnExit();
 					java.io.PrintWriter urlWriter = new java.io.PrintWriter( new java.io.BufferedWriter( new java.io.FileWriter( tempURL ) ) );
-					urlWriter.println( "[InternetShortcut]" ); 
-					urlWriter.println( "URL=" + urlString ); 
+					urlWriter.println( "[InternetShortcut]" );
+					urlWriter.println( "URL=" + urlString );
 					urlWriter.flush();
 					urlWriter.close();
 					cmdarray[2] = tempURL.getAbsolutePath();
 				} catch( Throwable t ) {
-					cmdarray[2] = urlString.substring( 0, urlString.indexOf( "&stacktrace" ) ); 
+					cmdarray[2] = urlString.substring( 0, urlString.indexOf( "&stacktrace" ) );
 				}
 			}
 
@@ -1667,12 +1667,12 @@ public class AuthoringToolResources {
 		} else {
 			// try netscape
 		    try {
-				String[] cmd = new String[] { "netscape", urlString }; 
+				String[] cmd = new String[] { "netscape", urlString };
 				Runtime.getRuntime().exec( cmd );
 		    } catch( Throwable t ) {
-		        String lcOSName = System.getProperty( "os.name" ).toLowerCase(); 
-		        if( lcOSName.startsWith( "Mac os x" ) ) { 
-		            Runtime.getRuntime().exec( "open " + urlString ); 
+		        String lcOSName = System.getProperty( "os.name" ).toLowerCase();
+		        if( lcOSName.startsWith( "Mac os x" ) ) {
+		            Runtime.getRuntime().exec( "open " + urlString );
 		        }
 		    }
 		}
@@ -1719,7 +1719,7 @@ public class AuthoringToolResources {
 		Double number = null;
 		if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) { 	//Aik Min - Not sure if translation is really needed here.
 			number = new Double( Double.POSITIVE_INFINITY );
-		} else if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) { 
+		} else if( doubleString.trim().equalsIgnoreCase( Messages.getString("infinity") ) ) {
 			number = new Double( Double.NEGATIVE_INFINITY );
 		} else if( doubleString.indexOf( '/' ) > -1 ) {
 			if( doubleString.lastIndexOf( '/' ) == doubleString.indexOf( '/' ) ) {
@@ -1744,14 +1744,14 @@ public class AuthoringToolResources {
 	public static edu.cmu.cs.stage3.alice.core.Group getDummyObjectGroup( edu.cmu.cs.stage3.alice.core.World world ) {
 		edu.cmu.cs.stage3.alice.core.Element[] groups = world.getChildren( edu.cmu.cs.stage3.alice.core.Group.class );
 		for( int i = 0; i < groups.length; i++ ) {
-			if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) {   
+			if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) {
 				return (edu.cmu.cs.stage3.alice.core.Group)groups[i];
 			}
 		}
 
 		edu.cmu.cs.stage3.alice.core.Group dummyObjectGroup = new edu.cmu.cs.stage3.alice.core.Group();
-		dummyObjectGroup.name.set( Messages.getString("Dummy_Objects") ); 
-		dummyObjectGroup.data.put( "dummyObjectGroup", "true" );  
+		dummyObjectGroup.name.set( Messages.getString("Dummy_Objects") );
+		dummyObjectGroup.data.put( "dummyObjectGroup", "true" );
 		dummyObjectGroup.valueClass.set( edu.cmu.cs.stage3.alice.core.Dummy.class );
 		world.addChild( dummyObjectGroup );
 		world.groups.add( dummyObjectGroup );
@@ -1762,7 +1762,7 @@ public class AuthoringToolResources {
 		if( world != null ) {
 			edu.cmu.cs.stage3.alice.core.Element[] groups = world.getChildren( edu.cmu.cs.stage3.alice.core.Group.class );
 			for( int i = 0; i < groups.length; i++ ) {
-				if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) {   
+				if( (groups[i].data.get( "dummyObjectGroup" ) != null) && groups[i].data.get( "dummyObjectGroup" ).equals( "true" ) && world.groups.contains( groups[i] ) ) {
 					return true;
 				}
 			}
@@ -1824,9 +1824,9 @@ public class AuthoringToolResources {
 				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).asSeenBy.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).asSeenBy.get() );
 				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).style.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).style.get() );
 			} catch( IllegalAccessException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e );
 			} catch( InstantiationException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e );
 			}
 		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.TransformAnimation ) {
 			undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
@@ -1864,7 +1864,7 @@ public class AuthoringToolResources {
 		} else {
 			undoResponse = new edu.cmu.cs.stage3.alice.core.response.Wait();
 			undoResponse.duration.set( new Double( 0.0 ) );
-			AuthoringTool.showErrorDialog( Messages.getString("Could_not_create_undoResponse_for_", response), null ); 
+			AuthoringTool.showErrorDialog( Messages.getString("Could_not_create_undoResponse_for_", response), null );
 		}
 
 		return undoResponse;
@@ -1986,9 +1986,9 @@ public class AuthoringToolResources {
 				billboard.textureMaps.add( textureMap );
 				billboard.diffuseColorMap.set( textureMap );
 				billboard.name.set( textureMap.name.getStringValue() );
-				textureMap.name.set( textureMap.name.getStringValue() + "_Texture" ); 
+				textureMap.name.set( textureMap.name.getStringValue() + "_Texture" );
 			} else {
-				billboard.name.set( textureMap.name.getStringValue() + "_Billboard" ); 
+				billboard.name.set( textureMap.name.getStringValue() + "_Billboard" );
 				billboard.diffuseColorMap.set( textureMap );
 			}
 
@@ -2038,10 +2038,10 @@ public class AuthoringToolResources {
 
 	public static String getNameForNewChild( String baseName, edu.cmu.cs.stage3.alice.core.Element parent ) {
 		String name = baseName;
-		
+
 		if (name != null)
 			name = name.substring(0, 1).toLowerCase() + name.substring(1, name.length());
-		
+
 		if( (name == null) || (parent == null) ) {
 			return name;
 		}
@@ -2051,7 +2051,7 @@ public class AuthoringToolResources {
 		}
 
 		if( baseName.length() < 1 ) {
-			baseName = Messages.getString("copy"); 
+			baseName = Messages.getString("copy");
 		}
 
 		// take baseName, strip a number off the end if necessary, and use next available number after the stripped number
@@ -2075,7 +2075,7 @@ public class AuthoringToolResources {
 			}
 		}
 
-		throw new RuntimeException( Messages.getString("Unable_to_find_a_suitable_new_name__baseName___", baseName, parent) );  
+		throw new RuntimeException( Messages.getString("Unable_to_find_a_suitable_new_name__baseName___", baseName, parent) );
 	}
 
 	/*
@@ -2104,10 +2104,10 @@ public class AuthoringToolResources {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
 					} catch( java.lang.ClassNotFoundException e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", className), e );
 					}
 				} else {
-					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_worldTreeChildrenPropertiesStructure__", o), null ); 
+					AuthoringTool.showErrorDialog( Messages.getString("Unexpected_object_found_in_worldTreeChildrenPropertiesStructure__", o), null );
 				}
 			}
 		}
@@ -2218,9 +2218,9 @@ public class AuthoringToolResources {
 	public static java.awt.datatransfer.DataFlavor getReferenceFlavorForClass( Class c ) {
 		if( ! AuthoringToolResources.resources.flavorMap.containsKey( c ) ) {
 			try {
-				AuthoringToolResources.resources.flavorMap.put( c, new java.awt.datatransfer.DataFlavor( java.awt.datatransfer.DataFlavor.javaJVMLocalObjectMimeType + "; class=" + c.getName() ) ); 
+				AuthoringToolResources.resources.flavorMap.put( c, new java.awt.datatransfer.DataFlavor( java.awt.datatransfer.DataFlavor.javaJVMLocalObjectMimeType + "; class=" + c.getName() ) );
 			} catch( ClassNotFoundException e ) {
-				AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", c.getName()), e ); 
+				AuthoringTool.showErrorDialog( Messages.getString("Can_t_find_class_", c.getName()), e );
 			}
 		}
 		return (java.awt.datatransfer.DataFlavor)AuthoringToolResources.resources.flavorMap.get( c );
@@ -2232,7 +2232,7 @@ public class AuthoringToolResources {
 		} else if( cls == Number.class ) {
 			return new Double( 1 );
 		} else if( cls == String.class ) {
-			return new String( Messages.getString("default_string") ); 
+			return new String( Messages.getString("default_string") );
 		} else if( cls == javax.vecmath.Vector3d.class ) {
 			return edu.cmu.cs.stage3.math.MathUtilities.createXAxis();
 		} else if( cls == edu.cmu.cs.stage3.math.Vector3.class ) {
@@ -2335,26 +2335,26 @@ public class AuthoringToolResources {
 	public static String formatMemorySize( long bytes ) {
 		String sizeString = null;
 		if( bytes < 1024 ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + " bytes"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes ) + " bytes";
 		} else if( bytes < 1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/1024 ) + " KB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/1024 ) + " KB";
 		} else if( bytes < 1024L*1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L) ) + " MB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L) ) + " MB";
 		} else if( bytes < 1024L*1024L*1024L*1024L ) {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L*1024L) ) + " GB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L*1024L) ) + " GB";
 		} else {
-			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L*1024L*1024L) ) + " TB"; 
+			sizeString = AuthoringToolResources.resources.decimalFormatter.format( bytes/(1024L*1024L*1024L*1024L) ) + " TB";
 		}
 		return sizeString;
 	}
 
 	public static String formatTime( double seconds ) {
 		if( Double.isNaN( seconds ) ) {
-			return "?:??"; 
+			return "?:??";
 		}
-		java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" ); 
-		java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" ); 
-		java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" ); 
+		java.text.DecimalFormat decFormatter = new java.text.DecimalFormat( ".000" );
+		java.text.DecimalFormat secMinFormatter1 = new java.text.DecimalFormat( "00" );
+		java.text.DecimalFormat secMinFormatter2 = new java.text.DecimalFormat( "#0" );
 
 		double secondsFloored = (int)Math.floor( seconds );
 		double decimal = seconds - secondsFloored;
@@ -2364,10 +2364,10 @@ public class AuthoringToolResources {
 
 		String timeString = secMinFormatter1.format( secs ) + decFormatter.format( decimal );
 		if( hours > 0.0 ) {
-			timeString = secMinFormatter1.format( minutes ) + ":" + timeString; 
-			timeString = secMinFormatter2.format( hours ) + ":" + timeString; 
+			timeString = secMinFormatter1.format( minutes ) + ":" + timeString;
+			timeString = secMinFormatter2.format( hours ) + ":" + timeString;
 		} else {
-			timeString = secMinFormatter2.format( minutes ) + ":" + timeString; 
+			timeString = secMinFormatter2.format( minutes ) + ":" + timeString;
 		}
 
 		return timeString;
@@ -2377,11 +2377,11 @@ public class AuthoringToolResources {
 		printHierarchy( c, 0 );
 	}
 	private static void printHierarchy( java.awt.Component c, int level ) {
-		String tabs = ""; 
+		String tabs = "";
 		for( int i = 0; i < level; i++ ) {
-			tabs += "--"; 
+			tabs += "--";
 		}
-		System.out.println( tabs + c.getClass().getName() + "_" + c.hashCode() ); 
+		System.out.println( tabs + c.getClass().getName() + "_" + c.hashCode() );
 
 		if( c instanceof java.awt.Container ) {
 			java.awt.Component[] children = ((java.awt.Container)c).getComponents();
@@ -2392,53 +2392,53 @@ public class AuthoringToolResources {
 	}
 
 	private static void initKeyCodesToStrings() {
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_0 ), "0" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_1 ), "1" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_2 ), "2" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_3 ), "3" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_4 ), "4" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_5 ), "5" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_6 ), "6" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_7 ), "7" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_8 ), "8" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_9 ), "9" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_A ), "A" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_B ), "B" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_C ), "C" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_D ), "D" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_E ), "E" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_F ), "F" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_G ), "G" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_H ), "H" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_I ), "I" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_J ), "J" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_K ), "K" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_L ), "L" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_M ), "M" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_N ), "N" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_O ), "O" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_P ), "P" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Q ), "Q" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_R ), "R" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_S ), "S" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_T ), "T" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_U ), "U" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_V ), "V" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_W ), "W" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_X ), "X" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Y ), "Y" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Z ), "Z" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ENTER ), "enter" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SPACE ), "space" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_UP ), "upArrow" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DOWN ), "downArrow" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_LEFT ), "leftArrow" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_RIGHT ), "rightArrow" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_0 ), "0" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_1 ), "1" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_2 ), "2" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_3 ), "3" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_4 ), "4" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_5 ), "5" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_6 ), "6" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_7 ), "7" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_8 ), "8" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_9 ), "9" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_A ), "A" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_B ), "B" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_C ), "C" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_D ), "D" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_E ), "E" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_F ), "F" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_G ), "G" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_H ), "H" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_I ), "I" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_J ), "J" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_K ), "K" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_L ), "L" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_M ), "M" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_N ), "N" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_O ), "O" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_P ), "P" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Q ), "Q" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_R ), "R" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_S ), "S" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_T ), "T" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_U ), "U" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_V ), "V" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_W ), "W" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_X ), "X" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Y ), "Y" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_Z ), "Z" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ENTER ), "enter" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SPACE ), "space" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_UP ), "upArrow" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DOWN ), "downArrow" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_LEFT ), "leftArrow" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_RIGHT ), "rightArrow" );
 		// Aik Min = Possible addition
 		//AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PRINTSCREEN ), "printscreen" );
 		//AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PRINTSCREEN ), "scrolllock" );
 		//AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PAUSE ), "pause" );
-		
+
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_BACK_SPACE ), "backspace" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_INSERT ), "insert" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DELETE ), "delete" );
@@ -2446,7 +2446,7 @@ public class AuthoringToolResources {
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_END ), "end" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PAGE_UP ), "pageup" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_PAGE_DOWN ), "pagedown" );
-		
+
 		//Aik Min - New
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ALT ), "alt" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_CONTROL ), "ctrl" );
@@ -2461,9 +2461,9 @@ public class AuthoringToolResources {
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD7 ), "num7" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD8 ), "num8" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_NUMPAD9 ), "num9" );
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DIVIDE ), "divide" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_MULTIPLY ), "multiply" ); 
-		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SUBTRACT ), "subtract" ); 
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_DIVIDE ), "divide" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_MULTIPLY ), "multiply" );
+		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_SUBTRACT ), "subtract" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_ADD ), "add" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_BACK_QUOTE ), "`" );
 		AuthoringToolResources.resources.keyCodesToStrings.put( new Integer( java.awt.event.KeyEvent.VK_MINUS ), "-" );
@@ -2501,18 +2501,18 @@ public class AuthoringToolResources {
 	/////////////////////////////
 
 	public static String getPrefix( String token ) {
-		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {   
-			return token.substring( 0, token.indexOf( "<" ) ); 
+		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {
+			return token.substring( 0, token.indexOf( "<" ) );
 		}
 		return token;
 	}
 
 	public static String getSpecifier( String token ) {
-		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {   
-			if ( !AikMin.isWindows() ) {  
-				token = token.replaceAll("\\\\", java.io.File.separator); 
+		if( (token.indexOf( "<" ) > -1) && (token.indexOf( ">" ) > token.indexOf( "<" )) ) {
+			if ( !AikMin.isWindows() ) {
+				token = token.replaceAll("\\\\", java.io.File.separator);
 			}
-			return token.substring( token.indexOf( "<" ) + 1, token.indexOf( ">" ) );  
+			return token.substring( token.indexOf( "<" ) + 1, token.indexOf( ">" ) );
 		}
 		return null;
 	}
@@ -2530,7 +2530,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_ElementDnDPanel_"), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_ElementDnDPanel_"), e );
 					}
 				}
 				return false;
@@ -2557,7 +2557,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_PropertyDnDPanel_"), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_PropertyDnDPanel_"), e );
 					}
 				}
 				return false;
@@ -2580,7 +2580,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_UserDefinedResponseDnDPanel_"), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_UserDefinedResponseDnDPanel_"), e );
 					}
 				}
 				return false;
@@ -2603,7 +2603,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_UserDefinedQuestionDnDPanel_"), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_UserDefinedQuestionDnDPanel_"), e );
 					}
 				}
 				return false;
@@ -2626,7 +2626,7 @@ public class AuthoringToolResources {
 							}
 						}
 					} catch( Exception e ) {
-						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_PrototypeDnDPanel_"), e ); 
+						AuthoringTool.showErrorDialog( Messages.getString("Error_finding_PrototypeDnDPanel_"), e );
 					}
 				}
 				return false;
@@ -2720,5 +2720,5 @@ public class AuthoringToolResources {
 		}
 
 		return null;
-	}	
+	}
 }
