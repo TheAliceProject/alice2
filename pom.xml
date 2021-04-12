@@ -4,7 +4,7 @@
 
   <groupId>org.alice</groupId>
   <artifactId>alice2</artifactId>
-  <version>2.5-SNAPSHOT</version>
+  <version>2.5.4.1-SNAPSHOT</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,7 @@
     <!--  <jogl.version>2.4.0-rc-20210111</jogl.version> -->
 
     <!--  The first digit is from Alice 2, followed by SemVer identifier: major.minor.patch  -->
-    <alice.build.version>2.5.5.0</alice.build.version>
+    <alice.build.version>2.5.4.1</alice.build.version>
     <alice.build.prerelease> </alice.build.prerelease>
     <!--  TODO: Have the future build system replace local with a build #  -->
     <alice.build.metadata>+build.local</alice.build.metadata>
