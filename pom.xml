@@ -244,6 +244,55 @@
           <fork>true</fork>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.sonatype.install4j</groupId>
+        <artifactId>install4j-maven-plugin</artifactId>
+        <version>1.0.8</version>
+        <executions>
+          <execution>
+            <id>compile-installers</id>
+            <phase>package</phase>
+            <inherited>false</inherited>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <projectFile>installer/alice2.install4j</projectFile>
+              <attach>true</attach>
+              <release>${alice.build.version}${alice.build.prerelease}${alice.build.metadata}</release>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-license</id>
+            <phase>package</phase>
+            <goals>
+              <goal>install-license</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>net.nicoulaj.maven.plugins</groupId>
+        <artifactId>checksum-maven-plugin</artifactId>
+        <version>1.9</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>artifacts</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <csvSummary>true</csvSummary>
+          <csvSummaryFile>media/artifacts-checksums.csv</csvSummaryFile>
+          <xmlSummary>true</xmlSummary>
+          <xmlSummaryFile>media/artifacts-checksums.xml</xmlSummaryFile>
+          <algorithms>
+            <algorithm>SHA-256</algorithm>
+            <algorithm>MD5</algorithm>
+          </algorithms>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
