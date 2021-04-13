@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="7.0.12" transformSequenceNumber="7">
-  <directoryPresets config="../target/alice2-2.5-SNAPSHOT.jar" />
-  <application name="Alice 2.5" distributionSourceDir="" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.5.4" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="81236657ad4d4aae" javaMinVersion="1.8" javaMaxVersion="1.8" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <directoryPresets config="../target/alice2-2.5.4.1-SNAPSHOT.jar" />
+  <application name="Alice 2.5" distributionSourceDir="" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="false" shrinkRuntime="true" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.5.4.1" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="81236657ad4d4aae" javaMinVersion="1.8" javaMaxVersion="1.8" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -25,11 +25,13 @@
       <fileset name="EnglishGallery" id="60" customizedId="" />
       <fileset name="SpanishGallery" id="199" customizedId="" />
       <fileset name="Windows" id="322" customizedId="" />
+      <fileset name="Linux" id="454" customizedId="" />
     </filesets>
     <roots>
       <root id="61" fileset="60" location="" />
       <root id="200" fileset="199" location="" />
       <root id="323" fileset="322" location="" />
+      <root id="455" fileset="454" location="" />
     </roots>
     <mountPoints>
       <mountPoint id="58" root="" location="Required" mode="755" />
@@ -41,6 +43,8 @@
       <mountPoint id="202" root="200" location="Required/gallery" mode="755" />
       <mountPoint id="203" root="200" location="Required/gallery/Spanish" mode="755" />
       <mountPoint id="324" root="323" location="Required" mode="755" />
+      <mountPoint id="456" root="455" location="Required" mode="755" />
+      <mountPoint id="460" root="455" location="Required/install" mode="755" />
     </mountPoints>
     <entries>
       <dirEntry mountPoint="72" file="../target/lib" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="lib" excludeSuffixes="" dirMode="755" overrideDirMode="false">
@@ -52,7 +56,7 @@
           <entry location="gallery" fileType="regular" />
         </exclude>
       </dirEntry>
-      <fileEntry mountPoint="58" file="../target/alice2-2.5-SNAPSHOT.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="58" file="../target/alice2-2.5.4.1-SNAPSHOT.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="../Alice2_LICENSE.pdf" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="../jythonLicense.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="../lgpl.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
@@ -65,6 +69,7 @@
       <dirEntry mountPoint="324" file="../lib/Windows" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Windows" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
+      <fileEntry mountPoint="460" file="./linux/alice2.desktop.partial" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
     </entries>
     <components>
       <component name="Spanish Gallery" id="67" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
@@ -101,6 +106,13 @@
           <component id="219" />
         </dependencies>
       </component>
+      <component name="Linux" id="459" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
+        <description />
+        <include all="false">
+          <entry location=".i4j_fileset_454" fileType="regular" />
+        </include>
+        <dependencies />
+      </component>
     </components>
   </files>
   <launchers>
@@ -117,7 +129,7 @@
       <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" mainMode="1" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8" arguments="-l ${compiler:sys.languageId}" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <scanDirectory location="Required/externalLib" failOnError="false" />
-          <archive location="Required/alice2-2.5-SNAPSHOT.jar" failOnError="false" />
+          <archive location="Required/alice2-2.5.4.1-SNAPSHOT.jar" failOnError="false" />
         </classPath>
         <modulePath />
         <nativeLibraryDirectories>
@@ -1126,10 +1138,11 @@ return console.askYesNo(message, true);
     </styles>
   </installerGui>
   <mediaSets>
-    <macosArchive name="English macOS Single Bundle Archive" id="71" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
+    <macosArchive name="English macOS Single Bundle Archive" id="71" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
       <excludedComponents>
         <component id="67" />
         <component id="325" />
+        <component id="459" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedBeans />
@@ -1159,9 +1172,10 @@ return console.askYesNo(message, true);
         <file name="AliceDisk.icns" file="./images/icon/AliceDisk.icns" />
       </topLevelFiles>
     </macosArchive>
-    <windowsArchive name="English Windows Archive" id="186" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
+    <windowsArchive name="English Windows Archive" id="186" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
       <excludedComponents>
         <component id="67" />
+        <component id="459" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedLaunchers />
@@ -1185,10 +1199,11 @@ return console.askYesNo(message, true);
         <customAttributes />
       </autoUpdate>
     </windowsArchive>
-    <macosArchive name="Spanish macOS Single Bundle Archive" id="213" customizedId="" mediaFileName="${compiler:sys.fullName}s" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
+    <macosArchive name="Spanish macOS Single Bundle Archive" id="213" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}_es" launcherId="70">
       <excludedComponents>
         <component id="59" />
         <component id="325" />
+        <component id="459" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedBeans />
@@ -1218,9 +1233,10 @@ return console.askYesNo(message, true);
         <file name="AliceDisk.icns" file="./images/icon/AliceDisk.icns" />
       </topLevelFiles>
     </macosArchive>
-    <windowsArchive name="Spanish Windows Archive" id="437" customizedId="" mediaFileName="${compiler:sys.fullName}s" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="true" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
+    <windowsArchive name="Spanish Windows Archive" id="437" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="true" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
       <excludedComponents>
         <component id="59" />
+        <component id="459" />
       </excludedComponents>
       <includedDownloadableComponents />
       <excludedLaunchers />
@@ -1244,7 +1260,7 @@ return console.askYesNo(message, true);
         <customAttributes />
       </autoUpdate>
     </windowsArchive>
-    <linuxDeb name="English Linux Deb Archive" id="442" customizedId="" mediaFileName="${compiler:sys.fullName}e" installDir="/opt/${compiler:sys.fullName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false" overwriteNeverAsConfigFiles="false" dependencies="libglu1-mesa, openjdk-8-jre" bzip="false" description="" maintainerEmail="" architectureSet="false" architecture="">
+    <linuxDeb name="English Linux Deb Archive" id="442" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false" overwriteNeverAsConfigFiles="false" dependencies="libglu1-mesa, openjdk-8-jre" bzip="false" description="" maintainerEmail="" architectureSet="false" architecture="">
       <excludedComponents>
         <component id="67" />
         <component id="325" />
@@ -1269,17 +1285,18 @@ return console.askYesNo(message, true);
       <preInstallScript mode="1" file="">
         <content />
       </preInstallScript>
-      <postInstallScript mode="1" file="">
-        <content />
+      <postInstallScript mode="3" file="">
+        <content>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
+lxpanelctl restart</content>
       </postInstallScript>
-      <preUninstallScript mode="1" file="">
-        <content />
+      <preUninstallScript mode="3" file="">
+        <content>rm /usr/share/applications/alice2.desktop</content>
       </preUninstallScript>
       <postUninstallScript mode="1" file="">
         <content />
       </postUninstallScript>
     </linuxDeb>
-    <linuxDeb name="Spanish Linux Deb Archive" id="447" customizedId="" mediaFileName="${compiler:sys.fullName}s" installDir="/opt/${compiler:sys.fullName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false" overwriteNeverAsConfigFiles="false" dependencies="libglu1-mesa, openjdk-8-jre" bzip="false" description="" maintainerEmail="" architectureSet="false" architecture="">
+    <linuxDeb name="Spanish Linux Deb Archive" id="447" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false" overwriteNeverAsConfigFiles="false" dependencies="libglu1-mesa, openjdk-8-jre" bzip="false" description="" maintainerEmail="" architectureSet="false" architecture="">
       <excludedComponents>
         <component id="59" />
         <component id="325" />
@@ -1304,16 +1321,123 @@ return console.askYesNo(message, true);
       <preInstallScript mode="1" file="">
         <content />
       </preInstallScript>
-      <postInstallScript mode="1" file="">
-        <content />
+      <postInstallScript mode="3" file="">
+        <content>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
+lxpanelctl restart</content>
       </postInstallScript>
-      <preUninstallScript mode="1" file="">
-        <content />
+      <preUninstallScript mode="3" file="">
+        <content>rm /usr/share/applications/alice2.desktop</content>
       </preUninstallScript>
       <postUninstallScript mode="1" file="">
         <content />
       </postUninstallScript>
     </linuxDeb>
+    <unixInstaller name="English Unix Installer" id="448" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="false" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
+      <excludedComponents>
+        <component id="67" />
+        <component id="325" />
+      </excludedComponents>
+      <includedDownloadableComponents />
+      <excludedLaunchers />
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
+      <exclude>
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location=".i4j_fileset_199" fileType="regular" />
+        <entry location=".i4j_fileset_322" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+      <installerScript mode="1" file="">
+        <content />
+      </installerScript>
+    </unixInstaller>
+    <unixArchive name="English Unix Archive" id="449" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false">
+      <excludedComponents>
+        <component id="67" />
+        <component id="325" />
+      </excludedComponents>
+      <includedDownloadableComponents />
+      <excludedLaunchers />
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
+      <exclude>
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location=".i4j_fileset_199" fileType="regular" />
+        <entry location=".i4j_fileset_322" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+    </unixArchive>
+    <unixInstaller name="Spanish Unix Installer" id="450" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="false" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
+      <excludedComponents>
+        <component id="59" />
+        <component id="325" />
+      </excludedComponents>
+      <includedDownloadableComponents />
+      <excludedLaunchers />
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <exclude>
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location=".i4j_fileset_60" fileType="regular" />
+        <entry location=".i4j_fileset_322" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+      <installerScript mode="1" file="">
+        <content />
+      </installerScript>
+    </unixInstaller>
+    <unixArchive name="Spanish Unix Archive" id="451" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false">
+      <excludedComponents>
+        <component id="59" />
+        <component id="325" />
+      </excludedComponents>
+      <includedDownloadableComponents />
+      <excludedLaunchers />
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <exclude>
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location=".i4j_fileset_60" fileType="regular" />
+        <entry location=".i4j_fileset_322" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+    </unixArchive>
   </mediaSets>
   <buildIds buildAll="true">
     <mediaSet refId="71" />
@@ -1322,6 +1446,10 @@ return console.askYesNo(message, true);
     <mediaSet refId="437" />
     <mediaSet refId="442" />
     <mediaSet refId="447" />
+    <mediaSet refId="448" />
+    <mediaSet refId="449" />
+    <mediaSet refId="450" />
+    <mediaSet refId="451" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" disableJreBundling="false" debug="false" />
 </install4j>
