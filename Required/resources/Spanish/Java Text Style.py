@@ -19,7 +19,7 @@ def os_path_join( *args ):
 # load common resource data
 ####################################
 
-standardResourcesFile = java.io.File( JAlice.getAliceHomeDirectory(), "resources/common/StandardResources.py" )
+standardResourcesFile = os.path.join( JAlice.getAliceHomeDirectory(), "resources/common/StandardResources.py" )
 execfile( standardResourcesFile.getAbsolutePath() )
 
 
@@ -433,5 +433,5 @@ miscMap["javaLikeSyntax"] = "true"
 # transfer resource data to Alice
 ####################################
 
-resourceTransferFile = java.io.File( JAlice.getAliceHomeDirectory(), "resources/common/ResourceTransfer.py" )
+resourceTransferFile = os.path.join( JAlice.getAliceHomeDirectory(), "resources/common/ResourceTransfer.py" )
 execfile( resourceTransferFile.getAbsolutePath() )
