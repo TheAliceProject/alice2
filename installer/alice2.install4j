@@ -126,7 +126,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
         </text>
       </splashScreen>
-      <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" mainMode="1" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8" arguments="-l ${compiler:sys.languageId}" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" mainMode="1" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython -Dpython.path=jython/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8" arguments="-l ${compiler:sys.languageId}" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <scanDirectory location="Required/externalLib" failOnError="false" />
           <archive location="Required/alice2-2.5.4.1-SNAPSHOT.jar" failOnError="false" />

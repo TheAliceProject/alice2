@@ -17,7 +17,7 @@ Launch `edu.cmu.cs.stage3.alice.authoringtool.JAlice` from the Required folder, 
 
 Include the following VM arguments:
 
-`-Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8`
+`-Dpython.home=jython -Dpython.path=jython/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8`
 
 On Windows, to include the Dynamic-Link Libraries (DLLs), add:
 
