@@ -56,7 +56,7 @@ public class CallToUserDefinedResponsePrototypeDnDPanel extends edu.cmu.cs.stage
 	protected void startListening() {
 		if( callToUserDefinedResponsePrototype != null ) {
 			callToUserDefinedResponsePrototype.startListening();
-			edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse response = callToUserDefinedResponsePrototype.getActualResponse();
+			edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse response = callToUserDefinedResponsePrototype.getActualResponse();
 			if( response != null ) {
 				response.requiredFormalParameters.addObjectArrayPropertyListener( refreshListener );
 				response.keywordFormalParameters.addObjectArrayPropertyListener( refreshListener );
@@ -78,7 +78,7 @@ public class CallToUserDefinedResponsePrototypeDnDPanel extends edu.cmu.cs.stage
 	protected void stopListening() {
 		if( callToUserDefinedResponsePrototype != null ) {
 			callToUserDefinedResponsePrototype.stopListening();
-			edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse response = callToUserDefinedResponsePrototype.getActualResponse();
+			edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse response = callToUserDefinedResponsePrototype.getActualResponse();
 			if( response != null ) {
 				response.requiredFormalParameters.removeObjectArrayPropertyListener( refreshListener );
 				response.keywordFormalParameters.removeObjectArrayPropertyListener( refreshListener );
@@ -140,7 +140,7 @@ public class CallToUserDefinedResponsePrototypeDnDPanel extends edu.cmu.cs.stage
 		subPanel.removeAll();
 
 		if( callToUserDefinedResponsePrototype != null ) {
-			edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse response = callToUserDefinedResponsePrototype.getActualResponse();
+			edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse response = callToUserDefinedResponsePrototype.getActualResponse();
 			constraints.gridx = 0;
 			nameViewController = null;
 			if( response != null ) {

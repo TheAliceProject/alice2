@@ -88,8 +88,8 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	
 	protected void variableInit(){
         super.variableInit();
-        if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder){
-            edu.cmu.cs.stage3.alice.core.response.LoopNInOrder proxy = (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder)m_element;
+        if (m_element instanceof edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder){
+            edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder proxy = (edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder)m_element;
 			m_end = proxy.end;
 			m_start = proxy.start;
 			m_increment = proxy.increment;
@@ -136,8 +136,8 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		if (components != null){
 			components.addObjectArrayPropertyListener(this);
 			for (int i=0; i<components.size(); i++){
-				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-					edu.cmu.cs.stage3.alice.core.response.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)components.get(i);
+				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+					edu.cmu.cs.stage3.alice.core.responses.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)components.get(i);
 					listenToChildren(current.componentResponses);
 				}
 				else if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite){
@@ -153,8 +153,8 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 			components.removeObjectArrayPropertyListener(this);
 		
 			for (int i=0; i<components.size(); i++){
-				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-					edu.cmu.cs.stage3.alice.core.response.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)components.get(i);
+				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+					edu.cmu.cs.stage3.alice.core.responses.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)components.get(i);
 					stopListenToChildren(current.componentResponses);
 				}
 				else if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite){
@@ -330,7 +330,7 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 	   if (parent instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN){
 		   return false;
 	   }
-	   if (parent instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder){
+	   if (parent instanceof edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder){
 		   return false;
 	   }
 		return isTopOccurrance(parent.getParent());
@@ -345,8 +345,8 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 		String baseName = Messages.getString("index"); 
 		for (int i=0; i<currentContainer.size(); i++){
 			edu.cmu.cs.stage3.alice.core.Element var = null;
-			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder){
-				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.response.LoopNInOrder)currentContainer.get(i)).index.get());
+			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder){
+				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder)currentContainer.get(i)).index.get());
 			}
 			else if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN){
 				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.question.userdefined.LoopN)currentContainer.get(i)).index.get());
@@ -357,8 +357,8 @@ public abstract class LoopNElementPanel extends CompositeElementPanel  implement
 				else 
 					var.name.set(currentLevel+"#_"+baseName); 	// Aik Min - Language
 			}
-			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-				setAllNames( ((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)currentContainer.get(i)).componentResponses , currentLevel+1);
+			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+				setAllNames( ((edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)currentContainer.get(i)).componentResponses , currentLevel+1);
 			}
 			else if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite){
 				setAllNames( ((edu.cmu.cs.stage3.alice.core.question.userdefined.Composite)currentContainer.get(i)).components , currentLevel+1);

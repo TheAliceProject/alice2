@@ -450,8 +450,8 @@ public class ExportCodeForPrintingContentPane extends edu.cmu.cs.stage3.swing.Co
 					((CustomCheckBox) toAdd).object = currentObject;
 					toAdd.setOpaque(false);
 					
-				} else if (currentObject instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
-					edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype callToUserDefinedResponsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) currentObject);
+				} else if (currentObject instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) {
+					edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype callToUserDefinedResponsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype((edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) currentObject);
 					javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(callToUserDefinedResponsePrototype);
 					if (!AikMin.isLTR()) 
 						gui.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);

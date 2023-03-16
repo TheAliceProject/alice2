@@ -29,7 +29,7 @@ import edu.cmu.cs.stage3.lang.Messages;
  * @author Jason Pratt
  */
 public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel implements edu.cmu.cs.stage3.alice.authoringtool.util.GUIElement {
-	protected edu.cmu.cs.stage3.alice.core.response.Print printStatement;
+	protected edu.cmu.cs.stage3.alice.core.responses.Print printStatement;
 	protected javax.swing.JPanel subPanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel();
 	protected javax.swing.JLabel printPrefixLabel = new javax.swing.JLabel( Messages.getString("Print__") ); 
 	protected javax.swing.JLabel printSuffixLabel = new javax.swing.JLabel( "" ); 
@@ -67,11 +67,11 @@ public class ResponsePrintViewController extends edu.cmu.cs.stage3.alice.authori
 		subPanel.addMouseListener( mouseListener ); // this didn't used to be necessary. I don't know what's going on
 	}
 
-	public edu.cmu.cs.stage3.alice.core.response.Print get() {
+	public edu.cmu.cs.stage3.alice.core.responses.Print get() {
 		return printStatement;
 	}
 
-	public void set( edu.cmu.cs.stage3.alice.core.response.Print printStatement ) {
+	public void set( edu.cmu.cs.stage3.alice.core.responses.Print printStatement ) {
 		super.reset();
 
 		stopListening();

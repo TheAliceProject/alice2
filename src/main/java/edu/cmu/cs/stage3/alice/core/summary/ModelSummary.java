@@ -54,7 +54,7 @@ public class ModelSummary extends ElementSummary {
 		if( getModel() != null ) {
 			String[] methodNames = new String[ getModel().responses.size() ];
 			for( int i=0; i<methodNames.length; i++ ) {
-				edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse methodI = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)getModel().responses.get( i );
+				edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse methodI = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)getModel().responses.get( i );
 				methodNames[ i ] = methodI.name.getStringValue(); 
 			}
 			return methodNames;

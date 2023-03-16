@@ -207,7 +207,7 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 						return false;
 					}
 					edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype prototype = (edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype) transferable.getTransferData(edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable.responsePrototypeReferenceFlavor);
-					if (edu.cmu.cs.stage3.alice.core.response.CompositeResponse.class.isAssignableFrom(prototype.getElementClass()) || edu.cmu.cs.stage3.alice.core.response.Print.class.isAssignableFrom(prototype.getElementClass()) || edu.cmu.cs.stage3.alice.core.response.Comment.class.isAssignableFrom(prototype.getElementClass())) {
+					if (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse.class.isAssignableFrom(prototype.getElementClass()) || edu.cmu.cs.stage3.alice.core.responses.Print.class.isAssignableFrom(prototype.getElementClass()) || edu.cmu.cs.stage3.alice.core.responses.Comment.class.isAssignableFrom(prototype.getElementClass())) {
 						dtde.rejectDrag();
 						return false;
 					}
@@ -1876,8 +1876,8 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 		Object selected = moveCameraCombo.getSelectedItem();
 		if (selected instanceof edu.cmu.cs.stage3.alice.core.Dummy) {
 			edu.cmu.cs.stage3.alice.core.Dummy dummy = (edu.cmu.cs.stage3.alice.core.Dummy) selected;
-			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation anim = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
-			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoAnim = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation anim = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation undoAnim = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 			anim.pointOfView.set(edu.cmu.cs.stage3.math.MathUtilities.createIdentityMatrix4d());
 			anim.subject.set(renderCamera);
 			anim.asSeenBy.set(dummy);

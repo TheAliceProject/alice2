@@ -78,8 +78,8 @@ public class PopupMenuUtilities{
 		public boolean accept( Object o ) {
 			if( o instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 				edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)o;
-				if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-					edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)variable.getParent();
+				if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+					edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)variable.getParent();
 					if( callToUserDefinedResponse.requiredActualParameters.contains( variable ) ) {
 						return false;
 					} else if( callToUserDefinedResponse.keywordActualParameters.contains( variable ) ) {
@@ -669,7 +669,7 @@ public class PopupMenuUtilities{
 			//edu.cmu.cs.stage3.util.StringObjectPair[] known = { new edu.cmu.cs.stage3.util.StringObjectPair( "element", expression ), new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", Messages.getString("value") ), new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Integer( 0 ) ) };
 			edu.cmu.cs.stage3.util.StringObjectPair[] known = { new edu.cmu.cs.stage3.util.StringObjectPair( "element", expression ), new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", "value" ), new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 1.0 ) ) };
 			String[] desired = { "value" };
-			edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype rp = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, known, desired );
+			edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype rp = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation.class, known, desired );
 			java.util.Vector setValueStructure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makePrototypeStructure( rp, factory, context );
 			if( (setValueStructure != null) && (! setValueStructure.isEmpty()) ) {
 				structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "set value", setValueStructure ) );
@@ -770,8 +770,8 @@ public class PopupMenuUtilities{
 									new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 1.0 ) ),
 								};
 								String[] desiredProperties = new String[] { "value" };
-								edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class, knownPropertyValues, desiredProperties );
-								String responseName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getFormattedReprForValue( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, knownPropertyValues );
+								edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation.class, knownPropertyValues, desiredProperties );
+								String responseName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getFormattedReprForValue( edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation.class, knownPropertyValues );
 								java.util.Vector subStructure = makePrototypeStructure( responsePrototype, factory, context );
 								structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( responseName, subStructure ) );
 							} else {
@@ -780,8 +780,8 @@ public class PopupMenuUtilities{
 									new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", propertyName )
 								};
 								String[] desiredProperties = new String[] { "value" };
-								edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, knownPropertyValues, desiredProperties );
-								String responseName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getFormattedReprForValue( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, knownPropertyValues );
+								edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation.class, knownPropertyValues, desiredProperties );
+								String responseName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getFormattedReprForValue( edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation.class, knownPropertyValues );
 								java.util.Vector subStructure = makePrototypeStructure( responsePrototype, factory, context );
 								structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( responseName, subStructure ) );
 							}
@@ -869,7 +869,7 @@ public class PopupMenuUtilities{
 //			structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( "Separator", javax.swing.JSeparator.class ) );
 			Class preValueClass = null;
 			java.util.Vector preDefaultStructure = null;
-			if( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
+			if( edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
 				preDefaultStructure = getDefaultValueStructureForPropertyAnimation( elementPrototype.getKnownPropertyValues() );
 				preValueClass = getValueClassForPropertyAnimation( elementPrototype.getKnownPropertyValues() );
 			} else if( edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
@@ -878,7 +878,7 @@ public class PopupMenuUtilities{
 			} else if( edu.cmu.cs.stage3.alice.core.question.list.ListBooleanQuestion.class.isAssignableFrom( elementPrototype.getElementClass() ) ||
 					   edu.cmu.cs.stage3.alice.core.question.list.ListNumberQuestion.class.isAssignableFrom( elementPrototype.getElementClass() ) ||
 					   edu.cmu.cs.stage3.alice.core.question.list.ListObjectQuestion.class.isAssignableFrom( elementPrototype.getElementClass() ) ||
-					   edu.cmu.cs.stage3.alice.core.response.list.ListResponse.class.isAssignableFrom( elementPrototype.getElementClass() ) )
+					   edu.cmu.cs.stage3.alice.core.responses.list.ListResponse.class.isAssignableFrom( elementPrototype.getElementClass() ) )
 			{
 				if( desiredProperties[0].equals( "item" ) ) {
 					preValueClass = getValueClassForList( elementPrototype.getKnownPropertyValues() );
@@ -892,7 +892,7 @@ public class PopupMenuUtilities{
 				}
 			} else if( edu.cmu.cs.stage3.alice.core.question.array.ArrayNumberQuestion.class.isAssignableFrom( elementPrototype.getElementClass() ) ||
 					   edu.cmu.cs.stage3.alice.core.question.array.ArrayObjectQuestion.class.isAssignableFrom( elementPrototype.getElementClass() ) ||
-					   edu.cmu.cs.stage3.alice.core.response.array.ArrayResponse.class.isAssignableFrom( elementPrototype.getElementClass() ) )
+					   edu.cmu.cs.stage3.alice.core.responses.array.ArrayResponse.class.isAssignableFrom( elementPrototype.getElementClass() ) )
 			{
 				if( desiredProperties[0].equals( "item" ) ) {
 					preValueClass = getValueClassForArray( elementPrototype.getKnownPropertyValues() );
@@ -905,7 +905,7 @@ public class PopupMenuUtilities{
 					preDefaultStructure = getDefaultValueStructureForProperty( elementPrototype.getElementClass(), desiredProperties[0] );
 				}
 			} else if( elementPrototype instanceof CallToUserDefinedResponsePrototype ) {
-				edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse actualResponse = ((CallToUserDefinedResponsePrototype)elementPrototype).getActualResponse();
+				edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse actualResponse = ((CallToUserDefinedResponsePrototype)elementPrototype).getActualResponse();
 				Object[] params = actualResponse.requiredFormalParameters.getArrayValue();
 				for( int i = 0; i < params.length; i++ ) {
 					if( ((edu.cmu.cs.stage3.alice.core.Variable)params[i]).name.getStringValue().equals( desiredProperties[0] ) ) {
@@ -1020,8 +1020,8 @@ public class PopupMenuUtilities{
 			
 			//Don't get self criterion stuff!
 			//if( (edu.cmu.cs.stage3.alice.core.response.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( Messages.getString("target") )) ||
-			if( (edu.cmu.cs.stage3.alice.core.response.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( "target" )) ||
-				(edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class.isAssignableFrom(elementPrototype.elementClass)  && desiredProperties[0].equals( "value" )) ) {
+			if( (edu.cmu.cs.stage3.alice.core.responses.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( "target" )) ||
+				(edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation.class.isAssignableFrom(elementPrototype.elementClass)  && desiredProperties[0].equals( "value" )) ) {
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
 					String propertyName = knownPropertyValues[i].getString();
 					if( propertyName.equals( "subject" ) || propertyName.equals( "element" ) ) {
@@ -1399,7 +1399,7 @@ public class PopupMenuUtilities{
 					final edu.cmu.cs.stage3.alice.core.Property referenceProperty = property;
 					PopupItemFactory userDefinedResponsePopupFactory = new PopupItemFactory() {
 						public Object createItem( Object o ) {
-							final edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse userDefinedResponse = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)o;
+							final edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse userDefinedResponse = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)o;
 							CallToUserDefinedResponsePrototype callToUserDefinedResponsePrototype = new CallToUserDefinedResponsePrototype( userDefinedResponse );
 							callToUserDefinedResponsePrototype.calculateDesiredProperties();
 							PopupItemFactory prototypePopupFactory = new PopupItemFactory() {
@@ -1418,7 +1418,7 @@ public class PopupMenuUtilities{
 							return prototypePopupFactory.createItem( callToUserDefinedResponsePrototype );
 						}
 					};
-					edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion criterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class );
+					edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion criterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse.class );
 					structure.addAll( makeElementStructure( root, criterion, userDefinedResponsePopupFactory, root, property.get() ) );
 				} else {
 					// default and recently used values
@@ -1494,7 +1494,7 @@ public class PopupMenuUtilities{
 								public boolean accept( Object o ) {
 									if( o instanceof edu.cmu.cs.stage3.alice.core.Response ) {
 										if( ! (((edu.cmu.cs.stage3.alice.core.Response)o).getParent() instanceof edu.cmu.cs.stage3.alice.core.Response) ) {
-											if( ! (o instanceof edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse) ) {
+											if( ! (o instanceof edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse) ) {
 												return true;
 											}
 										}
@@ -1502,8 +1502,8 @@ public class PopupMenuUtilities{
 									return false;
 								}
 							};
-						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "element" ) ) {
-							edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
+						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( "element" ) ) {
+							edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)property.getOwner();
 							final String propertyName = propertyAnimation.propertyName.getStringValue();
 							edu.cmu.cs.stage3.util.Criterion hasProperty = new edu.cmu.cs.stage3.util.Criterion() {
 								public boolean accept( Object o ) {
@@ -1517,7 +1517,7 @@ public class PopupMenuUtilities{
 							};
 							criterion = new edu.cmu.cs.stage3.util.criterion.MatchesAllCriterion( new edu.cmu.cs.stage3.util.Criterion[] { hasProperty, isNamedElement } );
 						//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtAnimation) && property.getName().equals( Messages.getString("target") ) ) {
-						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtAnimation) && property.getName().equals( "target" ) ) {
+						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PointAtAnimation) && property.getName().equals( "target" ) ) {
 							final Object transformableValue = property.getOwner().getPropertyNamed( "subject" ).get();
 							edu.cmu.cs.stage3.util.Criterion notSelf = new edu.cmu.cs.stage3.util.Criterion() {
 								public boolean accept( Object o ) {
@@ -1544,7 +1544,7 @@ public class PopupMenuUtilities{
 							InAppropriateObjectArrayPropertyCriterion inAppropriateOAPCriterion = new InAppropriateObjectArrayPropertyCriterion();
 							criterion = new edu.cmu.cs.stage3.util.criterion.MatchesAllCriterion( new edu.cmu.cs.stage3.util.Criterion[] { instanceOf, notSelf, isNamedElement, inAppropriateOAPCriterion } );
 						//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtConstraint) && property.getName().equals( Messages.getString("target") ) ) {
-						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtConstraint) && property.getName().equals( "target" ) ) {
+						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PointAtConstraint) && property.getName().equals( "target" ) ) {
 							final Object transformableValue = property.getOwner().getPropertyNamed( "subject" ).get();
 							edu.cmu.cs.stage3.util.Criterion notSelf = new edu.cmu.cs.stage3.util.Criterion() {
 								public boolean accept( Object o ) {
@@ -2021,7 +2021,7 @@ public class PopupMenuUtilities{
 
 		Runnable textStringRunnable = new Runnable() {
 			public void run() {
-				ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.response.Print.class, known, new String[] { "text" } );
+				ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.responses.Print.class, known, new String[] { "text" } );
 				//java.awt.Frame jAliceFrame = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().getJAliceFrame();
 				String text = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Enter_text_to_print"), Messages.getString("Enter_Text_String"), javax.swing.JOptionPane.PLAIN_MESSAGE );
 				if( text != null ) {
@@ -2031,7 +2031,7 @@ public class PopupMenuUtilities{
 		};
 		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("text_string___"), textStringRunnable ) );
 
-		ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.response.Print.class, known, new String[] { "object" } );
+		ElementPrototype elementPrototype = new ElementPrototype( edu.cmu.cs.stage3.alice.core.responses.Print.class, known, new String[] { "object" } );
 		structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( Messages.getString("object"), PopupMenuUtilities.makePrototypeStructure( elementPrototype, factory, context ) ) );
 
 		return structure;
@@ -2131,8 +2131,8 @@ public class PopupMenuUtilities{
 	public static java.util.Vector getUnlabeledDefaultValueStructureForProperty( Class elementClass, String propertyName, edu.cmu.cs.stage3.alice.core.Property property ) {
 		if( property != null ) {
 			//if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
-			if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) {
-				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
+			if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( "value" ) ) {
+				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)property.getOwner();
 				if (propertyAnimation.element.getElementValue() != null)
 					elementClass = propertyAnimation.element.getElementValue().getClass();
 				if (propertyAnimation.element.getElementValue()instanceof edu.cmu.cs.stage3.alice.core.Variable){

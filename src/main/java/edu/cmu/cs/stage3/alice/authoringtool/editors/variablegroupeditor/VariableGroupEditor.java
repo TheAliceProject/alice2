@@ -180,7 +180,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 		java.awt.datatransfer.Transferable transferable = dtde.getTransferable();
 		try {
 			edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.variableReferenceFlavor );
-			if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ){
+			if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ){
 				lineLocation = -1;
 				dtde.rejectDrag();
 			} else {
@@ -202,7 +202,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 		java.awt.datatransfer.Transferable transferable = dtde.getTransferable();
 		try {
 			edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.variableReferenceFlavor );
-			if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ){
+			if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ){
 				lineLocation = -1;
 				dtde.rejectDrag();
 			} else {
@@ -227,7 +227,7 @@ public class VariableGroupEditor extends javax.swing.JPanel implements edu.cmu.c
 			dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_MOVE );
 			try {
 				edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.variableReferenceFlavor );
-				if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ){
+				if( variable.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ){
 					dtde.dropComplete( false );
 				} else {
 					if( variables.contains( variable ) ) {

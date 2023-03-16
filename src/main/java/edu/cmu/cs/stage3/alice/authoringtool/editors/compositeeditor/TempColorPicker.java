@@ -97,23 +97,23 @@ public class TempColorPicker extends javax.swing.JPanel {
     public TempColorPicker(CompositeElementEditor r) {
         editor = r;
         setLayout(new java.awt.GridBagLayout());
-        add(new TileColorPicker(Messages.getString("DoInOrder"), edu.cmu.cs.stage3.alice.core.response.DoInOrder.class),  new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0 
+        add(new TileColorPicker(Messages.getString("DoInOrder"), edu.cmu.cs.stage3.alice.core.responses.DoInOrder.class),  new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("DoTogether"), edu.cmu.cs.stage3.alice.core.response.DoTogether.class),  new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0 
+        add(new TileColorPicker(Messages.getString("DoTogether"), edu.cmu.cs.stage3.alice.core.responses.DoTogether.class),  new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("IfElseInOrder"), edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class),  new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0 
+        add(new TileColorPicker(Messages.getString("IfElseInOrder"), edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder.class),  new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("LoopNInOrder"), edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class),  new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0 
+        add(new TileColorPicker(Messages.getString("LoopNInOrder"), edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder.class),  new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("WhileLoopInOrder"), edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class),  new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0 
+        add(new TileColorPicker(Messages.getString("WhileLoopInOrder"), edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder.class),  new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("ForEachInOrder"), edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class),  new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0 
+        add(new TileColorPicker(Messages.getString("ForEachInOrder"), edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder.class),  new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("ForAllTogether"), edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class),  new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0 
+        add(new TileColorPicker(Messages.getString("ForAllTogether"), edu.cmu.cs.stage3.alice.core.responses.ForEachTogether.class),  new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
         add(new TileColorPicker(Messages.getString("response"), "response"),  new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0  
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
-        add(new TileColorPicker(Messages.getString("Comment"), edu.cmu.cs.stage3.alice.core.response.Comment.class, "commentForeground"),  new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0  
+        add(new TileColorPicker(Messages.getString("Comment"), edu.cmu.cs.stage3.alice.core.responses.Comment.class, "commentForeground"),  new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));
         add(new TileColorPicker(edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING, "+ - * /"),  new GridBagConstraints(0, 9, 1, 1, 0.0, 0.0 
             ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 4, 0, 0), 0, 0));

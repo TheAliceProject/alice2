@@ -695,8 +695,8 @@ public class AuthoringToolResources {
 		Class elementClass = property.getOwner().getClass();
 		String propertyName = property.getName();
 		//if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
-		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "value" ) ) {
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner();
+		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( "value" ) ) {
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)property.getOwner();
 			Object e = propertyAnimation.element.get();
 			if( e instanceof edu.cmu.cs.stage3.alice.core.Expression ) {
 				elementClass = ((edu.cmu.cs.stage3.alice.core.Expression)e).getValueClass();
@@ -732,7 +732,7 @@ public class AuthoringToolResources {
 			return getReprForValue( value );
 		}
 
-		if( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedResponse" )) ||
+		if( (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedResponse" )) ||
 			(edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass ) && propertyName.equals( "userDefinedQuestion" )) )
 		{
 			verbose = true;
@@ -1211,7 +1211,7 @@ public class AuthoringToolResources {
 					return element.name.getStringValue();
 				}
 			}
-		} else if( (element instanceof edu.cmu.cs.stage3.alice.core.Sound) && (context instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) ) {
+		} else if( (element instanceof edu.cmu.cs.stage3.alice.core.Sound) && (context instanceof edu.cmu.cs.stage3.alice.core.responses.SoundResponse) ) {
 			edu.cmu.cs.stage3.alice.core.Sound sound = (edu.cmu.cs.stage3.alice.core.Sound)element;
 			String s = getReprForValue( element, true );
 			double t = Double.NaN;
@@ -1800,9 +1800,9 @@ public class AuthoringToolResources {
 		edu.cmu.cs.stage3.alice.core.Response undoResponse = null;
 
 		Class responseClass = response.getClass();
-		if( response instanceof edu.cmu.cs.stage3.alice.core.response.ResizeAnimation ) {
-			edu.cmu.cs.stage3.alice.core.response.ResizeAnimation resizeResponse = (edu.cmu.cs.stage3.alice.core.response.ResizeAnimation)response;
-			edu.cmu.cs.stage3.alice.core.response.ResizeAnimation undoResizeResponse = new edu.cmu.cs.stage3.alice.core.response.ResizeAnimation();
+		if( response instanceof edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation ) {
+			edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation resizeResponse = (edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation)response;
+			edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation undoResizeResponse = new edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation();
 
 			undoResizeResponse.amount.set( new Double( 1.0/resizeResponse.amount.doubleValue() ) );
 			undoResizeResponse.asSeenBy.set( resizeResponse.asSeenBy.get() );
@@ -1811,60 +1811,60 @@ public class AuthoringToolResources {
 			undoResizeResponse.subject.set( resizeResponse.subject.get() );
 
 			undoResponse = undoResizeResponse;
-		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation ) {
+		} else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation ) {
 			try {
-				undoResponse = (edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)responseClass.newInstance();
-				edu.cmu.cs.stage3.alice.core.Direction direction = (edu.cmu.cs.stage3.alice.core.Direction)((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).direction.getValue();
+				undoResponse = (edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)responseClass.newInstance();
+				edu.cmu.cs.stage3.alice.core.Direction direction = (edu.cmu.cs.stage3.alice.core.Direction)((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)response).direction.getValue();
 				edu.cmu.cs.stage3.alice.core.Direction opposite = new edu.cmu.cs.stage3.alice.core.Direction(
 					(direction.getMoveAxis() == null) ? null : edu.cmu.cs.stage3.math.Vector3.negate( direction.getMoveAxis() ),
 					(direction.getTurnAxis() == null) ? null : edu.cmu.cs.stage3.math.Vector3.negate( direction.getTurnAxis() ),
 					(direction.getRollAxis() == null) ? null : edu.cmu.cs.stage3.math.Vector3.negate( direction.getRollAxis() )
 				);
-				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).subject.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).subject.get() );
-				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).amount.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).amount.get() );
-				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).direction.set( opposite );
-				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).asSeenBy.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).asSeenBy.get() );
-				((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)undoResponse).style.set( ((edu.cmu.cs.stage3.alice.core.response.DirectionAmountTransformAnimation)response).style.get() );
+				((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)undoResponse).subject.set( ((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)response).subject.get() );
+				((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)undoResponse).amount.set( ((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)response).amount.get() );
+				((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)undoResponse).direction.set( opposite );
+				((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)undoResponse).asSeenBy.set( ((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)response).asSeenBy.get() );
+				((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)undoResponse).style.set( ((edu.cmu.cs.stage3.alice.core.responses.DirectionAmountTransformAnimation)response).style.get() );
 			} catch( IllegalAccessException e ) {
 				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e );
 			} catch( InstantiationException e ) {
 				AuthoringTool.showErrorDialog( Messages.getString("Error_creating_new_response__", responseClass), e );
 			}
-		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.TransformAnimation ) {
-			undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
-			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.response.TransformAnimation)response).subject.getValue();
+		} else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.TransformAnimation ) {
+			undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.responses.TransformAnimation)response).subject.getValue();
 			edu.cmu.cs.stage3.math.Matrix44 localTransformation = transformable.getLocalTransformation();
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).element.set( transformable );
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).propertyName.set( transformable.localTransformation.getName() );
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).value.set( localTransformation );
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE );
-		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation ) {
-			undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
-			edu.cmu.cs.stage3.alice.core.Element element = ((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)response).element.getElementValue();
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).element.set( element );
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).propertyName.set( ((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)response).propertyName.get() );
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).value.set( element.getPropertyNamed( ((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)response).propertyName.getStringValue() ).getValue() );
-			((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)undoResponse).howMuch.set( ((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)response).howMuch.get() );
-		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.SayAnimation ||
-				   response instanceof edu.cmu.cs.stage3.alice.core.response.ThinkAnimation ||
-				   response instanceof edu.cmu.cs.stage3.alice.core.response.Wait ||
-				   response instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) {
-			undoResponse = new edu.cmu.cs.stage3.alice.core.response.Wait();
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).element.set( transformable );
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).propertyName.set( transformable.localTransformation.getName() );
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).value.set( localTransformation );
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE );
+		} else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation ) {
+			undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.Element element = ((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)response).element.getElementValue();
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).element.set( element );
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).propertyName.set( ((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)response).propertyName.get() );
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).value.set( element.getPropertyNamed( ((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)response).propertyName.getStringValue() ).getValue() );
+			((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)undoResponse).howMuch.set( ((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)response).howMuch.get() );
+		} else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.SayAnimation ||
+				   response instanceof edu.cmu.cs.stage3.alice.core.responses.ThinkAnimation ||
+				   response instanceof edu.cmu.cs.stage3.alice.core.responses.Wait ||
+				   response instanceof edu.cmu.cs.stage3.alice.core.responses.SoundResponse) {
+			undoResponse = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 			undoResponse.duration.set( new Double( 0.0 ) );
-		}else if( response instanceof edu.cmu.cs.stage3.alice.core.response.PoseAnimation){
-			edu.cmu.cs.stage3.alice.core.response.PoseAnimation poseAnim = (edu.cmu.cs.stage3.alice.core.response.PoseAnimation)response;
-			undoResponse = new edu.cmu.cs.stage3.alice.core.response.PoseAnimation();
+		}else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.PoseAnimation){
+			edu.cmu.cs.stage3.alice.core.responses.PoseAnimation poseAnim = (edu.cmu.cs.stage3.alice.core.responses.PoseAnimation)response;
+			undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PoseAnimation();
 			edu.cmu.cs.stage3.alice.core.Transformable subject = (edu.cmu.cs.stage3.alice.core.Transformable)poseAnim.subject.get();
 			edu.cmu.cs.stage3.alice.core.Pose currentPose = edu.cmu.cs.stage3.alice.core.Pose.manufacturePose( subject, subject );
-			((edu.cmu.cs.stage3.alice.core.response.PoseAnimation)undoResponse).subject.set(subject);
-			((edu.cmu.cs.stage3.alice.core.response.PoseAnimation)undoResponse).pose.set(currentPose);
+			((edu.cmu.cs.stage3.alice.core.responses.PoseAnimation)undoResponse).subject.set(subject);
+			((edu.cmu.cs.stage3.alice.core.responses.PoseAnimation)undoResponse).pose.set(currentPose);
 //			TODO: handle CompositeAnimations... and everything else...
 		}
 
 		if( undoResponse != null ) {
 			undoResponse.duration.set( response.duration.get() );
 		} else {
-			undoResponse = new edu.cmu.cs.stage3.alice.core.response.Wait();
+			undoResponse = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 			undoResponse.duration.set( new Double( 0.0 ) );
 			AuthoringTool.showErrorDialog( Messages.getString("Could_not_create_undoResponse_for_", response), null );
 		}
@@ -1895,8 +1895,8 @@ public class AuthoringToolResources {
 	public static edu.cmu.cs.stage3.alice.core.Property[] getAffectedProperties( edu.cmu.cs.stage3.alice.core.Response response ) {
 		edu.cmu.cs.stage3.alice.core.Property[] properties = null;
 
-		if( response instanceof edu.cmu.cs.stage3.alice.core.response.ResizeAnimation ) {
-			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.response.TransformAnimation)response).subject.getElementValue();
+		if( response instanceof edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation ) {
+			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.responses.TransformAnimation)response).subject.getElementValue();
 			java.util.Vector pVector = new java.util.Vector();
 			pVector.add( transformable.localTransformation );
 			if( transformable instanceof edu.cmu.cs.stage3.alice.core.Model ) {
@@ -1910,16 +1910,16 @@ public class AuthoringToolResources {
 				}
 			}
 			properties = (edu.cmu.cs.stage3.alice.core.Property[])pVector.toArray( new edu.cmu.cs.stage3.alice.core.Property[0] );
-		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.TransformAnimation ) {
-			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.response.TransformAnimation)response).subject.getElementValue();
+		} else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.TransformAnimation ) {
+			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.responses.TransformAnimation)response).subject.getElementValue();
 			properties = new edu.cmu.cs.stage3.alice.core.Property[] { transformable.localTransformation };
-		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.TransformResponse ) {
-			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.response.TransformResponse)response).subject.getElementValue();
+		} else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.TransformResponse ) {
+			edu.cmu.cs.stage3.alice.core.Transformable transformable = (edu.cmu.cs.stage3.alice.core.Transformable)((edu.cmu.cs.stage3.alice.core.responses.TransformResponse)response).subject.getElementValue();
 			properties = new edu.cmu.cs.stage3.alice.core.Property[] { transformable.localTransformation };
-		} else if( response instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation ) {
-			edu.cmu.cs.stage3.alice.core.Element element = ((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)response).element.getElementValue();
-			String propertyName = ((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)response).propertyName.getStringValue();
-			edu.cmu.cs.stage3.util.HowMuch howMuch = (edu.cmu.cs.stage3.util.HowMuch)((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)response).howMuch.getValue();
+		} else if( response instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation ) {
+			edu.cmu.cs.stage3.alice.core.Element element = ((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)response).element.getElementValue();
+			String propertyName = ((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)response).propertyName.getStringValue();
+			edu.cmu.cs.stage3.util.HowMuch howMuch = (edu.cmu.cs.stage3.util.HowMuch)((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)response).howMuch.getValue();
 
 			java.util.LinkedList propertyList = new java.util.LinkedList();
 			addAffectedProperties( propertyList, element, propertyName, howMuch );

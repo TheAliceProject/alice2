@@ -38,7 +38,7 @@ public class ForEachInListSequentialLoopPanel extends edu.cmu.cs.stage3.alice.au
         super();
     }
 
-    public void set(edu.cmu.cs.stage3.alice.core.response.ForEachInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+    public void set(edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super.set(r, authoringToolIn);
     }
 

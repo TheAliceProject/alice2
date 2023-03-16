@@ -328,7 +328,7 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 			} else if( AuthoringToolResources.safeIsDataFlavorSupported(dtde, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CallToUserDefinedQuestionPrototypeReferenceTransferable.callToUserDefinedQuestionPrototypeReferenceFlavor ) ) {
 				dtde.acceptDrag( java.awt.dnd.DnDConstants.ACTION_MOVE );
 				return;
-			} else if( AuthoringToolResources.safeIsDataFlavorSupported(dtde, AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class ) ) ) {
+			} else if( AuthoringToolResources.safeIsDataFlavorSupported(dtde, AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class ) ) ) {
 				dtde.acceptDrag( java.awt.dnd.DnDConstants.ACTION_MOVE );
 				return;
 			} else if( AuthoringToolResources.safeIsDataFlavorSupported(dtde, AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class ) ) ) {
@@ -369,11 +369,11 @@ public class TabbedEditorComponent extends javax.swing.JPanel {
 			//DEBUG System.out.println( "drop" );
 			try {
 				Object o = null;
-				if( AuthoringToolResources.safeIsDataFlavorSupported(dtde, AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class ) ) ) {
+				if( AuthoringToolResources.safeIsDataFlavorSupported(dtde, AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class ) ) ) {
 					dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_MOVE );
 					java.awt.datatransfer.Transferable transferable = dtde.getTransferable();
-					o = transferable.getTransferData( AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class ) );
-					o = ((edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)o).userDefinedResponse.getUserDefinedResponseValue();
+					o = transferable.getTransferData( AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class ) );
+					o = ((edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)o).userDefinedResponse.getUserDefinedResponseValue();
 				} else if( AuthoringToolResources.safeIsDataFlavorSupported(dtde, AuthoringToolResources.getReferenceFlavorForClass( edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class ) ) ) {
 					dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_MOVE );
 					java.awt.datatransfer.Transferable transferable = dtde.getTransferable();

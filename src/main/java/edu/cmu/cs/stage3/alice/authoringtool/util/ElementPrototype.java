@@ -44,7 +44,7 @@ public class ElementPrototype {
 		} catch( Exception e ) {
 			throw new IllegalArgumentException( Messages.getString("Unable_to_create_a_new_element_of_type__", elementClass.getName()) ); 
 		}
-		if( ! (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) || edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass )) ) { // don't do checking for CallToUserDefinedResponse/Question, since they use known and desired properties for requiredParameters
+		if( ! (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class.isAssignableFrom( elementClass ) || edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion.class.isAssignableFrom( elementClass )) ) { // don't do checking for CallToUserDefinedResponse/Question, since they use known and desired properties for requiredParameters
 			if( knownPropertyValues != null ) {
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
 					String propertyName = knownPropertyValues[i].getString();
@@ -129,12 +129,12 @@ public class ElementPrototype {
 				}
 			}
 
-			if( edu.cmu.cs.stage3.alice.core.response.ForEach.class.isAssignableFrom( elementClass ) ) {
-				edu.cmu.cs.stage3.alice.core.response.ForEach forResponse = null;
-				if( edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class.isAssignableFrom( elementClass ) ) {
-					forResponse = (edu.cmu.cs.stage3.alice.core.response.ForEachInOrder)element;
-				} else if( edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class.isAssignableFrom( elementClass ) ) {
-					forResponse = (edu.cmu.cs.stage3.alice.core.response.ForEachTogether)element;
+			if( edu.cmu.cs.stage3.alice.core.responses.ForEach.class.isAssignableFrom( elementClass ) ) {
+				edu.cmu.cs.stage3.alice.core.responses.ForEach forResponse = null;
+				if( edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder.class.isAssignableFrom( elementClass ) ) {
+					forResponse = (edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder)element;
+				} else if( edu.cmu.cs.stage3.alice.core.responses.ForEachTogether.class.isAssignableFrom( elementClass ) ) {
+					forResponse = (edu.cmu.cs.stage3.alice.core.responses.ForEachTogether)element;
 				}
 				edu.cmu.cs.stage3.alice.core.Variable eachVar = new edu.cmu.cs.stage3.alice.core.Variable();
 				eachVar.name.set( Messages.getString("item") ); 
@@ -148,8 +148,8 @@ public class ElementPrototype {
 				eachVar.valueClass.set( Object.class );
 				forQuestion.addChild( eachVar );
 				forQuestion.each.set( eachVar );
-			} else if (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class.isAssignableFrom( elementClass ) ){
-				edu.cmu.cs.stage3.alice.core.response.LoopNInOrder loopN = (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder)element;
+			} else if (edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder.class.isAssignableFrom( elementClass ) ){
+				edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder loopN = (edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder)element;
 				edu.cmu.cs.stage3.alice.core.Variable indexVar = new edu.cmu.cs.stage3.alice.core.Variable();
 				indexVar.name.set( Messages.getString("index") ); 
 				indexVar.valueClass.set( Number.class );

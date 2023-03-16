@@ -111,10 +111,10 @@ public class ElementPopupUtilities {
 			if( classes != null ) {
 				for( int i = 0; i < classes.length; i++ ) {
 					final Class c = classes[i];
-					if (element instanceof edu.cmu.cs.stage3.alice.core.response.TurnAnimation){
-						edu.cmu.cs.stage3.alice.core.response.TurnAnimation turnAnimation = (edu.cmu.cs.stage3.alice.core.response.TurnAnimation)element;
+					if (element instanceof edu.cmu.cs.stage3.alice.core.responses.TurnAnimation){
+						edu.cmu.cs.stage3.alice.core.responses.TurnAnimation turnAnimation = (edu.cmu.cs.stage3.alice.core.responses.TurnAnimation)element;
 						if (turnAnimation.direction.get() == edu.cmu.cs.stage3.alice.core.Direction.FORWARD || turnAnimation.direction.get() == edu.cmu.cs.stage3.alice.core.Direction.BACKWARD){
-							if (edu.cmu.cs.stage3.alice.core.response.RollAnimation.class.isAssignableFrom(c)){
+							if (edu.cmu.cs.stage3.alice.core.responses.RollAnimation.class.isAssignableFrom(c)){
 								continue;
 							}
 						}
@@ -424,29 +424,29 @@ public class ElementPopupUtilities {
 		}
 
 		protected edu.cmu.cs.stage3.alice.core.Response createDestroyResponse( edu.cmu.cs.stage3.alice.core.Model model ) {
-			edu.cmu.cs.stage3.alice.core.response.TurnAnimation turnAnimation = new edu.cmu.cs.stage3.alice.core.response.TurnAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.TurnAnimation turnAnimation = new edu.cmu.cs.stage3.alice.core.responses.TurnAnimation();
 			turnAnimation.subject.set( model );
 			turnAnimation.direction.set( edu.cmu.cs.stage3.alice.core.Direction.LEFT );
 			turnAnimation.amount.set( new Double( 10.0 ) );
 			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			opacityAnimation.element.set( model );
 			opacityAnimation.propertyName.set( ("opacity") ); 
 			opacityAnimation.value.set( new Double( 0.0 ) );
 			opacityAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
 			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
-			edu.cmu.cs.stage3.alice.core.response.DoTogether doTogether = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
+			edu.cmu.cs.stage3.alice.core.responses.DoTogether doTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			doTogether.componentResponses.add( turnAnimation );
 			doTogether.componentResponses.add( opacityAnimation );
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			vehicleAnimation.element.set( model );
 			vehicleAnimation.propertyName.set( ("vehicle") ); 
 			vehicleAnimation.value.set( null );
 			vehicleAnimation.duration.set( new Double( 0.0 ) );
 			vehicleAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE );
-			edu.cmu.cs.stage3.alice.core.response.Wait wait = new edu.cmu.cs.stage3.alice.core.response.Wait();
+			edu.cmu.cs.stage3.alice.core.responses.Wait wait = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 			wait.duration.set( new Double( .2 ) );
-			edu.cmu.cs.stage3.alice.core.response.DoInOrder doInOrder = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
+			edu.cmu.cs.stage3.alice.core.responses.DoInOrder doInOrder = new edu.cmu.cs.stage3.alice.core.responses.DoInOrder();
 			doInOrder.componentResponses.add( wait );
 			edu.cmu.cs.stage3.alice.core.Element[] heads = model.search( namedHeadCriterion );
 			if( (heads != null) && (heads.length > 0) ) {
@@ -454,12 +454,12 @@ public class ElementPopupUtilities {
 				if( head instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
 					edu.cmu.cs.stage3.alice.core.Camera camera = authoringTool.getCurrentCamera();
 					if( camera != null ) {
-						edu.cmu.cs.stage3.alice.core.response.PointAtAnimation pointAt = new edu.cmu.cs.stage3.alice.core.response.PointAtAnimation();
+						edu.cmu.cs.stage3.alice.core.responses.PointAtAnimation pointAt = new edu.cmu.cs.stage3.alice.core.responses.PointAtAnimation();
 						pointAt.subject.set( head );
 						pointAt.target.set( camera );
 						pointAt.duration.set( new Double( .5 ) );
 						doInOrder.componentResponses.add( pointAt );
-						edu.cmu.cs.stage3.alice.core.response.Wait wait2 = new edu.cmu.cs.stage3.alice.core.response.Wait();
+						edu.cmu.cs.stage3.alice.core.responses.Wait wait2 = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 						wait2.duration.set( new Double( .4 ) );
 						doInOrder.componentResponses.add( wait2 );
 					}
@@ -471,38 +471,38 @@ public class ElementPopupUtilities {
 		}
 
 		protected edu.cmu.cs.stage3.alice.core.Response createDestroyUndoResponse( edu.cmu.cs.stage3.alice.core.Model model ) {
-			edu.cmu.cs.stage3.alice.core.response.TurnAnimation turnAnimation = new edu.cmu.cs.stage3.alice.core.response.TurnAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.TurnAnimation turnAnimation = new edu.cmu.cs.stage3.alice.core.responses.TurnAnimation();
 			turnAnimation.subject.set( model );
 			turnAnimation.direction.set( edu.cmu.cs.stage3.alice.core.Direction.RIGHT );
 			turnAnimation.amount.set( new Double( 5.0 ) );
 			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			opacityAnimation.element.set( model );
 			opacityAnimation.propertyName.set( ("opacity") ); 
 			opacityAnimation.value.set( model.opacity.get() );
 			opacityAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS ); // won't work correctly if children have different opacities
 			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
 			opacityAnimation.duration.set( new Double( .8 ) );
-			edu.cmu.cs.stage3.alice.core.response.DoTogether doTogether = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
+			edu.cmu.cs.stage3.alice.core.responses.DoTogether doTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			doTogether.componentResponses.add( turnAnimation );
 			doTogether.componentResponses.add( opacityAnimation );
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			vehicleAnimation.element.set( model );
 			vehicleAnimation.propertyName.set( ("vehicle") ); 
 			vehicleAnimation.value.set( model.vehicle.get() );
 			vehicleAnimation.duration.set( new Double( 0.0 ) );
 			vehicleAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE );
-			edu.cmu.cs.stage3.alice.core.response.DoInOrder doInOrder = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
+			edu.cmu.cs.stage3.alice.core.responses.DoInOrder doInOrder = new edu.cmu.cs.stage3.alice.core.responses.DoInOrder();
 			doInOrder.componentResponses.add( vehicleAnimation );
 			doInOrder.componentResponses.add( doTogether );
 			edu.cmu.cs.stage3.alice.core.Element[] heads = model.search( namedHeadCriterion );
 			if( (heads != null) && (heads.length > 0) ) {
 				edu.cmu.cs.stage3.alice.core.Element head = heads[0];
 				if( head instanceof edu.cmu.cs.stage3.alice.core.Transformable ) {
-					edu.cmu.cs.stage3.alice.core.response.Wait wait2 = new edu.cmu.cs.stage3.alice.core.response.Wait();
+					edu.cmu.cs.stage3.alice.core.responses.Wait wait2 = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 					wait2.duration.set( new Double( .4 ) );
 					doInOrder.componentResponses.add( wait2 );
-					edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation povAnimation = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+					edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation povAnimation = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 					povAnimation.subject.set( head );
 					povAnimation.pointOfView.set( ((edu.cmu.cs.stage3.alice.core.Transformable)head).getPointOfView() );
 					povAnimation.duration.set( new Double( .5 ) );
@@ -561,10 +561,10 @@ public class ElementPopupUtilities {
 			String name = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getNameForNewChild( element.name.getStringValue(), element.getParent() );
 
 			// should createCopyNamed handle this?
-			if( element.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse ) {
-				int index = ((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)element.getParent()).componentResponses.indexOf( element );
+			if( element.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse ) {
+				int index = ((edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)element.getParent()).componentResponses.indexOf( element );
 				edu.cmu.cs.stage3.alice.core.Element copy = element.HACK_createCopy( name, element.getParent(), index + 1, null, null );
-				((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)element.getParent()).componentResponses.add(index+1, copy);
+				((edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)element.getParent()).componentResponses.add(index+1, copy);
 			} else if( element.getParent() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite ) {
 				int index = ((edu.cmu.cs.stage3.alice.core.question.userdefined.Composite)element.getParent()).components.indexOf( element );
 				edu.cmu.cs.stage3.alice.core.Element copy = element.HACK_createCopy( name, element.getParent(), index + 1, null, null );

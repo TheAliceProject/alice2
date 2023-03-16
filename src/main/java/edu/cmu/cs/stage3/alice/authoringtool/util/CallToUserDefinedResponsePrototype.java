@@ -27,16 +27,16 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  * @author Jason Pratt
  */
 public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
-	protected edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse actualResponse;
+	protected edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse actualResponse;
 	protected RefreshListener refreshListener = new RefreshListener();
 
-	public CallToUserDefinedResponsePrototype( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse actualResponse ) {
-		super( edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class, new edu.cmu.cs.stage3.util.StringObjectPair[0], new String[0] );
+	public CallToUserDefinedResponsePrototype( edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse actualResponse ) {
+		super( edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class, new edu.cmu.cs.stage3.util.StringObjectPair[0], new String[0] );
 		this.actualResponse = actualResponse;
 	}
 
-	protected CallToUserDefinedResponsePrototype( edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse actualResponse, edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues, String[] desiredProperties ) {
-		super( edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class, knownPropertyValues, desiredProperties );
+	protected CallToUserDefinedResponsePrototype(edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse actualResponse, edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues, String[] desiredProperties ) {
+		super( edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class, knownPropertyValues, desiredProperties );
 		this.actualResponse = actualResponse;
 	}
 
@@ -70,7 +70,7 @@ public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
 			knownMap.put( knownPropertyValues[i].getString(), knownPropertyValues[i].getObject() );
 		}
 
-		edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse callToUserDefinedResponse = new edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse();
+		edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse callToUserDefinedResponse = new edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse();
 		callToUserDefinedResponse.userDefinedResponse.set( actualResponse );
 		Object[] params = actualResponse.requiredFormalParameters.getArrayValue();
 		for( int i = 0; i < params.length; i++ ) {
@@ -94,7 +94,7 @@ public class CallToUserDefinedResponsePrototype extends ResponsePrototype {
 		return super.createCopy( newKnownPropertyValues );
 	}
 
-	public edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse getActualResponse() {
+	public edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse getActualResponse() {
 		return actualResponse;
 	}
 

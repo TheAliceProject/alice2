@@ -313,7 +313,7 @@ public class ASEImporter extends edu.cmu.cs.stage3.alice.authoringtool.AbstractI
 			for( java.util.Iterator iter = rootModels.iterator(); iter.hasNext(); ) {
 				edu.cmu.cs.stage3.alice.core.Transformable root = (edu.cmu.cs.stage3.alice.core.Transformable)iter.next();
 				//System.out.println( "root: " + root );
-				edu.cmu.cs.stage3.alice.core.response.DoTogether rootAnim = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
+				edu.cmu.cs.stage3.alice.core.responses.DoTogether rootAnim = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 				rootAnim.name.set( "keyframeAnimation" ); 
 				for( java.util.Iterator jter = models.iterator(); jter.hasNext(); ) {
 					edu.cmu.cs.stage3.alice.core.Transformable trans = (edu.cmu.cs.stage3.alice.core.Transformable)jter.next();

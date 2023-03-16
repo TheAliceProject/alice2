@@ -48,8 +48,8 @@ public abstract class WhileElementPanel extends CompositeElementPanel {
 
 	protected void variableInit(){
         super.variableInit();
-        if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder){
-            edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder proxy = (edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder)m_element;
+        if (m_element instanceof edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder){
+            edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder proxy = (edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder)m_element;
             m_condition = proxy.condition;
         }
         else if (m_element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.While){

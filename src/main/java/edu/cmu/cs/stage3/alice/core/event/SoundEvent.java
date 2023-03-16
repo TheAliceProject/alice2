@@ -27,7 +27,7 @@ public class SoundEvent extends java.util.EventObject {
 	private Object time, dataSource, duration;
 
 	public SoundEvent(
-			edu.cmu.cs.stage3.alice.core.response.SoundResponse source,
+			edu.cmu.cs.stage3.alice.core.responses.SoundResponse source,
 			Object value, Object ds, Object dur) {
 		super(source);
 		time = value;
@@ -35,8 +35,8 @@ public class SoundEvent extends java.util.EventObject {
 		duration = dur;
 	}
 
-	public edu.cmu.cs.stage3.alice.core.response.SoundResponse getSoundResponse() {
-		return (edu.cmu.cs.stage3.alice.core.response.SoundResponse) getSource();
+	public edu.cmu.cs.stage3.alice.core.responses.SoundResponse getSoundResponse() {
+		return (edu.cmu.cs.stage3.alice.core.responses.SoundResponse) getSource();
 	}
 
 	public Object getTime() {

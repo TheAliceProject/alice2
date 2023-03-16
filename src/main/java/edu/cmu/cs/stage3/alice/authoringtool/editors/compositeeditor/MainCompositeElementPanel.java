@@ -183,8 +183,8 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 
 
     private void setVariableObjects(edu.cmu.cs.stage3.alice.core.Element element){
-        if (element instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse){
-            edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse r = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)element;
+        if (element instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse){
+            edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse r = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)element;
             keywordParameters = r.keywordFormalParameters;
             requiredParameters = r.requiredFormalParameters;
             localVariables = r.localVariables;
@@ -904,8 +904,8 @@ public class MainCompositeElementPanel extends CompositeElementPanel implements 
 
         protected edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty getGroup(edu.cmu.cs.stage3.alice.core.Variable toRemove){
             edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty containingArray = null;
-            if (toRemove.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse){
-                edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse parent = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)toRemove.getParent();
+            if (toRemove.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse){
+                edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse parent = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)toRemove.getParent();
                 if (parent.keywordFormalParameters.contains(toRemove)){
                     containingArray = parent.keywordFormalParameters;
                 }

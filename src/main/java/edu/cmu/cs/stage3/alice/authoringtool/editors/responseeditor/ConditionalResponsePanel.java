@@ -39,7 +39,7 @@ public class ConditionalResponsePanel extends edu.cmu.cs.stage3.alice.authoringt
         backgroundColor = getCustomBackgroundColor();
     }
 
-     public void set(edu.cmu.cs.stage3.alice.core.response.IfElseInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+     public void set(edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super.set(r, authoringToolIn);
     }
 

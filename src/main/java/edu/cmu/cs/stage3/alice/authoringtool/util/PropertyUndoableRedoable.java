@@ -98,11 +98,11 @@ public class PropertyUndoableRedoable implements ContextAssignableUndoableRedoab
 		if (newValue != null) newValueString = newValue.toString();
 	  }
 
-	  if (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
-		edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse cudResponse = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) property.getOwner();
+	  if (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) {
+		edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse cudResponse = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) property.getOwner();
 		String methodName = "";
-		if (cudResponse.userDefinedResponse.get() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
-		  edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse udResponse = ((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) cudResponse.userDefinedResponse.get());
+		if (cudResponse.userDefinedResponse.get() instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) {
+		  edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse udResponse = ((edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) cudResponse.userDefinedResponse.get());
 		  methodName = udResponse.getKey();
 		}
 

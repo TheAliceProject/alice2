@@ -40,24 +40,24 @@ public abstract class Element {
 	static {
 		//s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.behavior.SpacepadBehavior", edu.cmu.cs.stage3.alice.core.behavior.tracking.SpacePadBehavior.class );
 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ConditionalLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ConditionalSequentialResponse", edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.CountLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.response.ForEach.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.OrientationAnimation", edu.cmu.cs.stage3.alice.core.response.ForwardVectorAnimation.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ParallelForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ParallelResponse", edu.cmu.cs.stage3.alice.core.response.DoTogether.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ProxyForScriptDefinedResponse", edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialResponse", edu.cmu.cs.stage3.alice.core.response.DoInOrder.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ConditionalLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ConditionalSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.CountLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.ForEach.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.OrientationAnimation", edu.cmu.cs.stage3.alice.core.responses.ForwardVectorAnimation.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ParallelForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.ForEachTogether.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ParallelResponse", edu.cmu.cs.stage3.alice.core.responses.DoTogether.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ProxyForScriptDefinedResponse", edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialResponse", edu.cmu.cs.stage3.alice.core.responses.DoInOrder.class );
 
 		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.KeyboardNavigationBehavior", edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior.class ); 
 		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.MouseNavigationBehavior", edu.cmu.cs.stage3.alice.core.behavior.MouseLookingBehavior.class ); 
 
 		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.Pose", edu.cmu.cs.stage3.alice.core.Pose.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.PoseAnimation", edu.cmu.cs.stage3.alice.core.response.PoseAnimation.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.PoseAnimation", edu.cmu.cs.stage3.alice.core.responses.PoseAnimation.class );
 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.MetaResponse", edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.MetaResponse", edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class );
 
 		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.KeyMapping", edu.cmu.cs.stage3.alice.core.navigation.KeyMapping.class ); 
 	}

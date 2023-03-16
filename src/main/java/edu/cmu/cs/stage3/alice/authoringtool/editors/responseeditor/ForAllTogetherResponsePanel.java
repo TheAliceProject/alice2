@@ -44,7 +44,7 @@ public class ForAllTogetherResponsePanel extends ForEachInListSequentialLoopPane
         middleHeaderText = Messages.getString("__every"); 
     }
 
-    public void set(edu.cmu.cs.stage3.alice.core.response.ForEachTogether r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn) {
+    public void set(edu.cmu.cs.stage3.alice.core.responses.ForEachTogether r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn) {
         super.set(r, authoringToolIn);
     }
 

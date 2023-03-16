@@ -72,13 +72,13 @@ public class CopyMode extends DefaultMoveMode {
 			if( hasBeenDragged ) {
 				//pass
 			} else {
-				edu.cmu.cs.stage3.alice.core.response.MoveAnimation moveAnimation = new edu.cmu.cs.stage3.alice.core.response.MoveAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.MoveAnimation moveAnimation = new edu.cmu.cs.stage3.alice.core.responses.MoveAnimation();
 				moveAnimation.subject.set( pickedTransformable );
 				moveAnimation.direction.set( edu.cmu.cs.stage3.alice.core.Direction.FORWARD );
 				moveAnimation.amount.set( new Double( 1 ) );
 				moveAnimation.isScaledBySize.set( Boolean.TRUE );
 
-				edu.cmu.cs.stage3.alice.core.response.MoveAnimation undoAnimation = new edu.cmu.cs.stage3.alice.core.response.MoveAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.MoveAnimation undoAnimation = new edu.cmu.cs.stage3.alice.core.responses.MoveAnimation();
 				undoAnimation.subject.set( pickedTransformable );
 				undoAnimation.direction.set( edu.cmu.cs.stage3.alice.core.Direction.FORWARD );
 				undoAnimation.amount.set( new Double( -1 ) );

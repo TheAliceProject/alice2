@@ -75,7 +75,7 @@ public class SimulationExceptionPanel extends javax.swing.JPanel {
 		edu.cmu.cs.stage3.alice.core.World world = m_authoringTool.getWorld();
 		edu.cmu.cs.stage3.alice.core.Element ancestor = null;
 		edu.cmu.cs.stage3.alice.core.Element[] userDefinedResponses = world
-				.getDescendants(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class);
+				.getDescendants(edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse.class);
 		for (int i = 0; i < userDefinedResponses.length; i++) {
 			if (userDefinedResponses[i].isAncestorOf(element)) {
 				ancestor = userDefinedResponses[i];

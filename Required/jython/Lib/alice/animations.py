@@ -60,7 +60,7 @@ def ScriptAction( fcn, args=(), kws={} ):
 			print "warning: unexpected arguments ", args
 		if kws:
 			print "warning: unexpected keywords ", kws
-		scriptResponse =  edu.cmu.cs.stage3.alice.core.response.ScriptResponse()
+		scriptResponse =  edu.cmu.cs.stage3.alice.core.responses.ScriptResponse()
 		scriptResponse.script.set( fcn )
 		scriptResponse.setWorld( __world__ )
 		return scriptResponse
@@ -68,7 +68,7 @@ def ScriptAction( fcn, args=(), kws={} ):
 		return ApplyResponse( fcn, args, kws )
 
 def WaitAction( duration ):
-	a = edu.cmu.cs.stage3.alice.core.response.Wait()
+	a = edu.cmu.cs.stage3.alice.core.responses.Wait()
 	a.duration.set( duration )
 	return a
 
@@ -82,7 +82,7 @@ def _AddComponentResponses( a, args ):
 		a.componentResponses.add( child )
 
 def DoInOrder( *args, **kws ):
-	a = edu.cmu.cs.stage3.alice.core.response.DoInOrder()
+	a = edu.cmu.cs.stage3.alice.core.responses.DoInOrder()
 	_AddComponentResponses( a, args )
 	try:
 		wait = kws["wait"]
@@ -91,7 +91,7 @@ def DoInOrder( *args, **kws ):
 	return _WaitIfNecessary( a, wait )
 
 def DoTogether( *args, **kws ):
-	a = edu.cmu.cs.stage3.alice.core.response.DoTogether()
+	a = edu.cmu.cs.stage3.alice.core.responses.DoTogether()
 	_AddComponentResponses( a, args )
 	try:
 		wait = kws["wait"]
@@ -128,7 +128,7 @@ def ManufactureEach( list ):
 	return each
 
 def ForEachInOrder( each, list, *args, **kws ):
-	a = edu.cmu.cs.stage3.alice.core.response.ForEachInOrder()
+	a = edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder()
 	_AddComponentResponses( a, args )
 	
 	a.each.set( each )
@@ -148,7 +148,7 @@ def ForEachInOrder( each, list, *args, **kws ):
 	return _WaitIfNecessary( a, wait )
 	
 def ForEachTogether( each, list, *args, **kws ):
-	a = edu.cmu.cs.stage3.alice.core.response.ForEachTogether()
+	a = edu.cmu.cs.stage3.alice.core.responses.ForEachTogether()
 	_AddComponentResponses( a, args )
 	a.each.set( each )
 	a.list.set( list )
@@ -162,7 +162,7 @@ def IfElseInOrder( condition, ifAnimation, elseAnimation=None ):
 	if callable( condition ):
 		condition = ApplyQuestion( condition, cls=java.lang.Boolean )
 
-	a = edu.cmu.cs.stage3.alice.core.response.IfElseInOrder()
+	a = edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder()
 	a.addComponentResponse( ifAnimation )
 	#todo
 	try:
@@ -172,7 +172,7 @@ def IfElseInOrder( condition, ifAnimation, elseAnimation=None ):
 	return _WaitIfNecessary( a, wait )
 
 def WhileLoopInOrder( condition, *args ):
-	anim = edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder()
+	anim = edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder()
 	_AddComponentResponses( anim, args )
 
 	if callable( condition ):
@@ -184,7 +184,7 @@ def LoopNInOrder( *args ):
 	return None
 
 def MoveAnimation( subject, direction=forward, amount=1, duration=1, asSeenBy=None, style=gently, isScaledBySize=false, wait=0 ):
-	anim = edu.cmu.cs.stage3.alice.core.response.MoveAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.MoveAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -224,7 +224,7 @@ def TurnAnimation( subject, direction=forward, amount=0.25, duration=1, asSeenBy
 		print 
 		return 
 
-	anim = edu.cmu.cs.stage3.alice.core.response.TurnAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.TurnAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -258,7 +258,7 @@ def RollAnimation( subject, direction=forward, amount=0.25, duration=1, asSeenBy
 		print 'WARNING: one cannot roll up or down or forward or backward.  Please use turn instead.'
 		print 
 		return 
-	anim = edu.cmu.cs.stage3.alice.core.response.RollAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.RollAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -287,7 +287,7 @@ def RollAnimation( subject, direction=forward, amount=0.25, duration=1, asSeenBy
 	return _WaitIfNecessary( anim, wait )
 
 def ResizeAnimation( subject, dimension=all, amount=2, likeRubber=false, duration=1, asSeenBy=None, style=gently, wait=0 ):
-	anim = edu.cmu.cs.stage3.alice.core.response.ResizeAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -324,7 +324,7 @@ def PositionAnimation( subject, position=(0,0,0), duration=1, asSeenBy=None, sty
 		x, y, z = position
 		position = edu.cmu.cs.stage3.math.Vector3( x, y, z )
 
-	anim = edu.cmu.cs.stage3.alice.core.response.PositionAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.PositionAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -356,7 +356,7 @@ def ForwardVectorAnimation( subject, forward=(1,0,0), upGuide=None, duration=1, 
 		x, y, z = upGuide
 		upGuide = Vector3( x, y, z )
 	
-	anim = edu.cmu.cs.stage3.alice.core.response.ForwardVectorAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.ForwardVectorAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -389,7 +389,7 @@ def QuaternionAnimation( subject, quaternion=(0,0,0,1), duration=1, asSeenBy=Non
 		x,y,z,w = quaternion
 		quaternion = edu.cmu.cs.stage3.math.Quaternion( x,y,z,w )
 
-	anim = edu.cmu.cs.stage3.alice.core.response.QuaternionAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.QuaternionAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -419,7 +419,7 @@ def EulerAnglesAnimation( subject, pitchYawRoll=(0,0,0), duration=1, asSeenBy=No
 		pitch, yaw, roll = pitchYawRoll
 		pitchYawRoll = edu.cmu.cs.stage3.math.EulerAngles( pitch, yaw, roll )
 
-	anim = edu.cmu.cs.stage3.alice.core.response.EulerAnglesAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.EulerAnglesAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -449,7 +449,7 @@ def SizeAnimation( subject, size=Vector3(0,0,0), duration=1, asSeenBy=None, styl
 		x, y, z = size
 		size = edu.cmu.cs.stage3.math.Vector3( x, y, z )
 
-	anim = edu.cmu.cs.stage3.alice.core.response.SizeAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.SizeAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -481,7 +481,7 @@ def PointAtAnimation( subject, target, offset=None, upGuide=None, onlyAffectYaw=
 		x, y, z = upGuide
 		upGuide = edu.cmu.cs.stage3.math.Vector3( x, y, z )
 
-	anim = edu.cmu.cs.stage3.alice.core.response.PointAtAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.PointAtAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -518,7 +518,7 @@ def PointAtAnimation( subject, target, offset=None, upGuide=None, onlyAffectYaw=
 	return _WaitIfNecessary( anim, wait )
 
 def PointOfViewAnimation( subject, pointOfView, affectPosition=true, affectQuaternion=true, followHermiteCubic=false, duration=1, asSeenBy=None, style=gently, wait=0 ):
-	anim = edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -555,7 +555,7 @@ def PointOfViewAnimation( subject, pointOfView, affectPosition=true, affectQuate
 	return _WaitIfNecessary( anim, wait )
 
 def StandUpAnimation( subject, duration=1, asSeenBy=None, style=gently, wait=0 ):
-	anim = edu.cmu.cs.stage3.alice.core.response.StandUpAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.StandUpAnimation()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -582,7 +582,7 @@ def PathAnimation( subject, pointOfViews, times=None, duration=None, asSeenBy=No
 		while enum.hasMoreElements():
 			pointOfViews.append( enum.nextElement() )
 
-	anim = edu.cmu.cs.stage3.alice.core.response.PathAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.PathAnimation()
 	
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -617,7 +617,7 @@ def TextureMapAnimation( subject, textureMaps, framesPerSecond=24, setDiffuseCol
 		while enum.hasMoreElements():
 			textureMaps.append( enum.nextElement() )
 
-	anim = edu.cmu.cs.stage3.alice.core.response.TextureMapMovie()
+	anim = edu.cmu.cs.stage3.alice.core.responses.TextureMapMovie()
 
 	if callable( subject ):
 		subject = ApplyQuestion( subject, cls=anim.subject.getValueClass() )
@@ -651,7 +651,7 @@ def PropertyAnimation( element, propertyName, value, duration=1, style=gently, h
 		if howMuch is None:
 			howMuch = instanceAndParts
 
-	anim = edu.cmu.cs.stage3.alice.core.response.PropertyAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation()
 
 	anim.element.set( element )
 	anim.propertyName.set( propertyName )
@@ -676,14 +676,14 @@ def PropertyAnimation( element, propertyName, value, duration=1, style=gently, h
 	return _WaitIfNecessary( anim, wait )
 
 def VehiclePropertyAnimation( element, vehicle ):
-	anim = edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation()
+	anim = edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation()
 	anim.element.set( element )
 	anim.vehicle.set( vehicle )
 	anim.duration = 0
 	return anim
 
 def SoundAction( sound, volumeLevel=1, wait=0 ):
-	anim = edu.cmu.cs.stage3.alice.core.response.SoundResponse()
+	anim = edu.cmu.cs.stage3.alice.core.responses.SoundResponse()
 
 	if callable( sound ):
 		sound = ApplyQuestion( sound, cls=anim.sound.getValueClass() )

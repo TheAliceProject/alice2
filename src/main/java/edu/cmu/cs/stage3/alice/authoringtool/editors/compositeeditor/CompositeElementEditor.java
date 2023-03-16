@@ -240,14 +240,14 @@ public abstract class CompositeElementEditor extends GroupingPanel
 	public static int getDepthCount(edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty children){
 		int maxDepth = 0;
 		for (int i=0; i<children.size(); i++){
-			if (children.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-				edu.cmu.cs.stage3.alice.core.response.CompositeResponse currentResponse = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)children.get(i);
+			if (children.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+				edu.cmu.cs.stage3.alice.core.responses.CompositeResponse currentResponse = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)children.get(i);
 				int depth = getDepthCount(currentResponse.componentResponses);
 				if (depth > maxDepth){
 					maxDepth = depth;
 				}
-				if (currentResponse instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
-					edu.cmu.cs.stage3.alice.core.response.IfElseInOrder ifResponse = (edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)currentResponse;
+				if (currentResponse instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder){
+					edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder ifResponse = (edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)currentResponse;
 					depth = getDepthCount(ifResponse.elseComponentResponses);
 					if (depth > maxDepth){
 						maxDepth = depth;

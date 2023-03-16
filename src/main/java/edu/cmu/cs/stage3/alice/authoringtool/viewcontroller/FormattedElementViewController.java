@@ -59,9 +59,9 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 	};
 	protected edu.cmu.cs.stage3.alice.core.event.PropertyListener userDefinedListener = new edu.cmu.cs.stage3.alice.core.event.PropertyListener() {
 		public void propertyChanging( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
-			if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-				if( ev.getProperty().getValue() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
-					((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)ev.getProperty().getValue()).name.removePropertyListener( updateListener );
+			if( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+				if( ev.getProperty().getValue() instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
+					((edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)ev.getProperty().getValue()).name.removePropertyListener( updateListener );
 				}
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion ) {
 				if( ev.getProperty().getValue() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion ) {
@@ -70,9 +70,9 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 			}
 		}
 		public void propertyChanged( edu.cmu.cs.stage3.alice.core.event.PropertyEvent ev ) {
-			if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-				if( ev.getProperty().getValue() instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
-					((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)ev.getProperty().getValue()).name.addPropertyListener( updateListener );
+			if( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+				if( ev.getProperty().getValue() instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
+					((edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)ev.getProperty().getValue()).name.addPropertyListener( updateListener );
 				}
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion ) {
 				if( ev.getProperty().getValue() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion ) {
@@ -151,11 +151,11 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 			calculateVisibleProperties();
 			setTransferable( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( element ) );
 
-			if( element instanceof edu.cmu.cs.stage3.alice.core.response.Comment ) { //TODO: specify in config
+			if( element instanceof edu.cmu.cs.stage3.alice.core.responses.Comment ) { //TODO: specify in config
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Comment" ) ); 
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Comment ) { //TODO: specify in config
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Comment" ) ); 
-			} else if( element instanceof edu.cmu.cs.stage3.alice.core.response.Print ) { //TODO: specify in config
+			} else if( element instanceof edu.cmu.cs.stage3.alice.core.responses.Print ) { //TODO: specify in config
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) ); 
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print ) { //TODO: specify in config
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Print" ) ); 
@@ -163,7 +163,7 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "PropertyAssignment" ) ); 
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Return ) { //TODO: specify in config
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "Return" ) ); 
-			} else if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) { //TODO: specify in config
+			} else if( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) { //TODO: specify in config
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedResponse" ) ); 
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.Response ) { //TODO: specify in config
 				setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "response" ) ); 
@@ -200,8 +200,8 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 //			questionComponent.isCommentedOut.addPropertyListener( commentedListener );
 		}
 
-		if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-			edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)element;
+		if( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+			edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)element;
 			callToUserDefinedResponse.userDefinedResponse.addPropertyListener( userDefinedListener );
 			if( callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue() != null ) {
 				callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue().name.addPropertyListener( updateListener );
@@ -224,8 +224,8 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 //			questionComponent.isCommentedOut.removePropertyListener( commentedListener );
 		}
 
-		if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-			edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)element;
+		if( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+			edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)element;
 			callToUserDefinedResponse.userDefinedResponse.removePropertyListener( userDefinedListener );
 			if( callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue() != null ) {
 				callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue().name.removePropertyListener( updateListener );
@@ -302,9 +302,9 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 	protected edu.cmu.cs.stage3.alice.core.Property[] getUnsetProperties() {
 		// HACK - special case for script, script definded, and comment
 		//TODO: specify these in config file
-		if( (element instanceof edu.cmu.cs.stage3.alice.core.response.ScriptResponse) ||
-			(element instanceof edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse) ||
-			(element instanceof edu.cmu.cs.stage3.alice.core.response.Comment) )
+		if( (element instanceof edu.cmu.cs.stage3.alice.core.responses.ScriptResponse) ||
+			(element instanceof edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse) ||
+			(element instanceof edu.cmu.cs.stage3.alice.core.responses.Comment) )
 		{
 			return new edu.cmu.cs.stage3.alice.core.Property[0];
 		}
@@ -379,11 +379,11 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 				if( token.startsWith( "<" ) && token.endsWith( ">" ) ) {  
 					edu.cmu.cs.stage3.alice.core.Property property = element.getPropertyNamed( token.substring( token.lastIndexOf( "<" ) + 1, token.indexOf( ">" ) ) );  
 					if( property != null ) {
-						if( ((element instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) || (element instanceof edu.cmu.cs.stage3.alice.core.question.PropertyValue)) && property.getName().equals( "propertyName" ) ) { 
+						if( ((element instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) || (element instanceof edu.cmu.cs.stage3.alice.core.question.PropertyValue)) && property.getName().equals( "propertyName" ) ) {
 							gui = new StringPropertyLabel( (edu.cmu.cs.stage3.alice.core.property.StringProperty)property );
 						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.PropertyAssignment) && property.getName().equals( "propertyName" ) ) { 
 							gui = new StringPropertyLabel( (edu.cmu.cs.stage3.alice.core.property.StringProperty)property );
-						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) { 
+						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) {
 							gui = new PropertyLabel( property );
 						} else if( (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion) && property.getName().equals( "userDefinedQuestion" ) ) { 
 							gui = new PropertyLabel( property );
@@ -421,7 +421,7 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 								((javax.swing.JLabel)gui).setFont( new java.awt.Font( "Courier", java.awt.Font.BOLD, (int)(18*fontSize/12.0) ) );
 								((javax.swing.JLabel)gui).setForeground(java.awt.Color.black);
 					}else */
-					if( ((element instanceof edu.cmu.cs.stage3.alice.core.response.Comment) || (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Comment)) ) { //TODO: put in config file
+					if( ((element instanceof edu.cmu.cs.stage3.alice.core.responses.Comment) || (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Comment)) ) { //TODO: put in config file
 						((javax.swing.JLabel)gui).setForeground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "commentForeground" ) ); 
 						((javax.swing.JLabel)gui).setFont( new java.awt.Font( "Helvetica", java.awt.Font.BOLD, (int)(13*fontSize/12.0) ) ); 
 					}
@@ -436,9 +436,9 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 				edu.cmu.cs.stage3.alice.core.Property property = (edu.cmu.cs.stage3.alice.core.Property)iter.next();
 				if( property != null ) {
 					javax.swing.JComponent gui = null;
-					if( (element instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "propertyName" ) ) { 
+					if( (element instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( "propertyName" ) ) {
 						gui = new StringPropertyLabel( (edu.cmu.cs.stage3.alice.core.property.StringProperty)property );
-					} else if( (element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) { 
+					} else if( (element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) && property.getName().equals( "userDefinedResponse" ) ) {
 						gui = new PropertyLabel( property );
 					} else {
 						boolean allowExpressions = ! String.class.isAssignableFrom( property.getValueClass() );
@@ -450,7 +450,7 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 			}
 
 			// add more tile
-			boolean isUserDefined = (FormattedElementViewController.this.element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) || (FormattedElementViewController.this.element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion);
+			boolean isUserDefined = (FormattedElementViewController.this.element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) || (FormattedElementViewController.this.element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion);
 			if( (getUnsetProperties().length > 0) && (! isUserDefined) ) {
 				subPanel.add( moreTile, new java.awt.GridBagConstraints( i++, 0, 1, 1, 0.0, 0.0, java.awt.GridBagConstraints.CENTER, java.awt.GridBagConstraints.NONE, new java.awt.Insets( 0, 4, 0, 0 ), 0, 0 ) );
 			}
@@ -489,8 +489,8 @@ public class FormattedElementViewController extends edu.cmu.cs.stage3.alice.auth
 		}
 
 		public void doubleClickResponse( java.awt.event.MouseEvent ev ) {
-			if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().editObject( ((edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)element).userDefinedResponse.getUserDefinedResponseValue(), FormattedElementViewController.this );
+			if( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().editObject( ((edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)element).userDefinedResponse.getUserDefinedResponseValue(), FormattedElementViewController.this );
 			} else if( element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion ) {
 				edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack().editObject( ((edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion)element).userDefinedQuestion.getUserDefinedQuestionValue(), FormattedElementViewController.this );
 			}

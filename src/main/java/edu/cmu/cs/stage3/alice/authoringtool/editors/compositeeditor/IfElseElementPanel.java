@@ -89,8 +89,8 @@ public abstract class IfElseElementPanel extends CompositeElementPanel {
 
 	protected void variableInit(){
         super.variableInit();
-        if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
-            edu.cmu.cs.stage3.alice.core.response.IfElseInOrder proxy = (edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)m_element;
+        if (m_element instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder){
+            edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder proxy = (edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)m_element;
             m_condition = proxy.condition;
             m_elseComponents = proxy.elseComponentResponses;
             elseComponentPanel = new edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.CompositeComponentResponsePanel();

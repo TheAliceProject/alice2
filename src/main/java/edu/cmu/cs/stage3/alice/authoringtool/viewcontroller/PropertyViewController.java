@@ -492,8 +492,8 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 				mainString = "";
 			}
 			//Aik Min - fix print and comment
-			if (!(this.property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.Comment)
-					&& !(this.property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.Print) ){
+			if (!(this.property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.Comment)
+					&& !(this.property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.Print) ){
 				String unitString = null;
 				java.util.Collection unitMapValues = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getUnitMapValues();
 				for( java.util.Iterator iter = unitMapValues.iterator(); iter.hasNext(); ) {
@@ -695,7 +695,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 						}
 					}
 				} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.responseReferenceFlavor ) ) {
-					if (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print){
+					if (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print){
 						return false;
 					}
 					if( desiredValueClass.isAssignableFrom( edu.cmu.cs.stage3.alice.core.Response.class ) ) {
@@ -730,7 +730,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 					} else if( Number.class.isAssignableFrom( desiredValueClass ) && javax.vecmath.Vector3d.class.isAssignableFrom( element.getClass() ) && PropertyViewController.this.allowExpressions ) {
 						return true;
 					} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( desiredValueClass ) && !(element instanceof edu.cmu.cs.stage3.alice.core.Behavior)) {
-						if (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print){
+						if (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print){
 							return false;
 						}
 						return true;
@@ -751,7 +751,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 				} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor ) ) {				
 					final edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype elementPrototype = (edu.cmu.cs.stage3.alice.authoringtool.util.ElementPrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementPrototypeReferenceTransferable.elementPrototypeReferenceFlavor );
 					Class elementClass = elementPrototype.getElementClass();
-					if ((property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print) 
+					if ((property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print)
 						&& edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom(elementClass)){
 						return false;
 					}
@@ -767,7 +767,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 							return true;							
 						}
 						// Aik Min - This is to allow function in "if" statement 
-						else if ( property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder ){ 
+						else if ( property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder ){
 							hookItUp = true;
 						}
 
@@ -779,7 +779,7 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 					}
 				} else if( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.safeIsDataFlavorSupported(transferable, edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CopyFactoryTransferable.copyFactoryFlavor ) ) {
 					edu.cmu.cs.stage3.alice.core.CopyFactory copyFactory = (edu.cmu.cs.stage3.alice.core.CopyFactory)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.CopyFactoryTransferable.copyFactoryFlavor );
-					if ((property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print) 
+					if ((property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.Print || property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print)
 						&& edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom(copyFactory.getValueClass())){
 						return false;
 					}
@@ -1180,11 +1180,11 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 					dtde.acceptDrop( java.awt.dnd.DnDConstants.ACTION_LINK );
 					//This if checks to see if the drop happened on the PointOfView property of an object in the properties panel
 					if( ((property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.Transformable) && (property == ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).localTransformation) )) {
-						edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation povAnim = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+						edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation povAnim = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 						povAnim.subject.set( property.getOwner() );
 						povAnim.pointOfView.set( edu.cmu.cs.stage3.math.Matrix44.IDENTITY );
 						povAnim.asSeenBy.set( element );
-						edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+						edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 						undoResponse.subject.set( property.getOwner() );
 						undoResponse.pointOfView.set( ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).localTransformation.getMatrix4dValue() );
 						undoResponse.asSeenBy.set( ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).vehicle.getValue() );
@@ -1267,14 +1267,14 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 							new edu.cmu.cs.stage3.util.StringObjectPair( "duration", new Double( 1.0 ) ),
 						};
 						String[] desiredProperties = new String[] { "value" };
-						responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class, knownPropertyValues, desiredProperties );
+						responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation.class, knownPropertyValues, desiredProperties );
 					} else {
 						edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues = new edu.cmu.cs.stage3.util.StringObjectPair[] {
 							new edu.cmu.cs.stage3.util.StringObjectPair( "element", p.getOwner() ),
 							new edu.cmu.cs.stage3.util.StringObjectPair( "propertyName", p.getName() )
 						};
 						String[] desiredProperties = new String[] { "value" };
-						responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class, knownPropertyValues, desiredProperties );
+						responsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype( edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation.class, knownPropertyValues, desiredProperties );
 					}
 
 					edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory prototypeFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory() {

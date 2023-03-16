@@ -33,8 +33,8 @@ public class StringPropertyLabel extends PropertyLabel {
 
 	public void update() {
 		String propertyName = ((edu.cmu.cs.stage3.alice.core.property.StringProperty)property).getStringValue();
-		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( "propertyName" ) ) {
-			edu.cmu.cs.stage3.alice.core.Element element = ((edu.cmu.cs.stage3.alice.core.response.PropertyAnimation)property.getOwner()).element.getElementValue();
+		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( "propertyName" ) ) {
+			edu.cmu.cs.stage3.alice.core.Element element = ((edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)property.getOwner()).element.getElementValue();
 			if( element != null ) {
 				Class elementClass = element.getClass();
 				while( edu.cmu.cs.stage3.alice.core.Element.class.isAssignableFrom( elementClass ) ) {

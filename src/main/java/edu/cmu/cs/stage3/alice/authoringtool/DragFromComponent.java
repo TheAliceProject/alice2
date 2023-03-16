@@ -91,7 +91,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 	protected javax.swing.JButton newAnimationButton = new javax.swing.JButton( Messages.getString("create_new_method") ); 
 	protected javax.swing.JButton newQuestionButton = new javax.swing.JButton( Messages.getString("create_new_", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.QUESTION_STRING) ); 
 	protected javax.swing.JButton capturePoseButton = new javax.swing.JButton( Messages.getString("capture_pose") ); 
-	protected edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse newlyCreatedAnimation;
+	protected edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse newlyCreatedAnimation;
 	protected edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion newlyCreatedQuestion;
 	protected edu.cmu.cs.stage3.alice.core.Pose newlyCreatedPose;
 	protected AuthoringTool authoringTool;
@@ -125,7 +125,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 						if( result == edu.cmu.cs.stage3.swing.ContentPane.OK_OPTION ) {
 							authoringTool.getUndoRedoStack().startCompound();
 							try {
-								edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse response = new edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse();
+								edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse response = new edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse();
 								response.name.set( newResponseContentPane.getNameValue() );
 								responses.getOwner().addChild( response );
 								responses.add( response );
@@ -460,7 +460,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) { 
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
-				if( e instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
+				if( e instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
 					return AuthoringToolResources.findEditObjectButton( animationsPanel, e );
 				} else if( e instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion ) {
 					return AuthoringToolResources.findEditObjectButton( questionsPanel, e );
@@ -536,7 +536,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		} else if( prefix.equals( "editObjectButton" ) && (spec != null) ) { 
 			edu.cmu.cs.stage3.alice.core.Element e = world.getDescendantKeyed( spec );
 			if( e != null ) {
-				if( e instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
+				if( e instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
 					return AuthoringToolResources.findEditObjectButton( animationsPanel, e );
 				} else if( e instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion ) {
 					return AuthoringToolResources.findEditObjectButton( questionsPanel, e );
@@ -646,22 +646,22 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 												if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.Transformable) && (property == ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).vehicle) ) {
 													((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).setVehiclePreservingAbsoluteTransformation( (edu.cmu.cs.stage3.alice.core.ReferenceFrame)o );
 												} else if (property.getName().equals("localTransformation")){ //Animate and undo the point of view when set 
-													edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation povAnim = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+													edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation povAnim = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 													povAnim.subject.set( property.getOwner() );
 													povAnim.pointOfView.set( o );
 													povAnim.asSeenBy.set( element.getParent() );
-													edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+													edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 													undoResponse.subject.set( property.getOwner() );
 													undoResponse.pointOfView.set( ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).localTransformation.getMatrix4dValue() );
 													undoResponse.asSeenBy.set( ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).vehicle.getValue() );
 													edu.cmu.cs.stage3.alice.core.Property[] properties = new edu.cmu.cs.stage3.alice.core.Property[] { ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).localTransformation };
 													authoringTool.performOneShot( povAnim, undoResponse, properties );
 												} else {
-													edu.cmu.cs.stage3.alice.core.response.PropertyAnimation response = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+													edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation response = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 													response.element.set( property.getOwner() );
 													response.propertyName.set( property.getName() );
 													response.value.set( o );
-													edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+													edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 													undoResponse.element.set( property.getOwner() );
 													undoResponse.propertyName.set( property.getName() );
 													undoResponse.value.set( property.getValue() );
@@ -756,11 +756,11 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 				int count = 0;
 				Object[] responseArray = responses.getArrayValue();
 				for( int i = 0; i < responseArray.length; i++ ) {
-					Class responseClass = edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class;
+					Class responseClass = edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class;
 					edu.cmu.cs.stage3.alice.core.Response response = (edu.cmu.cs.stage3.alice.core.Response)responseArray[i];
 
-					if( response instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
-						edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype callToUserDefinedResponsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype( (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)response );
+					if( response instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
+						edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype callToUserDefinedResponsePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.CallToUserDefinedResponsePrototype( (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)response );
 						javax.swing.JComponent gui = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI( callToUserDefinedResponsePrototype );
 						if( gui != null ) {
 							edu.cmu.cs.stage3.alice.authoringtool.util.EditObjectButton editButton = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getEditObjectButton( response, gui );
@@ -1001,7 +1001,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 		public void objectArrayPropertyChanging( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent ev ) {}
 		public void objectArrayPropertyChanged( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent ev ) {
 			if( ev.getChangeType() == edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent.ITEM_INSERTED ) {
-				newlyCreatedAnimation = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)ev.getItem();
+				newlyCreatedAnimation = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)ev.getItem();
 			}
 			int selectedIndex = tabbedPane.getSelectedIndex();
 			refreshGUI();

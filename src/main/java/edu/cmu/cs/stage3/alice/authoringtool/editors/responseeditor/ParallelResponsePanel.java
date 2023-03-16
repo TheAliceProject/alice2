@@ -36,10 +36,10 @@ public class ParallelResponsePanel extends CompositeResponsePanel {
 
     public ParallelResponsePanel(){
         super();
-        headerText = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.DoTogether.class);
+        headerText = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.DoTogether.class);
     }
 
-    public void set(edu.cmu.cs.stage3.alice.core.response.DoTogether r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+    public void set(edu.cmu.cs.stage3.alice.core.responses.DoTogether r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super.set(r, authoringToolIn);
     }
 

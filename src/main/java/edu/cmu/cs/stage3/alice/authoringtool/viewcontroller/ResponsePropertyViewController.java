@@ -78,9 +78,9 @@ public class ResponsePropertyViewController extends PropertyViewController {
 		
 		if (responsePanel.getComponentCount() > 0){
 			if (responsePanel.getComponent(0) instanceof edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel
-				&& property.get() instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
+				&& property.get() instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
 				edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel compPanel = (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel)responsePanel.getComponent(0);
-				int colSpan = edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.getDepthCount(((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)property.get()).componentResponses);
+				int colSpan = edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.getDepthCount(((edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)property.get()).componentResponses);
 				compPanel.getHTML(toWriteTo, colSpan+1, true, !isEnabled);
 			} else{
 				java.awt.Color bgColor= responsePanel.getComponent(0).getBackground();

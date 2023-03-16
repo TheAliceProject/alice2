@@ -42,7 +42,7 @@ public class MainSequentialResponsePanel extends MainCompositeResponsePanel{
         return edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoInOrder");
     }
 
-    public void set(edu.cmu.cs.stage3.alice.core.response.CompositeResponse response, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool newAuthoringTool) {
+    public void set(edu.cmu.cs.stage3.alice.core.responses.CompositeResponse response, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool newAuthoringTool) {
         super.set(response, newAuthoringTool);
     }
 
