@@ -21,7 +21,7 @@
  *    "This product includes software developed by Carnegie Mellon University"
  */
 
-package edu.cmu.cs.stage3.alice.core.behavior;
+package edu.cmu.cs.stage3.alice.core.behaviors;
 
 import edu.cmu.cs.stage3.alice.core.Expression;
 import edu.cmu.cs.stage3.alice.core.Model;
@@ -29,14 +29,13 @@ import edu.cmu.cs.stage3.alice.core.Question;
 import edu.cmu.cs.stage3.alice.core.RenderTarget;
 import edu.cmu.cs.stage3.alice.core.Transformable;
 import edu.cmu.cs.stage3.alice.core.Variable;
-import edu.cmu.cs.stage3.alice.core.World;
 import edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty;
 import edu.cmu.cs.stage3.alice.core.property.IntegerProperty;
 import edu.cmu.cs.stage3.alice.core.property.TransformableProperty;
 import edu.cmu.cs.stage3.alice.core.question.PickQuestion;
 
-public class MouseButtonClickBehavior extends TriggerBehavior implements java.awt.event.MouseListener {
-	private static Class[] s_supportedCoercionClasses = { MouseButtonIsPressedBehavior.class };
+public class MouseButtonIsPressedBehavior extends AbstractConditionalBehavior implements java.awt.event.MouseListener, java.awt.event.MouseMotionListener {
+	private static Class[] s_supportedCoercionClasses = { MouseButtonClickBehavior.class };
 	
 	public Class[] getSupportedCoercionClasses() {
 		return s_supportedCoercionClasses;
@@ -49,8 +48,6 @@ public class MouseButtonClickBehavior extends TriggerBehavior implements java.aw
 	public final TransformableProperty onWhat = new TransformableProperty( this, "onWhat", null );
 
 	private edu.cmu.cs.stage3.alice.core.RenderTarget[] m_renderTargets = null;
-	private java.awt.event.MouseEvent m_pressedEvent = null;
-
 
 	public void manufactureAnyNecessaryDetails() {
 		if( details.size()==2 ) {
@@ -110,7 +107,6 @@ public class MouseButtonClickBehavior extends TriggerBehavior implements java.aw
 		}
 		return ( ( modifiers&required ) == required ) && ( ( modifiers&excluded ) == 0 );
 	}
-
 	public void mouseClicked( java.awt.event.MouseEvent mouseEvent ) {
 	}
 	public void mouseEntered( java.awt.event.MouseEvent mouseEvent ) {
@@ -118,59 +114,57 @@ public class MouseButtonClickBehavior extends TriggerBehavior implements java.aw
 	public void mouseExited( java.awt.event.MouseEvent mouseEvent ) {
 	}
 	public void mousePressed( java.awt.event.MouseEvent mouseEvent ) {
-		m_pressedEvent = mouseEvent;
-	}
-
-	public long m_clickTimeThreshold = 300;
-	public int m_clickDistanceThresholdSquared = 100;
-	// Aik Min - Mouse events in Play (render) window
-	public void mouseReleased( java.awt.event.MouseEvent mouseEvent ) {
-		int dx = mouseEvent.getX() - m_pressedEvent.getX();
-		int dy = mouseEvent.getY() - m_pressedEvent.getY();
-		long dt = mouseEvent.getWhen() - m_pressedEvent.getWhen();
-		if( dt < m_clickTimeThreshold ) {
-			if( dx*dx + dy*dy < m_clickDistanceThresholdSquared ) {
-				if( isEnabled.booleanValue() ) {
-					if( checkModifierMask( mouseEvent ) ) {
-						updateDetails( mouseEvent );
-						Transformable onWhatValue = onWhat.getTransformableValue();
-						boolean success;
-						if( onWhatValue!=null ) {
-							edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo = RenderTarget.pick( mouseEvent );
-							if( pickInfo != null && pickInfo.getCount()>0 ) {
-								Model model = (Model)( pickInfo.getVisualAt( 0 ).getBonus() );
-								success = onWhatValue == model || onWhatValue.isAncestorOf( model );
-							} else {
-								success = false;
-							}
-						} else {
-							success = true;
-						}
-						if( success ) {
-							updateDetails( mouseEvent );
-							trigger( mouseEvent.getWhen()*0.001 );
-						}
+		updateDetails( mouseEvent );
+		if( isEnabled.booleanValue() ) {
+			if( checkModifierMask( mouseEvent ) ) {
+				Transformable onWhatValue = onWhat.getTransformableValue();
+				boolean success;
+				if( onWhatValue!=null ) {
+					edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pickInfo = RenderTarget.pick( mouseEvent );
+					if( pickInfo.getCount()>0 ) {
+						Model model = (Model)( pickInfo.getVisualAt( 0 ).getBonus() );
+						success = onWhatValue == model || onWhatValue.isAncestorOf( model );
+					} else {
+						success = false;
 					}
+				} else {
+					success = true;
+				}
+				if( success ) {
+					set( true );
 				}
 			}
 		}
 	}
+	public void mouseReleased( java.awt.event.MouseEvent mouseEvent ) {
+		updateDetails( mouseEvent );
+		set( false );
+	}
+	public void mouseDragged( java.awt.event.MouseEvent mouseEvent ) {
+		updateDetails( mouseEvent );
+	}
+	public void mouseMoved( java.awt.event.MouseEvent mouseEvent ) {
+		//todo?
+		//updateDetails( mouseEvent );
+	}
 	
-	protected void started( World world, double time ) {
+	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.started( world, time );
-		m_renderTargets = (RenderTarget[])renderTargets.get();
+		m_renderTargets = (edu.cmu.cs.stage3.alice.core.RenderTarget[])renderTargets.get();
 		if( m_renderTargets==null ) {
-			m_renderTargets = (RenderTarget[])world.getDescendants( RenderTarget.class );
+			m_renderTargets = (edu.cmu.cs.stage3.alice.core.RenderTarget[])world.getDescendants( edu.cmu.cs.stage3.alice.core.RenderTarget.class );
 		}
 		for( int i=0; i<m_renderTargets.length; i++ ) {
 			m_renderTargets[i].addMouseListener( this );
+			m_renderTargets[i].addMouseMotionListener( this );
 		}
 	}
 	
-	protected void stopped( World world, double time ) {
+	protected void stopped( edu.cmu.cs.stage3.alice.core.World world, double time ) {
 		super.stopped( world, time );
 		for( int i=0; i<m_renderTargets.length; i++ ) {
 			m_renderTargets[i].removeMouseListener( this );
+			m_renderTargets[i].removeMouseMotionListener( this );
 		}
 		m_renderTargets = null;
 	}

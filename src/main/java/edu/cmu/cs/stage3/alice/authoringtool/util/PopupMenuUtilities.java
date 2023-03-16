@@ -1409,8 +1409,8 @@ public class PopupMenuUtilities{
 								}
 							};
 							if( userDefinedResponse.requiredFormalParameters.size() > 0 ) {
-								if (referenceProperty.getOwner() instanceof edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior ||
-								referenceProperty.getOwner() instanceof edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior){
+								if (referenceProperty.getOwner() instanceof edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior ||
+								referenceProperty.getOwner() instanceof edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonIsPressedBehavior){
 									return makePrototypeStructure( callToUserDefinedResponsePrototype, prototypePopupFactory, referenceProperty.getOwner() );
 								}
 								return makePrototypeStructure( callToUserDefinedResponsePrototype, prototypePopupFactory, context );

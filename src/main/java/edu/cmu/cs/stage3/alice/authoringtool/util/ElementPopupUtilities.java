@@ -119,7 +119,7 @@ public class ElementPopupUtilities {
 							}
 						}
 					}
-					if (!(edu.cmu.cs.stage3.alice.core.behavior.WorldIsRunningBehavior.class.isAssignableFrom(c))) {
+					if (!(edu.cmu.cs.stage3.alice.core.behaviors.WorldIsRunningBehavior.class.isAssignableFrom(c))) {
 						String repr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue( c );
 						Runnable runnable = new Runnable() {
 							public void run() {

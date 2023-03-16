@@ -21,7 +21,7 @@
  *    "This product includes software developed by Carnegie Mellon University"
  */
 
-package edu.cmu.cs.stage3.alice.core.behavior;
+package edu.cmu.cs.stage3.alice.core.behaviors;
 
 /**
  * <p>Title: </p>
@@ -73,7 +73,7 @@ public class SoundLevelBehavior extends TriggerBehavior implements ControllerLis
                             Format.NOT_SPECIFIED,
                             Format.byteArray)
         };
-        this.multipleRuntimeResponsePolicy.set(edu.cmu.cs.stage3.alice.core.behavior.MultipleRuntimeResponsePolicy.IGNORE_MULTIPLE);
+        this.multipleRuntimeResponsePolicy.set(edu.cmu.cs.stage3.alice.core.behaviors.MultipleRuntimeResponsePolicy.IGNORE_MULTIPLE);
     }
 
 	public void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {

@@ -1,4 +1,4 @@
-package edu.cmu.cs.stage3.alice.core.behavior;
+package edu.cmu.cs.stage3.alice.core.behaviors;
 
 import edu.cmu.cs.stage3.alice.core.property.CollectionProperty;
 

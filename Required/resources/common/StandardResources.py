@@ -193,11 +193,11 @@ propertiesToOmitNoneFor = [
 
 propertiesToIncludeNoneFor = [
 	["diffuseColorMap", "edu.cmu.cs.stage3.alice.core.Model"],
-	["keyCode", "edu.cmu.cs.stage3.alice.core.behavior.KeyClickBehavior"],
-	["keyCode", "edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior"],
-	["onWhat", "edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior"],
-	["onWhat", "edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior"],
-	["keyMap", "edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior"],
+	["keyCode", "edu.cmu.cs.stage3.alice.core.behaviors.KeyClickBehavior"],
+	["keyCode", "edu.cmu.cs.stage3.alice.core.behaviors.KeyIsPressedBehavior"],
+	["onWhat", "edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior"],
+	["onWhat", "edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonIsPressedBehavior"],
+	["keyMap", "edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior"],
 	["duration", "edu.cmu.cs.stage3.alice.core.responses.SoundResponse"],
 	["fromMarker", "edu.cmu.cs.stage3.alice.core.responses.SoundResponse"],
 	["toMarker", "edu.cmu.cs.stage3.alice.core.responses.SoundResponse"],
@@ -276,16 +276,16 @@ propertyNamesToOmit = [
 	("condition", "edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder"),
 	("script", "edu.cmu.cs.stage3.alice.core.responses.ScriptResponse"),
 	("script", "edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse"),
-	("keyCode", "edu.cmu.cs.stage3.alice.core.behavior.KeyClickBehavior"),
-	("keyCode", "edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior"),
-	("onWhat", "edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior"),
-	("onWhat", "edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior"),
-	("objects", "edu.cmu.cs.stage3.alice.core.behavior.DefaultMouseInteractionBehavior"),
-	("condition", "edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior"),
-	("variable", "edu.cmu.cs.stage3.alice.core.behavior.VariableChangeBehavior"),
-	("marker", "edu.cmu.cs.stage3.alice.core.behavior.SoundMarkerPassedBehavior"),
-	("level", "edu.cmu.cs.stage3.alice.core.behavior.SoundLevelBehavior"),
-	("subject", "edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior"),
+	("keyCode", "edu.cmu.cs.stage3.alice.core.behaviors.KeyClickBehavior"),
+	("keyCode", "edu.cmu.cs.stage3.alice.core.behaviors.KeyIsPressedBehavior"),
+	("onWhat", "edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior"),
+	("onWhat", "edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonIsPressedBehavior"),
+	("objects", "edu.cmu.cs.stage3.alice.core.behaviors.DefaultMouseInteractionBehavior"),
+	("condition", "edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior"),
+	("variable", "edu.cmu.cs.stage3.alice.core.behaviors.VariableChangeBehavior"),
+	("marker", "edu.cmu.cs.stage3.alice.core.behaviors.SoundMarkerPassedBehavior"),
+	("level", "edu.cmu.cs.stage3.alice.core.behaviors.SoundLevelBehavior"),
+	("subject", "edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior"),
 	("start", "edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder"),
 	("increment", "edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder"),
 	("end", "edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder"),
@@ -367,7 +367,7 @@ propertyNamesToOmit = [
 	("detailMap", "edu.cmu.cs.stage3.alice.core.Model"),
 	("interactionMap", "edu.cmu.cs.stage3.alice.core.Model"),
 	("disabledAffectors", "edu.cmu.cs.stage3.alice.core.Model"),
-	("transformable", "edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior"),
+	("transformable", "edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior"),
 	("a", "edu.cmu.cs.stage3.alice.core.question.StringConcatQuestion"),
 	("b", "edu.cmu.cs.stage3.alice.core.question.StringConcatQuestion"),
 	("what", "edu.cmu.cs.stage3.alice.core.question.ToStringQuestion"),
@@ -653,7 +653,7 @@ defaultPropertyValues = [
 		edu.cmu.cs.stage3.alice.core.Direction.BACKWARD,
 	]
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.KeyClickBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.KeyClickBehavior",
 	["keyCode",
 		java.awt.event.KeyEvent.VK_SPACE,
 		java.awt.event.KeyEvent.VK_ENTER,
@@ -735,7 +735,7 @@ defaultPropertyValues = [
 		],
 	],
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.KeyIsPressedBehavior",
 	["keyCode",
 		java.awt.event.KeyEvent.VK_SPACE,
 		java.awt.event.KeyEvent.VK_ENTER,
@@ -921,7 +921,7 @@ defaultPropertyValues = [
 		Double( 3.0 ),
 	],
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.SoundLevelBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.SoundLevelBehavior",
 	["level",
 		Double( 0.0 ),
 		Double( .1 ),
@@ -963,10 +963,10 @@ defaultPropertyValues = [
 ]
 
 propertiesToOmitScriptDefinedFor = [
-	("triggerResponse", "edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior"),
-	("beginResponse", "edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior"),
-	("duringResponse", "edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior"),
-	("endResponse", "edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior"),
+	("triggerResponse", "edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior"),
+	("beginResponse", "edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior"),
+	("duringResponse", "edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior"),
+	("endResponse", "edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior"),
 	("script", "edu.cmu.cs.stage3.alice.core.responses.ScriptResponse"),
 	("script", "edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse"),
 	("text", "edu.cmu.cs.stage3.alice.core.responses.Comment"),
@@ -1013,35 +1013,35 @@ propertyValueFormatMap = {
 		Double( 1.0 ) : "<value> <distanceUnit>",
 		"default" : "<value> <distanceUnits>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior.triggerResponse" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior.triggerResponse" : {
 		None : "Nothing",
 		"default" : "<value>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior.beginResponse" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior.beginResponse" : {
 		None : "Nothing",
 		"default" : "<value>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior.duringResponse" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior.duringResponse" : {
 		None : "Nothing",
 		"default" : "<value>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior.endResponse" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior.endResponse" : {
 		None : "Nothing",
 		"default" : "<value>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.KeyClickBehavior.keyCode" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.KeyClickBehavior.keyCode" : {
 		None : "any key",
 		"default" : "<keyCodeValue>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior.keyCode" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.KeyIsPressedBehavior.keyCode" : {
 		None : "any key",
 		"default" : "<keyCodeValue>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior.onWhat" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior.onWhat" : {
 		None : "anything",
 		"default" : "<value>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior.onWhat" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonIsPressedBehavior.onWhat" : {
 		None : "anything",
 		"default" : "<value>",
 	},
@@ -1132,10 +1132,10 @@ propertyValueFormatMap = {
 	"edu.cmu.cs.stage3.alice.core.responses.RotateAtSpeed.speed" : {
 		"default" : "<value> <revolutionVelocityUnits>",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.SoundLevelBehavior.level" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.SoundLevelBehavior.level" : {
 		"default" : "<value> (<percentValue>)",
 	},
-	"edu.cmu.cs.stage3.alice.core.behavior.DefaultMouseInteractionBehavior.objects" : {
+	"edu.cmu.cs.stage3.alice.core.behaviors.DefaultMouseInteractionBehavior.objects" : {
 		None : "Any Object",
 	},
 	"edu.cmu.cs.stage3.alice.core.responses.SoundResponse.duration" : {
@@ -1728,41 +1728,41 @@ questionStructure = [
 ######################
 
 behaviorList = [
-	edu.cmu.cs.stage3.alice.core.behavior.WorldStartBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.KeyClickBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.VariableChangeBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.DefaultMouseInteractionBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.MouseNavigationBehavior,
-	edu.cmu.cs.stage3.alice.core.behavior.MouseLookingBehavior,
-#	edu.cmu.cs.stage3.alice.core.behavior.MessageReceivedBehavior,
-#	edu.cmu.cs.stage3.alice.core.behavior.SoundMarkerPassedBehavior,
-#	edu.cmu.cs.stage3.alice.core.behavior.SoundLevelBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.WorldStartBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.KeyClickBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.VariableChangeBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.DefaultMouseInteractionBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.MouseNavigationBehavior,
+	edu.cmu.cs.stage3.alice.core.behaviors.MouseLookingBehavior,
+#	edu.cmu.cs.stage3.alice.core.behaviors.MessageReceivedBehavior,
+#	edu.cmu.cs.stage3.alice.core.behaviors.SoundMarkerPassedBehavior,
+#	edu.cmu.cs.stage3.alice.core.behaviors.SoundLevelBehavior,
 ]
 
 behaviorParameterProperties = [
-["edu.cmu.cs.stage3.alice.core.behavior.KeyClickBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.KeyClickBehavior",
 	"keyCode",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.KeyIsPressedBehavior",
 	"keyCode",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior",
 	"onWhat",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonIsPressedBehavior",
 	"onWhat",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.VariableChangeBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.VariableChangeBehavior",
 	"variable",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.MessageReceivedBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.MessageReceivedBehavior",
 	"fromWho",
 	"toWhom",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.DefaultMouseInteractionBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.DefaultMouseInteractionBehavior",
 	"objects",
 ],
 ["edu.cmu.cs.stage3.bb2.navigation.KeyboardNavigationBehavior",
@@ -1772,15 +1772,15 @@ behaviorParameterProperties = [
 	"transformable",
 	"mode",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.WorldIsRunningBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.WorldIsRunningBehavior",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior",
 	"condition",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.SoundMarkerPassedBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.SoundMarkerPassedBehavior",
 	"marker",
 ],
-["edu.cmu.cs.stage3.alice.core.behavior.SoundLevelBehavior",
+["edu.cmu.cs.stage3.alice.core.behaviors.SoundLevelBehavior",
 	"level",
 ],
 ]

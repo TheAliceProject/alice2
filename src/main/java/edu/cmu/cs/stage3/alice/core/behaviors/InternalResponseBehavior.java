@@ -21,26 +21,13 @@
  *    "This product includes software developed by Carnegie Mellon University"
  */
 
-package edu.cmu.cs.stage3.alice.core.behavior;
+package edu.cmu.cs.stage3.alice.core.behaviors;
 
-public class WorldIsRunningBehavior extends AbstractConditionalBehavior {
-	private static Class[] s_supportedCoercionClasses = { WorldStartBehavior.class };
+public abstract class InternalResponseBehavior extends edu.cmu.cs.stage3.alice.core.Behavior {
 	
-	public Class[] getSupportedCoercionClasses() {
-		return s_supportedCoercionClasses;
+	public void stopAllRuntimeResponses( double time ) {
 	}
 	
-	protected boolean invokeEndOnStop() {
-		return false;
-	}
-	
-	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
-		super.started( world, time );
-		set( true );
-	}
-	
-	protected void stopped( edu.cmu.cs.stage3.alice.core.World world, double time ) {
-		set( false );
-		super.stopped( world, time );
+	public void internalSchedule( double time, double dt ) {
 	}
 }

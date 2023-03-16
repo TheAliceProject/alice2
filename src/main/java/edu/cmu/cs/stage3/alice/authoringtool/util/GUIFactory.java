@@ -119,20 +119,20 @@ public class GUIFactory {
 			if( viewController != null ) {
 				((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController)viewController).setElement( (edu.cmu.cs.stage3.alice.core.Element)o );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.TriggerBehaviorPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.TriggerBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.TriggerBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behaviors.AbstractConditionalBehavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.ConditionalBehaviorPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.ConditionalBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.ConditionalBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behaviors.AbstractConditionalBehavior)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behavior.InternalResponseBehavior ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behaviors.InternalResponseBehavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.InternalResponseBehaviorPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.InternalResponseBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behavior.InternalResponseBehavior)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.InternalResponseBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behaviors.InternalResponseBehavior)o, authoringTool );
 			}
 		} else if( o instanceof edu.cmu.cs.stage3.alice.core.Behavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.GenericBehaviorPanel.class );

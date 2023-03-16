@@ -21,13 +21,26 @@
  *    "This product includes software developed by Carnegie Mellon University"
  */
 
-package edu.cmu.cs.stage3.alice.core.behavior;
+package edu.cmu.cs.stage3.alice.core.behaviors;
 
-public class MultipleRuntimeResponsePolicy extends edu.cmu.cs.stage3.util.Enumerable {
-	public static final MultipleRuntimeResponsePolicy IGNORE_MULTIPLE = new MultipleRuntimeResponsePolicy();
-	public static final MultipleRuntimeResponsePolicy ENQUEUE_MULTIPLE = new MultipleRuntimeResponsePolicy();
-	public static final MultipleRuntimeResponsePolicy INTERLEAVE_MULTIPLE = new MultipleRuntimeResponsePolicy();
-	public static MultipleRuntimeResponsePolicy valueOf( String s ) {
-		return (MultipleRuntimeResponsePolicy)edu.cmu.cs.stage3.util.Enumerable.valueOf( s, MultipleRuntimeResponsePolicy.class );
+public class WorldIsRunningBehavior extends AbstractConditionalBehavior {
+	private static Class[] s_supportedCoercionClasses = { WorldStartBehavior.class };
+	
+	public Class[] getSupportedCoercionClasses() {
+		return s_supportedCoercionClasses;
+	}
+	
+	protected boolean invokeEndOnStop() {
+		return false;
+	}
+	
+	protected void started( edu.cmu.cs.stage3.alice.core.World world, double time ) {
+		super.started( world, time );
+		set( true );
+	}
+	
+	protected void stopped( edu.cmu.cs.stage3.alice.core.World world, double time ) {
+		set( false );
+		super.stopped( world, time );
 	}
 }

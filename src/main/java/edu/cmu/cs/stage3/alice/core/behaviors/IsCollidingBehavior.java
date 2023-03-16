@@ -1,4 +1,4 @@
-package edu.cmu.cs.stage3.alice.core.behavior;
+package edu.cmu.cs.stage3.alice.core.behaviors;
 
 import edu.cmu.cs.stage3.alice.core.Collection;
 import edu.cmu.cs.stage3.alice.core.Transformable;

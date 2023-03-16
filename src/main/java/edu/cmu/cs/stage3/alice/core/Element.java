@@ -51,8 +51,8 @@ public abstract class Element {
 		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder.class );
 		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialResponse", edu.cmu.cs.stage3.alice.core.responses.DoInOrder.class );
 
-		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.KeyboardNavigationBehavior", edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.MouseNavigationBehavior", edu.cmu.cs.stage3.alice.core.behavior.MouseLookingBehavior.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.KeyboardNavigationBehavior", edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.MouseNavigationBehavior", edu.cmu.cs.stage3.alice.core.behaviors.MouseLookingBehavior.class );
 
 		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.Pose", edu.cmu.cs.stage3.alice.core.Pose.class ); 
 		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.PoseAnimation", edu.cmu.cs.stage3.alice.core.responses.PoseAnimation.class );
@@ -1881,7 +1881,7 @@ public abstract class Element {
 		Element[] children = getChildren();
 		int index = -1;
 		for( int i=0; i<children.length; i++ ) {
-			if (children [i] instanceof edu.cmu.cs.stage3.alice.core.behavior.WorldIsRunningBehavior){
+			if (children [i] instanceof edu.cmu.cs.stage3.alice.core.behaviors.WorldIsRunningBehavior){
 				children[ i ].stopped( world, time );
 				index = i;
 			}			
