@@ -1,8 +1,28 @@
 from edu.cmu.cs.stage3.alice.authoringtool import JAlice
+from edu.cmu.cs.stage3.alice.core.question.array import ItemAtIndex
+from edu.cmu.cs.stage3.alice.core.question.ask import AskUserForNumber
+from edu.cmu.cs.stage3.alice.core.question.list import Contains
+from edu.cmu.cs.stage3.alice.core.question.math import Min
+from edu.cmu.cs.stage3.alice.core.question.mouse import DistanceFromLeftEdge
+from edu.cmu.cs.stage3.alice.core.question.time import TimeElapsedSinceWorldStart
+from edu.cmu.cs.stage3.alice.core.question.userdefined import CallToUserDefinedQuestion
+from edu.cmu.cs.stage3.alice.core.question.vector3 import X
+from edu.cmu.cs.stage3.alice.core.question.visualization.array import ItemAtIndex
+from edu.cmu.cs.stage3.alice.core.question.visualization.list import Size
+from edu.cmu.cs.stage3.alice.core.question.visualization.model import Item
+from edu.cmu.cs.stage3.alice.core.responses.array import SetItemAtIndex
+from edu.cmu.cs.stage3.alice.core.responses.list import InsertItemAtBeginning
+from edu.cmu.cs.stage3.alice.core.responses.vector3 import SetX
+from edu.cmu.cs.stage3.alice.core.responses.visualization.array import SetItemAtIndex
+from edu.cmu.cs.stage3.alice.core.responses.visualization.list import InsertItemAtBeginning
+from edu.cmu.cs.stage3.alice.core.responses.visualization.model import SetItem
+from edu.cmu.cs.stage3.alice.core.styles import TraditionalAnimationStyle
+from edu.cmu.cs.stage3.pratt.maxkeyframing import PositionKeyframeResponse
 from edu.cmu.cs.stage3.util import StringTypePair
 from java.lang import Boolean
 import edu
 import java
+import os
 import string
 
 # HACK: until os.path works

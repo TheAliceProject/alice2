@@ -1,3 +1,27 @@
+from edu.cmu.cs.stage3.alice.authoringtool.editors.texturemapviewer import TextureMapViewer
+from edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor import ResponseEditor
+from edu.cmu.cs.stage3.alice.authoringtool.editors.scripteditor import ScriptEditor
+from edu.cmu.cs.stage3.alice.authoringtool.editors.keymappingeditor import KeyMappingEditor
+from edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor import QuestionEditor
+from edu.cmu.cs.stage3.alice.authoringtool.importers import ImageImporter
+from edu.cmu.cs.stage3.alice.authoringtool.importers.mocap import ASFImporter
+from edu.cmu.cs.stage3.alice.core.behaviors import KeyClickBehavior
+from edu.cmu.cs.stage3.alice.core.responses import SoundResponse
+from edu.cmu.cs.stage3.alice.scenegraph import Color
+from edu.cmu.cs.stage3.util import Enumerable
+from edu.cmu.cs.stage3.math import Matrix44
+from edu.cmu.cs.stage3.math import Quaternion
+from edu.cmu.cs.stage3.math import Vector3
+from edu.cmu.cs.stage3.alice.core import ReferenceFrame
+from java.lang import Double
+from java.lang import Integer
+from java.lang import String
+from javax.vecmath import Vector3d
+from javax.vecmath import Matrix4d
+
+import java.awt.event
+import java
+import javax
 ####################
 # Property Config
 ####################
