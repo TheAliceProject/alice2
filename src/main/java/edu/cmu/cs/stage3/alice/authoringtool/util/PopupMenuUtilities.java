@@ -2321,10 +2321,10 @@ public class PopupMenuUtilities{
 				structure.add( enumItems[i] );
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Style.class.isAssignableFrom( valueClass ) ) {
-			structure.add( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY );
-			structure.add( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
-			structure.add( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
-			structure.add( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY);
+			structure.add( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY );
+			structure.add( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
+			structure.add( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
+			structure.add( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY);
 		} else if( edu.cmu.cs.stage3.math.Vector3.class.isAssignableFrom( valueClass ) ) {
 			structure.add( new edu.cmu.cs.stage3.math.Vector3( 0.0, 0.0, 0.0 ) );
 		} else if( edu.cmu.cs.stage3.math.Vector4.class.isAssignableFrom( valueClass ) ) {

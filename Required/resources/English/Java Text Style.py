@@ -272,10 +272,10 @@ nameMap = {
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer" : "JOGL",
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer" : "None",
 
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "BEGIN_AND_END_GENTLY",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "BEGIN_GENTLY_AND_END_ABRUPTLY",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "BEGIN_ABRUPTLY_AND_END_GENTLY",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "BEGIN_AND_END_ABRUPTLY",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "BEGIN_AND_END_GENTLY",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "BEGIN_GENTLY_AND_END_ABRUPTLY",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "BEGIN_ABRUPTLY_AND_END_GENTLY",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "BEGIN_AND_END_ABRUPTLY",
 
 	edu.cmu.cs.stage3.alice.core.Direction.LEFT : "LEFT",
 	edu.cmu.cs.stage3.alice.core.Direction.RIGHT : "RIGHT",

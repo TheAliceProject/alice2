@@ -7,7 +7,7 @@
 package edu.cmu.cs.stage3.alice.core.responses;
 
 
-import edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle;
+import edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle;
 
 
 

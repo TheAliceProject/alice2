@@ -21,7 +21,7 @@
  *    "This product includes software developed by Carnegie Mellon University"
  */
 
-package edu.cmu.cs.stage3.alice.core.style;
+package edu.cmu.cs.stage3.alice.core.styles;
 
 public class TraditionalAnimationStyle extends edu.cmu.cs.stage3.util.Enumerable implements edu.cmu.cs.stage3.alice.core.Style {
 	/** @deprecated */

@@ -428,13 +428,13 @@ public class ElementPopupUtilities {
 			turnAnimation.subject.set( model );
 			turnAnimation.direction.set( edu.cmu.cs.stage3.alice.core.Direction.LEFT );
 			turnAnimation.amount.set( new Double( 10.0 ) );
-			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
+			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
 			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			opacityAnimation.element.set( model );
 			opacityAnimation.propertyName.set( ("opacity") ); 
 			opacityAnimation.value.set( new Double( 0.0 ) );
 			opacityAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS );
-			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
+			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY );
 			edu.cmu.cs.stage3.alice.core.responses.DoTogether doTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			doTogether.componentResponses.add( turnAnimation );
 			doTogether.componentResponses.add( opacityAnimation );
@@ -475,13 +475,13 @@ public class ElementPopupUtilities {
 			turnAnimation.subject.set( model );
 			turnAnimation.direction.set( edu.cmu.cs.stage3.alice.core.Direction.RIGHT );
 			turnAnimation.amount.set( new Double( 5.0 ) );
-			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
+			turnAnimation.style.set( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
 			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			opacityAnimation.element.set( model );
 			opacityAnimation.propertyName.set( ("opacity") ); 
 			opacityAnimation.value.set( model.opacity.get() );
 			opacityAnimation.howMuch.set( edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS ); // won't work correctly if children have different opacities
-			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
+			opacityAnimation.style.set( edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY );
 			opacityAnimation.duration.set( new Double( .8 ) );
 			edu.cmu.cs.stage3.alice.core.responses.DoTogether doTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			doTogether.componentResponses.add( turnAnimation );

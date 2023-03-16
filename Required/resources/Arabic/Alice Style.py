@@ -301,10 +301,10 @@ nameMap = {
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer" : "JOGL",
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer" : "لاشيء",
 
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "رويدًا",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "ابدأ رويدًا",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "انهي رويدًا",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "بشكل مفاجئ",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "رويدًا",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "ابدأ رويدًا",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "انهي رويدًا",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "بشكل مفاجئ",
 
 	edu.cmu.cs.stage3.alice.core.Direction.LEFT : "يسار",
 	edu.cmu.cs.stage3.alice.core.Direction.RIGHT : "يمين",

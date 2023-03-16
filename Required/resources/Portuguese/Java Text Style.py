@@ -272,10 +272,10 @@ nameMap = {
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer" : "JOGL",
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer" : "Nenhum",
 
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "INÍCIO_E_FIM_SUAVEMENTE",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "INÍCIO_SUAVEMENTE_E_FIM_BRUSCAMENTE",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "INÍCIO_BRUSCAMENTE_E_FIM_SUAVEMENTE",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "INÍCIO_E_FIM_BRUSCAMENTE",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "INÍCIO_E_FIM_SUAVEMENTE",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "INÍCIO_SUAVEMENTE_E_FIM_BRUSCAMENTE",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "INÍCIO_BRUSCAMENTE_E_FIM_SUAVEMENTE",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "INÍCIO_E_FIM_BRUSCAMENTE",
 
 	edu.cmu.cs.stage3.alice.core.Direction.LEFT : "ESQUERDA",
 	edu.cmu.cs.stage3.alice.core.Direction.RIGHT : "DIREITA",

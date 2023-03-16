@@ -24,7 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.responses;
 
 import edu.cmu.cs.stage3.alice.core.property.StyleProperty;
-import edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle;
+import edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle;
 
 public abstract class Animation extends edu.cmu.cs.stage3.alice.core.Response {
 	public final StyleProperty style = new StyleProperty( this, "style", TraditionalAnimationStyle.BEGIN_AND_END_GENTLY );

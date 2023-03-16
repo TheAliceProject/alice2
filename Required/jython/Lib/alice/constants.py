@@ -39,10 +39,10 @@ instance = edu.cmu.cs.stage3.util.HowMuch.INSTANCE
 instanceAndParts = edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_PARTS
 instanceAndAllDescendants = edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS
 
-abruptly = edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.LINEAR
-beginGently = edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.SLOW_IN
-endGently = edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.SLOW_OUT
-gently = edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.SLOW_IN_OUT
+abruptly = edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.LINEAR
+beginGently = edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.SLOW_IN
+endGently = edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.SLOW_OUT
+gently = edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.SLOW_IN_OUT
 
 solid = edu.cmu.cs.stage3.alice.scenegraph.FillingStyle.SOLID
 wireframe = edu.cmu.cs.stage3.alice.scenegraph.FillingStyle.WIREFRAME
