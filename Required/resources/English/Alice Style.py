@@ -1,14 +1,8 @@
 from edu.cmu.cs.stage3.alice.authoringtool import JAlice
 from edu.cmu.cs.stage3.util import StringTypePair
 from java.lang import Boolean
-from java.lang import Double
-from java.lang import Integer
-from java.lang import String
-from edu.cmu.cs.stage3.math import Vector3
-from edu.cmu.cs.stage3.math import Matrix44
 import edu
 import java
-import javax
 import string
 
 # HACK: until os.path works
@@ -19,8 +13,8 @@ def os_path_join( *args ):
 # load common resource data
 ####################################
 
-standardResourcesFile = os.path.join( JAlice.getAliceHomeDirectory(), "resources/common/StandardResources.py" )
-execfile( standardResourcesFile.getAbsolutePath() )
+standardResourcesFile = os.path.join( JAlice.getAliceHomeDirectoryString(), "resources/common/StandardResources.py" )
+execfile( standardResourcesFile)
 
 
 ##################
@@ -464,5 +458,5 @@ experimental = 0
 # transfer resource data to Alice
 ####################################
 
-resourceTransferFile = os.path.join( JAlice.getAliceHomeDirectory(), "resources/common/ResourceTransfer.py" )
-execfile( resourceTransferFile.getAbsolutePath() )
+resourceTransferFile = os.path.join( JAlice.getAliceHomeDirectoryString(), "resources/common/ResourceTransfer.py" )
+execfile( resourceTransferFile)

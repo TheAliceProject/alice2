@@ -189,7 +189,7 @@ AuthoringToolResources.setEditorClasses( array( editorList, java.lang.Class ) )
 #########################
 
 AuthoringToolResources.setMainWebGalleryURL( java.net.URL( mainWebGalleryURL ) )
-AuthoringToolResources.setMainDiskGalleryDirectory( os.path.join( mainDiskGallery ).getAbsoluteFile() )
+AuthoringToolResources.setMainDiskGalleryDirectory( os.path.join( mainDiskGallery ) )
 AuthoringToolResources.autodetectMainCDGalleryDirectory( mainCDGalleryName )
 AuthoringToolResources.setMainUpdateURL( java.net.URL( mainUpdateURL ) )
 

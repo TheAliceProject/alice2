@@ -708,8 +708,11 @@ public class JAlice {
 				setAliceHomeDirectory( new java.io.File( System.getProperty( "user.dir" ) ).getAbsoluteFile() );
 			}
 		}
-
 		return aliceHomeDirectory;
+	}
+
+	public static String getAliceHomeDirectoryString() {
+		return getAliceHomeDirectory().toString();
 	}
 
 	public static void setAliceUserDirectory( java.io.File file ) {

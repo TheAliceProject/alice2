@@ -25,6 +25,8 @@ package edu.cmu.cs.stage3.alice.authoringtool;
 
 import edu.cmu.cs.stage3.lang.Messages;
 
+import java.io.File;
+
 /**
  * @author Jason Pratt
  */
@@ -1460,8 +1462,8 @@ public class AuthoringToolResources {
 		return AuthoringToolResources.resources.mainWebGalleryURL;
 	}
 
-	public static void setMainDiskGalleryDirectory( java.io.File file ) {
-		AuthoringToolResources.resources.mainDiskGalleryDirectory = file;
+	public static void setMainDiskGalleryDirectory(String filename) {
+		AuthoringToolResources.resources.mainDiskGalleryDirectory = new File(filename);
 	}
 
 	public static java.io.File getMainDiskGalleryDirectory() {
