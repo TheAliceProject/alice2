@@ -291,8 +291,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		authoringTool.stopWorld();
 		statusFrame.setVisible(false);
 		timeLabel.setBackground(java.awt.Color.GREEN);
-		setClear(false);
 		setButtonsCapturing(false);
+		setClear(false);
 
 		endCapturing = false;
 		running = false;
