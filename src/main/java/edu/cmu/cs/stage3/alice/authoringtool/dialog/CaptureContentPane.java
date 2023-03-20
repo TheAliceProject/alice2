@@ -826,6 +826,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 
 	// have we finished capturing?
 	public boolean getEnd() {
+		Thread.yield();
 		return endCapturing;
 	}
 
@@ -1274,12 +1275,12 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		public void run() {
 			java.text.DecimalFormat det = new java.text.DecimalFormat("00");
 			while (endCapturing != false) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				if (getRunning()) {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					timer++;
 					int seconds = timer % 60;
 					int minutes = timer / 60;
