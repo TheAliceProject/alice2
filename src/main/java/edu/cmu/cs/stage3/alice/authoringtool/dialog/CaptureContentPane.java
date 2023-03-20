@@ -1157,7 +1157,7 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			m = null;
 			sources.clear();
 			sources = null;
-//			pulsing = false;
+			pulsing = false;
 			try {
 				pulse.join();
 			} catch (InterruptedException e) {
