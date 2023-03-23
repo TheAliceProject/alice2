@@ -229,14 +229,14 @@ public class ZipFileTreeStorer implements edu.cmu.cs.stage3.io.DirectoryTreeStor
             fileName = new String(name);
             // Aik Min - Recompute file length for names with extended characters since those characters requires 2 byte to store them
             try {
-				fileNameLength = new String (fileName.getBytes(), "ISO-8859-1").length();
+				fileNameLength = fileName.getBytes("UTF-8").length;
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
             if (localHeaderReference != null){
                 localHeaderReference.fileName = new String(fileName);
-                localHeaderReference.fileNameLength = fileName.length();
+                localHeaderReference.fileNameLength = fileNameLength;
             }
         }
 
