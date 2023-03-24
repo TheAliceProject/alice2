@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.DictionaryProperty;
 import edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty;
@@ -1437,13 +1438,12 @@ public abstract class Element {
             org.w3c.dom.Element elementNode = document.getDocumentElement();
             elementNode.normalize();
 
-            String classname = elementNode.getAttribute( "class" ); 
+            String classname = elementNode.getAttribute( "class" );
             double version = Double.parseDouble( elementNode.getAttribute( "version" ) ); 
             String nameValue = elementNode.getAttribute( "name" );
 
             try {
-            	
-                Class cls = Class.forName( classname );
+                Class cls = AuthoringTool.getClassForName(classname);
                 Element element = (Element)(cls.newInstance());
                 try {
                     element.m_xmlFileKeepKey = loader.getKeepKey( XML_FILENAME );
@@ -1505,7 +1505,7 @@ public abstract class Element {
 			throw new ExceptionWrapper( saxe, "org.xml.sax.SAXException" ); 
         } 
 	}
-	public static Element load( edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, Element externalRoot, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws java.io.IOException, edu.cmu.cs.stage3.progress.ProgressCancelException, UnresolvablePropertyReferencesException {
+  public static Element load( edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, Element externalRoot, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws java.io.IOException, edu.cmu.cs.stage3.progress.ProgressCancelException, UnresolvablePropertyReferencesException {
         java.util.Vector referencesToBeResolved = new java.util.Vector();
         java.util.Vector referencesLeftUnresolved = new java.util.Vector();
         Element element;

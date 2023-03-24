@@ -30,6 +30,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -132,7 +133,7 @@ public class TypeChooser extends javax.swing.JPanel {
 		Class newType = (Class)typeMap.get( typeString.getItem() );
 		if( newType == null ) {
 			try {
-				newType = Class.forName( typeString.getItem() );
+				newType = AuthoringTool.getClassForName(typeString.getItem());
 			} catch( ClassNotFoundException e ) {
 				newType = null;
 			}

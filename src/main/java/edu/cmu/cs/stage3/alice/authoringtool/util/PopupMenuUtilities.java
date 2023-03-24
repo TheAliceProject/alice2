@@ -32,6 +32,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.Element;
 import edu.cmu.cs.stage3.lang.Messages;
 import edu.cmu.cs.stage3.util.StringObjectPair;
@@ -786,7 +787,7 @@ public class PopupMenuUtilities{
 								structure.add( new edu.cmu.cs.stage3.util.StringObjectPair( responseName, subStructure ) );
 							}
 						} else {
-							Class responseClass = Class.forName( className );
+							Class responseClass = AuthoringTool.getClassForName(className);
 							java.util.LinkedList known = new java.util.LinkedList();
 							String format = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getFormat( responseClass );
 							edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer tokenizer = new edu.cmu.cs.stage3.alice.authoringtool.util.FormatTokenizer( format );

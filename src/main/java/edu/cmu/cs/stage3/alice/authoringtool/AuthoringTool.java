@@ -391,6 +391,20 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
 
+	public static Class getClassForName(String classname) throws ClassNotFoundException {
+		return Class.forName(correctedClassName(classname));
+	}
+
+	private static String correctedClassName(String classname) {
+		classname = classname.replace("edu.cmu.cs.stage3.alice.core.response.",
+				"edu.cmu.cs.stage3.alice.core.responses.");
+		classname = classname.replace("edu.cmu.cs.stage3.alice.core.behavior.",
+				"edu.cmu.cs.stage3.alice.core.behaviors.");
+		classname = classname.replace("edu.cmu.cs.stage3.alice.core.style.",
+				"edu.cmu.cs.stage3.alice.core.styles.");
+		return classname;
+	}
+
 	private void filterInit() {
 		worldFileFilter = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(WORLD_EXTENSION, WORLD_EXTENSION.toUpperCase() + " " + Messages.getString("_Alice_World_Files_")); 
 		characterFileFilter = new edu.cmu.cs.stage3.alice.authoringtool.util.ExtensionFileFilter(CHARACTER_EXTENSION, CHARACTER_EXTENSION.toUpperCase() + " " + Messages.getString("_Alice_Object_Files_")); 
@@ -976,7 +990,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			boolean isSoftwareEmulationForced = false;
 			try {
 				String[] renderers = authoringToolConfig.getValueList( "rendering.orderedRendererList" ); 
-				rendererClass = Class.forName( renderers[ 0 ] );
+				rendererClass = getClassForName(renderers[ 0 ]);
 			} catch( Throwable t ) {
 				//todo: inform user of configuration problem?
 				//pass
@@ -4182,7 +4196,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									}
 								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
-										Class elementClass = Class.forName(spec);
+										Class elementClass = getClassForName(spec);
 										if (elementClass != null) {
 											java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 											if (c != null) {
@@ -4449,7 +4463,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									}
 								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
-										Class elementClass = Class.forName(spec);
+										Class elementClass = getClassForName(spec);
 										if (elementClass != null) {
 											java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 											if (c != null) {
@@ -4748,7 +4762,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									}
 								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
-										Class elementClass = Class.forName(spec);
+										Class elementClass = getClassForName(spec);
 										if (elementClass != null) {
 											java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 											if ((c != null) && c.isShowing()) {
@@ -4995,7 +5009,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								}
 							} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 								try {
-									Class elementClass = Class.forName(spec);
+									Class elementClass = getClassForName(spec);
 									if (elementClass != null) {
 										java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 										if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {

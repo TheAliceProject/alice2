@@ -236,7 +236,7 @@ public class AuthoringToolResources {
 				if( o instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 					String className = ((edu.cmu.cs.stage3.util.StringObjectPair)o).getString();
 					try {
-						Class.forName( className );
+						AuthoringTool.getClassForName(className);
 					} catch( java.lang.ClassNotFoundException e ) {
 						throw new IllegalArgumentException( Messages.getString("propertyStructure_error__is_not_a_Class", className) );
 					}
@@ -256,7 +256,7 @@ public class AuthoringToolResources {
 				if( o instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 					String className = ((edu.cmu.cs.stage3.util.StringObjectPair)o).getString();
 					try {
-						Class c = Class.forName( className );
+						Class c = AuthoringTool.getClassForName(className);
 						if( c.isAssignableFrom( elementClass ) ) {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
@@ -358,7 +358,7 @@ public class AuthoringToolResources {
 				if( o instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 					String className = ((edu.cmu.cs.stage3.util.StringObjectPair)o).getString();
 					try {
-						Class c = Class.forName( className );
+						Class c = AuthoringTool.getClassForName(className);
 						if( c.isAssignableFrom( elementClass ) ) {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
@@ -394,7 +394,7 @@ public class AuthoringToolResources {
 											Object className2 = kter.next();
 											if( className2 instanceof String ) {
 												try {
-													Class.forName( (String)className2 );
+													AuthoringTool.getClassForName((String) className2);
 												} catch( ClassNotFoundException e ) {
 													throw new IllegalArgumentException( Messages.getString("questionStructure_error__is_not_a_Class", className2) );
 												}
@@ -429,7 +429,7 @@ public class AuthoringToolResources {
 				if( o instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 					String className = ((edu.cmu.cs.stage3.util.StringObjectPair)o).getString();
 					try {
-						Class c = Class.forName( className );
+						Class c = AuthoringTool.getClassForName(className);
 						if( c.isAssignableFrom( elementClass ) ) {
 							return (java.util.Vector)((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
@@ -492,7 +492,7 @@ public class AuthoringToolResources {
 				edu.cmu.cs.stage3.util.StringObjectPair classChunk = (edu.cmu.cs.stage3.util.StringObjectPair)iter.next();
 				String className = classChunk.getString();
 				try {
-					Class c = Class.forName( className );
+					Class c = AuthoringTool.getClassForName(className);
 					if( c.isAssignableFrom( elementClass ) ) {
 						java.util.Vector properties = (java.util.Vector)classChunk.getObject();
 						for( java.util.Iterator jter = properties.iterator(); jter.hasNext(); ) {
@@ -1320,7 +1320,7 @@ public class AuthoringToolResources {
 				if( o instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 					String className = ((edu.cmu.cs.stage3.util.StringObjectPair)o).getString();
 					try {
-						Class c = Class.forName( className );
+						Class c = AuthoringTool.getClassForName(className);
 						if( c.isAssignableFrom( behaviorClass ) ) {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}
@@ -2101,7 +2101,7 @@ public class AuthoringToolResources {
 				if( o instanceof edu.cmu.cs.stage3.util.StringObjectPair ) {
 					String className = ((edu.cmu.cs.stage3.util.StringObjectPair)o).getString();
 					try {
-						Class c = Class.forName( className );
+						Class c = AuthoringTool.getClassForName(className);
 						if( c.isAssignableFrom( elementClass ) ) {
 							return (String[])((edu.cmu.cs.stage3.util.StringObjectPair)o).getObject();
 						}

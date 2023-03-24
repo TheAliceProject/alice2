@@ -23,6 +23,7 @@
 
 package edu.cmu.cs.stage3.alice.core;
 
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
@@ -619,7 +620,7 @@ public abstract class Property {
     }
     protected void decodeReference( org.w3c.dom.Element node, java.util.Vector referencesToBeResolved, double version, String typeName ) {
 		try {
-            Class type = Class.forName( typeName );
+            Class type = AuthoringTool.getClassForName(typeName);
             String text = getNodeText( node );
             //todo?
             if( text.equals( "." ) ) { 
@@ -650,7 +651,7 @@ public abstract class Property {
         if( typeName.length() > 0 ) {
             String text = getNodeText( node );
             try {
-                Class type = Class.forName( typeName );
+                Class type = AuthoringTool.getClassForName(typeName);
                 Object t = getValueOf( type, text );
                 set( t );
             } catch( ClassNotFoundException cnfe ) {
