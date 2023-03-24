@@ -283,11 +283,7 @@ public class JAlice {
 				System.exit( 1 );
 			}
 
-			javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
-	            public void run() {
-	            		authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
-	            }
-			});
+			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
 				splashScreen.hideSplash();
 			}

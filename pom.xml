@@ -9,7 +9,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
-    <jogl.version>2.4.0-rc-20210111</jogl.version>
+    <jogl.version>2.4.0</jogl.version>
 
     <!--  The first digit is from Alice 2, followed by SemVer identifier: major.minor.patch  -->
     <alice.build.version>2.5.4.2</alice.build.version>
@@ -121,19 +121,19 @@
                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
                 </artifactItem>
 
-                <!-- linux-i586 -->
+                <!-- linux-aarch64 -->
                 <artifactItem>
                   <groupId>org.jogamp.jogl</groupId>
                   <artifactId>jogl-all</artifactId>
                   <version>${jogl.version}</version>
-                  <classifier>natives-linux-i586</classifier>
+                  <classifier>natives-linux-aarch64</classifier>
                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
                 </artifactItem>
                 <artifactItem>
                   <groupId>org.jogamp.gluegen</groupId>
                   <artifactId>gluegen-rt</artifactId>
                   <version>${jogl.version}</version>
-                  <classifier>natives-linux-i586</classifier>
+                  <classifier>natives-linux-aarch64</classifier>
                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
                 </artifactItem>
 
@@ -166,22 +166,6 @@
                   <artifactId>gluegen-rt</artifactId>
                   <version>${jogl.version}</version>
                   <classifier>natives-macosx-universal</classifier>
-                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                </artifactItem>
-
-                <!-- win32 -->
-                <artifactItem>
-                  <groupId>org.jogamp.jogl</groupId>
-                  <artifactId>jogl-all</artifactId>
-                  <version>${jogl.version}</version>
-                  <classifier>natives-windows-i586</classifier>
-                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.jogamp.gluegen</groupId>
-                  <artifactId>gluegen-rt</artifactId>
-                  <version>${jogl.version}</version>
-                  <classifier>natives-windows-i586</classifier>
                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
                 </artifactItem>
 
@@ -288,6 +272,11 @@
   </build>
 
   <repositories>
+    <repository>
+      <id>jogamp.org</id>
+      <name>JogAmp builds</name>
+      <url>https://jogamp.org/deployment/maven/</url>
+    </repository>
     <repository>
       <id>mvnrepository.com</id>
       <name>Maven Central Repository</name>
