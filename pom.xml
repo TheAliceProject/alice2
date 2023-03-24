@@ -285,7 +285,7 @@
     <repository>
       <id>builds.archive.org</id>
       <name>Maven Archive Repository</name>
-      <url>http://builds.archive.org/maven2</url>
+      <url>https://builds.archive.org/maven2/</url>
     </repository>
   </repositories>
 </project>
