@@ -72,8 +72,7 @@ public class ImageIO {
 		} else {
 			bufferedInputStream = new java.io.BufferedInputStream( inputStream );
 		}
-		edu.cmu.cs.stage3.image.codec.ImageDecoder imageDecoder = edu.cmu.cs.stage3.image.codec.ImageCodec.createImageDecoder( codecName, bufferedInputStream, imageDecodeParam );
-		java.awt.image.RenderedImage renderedImage = imageDecoder.decodeAsRenderedImage();
+		java.awt.image.RenderedImage renderedImage = javax.imageio.ImageIO.read(bufferedInputStream);
 
 		if( renderedImage instanceof java.awt.Image ) {
 			return (java.awt.Image)renderedImage;
@@ -127,11 +126,6 @@ public class ImageIO {
 			bufferedImage.setRGB( 0, 0, width, height, pixels, 0, width );
 			renderedImage = bufferedImage;
 		}
-		if( imageEncodeParam == null ) {
-			if( codecName.equals( "png" ) ) {
-				imageEncodeParam = edu.cmu.cs.stage3.image.codec.PNGEncodeParam.getDefaultEncodeParam( renderedImage );
-			}
-		}
 		java.io.BufferedOutputStream bufferedOutputStream;
 		if( outputStream instanceof java.io.BufferedOutputStream ) {
 			bufferedOutputStream = (java.io.BufferedOutputStream)outputStream;
@@ -139,8 +133,7 @@ public class ImageIO {
 			bufferedOutputStream = new java.io.BufferedOutputStream( outputStream );
 		}
 
-		edu.cmu.cs.stage3.image.codec.ImageEncoder imageEncoder = edu.cmu.cs.stage3.image.codec.ImageCodec.createImageEncoder( codecName, bufferedOutputStream, imageEncodeParam );
-		imageEncoder.encode( renderedImage );
+		javax.imageio.ImageIO.write(renderedImage, codecName, bufferedOutputStream);
 		bufferedOutputStream.flush();
 	}
 }
