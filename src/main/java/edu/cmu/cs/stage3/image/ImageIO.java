@@ -62,10 +62,7 @@ public class ImageIO {
 	}
 
 
-    public static java.awt.Image load( String codecName, java.io.InputStream inputStream ) throws java.io.IOException {
-        return load( codecName, inputStream, null );
-    }
-    public static java.awt.Image load( String codecName, java.io.InputStream inputStream, edu.cmu.cs.stage3.image.codec.ImageDecodeParam imageDecodeParam ) throws java.io.IOException {
+  public static java.awt.Image load( String codecName, java.io.InputStream inputStream ) throws java.io.IOException {
 		java.io.BufferedInputStream bufferedInputStream;
 		if( inputStream instanceof java.io.BufferedInputStream ) {
 			bufferedInputStream = (java.io.BufferedInputStream)inputStream;
@@ -98,10 +95,7 @@ public class ImageIO {
 		return bufferedImage;
 	}
     public static void store( String codecName, java.io.OutputStream outputStream, java.awt.Image image ) throws InterruptedException, java.io.IOException {
-        store( codecName, outputStream, image, null );
-    }
-    public static void store( String codecName, java.io.OutputStream outputStream, java.awt.Image image, edu.cmu.cs.stage3.image.codec.ImageEncodeParam imageEncodeParam ) throws InterruptedException, java.io.IOException {
-		int width = ImageUtilities.getWidth( image ); 
+		int width = ImageUtilities.getWidth( image );
 		int height = ImageUtilities.getHeight( image ); 
 
 		java.awt.image.RenderedImage renderedImage;
