@@ -35,7 +35,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 public class SequentialResponsePanel extends CompositeResponsePanel {
 
 /*
-    public SequentialResponsePanel(edu.cmu.cs.stage3.alice.core.response.DoInOrder r, int depth, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+    public SequentialResponsePanel(edu.cmu.cs.stage3.alice.core.responses.DoInOrder r, int depth, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super(r, depth, authoringToolIn);
     }
 */

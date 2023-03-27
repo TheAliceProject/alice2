@@ -98,8 +98,8 @@ public abstract class PropertyViewController extends edu.cmu.cs.stage3.alice.aut
 //					ev.getProperty().getOwner().addChild( call );
 //					call.data.put( "PropertyViewController_propertyOwner", ev.getProperty().getName() );
 //				}
-//			} else if( ev.getValue() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-//				edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse call = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)ev.getValue();
+//			} else if( ev.getValue() instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+//				edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse call = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)ev.getValue();
 //				if( call.getParent() != ev.getProperty().getOwner() ) {
 //					ev.getProperty().getOwner().addChild( call );
 //					call.data.put( "PropertyViewController_propertyOwner", ev.getProperty().getName() );

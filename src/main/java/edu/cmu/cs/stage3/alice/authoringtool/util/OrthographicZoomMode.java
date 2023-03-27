@@ -181,34 +181,34 @@ public class OrthographicZoomMode extends RenderTargetManipulatorMode {
 					return;
 				}
 
-				edu.cmu.cs.stage3.alice.core.response.DoTogether zoomResponse = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
-				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation minYAnim = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.DoTogether zoomResponse = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
+				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation minYAnim = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 				minYAnim.element.set( orthoCamera );
 				minYAnim.propertyName.set( "minimumY" );
 				minYAnim.value.set( new Double( newMinY ) );
 				zoomResponse.componentResponses.add( minYAnim );
-				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation maxYAnim = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation maxYAnim = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 				maxYAnim.element.set( orthoCamera );
 				maxYAnim.propertyName.set( "maximumY" );
 				maxYAnim.value.set( new Double( newMaxY ) );
 				zoomResponse.componentResponses.add( maxYAnim );
-				edu.cmu.cs.stage3.alice.core.response.MoveVectorAnimation moveAnim = new edu.cmu.cs.stage3.alice.core.response.MoveVectorAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.MoveVectorAnimation moveAnim = new edu.cmu.cs.stage3.alice.core.responses.MoveVectorAnimation();
 				moveAnim.subject.set( orthoCamera );
 				moveAnim.vector.set( new edu.cmu.cs.stage3.math.Vector3( cameraOffsetX, cameraOffsetY, 0.0 ) );
 				zoomResponse.componentResponses.add( moveAnim );
 
-				edu.cmu.cs.stage3.alice.core.response.DoTogether undoZoomResponse = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
-				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoMinYAnim = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.DoTogether undoZoomResponse = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
+				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoMinYAnim = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 				undoMinYAnim.element.set( orthoCamera );
 				undoMinYAnim.propertyName.set( "minimumY" );
 				undoMinYAnim.value.set( new Double( oldMinY ) );
 				undoZoomResponse.componentResponses.add( undoMinYAnim );
-				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoMaxYAnim = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoMaxYAnim = new AuthoringTool.getClassForNamePropertyAnimation();
 				undoMaxYAnim.element.set( orthoCamera );
 				undoMaxYAnim.propertyName.set( "maximumY" );
 				undoMaxYAnim.value.set( new Double( oldMaxY ) );
 				undoZoomResponse.componentResponses.add( undoMaxYAnim );
-				edu.cmu.cs.stage3.alice.core.response.MoveVectorAnimation undoMoveAnim = new edu.cmu.cs.stage3.alice.core.response.MoveVectorAnimation();
+				AuthoringTool.getClassForNameMoveVectorAnimation undoMoveAnim = new AuthoringTool.getClassForNameMoveVectorAnimation();
 				undoMoveAnim.subject.set( orthoCamera );
 				undoMoveAnim.vector.set( new edu.cmu.cs.stage3.math.Vector3( -cameraOffsetX, -cameraOffsetY, 0.0 ) );
 				undoZoomResponse.componentResponses.add( undoMoveAnim );

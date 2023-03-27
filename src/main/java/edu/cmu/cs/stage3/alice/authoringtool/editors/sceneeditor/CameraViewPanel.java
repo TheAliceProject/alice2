@@ -865,10 +865,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	// javax.swing.tree.TreePath path = ev.getNewLeadSelectionPath();
 	// if( (path != null) && (povTransformable != null) ) {
 	// Object o = path.getLastPathComponent();
-	// edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation ani = new
-	// edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
-	// edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation inverseAni =
-	// new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation ani = new
+	// edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation inverseAni =
+	// new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 	// ani.pointOfView.set(
 	// (edu.cmu.cs.stage3.math.Matrix44)((edu.cmu.cs.stage3.alice.core.Variable)o).getValue()
 	// );
@@ -1794,10 +1794,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	}
 
 	// void btnStandUp_actionPerformed(ActionEvent e) {
-	// edu.cmu.cs.stage3.alice.core.response.StandUpAnimation ani = new
-	// edu.cmu.cs.stage3.alice.core.response.StandUpAnimation();
-	// edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation inverseAni =
-	// new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.StandUpAnimation ani = new
+	// edu.cmu.cs.stage3.alice.core.responses.StandUpAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation inverseAni =
+	// new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 	// ani.asSeenBy.set(world);
 	// ani.transformable.set( renderCamera );
 	// inverseAni.transformable.set( renderCamera );
@@ -1811,10 +1811,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	// void btnEyeHeight_actionPerformed(ActionEvent e) {
 	// double xPos = renderCamera.getPosition(world).x;
 	// double zPos = renderCamera.getPosition(world).z;
-	// edu.cmu.cs.stage3.alice.core.response.PositionAnimation ani = new
-	// edu.cmu.cs.stage3.alice.core.response.PositionAnimation();
-	// edu.cmu.cs.stage3.alice.core.response.PositionAnimation inverseAni = new
-	// edu.cmu.cs.stage3.alice.core.response.PositionAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.PositionAnimation ani = new
+	// edu.cmu.cs.stage3.alice.core.responses.PositionAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.PositionAnimation inverseAni = new
+	// edu.cmu.cs.stage3.alice.core.responses.PositionAnimation();
 	// ani.asSeenBy.set(world);
 	// ani.transformable.set( renderCamera );
 	// ani.position.set( new javax.vecmath.Vector3d( xPos, 1.6, zPos ) );
@@ -1827,10 +1827,10 @@ public class CameraViewPanel extends JPanel implements edu.cmu.cs.stage3.alice.s
 	// }
 	//
 	// void btnResetCamera_actionPerformed(ActionEvent e) {
-	// edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation ani = new
-	// edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
-	// edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation inverseAni =
-	// new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation ani = new
+	// edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
+	// edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation inverseAni =
+	// new AuthoringTool.getClassForNamePointOfViewAnimation();
 	// ani.pointOfView.set( originalCameraPOV );
 	// ani.transformable.set( renderCamera );
 	// inverseAni.pointOfView.set( renderCamera.getLocalTransformation() );

@@ -37,7 +37,7 @@ public class OneShotSimpleBehavior extends edu.cmu.cs.stage3.alice.core.util.One
 }
 
 
-//public class OneShotSimpleBehavior extends edu.cmu.cs.stage3.alice.core.behavior.SimpleBehavior {
+//public class OneShotSimpleBehavior extends edu.cmu.cs.stage3.alice.core.behaviors.SimpleBehavior {
 //	protected edu.cmu.cs.stage3.alice.core.Property[] affectedProperties;
 //	public edu.cmu.cs.stage3.alice.core.Property[] getAffectedProperties() {
 //		return this.affectedProperties;

@@ -694,7 +694,7 @@ public class AuthoringToolResources {
 	public static String getReprForValue( Object value, edu.cmu.cs.stage3.alice.core.Property property, Object extraContextInfo ) {
 		Class elementClass = property.getOwner().getClass();
 		String propertyName = property.getName();
-		//if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
+    //if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
 		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( "value" ) ) {
 			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)property.getOwner();
 			Object e = propertyAnimation.element.get();
@@ -2325,7 +2325,7 @@ public class AuthoringToolResources {
 	public static void garbageCollectIfPossible( edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] references ) {
 		for( int i = 0; i < references.length; i++ ) {
 			edu.cmu.cs.stage3.alice.core.Element element = references[i].getProperty().getOwner();
-//			if( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
+//			if( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
 				edu.cmu.cs.stage3.alice.core.reference.PropertyReference[] metaReferences = element.getRoot().getPropertyReferencesTo( element, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS, false, true );
 				if( metaReferences.length == 0 ) {
 					element.getParent().removeChild( element );

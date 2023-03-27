@@ -29,7 +29,7 @@ package edu.cmu.cs.stage3.alice.authoringtool.viewcontroller;
 public class ResponsePropertyViewController extends PropertyViewController {
 	protected javax.swing.JLabel responseLabel = new javax.swing.JLabel();
 	protected edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel responsePanel = new edu.cmu.cs.stage3.alice.authoringtool.util.GroupingPanel();
-//	protected edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse scriptResponse;
+//	protected edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse scriptResponse;
 	protected edu.cmu.cs.stage3.alice.core.Element root = null;
 
 	public ResponsePropertyViewController() {

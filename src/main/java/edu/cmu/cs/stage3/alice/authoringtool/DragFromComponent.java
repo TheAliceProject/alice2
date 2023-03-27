@@ -817,7 +817,7 @@ public class DragFromComponent extends javax.swing.JPanel implements edu.cmu.cs.
 							if( item instanceof String ) { // ignore hierarchy for now
 								String className = (String)item;
 								try {
-									if( ! className.startsWith( "edu.cmu.cs.stage3.alice.core.response.PropertyAnimation" ) ) { // ignore property animations for now 
+									if( ! className.startsWith( "edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation" ) ) { // ignore property animations for now
 										Class responseClass = Class.forName( className );
 										java.util.LinkedList known = new java.util.LinkedList();
 										String format = AuthoringToolResources.getFormat( responseClass );

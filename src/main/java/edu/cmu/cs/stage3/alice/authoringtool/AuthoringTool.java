@@ -2980,8 +2980,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 	
 /*	private void displayDurations(edu.cmu.cs.stage3.alice.core.Response r){
-		if (r instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-			edu.cmu.cs.stage3.alice.core.response.CompositeResponse c = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)r;
+		if (r instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+			edu.cmu.cs.stage3.alice.core.responses.CompositeResponse c = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)r;
 			System.out.println("COMPOSITE("); 
 			for (int i=0; i<c.componentResponses.size(); i++){
 				displayDurations((edu.cmu.cs.stage3.alice.core.Response)c.componentResponses.get(i));

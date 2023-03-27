@@ -761,7 +761,7 @@ public class PopupMenuUtilities{
 				if( item instanceof String ) {
 					String className = (String)item;
 					try {
-						if( className.startsWith( "edu.cmu.cs.stage3.alice.core.response.PropertyAnimation" ) ) {
+						if( className.startsWith( "edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation" ) ) {
 							String propertyName = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getSpecifier( className );
 							//if( propertyName.equals( Messages.getString("vehicle") ) ) {
 							if( propertyName.equals( "vehicle" ) ) {
@@ -1020,7 +1020,7 @@ public class PopupMenuUtilities{
 			edu.cmu.cs.stage3.util.StringObjectPair[] knownPropertyValues = elementPrototype.getKnownPropertyValues();
 			
 			//Don't get self criterion stuff!
-			//if( (edu.cmu.cs.stage3.alice.core.response.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( Messages.getString("target") )) ||
+			//if( (edu.cmu.cs.stage3.alice.core.responses.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( Messages.getString("target") )) ||
 			if( (edu.cmu.cs.stage3.alice.core.responses.AbstractPointAtAnimation.class.isAssignableFrom( elementClass )  && desiredProperties[0].equals( "target" )) ||
 				(edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation.class.isAssignableFrom(elementPrototype.elementClass)  && desiredProperties[0].equals( "value" )) ) {
 				for( int i = 0; i < knownPropertyValues.length; i++ ) {
@@ -1517,7 +1517,7 @@ public class PopupMenuUtilities{
 								}
 							};
 							criterion = new edu.cmu.cs.stage3.util.criterion.MatchesAllCriterion( new edu.cmu.cs.stage3.util.Criterion[] { hasProperty, isNamedElement } );
-						//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtAnimation) && property.getName().equals( Messages.getString("target") ) ) {
+						//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PointAtAnimation) && property.getName().equals( Messages.getString("target") ) ) {
 						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PointAtAnimation) && property.getName().equals( "target" ) ) {
 							final Object transformableValue = property.getOwner().getPropertyNamed( "subject" ).get();
 							edu.cmu.cs.stage3.util.Criterion notSelf = new edu.cmu.cs.stage3.util.Criterion() {
@@ -1544,7 +1544,7 @@ public class PopupMenuUtilities{
 							edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion instanceOf = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion( targetValueClass );
 							InAppropriateObjectArrayPropertyCriterion inAppropriateOAPCriterion = new InAppropriateObjectArrayPropertyCriterion();
 							criterion = new edu.cmu.cs.stage3.util.criterion.MatchesAllCriterion( new edu.cmu.cs.stage3.util.Criterion[] { instanceOf, notSelf, isNamedElement, inAppropriateOAPCriterion } );
-						//} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PointAtConstraint) && property.getName().equals( Messages.getString("target") ) ) {
+						//} else if( (property.getOwner() instanceof AuthoringTool.getClassForNamePointAtConstraint) && property.getName().equals( Messages.getString("target") ) ) {
 						} else if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PointAtConstraint) && property.getName().equals( "target" ) ) {
 							final Object transformableValue = property.getOwner().getPropertyNamed( "subject" ).get();
 							edu.cmu.cs.stage3.util.Criterion notSelf = new edu.cmu.cs.stage3.util.Criterion() {
@@ -2131,7 +2131,7 @@ public class PopupMenuUtilities{
 	// property may be null if it is not available.  if it is available, though, it will be used to derive the value class.
 	public static java.util.Vector getUnlabeledDefaultValueStructureForProperty( Class elementClass, String propertyName, edu.cmu.cs.stage3.alice.core.Property property ) {
 		if( property != null ) {
-			//if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.PropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
+			//if( (property.getOwner() instanceof AuthoringTool.getClassForNamePropertyAnimation) && property.getName().equals( Messages.getString("value") ) ) {
 			if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation) && property.getName().equals( "value" ) ) {
 				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation propertyAnimation = (edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation)property.getOwner();
 				if (propertyAnimation.element.getElementValue() != null)

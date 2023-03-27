@@ -44,7 +44,7 @@ public class ParallelResponsePanel extends CompositeResponsePanel {
     }
 
 /*
-    public ParallelResponsePanel(edu.cmu.cs.stage3.alice.core.response.DoTogether r, int depth, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+    public ParallelResponsePanel(edu.cmu.cs.stage3.alice.core.responses.DoTogether r, int depth, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super(r, depth, authoringToolIn);
     }
 */

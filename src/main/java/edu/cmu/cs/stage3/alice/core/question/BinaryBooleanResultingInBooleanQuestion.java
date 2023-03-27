@@ -35,10 +35,10 @@ public abstract class BinaryBooleanResultingInBooleanQuestion extends BooleanQue
 		boolean aValue = a.booleanValue();
 		boolean returnValue;
 /*		if (this instanceof edu.cmu.cs.stage3.alice.core.question.And){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
+			edu.cmu.cs.stage3.alice.core.responses.Print.outputtext=
 				Messages.getString("both_and_is_", aValue, b.booleanValue());		   
 		} else if (this instanceof edu.cmu.cs.stage3.alice.core.question.Or){
-			edu.cmu.cs.stage3.alice.core.response.Print.outputtext= 
+			edu.cmu.cs.stage3.alice.core.responses.Print.outputtext=
 				Messages.getString("either_or_is_", aValue, b.booleanValue());		   
 		}*/ 
 		if( isShortCircuitable( aValue ) ) {
