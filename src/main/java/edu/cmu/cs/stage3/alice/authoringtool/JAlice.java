@@ -35,7 +35,6 @@ import javax.media.format.AudioFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import edu.cmu.cs.stage3.alice.authoringtool.util.EditorUtilities;
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -69,7 +68,6 @@ public class JAlice {
 		try {
 			if (AikMin.isMAC()){
 				Desktop app = Desktop.getDesktop();
-				URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/alice.png");
 
 				app.setOpenFileHandler( new OpenFilesHandler() {
 					@Override
