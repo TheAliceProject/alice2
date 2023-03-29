@@ -2,7 +2,7 @@
 
 [Alice](https://www.alice.org) is an innovative block-based programming environment that makes it easy to create animations, build interactive narratives, or program simple games in 3D.
 
-### Latest Released Build: [![](https://img.shields.io/badge/2.5.4.1-green.svg)](http://www.alice.org/get-alice/alice-2/)
+### Latest Released Build: [![](https://img.shields.io/badge/2.6.0-green.svg)](http://www.alice.org/get-alice/alice-2/)
 
 ## Building Alice 2 from Source
 
