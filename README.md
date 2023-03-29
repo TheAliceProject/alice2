@@ -17,7 +17,7 @@ Launch `edu.cmu.cs.stage3.alice.authoringtool.JAlice` from the Required folder, 
 
 Include the following VM arguments:
 
-`-Dpython.home=jython -Dpython.path=jython/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8`
+`-Dpython.home=jython -Dpython.path=jython/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8 --add-exports java.base/java.lang=ALL-UNNAMED --add-exports java.desktop/sun.awt=ALL-UNNAMED --add-exports java.desktop/sun.java2d=ALL-UNNAMED`
 
 On Windows, to include the Dynamic-Link Libraries (DLLs), add:
 
@@ -25,7 +25,7 @@ On Windows, to include the Dynamic-Link Libraries (DLLs), add:
 
 On Mac add:
 
-`-Dapple.laf.useScreenMenuBar=true`
+`-Dapple.laf.useScreenMenuBar=true -Xdock:icon=classes/edu/cmu/cs/stage3/alice/authoringtool/images/alice.png`
 
 ## Release Builds
 
