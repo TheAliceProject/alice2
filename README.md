@@ -29,7 +29,7 @@ On Mac add:
 
 ## Release Builds
 
-Official builds of Alice are built using Install4J 7.
+Official builds of Alice are built using Install4J 10.
 
 The file `installer/alice2.install4j` can be built using Install4J or `mvn install`. Maven will automatically use Install4J if it is installed.
 
