@@ -2,9 +2,7 @@
 <install4j version="10.0.4" transformSequenceNumber="10">
   <directoryPresets config="../target/alice2-2.6.0-SNAPSHOT.jar" />
   <application name="Alice 2.6" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.0" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
-    <variables>
-      <variable name="included_jre_version" value="1.8.0_152" />
-    </variables>
+    <jreBundles jdkProviderId="Adoptium" release="17/latest" />
   </application>
   <files missingFilesStrategy="error" globalExcludeSuffixes="*.sha1,*.lastUpdated,*.pom,*.repositories,*.DS_Store">
     <filesets>
@@ -585,7 +583,6 @@ return console.askYesNo(message, true);
         <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
         <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
       </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-amd64-1.8.0_202" />
     </windowsArchive>
     <macosArchive name="Spanish macOS Single Bundle Archive" id="213" mediaFileName="${compiler:sys.fullName}_es" overridePrincipalLanguage="true" volumeName="${compiler:sys.fullName}_es" launcherId="70">
       <excludedComponents>
@@ -629,7 +626,6 @@ return console.askYesNo(message, true);
         <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
         <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
       </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-amd64-1.8.0_202" />
     </windowsArchive>
     <linuxDeb name="English Linux Deb Archive" id="442" mediaFileName="${compiler:sys.fullName}" dependencies="libglu1-mesa, openjdk-8-jre">
       <excludedComponents>
