@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.imageio.ImageIO;
 
@@ -182,33 +184,29 @@ public class MovieWriter
    * @return a list of full path names for the frames
    * of the movie
    */
-  public List getFrameNames()
-  {
+  public List<String> getFrameNames() {
     File dir = new File(framesDir);
-    String[] filesArray = dir.list();
-    List files = new ArrayList();
-    long lenFirst = 0; 
-    for (int x = 0; x<filesArray.length; x++)
-    {
-    	String fileName = filesArray[x];
-      // only continue if jpg picture
-      if (fileName.indexOf(".jpg") >= 0)
-      {
-        File f = new File(framesDir + fileName);
-        // check for imcomplete image
-        if (lenFirst == 0 || 
-            f.length() > (lenFirst / 2))
-        {
-          // image okay so far
-          try {
-            BufferedImage i = ImageIO.read(f);
-            files.add(framesDir + fileName);
-          } catch (Exception ex) {
-            // if problem reading don't add it
-          }
+    String[] frameFiles = dir.list((d, name) -> name.contains(".jpg"));
+    if (frameFiles == null) {
+      return Collections.emptyList();
+    }
+    Arrays.sort(frameFiles, String::compareTo);
+    List<String> files = new ArrayList<>();
+    long lenFirst = 0;
+    for (String fileName : frameFiles) {
+      File f = new File(framesDir + fileName);
+      // check for incomplete image
+      if (lenFirst == 0 || f.length() > (lenFirst / 2)) {
+        // image okay so far
+        try {
+          BufferedImage i = ImageIO.read(f);
+          files.add(framesDir + fileName);
+        } catch (Exception ex) {
+          // if problem reading don't add it
         }
-        if (lenFirst == 0)
-          lenFirst = f.length();
+      }
+      if (lenFirst == 0) {
+        lenFirst = f.length();
       }
     }
     return files;
@@ -220,8 +218,8 @@ public class MovieWriter
   public boolean writeAVI()
   {
     JpegImagesToMovie imageToMovie = new JpegImagesToMovie();
-    List frameNames = getFrameNames();
-    Picture p = new Picture((String) frameNames.get(0));
+    List<String> frameNames = getFrameNames();
+    Picture p = new Picture(frameNames.get(0));
     return imageToMovie.doItAVI(p.getWidth(),p.getHeight(),
                          frameRate,frameNames,outputURL + ".avi");
   }
@@ -232,8 +230,8 @@ public class MovieWriter
   public boolean writeQuicktime()
   {
     JpegImagesToMovie imageToMovie = new JpegImagesToMovie();
-    List frameNames = getFrameNames();
-    Picture p = new Picture((String) frameNames.get(0));
+    List<String> frameNames = getFrameNames();
+    Picture p = new Picture(frameNames.get(0));
     return imageToMovie.doItQuicktime(p.getWidth(),p.getHeight(),
             frameRate,frameNames,outputURL + ".mov");
   }
