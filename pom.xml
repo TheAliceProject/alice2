@@ -68,7 +68,7 @@
       <version>1.0.0</version>
       <!-- TODO: find a public source, or store on alice maven server -->
       <scope>system</scope>
-      <systemPath>${project.basedir}/lib/mp3plugin.jar</systemPath>
+      <systemPath>${pom.basedir}/lib/mp3plugin.jar</systemPath>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.mozilla/juniversalchardet -->
     <dependency>
