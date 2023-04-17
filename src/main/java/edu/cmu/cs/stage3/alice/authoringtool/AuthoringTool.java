@@ -395,6 +395,10 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		return Class.forName(correctedClassName(classname));
 	}
 
+
+	// Added in Alice 2.6, which upgraded python and jython to 2.7.3. In 2.7.3 having a class and a package with
+	// the same name caused build problems, so these three packages were renamed. This renaming breaks backwards
+	// compatibility so Alice 2.5 and earlier will not be able to open newer files.
 	private static String correctedClassName(String classname) {
 		classname = classname.replace("edu.cmu.cs.stage3.alice.core.response.",
 				"edu.cmu.cs.stage3.alice.core.responses.");
