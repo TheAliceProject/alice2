@@ -231,6 +231,9 @@ public class MovieWriter
   {
     JpegImagesToMovie imageToMovie = new JpegImagesToMovie();
     List<String> frameNames = getFrameNames();
+    if (frameNames.isEmpty()) {
+      return false;
+    }
     Picture p = new Picture(frameNames.get(0));
     return imageToMovie.doItQuicktime(p.getWidth(),p.getHeight(),
             frameRate,frameNames,outputURL + ".mov");
