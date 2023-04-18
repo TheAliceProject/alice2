@@ -27,13 +27,6 @@ package edu.cmu.cs.stage3.alice.scripting.jython;
  * @author Dennis Cosgrove
  */
 public class Interpreter implements edu.cmu.cs.stage3.alice.scripting.Interpreter {
-	static final java.util.Dictionary s_map = new java.util.Hashtable();
-	static {
-		s_map.put( edu.cmu.cs.stage3.alice.scripting.CompileType.EVAL, "eval" );
-		s_map.put( edu.cmu.cs.stage3.alice.scripting.CompileType.EXEC_SINGLE, "single" );
-		s_map.put( edu.cmu.cs.stage3.alice.scripting.CompileType.EXEC_MULTIPLE, "exec" );
-	}
-
 	private ScriptingFactory m_scriptingFactory;
 	private org.python.core.PyModule m_module;
 	private Namespace m_dict;
@@ -67,7 +60,7 @@ public class Interpreter implements edu.cmu.cs.stage3.alice.scripting.Interprete
 	}
 
 	public edu.cmu.cs.stage3.alice.scripting.Code compile( String script, Object source, edu.cmu.cs.stage3.alice.scripting.CompileType compileType ) {
-		org.python.core.PyCode pyCode = org.python.core.Py.compile_flags( script, source.toString(), (String)s_map.get( compileType ), null );
+		org.python.core.PyCode pyCode = org.python.core.Py.compile_flags( script, source.toString(), compileType.getMode(), null);
 		return new Code( pyCode, compileType );
 	}
 	public Object eval( edu.cmu.cs.stage3.alice.scripting.Code code ) {

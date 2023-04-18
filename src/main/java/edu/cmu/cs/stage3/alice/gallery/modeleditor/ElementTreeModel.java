@@ -17,7 +17,7 @@ class ElementTreeModel implements javax.swing.tree.TreeModel {
 		if( e instanceof edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray ) {
 			return false; 
 		} else if( e instanceof edu.cmu.cs.stage3.alice.core.Response ) {
-			return e instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse;
+			return e instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse;
 		} else if( e instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Component ) {
 			return false;
 		} else {

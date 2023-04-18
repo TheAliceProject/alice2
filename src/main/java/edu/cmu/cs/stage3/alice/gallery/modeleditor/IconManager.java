@@ -37,7 +37,7 @@ class IconManager {
 					return m_modelIcon;
 				}
 				return m_partIcon;
-			} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) { 
+			} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
 				return m_methodIcon;
 			} else if( o instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion ) { 
 				return m_methodIcon;

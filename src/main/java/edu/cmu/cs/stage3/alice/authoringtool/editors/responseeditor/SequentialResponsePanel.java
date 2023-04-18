@@ -35,16 +35,16 @@ package edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor;
 public class SequentialResponsePanel extends CompositeResponsePanel {
 
 /*
-    public SequentialResponsePanel(edu.cmu.cs.stage3.alice.core.response.DoInOrder r, int depth, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+    public SequentialResponsePanel(edu.cmu.cs.stage3.alice.core.responses.DoInOrder r, int depth, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super(r, depth, authoringToolIn);
     }
 */
     public SequentialResponsePanel(){
         super();
-        headerText = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.DoInOrder.class);
+        headerText = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.DoInOrder.class);
     }
 
-    public void set(edu.cmu.cs.stage3.alice.core.response.DoInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+    public void set(edu.cmu.cs.stage3.alice.core.responses.DoInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super.set(r, authoringToolIn);
     }
 

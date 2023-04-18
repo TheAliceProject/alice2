@@ -99,8 +99,8 @@ public class VariablesViewController extends edu.cmu.cs.stage3.alice.authoringto
 
 	protected void startListening() {
 		if( variables != null ) {
-//			if( variables.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-//				edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)variables.getOwner();
+//			if( variables.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+//				edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)variables.getOwner();
 //				if( callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue() != null ) {
 //					if( variables == callToUserDefinedResponse.requiredActualParameters ) {
 //						callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue().requiredFormalParameters.addObjectArrayPropertyListener( syncListener );
@@ -159,8 +159,8 @@ public class VariablesViewController extends edu.cmu.cs.stage3.alice.authoringto
 
 	protected void stopListening() {
 		if( variables != null ) {
-//			if( variables.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-//				edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)variables.getOwner();
+//			if( variables.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+//				edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse callToUserDefinedResponse = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)variables.getOwner();
 //				if( callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue() != null ) {
 //					if( variables == callToUserDefinedResponse.requiredActualParameters ) {
 //						callToUserDefinedResponse.userDefinedResponse.getUserDefinedResponseValue().requiredFormalParameters.removeObjectArrayPropertyListener( syncListener );

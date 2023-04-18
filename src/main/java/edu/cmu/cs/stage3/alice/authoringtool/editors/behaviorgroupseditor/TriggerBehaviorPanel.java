@@ -49,7 +49,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
         this.addComponentListener(this);
     }
 
-    public void set(edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior behavior, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+    public void set(edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior behavior, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
         super.set(behavior, authoringTool);
     }
     
@@ -65,7 +65,7 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
 			strikeEnd = "</font></strike>"; 
 		}
 		
-		edu.cmu.cs.stage3.alice.core.Response response = (edu.cmu.cs.stage3.alice.core.Response)((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse.get();
+		edu.cmu.cs.stage3.alice.core.Response response = (edu.cmu.cs.stage3.alice.core.Response)((edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior)m_behavior).triggerResponse.get();
 		toWriteTo.append("<tr>\n<td bgcolor="+getHTMLColorString(bgColor)+" colspan=\"2\">"+strikeStart);  
 		labelPanel.remove(lastLabel);	// Aik Min - need work
 		toWriteTo.append(edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getHTMLStringForComponent(labelPanel));
@@ -127,8 +127,8 @@ public class TriggerBehaviorPanel extends BasicBehaviorPanel implements java.awt
 			lastLabel.setText(Messages.getString("___do")); 
         }
 		labelPanel.add(lastLabel, new java.awt.GridBagConstraints(x,0,1,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,0), 0,0));
-        edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory triggerFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse);
-        triggerPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)m_behavior).triggerResponse, false, true, true, triggerFactory);
+        edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory triggerFactory = new edu.cmu.cs.stage3.alice.authoringtool.util.SetPropertyImmediatelyFactory(((edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior)m_behavior).triggerResponse);
+        triggerPanel = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getPropertyViewController(((edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior)m_behavior).triggerResponse, false, true, true, triggerFactory);
         triggerPanel.addComponentListener(this);
         m_containingPanel.add(labelPanel, new java.awt.GridBagConstraints(0,0,2,1,0,0,java.awt.GridBagConstraints.LINE_START, java.awt.GridBagConstraints.NONE, new java.awt.Insets(0,2,0,2), 0,0));
         if (isSecondLine){

@@ -57,8 +57,8 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
     
 	protected void variableInit(){
         super.variableInit();
-        if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.ForEach){
-            edu.cmu.cs.stage3.alice.core.response.ForEach proxy = (edu.cmu.cs.stage3.alice.core.response.ForEach)m_element;
+        if (m_element instanceof edu.cmu.cs.stage3.alice.core.responses.ForEach){
+            edu.cmu.cs.stage3.alice.core.responses.ForEach proxy = (edu.cmu.cs.stage3.alice.core.responses.ForEach)m_element;
             m_list = proxy.list;
             m_each = proxy.each;
         }
@@ -78,8 +78,8 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		if (components != null){
 			components.addObjectArrayPropertyListener(this);
 			for (int i=0; i<components.size(); i++){
-				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-					edu.cmu.cs.stage3.alice.core.response.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)components.get(i);
+				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+					edu.cmu.cs.stage3.alice.core.responses.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)components.get(i);
 					listenToChildren(current.componentResponses);
 				}
 				else if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite){
@@ -95,8 +95,8 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 			components.removeObjectArrayPropertyListener(this);
 			
 			for (int i=0; i<components.size(); i++){
-				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-					edu.cmu.cs.stage3.alice.core.response.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)components.get(i);
+				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+					edu.cmu.cs.stage3.alice.core.responses.CompositeResponse current = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)components.get(i);
 					stopListenToChildren(current.componentResponses);
 				}
 				else if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite){
@@ -145,8 +145,8 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
         if (parent instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach){
             list = ((edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)parent).list;
         }
-        if (parent instanceof edu.cmu.cs.stage3.alice.core.response.ForEach){
-            list = ((edu.cmu.cs.stage3.alice.core.response.ForEach)parent).list;
+        if (parent instanceof edu.cmu.cs.stage3.alice.core.responses.ForEach){
+            list = ((edu.cmu.cs.stage3.alice.core.responses.ForEach)parent).list;
         }
         if (list != null && list.get() == toCheck){
             if (parent.getParent() != null && !(parent.getParent() instanceof edu.cmu.cs.stage3.alice.core.Sandbox)){
@@ -255,8 +255,8 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 	   if (parent instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach){
 		   list = ((edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)parent).list;
 	   }
-	   if (parent instanceof edu.cmu.cs.stage3.alice.core.response.ForEach){
-		   list = ((edu.cmu.cs.stage3.alice.core.response.ForEach)parent).list;
+	   if (parent instanceof edu.cmu.cs.stage3.alice.core.responses.ForEach){
+		   list = ((edu.cmu.cs.stage3.alice.core.responses.ForEach)parent).list;
 	   }
 	   if (list != null && list.get() == toCheck){
 		   return false;
@@ -296,9 +296,9 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 		for (int i=0; i<currentContainer.size(); i++){
 			Object list = null;
 			edu.cmu.cs.stage3.alice.core.Element var = null;
-			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.ForEach){
-				list = ((edu.cmu.cs.stage3.alice.core.response.ForEach)currentContainer.get(i)).list.get();
-				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.response.ForEach)currentContainer.get(i)).each.get());
+			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.ForEach){
+				list = ((edu.cmu.cs.stage3.alice.core.responses.ForEach)currentContainer.get(i)).list.get();
+				var = ((edu.cmu.cs.stage3.alice.core.Element)((edu.cmu.cs.stage3.alice.core.responses.ForEach)currentContainer.get(i)).each.get());
 			}
 			else if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach){
 				list = ((edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)currentContainer.get(i)).list.get();
@@ -307,9 +307,9 @@ public abstract class ForEachElementPanel extends CompositeElementPanel implemen
 			if (list == m_list.get()){
 				var.name.set(baseName+"_#"+currentLevel); 
 			}
-			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
+			if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
 				
-				setAllNames( ((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)currentContainer.get(i)).componentResponses , currentLevel+1);
+				setAllNames( ((edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)currentContainer.get(i)).componentResponses , currentLevel+1);
 			}
 			else if (currentContainer.get(i) instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite){
 				setAllNames( ((edu.cmu.cs.stage3.alice.core.question.userdefined.Composite)currentContainer.get(i)).components , currentLevel+1);

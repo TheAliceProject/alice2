@@ -1,4 +1,5 @@
 from edu.cmu.cs.stage3.alice.authoringtool import AuthoringToolResources
+from java.net import URL
 from java.util import Vector
 from java.util import HashMap
 from edu.cmu.cs.stage3.util import StringObjectPair
@@ -189,7 +190,7 @@ AuthoringToolResources.setEditorClasses( array( editorList, java.lang.Class ) )
 #########################
 
 AuthoringToolResources.setMainWebGalleryURL( java.net.URL( mainWebGalleryURL ) )
-AuthoringToolResources.setMainDiskGalleryDirectory( java.io.File( mainDiskGallery ).getAbsoluteFile() )
+AuthoringToolResources.setMainDiskGalleryDirectory( os.path.join( mainDiskGallery ) )
 AuthoringToolResources.autodetectMainCDGalleryDirectory( mainCDGalleryName )
 AuthoringToolResources.setMainUpdateURL( java.net.URL( mainUpdateURL ) )
 

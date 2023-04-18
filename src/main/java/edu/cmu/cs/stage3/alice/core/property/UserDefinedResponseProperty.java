@@ -24,7 +24,7 @@
 package edu.cmu.cs.stage3.alice.core.property;
 
 import edu.cmu.cs.stage3.alice.core.Element;
-import edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse;
+import edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse;
 
 public class UserDefinedResponseProperty extends ResponseProperty {
 	public UserDefinedResponseProperty( Element owner, String name, UserDefinedResponse defaultValue ) {

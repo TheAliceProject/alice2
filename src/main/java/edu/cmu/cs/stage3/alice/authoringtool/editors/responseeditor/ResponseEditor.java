@@ -57,7 +57,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         super();
     }
 
-    public void setObject(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse toEdit){
+    public void setObject(edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse toEdit){
         clearAllListening();
         this.elementBeingEdited = toEdit;
         updateGui();
@@ -68,13 +68,13 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
     }
 
 	protected edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.MainCompositeElementPanel createElementTree(edu.cmu.cs.stage3.alice.core.Element selected){
-        if (selected instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
+        if (selected instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
             MainCompositeResponsePanel toReturn = null;
-            if (selected instanceof edu.cmu.cs.stage3.alice.core.response.DoInOrder){
+            if (selected instanceof edu.cmu.cs.stage3.alice.core.responses.DoInOrder){
                 toReturn = new MainSequentialResponsePanel();
                 toReturn.set(selected, authoringTool);
             }
-            else if (selected instanceof edu.cmu.cs.stage3.alice.core.response.DoTogether){
+            else if (selected instanceof edu.cmu.cs.stage3.alice.core.responses.DoTogether){
                 toReturn = new MainParallelResponsePanel();
                 toReturn.set(selected, authoringTool);
             }
@@ -85,17 +85,17 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
 
 
 	protected void initPrototypes(){
-        String doInOrderString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.DoInOrder.class);
-        String doTogetherString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.DoTogether.class);
-        String doIfTrueString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class);
-        String loopString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class);
-        //protected final String waitString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.Wait.class);
-        String sequentialLoopString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class);
-        String forAllTogetherString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class);
-        String scriptString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.ScriptResponse.class);
-        String scriptDefinedString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse.class);
-        String loopIfTrueString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class);
-        String commentString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.response.Comment.class);
+        String doInOrderString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.DoInOrder.class);
+        String doTogetherString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.DoTogether.class);
+        String doIfTrueString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder.class);
+        String loopString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder.class);
+        //protected final String waitString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.Wait.class);
+        String sequentialLoopString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder.class);
+        String forAllTogetherString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.ForEachTogether.class);
+        String scriptString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.ScriptResponse.class);
+        String scriptDefinedString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse.class);
+        String loopIfTrueString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder.class);
+        String commentString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(edu.cmu.cs.stage3.alice.core.responses.Comment.class);
         String mathString = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue("+ - * /"); 
 
         java.awt.Color DO_IN_ORDER_COLOR = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor("DoInOrder"); 
@@ -121,7 +121,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         doInOrderPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.DoInOrder.class, null, null)));
+                edu.cmu.cs.stage3.alice.core.responses.DoInOrder.class, null, null)));
         doInOrderPrototype.addDragSourceComponent(DIOJLabel);
 
         doTogetherPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
@@ -132,7 +132,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         doTogetherPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.DoTogether.class, null, null)));
+                edu.cmu.cs.stage3.alice.core.responses.DoTogether.class, null, null)));
         doTogetherPrototype.addDragSourceComponent(DTJLabel);
 
         doIfTruePrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
@@ -144,7 +144,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         doIfTruePrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class, null, DITdesired)));
+                edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder.class, null, DITdesired)));
         doIfTruePrototype.addDragSourceComponent(DITLabel);
 
         String CLdesired[] = {"end"}; 
@@ -156,7 +156,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         loopPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class, null, CLdesired)));
+                edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder.class, null, CLdesired)));
         loopPrototype.addDragSourceComponent(LLabel);
 
         String LITdesired[] = {"condition"}; 
@@ -168,7 +168,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         loopIfTruePrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class, null, LITdesired)));
+                edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder.class, null, LITdesired)));
         loopIfTruePrototype.addDragSourceComponent(LITLabel);
 
         String SLdesired[] = {"list"}; 
@@ -180,7 +180,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         sequentialLoopPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class, null, SLdesired)));
+                edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder.class, null, SLdesired)));
         sequentialLoopPrototype.addDragSourceComponent(SLLabel);
 
         String FATdesired[] = {"list"}; 
@@ -192,13 +192,13 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         forAllTogetherPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class, null, FATdesired)));
+                edu.cmu.cs.stage3.alice.core.responses.ForEachTogether.class, null, FATdesired)));
         forAllTogetherPrototype.addDragSourceComponent(FATLabel);
 
         String Wdesired[] = {"duration"}; 
         waitPrototype = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.Wait.class, null, Wdesired));
+                edu.cmu.cs.stage3.alice.core.responses.Wait.class, null, Wdesired));
         //waitPrototype.addDragSourceComponent(WLabel);
 
         scriptDefinedPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
@@ -210,7 +210,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         scriptDefinedPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse.class, null, null)));
+                edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse.class, null, null)));
         scriptDefinedPrototype.addDragSourceComponent(scriptDefinedLabel);
 
         scriptPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
@@ -220,7 +220,7 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         scriptPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.ScriptResponse.class, null, null)));
+                edu.cmu.cs.stage3.alice.core.responses.ScriptResponse.class, null, null)));
         scriptPrototype.addDragSourceComponent(scriptLabel);
 
         edu.cmu.cs.stage3.util.StringObjectPair Cknown[] = {new edu.cmu.cs.stage3.util.StringObjectPair("text", Messages.getString("No_comment"))};  
@@ -232,12 +232,12 @@ public class ResponseEditor extends edu.cmu.cs.stage3.alice.authoringtool.editor
         commentPrototype.setTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.Comment.class, Cknown, null)));
+                edu.cmu.cs.stage3.alice.core.responses.Comment.class, Cknown, null)));
         commentPrototype.addDragSourceComponent(commentLabel);
 
         printPrototype = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(
                 new edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype(
-                edu.cmu.cs.stage3.alice.core.response.Print.class, null, null));
+                edu.cmu.cs.stage3.alice.core.responses.Print.class, null, null));
 
         mathPrototype = new edu.cmu.cs.stage3.alice.authoringtool.util.DnDGroupingPanel();
         mathPrototype.setBackground(MATH_COLOR);

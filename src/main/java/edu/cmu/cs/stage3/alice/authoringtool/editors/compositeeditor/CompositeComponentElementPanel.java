@@ -779,8 +779,8 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
 
     protected boolean isRecursive(edu.cmu.cs.stage3.alice.core.Element toDrop){
         edu.cmu.cs.stage3.alice.core.Element potentialParent = null;
-        if (toDrop instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse){
-            potentialParent = ((edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)toDrop).userDefinedResponse.getUserDefinedResponseValue();
+        if (toDrop instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse){
+            potentialParent = ((edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)toDrop).userDefinedResponse.getUserDefinedResponseValue();
         }
         else if (toDrop instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion){
             potentialParent = ((edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion)toDrop).userDefinedQuestion.getUserDefinedQuestionValue();
@@ -804,7 +804,7 @@ public abstract class CompositeComponentElementPanel extends edu.cmu.cs.stage3.a
     protected boolean checkLoop(edu.cmu.cs.stage3.alice.core.Element e){
         if (e instanceof edu.cmu.cs.stage3.alice.core.Variable){
             edu.cmu.cs.stage3.alice.core.Variable v = (edu.cmu.cs.stage3.alice.core.Variable)e;
-            if (v.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.ForEach || v.getParent() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach){
+            if (v.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.ForEach || v.getParent() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach){
                 if (canFindOwner(v.getParent(),this.componentElements.getOwner())){
                     return true;
                 }

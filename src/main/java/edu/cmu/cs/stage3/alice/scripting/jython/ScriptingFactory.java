@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.scripting.jython;
 
+import org.python.core.CompileMode;
+import org.python.core.Py;
+
 /**
  * @author Dennis Cosgrove
  */
@@ -34,7 +37,7 @@ public class ScriptingFactory implements edu.cmu.cs.stage3.alice.scripting.Scrip
 		java.util.Properties preProperties;
 		try {
 			preProperties = System.getProperties();
-		} catch( java.security.AccessControlException ace ) {
+		} catch( Throwable ace ) {
 			preProperties = new java.util.Properties();
 			preProperties.setProperty( "python.home", System.getProperty( "python.home" ) );
 		}
@@ -63,7 +66,7 @@ public class ScriptingFactory implements edu.cmu.cs.stage3.alice.scripting.Scrip
 			br.close(); // To fix resource leak
 			if( sb.length()>0 ) {
 				String script = sb.substring( 0, sb.length()-1 );
-				org.python.core.PyCode code = org.python.core.__builtin__.compile( script, pathname, "exec" );
+				org.python.core.PyCode code = Py.compile_flags(script, pathname, CompileMode.exec, Py.getCompilerFlags());
 				org.python.core.Py.exec( code, systemState.builtins, systemState.builtins );
 			}
 		} catch( java.io.IOException ioe ) {

@@ -44,40 +44,40 @@ public class GUIFactory {
 	public static javax.swing.JComponent getGUI( Object o ) {
 		edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool = edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool.getHack();
 		javax.swing.JComponent viewController = null;		
-		if( o instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder ) {
+		if( o instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ConditionalResponsePanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ConditionalResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ConditionalResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.LoopNInOrder ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.CountLoopPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.CountLoopPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.response.LoopNInOrder)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.CountLoopPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.LoopIfTrueResponsePanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.LoopIfTrueResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.LoopIfTrueResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.ForEachInOrder ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ForEachInListSequentialLoopPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ForEachInListSequentialLoopPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.response.ForEachInOrder)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ForEachInListSequentialLoopPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.ForEachTogether ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.ForEachTogether ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ForAllTogetherResponsePanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ForAllTogetherResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.response.ForEachTogether)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ForAllTogetherResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.ForEachTogether)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.DoTogether ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.DoTogether ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ParallelResponsePanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ParallelResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.response.DoTogether)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.ParallelResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.DoTogether)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.DoInOrder ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.DoInOrder ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.SequentialResponsePanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.SequentialResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.response.DoInOrder)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.SequentialResponsePanel)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.DoInOrder)o, authoringTool );
 			}
 		} else if( o instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.IfElse ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.IfElsePanel.class );
@@ -99,10 +99,10 @@ public class GUIFactory {
 			if( viewController != null ) {
 				((edu.cmu.cs.stage3.alice.authoringtool.editors.questioneditor.ForEachPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.question.userdefined.ForEach)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.response.Print ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.responses.Print ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ResponsePrintViewController.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ResponsePrintViewController)viewController).set( (edu.cmu.cs.stage3.alice.core.response.Print)o );
+				((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.ResponsePrintViewController)viewController).set( (edu.cmu.cs.stage3.alice.core.responses.Print)o );
 			}
 		} else if( o instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Print ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.QuestionPrintViewController.class );
@@ -119,20 +119,20 @@ public class GUIFactory {
 			if( viewController != null ) {
 				((edu.cmu.cs.stage3.alice.authoringtool.viewcontroller.FormattedElementViewController)viewController).setElement( (edu.cmu.cs.stage3.alice.core.Element)o );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.TriggerBehaviorPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.TriggerBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behavior.TriggerBehavior)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.TriggerBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behaviors.TriggerBehavior)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behaviors.AbstractConditionalBehavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.ConditionalBehaviorPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.ConditionalBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behavior.AbstractConditionalBehavior)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.ConditionalBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behaviors.AbstractConditionalBehavior)o, authoringTool );
 			}
-		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behavior.InternalResponseBehavior ) {
+		} else if( o instanceof edu.cmu.cs.stage3.alice.core.behaviors.InternalResponseBehavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.InternalResponseBehaviorPanel.class );
 			if( viewController != null ) {
-				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.InternalResponseBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behavior.InternalResponseBehavior)o, authoringTool );
+				((edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.InternalResponseBehaviorPanel)viewController).set( (edu.cmu.cs.stage3.alice.core.behaviors.InternalResponseBehavior)o, authoringTool );
 			}
 		} else if( o instanceof edu.cmu.cs.stage3.alice.core.Behavior ) {
 			viewController = getOrCreateGUI( edu.cmu.cs.stage3.alice.authoringtool.editors.behaviorgroupseditor.GenericBehaviorPanel.class );
@@ -620,7 +620,7 @@ public class GUIFactory {
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( valueClass ) ) {
 			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Please_enter_a_jython_script_that_will_evaluate_to_a_response_"), Messages.getString("Custom_Response_Script"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
-			edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse();
+			edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse();
 			scriptResponse.script.set( script );
 			property.getOwner().addChild( scriptResponse );
 			((Runnable)factory.createItem( scriptResponse )).run();
@@ -676,7 +676,7 @@ public class GUIFactory {
 			}
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( valueClass ) ) {
 			String script = edu.cmu.cs.stage3.swing.DialogManager.showInputDialog( Messages.getString("Please_enter_a_jython_script_that_will_evaluate_to_a_response_"), Messages.getString("Custom_Response_Script"), javax.swing.JOptionPane.PLAIN_MESSAGE );  
-			edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse();
+			edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse scriptResponse = new edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse();
 			scriptResponse.script.set( script );
 			if( anchorForAnonymousItems != null ) {
 				anchorForAnonymousItems.addChild( scriptResponse );

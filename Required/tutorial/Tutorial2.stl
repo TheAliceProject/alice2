@@ -254,7 +254,7 @@
     </stateCapsule>
     <note type="hole" autoAdvance="false" advanceEvent="mouseClick" hasNext="false" xPos="-37.0" yPos="-254.0">
       <id>
-	<![CDATA[details<bunny>:responsePrototype<edu.cmu.cs.stage3.alice.core.response.MoveAnimation>]]>
+	<![CDATA[details<bunny>:responsePrototype<edu.cmu.cs.stage3.alice.core.responses.MoveAnimation>]]>
       </id>
       <message>
 	<![CDATA[1Drag "bunny move" from here...]]>
@@ -297,7 +297,7 @@
     </stateCapsule>
     <note type="hole" autoAdvance="false" advanceEvent="mouseClick" hasNext="false" xPos="-46.0" yPos="-235.0">
       <id>
-	<![CDATA[details<bunny>:responsePrototype<edu.cmu.cs.stage3.alice.core.response.MoveAnimation>]]>
+	<![CDATA[details<bunny>:responsePrototype<edu.cmu.cs.stage3.alice.core.responses.MoveAnimation>]]>
       </id>
       <message>
 	<![CDATA[1Drag "bunny move" from here..]]>
@@ -1061,7 +1061,7 @@
     </stateCapsule>
     <note type="hole" autoAdvance="false" advanceEvent="mouseClick" hasNext="false" xPos="-40.0" yPos="43.0">
       <id>
-	<![CDATA[details<bunny.body.chest.armR>:responsePrototype<edu.cmu.cs.stage3.alice.core.response.TurnAnimation>]]>
+	<![CDATA[details<bunny.body.chest.armR>:responsePrototype<edu.cmu.cs.stage3.alice.core.responses.TurnAnimation>]]>
       </id>
       <message>
 	<![CDATA[1Drag armR from here..]]>
@@ -1088,7 +1088,7 @@
     </stateCapsule>
     <note type="hole" autoAdvance="false" advanceEvent="mouseClick" hasNext="false" xPos="-37.0" yPos="73.0">
       <id>
-	<![CDATA[details<bunny.body.chest.armR>:responsePrototype<edu.cmu.cs.stage3.alice.core.response.TurnAnimation>]]>
+	<![CDATA[details<bunny.body.chest.armR>:responsePrototype<edu.cmu.cs.stage3.alice.core.responses.TurnAnimation>]]>
       </id>
       <message>
 	<![CDATA[1Drag "armR turn" from here...]]>

@@ -23,11 +23,15 @@
 
 package edu.cmu.cs.stage3.alice.scripting;
 
+import org.python.core.CompileMode;
+
 /**
  * @author Dennis Cosgrove
  */
 public interface CompileType {
-	public final static CompileType EVAL = new CompileType() {};
-	public final static CompileType EXEC_SINGLE = new CompileType() {};
-	public final static CompileType EXEC_MULTIPLE = new CompileType() {};
+	CompileType EVAL = () -> CompileMode.eval;
+	CompileType EXEC_SINGLE = () -> CompileMode.single;
+	CompileType EXEC_MULTIPLE = () -> CompileMode.exec;
+
+	CompileMode getMode();
 }

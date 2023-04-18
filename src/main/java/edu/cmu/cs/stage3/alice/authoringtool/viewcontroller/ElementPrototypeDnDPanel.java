@@ -48,7 +48,7 @@ public class ElementPrototypeDnDPanel extends edu.cmu.cs.stage3.alice.authoringt
 		this.elementPrototype = elementPrototype;
 		this.setTransferable( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.TransferableFactory.createTransferable( elementPrototype ) );
 
-		if( edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
+		if( edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
 			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "userDefinedResponse" ) ); 
 		} else if( edu.cmu.cs.stage3.alice.core.Response.class.isAssignableFrom( elementPrototype.getElementClass() ) ) {
 			this.setBackground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "response" ) ); 

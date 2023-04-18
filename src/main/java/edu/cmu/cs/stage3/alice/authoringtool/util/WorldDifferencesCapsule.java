@@ -84,7 +84,7 @@ public class WorldDifferencesCapsule implements edu.cmu.cs.stage3.alice.core.eve
 					capsule.putElementPosition(value.getKey(this.world), newPos);
 
 					// CALL to a user-defined response is handled a little differently to get the parameters
-					if (value instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
+					if (value instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) {
 						edu.cmu.cs.stage3.alice.core.Property params = value.getPropertyNamed("requiredActualParameters");
 						Object udobj = params.getValue();
 						if (udobj instanceof edu.cmu.cs.stage3.alice.core.Variable[]) {
@@ -133,12 +133,12 @@ public class WorldDifferencesCapsule implements edu.cmu.cs.stage3.alice.core.eve
 				edu.cmu.cs.stage3.alice.core.Property p = null;
 				if (e != null) p = e.getPropertyNamed(propName);
 				if (p != null) {
-					if (p.get() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
-						edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
+					if (p.get() instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) {
+						edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
 						String valueRepr = edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getReprForValue(resp.get(), true);
 						capsule.putPropertyValue(resp.getOwner().getKey(world)+".userDefinedResponse", valueRepr);
 
-						edu.cmu.cs.stage3.alice.core.Property pars = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("requiredActualParameters");
+						edu.cmu.cs.stage3.alice.core.Property pars = ( (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) p.get()).getPropertyNamed("requiredActualParameters");
 
 						Object udobj = pars.getValue();
 						if (udobj instanceof edu.cmu.cs.stage3.alice.core.Variable[]) {
@@ -205,8 +205,8 @@ public class WorldDifferencesCapsule implements edu.cmu.cs.stage3.alice.core.eve
     			edu.cmu.cs.stage3.alice.core.Property p = null;
     			if (e != null) p = e.getPropertyNamed(propName);
 
-    			if (p.get() instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
-    				edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
+    			if (p.get() instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) {
+    				edu.cmu.cs.stage3.alice.core.Property resp = ( (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) p.get()).getPropertyNamed("userDefinedResponse");
 
     				propAndKey = resp.getOwner().getKey(world) + ".userDefinedResponse";
     			}

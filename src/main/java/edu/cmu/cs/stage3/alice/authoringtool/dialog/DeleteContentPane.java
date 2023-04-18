@@ -393,10 +393,10 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 								+ ">:viewController<>:variable<"
 								+ reference.getProperty().getOwner()
 										.getKey(sourceParent) + ">";
-					} else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse
-							|| sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
+					} else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse
+							|| sourceParent instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) {
 						edu.cmu.cs.stage3.alice.core.Element[] userDefinedResponses = world
-								.getDescendants(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class);
+								.getDescendants(edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse.class);
 						for (int i = 0; i < userDefinedResponses.length; i++) {
 							// System.out.println(userDefinedResponses[i]);
 							if (userDefinedResponses[i] == sourceParent
@@ -468,7 +468,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 
 			if (highlightID == null) {
 				edu.cmu.cs.stage3.util.Criterion userDefinedResponsesCriterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
-						edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class);
+						edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse.class);
 				edu.cmu.cs.stage3.util.Criterion userDefinedQuestionsCriterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
 						edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class);
 				edu.cmu.cs.stage3.util.Criterion[] searchCriterion = {
@@ -572,10 +572,10 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 						highlightID = Messages.getString("The_World_s_variable__is_set_to_", reference.getProperty().getOwner().name.getStringValue(), ourName);
 					} else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.Model) {
 						highlightID = Messages.getString("The__s_variable__is_set_to_", sourceParent.name.getStringValue(), reference.getProperty().getOwner().name.getStringValue(), ourName);
-					} else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse
-							|| sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
+					} else if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse
+							|| sourceParent instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) {
 						edu.cmu.cs.stage3.alice.core.Element[] userDefinedResponses = world
-								.getDescendants(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class);
+								.getDescendants(edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse.class);
 						for (int i = 0; i < userDefinedResponses.length; i++) {
 							// System.out.println(userDefinedResponses[i]);
 							if (userDefinedResponses[i] == sourceParent
@@ -628,7 +628,7 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 				String temp1 = "";
 				String temp2 = "";
 				edu.cmu.cs.stage3.util.Criterion userDefinedResponsesCriterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
-						edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class);
+						edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse.class);
 				edu.cmu.cs.stage3.util.Criterion userDefinedQuestionsCriterion = new edu.cmu.cs.stage3.util.criterion.InstanceOfCriterion(
 						edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class);
 				edu.cmu.cs.stage3.util.Criterion[] searchCriterion = {
@@ -716,12 +716,12 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 				.getOwner();
 		edu.cmu.cs.stage3.alice.core.Element sourceParent = source.getParent();
 		if (reference != null) {
-			if (source instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse
+			if (source instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse
 					|| source instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion
 					|| source instanceof edu.cmu.cs.stage3.alice.core.question.PropertyValue) {
 				// need to check to see if it's just a call, or it's part of a
 				// property...
-				if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse) {
+				if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse) {
 					source.removeFromParent();
 				} else {
 					edu.cmu.cs.stage3.alice.core.Property[] properties = sourceParent
@@ -789,12 +789,12 @@ public class DeleteContentPane extends edu.cmu.cs.stage3.swing.ContentPane imple
 			edu.cmu.cs.stage3.alice.core.Element sourceParent = source
 					.getParent();
 			if (reference != null) {
-				if (source instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse
+				if (source instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse
 						|| source instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion
 						|| source instanceof edu.cmu.cs.stage3.alice.core.question.PropertyValue) {
 					// need to check to see if it's just a call, or it's part of
 					// a property...
-					if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse) {
+					if (sourceParent instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse) {
 						source.removeFromParent();
 					} else {
 						edu.cmu.cs.stage3.alice.core.Property[] properties = sourceParent

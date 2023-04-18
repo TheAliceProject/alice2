@@ -37,8 +37,8 @@ import java.util.Vector;
 
 import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.Pose;
-import edu.cmu.cs.stage3.alice.core.response.DoTogether;
-import edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse;
+import edu.cmu.cs.stage3.alice.core.responses.DoTogether;
+import edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse;
 
 public class ASFSkeleton {
     public Vector bones;

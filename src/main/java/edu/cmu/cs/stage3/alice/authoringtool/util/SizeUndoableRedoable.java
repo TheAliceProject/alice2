@@ -28,10 +28,10 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  */
 public class SizeUndoableRedoable extends OneShotUndoableRedoable {
 	public SizeUndoableRedoable( edu.cmu.cs.stage3.alice.core.Transformable transformable, javax.vecmath.Vector3d oldSize, javax.vecmath.Vector3d newSize, edu.cmu.cs.stage3.alice.core.Scheduler scheduler ) {
-		super( new edu.cmu.cs.stage3.alice.core.response.SizeAnimation(), new edu.cmu.cs.stage3.alice.core.response.SizeAnimation(), new edu.cmu.cs.stage3.alice.authoringtool.util.OneShotSimpleBehavior(), scheduler );
+		super( new edu.cmu.cs.stage3.alice.core.responses.SizeAnimation(), new edu.cmu.cs.stage3.alice.core.responses.SizeAnimation(), new edu.cmu.cs.stage3.alice.authoringtool.util.OneShotSimpleBehavior(), scheduler );
 
-		edu.cmu.cs.stage3.alice.core.response.SizeAnimation redoResponse = (edu.cmu.cs.stage3.alice.core.response.SizeAnimation)getRedoResponse();
-		edu.cmu.cs.stage3.alice.core.response.SizeAnimation undoResponse = (edu.cmu.cs.stage3.alice.core.response.SizeAnimation)getUndoResponse();
+		edu.cmu.cs.stage3.alice.core.responses.SizeAnimation redoResponse = (edu.cmu.cs.stage3.alice.core.responses.SizeAnimation)getRedoResponse();
+		edu.cmu.cs.stage3.alice.core.responses.SizeAnimation undoResponse = (edu.cmu.cs.stage3.alice.core.responses.SizeAnimation)getUndoResponse();
 		edu.cmu.cs.stage3.alice.authoringtool.util.OneShotSimpleBehavior oneShotBehavior = getOneShotBehavior();
 
 		redoResponse.subject.set( transformable );

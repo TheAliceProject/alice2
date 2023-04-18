@@ -724,8 +724,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 	@SuppressWarnings("cast")
 	public void findSoundsfromResponse(Response s) {
 
-		if (s instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) {
-			((edu.cmu.cs.stage3.alice.core.response.SoundResponse) s).addSoundListener(new movieMaker.SoundHandler(authoringTool.getSoundStorage(), authoringTool));
+		if (s instanceof edu.cmu.cs.stage3.alice.core.responses.SoundResponse) {
+			((edu.cmu.cs.stage3.alice.core.responses.SoundResponse) s).addSoundListener(new movieMaker.SoundHandler(authoringTool.getSoundStorage(), authoringTool));
 			// System.err.println(s.toString());
 		}
 		if ((((Response) s).getChildCount()) > 0) {
@@ -747,8 +747,8 @@ public class CaptureContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 		if ((((Behavior) s).getChildCount()) > 0) {
 			Element[] children = ((Behavior) s).getChildren(edu.cmu.cs.stage3.alice.core.Response.class);
 			for (int y = 0; y < children.length; y++) {
-				if (children[y] instanceof edu.cmu.cs.stage3.alice.core.response.SoundResponse) {
-					((edu.cmu.cs.stage3.alice.core.response.SoundResponse) children[y]).addSoundListener(new movieMaker.SoundHandler(authoringTool.getSoundStorage(), authoringTool));
+				if (children[y] instanceof edu.cmu.cs.stage3.alice.core.responses.SoundResponse) {
+					((edu.cmu.cs.stage3.alice.core.responses.SoundResponse) children[y]).addSoundListener(new movieMaker.SoundHandler(authoringTool.getSoundStorage(), authoringTool));
 				}
 			}
 		}

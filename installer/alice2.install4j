@@ -1,353 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="7.0.12" transformSequenceNumber="7">
-  <directoryPresets config="../target/alice2-2.5.4.1-SNAPSHOT.jar" />
-  <application name="Alice 2.5" distributionSourceDir="" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="false" shrinkRuntime="true" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.5.4.1" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="81236657ad4d4aae" javaMinVersion="1.8" javaMaxVersion="1.8" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
-    <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
-      <principalLanguage id="en" customLocalizationFile="" />
-      <additionalLanguages />
-    </languages>
-    <searchSequence>
-      <registry />
-      <envVar name="JAVA_HOME" />
-      <envVar name="JDK_HOME" />
-    </searchSequence>
-    <variables>
-      <variable name="included_jre_version" value="1.8.0_152" description="" category="" />
-    </variables>
-    <mergedProjects />
-    <codeSigning macEnabled="false" macPkcs12File="" windowsEnabled="false" windowsKeySource="pkcs12" windowsPvkFile="" windowsSpcFile="" windowsPkcs12File="" windowsPkcs11Library="" windowsPkcs11Slot="">
-      <windowsKeystoreIdentifier issuer="" serial="" subject="" />
-      <windowsPkcs11Identifier issuer="" serial="" subject="" />
-    </codeSigning>
+<install4j version="10.0.4" transformSequenceNumber="10">
+  <directoryPresets config="../target/alice2-2.6.0-SNAPSHOT.jar" />
+  <application name="Alice 2.6" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.0" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
+    <jreBundles jdkProviderId="Adoptium" release="17/latest" />
   </application>
-  <files keepModificationTimes="false" missingFilesStrategy="error" globalExcludeSuffixes="*.sha1,*.lastUpdated,*.pom,*.repositories,*.DS_Store" defaultOverwriteMode="4" defaultUninstallMode="0" launcherOverwriteMode="3" defaultFileMode="644" defaultDirMode="755">
+  <files missingFilesStrategy="error" globalExcludeSuffixes="*.sha1,*.lastUpdated,*.pom,*.repositories,*.DS_Store">
     <filesets>
-      <fileset name="EnglishGallery" id="60" customizedId="" />
-      <fileset name="SpanishGallery" id="199" customizedId="" />
-      <fileset name="Windows" id="322" customizedId="" />
-      <fileset name="Linux" id="454" customizedId="" />
+      <fileset name="EnglishGallery" id="60" />
+      <fileset name="SpanishGallery" id="199" />
+      <fileset name="Windows" id="322" />
+      <fileset name="Linux" id="454" />
     </filesets>
     <roots>
-      <root id="61" fileset="60" location="" />
-      <root id="200" fileset="199" location="" />
-      <root id="323" fileset="322" location="" />
-      <root id="455" fileset="454" location="" />
+      <root id="61" fileset="60" />
+      <root id="200" fileset="199" />
+      <root id="323" fileset="322" />
+      <root id="455" fileset="454" />
     </roots>
     <mountPoints>
-      <mountPoint id="58" root="" location="Required" mode="755" />
-      <mountPoint id="72" root="" location="Required/externalLib" mode="755" />
-      <mountPoint id="63" root="61" location="Required" mode="755" />
-      <mountPoint id="64" root="61" location="Required/gallery" mode="755" />
-      <mountPoint id="65" root="61" location="Required/gallery/English" mode="755" />
-      <mountPoint id="201" root="200" location="Required" mode="755" />
-      <mountPoint id="202" root="200" location="Required/gallery" mode="755" />
-      <mountPoint id="203" root="200" location="Required/gallery/Spanish" mode="755" />
-      <mountPoint id="324" root="323" location="Required" mode="755" />
-      <mountPoint id="456" root="455" location="Required" mode="755" />
-      <mountPoint id="460" root="455" location="Required/install" mode="755" />
+      <mountPoint id="58" location="Required" />
+      <mountPoint id="72" location="Required/externalLib" />
+      <mountPoint id="63" root="61" location="Required" />
+      <mountPoint id="64" root="61" location="Required/gallery" />
+      <mountPoint id="65" root="61" location="Required/gallery/English" />
+      <mountPoint id="201" root="200" location="Required" />
+      <mountPoint id="202" root="200" location="Required/gallery" />
+      <mountPoint id="203" root="200" location="Required/gallery/Spanish" />
+      <mountPoint id="324" root="323" location="Required" />
+      <mountPoint id="456" root="455" location="Required" />
+      <mountPoint id="460" root="455" location="Required/install" />
     </mountPoints>
     <entries>
-      <dirEntry mountPoint="72" file="../target/lib" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="lib" excludeSuffixes="" dirMode="755" overrideDirMode="false">
-        <exclude />
-      </dirEntry>
-      <fileEntry mountPoint="72" file="../lib/mp3plugin.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <dirEntry mountPoint="58" file="../Required" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Required" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="72" file="../target/lib" subDirectory="lib" />
+      <fileEntry mountPoint="72" file="../lib/mp3plugin.jar" />
+      <dirEntry mountPoint="58" file="../Required" subDirectory="Required">
         <exclude>
-          <entry location="gallery" fileType="regular" />
+          <entry location="gallery" />
         </exclude>
       </dirEntry>
-      <fileEntry mountPoint="58" file="../target/alice2-2.5.4.1-SNAPSHOT.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <fileEntry mountPoint="58" file="../Alice2_LICENSE.pdf" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <fileEntry mountPoint="58" file="../jythonLicense.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <fileEntry mountPoint="58" file="../lgpl.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <dirEntry mountPoint="65" file="../Required/gallery/English" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="English" excludeSuffixes="" dirMode="755" overrideDirMode="false">
-        <exclude />
-      </dirEntry>
-      <dirEntry mountPoint="203" file="../Required/gallery/Spanish" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Spanish" excludeSuffixes="" dirMode="755" overrideDirMode="false">
-        <exclude />
-      </dirEntry>
-      <dirEntry mountPoint="324" file="../lib/Windows" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="Windows" excludeSuffixes="" dirMode="755" overrideDirMode="false">
-        <exclude />
-      </dirEntry>
-      <fileEntry mountPoint="460" file="./linux/alice2.desktop.partial" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="58" file="../target/alice2-2.6.0-SNAPSHOT.jar" />
+      <fileEntry mountPoint="58" file="../Alice2_LICENSE.pdf" />
+      <fileEntry mountPoint="58" file="../jythonLicense.txt" />
+      <fileEntry mountPoint="58" file="../lgpl.txt" />
+      <dirEntry mountPoint="65" file="../Required/gallery/English" subDirectory="English" />
+      <dirEntry mountPoint="203" file="../Required/gallery/Spanish" subDirectory="Spanish" />
+      <dirEntry mountPoint="324" file="../lib/Windows" subDirectory="Windows" />
+      <fileEntry mountPoint="460" file="./linux/alice2.desktop.partial" />
     </entries>
     <components>
-      <component name="Spanish Gallery" id="67" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
-        <description />
-        <include all="false">
-          <entry location=".i4j_fileset_199" fileType="regular" />
+      <component name="Spanish Gallery" id="67">
+        <include>
+          <entry filesetId="199" />
         </include>
         <dependencies>
           <component id="219" />
         </dependencies>
       </component>
-      <component name="English Full Gallery" id="59" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
-        <description />
-        <include all="false">
-          <entry location=".i4j_fileset_60" fileType="regular" />
+      <component name="English Full Gallery" id="59">
+        <include>
+          <entry filesetId="60" />
         </include>
         <dependencies>
           <component id="219" />
         </dependencies>
       </component>
-      <component name="Alice Base" id="219" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
-        <description />
-        <include all="false">
-          <entry location=".i4j_fileset_" fileType="regular" />
+      <component name="Alice Base" id="219">
+        <include>
+          <entry defaultFileset="true" />
         </include>
-        <dependencies />
       </component>
-      <component name="Windows" id="325" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
-        <description />
-        <include all="false">
-          <entry location=".i4j_fileset_322" fileType="regular" />
+      <component name="Windows" id="325">
+        <include>
+          <entry filesetId="322" />
         </include>
         <dependencies>
           <component id="219" />
         </dependencies>
       </component>
-      <component name="Linux" id="459" customizedId="" displayDescription="false" hideHelpButton="false" selected="true" changeable="true" downloadable="false" hidden="false">
-        <description />
-        <include all="false">
-          <entry location=".i4j_fileset_454" fileType="regular" />
+      <component name="Linux" id="459">
+        <include>
+          <entry filesetId="454" />
         </include>
-        <dependencies />
       </component>
     </components>
   </files>
   <launchers>
-    <launcher name="Alice 2.5" id="70" customizedId="" external="false" excludeFromMenu="false" unixMode="755" unixAutoStart="true" menuName="" icnsFile="./images/icon/alice.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="" useCustomMacosExecutableName="false" customMacosExecutableName="" useJavaMinVersionOverride="false" javaMinVersionOverride="" useJavaMaxVersionOverride="false" javaMaxVersionOverride="" checkUpdater="false" updateExecutionMode="unattendedProgress" unattendedUpdateTitle="${i18n:updater.WindowTitle(&quot;${compiler:sys.fullName}&quot;)}">
-      <executable name="alice2" type="1" iconSet="true" iconFile="" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="Required" singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true" dpiAware="java9+">
-        <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="${compiler:sys.shortName}" productName="" />
+    <launcher name="Alice 2.6" id="70" icnsFile="./images/icon/alice.icns">
+      <executable name="alice2" iconSet="true" executableDir="." executableMode="gui" workingDirectory="Required" singleInstance="true">
+        <versionInfo internalName="${compiler:sys.shortName}" />
       </executable>
-      <splashScreen show="false" width="0" height="0" bitmapFile="" textOverlay="false">
-        <text>
-          <statusLine x="20" y="20" text="" fontSize="8" fontColor="0,0,0" bold="false" />
-          <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
-        </text>
-      </splashScreen>
-      <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" mainMode="1" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8" arguments="-l ${compiler:sys.languageId}" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython -Dpython.path=jython/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8 -Dapple.laf.useScreenMenuBar=true --add-exports java.base/java.lang=ALL-UNNAMED --add-exports java.desktop/sun.awt=ALL-UNNAMED --add-exports java.desktop/sun.java2d=ALL-UNNAMED" arguments="-l ${compiler:sys.languageId}">
         <classPath>
           <scanDirectory location="Required/externalLib" failOnError="false" />
-          <archive location="Required/alice2-2.5.4.1-SNAPSHOT.jar" failOnError="false" />
+          <archive location="Required/alice2-2.6.0-SNAPSHOT.jar" failOnError="false" />
         </classPath>
-        <modulePath />
         <nativeLibraryDirectories>
           <directory name="Required/externalLib/win32" />
           <directory name="Required/lib/win32" />
         </nativeLibraryDirectories>
-        <vmOptions />
       </java>
-      <includedFiles />
-      <unextractableFiles />
-      <vmOptionsFile mode="none" overwriteMode="0" fileMode="644">
-        <content />
-      </vmOptionsFile>
-      <customScript mode="1" file="">
-        <content />
-      </customScript>
-      <infoPlist mode="1" file="">
-        <content />
-      </infoPlist>
+      <vmOptionsFile mode="none" />
       <iconImageFiles>
         <file path="./images/icon/AliceIcon.png" />
       </iconImageFiles>
     </launcher>
   </launchers>
-  <installerGui installerType="1" addOnAppId="" suggestPreviousLocations="true" autoUpdateDescriptorUrl="" useAutoUpdateBaseUrl="false" autoUpdateBaseUrl="">
-    <staticMembers script="" />
-    <customCode />
-    <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-      <commentFiles />
-      <customAttributes />
-    </autoUpdate>
+  <installerGui>
     <applications>
-      <application name="" id="installer" customizedId="" beanClass="com.install4j.runtime.beans.applications.InstallerApplication" enabled="true" commentSet="false" comment="" actionElevationType="none" styleId="" fileset="" customIcnsFile="" customIcoFile="" macEntitlementsFile="" automaticLauncherIntegration="false" launchMode="startupFirstWindow" launchInNewProcess="true" launchSchedule="updateSchedule" allLaunchers="true">
-        <serializedBean>
-          <java class="java.beans.XMLDecoder">
-            <object class="com.install4j.runtime.beans.applications.InstallerApplication" />
-          </java>
-        </serializedBean>
-        <styleOverrides />
-        <customScript mode="1" file="">
-          <content />
-        </customScript>
-        <launcherIds />
-        <variables />
+      <application id="installer" beanClass="com.install4j.runtime.beans.applications.InstallerApplication">
         <startup>
-          <screen name="" id="1" customizedId="" beanClass="com.install4j.runtime.beans.screens.StartupScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.StartupScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
+          <screen id="1" beanClass="com.install4j.runtime.beans.screens.StartupScreen" rollbackBarrierExitCode="0">
             <actions>
-              <action name="" id="22" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RequestPrivilegesAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.misc.RequestPrivilegesAction" />
-                  </java>
-                </serializedBean>
-                <condition />
-              </action>
+              <action id="22" beanClass="com.install4j.runtime.beans.actions.misc.RequestPrivilegesAction" actionElevationType="none" rollbackBarrierExitCode="0" />
             </actions>
-            <formComponents />
           </screen>
         </startup>
         <screens>
-          <screen name="" id="2" customizedId="" beanClass="com.install4j.runtime.beans.screens.WelcomeScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="41" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.WelcomeScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
+          <screen id="2" beanClass="com.install4j.runtime.beans.screens.WelcomeScreen" styleId="41" rollbackBarrierExitCode="0">
             <actions>
-              <action name="" id="7" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="true" failureStrategy="1" errorMessage="">
+              <action id="7" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" rollbackBarrierExitCode="0" multiExec="true">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction">
-                      <void property="excludedVariables">
-                        <array class="java.lang.String" length="1">
-                          <void index="0">
-                            <string>sys.installationDir</string>
-                          </void>
-                        </array>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="excludedVariables" type="array" elementType="string" length="1">
+                    <element index="0">sys.installationDir</element>
+                  </property>
                 </serializedBean>
                 <condition>context.getBooleanVariable("sys.confirmedUpdateInstallation")</condition>
               </action>
             </actions>
             <formComponents>
-              <formComponent name="" id="3" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="3" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
-                      <void property="labelText">
-                        <string>${form:welcomeMessage}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelText" type="string">${form:welcomeMessage}</property>
                 </serializedBean>
-                <initScript />
                 <visibilityScript>!context.isConsole()</visibilityScript>
-                <externalParametrizationPropertyNames />
               </formComponent>
-              <formComponent name="" id="4" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="4" beanClass="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent">
-                      <void property="consoleScript">
-                        <object class="com.install4j.api.beans.ScriptProperty">
-                          <void property="value">
-                            <string>String message = context.getMessage("ConsoleWelcomeLabel", context.getApplicationName());
+                  <property name="consoleScript">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">String message = context.getMessage("ConsoleWelcomeLabel", context.getApplicationName());
 return console.askOkCancel(message, true);
-</string>
-                          </void>
-                        </object>
-                      </void>
+</property>
                     </object>
-                  </java>
+                  </property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
-              <formComponent name="" id="5" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.UpdateAlertComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="true" externalParametrizationName="Update Alert" externalParametrizationMode="include">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.UpdateAlertComponent" />
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript />
+              <formComponent id="5" beanClass="com.install4j.runtime.beans.formcomponents.UpdateAlertComponent" useExternalParametrization="true" externalParametrizationName="Update Alert" externalParametrizationMode="include">
                 <externalParametrizationPropertyNames>
                   <propertyName>updateCheck</propertyName>
                 </externalParametrizationPropertyNames>
               </formComponent>
-              <formComponent name="" id="6" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" enabled="true" commentSet="false" comment="" insetTop="20" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="6" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetTop="20">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
-                      <void property="labelText">
-                        <string>${i18n:ClickNext}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelText" type="string">${i18n:ClickNext}</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
             </formComponents>
           </screen>
-          <screen name="" id="8" customizedId="" beanClass="com.install4j.runtime.beans.screens.InstallationDirectoryScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.InstallationDirectoryScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
+          <screen id="8" beanClass="com.install4j.runtime.beans.screens.InstallationDirectoryScreen" rollbackBarrierExitCode="0">
             <condition>!context.getBooleanVariable("sys.confirmedUpdateInstallation")</condition>
-            <validation />
-            <preActivation />
-            <postActivation />
             <actions>
-              <action name="" id="11" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="true" failureStrategy="1" errorMessage="">
+              <action id="11" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" rollbackBarrierExitCode="0" multiExec="true">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction">
-                      <void property="excludedVariables">
-                        <array class="java.lang.String" length="1">
-                          <void index="0">
-                            <string>sys.installationDir</string>
-                          </void>
-                        </array>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="excludedVariables" type="array" elementType="string" length="1">
+                    <element index="0">sys.installationDir</element>
+                  </property>
                 </serializedBean>
                 <condition>context.getVariable("sys.responseFile") == null</condition>
               </action>
             </actions>
             <formComponents>
-              <formComponent name="" id="9" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="25" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="9" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="25">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
-                      <void property="labelText">
-                        <string>${i18n:SelectDirLabel(${compiler:sys.fullName})}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelText" type="string">${i18n:SelectDirLabel(${compiler:sys.fullName})}</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
-              <formComponent name="" id="10" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.InstallationDirectoryChooserComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="true" externalParametrizationName="Installation Directory Chooser" externalParametrizationMode="include">
+              <formComponent id="10" beanClass="com.install4j.runtime.beans.formcomponents.InstallationDirectoryChooserComponent" useExternalParametrization="true" externalParametrizationName="Installation Directory Chooser" externalParametrizationMode="include">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.InstallationDirectoryChooserComponent">
-                      <void property="requestFocus">
-                        <boolean>true</boolean>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="requestFocus" type="boolean" value="true" />
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
                 <externalParametrizationPropertyNames>
                   <propertyName>suggestAppDir</propertyName>
                   <propertyName>validateApplicationId</propertyName>
@@ -364,324 +195,112 @@ return console.askOkCancel(message, true);
               </formComponent>
             </formComponents>
           </screen>
-          <screen name="" id="12" customizedId="" beanClass="com.install4j.runtime.beans.screens.ComponentsScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.ComponentsScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
-            <actions />
+          <screen id="12" beanClass="com.install4j.runtime.beans.screens.ComponentsScreen" rollbackBarrierExitCode="0">
             <formComponents>
-              <formComponent name="" id="13" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="13" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
-                      <void property="labelText">
-                        <string>${i18n:SelectComponentsLabel2}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelText" type="string">${i18n:SelectComponentsLabel2}</property>
                 </serializedBean>
-                <initScript />
                 <visibilityScript>!context.isConsole()</visibilityScript>
-                <externalParametrizationPropertyNames />
               </formComponent>
-              <formComponent name="" id="14" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.ComponentSelectorComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="true" externalParametrizationName="Installation Components" externalParametrizationMode="include">
+              <formComponent id="14" beanClass="com.install4j.runtime.beans.formcomponents.ComponentSelectorComponent" useExternalParametrization="true" externalParametrizationName="Installation Components" externalParametrizationMode="include">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.ComponentSelectorComponent">
-                      <void property="fillVertical">
-                        <boolean>true</boolean>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="fillVertical" type="boolean" value="true" />
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
                 <externalParametrizationPropertyNames>
                   <propertyName>selectionChangedScript</propertyName>
                 </externalParametrizationPropertyNames>
               </formComponent>
             </formComponents>
           </screen>
-          <screen name="" id="15" customizedId="" beanClass="com.install4j.runtime.beans.screens.InstallationScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="" rollbackBarrier="true" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.InstallationScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
+          <screen id="15" beanClass="com.install4j.runtime.beans.screens.InstallationScreen" rollbackBarrier="true" rollbackBarrierExitCode="0">
             <actions>
-              <action name="" id="17" customizedId="" beanClass="com.install4j.runtime.beans.actions.InstallFilesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="false" failureStrategy="2" errorMessage="${i18n:FileCorrupted}">
+              <action id="17" beanClass="com.install4j.runtime.beans.actions.InstallFilesAction" actionElevationType="elevated" rollbackBarrierExitCode="0" failureStrategy="quit" errorMessage="${i18n:FileCorrupted}" />
+              <action id="18" beanClass="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" actionElevationType="elevated" rollbackBarrierExitCode="0">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.InstallFilesAction" />
-                  </java>
-                </serializedBean>
-                <condition />
-              </action>
-              <action name="" id="18" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction">
-                      <void property="uninstallerMenuName">
-                        <string>${i18n:UninstallerMenuEntry(${compiler:sys.fullName})}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="uninstallerMenuName" type="string">${i18n:UninstallerMenuEntry(${compiler:sys.fullName})}</property>
                 </serializedBean>
                 <condition>!context.getBooleanVariable("sys.programGroupDisabled")</condition>
               </action>
-              <action name="" id="19" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.RegisterAddRemoveAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="false" failureStrategy="1" errorMessage="">
+              <action id="19" beanClass="com.install4j.runtime.beans.actions.desktop.RegisterAddRemoveAction" actionElevationType="elevated" rollbackBarrierExitCode="0">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.desktop.RegisterAddRemoveAction">
-                      <void property="itemName">
-                        <string>${compiler:sys.fullName} ${compiler:sys.version}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="itemName" type="string">${compiler:sys.fullName} ${compiler:sys.version}</property>
                 </serializedBean>
-                <condition />
               </action>
             </actions>
             <formComponents>
-              <formComponent name="" id="16" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.ProgressComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="16" beanClass="com.install4j.runtime.beans.formcomponents.ProgressComponent">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.ProgressComponent">
-                      <void property="initialStatusMessage">
-                        <string>${i18n:WizardPreparing}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="initialStatusMessage" type="string">${i18n:WizardPreparing}</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
             </formComponents>
           </screen>
-          <screen name="" id="20" customizedId="" beanClass="com.install4j.runtime.beans.screens.FinishedScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="41" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="true" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.FinishedScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
-            <actions />
+          <screen id="20" beanClass="com.install4j.runtime.beans.screens.FinishedScreen" styleId="41" rollbackBarrierExitCode="0" finishScreen="true">
             <formComponents>
-              <formComponent name="" id="21" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="10" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="21" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="10">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
-                      <void property="labelText">
-                        <string>${form:finishedMessage}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelText" type="string">${form:finishedMessage}</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
             </formComponents>
           </screen>
         </screens>
       </application>
-      <application name="" id="uninstaller" customizedId="" beanClass="com.install4j.runtime.beans.applications.UninstallerApplication" enabled="true" commentSet="false" comment="" actionElevationType="none" styleId="" fileset="" customIcnsFile="" customIcoFile="" macEntitlementsFile="" automaticLauncherIntegration="false" launchMode="startupFirstWindow" launchInNewProcess="true" launchSchedule="updateSchedule" allLaunchers="true">
+      <application id="uninstaller" beanClass="com.install4j.runtime.beans.applications.UninstallerApplication">
         <serializedBean>
-          <java class="java.beans.XMLDecoder">
-            <object class="com.install4j.runtime.beans.applications.UninstallerApplication">
-              <void property="customMacosExecutableName">
-                <string>${i18n:UninstallerMenuEntry(${compiler:sys.fullName})}</string>
-              </void>
-              <void property="useCustomMacosExecutableName">
-                <boolean>true</boolean>
-              </void>
-            </object>
-          </java>
+          <property name="customMacosExecutableName" type="string">${i18n:UninstallerMenuEntry(${compiler:sys.fullName})}</property>
+          <property name="useCustomMacosExecutableName" type="boolean" value="true" />
         </serializedBean>
-        <styleOverrides />
-        <customScript mode="1" file="">
-          <content />
-        </customScript>
-        <launcherIds />
-        <variables />
         <startup>
-          <screen name="" id="23" customizedId="" beanClass="com.install4j.runtime.beans.screens.StartupScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.StartupScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
+          <screen id="23" beanClass="com.install4j.runtime.beans.screens.StartupScreen" rollbackBarrierExitCode="0">
             <actions>
-              <action name="" id="33" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" />
-                  </java>
-                </serializedBean>
-                <condition />
-              </action>
-              <action name="" id="34" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RequireInstallerPrivilegesAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.misc.RequireInstallerPrivilegesAction" />
-                  </java>
-                </serializedBean>
-                <condition />
-              </action>
+              <action id="33" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" rollbackBarrierExitCode="0" />
+              <action id="34" beanClass="com.install4j.runtime.beans.actions.misc.RequireInstallerPrivilegesAction" actionElevationType="none" rollbackBarrierExitCode="0" />
             </actions>
-            <formComponents />
           </screen>
         </startup>
         <screens>
-          <screen name="" id="24" customizedId="" beanClass="com.install4j.runtime.beans.screens.UninstallWelcomeScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="41" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.UninstallWelcomeScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
-            <actions />
+          <screen id="24" beanClass="com.install4j.runtime.beans.screens.UninstallWelcomeScreen" styleId="41" rollbackBarrierExitCode="0">
             <formComponents>
-              <formComponent name="" id="25" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="10" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="25" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="10">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
-                      <void property="labelText">
-                        <string>${form:welcomeMessage}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelText" type="string">${form:welcomeMessage}</property>
                 </serializedBean>
-                <initScript />
                 <visibilityScript>!context.isConsole()</visibilityScript>
-                <externalParametrizationPropertyNames />
               </formComponent>
-              <formComponent name="" id="26" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="26" beanClass="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent">
-                      <void property="consoleScript">
-                        <object class="com.install4j.api.beans.ScriptProperty">
-                          <void property="value">
-                            <string>String message = context.getMessage("ConfirmUninstall", context.getApplicationName());
+                  <property name="consoleScript">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">String message = context.getMessage("ConfirmUninstall", context.getApplicationName());
 return console.askYesNo(message, true);
-</string>
-                          </void>
-                        </object>
-                      </void>
+</property>
                     </object>
-                  </java>
+                  </property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
             </formComponents>
           </screen>
-          <screen name="" id="27" customizedId="" beanClass="com.install4j.runtime.beans.screens.UninstallationScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.UninstallationScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
+          <screen id="27" beanClass="com.install4j.runtime.beans.screens.UninstallationScreen" rollbackBarrierExitCode="0">
             <actions>
-              <action name="" id="29" customizedId="" beanClass="com.install4j.runtime.beans.actions.UninstallFilesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" rollbackBarrierExitCode="0" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.UninstallFilesAction" />
-                  </java>
-                </serializedBean>
-                <condition />
-              </action>
+              <action id="29" beanClass="com.install4j.runtime.beans.actions.UninstallFilesAction" actionElevationType="elevated" rollbackBarrierExitCode="0" />
             </actions>
             <formComponents>
-              <formComponent name="" id="28" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.ProgressComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="28" beanClass="com.install4j.runtime.beans.formcomponents.ProgressComponent">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.ProgressComponent">
-                      <void property="initialStatusMessage">
-                        <string>${i18n:UninstallerPreparing}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="initialStatusMessage" type="string">${i18n:UninstallerPreparing}</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
             </formComponents>
           </screen>
-          <screen name="" id="32" customizedId="" beanClass="com.install4j.runtime.beans.screens.UninstallFailureScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="true" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.UninstallFailureScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
-            <actions />
-            <formComponents />
-          </screen>
-          <screen name="" id="30" customizedId="" beanClass="com.install4j.runtime.beans.screens.UninstallSuccessScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" styleId="41" rollbackBarrier="false" rollbackBarrierExitCode="0" backButton="2" finishScreen="true" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.UninstallSuccessScreen" />
-              </java>
-            </serializedBean>
-            <styleOverrides />
-            <condition />
-            <validation />
-            <preActivation />
-            <postActivation />
-            <actions />
+          <screen id="32" beanClass="com.install4j.runtime.beans.screens.UninstallFailureScreen" rollbackBarrierExitCode="0" finishScreen="true" />
+          <screen id="30" beanClass="com.install4j.runtime.beans.screens.UninstallSuccessScreen" styleId="41" rollbackBarrierExitCode="0" finishScreen="true">
             <formComponents>
-              <formComponent name="" id="31" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="10" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="31" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="10">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
-                      <void property="labelText">
-                        <string>${form:successMessage}</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelText" type="string">${form:successMessage}</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
             </formComponents>
           </screen>
@@ -689,182 +308,100 @@ return console.askYesNo(message, true);
       </application>
     </applications>
     <styles defaultStyleId="35">
-      <style name="Standard" id="35" customizedId="" beanClass="com.install4j.runtime.beans.styles.FormStyle" enabled="true" commentSet="false" comment="">
-        <serializedBean>
-          <java class="java.beans.XMLDecoder">
-            <object class="com.install4j.runtime.beans.styles.FormStyle" />
-          </java>
-        </serializedBean>
+      <style name="Standard" id="35" beanClass="com.install4j.runtime.beans.styles.FormStyle">
         <formComponents>
-          <formComponent name="Header" id="36" customizedId="" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" enabled="true" commentSet="false" comment="" insetTop="0" insetLeft="" insetBottom="0" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+          <formComponent name="Header" id="36" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" insetTop="0" insetBottom="0">
             <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.styles.NestedStyleComponent">
-                  <void property="styleId">
-                    <string>48</string>
-                  </void>
-                </object>
-              </java>
+              <property name="styleId" type="string">48</property>
             </serializedBean>
-            <initScript />
-            <visibilityScript />
-            <externalParametrizationPropertyNames />
           </formComponent>
-          <group name="Main" id="37" customizedId="" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" />
-              </java>
-            </serializedBean>
+          <group name="Main" id="37" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
             <beans>
-              <formComponent name="" id="38" customizedId="" beanClass="com.install4j.runtime.beans.styles.ContentComponent" enabled="true" commentSet="false" comment="" insetTop="10" insetLeft="20" insetBottom="10" insetRight="20" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="38" beanClass="com.install4j.runtime.beans.styles.ContentComponent" insetTop="10" insetLeft="20" insetBottom="10" insetRight="20" />
+              <formComponent name="Watermark" id="39" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" insetTop="0" insetLeft="5" insetBottom="0" useExternalParametrization="true" externalParametrizationName="Custom watermark" externalParametrizationMode="include">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.styles.ContentComponent" />
-                  </java>
+                  <property name="enabledTitleText" type="boolean" value="false" />
+                  <property name="labelText" type="string">install4j</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
-              </formComponent>
-              <formComponent name="Watermark" id="39" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" enabled="true" commentSet="false" comment="" insetTop="0" insetLeft="5" insetBottom="0" insetRight="" resetInitOnPrevious="false" useExternalParametrization="true" externalParametrizationName="Custom watermark" externalParametrizationMode="include">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.SeparatorComponent">
-                      <void property="enabledTitleText">
-                        <boolean>false</boolean>
-                      </void>
-                      <void property="labelText">
-                        <string>install4j</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript />
                 <externalParametrizationPropertyNames>
                   <propertyName>labelText</propertyName>
                 </externalParametrizationPropertyNames>
               </formComponent>
-              <formComponent name="Footer" id="40" customizedId="" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" enabled="true" commentSet="false" comment="" insetTop="0" insetLeft="" insetBottom="0" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent name="Footer" id="40" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" insetTop="0" insetBottom="0">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.styles.NestedStyleComponent">
-                      <void property="styleId">
-                        <string>52</string>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="styleId" type="string">52</property>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
             </beans>
-            <externalParametrizationPropertyNames />
           </group>
         </formComponents>
       </style>
-      <style name="Banner" id="41" customizedId="" beanClass="com.install4j.runtime.beans.styles.FormStyle" enabled="true" commentSet="false" comment="">
-        <serializedBean>
-          <java class="java.beans.XMLDecoder">
-            <object class="com.install4j.runtime.beans.styles.FormStyle" />
-          </java>
-        </serializedBean>
+      <style name="Banner" id="41" beanClass="com.install4j.runtime.beans.styles.FormStyle">
         <formComponents>
-          <group name="" id="42" customizedId="" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit" useExternalParametrization="true" externalParametrizationName="Customize banner image" externalParametrizationMode="include">
+          <group id="42" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" useExternalParametrization="true" externalParametrizationName="Customize banner image" externalParametrizationMode="include">
             <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
-                  <void property="backgroundColor">
-                    <object class="java.awt.Color">
-                      <int>255</int>
-                      <int>255</int>
-                      <int>255</int>
-                      <int>255</int>
-                    </object>
-                  </void>
-                  <void property="borderSides">
-                    <object class="com.install4j.runtime.beans.formcomponents.BorderSides">
-                      <void property="bottom">
-                        <boolean>true</boolean>
-                      </void>
-                    </object>
-                  </void>
-                  <void property="imageEdgeBackgroundColor">
-                    <object class="java.awt.Color">
-                      <int>25</int>
-                      <int>143</int>
-                      <int>220</int>
-                      <int>255</int>
-                    </object>
-                  </void>
-                  <void property="imageEdgeBorder">
-                    <boolean>true</boolean>
-                  </void>
-                  <void property="imageFile">
-                    <object class="com.install4j.api.beans.ExternalFile">
-                      <string>${compiler:sys.install4jHome}/resource/styles/wizard.png</string>
-                    </object>
-                  </void>
-                  <void property="insets">
-                    <object class="java.awt.Insets">
-                      <int>5</int>
-                      <int>10</int>
-                      <int>10</int>
-                      <int>10</int>
-                    </object>
-                  </void>
+              <property name="backgroundColor">
+                <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                  <object class="java.awt.Color">
+                    <int>255</int>
+                    <int>255</int>
+                    <int>255</int>
+                    <int>255</int>
+                  </object>
+                  <object class="java.awt.Color">
+                    <int>49</int>
+                    <int>52</int>
+                    <int>53</int>
+                    <int>255</int>
+                  </object>
                 </object>
-              </java>
+              </property>
+              <property name="borderSides">
+                <object class="com.install4j.runtime.beans.formcomponents.BorderSides">
+                  <property name="bottom" type="boolean" value="true" />
+                </object>
+              </property>
+              <property name="imageEdgeBackgroundColor">
+                <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                  <object class="java.awt.Color">
+                    <int>25</int>
+                    <int>143</int>
+                    <int>220</int>
+                    <int>255</int>
+                  </object>
+                  <object class="java.awt.Color">
+                    <int>0</int>
+                    <int>74</int>
+                    <int>151</int>
+                    <int>255</int>
+                  </object>
+                </object>
+              </property>
+              <property name="imageEdgeBorder" type="boolean" value="true" />
+              <property name="imageFile">
+                <object class="com.install4j.api.beans.ExternalFile">
+                  <string>${compiler:sys.install4jHome}/resource/styles/wizard.png</string>
+                </object>
+              </property>
+              <property name="insets">
+                <object class="java.awt.Insets">
+                  <int>5</int>
+                  <int>10</int>
+                  <int>10</int>
+                  <int>10</int>
+                </object>
+              </property>
             </serializedBean>
             <beans>
-              <formComponent name="" id="43" customizedId="" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent" enabled="true" commentSet="false" comment="" insetTop="0" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <formComponent id="43" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent" insetTop="0">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.styles.ScreenTitleComponent">
-                      <void property="labelFontSizePercent">
-                        <int>130</int>
-                      </void>
-                      <void property="labelFontStyle">
-                        <object class="java.lang.Enum" method="valueOf">
-                          <class>com.install4j.runtime.beans.formcomponents.FontStyle</class>
-                          <string>BOLD</string>
-                        </object>
-                      </void>
-                      <void property="labelFontType">
-                        <object class="java.lang.Enum" method="valueOf">
-                          <class>com.install4j.runtime.beans.formcomponents.FontType</class>
-                          <string>DERIVED</string>
-                        </object>
-                      </void>
-                    </object>
-                  </java>
+                  <property name="labelFontSizePercent" type="int" value="130" />
+                  <property name="labelFontStyle" type="enum" class="com.install4j.runtime.beans.formcomponents.FontStyle" value="BOLD" />
+                  <property name="labelFontType" type="enum" class="com.install4j.runtime.beans.formcomponents.FontType" value="DERIVED" />
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
               </formComponent>
-              <formComponent name="" id="44" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.SeparatorComponent" />
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
-              </formComponent>
-              <formComponent name="" id="45" customizedId="" beanClass="com.install4j.runtime.beans.styles.ContentComponent" enabled="true" commentSet="false" comment="" insetTop="10" insetLeft="" insetBottom="0" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.styles.ContentComponent" />
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript />
-                <externalParametrizationPropertyNames />
-              </formComponent>
+              <formComponent id="44" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" />
+              <formComponent id="45" beanClass="com.install4j.runtime.beans.styles.ContentComponent" insetTop="10" insetBottom="0" />
             </beans>
             <externalParametrizationPropertyNames>
               <propertyName>imageAnchor</propertyName>
@@ -872,141 +409,80 @@ return console.askYesNo(message, true);
               <propertyName>imageFile</propertyName>
             </externalParametrizationPropertyNames>
           </group>
-          <formComponent name="" id="46" customizedId="" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="0" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+          <formComponent id="46" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" insetBottom="0">
             <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.styles.NestedStyleComponent">
-                  <void property="styleId">
-                    <string>52</string>
-                  </void>
-                </object>
-              </java>
+              <property name="styleId" type="string">52</property>
             </serializedBean>
-            <initScript />
-            <visibilityScript />
-            <externalParametrizationPropertyNames />
           </formComponent>
         </formComponents>
       </style>
-      <group name="Style components" id="47" customizedId="" beanClass="com.install4j.runtime.beans.groups.StyleGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit">
-        <serializedBean>
-          <java class="java.beans.XMLDecoder">
-            <object class="com.install4j.runtime.beans.groups.StyleGroup" />
-          </java>
-        </serializedBean>
+      <group name="Style components" id="47" beanClass="com.install4j.runtime.beans.groups.StyleGroup">
         <beans>
-          <style name="Standard header" id="48" customizedId="" beanClass="com.install4j.runtime.beans.styles.FormStyle" enabled="true" commentSet="false" comment="">
+          <style name="Standard header" id="48" beanClass="com.install4j.runtime.beans.styles.FormStyle">
             <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.styles.FormStyle">
-                  <void property="fillVertical">
-                    <boolean>false</boolean>
-                  </void>
-                  <void property="standalone">
-                    <boolean>false</boolean>
-                  </void>
-                  <void property="verticalAnchor">
-                    <object class="java.lang.Enum" method="valueOf">
-                      <class>com.install4j.api.beans.Anchor</class>
-                      <string>NORTH</string>
-                    </object>
-                  </void>
-                </object>
-              </java>
+              <property name="fillVertical" type="boolean" value="false" />
+              <property name="standalone" type="boolean" value="false" />
+              <property name="verticalAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="NORTH" />
             </serializedBean>
             <formComponents>
-              <group name="" id="49" customizedId="" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit" useExternalParametrization="true" externalParametrizationName="Customize title bar" externalParametrizationMode="include">
+              <group id="49" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" useExternalParametrization="true" externalParametrizationName="Customize title bar" externalParametrizationMode="include">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
-                      <void property="backgroundColor">
-                        <object class="java.awt.Color">
-                          <int>255</int>
-                          <int>255</int>
-                          <int>255</int>
-                          <int>255</int>
-                        </object>
-                      </void>
-                      <void property="borderSides">
-                        <object class="com.install4j.runtime.beans.formcomponents.BorderSides">
-                          <void property="bottom">
-                            <boolean>true</boolean>
-                          </void>
-                        </object>
-                      </void>
-                      <void property="imageAnchor">
-                        <object class="java.lang.Enum" method="valueOf">
-                          <class>com.install4j.api.beans.Anchor</class>
-                          <string>NORTHEAST</string>
-                        </object>
-                      </void>
-                      <void property="imageEdgeBorderWidth">
-                        <int>2</int>
-                      </void>
-                      <void property="imageFile">
-                        <object class="com.install4j.api.beans.ExternalFile">
-                          <string>icon:${installer:sys.installerApplicationMode}_header.png</string>
-                        </object>
-                      </void>
-                      <void property="imageInsets">
-                        <object class="java.awt.Insets">
-                          <int>0</int>
-                          <int>5</int>
-                          <int>1</int>
-                          <int>1</int>
-                        </object>
-                      </void>
-                      <void property="insets">
-                        <object class="java.awt.Insets">
-                          <int>0</int>
-                          <int>20</int>
-                          <int>0</int>
-                          <int>10</int>
-                        </object>
-                      </void>
+                  <property name="backgroundColor">
+                    <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                      <object class="java.awt.Color">
+                        <int>255</int>
+                        <int>255</int>
+                        <int>255</int>
+                        <int>255</int>
+                      </object>
+                      <object class="java.awt.Color">
+                        <int>49</int>
+                        <int>52</int>
+                        <int>53</int>
+                        <int>255</int>
+                      </object>
                     </object>
-                  </java>
+                  </property>
+                  <property name="borderSides">
+                    <object class="com.install4j.runtime.beans.formcomponents.BorderSides">
+                      <property name="bottom" type="boolean" value="true" />
+                    </object>
+                  </property>
+                  <property name="imageAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="NORTHEAST" />
+                  <property name="imageEdgeBorderWidth" type="int" value="2" />
+                  <property name="imageFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>icon:${installer:sys.installerApplicationMode}_header.png</string>
+                    </object>
+                  </property>
+                  <property name="imageInsets">
+                    <object class="java.awt.Insets">
+                      <int>0</int>
+                      <int>5</int>
+                      <int>1</int>
+                      <int>1</int>
+                    </object>
+                  </property>
+                  <property name="insets">
+                    <object class="java.awt.Insets">
+                      <int>0</int>
+                      <int>20</int>
+                      <int>0</int>
+                      <int>10</int>
+                    </object>
+                  </property>
                 </serializedBean>
                 <beans>
-                  <formComponent name="Title" id="50" customizedId="" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+                  <formComponent name="Title" id="50" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent">
                     <serializedBean>
-                      <java class="java.beans.XMLDecoder">
-                        <object class="com.install4j.runtime.beans.styles.ScreenTitleComponent">
-                          <void property="labelFontStyle">
-                            <object class="java.lang.Enum" method="valueOf">
-                              <class>com.install4j.runtime.beans.formcomponents.FontStyle</class>
-                              <string>BOLD</string>
-                            </object>
-                          </void>
-                          <void property="labelFontType">
-                            <object class="java.lang.Enum" method="valueOf">
-                              <class>com.install4j.runtime.beans.formcomponents.FontType</class>
-                              <string>DERIVED</string>
-                            </object>
-                          </void>
-                        </object>
-                      </java>
+                      <property name="labelFontStyle" type="enum" class="com.install4j.runtime.beans.formcomponents.FontStyle" value="BOLD" />
+                      <property name="labelFontType" type="enum" class="com.install4j.runtime.beans.formcomponents.FontType" value="DERIVED" />
                     </serializedBean>
-                    <initScript />
-                    <visibilityScript />
-                    <externalParametrizationPropertyNames />
                   </formComponent>
-                  <formComponent name="Subtitle" id="51" customizedId="" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="8" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+                  <formComponent name="Subtitle" id="51" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent" insetLeft="8">
                     <serializedBean>
-                      <java class="java.beans.XMLDecoder">
-                        <object class="com.install4j.runtime.beans.styles.ScreenTitleComponent">
-                          <void property="titleType">
-                            <object class="java.lang.Enum" method="valueOf">
-                              <class>com.install4j.runtime.beans.styles.TitleType</class>
-                              <string>SUB_TITLE</string>
-                            </object>
-                          </void>
-                        </object>
-                      </java>
+                      <property name="titleType" type="enum" class="com.install4j.runtime.beans.styles.TitleType" value="SUB_TITLE" />
                     </serializedBean>
-                    <initScript />
-                    <visibilityScript />
-                    <externalParametrizationPropertyNames />
                   </formComponent>
                 </beans>
                 <externalParametrizationPropertyNames>
@@ -1019,117 +495,46 @@ return console.askYesNo(message, true);
               </group>
             </formComponents>
           </style>
-          <style name="Standard footer" id="52" customizedId="" beanClass="com.install4j.runtime.beans.styles.FormStyle" enabled="true" commentSet="false" comment="">
+          <style name="Standard footer" id="52" beanClass="com.install4j.runtime.beans.styles.FormStyle">
             <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.styles.FormStyle">
-                  <void property="fillVertical">
-                    <boolean>false</boolean>
-                  </void>
-                  <void property="standalone">
-                    <boolean>false</boolean>
-                  </void>
-                  <void property="verticalAnchor">
-                    <object class="java.lang.Enum" method="valueOf">
-                      <class>com.install4j.api.beans.Anchor</class>
-                      <string>SOUTH</string>
-                    </object>
-                  </void>
-                </object>
-              </java>
+              <property name="fillVertical" type="boolean" value="false" />
+              <property name="standalone" type="boolean" value="false" />
+              <property name="verticalAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="SOUTH" />
             </serializedBean>
             <formComponents>
-              <group name="" id="53" customizedId="" beanClass="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+              <group id="53" beanClass="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup">
                 <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup">
-                      <void property="alignFirstLabel">
-                        <boolean>false</boolean>
-                      </void>
-                      <void property="insets">
-                        <object class="java.awt.Insets">
-                          <int>3</int>
-                          <int>5</int>
-                          <int>8</int>
-                          <int>5</int>
-                        </object>
-                      </void>
+                  <property name="alignFirstLabel" type="boolean" value="false" />
+                  <property name="insets">
+                    <object class="java.awt.Insets">
+                      <int>3</int>
+                      <int>5</int>
+                      <int>8</int>
+                      <int>5</int>
                     </object>
-                  </java>
+                  </property>
                 </serializedBean>
                 <beans>
-                  <formComponent name="" id="54" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SpringComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+                  <formComponent id="54" beanClass="com.install4j.runtime.beans.formcomponents.SpringComponent" />
+                  <formComponent name="Back button" id="55" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent">
                     <serializedBean>
-                      <java class="java.beans.XMLDecoder">
-                        <object class="com.install4j.runtime.beans.formcomponents.SpringComponent" />
-                      </java>
+                      <property name="buttonText" type="string">&lt; ${i18n:ButtonBack}</property>
+                      <property name="controlButtonType" type="enum" class="com.install4j.api.context.ControlButtonType" value="PREVIOUS" />
                     </serializedBean>
-                    <initScript />
-                    <visibilityScript />
-                    <externalParametrizationPropertyNames />
                   </formComponent>
-                  <formComponent name="Back button" id="55" customizedId="" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+                  <formComponent name="Next button" id="56" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent">
                     <serializedBean>
-                      <java class="java.beans.XMLDecoder">
-                        <object class="com.install4j.runtime.beans.styles.StandardControlButtonComponent">
-                          <void property="buttonText">
-                            <string>&lt; ${i18n:ButtonBack}</string>
-                          </void>
-                          <void property="controlButtonType">
-                            <object class="java.lang.Enum" method="valueOf">
-                              <class>com.install4j.api.context.ControlButtonType</class>
-                              <string>PREVIOUS</string>
-                            </object>
-                          </void>
-                        </object>
-                      </java>
+                      <property name="buttonText" type="string">${i18n:ButtonNext} &gt;</property>
+                      <property name="controlButtonType" type="enum" class="com.install4j.api.context.ControlButtonType" value="NEXT" />
                     </serializedBean>
-                    <initScript />
-                    <visibilityScript />
-                    <externalParametrizationPropertyNames />
                   </formComponent>
-                  <formComponent name="Next button" id="56" customizedId="" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
+                  <formComponent name="Cancel button" id="57" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent" insetLeft="5">
                     <serializedBean>
-                      <java class="java.beans.XMLDecoder">
-                        <object class="com.install4j.runtime.beans.styles.StandardControlButtonComponent">
-                          <void property="buttonText">
-                            <string>${i18n:ButtonNext} &gt;</string>
-                          </void>
-                          <void property="controlButtonType">
-                            <object class="java.lang.Enum" method="valueOf">
-                              <class>com.install4j.api.context.ControlButtonType</class>
-                              <string>NEXT</string>
-                            </object>
-                          </void>
-                        </object>
-                      </java>
+                      <property name="buttonText" type="string">${i18n:ButtonCancel}</property>
+                      <property name="controlButtonType" type="enum" class="com.install4j.api.context.ControlButtonType" value="CANCEL" />
                     </serializedBean>
-                    <initScript />
-                    <visibilityScript />
-                    <externalParametrizationPropertyNames />
-                  </formComponent>
-                  <formComponent name="Cancel button" id="57" customizedId="" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="5" insetBottom="" insetRight="" resetInitOnPrevious="false" useExternalParametrization="false" externalParametrizationName="" externalParametrizationMode="all">
-                    <serializedBean>
-                      <java class="java.beans.XMLDecoder">
-                        <object class="com.install4j.runtime.beans.styles.StandardControlButtonComponent">
-                          <void property="buttonText">
-                            <string>${i18n:ButtonCancel}</string>
-                          </void>
-                          <void property="controlButtonType">
-                            <object class="java.lang.Enum" method="valueOf">
-                              <class>com.install4j.api.context.ControlButtonType</class>
-                              <string>CANCEL</string>
-                            </object>
-                          </void>
-                        </object>
-                      </java>
-                    </serializedBean>
-                    <initScript />
-                    <visibilityScript />
-                    <externalParametrizationPropertyNames />
                   </formComponent>
                 </beans>
-                <externalParametrizationPropertyNames />
               </group>
             </formComponents>
           </style>
@@ -1138,32 +543,23 @@ return console.askYesNo(message, true);
     </styles>
   </installerGui>
   <mediaSets>
-    <macosArchive name="English macOS Single Bundle Archive" id="71" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}" launcherId="70">
+    <macosArchive name="English macOS Single Bundle Archive" id="71" mediaFileName="${compiler:sys.fullName}" volumeName="${compiler:sys.fullName}" launcherId="70">
       <excludedComponents>
         <component id="67" />
         <component id="325" />
         <component id="459" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
+      <jreBundle jreBundleSource="preCreated" includedJre="macos-amd64-17" />
       <topLevelFiles>
         <file name=".VolumeIcon.icns" file="./images/icon/AliceVolumeIcon.icns" />
         <symlink name="Applications" target="/Applications" />
@@ -1172,59 +568,40 @@ return console.askYesNo(message, true);
         <file name="AliceDisk.icns" file="./images/icon/AliceDisk.icns" />
       </topLevelFiles>
     </macosArchive>
-    <windowsArchive name="English Windows Archive" id="186" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
+    <windowsArchive name="English Windows Archive" id="186" mediaFileName="${compiler:sys.fullName}" installDir="${compiler:sys.fullName}" architecture="64">
       <excludedComponents>
         <component id="67" />
         <component id="459" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
     </windowsArchive>
-    <macosArchive name="Spanish macOS Single Bundle Archive" id="213" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_152_unpacked" manualJREEntry="false" archiveType="dmg" volumeName="${compiler:sys.fullName}_es" launcherId="70">
+    <macosArchive name="Spanish macOS Single Bundle Archive" id="213" mediaFileName="${compiler:sys.fullName}_es" overridePrincipalLanguage="true" volumeName="${compiler:sys.fullName}_es" launcherId="70">
       <excludedComponents>
         <component id="59" />
         <component id="325" />
         <component id="459" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
+      <jreBundle jreBundleSource="preCreated" includedJre="macos-amd64-17" />
       <topLevelFiles>
         <file name=".VolumeIcon.icns" file="./images/icon/AliceVolumeIcon.icns" />
         <symlink name="Applications" target="/Applications" />
@@ -1233,223 +610,121 @@ return console.askYesNo(message, true);
         <file name="AliceDisk.icns" file="./images/icon/AliceDisk.icns" />
       </topLevelFiles>
     </macosArchive>
-    <windowsArchive name="Spanish Windows Archive" id="437" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="true" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_202" manualJREEntry="false">
+    <windowsArchive name="Spanish Windows Archive" id="437" mediaFileName="${compiler:sys.fullName}_es" installDir="${compiler:sys.fullName}" overridePrincipalLanguage="true" architecture="64">
       <excludedComponents>
         <component id="59" />
         <component id="459" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
     </windowsArchive>
-    <linuxDeb name="English Linux Deb Archive" id="442" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false" overwriteNeverAsConfigFiles="false" dependencies="libglu1-mesa, openjdk-8-jre" bzip="false" description="" maintainerEmail="" architectureSet="false" architecture="">
+    <linuxDeb name="English Linux Deb Archive" id="442" mediaFileName="${compiler:sys.fullName}" dependencies="libglu1-mesa, openjdk-8-jre">
       <excludedComponents>
         <component id="67" />
         <component id="325" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
-      <preInstallScript mode="1" file="">
-        <content />
-      </preInstallScript>
-      <postInstallScript mode="3" file="">
-        <content>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
-lxpanelctl restart</content>
-      </postInstallScript>
-      <preUninstallScript mode="3" file="">
-        <content>rm /usr/share/applications/alice2.desktop</content>
-      </preUninstallScript>
-      <postUninstallScript mode="1" file="">
-        <content />
-      </postUninstallScript>
+      <jreBundle jreBundleSource="none" />
+      <postInstallScript>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
+lxpanelctl restart</postInstallScript>
+      <preUninstallScript>rm /usr/share/applications/alice2.desktop</preUninstallScript>
     </linuxDeb>
-    <linuxDeb name="Spanish Linux Deb Archive" id="447" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false" overwriteNeverAsConfigFiles="false" dependencies="libglu1-mesa, openjdk-8-jre" bzip="false" description="" maintainerEmail="" architectureSet="false" architecture="">
+    <linuxDeb name="Spanish Linux Deb Archive" id="447" mediaFileName="${compiler:sys.fullName}_es" overridePrincipalLanguage="true" dependencies="libglu1-mesa, openjdk-8-jre">
       <excludedComponents>
         <component id="59" />
         <component id="325" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
-      <preInstallScript mode="1" file="">
-        <content />
-      </preInstallScript>
-      <postInstallScript mode="3" file="">
-        <content>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
-lxpanelctl restart</content>
-      </postInstallScript>
-      <preUninstallScript mode="3" file="">
-        <content>rm /usr/share/applications/alice2.desktop</content>
-      </preUninstallScript>
-      <postUninstallScript mode="1" file="">
-        <content />
-      </postUninstallScript>
+      <jreBundle jreBundleSource="none" />
+      <postInstallScript>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
+lxpanelctl restart</postInstallScript>
+      <preUninstallScript>rm /usr/share/applications/alice2.desktop</preUninstallScript>
     </linuxDeb>
-    <unixInstaller name="English Unix Installer" id="448" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="false" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
+    <unixInstaller name="English Unix Installer" id="448" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}">
       <excludedComponents>
         <component id="67" />
         <component id="325" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location=".i4j_fileset_199" fileType="regular" />
-        <entry location=".i4j_fileset_322" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry filesetId="199" />
+        <entry filesetId="322" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
-      <installerScript mode="1" file="">
-        <content />
-      </installerScript>
+      <jreBundle jreBundleSource="none" />
     </unixInstaller>
-    <unixArchive name="English Unix Archive" id="449" customizedId="" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false">
+    <unixArchive name="English Unix Archive" id="449" mediaFileName="${compiler:sys.fullName}" installDir="/opt/${compiler:sys.shortName}">
       <excludedComponents>
         <component id="67" />
         <component id="325" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location=".i4j_fileset_199" fileType="regular" />
-        <entry location=".i4j_fileset_322" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry filesetId="199" />
+        <entry filesetId="322" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
+      <jreBundle jreBundleSource="none" />
     </unixArchive>
-    <unixInstaller name="Spanish Unix Installer" id="450" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="false" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
+    <unixInstaller name="Spanish Unix Installer" id="450" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true">
       <excludedComponents>
         <component id="59" />
         <component id="325" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location=".i4j_fileset_60" fileType="regular" />
-        <entry location=".i4j_fileset_322" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry filesetId="60" />
+        <entry filesetId="322" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
-      <installerScript mode="1" file="">
-        <content />
-      </installerScript>
+      <jreBundle jreBundleSource="none" />
     </unixInstaller>
-    <unixArchive name="Spanish Unix Archive" id="451" customizedId="" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false">
+    <unixArchive name="Spanish Unix Archive" id="451" mediaFileName="${compiler:sys.fullName}_es" installDir="/opt/${compiler:sys.shortName}" overridePrincipalLanguage="true">
       <excludedComponents>
         <component id="59" />
         <component id="325" />
       </excludedComponents>
-      <includedDownloadableComponents />
-      <excludedLaunchers />
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="es" customLocalizationFile="" />
+      <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" fileType="regular" />
-        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" fileType="regular" />
-        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-i586.jar" fileType="regular" />
-        <entry location=".i4j_fileset_60" fileType="regular" />
-        <entry location=".i4j_fileset_322" fileType="regular" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry filesetId="60" />
+        <entry filesetId="322" />
       </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
+      <jreBundle jreBundleSource="none" />
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="true">
+  <buildIds buildAll="false">
     <mediaSet refId="71" />
-    <mediaSet refId="186" />
-    <mediaSet refId="213" />
-    <mediaSet refId="437" />
-    <mediaSet refId="442" />
-    <mediaSet refId="447" />
-    <mediaSet refId="448" />
-    <mediaSet refId="449" />
-    <mediaSet refId="450" />
-    <mediaSet refId="451" />
   </buildIds>
-  <buildOptions verbose="false" faster="false" disableSigning="false" disableJreBundling="false" debug="false" />
+  <buildOptions disableSigning="true" />
 </install4j>

@@ -36,11 +36,11 @@ public abstract class SizeAlongDimensionQuestion extends Question {
 		Transformable subjectValue = subject.getTransformableValue();
 		if( subjectValue!=null ) {
 /*			if (this instanceof Width){
-				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_width_is_");	 
+				edu.cmu.cs.stage3.alice.core.responses.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_width_is_");
 			} else if (this instanceof Height){
-				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_height_is_"); 
+				edu.cmu.cs.stage3.alice.core.responses.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_height_is_");
 			} else if (this instanceof Depth){
-				edu.cmu.cs.stage3.alice.core.response.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_depth_is_"); 
+				edu.cmu.cs.stage3.alice.core.responses.Print.outputtext= subjectValue.name.getStringValue()+Messages.getString("_s_depth_is_");
 			}*/ 
 			return new Double( subjectValue.getSizeAlongDimension( getDimension() ) );
 		}

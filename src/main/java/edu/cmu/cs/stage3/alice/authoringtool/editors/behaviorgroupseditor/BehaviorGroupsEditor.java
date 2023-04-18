@@ -434,8 +434,8 @@ public class BehaviorGroupsEditor extends edu.cmu.cs.stage3.alice.authoringtool.
                     behavior.setParent( owner );
                     owner.behaviors.add(0, behavior);
                     behavior.manufactureDetails();
-                    if (behavior instanceof edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior){
-						((edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior)behavior).subject.set(authoringTool.getCurrentCamera());
+                    if (behavior instanceof edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior){
+						((edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior)behavior).subject.set(authoringTool.getCurrentCamera());
                     }
                 }
 				if (authoringTool != null){

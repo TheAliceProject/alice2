@@ -47,7 +47,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
 	protected java.awt.Component makeGUI(edu.cmu.cs.stage3.alice.core.Element currentElement){
         javax.swing.JComponent toAdd = null;
         if (currentElement instanceof edu.cmu.cs.stage3.alice.core.Response){
-            if (currentElement instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
+            if (currentElement instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
                 toAdd = edu.cmu.cs.stage3.alice.authoringtool.util.GUIFactory.getGUI(currentElement);
             }
             else{
@@ -203,7 +203,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
         	// Copy item by Ctrl + dragging
         	try {
                 edu.cmu.cs.stage3.alice.core.Response response = (edu.cmu.cs.stage3.alice.core.Response)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable.responseReferenceFlavor );
-                if (response instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
+                if (response instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
                     if (!isCopy && !isValidDrop( s_currentComponentPanel.getElement(), response)){
                         successful = false;
                     }
@@ -242,7 +242,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                 try {
                     edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype responsePrototype = (edu.cmu.cs.stage3.alice.authoringtool.util.ResponsePrototype)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ResponsePrototypeReferenceTransferable.responsePrototypeReferenceFlavor );
                     if ((responsePrototype.getDesiredProperties() == null || responsePrototype.getDesiredProperties().length < 1) &&
-                        !edu.cmu.cs.stage3.alice.core.response.Print.class.isAssignableFrom(responsePrototype.getResponseClass())){
+                        !edu.cmu.cs.stage3.alice.core.responses.Print.class.isAssignableFrom(responsePrototype.getResponseClass())){
                         performDrop(responsePrototype.createNewResponse(), dtde);
                     } else if (responsePrototype.getDesiredProperties().length > 3){ //Bypass the popup menu and just put in defaults if it wants more than 3 parameters
 						performDrop(responsePrototype.createNewResponse(), dtde);
@@ -266,7 +266,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                             }
                         };
                         java.util.Vector structure = null;
-                        if (edu.cmu.cs.stage3.alice.core.response.Print.class.isAssignableFrom(responsePrototype.getResponseClass())){
+                        if (edu.cmu.cs.stage3.alice.core.responses.Print.class.isAssignableFrom(responsePrototype.getResponseClass())){
                             structure = edu.cmu.cs.stage3.alice.authoringtool.util.PopupMenuUtilities.makeResponsePrintStructure(factory, componentElements.getOwner());
                         }
                         else{
@@ -301,7 +301,7 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
             if (successful){
                 try {
                     edu.cmu.cs.stage3.util.StringObjectPair[] known;
-                    edu.cmu.cs.stage3.alice.core.response.PropertyAnimation animation;
+                    edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation animation;
                     Class animationClass;
                     edu.cmu.cs.stage3.alice.core.Property property = (edu.cmu.cs.stage3.alice.core.Property)transferable.getTransferData( edu.cmu.cs.stage3.alice.authoringtool.datatransfer.PropertyReferenceTransferable.propertyReferenceFlavor );
                     if (property instanceof edu.cmu.cs.stage3.alice.core.property.VehicleProperty){
@@ -309,12 +309,12 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                         //edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair(Messages.getString("duration"), new Double(0))};
                     	edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName()), new edu.cmu.cs.stage3.util.StringObjectPair("duration", new Double(1))};
                         known = newKnown;
-                        animationClass = edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation.class;
+                        animationClass = edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation.class;
                     }
                     else{
                         edu.cmu.cs.stage3.util.StringObjectPair[] newKnown = {new edu.cmu.cs.stage3.util.StringObjectPair("element", property.getOwner()), new edu.cmu.cs.stage3.util.StringObjectPair("propertyName", property.getName())};  
                         known = newKnown;
-                        animationClass = edu.cmu.cs.stage3.alice.core.response.PropertyAnimation.class;
+                        animationClass = edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation.class;
                     }
                     edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory = new edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory() {
                         public Object createItem( final Object object ) {
@@ -429,13 +429,13 @@ public class CompositeComponentResponsePanel extends edu.cmu.cs.stage3.alice.aut
                 }
                 if (successful){
                     if (element instanceof edu.cmu.cs.stage3.alice.core.Sound){
-                        edu.cmu.cs.stage3.alice.core.response.SoundResponse r = new edu.cmu.cs.stage3.alice.core.response.SoundResponse();
+                        edu.cmu.cs.stage3.alice.core.responses.SoundResponse r = new edu.cmu.cs.stage3.alice.core.responses.SoundResponse();
                         r.sound.set(element);
                         r.subject.set(element.getParent());
                         performDrop(r, dtde);
                     }
                     else if (element instanceof edu.cmu.cs.stage3.alice.core.Pose){
-                        edu.cmu.cs.stage3.alice.core.response.PoseAnimation r = new edu.cmu.cs.stage3.alice.core.response.PoseAnimation();
+                        edu.cmu.cs.stage3.alice.core.responses.PoseAnimation r = new edu.cmu.cs.stage3.alice.core.responses.PoseAnimation();
                         r.pose.set(element);
                         r.subject.set(element.getParent());
                         performDrop(r, dtde);

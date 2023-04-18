@@ -40,7 +40,7 @@ import edu.cmu.cs.stage3.alice.core.Model;
 import edu.cmu.cs.stage3.alice.core.Pose;
 import edu.cmu.cs.stage3.alice.core.Response;
 import edu.cmu.cs.stage3.alice.core.geometry.IndexedTriangleArray;
-import edu.cmu.cs.stage3.alice.core.response.CompositeResponse;
+import edu.cmu.cs.stage3.alice.core.responses.CompositeResponse;
 import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
 import edu.cmu.cs.stage3.math.MathUtilities;
 import edu.cmu.cs.stage3.math.Matrix33;

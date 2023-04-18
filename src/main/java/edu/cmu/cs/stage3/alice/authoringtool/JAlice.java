@@ -23,6 +23,9 @@
 
 package edu.cmu.cs.stage3.alice.authoringtool;
 
+import java.awt.Desktop;
+import java.awt.desktop.OpenFilesEvent;
+import java.awt.desktop.OpenFilesHandler;
 import java.io.File;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -32,9 +35,6 @@ import javax.media.format.AudioFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import com.apple.eawt.AppEvent.OpenFilesEvent;
-import com.apple.eawt.OpenFilesHandler;
-
 import edu.cmu.cs.stage3.lang.Messages;
 
 /**
@@ -43,7 +43,7 @@ import edu.cmu.cs.stage3.lang.Messages;
 public class JAlice {
 
 	// version information
-	private static String version = "2.5.4.1"; //System.getProperty("java.version");
+	private static String version = "2.6.0"; //System.getProperty("java.version");
 	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	//private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );
@@ -67,11 +67,10 @@ public class JAlice {
         }*/
 		try {
 			if (AikMin.isMAC()){
-				com.apple.eawt.Application app = com.apple.eawt.Application.getApplication();
-				URL url = edu.cmu.cs.stage3.alice.authoringtool.JAlice.class.getResource("images/alice.png");
-				app.setDockIconImage( java.awt.Toolkit.getDefaultToolkit().getImage(url) );
+				Desktop app = Desktop.getDesktop();
 
 				app.setOpenFileHandler( new OpenFilesHandler() {
+					@Override
 					public void openFiles(OpenFilesEvent event) {
 						File file = event.getFiles().get(0);
 						worldToLoad = file.getAbsoluteFile();
@@ -282,11 +281,7 @@ public class JAlice {
 				System.exit( 1 );
 			}
 
-			javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
-	            public void run() {
-	            		authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
-	            }
-			});
+			authoringTool = new AuthoringTool( defaultWorld, worldToLoad, stdOutToConsole, stdErrToConsole );
 			if( useJavaBasedSplashScreen ) {
 				splashScreen.hideSplash();
 			}
@@ -707,8 +702,11 @@ public class JAlice {
 				setAliceHomeDirectory( new java.io.File( System.getProperty( "user.dir" ) ).getAbsoluteFile() );
 			}
 		}
-
 		return aliceHomeDirectory;
+	}
+
+	public static String getAliceHomeDirectoryString() {
+		return getAliceHomeDirectory().toString();
 	}
 
 	public static void setAliceUserDirectory( java.io.File file ) {

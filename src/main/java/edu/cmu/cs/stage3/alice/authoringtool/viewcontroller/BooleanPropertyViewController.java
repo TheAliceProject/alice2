@@ -71,7 +71,7 @@ public class BooleanPropertyViewController extends PropertyViewController {
 //		if( checkBox.isSelected() != b ) {
 //			checkBox.setSelected( b );
 //		}
-		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder) ||
+		if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder) ||
 			(property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.IfElse) ||
 			(property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.And) ||
 			(property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.question.Or) ||

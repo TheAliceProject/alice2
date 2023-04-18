@@ -28,10 +28,10 @@ package edu.cmu.cs.stage3.alice.authoringtool.util;
  */
 public class PointOfViewUndoableRedoable extends OneShotUndoableRedoable {
 	public PointOfViewUndoableRedoable( edu.cmu.cs.stage3.alice.core.Transformable transformable, edu.cmu.cs.stage3.math.Matrix44 oldTransformation, edu.cmu.cs.stage3.math.Matrix44 newTransformation, edu.cmu.cs.stage3.alice.core.Scheduler scheduler ) {
-		super( new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation(), new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation(), new edu.cmu.cs.stage3.alice.authoringtool.util.OneShotSimpleBehavior(), scheduler );
+		super( new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation(), new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation(), new edu.cmu.cs.stage3.alice.authoringtool.util.OneShotSimpleBehavior(), scheduler );
 
-		edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation redoResponse = (edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation)getRedoResponse();
-		edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoResponse = (edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation)getUndoResponse();
+		edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation redoResponse = (edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation)getRedoResponse();
+		edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation undoResponse = (edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation)getUndoResponse();
 		edu.cmu.cs.stage3.alice.authoringtool.util.OneShotSimpleBehavior oneShotBehavior = getOneShotBehavior();
 
 		redoResponse.subject.set( transformable );

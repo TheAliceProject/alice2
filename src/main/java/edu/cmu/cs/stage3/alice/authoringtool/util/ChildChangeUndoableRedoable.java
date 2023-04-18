@@ -88,15 +88,15 @@ public class ChildChangeUndoableRedoable implements ContextAssignableUndoableRed
 		  if (child instanceof edu.cmu.cs.stage3.alice.core.Response) {
 
 			// handle user defined responses
-			if (child instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
+			if (child instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) {
 			  String responseType = child.getClass().getName();
-			  edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse udResponse = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)((edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)child).userDefinedResponse.get();
+			  edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse udResponse = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)((edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)child).userDefinedResponse.get();
 			  String methodName = "methodCopied";
 			  if (udResponse != null) {
 			  	methodName = udResponse.getKey();
 			  }
 
-			  edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty eaProp = ((edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)child).requiredActualParameters;
+			  edu.cmu.cs.stage3.alice.core.property.ElementArrayProperty eaProp = ((edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)child).requiredActualParameters;
 			  edu.cmu.cs.stage3.alice.core.Element[] elems = eaProp.getElementArrayValue();
 
 			  String params = "";

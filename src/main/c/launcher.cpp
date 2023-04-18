@@ -80,7 +80,7 @@ static DWORD WINAPI JavaThread( LPVOID lpParameter ) {
 		options[ 1 ].extraInfo = NULL;
 		options[ 2 ].optionString = vcMaxHeapBuffer;
 		options[ 2 ].extraInfo = NULL;
-		options[ 3 ].optionString = "-Dpython.home=jython-2.1";
+		options[ 3 ].optionString = "-Dpython.home=jython";
 		options[ 3 ].extraInfo = NULL;
 		options[ 4 ].optionString = "-Djava.library.path=lib/win32;externalLib/win32";
 		options[ 4 ].extraInfo = NULL;

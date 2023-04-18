@@ -24,6 +24,7 @@
 package edu.cmu.cs.stage3.alice.core;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AikMin;
+import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.property.BooleanProperty;
 import edu.cmu.cs.stage3.alice.core.property.DictionaryProperty;
 import edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty;
@@ -38,26 +39,26 @@ import edu.cmu.cs.stage3.util.HowMuch;
 public abstract class Element {
 	private static java.util.Hashtable s_classnameMap = new java.util.Hashtable();
 	static {
-		//s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.behavior.SpacepadBehavior", edu.cmu.cs.stage3.alice.core.behavior.tracking.SpacePadBehavior.class );
+		//s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.behaviors.SpacepadBehavior", edu.cmu.cs.stage3.alice.core.behaviors.tracking.SpacePadBehavior.class );
 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ConditionalLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ConditionalSequentialResponse", edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.CountLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.response.LoopNInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.response.ForEach.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.OrientationAnimation", edu.cmu.cs.stage3.alice.core.response.ForwardVectorAnimation.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ParallelForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.response.ForEachTogether.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ParallelResponse", edu.cmu.cs.stage3.alice.core.response.DoTogether.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.ProxyForScriptDefinedResponse", edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.response.ForEachInOrder.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.SequentialResponse", edu.cmu.cs.stage3.alice.core.response.DoInOrder.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.ConditionalLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.ConditionalSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.CountLoopSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.ForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.ForEach.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.OrientationAnimation", edu.cmu.cs.stage3.alice.core.responses.ForwardVectorAnimation.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.ParallelForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.ForEachTogether.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.ParallelResponse", edu.cmu.cs.stage3.alice.core.responses.DoTogether.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.ProxyForScriptDefinedResponse", edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.SequentialForEachInListSequentialResponse", edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.SequentialResponse", edu.cmu.cs.stage3.alice.core.responses.DoInOrder.class );
 
-		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.KeyboardNavigationBehavior", edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.MouseNavigationBehavior", edu.cmu.cs.stage3.alice.core.behavior.MouseLookingBehavior.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.KeyboardNavigationBehavior", edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior.class );
+		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.MouseNavigationBehavior", edu.cmu.cs.stage3.alice.core.behaviors.MouseLookingBehavior.class );
 
 		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.Pose", edu.cmu.cs.stage3.alice.core.Pose.class ); 
-		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.PoseAnimation", edu.cmu.cs.stage3.alice.core.response.PoseAnimation.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.pratt.pose.PoseAnimation", edu.cmu.cs.stage3.alice.core.responses.PoseAnimation.class );
 
-		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.response.MetaResponse", edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse.class ); 
+		s_classnameMap.put( "edu.cmu.cs.stage3.alice.core.responses.MetaResponse", edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse.class );
 
 		s_classnameMap.put( "edu.cmu.cs.stage3.bb2.navigation.KeyMapping", edu.cmu.cs.stage3.alice.core.navigation.KeyMapping.class ); 
 	}
@@ -1437,13 +1438,12 @@ public abstract class Element {
             org.w3c.dom.Element elementNode = document.getDocumentElement();
             elementNode.normalize();
 
-            String classname = elementNode.getAttribute( "class" ); 
+            String classname = elementNode.getAttribute( "class" );
             double version = Double.parseDouble( elementNode.getAttribute( "version" ) ); 
             String nameValue = elementNode.getAttribute( "name" );
 
             try {
-            	
-                Class cls = Class.forName( classname );
+                Class cls = AuthoringTool.getClassForName(classname);
                 Element element = (Element)(cls.newInstance());
                 try {
                     element.m_xmlFileKeepKey = loader.getKeepKey( XML_FILENAME );
@@ -1505,7 +1505,7 @@ public abstract class Element {
 			throw new ExceptionWrapper( saxe, "org.xml.sax.SAXException" ); 
         } 
 	}
-	public static Element load( edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, Element externalRoot, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws java.io.IOException, edu.cmu.cs.stage3.progress.ProgressCancelException, UnresolvablePropertyReferencesException {
+  public static Element load( edu.cmu.cs.stage3.io.DirectoryTreeLoader loader, Element externalRoot, edu.cmu.cs.stage3.progress.ProgressObserver progressObserver ) throws java.io.IOException, edu.cmu.cs.stage3.progress.ProgressCancelException, UnresolvablePropertyReferencesException {
         java.util.Vector referencesToBeResolved = new java.util.Vector();
         java.util.Vector referencesLeftUnresolved = new java.util.Vector();
         Element element;
@@ -1881,7 +1881,7 @@ public abstract class Element {
 		Element[] children = getChildren();
 		int index = -1;
 		for( int i=0; i<children.length; i++ ) {
-			if (children [i] instanceof edu.cmu.cs.stage3.alice.core.behavior.WorldIsRunningBehavior){
+			if (children [i] instanceof edu.cmu.cs.stage3.alice.core.behaviors.WorldIsRunningBehavior){
 				children[ i ].stopped( world, time );
 				index = i;
 			}			

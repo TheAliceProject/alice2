@@ -23,7 +23,7 @@
 
 package edu.cmu.cs.stage3.pratt.maxkeyframing;
 
-public abstract class KeyframeResponse extends edu.cmu.cs.stage3.alice.core.response.TransformResponse {
+public abstract class KeyframeResponse extends edu.cmu.cs.stage3.alice.core.responses.TransformResponse {
 	public final edu.cmu.cs.stage3.alice.core.property.ObjectProperty spline = new edu.cmu.cs.stage3.alice.core.property.ObjectProperty( this, "spline", null, edu.cmu.cs.stage3.pratt.maxkeyframing.Spline.class );
 
 	public KeyframeResponse() {

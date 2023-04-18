@@ -2,7 +2,7 @@ package movieMaker;
 
 import edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool;
 import edu.cmu.cs.stage3.alice.core.event.SoundEvent;
-import edu.cmu.cs.stage3.alice.core.response.SoundResponse;
+import edu.cmu.cs.stage3.alice.core.responses.SoundResponse;
 
 public class SoundHandler implements edu.cmu.cs.stage3.alice.core.event.SoundListener 
 {

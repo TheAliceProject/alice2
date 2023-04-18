@@ -43,7 +43,7 @@ public class StringPropertyViewController extends TextFieldEditablePropertyViewC
 	public void set( edu.cmu.cs.stage3.alice.core.Property property, boolean includeDefaults, boolean allowExpressions, boolean omitPropertyName, boolean emptyStringWritesNull, final edu.cmu.cs.stage3.alice.authoringtool.util.PopupItemFactory factory ) {
 		super.set( property, includeDefaults, allowExpressions, true, omitPropertyName, factory );
 		this.emptyStringWritesNull = emptyStringWritesNull && (! edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.shouldGUIOmitNone( property ));
-		if( edu.cmu.cs.stage3.alice.core.response.Comment.class.isAssignableFrom( property.getOwner().getClass() ) || edu.cmu.cs.stage3.alice.core.question.userdefined.Comment.class.isAssignableFrom( property.getOwner().getClass() ) ) {
+		if( edu.cmu.cs.stage3.alice.core.responses.Comment.class.isAssignableFrom( property.getOwner().getClass() ) || edu.cmu.cs.stage3.alice.core.question.userdefined.Comment.class.isAssignableFrom( property.getOwner().getClass() ) ) {
 			stringLabel.setForeground( edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.getColor( "commentForeground" ) );
 			int fontSize = Integer.parseInt(authoringToolConfig.getValue("fontSize"));
 			stringLabel.setFont( new java.awt.Font( "Helvetica", java.awt.Font.BOLD, (int)(13*fontSize/12.0) ) );

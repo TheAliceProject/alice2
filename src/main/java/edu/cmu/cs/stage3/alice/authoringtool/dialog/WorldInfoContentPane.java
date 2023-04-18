@@ -97,7 +97,7 @@ public class WorldInfoContentPane extends edu.cmu.cs.stage3.swing.ContentPane {
 			polyCountLabel.setText(Messages.getString("Number_of_polygons__", (itaCounter.getShownIndexCount() / 3)));
 			textureCountLabel.setText(Messages.getString("Number_of_textures__", textureMapCounter.getTextureMapCount()));
 			textureMemoryLabel.setText(Messages.getString("Texture_memory_used__", edu.cmu.cs.stage3.alice.authoringtool.AuthoringToolResources.formatMemorySize(textureMapCounter.getTextureMapMemoryCount())));
-			userDefinedResponseCountLabel.setText(Messages.getString("Number_of_user_defined_animations__", world.getDescendants(edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse.class).length));
+			userDefinedResponseCountLabel.setText(Messages.getString("Number_of_user_defined_animations__", world.getDescendants(edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse.class).length));
 			userDefinedQuestionCountLabel.setText(Messages.getString("Number_of_user_defined_questions__", world.getDescendants(edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion.class).length));
 			behaviorCountLabel.setText(Messages.getString("Number_of_behaviors__", world.getDescendants(edu.cmu.cs.stage3.alice.core.Behavior.class).length));
 			playCountLabel.setText(Messages.getString("Number_of_times_the_world_has_been_run__", playCount));

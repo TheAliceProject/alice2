@@ -1,14 +1,28 @@
 from edu.cmu.cs.stage3.alice.authoringtool import JAlice
+from edu.cmu.cs.stage3.alice.core.question.array import ItemAtIndex
+from edu.cmu.cs.stage3.alice.core.question.ask import AskUserForNumber
+from edu.cmu.cs.stage3.alice.core.question.list import Contains
+from edu.cmu.cs.stage3.alice.core.question.math import Min
+from edu.cmu.cs.stage3.alice.core.question.mouse import DistanceFromLeftEdge
+from edu.cmu.cs.stage3.alice.core.question.time import TimeElapsedSinceWorldStart
+from edu.cmu.cs.stage3.alice.core.question.userdefined import CallToUserDefinedQuestion
+from edu.cmu.cs.stage3.alice.core.question.vector3 import X
+from edu.cmu.cs.stage3.alice.core.question.visualization.array import ItemAtIndex
+from edu.cmu.cs.stage3.alice.core.question.visualization.list import Size
+from edu.cmu.cs.stage3.alice.core.question.visualization.model import Item
+from edu.cmu.cs.stage3.alice.core.responses.array import SetItemAtIndex
+from edu.cmu.cs.stage3.alice.core.responses.list import InsertItemAtBeginning
+from edu.cmu.cs.stage3.alice.core.responses.vector3 import SetX
+from edu.cmu.cs.stage3.alice.core.responses.visualization.array import SetItemAtIndex
+from edu.cmu.cs.stage3.alice.core.responses.visualization.list import InsertItemAtBeginning
+from edu.cmu.cs.stage3.alice.core.responses.visualization.model import SetItem
+from edu.cmu.cs.stage3.alice.core.styles import TraditionalAnimationStyle
+from edu.cmu.cs.stage3.pratt.maxkeyframing import PositionKeyframeResponse
 from edu.cmu.cs.stage3.util import StringTypePair
 from java.lang import Boolean
-from java.lang import Double
-from java.lang import Integer
-from java.lang import String
-from edu.cmu.cs.stage3.math import Vector3
-from edu.cmu.cs.stage3.math import Matrix44
 import edu
 import java
-import javax
+import os
 import string
 
 # HACK: until os.path works
@@ -19,8 +33,8 @@ def os_path_join( *args ):
 # load common resource data
 ####################################
 
-standardResourcesFile = java.io.File( JAlice.getAliceHomeDirectory(), "resources/common/StandardResources.py" )
-execfile( standardResourcesFile.getAbsolutePath() )
+standardResourcesFile = os.path.join( JAlice.getAliceHomeDirectoryString(), "resources/common/StandardResources.py" )
+execfile( standardResourcesFile)
 
 
 ##################
@@ -28,60 +42,60 @@ execfile( standardResourcesFile.getAbsolutePath() )
 ##################
 
 formatMap = {
-	edu.cmu.cs.stage3.alice.core.response.MoveAnimation : "<<<subject>>> mova <<direction>><<amount>>",
-	edu.cmu.cs.stage3.alice.core.response.MoveTowardAnimation : "<<<subject>>> mova <<amount>> para <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.MoveAwayFromAnimation : "<<<subject>>> mova <<amount>> a partir de <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.TurnAnimation : "<<<subject>>> gire <<direction>><<amount>>",
-	edu.cmu.cs.stage3.alice.core.response.RollAnimation : "<<<subject>>> role <<direction>><<amount>>",
-	edu.cmu.cs.stage3.alice.core.response.MoveAtSpeed : "<<<subject>>> mova na velocidade <<direction>><<speed>>",
-	edu.cmu.cs.stage3.alice.core.response.TurnAtSpeed : "<<<subject>>> gire na velocidade <<direction>><<speed>>",
-	edu.cmu.cs.stage3.alice.core.response.RollAtSpeed : "<<<subject>>> role na velocidade <<direction>><<speed>>",
-	edu.cmu.cs.stage3.alice.core.response.ResizeAnimation : "<<<subject>>> redimensione <<amount>>",
-	edu.cmu.cs.stage3.alice.core.response.PointAtAnimation : "<<<subject>>> aponte para <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.TurnToFaceAnimation : "<<<subject>>> gire para a face <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.TurnAwayFromAnimation : "<<<subject>>> gire se afastando de <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.PointAtConstraint : "<<<subject>>> restringido para apontar <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.TurnToFaceConstraint : "<<<subject>>> restringido para olhar de frente <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.TurnAwayFromConstraint : "<<<subject>>> restringido a virar para <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.GetAGoodLookAtAnimation : "<<<subject>>> obtenha uma boa visão de <<target>>",
-	edu.cmu.cs.stage3.alice.core.response.StandUpAnimation : "<<<subject>>> levante",
-	edu.cmu.cs.stage3.alice.core.response.PositionAnimation : "<<<subject>>> mova para <<asSeenBy>>",
-	edu.cmu.cs.stage3.alice.core.response.PlaceAnimation : "<<<subject>>> caitlin move para <<amount>><<spatialRelation>><<asSeenBy>>",
-	edu.cmu.cs.stage3.alice.core.response.QuaternionAnimation : "<<<subject>>> oriente para <<asSeenBy>>",
-	edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation : "<<<subject>>> defina ponto de vista para <<asSeenBy>>",
-	edu.cmu.cs.stage3.alice.core.response.PropertyAnimation : "<<<element>>> defina <propertyName> para <<value>>",
-	edu.cmu.cs.stage3.alice.core.response.SoundResponse : "<<<subject>>> reproduza o som <<sound>>",
-	edu.cmu.cs.stage3.alice.core.response.Wait : "Espere <<duration>>",
-	edu.cmu.cs.stage3.alice.core.response.Comment : "// <<text>>",
-	edu.cmu.cs.stage3.alice.core.response.Print : "mostre <<text>> <<object>>",
-	edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse : "<userDefinedResponse><requiredActualParameters>",
-	edu.cmu.cs.stage3.alice.core.response.ScriptResponse : "Roteiro <<script>>",
-	edu.cmu.cs.stage3.alice.core.response.ScriptDefinedResponse : "Resposta Definida por Roteiro <<script>>",
-	edu.cmu.cs.stage3.alice.core.response.SayAnimation : "<<<subject>>> diga <<what>>",
-	edu.cmu.cs.stage3.alice.core.response.ThinkAnimation : "<<<subject>>> pense <<what>>",
+	edu.cmu.cs.stage3.alice.core.responses.MoveAnimation : "<<<subject>>> mova <<direction>><<amount>>",
+	edu.cmu.cs.stage3.alice.core.responses.MoveTowardAnimation : "<<<subject>>> mova <<amount>> para <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.MoveAwayFromAnimation : "<<<subject>>> mova <<amount>> a partir de <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.TurnAnimation : "<<<subject>>> gire <<direction>><<amount>>",
+	edu.cmu.cs.stage3.alice.core.responses.RollAnimation : "<<<subject>>> role <<direction>><<amount>>",
+	edu.cmu.cs.stage3.alice.core.responses.MoveAtSpeed : "<<<subject>>> mova na velocidade <<direction>><<speed>>",
+	edu.cmu.cs.stage3.alice.core.responses.TurnAtSpeed : "<<<subject>>> gire na velocidade <<direction>><<speed>>",
+	edu.cmu.cs.stage3.alice.core.responses.RollAtSpeed : "<<<subject>>> role na velocidade <<direction>><<speed>>",
+	edu.cmu.cs.stage3.alice.core.responses.ResizeAnimation : "<<<subject>>> redimensione <<amount>>",
+	edu.cmu.cs.stage3.alice.core.responses.PointAtAnimation : "<<<subject>>> aponte para <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.TurnToFaceAnimation : "<<<subject>>> gire para a face <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.TurnAwayFromAnimation : "<<<subject>>> gire se afastando de <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.PointAtConstraint : "<<<subject>>> restringido para apontar <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.TurnToFaceConstraint : "<<<subject>>> restringido para olhar de frente <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.TurnAwayFromConstraint : "<<<subject>>> restringido a virar para <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.GetAGoodLookAtAnimation : "<<<subject>>> obtenha uma boa visão de <<target>>",
+	edu.cmu.cs.stage3.alice.core.responses.StandUpAnimation : "<<<subject>>> levante",
+	edu.cmu.cs.stage3.alice.core.responses.PositionAnimation : "<<<subject>>> mova para <<asSeenBy>>",
+	edu.cmu.cs.stage3.alice.core.responses.PlaceAnimation : "<<<subject>>> caitlin move para <<amount>><<spatialRelation>><<asSeenBy>>",
+	edu.cmu.cs.stage3.alice.core.responses.QuaternionAnimation : "<<<subject>>> oriente para <<asSeenBy>>",
+	edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation : "<<<subject>>> defina ponto de vista para <<asSeenBy>>",
+	edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation : "<<<element>>> defina <propertyName> para <<value>>",
+	edu.cmu.cs.stage3.alice.core.responses.SoundResponse : "<<<subject>>> reproduza o som <<sound>>",
+	edu.cmu.cs.stage3.alice.core.responses.Wait : "Espere <<duration>>",
+	edu.cmu.cs.stage3.alice.core.responses.Comment : "// <<text>>",
+	edu.cmu.cs.stage3.alice.core.responses.Print : "mostre <<text>> <<object>>",
+	edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse : "<userDefinedResponse><requiredActualParameters>",
+	edu.cmu.cs.stage3.alice.core.responses.ScriptResponse : "Roteiro <<script>>",
+	edu.cmu.cs.stage3.alice.core.responses.ScriptDefinedResponse : "Resposta Definida por Roteiro <<script>>",
+	edu.cmu.cs.stage3.alice.core.responses.SayAnimation : "<<<subject>>> diga <<what>>",
+	edu.cmu.cs.stage3.alice.core.responses.ThinkAnimation : "<<<subject>>> pense <<what>>",
 	edu.cmu.cs.stage3.pratt.maxkeyframing.PositionKeyframeResponse : "animação de quadro chave por posição <<subject>>",
 	edu.cmu.cs.stage3.pratt.maxkeyframing.QuaternionKeyframeResponse : "animação de quadro chave por orientação <<subject>>",
 	edu.cmu.cs.stage3.pratt.maxkeyframing.ScaleKeyframeResponse : "animação de quadro chave por escala <<subject>>",
 	edu.cmu.cs.stage3.pratt.maxkeyframing.KeyframeResponse : "animação de quadro chave <<subject>>",
-	edu.cmu.cs.stage3.alice.core.response.PoseAnimation : "<<<subject>>> defina pose <<pose>>",
-	edu.cmu.cs.stage3.alice.core.response.Increment : "incremente <<<variable>>> por 1",
-	edu.cmu.cs.stage3.alice.core.response.Decrement : "decremente <<<variable>>> por 1",
+	edu.cmu.cs.stage3.alice.core.responses.PoseAnimation : "<<<subject>>> defina pose <<pose>>",
+	edu.cmu.cs.stage3.alice.core.responses.Increment : "incremente <<<variable>>> por 1",
+	edu.cmu.cs.stage3.alice.core.responses.Decrement : "decremente <<<variable>>> por 1",
 
-	edu.cmu.cs.stage3.alice.core.response.VehiclePropertyAnimation : "<element> defina <propertyName> para <value>",
+	edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation : "<element> defina <propertyName> para <value>",
 
-	edu.cmu.cs.stage3.alice.core.response.list.InsertItemAtBeginning : "adicione <item> no início de <<<list>>>",
-	edu.cmu.cs.stage3.alice.core.response.list.InsertItemAtEnd : "adicione <item> no final de <<<list>>>",
-	edu.cmu.cs.stage3.alice.core.response.list.InsertItemAtIndex : "adicione <item> na posição <index> de <<<list>>>",
-	edu.cmu.cs.stage3.alice.core.response.list.RemoveItemFromBeginning : "adicione item do início de <<<list>>>",
-	edu.cmu.cs.stage3.alice.core.response.list.RemoveItemFromEnd : "remova item do final de <<<list>>>",
-	edu.cmu.cs.stage3.alice.core.response.list.RemoveItemFromIndex : "remova item da posição <index> de <<<list>>>",
-	edu.cmu.cs.stage3.alice.core.response.list.Clear : "remova todos itens de <<<list>>>",
+	edu.cmu.cs.stage3.alice.core.responses.list.InsertItemAtBeginning : "adicione <item> no início de <<<list>>>",
+	edu.cmu.cs.stage3.alice.core.responses.list.InsertItemAtEnd : "adicione <item> no final de <<<list>>>",
+	edu.cmu.cs.stage3.alice.core.responses.list.InsertItemAtIndex : "adicione <item> na posição <index> de <<<list>>>",
+	edu.cmu.cs.stage3.alice.core.responses.list.RemoveItemFromBeginning : "adicione item do início de <<<list>>>",
+	edu.cmu.cs.stage3.alice.core.responses.list.RemoveItemFromEnd : "remova item do final de <<<list>>>",
+	edu.cmu.cs.stage3.alice.core.responses.list.RemoveItemFromIndex : "remova item da posição <index> de <<<list>>>",
+	edu.cmu.cs.stage3.alice.core.responses.list.Clear : "remova todos itens de <<<list>>>",
 
-	edu.cmu.cs.stage3.alice.core.response.array.SetItemAtIndex : "defina item <index> para <item> em <<<array>>>",
+	edu.cmu.cs.stage3.alice.core.responses.array.SetItemAtIndex : "defina item <index> para <item> em <<<array>>>",
 
-	edu.cmu.cs.stage3.alice.core.response.vector3.SetX : "defina distância de <<<vector3>>> à direita <<value>>",
-	edu.cmu.cs.stage3.alice.core.response.vector3.SetY : "defina distância de <<<vector3>>> acima <<value>>",
-	edu.cmu.cs.stage3.alice.core.response.vector3.SetZ : "defina distância de <<<vector3>>> a frente <<value>>",
+	edu.cmu.cs.stage3.alice.core.responses.vector3.SetX : "defina distância de <<<vector3>>> à direita <<value>>",
+	edu.cmu.cs.stage3.alice.core.responses.vector3.SetY : "defina distância de <<<vector3>>> acima <<value>>",
+	edu.cmu.cs.stage3.alice.core.responses.vector3.SetZ : "defina distância de <<<vector3>>> a frente <<value>>",
 
 	edu.cmu.cs.stage3.alice.core.question.userdefined.CallToUserDefinedQuestion : "<userDefinedQuestion><requiredActualParameters>",
 	edu.cmu.cs.stage3.alice.core.question.userdefined.Return : "Devolva <<value>>",
@@ -220,10 +234,10 @@ formatMap = {
 	edu.cmu.cs.stage3.alice.core.question.PropertyValue : "<<<element>>>.<propertyName>",
 
 	edu.cmu.cs.stage3.alice.core.question.visualization.model.Item : "o valor de <<<subject>>>",
-	edu.cmu.cs.stage3.alice.core.response.visualization.model.SetItem : "deixe <<<subject>>> = <item>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.model.SetItem : "deixe <<<subject>>> = <item>",
 
 	edu.cmu.cs.stage3.alice.core.question.visualization.array.ItemAtIndex : "o valor de <<<subject>>>[ <index> ]",
-	edu.cmu.cs.stage3.alice.core.response.visualization.array.SetItemAtIndex : "deixe <<<subject>>>[ <index> ] = <item>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.array.SetItemAtIndex : "deixe <<<subject>>>[ <index> ] = <item>",
 	edu.cmu.cs.stage3.alice.core.question.visualization.array.Size : "tamanho do <<<subject>>>",
 
 	edu.cmu.cs.stage3.alice.core.question.visualization.list.Size : "tamanho do <<<subject>>>",
@@ -235,13 +249,13 @@ formatMap = {
 	edu.cmu.cs.stage3.alice.core.question.visualization.list.ItemAtEnd : "<<<subject>>> é o item no final",
 	edu.cmu.cs.stage3.alice.core.question.visualization.list.ItemAtIndex : "<<<subject>>> é o item no índice <index>",
 	
-	edu.cmu.cs.stage3.alice.core.response.visualization.list.InsertItemAtBeginning : "adicione <item> no início de <<<subject>>>",
-	edu.cmu.cs.stage3.alice.core.response.visualization.list.InsertItemAtEnd : "adicione <item> no final de <<<subject>>>",
-	edu.cmu.cs.stage3.alice.core.response.visualization.list.InsertItemAtIndex : "adicione <item> no <index> de <<<subject>>>",
-	edu.cmu.cs.stage3.alice.core.response.visualization.list.RemoveItemFromBeginning : "remova um item do início de <<<subject>>>",
-	edu.cmu.cs.stage3.alice.core.response.visualization.list.RemoveItemFromEnd : "remova um item do final de <<<subject>>>",
-	edu.cmu.cs.stage3.alice.core.response.visualization.list.RemoveItemFromIndex : "remova um item do <index> de <<<subject>>>",
-	edu.cmu.cs.stage3.alice.core.response.visualization.list.Clear : "limpe <<<subject>>>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.list.InsertItemAtBeginning : "adicione <item> no início de <<<subject>>>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.list.InsertItemAtEnd : "adicione <item> no final de <<<subject>>>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.list.InsertItemAtIndex : "adicione <item> no <index> de <<<subject>>>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.list.RemoveItemFromBeginning : "remova um item do início de <<<subject>>>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.list.RemoveItemFromEnd : "remova um item do final de <<<subject>>>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.list.RemoveItemFromIndex : "remova um item do <index> de <<<subject>>>",
+	edu.cmu.cs.stage3.alice.core.responses.visualization.list.Clear : "limpe <<<subject>>>",
 }
 
 
@@ -251,43 +265,43 @@ formatMap = {
 ##################
 
 nameMap = {
-	"edu.cmu.cs.stage3.alice.core.response.DoInOrder" : "Faça em ordem",
-	"edu.cmu.cs.stage3.alice.core.response.DoTogether" : "Faça junto",
-	"edu.cmu.cs.stage3.alice.core.response.IfElseInOrder" : "Se/Senão",
-	"edu.cmu.cs.stage3.alice.core.response.LoopNInOrder" : "Repita",
-	"edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder" : "Enquanto",
-	"edu.cmu.cs.stage3.alice.core.response.ForEachInOrder" : "Para todos em ordem",
-	"edu.cmu.cs.stage3.alice.core.response.ForEachTogether" : "Para todos juntos",
-	"edu.cmu.cs.stage3.alice.core.response.Print" : "Mostre",
-	"edu.cmu.cs.stage3.alice.core.response.QuaternionAnimation.quaternion" : "deslocamento por",
-	"edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation.pointOfView" : "ponto de vista de",
-	"edu.cmu.cs.stage3.alice.core.response.PositionAnimation.position" : "deslocamento por",
+	"edu.cmu.cs.stage3.alice.core.responses.DoInOrder" : "Faça em ordem",
+	"edu.cmu.cs.stage3.alice.core.responses.DoTogether" : "Faça junto",
+	"edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder" : "Se/Senão",
+	"edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder" : "Repita",
+	"edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder" : "Enquanto",
+	"edu.cmu.cs.stage3.alice.core.responses.ForEachInOrder" : "Para todos em ordem",
+	"edu.cmu.cs.stage3.alice.core.responses.ForEachTogether" : "Para todos juntos",
+	"edu.cmu.cs.stage3.alice.core.responses.Print" : "Mostre",
+	"edu.cmu.cs.stage3.alice.core.responses.QuaternionAnimation.quaternion" : "deslocamento por",
+	"edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation.pointOfView" : "ponto de vista de",
+	"edu.cmu.cs.stage3.alice.core.responses.PositionAnimation.position" : "deslocamento por",
 
 	"edu.cmu.cs.stage3.alice.core.question.userdefined.Return" : "Devolve",
 
-	"edu.cmu.cs.stage3.alice.core.behavior.WorldStartBehavior" : "Quando o mundo começa",
-	"edu.cmu.cs.stage3.alice.core.behavior.WorldIsRunningBehavior" : "Enquanto o mundo está executando",
-	"edu.cmu.cs.stage3.alice.core.behavior.KeyClickBehavior" : "Quando <keyCode> é digitado",
-	"edu.cmu.cs.stage3.alice.core.behavior.KeyIsPressedBehavior" : "Enquanto <keyCode> é pressionado",
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior" : "Quando <mouse> é clicado sobre <onWhat>",
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior" : "Enquanto <mouse> é pressionado sobre <onWhat>",
-	"edu.cmu.cs.stage3.alice.core.behavior.ConditionalBehavior" : "Enquanto <condition> é verdadeira",
-	"edu.cmu.cs.stage3.alice.core.behavior.ConditionalTriggerBehavior" : "Quando <condition> se torna verdadeira",
-	"edu.cmu.cs.stage3.alice.core.behavior.VariableChangeBehavior" : "Quando <variable> muda",
-	"edu.cmu.cs.stage3.alice.core.behavior.MessageReceivedBehavior" : "Quando uma mensagem é recebida por <toWhom> de <fromWho>", 
-	"edu.cmu.cs.stage3.alice.core.behavior.DefaultMouseInteractionBehavior" : "Deixe <mouse> mover <objects>",
-	"edu.cmu.cs.stage3.alice.core.behavior.KeyboardNavigationBehavior" : "Deixe <arrowKeys> mover <subject>",
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseNavigationBehavior" : "Deixe <mouse> mover the camera",
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseLookingBehavior" : "Deixe <mouse> orientar the camera",
-	"edu.cmu.cs.stage3.alice.core.behavior.SoundMarkerPassedBehavior" : "Quando som marcado <marker> é reproduzido",
-	"edu.cmu.cs.stage3.alice.core.behavior.SoundLevelBehavior" : "Quando o nível de gravação de som é >= <level>",
+	"edu.cmu.cs.stage3.alice.core.behaviors.WorldStartBehavior" : "Quando o mundo começa",
+	"edu.cmu.cs.stage3.alice.core.behaviors.WorldIsRunningBehavior" : "Enquanto o mundo está executando",
+	"edu.cmu.cs.stage3.alice.core.behaviors.KeyClickBehavior" : "Quando <keyCode> é digitado",
+	"edu.cmu.cs.stage3.alice.core.behaviors.KeyIsPressedBehavior" : "Enquanto <keyCode> é pressionado",
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior" : "Quando <mouse> é clicado sobre <onWhat>",
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonIsPressedBehavior" : "Enquanto <mouse> é pressionado sobre <onWhat>",
+	"edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior" : "Enquanto <condition> é verdadeira",
+	"edu.cmu.cs.stage3.alice.core.behaviors.ConditionalTriggerBehavior" : "Quando <condition> se torna verdadeira",
+	"edu.cmu.cs.stage3.alice.core.behaviors.VariableChangeBehavior" : "Quando <variable> muda",
+	"edu.cmu.cs.stage3.alice.core.behaviors.MessageReceivedBehavior" : "Quando uma mensagem é recebida por <toWhom> de <fromWho>", 
+	"edu.cmu.cs.stage3.alice.core.behaviors.DefaultMouseInteractionBehavior" : "Deixe <mouse> mover <objects>",
+	"edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior" : "Deixe <arrowKeys> mover <subject>",
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseNavigationBehavior" : "Deixe <mouse> mover the camera",
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseLookingBehavior" : "Deixe <mouse> orientar the camera",
+	"edu.cmu.cs.stage3.alice.core.behaviors.SoundMarkerPassedBehavior" : "Quando som marcado <marker> é reproduzido",
+	"edu.cmu.cs.stage3.alice.core.behaviors.SoundLevelBehavior" : "Quando o nível de gravação de som é >= <level>",
 
 	"edu.cmu.cs.stage3.alice.core.Model.opacity" : "opacidade",
 	"edu.cmu.cs.stage3.alice.core.Model.diffuseColorMap" : "textura da pele",
 	"diffuseColorMap" : "textura da pele",
 	"edu.cmu.cs.stage3.alice.core.Transformable.localTransformation" : "pontoDeVista",
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseButtonClickBehavior.onWhat" : "emQue",
-	"edu.cmu.cs.stage3.alice.core.behavior.MouseButtonIsPressedBehavior.onWhat" : "emQue",
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonClickBehavior.onWhat" : "emQue",
+	"edu.cmu.cs.stage3.alice.core.behaviors.MouseButtonIsPressedBehavior.onWhat" : "emQue",
 	"edu.cmu.cs.stage3.alice.core.question.IsCloseTo.threshold" : "está dentro",
 	"edu.cmu.cs.stage3.alice.core.question.IsFarFrom.threshold" : "está pelo menos",
 	"edu.cmu.cs.stage3.alice.core.question.IsCloseTo.object" : "de",
@@ -299,10 +313,10 @@ nameMap = {
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer.Renderer" : "JOGL",
 	"edu.cmu.cs.stage3.alice.scenegraph.renderer.nullrenderer.Renderer" : "None",
 
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "suavemente",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "inicia suavemente",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "finaliza suavemente",
-	edu.cmu.cs.stage3.alice.core.style.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "bruscamente",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_GENTLY : "suavemente",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_GENTLY_AND_END_ABRUPTLY : "inicia suavemente",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_ABRUPTLY_AND_END_GENTLY : "finaliza suavemente",
+	edu.cmu.cs.stage3.alice.core.styles.TraditionalAnimationStyle.BEGIN_AND_END_ABRUPTLY : "bruscamente",
 
 	edu.cmu.cs.stage3.alice.core.Direction.LEFT : "esquerda",
 	edu.cmu.cs.stage3.alice.core.Direction.RIGHT : "direita",
@@ -457,6 +471,6 @@ experimental = 0
 # transfer resource data to Alice
 ####################################
 
-resourceTransferFile = java.io.File( JAlice.getAliceHomeDirectory(), "resources/common/ResourceTransfer.py" )
-execfile( resourceTransferFile.getAbsolutePath() )
+resourceTransferFile = os.path.join( JAlice.getAliceHomeDirectoryString(), "resources/common/ResourceTransfer.py" )
+execfile( resourceTransferFile)
 

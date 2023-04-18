@@ -122,7 +122,7 @@ public void clear (){
 						element instanceof edu.cmu.cs.stage3.alice.core.World ) {
 					dtde.rejectDrag();
 					return false;
-				} else if ( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse){
+				} else if ( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse){
 					if (element.getChildCount() > 0) {
 						//dtde.rejectDrag();
 						//return false;
@@ -198,7 +198,7 @@ public void clear (){
 					element instanceof edu.cmu.cs.stage3.alice.core.Model || 
 					element instanceof edu.cmu.cs.stage3.alice.core.World ) {
 				return false;
-			} else if ( element instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse){
+			} else if ( element instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse){
 				if (element.getChildCount() > 0) {
 					//dtde.rejectDrag();
 					//return false;

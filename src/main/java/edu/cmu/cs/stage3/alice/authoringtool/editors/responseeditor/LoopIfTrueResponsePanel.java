@@ -37,7 +37,7 @@ public class LoopIfTrueResponsePanel extends edu.cmu.cs.stage3.alice.authoringto
         super();
     }
 
-     public void set(edu.cmu.cs.stage3.alice.core.response.WhileLoopInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+     public void set(edu.cmu.cs.stage3.alice.core.responses.WhileLoopInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super.set(r, authoringToolIn);
     }
 

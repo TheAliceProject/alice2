@@ -40,7 +40,7 @@ public class InternalResponseBehaviorPanel extends BasicBehaviorPanel {
     public InternalResponseBehaviorPanel(){
         super();
     }
-    public void set(edu.cmu.cs.stage3.alice.core.behavior.InternalResponseBehavior behavior, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
+    public void set(edu.cmu.cs.stage3.alice.core.behaviors.InternalResponseBehavior behavior, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringTool) {
         super.set(behavior, authoringTool);
     }
 

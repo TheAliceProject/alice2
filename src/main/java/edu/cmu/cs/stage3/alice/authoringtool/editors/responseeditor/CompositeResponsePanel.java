@@ -38,15 +38,15 @@ import edu.cmu.cs.stage3.lang.Messages;
 
 public abstract class CompositeResponsePanel extends edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementPanel{
 
-    protected edu.cmu.cs.stage3.alice.core.response.CompositeResponse m_response;
+    protected edu.cmu.cs.stage3.alice.core.responses.CompositeResponse m_response;
 
     public CompositeResponsePanel(){
         super();
         headerText = Messages.getString("Composite_Response"); 
     }
 
-    public void set(edu.cmu.cs.stage3.alice.core.response.CompositeResponse response, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
-        m_response = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)m_element;
+    public void set(edu.cmu.cs.stage3.alice.core.responses.CompositeResponse response, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+        m_response = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)m_element;
         super.set(response, authoringToolIn);
     }
 

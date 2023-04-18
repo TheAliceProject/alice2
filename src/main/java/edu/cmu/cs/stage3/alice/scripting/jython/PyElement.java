@@ -23,12 +23,12 @@
 
 package edu.cmu.cs.stage3.alice.scripting.jython;
 
-public class PyElement extends org.python.core.PyJavaInstance {
+public class PyElement extends org.python.core.PyInstance {
 	private edu.cmu.cs.stage3.alice.core.Element m_element;
 	private Namespace m_namespace;
 	//private boolean m_explicit = true;
 	public PyElement( edu.cmu.cs.stage3.alice.core.Element element, Namespace namespace ) {
-		super( element );
+		super();
 		m_element = element;
 		m_namespace = namespace;
 		//__dict__ = new org.python.core.PyStringMap();
@@ -46,8 +46,9 @@ public class PyElement extends org.python.core.PyJavaInstance {
 	//		__dict__.__setitem__( s, pyO );
 	//	}
 	//}
-	
-	public org.python.core.PyObject __findattr__( String name ) {
+
+	@Override
+	public org.python.core.PyObject __findattr_ex__( String name ) {
 		edu.cmu.cs.stage3.alice.core.Element descendant = m_element.getChildNamedIgnoreCase( name );
 		if( descendant == null ) {
 			edu.cmu.cs.stage3.alice.core.Property property = m_element.getPropertyNamedIgnoreCase( name );
@@ -62,7 +63,7 @@ public class PyElement extends org.python.core.PyJavaInstance {
 						return org.python.core.Py.java2py( property );
 					}
 				}
-				return super.__findattr__( name );
+				return super.__findattr_ex__( name );
 			}
 			return m_namespace.java2py( property.get() );
 		}

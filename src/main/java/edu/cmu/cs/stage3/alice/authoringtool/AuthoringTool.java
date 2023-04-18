@@ -141,12 +141,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	
 	private edu.cmu.cs.stage3.alice.core.util.WorldListener userDefinedParameterListener = new edu.cmu.cs.stage3.alice.core.util.WorldListener() {
 		private Object m_previousPropertyValue = null;
-		private edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse[] getCallsTo( final edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse userDefined ) {
+		private edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse[] getCallsTo(final edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse userDefined ) {
 			java.util.Vector v = new java.util.Vector();
 			this.getWorld().internalSearch( new edu.cmu.cs.stage3.util.Criterion() {
 				public boolean accept( Object o ) {
-					if( o instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse ) {
-						edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse call = (edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse)o;
+					if( o instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse ) {
+						edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse call = (edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse)o;
 						if( call.userDefinedResponse.getUserDefinedResponseValue() == userDefined ) {
 							return true;
 						}
@@ -154,7 +154,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					return false;
 				}
 			}, edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS, v );
-			edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse[] calls = new edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse[ v.size() ];
+			edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse[] calls = new edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse[ v.size() ];
 			v.copyInto( calls );
 			return calls;
 		}
@@ -190,9 +190,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				edu.cmu.cs.stage3.alice.core.Variable variable = (edu.cmu.cs.stage3.alice.core.Variable)owner;
 				if( property.getName().equals( "name" ) ) { 
 					edu.cmu.cs.stage3.alice.core.Element parent = variable.getParent();
-					if( parent instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
-						edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse userDefined = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)parent;
-						edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse[] calls = getCallsTo( userDefined );
+					if( parent instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
+						edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse userDefined = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)parent;
+						edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse[] calls = getCallsTo( userDefined );
 						for( int i=0; i<calls.length; i++ ) {
 							for( int j=0; j<calls[ i ].requiredActualParameters.size(); j++ ) {
 								edu.cmu.cs.stage3.alice.core.Variable actualParameterJ = (edu.cmu.cs.stage3.alice.core.Variable)calls[ i ].requiredActualParameters.get( j );
@@ -223,14 +223,14 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		protected void handleObjectArrayPropertyChanged( edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent e ) {
 			edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty oap = e.getObjectArrayProperty();
 			edu.cmu.cs.stage3.alice.core.Element owner = oap.getOwner();
-			if( owner instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse ) {
-				edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse userDefined = (edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse)owner;
+			if( owner instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse ) {
+				edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse userDefined = (edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse)owner;
 				if( oap.getName().equals( "requiredFormalParameters" ) ) { 
 					Object item = e.getItem();
 					if( item instanceof edu.cmu.cs.stage3.alice.core.Variable ) {
 						edu.cmu.cs.stage3.alice.core.Variable formalParameter = (edu.cmu.cs.stage3.alice.core.Variable)item;
 						String formalParameterName = formalParameter.name.getStringValue();
-						edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse[] calls = getCallsTo( userDefined );
+						edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse[] calls = getCallsTo( userDefined );
 						switch( e.getChangeType() ) {
 						case edu.cmu.cs.stage3.alice.core.event.ObjectArrayPropertyEvent.ITEM_INSERTED:
 							for( int i=0; i<calls.length; i++ ) {
@@ -389,6 +389,24 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		} else if (worldToLoad != defaultWorld){
 			worldInit(worldToLoad);
 		}
+	}
+
+	public static Class getClassForName(String classname) throws ClassNotFoundException {
+		return Class.forName(correctedClassName(classname));
+	}
+
+
+	// Added in Alice 2.6, which upgraded python and jython to 2.7.3. In 2.7.3 having a class and a package with
+	// the same name caused build problems, so these three packages were renamed. This renaming breaks backwards
+	// compatibility so Alice 2.5 and earlier will not be able to open newer files.
+	private static String correctedClassName(String classname) {
+		classname = classname.replace("edu.cmu.cs.stage3.alice.core.response.",
+				"edu.cmu.cs.stage3.alice.core.responses.");
+		classname = classname.replace("edu.cmu.cs.stage3.alice.core.behavior.",
+				"edu.cmu.cs.stage3.alice.core.behaviors.");
+		classname = classname.replace("edu.cmu.cs.stage3.alice.core.style.",
+				"edu.cmu.cs.stage3.alice.core.styles.");
+		return classname;
 	}
 
 	private void filterInit() {
@@ -976,7 +994,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			boolean isSoftwareEmulationForced = false;
 			try {
 				String[] renderers = authoringToolConfig.getValueList( "rendering.orderedRendererList" ); 
-				rendererClass = Class.forName( renderers[ 0 ] );
+				rendererClass = getClassForName(renderers[ 0 ]);
 			} catch( Throwable t ) {
 				//todo: inform user of configuration problem?
 				//pass
@@ -2818,68 +2836,68 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 			}
 
 			// getAGoodLook response
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation setupOpacity = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation setupOpacity = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			setupOpacity.element.set(model);
 			setupOpacity.propertyName.set("opacity"); 
 			setupOpacity.value.set(new Double(0.0));
 			setupOpacity.duration.set(new Double(0.0));
 			setupOpacity.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE_AND_ALL_DESCENDANTS);
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation vehicleAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			vehicleAnimation.element.set(model);
 			vehicleAnimation.propertyName.set("vehicle"); 
 			vehicleAnimation.value.set(vehicle);
 			vehicleAnimation.duration.set(new Double(0.0));
 			vehicleAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
-			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation getAGoodLook = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation getAGoodLook = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 			if (camera != null){
 				getAGoodLook.subject.set(camera);
 				getAGoodLook.pointOfView.set(goodLook);
 			}
 			
-			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation cameraGoBack = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation cameraGoBack = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 			if (camera != null){
 				cameraGoBack.subject.set(camera);
 				cameraGoBack.pointOfView.set(camera.getLocalTransformation());
 				cameraGoBack.duration.set(new Double(.5));
 			}
-			edu.cmu.cs.stage3.alice.core.response.Wait wait = new edu.cmu.cs.stage3.alice.core.response.Wait();
+			edu.cmu.cs.stage3.alice.core.responses.Wait wait = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 			wait.duration.set(new Double(.7));
-			edu.cmu.cs.stage3.alice.core.response.Wait wait2 = new edu.cmu.cs.stage3.alice.core.response.Wait();
+			edu.cmu.cs.stage3.alice.core.responses.Wait wait2 = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 			wait2.duration.set(new Double(.2));
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClipping = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation farClipping = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			if (camera != null){
 				farClipping.element.set(camera);
 				farClipping.propertyName.set("farClippingPlaneDistance"); 
 				farClipping.value.set(new Double(distanceToBackOfObject));
 			}
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClipping2 = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation farClipping2 = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			if (camera != null){
 				farClipping2.element.set(camera);
 				farClipping2.propertyName.set("farClippingPlaneDistance"); 
 				farClipping2.value.set(camera.farClippingPlaneDistance.get());
 			}
-			edu.cmu.cs.stage3.alice.core.response.DoTogether opacityDoTogether = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
+			edu.cmu.cs.stage3.alice.core.responses.DoTogether opacityDoTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			for (java.util.Iterator iter = opacityMap.keySet().iterator(); iter.hasNext();) {
 				edu.cmu.cs.stage3.alice.core.Model m = (edu.cmu.cs.stage3.alice.core.Model) iter.next();
 				Object opacity = opacityMap.get(m);
-				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 				opacityAnimation.element.set(m);
 				opacityAnimation.propertyName.set("opacity"); 
 				opacityAnimation.value.set(opacity);
 				opacityAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
 				opacityDoTogether.componentResponses.add(opacityAnimation);
 			}
-			edu.cmu.cs.stage3.alice.core.response.DoInOrder waitOpacityDoInOrder = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
+			edu.cmu.cs.stage3.alice.core.responses.DoInOrder waitOpacityDoInOrder = new edu.cmu.cs.stage3.alice.core.responses.DoInOrder();
 			waitOpacityDoInOrder.componentResponses.add(wait);
 			waitOpacityDoInOrder.componentResponses.add(opacityDoTogether);
 			waitOpacityDoInOrder.componentResponses.add(wait2);
-			edu.cmu.cs.stage3.alice.core.response.DoTogether cameraOpacityDoTogether = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
+			edu.cmu.cs.stage3.alice.core.responses.DoTogether cameraOpacityDoTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			if (needToChangeFarClipping) {
 				cameraOpacityDoTogether.componentResponses.add(farClipping);
 			}
 			cameraOpacityDoTogether.componentResponses.add(getAGoodLook);
 			cameraOpacityDoTogether.componentResponses.add(waitOpacityDoInOrder);
-			edu.cmu.cs.stage3.alice.core.response.DoInOrder response = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
+			edu.cmu.cs.stage3.alice.core.responses.DoInOrder response = new edu.cmu.cs.stage3.alice.core.responses.DoInOrder();
 			response.componentResponses.add(setupOpacity);
 			response.componentResponses.add(vehicleAnimation);
 			if (camera != null){
@@ -2890,64 +2908,64 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				response.componentResponses.add(opacityDoTogether);
 			}
 			// getAGoodLook undoResponse
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoVehicleAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoVehicleAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			undoVehicleAnimation.element.set(model);
 			undoVehicleAnimation.propertyName.set("vehicle"); 
 			undoVehicleAnimation.value.set(null);
 			undoVehicleAnimation.duration.set(new Double(0.0));
 			undoVehicleAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
-			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoGetAGoodLook = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation undoGetAGoodLook = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 			if (camera != null){	
 				undoGetAGoodLook.subject.set(camera);
 				undoGetAGoodLook.pointOfView.set(goodLook);
 				undoGetAGoodLook.duration.set(new Double(.5));
 			}
-			edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoCameraGoBack = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation undoCameraGoBack = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 			if (camera != null){	
 				undoCameraGoBack.subject.set(camera);
 				undoCameraGoBack.pointOfView.set(camera.getLocalTransformation());
 			}
-			edu.cmu.cs.stage3.alice.core.response.Wait undoWait = new edu.cmu.cs.stage3.alice.core.response.Wait();
+			edu.cmu.cs.stage3.alice.core.responses.Wait undoWait = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 			undoWait.duration.set(new Double(.9));
-			edu.cmu.cs.stage3.alice.core.response.Wait undoWait2 = new edu.cmu.cs.stage3.alice.core.response.Wait();
+			edu.cmu.cs.stage3.alice.core.responses.Wait undoWait2 = new edu.cmu.cs.stage3.alice.core.responses.Wait();
 			undoWait2.duration.set(new Double(.2));
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoFarClipping = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoFarClipping = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			if (camera != null){
 				undoFarClipping.element.set(camera);
 				undoFarClipping.propertyName.set("farClippingPlaneDistance"); 
 				undoFarClipping.value.set(new Double(distanceToBackOfObject));
 				undoFarClipping.duration.set(new Double(.2));
 			}
-			edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoFarClipping2 = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+			edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoFarClipping2 = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 			if (camera != null){
 				undoFarClipping2.element.set(camera);
 				undoFarClipping2.propertyName.set("farClippingPlaneDistance"); 
 				undoFarClipping2.value.set(camera.farClippingPlaneDistance.get());
 				undoFarClipping2.duration.set(new Double(.2));
 			}
-			edu.cmu.cs.stage3.alice.core.response.DoInOrder undoCameraGoBackWaitDoInOrder = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
+			edu.cmu.cs.stage3.alice.core.responses.DoInOrder undoCameraGoBackWaitDoInOrder = new edu.cmu.cs.stage3.alice.core.responses.DoInOrder();
 			undoCameraGoBackWaitDoInOrder.componentResponses.add(undoWait);
 			undoCameraGoBackWaitDoInOrder.componentResponses.add(undoCameraGoBack);
-			edu.cmu.cs.stage3.alice.core.response.DoTogether undoOpacityDoTogether = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
+			edu.cmu.cs.stage3.alice.core.responses.DoTogether undoOpacityDoTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			for (java.util.Iterator iter = opacityMap.keySet().iterator(); iter.hasNext();) {
 				edu.cmu.cs.stage3.alice.core.Model m = (edu.cmu.cs.stage3.alice.core.Model) iter.next();
-				edu.cmu.cs.stage3.alice.core.response.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+				edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation opacityAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 				opacityAnimation.element.set(m);
 				opacityAnimation.propertyName.set("opacity"); 
 				opacityAnimation.value.set(new Double(0.0));
 				opacityAnimation.howMuch.set(edu.cmu.cs.stage3.util.HowMuch.INSTANCE);
 				undoOpacityDoTogether.componentResponses.add(opacityAnimation);
 			}
-			edu.cmu.cs.stage3.alice.core.response.DoInOrder undoOpacityWaitDoInOrder = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
+			edu.cmu.cs.stage3.alice.core.responses.DoInOrder undoOpacityWaitDoInOrder = new edu.cmu.cs.stage3.alice.core.responses.DoInOrder();
 			undoOpacityWaitDoInOrder.componentResponses.add(undoWait2);
 			undoOpacityWaitDoInOrder.componentResponses.add(undoOpacityDoTogether);
-			edu.cmu.cs.stage3.alice.core.response.DoTogether undoCameraOpacityDoTogether = new edu.cmu.cs.stage3.alice.core.response.DoTogether();
+			edu.cmu.cs.stage3.alice.core.responses.DoTogether undoCameraOpacityDoTogether = new edu.cmu.cs.stage3.alice.core.responses.DoTogether();
 			undoCameraOpacityDoTogether.componentResponses.add(undoOpacityWaitDoInOrder);
 			undoCameraOpacityDoTogether.componentResponses.add(undoCameraGoBackWaitDoInOrder);
 			if (needToChangeFarClipping) {
 				undoCameraOpacityDoTogether.componentResponses.add(undoFarClipping);
 			}
-			edu.cmu.cs.stage3.alice.core.response.DoInOrder undoResponse = new edu.cmu.cs.stage3.alice.core.response.DoInOrder();
+			edu.cmu.cs.stage3.alice.core.responses.DoInOrder undoResponse = new edu.cmu.cs.stage3.alice.core.responses.DoInOrder();
 			if (camera != null){
 				undoResponse.componentResponses.add(undoGetAGoodLook);
 				undoResponse.componentResponses.add(undoCameraOpacityDoTogether);
@@ -2966,8 +2984,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	}
 	
 /*	private void displayDurations(edu.cmu.cs.stage3.alice.core.Response r){
-		if (r instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-			edu.cmu.cs.stage3.alice.core.response.CompositeResponse c = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)r;
+		if (r instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+			edu.cmu.cs.stage3.alice.core.responses.CompositeResponse c = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)r;
 			System.out.println("COMPOSITE("); 
 			for (int i=0; i<c.componentResponses.size(); i++){
 				displayDurations((edu.cmu.cs.stage3.alice.core.Response)c.componentResponses.get(i));
@@ -2985,11 +3003,11 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		//		javax.vecmath.Matrix4d goodLook = AuthoringToolResources.getAGoodLookAtMatrix( transformable, camera );
 		javax.vecmath.Matrix4d goodLook = camera.calculateGoodLookAt(transformable);
 
-		edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation getAGoodLook = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+		edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation getAGoodLook = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 		getAGoodLook.subject.set(camera);
 		getAGoodLook.pointOfView.set(goodLook);
 
-		edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+		edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 		undoResponse.subject.set(camera);
 		undoResponse.pointOfView.set(camera.getLocalTransformation());
 
@@ -3014,12 +3032,12 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					if (result == javax.swing.JOptionPane.YES_OPTION) {
 						edu.cmu.cs.stage3.alice.core.Property[] affectedProperties = { camera.farClippingPlaneDistance };
 
-						edu.cmu.cs.stage3.alice.core.response.PropertyAnimation farClippingAnimation = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+						edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation farClippingAnimation = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 						farClippingAnimation.element.set(camera);
 						farClippingAnimation.propertyName.set("farClippingPlaneDistance"); 
 						farClippingAnimation.value.set(new Double(distanceToBackOfObject));
 
-						edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+						edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 						undoResponse.element.set(camera);
 						undoResponse.propertyName.set("farClippingPlaneDistance"); 
 						undoResponse.value.set(camera.farClippingPlaneDistance.get());
@@ -3214,7 +3232,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	public void performPointOfViewOneShot(edu.cmu.cs.stage3.alice.core.Transformable transformable, edu.cmu.cs.stage3.math.Matrix44 newTransformation) {
 		edu.cmu.cs.stage3.math.Matrix44 oldTransformation = transformable.localTransformation.getMatrix44Value();
 
-		edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation povAnimation = new edu.cmu.cs.stage3.alice.core.response.PointOfViewAnimation();
+		edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation povAnimation = new edu.cmu.cs.stage3.alice.core.responses.PointOfViewAnimation();
 		povAnimation.subject.set(transformable);
 		povAnimation.pointOfView.set(newTransformation);
 
@@ -4182,7 +4200,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									}
 								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
-										Class elementClass = Class.forName(spec);
+										Class elementClass = getClassForName(spec);
 										if (elementClass != null) {
 											java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 											if (c != null) {
@@ -4449,7 +4467,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									}
 								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
-										Class elementClass = Class.forName(spec);
+										Class elementClass = getClassForName(spec);
 										if (elementClass != null) {
 											java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 											if (c != null) {
@@ -4748,7 +4766,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 									}
 								} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 									try {
-										Class elementClass = Class.forName(spec);
+										Class elementClass = getClassForName(spec);
 										if (elementClass != null) {
 											java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 											if ((c != null) && c.isShowing()) {
@@ -4995,7 +5013,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 								}
 							} else if (prefix.equals("elementPrototypeTile") && (spec != null)) { 
 								try {
-									Class elementClass = Class.forName(spec);
+									Class elementClass = getClassForName(spec);
 									if (elementClass != null) {
 										java.awt.Component c = AuthoringToolResources.findPrototypeDnDPanel(container, elementClass);
 										if ((c != null) && c.isShowing() && (c instanceof javax.swing.JComponent)) {
@@ -5091,7 +5109,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				edu.cmu.cs.stage3.alice.core.Element element = world.getDescendantKeyed(elementKey);
 				if (element != null) {
 					int actualPosition = element.getParent().getIndexOfChild(element);
-					if (element instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
+					if (element instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) {
 						edu.cmu.cs.stage3.alice.core.Property resp = element.getParent().getPropertyNamed("responses"); 
 						if (resp instanceof edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) {
 							actualPosition = ((edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty) resp).indexOf(element);
@@ -5134,7 +5152,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 				if (propertyOwner != null) {
 
 					// getting "properties" of a call to a user defined response
-					if (propertyOwner instanceof edu.cmu.cs.stage3.alice.core.response.CallToUserDefinedResponse) {
+					if (propertyOwner instanceof edu.cmu.cs.stage3.alice.core.responses.CallToUserDefinedResponse) {
 						edu.cmu.cs.stage3.alice.core.Property requiredParams = propertyOwner.getPropertyNamed("requiredActualParameters"); 
 
 						Object udobj = requiredParams.getValue();
@@ -5470,8 +5488,8 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 
 	private void checkForUnreferencedCurrentMethod() {
 		Object object = getObjectBeingEdited();
-		if (object instanceof edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) {
-			if (!AuthoringToolResources.isMethodHookedUp((edu.cmu.cs.stage3.alice.core.response.UserDefinedResponse) object, world) && !authoringToolConfig.getValue("doNotShowUnhookedMethodWarning").equalsIgnoreCase("true")) {  
+		if (object instanceof edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) {
+			if (!AuthoringToolResources.isMethodHookedUp((edu.cmu.cs.stage3.alice.core.responses.UserDefinedResponse) object, world) && !authoringToolConfig.getValue("doNotShowUnhookedMethodWarning").equalsIgnoreCase("true")) {
 				String objectRepr = AuthoringToolResources.getReprForValue(object, true);
 				edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(
 					Messages.getString("The_current_method____is_not_called_by_any_events_or_by_any_other_methods_which_might_be_called_by_any_events_", objectRepr),  

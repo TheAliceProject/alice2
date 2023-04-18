@@ -2,7 +2,7 @@
 
 [Alice](https://www.alice.org) is an innovative block-based programming environment that makes it easy to create animations, build interactive narratives, or program simple games in 3D.
 
-### Latest Released Build: [![](https://img.shields.io/badge/2.5.4.1-green.svg)](http://www.alice.org/get-alice/alice-2/)
+### Latest Released Build: [![](https://img.shields.io/badge/2.6.0-green.svg)](http://www.alice.org/get-alice/alice-2/)
 
 ## Building Alice 2 from Source
 
@@ -17,7 +17,7 @@ Launch `edu.cmu.cs.stage3.alice.authoringtool.JAlice` from the Required folder, 
 
 Include the following VM arguments:
 
-`-Dpython.home=jython-2.1 -Dpython.path=jython-2.1/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8`
+`-Dpython.home=jython -Dpython.path=jython/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8 --add-exports java.base/java.lang=ALL-UNNAMED --add-exports java.desktop/sun.awt=ALL-UNNAMED --add-exports java.desktop/sun.java2d=ALL-UNNAMED`
 
 On Windows, to include the Dynamic-Link Libraries (DLLs), add:
 
@@ -25,11 +25,11 @@ On Windows, to include the Dynamic-Link Libraries (DLLs), add:
 
 On Mac add:
 
-`-Dapple.laf.useScreenMenuBar=true`
+`-Dapple.laf.useScreenMenuBar=true -Xdock:icon=classes/edu/cmu/cs/stage3/alice/authoringtool/images/alice.png`
 
 ## Release Builds
 
-Official builds of Alice are built using Install4J 7.
+Official builds of Alice are built using Install4J 10.
 
 The file `installer/alice2.install4j` can be built using Install4J or `mvn install`. Maven will automatically use Install4J if it is installed.
 

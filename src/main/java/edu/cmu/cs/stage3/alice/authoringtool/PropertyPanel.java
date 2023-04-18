@@ -100,11 +100,11 @@ public class PropertyPanel extends javax.swing.JPanel {
 												if( (property.getOwner() instanceof edu.cmu.cs.stage3.alice.core.Transformable) && (property == ((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).vehicle) ) {
 													((edu.cmu.cs.stage3.alice.core.Transformable)property.getOwner()).setVehiclePreservingAbsoluteTransformation( (edu.cmu.cs.stage3.alice.core.ReferenceFrame)o );
 												} else {
-													edu.cmu.cs.stage3.alice.core.response.PropertyAnimation response = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+													edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation response = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 													response.element.set( property.getOwner() );
 													response.propertyName.set( property.getName() );
 													response.value.set( o );
-													edu.cmu.cs.stage3.alice.core.response.PropertyAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.response.PropertyAnimation();
+													edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation undoResponse = new edu.cmu.cs.stage3.alice.core.responses.PropertyAnimation();
 													undoResponse.element.set( property.getOwner() );
 													undoResponse.propertyName.set( property.getName() );
 													undoResponse.value.set( property.getValue() );

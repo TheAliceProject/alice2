@@ -136,8 +136,8 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
             isExpanded = ((Boolean)isExpandedValue).booleanValue();
         }
         setTransferable(new edu.cmu.cs.stage3.alice.authoringtool.datatransfer.ElementReferenceTransferable(m_element));
-        if (m_element instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-            edu.cmu.cs.stage3.alice.core.response.CompositeResponse proxy = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)m_element;
+        if (m_element instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+            edu.cmu.cs.stage3.alice.core.responses.CompositeResponse proxy = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)m_element;
             m_components = proxy.componentResponses;
             m_isCommentedOut = proxy.isCommentedOut;
             componentElementPanel = new edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor.CompositeComponentResponsePanel();
@@ -247,13 +247,13 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
     }
 
     public void dissolve(){
-        if (m_element.getParent() instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
+        if (m_element.getParent() instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
             authoringTool.getUndoRedoStack().startCompound();
-            edu.cmu.cs.stage3.alice.core.response.CompositeResponse parent = (edu.cmu.cs.stage3.alice.core.response.CompositeResponse)m_element.getParent();
+            edu.cmu.cs.stage3.alice.core.responses.CompositeResponse parent = (edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)m_element.getParent();
             int index = parent.componentResponses.indexOf(m_element);
-            if (parent instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
+            if (parent instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder){
                 if (!parent.componentResponses.contains(m_element)){
-                    index = ((edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)parent).elseComponentResponses.indexOf(m_element);
+                    index = ((edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)parent).elseComponentResponses.indexOf(m_element);
                 }
             }
             Object responses[] = m_components.getArrayValue();
@@ -453,12 +453,12 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 	protected static int getEmptyRows(Object[] elements){
 		int count = 0;
 		for (int i=0; i<elements.length; i++){
-			if (elements[i] instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
-				if (((edu.cmu.cs.stage3.alice.core.response.CompositeResponse)elements[i]).componentResponses.size() == 0){
+			if (elements[i] instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
+				if (((edu.cmu.cs.stage3.alice.core.responses.CompositeResponse)elements[i]).componentResponses.size() == 0){
 					count++;
 				}
-				if (elements[i] instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
-					if (((edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)elements[i]).elseComponentResponses.size() == 0){
+				if (elements[i] instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder){
+					if (((edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)elements[i]).elseComponentResponses.size() == 0){
 						count++;
 					}
 				}
@@ -479,16 +479,16 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 	protected static int getTotalRowsToRenderForIfElse(edu.cmu.cs.stage3.alice.core.Element ifElse, edu.cmu.cs.stage3.alice.core.property.ObjectArrayProperty components){
 		int total = 0;
 		java.util.Vector potentiallyEmpty = new java.util.Vector();
-		if (ifElse instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
-			edu.cmu.cs.stage3.alice.core.response.IfElseInOrder ifElseResponse = (edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)ifElse;
+		if (ifElse instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder){
+			edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder ifElseResponse = (edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)ifElse;
 			for (int i=0; i<components.size(); i++){
-				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.response.CompositeResponse){
+				if (components.get(i) instanceof edu.cmu.cs.stage3.alice.core.responses.CompositeResponse){
 					edu.cmu.cs.stage3.alice.core.Element[] ds = ((edu.cmu.cs.stage3.alice.core.Element)components.get(i)).getDescendants(edu.cmu.cs.stage3.alice.core.Response.class);
 					total += ds.length;
-					total += ((edu.cmu.cs.stage3.alice.core.Element)components.get(i)).getDescendants(edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class).length;
-					potentiallyEmpty.addAll(java.util.Arrays.asList(((edu.cmu.cs.stage3.alice.core.Element)components.get(i)).getDescendants(edu.cmu.cs.stage3.alice.core.response.CompositeResponse.class)));
+					total += ((edu.cmu.cs.stage3.alice.core.Element)components.get(i)).getDescendants(edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder.class).length;
+					potentiallyEmpty.addAll(java.util.Arrays.asList(((edu.cmu.cs.stage3.alice.core.Element)components.get(i)).getDescendants(edu.cmu.cs.stage3.alice.core.responses.CompositeResponse.class)));
 					if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
-						total += ((edu.cmu.cs.stage3.alice.core.Element)components.get(i)).getDescendants(edu.cmu.cs.stage3.alice.core.response.CompositeResponse.class).length; // add on the extra "}" for each composite
+						total += ((edu.cmu.cs.stage3.alice.core.Element)components.get(i)).getDescendants(edu.cmu.cs.stage3.alice.core.responses.CompositeResponse.class).length; // add on the extra "}" for each composite
 					}
 				} else{
 					total++;
@@ -541,15 +541,15 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 	public static int getTotalHTMLRows(edu.cmu.cs.stage3.alice.core.Element element){
 		int totalRows = 0;
 		if (element instanceof edu.cmu.cs.stage3.alice.core.Response){
-			if (element instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
-				totalRows = getTotalRowsToRenderForIfElse(element, ((edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)element).componentResponses );
+			if (element instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder){
+				totalRows = getTotalRowsToRenderForIfElse(element, ((edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)element).componentResponses );
 			} else{
 				totalRows = (element.getDescendants(edu.cmu.cs.stage3.alice.core.Response.class).length - 1);
-				totalRows += element.getDescendants(edu.cmu.cs.stage3.alice.core.response.IfElseInOrder.class).length;
-				totalRows += getEmptyRows(element.getDescendants(edu.cmu.cs.stage3.alice.core.response.CompositeResponse.class));
+				totalRows += element.getDescendants(edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder.class).length;
+				totalRows += getEmptyRows(element.getDescendants(edu.cmu.cs.stage3.alice.core.responses.CompositeResponse.class));
 				
 				if (edu.cmu.cs.stage3.alice.authoringtool.editors.compositeeditor.CompositeElementEditor.IS_JAVA){
-					totalRows += (element.getDescendants(edu.cmu.cs.stage3.alice.core.response.CompositeResponse.class).length - 1); // add on the extra "}" for each composite
+					totalRows += (element.getDescendants(edu.cmu.cs.stage3.alice.core.responses.CompositeResponse.class).length - 1); // add on the extra "}" for each composite
 				}
 			}
 		} else if (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.Composite || (element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.UserDefinedQuestion)){
@@ -649,8 +649,8 @@ public abstract class CompositeElementPanel extends edu.cmu.cs.stage3.alice.auth
 			IfElseElementPanel ifElse = (IfElseElementPanel)this;
 			if (this.m_element instanceof edu.cmu.cs.stage3.alice.core.question.userdefined.IfElse){
 				totalRows = getTotalRowsToRenderForIfElse(this.m_element, ((edu.cmu.cs.stage3.alice.core.question.userdefined.IfElse)this.m_element).elseComponents );
-			} else if (this.m_element instanceof edu.cmu.cs.stage3.alice.core.response.IfElseInOrder){
-				totalRows = getTotalRowsToRenderForIfElse(this.m_element, ((edu.cmu.cs.stage3.alice.core.response.IfElseInOrder)this.m_element).elseComponentResponses );
+			} else if (this.m_element instanceof edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder){
+				totalRows = getTotalRowsToRenderForIfElse(this.m_element, ((edu.cmu.cs.stage3.alice.core.responses.IfElseInOrder)this.m_element).elseComponentResponses );
 			}
 			styleString = " style=\"border-left: 1 solid "+borderColorString+"; border-right: 1 solid "+borderColorString+"\"";   
 			

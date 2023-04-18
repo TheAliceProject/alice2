@@ -40,7 +40,7 @@ public class CountLoopPanel extends edu.cmu.cs.stage3.alice.authoringtool.editor
     }
 
 
-    public void set(edu.cmu.cs.stage3.alice.core.response.LoopNInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
+    public void set(edu.cmu.cs.stage3.alice.core.responses.LoopNInOrder r, edu.cmu.cs.stage3.alice.authoringtool.AuthoringTool authoringToolIn){
         super.set(r, authoringToolIn);
     }
 

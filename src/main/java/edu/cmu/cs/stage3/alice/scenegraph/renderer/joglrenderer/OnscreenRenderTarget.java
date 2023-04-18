@@ -25,10 +25,10 @@ package edu.cmu.cs.stage3.alice.scenegraph.renderer.joglrenderer;
 
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.awt.GLJPanel;
 
 public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget {
-    private GLCanvas m_glCanvas;
+    private GLJPanel m_gljPanel;
     //private javax.media.opengl.GLPbuffer m_glPBuffer;
     private RenderContext m_renderContext;
     private PickContext m_pickContext;
@@ -52,7 +52,7 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
     }
 
 	public java.awt.Component getAWTComponent() {
-	    if( m_glCanvas == null ) {
+	    if( m_gljPanel == null ) {
 	    	GLProfile profile = GLProfile.getDefault();
 			GLCapabilities glCaps = new GLCapabilities( profile );
 			/*glCaps.setHardwareAccelerated( true );
@@ -61,18 +61,18 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	        glCaps.setGreenBits( 8 );
 	        glCaps.setAlphaBits( 8 );*/
 	        //m_glCanvas = javax.media.opengl.GLDrawableFactory.getFactory().createGLCanvas( glCaps );
-	        m_glCanvas = new GLCanvas( glCaps );
+	        m_gljPanel = new GLJPanel( glCaps );
 	       	m_renderContext = new RenderContext( this );
-	        m_glCanvas.addGLEventListener( m_renderContext );   
+	        m_gljPanel.addGLEventListener( m_renderContext );
             m_pickContext = new PickContext( this );
-	        m_glCanvas.addGLEventListener( m_pickContext );
+	        m_gljPanel.addGLEventListener( m_pickContext );
 	    }
-		return m_glCanvas;
+		return m_gljPanel;
 	}    
 	
 	public edu.cmu.cs.stage3.alice.scenegraph.renderer.PickInfo pick( int x, int y, boolean isSubElementRequired, boolean isOnlyFrontMostRequired ) {
 	    if( m_pickContext != null ) {
-	        return m_pickContext.pick( m_glCanvas, x, y, isSubElementRequired, isOnlyFrontMostRequired );
+	        return m_pickContext.pick(m_gljPanel, x, y, isSubElementRequired, isOnlyFrontMostRequired );
 	    }
 		return null;
 	    

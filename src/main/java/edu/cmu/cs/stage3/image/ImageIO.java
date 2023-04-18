@@ -62,18 +62,14 @@ public class ImageIO {
 	}
 
 
-    public static java.awt.Image load( String codecName, java.io.InputStream inputStream ) throws java.io.IOException {
-        return load( codecName, inputStream, null );
-    }
-    public static java.awt.Image load( String codecName, java.io.InputStream inputStream, edu.cmu.cs.stage3.image.codec.ImageDecodeParam imageDecodeParam ) throws java.io.IOException {
+  public static java.awt.Image load( String codecName, java.io.InputStream inputStream ) throws java.io.IOException {
 		java.io.BufferedInputStream bufferedInputStream;
 		if( inputStream instanceof java.io.BufferedInputStream ) {
 			bufferedInputStream = (java.io.BufferedInputStream)inputStream;
 		} else {
 			bufferedInputStream = new java.io.BufferedInputStream( inputStream );
 		}
-		edu.cmu.cs.stage3.image.codec.ImageDecoder imageDecoder = edu.cmu.cs.stage3.image.codec.ImageCodec.createImageDecoder( codecName, bufferedInputStream, imageDecodeParam );
-		java.awt.image.RenderedImage renderedImage = imageDecoder.decodeAsRenderedImage();
+		java.awt.image.RenderedImage renderedImage = javax.imageio.ImageIO.read(bufferedInputStream);
 
 		if( renderedImage instanceof java.awt.Image ) {
 			return (java.awt.Image)renderedImage;
@@ -99,10 +95,7 @@ public class ImageIO {
 		return bufferedImage;
 	}
     public static void store( String codecName, java.io.OutputStream outputStream, java.awt.Image image ) throws InterruptedException, java.io.IOException {
-        store( codecName, outputStream, image, null );
-    }
-    public static void store( String codecName, java.io.OutputStream outputStream, java.awt.Image image, edu.cmu.cs.stage3.image.codec.ImageEncodeParam imageEncodeParam ) throws InterruptedException, java.io.IOException {
-		int width = ImageUtilities.getWidth( image ); 
+		int width = ImageUtilities.getWidth( image );
 		int height = ImageUtilities.getHeight( image ); 
 
 		java.awt.image.RenderedImage renderedImage;
@@ -127,11 +120,6 @@ public class ImageIO {
 			bufferedImage.setRGB( 0, 0, width, height, pixels, 0, width );
 			renderedImage = bufferedImage;
 		}
-		if( imageEncodeParam == null ) {
-			if( codecName.equals( "png" ) ) {
-				imageEncodeParam = edu.cmu.cs.stage3.image.codec.PNGEncodeParam.getDefaultEncodeParam( renderedImage );
-			}
-		}
 		java.io.BufferedOutputStream bufferedOutputStream;
 		if( outputStream instanceof java.io.BufferedOutputStream ) {
 			bufferedOutputStream = (java.io.BufferedOutputStream)outputStream;
@@ -139,8 +127,7 @@ public class ImageIO {
 			bufferedOutputStream = new java.io.BufferedOutputStream( outputStream );
 		}
 
-		edu.cmu.cs.stage3.image.codec.ImageEncoder imageEncoder = edu.cmu.cs.stage3.image.codec.ImageCodec.createImageEncoder( codecName, bufferedOutputStream, imageEncodeParam );
-		imageEncoder.encode( renderedImage );
+		javax.imageio.ImageIO.write(renderedImage, codecName, bufferedOutputStream);
 		bufferedOutputStream.flush();
 	}
 }
