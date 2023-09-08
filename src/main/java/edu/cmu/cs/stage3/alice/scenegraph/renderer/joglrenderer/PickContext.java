@@ -43,7 +43,7 @@ class PickContext extends Context {
             m_renderTarget.commitAnyPendingChanges();
     	    m_pickNameMap.clear();
     	    try {
-	    	    m_pickInfo = m_renderTarget.performPick( this, m_pickParameters );
+	    	    m_pickInfo = m_renderTarget.performPick( drawable,  this, m_pickParameters );
     	    } finally {
     	        m_pickParameters = null;
     	    }

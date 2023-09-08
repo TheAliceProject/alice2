@@ -33,6 +33,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLDrawableFactory;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.fixedfunc.GLLightingFunc;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.util.awt.AWTGLReadBufferUtil;
@@ -72,7 +73,7 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
     private java.nio.IntBuffer m_pickBuffer;
     private java.nio.IntBuffer m_viewportBuffer;
     
-    public PickInfo performPick( PickContext context, PickParameters pickParameters ) {
+    public PickInfo performPick( GLAutoDrawable drawable, PickContext context, PickParameters pickParameters ) {
         int x = pickParameters.getX();
         int y = pickParameters.getY();
 	    edu.cmu.cs.stage3.alice.scenegraph.Camera sgCamera = getCameraAtPixel( x, y );
@@ -92,6 +93,12 @@ public abstract class RenderTarget extends edu.cmu.cs.stage3.alice.scenegraph.re
 
         	int width = context.getWidth();
         	int height = context.getHeight();
+        	if (drawable instanceof GLJPanel) {
+						float[] scale = new float[2];
+						((GLJPanel) drawable).getCurrentSurfaceScale(scale);
+						width = (int) (width / scale[0]);
+						height = (int) (height / scale[1]);
+        	}
         	//todo: use actual viewport
 		    CameraProxy cameraProxy = (CameraProxy)getProxyFor( sgCamera );
         	java.awt.Rectangle viewport = cameraProxy.getActualViewport( width, height );
