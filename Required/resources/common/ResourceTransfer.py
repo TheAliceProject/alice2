@@ -1,3 +1,4 @@
+# coding: utf-8
 from edu.cmu.cs.stage3.alice.authoringtool import AuthoringToolResources
 from java.net import URL
 from java.util import Vector

@@ -1,14 +1,29 @@
+# coding: utf-8
 from edu.cmu.cs.stage3.alice.authoringtool import JAlice
+from edu.cmu.cs.stage3.alice.core.question.array import ItemAtIndex
+from edu.cmu.cs.stage3.alice.core.question.ask import AskUserForNumber
+from edu.cmu.cs.stage3.alice.core.question.list import Contains
+from edu.cmu.cs.stage3.alice.core.question.math import Min
+from edu.cmu.cs.stage3.alice.core.question.mouse import DistanceFromLeftEdge
+from edu.cmu.cs.stage3.alice.core.question.time import TimeElapsedSinceWorldStart
+from edu.cmu.cs.stage3.alice.core.question.userdefined import CallToUserDefinedQuestion
+from edu.cmu.cs.stage3.alice.core.question.vector3 import X
+from edu.cmu.cs.stage3.alice.core.question.visualization.array import ItemAtIndex
+from edu.cmu.cs.stage3.alice.core.question.visualization.list import Size
+from edu.cmu.cs.stage3.alice.core.question.visualization.model import Item
+from edu.cmu.cs.stage3.alice.core.responses.array import SetItemAtIndex
+from edu.cmu.cs.stage3.alice.core.responses.list import InsertItemAtBeginning
+from edu.cmu.cs.stage3.alice.core.responses.vector3 import SetX
+from edu.cmu.cs.stage3.alice.core.responses.visualization.array import SetItemAtIndex
+from edu.cmu.cs.stage3.alice.core.responses.visualization.list import InsertItemAtBeginning
+from edu.cmu.cs.stage3.alice.core.responses.visualization.model import SetItem
+from edu.cmu.cs.stage3.alice.core.styles import TraditionalAnimationStyle
+from edu.cmu.cs.stage3.pratt.maxkeyframing import PositionKeyframeResponse
 from edu.cmu.cs.stage3.util import StringTypePair
 from java.lang import Boolean
-from java.lang import Double
-from java.lang import Integer
-from java.lang import String
-from edu.cmu.cs.stage3.math import Vector3
-from edu.cmu.cs.stage3.math import Matrix44
 import edu
 import java
-import javax
+import os
 import string
 
 # HACK: until os.path works
@@ -66,8 +81,8 @@ formatMap = {
 	edu.cmu.cs.stage3.alice.core.responses.PoseAnimation : "<<<subject>>> ضبط الوضعية <<pose>>",
 	edu.cmu.cs.stage3.alice.core.responses.Increment : "زيادة <<<variable>>> بمقدار 1",
 	edu.cmu.cs.stage3.alice.core.responses.Decrement : "نقصان <<<variable>>> بمقدار 1",
-        
-        edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation : "<element> ضبط <propertyName> إلى <value>",
+
+	edu.cmu.cs.stage3.alice.core.responses.VehiclePropertyAnimation : "<element> ضبط <propertyName> إلى <value>",
 
 	edu.cmu.cs.stage3.alice.core.responses.list.InsertItemAtBeginning : " إدراج <item> في البداية <<<list>>>",
 	edu.cmu.cs.stage3.alice.core.responses.list.InsertItemAtEnd : "إدراج <item> في النهاية <<<list>>>",
@@ -106,8 +121,6 @@ formatMap = {
 	edu.cmu.cs.stage3.alice.core.question.ToStringQuestion : "<what> كسلسلة نصية",
 
 	edu.cmu.cs.stage3.alice.core.question.StringToUpperCaseQuestion : "<a> to uppercase",
-
-
 	edu.cmu.cs.stage3.alice.core.question.StringToLowerCaseQuestion : "<a> to lowercase",
 
 	edu.cmu.cs.stage3.alice.core.question.ask.AskUserForNumber : " اسأل المستخدم عن عدد <<question>>",
@@ -124,51 +137,51 @@ formatMap = {
 	edu.cmu.cs.stage3.alice.core.question.NumberIsLessThan : "<a>&lt;<b>",
 	edu.cmu.cs.stage3.alice.core.question.NumberIsLessThanOrEqualTo : "<a>&lt;=<b>",
 
-	edu.cmu.cs.stage3.alice.core.question.NumberAddition : "(<a>+<b>)", 
-	edu.cmu.cs.stage3.alice.core.question.NumberSubtraction : "(<a>-<b>)", 
-	edu.cmu.cs.stage3.alice.core.question.NumberMultiplication : "(<a>*<b>)", 
+	edu.cmu.cs.stage3.alice.core.question.NumberAddition : "(<a>+<b>)",
+	edu.cmu.cs.stage3.alice.core.question.NumberSubtraction : "(<a>-<b>)",
+	edu.cmu.cs.stage3.alice.core.question.NumberMultiplication : "(<a>*<b>)",
 	edu.cmu.cs.stage3.alice.core.question.NumberDivision : "(<a>/<b>)",
 
-	edu.cmu.cs.stage3.alice.core.question.math.Min : "العدد الأصغر بين <a> و <b>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Max : " العدد الأكبر بين <a> و <b>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Abs : "القيمة المطلقة <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Sqrt : "الجذر التربيعي <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Floor : "الحد الأدنى <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Ceil : "الحد الأعلى <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Sin : "جيب الزاوية <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Cos : "جيب تمام الزاوية <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Tan : "مماس الزاوية <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.ASin : "قوس جيب الزاوية<a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.ACos : "قوس جيب التمام <a>", 
+	edu.cmu.cs.stage3.alice.core.question.math.Min : "العدد الأصغر بين <a> و <b>",
+	edu.cmu.cs.stage3.alice.core.question.math.Max : " العدد الأكبر بين <a> و <b>",
+	edu.cmu.cs.stage3.alice.core.question.math.Abs : "القيمة المطلقة <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Sqrt : "الجذر التربيعي <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Floor : "الحد الأدنى <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Ceil : "الحد الأعلى <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Sin : "جيب الزاوية <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Cos : "جيب تمام الزاوية <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Tan : "مماس الزاوية <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.ASin : "قوس جيب الزاوية<a>",
+	edu.cmu.cs.stage3.alice.core.question.math.ACos : "قوس جيب التمام <a>",
 	edu.cmu.cs.stage3.alice.core.question.math.ATan : "قوس المماس <a>",
-	edu.cmu.cs.stage3.alice.core.question.math.ATan2 : "قوس المماس2 <a><b>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Pow : "<a> مرفوعه إلى القوة <b>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Log : "اللوغاريتم الطبيعي ل<a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Exp : " مرفوعه إلى القوة <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.IEEERemainder : "IEEE الباقي من <a>/<b>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Int : "عدد صحيح <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.Round : "حول <a>", 
-	edu.cmu.cs.stage3.alice.core.question.math.ToDegrees : "<a> تحويل من راديان إلى درجات", 
-	edu.cmu.cs.stage3.alice.core.question.math.ToRadians : "<a> تحويل من درجات إلى راديان", 
+	edu.cmu.cs.stage3.alice.core.question.math.ATan2 : "قوس المماس2 <a><b>",
+	edu.cmu.cs.stage3.alice.core.question.math.Pow : "<a> مرفوعه إلى القوة <b>",
+	edu.cmu.cs.stage3.alice.core.question.math.Log : "اللوغاريتم الطبيعي ل<a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Exp : " مرفوعه إلى القوة <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.IEEERemainder : "IEEE الباقي من <a>/<b>",
+	edu.cmu.cs.stage3.alice.core.question.math.Int : "عدد صحيح <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.Round : "حول <a>",
+	edu.cmu.cs.stage3.alice.core.question.math.ToDegrees : "<a> تحويل من راديان إلى درجات",
+	edu.cmu.cs.stage3.alice.core.question.math.ToRadians : "<a> تحويل من درجات إلى راديان",
 	edu.cmu.cs.stage3.alice.core.question.math.SuperSqrt : "<a> ل <b>الجذر ال",
 
-	edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromLeftEdge : "مسافة الفأرة من الحافة اليسرى", 
-	edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromTopEdge : "مسافة الفأرة من الحافة العلوية", 
+	edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromLeftEdge : "مسافة الفأرة من الحافة اليسرى",
+	edu.cmu.cs.stage3.alice.core.question.mouse.DistanceFromTopEdge : "مسافة الفأرة من الحافة العلوية",
 
-	edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart : "الوقت المنقضي",  
+	edu.cmu.cs.stage3.alice.core.question.time.TimeElapsedSinceWorldStart : "الوقت المنقضي",
 
-	edu.cmu.cs.stage3.alice.core.question.time.Year : "عام", 
-	edu.cmu.cs.stage3.alice.core.question.time.MonthOfYear : "شهر من عام", 
-	edu.cmu.cs.stage3.alice.core.question.time.DayOfYear : "يوم من عام", 
-	edu.cmu.cs.stage3.alice.core.question.time.DayOfMonth : "يوم من شهر", 
-	edu.cmu.cs.stage3.alice.core.question.time.DayOfWeek : "يوم من اسبوع", 
-	edu.cmu.cs.stage3.alice.core.question.time.DayOfWeekInMonth : "يوم من الاسبوع من الشهر", 
-	edu.cmu.cs.stage3.alice.core.question.time.IsAM : " هل صباحا", 
-	edu.cmu.cs.stage3.alice.core.question.time.IsPM : " هل مساء ", 
-	edu.cmu.cs.stage3.alice.core.question.time.HourOfAMOrPM : "ساعة صباحا أو مساء", 
-	edu.cmu.cs.stage3.alice.core.question.time.HourOfDay : "ساعة من يوم", 
-	edu.cmu.cs.stage3.alice.core.question.time.MinuteOfHour : "دقيقة من ساعة", 
-	edu.cmu.cs.stage3.alice.core.question.time.SecondOfMinute : "ثانية من دقيقة", 
+	edu.cmu.cs.stage3.alice.core.question.time.Year : "عام",
+	edu.cmu.cs.stage3.alice.core.question.time.MonthOfYear : "شهر من عام",
+	edu.cmu.cs.stage3.alice.core.question.time.DayOfYear : "يوم من عام",
+	edu.cmu.cs.stage3.alice.core.question.time.DayOfMonth : "يوم من شهر",
+	edu.cmu.cs.stage3.alice.core.question.time.DayOfWeek : "يوم من اسبوع",
+	edu.cmu.cs.stage3.alice.core.question.time.DayOfWeekInMonth : "يوم من الاسبوع من الشهر",
+	edu.cmu.cs.stage3.alice.core.question.time.IsAM : " هل صباحا",
+	edu.cmu.cs.stage3.alice.core.question.time.IsPM : " هل مساء ",
+	edu.cmu.cs.stage3.alice.core.question.time.HourOfAMOrPM : "ساعة صباحا أو مساء",
+	edu.cmu.cs.stage3.alice.core.question.time.HourOfDay : "ساعة من يوم",
+	edu.cmu.cs.stage3.alice.core.question.time.MinuteOfHour : "دقيقة من ساعة",
+	edu.cmu.cs.stage3.alice.core.question.time.SecondOfMinute : "ثانية من دقيقة",
 
 	edu.cmu.cs.stage3.alice.core.question.RandomBoolean : "اختر صحيح <probabilityOfTrue> من الوقت",
 	edu.cmu.cs.stage3.alice.core.question.RandomNumber : "رقم عشوائي",
@@ -198,7 +211,7 @@ formatMap = {
 	edu.cmu.cs.stage3.alice.core.question.IsWiderThan : "<<<subject>>> هل أوسع من <<object>>",
 	edu.cmu.cs.stage3.alice.core.question.IsShorterThan : "<<<subject>>> هل أقصر من <<object>>",
 	edu.cmu.cs.stage3.alice.core.question.IsTallerThan : "<<<subject>>> هل أطول من <<object>>",
- 
+
 	edu.cmu.cs.stage3.alice.core.question.IsCloseTo : "<<<subject>>> هل ضمن <threshold> من <object>",
 	edu.cmu.cs.stage3.alice.core.question.IsFarFrom : "<<<subject>>> هل على الأقل <threshold> يبتعد عن <object>",
 	edu.cmu.cs.stage3.alice.core.question.DistanceTo : "<<<subject>>> المسافة إلى <<object>>",
@@ -236,7 +249,7 @@ formatMap = {
 	edu.cmu.cs.stage3.alice.core.question.visualization.list.ItemAtBeginning : "<<<subject>>>'s العنصر في البداية",
 	edu.cmu.cs.stage3.alice.core.question.visualization.list.ItemAtEnd : "<<<subject>>>'s العنصر في النهاية",
 	edu.cmu.cs.stage3.alice.core.question.visualization.list.ItemAtIndex : "<<<subject>>>'s العنصر في الرقم التسلسلي <index>",
-	
+
 	edu.cmu.cs.stage3.alice.core.responses.visualization.list.InsertItemAtBeginning : "أضف <item> في بداية <<<subject>>>",
 	edu.cmu.cs.stage3.alice.core.responses.visualization.list.InsertItemAtEnd : "أضف <item> في نهاية <<<subject>>>",
 	edu.cmu.cs.stage3.alice.core.responses.visualization.list.InsertItemAtIndex : "أضف <item> في <index> من <<<subject>>>",
@@ -276,7 +289,7 @@ nameMap = {
 	"edu.cmu.cs.stage3.alice.core.behaviors.ConditionalBehavior" : "بينما <condition> صحيح",
 	"edu.cmu.cs.stage3.alice.core.behaviors.ConditionalTriggerBehavior" : "عندما <condition> يصبح صحيح",
 	"edu.cmu.cs.stage3.alice.core.behaviors.VariableChangeBehavior" : "عندما <variable> يتغير",
-	"edu.cmu.cs.stage3.alice.core.behaviors.MessageReceivedBehavior" : "عند تلقي رسالة بواسطة  <toWhom> من <fromWho>", 
+	"edu.cmu.cs.stage3.alice.core.behaviors.MessageReceivedBehavior" : "عند تلقي رسالة بواسطة  <toWhom> من <fromWho>",
 	"edu.cmu.cs.stage3.alice.core.behaviors.DefaultMouseInteractionBehavior" : " دع <mouse> يتحرك <objects>",
 	"edu.cmu.cs.stage3.alice.core.behaviors.KeyboardNavigationBehavior" : " دع <arrowKeys> يتحرك <subject>",
 	"edu.cmu.cs.stage3.alice.core.behaviors.MouseNavigationBehavior" : " دع <mouse> يحرك الكاميرا",
@@ -330,7 +343,7 @@ nameMap = {
 	edu.cmu.cs.stage3.alice.core.FogStyle.EXPONENTIAL : "كثافة",
 
 	edu.cmu.cs.stage3.alice.scenegraph.FillingStyle.SOLID : "صلب",
- 	edu.cmu.cs.stage3.alice.scenegraph.FillingStyle.WIREFRAME : "الإطار السلكي",
+	edu.cmu.cs.stage3.alice.scenegraph.FillingStyle.WIREFRAME : "الإطار السلكي",
 	edu.cmu.cs.stage3.alice.scenegraph.FillingStyle.POINTS : "نقاط",
 
 	edu.cmu.cs.stage3.alice.scenegraph.ShadingStyle.NONE : "لاشيء",
@@ -444,7 +457,7 @@ colorMap = {
 	"makeSceneEditorBigBackground" : java.awt.Color( 0, 150, 0 ),
 	"makeSceneEditorSmallBackground" : java.awt.Color( 0, 150, 0 ),
 	"stdErrTextColor" : java.awt.Color( 52, 174, 32 ),
-        "mainFontColor" : java.awt.Color(0,0,0),
+	"mainFontColor" : java.awt.Color(0,0,0),
 }
 
 

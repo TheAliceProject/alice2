@@ -1,3 +1,4 @@
+# coding: utf-8
 from edu.cmu.cs.stage3.alice.authoringtool import JAlice
 from edu.cmu.cs.stage3.util import StringTypePair
 from java.lang import Boolean

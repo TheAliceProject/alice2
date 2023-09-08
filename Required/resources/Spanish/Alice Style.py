@@ -1,3 +1,4 @@
+# coding: utf-8
 from edu.cmu.cs.stage3.alice.authoringtool import JAlice
 from edu.cmu.cs.stage3.alice.core.question.array import ItemAtIndex
 from edu.cmu.cs.stage3.alice.core.question.ask import AskUserForNumber
