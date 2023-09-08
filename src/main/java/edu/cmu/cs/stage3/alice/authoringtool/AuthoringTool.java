@@ -4373,7 +4373,7 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 					prefix = AuthoringToolResources.getPrefix(token);
 					spec = AuthoringToolResources.getSpecifier(token);
 					if (prefix.equals("createNewEventButton")) { 
-						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, "create new event"); 
+						java.awt.Component c = AuthoringToolResources.findButton(jAliceFrame.behaviorGroupsEditor, Messages.getString("create_new_event")); 
 						if (c != null) {
 							r = c.getBounds();
 							r = javax.swing.SwingUtilities.convertRectangle(c.getParent(), r, jAliceFrame.getGlassPane());
