@@ -1,3 +1,4 @@
+# coding: utf-8
 from edu.cmu.cs.stage3.alice.authoringtool.editors.texturemapviewer import TextureMapViewer
 from edu.cmu.cs.stage3.alice.authoringtool.editors.responseeditor import ResponseEditor
 from edu.cmu.cs.stage3.alice.authoringtool.editors.scripteditor import ScriptEditor
