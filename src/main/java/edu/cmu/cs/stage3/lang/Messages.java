@@ -10,11 +10,7 @@ public class Messages {
 		try {	
 			String t = (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang.messages", AikMin.locale).getObject(key);
 			t = t.replace("''", "'");
-			//if (AikMin.locale.equals(new Locale("ar"))){
-				return new String ( t.getBytes("ISO-8859-1"), "UTF-8" );
-			//}
-			//t.replace("''", "'");
-			//return (String)ResourceBundle.getBundle("edu.cmu.cs.stage3.lang."+AikMin.locale).getObject(key);
+			return t; //already converted from UTF-8 properties
 		} catch (MissingResourceException e) {
 			return key.replace("_", " ");
 		} catch (Exception ee){

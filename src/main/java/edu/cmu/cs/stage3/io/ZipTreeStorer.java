@@ -86,7 +86,7 @@ public class ZipTreeStorer implements DirectoryTreeStorer {
 			throw new IllegalArgumentException( Messages.getString("pathname_has_no_length") ); 
 		}
 		
-		String path = new String ((currentDirectory + pathname + "/").getBytes(), "ISO-8859-1") ;
+		String path = new String (currentDirectory + pathname + "/") ;
 		java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry( path ); 
 		if( zipOut != null ) {
 			zipOut.putNextEntry( newEntry );
