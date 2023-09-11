@@ -143,10 +143,10 @@ AuthoringToolResources.setBehaviorParameterPropertiesStructure( behaviorParamete
 ##################
 
 for key in nameMap.keys():
-	AuthoringToolResources.putName( key, nameMap[key] )
+	AuthoringToolResources.putName( key, nameMap[key].decode("utf-8") )
 
 for key in htmlNameMap.keys():
-	AuthoringToolResources.putHTMLName( key, htmlNameMap[key] )
+	AuthoringToolResources.putHTMLName( key, htmlNameMap[key].decode("utf-8") )
 
 
 ##################
@@ -154,7 +154,7 @@ for key in htmlNameMap.keys():
 ##################
 
 for key in formatMap.keys():
-	AuthoringToolResources.putFormat( key, formatMap[key] )
+	AuthoringToolResources.putFormat( key, formatMap[key].decode("utf-8") )
 
 
 ####################
