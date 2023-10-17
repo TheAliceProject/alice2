@@ -279,7 +279,7 @@ public class Graphics extends java.awt.Graphics {
 	}
 	
 	public void drawString( String str, int x, int y ) {
-		com.jogamp.opengl.util.awt.TextRenderer renderer = new com.jogamp.opengl.util.awt.TextRenderer( m_font );
+		  com.jogamp.opengl.util.awt.TextRenderer renderer = new NonCachingTextRenderer(m_font);
 	    renderer.beginRendering(m_renderContext.getWidth(), m_renderContext.getHeight());
 	    renderer.setColor(m_color);
 	    renderer.draw(str, x, m_renderContext.getHeight() - y);
