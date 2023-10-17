@@ -47,6 +47,10 @@ class RenderContext extends Context {
     
     private java.awt.Rectangle m_clearRect = new java.awt.Rectangle();
 
+    private final Object m_displayLock = new Object();
+    public static final int MIN_RENDER_WAIT = 25;
+    private long lastRenderMillis = 0;
+
     public RenderContext( RenderTarget renderTarget ) {
         m_renderTarget = renderTarget;
         m_renderOpaque = true;
@@ -59,15 +63,20 @@ class RenderContext extends Context {
     }
     
 	public void display( GLAutoDrawable drawable ) {
-        super.display( drawable );
-        
-        m_renderTarget.commitAnyPendingChanges();
-        m_clearRect.setBounds( 0, 0, 0, 0 );
-        m_renderTarget.performClearAndRenderOffscreen( this );
+    synchronized (m_displayLock) {
+      long timeMillis = System.currentTimeMillis();
+      if (timeMillis - lastRenderMillis < MIN_RENDER_WAIT) {
+          // Prevent display() from triggering itself in a tight cycle
+          return;
+      }
+      lastRenderMillis = timeMillis;
+      super.display( drawable );
 
-		if( m_clearRect.x == 0 && m_clearRect.y == 0 && m_clearRect.width == m_width && m_clearRect.height == m_height ) {
-            //pass
-        } else {
+      m_renderTarget.commitAnyPendingChanges();
+      m_clearRect.setBounds( 0, 0, 0, 0 );
+      m_renderTarget.performClearAndRenderOffscreen( this );
+
+      if (m_clearRect.x != 0 || m_clearRect.y != 0 || m_clearRect.width != m_width || m_clearRect.height != m_height) {
             gl2.glEnable( GL.GL_SCISSOR_TEST );
             gl2.glClearColor( 0, 0, 0, 1 );
             try {
@@ -87,10 +96,11 @@ class RenderContext extends Context {
                     gl2.glScissor( 0, m_clearRect.y + m_clearRect.height, m_width, m_height - m_clearRect.height );
                     gl2.glClear( GL.GL_COLOR_BUFFER_BIT );
                 }
-            } finally { 
+            } finally {
                 gl2.glDisable( GL.GL_SCISSOR_TEST );
             }
-        }
+      }
+    }
 	}
 
     public void beginAffectorSetup() {
