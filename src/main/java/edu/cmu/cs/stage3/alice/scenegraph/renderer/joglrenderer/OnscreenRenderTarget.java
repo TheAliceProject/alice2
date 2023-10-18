@@ -27,6 +27,8 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLJPanel;
 
+import javax.vecmath.Vector3d;
+
 public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.OnscreenRenderTarget {
     private GLJPanel m_gljPanel;
     //private javax.media.opengl.GLPbuffer m_glPBuffer;
@@ -76,5 +78,14 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	    }
 		return null;
 	    
-	}	
+	}
+
+	@Override
+	protected Vector3d scaleForSurface(Vector3d xyz) {
+		float[] scale = new float[2];
+		m_gljPanel.getCurrentSurfaceScale(scale);
+		xyz.x = (int) (xyz.x * scale[0]);
+		xyz.y = (int) (xyz.y * scale[1]);
+		return xyz;
+	}
 }

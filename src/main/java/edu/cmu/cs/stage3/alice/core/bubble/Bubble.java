@@ -186,7 +186,7 @@ public abstract class Bubble {
 				edu.cmu.cs.stage3.alice.core.Camera camera = (edu.cmu.cs.stage3.alice.core.Camera)sgCamera.getBonus();
 				if( camera != null && camera != m_referenceFrame ) {
 					javax.vecmath.Vector3d xyzInCamera = m_referenceFrame.transformTo( m_offsetFromReferenceFrame, camera );
-					javax.vecmath.Vector3d xyzInViewport = rt.transformFromCameraToViewport( xyzInCamera, sgCamera );
+					javax.vecmath.Vector3d xyzInViewport = rt.transformFromCameraToScaledViewport( xyzInCamera, sgCamera );
 					m_origin.x = (int)xyzInViewport.x;
 					m_origin.y = (int)xyzInViewport.y;
 				}

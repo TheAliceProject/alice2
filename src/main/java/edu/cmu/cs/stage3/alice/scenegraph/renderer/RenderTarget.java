@@ -54,6 +54,7 @@ public interface RenderTarget {
 	public javax.vecmath.Vector4d transformFromCameraToProjection( javax.vecmath.Vector3d xyz, edu.cmu.cs.stage3.alice.scenegraph.Camera camera );
 	public javax.vecmath.Vector3d transformFromProjectionToViewport( javax.vecmath.Vector4d xyzw, edu.cmu.cs.stage3.alice.scenegraph.Camera camera );
 	public javax.vecmath.Vector3d transformFromCameraToViewport( javax.vecmath.Vector3d xyz, edu.cmu.cs.stage3.alice.scenegraph.Camera camera );
+	public javax.vecmath.Vector3d transformFromCameraToScaledViewport( javax.vecmath.Vector3d xyz, edu.cmu.cs.stage3.alice.scenegraph.Camera camera );
 
 	public java.awt.Image getOffscreenImage();
 	public java.awt.Graphics getOffscreenGraphics();

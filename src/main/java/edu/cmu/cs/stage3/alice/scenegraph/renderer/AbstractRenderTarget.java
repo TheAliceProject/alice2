@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.scenegraph.renderer;
 
+import javax.vecmath.Vector3d;
+
 public abstract class AbstractRenderTarget implements edu.cmu.cs.stage3.alice.scenegraph.renderer.RenderTarget {
 	private AbstractRenderer m_abstractRenderer;
 	private java.util.Vector m_sgCameras = new java.util.Vector();
@@ -140,6 +142,14 @@ public abstract class AbstractRenderTarget implements edu.cmu.cs.stage3.alice.sc
 	}
 	public javax.vecmath.Vector3d transformFromCameraToViewport( javax.vecmath.Vector3d xyz, edu.cmu.cs.stage3.alice.scenegraph.Camera camera ) {
 		return transformFromProjectionToViewport( transformFromCameraToProjection( xyz, camera ), camera );
+	}
+	public javax.vecmath.Vector3d transformFromCameraToScaledViewport( javax.vecmath.Vector3d xyz, edu.cmu.cs.stage3.alice.scenegraph.Camera camera ) {
+		return scaleForSurface(transformFromCameraToViewport(xyz, camera));
+	}
+
+	protected Vector3d scaleForSurface(Vector3d xyz) {
+		// Default to no scale change.
+		return xyz;
 	}
 
 	public edu.cmu.cs.stage3.math.Ray getRayAtPixel( edu.cmu.cs.stage3.alice.scenegraph.Camera camera, int pixelX, int pixelY ) {
