@@ -28,6 +28,8 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.PathIterator;
+import java.text.Bidi;
+import java.time.format.TextStyle;
 
 import javax.vecmath.Point2d;
 import javax.vecmath.Point3d;
@@ -39,6 +41,8 @@ import edu.cmu.cs.stage3.alice.core.property.NumberProperty;
 import edu.cmu.cs.stage3.alice.core.property.StringProperty;
 import edu.cmu.cs.stage3.alice.scenegraph.IndexedTriangleArray;
 import edu.cmu.cs.stage3.alice.scenegraph.Vertex3d;
+
+import static java.awt.Font.LAYOUT_RIGHT_TO_LEFT;
 
 /**
  * <p>Title: </p>
@@ -119,7 +123,7 @@ public class Text3D extends Geometry {
             loc = m_text.indexOf('\n',loc)+1;
         }
         if (loc<m_text.length()) {
-            GlyphVector gv = m_font.createGlyphVector(new FontRenderContext(new AffineTransform(),false,true),m_text.substring(loc));
+            GlyphVector gv = getGlyphVector(m_text.substring(loc));
             shiftOffset.x = gv.getVisualBounds().getWidth()/2;
             for (int i=0; i<gv.getNumGlyphs(); i++) {
             	//changed: dividing width by 10 to make less wide, maybe change shiftOffset as well
@@ -142,6 +146,19 @@ public class Text3D extends Geometry {
                     verts[i].scale(1.0/height,1.0/height,1);
             }
             ((IndexedTriangleArray)this.getSceneGraphGeometry()).setVertices(verts);
+        }
+    }
+
+    private GlyphVector getGlyphVector(String string) {
+        if (Bidi.requiresBidi(string.toCharArray(), 0, string.length())
+            && new Bidi(string, Bidi.DIRECTION_DEFAULT_LEFT_TO_RIGHT).isRightToLeft()) {
+            return m_font.layoutGlyphVector(
+                new FontRenderContext(new AffineTransform(), false, true),
+                string.toCharArray(),
+                0, string.length(), LAYOUT_RIGHT_TO_LEFT
+            );
+        } else {
+            return m_font.createGlyphVector(new FontRenderContext(new AffineTransform(), false, true), string);
         }
     }
 
