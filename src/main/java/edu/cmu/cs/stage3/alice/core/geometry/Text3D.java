@@ -158,7 +158,7 @@ public class Text3D extends Geometry {
                 0, string.length(), LAYOUT_RIGHT_TO_LEFT
             );
         } else {
-            return m_font.createGlyphVector(new FontRenderContext(new AffineTransform(),false,true), string);
+            return m_font.createGlyphVector(new FontRenderContext(new AffineTransform(), false, true), string);
         }
     }
 
