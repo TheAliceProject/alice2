@@ -64,7 +64,7 @@ class RenderContext extends Context {
     
 	public void display( GLAutoDrawable drawable ) {
     synchronized (m_displayLock) {
-      long timeMillis = System.currentTimeMillis();
+      final long timeMillis = System.currentTimeMillis();
       if (timeMillis - lastRenderMillis < MIN_RENDER_WAIT) {
           // Prevent display() from triggering itself in a tight cycle
           return;
