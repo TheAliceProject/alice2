@@ -231,8 +231,12 @@ public abstract class RenderTargetPickManipulator extends ScreenWrappingMouseLis
 			//TODO: position mouse based on object of interest's position in the picture plane;  for now, it does a rough approximation
 			java.awt.Point tempPoint = ev.getPoint();
 			javax.swing.SwingUtilities.convertPointToScreen( tempPoint, ev.getComponent() );
-			javax.swing.SwingUtilities.convertPointToScreen( originalMousePoint, ev.getComponent() );
-			edu.cmu.cs.stage3.awt.AWTUtilities.setCursorLocation( tempPoint.x, originalMousePoint.y);
+			if (originalMousePoint == null) {
+				edu.cmu.cs.stage3.awt.AWTUtilities.setCursorLocation(tempPoint.x, tempPoint.y);
+			} else {
+				javax.swing.SwingUtilities.convertPointToScreen(originalMousePoint, ev.getComponent());
+				edu.cmu.cs.stage3.awt.AWTUtilities.setCursorLocation(tempPoint.x, originalMousePoint.y);
+			}
 		}
 
 		lastEPickedTransformable = ePickedTransformable;
