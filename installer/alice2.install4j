@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="10.0.4" transformSequenceNumber="10">
-  <directoryPresets config="../target/alice2-2.6.0-SNAPSHOT.jar" />
-  <application name="Alice 2.6" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.0" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
+  <directoryPresets config="../target/alice2-2.6.1-SNAPSHOT.jar" />
+  <application name="Alice 2.6.1-rc.1" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.1-rc.1" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
     <jreBundles jdkProviderId="Adoptium" release="17/latest" />
   </application>
   <files missingFilesStrategy="error" globalExcludeSuffixes="*.sha1,*.lastUpdated,*.pom,*.repositories,*.DS_Store">
@@ -38,7 +38,7 @@
           <entry location="gallery" />
         </exclude>
       </dirEntry>
-      <fileEntry mountPoint="58" file="../target/alice2-2.6.0-SNAPSHOT.jar" />
+      <fileEntry mountPoint="58" file="../target/alice2-2.6.1-SNAPSHOT.jar" />
       <fileEntry mountPoint="58" file="../Alice2_LICENSE.pdf" />
       <fileEntry mountPoint="58" file="../jythonLicense.txt" />
       <fileEntry mountPoint="58" file="../lgpl.txt" />
@@ -85,14 +85,14 @@
     </components>
   </files>
   <launchers>
-    <launcher name="Alice 2.6" id="70" icnsFile="./images/icon/alice.icns">
-      <executable name="alice2" iconSet="true" executableDir="." executableMode="gui" workingDirectory="Required" singleInstance="true">
+    <launcher name="Alice 2.6.1-rc.1" id="70" icnsFile="./images/icon/alice.icns">
+      <executable name="alice" iconSet="true" executableDir="." executableMode="gui" workingDirectory="Required">
         <versionInfo internalName="${compiler:sys.shortName}" />
       </executable>
       <java mainClass="edu.cmu.cs.stage3.alice.authoringtool.JAlice" vmParameters="-Dapple.laf.useScreenMenuBar=true -Dpython.home=jython -Dpython.path=jython/Lib/alice -Xmx1024m -Dfile.encoding=UTF-8 -Dapple.laf.useScreenMenuBar=true --add-exports java.base/java.lang=ALL-UNNAMED --add-exports java.desktop/sun.awt=ALL-UNNAMED --add-exports java.desktop/sun.java2d=ALL-UNNAMED" arguments="-l ${compiler:sys.languageId}">
         <classPath>
           <scanDirectory location="Required/externalLib" failOnError="false" />
-          <archive location="Required/alice2-2.6.0-SNAPSHOT.jar" failOnError="false" />
+          <archive location="Required/alice2-2.6.1-SNAPSHOT.jar" failOnError="false" />
         </classPath>
         <nativeLibraryDirectories>
           <directory name="Required/externalLib/win32" />
