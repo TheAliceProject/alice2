@@ -1651,7 +1651,7 @@ public abstract class Element {
             org.w3c.dom.Document document = builder.newDocument();
 
             org.w3c.dom.Element elementNode = document.createElement( "element" ); 
-            elementNode.setAttribute( "class", getClass().getName() ); 
+            elementNode.setAttribute( "class", AuthoringTool.getOlderClassName( getClass().getName() ) );
             elementNode.setAttribute( "version", Double.toString( VERSION ) ); 
 
             document.appendChild( elementNode );

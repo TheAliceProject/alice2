@@ -33,6 +33,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -395,17 +396,28 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		return Class.forName(correctedClassName(classname));
 	}
 
+	private static final java.util.Hashtable<String, String> changedPackageNames = new java.util.Hashtable<>();
+	static {
+		changedPackageNames.put("edu.cmu.cs.stage3.alice.core.response.", "edu.cmu.cs.stage3.alice.core.responses.");
+		changedPackageNames.put("edu.cmu.cs.stage3.alice.core.behavior.", "edu.cmu.cs.stage3.alice.core.behaviors.");
+		changedPackageNames.put("edu.cmu.cs.stage3.alice.core.style.", "edu.cmu.cs.stage3.alice.core.styles.");
+	}
 
 	// Added in Alice 2.6, which upgraded python and jython to 2.7.3. In 2.7.3 having a class and a package with
-	// the same name caused build problems, so these three packages were renamed. This renaming breaks backwards
-	// compatibility so Alice 2.5 and earlier will not be able to open newer files.
+	// the same name caused build problems, so these three packages were renamed. This pair of methods is used to
+	// read the older packages as newer and write the newer package names as old, so that the file format remains.
 	private static String correctedClassName(String classname) {
-		classname = classname.replace("edu.cmu.cs.stage3.alice.core.response.",
-				"edu.cmu.cs.stage3.alice.core.responses.");
-		classname = classname.replace("edu.cmu.cs.stage3.alice.core.behavior.",
-				"edu.cmu.cs.stage3.alice.core.behaviors.");
-		classname = classname.replace("edu.cmu.cs.stage3.alice.core.style.",
-				"edu.cmu.cs.stage3.alice.core.styles.");
+		for (Map.Entry<String, String> entry : changedPackageNames.entrySet()) {
+			classname = classname.replace(entry.getKey(), entry.getValue());
+		}
+		return classname;
+	}
+
+	// Used when saving to store under the older package names and maintain backward compatibility
+	public static String getOlderClassName(String classname) {
+		for (Map.Entry<String, String> entry : changedPackageNames.entrySet()) {
+			classname = classname.replace(entry.getValue(), entry.getKey());
+		}
 		return classname;
 	}
 
