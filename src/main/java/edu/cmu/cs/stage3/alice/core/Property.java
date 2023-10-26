@@ -702,7 +702,10 @@ public abstract class Property {
     }
     protected void encodeObject( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, ReferenceGenerator referenceGenerator ) throws java.io.IOException {
         Object o = get();
-        node.setAttribute( "class", o.getClass().getName() ); 
+        // Use the class name that matches older package structure for backward compatibility
+        // (e.g. behavior not behaviors)
+        node.setAttribute( "class", AuthoringTool.getOlderClassName( o.getClass().getName() ) );
+        // toString() may include the package path but has not been found to break compatibility.
         node.appendChild( createNodeForString( document, o.toString() ) );
     }
     public final void encode( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, ReferenceGenerator referenceGenerator ) throws java.io.IOException {
