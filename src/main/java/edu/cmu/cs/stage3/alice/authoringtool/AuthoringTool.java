@@ -547,29 +547,9 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		renderContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.RenderContentPane(this);
 		
 		
-		importFileChooser = new javax.swing.JFileChooser();		
-		saveWorldFileChooser = new javax.swing.JFileChooser() {
-			public void approveSelection() {
-				java.io.File desiredFile = getSelectedFile();
-				if (currentWorldLocation == null || currentWorldLocation.equals(desiredFile) || !desiredFile.exists()) {
-					if (shouldAllowOverwrite(desiredFile)) {
-						super.approveSelection();
-					} else {
-						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("That_is_protected_Alice_file_and_you_can_not_overwrite_it__Please_choose_another_file_")); 
-					}
-				} else if (desiredFile.exists()) {
-					if (shouldAllowOverwrite(desiredFile)) {
-						int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("You_are_about_to_save_over_an_existing_file__Are_you_sure_you_want_to_"), Messages.getString("Save_Over_Warning"), javax.swing.JOptionPane.YES_NO_OPTION);  
-						if (n == javax.swing.JOptionPane.YES_OPTION) {
-							super.approveSelection();
-						}
-					} else {
-						edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("That_is_protected_Alice_file_and_you_can_not_overwrite_it__Please_choose_another_file_")); 
-					}
+		importFileChooser = new javax.swing.JFileChooser();
 
-				}
-			}
-		};
+		saveWorldFileChooser = newSaveFileChooser();
 		addCharacterFileChooser = new javax.swing.JFileChooser();
 		saveCharacterFileDialog = new javax.swing.JFileChooser();
 			
@@ -634,7 +614,6 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		addCharacterFileChooser.setFileFilter(characterFileFilter);
 		addCharacterFileChooser.setPreferredSize(new java.awt.Dimension(x, y));
 
-		worldsDirectoryChanged();
 		importDirectoryChanged();
 		charactersDirectoryChanged();
 	
@@ -650,6 +629,17 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 	
 		stdErrContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this, true);
 		stdOutContentPane = new edu.cmu.cs.stage3.alice.authoringtool.dialog.StdErrOutContentPane(this, false);
+	}
+
+	private SaveFileChooser newSaveFileChooser() {
+		String worldsDirPath = authoringToolConfig.getValue("directories.worldsDirectory");
+		if (worldsDirPath != null) {
+			File worldsDir = new File(worldsDirPath);
+			if (worldsDir != null && worldsDir.exists() && worldsDir.isDirectory()) {
+				return new SaveFileChooser(worldsDir);
+			}
+		}
+		return new SaveFileChooser();
 	}
 
 	private void undoRedoInit() {
@@ -5869,6 +5859,34 @@ public class AuthoringTool implements java.awt.datatransfer.ClipboardOwner, edu.
 		}
 	}
 
-	
+	private class SaveFileChooser extends javax.swing.JFileChooser {
+		public SaveFileChooser(File dir) {
+			super(dir);
+		}
 
+		public SaveFileChooser() {
+			super();
+		}
+
+		public void approveSelection() {
+			File desiredFile = getSelectedFile();
+			if (currentWorldLocation == null || currentWorldLocation.equals(desiredFile) || !desiredFile.exists()) {
+				if (shouldAllowOverwrite(desiredFile)) {
+					super.approveSelection();
+				} else {
+					edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("That_is_protected_Alice_file_and_you_can_not_overwrite_it__Please_choose_another_file_"));
+				}
+			} else if (desiredFile.exists()) {
+				if (shouldAllowOverwrite(desiredFile)) {
+					int n = edu.cmu.cs.stage3.swing.DialogManager.showConfirmDialog(Messages.getString("You_are_about_to_save_over_an_existing_file__Are_you_sure_you_want_to_"), Messages.getString("Save_Over_Warning"), JOptionPane.YES_NO_OPTION);
+					if (n == JOptionPane.YES_OPTION) {
+						super.approveSelection();
+					}
+				} else {
+					edu.cmu.cs.stage3.swing.DialogManager.showMessageDialog(Messages.getString("That_is_protected_Alice_file_and_you_can_not_overwrite_it__Please_choose_another_file_"));
+				}
+
+			}
+		}
+	}
 }
