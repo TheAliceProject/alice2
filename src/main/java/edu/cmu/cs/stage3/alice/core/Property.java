@@ -28,6 +28,7 @@ import edu.cmu.cs.stage3.alice.core.event.PropertyEvent;
 import edu.cmu.cs.stage3.alice.core.event.PropertyListener;
 import edu.cmu.cs.stage3.alice.core.reference.PropertyReference;
 import edu.cmu.cs.stage3.lang.Messages;
+import edu.cmu.cs.stage3.util.Enumerable;
 
 public abstract class Property {
 	private static boolean HACK_s_isListeningEnabled = true;
@@ -705,9 +706,15 @@ public abstract class Property {
         // Use the class name that matches older package structure for backward compatibility
         // (e.g. behavior not behaviors)
         node.setAttribute( "class", AuthoringTool.getOlderClassName( o.getClass().getName() ) );
-        // toString() may include the package path but has not been found to break compatibility.
-        node.appendChild( createNodeForString( document, o.toString() ) );
+        String serialized = o instanceof Enumerable ? enumString((Enumerable) o) : o.toString();
+        node.appendChild( createNodeForString( document, serialized) );
     }
+
+    // Based on Enumerable.toString() with the added mapping to older class names
+    private String enumString(Enumerable e) {
+        return AuthoringTool.getOlderClassName(e.getClass().getName()) + "[" + e.getRepr() + "]";
+    }
+
     public final void encode( org.w3c.dom.Document document, org.w3c.dom.Element node, edu.cmu.cs.stage3.io.DirectoryTreeStorer storer, ReferenceGenerator referenceGenerator ) throws java.io.IOException {
 		Object o = get();
         if( o != null ) {
