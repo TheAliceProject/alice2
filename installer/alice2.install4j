@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="10.0.4" transformSequenceNumber="10">
   <directoryPresets config="../target/alice2-2.6.1-SNAPSHOT.jar" />
-  <application name="Alice 2.6.1-rc.3" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.1-rc.3" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
+  <application name="Alice 2.6.1-rc.4" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.1-rc.4" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
     <jreBundles jdkProviderId="Adoptium" release="17/latest" />
   </application>
   <files missingFilesStrategy="error" globalExcludeSuffixes="*.sha1,*.lastUpdated,*.pom,*.repositories,*.DS_Store">
@@ -85,7 +85,7 @@
     </components>
   </files>
   <launchers>
-    <launcher name="Alice 2.6.1-rc.3" id="70" icnsFile="./images/icon/alice.icns">
+    <launcher name="Alice 2.6.1-rc.4" id="70" icnsFile="./images/icon/alice.icns">
       <executable name="alice" iconSet="true" executableDir="." executableMode="gui" workingDirectory="Required">
         <versionInfo internalName="${compiler:sys.shortName}" />
       </executable>
