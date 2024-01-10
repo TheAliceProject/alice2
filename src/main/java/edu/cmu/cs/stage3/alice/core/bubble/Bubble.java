@@ -23,6 +23,8 @@
 
 package edu.cmu.cs.stage3.alice.core.bubble;
 
+import java.awt.*;
+
 class SubText {
 	public SubText( String text, java.awt.geom.Rectangle2D bound, int yOffset ) {
 		m_text = text;
@@ -168,6 +170,13 @@ public abstract class Bubble {
 						}
 						String substring = m_text.substring( i, limit );
 						java.awt.geom.Rectangle2D boundI = m_font.getStringBounds( substring, frc );
+						float[] scale = rt.getSurfaceScale();
+						if (scale[0] != 1.0f || scale[1] != 1.0f) {
+							boundI.setRect(
+								boundI.getX() * scale[0], boundI.getY() * scale[1],
+								boundI.getWidth() * scale[0], boundI.getHeight() * scale[1]);
+							setFont(new Font(m_font.getName(), m_font.getStyle(), (int) (m_font.getSize() * scale[0])));
+						}
 						m_subTexts.addElement( new SubText( substring, boundI, offsetY ) );
 						offsetY += boundI.getHeight();
 						i = limit + 1;

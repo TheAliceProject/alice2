@@ -55,6 +55,9 @@ public class BubbleManager implements edu.cmu.cs.stage3.alice.scenegraph.rendere
 			if( sgCameras.length > 0 ) {
 				edu.cmu.cs.stage3.alice.scenegraph.Camera sgCamera = sgCameras[ 0 ];
 				java.awt.Rectangle actualViewport = rt.getActualViewport( sgCamera );
+				float[] scale = rt.getSurfaceScale();
+				actualViewport.width *= scale[0];
+				actualViewport.height *= scale[1];
 				for( int i=0; i<m_bubbles.length; i++ ) {
 					Bubble bubbleI = m_bubbles[ i ];
 					if( bubbleI.isShowing() ) {

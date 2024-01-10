@@ -81,6 +81,13 @@ public class OnscreenRenderTarget extends RenderTarget implements edu.cmu.cs.sta
 	}
 
 	@Override
+	public float[] getSurfaceScale() {
+		float[] scale = new float[2];
+		m_gljPanel.getCurrentSurfaceScale(scale);
+		return scale;
+	}
+
+	@Override
 	protected Vector3d scaleForSurface(Vector3d xyz) {
 		float[] scale = new float[2];
 		m_gljPanel.getCurrentSurfaceScale(scale);
