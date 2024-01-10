@@ -43,7 +43,7 @@ import edu.cmu.cs.stage3.lang.Messages;
 public class JAlice {
 
 	// version information
-	private static String version = "2.6.1-rc.4"; //System.getProperty("java.version");
+	private static String version = "2.6.1-rc.5"; //System.getProperty("java.version");
 	private static String backgroundColor =  new java.awt.Color(0, 78, 152).toString(); //edu.cmu.cs.stage3.alice.scenegraph.Color( 0.0/255.0, 78.0/255.0, 152.0/255.0 ).toString();
 	private static String directory = null;
 	//private Package authoringToolPackage = Package.getPackage( "edu.cmu.cs.stage3.alice.authoringtool" );

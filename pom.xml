@@ -13,7 +13,7 @@
 
     <!--  The first digit is from Alice 2, followed by SemVer identifier: major.minor.patch  -->
     <alice.build.version>2.6.1</alice.build.version>
-    <alice.build.prerelease>-rc.4</alice.build.prerelease>
+    <alice.build.prerelease>-rc.5</alice.build.prerelease>
     <!--  TODO: Have the future build system replace local with a build #  -->
     <alice.build.metadata>+build.local</alice.build.metadata>
   </properties>
