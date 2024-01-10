@@ -67,6 +67,9 @@ public interface RenderTarget {
 
 	public java.awt.Dimension getSize();
 	public java.awt.Dimension getSize( java.awt.Dimension rv );
+	public default float[] getSurfaceScale() {
+		return new float[]{1.0f, 1.0f};
+	}
 
 	public double[] getActualPlane( edu.cmu.cs.stage3.alice.scenegraph.OrthographicCamera orthographicCamera );
 	public double[] getActualPlane( edu.cmu.cs.stage3.alice.scenegraph.PerspectiveCamera perspectiveCamera );
