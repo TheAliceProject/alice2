@@ -48,7 +48,7 @@ class RenderContext extends Context {
     private java.awt.Rectangle m_clearRect = new java.awt.Rectangle();
 
     private final Object m_displayLock = new Object();
-    public static final int MIN_RENDER_WAIT = 25;
+    public static final int MIN_RENDER_WAIT = 5;
     private long lastRenderMillis = 0;
 
     public RenderContext( RenderTarget renderTarget ) {
