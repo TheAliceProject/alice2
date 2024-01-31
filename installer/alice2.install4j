@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="10.0.4" transformSequenceNumber="10">
   <directoryPresets config="../target/alice2-2.6.1-SNAPSHOT.jar" />
-  <application name="Alice 2.6.1-rc.5" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.1-rc.4" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
-    <jreBundles jdkProviderId="Adoptium" release="17/latest" />
+  <application name="Alice 2.6.1" applicationId="2612-7202-9353-1999" mediaDir="./installerOutput" createChecksums="false" shortName="alice2" publisher="The Alice Project" publisherWeb="https://alice.org" version="2.6.1" allPathsRelative="true" macVolumeId="81236657ad4d4aae" javaMinVersion="17" javaMaxVersion="17" jdkMode="runtimeJre">
+    <jreBundles jdkProviderId="Liberica" release="17/latest" />
   </application>
   <files missingFilesStrategy="error" globalExcludeSuffixes="*.sha1,*.lastUpdated,*.pom,*.repositories,*.DS_Store">
     <filesets>
@@ -85,7 +85,7 @@
     </components>
   </files>
   <launchers>
-    <launcher name="Alice 2.6.1-rc.5" id="70" icnsFile="./images/icon/alice.icns">
+    <launcher name="Alice 2.6.1" id="70" icnsFile="./images/icon/alice.icns">
       <executable name="alice" iconSet="true" executableDir="." executableMode="gui" workingDirectory="Required">
         <versionInfo internalName="${compiler:sys.shortName}" />
       </executable>
@@ -627,7 +627,7 @@ return console.askYesNo(message, true);
         <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
       </exclude>
     </windowsArchive>
-    <linuxDeb name="English Linux Deb Archive" id="442" mediaFileName="${compiler:sys.fullName}" dependencies="libglu1-mesa, openjdk-8-jre">
+    <linuxDeb name="English Linux Deb Archive" id="442" mediaFileName="${compiler:sys.fullName}" dependencies="libglu1-mesa, openjdk-17-jre">
       <excludedComponents>
         <component id="67" />
         <component id="325" />
@@ -643,7 +643,7 @@ return console.askYesNo(message, true);
 lxpanelctl restart</postInstallScript>
       <preUninstallScript>rm /usr/share/applications/alice2.desktop</preUninstallScript>
     </linuxDeb>
-    <linuxDeb name="Spanish Linux Deb Archive" id="447" mediaFileName="${compiler:sys.fullName}_es" overridePrincipalLanguage="true" dependencies="libglu1-mesa, openjdk-8-jre">
+    <linuxDeb name="Spanish Linux Deb Archive" id="447" mediaFileName="${compiler:sys.fullName}_es" overridePrincipalLanguage="true" dependencies="libglu1-mesa, openjdk-17-jre">
       <excludedComponents>
         <component id="59" />
         <component id="325" />
