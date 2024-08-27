@@ -9,7 +9,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
-    <jogl.version>2.4.0</jogl.version>
+    <jogl.version>2.5.0</jogl.version>
 
     <!--  The first digit is from Alice 2, followed by SemVer identifier: major.minor.patch  -->
     <alice.build.version>2.6.1</alice.build.version>
