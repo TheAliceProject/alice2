@@ -9,7 +9,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
-    <jogl.version>2.4.0</jogl.version>
+    <jogl.version>2.3.2</jogl.version>
 
     <!--  The first digit is from Alice 2, followed by SemVer identifier: major.minor.patch  -->
     <alice.build.version>2.6.1</alice.build.version>
@@ -118,22 +118,6 @@
                   <artifactId>gluegen-rt</artifactId>
                   <version>${jogl.version}</version>
                   <classifier>natives-linux-amd64</classifier>
-                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                </artifactItem>
-
-                <!-- linux-aarch64 -->
-                <artifactItem>
-                  <groupId>org.jogamp.jogl</groupId>
-                  <artifactId>jogl-all</artifactId>
-                  <version>${jogl.version}</version>
-                  <classifier>natives-linux-aarch64</classifier>
-                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.jogamp.gluegen</groupId>
-                  <artifactId>gluegen-rt</artifactId>
-                  <version>${jogl.version}</version>
-                  <classifier>natives-linux-aarch64</classifier>
                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
                 </artifactItem>
 

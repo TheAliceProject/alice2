@@ -550,14 +550,12 @@ return console.askYesNo(message, true);
         <component id="459" />
       </excludedComponents>
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" />
       </exclude>
       <jreBundle jreBundleSource="preCreated" includedJre="macos-amd64-17" />
       <topLevelFiles>
@@ -574,14 +572,12 @@ return console.askYesNo(message, true);
         <component id="459" />
       </excludedComponents>
       <exclude>
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" />
       </exclude>
     </windowsArchive>
     <macosArchive name="Spanish macOS Single Bundle Archive" id="213" mediaFileName="${compiler:sys.fullName}_es" overridePrincipalLanguage="true" volumeName="${compiler:sys.fullName}_es" launcherId="70">
@@ -592,14 +588,12 @@ return console.askYesNo(message, true);
       </excludedComponents>
       <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" />
       </exclude>
       <jreBundle jreBundleSource="preCreated" includedJre="macos-amd64-17" />
       <topLevelFiles>
@@ -617,15 +611,12 @@ return console.askYesNo(message, true);
       </excludedComponents>
       <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-aarch64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-armv6hf.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-linux-aarch64.jar" />
-      </exclude>
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-linux-armv6hf.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-linux-armv6hf.jar" />      </exclude>
     </windowsArchive>
     <linuxDeb name="English Linux Deb Archive" id="442" mediaFileName="${compiler:sys.fullName}" dependencies="libglu1-mesa, openjdk-17-jre">
       <excludedComponents>
@@ -633,10 +624,10 @@ return console.askYesNo(message, true);
         <component id="325" />
       </excludedComponents>
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
       </exclude>
       <jreBundle jreBundleSource="none" />
       <postInstallScript>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
@@ -650,10 +641,10 @@ lxpanelctl restart</postInstallScript>
       </excludedComponents>
       <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
       </exclude>
       <jreBundle jreBundleSource="none" />
       <postInstallScript>cat /opt/alice2/alice2.desktop /opt/alice2/Required/install/alice2.desktop.partial &gt; /usr/share/applications/alice2.desktop
@@ -666,10 +657,10 @@ lxpanelctl restart</postInstallScript>
         <component id="325" />
       </excludedComponents>
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
         <entry filesetId="199" />
         <entry filesetId="322" />
       </exclude>
@@ -681,10 +672,10 @@ lxpanelctl restart</postInstallScript>
         <component id="325" />
       </excludedComponents>
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
         <entry filesetId="199" />
         <entry filesetId="322" />
       </exclude>
@@ -697,10 +688,10 @@ lxpanelctl restart</postInstallScript>
       </excludedComponents>
       <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
         <entry filesetId="60" />
         <entry filesetId="322" />
       </exclude>
@@ -713,10 +704,10 @@ lxpanelctl restart</postInstallScript>
       </excludedComponents>
       <overriddenPrincipalLanguage id="es" />
       <exclude>
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/gluegen-rt-2.4.0-natives-macosx-universal.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-windows-amd64.jar" />
-        <entry location="Required/externalLib/jogl-all-2.4.0-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/gluegen-rt-2.3.2-natives-macosx-universal.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-windows-amd64.jar" />
+        <entry location="Required/externalLib/jogl-all-2.3.2-natives-macosx-universal.jar" />
         <entry filesetId="60" />
         <entry filesetId="322" />
       </exclude>
